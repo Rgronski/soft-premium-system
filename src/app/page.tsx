@@ -1,5 +1,24 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+type Project = {
+  id: string;
+  name: string;
+  createdAt: string;
+};
+
 export default function Home() {
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    const savedProjects = localStorage.getItem("soft-premium-system.projects");
+    const parsedProjects = savedProjects ? JSON.parse(savedProjects) : [];
+
+    setProjects(parsedProjects);
+  }, []);
+
   return (
     <main className="min-h-screen bg-zinc-950 px-6 py-10 text-zinc-50">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
@@ -7,6 +26,7 @@ export default function Home() {
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-zinc-400">
             Soft Premium System
           </p>
+
           <div className="space-y-1">
             <h1 className="text-4xl font-semibold tracking-tight">
               Welcome back, Radek
@@ -23,12 +43,13 @@ export default function Home() {
                 Resume the active foundation sprint.
               </p>
             </div>
+
             <Link
-  href="/workspace"
-  className="rounded-full bg-white px-5 py-2 text-sm font-medium text-zinc-950 transition-colors hover:bg-zinc-200"
->
-  Continue
-</Link>
+              href="/workspace"
+              className="rounded-full bg-white px-5 py-2 text-sm font-medium text-zinc-950 transition-colors hover:bg-zinc-200"
+            >
+              Continue
+            </Link>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
@@ -38,12 +59,14 @@ export default function Home() {
               </p>
               <p className="mt-2 text-base font-medium">Soft Premium System</p>
             </div>
+
             <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
               <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
                 Status
               </p>
               <p className="mt-2 text-base font-medium">Foundation</p>
             </div>
+
             <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
               <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
                 Sprint
@@ -61,16 +84,28 @@ export default function Home() {
                 Quick access to your latest workspace.
               </p>
             </div>
+
             <Link
-  href="/projects"
-  className="rounded-full border border-zinc-700 px-5 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
->
-  Create New Project
-</Link>
+              href="/projects"
+              className="rounded-full border border-zinc-700 px-5 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+            >
+              Create New Project
+            </Link>
           </div>
 
-          <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
-            <p className="text-base font-medium">Soft Premium System</p>
+          <div className="space-y-3">
+            {projects.length === 0 ? (
+              <p className="text-sm text-zinc-400">No projects yet.</p>
+            ) : (
+              projects.map((project) => (
+                <div
+                  key={project.id}
+                  className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
+                >
+                  <p className="text-base font-medium">• {project.name}</p>
+                </div>
+              ))
+            )}
           </div>
         </section>
       </div>
