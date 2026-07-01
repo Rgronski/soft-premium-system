@@ -102,7 +102,10 @@ export default function Home() {
                   key={project.id}
                   className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
                 >
-                  <p className="text-base font-medium">• {project.name}</p>
+                  <p className="text-base font-medium">{project.name}</p>
+                  <p className="mt-1 text-sm text-zinc-400">
+                    {new Date(project.createdAt).toLocaleDateString()}
+                  </p>
                 </div>
               ))
             )}
