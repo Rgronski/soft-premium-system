@@ -1,0 +1,281 @@
+# Project Brain Specification v0.1
+
+Status: Draft
+
+Version: 0.1
+
+Date: 2026-07-01
+
+Owners:
+- Product Owner — Radek Groński
+- Chief Architect — ChatGPT
+
+---
+
+# Purpose
+
+Project Brain jest centralnym silnikiem wiedzy (Knowledge Engine) platformy Soft Premium System.
+
+Nie jest modułem UI.
+
+Nie jest bazą dokumentów.
+
+Nie jest generatorem plików.
+
+Project Brain jest jedynym źródłem prawdy (Single Source of Truth) dla całego projektu.
+
+Każdy moduł platformy odczytuje lub zapisuje dane wyłącznie poprzez Project Brain.
+
+---
+
+# Vision
+
+Projekt powinien być zarządzany poprzez wiedzę, a nie poprzez pliki.
+
+Markdown, PDF, README, ADR oraz inne dokumenty są jedynie reprezentacją wiedzy zapisanej w Project Brain.
+
+---
+
+# Responsibilities
+
+Project Brain odpowiada za:
+
+- przechowywanie wiedzy projektu
+- relacje pomiędzy obiektami
+- historię zmian
+- kontekst AI
+- decyzje architektoniczne
+- roadmapę
+- sprinty
+- backlog
+- historię wydań
+
+Project Brain nie odpowiada za:
+
+- wygląd aplikacji
+- routing
+- komponenty UI
+- integracje zewnętrzne
+- eksport dokumentów
+
+---
+
+# Core Objects
+
+Project
+
+Identity
+
+Vision
+
+Architecture
+
+Roadmap
+
+Decision (ADR)
+
+Sprint
+
+Task
+
+Backlog Item
+
+Session
+
+Developer Journal
+
+AI Context
+
+Release
+
+Template
+
+Integration
+
+---
+
+# Relationships
+
+Project
+│
+├── Identity
+├── Vision
+├── Architecture
+├── Roadmap
+├── Decisions
+├── Sprint
+│     └── Tasks
+├── Backlog
+├── Sessions
+├── Developer Journal
+├── AI Context
+├── Releases
+└── Templates
+
+---
+
+# Knowledge Flow
+
+Idea
+
+↓
+
+Vision
+
+↓
+
+Architecture Review
+
+↓
+
+ADR
+
+↓
+
+Sprint
+
+↓
+
+Tasks
+
+↓
+
+Implementation
+
+↓
+
+Developer Journal
+
+↓
+
+Release
+
+---
+
+# Consumers
+
+Project Brain udostępnia dane dla:
+
+Dashboard
+
+Projects
+
+Prompt Generator
+
+File Generator
+
+AI Workspace
+
+GitHub Integration
+
+Supabase Integration
+
+Vercel Integration
+
+Export Engine
+
+---
+
+# Export Layer
+
+Project Brain nie zapisuje README.
+
+Project Brain nie zapisuje ADR.
+
+Project Brain nie zapisuje Roadmap.
+
+Zamiast tego udostępnia dane do warstwy eksportu.
+
+Export Layer generuje:
+
+README.md
+
+FOUNDATION.md
+
+ADR-xxxx.md
+
+Roadmap.md
+
+Developer Journal.md
+
+Release Notes.md
+
+PDF
+
+Word
+
+HTML
+
+---
+
+# AI Layer
+
+Każdy model AI korzysta z Project Brain.
+
+ChatGPT
+
+Chief Architect
+
+Codex
+
+Senior Developer
+
+Claude
+
+Documentation
+
+Gemini
+
+Repository Analysis
+
+Każdy model pracuje na tych samych danych.
+
+Nigdy na własnej kopii wiedzy.
+
+---
+
+# Architectural Principles
+
+Single Source of Truth
+
+Knowledge First
+
+Documents are Views
+
+Architecture before Code
+
+AI assists Humans
+
+Modular Design
+
+Evolution over Revolution
+
+---
+
+# Out of Scope (v0.1)
+
+Brak bazy danych
+
+Brak synchronizacji z GitHub
+
+Brak synchronizacji z Supabase
+
+Brak synchronizacji AI
+
+Brak wersjonowania Project Brain
+
+Brak współpracy wielu użytkowników
+
+---
+
+# Future Vision
+
+Docelowo użytkownik nie będzie edytował dokumentów.
+
+Będzie edytował Project Brain.
+
+Dokumenty będą generowane automatycznie.
+
+---
+
+End of Specification
