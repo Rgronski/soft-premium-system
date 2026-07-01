@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function Home() {
   return (
     <main className="min-h-screen bg-zinc-950 px-6 py-10 text-zinc-50">
@@ -22,12 +23,12 @@ export default function Home() {
                 Resume the active foundation sprint.
               </p>
             </div>
-            <button
-              type="button"
-              className="rounded-full bg-white px-5 py-2 text-sm font-medium text-zinc-950 transition-colors hover:bg-zinc-200"
-            >
-              Continue
-            </button>
+            <Link
+  href="/workspace"
+  className="rounded-full bg-white px-5 py-2 text-sm font-medium text-zinc-950 transition-colors hover:bg-zinc-200"
+>
+  Continue
+</Link>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
