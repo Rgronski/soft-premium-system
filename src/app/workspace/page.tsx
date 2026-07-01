@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function WorkspacePage() {
   return (
     <main className="min-h-screen bg-zinc-950 px-6 py-10 text-zinc-50">
@@ -10,6 +11,15 @@ export default function WorkspacePage() {
           <h1 className="mt-2 text-4xl font-semibold">
             Soft Premium System
           </h1>
+
+<div className="mt-6">
+  <Link
+    href="/"
+    className="rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+  >
+    ← Back to Home
+  </Link>
+</div>
 
           <p className="mt-2 text-zinc-400">
             Foundation • WF-002
