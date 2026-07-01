@@ -98,15 +98,16 @@ export default function Home() {
               <p className="text-sm text-zinc-400">No projects yet.</p>
             ) : (
               projects.map((project) => (
-                <div
+                <Link
                   key={project.id}
-                  className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
+                  href={`/projects/${project.id}`}
+                  className="block w-full rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
                 >
                   <p className="text-base font-medium">{project.name}</p>
                   <p className="mt-1 text-sm text-zinc-400">
                     {new Date(project.createdAt).toLocaleDateString()}
                   </p>
-                </div>
+                </Link>
               ))
             )}
           </div>
