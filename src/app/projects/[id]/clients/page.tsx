@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -37,12 +38,12 @@ export default function ProjectClientsPage() {
             </p>
           </div>
 
-          <button
-            type="button"
+          <Link
+            href={`/projects/${params.id}/clients/new`}
             className="rounded-full border border-zinc-700 px-5 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
           >
             Add Client
-          </button>
+          </Link>
         </div>
 
         {isLoaded && clients.length > 0 ? (
