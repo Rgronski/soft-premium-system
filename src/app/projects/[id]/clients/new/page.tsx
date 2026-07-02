@@ -1,11 +1,45 @@
 "use client";
 
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
+type Client = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  createdAt: string;
+};
+
 export default function NewProjectClientPage() {
+  const params = useParams<{ id: string }>();
+  const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
+
+  function handleCreateClient() {
+    const newClient: Client = {
+      id: crypto.randomUUID(),
+      firstName,
+      lastName,
+      phone,
+      createdAt: new Date().toISOString(),
+    };
+
+    const storageKey = `soft-premium-system.projects.${params.id}.clients`;
+    const savedClients = localStorage.getItem(storageKey);
+    const clients: Client[] = savedClients ? JSON.parse(savedClients) : [];
+    const updatedClients = [...clients, newClient];
+
+    localStorage.setItem(storageKey, JSON.stringify(updatedClients));
+
+    setFirstName("");
+    setLastName("");
+    setPhone("");
+
+    router.push(`/projects/${params.id}/clients`);
+  }
 
   return (
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
@@ -51,6 +85,7 @@ export default function NewProjectClientPage() {
 
         <button
           type="button"
+          onClick={handleCreateClient}
           className="rounded-full bg-white px-5 py-2 text-sm font-medium text-zinc-950"
         >
           Create Client
