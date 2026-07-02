@@ -49,15 +49,16 @@ export default function ProjectClientsPage() {
         {isLoaded && clients.length > 0 ? (
           <div className="space-y-3">
             {clients.map((client) => (
-              <div
+              <Link
                 key={client.id}
-                className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
+                href={`/projects/${params.id}/clients/${client.id}`}
+                className="block w-full rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
               >
                 <p className="text-base font-medium text-zinc-50">
                   {client.firstName} {client.lastName}
                 </p>
                 <p className="mt-1 text-sm text-zinc-400">{client.phone}</p>
-              </div>
+              </Link>
             ))}
           </div>
         ) : null}
