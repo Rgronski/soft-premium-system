@@ -61,47 +61,43 @@ Session Close should leave enough confirmed information here to support the next
 Feature implementation and documentation update
 
 **Current Milestone**
-MS-007 - Calendar View
+MS-DOC-002 - Workflow Governance v1.0
 
 **Session Focus**
-Implement Calendar as a read-only view over existing project Visits, Clients, and Services data.
+Establish workflow governance and mark SPS Operating Workflow v1.0 as stable.
 
 ---
 
 # Completed In This Session
 
-* Replaced the Calendar placeholder with a working visits list in `src/app/projects/[id]/calendar/page.tsx`.
-* Calendar now reads existing project Visits, Clients, and Services from `localStorage`.
-* Calendar now renders visits sorted by `date ASC` and `time ASC`.
-* Added Calendar empty state `No visits scheduled`.
-* Added `Add Visit` link from Calendar to `/projects/{projectId}/visits/new`.
-* Updated session documentation for the current MS-007 state.
+* Prepared the documentation patch for `MS-DOC-002 - Workflow Governance v1.0`.
+* Marked SPS Operating Workflow v1.0 as stable in the lifecycle documentation.
+* Prepared workflow governance rules and versioning policy.
 
 ---
 
 # Not Completed In This Session
 
-* No other application modules were changed in this session.
-* Known lint issues outside the MS-007 scope remain in the repository.
+* Documentation patch is pending verification.
 
 ---
 
 # Verification Status
 
 **Code Verification**
-`npm run build` passed. `npm run lint` still reports known existing issues outside the MS-007 scope.
+Not applicable. This task changes documentation only.
 
 **Documentation Verification**
-Session close completed and documentation updated to reflect the confirmed repository state.
+In progress. Documentation patch pending verification.
 
 **Commit Status**
-Confirmed. Commit created: `2615dde feat: add calendar view`.
+Not confirmed.
 
 **Push Status**
-Confirmed. Push completed.
+Not confirmed.
 
 **Working Tree Status**
-Clean.
+Pending verification.
 
 **Responsibility Split**
 Diagnosis and scope definition: ChatGPT / Chief Architect.
@@ -112,7 +108,7 @@ Commit and push: Product Owner.
 
 # Next Logical Step
 
-Continue the next planned workflow after the completed MS-007 milestone.
+Verify the documentation diff for MS-DOC-002 and confirm the stable workflow governance state.
 
 ---
 

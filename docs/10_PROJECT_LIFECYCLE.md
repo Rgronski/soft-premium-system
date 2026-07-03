@@ -14,7 +14,7 @@ Define the standard lifecycle for starting, running, and closing Soft Premium Sy
 Chief Architect
 
 **Status**
-Draft
+Stable
 
 **Version**
 1.0
@@ -42,6 +42,79 @@ This document defines the lifecycle of a Soft Premium System development session
 Its purpose is to make every session predictable, recoverable, and easy to continue in a new AI conversation.
 
 The lifecycle does not replace the Development Standard. It extends it with session start and session close procedures.
+
+---
+
+# SPS Operating Workflow
+
+**Version**
+1.0
+
+**Status**
+Stable
+
+The SPS Operating Workflow is considered stable.
+
+Routine feature development must follow this workflow.
+
+The workflow itself is treated as an architectural asset of the project.
+
+---
+
+# Workflow Governance
+
+Changes to the workflow are not part of normal feature development.
+
+Any modification to the workflow requires:
+
+* architectural justification,
+* explicit Product Owner approval,
+* documentation update,
+* version increment when applicable,
+* changelog entry.
+
+---
+
+# Workflow Change Policy
+
+Workflow modifications are exceptional.
+
+Before changing the workflow, the Chief Architect must answer:
+
+1. Is this a process defect?
+2. Is this a recurring problem?
+3. Can this be solved without changing the workflow?
+
+Only if the answer justifies a workflow modification should the process itself be updated.
+
+Otherwise the issue should be treated as a project task or parked idea.
+
+---
+
+# Workflow Versioning
+
+**1.0**
+Initial stable workflow.
+
+**1.x**
+Minor process improvements.
+No breaking changes.
+
+**2.x**
+Major workflow redesign.
+Requires architectural review and Product Owner approval.
+
+---
+
+# Product Boundary
+
+The workflow is part of the product.
+
+It evolves independently from application milestones.
+
+Workflow changes must never be introduced incidentally during feature implementation.
+
+If a workflow improvement is discovered while implementing a milestone, it should be parked as a separate architectural task unless it blocks safe development.
 
 ---
 

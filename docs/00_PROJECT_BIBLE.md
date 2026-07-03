@@ -204,6 +204,14 @@ Information must never be duplicated across documents.
 
 Documents reference the owner instead of copying content.
 
+The SPS Operating Workflow is part of the project Source of Truth.
+
+Current workflow version: 1.0.
+
+Status: Stable.
+
+Workflow changes require architectural justification and Product Owner approval.
+
 ---
 
 ## Project Brain as Source of Truth

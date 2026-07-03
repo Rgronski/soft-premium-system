@@ -107,6 +107,15 @@ Each release entry should contain:
 * Each Calendar item now shows date, time, client, service, and status when present.
 * Added empty state `No visits scheduled` with an `Add Visit` link to `/projects/{projectId}/visits/new`.
 
+## MS-DOC-002 - Workflow Governance v1.0
+
+### Completed
+
+* Marked the SPS Operating Workflow as Version `1.0` and Status `Stable`.
+* Added workflow governance rules, workflow change policy, workflow versioning, and product boundary rules.
+* Declared the workflow as a Source of Truth architectural asset in project documentation.
+* Updated session state for the active documentation governance task.
+
 ---
 
 # Future Releases
