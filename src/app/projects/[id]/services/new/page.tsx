@@ -1,11 +1,45 @@
 "use client";
 
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
+type Service = {
+  id: string;
+  name: string;
+  duration: number;
+  price: number;
+  createdAt: string;
+};
+
 export default function NewProjectServicePage() {
+  const params = useParams<{ id: string }>();
+  const router = useRouter();
   const [name, setName] = useState("");
   const [duration, setDuration] = useState("");
   const [price, setPrice] = useState("");
+
+  function handleCreateService() {
+    const newService: Service = {
+      id: crypto.randomUUID(),
+      name,
+      duration: Number(duration),
+      price: Number(price),
+      createdAt: new Date().toISOString(),
+    };
+
+    const storageKey = `soft-premium-system.projects.${params.id}.services`;
+    const savedServices = localStorage.getItem(storageKey);
+    const services: Service[] = savedServices ? JSON.parse(savedServices) : [];
+    const updatedServices = [...services, newService];
+
+    localStorage.setItem(storageKey, JSON.stringify(updatedServices));
+
+    setName("");
+    setDuration("");
+    setPrice("");
+
+    router.push(`/projects/${params.id}/services`);
+  }
 
   return (
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
@@ -53,6 +87,7 @@ export default function NewProjectServicePage() {
 
         <button
           type="button"
+          onClick={handleCreateService}
           className="rounded-full bg-white px-5 py-2 text-sm font-medium text-zinc-950"
         >
           Create Service
