@@ -199,6 +199,17 @@ Implementation must not begin before diagnosis, review, and scope approval.
 
 Implementation should normally be executed by Codex in the local repository after ChatGPT / Chief Architect prepares the approved scope and execution prompt.
 
+Between Scope Approval and Codex implementation, Chief Architect should prepare a complete handoff prompt for Codex.
+
+The handoff prompt should include:
+
+* task objective,
+* approved scope,
+* files that may be changed,
+* files that must not be changed,
+* verification plan,
+* Minimal Patch constraints.
+
 Work should remain focused on one intention per session unless the Product Owner explicitly changes the goal.
 
 New ideas unrelated to the active milestone should be parked and revisited only when the Product Owner asks for them.

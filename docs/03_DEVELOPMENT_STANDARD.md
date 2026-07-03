@@ -67,25 +67,27 @@ Every workflow follows the same sequence.
 
 ```text
 Diagnosis
-    ↓
+    ->
 Review
-    ↓
+    ->
 Scope Approval
-    ↓
+    ->
+Chief Architect -> Codex Handoff
+    ->
 Implementation
-    ↓
+    ->
 Testing
-    ↓
+    ->
 Commit
-    ↓
+    ->
 Push
-    ↓
+    ->
 Documentation Update
-    ↓
+    ->
 Session Close
 ```
 
-Implementation must never begin before diagnosis and scope approval.
+Implementation must never begin before diagnosis, scope approval, and Chief Architect -> Codex Handoff.
 
 ---
 
@@ -116,6 +118,23 @@ The review verifies:
 * implementation scope,
 * possible risks,
 * alternative solutions.
+
+---
+
+# Chief Architect -> Codex Handoff Standard
+
+After Scope Approval and before implementation, Chief Architect prepares the implementation prompt for Codex.
+
+The handoff prompt must include:
+
+* task objective,
+* approved scope,
+* files that may be changed,
+* files that must not be changed,
+* verification plan,
+* implementation constraints under the Minimal Patch rule.
+
+This handoff formalizes the transition from diagnosis and architectural control to local repository implementation by Codex.
 
 ---
 
@@ -186,6 +205,7 @@ A workflow is complete only when all of the following conditions are satisfied:
 * Diagnosis completed
 * Review completed
 * Scope approved
+* Chief Architect -> Codex handoff completed
 * Implementation finished
 * Tests completed
 * Commit created
