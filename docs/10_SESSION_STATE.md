@@ -48,6 +48,8 @@ This document describes session continuity. It does not replace:
 
 It should also record who owned diagnosis, implementation, verification, and repository actions when responsibilities are split between ChatGPT / Chief Architect, Codex, and Product Owner.
 
+Session Close should leave enough confirmed information here to support the next session's Project Integrity Check.
+
 ---
 
 # Latest Session
@@ -125,6 +127,8 @@ Before continuing feature work, load `docs/` and verify the current milestone st
 Then continue using the standard workflow with explicit role split:
 
 ```text
+Project Integrity Check
+    ->
 Diagnosis by ChatGPT / Chief Architect
     ->
 Review

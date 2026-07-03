@@ -89,24 +89,32 @@ Every development session follows this sequence.
 
 ```text
 Start Session
-    ↓
+    ->
 Load Context
-    ↓
-Verify Project State
-    ↓
-Work According To Development Standard
-    ↓
-Verify Work
-    ↓
+    ->
+Project Integrity Check
+    ->
+Diagnosis
+    ->
+Review
+    ->
+Scope Approval
+    ->
+Chief Architect -> Codex Handoff
+    ->
+Codex Implementation
+    ->
+Verification
+    ->
+Testing
+    ->
 Commit
-    ↓
+    ->
 Push
-    ↓
+    ->
 Update Documentation
-    ↓
+    ->
 Close Session
-    ↓
-Prepare Next Session Prompt
 ```
 
 ---
@@ -176,9 +184,28 @@ Code inspection may clarify implementation details, but it must not override pro
 
 ---
 
-# Verify Project State
+# Project Integrity Check
 
-Before implementation, ChatGPT / Chief Architect should identify:
+At the beginning of every session, before diagnosis starts, Chief Architect performs a Project Integrity Check.
+
+Chief Architect must verify:
+
+* whether documentation is consistent,
+* whether `08_CURRENT_STATE.md` matches `10_SESSION_STATE.md`,
+* whether `10_SESSION_STATE.md` matches the actual repository state when that state can be confirmed,
+* whether `09_CHANGELOG.md` matches `08_CURRENT_STATE.md`,
+* whether the previous milestone is actually completed,
+* whether the repository is ready to begin the next milestone.
+
+If an inconsistency is detected, Chief Architect must:
+
+* stop the start of the new milestone,
+* prepare diagnosis only,
+* propose a minimal documentation patch,
+* avoid moving to implementation,
+* wait for Product Owner approval.
+
+After a successful Project Integrity Check, ChatGPT / Chief Architect should identify:
 
 * current milestone,
 * relevant existing routes and components,
@@ -194,6 +221,8 @@ If the uploaded project package is incomplete, ChatGPT / Chief Architect must sa
 # Work According To Development Standard
 
 Product work follows the standard workflow defined in `03_DEVELOPMENT_STANDARD.md`.
+
+Diagnosis must not begin before a successful Project Integrity Check.
 
 Implementation must not begin before diagnosis, review, and scope approval.
 
@@ -267,6 +296,7 @@ The prompt should include:
 * required ZIP upload instruction,
 * PowerShell commands for creating the ZIP package,
 * instruction to load `docs/` as Source of Truth,
+* instruction to perform Project Integrity Check before diagnosis,
 * instruction not to implement before diagnosis and scope approval.
 
 ---
@@ -277,7 +307,7 @@ The prompt should include:
 
 It is not a changelog and does not replace `08_CURRENT_STATE.md` or `09_CHANGELOG.md`.
 
-Its purpose is to help the next session resume safely.
+Its purpose is to help the next session resume safely and to provide evidence for the next Project Integrity Check.
 
 ---
 

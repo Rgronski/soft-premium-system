@@ -126,15 +126,31 @@ Unless instructed otherwise, AI follows the standard development workflow define
 
 > **03_DEVELOPMENT_STANDARD.md**
 
+Diagnosis must not begin before Project Integrity Check.
+
 Implementation should never begin before diagnosis and review.
 
 Default operating model:
 
-1. ChatGPT / Chief Architect performs diagnosis and scope definition.
-2. Product Owner approves scope.
-3. Codex performs the local repository implementation.
-4. ChatGPT / Chief Architect verifies the report, diff, and documentation.
-5. Product Owner commits and pushes.
+1. ChatGPT / Chief Architect performs Project Integrity Check at the start of the session.
+2. ChatGPT / Chief Architect performs diagnosis and scope definition.
+3. Product Owner approves scope.
+4. Codex performs the local repository implementation.
+5. ChatGPT / Chief Architect verifies the report, diff, and documentation.
+6. Product Owner commits and pushes.
+
+At the beginning of every new session, ChatGPT / Chief Architect must perform Project Integrity Check before diagnosis.
+
+Project Integrity Check verifies:
+
+* documentation consistency,
+* alignment between `08_CURRENT_STATE.md` and `10_SESSION_STATE.md`,
+* alignment between `10_SESSION_STATE.md` and the confirmed repository state when available,
+* alignment between `09_CHANGELOG.md` and `08_CURRENT_STATE.md`,
+* whether the previous milestone is truly completed,
+* whether the repository is ready for the next milestone.
+
+If an inconsistency is detected, ChatGPT / Chief Architect must stop before implementation, prepare diagnosis only, propose a minimal documentation patch, and wait for Product Owner approval.
 
 AI also follows the session lifecycle defined in:
 
@@ -351,6 +367,7 @@ Verify:
 
 Verify Definition of Done using:
 
+* Project Integrity Check
 * Diagnosis
 * Review
 * Scope Approval

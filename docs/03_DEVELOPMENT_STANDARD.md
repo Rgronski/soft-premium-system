@@ -66,6 +66,8 @@ All development work follows these principles:
 Every workflow follows the same sequence.
 
 ```text
+Project Integrity Check
+    ->
 Diagnosis
     ->
 Review
@@ -87,6 +89,8 @@ Documentation Update
 Session Close
 ```
 
+Diagnosis must not begin before a successful Project Integrity Check.
+
 Implementation must never begin before diagnosis, scope approval, and Chief Architect -> Codex Handoff.
 
 ---
@@ -94,6 +98,8 @@ Implementation must never begin before diagnosis, scope approval, and Chief Arch
 # Diagnosis Standard
 
 Every implementation begins with a diagnosis.
+
+Diagnosis may begin only after a positive Project Integrity Check confirms that the project documentation and confirmed repository state are consistent enough to continue safely.
 
 The diagnosis should include:
 
@@ -202,6 +208,7 @@ Documentation should never become outdated intentionally.
 
 A workflow is complete only when all of the following conditions are satisfied:
 
+* Project Integrity Check completed
 * Diagnosis completed
 * Review completed
 * Scope approved
@@ -217,12 +224,12 @@ A workflow is complete only when all of the following conditions are satisfied:
 
 # Related Documents
 
-| Document            | Source of Truth                     |
-| ------------------- | ----------------------------------- |
-| 00_PROJECT_BIBLE.md | Project philosophy                  |
-| 01_VISION.md        | Product vision                      |
-| 02_ARCHITECTURE.md  | System architecture                 |
-| 04_UI_STANDARD.md   | User interface standards            |
-| 07_DECISIONS.md     | Architecture Decision Records       |
-| AI_CONTEXT.md       | AI operating model and SPS Commands |
-| 10_PROJECT_LIFECYCLE.md | Session lifecycle and close protocol |
+| Document                   | Source of Truth                     |
+| -------------------------- | ----------------------------------- |
+| 00_PROJECT_BIBLE.md        | Project philosophy                  |
+| 01_VISION.md               | Product vision                      |
+| 02_ARCHITECTURE.md         | System architecture                 |
+| 04_UI_STANDARD.md          | User interface standards            |
+| 07_DECISIONS.md            | Architecture Decision Records       |
+| AI_CONTEXT.md              | AI operating model and SPS Commands |
+| 10_PROJECT_LIFECYCLE.md    | Session lifecycle and close protocol |
