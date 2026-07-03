@@ -72,6 +72,13 @@ export default async function ProjectLayout({
               </Link>
 
               <Link
+                href={`/projects/${id}/visits`}
+                className="block rounded-xl px-3 py-2 text-sm text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
+              >
+                Visits
+              </Link>
+
+              <Link
                 href={`/projects/${id}/invoices`}
                 className="block rounded-xl px-3 py-2 text-sm text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
               >
