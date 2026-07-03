@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type Client = {
@@ -19,8 +19,18 @@ type Service = {
   createdAt: string;
 };
 
+type Visit = {
+  id: string;
+  clientId: string;
+  serviceId: string;
+  date: string;
+  time: string;
+  createdAt: string;
+};
+
 export default function NewProjectVisitPage() {
   const params = useParams<{ id: string }>();
+  const router = useRouter();
   const [clientId, setClientId] = useState("");
   const [serviceId, setServiceId] = useState("");
   const [date, setDate] = useState("");
@@ -44,6 +54,31 @@ export default function NewProjectVisitPage() {
     setClients(parsedClients);
     setServices(parsedServices);
   }, [params.id]);
+
+  function handleCreateVisit() {
+    const newVisit: Visit = {
+      id: crypto.randomUUID(),
+      clientId,
+      serviceId,
+      date,
+      time,
+      createdAt: new Date().toISOString(),
+    };
+
+    const storageKey = `soft-premium-system.projects.${params.id}.visits`;
+    const savedVisits = localStorage.getItem(storageKey);
+    const visits: Visit[] = savedVisits ? JSON.parse(savedVisits) : [];
+    const updatedVisits = [...visits, newVisit];
+
+    localStorage.setItem(storageKey, JSON.stringify(updatedVisits));
+
+    setClientId("");
+    setServiceId("");
+    setDate("");
+    setTime("");
+
+    router.push(`/projects/${params.id}/visits`);
+  }
 
   return (
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
@@ -111,6 +146,7 @@ export default function NewProjectVisitPage() {
 
         <button
           type="button"
+          onClick={handleCreateVisit}
           className="rounded-full bg-white px-5 py-2 text-sm font-medium text-zinc-950"
         >
           Create Visit
