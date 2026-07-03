@@ -42,11 +42,11 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-**MS-007 — Calendar View preparation**
+**MS-007 - Calendar View**
 
 Objective:
 
-Prepare Calendar View development while formalizing the project session lifecycle.
+Present existing project visits in Calendar as a sorted read-only view based on stored Visits, Clients, and Services data.
 
 ---
 
@@ -63,29 +63,32 @@ Prepare Calendar View development while formalizing the project session lifecycl
 * 06_BACKLOG.md
 * 07_DECISIONS.md
 
+## Product Work
+
+* Project creation with localStorage persistence
+* Home view with Recent Projects list
+* Project workspace layout with shared header and sidebar
+* Overview page for project workspace
+* Placeholder workspace modules for Clients, Calendar, Invoices, and Settings
+* Clients list, create flow, and details view
+* Services list, create flow, and details view
+* Visits list, create flow, and details view
+* Calendar View implemented as a read-only list over existing Visits, Clients, and Services data
+
 ---
 
 # In Progress
 
-* 08_CURRENT_STATE.md
-* 10_PROJECT_LIFECYCLE.md
-* 10_SESSION_STATE.md
+* MS-007 verification and local repository review
 
 ---
 
 # Next
 
-Documentation Sprint completion:
+After MS-007:
 
-* 09_CHANGELOG.md
-* AI_CONTEXT.md
-* 10_PROJECT_LIFECYCLE.md
-* 10_SESSION_STATE.md
-
-After Documentation Sprint:
-
-* Resume product development
-* Begin the next planned product milestone
+* Continue the next planned workflow within the active milestone path
+* Keep Calendar as a view over existing Visits data
 * Keep documentation synchronized with future development
 
 ---
@@ -94,7 +97,7 @@ After Documentation Sprint:
 
 No known architectural issues.
 
-AI works on uploaded ZIP copies unless the Product Owner applies changes locally. Commit and push status must be confirmed explicitly.
+Commit and push status must always be confirmed explicitly by the Product Owner.
 
 ---
 
@@ -102,15 +105,15 @@ AI works on uploaded ZIP copies unless the Product Owner applies changes locally
 
 Priority 1
 
-Complete Project Lifecycle documentation update.
+Verify MS-007 locally with lint and build.
 
 Priority 2
 
-Apply, commit, and push documentation changes locally.
+Review Calendar View against existing Visits, Clients, and Services data.
 
 Priority 3
 
-Resume MS-007 Calendar View using the established standards.
+Confirm repository state, then continue the next planned workflow.
 
 ---
 
@@ -128,12 +131,12 @@ Candidate work belongs to the Backlog.
 
 # Related Documents
 
-| Document        | Source of Truth           |
-| --------------- | ------------------------- |
-| 05_ROADMAP.md   | Planned product evolution |
-| 06_BACKLOG.md   | Candidate future work     |
-| 07_DECISIONS.md | Architecture decisions    |
-| 09_CHANGELOG.md | Project history           |
-| AI_CONTEXT.md   | AI operating model        |
-| 10_PROJECT_LIFECYCLE.md | Session lifecycle |
-| 10_SESSION_STATE.md | Latest session state |
+| Document                   | Source of Truth           |
+| -------------------------- | ------------------------- |
+| 05_ROADMAP.md              | Planned product evolution |
+| 06_BACKLOG.md              | Candidate future work     |
+| 07_DECISIONS.md            | Architecture decisions    |
+| 09_CHANGELOG.md            | Project history           |
+| AI_CONTEXT.md              | AI operating model        |
+| 10_PROJECT_LIFECYCLE.md    | Session lifecycle         |
+| 10_SESSION_STATE.md        | Latest session state      |

@@ -87,8 +87,7 @@ Each release entry should contain:
 * Source of Truth responsibilities defined.
 * Documentation standards introduced.
 
-
-## Process Update — Project Lifecycle
+## Process Update - Project Lifecycle
 
 ### Completed
 
@@ -97,6 +96,16 @@ Each release entry should contain:
 * Added Session Close Protocol for `Koniec tego czatu`.
 * Added ZIP handoff expectations for new AI sessions.
 * Updated AI operating context to reference session lifecycle rules.
+
+## MS-007 - Calendar View
+
+### Completed
+
+* Replaced the Calendar placeholder in `src/app/projects/[id]/calendar/page.tsx`.
+* Calendar now reads existing Visits, Clients, and Services from project `localStorage`.
+* Calendar now renders a sorted visits list by `date ASC` and `time ASC`.
+* Each Calendar item now shows date, time, client, service, and status when present.
+* Added empty state `No visits scheduled` with an `Add Visit` link to `/projects/{projectId}/visits/new`.
 
 ---
 

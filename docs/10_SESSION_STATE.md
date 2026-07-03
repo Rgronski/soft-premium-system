@@ -56,28 +56,30 @@ It should also record who owned diagnosis, implementation, verification, and rep
 2026-07-04
 
 **Session Type**
-Process and documentation update
+Feature implementation and documentation update
 
 **Current Milestone**
 MS-007 - Calendar View
 
 **Session Focus**
-Clarify the implementation workflow split between ChatGPT / Chief Architect, Codex, and Product Owner.
+Implement Calendar as a read-only view over existing project Visits, Clients, and Services data.
 
 ---
 
 # Completed In This Session
 
-* Clarified that ChatGPT / Chief Architect owns diagnosis, scope, architecture, Codex prompt preparation, and verification.
-* Clarified that Codex owns minimal local implementation in the repository.
-* Clarified that Product Owner owns scope approval, test confirmation, commit, push, and repository state confirmation.
-* Clarified that direct sandbox patching by ChatGPT / Chief Architect is not the default path.
+* Replaced the Calendar placeholder with a working visits list in `src/app/projects/[id]/calendar/page.tsx`.
+* Calendar now reads existing project Visits, Clients, and Services from `localStorage`.
+* Calendar now renders visits sorted by `date ASC` and `time ASC`.
+* Added Calendar empty state `No visits scheduled`.
+* Added `Add Visit` link from Calendar to `/projects/{projectId}/visits/new`.
+* Updated session documentation for the current MS-007 state.
 
 ---
 
 # Not Completed In This Session
 
-* No application feature work was implemented in this session.
+* No other application modules were changed in this session.
 * Repository commit and push were not performed in this session.
 
 ---
@@ -85,10 +87,10 @@ Clarify the implementation workflow split between ChatGPT / Chief Architect, Cod
 # Verification Status
 
 **Code Verification**
-Not applicable. This session changed documentation only.
+Pending `npm run lint` and `npm run build`.
 
 **Documentation Verification**
-Pending local review after applying files to the working repository.
+Pending local review after Calendar and session updates.
 
 **Commit Status**
 Not confirmed.
@@ -97,26 +99,27 @@ Not confirmed.
 Not confirmed.
 
 **Working Tree Status**
-Pending local review in the repository after documentation update.
+Pending local review in the repository after Calendar implementation and documentation update.
 
 **Responsibility Split**
-Diagnosis and process definition: ChatGPT / Chief Architect.
-Implementation execution for feature work: Codex by default.
+Diagnosis and scope definition: ChatGPT / Chief Architect.
+Implementation execution: Codex.
 Commit and push: Product Owner.
 
 ---
 
 # Next Logical Step
 
-Review the updated process documentation locally, confirm the role split, and continue the next workflow using ChatGPT / Chief Architect for diagnosis and Codex for implementation.
+Run lint and build, review Calendar with real project data, and then continue the next planned workflow in MS-007 or the following milestone.
 
 ---
 
 # Notes For Next AI Session
 
-Before continuing feature work, load `docs/` and verify that these documents exist:
+Before continuing feature work, load `docs/` and verify the current milestone state:
 
-* `10_PROJECT_LIFECYCLE.md`
+* `08_CURRENT_STATE.md`
+* `09_CHANGELOG.md`
 * `10_SESSION_STATE.md`
 
 Then continue using the standard workflow with explicit role split:
@@ -127,6 +130,8 @@ Diagnosis by ChatGPT / Chief Architect
 Review
     ->
 Scope Approval
+    ->
+Chief Architect -> Codex Handoff
     ->
 Implementation by Codex
     ->
