@@ -50,15 +50,16 @@ export default function ProjectVisitsPage() {
         {isLoaded && visits.length > 0 ? (
           <div className="space-y-3">
             {visits.map((visit) => (
-              <div
+              <Link
                 key={visit.id}
-                className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
+                href={`/projects/${params.id}/visits/${visit.id}`}
+                className="block w-full rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
               >
                 <p className="text-base font-medium text-zinc-50">
                   {visit.date}
                 </p>
                 <p className="mt-1 text-sm text-zinc-400">{visit.time}</p>
-              </div>
+              </Link>
             ))}
           </div>
         ) : null}
