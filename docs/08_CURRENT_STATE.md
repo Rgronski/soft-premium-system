@@ -42,11 +42,11 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-**Documentation Sprint**
+**MS-007 — Calendar View preparation**
 
 Objective:
 
-Establish the documentation foundation for Soft Premium System before continuing product development.
+Prepare Calendar View development while formalizing the project session lifecycle.
 
 ---
 
@@ -68,6 +68,8 @@ Establish the documentation foundation for Soft Premium System before continuing
 # In Progress
 
 * 08_CURRENT_STATE.md
+* 10_PROJECT_LIFECYCLE.md
+* 10_SESSION_STATE.md
 
 ---
 
@@ -77,6 +79,8 @@ Documentation Sprint completion:
 
 * 09_CHANGELOG.md
 * AI_CONTEXT.md
+* 10_PROJECT_LIFECYCLE.md
+* 10_SESSION_STATE.md
 
 After Documentation Sprint:
 
@@ -90,7 +94,7 @@ After Documentation Sprint:
 
 No known architectural issues.
 
-Documentation is currently being established and may continue to evolve until the Documentation Sprint is completed.
+AI works on uploaded ZIP copies unless the Product Owner applies changes locally. Commit and push status must be confirmed explicitly.
 
 ---
 
@@ -98,15 +102,15 @@ Documentation is currently being established and may continue to evolve until th
 
 Priority 1
 
-Complete the documentation foundation.
+Complete Project Lifecycle documentation update.
 
 Priority 2
 
-Validate documentation consistency.
+Apply, commit, and push documentation changes locally.
 
 Priority 3
 
-Resume implementation using the established standards.
+Resume MS-007 Calendar View using the established standards.
 
 ---
 
@@ -131,3 +135,5 @@ Candidate work belongs to the Backlog.
 | 07_DECISIONS.md | Architecture decisions    |
 | 09_CHANGELOG.md | Project history           |
 | AI_CONTEXT.md   | AI operating model        |
+| 10_PROJECT_LIFECYCLE.md | Session lifecycle |
+| 10_SESSION_STATE.md | Latest session state |

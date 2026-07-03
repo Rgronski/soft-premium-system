@@ -87,6 +87,17 @@ Each release entry should contain:
 * Source of Truth responsibilities defined.
 * Documentation standards introduced.
 
+
+## Process Update — Project Lifecycle
+
+### Completed
+
+* Added `10_PROJECT_LIFECYCLE.md`.
+* Added `10_SESSION_STATE.md`.
+* Added Session Close Protocol for `Koniec tego czatu`.
+* Added ZIP handoff expectations for new AI sessions.
+* Updated AI operating context to reference session lifecycle rules.
+
 ---
 
 # Future Releases

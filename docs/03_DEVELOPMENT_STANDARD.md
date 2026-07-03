@@ -34,6 +34,7 @@ Yes
 08_CURRENT_STATE.md
 09_CHANGELOG.md
 AI_CONTEXT.md
+10_PROJECT_LIFECYCLE.md
 
 ---
 
@@ -80,6 +81,8 @@ Commit
 Push
     ↓
 Documentation Update
+    ↓
+Session Close
 ```
 
 Implementation must never begin before diagnosis and scope approval.
@@ -188,6 +191,7 @@ A workflow is complete only when all of the following conditions are satisfied:
 * Commit created
 * Changes pushed
 * Documentation updated
+* Session closed or next-session state prepared
 
 ---
 
@@ -201,3 +205,4 @@ A workflow is complete only when all of the following conditions are satisfied:
 | 04_UI_STANDARD.md   | User interface standards            |
 | 07_DECISIONS.md     | Architecture Decision Records       |
 | AI_CONTEXT.md       | AI operating model and SPS Commands |
+| 10_PROJECT_LIFECYCLE.md | Session lifecycle and close protocol |

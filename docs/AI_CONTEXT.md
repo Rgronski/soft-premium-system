@@ -30,6 +30,8 @@ Yes
 * 03_DEVELOPMENT_STANDARD.md
 * 04_UI_STANDARD.md
 * 08_CURRENT_STATE.md
+* 10_PROJECT_LIFECYCLE.md
+* 10_SESSION_STATE.md
 
 ---
 
@@ -87,6 +89,12 @@ Unless instructed otherwise, AI follows the standard development workflow define
 > **03_DEVELOPMENT_STANDARD.md**
 
 Implementation should never begin before diagnosis and review.
+
+AI also follows the session lifecycle defined in:
+
+> **10_PROJECT_LIFECYCLE.md**
+
+When the Product Owner writes `Koniec tego czatu`, AI must execute the Session Close Protocol and prepare a next-session prompt.
 
 ---
 
@@ -324,3 +332,22 @@ If no SPS Command is provided, AI selects the operating mode that best supports 
 | 03_DEVELOPMENT_STANDARD.md | Development workflow   |
 | 04_UI_STANDARD.md          | UI standards           |
 | 08_CURRENT_STATE.md        | Current project status |
+
+---
+
+## /session-close
+
+Close the current working session according to `10_PROJECT_LIFECYCLE.md`.
+
+Prepare:
+
+* completed work summary,
+* changed files list,
+* verification status,
+* documentation status,
+* commit and push status,
+* unknowns that cannot be confirmed,
+* next logical step,
+* ready-to-use prompt for the next chat with ZIP handoff instructions.
+
+Do not claim that work was committed, pushed, or verified unless confirmed.
