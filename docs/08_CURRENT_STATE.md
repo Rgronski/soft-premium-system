@@ -79,7 +79,7 @@ Present existing project visits in Calendar as a sorted read-only view based on 
 
 # In Progress
 
-* MS-007 verification and local repository review
+* No active implementation work is currently in progress
 
 ---
 
@@ -105,15 +105,15 @@ Commit and push status must always be confirmed explicitly by the Product Owner.
 
 Priority 1
 
-Verify MS-007 locally with lint and build.
+Continue the next planned workflow after completed MS-007.
 
 Priority 2
 
-Review Calendar View against existing Visits, Clients, and Services data.
+Keep Calendar as a read-only view over existing Visits data.
 
 Priority 3
 
-Confirm repository state, then continue the next planned workflow.
+Keep documentation synchronized with future development.
 
 ---
 
