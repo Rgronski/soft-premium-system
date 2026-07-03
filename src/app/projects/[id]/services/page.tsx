@@ -51,9 +51,10 @@ export default function ProjectServicesPage() {
         {isLoaded && services.length > 0 ? (
           <div className="space-y-3">
             {services.map((service) => (
-              <div
+              <Link
                 key={service.id}
-                className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
+                href={`/projects/${params.id}/services/${service.id}`}
+                className="block w-full rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
               >
                 <p className="text-base font-medium text-zinc-50">
                   {service.name}
@@ -61,7 +62,7 @@ export default function ProjectServicesPage() {
                 <p className="mt-1 text-sm text-zinc-400">
                   {service.duration} • {service.price}
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
         ) : null}
