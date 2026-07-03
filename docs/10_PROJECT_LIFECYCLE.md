@@ -45,6 +45,44 @@ The lifecycle does not replace the Development Standard. It extends it with sess
 
 ---
 
+# Implementation Responsibility
+
+Soft Premium System uses a split workflow between architecture/governance and implementation.
+
+## ChatGPT / Chief Architect
+
+ChatGPT / Chief Architect:
+
+* leads diagnosis,
+* defines scope,
+* protects architecture,
+* prepares the prompt for Codex,
+* verifies the implementation report, diff, and documentation,
+* does not perform code patches in the sandbox by default,
+* does not generate ZIP patch packages by default,
+* may implement directly only if the Product Owner explicitly requests it or Codex is unavailable.
+
+## Codex
+
+Codex:
+
+* performs the minimal patch directly in the local repository,
+* stays within the approved scope,
+* shows the diff,
+* runs tests or clearly indicates what should be tested,
+* does not commit automatically.
+
+## Product Owner
+
+Product Owner:
+
+* approves scope,
+* runs tests or confirms test results,
+* performs commit and push,
+* confirms repository state.
+
+---
+
 # Session Lifecycle
 
 Every development session follows this sequence.
@@ -77,9 +115,11 @@ Prepare Next Session Prompt
 
 A new session begins by loading the current project context.
 
-AI must not assume access to the Product Owner's local filesystem.
+ChatGPT / Chief Architect must not assume access to the Product Owner's local filesystem unless a tool session explicitly provides it.
 
-If the project is local, AI should ask the Product Owner to upload a ZIP package containing the project or the smallest useful diagnostic subset.
+If Codex is unavailable and the project is local, ChatGPT / Chief Architect should ask the Product Owner to upload a ZIP package containing the project or the smallest useful diagnostic subset.
+
+If Codex is available in the local repository, implementation should normally be delegated to Codex after diagnosis and scope approval instead of defaulting to ZIP-based patch exchange.
 
 Recommended PowerShell command for a standard session package:
 
@@ -112,7 +152,7 @@ Compress-Archive -Path `
 
 # Load Context
 
-AI must read the documentation in `docs/` before beginning project work.
+ChatGPT / Chief Architect and Codex must read the documentation in `docs/` before beginning project work.
 
 Required documents:
 
@@ -138,7 +178,7 @@ Code inspection may clarify implementation details, but it must not override pro
 
 # Verify Project State
 
-Before implementation, AI should identify:
+Before implementation, ChatGPT / Chief Architect should identify:
 
 * current milestone,
 * relevant existing routes and components,
@@ -147,7 +187,7 @@ Before implementation, AI should identify:
 * whether documentation and code appear consistent,
 * whether the requested work requires Product Owner approval.
 
-If the uploaded project package is incomplete, AI must say so explicitly and limit its conclusions to the available files.
+If the uploaded project package is incomplete, ChatGPT / Chief Architect must say so explicitly and limit conclusions to the available files.
 
 ---
 
@@ -156,6 +196,8 @@ If the uploaded project package is incomplete, AI must say so explicitly and lim
 Product work follows the standard workflow defined in `03_DEVELOPMENT_STANDARD.md`.
 
 Implementation must not begin before diagnosis, review, and scope approval.
+
+Implementation should normally be executed by Codex in the local repository after ChatGPT / Chief Architect prepares the approved scope and execution prompt.
 
 Work should remain focused on one intention per session unless the Product Owner explicitly changes the goal.
 
@@ -177,7 +219,7 @@ When this command is received, AI performs the Session Close Protocol.
 
 # Session Close Protocol
 
-AI should prepare a closing report containing:
+ChatGPT / Chief Architect should prepare a closing report containing:
 
 1. What was achieved in the session.
 2. Which files were changed.
@@ -189,9 +231,15 @@ AI should prepare a closing report containing:
 8. The next logical step.
 9. A ready-to-use prompt for the next chat.
 
-AI must not claim that files were saved, committed, pushed, or verified unless this was actually confirmed.
+ChatGPT / Chief Architect must not claim that files were saved, committed, pushed, or verified unless this was actually confirmed.
 
-If AI only worked on an uploaded ZIP copy, it must clearly state that the Product Owner still needs to apply the changes locally.
+If work happened only on an uploaded ZIP copy, the report must clearly state that the Product Owner still needs to apply the changes locally.
+
+If Codex performed the implementation locally, the report should explicitly distinguish:
+
+* diagnosis and scope ownership by ChatGPT / Chief Architect,
+* implementation ownership by Codex,
+* commit and push ownership by Product Owner.
 
 ---
 

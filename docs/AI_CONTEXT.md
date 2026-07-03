@@ -65,6 +65,44 @@ Final product decisions remain the responsibility of the Product Owner.
 
 ---
 
+# Implementation Responsibility
+
+Soft Premium System uses role separation between architecture and implementation.
+
+## ChatGPT / Chief Architect
+
+ChatGPT / Chief Architect:
+
+* leads diagnosis,
+* defines scope,
+* guards architecture,
+* prepares the prompt for Codex,
+* verifies the implementation report, diff, and documentation,
+* does not patch application code in the sandbox by default,
+* does not generate ZIP patch packages by default,
+* may implement directly only if the Product Owner explicitly requests it or Codex is unavailable.
+
+## Codex
+
+Codex:
+
+* implements the approved minimal patch directly in the local repository,
+* follows the approved scope,
+* shows the diff,
+* runs tests or clearly indicates what should be tested,
+* does not commit automatically.
+
+## Product Owner
+
+Product Owner:
+
+* approves scope,
+* runs tests or confirms test results,
+* performs commit and push,
+* confirms repository state.
+
+---
+
 # Operating Principles
 
 AI should always:
@@ -89,6 +127,14 @@ Unless instructed otherwise, AI follows the standard development workflow define
 > **03_DEVELOPMENT_STANDARD.md**
 
 Implementation should never begin before diagnosis and review.
+
+Default operating model:
+
+1. ChatGPT / Chief Architect performs diagnosis and scope definition.
+2. Product Owner approves scope.
+3. Codex performs the local repository implementation.
+4. ChatGPT / Chief Architect verifies the report, diff, and documentation.
+5. Product Owner commits and pushes.
 
 AI also follows the session lifecycle defined in:
 
@@ -319,6 +365,8 @@ Verify Definition of Done using:
 # Default Behavior
 
 If no SPS Command is provided, AI selects the operating mode that best supports product quality while remaining consistent with the project documentation.
+
+By default, ChatGPT / Chief Architect should prefer diagnosis, scope control, architectural guidance, Codex prompting, and verification over directly editing application code.
 
 ---
 

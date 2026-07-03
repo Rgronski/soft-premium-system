@@ -46,6 +46,8 @@ This document describes session continuity. It does not replace:
 * `09_CHANGELOG.md` for completed historical changes,
 * `06_BACKLOG.md` for candidate future work.
 
+It should also record who owned diagnosis, implementation, verification, and repository actions when responsibilities are split between ChatGPT / Chief Architect, Codex, and Product Owner.
+
 ---
 
 # Latest Session
@@ -57,28 +59,26 @@ This document describes session continuity. It does not replace:
 Process and documentation update
 
 **Current Milestone**
-MS-007 — Calendar View
+MS-007 - Calendar View
 
 **Session Focus**
-Introduce Project Lifecycle and Session Close Protocol before continuing MS-007 implementation.
+Clarify the implementation workflow split between ChatGPT / Chief Architect, Codex, and Product Owner.
 
 ---
 
 # Completed In This Session
 
-* Defined Project Lifecycle as a formal SPS operating process.
-* Added Session Close Protocol triggered by `Koniec tego czatu`.
-* Added Session State as a dedicated continuity document.
-* Added ZIP handoff expectations for new AI sessions.
-* Confirmed that AI must not assume access to the Product Owner's local filesystem.
+* Clarified that ChatGPT / Chief Architect owns diagnosis, scope, architecture, Codex prompt preparation, and verification.
+* Clarified that Codex owns minimal local implementation in the repository.
+* Clarified that Product Owner owns scope approval, test confirmation, commit, push, and repository state confirmation.
+* Clarified that direct sandbox patching by ChatGPT / Chief Architect is not the default path.
 
 ---
 
 # Not Completed In This Session
 
-* MS-007 implementation has not started.
-* Calendar View remains pending.
-* Local commit and push cannot be confirmed from this uploaded ZIP copy.
+* No application feature work was implemented in this session.
+* Repository commit and push were not performed in this session.
 
 ---
 
@@ -97,41 +97,46 @@ Not confirmed.
 Not confirmed.
 
 **Working Tree Status**
-Not confirmed. AI worked on an uploaded ZIP copy, not directly on the Product Owner's local Git working tree.
+Pending local review in the repository after documentation update.
+
+**Responsibility Split**
+Diagnosis and process definition: ChatGPT / Chief Architect.
+Implementation execution for feature work: Codex by default.
+Commit and push: Product Owner.
 
 ---
 
 # Next Logical Step
 
-Apply the documentation updates to the local repository, review the diff, commit them, push them, and then return to MS-007 — Calendar View.
+Review the updated process documentation locally, confirm the role split, and continue the next workflow using ChatGPT / Chief Architect for diagnosis and Codex for implementation.
 
 ---
 
 # Notes For Next AI Session
 
-Before continuing MS-007, load `docs/` and verify that these documents exist:
+Before continuing feature work, load `docs/` and verify that these documents exist:
 
 * `10_PROJECT_LIFECYCLE.md`
 * `10_SESSION_STATE.md`
 
-Then continue with MS-007 using the standard workflow:
+Then continue using the standard workflow with explicit role split:
 
 ```text
-Diagnosis
-    ↓
+Diagnosis by ChatGPT / Chief Architect
+    ->
 Review
-    ↓
+    ->
 Scope Approval
-    ↓
-Implementation
-    ↓
+    ->
+Implementation by Codex
+    ->
 Testing
-    ↓
-Commit
-    ↓
-Push
-    ↓
+    ->
+Commit by Product Owner
+    ->
+Push by Product Owner
+    ->
 Documentation Update
-    ↓
+    ->
 Session Close
 ```
