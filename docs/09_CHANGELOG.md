@@ -116,6 +116,17 @@ Each release entry should contain:
 * Declared the workflow as a Source of Truth architectural asset in project documentation.
 * Updated session state for the active documentation governance task.
 
+## MS-008 - Project Workspace Dashboard Polish
+
+### Completed
+
+* Project dashboard is no longer a placeholder and now acts as a real project workspace center.
+* Added KPI cards sourced from project `localStorage`: Clients, Services, Visits, and Upcoming Visits.
+* Added working Quick Actions for Add Client, Add Service, Schedule Visit, and Open Calendar using existing routes.
+* Fixed lint issues by removing synchronous `setState` inside `useEffect` in the affected pages.
+* Confirmed `npm run lint` passes.
+* Confirmed `npm run build` passes.
+
 ---
 
 # Future Releases

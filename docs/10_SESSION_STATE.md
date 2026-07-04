@@ -64,24 +64,25 @@ Feature implementation and documentation update
 None
 
 **Latest Completed Milestone**
-MS-DOC-002 - Workflow Governance v1.0
+MS-008 - Project Workspace Dashboard Polish
 
 **Next Milestone**
-MS-008
+MS-009 - To be planned
 
 **Session Focus**
-Close the documentation state after completed MS-DOC-002 and prepare the project for MS-008 planning.
+Close the project state after completed MS-008 and prepare the project for Project Integrity Check and MS-009 planning.
 
 ---
 
 # Completed In This Session
 
-* Completed `MS-DOC-002 - Workflow Governance v1.0`.
-* Marked SPS Operating Workflow v1.0 as stable in the lifecycle documentation.
-* Added workflow governance rules and versioning policy.
-* Confirmed workflow status as Version `1.0` and `Stable`.
-* Confirmed repository commit `b07e7cc docs: establish workflow governance v1.0`.
-* Confirmed push completion and clean working tree.
+* Completed `MS-008 - Project Workspace Dashboard Polish`.
+* Project dashboard now shows KPI values from project `localStorage`: Clients, Services, Visits, and Upcoming Visits.
+* Project dashboard Quick Actions now route to Add Client, Add Service, Schedule Visit, and Open Calendar.
+* Resolved lint issues caused by synchronous `setState` inside `useEffect` in the affected pages.
+* Confirmed `npm run lint` as `OK`.
+* Confirmed `npm run build` as `OK`.
+* Confirmed commit and push completion.
 
 ---
 
@@ -94,30 +95,37 @@ Close the documentation state after completed MS-DOC-002 and prepare the project
 # Verification Status
 
 **Code Verification**
-Not applicable. This task changes documentation only.
+Completed.
 
 **Documentation Verification**
-Completed. Documentation reflects the confirmed repository state for MS-DOC-002.
+Completed. Documentation reflects the confirmed repository state after MS-008 closure.
 
 **Commit Status**
-Confirmed. Commit created: `b07e7cc docs: establish workflow governance v1.0`.
+Completed.
 
 **Push Status**
-Confirmed. Push completed.
+Completed.
 
 **Working Tree Status**
-Clean.
+Documentation updated.
 
 **Responsibility Split**
 Diagnosis and scope definition: ChatGPT / Chief Architect.
 Implementation execution: Codex.
 Commit and push: Product Owner.
 
+**Session Status**
+Closed
+
+**Validation**
+`npm run lint`: OK
+`npm run build`: OK
+
 ---
 
 # Next Logical Step
 
-Perform Project Integrity Check and begin planning for MS-008.
+Perform Project Integrity Check and then begin planning for MS-009.
 
 ---
 

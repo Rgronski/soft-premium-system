@@ -45,14 +45,14 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 **None**
 
 **Latest Completed Milestone**
-MS-DOC-002 - Workflow Governance v1.0
+MS-008 - Project Workspace Dashboard Polish
 
 **Next Milestone**
-MS-008
+MS-009 - To be planned
 
 Objective:
 
-Workflow governance is established and SPS Operating Workflow is confirmed as Version 1.0 with Status Stable. The next step is planning MS-008.
+Workflow governance is established and SPS Operating Workflow is confirmed as Version 1.0 with Status Stable. The project workspace dashboard is now a real work center with KPI visibility and direct Quick Actions. The next step is Project Integrity Check and planning MS-009.
 
 ---
 
@@ -82,6 +82,9 @@ Workflow governance is established and SPS Operating Workflow is confirmed as Ve
 * Calendar View implemented as a read-only list over existing Visits, Clients, and Services data
 * Workflow governance established for SPS Operating Workflow v1.0
 * SPS Operating Workflow marked as Version 1.0 and Status Stable
+* Project workspace dashboard upgraded from placeholder to active workspace center
+* Dashboard KPI cards now show Clients, Services, Visits, and Upcoming Visits from project localStorage
+* Dashboard Quick Actions now route to Add Client, Add Service, Schedule Visit, and Open Calendar
 
 ---
 
@@ -95,7 +98,8 @@ Workflow governance is established and SPS Operating Workflow is confirmed as Ve
 
 Next session priorities:
 
-* Begin planning for MS-008
+* Perform Project Integrity Check
+* Begin planning for MS-009
 * Keep workflow governance and project state documentation synchronized
 * Continue the next planned workflow within the active milestone path
 
@@ -113,15 +117,15 @@ Commit and push status must always be confirmed explicitly by the Product Owner.
 
 Priority 1
 
-Begin planning for MS-008.
+Perform Project Integrity Check.
 
 Priority 2
 
-Keep workflow governance and project state documentation aligned for Project Integrity Check.
+Begin planning for MS-009.
 
 Priority 3
 
-Keep documentation synchronized with future development.
+Keep workflow governance and project state documentation aligned for the next milestone.
 
 ---
 
