@@ -113,6 +113,14 @@ The architecture of Soft Premium System follows these principles:
 
 ---
 
+## Domain Independence
+
+Platform core must remain domain-independent.
+
+Industry-specific behaviour should be achieved through configuration, extensions or application modules rather than modifications of the platform core.
+
+---
+
 # Knowledge Architecture
 
 The Canonical Project Model organizes project knowledge into the following domains:

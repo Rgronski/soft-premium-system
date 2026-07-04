@@ -88,6 +88,18 @@ The goal is to make good decisions repeatable.
 
 ---
 
+# Platform Vision
+
+Soft Premium System is a platform for creating modern business applications.
+
+It is not designed for only one industry.
+
+AI is an integral part of the software creation process within SPS.
+
+The platform should provide a repeatable way to design, build, and evolve applications across multiple domains without redefining the foundation each time.
+
+---
+
 # Core Transformation
 
 Soft Premium System transforms software development from a series of isolated decisions into a consistent, repeatable system.

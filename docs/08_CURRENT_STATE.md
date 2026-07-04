@@ -45,14 +45,14 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 **None**
 
 **Latest Completed Milestone**
-MS-008 - Project Workspace Dashboard Polish
+MS-DOC-003 - Platform Identity & Origins
 
 **Next Milestone**
-MS-009 - To be planned
+MS-009 - Planning
 
 Objective:
 
-Workflow governance is established and SPS Operating Workflow is confirmed as Version 1.0 with Status Stable. The project workspace dashboard is now a real work center with KPI visibility and direct Quick Actions. The next step is Project Integrity Check and planning MS-009.
+Workflow governance is established and SPS Operating Workflow is confirmed as Version 1.0 with Status Stable. Platform identity, origins, domain independence, and Project Context Loader are now explicitly established in the project foundations. The next step is planning MS-009.
 
 ---
 
@@ -60,6 +60,7 @@ Workflow governance is established and SPS Operating Workflow is confirmed as Ve
 
 ## Foundation
 
+* 00_ORIGINS.md
 * 00_PROJECT_BIBLE.md
 * 01_VISION.md
 * 02_ARCHITECTURE.md
@@ -85,6 +86,10 @@ Workflow governance is established and SPS Operating Workflow is confirmed as Ve
 * Project workspace dashboard upgraded from placeholder to active workspace center
 * Dashboard KPI cards now show Clients, Services, Visits, and Upcoming Visits from project localStorage
 * Dashboard Quick Actions now route to Add Client, Add Service, Schedule Visit, and Open Calendar
+* Platform identity formally established for Soft Premium System
+* Domain independence formally established for platform core
+* Project Context Loader (PCL) added as the official first stage of workflow context loading
+* ADR-001 added for Platform Identity & Domain Independence
 
 ---
 

@@ -127,6 +127,16 @@ Each release entry should contain:
 * Confirmed `npm run lint` passes.
 * Confirmed `npm run build` passes.
 
+## MS-DOC-003 - Platform Identity & Origins
+
+### Completed
+
+* Added `00_ORIGINS.md`.
+* Established Platform Identity for Soft Premium System.
+* Established Domain Independence for the platform core.
+* Added Project Context Loader (PCL).
+* Added ADR-001.
+
 ---
 
 # Future Releases

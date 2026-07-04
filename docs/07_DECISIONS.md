@@ -65,6 +65,40 @@ Status values:
 
 ---
 
+# ADR-001
+
+## Status
+
+Accepted
+
+## Context
+
+Soft Premium System has evolved beyond a single domain origin and now needs an explicit architectural identity that can guide future milestones, AI interpretation, and product scope decisions.
+
+The project must clearly distinguish between the platform core and domain-specific implementations.
+
+## Decision
+
+Soft Premium System is defined as a domain-independent platform for designing, building, and evolving modern business applications.
+
+Beauty Client Pro is recognized as the historical origin context, but not as the architectural definition of the platform.
+
+Platform core must remain domain-independent, while industry-specific behaviour should be implemented through configuration, extensions, or application modules.
+
+Project Context Loader (PCL) becomes the official first stage of the workflow.
+
+## Consequences
+
+Future milestones must preserve platform identity and avoid binding platform architecture to a single industry.
+
+Documentation, AI interpretation, and architecture decisions must treat domain implementations as consumers or extensions of the platform rather than as the platform itself.
+
+Project Context Loader must be executed before Project Integrity Check, diagnosis, and implementation planning.
+
+This decision affects future milestones by requiring platform-level thinking before domain-level specialization.
+
+---
+
 # ADR-0001
 
 ## Status

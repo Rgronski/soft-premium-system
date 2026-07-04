@@ -24,6 +24,7 @@ Yes
 
 **Depends On**
 
+* 00_ORIGINS.md
 * 00_PROJECT_BIBLE.md
 * 01_VISION.md
 * 02_ARCHITECTURE.md
@@ -42,6 +43,33 @@ This document defines the operational rules for AI assistants participating in t
 It establishes roles, responsibilities, working principles, and the SPS Commands used during collaboration.
 
 AI follows the project standards rather than defining them.
+
+---
+
+# Project Context Loader (PCL)
+
+Before beginning active work, AI must execute the official Project Context Loader.
+
+AI must understand:
+
+* the origin of the project,
+* the philosophy of the project,
+* the vision of the project,
+* the architecture of the project,
+* the current state of the project.
+
+Official load order:
+
+0. `00_ORIGINS.md`
+1. `00_PROJECT_BIBLE.md`
+2. `01_VISION.md`
+3. `02_ARCHITECTURE.md`
+4. Development Standards
+5. Current State
+6. Session State
+7. Change Log
+
+Project Context Loader is the official first stage of the workflow.
 
 ---
 
@@ -127,19 +155,21 @@ Unless instructed otherwise, AI follows the standard development workflow define
 > **03_DEVELOPMENT_STANDARD.md**
 
 Diagnosis must not begin before Project Integrity Check.
+Diagnosis must not begin before Project Context Loader.
 
 Implementation should never begin before diagnosis and review.
 
 Default operating model:
 
-1. ChatGPT / Chief Architect performs Project Integrity Check at the start of the session.
-2. ChatGPT / Chief Architect performs diagnosis and scope definition.
-3. Product Owner approves scope.
-4. Codex performs the local repository implementation.
-5. ChatGPT / Chief Architect verifies the report, diff, and documentation.
-6. Product Owner commits and pushes.
+1. ChatGPT / Chief Architect performs Project Context Loader at the start of the session.
+2. ChatGPT / Chief Architect performs Project Integrity Check.
+3. ChatGPT / Chief Architect performs diagnosis and scope definition.
+4. Product Owner approves scope.
+5. Codex performs the local repository implementation.
+6. ChatGPT / Chief Architect verifies the report, diff, and documentation.
+7. Product Owner commits and pushes.
 
-At the beginning of every new session, ChatGPT / Chief Architect must perform Project Integrity Check before diagnosis.
+At the beginning of every new session, ChatGPT / Chief Architect must perform Project Context Loader and Project Integrity Check before diagnosis.
 
 Project Integrity Check verifies:
 
@@ -367,6 +397,7 @@ Verify:
 
 Verify Definition of Done using:
 
+* Project Context Loader
 * Project Integrity Check
 * Diagnosis
 * Review
@@ -391,6 +422,7 @@ By default, ChatGPT / Chief Architect should prefer diagnosis, scope control, ar
 
 | Document                   | Source of Truth        |
 | -------------------------- | ---------------------- |
+| 00_ORIGINS.md              | Project origins        |
 | 00_PROJECT_BIBLE.md        | Project philosophy     |
 | 01_VISION.md               | Product vision         |
 | 02_ARCHITECTURE.md         | System architecture    |

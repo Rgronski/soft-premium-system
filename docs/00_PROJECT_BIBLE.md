@@ -42,6 +42,25 @@ All other documents must remain consistent with this document.
 
 ---
 
+# Project Context Loader (PCL)
+
+Every new project session begins with the Project Context Loader.
+
+Load order:
+
+0. `00_ORIGINS.md`
+1. `00_PROJECT_BIBLE.md`
+2. `01_VISION.md`
+3. `02_ARCHITECTURE.md`
+4. Development Standards
+5. Current State
+6. Session State
+7. Change Log
+
+Project Context Loader establishes the minimum context that humans and AI must load before Project Integrity Check and any active work.
+
+---
+
 # Mission
 
 Soft Premium System exists to simplify and standardize the design, development, and maintenance of small, high-quality applications.
@@ -274,6 +293,7 @@ Quality is measured by long-term clarity and maintainability, not by technical s
 
 | Document                   | Source of Truth                                   |
 | -------------------------- | ------------------------------------------------- |
+| 00_ORIGINS.md              | Project origins and philosophical context         |
 | 01_VISION.md               | Product vision                                    |
 | 02_ARCHITECTURE.md         | Knowledge, information, and software architecture |
 | 03_DEVELOPMENT_STANDARD.md | Development workflow                              |
