@@ -42,11 +42,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-**MS-DOC-002 - Workflow Governance v1.0**
+**None**
+
+**Latest Completed Milestone**
+MS-DOC-002 - Workflow Governance v1.0
+
+**Next Milestone**
+MS-008
 
 Objective:
 
-Establish workflow governance and confirm SPS Operating Workflow as Version 1.0 with Status Stable.
+Workflow governance is established and SPS Operating Workflow is confirmed as Version 1.0 with Status Stable. The next step is planning MS-008.
 
 ---
 
@@ -87,7 +93,7 @@ Establish workflow governance and confirm SPS Operating Workflow as Version 1.0 
 
 # Next
 
-After MS-DOC-002:
+Next session priorities:
 
 * Begin planning for MS-008
 * Keep workflow governance and project state documentation synchronized

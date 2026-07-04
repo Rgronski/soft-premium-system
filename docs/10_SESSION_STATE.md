@@ -61,10 +61,16 @@ Session Close should leave enough confirmed information here to support the next
 Feature implementation and documentation update
 
 **Current Milestone**
+None
+
+**Latest Completed Milestone**
 MS-DOC-002 - Workflow Governance v1.0
 
+**Next Milestone**
+MS-008
+
 **Session Focus**
-Establish workflow governance and mark SPS Operating Workflow v1.0 as stable.
+Close the documentation state after completed MS-DOC-002 and prepare the project for MS-008 planning.
 
 ---
 
@@ -81,7 +87,7 @@ Establish workflow governance and mark SPS Operating Workflow v1.0 as stable.
 
 # Not Completed In This Session
 
-* No open work remains for MS-DOC-002.
+* No open work remains.
 
 ---
 
