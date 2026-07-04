@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 type Service = {
   id: string;
@@ -13,20 +13,18 @@ type Service = {
 
 export default function ServiceDetailsPage() {
   const params = useParams<{ id: string; serviceId: string }>();
-  const [service, setService] = useState<Service | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const service = useMemo<Service | null>(() => {
+    if (typeof window === "undefined") {
+      return null;
+    }
 
-  useEffect(() => {
     const savedServices = localStorage.getItem(
       `soft-premium-system.projects.${params.id}.services`,
     );
     const services: Service[] = savedServices ? JSON.parse(savedServices) : [];
-    const matchedService =
-      services.find((item) => item.id === params.serviceId) ?? null;
-
-    setService(matchedService);
-    setIsLoaded(true);
+    return services.find((item) => item.id === params.serviceId) ?? null;
   }, [params.id, params.serviceId]);
+  const isLoaded = typeof window !== "undefined";
 
   return (
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 type Client = {
   id: string;
@@ -14,18 +14,17 @@ type Client = {
 
 export default function ProjectClientsPage() {
   const params = useParams<{ id: string }>();
-  const [clients, setClients] = useState<Client[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const clients = useMemo<Client[]>(() => {
+    if (typeof window === "undefined") {
+      return [];
+    }
 
-  useEffect(() => {
     const savedClients = localStorage.getItem(
       `soft-premium-system.projects.${params.id}.clients`,
     );
-    const parsedClients: Client[] = savedClients ? JSON.parse(savedClients) : [];
-
-    setClients(parsedClients);
-    setIsLoaded(true);
+    return savedClients ? JSON.parse(savedClients) : [];
   }, [params.id]);
+  const isLoaded = typeof window !== "undefined";
 
   return (
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">

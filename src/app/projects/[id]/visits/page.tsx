@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 type Visit = {
   id: string;
@@ -15,18 +15,17 @@ type Visit = {
 
 export default function ProjectVisitsPage() {
   const params = useParams<{ id: string }>();
-  const [visits, setVisits] = useState<Visit[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const visits = useMemo<Visit[]>(() => {
+    if (typeof window === "undefined") {
+      return [];
+    }
 
-  useEffect(() => {
     const savedVisits = localStorage.getItem(
       `soft-premium-system.projects.${params.id}.visits`,
     );
-    const parsedVisits: Visit[] = savedVisits ? JSON.parse(savedVisits) : [];
-
-    setVisits(parsedVisits);
-    setIsLoaded(true);
+    return savedVisits ? JSON.parse(savedVisits) : [];
   }, [params.id]);
+  const isLoaded = typeof window !== "undefined";
 
   return (
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">

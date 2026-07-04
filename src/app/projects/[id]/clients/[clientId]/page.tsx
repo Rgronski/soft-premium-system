@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 type Client = {
   id: string;
@@ -13,20 +13,18 @@ type Client = {
 
 export default function ClientDetailsPage() {
   const params = useParams<{ id: string; clientId: string }>();
-  const [client, setClient] = useState<Client | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const client = useMemo<Client | null>(() => {
+    if (typeof window === "undefined") {
+      return null;
+    }
 
-  useEffect(() => {
     const savedClients = localStorage.getItem(
       `soft-premium-system.projects.${params.id}.clients`,
     );
     const clients: Client[] = savedClients ? JSON.parse(savedClients) : [];
-    const matchedClient =
-      clients.find((item) => item.id === params.clientId) ?? null;
-
-    setClient(matchedClient);
-    setIsLoaded(true);
+    return clients.find((item) => item.id === params.clientId) ?? null;
   }, [params.clientId, params.id]);
+  const isLoaded = typeof window !== "undefined";
 
   return (
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">

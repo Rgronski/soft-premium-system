@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 type Project = {
   id: string;
@@ -10,13 +10,13 @@ type Project = {
 };
 
 export default function Home() {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const projects = useMemo<Project[]>(() => {
+    if (typeof window === "undefined") {
+      return [];
+    }
 
-  useEffect(() => {
     const savedProjects = localStorage.getItem("soft-premium-system.projects");
-    const parsedProjects = savedProjects ? JSON.parse(savedProjects) : [];
-
-    setProjects(parsedProjects);
+    return savedProjects ? JSON.parse(savedProjects) : [];
   }, []);
 
   return (

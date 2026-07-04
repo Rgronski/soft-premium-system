@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
 type Client = {
   id: string;
@@ -35,24 +35,25 @@ export default function NewProjectVisitPage() {
   const [serviceId, setServiceId] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
-  const [clients, setClients] = useState<Client[]>([]);
-  const [services, setServices] = useState<Service[]>([]);
+  const clients = useMemo<Client[]>(() => {
+    if (typeof window === "undefined") {
+      return [];
+    }
 
-  useEffect(() => {
     const savedClients = localStorage.getItem(
       `soft-premium-system.projects.${params.id}.clients`,
     );
-    const parsedClients: Client[] = savedClients ? JSON.parse(savedClients) : [];
+    return savedClients ? JSON.parse(savedClients) : [];
+  }, [params.id]);
+  const services = useMemo<Service[]>(() => {
+    if (typeof window === "undefined") {
+      return [];
+    }
 
     const savedServices = localStorage.getItem(
       `soft-premium-system.projects.${params.id}.services`,
     );
-    const parsedServices: Service[] = savedServices
-      ? JSON.parse(savedServices)
-      : [];
-
-    setClients(parsedClients);
-    setServices(parsedServices);
+    return savedServices ? JSON.parse(savedServices) : [];
   }, [params.id]);
 
   function handleCreateVisit() {

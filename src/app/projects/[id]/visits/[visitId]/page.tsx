@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 type Visit = {
   id: string;
@@ -28,14 +28,25 @@ type Service = {
   createdAt: string;
 };
 
+type VisitDetailsSnapshot = {
+  visit: Visit | null;
+  client: Client | null;
+  service: Service | null;
+  isLoaded: boolean;
+};
+
 export default function VisitDetailsPage() {
   const params = useParams<{ id: string; visitId: string }>();
-  const [visit, setVisit] = useState<Visit | null>(null);
-  const [client, setClient] = useState<Client | null>(null);
-  const [service, setService] = useState<Service | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const details = useMemo<VisitDetailsSnapshot>(() => {
+    if (typeof window === "undefined") {
+      return {
+        visit: null,
+        client: null,
+        service: null,
+        isLoaded: false,
+      };
+    }
 
-  useEffect(() => {
     const savedVisits = localStorage.getItem(
       `soft-premium-system.projects.${params.id}.visits`,
     );
@@ -53,23 +64,21 @@ export default function VisitDetailsPage() {
     );
     const services: Service[] = savedServices ? JSON.parse(savedServices) : [];
 
-    setVisit(matchedVisit);
-    setClient(
-      matchedVisit
+    return {
+      visit: matchedVisit,
+      client: matchedVisit
         ? clients.find((item) => item.id === matchedVisit.clientId) ?? null
         : null,
-    );
-    setService(
-      matchedVisit
+      service: matchedVisit
         ? services.find((item) => item.id === matchedVisit.serviceId) ?? null
         : null,
-    );
-    setIsLoaded(true);
+      isLoaded: true,
+    };
   }, [params.id, params.visitId]);
 
   return (
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
-      {!isLoaded ? null : visit ? (
+      {!details.isLoaded ? null : details.visit ? (
         <div className="space-y-4">
           <div className="space-y-2">
             <h2 className="text-2xl font-semibold text-zinc-50">
@@ -86,7 +95,9 @@ export default function VisitDetailsPage() {
                 Client
               </p>
               <p className="mt-2 text-base font-medium text-zinc-50">
-                {client ? `${client.firstName} ${client.lastName}` : "Unknown client"}
+                {details.client
+                  ? `${details.client.firstName} ${details.client.lastName}`
+                  : "Unknown client"}
               </p>
             </div>
 
@@ -95,7 +106,7 @@ export default function VisitDetailsPage() {
                 Service
               </p>
               <p className="mt-2 text-base font-medium text-zinc-50">
-                {service ? service.name : "Unknown service"}
+                {details.service ? details.service.name : "Unknown service"}
               </p>
             </div>
 
@@ -104,7 +115,7 @@ export default function VisitDetailsPage() {
                 Date
               </p>
               <p className="mt-2 text-base font-medium text-zinc-50">
-                {visit.date}
+                {details.visit.date}
               </p>
             </div>
 
@@ -113,7 +124,7 @@ export default function VisitDetailsPage() {
                 Time
               </p>
               <p className="mt-2 text-base font-medium text-zinc-50">
-                {visit.time}
+                {details.visit.time}
               </p>
             </div>
 
@@ -122,7 +133,7 @@ export default function VisitDetailsPage() {
                 Created At
               </p>
               <p className="mt-2 text-base font-medium text-zinc-50">
-                {new Date(visit.createdAt).toLocaleDateString()}
+                {new Date(details.visit.createdAt).toLocaleDateString()}
               </p>
             </div>
           </div>

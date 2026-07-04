@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 type Service = {
   id: string;
@@ -14,20 +14,17 @@ type Service = {
 
 export default function ProjectServicesPage() {
   const params = useParams<{ id: string }>();
-  const [services, setServices] = useState<Service[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const services = useMemo<Service[]>(() => {
+    if (typeof window === "undefined") {
+      return [];
+    }
 
-  useEffect(() => {
     const savedServices = localStorage.getItem(
       `soft-premium-system.projects.${params.id}.services`,
     );
-    const parsedServices: Service[] = savedServices
-      ? JSON.parse(savedServices)
-      : [];
-
-    setServices(parsedServices);
-    setIsLoaded(true);
+    return savedServices ? JSON.parse(savedServices) : [];
   }, [params.id]);
+  const isLoaded = typeof window !== "undefined";
 
   return (
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
