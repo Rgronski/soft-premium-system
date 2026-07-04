@@ -42,11 +42,11 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-**MS-007 - Calendar View**
+**MS-DOC-002 - Workflow Governance v1.0**
 
 Objective:
 
-Present existing project visits in Calendar as a sorted read-only view based on stored Visits, Clients, and Services data.
+Establish workflow governance and confirm SPS Operating Workflow as Version 1.0 with Status Stable.
 
 ---
 
@@ -74,6 +74,8 @@ Present existing project visits in Calendar as a sorted read-only view based on 
 * Services list, create flow, and details view
 * Visits list, create flow, and details view
 * Calendar View implemented as a read-only list over existing Visits, Clients, and Services data
+* Workflow governance established for SPS Operating Workflow v1.0
+* SPS Operating Workflow marked as Version 1.0 and Status Stable
 
 ---
 
@@ -85,11 +87,11 @@ Present existing project visits in Calendar as a sorted read-only view based on 
 
 # Next
 
-After MS-007:
+After MS-DOC-002:
 
+* Begin planning for MS-008
+* Keep workflow governance and project state documentation synchronized
 * Continue the next planned workflow within the active milestone path
-* Keep Calendar as a view over existing Visits data
-* Keep documentation synchronized with future development
 
 ---
 
@@ -105,11 +107,11 @@ Commit and push status must always be confirmed explicitly by the Product Owner.
 
 Priority 1
 
-Continue the next planned workflow after completed MS-007.
+Begin planning for MS-008.
 
 Priority 2
 
-Keep Calendar as a read-only view over existing Visits data.
+Keep workflow governance and project state documentation aligned for Project Integrity Check.
 
 Priority 3
 
