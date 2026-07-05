@@ -42,17 +42,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-**MS-009.3 - Scheduling Engine Calendar Navigation**
+**None**
 
 **Latest Completed Milestone**
-MS-009.2 - Scheduling Engine Month View
+MS-009.3 - Scheduling Engine Calendar Navigation
 
 **Next Milestone**
-MS-009.3 - Scheduling Engine Calendar Navigation
+MS-009.4 - Scheduling Engine Next Step
 
 Objective:
 
-Calendar Shell and Scheduling Engine Month View are completed. The active next step is implementing MS-009.3 with Previous Month, Next Month, and Today navigation after Project Integrity Check passes.
+Scheduling Engine now provides Calendar Shell, Month View, daily visit counters, current month navigation, and Today reset inside Calendar. The next step is preparing MS-009.4 after Project Integrity Check passes.
 
 ---
 
@@ -92,12 +92,13 @@ Calendar Shell and Scheduling Engine Month View are completed. The active next s
 * ADR-001 added for Platform Identity & Domain Independence
 * MS-009.1 completed with Calendar Shell structure for Header, Navigation, View Switcher, and Workspace
 * MS-009.2 completed with functional Month View, current month label, today highlight, and visit counters per day
+* MS-009.3 completed with Previous Month, Next Month, Today, and Month View navigation
 
 ---
 
 # In Progress
 
-* MS-009.3 - Scheduling Engine Calendar Navigation
+* No active implementation work is currently in progress
 
 ---
 
@@ -106,7 +107,7 @@ Calendar Shell and Scheduling Engine Month View are completed. The active next s
 Next session priorities:
 
 * Perform Project Integrity Check
-* Implement MS-009.3
+* Prepare MS-009.4
 * Keep workflow governance and project state documentation synchronized
 * Continue the next planned workflow within the active milestone path
 
@@ -128,7 +129,7 @@ Perform Project Integrity Check.
 
 Priority 2
 
-Implement MS-009.3 - Scheduling Engine Calendar Navigation.
+Prepare MS-009.4.
 
 Priority 3
 

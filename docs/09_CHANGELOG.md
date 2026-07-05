@@ -155,6 +155,15 @@ Each release entry should contain:
 * Added today highlight using existing SPS UI styling.
 * Added daily visit counters sourced from existing project `localStorage` visits.
 
+## MS-009.3 - Scheduling Engine Calendar Navigation
+
+### Completed
+
+* Added Previous Month navigation for Month View.
+* Added Next Month navigation for Month View.
+* Added Today reset navigation for Month View.
+* Completed Month View Navigation on top of the existing Scheduling Engine foundation.
+
 ---
 
 # Future Releases
