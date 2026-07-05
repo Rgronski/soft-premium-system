@@ -131,8 +131,40 @@ export default function ProjectCalendarPage() {
 
     return [...emptyDays, ...filledDays];
   }, [currentDate, effectiveViewDate, visits]);
+  const selectedDayDate = useMemo(() => {
+    if (!activeDayKey) {
+      return null;
+    }
+
+    return new Date(`${activeDayKey}T00:00:00`);
+  }, [activeDayKey]);
+  const selectedDayLabel = useMemo(() => {
+    if (!selectedDayDate) {
+      return "";
+    }
+
+    return selectedDayDate.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  }, [selectedDayDate]);
+  const selectedDayWeekday = useMemo(() => {
+    if (!selectedDayDate) {
+      return "";
+    }
+
+    return selectedDayDate.toLocaleDateString(undefined, {
+      weekday: "long",
+    });
+  }, [selectedDayDate]);
+  const selectedDayVisits = useMemo(
+    () => visits.filter((visit) => visit.date === activeDayKey),
+    [activeDayKey, visits],
+  );
 
   function handlePreviousMonth() {
+    setActiveDayKey(null);
     setViewDate((currentViewDate) =>
       currentViewDate
         ? new Date(
@@ -145,6 +177,7 @@ export default function ProjectCalendarPage() {
   }
 
   function handleNextMonth() {
+    setActiveDayKey(null);
     setViewDate((currentViewDate) =>
       currentViewDate
         ? new Date(
@@ -157,6 +190,7 @@ export default function ProjectCalendarPage() {
   }
 
   function handleToday() {
+    setActiveDayKey(null);
     setViewDate(currentDate ? new Date(currentDate) : null);
   }
 
@@ -277,6 +311,48 @@ export default function ProjectCalendarPage() {
                 ),
               )}
             </div>
+
+            {activeDayKey ? (
+              <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
+                <div className="space-y-4">
+                  <div className="space-y-1">
+                    <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
+                      Day Details
+                    </p>
+                    <h4 className="text-lg font-semibold text-zinc-50">
+                      {selectedDayLabel}
+                    </h4>
+                    <p className="text-sm text-zinc-400">{selectedDayWeekday}</p>
+                    <p className="text-sm text-zinc-400">
+                      {selectedDayVisits.length}{" "}
+                      {selectedDayVisits.length === 1 ? "visit" : "visits"}
+                    </p>
+                  </div>
+
+                  {selectedDayVisits.length === 0 ? (
+                    <p className="text-sm text-zinc-400">Brak wizyt</p>
+                  ) : (
+                    <div className="space-y-2">
+                      {selectedDayVisits.map((visit) => (
+                        <div
+                          key={visit.id}
+                          className="rounded-lg border border-zinc-800 bg-zinc-950/60 px-3 py-2"
+                        >
+                          <p className="text-sm font-medium text-zinc-100">
+                            {visit.time}
+                          </p>
+                          {visit.status ? (
+                            <p className="text-xs text-zinc-400">
+                              Status: {visit.status}
+                            </p>
+                          ) : null}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : null}
 
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
               Scheduling items
