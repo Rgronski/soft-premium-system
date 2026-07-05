@@ -174,6 +174,19 @@ Each release entry should contain:
 * Preserved Today Highlight behaviour.
 * Preserved Month Navigation introduced in MS-009.3.
 
+## MS-009.5 - Scheduling Engine Day Details
+
+### Completed
+
+* Added Day Details panel.
+* Added selected day information.
+* Added weekday display.
+* Added visit count.
+* Added visit list.
+* Added "Brak wizyt" empty state.
+* Preserved Month Navigation.
+* Preserved Day Selection.
+
 ---
 
 # Future Releases
