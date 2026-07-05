@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 type Visit = {
   id: string;
@@ -36,6 +36,10 @@ export default function ProjectCalendarPage() {
 
     return new Date();
   }, [isLoaded]);
+  const [viewDate, setViewDate] = useState(() =>
+    isLoaded ? new Date() : null,
+  );
+  const effectiveViewDate = viewDate ?? currentDate;
   const visits = useMemo<Visit[]>(() => {
     if (!isLoaded) {
       return [];
@@ -54,15 +58,15 @@ export default function ProjectCalendarPage() {
     });
   }, [isLoaded, params.id]);
   const monthLabel = useMemo(() => {
-    if (!currentDate) {
+    if (!effectiveViewDate) {
       return "";
     }
 
-    return currentDate.toLocaleDateString(undefined, {
+    return effectiveViewDate.toLocaleDateString(undefined, {
       month: "long",
       year: "numeric",
     });
-  }, [currentDate]);
+  }, [effectiveViewDate]);
   const weekdayLabels = useMemo(() => {
     if (!currentDate) {
       return [];
@@ -76,17 +80,19 @@ export default function ProjectCalendarPage() {
     );
   }, [currentDate]);
   const monthDays = useMemo<Array<EmptyMonthDay | FilledMonthDay>>(() => {
-    if (!currentDate) {
+    if (!effectiveViewDate) {
       return [];
     }
 
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
+    const year = effectiveViewDate.getFullYear();
+    const month = effectiveViewDate.getMonth();
     const firstDayOfMonth = new Date(year, month, 1);
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const todayKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(
-      currentDate.getDate(),
-    ).padStart(2, "0")}`;
+    const todayKey = currentDate
+      ? `${currentDate.getFullYear()}-${String(
+          currentDate.getMonth() + 1,
+        ).padStart(2, "0")}-${String(currentDate.getDate()).padStart(2, "0")}`
+      : "";
     const visitCountByDay = visits.reduce<Record<string, number>>((counts, visit) => {
       const [visitYear, visitMonth] = visit.date.split("-").map(Number);
 
@@ -123,7 +129,35 @@ export default function ProjectCalendarPage() {
     );
 
     return [...emptyDays, ...filledDays];
-  }, [currentDate, visits]);
+  }, [currentDate, effectiveViewDate, visits]);
+
+  function handlePreviousMonth() {
+    setViewDate((currentViewDate) =>
+      currentViewDate
+        ? new Date(
+            currentViewDate.getFullYear(),
+            currentViewDate.getMonth() - 1,
+            1,
+          )
+        : currentViewDate,
+    );
+  }
+
+  function handleNextMonth() {
+    setViewDate((currentViewDate) =>
+      currentViewDate
+        ? new Date(
+            currentViewDate.getFullYear(),
+            currentViewDate.getMonth() + 1,
+            1,
+          )
+        : currentViewDate,
+    );
+  }
+
+  function handleToday() {
+    setViewDate(currentDate ? new Date(currentDate) : null);
+  }
 
   return (
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
@@ -137,18 +171,21 @@ export default function ProjectCalendarPage() {
           <div className="flex items-center gap-3">
             <button
               type="button"
+              onClick={handlePreviousMonth}
               className="rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
             >
               {"<"}
             </button>
             <button
               type="button"
+              onClick={handleToday}
               className="rounded-full border border-zinc-700 px-5 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
             >
               Today
             </button>
             <button
               type="button"
+              onClick={handleNextMonth}
               className="rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
             >
               {">"}
