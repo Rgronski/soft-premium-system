@@ -164,6 +164,16 @@ Each release entry should contain:
 * Added Today reset navigation for Month View.
 * Completed Month View Navigation on top of the existing Scheduling Engine foundation.
 
+## MS-009.4 - Scheduling Engine Day Selection
+
+### Completed
+
+* Added day selection in Month View.
+* Only one active day can be selected.
+* Added visual selected state.
+* Preserved Today Highlight behaviour.
+* Preserved Month Navigation introduced in MS-009.3.
+
 ---
 
 # Future Releases
