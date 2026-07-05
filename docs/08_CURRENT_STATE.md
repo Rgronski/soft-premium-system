@@ -45,14 +45,14 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 **None**
 
 **Latest Completed Milestone**
-MS-009.5 - Scheduling Engine Day Details
+MS-000.2 - AI Development Workflow
 
 **Next Milestone**
-MS-009.6
+MS-000.3 - AI Workflow Command / Command Center
 
 Objective:
 
-Scheduling Engine now provides Calendar Shell, Month View, daily visit counters, current month navigation, Today reset, active day selection, and Day Details inside Calendar. The next step is preparing MS-009.6 after Project Integrity Check passes.
+ENG-000 now provides a formal AI Development Workflow with defined roles, workflow stages, handoff prompts, and Project Integrity Check support. The next step is preparing MS-000.3 with an AI workflow command, milestone and task status list, scoped work selection such as "robimy 5-9", ChatGPT <-> Codex <-> GitHub automation, automation final reporting, and Project Context Loader as a first-class element of ENG-000.
 
 ---
 
@@ -90,6 +90,7 @@ Scheduling Engine now provides Calendar Shell, Month View, daily visit counters,
 * Domain independence formally established for platform core
 * Project Context Loader (PCL) added as the official first stage of workflow context loading
 * ADR-001 added for Platform Identity & Domain Independence
+* MS-000.2 completed with formal AI Development Workflow foundation, roles, workflow stages, prompts, and Project Integrity Check checklist
 * MS-009.1 completed with Calendar Shell structure for Header, Navigation, View Switcher, and Workspace
 * MS-009.2 completed with functional Month View, current month label, today highlight, and visit counters per day
 * MS-009.3 completed with Previous Month, Next Month, Today, and Month View navigation
@@ -109,7 +110,7 @@ Scheduling Engine now provides Calendar Shell, Month View, daily visit counters,
 Next session priorities:
 
 * Perform Project Integrity Check
-* Prepare MS-009.6
+* Prepare MS-000.3
 * Keep workflow governance and project state documentation synchronized
 * Continue the next planned workflow within the active milestone path
 
@@ -131,7 +132,7 @@ Perform Project Integrity Check.
 
 Priority 2
 
-Prepare MS-009.6.
+Prepare MS-000.3 - AI Workflow Command / Command Center.
 
 Priority 3
 

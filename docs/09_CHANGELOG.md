@@ -187,6 +187,15 @@ Each release entry should contain:
 * Preserved Month Navigation.
 * Preserved Day Selection.
 
+## MS-000.2 - AI Development Workflow
+
+### Completed
+
+* Added the formal AI Development Workflow foundation.
+* Added AGENTS.md role and execution rules.
+* Added AI workflow roles, workflow stages, prompts, and Project Integrity Check checklist.
+* Established the process of creating SPS as part of SPS itself.
+
 ---
 
 # Future Releases
