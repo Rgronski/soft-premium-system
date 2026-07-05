@@ -42,17 +42,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-**None**
+**MS-009.3 - Scheduling Engine Calendar Navigation**
 
 **Latest Completed Milestone**
-MS-DOC-003 - Platform Identity & Origins
+MS-009.2 - Scheduling Engine Month View
 
 **Next Milestone**
-MS-009 - Planning
+MS-009.3 - Scheduling Engine Calendar Navigation
 
 Objective:
 
-Workflow governance is established and SPS Operating Workflow is confirmed as Version 1.0 with Status Stable. Platform identity, origins, domain independence, and Project Context Loader are now explicitly established in the project foundations. The next step is planning MS-009.
+Calendar Shell and Scheduling Engine Month View are completed. The active next step is implementing MS-009.3 with Previous Month, Next Month, and Today navigation after Project Integrity Check passes.
 
 ---
 
@@ -90,12 +90,14 @@ Workflow governance is established and SPS Operating Workflow is confirmed as Ve
 * Domain independence formally established for platform core
 * Project Context Loader (PCL) added as the official first stage of workflow context loading
 * ADR-001 added for Platform Identity & Domain Independence
+* MS-009.1 completed with Calendar Shell structure for Header, Navigation, View Switcher, and Workspace
+* MS-009.2 completed with functional Month View, current month label, today highlight, and visit counters per day
 
 ---
 
 # In Progress
 
-* No active implementation work is currently in progress
+* MS-009.3 - Scheduling Engine Calendar Navigation
 
 ---
 
@@ -104,7 +106,7 @@ Workflow governance is established and SPS Operating Workflow is confirmed as Ve
 Next session priorities:
 
 * Perform Project Integrity Check
-* Begin planning for MS-009
+* Implement MS-009.3
 * Keep workflow governance and project state documentation synchronized
 * Continue the next planned workflow within the active milestone path
 
@@ -126,7 +128,7 @@ Perform Project Integrity Check.
 
 Priority 2
 
-Begin planning for MS-009.
+Implement MS-009.3 - Scheduling Engine Calendar Navigation.
 
 Priority 3
 

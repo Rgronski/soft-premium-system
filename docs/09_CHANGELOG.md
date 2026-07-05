@@ -137,6 +137,24 @@ Each release entry should contain:
 * Added Project Context Loader (PCL).
 * Added ADR-001.
 
+## MS-009.1 - Calendar Shell
+
+### Completed
+
+* Replaced the simple Calendar list layout with a Calendar Shell.
+* Added Calendar header, UI-only navigation, view switcher, and workspace structure.
+* Established Calendar as the first application UI consumer for the Scheduling Engine foundation.
+
+## MS-009.2 - Scheduling Engine Month View
+
+### Completed
+
+* Replaced the workspace placeholder with a functional Month View.
+* Added current month and year display based on browser date.
+* Added monthly day grid with weekday headers and empty leading cells before the first weekday.
+* Added today highlight using existing SPS UI styling.
+* Added daily visit counters sourced from existing project `localStorage` visits.
+
 ---
 
 # Future Releases
