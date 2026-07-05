@@ -39,6 +39,7 @@ export default function ProjectCalendarPage() {
   const [viewDate, setViewDate] = useState(() =>
     isLoaded ? new Date() : null,
   );
+  const [activeDayKey, setActiveDayKey] = useState<string | null>(null);
   const effectiveViewDate = viewDate ?? currentDate;
   const visits = useMemo<Visit[]>(() => {
     if (!isLoaded) {
@@ -245,16 +246,21 @@ export default function ProjectCalendarPage() {
                 ) : (
                   <div
                     key={day.key}
-                    className={`min-h-28 rounded-xl border p-3 ${
-                      day.isToday
-                        ? "border-zinc-500 bg-zinc-900"
-                        : "border-zinc-800 bg-zinc-950/60"
+                    onClick={() => setActiveDayKey(day.key)}
+                    className={`min-h-28 cursor-pointer rounded-xl border p-3 ${
+                      activeDayKey === day.key
+                        ? "border-zinc-300 bg-zinc-900"
+                        : day.isToday
+                          ? "border-zinc-500 bg-zinc-900"
+                          : "border-zinc-800 bg-zinc-950/60"
                     }`}
                   >
                     <div className="flex h-full flex-col justify-between gap-3">
                       <p
                         className={`text-sm font-medium ${
-                          day.isToday ? "text-zinc-50" : "text-zinc-300"
+                          activeDayKey === day.key || day.isToday
+                            ? "text-zinc-50"
+                            : "text-zinc-300"
                         }`}
                       >
                         {day.dayNumber}
