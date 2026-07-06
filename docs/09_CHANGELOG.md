@@ -246,6 +246,86 @@ Each release entry should contain:
 * Defined milestone contracts from `MS-000.6` to `MS-001.4`.
 * Started `MS-000.6 - Roadmap Engine` as the current documentation and architecture milestone.
 
+## MS-000.7 - Workspace Engine
+
+### Date
+
+2026-07-06
+
+### Completed
+
+* Extracted workspace structure into dedicated workspace components.
+* Introduced `WorkspaceLayout`, `WorkspaceHeader`, `WorkspaceContent`, and `WorkspacePanels`.
+* Preserved dashboard data logic and UI behaviour.
+
+## MS-000.8 - Project Engine
+
+### Date
+
+2026-07-06
+
+### Completed
+
+* Added shared `Project` model.
+* Added Project Engine service for `getProjects`, `getProjectById`, and `createProject`.
+* Connected home, project creation, and project dashboard screens to the shared project service.
+
+## MS-000.9 - Task Engine
+
+### Date
+
+2026-07-06
+
+### Completed
+
+* Added shared `Task` model.
+* Added Task Engine service for `getTasks`, `getTask`, and `createTask`.
+* Preserved storage key structure per project without migration.
+
+## MS-001.0 - Task Workspace Integration
+
+### Date
+
+2026-07-06
+
+### Completed
+
+* Added project Tasks workspace screen.
+* Added Tasks link to project workspace navigation.
+* Connected task creation and task listing to the existing Task Engine.
+* Preserved Project Engine and existing workspace modules without behavioural changes.
+
+## MS-001.1 - Knowledge Engine
+
+### Date
+
+2026-07-06
+
+### Completed
+
+* Added KnowledgeEntry model.
+* Added Knowledge Engine service.
+* Added project-scoped knowledge storage.
+* No UI added.
+* No AI added.
+* No search, tags, categories or workflow added.
+* Minimal domain layer only.
+
+## MS-001.2A - UI Foundation
+
+### Date
+
+2026-07-06
+
+### Completed
+
+* Added SectionCard UI component.
+* Centralized primary section container style.
+* Updated selected simple screens to use SectionCard.
+* No visual redesign.
+* No new UI variants.
+* No business logic changes.
+
 ---
 
 # Future Releases

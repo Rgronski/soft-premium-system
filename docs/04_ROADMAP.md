@@ -90,21 +90,22 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-000.3` - Command Center
 * `MS-000.4` - Experience Blueprint
 * `MS-000.5` - The Conductor
-
-## Current
-
-* `MS-000.6` - Roadmap Engine
-
-## Next
-
 * `MS-000.7` - Workspace Engine
 * `MS-000.8` - Project Engine
 * `MS-000.9` - Task Engine
-* `MS-001.0` - Knowledge Engine
-* `MS-001.1` - UI System
-* `MS-001.2` - Workflow Engine
-* `MS-001.3` - Release Readiness
-* `MS-001.4` - SPS OS 1.0 Release Candidate
+* `MS-001.0` - Task Workspace Integration
+* `MS-001.1` - Knowledge Engine
+* `MS-001.2A` - UI Foundation
+
+## Current
+
+* `MS-001.2B` - UI Foundation Continuation
+
+## Next
+
+* `MS-001.3` - Workflow Engine
+* `MS-001.4` - Release Readiness
+* `MS-001.5` - SPS OS 1.0 Release Candidate
 
 ---
 
@@ -116,7 +117,7 @@ The roadmap applies only to SPS OS 1.0.
 MS-000.6 - Roadmap Engine
 
 **Status**
-Current
+Completed
 
 **Purpose**
 Establish the formal SPS OS 1.0 roadmap as a first-class project control document.
@@ -178,7 +179,7 @@ MS-000.7 - Workspace Engine
 MS-000.7 - Workspace Engine
 
 **Status**
-Planned
+Completed
 
 **Purpose**
 Define the primary workspace operating layer of SPS OS 1.0.
@@ -226,7 +227,7 @@ MS-000.8 - Project Engine
 MS-000.8 - Project Engine
 
 **Status**
-Planned
+Completed
 
 **Purpose**
 Define project-level operating structure in SPS OS 1.0.
@@ -273,7 +274,7 @@ MS-000.9 - Task Engine
 MS-000.9 - Task Engine
 
 **Status**
-Planned
+Completed
 
 **Purpose**
 Define task-level execution structure for SPS OS 1.0.
@@ -314,13 +315,65 @@ Establish the Task Engine contract and lifecycle boundaries.
 **Next Milestone**
 MS-001.0 - Knowledge Engine
 
-## MS-001.0 - Knowledge Engine
+## MS-001.0 - Task Workspace Integration
 
 **Milestone**
-MS-001.0 - Knowledge Engine
+MS-001.0 - Task Workspace Integration
 
 **Status**
-Planned
+Completed
+
+**Purpose**
+Integrate the Task Engine into the project workspace as the first usable task screen.
+
+**Business Goal**
+Make tasks visible and usable inside project workspace flow.
+
+**Technical Goal**
+Connect Task Engine to project routing and workspace UI without changing Project Engine.
+
+**Dependencies**
+* `MS-000.9 - Task Engine`
+
+**Definition of Ready**
+* task engine exists,
+* project workspace routing is available.
+
+**Implementation Scope**
+* add project Tasks screen,
+* add Tasks navigation entry,
+* connect Task Engine reads and writes to workspace UI.
+
+**Out of Scope**
+* knowledge modeling
+* AI agent behavior
+* enterprise expansion
+
+**Artifacts**
+* Tasks workspace route
+* project navigation update
+* state document updates
+
+**Definition of Done**
+* tasks are accessible in project workspace,
+* task creation works through Task Engine,
+* task list renders without direct localStorage access in UI.
+
+**Documentation Updates**
+* Current State
+* Session State
+* Change Log
+
+**Next Milestone**
+MS-001.1 - Knowledge Engine
+
+## MS-001.1 - Knowledge Engine
+
+**Milestone**
+MS-001.1 - Knowledge Engine
+
+**Status**
+Current
 
 **Purpose**
 Define the knowledge management engine for SPS OS 1.0.
@@ -332,10 +385,10 @@ Create a stable knowledge layer supporting continuity and decision quality.
 Establish the Knowledge Engine contract and source-of-truth boundaries.
 
 **Dependencies**
-* `MS-000.9 - Task Engine`
+* `MS-001.0 - Task Workspace Integration`
 
 **Definition of Ready**
-* task engine contract exists.
+* task workspace integration exists.
 
 **Implementation Scope**
 * knowledge engine definition,
@@ -359,46 +412,53 @@ Establish the Knowledge Engine contract and source-of-truth boundaries.
 * Change Log
 
 **Next Milestone**
-MS-001.1 - UI System
+MS-001.2A - UI Foundation / SectionCard
 
-## MS-001.1 - UI System
+## MS-001.2A - UI Foundation / SectionCard
 
 **Milestone**
-MS-001.1 - UI System
+MS-001.2A - UI Foundation / SectionCard
 
 **Status**
-Planned
+Completed
 
 **Purpose**
-Define the SPS OS 1.0 UI system as a controlled platform layer.
+Introduce the first shared UI foundation component without changing visual design.
 
 **Business Goal**
-Keep the interface coherent, navigable, and operationally stable.
+Start UI consistency work through a safe reusable section container.
 
 **Technical Goal**
-Establish the UI System contract and interface boundaries.
+Introduce `SectionCard` and connect selected simple screens to the shared container.
 
 **Dependencies**
-* `MS-001.0 - Knowledge Engine`
+* `MS-001.1 - Knowledge Engine`
 
 **Definition of Ready**
 * knowledge engine contract exists.
 
 **Implementation Scope**
-* UI system definition,
-* interface consistency contract,
-* system UI boundaries.
+* add `SectionCard`,
+* centralize primary section container style,
+* update selected simple screens,
+* preserve current appearance 1:1.
 
 **Out of Scope**
-* SPS OS 2.0 redesign
+* visual redesign
+* new UI variants
+* button system
+* input system
 * plugins
 
 **Artifacts**
-* UI system documentation
+* `SectionCard` UI component
+* updated simple screens
 * state document updates
 
 **Definition of Done**
-* UI system is formally defined and accepted.
+* SectionCard exists,
+* selected screens use it,
+* no visual or business logic changes were introduced.
 
 **Documentation Updates**
 * Current State
@@ -406,12 +466,62 @@ Establish the UI System contract and interface boundaries.
 * Change Log
 
 **Next Milestone**
-MS-001.2 - Workflow Engine
+MS-001.2B - UI Foundation Continuation
 
-## MS-001.2 - Workflow Engine
+## MS-001.2B - UI Foundation Continuation
 
 **Milestone**
-MS-001.2 - Workflow Engine
+MS-001.2B - UI Foundation Continuation
+
+**Status**
+Current
+
+**Purpose**
+Continue UI foundation work in small, safe increments after SectionCard.
+
+**Business Goal**
+Expand UI consistency while preserving the existing visual language.
+
+**Technical Goal**
+Continue extracting repeated UI primitives without changing behaviour.
+
+**Dependencies**
+* `MS-001.2A - UI Foundation / SectionCard`
+
+**Definition of Ready**
+* SectionCard milestone is completed,
+* repeated UI patterns are identified.
+
+**Implementation Scope**
+* continue low-risk UI extraction,
+* preserve visual parity,
+* keep scope limited to foundational UI reuse.
+
+**Out of Scope**
+* visual redesign
+* new UI variants
+* design system overhaul
+* plugins
+
+**Artifacts**
+* additional UI foundation updates
+* state document updates
+
+**Definition of Done**
+* next safe UI foundation slice is completed and verified.
+
+**Documentation Updates**
+* Current State
+* Session State
+* Change Log
+
+**Next Milestone**
+MS-001.3 - Workflow Engine
+
+## MS-001.3 - Workflow Engine
+
+**Milestone**
+MS-001.3 - Workflow Engine
 
 **Status**
 Planned
@@ -426,7 +536,7 @@ Make workflow progression explicit, repeatable, and controllable.
 Establish the Workflow Engine contract without implementing advanced automation.
 
 **Dependencies**
-* `MS-001.1 - UI System`
+* `MS-001.2 - UI System`
 
 **Definition of Ready**
 * UI system contract exists.
@@ -453,12 +563,12 @@ Establish the Workflow Engine contract without implementing advanced automation.
 * Change Log
 
 **Next Milestone**
-MS-001.3 - Release Readiness
+MS-001.4 - Release Readiness
 
-## MS-001.3 - Release Readiness
+## MS-001.4 - Release Readiness
 
 **Milestone**
-MS-001.3 - Release Readiness
+MS-001.4 - Release Readiness
 
 **Status**
 Planned
@@ -473,7 +583,7 @@ Ensure the platform is organized for release evaluation.
 Establish the release-readiness contract and validation boundaries.
 
 **Dependencies**
-* `MS-001.2 - Workflow Engine`
+* `MS-001.3 - Workflow Engine`
 
 **Definition of Ready**
 * workflow engine contract exists.
@@ -500,12 +610,12 @@ Establish the release-readiness contract and validation boundaries.
 * Change Log
 
 **Next Milestone**
-MS-001.4 - SPS OS 1.0 Release Candidate
+MS-001.5 - SPS OS 1.0 Release Candidate
 
-## MS-001.4 - SPS OS 1.0 Release Candidate
+## MS-001.5 - SPS OS 1.0 Release Candidate
 
 **Milestone**
-MS-001.4 - SPS OS 1.0 Release Candidate
+MS-001.5 - SPS OS 1.0 Release Candidate
 
 **Status**
 Planned
@@ -520,7 +630,7 @@ Create the controlled final milestone before SPS OS 1.0 release acceptance.
 Establish the release candidate contract and completion boundary for SPS OS 1.0.
 
 **Dependencies**
-* `MS-001.3 - Release Readiness`
+* `MS-001.4 - Release Readiness`
 
 **Definition of Ready**
 * release readiness milestone exists.

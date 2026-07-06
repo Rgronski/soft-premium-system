@@ -1,5 +1,7 @@
 "use client";
 
+import { SectionCard } from "@/components/ui/SectionCard";
+import { createProject } from "@/lib/project/project";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -14,21 +16,7 @@ export default function ProjectsPage() {
       return;
     }
 
-    const newProject = {
-      id: crypto.randomUUID(),
-      name: trimmedProjectName,
-      createdAt: new Date().toISOString(),
-    };
-
-    const savedProjects = localStorage.getItem("soft-premium-system.projects");
-    const projects = savedProjects ? JSON.parse(savedProjects) : [];
-
-    const updatedProjects = [...projects, newProject];
-
-    localStorage.setItem(
-      "soft-premium-system.projects",
-      JSON.stringify(updatedProjects),
-    );
+    createProject(trimmedProjectName);
 
     setProjectName("");
     router.push("/");
@@ -55,7 +43,7 @@ export default function ProjectsPage() {
           </p>
         </header>
 
-        <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
+        <SectionCard>
           <label className="block">
             <span className="mb-2 block text-sm text-zinc-400">
               Project Name
@@ -77,7 +65,7 @@ export default function ProjectsPage() {
           >
             Create Project
           </button>
-        </section>
+        </SectionCard>
       </div>
     </main>
   );

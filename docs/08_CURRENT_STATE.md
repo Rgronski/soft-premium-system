@@ -42,22 +42,21 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-000.6 - Roadmap Engine
+**None**
 
 **Latest Completed Milestone**
-MS-000.5 - The Conductor
+MS-001.2A - UI Foundation
 
 **Next Milestone**
-MS-000.7 - Workspace Engine
+MS-001.2B - UI Foundation Continuation
 
 Objective:
 
-ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-000.6 has started as a documentation and architecture milestone that establishes the formal roadmap contract for SPS OS 1.0.
+ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-001.2A has been completed and verified. The next milestone is MS-001.2B - UI Foundation Continuation.
 
 Project Status:
 
-MS-000.5 completed and verified.
-MS-000.6 started as a documentation and architecture milestone.
+MS-001.2A completed and verified.
 
 ---
 
@@ -99,6 +98,12 @@ MS-000.6 started as a documentation and architecture milestone.
 * MS-000.3 completed with AI Workflow Command Center, workflow API contract, PCL bootloader definition, and ENG-000 constitution
 * MS-000.4 completed with the first SPS OS 1.0 Experience Blueprint for workspace experience
 * MS-000.5 completed with ConductorState model, Conductor service, ConductorPanel, and Project Dashboard integration
+* MS-000.7 completed with Workspace Engine extraction for dashboard workspace structure
+* MS-000.8 completed with Project Engine MVP for shared project model and service
+* MS-000.9 completed with Task Engine MVP for shared task model and service
+* MS-001.0 completed with Task Workspace Integration for project tasks screen and workspace navigation
+* MS-001.1 completed with KnowledgeEntry model, Knowledge Engine service, and project-scoped knowledge storage
+* MS-001.2A completed with SectionCard UI component and selected simple screens updated to use the shared section container
 * MS-009.1 completed with Calendar Shell structure for Header, Navigation, View Switcher, and Workspace
 * MS-009.2 completed with functional Month View, current month label, today highlight, and visit counters per day
 * MS-009.3 completed with Previous Month, Next Month, Today, and Month View navigation
@@ -109,7 +114,7 @@ MS-000.6 started as a documentation and architecture milestone.
 
 # In Progress
 
-* MS-000.6 - Roadmap Engine is active as a documentation and architecture milestone
+* No active implementation work is currently in progress
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
 
 ---
@@ -119,7 +124,7 @@ MS-000.6 started as a documentation and architecture milestone.
 Next session priorities:
 
 * Perform Project Integrity Check
-* Complete MS-000.6 - Roadmap Engine
+* Prepare MS-001.2B - UI Foundation Continuation
 * Keep ENG-000 / SPS Core / SPS OS 1.0 as the active platform priority
 * Keep workflow governance and project state documentation synchronized
 * Continue the next planned workflow within the active milestone path
@@ -142,7 +147,7 @@ Perform Project Integrity Check.
 
 Priority 2
 
-Complete MS-000.6 - Roadmap Engine.
+Prepare MS-001.2B - UI Foundation Continuation.
 
 Priority 3
 
@@ -150,14 +155,14 @@ Keep ENG-000 / SPS Core / SPS OS 1.0 documentation aligned for the next mileston
 
 ---
 
-# MS-000.5 Summary
+# MS-001.2A Summary
 
-* Introduced ConductorState model.
-* Added Conductor service.
-* Added ConductorPanel.
-* Integrated Conductor into Project Dashboard.
-* Minimal implementation completed.
-* Ready for next milestone.
+* Added SectionCard UI component.
+* Centralized primary section container style.
+* Updated selected simple screens to use SectionCard.
+* No visual redesign.
+* No new UI variants.
+* No business logic changes.
 
 ---
 

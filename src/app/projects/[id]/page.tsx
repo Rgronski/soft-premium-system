@@ -4,14 +4,10 @@ import { WorkspaceContent } from "@/components/workspace/WorkspaceContent";
 import { WorkspaceHeader } from "@/components/workspace/WorkspaceHeader";
 import { WorkspaceLayout } from "@/components/workspace/WorkspaceLayout";
 import { WorkspacePanels } from "@/components/workspace/WorkspacePanels";
+import { getProjectById } from "@/lib/project/project";
+import type { Project } from "@/lib/project/types";
 import { useParams } from "next/navigation";
 import { useMemo } from "react";
-
-type Project = {
-  id: string;
-  name: string;
-  createdAt: string;
-};
 
 type Client = {
   id: string;
@@ -50,9 +46,7 @@ export default function ProjectWorkspacePage() {
       };
     }
 
-    const savedProjects = localStorage.getItem("soft-premium-system.projects");
-    const projects: Project[] = savedProjects ? JSON.parse(savedProjects) : [];
-    const project = projects.find((item) => item.id === params.id) ?? null;
+    const project = getProjectById(params.id);
     const savedClients = localStorage.getItem(
       `soft-premium-system.projects.${params.id}.clients`,
     );

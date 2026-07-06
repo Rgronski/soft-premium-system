@@ -1,22 +1,13 @@
 "use client";
 
+import { getProjects } from "@/lib/project/project";
+import type { Project } from "@/lib/project/types";
 import Link from "next/link";
 import { useMemo } from "react";
 
-type Project = {
-  id: string;
-  name: string;
-  createdAt: string;
-};
-
 export default function Home() {
   const projects = useMemo<Project[]>(() => {
-    if (typeof window === "undefined") {
-      return [];
-    }
-
-    const savedProjects = localStorage.getItem("soft-premium-system.projects");
-    return savedProjects ? JSON.parse(savedProjects) : [];
+    return getProjects();
   }, []);
 
   return (
