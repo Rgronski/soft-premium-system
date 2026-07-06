@@ -69,6 +69,14 @@ Each release entry should contain:
 
 # Unreleased
 
+## MS-001.2B - UI Foundation Continuation
+
+### In Progress
+
+* Minimal Patch 1 completed.
+* Created `docs/06_UI_INVENTORY.md`.
+* Added the first repository-based UI inventory for routes, layouts, shared UI, workspace UI, project UI, Conductor UI, status matrix, and Missing / Planned elements.
+
 ## Documentation Sprint
 
 ### Completed

@@ -40,6 +40,10 @@ This document defines the formal roadmap contract for SPS OS 1.0.
 
 It is the Single Source of Truth for milestone order.
 
+It is the execution roadmap, milestone contract register, and Single Source of Truth for work sequencing used by PCL.
+
+`05_ROADMAP.md` remains the product and strategic roadmap. It is not the execution roadmap used by PCL for milestone activation order.
+
 PCL uses the roadmap to determine the next milestone step.
 
 Chief Architect, Codex Handoff, and the future Conductor use this roadmap as the canonical milestone sequence reference.
@@ -67,6 +71,12 @@ Lifecycle rule:
 The roadmap is not a backlog.
 
 The roadmap applies only to SPS OS 1.0.
+
+The roadmap `Current` state identifies the next recommended execution milestone in the roadmap sequence.
+
+It does not by itself activate a milestone.
+
+A milestone becomes active only when Chief Architect formally starts it after PCL and Project Integrity Check.
 
 ---
 
@@ -474,7 +484,7 @@ MS-001.2B - UI Foundation Continuation
 MS-001.2B - UI Foundation Continuation
 
 **Status**
-Current
+In Progress
 
 **Purpose**
 Continue UI foundation work in small, safe increments after SectionCard.
@@ -505,6 +515,7 @@ Continue extracting repeated UI primitives without changing behaviour.
 
 **Artifacts**
 * additional UI foundation updates
+* `docs/06_UI_INVENTORY.md`
 * state document updates
 
 **Definition of Done**
