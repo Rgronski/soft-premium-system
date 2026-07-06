@@ -326,6 +326,21 @@ Each release entry should contain:
 * No new UI variants.
 * No business logic changes.
 
+## MS-001.2B - UI Foundation Continuation
+
+### Date
+
+2026-07-07
+
+### Completed
+
+* Minimal Patch 1 completed - created `docs/06_UI_INVENTORY.md`.
+* Minimal Patch 2 completed - `WorkspaceLayout` now composes `SectionCard` internally.
+* Minimal Patch 3 completed - `WorkspacePanels` Quick Actions now render from a local configuration array.
+* Minimal Patch 4 completed - `WorkspacePanels` KPI cards now render from a local configuration array.
+* No new shared UI components were created in these patches.
+* UI Foundation continuation was completed without visual redesign or architecture changes.
+
 ---
 
 # Future Releases

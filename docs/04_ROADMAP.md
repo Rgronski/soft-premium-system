@@ -96,10 +96,11 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-001.0` - Task Workspace Integration
 * `MS-001.1` - Knowledge Engine
 * `MS-001.2A` - UI Foundation
+* `MS-001.2B` - UI Foundation Continuation
 
 ## Current
 
-* `MS-001.2B` - UI Foundation Continuation
+None
 
 ## Next
 
@@ -474,7 +475,7 @@ MS-001.2B - UI Foundation Continuation
 MS-001.2B - UI Foundation Continuation
 
 **Status**
-In Progress
+Completed
 
 **Purpose**
 Continue UI foundation work in small, safe increments after SectionCard.

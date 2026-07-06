@@ -42,23 +42,23 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-**MS-001.2B - UI Foundation Continuation**
+**None**
 
 **Latest Completed Milestone**
-MS-001.2A - UI Foundation
+MS-001.2B - UI Foundation Continuation
 
 **Next Milestone**
-Not applicable while MS-001.2B is in progress
+MS-001.3 - Workflow Engine
 
 Objective:
 
-ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-001.2B - UI Foundation Continuation is active and currently focused on minimal UI foundation continuation work.
+ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-001.2B - UI Foundation Continuation has been completed and the project is ready to start MS-001.3 - Workflow Engine.
 
 Project Status:
 
-MS-001.2B in progress.
+MS-001.2B completed and closed. Ready for MS-001.3.
 
-Completed in this milestone:
+Completed in the latest milestone:
 
 * Minimal Patch 1 completed
 * Created `docs/06_UI_INVENTORY.md`
@@ -74,13 +74,12 @@ Completed in this milestone:
 
 Status:
 
-* In progress
+* Ready for MS-001.3
 
 Next:
 
-* Final Consistency Gate
-* Commit / push after Final Consistency Gate
-* Milestone close review
+* Start MS-001.3 - Workflow Engine
+* Synchronize MS-001.3 after its own accepted patch scope
 
 ---
 
@@ -138,11 +137,8 @@ Next:
 
 # In Progress
 
-* `MS-001.2B - UI Foundation Continuation` is active
-* Minimal Patch 1 completed with `docs/06_UI_INVENTORY.md`
-* Minimal Patch 2 completed with `WorkspaceLayout` composing `SectionCard` internally
-* Minimal Patch 3 completed with `WorkspacePanels` rendering Quick Actions from a local configuration array
-* Minimal Patch 4 completed with `WorkspacePanels` rendering KPI cards from a local configuration array
+* No active milestone is currently open
+* MS-001.2B - UI Foundation Continuation is formally completed
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
 
 ---
@@ -151,9 +147,8 @@ Next:
 
 Next session priorities:
 
-* Perform Final Consistency Gate
-* Prepare commit / push after Final Consistency Gate
-* Prepare milestone close review
+* Start MS-001.3 - Workflow Engine when formally approved
+* Keep milestone state synchronization aligned with workflow closure order
 * Keep ENG-000 / SPS Core / SPS OS 1.0 as the active platform priority
 * Keep workflow governance and project state documentation synchronized
 * Continue the next planned workflow within the active milestone path
@@ -172,15 +167,15 @@ Commit and push status must always be confirmed explicitly by the Product Owner.
 
 Priority 1
 
-Complete final consistency verification for `MS-001.2B - UI Foundation Continuation`.
+Confirm readiness for `MS-001.3 - Workflow Engine`.
 
 Priority 2
 
-Perform Final Consistency Gate.
+Start `MS-001.3 - Workflow Engine` in the next formal workflow step.
 
 Priority 3
 
-Prepare commit / push after Final Consistency Gate and milestone close review.
+Keep workflow state aligned with formal milestone closure.
 
 ---
 
@@ -195,7 +190,7 @@ Prepare commit / push after Final Consistency Gate and milestone close review.
 
 ---
 
-# MS-001.2B Progress
+# MS-001.2B Summary
 
 * Minimal Patch 1 completed.
 * Created `docs/06_UI_INVENTORY.md`.
@@ -208,7 +203,7 @@ Prepare commit / push after Final Consistency Gate and milestone close review.
 * Minimal Patch 4 completed.
 * `WorkspacePanels` KPI cards now render from a local configuration array.
 * No new shared component was created.
-* Milestone remains active and is not closed.
+* Milestone is formally completed.
 
 ---
 
