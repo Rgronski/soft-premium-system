@@ -190,6 +190,27 @@ When the Product Owner writes `Koniec tego czatu`, AI must execute the Session C
 
 ---
 
+# Reserved Command: "koniec czatu"
+
+Meaning:
+When the user writes "koniec czatu", generate the canonical Development Session Bootstrap from `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
+
+Rules:
+- Do not invent a new bootstrap.
+- Do not replace it with Get-Content commands.
+- The next chat must begin by asking the user for a fresh ZIP.
+- The canonical bootstrap is the Single Source of Truth for restarting SPS sessions.
+- The canonical bootstrap must always include credit-saving mode.
+- Credit-saving mode means:
+  - minimal changes,
+  - diagnosis before implementation,
+  - no unnecessary exploration,
+  - no broad refactoring,
+  - no side quests,
+  - stop on inconsistency.
+
+---
+
 # Source of Truth
 
 AI never creates competing sources of information.
