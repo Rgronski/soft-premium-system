@@ -62,6 +62,9 @@ Completed in this milestone:
 
 * Minimal Patch 1 completed
 * Created `docs/06_UI_INVENTORY.md`
+* Minimal Patch 2 completed
+* `WorkspaceLayout` now composes `SectionCard` internally
+* `SectionCard` adoption increased indirectly
 
 Status:
 
@@ -69,8 +72,8 @@ Status:
 
 Next:
 
-* Documentation Sync Review
-* Select the first UI component to refine after documentation synchronization
+* Consistency Gate
+* Commit / push after Consistency Gate
 
 ---
 
@@ -130,6 +133,7 @@ Next:
 
 * `MS-001.2B - UI Foundation Continuation` is active
 * Minimal Patch 1 completed with `docs/06_UI_INVENTORY.md`
+* Minimal Patch 2 completed with `WorkspaceLayout` composing `SectionCard` internally
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
 
 ---
@@ -138,8 +142,8 @@ Next:
 
 Next session priorities:
 
-* Perform Documentation Sync Review
-* Select the first UI component to refine
+* Perform Consistency Gate
+* Prepare commit / push after Consistency Gate
 * Keep ENG-000 / SPS Core / SPS OS 1.0 as the active platform priority
 * Keep workflow governance and project state documentation synchronized
 * Continue the next planned workflow within the active milestone path
@@ -158,15 +162,15 @@ Commit and push status must always be confirmed explicitly by the Product Owner.
 
 Priority 1
 
-Complete documentation synchronization for `MS-001.2B - UI Foundation Continuation`.
+Complete consistency verification for `MS-001.2B - UI Foundation Continuation`.
 
 Priority 2
 
-Perform Documentation Sync Review.
+Perform Consistency Gate.
 
 Priority 3
 
-Select the first UI component to refine after synchronization.
+Prepare commit / push after Consistency Gate.
 
 ---
 
@@ -185,6 +189,9 @@ Select the first UI component to refine after synchronization.
 
 * Minimal Patch 1 completed.
 * Created `docs/06_UI_INVENTORY.md`.
+* Minimal Patch 2 completed.
+* `WorkspaceLayout` now composes `SectionCard` internally.
+* `SectionCard` adoption increased indirectly.
 * Milestone remains active and is not closed.
 
 ---

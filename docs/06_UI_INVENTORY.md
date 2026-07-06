@@ -105,6 +105,11 @@ Role:
 - keep dashboard layout split into header, content wrapper and panel area,
 - preserve existing dashboard UI without changing data logic.
 
+Current note:
+
+- `WorkspaceLayout` now composes `SectionCard` internally,
+- `SectionCard` adoption increased indirectly through workspace composition.
+
 ## 6. Workspace UI
 
 ### General Workspace Screen
@@ -206,8 +211,8 @@ Current state:
 | --- | --- | --- | --- | --- |
 | `RootLayout` | Layout | Active | Full app | Global shell and fonts. |
 | `ProjectLayout` | Layout | Active | `/projects/[id]/*` | Sidebar project workspace shell. |
-| `SectionCard` | Shared UI | Active | Selected simple screens | First extracted UI foundation component. |
-| `WorkspaceLayout` | Workspace UI | Active | Project Dashboard | Wrapper for dashboard workspace section. |
+| `SectionCard` | Shared UI | Active | Selected simple screens and WorkspaceLayout | First extracted UI foundation component with indirect workspace adoption. |
+| `WorkspaceLayout` | Workspace UI | Active | Project Dashboard | Workspace wrapper now composed through SectionCard. |
 | `WorkspaceHeader` | Workspace UI | Active | Project Dashboard | Dashboard title/subtitle area. |
 | `WorkspaceContent` | Workspace UI | Active | Project Dashboard | Dashboard content wrapper. |
 | `WorkspacePanels` | Workspace UI | Active | Project Dashboard | KPI, Conductor and quick actions area. |
@@ -242,3 +247,4 @@ Missing / Planned based on current repository snapshot:
 - Generated during MS-001.2B.
 - Based on repository snapshot, not on assumptions.
 - Must be updated whenever UI structure changes.
+- Updated after Minimal Patch 2: `WorkspaceLayout` composes `SectionCard` internally.

@@ -508,6 +508,10 @@ Continue extracting repeated UI primitives without changing behaviour.
 * `docs/06_UI_INVENTORY.md`
 * state document updates
 
+**Current Progress**
+* Minimal Patch 1 completed - created `docs/06_UI_INVENTORY.md`
+* Minimal Patch 2 completed - `WorkspaceLayout` now composes `SectionCard` internally
+
 **Definition of Done**
 * next safe UI foundation slice is completed and verified.
 

@@ -70,7 +70,7 @@ MS-001.2A - UI Foundation
 Not applicable while MS-001.2B is in progress
 
 **Session Focus**
-Synchronize control documents after accepted Minimal Patch 1 in MS-001.2B.
+Synchronize control documents after accepted Minimal Patch 2 in MS-001.2B.
 
 MS-001.2B - UI Foundation Continuation is active and remains open.
 
@@ -78,6 +78,9 @@ Completed in this milestone:
 
 * Minimal Patch 1 completed
 * Created `docs/06_UI_INVENTORY.md`
+* Minimal Patch 2 completed
+* `WorkspaceLayout` now composes `SectionCard` internally
+* `SectionCard` adoption increased indirectly
 
 Status:
 
@@ -85,8 +88,8 @@ Status:
 
 Next:
 
-* Documentation Sync Review
-* Select the first UI component to refine
+* Consistency Gate
+* Commit / push after Consistency Gate
 
 ---
 
@@ -95,6 +98,8 @@ Next:
 * Synchronized control documents for active `MS-001.2B - UI Foundation Continuation`.
 * Recorded Minimal Patch 1.
 * Recorded creation of `docs/06_UI_INVENTORY.md`.
+* Recorded Minimal Patch 2.
+* Recorded that `WorkspaceLayout` now composes `SectionCard` internally.
 * Kept the milestone open and marked it as in progress.
 
 ---
@@ -102,8 +107,8 @@ Next:
 # Not Completed In This Session
 
 * `MS-001.2B - UI Foundation Continuation` is not closed.
-* Documentation Sync Review remains next.
-* The first UI component refinement has not been selected yet.
+* Consistency Gate remains next.
+* Commit and push are still pending after Consistency Gate.
 
 ---
 
@@ -113,7 +118,7 @@ Next:
 Completed.
 
 **Documentation Verification**
-Completed. Documentation reflects the active `MS-001.2B - UI Foundation Continuation` state after Minimal Patch 1.
+Completed. Documentation reflects the active `MS-001.2B - UI Foundation Continuation` state after Minimal Patch 2.
 
 **Commit Status**
 Not completed.
@@ -133,17 +138,17 @@ Commit and push: Product Owner.
 Open
 
 **Validation**
-Session Result: MS-001.2B remains active after Minimal Patch 1.
-Architecture: UI Foundation continuation is documented through UI Inventory v1.
+Session Result: MS-001.2B remains active after Minimal Patch 2.
+Architecture: UI Foundation continuation now includes indirect `SectionCard` adoption through `WorkspaceLayout`.
 Verification: Passed.
-Repository: Ready for Documentation Sync Review and the next scoped UI patch.
-Next Action: Perform Documentation Sync Review and select the first UI component to refine.
+Repository: Ready for Consistency Gate, then commit / push.
+Next Action: Perform Consistency Gate, then commit / push.
 
 ---
 
 # Next Logical Step
 
-Perform Documentation Sync Review, then select the first UI component to refine within `MS-001.2B - UI Foundation Continuation`.
+Perform Consistency Gate, then commit / push within `MS-001.2B - UI Foundation Continuation`.
 
 ---
 

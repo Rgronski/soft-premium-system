@@ -1,3 +1,4 @@
+import { SectionCard } from "@/components/ui/SectionCard";
 import type { ReactNode } from "react";
 
 type WorkspaceLayoutProps = {
@@ -5,9 +6,5 @@ type WorkspaceLayoutProps = {
 };
 
 export function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
-  return (
-    <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
-      {children}
-    </section>
-  );
+  return <SectionCard>{children}</SectionCard>;
 }
