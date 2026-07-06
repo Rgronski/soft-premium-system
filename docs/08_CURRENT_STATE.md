@@ -42,44 +42,42 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-**None**
+**MS-001.3 - Workflow Engine**
 
 **Latest Completed Milestone**
 MS-001.2B - UI Foundation Continuation
 
 **Next Milestone**
-MS-001.3 - Workflow Engine
+Not applicable while MS-001.3 is in progress
 
 Objective:
 
-ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-001.2B - UI Foundation Continuation has been completed and the project is ready to start MS-001.3 - Workflow Engine.
+ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-001.3 - Workflow Engine is the active milestone.
 
 Project Status:
 
-MS-001.2B completed and closed. Ready for MS-001.3.
+MS-001.3 is active and in progress after commit `287803c`.
 
-Completed in the latest milestone:
+Completed in this milestone:
 
 * Minimal Patch 1 completed
-* Created `docs/06_UI_INVENTORY.md`
+* Created `docs/11_WORKFLOW_ENGINE.md`
 * Minimal Patch 2 completed
-* `WorkspaceLayout` now composes `SectionCard` internally
-* `SectionCard` adoption increased indirectly
-* Minimal Patch 3 completed
-* `WorkspacePanels` Quick Actions now render from a local configuration array
-* No new shared component was created
-* Minimal Patch 4 completed
-* `WorkspacePanels` KPI cards now render from a local configuration array
-* No new shared component was created
+* Workflow domain contract created
+* Added `src/lib/workflow/types.ts`
+* Added `src/lib/workflow/engine.ts`
+* Commit: `287803c` - `feat(ms-001.3): add workflow engine foundation`
+* Workflow Engine remains isolated from UI
+* Decision rules are not implemented yet
 
 Status:
 
-* Ready for MS-001.3
+* In progress
 
 Next:
 
-* Start MS-001.3 - Workflow Engine
-* Synchronize MS-001.3 after its own accepted patch scope
+* Minimal Patch 3 planning
+* First decision rule candidate review
 
 ---
 
@@ -137,8 +135,9 @@ Next:
 
 # In Progress
 
-* No active milestone is currently open
-* MS-001.2B - UI Foundation Continuation is formally completed
+* `MS-001.3 - Workflow Engine` is active
+* Minimal Patch 1 completed with `docs/11_WORKFLOW_ENGINE.md`
+* Minimal Patch 2 completed with the Workflow domain contract foundation
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
 
 ---
@@ -147,11 +146,11 @@ Next:
 
 Next session priorities:
 
-* Start MS-001.3 - Workflow Engine when formally approved
-* Keep milestone state synchronization aligned with workflow closure order
+* Plan Minimal Patch 3 for `MS-001.3 - Workflow Engine`
+* Review the first decision rule candidate
 * Keep ENG-000 / SPS Core / SPS OS 1.0 as the active platform priority
+* Keep workflow domain work isolated from UI
 * Keep workflow governance and project state documentation synchronized
-* Continue the next planned workflow within the active milestone path
 
 ---
 
@@ -167,15 +166,15 @@ Commit and push status must always be confirmed explicitly by the Product Owner.
 
 Priority 1
 
-Confirm readiness for `MS-001.3 - Workflow Engine`.
+Continue `MS-001.3 - Workflow Engine`.
 
 Priority 2
 
-Start `MS-001.3 - Workflow Engine` in the next formal workflow step.
+Plan Minimal Patch 3 and review the first decision rule candidate.
 
 Priority 3
 
-Keep workflow state aligned with formal milestone closure.
+Keep workflow state aligned with the active milestone.
 
 ---
 
@@ -190,20 +189,18 @@ Keep workflow state aligned with formal milestone closure.
 
 ---
 
-# MS-001.2B Summary
+# MS-001.3 Progress
 
 * Minimal Patch 1 completed.
-* Created `docs/06_UI_INVENTORY.md`.
+* Created `docs/11_WORKFLOW_ENGINE.md`.
 * Minimal Patch 2 completed.
-* `WorkspaceLayout` now composes `SectionCard` internally.
-* `SectionCard` adoption increased indirectly.
-* Minimal Patch 3 completed.
-* `WorkspacePanels` Quick Actions now render from a local configuration array.
-* No new shared component was created.
-* Minimal Patch 4 completed.
-* `WorkspacePanels` KPI cards now render from a local configuration array.
-* No new shared component was created.
-* Milestone is formally completed.
+* Workflow domain contract created.
+* Added `src/lib/workflow/types.ts`.
+* Added `src/lib/workflow/engine.ts`.
+* Commit recorded: `287803c`.
+* Workflow Engine remains isolated from UI.
+* Decision rules are not implemented yet.
+* Milestone remains in progress.
 
 ---
 

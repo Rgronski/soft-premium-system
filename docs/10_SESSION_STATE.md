@@ -55,71 +55,68 @@ Session Close should leave enough confirmed information here to support the next
 # Latest Session
 
 **Date**
-2026-07-06
+2026-07-07
 
 **Session Type**
 Documentation synchronization
 
 **Current Milestone**
-None
+MS-001.3 - Workflow Engine
 
 **Latest Completed Milestone**
 MS-001.2B - UI Foundation Continuation
 
 **Next Milestone**
-MS-001.3 - Workflow Engine
+Not applicable while MS-001.3 is in progress
 
 **Session Focus**
-Formal Milestone Close Sync for completed MS-001.2B - UI Foundation Continuation.
+Control Files Sync for active MS-001.3 - Workflow Engine after commit `287803c`.
 
-MS-001.2B - UI Foundation Continuation is formally closed.
+MS-001.3 - Workflow Engine is active and remains open.
 
-Completed in the closed milestone:
+Completed in this milestone:
 
 * Minimal Patch 1 completed
-* Created `docs/06_UI_INVENTORY.md`
+* Created `docs/11_WORKFLOW_ENGINE.md`
 * Minimal Patch 2 completed
-* `WorkspaceLayout` now composes `SectionCard` internally
-* `SectionCard` adoption increased indirectly
-* Minimal Patch 3 completed
-* `WorkspacePanels` Quick Actions now render from a local configuration array
-* No new shared component was created
-* Minimal Patch 4 completed
-* `WorkspacePanels` KPI cards now render from a local configuration array
-* No new shared component was created
+* Workflow domain contract created
+* Added `src/lib/workflow/types.ts`
+* Added `src/lib/workflow/engine.ts`
+* Commit: `287803c` - `feat(ms-001.3): add workflow engine foundation`
+* Workflow Engine remains isolated from UI
+* Decision rules are not implemented yet
 
 Status:
 
-* Ready for MS-001.3
+* In progress
 
 Next:
 
-* Start MS-001.3 - Workflow Engine
-* Synchronize MS-001.3 after its own accepted patch scope
+* Minimal Patch 3 planning
+* First decision rule candidate review
 
 ---
 
 # Completed In This Session
 
-* Synchronized control documents for completed `MS-001.2B - UI Foundation Continuation`.
+* Synchronized control documents for active `MS-001.3 - Workflow Engine`.
 * Recorded Minimal Patch 1.
-* Recorded creation of `docs/06_UI_INVENTORY.md`.
+* Recorded creation of `docs/11_WORKFLOW_ENGINE.md`.
 * Recorded Minimal Patch 2.
-* Recorded that `WorkspaceLayout` now composes `SectionCard` internally.
-* Recorded Minimal Patch 3.
-* Recorded that `WorkspacePanels` Quick Actions now render from a local configuration array.
-* Recorded that no new shared component was created.
-* Recorded Minimal Patch 4.
-* Recorded that `WorkspacePanels` KPI cards now render from a local configuration array.
-* Recorded that no new shared component was created.
-* Closed `MS-001.2B - UI Foundation Continuation`.
+* Recorded the Workflow domain contract.
+* Recorded `ProjectState`, `WorkflowResult`, `WorkflowEngine`, and `evaluateWorkflow()`.
+* Recorded addition of `src/lib/workflow/types.ts`.
+* Recorded addition of `src/lib/workflow/engine.ts`.
+* Recorded commit `287803c` for the Workflow Engine foundation.
+* Kept `MS-001.3 - Workflow Engine` open and in progress.
 
 ---
 
 # Not Completed In This Session
 
-* `MS-001.3 - Workflow Engine` is not started in this sync.
-* Commit and push for this close sync are still pending.
+* Decision rules are not implemented yet.
+* Minimal Patch 3 is still pending.
+* Commit and push for this control files sync are still pending.
 
 ---
 
@@ -129,7 +126,7 @@ Next:
 Completed.
 
 **Documentation Verification**
-Completed. Documentation reflects the formal closure of `MS-001.2B - UI Foundation Continuation`.
+Completed. Documentation reflects active `MS-001.3 - Workflow Engine` after Minimal Patch 2.
 
 **Commit Status**
 Not completed.
@@ -149,17 +146,17 @@ Commit and push: Product Owner.
 Open
 
 **Validation**
-Session Result: MS-001.2B - UI Foundation Continuation successfully closed.
-Architecture: UI Foundation continuation is formally closed after four minimal patches.
+Session Result: MS-001.3 - Workflow Engine remains active after Minimal Patch 2.
+Architecture: Workflow Engine foundation now includes the first domain contract and evaluation stub.
 Verification: Passed.
-Repository: Ready for MS-001.3 start after Commit / Push of the close sync.
-Next Action: Commit / Push the close sync, then start MS-001.3.
+Repository: Aligned with committed Workflow Engine foundation.
+Next Action: Continue with Minimal Patch 3 planning and first decision rule candidate review.
 
 ---
 
 # Next Logical Step
 
-Commit / Push the close sync, then formally start `MS-001.3 - Workflow Engine`.
+Continue `MS-001.3 - Workflow Engine` with Minimal Patch 3 planning and first decision rule candidate review.
 
 ---
 

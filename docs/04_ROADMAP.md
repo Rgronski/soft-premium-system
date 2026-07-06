@@ -100,11 +100,10 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-None
+* `MS-001.3` - Workflow Engine
 
 ## Next
 
-* `MS-001.3` - Workflow Engine
 * `MS-001.4` - Release Readiness
 * `MS-001.5` - SPS OS 1.0 Release Candidate
 
@@ -532,7 +531,7 @@ MS-001.3 - Workflow Engine
 MS-001.3 - Workflow Engine
 
 **Status**
-Planned
+In Progress
 
 **Purpose**
 Define workflow execution boundaries for SPS OS 1.0.
@@ -559,8 +558,19 @@ Establish the Workflow Engine contract without implementing advanced automation.
 * external integrations
 
 **Artifacts**
-* workflow engine documentation
+* `docs/11_WORKFLOW_ENGINE.md`
+* `src/lib/workflow/types.ts`
+* `src/lib/workflow/engine.ts`
 * state document updates
+
+**Current Progress**
+* Minimal Patch 1 completed - created `docs/11_WORKFLOW_ENGINE.md`
+* Minimal Patch 2 completed - Workflow domain contract created
+* Added `src/lib/workflow/types.ts`
+* Added `src/lib/workflow/engine.ts`
+* Commit: `287803c` - `feat(ms-001.3): add workflow engine foundation`
+* Workflow Engine remains isolated from UI
+* Decision rules are not implemented yet
 
 **Definition of Done**
 * workflow engine is formally defined and accepted.
