@@ -16,6 +16,25 @@ export function WorkspacePanels({
   upcomingVisitsCount,
   projectId,
 }: WorkspacePanelsProps) {
+  const quickActions = [
+    {
+      href: `/projects/${projectId}/clients/new`,
+      label: "Add Client",
+    },
+    {
+      href: `/projects/${projectId}/services/new`,
+      label: "Add Service",
+    },
+    {
+      href: `/projects/${projectId}/visits/new`,
+      label: "Schedule Visit",
+    },
+    {
+      href: `/projects/${projectId}/calendar`,
+      label: "Open Calendar",
+    },
+  ];
+
   return (
     <>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -63,30 +82,15 @@ export function WorkspacePanels({
           Quick Actions
         </p>
         <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-          <Link
-            href={`/projects/${projectId}/clients/new`}
-            className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-200 transition-colors hover:border-zinc-700 hover:bg-zinc-800"
-          >
-            Add Client
-          </Link>
-          <Link
-            href={`/projects/${projectId}/services/new`}
-            className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-200 transition-colors hover:border-zinc-700 hover:bg-zinc-800"
-          >
-            Add Service
-          </Link>
-          <Link
-            href={`/projects/${projectId}/visits/new`}
-            className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-200 transition-colors hover:border-zinc-700 hover:bg-zinc-800"
-          >
-            Schedule Visit
-          </Link>
-          <Link
-            href={`/projects/${projectId}/calendar`}
-            className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-200 transition-colors hover:border-zinc-700 hover:bg-zinc-800"
-          >
-            Open Calendar
-          </Link>
+          {quickActions.map((quickAction) => (
+            <Link
+              key={quickAction.href}
+              href={quickAction.href}
+              className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-200 transition-colors hover:border-zinc-700 hover:bg-zinc-800"
+            >
+              {quickAction.label}
+            </Link>
+          ))}
         </div>
       </div>
     </>

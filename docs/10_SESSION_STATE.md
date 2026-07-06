@@ -70,7 +70,7 @@ MS-001.2A - UI Foundation
 Not applicable while MS-001.2B is in progress
 
 **Session Focus**
-Synchronize control documents after accepted Minimal Patch 2 in MS-001.2B.
+Synchronize control documents after accepted Minimal Patch 3 in MS-001.2B.
 
 MS-001.2B - UI Foundation Continuation is active and remains open.
 
@@ -81,6 +81,9 @@ Completed in this milestone:
 * Minimal Patch 2 completed
 * `WorkspaceLayout` now composes `SectionCard` internally
 * `SectionCard` adoption increased indirectly
+* Minimal Patch 3 completed
+* `WorkspacePanels` Quick Actions now render from a local configuration array
+* No new shared component was created
 
 Status:
 
@@ -100,6 +103,9 @@ Next:
 * Recorded creation of `docs/06_UI_INVENTORY.md`.
 * Recorded Minimal Patch 2.
 * Recorded that `WorkspaceLayout` now composes `SectionCard` internally.
+* Recorded Minimal Patch 3.
+* Recorded that `WorkspacePanels` Quick Actions now render from a local configuration array.
+* Recorded that no new shared component was created.
 * Kept the milestone open and marked it as in progress.
 
 ---
@@ -118,7 +124,7 @@ Next:
 Completed.
 
 **Documentation Verification**
-Completed. Documentation reflects the active `MS-001.2B - UI Foundation Continuation` state after Minimal Patch 2.
+Completed. Documentation reflects the active `MS-001.2B - UI Foundation Continuation` state after Minimal Patch 3.
 
 **Commit Status**
 Not completed.
@@ -138,8 +144,8 @@ Commit and push: Product Owner.
 Open
 
 **Validation**
-Session Result: MS-001.2B remains active after Minimal Patch 2.
-Architecture: UI Foundation continuation now includes indirect `SectionCard` adoption through `WorkspaceLayout`.
+Session Result: MS-001.2B remains active after Minimal Patch 3.
+Architecture: UI Foundation continuation now includes indirect `SectionCard` adoption through `WorkspaceLayout` and local Quick Actions mapping in `WorkspacePanels`.
 Verification: Passed.
 Repository: Ready for Consistency Gate, then commit / push.
 Next Action: Perform Consistency Gate, then commit / push.

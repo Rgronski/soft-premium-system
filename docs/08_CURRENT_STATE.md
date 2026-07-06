@@ -65,6 +65,9 @@ Completed in this milestone:
 * Minimal Patch 2 completed
 * `WorkspaceLayout` now composes `SectionCard` internally
 * `SectionCard` adoption increased indirectly
+* Minimal Patch 3 completed
+* `WorkspacePanels` Quick Actions now render from a local configuration array
+* No new shared component was created
 
 Status:
 
@@ -134,6 +137,7 @@ Next:
 * `MS-001.2B - UI Foundation Continuation` is active
 * Minimal Patch 1 completed with `docs/06_UI_INVENTORY.md`
 * Minimal Patch 2 completed with `WorkspaceLayout` composing `SectionCard` internally
+* Minimal Patch 3 completed with `WorkspacePanels` rendering Quick Actions from a local configuration array
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
 
 ---
@@ -192,6 +196,9 @@ Prepare commit / push after Consistency Gate.
 * Minimal Patch 2 completed.
 * `WorkspaceLayout` now composes `SectionCard` internally.
 * `SectionCard` adoption increased indirectly.
+* Minimal Patch 3 completed.
+* `WorkspacePanels` Quick Actions now render from a local configuration array.
+* No new shared component was created.
 * Milestone remains active and is not closed.
 
 ---

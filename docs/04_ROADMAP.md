@@ -511,6 +511,7 @@ Continue extracting repeated UI primitives without changing behaviour.
 **Current Progress**
 * Minimal Patch 1 completed - created `docs/06_UI_INVENTORY.md`
 * Minimal Patch 2 completed - `WorkspaceLayout` now composes `SectionCard` internally
+* Minimal Patch 3 completed - `WorkspacePanels` Quick Actions now render from a local configuration array
 
 **Definition of Done**
 * next safe UI foundation slice is completed and verified.
