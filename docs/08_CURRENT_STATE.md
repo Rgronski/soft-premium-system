@@ -48,7 +48,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 MS-001.2A - UI Foundation
 
 **Next Milestone**
-MS-001.3 - Workflow Engine
+Not applicable while MS-001.2B is in progress
 
 Objective:
 
@@ -60,7 +60,8 @@ MS-001.2B in progress.
 
 Completed in this milestone:
 
-* Minimal Patch 1 - Created `docs/06_UI_INVENTORY.md`
+* Minimal Patch 1 completed
+* Created `docs/06_UI_INVENTORY.md`
 
 Status:
 
@@ -138,7 +139,7 @@ Next:
 Next session priorities:
 
 * Perform Documentation Sync Review
-* Select the first UI component to refine after documentation synchronization
+* Select the first UI component to refine
 * Keep ENG-000 / SPS Core / SPS OS 1.0 as the active platform priority
 * Keep workflow governance and project state documentation synchronized
 * Continue the next planned workflow within the active milestone path

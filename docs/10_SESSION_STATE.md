@@ -67,7 +67,7 @@ MS-001.2B - UI Foundation Continuation
 MS-001.2A - UI Foundation
 
 **Next Milestone**
-MS-001.3 - Workflow Engine
+Not applicable while MS-001.2B is in progress
 
 **Session Focus**
 Synchronize control documents after accepted Minimal Patch 1 in MS-001.2B.
@@ -76,7 +76,8 @@ MS-001.2B - UI Foundation Continuation is active and remains open.
 
 Completed in this milestone:
 
-* Minimal Patch 1 - Created `docs/06_UI_INVENTORY.md`
+* Minimal Patch 1 completed
+* Created `docs/06_UI_INVENTORY.md`
 
 Status:
 
@@ -85,7 +86,7 @@ Status:
 Next:
 
 * Documentation Sync Review
-* Select the first UI component to refine after documentation synchronization
+* Select the first UI component to refine
 
 ---
 
