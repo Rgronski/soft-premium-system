@@ -232,6 +232,20 @@ Each release entry should contain:
 * No AI added.
 * Minimal architecture only.
 
+## MS-000.6 - Roadmap Engine
+
+### Date
+
+2026-07-06
+
+### Completed
+
+* Added `docs/04_ROADMAP.md` as the formal SPS OS 1.0 roadmap contract.
+* Established roadmap as the Single Source of Truth for milestone order.
+* Defined milestone classification for SPS OS 1.0.
+* Defined milestone contracts from `MS-000.6` to `MS-001.4`.
+* Started `MS-000.6 - Roadmap Engine` as the current documentation and architecture milestone.
+
 ---
 
 # Future Releases

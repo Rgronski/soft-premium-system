@@ -23,7 +23,7 @@ Draft
 Yes
 
 **Depends On**
-05_ROADMAP.md
+04_ROADMAP.md
 
 **Referenced By**
 AI_CONTEXT.md
@@ -42,21 +42,22 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-**None**
+MS-000.6 - Roadmap Engine
 
 **Latest Completed Milestone**
 MS-000.5 - The Conductor
 
 **Next Milestone**
-To be planned according to roadmap
+MS-000.7 - Workspace Engine
 
 Objective:
 
-ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-000.5 has been completed and verified. The next milestone is not explicitly named in roadmap documentation and should be planned from the documented Phase 2 core platform direction.
+ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-000.6 has started as a documentation and architecture milestone that establishes the formal roadmap contract for SPS OS 1.0.
 
 Project Status:
 
 MS-000.5 completed and verified.
+MS-000.6 started as a documentation and architecture milestone.
 
 ---
 
@@ -108,8 +109,8 @@ MS-000.5 completed and verified.
 
 # In Progress
 
-* No active implementation work is currently in progress
-* Ready for next milestone planning within ENG-000 / SPS Core / SPS OS 1.0
+* MS-000.6 - Roadmap Engine is active as a documentation and architecture milestone
+* ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
 
 ---
 
@@ -118,7 +119,7 @@ MS-000.5 completed and verified.
 Next session priorities:
 
 * Perform Project Integrity Check
-* Plan the next milestone according to roadmap
+* Complete MS-000.6 - Roadmap Engine
 * Keep ENG-000 / SPS Core / SPS OS 1.0 as the active platform priority
 * Keep workflow governance and project state documentation synchronized
 * Continue the next planned workflow within the active milestone path
@@ -141,7 +142,7 @@ Perform Project Integrity Check.
 
 Priority 2
 
-Plan the next milestone according to roadmap.
+Complete MS-000.6 - Roadmap Engine.
 
 Priority 3
 
