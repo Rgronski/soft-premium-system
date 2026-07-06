@@ -70,7 +70,7 @@ MS-001.2A - UI Foundation
 Not applicable while MS-001.2B is in progress
 
 **Session Focus**
-Synchronize control documents after accepted Minimal Patch 3 in MS-001.2B.
+Synchronize control documents after accepted Minimal Patch 4 in MS-001.2B.
 
 MS-001.2B - UI Foundation Continuation is active and remains open.
 
@@ -84,6 +84,9 @@ Completed in this milestone:
 * Minimal Patch 3 completed
 * `WorkspacePanels` Quick Actions now render from a local configuration array
 * No new shared component was created
+* Minimal Patch 4 completed
+* `WorkspacePanels` KPI cards now render from a local configuration array
+* No new shared component was created
 
 Status:
 
@@ -91,8 +94,9 @@ Status:
 
 Next:
 
-* Consistency Gate
-* Commit / push after Consistency Gate
+* Final Consistency Gate
+* Commit / push after Final Consistency Gate
+* Milestone close review
 
 ---
 
@@ -106,6 +110,9 @@ Next:
 * Recorded Minimal Patch 3.
 * Recorded that `WorkspacePanels` Quick Actions now render from a local configuration array.
 * Recorded that no new shared component was created.
+* Recorded Minimal Patch 4.
+* Recorded that `WorkspacePanels` KPI cards now render from a local configuration array.
+* Recorded that no new shared component was created.
 * Kept the milestone open and marked it as in progress.
 
 ---
@@ -113,8 +120,9 @@ Next:
 # Not Completed In This Session
 
 * `MS-001.2B - UI Foundation Continuation` is not closed.
-* Consistency Gate remains next.
-* Commit and push are still pending after Consistency Gate.
+* Final Consistency Gate remains next.
+* Commit and push are still pending after Final Consistency Gate.
+* Milestone close review is still pending.
 
 ---
 
@@ -124,7 +132,7 @@ Next:
 Completed.
 
 **Documentation Verification**
-Completed. Documentation reflects the active `MS-001.2B - UI Foundation Continuation` state after Minimal Patch 3.
+Completed. Documentation reflects the active `MS-001.2B - UI Foundation Continuation` state after Minimal Patch 4.
 
 **Commit Status**
 Not completed.
@@ -144,17 +152,17 @@ Commit and push: Product Owner.
 Open
 
 **Validation**
-Session Result: MS-001.2B remains active after Minimal Patch 3.
-Architecture: UI Foundation continuation now includes indirect `SectionCard` adoption through `WorkspaceLayout` and local Quick Actions mapping in `WorkspacePanels`.
+Session Result: MS-001.2B remains active after Minimal Patch 4.
+Architecture: UI Foundation continuation now includes indirect `SectionCard` adoption through `WorkspaceLayout` and local mapping for Quick Actions and KPI cards in `WorkspacePanels`.
 Verification: Passed.
-Repository: Ready for Consistency Gate, then commit / push.
-Next Action: Perform Consistency Gate, then commit / push.
+Repository: Ready for final Consistency Gate, then commit / push, then milestone close review.
+Next Action: Perform Final Consistency Gate, then commit / push, then milestone close review.
 
 ---
 
 # Next Logical Step
 
-Perform Consistency Gate, then commit / push within `MS-001.2B - UI Foundation Continuation`.
+Perform Final Consistency Gate, then commit / push, then milestone close review within `MS-001.2B - UI Foundation Continuation`.
 
 ---
 

@@ -16,6 +16,25 @@ export function WorkspacePanels({
   upcomingVisitsCount,
   projectId,
 }: WorkspacePanelsProps) {
+  const kpiCards = [
+    {
+      label: "Clients",
+      value: clientsCount,
+    },
+    {
+      label: "Services",
+      value: servicesCount,
+    },
+    {
+      label: "Visits",
+      value: visitsCount,
+    },
+    {
+      label: "Upcoming Visits",
+      value: upcomingVisitsCount,
+    },
+  ];
+
   const quickActions = [
     {
       href: `/projects/${projectId}/clients/new`,
@@ -38,41 +57,19 @@ export function WorkspacePanels({
   return (
     <>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
-          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Clients
-          </p>
-          <p className="mt-2 text-2xl font-semibold text-zinc-50">
-            {clientsCount}
-          </p>
-        </div>
-
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
-          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Services
-          </p>
-          <p className="mt-2 text-2xl font-semibold text-zinc-50">
-            {servicesCount}
-          </p>
-        </div>
-
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
-          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Visits
-          </p>
-          <p className="mt-2 text-2xl font-semibold text-zinc-50">
-            {visitsCount}
-          </p>
-        </div>
-
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
-          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Upcoming Visits
-          </p>
-          <p className="mt-2 text-2xl font-semibold text-zinc-50">
-            {upcomingVisitsCount}
-          </p>
-        </div>
+        {kpiCards.map((kpiCard) => (
+          <div
+            key={kpiCard.label}
+            className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
+          >
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              {kpiCard.label}
+            </p>
+            <p className="mt-2 text-2xl font-semibold text-zinc-50">
+              {kpiCard.value}
+            </p>
+          </div>
+        ))}
       </div>
 
       <ConductorPanel />

@@ -68,6 +68,9 @@ Completed in this milestone:
 * Minimal Patch 3 completed
 * `WorkspacePanels` Quick Actions now render from a local configuration array
 * No new shared component was created
+* Minimal Patch 4 completed
+* `WorkspacePanels` KPI cards now render from a local configuration array
+* No new shared component was created
 
 Status:
 
@@ -75,8 +78,9 @@ Status:
 
 Next:
 
-* Consistency Gate
-* Commit / push after Consistency Gate
+* Final Consistency Gate
+* Commit / push after Final Consistency Gate
+* Milestone close review
 
 ---
 
@@ -138,6 +142,7 @@ Next:
 * Minimal Patch 1 completed with `docs/06_UI_INVENTORY.md`
 * Minimal Patch 2 completed with `WorkspaceLayout` composing `SectionCard` internally
 * Minimal Patch 3 completed with `WorkspacePanels` rendering Quick Actions from a local configuration array
+* Minimal Patch 4 completed with `WorkspacePanels` rendering KPI cards from a local configuration array
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
 
 ---
@@ -146,8 +151,9 @@ Next:
 
 Next session priorities:
 
-* Perform Consistency Gate
-* Prepare commit / push after Consistency Gate
+* Perform Final Consistency Gate
+* Prepare commit / push after Final Consistency Gate
+* Prepare milestone close review
 * Keep ENG-000 / SPS Core / SPS OS 1.0 as the active platform priority
 * Keep workflow governance and project state documentation synchronized
 * Continue the next planned workflow within the active milestone path
@@ -166,15 +172,15 @@ Commit and push status must always be confirmed explicitly by the Product Owner.
 
 Priority 1
 
-Complete consistency verification for `MS-001.2B - UI Foundation Continuation`.
+Complete final consistency verification for `MS-001.2B - UI Foundation Continuation`.
 
 Priority 2
 
-Perform Consistency Gate.
+Perform Final Consistency Gate.
 
 Priority 3
 
-Prepare commit / push after Consistency Gate.
+Prepare commit / push after Final Consistency Gate and milestone close review.
 
 ---
 
@@ -198,6 +204,9 @@ Prepare commit / push after Consistency Gate.
 * `SectionCard` adoption increased indirectly.
 * Minimal Patch 3 completed.
 * `WorkspacePanels` Quick Actions now render from a local configuration array.
+* No new shared component was created.
+* Minimal Patch 4 completed.
+* `WorkspacePanels` KPI cards now render from a local configuration array.
 * No new shared component was created.
 * Milestone remains active and is not closed.
 

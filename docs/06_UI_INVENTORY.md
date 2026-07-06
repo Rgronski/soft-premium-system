@@ -111,6 +111,8 @@ Current note:
 - `SectionCard` adoption increased indirectly through workspace composition.
 - `WorkspacePanels` Quick Actions now render from a local configuration array,
 - no new shared UI component was created for Quick Actions.
+- `WorkspacePanels` KPI cards now render from a local configuration array,
+- no new shared UI component was created for KPI cards.
 
 ## 6. Workspace UI
 
@@ -217,7 +219,7 @@ Current state:
 | `WorkspaceLayout` | Workspace UI | Active | Project Dashboard | Workspace wrapper now composed through SectionCard. |
 | `WorkspaceHeader` | Workspace UI | Active | Project Dashboard | Dashboard title/subtitle area. |
 | `WorkspaceContent` | Workspace UI | Active | Project Dashboard | Dashboard content wrapper. |
-| `WorkspacePanels` | Workspace UI | Active | Project Dashboard | KPI, Conductor and quick actions area with Quick Actions rendered from a local configuration array. |
+| `WorkspacePanels` | Workspace UI | Active | Project Dashboard | KPI, Conductor and quick actions area with KPI cards and Quick Actions rendered from local configuration arrays. |
 | `ConductorPanel` | Conductor UI | Active | Project Dashboard | Static conductor summary panel. |
 | `Calendar Month View` | Screen UI | Active | `/projects/[id]/calendar` | Month grid, navigation, selection, day details. |
 | `Invoices Screen` | Screen UI | Placeholder | `/projects/[id]/invoices` | Route exists, feature not implemented. |
@@ -251,3 +253,4 @@ Missing / Planned based on current repository snapshot:
 - Must be updated whenever UI structure changes.
 - Updated after Minimal Patch 2: `WorkspaceLayout` composes `SectionCard` internally.
 - Updated after Minimal Patch 3: `WorkspacePanels` renders Quick Actions from a local configuration array.
+- Updated after Minimal Patch 4: `WorkspacePanels` renders KPI cards from a local configuration array.
