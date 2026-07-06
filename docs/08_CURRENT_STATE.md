@@ -45,14 +45,18 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 **None**
 
 **Latest Completed Milestone**
-MS-000.2 - AI Development Workflow
+MS-000.5 - The Conductor
 
 **Next Milestone**
-MS-000.3 - AI Workflow Command / Command Center
+To be planned according to roadmap
 
 Objective:
 
-ENG-000 now provides a formal AI Development Workflow with defined roles, workflow stages, handoff prompts, and Project Integrity Check support. The next step is preparing MS-000.3 with an AI workflow command, milestone and task status list, scoped work selection such as "robimy 5-9", ChatGPT <-> Codex <-> GitHub automation, automation final reporting, and Project Context Loader as a first-class element of ENG-000.
+ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-000.5 has been completed and verified. The next milestone is not explicitly named in roadmap documentation and should be planned from the documented Phase 2 core platform direction.
+
+Project Status:
+
+MS-000.5 completed and verified.
 
 ---
 
@@ -91,6 +95,9 @@ ENG-000 now provides a formal AI Development Workflow with defined roles, workfl
 * Project Context Loader (PCL) added as the official first stage of workflow context loading
 * ADR-001 added for Platform Identity & Domain Independence
 * MS-000.2 completed with formal AI Development Workflow foundation, roles, workflow stages, prompts, and Project Integrity Check checklist
+* MS-000.3 completed with AI Workflow Command Center, workflow API contract, PCL bootloader definition, and ENG-000 constitution
+* MS-000.4 completed with the first SPS OS 1.0 Experience Blueprint for workspace experience
+* MS-000.5 completed with ConductorState model, Conductor service, ConductorPanel, and Project Dashboard integration
 * MS-009.1 completed with Calendar Shell structure for Header, Navigation, View Switcher, and Workspace
 * MS-009.2 completed with functional Month View, current month label, today highlight, and visit counters per day
 * MS-009.3 completed with Previous Month, Next Month, Today, and Month View navigation
@@ -102,6 +109,7 @@ ENG-000 now provides a formal AI Development Workflow with defined roles, workfl
 # In Progress
 
 * No active implementation work is currently in progress
+* Ready for next milestone planning within ENG-000 / SPS Core / SPS OS 1.0
 
 ---
 
@@ -110,7 +118,8 @@ ENG-000 now provides a formal AI Development Workflow with defined roles, workfl
 Next session priorities:
 
 * Perform Project Integrity Check
-* Prepare MS-000.3
+* Plan the next milestone according to roadmap
+* Keep ENG-000 / SPS Core / SPS OS 1.0 as the active platform priority
 * Keep workflow governance and project state documentation synchronized
 * Continue the next planned workflow within the active milestone path
 
@@ -132,11 +141,22 @@ Perform Project Integrity Check.
 
 Priority 2
 
-Prepare MS-000.3 - AI Workflow Command / Command Center.
+Plan the next milestone according to roadmap.
 
 Priority 3
 
-Keep workflow governance and project state documentation aligned for the next milestone.
+Keep ENG-000 / SPS Core / SPS OS 1.0 documentation aligned for the next milestone.
+
+---
+
+# MS-000.5 Summary
+
+* Introduced ConductorState model.
+* Added Conductor service.
+* Added ConductorPanel.
+* Integrated Conductor into Project Dashboard.
+* Minimal implementation completed.
+* Ready for next milestone.
 
 ---
 

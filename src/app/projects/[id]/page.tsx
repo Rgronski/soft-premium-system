@@ -1,5 +1,6 @@
 "use client";
 
+import { ConductorPanel } from "@/components/conductor/ConductorPanel";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useMemo } from "react";
@@ -130,6 +131,8 @@ export default function ProjectWorkspacePage() {
               </p>
             </div>
           </div>
+
+          <ConductorPanel />
 
           <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">

@@ -196,6 +196,42 @@ Each release entry should contain:
 * Added AI workflow roles, workflow stages, prompts, and Project Integrity Check checklist.
 * Established the process of creating SPS as part of SPS itself.
 
+## MS-000.3 - AI Workflow Command Center
+
+### Completed
+
+* Added AI Workflow Command Center foundation documentation.
+* Added workflow API contract for SPS UI, ENG-000, ChatGPT, Codex, and GitHub.
+* Added PCL bootloader definition as a first-class ENG-000 workflow element.
+* Added ENG-000 constitution for permanent workflow rules.
+* Commit: `be063e1`.
+
+## MS-000.4 - SPS Experience Blueprint
+
+### Completed
+
+* Added the first SPS OS 1.0 Workspace Experience Blueprint.
+* Defined Morning Experience, Workspace, The Conductor, main actions, and Closing Experience for SPS OS 1.0.
+* Established design goals for the SPS workspace experience without expanding scope beyond version 1.0.
+* Commit: `94a0ac7`.
+
+## MS-000.5 - The Conductor
+
+### Date
+
+2026-07-06
+
+### Completed
+
+* Added ConductorState model.
+* Added Conductor service.
+* Added ConductorPanel UI.
+* Integrated panel into Project Dashboard.
+* Established initial orchestration layer.
+* No business logic added.
+* No AI added.
+* Minimal architecture only.
+
 ---
 
 # Future Releases
