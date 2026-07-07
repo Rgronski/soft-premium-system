@@ -61,18 +61,18 @@ Session Close should leave enough confirmed information here to support the next
 Documentation synchronization
 
 **Current Milestone**
-MS-001.3 - Workflow Engine
+None
 
 **Latest Completed Milestone**
-MS-001.2B - UI Foundation Continuation
+MS-001.3 - Workflow Engine
 
 **Next Milestone**
-Not applicable while MS-001.3 is in progress
+MS-001.4 - Release Readiness
 
 **Session Focus**
-Control Files Sync for active MS-001.3 - Workflow Engine after commit `7f6c634`.
+Milestone Closure Control Files Sync for completed MS-001.3 - Workflow Engine.
 
-MS-001.3 - Workflow Engine is active and remains open.
+MS-001.3 - Workflow Engine is formally completed after Milestone Closure Review passed.
 
 Completed in this milestone:
 
@@ -106,17 +106,17 @@ Completed in this milestone:
 
 Status:
 
-* In progress
+* Completed
 
 Next:
 
-* Plan the next safe Workflow Engine rule
+* Prepare MS-001.4 - Release Readiness
 
 ---
 
 # Completed In This Session
 
-* Synchronized control documents for active `MS-001.3 - Workflow Engine`.
+* Synchronized control documents for completed `MS-001.3 - Workflow Engine`.
 * Recorded Minimal Patch 1.
 * Recorded creation of `docs/11_WORKFLOW_ENGINE.md`.
 * Recorded Minimal Patch 2.
@@ -138,13 +138,13 @@ Next:
 * Recorded addition of `src/lib/workflow/types.ts`.
 * Recorded addition of `src/lib/workflow/engine.ts`.
 * Recorded commit `7f6c634` for the Workflow Engine foundation.
-* Kept `MS-001.3 - Workflow Engine` open and in progress.
+* Recorded that Milestone Closure Review passed.
+* Closed `MS-001.3 - Workflow Engine`.
 
 ---
 
 # Not Completed In This Session
 
-* Further decision rules are not implemented yet.
 * Workflow Engine tests are not implemented because no existing test setup is available.
 * Commit and push for this control files sync are still pending.
 
@@ -156,7 +156,7 @@ Next:
 Completed.
 
 **Documentation Verification**
-Completed. Documentation reflects active `MS-001.3 - Workflow Engine` after Minimal Patch 8.
+Completed. Documentation reflects formally closed `MS-001.3 - Workflow Engine`.
 
 **Commit Status**
 Not completed.
@@ -176,17 +176,17 @@ Commit and push: Product Owner.
 Open
 
 **Validation**
-Session Result: MS-001.3 - Workflow Engine remains active after Minimal Patch 8.
+Session Result: MS-001.3 - Workflow Engine successfully closed.
 Architecture: Workflow Engine foundation now includes the first warning decision rule, two dynamic nextStep rules, consistent evidence across branches, a dynamic confidence policy, and a confirmed need for separate test setup scope.
 Verification: Passed.
-Repository: Aligned with committed Workflow Engine foundation.
-Next Action: Review the first decision rule and plan the next safe Workflow Engine patch.
+Repository: Aligned and ready for MS-001.4 preparation.
+Next Action: Prepare MS-001.4 - Release Readiness.
 
 ---
 
 # Next Logical Step
 
-Continue `MS-001.3 - Workflow Engine` with review of the first decision rule and planning of the next safe patch.
+Prepare `MS-001.4 - Release Readiness`.
 
 ---
 

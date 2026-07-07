@@ -363,6 +363,7 @@ Each release entry should contain:
 * Workflow Engine now returns evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch.
 * Workflow Engine now returns confidence `1.0` for `blocked`, `0.75` for `warning`, and `0.5` for ready branches.
 * Workflow Engine remains isolated from UI.
+* Milestone Closure Review passed and `MS-001.3 - Workflow Engine` was formally completed.
 
 ### Notes
 

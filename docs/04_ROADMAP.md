@@ -97,10 +97,11 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-001.1` - Knowledge Engine
 * `MS-001.2A` - UI Foundation
 * `MS-001.2B` - UI Foundation Continuation
+* `MS-001.3` - Workflow Engine
 
 ## Current
 
-* `MS-001.3` - Workflow Engine
+None
 
 ## Next
 
@@ -531,7 +532,7 @@ MS-001.3 - Workflow Engine
 MS-001.3 - Workflow Engine
 
 **Status**
-In Progress
+Completed
 
 **Purpose**
 Define workflow execution boundaries for SPS OS 1.0.
@@ -583,6 +584,7 @@ Establish the Workflow Engine contract without implementing advanced automation.
 * Workflow Engine now returns confidence `1.0` for `blocked`, `0.75` for `warning`, and `0.5` for ready branches
 * Minimal Patch 7 diagnosis completed - not implemented because no existing test setup was found
 * Test runner setup requires separate future scope before Workflow Engine tests can be added
+* Milestone Closure Review passed
 
 **Definition of Done**
 * workflow engine is formally defined and accepted.

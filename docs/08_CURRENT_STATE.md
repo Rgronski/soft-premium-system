@@ -42,21 +42,21 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-**MS-001.3 - Workflow Engine**
+**None**
 
 **Latest Completed Milestone**
-MS-001.2B - UI Foundation Continuation
+MS-001.3 - Workflow Engine
 
 **Next Milestone**
-Not applicable while MS-001.3 is in progress
+MS-001.4 - Release Readiness
 
 Objective:
 
-ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-001.3 - Workflow Engine is the active milestone.
+ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-001.3 - Workflow Engine has been completed and the project is prepared for MS-001.4 - Release Readiness.
 
 Project Status:
 
-MS-001.3 is active and in progress after commit `7f6c634`.
+MS-001.3 completed and closed after Milestone Closure Review passed.
 
 Completed in this milestone:
 
@@ -90,11 +90,11 @@ Completed in this milestone:
 
 Status:
 
-* In progress
+* Completed
 
 Next:
 
-* Plan the next safe Workflow Engine rule
+* Prepare MS-001.4 - Release Readiness
 
 ---
 
@@ -152,14 +152,8 @@ Next:
 
 # In Progress
 
-* `MS-001.3 - Workflow Engine` is active
-* Minimal Patch 1 completed with `docs/11_WORKFLOW_ENGINE.md`
-* Minimal Patch 2 completed with the Workflow domain contract foundation
-* Minimal Patch 3 completed with the first warning decision rule
-* Minimal Patch 4 completed with the first dynamic nextStep rule
-* Minimal Patch 5 completed with the second dynamic nextStep rule
-* Minimal Patch 6 completed with consistent evidence across all branches
-* Minimal Patch 8 completed with the first dynamic confidence policy
+* No active milestone is currently open
+* `MS-001.3 - Workflow Engine` is formally completed
 * Minimal Patch 7 diagnosis completed without implementation
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
 
@@ -169,7 +163,7 @@ Next:
 
 Next session priorities:
 
-* Plan the next safe Workflow Engine rule
+* Prepare `MS-001.4 - Release Readiness`
 * Keep ENG-000 / SPS Core / SPS OS 1.0 as the active platform priority
 * Keep workflow domain work isolated from UI
 * Keep workflow governance and project state documentation synchronized
@@ -189,10 +183,11 @@ Commit and push status must always be confirmed explicitly by the Product Owner.
 Priority 1
 
 Continue `MS-001.3 - Workflow Engine`.
+Confirm closure of `MS-001.3 - Workflow Engine`.
 
 Priority 2
 
-Plan the next safe Workflow Engine rule.
+Prepare `MS-001.4 - Release Readiness`.
 
 Priority 3
 
@@ -239,7 +234,8 @@ Keep workflow state aligned with the active milestone.
 * Workflow Engine now returns confidence `1.0` for `blocked`, `0.75` for `warning`, and `0.5` for ready branches.
 * Minimal Patch 7 remained diagnosis-only because no existing test setup was found.
 * Test runner setup requires separate future scope before Workflow Engine tests can be added.
-* Milestone remains in progress.
+* Milestone Closure Review passed.
+* Milestone is formally completed.
 
 ---
 
