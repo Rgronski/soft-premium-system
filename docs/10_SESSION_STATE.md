@@ -70,7 +70,7 @@ MS-001.2B - UI Foundation Continuation
 Not applicable while MS-001.3 is in progress
 
 **Session Focus**
-Control Files Sync for active MS-001.3 - Workflow Engine after commit `287803c`.
+Control Files Sync for active MS-001.3 - Workflow Engine after commit `7f6c634`.
 
 MS-001.3 - Workflow Engine is active and remains open.
 
@@ -84,7 +84,7 @@ Completed in this milestone:
 * First warning decision rule added to `evaluateWorkflow()`
 * Added `src/lib/workflow/types.ts`
 * Added `src/lib/workflow/engine.ts`
-* Commit: `287803c` - `feat(ms-001.3): add workflow engine foundation`
+* Commit: `7f6c634` - `feat(ms-001.3): add workflow engine foundation`
 * Workflow Engine remains isolated from UI
 * Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist
 * Decision priority is `blocked > warning > ready`
@@ -95,8 +95,7 @@ Status:
 
 Next:
 
-* Minimal Patch 3 planning
-* First decision rule candidate review
+* Plan the next safe Workflow Engine rule
 
 ---
 
@@ -112,7 +111,7 @@ Next:
 * Recorded `ProjectState`, `WorkflowResult`, `WorkflowEngine`, and `evaluateWorkflow()`.
 * Recorded addition of `src/lib/workflow/types.ts`.
 * Recorded addition of `src/lib/workflow/engine.ts`.
-* Recorded commit `287803c` for the Workflow Engine foundation.
+* Recorded commit `7f6c634` for the Workflow Engine foundation.
 * Kept `MS-001.3 - Workflow Engine` open and in progress.
 
 ---

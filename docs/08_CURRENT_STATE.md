@@ -56,7 +56,7 @@ ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-001.3 - Workflow
 
 Project Status:
 
-MS-001.3 is active and in progress after commit `287803c`.
+MS-001.3 is active and in progress after commit `7f6c634`.
 
 Completed in this milestone:
 
@@ -68,7 +68,7 @@ Completed in this milestone:
 * First warning decision rule added to `evaluateWorkflow()`
 * Added `src/lib/workflow/types.ts`
 * Added `src/lib/workflow/engine.ts`
-* Commit: `287803c` - `feat(ms-001.3): add workflow engine foundation`
+* Commit: `7f6c634` - `feat(ms-001.3): add workflow engine foundation`
 * Workflow Engine remains isolated from UI
 * Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist
 * Decision priority is `blocked > warning > ready`
@@ -79,8 +79,7 @@ Status:
 
 Next:
 
-* Minimal Patch 3 planning
-* First decision rule candidate review
+* Plan the next safe Workflow Engine rule
 
 ---
 
@@ -150,7 +149,6 @@ Next:
 
 Next session priorities:
 
-* Review the first implemented decision rule for `MS-001.3 - Workflow Engine`
 * Plan the next safe Workflow Engine rule
 * Keep ENG-000 / SPS Core / SPS OS 1.0 as the active platform priority
 * Keep workflow domain work isolated from UI
@@ -174,7 +172,7 @@ Continue `MS-001.3 - Workflow Engine`.
 
 Priority 2
 
-Review the first decision rule and plan the next safe rule.
+Plan the next safe Workflow Engine rule.
 
 Priority 3
 
@@ -203,7 +201,7 @@ Keep workflow state aligned with the active milestone.
 * First warning decision rule added to `evaluateWorkflow()`.
 * Added `src/lib/workflow/types.ts`.
 * Added `src/lib/workflow/engine.ts`.
-* Commit recorded: `287803c`.
+* Commit recorded: `7f6c634`.
 * Workflow Engine remains isolated from UI.
 * Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist.
 * Decision priority is `blocked > warning > ready`.
