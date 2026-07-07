@@ -193,11 +193,13 @@ When the Product Owner writes `Koniec tego czatu`, AI must execute the Session C
 # Reserved Command: "koniec czatu"
 
 Meaning:
-When the user writes "koniec czatu", generate the canonical Development Session Bootstrap from `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
+When the user writes "koniec czatu", generate only the canonical Development Session Bootstrap v2.2 from `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 
 Rules:
 - Do not invent a new bootstrap.
 - Do not replace it with Get-Content commands.
+- Return it as a ready-to-paste prompt for a new chat.
+- Do not add comments, summaries, or extra conversation.
 - The next chat must begin by asking the user for a fresh ZIP.
 - The canonical bootstrap is the Single Source of Truth for restarting SPS sessions.
 - The canonical bootstrap must always include credit-saving mode.

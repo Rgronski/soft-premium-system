@@ -1,4 +1,4 @@
-# Soft Premium System — Development Session Bootstrap v2.1
+# Soft Premium System — Development Session Bootstrap v2.2
 
 Kontynuujemy rozwój projektu Soft Premium System.
 
@@ -7,6 +7,9 @@ To nie jest nowy projekt.
 Projekt znajduje się lokalnie:
 
 C:\Users\p700\soft-premium-system
+
+Never skip any bootstrap phase.
+If information is missing, stop and ask only for the minimum artifact required to continue.
 
 Tryb pracy:
 
@@ -65,6 +68,32 @@ Po zakończeniu PCL wykonaj:
 2. Roadmap Summary
 3. Chief Architect Recommendation
 
+Project Integrity Check:
+
+Only documents explicitly listed as Single Source of Truth are authoritative.
+Other roadmap-like or historical documents must not be treated as conflicts unless referenced by the SSOT.
+
+Roadmap Summary:
+
+Roadmap Summary must be based only on SSOT documents and must show:
+- Current Milestone
+- Latest Completed Milestone
+- Next Milestone
+- Current Progress
+
+Chief Architect Recommendation:
+
+Return exactly one recommendation.
+Return exactly one proposed patch.
+Do not list alternatives unless there is a blocking inconsistency.
+
+Next Safe Step:
+
+After bootstrap, stop at:
+Diagnosis only.
+No implementation.
+No Codex prompt yet.
+
 Workflow:
 
 1. Diagnosis
@@ -102,10 +131,10 @@ Nie implementuj.
 
 Nie pytaj „co robimy?”.
 
-Najpierw pokaż:
+Końcowy wynik bootstrapu ma zawsze zawierać dokładnie:
 
 - Status projektu
 - Wynik Integrity Check
-- Aktualny milestone
-- Rekomendację
-- Następny krok
+- Roadmap Summary
+- Chief Architect Recommendation
+- Next Safe Step
