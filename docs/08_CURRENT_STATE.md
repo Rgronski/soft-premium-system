@@ -66,12 +66,15 @@ Completed in this milestone:
 * Workflow domain contract created
 * Minimal Patch 3 completed
 * First warning decision rule added to `evaluateWorkflow()`
+* Minimal Patch 4 completed
+* First dynamic nextStep rule added for active work
 * Added `src/lib/workflow/types.ts`
 * Added `src/lib/workflow/engine.ts`
 * Commit: `7f6c634` - `feat(ms-001.3): add workflow engine foundation`
 * Workflow Engine remains isolated from UI
 * Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist
 * Decision priority is `blocked > warning > ready`
+* Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings
 
 Status:
 
@@ -141,6 +144,7 @@ Next:
 * Minimal Patch 1 completed with `docs/11_WORKFLOW_ENGINE.md`
 * Minimal Patch 2 completed with the Workflow domain contract foundation
 * Minimal Patch 3 completed with the first warning decision rule
+* Minimal Patch 4 completed with the first dynamic nextStep rule
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
 
 ---
@@ -199,12 +203,15 @@ Keep workflow state aligned with the active milestone.
 * Workflow domain contract created.
 * Minimal Patch 3 completed.
 * First warning decision rule added to `evaluateWorkflow()`.
+* Minimal Patch 4 completed.
+* First dynamic nextStep rule added for active work.
 * Added `src/lib/workflow/types.ts`.
 * Added `src/lib/workflow/engine.ts`.
 * Commit recorded: `7f6c634`.
 * Workflow Engine remains isolated from UI.
 * Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist.
 * Decision priority is `blocked > warning > ready`.
+* Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings.
 * Milestone remains in progress.
 
 ---

@@ -352,8 +352,10 @@ Each release entry should contain:
 * Minimal Patch 1 completed - created `docs/11_WORKFLOW_ENGINE.md`.
 * Minimal Patch 2 completed - created the Workflow domain contract in `src/lib/workflow/types.ts` and `src/lib/workflow/engine.ts`.
 * Minimal Patch 3 completed - added the first warning decision rule to `evaluateWorkflow()`.
+* Minimal Patch 4 completed - added the first dynamic nextStep rule for active work.
 * Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist.
 * Decision priority is `blocked > warning > ready`.
+* Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings.
 * Workflow Engine remains isolated from UI.
 
 ---

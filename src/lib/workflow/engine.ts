@@ -51,6 +51,27 @@ export function evaluateWorkflow(projectState: ProjectState): WorkflowResult {
     };
   }
 
+  if (projectState.activeWork.length > 0) {
+    return {
+      nextStep: {
+        id: "continue-active-work",
+        label: "Continue active work",
+        description: "Continue the active workflow item before starting new work.",
+      },
+      health: "ready",
+      warnings: projectState.warnings,
+      progress: projectState.progress,
+      confidence: 0.25,
+      reason: "Workflow Engine detected active work ready to continue.",
+      evidence: [
+        `phase:${projectState.phase}`,
+        `completed:${projectState.completedWork.length}`,
+        `active:${projectState.activeWork.length}`,
+        `blockers:${projectState.blockers.length}`,
+      ],
+    };
+  }
+
   return {
     nextStep: {
       id: "review-project-state",
