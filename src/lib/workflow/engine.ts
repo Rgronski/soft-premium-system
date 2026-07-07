@@ -24,6 +24,7 @@ export function evaluateWorkflow(projectState: ProjectState): WorkflowResult {
         `phase:${projectState.phase}`,
         `completed:${projectState.completedWork.length}`,
         `active:${projectState.activeWork.length}`,
+        `warnings:${projectState.warnings.length}`,
         `blockers:${projectState.blockers.length}`,
       ],
     };
@@ -67,6 +68,7 @@ export function evaluateWorkflow(projectState: ProjectState): WorkflowResult {
         `phase:${projectState.phase}`,
         `completed:${projectState.completedWork.length}`,
         `active:${projectState.activeWork.length}`,
+        `warnings:${projectState.warnings.length}`,
         `blockers:${projectState.blockers.length}`,
       ],
     };
@@ -87,6 +89,7 @@ export function evaluateWorkflow(projectState: ProjectState): WorkflowResult {
       `phase:${projectState.phase}`,
       `completed:${projectState.completedWork.length}`,
       `active:${projectState.activeWork.length}`,
+      `warnings:${projectState.warnings.length}`,
       `blockers:${projectState.blockers.length}`,
     ],
   };

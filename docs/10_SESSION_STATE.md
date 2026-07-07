@@ -86,6 +86,8 @@ Completed in this milestone:
 * First dynamic nextStep rule added for active work
 * Minimal Patch 5 completed
 * Second dynamic nextStep rule added for starting next work
+* Minimal Patch 6 completed
+* Evidence counters unified across all WorkflowResult branches
 * Added `src/lib/workflow/types.ts`
 * Added `src/lib/workflow/engine.ts`
 * Commit: `7f6c634` - `feat(ms-001.3): add workflow engine foundation`
@@ -94,6 +96,7 @@ Completed in this milestone:
 * Decision priority is `blocked > warning > ready`
 * Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings
 * Workflow Engine now returns `nextStep.id: "start-next-work"` when no blockers, warnings, or active work exist
+* Workflow Engine now returns consistent evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch
 
 Status:
 
@@ -118,6 +121,8 @@ Next:
 * Recorded the first dynamic nextStep rule for active work.
 * Recorded Minimal Patch 5.
 * Recorded the second dynamic nextStep rule for starting next work.
+* Recorded Minimal Patch 6.
+* Recorded consistent evidence counters across all WorkflowResult branches.
 * Recorded `ProjectState`, `WorkflowResult`, `WorkflowEngine`, and `evaluateWorkflow()`.
 * Recorded addition of `src/lib/workflow/types.ts`.
 * Recorded addition of `src/lib/workflow/engine.ts`.
@@ -139,7 +144,7 @@ Next:
 Completed.
 
 **Documentation Verification**
-Completed. Documentation reflects active `MS-001.3 - Workflow Engine` after Minimal Patch 5.
+Completed. Documentation reflects active `MS-001.3 - Workflow Engine` after Minimal Patch 6.
 
 **Commit Status**
 Not completed.
@@ -159,8 +164,8 @@ Commit and push: Product Owner.
 Open
 
 **Validation**
-Session Result: MS-001.3 - Workflow Engine remains active after Minimal Patch 5.
-Architecture: Workflow Engine foundation now includes the first warning decision rule and two dynamic nextStep rules.
+Session Result: MS-001.3 - Workflow Engine remains active after Minimal Patch 6.
+Architecture: Workflow Engine foundation now includes the first warning decision rule, two dynamic nextStep rules, and consistent evidence across branches.
 Verification: Passed.
 Repository: Aligned with committed Workflow Engine foundation.
 Next Action: Review the first decision rule and plan the next safe Workflow Engine patch.

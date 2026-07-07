@@ -70,6 +70,8 @@ Completed in this milestone:
 * First dynamic nextStep rule added for active work
 * Minimal Patch 5 completed
 * Second dynamic nextStep rule added for starting next work
+* Minimal Patch 6 completed
+* Evidence counters unified across all WorkflowResult branches
 * Added `src/lib/workflow/types.ts`
 * Added `src/lib/workflow/engine.ts`
 * Commit: `7f6c634` - `feat(ms-001.3): add workflow engine foundation`
@@ -78,6 +80,7 @@ Completed in this milestone:
 * Decision priority is `blocked > warning > ready`
 * Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings
 * Workflow Engine now returns `nextStep.id: "start-next-work"` when no blockers, warnings, or active work exist
+* Workflow Engine now returns consistent evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch
 
 Status:
 
@@ -149,6 +152,7 @@ Next:
 * Minimal Patch 3 completed with the first warning decision rule
 * Minimal Patch 4 completed with the first dynamic nextStep rule
 * Minimal Patch 5 completed with the second dynamic nextStep rule
+* Minimal Patch 6 completed with consistent evidence across all branches
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
 
 ---
@@ -211,6 +215,8 @@ Keep workflow state aligned with the active milestone.
 * First dynamic nextStep rule added for active work.
 * Minimal Patch 5 completed.
 * Second dynamic nextStep rule added for starting next work.
+* Minimal Patch 6 completed.
+* Evidence counters unified across all WorkflowResult branches.
 * Added `src/lib/workflow/types.ts`.
 * Added `src/lib/workflow/engine.ts`.
 * Commit recorded: `7f6c634`.
@@ -219,6 +225,7 @@ Keep workflow state aligned with the active milestone.
 * Decision priority is `blocked > warning > ready`.
 * Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings.
 * Workflow Engine now returns `nextStep.id: "start-next-work"` when no blockers, warnings, or active work exist.
+* Workflow Engine now returns consistent evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch.
 * Milestone remains in progress.
 
 ---

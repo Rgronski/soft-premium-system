@@ -569,6 +569,7 @@ Establish the Workflow Engine contract without implementing advanced automation.
 * Minimal Patch 3 completed - first warning decision rule added
 * Minimal Patch 4 completed - first dynamic nextStep rule added
 * Minimal Patch 5 completed - second dynamic nextStep rule added
+* Minimal Patch 6 completed - evidence counters unified across all decision branches
 * Added `src/lib/workflow/types.ts`
 * Added `src/lib/workflow/engine.ts`
 * Commit: `287803c` - `feat(ms-001.3): add workflow engine foundation`
@@ -577,6 +578,7 @@ Establish the Workflow Engine contract without implementing advanced automation.
 * Decision priority is now `blocked > warning > ready`
 * Workflow Engine now returns `continue-active-work` when active work exists without blockers or warnings
 * Workflow Engine now returns `start-next-work` when no blockers, warnings, or active work exist
+* Workflow Engine now returns consistent evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch
 
 **Definition of Done**
 * workflow engine is formally defined and accepted.
