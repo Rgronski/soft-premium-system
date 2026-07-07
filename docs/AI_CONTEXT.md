@@ -198,8 +198,14 @@ When the user writes "koniec czatu", generate only the canonical Development Ses
 Rules:
 - Do not invent a new bootstrap.
 - Do not replace it with Get-Content commands.
-- Return it as a ready-to-paste prompt for a new chat.
+- Return only the canonical bootstrap prompt as a ready-to-paste artifact.
+- Do not execute the bootstrap.
+- Do not explain the bootstrap.
+- Do not summarize the session.
+- Do not prepend or append any text.
+- The response must consist exclusively of the bootstrap prompt.
 - Do not add comments, summaries, or extra conversation.
+- The instruction "Najpierw poproś mnie o świeży ZIP projektu" is part of the prompt for the next chat and must not be executed in the current chat.
 - The next chat must begin by asking the user for a fresh ZIP.
 - The canonical bootstrap is the Single Source of Truth for restarting SPS sessions.
 - The canonical bootstrap must always include credit-saving mode.
