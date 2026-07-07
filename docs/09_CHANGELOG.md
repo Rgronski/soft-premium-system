@@ -362,6 +362,12 @@ Each release entry should contain:
 * Workflow Engine now returns evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch.
 * Workflow Engine remains isolated from UI.
 
+### Notes
+
+* Minimal Patch 7 was diagnosis-only and was not implemented.
+* No existing test setup was found: no `test` script, no test framework in devDependencies, and no existing test configuration.
+* Test runner setup requires separate future scope before Workflow Engine tests can be added.
+
 ---
 
 # Future Releases

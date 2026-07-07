@@ -81,6 +81,9 @@ Completed in this milestone:
 * Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings
 * Workflow Engine now returns `nextStep.id: "start-next-work"` when no blockers, warnings, or active work exist
 * Workflow Engine now returns consistent evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch
+* Minimal Patch 7 remained diagnosis-only and was not implemented
+* No existing test setup was found in `package.json`, devDependencies, or test configuration
+* Test runner setup requires separate future scope
 
 Status:
 
@@ -153,6 +156,7 @@ Next:
 * Minimal Patch 4 completed with the first dynamic nextStep rule
 * Minimal Patch 5 completed with the second dynamic nextStep rule
 * Minimal Patch 6 completed with consistent evidence across all branches
+* Minimal Patch 7 diagnosis completed without implementation
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
 
 ---
@@ -226,6 +230,8 @@ Keep workflow state aligned with the active milestone.
 * Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings.
 * Workflow Engine now returns `nextStep.id: "start-next-work"` when no blockers, warnings, or active work exist.
 * Workflow Engine now returns consistent evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch.
+* Minimal Patch 7 remained diagnosis-only because no existing test setup was found.
+* Test runner setup requires separate future scope before Workflow Engine tests can be added.
 * Milestone remains in progress.
 
 ---

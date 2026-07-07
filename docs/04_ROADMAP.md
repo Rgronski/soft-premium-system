@@ -579,6 +579,8 @@ Establish the Workflow Engine contract without implementing advanced automation.
 * Workflow Engine now returns `continue-active-work` when active work exists without blockers or warnings
 * Workflow Engine now returns `start-next-work` when no blockers, warnings, or active work exist
 * Workflow Engine now returns consistent evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch
+* Minimal Patch 7 diagnosis completed - not implemented because no existing test setup was found
+* Test runner setup requires separate future scope before Workflow Engine tests can be added
 
 **Definition of Done**
 * workflow engine is formally defined and accepted.

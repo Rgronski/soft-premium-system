@@ -97,6 +97,9 @@ Completed in this milestone:
 * Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings
 * Workflow Engine now returns `nextStep.id: "start-next-work"` when no blockers, warnings, or active work exist
 * Workflow Engine now returns consistent evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch
+* Minimal Patch 7 remained diagnosis-only and was not implemented
+* No existing test setup was found in `package.json`, devDependencies, or test configuration
+* Test runner setup requires separate future scope
 
 Status:
 
@@ -123,6 +126,9 @@ Next:
 * Recorded the second dynamic nextStep rule for starting next work.
 * Recorded Minimal Patch 6.
 * Recorded consistent evidence counters across all WorkflowResult branches.
+* Recorded Minimal Patch 7 as diagnosis-only.
+* Recorded that no existing test setup was found.
+* Recorded that test runner setup requires separate future scope.
 * Recorded `ProjectState`, `WorkflowResult`, `WorkflowEngine`, and `evaluateWorkflow()`.
 * Recorded addition of `src/lib/workflow/types.ts`.
 * Recorded addition of `src/lib/workflow/engine.ts`.
@@ -134,6 +140,7 @@ Next:
 # Not Completed In This Session
 
 * Further decision rules are not implemented yet.
+* Workflow Engine tests are not implemented because no existing test setup is available.
 * Commit and push for this control files sync are still pending.
 
 ---
@@ -144,7 +151,7 @@ Next:
 Completed.
 
 **Documentation Verification**
-Completed. Documentation reflects active `MS-001.3 - Workflow Engine` after Minimal Patch 6.
+Completed. Documentation reflects active `MS-001.3 - Workflow Engine` after Minimal Patch 7 diagnosis-only review.
 
 **Commit Status**
 Not completed.
@@ -164,8 +171,8 @@ Commit and push: Product Owner.
 Open
 
 **Validation**
-Session Result: MS-001.3 - Workflow Engine remains active after Minimal Patch 6.
-Architecture: Workflow Engine foundation now includes the first warning decision rule, two dynamic nextStep rules, and consistent evidence across branches.
+Session Result: MS-001.3 - Workflow Engine remains active after Minimal Patch 7 diagnosis-only review.
+Architecture: Workflow Engine foundation now includes the first warning decision rule, two dynamic nextStep rules, consistent evidence across branches, and a confirmed need for separate test setup scope.
 Verification: Passed.
 Repository: Aligned with committed Workflow Engine foundation.
 Next Action: Review the first decision rule and plan the next safe Workflow Engine patch.
