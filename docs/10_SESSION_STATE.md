@@ -84,6 +84,8 @@ Completed in this milestone:
 * First warning decision rule added to `evaluateWorkflow()`
 * Minimal Patch 4 completed
 * First dynamic nextStep rule added for active work
+* Minimal Patch 5 completed
+* Second dynamic nextStep rule added for starting next work
 * Added `src/lib/workflow/types.ts`
 * Added `src/lib/workflow/engine.ts`
 * Commit: `7f6c634` - `feat(ms-001.3): add workflow engine foundation`
@@ -91,6 +93,7 @@ Completed in this milestone:
 * Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist
 * Decision priority is `blocked > warning > ready`
 * Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings
+* Workflow Engine now returns `nextStep.id: "start-next-work"` when no blockers, warnings, or active work exist
 
 Status:
 
@@ -113,6 +116,8 @@ Next:
 * Recorded the first warning decision rule in `evaluateWorkflow()`.
 * Recorded Minimal Patch 4.
 * Recorded the first dynamic nextStep rule for active work.
+* Recorded Minimal Patch 5.
+* Recorded the second dynamic nextStep rule for starting next work.
 * Recorded `ProjectState`, `WorkflowResult`, `WorkflowEngine`, and `evaluateWorkflow()`.
 * Recorded addition of `src/lib/workflow/types.ts`.
 * Recorded addition of `src/lib/workflow/engine.ts`.
@@ -134,7 +139,7 @@ Next:
 Completed.
 
 **Documentation Verification**
-Completed. Documentation reflects active `MS-001.3 - Workflow Engine` after Minimal Patch 4.
+Completed. Documentation reflects active `MS-001.3 - Workflow Engine` after Minimal Patch 5.
 
 **Commit Status**
 Not completed.
@@ -154,8 +159,8 @@ Commit and push: Product Owner.
 Open
 
 **Validation**
-Session Result: MS-001.3 - Workflow Engine remains active after Minimal Patch 4.
-Architecture: Workflow Engine foundation now includes the first warning decision rule and the first dynamic nextStep rule.
+Session Result: MS-001.3 - Workflow Engine remains active after Minimal Patch 5.
+Architecture: Workflow Engine foundation now includes the first warning decision rule and two dynamic nextStep rules.
 Verification: Passed.
 Repository: Aligned with committed Workflow Engine foundation.
 Next Action: Review the first decision rule and plan the next safe Workflow Engine patch.

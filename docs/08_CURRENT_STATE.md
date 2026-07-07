@@ -68,6 +68,8 @@ Completed in this milestone:
 * First warning decision rule added to `evaluateWorkflow()`
 * Minimal Patch 4 completed
 * First dynamic nextStep rule added for active work
+* Minimal Patch 5 completed
+* Second dynamic nextStep rule added for starting next work
 * Added `src/lib/workflow/types.ts`
 * Added `src/lib/workflow/engine.ts`
 * Commit: `7f6c634` - `feat(ms-001.3): add workflow engine foundation`
@@ -75,6 +77,7 @@ Completed in this milestone:
 * Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist
 * Decision priority is `blocked > warning > ready`
 * Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings
+* Workflow Engine now returns `nextStep.id: "start-next-work"` when no blockers, warnings, or active work exist
 
 Status:
 
@@ -145,6 +148,7 @@ Next:
 * Minimal Patch 2 completed with the Workflow domain contract foundation
 * Minimal Patch 3 completed with the first warning decision rule
 * Minimal Patch 4 completed with the first dynamic nextStep rule
+* Minimal Patch 5 completed with the second dynamic nextStep rule
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
 
 ---
@@ -205,6 +209,8 @@ Keep workflow state aligned with the active milestone.
 * First warning decision rule added to `evaluateWorkflow()`.
 * Minimal Patch 4 completed.
 * First dynamic nextStep rule added for active work.
+* Minimal Patch 5 completed.
+* Second dynamic nextStep rule added for starting next work.
 * Added `src/lib/workflow/types.ts`.
 * Added `src/lib/workflow/engine.ts`.
 * Commit recorded: `7f6c634`.
@@ -212,6 +218,7 @@ Keep workflow state aligned with the active milestone.
 * Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist.
 * Decision priority is `blocked > warning > ready`.
 * Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings.
+* Workflow Engine now returns `nextStep.id: "start-next-work"` when no blockers, warnings, or active work exist.
 * Milestone remains in progress.
 
 ---

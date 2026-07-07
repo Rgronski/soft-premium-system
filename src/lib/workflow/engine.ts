@@ -74,15 +74,15 @@ export function evaluateWorkflow(projectState: ProjectState): WorkflowResult {
 
   return {
     nextStep: {
-      id: "review-project-state",
-      label: "Review project state",
-      description: "Review the current project state before applying rules.",
+      id: "start-next-work",
+      label: "Start next work",
+      description: "Start the next safe workflow item.",
     },
     health: "ready",
     warnings: projectState.warnings,
     progress: projectState.progress,
     confidence: 0.25,
-    reason: "Workflow Engine foundation is active without decision rules.",
+    reason: "Workflow Engine detected a ready state with no active work in progress.",
     evidence: [
       `phase:${projectState.phase}`,
       `completed:${projectState.completedWork.length}`,
