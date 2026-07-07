@@ -566,11 +566,13 @@ Establish the Workflow Engine contract without implementing advanced automation.
 **Current Progress**
 * Minimal Patch 1 completed - created `docs/11_WORKFLOW_ENGINE.md`
 * Minimal Patch 2 completed - Workflow domain contract created
+* Minimal Patch 3 completed - first warning decision rule added
 * Added `src/lib/workflow/types.ts`
 * Added `src/lib/workflow/engine.ts`
 * Commit: `287803c` - `feat(ms-001.3): add workflow engine foundation`
 * Workflow Engine remains isolated from UI
-* Decision rules are not implemented yet
+* Workflow Engine now returns `warning` when blockers are absent and warnings exist
+* Decision priority is now `blocked > warning > ready`
 
 **Definition of Done**
 * workflow engine is formally defined and accepted.

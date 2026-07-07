@@ -341,6 +341,21 @@ Each release entry should contain:
 * No new shared UI components were created in these patches.
 * UI Foundation continuation was completed without visual redesign or architecture changes.
 
+## MS-001.3 - Workflow Engine
+
+### Date
+
+2026-07-07
+
+### Completed
+
+* Minimal Patch 1 completed - created `docs/11_WORKFLOW_ENGINE.md`.
+* Minimal Patch 2 completed - created the Workflow domain contract in `src/lib/workflow/types.ts` and `src/lib/workflow/engine.ts`.
+* Minimal Patch 3 completed - added the first warning decision rule to `evaluateWorkflow()`.
+* Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist.
+* Decision priority is `blocked > warning > ready`.
+* Workflow Engine remains isolated from UI.
+
 ---
 
 # Future Releases

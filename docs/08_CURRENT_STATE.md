@@ -64,11 +64,14 @@ Completed in this milestone:
 * Created `docs/11_WORKFLOW_ENGINE.md`
 * Minimal Patch 2 completed
 * Workflow domain contract created
+* Minimal Patch 3 completed
+* First warning decision rule added to `evaluateWorkflow()`
 * Added `src/lib/workflow/types.ts`
 * Added `src/lib/workflow/engine.ts`
 * Commit: `287803c` - `feat(ms-001.3): add workflow engine foundation`
 * Workflow Engine remains isolated from UI
-* Decision rules are not implemented yet
+* Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist
+* Decision priority is `blocked > warning > ready`
 
 Status:
 
@@ -138,6 +141,7 @@ Next:
 * `MS-001.3 - Workflow Engine` is active
 * Minimal Patch 1 completed with `docs/11_WORKFLOW_ENGINE.md`
 * Minimal Patch 2 completed with the Workflow domain contract foundation
+* Minimal Patch 3 completed with the first warning decision rule
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
 
 ---
@@ -146,8 +150,8 @@ Next:
 
 Next session priorities:
 
-* Plan Minimal Patch 3 for `MS-001.3 - Workflow Engine`
-* Review the first decision rule candidate
+* Review the first implemented decision rule for `MS-001.3 - Workflow Engine`
+* Plan the next safe Workflow Engine rule
 * Keep ENG-000 / SPS Core / SPS OS 1.0 as the active platform priority
 * Keep workflow domain work isolated from UI
 * Keep workflow governance and project state documentation synchronized
@@ -170,7 +174,7 @@ Continue `MS-001.3 - Workflow Engine`.
 
 Priority 2
 
-Plan Minimal Patch 3 and review the first decision rule candidate.
+Review the first decision rule and plan the next safe rule.
 
 Priority 3
 
@@ -195,11 +199,14 @@ Keep workflow state aligned with the active milestone.
 * Created `docs/11_WORKFLOW_ENGINE.md`.
 * Minimal Patch 2 completed.
 * Workflow domain contract created.
+* Minimal Patch 3 completed.
+* First warning decision rule added to `evaluateWorkflow()`.
 * Added `src/lib/workflow/types.ts`.
 * Added `src/lib/workflow/engine.ts`.
 * Commit recorded: `287803c`.
 * Workflow Engine remains isolated from UI.
-* Decision rules are not implemented yet.
+* Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist.
+* Decision priority is `blocked > warning > ready`.
 * Milestone remains in progress.
 
 ---

@@ -80,11 +80,14 @@ Completed in this milestone:
 * Created `docs/11_WORKFLOW_ENGINE.md`
 * Minimal Patch 2 completed
 * Workflow domain contract created
+* Minimal Patch 3 completed
+* First warning decision rule added to `evaluateWorkflow()`
 * Added `src/lib/workflow/types.ts`
 * Added `src/lib/workflow/engine.ts`
 * Commit: `287803c` - `feat(ms-001.3): add workflow engine foundation`
 * Workflow Engine remains isolated from UI
-* Decision rules are not implemented yet
+* Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist
+* Decision priority is `blocked > warning > ready`
 
 Status:
 
@@ -104,6 +107,8 @@ Next:
 * Recorded creation of `docs/11_WORKFLOW_ENGINE.md`.
 * Recorded Minimal Patch 2.
 * Recorded the Workflow domain contract.
+* Recorded Minimal Patch 3.
+* Recorded the first warning decision rule in `evaluateWorkflow()`.
 * Recorded `ProjectState`, `WorkflowResult`, `WorkflowEngine`, and `evaluateWorkflow()`.
 * Recorded addition of `src/lib/workflow/types.ts`.
 * Recorded addition of `src/lib/workflow/engine.ts`.
@@ -114,8 +119,7 @@ Next:
 
 # Not Completed In This Session
 
-* Decision rules are not implemented yet.
-* Minimal Patch 3 is still pending.
+* Further decision rules are not implemented yet.
 * Commit and push for this control files sync are still pending.
 
 ---
@@ -126,7 +130,7 @@ Next:
 Completed.
 
 **Documentation Verification**
-Completed. Documentation reflects active `MS-001.3 - Workflow Engine` after Minimal Patch 2.
+Completed. Documentation reflects active `MS-001.3 - Workflow Engine` after Minimal Patch 3.
 
 **Commit Status**
 Not completed.
@@ -146,17 +150,17 @@ Commit and push: Product Owner.
 Open
 
 **Validation**
-Session Result: MS-001.3 - Workflow Engine remains active after Minimal Patch 2.
-Architecture: Workflow Engine foundation now includes the first domain contract and evaluation stub.
+Session Result: MS-001.3 - Workflow Engine remains active after Minimal Patch 3.
+Architecture: Workflow Engine foundation now includes the first warning decision rule.
 Verification: Passed.
 Repository: Aligned with committed Workflow Engine foundation.
-Next Action: Continue with Minimal Patch 3 planning and first decision rule candidate review.
+Next Action: Review the first decision rule and plan the next safe Workflow Engine patch.
 
 ---
 
 # Next Logical Step
 
-Continue `MS-001.3 - Workflow Engine` with Minimal Patch 3 planning and first decision rule candidate review.
+Continue `MS-001.3 - Workflow Engine` with review of the first decision rule and planning of the next safe patch.
 
 ---
 
