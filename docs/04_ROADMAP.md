@@ -570,6 +570,7 @@ Establish the Workflow Engine contract without implementing advanced automation.
 * Minimal Patch 4 completed - first dynamic nextStep rule added
 * Minimal Patch 5 completed - second dynamic nextStep rule added
 * Minimal Patch 6 completed - evidence counters unified across all decision branches
+* Minimal Patch 8 completed - first dynamic confidence policy added
 * Added `src/lib/workflow/types.ts`
 * Added `src/lib/workflow/engine.ts`
 * Commit: `287803c` - `feat(ms-001.3): add workflow engine foundation`
@@ -579,6 +580,7 @@ Establish the Workflow Engine contract without implementing advanced automation.
 * Workflow Engine now returns `continue-active-work` when active work exists without blockers or warnings
 * Workflow Engine now returns `start-next-work` when no blockers, warnings, or active work exist
 * Workflow Engine now returns consistent evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch
+* Workflow Engine now returns confidence `1.0` for `blocked`, `0.75` for `warning`, and `0.5` for ready branches
 * Minimal Patch 7 diagnosis completed - not implemented because no existing test setup was found
 * Test runner setup requires separate future scope before Workflow Engine tests can be added
 

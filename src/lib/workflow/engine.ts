@@ -18,7 +18,7 @@ export function evaluateWorkflow(projectState: ProjectState): WorkflowResult {
       health: "blocked",
       warnings: projectState.warnings,
       progress: projectState.progress,
-      confidence: 0.25,
+      confidence: 1,
       reason: "Workflow Engine foundation is active without decision rules.",
       evidence: [
         `phase:${projectState.phase}`,
@@ -40,7 +40,7 @@ export function evaluateWorkflow(projectState: ProjectState): WorkflowResult {
       health: "warning",
       warnings: projectState.warnings,
       progress: projectState.progress,
-      confidence: 0.5,
+      confidence: 0.75,
       reason: "Workflow Engine detected warnings that should be reviewed before continuing.",
       evidence: [
         `phase:${projectState.phase}`,
@@ -62,7 +62,7 @@ export function evaluateWorkflow(projectState: ProjectState): WorkflowResult {
       health: "ready",
       warnings: projectState.warnings,
       progress: projectState.progress,
-      confidence: 0.25,
+      confidence: 0.5,
       reason: "Workflow Engine detected active work ready to continue.",
       evidence: [
         `phase:${projectState.phase}`,
@@ -83,7 +83,7 @@ export function evaluateWorkflow(projectState: ProjectState): WorkflowResult {
     health: "ready",
     warnings: projectState.warnings,
     progress: projectState.progress,
-    confidence: 0.25,
+    confidence: 0.5,
     reason: "Workflow Engine detected a ready state with no active work in progress.",
     evidence: [
       `phase:${projectState.phase}`,

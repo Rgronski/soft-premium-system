@@ -355,11 +355,13 @@ Each release entry should contain:
 * Minimal Patch 4 completed - added the first dynamic nextStep rule for active work.
 * Minimal Patch 5 completed - added the second dynamic nextStep rule for starting next work.
 * Minimal Patch 6 completed - unified evidence counters across all WorkflowResult branches.
+* Minimal Patch 8 completed - added the first dynamic confidence policy.
 * Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist.
 * Decision priority is `blocked > warning > ready`.
 * Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings.
 * Workflow Engine now returns `nextStep.id: "start-next-work"` when no blockers, warnings, or active work exist.
 * Workflow Engine now returns evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch.
+* Workflow Engine now returns confidence `1.0` for `blocked`, `0.75` for `warning`, and `0.5` for ready branches.
 * Workflow Engine remains isolated from UI.
 
 ### Notes

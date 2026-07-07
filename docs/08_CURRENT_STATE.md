@@ -72,6 +72,8 @@ Completed in this milestone:
 * Second dynamic nextStep rule added for starting next work
 * Minimal Patch 6 completed
 * Evidence counters unified across all WorkflowResult branches
+* Minimal Patch 8 completed
+* First dynamic confidence policy added
 * Added `src/lib/workflow/types.ts`
 * Added `src/lib/workflow/engine.ts`
 * Commit: `7f6c634` - `feat(ms-001.3): add workflow engine foundation`
@@ -81,6 +83,7 @@ Completed in this milestone:
 * Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings
 * Workflow Engine now returns `nextStep.id: "start-next-work"` when no blockers, warnings, or active work exist
 * Workflow Engine now returns consistent evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch
+* Workflow Engine now returns confidence `1.0` for `blocked`, `0.75` for `warning`, and `0.5` for ready branches
 * Minimal Patch 7 remained diagnosis-only and was not implemented
 * No existing test setup was found in `package.json`, devDependencies, or test configuration
 * Test runner setup requires separate future scope
@@ -156,6 +159,7 @@ Next:
 * Minimal Patch 4 completed with the first dynamic nextStep rule
 * Minimal Patch 5 completed with the second dynamic nextStep rule
 * Minimal Patch 6 completed with consistent evidence across all branches
+* Minimal Patch 8 completed with the first dynamic confidence policy
 * Minimal Patch 7 diagnosis completed without implementation
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
 
@@ -221,6 +225,8 @@ Keep workflow state aligned with the active milestone.
 * Second dynamic nextStep rule added for starting next work.
 * Minimal Patch 6 completed.
 * Evidence counters unified across all WorkflowResult branches.
+* Minimal Patch 8 completed.
+* First dynamic confidence policy added.
 * Added `src/lib/workflow/types.ts`.
 * Added `src/lib/workflow/engine.ts`.
 * Commit recorded: `7f6c634`.
@@ -230,6 +236,7 @@ Keep workflow state aligned with the active milestone.
 * Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings.
 * Workflow Engine now returns `nextStep.id: "start-next-work"` when no blockers, warnings, or active work exist.
 * Workflow Engine now returns consistent evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch.
+* Workflow Engine now returns confidence `1.0` for `blocked`, `0.75` for `warning`, and `0.5` for ready branches.
 * Minimal Patch 7 remained diagnosis-only because no existing test setup was found.
 * Test runner setup requires separate future scope before Workflow Engine tests can be added.
 * Milestone remains in progress.
