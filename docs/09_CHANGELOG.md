@@ -410,6 +410,20 @@ Each release entry should contain:
 * Kept `CAP-001` active as parallel capability documentation work.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
+## SPDM-003 - Repository Access Fallback
+
+### Date
+
+2026-07-08
+
+### Completed
+
+* Updated `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` with a Repository Access Fallback section.
+* Added explicit PowerShell ZIP commands for sessions where ChatGPT cannot access the local project directory.
+* Defined that Project Context Loader continues according to SPDM after ZIP upload.
+* Kept `CAP-001` active as parallel capability documentation work.
+* Preserved `MS-001.4 - Release Readiness` as the next product milestone.
+
 ---
 
 # Future Releases

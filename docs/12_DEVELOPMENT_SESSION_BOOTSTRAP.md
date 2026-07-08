@@ -42,6 +42,27 @@ Compress-Archive -Path `
   docs `
   -DestinationPath C:\Users\p700\sps-session.zip -Force
 
+Repository Access Fallback:
+
+If ChatGPT cannot access the local project directory, do not stop with a generic request for files.
+
+Immediately provide these PowerShell commands and ask the user to upload the fresh ZIP:
+
+cd C:\Users\p700\soft-premium-system
+
+git status
+git log --oneline --decorate -n 10
+
+Compress-Archive -Path `
+  package.json, `
+  tsconfig.json, `
+  next.config.* , `
+  src, `
+  docs `
+  -DestinationPath C:\Users\p700\sps-session.zip -Force
+
+After upload, continue Project Context Loader according to SPDM.
+
 Po otrzymaniu ZIP wykonaj Project Context Loader (PCL).
 
 Załaduj jako Single Source of Truth:
