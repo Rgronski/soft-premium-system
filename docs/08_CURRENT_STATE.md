@@ -59,6 +59,7 @@ Project Status:
 MS-001.3 completed and closed after Milestone Closure Review passed.
 SPDM-001 completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
 SPDM-002 completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` aligned to implement SPDM instead of defining methodology.
+CAP-001.1 completed and accepted with `docs/13_PROJECT_CAPABILITY.md` created as the Project Capability domain contract.
 
 Completed in this milestone:
 
@@ -99,6 +100,7 @@ Next:
 * Prepare MS-001.4 - Release Readiness
 * Keep `SPDM-001` recorded as completed documentation foundation work
 * Keep `SPDM-002` recorded as completed bootstrap alignment work
+* Keep `CAP-001` active as parallel capability documentation work
 
 ---
 
@@ -116,6 +118,7 @@ Next:
 * 05_ROADMAP.md
 * 06_BACKLOG.md
 * 07_DECISIONS.md
+* 13_PROJECT_CAPABILITY.md
 
 ## Product Work
 
@@ -153,6 +156,7 @@ Next:
 * MS-009.4 completed with day selection, single active day state, visual selected state, and preserved Today Highlight behaviour
 * MS-009.5 completed with Day Details panel, selected day information, weekday display, visit count, visit list, and Brak wizyt empty state
 * SPDM-001 completed with `docs/00_SPS_DEVELOPMENT_METHOD.md` as the top-level SPS development methodology foundation document
+* CAP-001.1 completed with `docs/13_PROJECT_CAPABILITY.md` as the initial Project Capability domain contract
 
 ---
 
@@ -162,6 +166,7 @@ Next:
 * `MS-001.3 - Workflow Engine` is formally completed
 * Minimal Patch 7 diagnosis completed without implementation
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
+* `CAP-001` remains active as parallel capability documentation work
 
 ---
 

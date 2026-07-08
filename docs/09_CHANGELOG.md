@@ -396,6 +396,20 @@ Each release entry should contain:
 * Reduced duplicated methodology in the bootstrap while preserving the operational workflow.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
+## CAP-001.1 - Project Domain Contract
+
+### Date
+
+2026-07-08
+
+### Completed
+
+* Added `docs/13_PROJECT_CAPABILITY.md`.
+* Created the initial Project Capability domain contract.
+* Defined Purpose, Vision, Responsibility, Domain Model, Lifecycle, Relationships, Capability Contract, and Future Evolution.
+* Kept `CAP-001` active as parallel capability documentation work.
+* Preserved `MS-001.4 - Release Readiness` as the next product milestone.
+
 ---
 
 # Future Releases
