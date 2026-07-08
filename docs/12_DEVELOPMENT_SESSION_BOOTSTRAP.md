@@ -8,10 +8,16 @@ Projekt znajduje się lokalnie:
 
 C:\Users\p700\soft-premium-system
 
+This bootstrap implements SPDM as defined in:
+
+- docs/00_SPS_DEVELOPMENT_METHOD.md
+
 Never skip any bootstrap phase.
-If information is missing, stop and ask only for the minimum artifact required to continue.
+If information is missing, stop and ask only for the minimum artifact required to continue according to SPDM.
 
 Tryb pracy:
+
+Execute this bootstrap in SPDM credit-saving mode and minimal patch mode:
 
 - oszczędzanie kredytów,
 - minimalne patche,
@@ -70,12 +76,12 @@ Po zakończeniu PCL wykonaj:
 
 Project Integrity Check:
 
+Execute Project Integrity Check according to SPDM SSOT validation rules.
 Only documents explicitly listed as Single Source of Truth are authoritative.
-Other roadmap-like or historical documents must not be treated as conflicts unless referenced by the SSOT.
 
 Roadmap Summary:
 
-Roadmap Summary must be based only on SSOT documents and must show:
+Roadmap Summary must follow SPDM and be based only on SSOT documents. It must show:
 - Current Milestone
 - Latest Completed Milestone
 - Next Milestone
@@ -83,12 +89,14 @@ Roadmap Summary must be based only on SSOT documents and must show:
 
 Chief Architect Recommendation:
 
+Apply SPDM decision discipline.
 Return exactly one recommendation.
 Return exactly one proposed patch.
 Do not list alternatives unless there is a blocking inconsistency.
 
 Next Safe Step:
 
+Apply SPDM lifecycle sequencing.
 After bootstrap, stop at:
 Diagnosis only.
 No implementation.

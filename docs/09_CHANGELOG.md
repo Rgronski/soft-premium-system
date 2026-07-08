@@ -384,6 +384,18 @@ Each release entry should contain:
 * Defined SPDM principles, roles, SSOT, PCL, lifecycle, minimal patch philosophy, credit saving philosophy, and milestone closure review.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
+## SPDM-002 - Bootstrap Alignment
+
+### Date
+
+2026-07-08
+
+### Completed
+
+* Updated `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` to implement `docs/00_SPS_DEVELOPMENT_METHOD.md` as the authoritative methodology source.
+* Reduced duplicated methodology in the bootstrap while preserving the operational workflow.
+* Preserved `MS-001.4 - Release Readiness` as the next product milestone.
+
 ---
 
 # Future Releases

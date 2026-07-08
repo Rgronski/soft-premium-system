@@ -73,6 +73,7 @@ MS-001.4 - Release Readiness
 Milestone Closure Control Files Sync for completed MS-001.3 - Workflow Engine.
 
 SPDM-001 documentation foundation is completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
+SPDM-002 bootstrap alignment is completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 
 MS-001.3 - Workflow Engine is formally completed after Milestone Closure Review passed.
 
@@ -144,6 +145,7 @@ Next:
 * Recorded that Milestone Closure Review passed.
 * Closed `MS-001.3 - Workflow Engine`.
 * Recorded `SPDM-001` as completed documentation foundation work.
+* Recorded `SPDM-002` as completed bootstrap alignment work.
 
 ---
 
@@ -186,6 +188,7 @@ Verification: Passed.
 Repository: Aligned and ready for MS-001.4 preparation.
 Next Action: Prepare MS-001.4 - Release Readiness.
 Additional Result: `SPDM-001` completed with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
+Additional Result: `SPDM-002` completed with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` aligned to SPDM.
 
 ---
 

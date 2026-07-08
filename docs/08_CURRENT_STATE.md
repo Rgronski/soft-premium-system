@@ -58,6 +58,7 @@ Project Status:
 
 MS-001.3 completed and closed after Milestone Closure Review passed.
 SPDM-001 completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
+SPDM-002 completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` aligned to implement SPDM instead of defining methodology.
 
 Completed in this milestone:
 
@@ -97,6 +98,7 @@ Next:
 
 * Prepare MS-001.4 - Release Readiness
 * Keep `SPDM-001` recorded as completed documentation foundation work
+* Keep `SPDM-002` recorded as completed bootstrap alignment work
 
 ---
 
