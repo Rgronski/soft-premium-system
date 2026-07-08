@@ -108,6 +108,11 @@ None
 * `MS-001.4` - Release Readiness
 * `MS-001.5` - SPS OS 1.0 Release Candidate
 
+## Parallel Documentation Work
+
+* `SPDM-001` - Soft Premium Development Method Foundation completed with `docs/00_SPS_DEVELOPMENT_METHOD.md`
+* This documentation foundation does not change the next product milestone order
+
 ---
 
 # Milestone Contracts

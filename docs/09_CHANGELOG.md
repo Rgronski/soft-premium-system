@@ -371,6 +371,19 @@ Each release entry should contain:
 * No existing test setup was found: no `test` script, no test framework in devDependencies, and no existing test configuration.
 * Test runner setup requires separate future scope before Workflow Engine tests can be added.
 
+## SPDM-001 - Soft Premium Development Method Foundation
+
+### Date
+
+2026-07-08
+
+### Completed
+
+* Added `docs/00_SPS_DEVELOPMENT_METHOD.md`.
+* Established the top-level SPS development methodology foundation.
+* Defined SPDM principles, roles, SSOT, PCL, lifecycle, minimal patch philosophy, credit saving philosophy, and milestone closure review.
+* Preserved `MS-001.4 - Release Readiness` as the next product milestone.
+
 ---
 
 # Future Releases

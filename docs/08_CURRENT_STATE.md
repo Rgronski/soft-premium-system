@@ -57,6 +57,7 @@ ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-001.3 - Workflow
 Project Status:
 
 MS-001.3 completed and closed after Milestone Closure Review passed.
+SPDM-001 completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
 
 Completed in this milestone:
 
@@ -95,6 +96,7 @@ Status:
 Next:
 
 * Prepare MS-001.4 - Release Readiness
+* Keep `SPDM-001` recorded as completed documentation foundation work
 
 ---
 
@@ -102,6 +104,7 @@ Next:
 
 ## Foundation
 
+* 00_SPS_DEVELOPMENT_METHOD.md
 * 00_ORIGINS.md
 * 00_PROJECT_BIBLE.md
 * 01_VISION.md
@@ -147,6 +150,7 @@ Next:
 * MS-009.3 completed with Previous Month, Next Month, Today, and Month View navigation
 * MS-009.4 completed with day selection, single active day state, visual selected state, and preserved Today Highlight behaviour
 * MS-009.5 completed with Day Details panel, selected day information, weekday display, visit count, visit list, and Brak wizyt empty state
+* SPDM-001 completed with `docs/00_SPS_DEVELOPMENT_METHOD.md` as the top-level SPS development methodology foundation document
 
 ---
 

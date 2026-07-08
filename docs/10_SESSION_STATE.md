@@ -72,6 +72,8 @@ MS-001.4 - Release Readiness
 **Session Focus**
 Milestone Closure Control Files Sync for completed MS-001.3 - Workflow Engine.
 
+SPDM-001 documentation foundation is completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
+
 MS-001.3 - Workflow Engine is formally completed after Milestone Closure Review passed.
 
 Completed in this milestone:
@@ -111,6 +113,7 @@ Status:
 Next:
 
 * Prepare MS-001.4 - Release Readiness
+* Keep `SPDM-001` recorded as completed documentation foundation work
 
 ---
 
@@ -140,6 +143,7 @@ Next:
 * Recorded commit `7f6c634` for the Workflow Engine foundation.
 * Recorded that Milestone Closure Review passed.
 * Closed `MS-001.3 - Workflow Engine`.
+* Recorded `SPDM-001` as completed documentation foundation work.
 
 ---
 
@@ -181,6 +185,7 @@ Architecture: Workflow Engine foundation now includes the first warning decision
 Verification: Passed.
 Repository: Aligned and ready for MS-001.4 preparation.
 Next Action: Prepare MS-001.4 - Release Readiness.
+Additional Result: `SPDM-001` completed with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
 
 ---
 
