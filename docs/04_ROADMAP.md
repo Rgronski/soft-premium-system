@@ -380,7 +380,7 @@ MS-001.1 - Knowledge Engine
 MS-001.1 - Knowledge Engine
 
 **Status**
-Current
+Completed
 
 **Purpose**
 Define the knowledge management engine for SPS OS 1.0.
@@ -550,7 +550,8 @@ Make workflow progression explicit, repeatable, and controllable.
 Establish the Workflow Engine contract without implementing advanced automation.
 
 **Dependencies**
-* `MS-001.2 - UI System`
+* `MS-001.2A - UI Foundation / SectionCard`
+* `MS-001.2B - UI Foundation Continuation`
 
 **Definition of Ready**
 * UI system contract exists.

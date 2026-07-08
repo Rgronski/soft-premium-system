@@ -188,16 +188,16 @@ Commit and push status must always be confirmed explicitly by the Product Owner.
 
 Priority 1
 
-Continue `MS-001.3 - Workflow Engine`.
-Confirm closure of `MS-001.3 - Workflow Engine`.
+Prepare `MS-001.4 - Release Readiness`.
+Confirm release-readiness scope and validation criteria.
 
 Priority 2
 
-Prepare `MS-001.4 - Release Readiness`.
+Keep workflow governance and project state documentation aligned.
 
 Priority 3
 
-Keep workflow state aligned with the active milestone.
+Do not start feature development before release-readiness review is complete.
 
 ---
 
