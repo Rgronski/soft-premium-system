@@ -454,6 +454,20 @@ Each release entry should contain:
 * Kept `CAP-001` active as parallel capability documentation work.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
+## CAP-001.2 - Project Domain Model
+
+### Date
+
+2026-07-09
+
+### Completed
+
+* Updated `docs/13_PROJECT_CAPABILITY.md`.
+* Added the `Project Domain Model` section.
+* Defined conceptual project attributes: Identity, Ownership, Lifecycle, Context, Relationships, and Metadata.
+* Kept `CAP-001` active as parallel capability documentation work.
+* Preserved `MS-001.4 - Release Readiness` as the next product milestone.
+
 ---
 
 # Future Releases

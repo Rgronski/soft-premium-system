@@ -81,6 +81,32 @@ This contract does not define storage schema or implementation types.
 
 ---
 
+# Project Domain Model
+
+Project is defined through the following conceptual attributes:
+
+* Identity
+  Project must have stable identity so it can remain recognizable across sessions, milestones, and related capability work.
+
+* Ownership
+  Project must carry ownership context that clarifies who is responsible for its direction, decisions, and continuity.
+
+* Lifecycle
+  Project must exist within an explicit lifecycle so its state can be understood as active, reviewed, evolving, or closed.
+
+* Context
+  Project must preserve the context that gives meaning to its work, including purpose, scope, and continuity of decisions.
+
+* Relationships
+  Project must define the domain boundary for subordinate capabilities and related work units that operate inside project scope.
+
+* Metadata
+  Project may carry descriptive metadata that supports classification, interpretation, and governance without redefining the project itself.
+
+This model remains conceptual and capability-level only.
+
+---
+
 # Lifecycle
 
 Project Capability follows a controlled lifecycle:

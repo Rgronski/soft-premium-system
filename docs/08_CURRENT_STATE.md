@@ -63,6 +63,7 @@ SPDM-003 completed and accepted with Repository Access Fallback added to `docs/1
 SPDM-004 completed and accepted with `docs/11_SPS_START.md` created as the SPS session launcher.
 SPDM-005 completed and accepted with `docs/14_GIT_WORKFLOW.md` created and Active Branch Validation added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 CAP-001.1 completed and accepted with `docs/13_PROJECT_CAPABILITY.md` created as the Project Capability domain contract.
+CAP-001.2 completed and accepted with Project Domain Model added to `docs/13_PROJECT_CAPABILITY.md`.
 
 Completed in this milestone:
 
@@ -167,6 +168,7 @@ Next:
 * SPDM-004 completed with `docs/11_SPS_START.md` as the SPS session launcher
 * SPDM-005 completed with `docs/14_GIT_WORKFLOW.md` and Active Branch Validation added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`
 * CAP-001.1 completed with `docs/13_PROJECT_CAPABILITY.md` as the initial Project Capability domain contract
+* CAP-001.2 completed with Project Domain Model added to `docs/13_PROJECT_CAPABILITY.md`
 
 ---
 
