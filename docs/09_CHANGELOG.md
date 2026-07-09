@@ -468,6 +468,21 @@ Each release entry should contain:
 * Kept `CAP-001` active as parallel capability documentation work.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
+## SPDM-006 - Full Startup Package
+
+### Date
+
+2026-07-09
+
+### Completed
+
+* Updated `docs/11_SPS_START.md` with a copy-paste startup prompt.
+* Updated `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` to require full ZIP Mode completion after ZIP upload.
+* Combined SPS Launcher, ZIP Mode, Bootstrap, and Active Branch Validation into one clear startup package.
+* Recorded verified branch state: `feature/documentation-foundation`, latest commit `caba05d`, working tree `clean`.
+* Kept `CAP-001` active as parallel capability documentation work.
+* Preserved `MS-001.4 - Release Readiness` as the next product milestone.
+
 ---
 
 # Future Releases

@@ -65,6 +65,17 @@ After upload, continue Project Context Loader according to SPDM.
 
 Po otrzymaniu ZIP wykonaj Project Context Loader (PCL).
 
+ZIP Mode must not stop after receiving ZIP.
+
+It must complete:
+
+- Project Context Loader,
+- SSOT Validation,
+- Active Branch Validation,
+- Roadmap Summary,
+- Chief Architect Recommendation,
+- Next Safe Step.
+
 Active Branch Validation:
 
 Before repository validation, determine the active branch.
@@ -74,6 +85,12 @@ Do not assume `main`.
 Use `docs/14_GIT_WORKFLOW.md` as the Git workflow reference.
 
 Run:
+
+git branch --show-current
+git status
+git log --oneline --decorate -n 10
+
+If branch state cannot be validated from ZIP content, ask only for:
 
 git branch --show-current
 git status
