@@ -247,6 +247,10 @@ Bootstrap must always generate a deterministic Runtime Dashboard as part of the 
 The Runtime Dashboard does not change bootstrap behavior.
 It only reports the runtime result of the completed bootstrap.
 
+Final bootstrap response MUST use the Runtime Dashboard format.
+
+Missing Runtime Dashboard means bootstrap report failure.
+
 The Runtime Dashboard must always contain these sections in this exact order:
 
 1. Bootstrap
@@ -333,6 +337,9 @@ Report the complete list of all SSOT documents actually read during bootstrap.
 
 Do not use incomplete phrases such as:
 
+- "m.in."
+- "among others"
+- "including key documents"
 - "między innymi"
 
 The SSOT Loaded list must be complete.
