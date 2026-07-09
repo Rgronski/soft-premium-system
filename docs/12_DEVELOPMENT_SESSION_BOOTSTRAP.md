@@ -239,3 +239,108 @@ Końcowy wynik bootstrapu ma zawsze zawierać dokładnie:
 - Roadmap Summary
 - Chief Architect Recommendation
 - Next Safe Step
+
+Runtime Dashboard Specification:
+
+Bootstrap must always generate a deterministic Runtime Dashboard as part of the bootstrap result.
+
+The Runtime Dashboard does not change bootstrap behavior.
+It only reports the runtime result of the completed bootstrap.
+
+The Runtime Dashboard must always contain these sections in this exact order:
+
+1. Bootstrap
+2. Chief Architect
+3. Runtime Modes
+4. Repository
+5. Project State
+6. SSOT Loaded
+7. Recommendation
+8. Next Safe Step
+
+Bootstrap:
+
+Report:
+
+- Bootstrap Version
+- Bootstrap Status
+- Project Context Loader
+- Project Integrity
+- SSOT Validation
+- Consistency Gate
+- Runtime Lock
+
+Each Bootstrap field must return only one of:
+
+- PASS
+- FAIL
+- ACTIVE
+
+Chief Architect:
+
+Report:
+
+- Role
+- Implementation Engine
+- Role Separation
+
+Runtime Modes:
+
+Report:
+
+- Credit Saving Mode
+- Minimal Patch Mode
+- Diagnosis Before Edit
+- No Refactoring
+- SSOT First
+- Session Lock
+
+Each Runtime Modes field must return only:
+
+- ACTIVE
+- INACTIVE
+
+Repository:
+
+If repository data is available during bootstrap, report:
+
+- Branch
+- Repository Status
+- Latest Commit
+
+If repository data is not available, report:
+
+- UNKNOWN
+
+Never guess.
+
+Project State:
+
+If data exists in SSOT, report:
+
+- Current Milestone
+- Current Capability
+- Current Sprint
+- Roadmap Status
+
+If the data does not exist, report:
+
+- UNKNOWN
+
+SSOT Loaded:
+
+Report the complete list of all SSOT documents actually read during bootstrap.
+
+Do not use incomplete phrases such as:
+
+- "między innymi"
+
+The SSOT Loaded list must be complete.
+
+Recommendation:
+
+Return exactly one recommendation.
+
+Next Safe Step:
+
+Return exactly one next safe step.
