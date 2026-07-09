@@ -60,6 +60,8 @@ MS-001.3 completed and closed after Milestone Closure Review passed.
 SPDM-001 completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
 SPDM-002 completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` aligned to implement SPDM instead of defining methodology.
 SPDM-003 completed and accepted with Repository Access Fallback added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
+SPDM-004 completed and accepted with `docs/11_SPS_START.md` created as the SPS session launcher.
+SPDM-005 completed and accepted with `docs/14_GIT_WORKFLOW.md` created and Active Branch Validation added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 CAP-001.1 completed and accepted with `docs/13_PROJECT_CAPABILITY.md` created as the Project Capability domain contract.
 
 Completed in this milestone:
@@ -102,6 +104,8 @@ Next:
 * Keep `SPDM-001` recorded as completed documentation foundation work
 * Keep `SPDM-002` recorded as completed bootstrap alignment work
 * Keep `SPDM-003` recorded as completed repository access fallback work
+* Keep `SPDM-004` recorded as completed SPS launcher work
+* Keep `SPDM-005` recorded as completed active branch validation work
 * Keep `CAP-001` active as parallel capability documentation work
 
 ---
@@ -121,6 +125,7 @@ Next:
 * 06_BACKLOG.md
 * 07_DECISIONS.md
 * 13_PROJECT_CAPABILITY.md
+* 14_GIT_WORKFLOW.md
 
 ## Product Work
 
@@ -159,6 +164,8 @@ Next:
 * MS-009.5 completed with Day Details panel, selected day information, weekday display, visit count, visit list, and Brak wizyt empty state
 * SPDM-001 completed with `docs/00_SPS_DEVELOPMENT_METHOD.md` as the top-level SPS development methodology foundation document
 * SPDM-003 completed with Repository Access Fallback added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`
+* SPDM-004 completed with `docs/11_SPS_START.md` as the SPS session launcher
+* SPDM-005 completed with `docs/14_GIT_WORKFLOW.md` and Active Branch Validation added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`
 * CAP-001.1 completed with `docs/13_PROJECT_CAPABILITY.md` as the initial Project Capability domain contract
 
 ---

@@ -65,6 +65,20 @@ After upload, continue Project Context Loader according to SPDM.
 
 Po otrzymaniu ZIP wykonaj Project Context Loader (PCL).
 
+Active Branch Validation:
+
+Before repository validation, determine the active branch.
+
+Do not assume `main`.
+
+Use `docs/14_GIT_WORKFLOW.md` as the Git workflow reference.
+
+Run:
+
+git branch --show-current
+git status
+git log --oneline --decorate -n 10
+
 Załaduj jako Single Source of Truth:
 
 - docs/00_ORIGINS.md

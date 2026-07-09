@@ -75,6 +75,8 @@ Milestone Closure Control Files Sync for completed MS-001.3 - Workflow Engine.
 SPDM-001 documentation foundation is completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
 SPDM-002 bootstrap alignment is completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 SPDM-003 repository access fallback is completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
+SPDM-004 SPS launcher is completed and accepted with `docs/11_SPS_START.md`.
+SPDM-005 Git workflow and active branch validation are completed and accepted with `docs/14_GIT_WORKFLOW.md` and `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 CAP-001.1 project domain contract is completed and accepted with `docs/13_PROJECT_CAPABILITY.md`.
 
 MS-001.3 - Workflow Engine is formally completed after Milestone Closure Review passed.
@@ -118,6 +120,8 @@ Next:
 * Prepare MS-001.4 - Release Readiness
 * Keep `SPDM-001` recorded as completed documentation foundation work
 * Keep `SPDM-003` recorded as completed repository access fallback work
+* Keep `SPDM-004` recorded as completed SPS launcher work
+* Keep `SPDM-005` recorded as completed active branch validation work
 * Keep `CAP-001` active as parallel capability documentation work
 
 ---
@@ -151,6 +155,8 @@ Next:
 * Recorded `SPDM-001` as completed documentation foundation work.
 * Recorded `SPDM-002` as completed bootstrap alignment work.
 * Recorded `SPDM-003` as completed repository access fallback work.
+* Recorded `SPDM-004` as completed SPS launcher work.
+* Recorded `SPDM-005` as completed active branch validation work.
 * Recorded `CAP-001.1` as completed Project Capability contract work.
 
 ---
@@ -196,6 +202,8 @@ Next Action: Prepare MS-001.4 - Release Readiness.
 Additional Result: `SPDM-001` completed with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
 Additional Result: `SPDM-002` completed with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` aligned to SPDM.
 Additional Result: `SPDM-003` completed with Repository Access Fallback added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
+Additional Result: `SPDM-004` completed with `docs/11_SPS_START.md` created as the SPS session launcher.
+Additional Result: `SPDM-005` completed with `docs/14_GIT_WORKFLOW.md` and Active Branch Validation added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 Additional Result: `CAP-001.1` completed with `docs/13_PROJECT_CAPABILITY.md` while `CAP-001` remains active.
 
 ---

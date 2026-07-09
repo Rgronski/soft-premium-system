@@ -424,6 +424,36 @@ Each release entry should contain:
 * Kept `CAP-001` active as parallel capability documentation work.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
+## SPDM-004 - SPS Launcher
+
+### Date
+
+2026-07-09
+
+### Completed
+
+* Added `docs/11_SPS_START.md`.
+* Created the SPS Launcher as the first entry point for new SPS OS sessions.
+* Defined Workspace Mode, ZIP Mode, and GitHub Mode.
+* Preserved `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` as the operational bootstrap and `SPDM` as the authoritative method.
+* Kept `CAP-001` active as parallel capability documentation work.
+* Preserved `MS-001.4 - Release Readiness` as the next product milestone.
+
+## SPDM-005 - Git Workflow and Active Branch Validation
+
+### Date
+
+2026-07-09
+
+### Completed
+
+* Added `docs/14_GIT_WORKFLOW.md`.
+* Defined the formal Git workflow rule that repository validation must use the active development branch.
+* Added Active Branch Validation to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
+* Added required branch verification commands: `git branch --show-current`, `git status`, and `git log --oneline --decorate -n 10`.
+* Kept `CAP-001` active as parallel capability documentation work.
+* Preserved `MS-001.4 - Release Readiness` as the next product milestone.
+
 ---
 
 # Future Releases
