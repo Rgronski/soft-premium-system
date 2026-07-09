@@ -483,6 +483,23 @@ Each release entry should contain:
 * Kept `CAP-001` active as parallel capability documentation work.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
+## SPDM-007 - One Command Startup
+
+### Date
+
+2026-07-10
+
+### Completed
+
+* Updated `docs/11_SPS_START.md`.
+* Updated `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
+* Defined `SPS OS — START` as the strict one-command startup protocol.
+* Blocked memory-based bootstrap and previous chat memory as SSOT for startup.
+* Required ZIP Mode immediately when verified repository access is missing.
+* Required exact PowerShell ZIP commands and a request only for `C:\Users\p700\sps-session.zip`.
+* Kept `CAP-001` active as parallel capability documentation work.
+* Preserved `MS-001.4 - Release Readiness` as the next product milestone.
+
 ---
 
 # Future Releases

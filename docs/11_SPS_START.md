@@ -2,6 +2,31 @@
 
 ---
 
+# One Command Startup
+
+The official one-command startup protocol for new SPS OS sessions is:
+
+`SPS OS — START`
+
+When this command is used, the assistant must treat it as a strict bootstrap trigger, not as a normal conversational prompt.
+
+Mandatory behavior:
+
+* If the assistant has no verified repo access, it must immediately enter ZIP Mode.
+* It must not claim PCL is complete from memory.
+* It must not use previous chat memory as SSOT.
+* It must not say "ready to continue" before full bootstrap is complete.
+* It must provide exact PowerShell ZIP commands.
+* It must ask only for `C:\Users\p700\sps-session.zip`.
+* After ZIP upload, it must complete PCL, SSOT Validation, Active Branch Validation, Roadmap Summary, Recommendation, and Next Safe Step.
+
+Forbidden startup responses:
+
+* "Project Context loaded from previous conversation"
+* "Bootstrap completed from memory"
+* "Send any project files"
+* "I am ready to continue"
+
 # Purpose
 
 SPS_START is the launcher for SPS OS sessions.
@@ -30,7 +55,7 @@ In this mode, continue with Project Context Loader using the local project files
 
 Use ZIP Mode when the assistant does not have access to the local repository.
 
-In this mode, immediately ask for a fresh ZIP and provide these PowerShell commands:
+In this mode, immediately ask only for `C:\Users\p700\sps-session.zip` and provide these exact PowerShell commands:
 
 ```powershell
 cd C:\Users\p700\soft-premium-system

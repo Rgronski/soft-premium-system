@@ -14,6 +14,7 @@ This bootstrap implements SPDM as defined in:
 
 Never skip any bootstrap phase.
 If information is missing, stop and ask only for the minimum artifact required to continue according to SPDM.
+Bootstrap cannot be marked complete unless SSOT documents were actually read from repository, ZIP, or verified GitHub source.
 
 Tryb pracy:
 

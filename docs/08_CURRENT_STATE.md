@@ -63,6 +63,7 @@ SPDM-003 completed and accepted with Repository Access Fallback added to `docs/1
 SPDM-004 completed and accepted with `docs/11_SPS_START.md` created as the SPS session launcher.
 SPDM-005 completed and accepted with `docs/14_GIT_WORKFLOW.md` created and Active Branch Validation added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 SPDM-006 completed and accepted with a full SPS startup package combining `docs/11_SPS_START.md`, ZIP Mode, `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`, and Active Branch Validation.
+SPDM-007 completed and accepted with one-command startup rules that block memory-based bootstrap and require ZIP/PCL-first startup behavior.
 CAP-001.1 completed and accepted with `docs/13_PROJECT_CAPABILITY.md` created as the Project Capability domain contract.
 CAP-001.2 completed and accepted with Project Domain Model added to `docs/13_PROJECT_CAPABILITY.md`.
 
@@ -109,6 +110,7 @@ Next:
 * Keep `SPDM-004` recorded as completed SPS launcher work
 * Keep `SPDM-005` recorded as completed active branch validation work
 * Keep `SPDM-006` recorded as completed full startup package work
+* Keep `SPDM-007` recorded as completed one-command startup enforcement work
 * Keep `CAP-001` active as parallel capability documentation work
 
 ---
@@ -170,6 +172,7 @@ Next:
 * SPDM-004 completed with `docs/11_SPS_START.md` as the SPS session launcher
 * SPDM-005 completed with `docs/14_GIT_WORKFLOW.md` and Active Branch Validation added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`
 * SPDM-006 completed with the full SPS startup package integrating SPS_START, ZIP Mode, Bootstrap, and Active Branch Validation
+* SPDM-007 completed with one-command startup enforcement that blocks memory-based bootstrap
 * CAP-001.1 completed with `docs/13_PROJECT_CAPABILITY.md` as the initial Project Capability domain contract
 * CAP-001.2 completed with Project Domain Model added to `docs/13_PROJECT_CAPABILITY.md`
 

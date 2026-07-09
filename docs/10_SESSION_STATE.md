@@ -78,6 +78,7 @@ SPDM-003 repository access fallback is completed and accepted with `docs/12_DEVE
 SPDM-004 SPS launcher is completed and accepted with `docs/11_SPS_START.md`.
 SPDM-005 Git workflow and active branch validation are completed and accepted with `docs/14_GIT_WORKFLOW.md` and `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 SPDM-006 full startup package is completed and accepted with `docs/11_SPS_START.md` and `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
+SPDM-007 one-command startup enforcement is completed and accepted with `docs/11_SPS_START.md` and `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 CAP-001.1 project domain contract is completed and accepted with `docs/13_PROJECT_CAPABILITY.md`.
 CAP-001.2 project domain model is completed and accepted with `docs/13_PROJECT_CAPABILITY.md`.
 
@@ -125,6 +126,7 @@ Next:
 * Keep `SPDM-004` recorded as completed SPS launcher work
 * Keep `SPDM-005` recorded as completed active branch validation work
 * Keep `SPDM-006` recorded as completed full startup package work
+* Keep `SPDM-007` recorded as completed one-command startup enforcement work
 * Keep `CAP-001` active as parallel capability documentation work
 
 ---
@@ -161,6 +163,7 @@ Next:
 * Recorded `SPDM-004` as completed SPS launcher work.
 * Recorded `SPDM-005` as completed active branch validation work.
 * Recorded `SPDM-006` as completed full startup package work.
+* Recorded `SPDM-007` as completed one-command startup enforcement work.
 * Recorded `CAP-001.1` as completed Project Capability contract work.
 * Recorded `CAP-001.2` as completed Project Domain Model work.
 
@@ -210,6 +213,7 @@ Additional Result: `SPDM-003` completed with Repository Access Fallback added to
 Additional Result: `SPDM-004` completed with `docs/11_SPS_START.md` created as the SPS session launcher.
 Additional Result: `SPDM-005` completed with `docs/14_GIT_WORKFLOW.md` and Active Branch Validation added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 Additional Result: `SPDM-006` completed with the full SPS startup package and verified branch state `feature/documentation-foundation` at commit `caba05d` with clean working tree.
+Additional Result: `SPDM-007` completed with one-command startup enforcement that blocks memory-based bootstrap and requires ZIP/PCL-first startup behavior.
 Additional Result: `CAP-001.1` completed with `docs/13_PROJECT_CAPABILITY.md` while `CAP-001` remains active.
 Additional Result: `CAP-001.2` completed with Project Domain Model added to `docs/13_PROJECT_CAPABILITY.md`.
 
