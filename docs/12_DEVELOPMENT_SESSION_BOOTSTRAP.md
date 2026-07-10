@@ -232,15 +232,11 @@ Nie implementuj.
 
 Nie pytaj „co robimy?”.
 
-Końcowy wynik bootstrapu ma zawsze zawierać dokładnie:
-
-- Status projektu
-- Wynik Integrity Check
-- Roadmap Summary
-- Chief Architect Recommendation
-- Next Safe Step
+Końcowy wynik bootstrapu musi być zwracany wyłącznie w formacie Runtime Dashboard.
 
 Runtime Dashboard Specification:
+
+This Runtime Dashboard specification supersedes any earlier summary-style final bootstrap output.
 
 Bootstrap must always generate a deterministic Runtime Dashboard as part of the bootstrap result.
 
@@ -250,6 +246,10 @@ It only reports the runtime result of the completed bootstrap.
 Final bootstrap response MUST use the Runtime Dashboard format.
 
 Missing Runtime Dashboard means bootstrap report failure.
+
+The Runtime Dashboard is the only valid final bootstrap report format.
+
+Any final bootstrap response that does not use the Runtime Dashboard format is invalid.
 
 The Runtime Dashboard must always contain these sections in this exact order:
 
@@ -335,7 +335,7 @@ SSOT Loaded:
 
 Report the complete list of all SSOT documents actually read during bootstrap.
 
-Do not use incomplete phrases such as:
+Do not use incomplete phrases anywhere in the final bootstrap report, such as:
 
 - "m.in."
 - "among others"
