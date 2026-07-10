@@ -16,6 +16,13 @@ Never skip any bootstrap phase.
 If information is missing, stop and ask only for the minimum artifact required to continue according to SPDM.
 Bootstrap cannot be marked complete unless SSOT documents were actually read from repository, ZIP, or verified GitHub source.
 
+Final Output Contract:
+
+- Final bootstrap response MUST use the Runtime Dashboard format.
+- The Runtime Dashboard is the only valid final bootstrap report format.
+- Any final bootstrap response without the Runtime Dashboard is invalid.
+- The phrases "m.in.", "między innymi", "among others", and "including key documents" are forbidden anywhere in the final bootstrap report.
+
 Tryb pracy:
 
 Execute this bootstrap in SPDM credit-saving mode and minimal patch mode:
