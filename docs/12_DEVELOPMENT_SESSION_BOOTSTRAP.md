@@ -281,6 +281,63 @@ The Runtime Dashboard must always contain these sections in this exact order:
 7. Recommendation
 8. Next Safe Step
 
+Mandatory Runtime Dashboard Template:
+
+The final bootstrap response MUST copy and complete the template below.
+Section names must not be changed.
+Section order must not be changed.
+No required field may be omitted.
+If a value is not available, write `UNKNOWN`.
+Additional comments may appear only inside the proper field or after all required fields, and they must not replace the dashboard.
+
+A report that only uses the title "Runtime Dashboard" but does not reproduce all eight required sections and fields is invalid.
+
+```text
+SPS OS Runtime Dashboard
+
+1. Bootstrap
+Bootstrap Version: [VALUE OR UNKNOWN]
+Bootstrap Status: [PASS | FAIL]
+Project Context Loader: [PASS | FAIL]
+Project Integrity: [PASS | FAIL]
+SSOT Validation: [PASS | FAIL]
+Consistency Gate: [PASS | FAIL]
+Runtime Lock: [ACTIVE | INACTIVE]
+
+2. Chief Architect
+Role: [Chief Architect]
+Implementation Engine: [Codex]
+Role Separation: [PASS | FAIL]
+
+3. Runtime Modes
+Credit Saving Mode: [ACTIVE | INACTIVE]
+Minimal Patch Mode: [ACTIVE | INACTIVE]
+Diagnosis Before Edit: [ACTIVE | INACTIVE]
+No Refactoring: [ACTIVE | INACTIVE]
+SSOT First: [ACTIVE | INACTIVE]
+Session Lock: [ACTIVE | INACTIVE]
+
+4. Repository
+Branch: [VALUE OR UNKNOWN]
+Repository Status: [CLEAN | DIRTY | UNKNOWN]
+Latest Commit: [VALUE OR UNKNOWN]
+
+5. Project State
+Current Milestone: [VALUE OR UNKNOWN]
+Current Capability: [VALUE OR UNKNOWN]
+Current Sprint: [VALUE OR UNKNOWN]
+Roadmap Status: [VALUE OR UNKNOWN]
+
+6. SSOT Loaded
+[COMPLETE LIST OF EVERY SSOT DOCUMENT ACTUALLY READ]
+
+7. Recommendation
+[EXACTLY ONE RECOMMENDATION]
+
+8. Next Safe Step
+[EXACTLY ONE NEXT SAFE STEP]
+```
+
 Bootstrap:
 
 Report:
