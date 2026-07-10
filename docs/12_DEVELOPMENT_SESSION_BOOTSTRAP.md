@@ -23,6 +23,18 @@ Final Output Contract:
 - Any final bootstrap response without the Runtime Dashboard is invalid.
 - The phrases "m.in.", "między innymi", "among others", and "including key documents" are forbidden anywhere in the final bootstrap report.
 
+ZIP Access Gate:
+
+If a ZIP attachment is visible but its contents are not accessible for reading:
+
+- do not announce bootstrap start,
+- do not execute PCL,
+- do not repeat the full bootstrap plan,
+- report exactly: `ZIP Access Check: FAIL`
+- report exactly: `Bootstrap Status: BLOCKED`
+- ask only for re-upload of an accessible ZIP,
+- do not continue until the ZIP contents are actually readable.
+
 Tryb pracy:
 
 Execute this bootstrap in SPDM credit-saving mode and minimal patch mode:
