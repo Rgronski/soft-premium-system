@@ -67,9 +67,12 @@ Repository Status: [CLEAN | DIRTY | UNKNOWN]
 Latest Commit: [VALUE OR UNKNOWN]
 
 5. Project State
-Current Milestone: [VALUE OR UNKNOWN]
-Current Capability: [VALUE OR UNKNOWN]
-Current Sprint: [VALUE OR UNKNOWN]
+Current Product Milestone: [VALUE | NONE | UNKNOWN]
+Next Product Milestone: [VALUE OR UNKNOWN]
+Active Parallel Capability: [VALUE | NONE | UNKNOWN]
+Latest Completed Capability Item: [VALUE | NONE | UNKNOWN]
+Current Sprint: [VALUE | NONE | UNKNOWN]
+Platform Priority: [VALUE OR UNKNOWN]
 Roadmap Status: [VALUE OR UNKNOWN]
 
 6. SSOT Loaded
@@ -110,10 +113,19 @@ Od razu podaj komendy PowerShell:
 
 cd C:\Users\p700\soft-premium-system
 
-git status
-git log --oneline --decorate -n 10
+@(
+  "Branch:"
+  git branch --show-current
+  ""
+  "Status:"
+  git status
+  ""
+  "Recent commits:"
+  git log --oneline --decorate -n 10
+) | Out-File -FilePath C:\Users\p700\sps-git-context.txt -Encoding utf8
 
 Compress-Archive -Path `
+  C:\Users\p700\sps-git-context.txt, `
   package.json, `
   tsconfig.json, `
   next.config.* , `
@@ -129,10 +141,19 @@ Immediately provide these PowerShell commands and ask the user to upload the fre
 
 cd C:\Users\p700\soft-premium-system
 
-git status
-git log --oneline --decorate -n 10
+@(
+  "Branch:"
+  git branch --show-current
+  ""
+  "Status:"
+  git status
+  ""
+  "Recent commits:"
+  git log --oneline --decorate -n 10
+) | Out-File -FilePath C:\Users\p700\sps-git-context.txt -Encoding utf8
 
 Compress-Archive -Path `
+  C:\Users\p700\sps-git-context.txt, `
   package.json, `
   tsconfig.json, `
   next.config.* , `
@@ -384,13 +405,27 @@ Each Runtime Modes field must return only:
 
 Repository:
 
-If repository data is available during bootstrap, report:
+Read repository data from `sps-git-context.txt` in the root of the uploaded ZIP package.
+
+The local path `C:\Users\p700\sps-git-context.txt` is used only to create the file before compression.
+
+During PCL, the source of repository data is `sps-git-context.txt` located in the root of the uploaded ZIP package.
+
+If `sps-git-context.txt` is available and readable from the root of the uploaded ZIP package during bootstrap, report:
 
 - Branch
 - Repository Status
 - Latest Commit
 
-If repository data is not available, report:
+Branch must be read from the `Branch` section.
+Repository Status must be determined from the `Status` section.
+If the `Status` section contains `nothing to commit, working tree clean`, report `CLEAN`.
+If the `Status` section shows staged, modified, deleted, renamed, or untracked files, report `DIRTY`.
+If the status cannot be read clearly, report `UNKNOWN`.
+Never return raw `git status` text as the `Repository Status` field.
+Latest Commit must be read as the first entry from `Recent commits`.
+
+If the file is missing from the uploaded ZIP package or the data is unreadable, report:
 
 - UNKNOWN
 
@@ -400,14 +435,28 @@ Project State:
 
 If data exists in SSOT, report:
 
-- Current Milestone
-- Current Capability
+- Current Product Milestone
+- Next Product Milestone
+- Active Parallel Capability
+- Latest Completed Capability Item
 - Current Sprint
+- Platform Priority
 - Roadmap Status
 
 If the data does not exist, report:
 
 - UNKNOWN
+
+Rules:
+
+- `Current` means scope that is actually active now.
+- `Next` means the approved next scope.
+- `Active Parallel Capability` is not a product milestone.
+- `Latest Completed Capability Item` must not be reported as the active capability.
+- `Platform Priority` must not replace milestone or capability.
+- Use `NONE` only when SSOT explicitly confirms that no active item exists.
+- Use `UNKNOWN` when SSOT does not contain a clear value.
+- Do not derive values from conversation history.
 
 SSOT Loaded:
 

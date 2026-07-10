@@ -60,10 +60,19 @@ In this mode, immediately ask only for `C:\Users\p700\sps-session.zip` and provi
 ```powershell
 cd C:\Users\p700\soft-premium-system
 
-git status
-git log --oneline --decorate -n 10
+@(
+  "Branch:"
+  git branch --show-current
+  ""
+  "Status:"
+  git status
+  ""
+  "Recent commits:"
+  git log --oneline --decorate -n 10
+) | Out-File -FilePath C:\Users\p700\sps-git-context.txt -Encoding utf8
 
 Compress-Archive -Path `
+  C:\Users\p700\sps-git-context.txt, `
   package.json, `
   tsconfig.json, `
   next.config.* , `
@@ -118,10 +127,19 @@ PowerShell ZIP commands:
 
 cd C:\Users\p700\soft-premium-system
 
-git status
-git log --oneline --decorate -n 10
+@(
+  "Branch:"
+  git branch --show-current
+  ""
+  "Status:"
+  git status
+  ""
+  "Recent commits:"
+  git log --oneline --decorate -n 10
+) | Out-File -FilePath C:\Users\p700\sps-git-context.txt -Encoding utf8
 
 Compress-Archive -Path `
+  C:\Users\p700\sps-git-context.txt, `
   package.json, `
   tsconfig.json, `
   next.config.* , `
