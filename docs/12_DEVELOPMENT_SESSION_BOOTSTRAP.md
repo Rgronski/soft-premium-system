@@ -21,7 +21,66 @@ Final Output Contract:
 - Final bootstrap response MUST use the Runtime Dashboard format.
 - The Runtime Dashboard is the only valid final bootstrap report format.
 - Any final bootstrap response without the Runtime Dashboard is invalid.
-- The phrases "m.in.", "między innymi", "among others", and "including key documents" are forbidden anywhere in the final bootstrap report.
+- The phrases "m.in.", "między innymi", "among others", "including key documents", "w tym", "including", and "such as" are forbidden anywhere in the final bootstrap report.
+
+Mandatory Runtime Dashboard Template:
+
+The final bootstrap response MUST copy and complete the template below.
+Section names must not be changed.
+Section order must not be changed.
+No required field may be omitted.
+If a value is not available, write `UNKNOWN`.
+Additional comments may appear only inside the proper field or after all required fields, and they must not replace the dashboard.
+
+A report that only uses the title "Runtime Dashboard" but does not reproduce all eight required sections and fields is invalid.
+
+Before sending the final response, compare it field-by-field with the Mandatory Runtime Dashboard Template. If any section or field is missing, do not send the response.
+
+```text
+SPS OS Runtime Dashboard
+
+1. Bootstrap
+Bootstrap Version: [VALUE OR UNKNOWN]
+Bootstrap Status: [PASS | FAIL]
+Project Context Loader: [PASS | FAIL]
+Project Integrity: [PASS | FAIL]
+SSOT Validation: [PASS | FAIL]
+Consistency Gate: [PASS | FAIL]
+Runtime Lock: [ACTIVE | INACTIVE]
+
+2. Chief Architect
+Role: [Chief Architect]
+Implementation Engine: [Codex]
+Role Separation: [PASS | FAIL]
+
+3. Runtime Modes
+Credit Saving Mode: [ACTIVE | INACTIVE]
+Minimal Patch Mode: [ACTIVE | INACTIVE]
+Diagnosis Before Edit: [ACTIVE | INACTIVE]
+No Refactoring: [ACTIVE | INACTIVE]
+SSOT First: [ACTIVE | INACTIVE]
+Session Lock: [ACTIVE | INACTIVE]
+
+4. Repository
+Branch: [VALUE OR UNKNOWN]
+Repository Status: [CLEAN | DIRTY | UNKNOWN]
+Latest Commit: [VALUE OR UNKNOWN]
+
+5. Project State
+Current Milestone: [VALUE OR UNKNOWN]
+Current Capability: [VALUE OR UNKNOWN]
+Current Sprint: [VALUE OR UNKNOWN]
+Roadmap Status: [VALUE OR UNKNOWN]
+
+6. SSOT Loaded
+[COMPLETE LIST OF EVERY SSOT DOCUMENT ACTUALLY READ]
+
+7. Recommendation
+[EXACTLY ONE RECOMMENDATION]
+
+8. Next Safe Step
+[EXACTLY ONE NEXT SAFE STEP]
+```
 
 ZIP Access Gate:
 
@@ -280,63 +339,6 @@ The Runtime Dashboard must always contain these sections in this exact order:
 6. SSOT Loaded
 7. Recommendation
 8. Next Safe Step
-
-Mandatory Runtime Dashboard Template:
-
-The final bootstrap response MUST copy and complete the template below.
-Section names must not be changed.
-Section order must not be changed.
-No required field may be omitted.
-If a value is not available, write `UNKNOWN`.
-Additional comments may appear only inside the proper field or after all required fields, and they must not replace the dashboard.
-
-A report that only uses the title "Runtime Dashboard" but does not reproduce all eight required sections and fields is invalid.
-
-```text
-SPS OS Runtime Dashboard
-
-1. Bootstrap
-Bootstrap Version: [VALUE OR UNKNOWN]
-Bootstrap Status: [PASS | FAIL]
-Project Context Loader: [PASS | FAIL]
-Project Integrity: [PASS | FAIL]
-SSOT Validation: [PASS | FAIL]
-Consistency Gate: [PASS | FAIL]
-Runtime Lock: [ACTIVE | INACTIVE]
-
-2. Chief Architect
-Role: [Chief Architect]
-Implementation Engine: [Codex]
-Role Separation: [PASS | FAIL]
-
-3. Runtime Modes
-Credit Saving Mode: [ACTIVE | INACTIVE]
-Minimal Patch Mode: [ACTIVE | INACTIVE]
-Diagnosis Before Edit: [ACTIVE | INACTIVE]
-No Refactoring: [ACTIVE | INACTIVE]
-SSOT First: [ACTIVE | INACTIVE]
-Session Lock: [ACTIVE | INACTIVE]
-
-4. Repository
-Branch: [VALUE OR UNKNOWN]
-Repository Status: [CLEAN | DIRTY | UNKNOWN]
-Latest Commit: [VALUE OR UNKNOWN]
-
-5. Project State
-Current Milestone: [VALUE OR UNKNOWN]
-Current Capability: [VALUE OR UNKNOWN]
-Current Sprint: [VALUE OR UNKNOWN]
-Roadmap Status: [VALUE OR UNKNOWN]
-
-6. SSOT Loaded
-[COMPLETE LIST OF EVERY SSOT DOCUMENT ACTUALLY READ]
-
-7. Recommendation
-[EXACTLY ONE RECOMMENDATION]
-
-8. Next Safe Step
-[EXACTLY ONE NEXT SAFE STEP]
-```
 
 Bootstrap:
 
