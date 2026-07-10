@@ -55,10 +55,10 @@ Session Close should leave enough confirmed information here to support the next
 # Latest Session
 
 **Date**
-2026-07-07
+2026-07-11
 
 **Session Type**
-Documentation synchronization
+Documentation-only design patch
 
 **Current Milestone**
 None
@@ -70,7 +70,15 @@ MS-001.3 - Workflow Engine
 MS-001.4 - Release Readiness
 
 **Session Focus**
-Milestone Closure Control Files Sync for completed MS-001.3 - Workflow Engine.
+CAP-002.1 - Session Close Protocol for SPS Lifecycle Engine.
+
+Current capability state:
+
+* `CAP-001 - Bootstrap Engine`: Functional Complete
+* `CAP-002 - SPS Lifecycle Engine`: Started
+* Current work item: `CAP-002.1 - Session Close Protocol`
+* Current mode: `documentation-only design patch`
+* Next Safe Step: validate Session Close Protocol after patch
 
 SPDM-001 documentation foundation is completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
 SPDM-002 bootstrap alignment is completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
@@ -116,7 +124,7 @@ Completed in this milestone:
 
 Status:
 
-* Completed
+* In Progress
 
 Next:
 
@@ -128,61 +136,36 @@ Next:
 * Keep `SPDM-006` recorded as completed full startup package work
 * Keep `SPDM-007` recorded as completed one-command startup enforcement work
 * Keep `CAP-001` active as parallel capability documentation work
+* Continue `CAP-002.1 - Session Close Protocol`
 
 ---
 
 # Completed In This Session
 
-* Synchronized control documents for completed `MS-001.3 - Workflow Engine`.
-* Recorded Minimal Patch 1.
-* Recorded creation of `docs/11_WORKFLOW_ENGINE.md`.
-* Recorded Minimal Patch 2.
-* Recorded the Workflow domain contract.
-* Recorded Minimal Patch 3.
-* Recorded the first warning decision rule in `evaluateWorkflow()`.
-* Recorded Minimal Patch 4.
-* Recorded the first dynamic nextStep rule for active work.
-* Recorded Minimal Patch 5.
-* Recorded the second dynamic nextStep rule for starting next work.
-* Recorded Minimal Patch 6.
-* Recorded consistent evidence counters across all WorkflowResult branches.
-* Recorded Minimal Patch 8.
-* Recorded the first dynamic confidence policy.
-* Recorded Minimal Patch 7 as diagnosis-only.
-* Recorded that no existing test setup was found.
-* Recorded that test runner setup requires separate future scope.
-* Recorded `ProjectState`, `WorkflowResult`, `WorkflowEngine`, and `evaluateWorkflow()`.
-* Recorded addition of `src/lib/workflow/types.ts`.
-* Recorded addition of `src/lib/workflow/engine.ts`.
-* Recorded commit `7f6c634` for the Workflow Engine foundation.
-* Recorded that Milestone Closure Review passed.
-* Closed `MS-001.3 - Workflow Engine`.
-* Recorded `SPDM-001` as completed documentation foundation work.
-* Recorded `SPDM-002` as completed bootstrap alignment work.
-* Recorded `SPDM-003` as completed repository access fallback work.
-* Recorded `SPDM-004` as completed SPS launcher work.
-* Recorded `SPDM-005` as completed active branch validation work.
-* Recorded `SPDM-006` as completed full startup package work.
-* Recorded `SPDM-007` as completed one-command startup enforcement work.
-* Recorded `CAP-001.1` as completed Project Capability contract work.
-* Recorded `CAP-001.2` as completed Project Domain Model work.
+* Started `CAP-002 - SPS Lifecycle Engine`.
+* Defined `CAP-002.1 - Session Close Protocol` as the active work item.
+* Added `docs/15_SESSION_CLOSE_PROTOCOL.md`.
+* Extended `10_PROJECT_LIFECYCLE.md` with the session close lifecycle position.
+* Separated start, bootstrap, and session close contracts in lifecycle documentation.
+* Updated session state to record `CAP-001` as functional complete and `CAP-002` as started.
+* Recorded the need to validate the Session Close Protocol after the patch.
 
 ---
 
 # Not Completed In This Session
 
-* Workflow Engine tests are not implemented because no existing test setup is available.
-* Commit and push for this control files sync are still pending.
+* Validation of the new Session Close Protocol is still pending.
+* Commit and push are pending verification.
 
 ---
 
 # Verification Status
 
 **Code Verification**
-Completed.
+Not applicable.
 
 **Documentation Verification**
-Completed. Documentation reflects formally closed `MS-001.3 - Workflow Engine`.
+Pending verification after patch.
 
 **Commit Status**
 Not completed.
@@ -191,7 +174,7 @@ Not completed.
 Not completed.
 
 **Working Tree Status**
-Repository contains active documentation work for the open milestone.
+UNKNOWN. Repository state was not verified in this Codex run.
 
 **Responsibility Split**
 Diagnosis and scope definition: ChatGPT / Chief Architect.
@@ -202,26 +185,19 @@ Commit and push: Product Owner.
 Open
 
 **Validation**
-Session Result: MS-001.3 - Workflow Engine successfully closed.
-Architecture: Workflow Engine foundation now includes the first warning decision rule, two dynamic nextStep rules, consistent evidence across branches, a dynamic confidence policy, and a confirmed need for separate test setup scope.
-Verification: Passed.
-Repository: Aligned and ready for MS-001.4 preparation.
-Next Action: Prepare MS-001.4 - Release Readiness.
-Additional Result: `SPDM-001` completed with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
-Additional Result: `SPDM-002` completed with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` aligned to SPDM.
-Additional Result: `SPDM-003` completed with Repository Access Fallback added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
-Additional Result: `SPDM-004` completed with `docs/11_SPS_START.md` created as the SPS session launcher.
-Additional Result: `SPDM-005` completed with `docs/14_GIT_WORKFLOW.md` and Active Branch Validation added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
-Additional Result: `SPDM-006` completed with the full SPS startup package and verified branch state `feature/documentation-foundation` at commit `caba05d` with clean working tree.
-Additional Result: `SPDM-007` completed with one-command startup enforcement that blocks memory-based bootstrap and requires ZIP/PCL-first startup behavior.
-Additional Result: `CAP-001.1` completed with `docs/13_PROJECT_CAPABILITY.md` while `CAP-001` remains active.
-Additional Result: `CAP-001.2` completed with Project Domain Model added to `docs/13_PROJECT_CAPABILITY.md`.
+Session Result: `CAP-002 - SPS Lifecycle Engine` started.
+Architecture: Session close is now defined as a separate operational contract from launcher and bootstrap.
+Verification: Pending.
+Repository: UNKNOWN in this run.
+Next Action: validate Session Close Protocol after patch.
+Additional Result: `CAP-001 - Bootstrap Engine` remains functionally complete.
+Additional Result: `CAP-002.1` formalizes `SPS OS — KONIEC`.
 
 ---
 
 # Next Logical Step
 
-Prepare `MS-001.4 - Release Readiness`.
+Validate `CAP-002.1 - Session Close Protocol`.
 
 ---
 

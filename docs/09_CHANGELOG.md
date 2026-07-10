@@ -500,6 +500,20 @@ Each release entry should contain:
 * Kept `CAP-001` active as parallel capability documentation work.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
+## CAP-002.1 - Session Close Protocol
+
+### Date
+
+2026-07-11
+
+### Completed
+
+* Started `CAP-002 - SPS Lifecycle Engine`.
+* Added `docs/15_SESSION_CLOSE_PROTOCOL.md`.
+* Introduced the formal Session Close Protocol for `SPS OS — KONIEC`.
+* Added the session close lifecycle concept to project documentation.
+* Separated session close from bootstrap and start as a distinct operational contract.
+
 ---
 
 # Future Releases

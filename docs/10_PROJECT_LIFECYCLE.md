@@ -161,33 +161,27 @@ Product Owner:
 Every development session follows this sequence.
 
 ```text
-Start Session
+SPS OS — START
     ->
-Load Context
+Bootstrap
     ->
-Project Integrity Check
+PCL
     ->
-Diagnosis
+Runtime Dashboard
     ->
-Review
+Development / Architecture Work
     ->
-Scope Approval
+SPS OS — KONIEC
     ->
-Chief Architect -> Codex Handoff
+Session Audit
     ->
-Codex Implementation
+Session State
     ->
-Verification
+Git Context
     ->
-Testing
+Session Handoff
     ->
-Commit
-    ->
-Push
-    ->
-Update Documentation
-    ->
-Close Session
+Next START
 ```
 
 ---
@@ -201,6 +195,13 @@ ChatGPT / Chief Architect must not assume access to the Product Owner's local fi
 If Codex is unavailable and the project is local, ChatGPT / Chief Architect should ask the Product Owner to upload a ZIP package containing the project or the smallest useful diagnostic subset.
 
 If Codex is available in the local repository, implementation should normally be delegated to Codex after diagnosis and scope approval instead of defaulting to ZIP-based patch exchange.
+
+Architectural distinction:
+
+* `CAP-001` handles safe session start.
+* `CAP-002` handles safe session close.
+* Launcher Contract and Bootstrap Contract are separate.
+* Session Close Contract is a third contract.
 
 Recommended PowerShell command for a standard session package:
 
@@ -323,7 +324,7 @@ New ideas unrelated to the active milestone should be parked and revisited only 
 The Product Owner may close a session by writing:
 
 ```text
-Koniec tego czatu
+SPS OS — KONIEC
 ```
 
 When this command is received, AI performs the Session Close Protocol.
@@ -353,6 +354,8 @@ If Codex performed the implementation locally, the report should explicitly dist
 * diagnosis and scope ownership by ChatGPT / Chief Architect,
 * implementation ownership by Codex,
 * commit and push ownership by Product Owner.
+
+The formal Session Close Contract is defined in `docs/15_SESSION_CLOSE_PROTOCOL.md`.
 
 ---
 
