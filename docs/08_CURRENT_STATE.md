@@ -64,8 +64,10 @@ SPDM-004 completed and accepted with `docs/11_SPS_START.md` created as the SPS s
 SPDM-005 completed and accepted with `docs/14_GIT_WORKFLOW.md` created and Active Branch Validation added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 SPDM-006 completed and accepted with a full SPS startup package combining `docs/11_SPS_START.md`, ZIP Mode, `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`, and Active Branch Validation.
 SPDM-007 completed and accepted with one-command startup rules that block memory-based bootstrap and require ZIP/PCL-first startup behavior.
-CAP-001.1 completed and accepted with `docs/13_PROJECT_CAPABILITY.md` created as the Project Capability domain contract.
-CAP-001.2 completed and accepted with Project Domain Model added to `docs/13_PROJECT_CAPABILITY.md`.
+CAP-003.1 completed and accepted with `docs/13_PROJECT_CAPABILITY.md` created as the Project Capability domain contract.
+CAP-003.2 completed and accepted with Project Domain Model added to `docs/13_PROJECT_CAPABILITY.md`.
+
+CAP-001 is reserved for the historical Bootstrap Engine. Project Capability documentation work is tracked as CAP-003.
 
 Completed in this milestone:
 
@@ -111,7 +113,7 @@ Next:
 * Keep `SPDM-005` recorded as completed active branch validation work
 * Keep `SPDM-006` recorded as completed full startup package work
 * Keep `SPDM-007` recorded as completed one-command startup enforcement work
-* Keep `CAP-001` active as parallel capability documentation work
+* Keep `CAP-003` active as parallel capability documentation work
 
 ---
 
@@ -173,8 +175,8 @@ Next:
 * SPDM-005 completed with `docs/14_GIT_WORKFLOW.md` and Active Branch Validation added to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`
 * SPDM-006 completed with the full SPS startup package integrating SPS_START, ZIP Mode, Bootstrap, and Active Branch Validation
 * SPDM-007 completed with one-command startup enforcement that blocks memory-based bootstrap
-* CAP-001.1 completed with `docs/13_PROJECT_CAPABILITY.md` as the initial Project Capability domain contract
-* CAP-001.2 completed with Project Domain Model added to `docs/13_PROJECT_CAPABILITY.md`
+* CAP-003.1 completed with `docs/13_PROJECT_CAPABILITY.md` as the initial Project Capability domain contract
+* CAP-003.2 completed with Project Domain Model added to `docs/13_PROJECT_CAPABILITY.md`
 
 ---
 
@@ -184,7 +186,7 @@ Next:
 * `MS-001.3 - Workflow Engine` is formally completed
 * Minimal Patch 7 diagnosis completed without implementation
 * ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
-* `CAP-001` remains active as parallel capability documentation work
+* `CAP-003` remains active as parallel capability documentation work
 * Verified branch state: `feature/documentation-foundation`, latest commit `caba05d`, working tree `clean`
 
 ---

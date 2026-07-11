@@ -396,7 +396,7 @@ Each release entry should contain:
 * Reduced duplicated methodology in the bootstrap while preserving the operational workflow.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
-## CAP-001.1 - Project Domain Contract
+## CAP-003.1 - Project Domain Contract
 
 ### Date
 
@@ -407,7 +407,7 @@ Each release entry should contain:
 * Added `docs/13_PROJECT_CAPABILITY.md`.
 * Created the initial Project Capability domain contract.
 * Defined Purpose, Vision, Responsibility, Domain Model, Lifecycle, Relationships, Capability Contract, and Future Evolution.
-* Kept `CAP-001` active as parallel capability documentation work.
+* Kept `CAP-003` active as parallel capability documentation work.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
 ## SPDM-003 - Repository Access Fallback
@@ -421,7 +421,7 @@ Each release entry should contain:
 * Updated `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` with a Repository Access Fallback section.
 * Added explicit PowerShell ZIP commands for sessions where ChatGPT cannot access the local project directory.
 * Defined that Project Context Loader continues according to SPDM after ZIP upload.
-* Kept `CAP-001` active as parallel capability documentation work.
+* Kept `CAP-003` active as parallel capability documentation work.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
 ## SPDM-004 - SPS Launcher
@@ -436,7 +436,7 @@ Each release entry should contain:
 * Created the SPS Launcher as the first entry point for new SPS OS sessions.
 * Defined Workspace Mode, ZIP Mode, and GitHub Mode.
 * Preserved `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` as the operational bootstrap and `SPDM` as the authoritative method.
-* Kept `CAP-001` active as parallel capability documentation work.
+* Kept `CAP-003` active as parallel capability documentation work.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
 ## SPDM-005 - Git Workflow and Active Branch Validation
@@ -451,10 +451,10 @@ Each release entry should contain:
 * Defined the formal Git workflow rule that repository validation must use the active development branch.
 * Added Active Branch Validation to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 * Added required branch verification commands: `git branch --show-current`, `git status`, and `git log --oneline --decorate -n 10`.
-* Kept `CAP-001` active as parallel capability documentation work.
+* Kept `CAP-003` active as parallel capability documentation work.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
-## CAP-001.2 - Project Domain Model
+## CAP-003.2 - Project Domain Model
 
 ### Date
 
@@ -465,7 +465,7 @@ Each release entry should contain:
 * Updated `docs/13_PROJECT_CAPABILITY.md`.
 * Added the `Project Domain Model` section.
 * Defined conceptual project attributes: Identity, Ownership, Lifecycle, Context, Relationships, and Metadata.
-* Kept `CAP-001` active as parallel capability documentation work.
+* Kept `CAP-003` active as parallel capability documentation work.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
 ## SPDM-006 - Full Startup Package
@@ -480,7 +480,7 @@ Each release entry should contain:
 * Updated `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` to require full ZIP Mode completion after ZIP upload.
 * Combined SPS Launcher, ZIP Mode, Bootstrap, and Active Branch Validation into one clear startup package.
 * Recorded verified branch state: `feature/documentation-foundation`, latest commit `caba05d`, working tree `clean`.
-* Kept `CAP-001` active as parallel capability documentation work.
+* Kept `CAP-003` active as parallel capability documentation work.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
 ## SPDM-007 - One Command Startup
@@ -497,7 +497,9 @@ Each release entry should contain:
 * Blocked memory-based bootstrap and previous chat memory as SSOT for startup.
 * Required ZIP Mode immediately when verified repository access is missing.
 * Required exact PowerShell ZIP commands and a request only for `C:\Users\p700\sps-session.zip`.
-* Kept `CAP-001` active as parallel capability documentation work.
+* Kept `CAP-003` active as parallel capability documentation work.
+
+Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capability work is tracked as CAP-003 to avoid identity collision.
 * Preserved `MS-001.4 - Release Readiness` as the next product milestone.
 
 ## CAP-002.1 - Session Close Protocol

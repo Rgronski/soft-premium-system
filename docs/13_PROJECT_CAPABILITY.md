@@ -33,6 +33,10 @@ Yes
 
 # Purpose
 
+This document defines CAP-003 — Project Capability / Project Domain Contract.
+
+It does not define CAP-001. CAP-001 is reserved for the historical Bootstrap Engine.
+
 This document defines the Project Capability as a formal domain contract.
 
 It exists to describe what a project is responsible for inside Soft Premium System without introducing implementation detail.

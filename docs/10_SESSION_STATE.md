@@ -223,8 +223,8 @@ SPDM-004 SPS launcher is completed and accepted with `docs/11_SPS_START.md`.
 SPDM-005 Git workflow and active branch validation are completed and accepted with `docs/14_GIT_WORKFLOW.md` and `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 SPDM-006 full startup package is completed and accepted with `docs/11_SPS_START.md` and `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 SPDM-007 one-command startup enforcement is completed and accepted with `docs/11_SPS_START.md` and `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
-CAP-001.1 project domain contract is completed and accepted with `docs/13_PROJECT_CAPABILITY.md`.
-CAP-001.2 project domain model is completed and accepted with `docs/13_PROJECT_CAPABILITY.md`.
+CAP-003.1 project domain contract is completed and accepted with `docs/13_PROJECT_CAPABILITY.md`.
+CAP-003.2 project domain model is completed and accepted with `docs/13_PROJECT_CAPABILITY.md`.
 
 MS-001.3 - Workflow Engine is formally completed after Milestone Closure Review passed.
 
@@ -271,7 +271,7 @@ Next:
 * Keep `SPDM-005` recorded as completed active branch validation work
 * Keep `SPDM-006` recorded as completed full startup package work
 * Keep `SPDM-007` recorded as completed one-command startup enforcement work
-* Keep `CAP-001` active as parallel capability documentation work
+* Keep `CAP-003` active as parallel capability documentation work
 * Regenerate `sps-session.zip` and run `SPS OS — START` again with the regenerated package.
 
 ---
