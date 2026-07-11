@@ -291,6 +291,16 @@ Do not duplicate the full Session Package Generator contract in this document.
 
 ---
 
+# Session Numbering
+
+`SPS OS â€” KONIEC` should record current session identity, calculate or confirm the next session number, and include Suggested Next Chat Title in the handoff.
+
+If the current session number is `UNKNOWN`, do not guess. Mark it as `UNKNOWN` and ask Product Owner to confirm if needed.
+
+The Suggested Next Chat Title is guidance for the next chat. It does not guarantee that the ChatGPT UI title was changed.
+
+---
+
 # Work Summary
 
 Work Summary must separate:

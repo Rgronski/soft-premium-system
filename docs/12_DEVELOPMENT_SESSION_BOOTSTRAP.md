@@ -83,6 +83,9 @@ Package Detected: [YES | NO | UNKNOWN]
 Git Context: [PRESENT | MISSING | UNKNOWN]
 Session Summary: [PRESENT | MISSING | UNKNOWN]
 Session Handoff: [PRESENT | MISSING | UNKNOWN]
+Current Session ID: [VALUE OR UNKNOWN]
+Suggested Chat Title: [VALUE OR UNKNOWN]
+Next Session ID: [VALUE OR UNKNOWN]
 Package Consistency: [PASS | FAIL | PARTIAL | UNKNOWN]
 
 8. Recommendation
@@ -125,6 +128,10 @@ If package context is missing, report `UNKNOWN`.
 Do not guess missing branch, commit, work item, milestone, or repository status.
 
 Runtime Dashboard should report package context when present.
+
+If session identity is present in package context, Runtime Dashboard should report Current Session ID, Suggested Chat Title, and Next Session ID.
+
+`SPS OS â€” START` displays the suggested title as official SPS OS guidance only. It must not claim that the ChatGPT UI title was changed.
 
 Package HEAD Authority:
 

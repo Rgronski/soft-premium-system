@@ -80,6 +80,10 @@ Date: [VALUE OR UNKNOWN]
 Chief Architect: [VALUE OR UNKNOWN]
 Product Owner: [VALUE OR UNKNOWN]
 Session Status: [VALUE OR UNKNOWN]
+Current Session ID: [VALUE OR UNKNOWN]
+Current Chat Title: [VALUE OR UNKNOWN]
+Next Session ID: [VALUE OR UNKNOWN]
+Suggested Next Chat Title: [VALUE OR UNKNOWN]
 
 Capability: [VALUE OR UNKNOWN]
 Capability Status: [VALUE OR UNKNOWN]
@@ -114,3 +118,7 @@ Recommendation: [EXACTLY ONE RECOMMENDATION]
 Next Safe Step: [EXACTLY ONE ACTIONABLE STEP]
 Next Chat Prompt: [READY-TO-PASTE PROMPT OR UNKNOWN]
 ```
+
+The handoff transfers the Suggested Next Chat Title as official SPS OS guidance only.
+
+It does not guarantee that the ChatGPT UI title was changed.

@@ -76,6 +76,10 @@ Session Close should leave enough confirmed information here to support the next
 Allowed fields:
 
 * date
+* current session id
+* current chat title
+* next session id
+* suggested next chat title
 * active capability
 * active work item
 * current mode
@@ -126,6 +130,10 @@ Deterministic Session State update template:
 SPS OS Session State
 
 Date: [VALUE OR UNKNOWN]
+Current Session ID: [VALUE OR UNKNOWN]
+Current Chat Title: [VALUE OR UNKNOWN]
+Next Session ID: [VALUE OR UNKNOWN]
+Suggested Next Chat Title: [VALUE OR UNKNOWN]
 Active Capability: [VALUE OR UNKNOWN]
 Active Work Item: [VALUE OR UNKNOWN]
 Current Mode: [VALUE OR UNKNOWN]
@@ -145,6 +153,23 @@ Blockers: [VALUE OR NONE OR UNKNOWN]
 Open Risks: [VALUE OR NONE OR UNKNOWN]
 Next Safe Step: [EXACTLY ONE NEXT SAFE STEP]
 ```
+
+---
+
+# Operational Session Identity
+
+Session State is the SSOT for operational SPS session identity.
+
+Use these fields:
+
+* Current Session ID
+* Current Chat Title
+* Next Session ID
+* Suggested Next Chat Title
+
+If no confirmed session number exists yet, use `UNKNOWN`.
+
+The Suggested Next Chat Title is official SPS OS guidance only. It does not guarantee that the ChatGPT UI title was changed.
 
 ---
 
@@ -174,6 +199,18 @@ The generator must not invent missing state.
 
 **Date**
 2026-07-11
+
+**Current Session ID**
+UNKNOWN
+
+**Current Chat Title**
+UNKNOWN
+
+**Next Session ID**
+UNKNOWN
+
+**Suggested Next Chat Title**
+UNKNOWN
 
 **Session Type**
 SPS lifecycle documentation and package integration

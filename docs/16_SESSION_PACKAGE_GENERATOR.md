@@ -118,6 +118,10 @@ The generator may collect:
 
 `sps-session-summary.txt` should contain:
 
+* current session id,
+* current chat title,
+* next session id,
+* suggested next chat title,
 * active capability,
 * active work item,
 * latest completed capability item,
@@ -125,6 +129,10 @@ The generator may collect:
 * repository state,
 * next safe step,
 * link/path to latest handoff if available.
+
+`New-SpsSession.ps1` should eventually include Session ID and Suggested Chat Title fields in `sps-session-summary.txt`.
+
+This document records that package expectation only; the script implementation is a separate patch.
 
 ---
 
