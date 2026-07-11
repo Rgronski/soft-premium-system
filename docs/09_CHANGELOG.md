@@ -532,6 +532,22 @@ Each release entry should contain:
 
 ---
 
+## CAP-002.3 - Session State
+
+### Date
+
+2026-07-11
+
+### Completed
+
+* Started Session State design.
+* Clarified Session State as an operational snapshot.
+* Separated Session State from changelog, roadmap, audit transcript, and handoff.
+* Added evidence and update timing rules.
+* Added deterministic Session State update template.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

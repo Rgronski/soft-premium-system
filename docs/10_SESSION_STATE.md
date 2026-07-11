@@ -40,15 +40,111 @@ This document records the latest known working session state.
 
 It helps the Product Owner and AI resume work safely in a new chat without relying only on conversation history.
 
+This document is an operational snapshot for SPS OS session continuity.
+
 This document describes session continuity. It does not replace:
 
 * `08_CURRENT_STATE.md` for product status,
 * `09_CHANGELOG.md` for completed historical changes,
 * `06_BACKLOG.md` for candidate future work.
 
+It is not:
+
+* a changelog,
+* a roadmap,
+* a session handoff,
+* an implementation report,
+* an audit transcript.
+
+It should answer only:
+
+* What is active now?
+* What was just completed?
+* What is next?
+* What is the verified repository state?
+* What is blocked or unknown?
+* What is the one Next Safe Step?
+
 It should also record who owned diagnosis, implementation, verification, and repository actions when responsibilities are split between ChatGPT / Chief Architect, Codex, and Product Owner.
 
 Session Close should leave enough confirmed information here to support the next session's Project Integrity Check.
+
+---
+
+# Session State Contract
+
+Allowed fields:
+
+* date
+* active capability
+* active work item
+* current mode
+* completed capability items
+* current product milestone
+* next product milestone
+* active parallel capability
+* latest completed capability item
+* current sprint
+* platform priority
+* repository branch
+* repository working tree state
+* ahead / behind status
+* latest verified commit
+* verification status
+* blockers
+* open risks
+* next safe step
+
+Forbidden content:
+
+* long narrative summaries
+* historical changelog entries
+* roadmap planning
+* implementation details
+* complete handoff text
+* speculative future work
+* unverified claims
+
+Evidence rules:
+
+* use confirmed terminal output
+* use committed documentation
+* use explicit Codex output
+* use `sps-git-context.txt` if available
+* use `UNKNOWN` when evidence is missing
+
+Update timing:
+
+* update during `SPS OS — KONIEC`
+* update after Session Audit
+* update before Session Handoff
+* update before the next START package
+
+Deterministic Session State update template:
+
+```text
+SPS OS Session State
+
+Date: [VALUE OR UNKNOWN]
+Active Capability: [VALUE OR UNKNOWN]
+Active Work Item: [VALUE OR UNKNOWN]
+Current Mode: [VALUE OR UNKNOWN]
+Completed Capability Items: [VALUE OR NONE OR UNKNOWN]
+Current Product Milestone: [VALUE OR NONE OR UNKNOWN]
+Next Product Milestone: [VALUE OR UNKNOWN]
+Active Parallel Capability: [VALUE OR NONE OR UNKNOWN]
+Latest Completed Capability Item: [VALUE OR NONE OR UNKNOWN]
+Current Sprint: [VALUE OR NONE OR UNKNOWN]
+Platform Priority: [VALUE OR UNKNOWN]
+Repository Branch: [VALUE OR UNKNOWN]
+Repository Working Tree State: [CLEAN OR DIRTY OR UNKNOWN]
+Ahead / Behind Status: [VALUE OR UNKNOWN]
+Latest Verified Commit: [VALUE OR UNKNOWN]
+Verification Status: [PASS OR FAIL OR PARTIAL OR BLOCKED OR UNKNOWN OR NOT APPLICABLE]
+Blockers: [VALUE OR NONE OR UNKNOWN]
+Open Risks: [VALUE OR NONE OR UNKNOWN]
+Next Safe Step: [EXACTLY ONE NEXT SAFE STEP]
+```
 
 ---
 

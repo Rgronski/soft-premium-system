@@ -251,6 +251,30 @@ Each section must require:
 
 ---
 
+# Session State Update
+
+Session close follows this operational order:
+
+```text
+Session Audit
+    ->
+Session State Update
+    ->
+Session Handoff
+```
+
+Session Audit checks the session.
+
+Session State records the current operational snapshot.
+
+Session Handoff transfers context to the next chat.
+
+The Session State update contract is defined in `docs/10_SESSION_STATE.md`.
+
+Do not duplicate the full Session State template in this document.
+
+---
+
 # Work Summary
 
 Work Summary must separate:
