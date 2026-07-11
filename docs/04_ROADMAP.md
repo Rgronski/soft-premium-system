@@ -633,16 +633,30 @@ Establish the release-readiness contract and validation boundaries.
 * release validation contract,
 * release criteria alignment.
 
+**Release Readiness Validation Categories**
+* SSOT consistency
+* Bootstrap/runtime startup
+* Session package generation
+* Git/repository state
+* Documentation completeness
+* Milestone closure evidence
+* Out-of-scope boundary confirmation
+
 **Out of Scope**
 * SPS 2.0 scope
 * new business modules
+* source-code feature implementation
+* test runner setup unless separately approved
 
 **Artifacts**
 * release readiness documentation
 * state document updates
 
 **Definition of Done**
-* release readiness milestone is formally defined and accepted.
+* release readiness categories are documented,
+* validation boundaries are accepted,
+* required release evidence is known,
+* next release decision can be made safely.
 
 **Documentation Updates**
 * Current State
