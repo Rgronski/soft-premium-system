@@ -126,6 +126,47 @@ Do not guess missing branch, commit, work item, milestone, or repository status.
 
 Runtime Dashboard should report package context when present.
 
+Package HEAD Authority:
+
+- `sps-git-context.txt` is authoritative for package HEAD and repository metadata inside the uploaded package.
+- SSOT documents do not need to duplicate the package HEAD exactly.
+- SSOT documents remain authoritative for project state, milestones, lifecycle facts, and decisions.
+
+Acceptable Commit Drift:
+
+Session State / Handoff commit fields may lag behind package HEAD when the only drift is caused by a session-state / handoff synchronization commit or a package-generation follow-up commit.
+
+This drift is acceptable if:
+
+- package Git Context is present,
+- Session State exists,
+- dated Session Handoff exists,
+- lifecycle facts match,
+- milestone state matches,
+- capability state matches,
+- no factual project-state conflict is detected.
+
+Package Consistency:
+
+- `PASS`: package context and SSOT agree, including acceptable commit drift.
+- `PARTIAL-NON-BLOCKING`: minor metadata drift exists, but lifecycle/project facts are consistent.
+- `FAIL`: factual conflict exists in milestone, capability, branch, project state, or SSOT ownership.
+- `UNKNOWN`: required evidence is missing.
+
+Consistency Gate:
+
+Do not fail Consistency Gate solely because Session State / Handoff commit fields are one commit behind package HEAD if the drift is acceptable under the rule above.
+
+Anti-loop rule:
+
+Do not recommend updating Session State / Handoff only to chase the latest package HEAD. Recommend update only when factual project state changed or required handoff/session-state facts are missing or wrong.
+
+Runtime Lock / Session Lock:
+
+Runtime Lock and Session Lock should become `ACTIVE` after bootstrap passes required gates.
+
+An acceptable commit drift must not keep locks inactive by itself.
+
 Tryb pracy:
 
 Execute this bootstrap in SPDM credit-saving mode and minimal patch mode:
