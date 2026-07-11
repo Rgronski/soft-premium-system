@@ -548,6 +548,23 @@ Each release entry should contain:
 
 ---
 
+## CAP-002.4 - Session Handoff
+
+### Date
+
+2026-07-11
+
+### Completed
+
+* Started Session Handoff design.
+* Added `docs/session-handoffs/README.md`.
+* Formalized handoff file naming.
+* Added deterministic handoff template.
+* Separated handoff from session state, changelog, roadmap, and audit transcript.
+* Clarified Next Chat Prompt and Next Safe Step requirements.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

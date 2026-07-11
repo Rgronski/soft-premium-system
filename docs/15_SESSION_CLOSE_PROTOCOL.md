@@ -261,17 +261,25 @@ Session Audit
 Session State Update
     ->
 Session Handoff
+    ->
+Next START
 ```
 
-Session Audit checks the session.
+Session Audit checks facts.
 
 Session State records the current operational snapshot.
 
-Session Handoff transfers context to the next chat.
+Session Handoff transfers only the context needed by the next chat.
+
+Next START uses the handoff together with a fresh ZIP / Git Context.
 
 The Session State update contract is defined in `docs/10_SESSION_STATE.md`.
 
+The Session Handoff contract is defined in `docs/session-handoffs/README.md`.
+
 Do not duplicate the full Session State template in this document.
+
+Do not duplicate the full Session Handoff template in this document.
 
 ---
 
@@ -341,6 +349,10 @@ It must include:
 * confirmed unknowns,
 * next safe step,
 * next chat preparation.
+
+The full handoff contract and deterministic template are defined in `docs/session-handoffs/README.md`.
+
+Do not duplicate the full handoff template in this document.
 
 ---
 

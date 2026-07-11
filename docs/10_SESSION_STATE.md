@@ -148,6 +148,18 @@ Next Safe Step: [EXACTLY ONE NEXT SAFE STEP]
 
 ---
 
+# Session State And Handoff Boundary
+
+Session State is the current operational snapshot.
+
+Session Handoff is the transfer package for the next chat.
+
+Session State must not contain the full handoff body.
+
+Full handoff contract lives in `docs/session-handoffs/README.md`.
+
+---
+
 # Latest Session
 
 **Date**
