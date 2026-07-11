@@ -704,9 +704,10 @@ Any `FAIL` or `MISSING` blocks the decision.
 
 **First Evidence Assessment**
 
-No category is marked `PASS` in this first assessment.
+Some categories are now marked `PASS` based on the latest successful `SPS OS — START`.
 Any `MISSING` category blocks release-readiness decision.
 Any `PARTIAL` category requires follow-up evidence or Product Owner decision.
+Release-readiness decision remains blocked because not all required categories are `PASS` or `NOT APPLICABLE`.
 
 * Category: SSOT consistency
   Status: `PARTIAL`
@@ -715,22 +716,22 @@ Any `PARTIAL` category requires follow-up evidence or Product Owner decision.
   Blocks release-readiness decision: YES
 
 * Category: Bootstrap/runtime startup
-  Status: `MISSING`
-  Evidence found: bootstrap contract defines required gates and Runtime Dashboard output.
-  Evidence missing: latest Runtime Dashboard proving successful bootstrap gates for this assessment.
-  Blocks release-readiness decision: YES
+  Status: `PASS`
+  Evidence found: latest successful `SPS OS — START` reported Bootstrap Status `PASS`, Project Context Loader `PASS`, Project Integrity `PASS`, SSOT Validation `PASS`, Consistency Gate `PASS`, Runtime Lock `ACTIVE`, and Session Lock `ACTIVE`.
+  Evidence missing: none for this category.
+  Blocks release-readiness decision: NO
 
 * Category: Session package generation
-  Status: `MISSING`
-  Evidence found: package generator contract defines expected Git Context, Session Summary, and handoff package context.
-  Evidence missing: latest package verification proving required package context is present and readable.
+  Status: `PARTIAL`
+  Evidence found: latest successful `SPS OS — START` reported Package Detected `YES`, Git Context `PRESENT`, Session Summary `PRESENT`, and Session Handoff `PRESENT`.
+  Evidence missing: Current Session ID, Suggested Chat Title, and Next Session ID are `UNKNOWN`; Package Consistency is `PARTIAL`.
   Blocks release-readiness decision: YES
 
 * Category: Git/repository state
-  Status: `PARTIAL`
-  Evidence found: current repository checkpoint was reported as clean and remote up to date.
-  Evidence missing: recorded release-readiness evidence tying branch, working tree, latest commit, and remote sync status to this assessment.
-  Blocks release-readiness decision: YES
+  Status: `PASS`
+  Evidence found: latest successful `SPS OS — START` reported branch `feature/documentation-foundation`, Repository Status `CLEAN`, and Latest Commit `3616fa3 docs(ms-001.4): record first readiness evidence assessment`; Product Owner confirmed remote state was up to date before package generation.
+  Evidence missing: none for this category.
+  Blocks release-readiness decision: NO
 
 * Category: Documentation completeness
   Status: `PARTIAL`
