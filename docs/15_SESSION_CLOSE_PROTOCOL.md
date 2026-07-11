@@ -99,6 +99,23 @@ Use only these status values where status reporting is required:
 
 ---
 
+# Session Audit Status Vocabulary
+
+Use only these Session Audit statuses:
+
+* `PASS`
+* `FAIL`
+* `PARTIAL`
+* `BLOCKED`
+* `UNKNOWN`
+* `NOT APPLICABLE`
+
+`PASS` requires evidence.
+
+`UNKNOWN` is better than guessing.
+
+---
+
 # Anti-Guessing Rules
 
 Chief Architect must not guess.
@@ -136,15 +153,101 @@ If the session still contains unresolved uncertainty, report it instead of smoot
 
 # Session Audit
 
-Session Audit must determine:
+After Session Freeze, Chief Architect audits the session before producing the final handoff.
 
-* what was actually completed,
-* what was only designed,
-* what was only proposed,
-* which files were confirmed changed,
-* what was verified,
-* what remains unknown,
-* whether the session is ready for handoff.
+The audit must check:
+
+* Session Scope
+* Active Capability / Milestone
+* Work Completed
+* Work Designed but Not Implemented
+* Work Proposed but Not Approved
+* Files Changed
+* Documentation Changed
+* Verification Status
+* Git Context
+* Repository Cleanliness
+* Commit / Push Status
+* Open Risks
+* Blockers
+* Parked Ideas
+* Next Safe Step
+
+The audit must use only factual evidence from:
+
+* current conversation,
+* confirmed user-provided terminal output,
+* `sps-git-context.txt` if available,
+* committed documentation,
+* explicitly provided Codex output.
+
+If evidence is missing, the status must be `UNKNOWN`.
+
+---
+
+# Session Audit Template
+
+Use this deterministic audit output template:
+
+```text
+SPS OS Session Audit
+
+1. Scope
+Status: [PASS | FAIL | PARTIAL | BLOCKED | UNKNOWN | NOT APPLICABLE]
+Evidence: [CONFIRMED EVIDENCE OR UNKNOWN]
+Notes: [FACTUAL NOTES OR NOT APPLICABLE]
+
+2. Capability / Milestone
+Status: [PASS | FAIL | PARTIAL | BLOCKED | UNKNOWN | NOT APPLICABLE]
+Evidence: [CONFIRMED EVIDENCE OR UNKNOWN]
+Notes: [FACTUAL NOTES OR NOT APPLICABLE]
+
+3. Completed Work
+Status: [PASS | FAIL | PARTIAL | BLOCKED | UNKNOWN | NOT APPLICABLE]
+Evidence: [CONFIRMED EVIDENCE OR UNKNOWN]
+Notes: [FACTUAL NOTES OR NOT APPLICABLE]
+
+4. Designed but Not Implemented
+Status: [PASS | FAIL | PARTIAL | BLOCKED | UNKNOWN | NOT APPLICABLE]
+Evidence: [CONFIRMED EVIDENCE OR UNKNOWN]
+Notes: [FACTUAL NOTES OR NOT APPLICABLE]
+
+5. Files and Documentation
+Status: [PASS | FAIL | PARTIAL | BLOCKED | UNKNOWN | NOT APPLICABLE]
+Evidence: [CONFIRMED EVIDENCE OR UNKNOWN]
+Notes: [FACTUAL NOTES OR NOT APPLICABLE]
+
+6. Verification
+Status: [PASS | FAIL | PARTIAL | BLOCKED | UNKNOWN | NOT APPLICABLE]
+Evidence: [CONFIRMED EVIDENCE OR UNKNOWN]
+Notes: [FACTUAL NOTES OR NOT APPLICABLE]
+
+7. Git Context
+Status: [PASS | FAIL | PARTIAL | BLOCKED | UNKNOWN | NOT APPLICABLE]
+Evidence: [CONFIRMED EVIDENCE OR UNKNOWN]
+Notes: [FACTUAL NOTES OR NOT APPLICABLE]
+
+8. Risks / Blockers
+Status: [PASS | FAIL | PARTIAL | BLOCKED | UNKNOWN | NOT APPLICABLE]
+Evidence: [CONFIRMED EVIDENCE OR UNKNOWN]
+Notes: [FACTUAL NOTES OR NOT APPLICABLE]
+
+9. Parked Ideas
+Status: [PASS | FAIL | PARTIAL | BLOCKED | UNKNOWN | NOT APPLICABLE]
+Evidence: [CONFIRMED EVIDENCE OR UNKNOWN]
+Notes: [FACTUAL NOTES OR NOT APPLICABLE]
+
+10. Next Safe Step
+Status: [PASS | FAIL | PARTIAL | BLOCKED | UNKNOWN | NOT APPLICABLE]
+Evidence: [CONFIRMED EVIDENCE OR UNKNOWN]
+Notes: [FACTUAL NOTES OR NOT APPLICABLE]
+```
+
+Each section must require:
+
+* status
+* evidence
+* notes
 
 ---
 

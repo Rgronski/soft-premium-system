@@ -70,15 +70,21 @@ MS-001.3 - Workflow Engine
 MS-001.4 - Release Readiness
 
 **Session Focus**
-CAP-002.1 - Session Close Protocol for SPS Lifecycle Engine.
+CAP-002.2 - Session Audit for SPS Lifecycle Engine.
 
 Current capability state:
 
 * `CAP-001 - Bootstrap Engine`: Functional Complete
 * `CAP-002 - SPS Lifecycle Engine`: Started
-* Current work item: `CAP-002.1 - Session Close Protocol`
+* `CAP-002.1 - Session Close Protocol`: Done
+* `CAP-002.2 - Session Audit`: Started
+* Current work item: `CAP-002.2 - Session Audit`
 * Current mode: `documentation-only design patch`
-* Next Safe Step: validate Session Close Protocol after patch
+* Last commit: `20d4769 docs: add SPS session close protocol`
+* Repository branch: `feature/documentation-foundation`
+* Repository working tree: `clean`
+* Repository remote status: `ahead of origin by 10 commits`
+* Next Safe Step: validate Session Audit protocol after patch
 
 SPDM-001 documentation foundation is completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
 SPDM-002 bootstrap alignment is completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
@@ -136,25 +142,26 @@ Next:
 * Keep `SPDM-006` recorded as completed full startup package work
 * Keep `SPDM-007` recorded as completed one-command startup enforcement work
 * Keep `CAP-001` active as parallel capability documentation work
-* Continue `CAP-002.1 - Session Close Protocol`
+* Continue `CAP-002.2 - Session Audit`
 
 ---
 
 # Completed In This Session
 
 * Started `CAP-002 - SPS Lifecycle Engine`.
-* Defined `CAP-002.1 - Session Close Protocol` as the active work item.
-* Added `docs/15_SESSION_CLOSE_PROTOCOL.md`.
-* Extended `10_PROJECT_LIFECYCLE.md` with the session close lifecycle position.
-* Separated start, bootstrap, and session close contracts in lifecycle documentation.
-* Updated session state to record `CAP-001` as functional complete and `CAP-002` as started.
-* Recorded the need to validate the Session Close Protocol after the patch.
+* Marked `CAP-002.1 - Session Close Protocol` as done.
+* Started `CAP-002.2 - Session Audit`.
+* Extended `docs/15_SESSION_CLOSE_PROTOCOL.md` with deterministic Session Audit rules.
+* Added Session Audit status vocabulary.
+* Added Session Audit output template.
+* Updated session state with confirmed repository facts from user-provided terminal output.
+* Recorded the need to validate the Session Audit protocol after the patch.
 
 ---
 
 # Not Completed In This Session
 
-* Validation of the new Session Close Protocol is still pending.
+* Validation of the new Session Audit protocol is still pending.
 * Commit and push are pending verification.
 
 ---
@@ -174,7 +181,7 @@ Not completed.
 Not completed.
 
 **Working Tree Status**
-UNKNOWN. Repository state was not verified in this Codex run.
+Clean. Confirmed from user-provided terminal output.
 
 **Responsibility Split**
 Diagnosis and scope definition: ChatGPT / Chief Architect.
@@ -185,19 +192,20 @@ Commit and push: Product Owner.
 Open
 
 **Validation**
-Session Result: `CAP-002 - SPS Lifecycle Engine` started.
-Architecture: Session close is now defined as a separate operational contract from launcher and bootstrap.
+Session Result: `CAP-002.2 - Session Audit` started.
+Architecture: Session close now includes a deterministic evidence-first audit contract.
 Verification: Pending.
-Repository: UNKNOWN in this run.
-Next Action: validate Session Close Protocol after patch.
+Repository: `feature/documentation-foundation`, working tree `clean`, ahead of origin by 10 commits.
+Next Action: validate Session Audit protocol after patch.
 Additional Result: `CAP-001 - Bootstrap Engine` remains functionally complete.
+Additional Result: `CAP-002.2` adds deterministic Session Audit rules.
 Additional Result: `CAP-002.1` formalizes `SPS OS — KONIEC`.
 
 ---
 
 # Next Logical Step
 
-Validate `CAP-002.1 - Session Close Protocol`.
+Validate `CAP-002.2 - Session Audit`.
 
 ---
 

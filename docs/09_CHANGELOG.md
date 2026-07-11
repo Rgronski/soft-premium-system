@@ -516,6 +516,22 @@ Each release entry should contain:
 
 ---
 
+## CAP-002.2 - Session Audit
+
+### Date
+
+2026-07-11
+
+### Completed
+
+* Started Session Audit design.
+* Added a deterministic audit checklist for `SPS OS — KONIEC`.
+* Added Session Audit status vocabulary.
+* Added Session Audit output template.
+* Clarified evidence-first and anti-guessing audit behavior.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.
