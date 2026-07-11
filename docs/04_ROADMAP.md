@@ -642,6 +642,66 @@ Establish the release-readiness contract and validation boundaries.
 * Milestone closure evidence
 * Out-of-scope boundary confirmation
 
+**Release Readiness Evidence Checklist**
+
+Status vocabulary:
+
+* `PASS`
+* `FAIL`
+* `PARTIAL`
+* `MISSING`
+* `NOT APPLICABLE`
+
+Checklist:
+
+* Category: SSOT consistency
+  Required Evidence: roadmap, current state, changelog, session state, and lifecycle documents do not conflict.
+  Evidence Source: SSOT documentation and bootstrap validation output.
+  Status Vocabulary: `PASS` / `FAIL` / `PARTIAL` / `MISSING` / `NOT APPLICABLE`
+  Notes / Decision Rule: any unresolved SSOT conflict blocks release-readiness decision.
+
+* Category: Bootstrap/runtime startup
+  Required Evidence: `SPS OS — START` completes required bootstrap gates and Runtime Dashboard output is valid.
+  Evidence Source: latest bootstrap Runtime Dashboard.
+  Status Vocabulary: `PASS` / `FAIL` / `PARTIAL` / `MISSING` / `NOT APPLICABLE`
+  Notes / Decision Rule: failed bootstrap, failed SSOT Validation, or failed Consistency Gate blocks release-readiness decision.
+
+* Category: Session package generation
+  Required Evidence: session package includes readable Git Context, Session Summary, and available Session Handoff.
+  Evidence Source: generated `sps-session.zip`, `sps-git-context.txt`, `sps-session-summary.txt`, and session handoff if available.
+  Status Vocabulary: `PASS` / `FAIL` / `PARTIAL` / `MISSING` / `NOT APPLICABLE`
+  Notes / Decision Rule: missing package context must be documented before release-readiness decision.
+
+* Category: Git/repository state
+  Required Evidence: branch, working tree state, latest commit, and remote sync status are known.
+  Evidence Source: confirmed Git output or package Git Context.
+  Status Vocabulary: `PASS` / `FAIL` / `PARTIAL` / `MISSING` / `NOT APPLICABLE`
+  Notes / Decision Rule: unknown or dirty repository state blocks release-readiness decision unless Product Owner explicitly accepts the condition.
+
+* Category: Documentation completeness
+  Required Evidence: required roadmap, current state, changelog, session state, bootstrap, close protocol, package, and capability documentation are present and aligned.
+  Evidence Source: SSOT documentation review.
+  Status Vocabulary: `PASS` / `FAIL` / `PARTIAL` / `MISSING` / `NOT APPLICABLE`
+  Notes / Decision Rule: missing required documentation blocks release-readiness decision.
+
+* Category: Milestone closure evidence
+  Required Evidence: completed milestones required for SPS OS 1.0 release path have closure evidence.
+  Evidence Source: roadmap, current state, changelog, and session state.
+  Status Vocabulary: `PASS` / `FAIL` / `PARTIAL` / `MISSING` / `NOT APPLICABLE`
+  Notes / Decision Rule: missing closure evidence for required prior milestones blocks release-readiness decision.
+
+* Category: Out-of-scope boundary confirmation
+  Required Evidence: SPS 2.0 scope, new business modules, source-code feature implementation, and test runner setup remain outside MS-001.4 unless separately approved.
+  Evidence Source: this milestone contract and Product Owner-approved scope.
+  Status Vocabulary: `PASS` / `FAIL` / `PARTIAL` / `MISSING` / `NOT APPLICABLE`
+  Notes / Decision Rule: scope expansion blocks release-readiness decision until explicitly approved.
+
+Decision boundary:
+
+MS-001.4 may proceed to release-readiness decision only when all required categories are `PASS` or explicitly `NOT APPLICABLE`.
+Any `FAIL` or `MISSING` blocks the decision.
+`PARTIAL` requires a documented follow-up or Product Owner decision.
+
 **Out of Scope**
 * SPS 2.0 scope
 * new business modules
