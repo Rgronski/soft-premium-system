@@ -38,6 +38,29 @@ function Get-FirstOrUnknown {
     return "$text"
 }
 
+function Get-WorkingTreeStatus {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $WorkingDirectory
+    )
+
+    try {
+        $output = & git -C $WorkingDirectory status --porcelain 2>$null
+        if ($LASTEXITCODE -ne 0) {
+            return "UNKNOWN"
+        }
+
+        if (@($output).Count -eq 0) {
+            return "CLEAN"
+        }
+
+        return "DIRTY"
+    }
+    catch {
+        return "UNKNOWN"
+    }
+}
+
 $scriptRoot = Split-Path -Parent $PSCommandPath
 $candidateRoot = Split-Path -Parent $scriptRoot
 
@@ -53,20 +76,11 @@ $repoRoot = (Resolve-Path -LiteralPath $repoRoot).Path
 $generatedAt = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss zzz")
 
 $branch = Get-FirstOrUnknown (Invoke-Git -Arguments @("branch", "--show-current") -WorkingDirectory $repoRoot)
-$statusShort = Invoke-Git -Arguments @("status", "--short") -WorkingDirectory $repoRoot
 $statusBranch = Invoke-Git -Arguments @("status", "--short", "--branch") -WorkingDirectory $repoRoot
 $latestCommit = Get-FirstOrUnknown (Invoke-Git -Arguments @("log", "-1", "--oneline", "--decorate") -WorkingDirectory $repoRoot)
 $recentCommits = Invoke-Git -Arguments @("log", "--oneline", "--decorate", "-n", "10") -WorkingDirectory $repoRoot
 
-if ($null -eq $statusShort) {
-    $workingTreeStatus = "UNKNOWN"
-}
-elseif (@($statusShort).Count -eq 0) {
-    $workingTreeStatus = "CLEAN"
-}
-else {
-    $workingTreeStatus = "DIRTY"
-}
+$workingTreeStatus = Get-WorkingTreeStatus -WorkingDirectory $repoRoot
 
 $aheadBehind = "UNKNOWN"
 if ($null -ne $statusBranch) {
