@@ -176,7 +176,7 @@ The generator must not invent missing state.
 2026-07-11
 
 **Session Type**
-Documentation-only design patch
+SPS lifecycle documentation and package integration
 
 **Current Milestone**
 None
@@ -188,21 +188,33 @@ MS-001.3 - Workflow Engine
 MS-001.4 - Release Readiness
 
 **Session Focus**
-CAP-002.2 - Session Audit for SPS Lifecycle Engine.
+CAP-002 - SPS Lifecycle Engine completed locally through Bootstrap Integration.
 
 Current capability state:
 
 * `CAP-001 - Bootstrap Engine`: Functional Complete
-* `CAP-002 - SPS Lifecycle Engine`: Started
+* `CAP-002 - SPS Lifecycle Engine`: Functional Complete locally
 * `CAP-002.1 - Session Close Protocol`: Done
-* `CAP-002.2 - Session Audit`: Started
-* Current work item: `CAP-002.2 - Session Audit`
-* Current mode: `documentation-only design patch`
-* Last commit: `20d4769 docs: add SPS session close protocol`
+* `CAP-002.2 - Session Audit`: Done
+* `CAP-002.3 - Session State`: Done
+* `CAP-002.4 - Session Handoff`: Done
+* `CAP-002.5a - Session Package Generator Contract`: Done
+* `CAP-002.5b - New-SpsSession.ps1 Implementation`: Done
+* `CAP-002.6 - Bootstrap Integration`: Done
+* Current work item: `NONE`
+* Latest completed capability item: `CAP-002.6 - Bootstrap Integration`
+* Current mode: `documentation and local tooling integration`
+* Latest verified commit: `81e4d07 docs: integrate SPS session package with bootstrap`
 * Repository branch: `feature/documentation-foundation`
-* Repository working tree: `clean`
-* Repository remote status: `ahead of origin by 10 commits`
-* Next Safe Step: validate Session Audit protocol after patch
+* Repository working tree: `UNKNOWN`
+* Repository remote status: `ahead 17`
+* Push status: `not done / not confirmed`
+* Session Package detected: `YES`
+* Git Context: `PRESENT`
+* Session Summary: `PRESENT`
+* Session Handoff: `will be present after this patch`
+* Package Consistency: `PARTIAL until next package regeneration`
+* Next Safe Step: Regenerate `sps-session.zip` and run `SPS OS — START` again with the regenerated package.
 
 SPDM-001 documentation foundation is completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
 SPDM-002 bootstrap alignment is completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
@@ -248,7 +260,7 @@ Completed in this milestone:
 
 Status:
 
-* In Progress
+* Functional Complete locally
 
 Next:
 
@@ -260,27 +272,27 @@ Next:
 * Keep `SPDM-006` recorded as completed full startup package work
 * Keep `SPDM-007` recorded as completed one-command startup enforcement work
 * Keep `CAP-001` active as parallel capability documentation work
-* Continue `CAP-002.2 - Session Audit`
+* Regenerate `sps-session.zip` and run `SPS OS — START` again with the regenerated package.
 
 ---
 
 # Completed In This Session
 
-* Started `CAP-002 - SPS Lifecycle Engine`.
-* Marked `CAP-002.1 - Session Close Protocol` as done.
-* Started `CAP-002.2 - Session Audit`.
-* Extended `docs/15_SESSION_CLOSE_PROTOCOL.md` with deterministic Session Audit rules.
-* Added Session Audit status vocabulary.
-* Added Session Audit output template.
-* Updated session state with confirmed repository facts from user-provided terminal output.
-* Recorded the need to validate the Session Audit protocol after the patch.
+* Completed `CAP-002.1 - Session Close Protocol`.
+* Completed `CAP-002.2 - Session Audit`.
+* Completed `CAP-002.3 - Session State`.
+* Completed `CAP-002.4 - Session Handoff`.
+* Completed `CAP-002.5a - Session Package Generator Contract`.
+* Completed `CAP-002.5b - New-SpsSession.ps1 Implementation`.
+* Completed `CAP-002.6 - Bootstrap Integration`.
+* Added dated CAP-002 session handoff for next bootstrap package.
 
 ---
 
 # Not Completed In This Session
 
-* Validation of the new Session Audit protocol is still pending.
-* Commit and push are pending verification.
+* Push is not done / not confirmed.
+* Package Consistency remains `PARTIAL` until the next package regeneration includes the dated session handoff.
 
 ---
 
@@ -290,16 +302,16 @@ Next:
 Not applicable.
 
 **Documentation Verification**
-Pending verification after patch.
+Session package bootstrap detected stale `docs/10_SESSION_STATE.md`; this patch updates it.
 
 **Commit Status**
-Not completed.
+Latest verified commit from package context: `81e4d07 docs: integrate SPS session package with bootstrap`.
 
 **Push Status**
-Not completed.
+Not done / not confirmed.
 
 **Working Tree Status**
-Clean. Confirmed from user-provided terminal output.
+UNKNOWN. `sps-git-context.txt` reports `UNKNOWN`.
 
 **Responsibility Split**
 Diagnosis and scope definition: ChatGPT / Chief Architect.
@@ -310,26 +322,26 @@ Commit and push: Product Owner.
 Open
 
 **Validation**
-Session Result: `CAP-002.2 - Session Audit` started.
-Architecture: Session close now includes a deterministic evidence-first audit contract.
-Verification: Pending.
-Repository: `feature/documentation-foundation`, working tree `clean`, ahead of origin by 10 commits.
-Next Action: validate Session Audit protocol after patch.
+Session Result: `CAP-002 - SPS Lifecycle Engine` Functional Complete locally.
+Architecture: Session close, audit, state, handoff, package generation, and bootstrap integration are documented and locally implemented where applicable.
+Verification: Package bootstrap reported `Session Package: PARTIAL` because dated handoff was missing before this patch.
+Repository: `feature/documentation-foundation`, working tree `UNKNOWN`, ahead 17.
+Next Action: Regenerate `sps-session.zip` and run `SPS OS — START` again with the regenerated package.
 Additional Result: `CAP-001 - Bootstrap Engine` remains functionally complete.
-Additional Result: `CAP-002.2` adds deterministic Session Audit rules.
+Additional Result: `CAP-002.1` through `CAP-002.6` are done locally.
 Additional Result: `CAP-002.1` formalizes `SPS OS — KONIEC`.
 
 ---
 
 # Next Logical Step
 
-Validate `CAP-002.2 - Session Audit`.
+Regenerate `sps-session.zip` and run `SPS OS — START` again with the regenerated package.
 
 ---
 
 # Notes For Next AI Session
 
-Before continuing feature work, load `docs/` and verify the current milestone state:
+Before continuing feature work, load the fresh session package and verify the current milestone state:
 
 * `00_ORIGINS.md`
 * `00_PROJECT_BIBLE.md`
@@ -338,6 +350,7 @@ Before continuing feature work, load `docs/` and verify the current milestone st
 * `08_CURRENT_STATE.md`
 * `09_CHANGELOG.md`
 * `10_SESSION_STATE.md`
+* `docs/session-handoffs/2026-07-11_CAP-002_SESSION_HANDOFF.md`
 
 Then continue using the standard workflow with explicit role split:
 
