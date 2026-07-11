@@ -67,7 +67,8 @@ SPDM-007 completed and accepted with one-command startup rules that block memory
 CAP-003.1 completed and accepted with `docs/13_PROJECT_CAPABILITY.md` created as the Project Capability domain contract.
 CAP-003.2 completed and accepted with Project Domain Model added to `docs/13_PROJECT_CAPABILITY.md`.
 MS-001.4 release readiness evidence checklist is defined with status vocabulary and decision boundary in `docs/04_ROADMAP.md`.
-MS-001.4 remains Planned. Implementation has not started, and no release-readiness checklist category has been marked PASS.
+MS-001.4 readiness evidence was updated after successful `SPS OS — START`: Bootstrap/runtime startup is `PASS`, Git/repository state is `PASS`, and Session package generation remains `PARTIAL`.
+MS-001.4 remains Planned. Implementation has not started, and release-readiness decision remains blocked.
 
 CAP-001 is reserved for the historical Bootstrap Engine. Project Capability documentation work is tracked as CAP-003.
 
@@ -197,7 +198,7 @@ Next:
 
 Next session priorities:
 
-* Validate MS-001.4 release readiness evidence checklist categories
+* Resolve remaining PARTIAL MS-001.4 readiness categories
 * Keep ENG-000 / SPS Core / SPS OS 1.0 as the active platform priority
 * Keep workflow domain work isolated from UI
 * Keep workflow governance and project state documentation synchronized
@@ -217,7 +218,7 @@ Commit and push status must always be confirmed explicitly by the Product Owner.
 Priority 1
 
 Prepare `MS-001.4 - Release Readiness`.
-Use the release readiness contract and evidence checklist defined in `docs/04_ROADMAP.md` to validate required release evidence categories.
+Use the release readiness contract and evidence checklist defined in `docs/04_ROADMAP.md` to resolve remaining PARTIAL readiness categories.
 
 Priority 2
 
