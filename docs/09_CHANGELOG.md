@@ -617,6 +617,22 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.4 - Release Readiness Evidence Checklist
+
+### Date
+
+2026-07-12
+
+### Completed
+
+* Defined the MS-001.4 release readiness evidence checklist in `docs/04_ROADMAP.md`.
+* Added seven evidence categories.
+* Added status vocabulary: `PASS`, `FAIL`, `PARTIAL`, `MISSING`, and `NOT APPLICABLE`.
+* Added the release-readiness decision boundary.
+* Confirmed MS-001.4 remains Planned and implementation has not started.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.
