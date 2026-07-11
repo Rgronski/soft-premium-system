@@ -582,6 +582,23 @@ Each release entry should contain:
 
 ---
 
+## CAP-002.6 - Bootstrap Integration
+
+### Date
+
+2026-07-11
+
+### Completed
+
+* Started Bootstrap Integration design.
+* Connected Session Package output to next `SPS OS — START`.
+* Defined bootstrap package detection rules.
+* Defined supplemental package context rules.
+* Added Runtime Dashboard package context fields.
+* Clarified that SSOT remains authoritative.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

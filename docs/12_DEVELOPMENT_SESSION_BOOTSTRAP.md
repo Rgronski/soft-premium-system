@@ -78,10 +78,17 @@ Roadmap Status: [VALUE OR UNKNOWN]
 6. SSOT Loaded
 [COMPLETE LIST OF EVERY SSOT DOCUMENT ACTUALLY READ]
 
-7. Recommendation
+7. Session Package
+Package Detected: [YES | NO | UNKNOWN]
+Git Context: [PRESENT | MISSING | UNKNOWN]
+Session Summary: [PRESENT | MISSING | UNKNOWN]
+Session Handoff: [PRESENT | MISSING | UNKNOWN]
+Package Consistency: [PASS | FAIL | PARTIAL | UNKNOWN]
+
+8. Recommendation
 [EXACTLY ONE RECOMMENDATION]
 
-8. Next Safe Step
+9. Next Safe Step
 [EXACTLY ONE NEXT SAFE STEP]
 ```
 
@@ -96,6 +103,28 @@ If a ZIP attachment is visible but its contents are not accessible for reading:
 - report exactly: `Bootstrap Status: BLOCKED`
 - ask only for re-upload of an accessible ZIP,
 - do not continue until the ZIP contents are actually readable.
+
+Session Package Bootstrap Integration:
+
+After receiving a readable ZIP and before or during PCL, Bootstrap should detect whether the uploaded ZIP includes:
+
+- `sps-git-context.txt`
+- `sps-session-summary.txt`
+- `docs/session-handoffs/`
+
+These files are supplemental package context.
+
+Package context is helpful, but it is not automatically authoritative.
+
+SSOT documents remain authoritative.
+
+If package context conflicts with SSOT documents, report the conflict.
+
+If package context is missing, report `UNKNOWN`.
+
+Do not guess missing branch, commit, work item, milestone, or repository status.
+
+Runtime Dashboard should report package context when present.
 
 Tryb pracy:
 

@@ -138,6 +138,20 @@ sps-session.zip
 
 ---
 
+# Bootstrap Consumption
+
+`New-SpsSession.ps1` creates package context.
+
+Bootstrap consumes package context.
+
+Bootstrap must still verify package context against SSOT.
+
+Missing package context must become `UNKNOWN`, not guessed.
+
+Session Package supports the next `SPS OS — START`.
+
+---
+
 # Implementation Status
 
 Recommended future script name:

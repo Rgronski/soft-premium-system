@@ -374,6 +374,10 @@ It may include Session Handoff.
 
 The package generator contract is defined in `docs/16_SESSION_PACKAGE_GENERATOR.md`.
 
+The output of `SPS OS — KONIEC` may include a Session Package.
+
+The next Bootstrap consumes Session Package according to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
+
 Do not duplicate the full generator contract in this document.
 
 ---
