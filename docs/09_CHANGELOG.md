@@ -565,6 +565,23 @@ Each release entry should contain:
 
 ---
 
+## CAP-002.5a - Session Package Generator Contract
+
+### Date
+
+2026-07-11
+
+### Completed
+
+* Started Session Package Generator design.
+* Added `docs/16_SESSION_PACKAGE_GENERATOR.md`.
+* Defined future `New-SpsSession.ps1` contract.
+* Clarified generator as context packaging tool, not decision maker.
+* Defined expected Git Context and Session Summary outputs.
+* Linked Session Package to next `SPS OS — START`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

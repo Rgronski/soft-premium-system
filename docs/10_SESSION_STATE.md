@@ -160,6 +160,16 @@ Full handoff contract lives in `docs/session-handoffs/README.md`.
 
 ---
 
+# Session State And Package Boundary
+
+Session State may be summarized into `sps-session-summary.txt` by the future package generator.
+
+Session State remains the source operational snapshot.
+
+The generator must not invent missing state.
+
+---
+
 # Latest Session
 
 **Date**

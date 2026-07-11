@@ -51,6 +51,16 @@ If evidence is missing, use `UNKNOWN`.
 
 ---
 
+# Session Package Boundary
+
+Session Handoff may be included in the next session package.
+
+The package generator must not rewrite handoff content.
+
+Handoff remains factual and evidence-based.
+
+---
+
 # Required Fields
 
 Session Handoff must include every field from the deterministic template.

@@ -262,6 +262,8 @@ Session State Update
     ->
 Session Handoff
     ->
+Session Package
+    ->
 Next START
 ```
 
@@ -271,15 +273,21 @@ Session State records the current operational snapshot.
 
 Session Handoff transfers only the context needed by the next chat.
 
+Session Package prepares the ZIP/context for the next chat.
+
 Next START uses the handoff together with a fresh ZIP / Git Context.
 
 The Session State update contract is defined in `docs/10_SESSION_STATE.md`.
 
 The Session Handoff contract is defined in `docs/session-handoffs/README.md`.
 
+The Session Package Generator contract is defined in `docs/16_SESSION_PACKAGE_GENERATOR.md`.
+
 Do not duplicate the full Session State template in this document.
 
 Do not duplicate the full Session Handoff template in this document.
+
+Do not duplicate the full Session Package Generator contract in this document.
 
 ---
 
@@ -353,6 +361,20 @@ It must include:
 The full handoff contract and deterministic template are defined in `docs/session-handoffs/README.md`.
 
 Do not duplicate the full handoff template in this document.
+
+---
+
+# Session Package
+
+Session Package prepares the ZIP/context for the next chat.
+
+It must include fresh Git Context.
+
+It may include Session Handoff.
+
+The package generator contract is defined in `docs/16_SESSION_PACKAGE_GENERATOR.md`.
+
+Do not duplicate the full generator contract in this document.
 
 ---
 
