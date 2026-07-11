@@ -204,10 +204,10 @@ Current capability state:
 * Current work item: `NONE`
 * Latest completed capability item: `CAP-002.6 - Bootstrap Integration`
 * Current mode: `documentation and local tooling integration`
-* Latest verified commit: `81e4d07 docs: integrate SPS session package with bootstrap`
+* Latest verified commit: `8b693cd docs: sync SPS session state and handoff`
 * Repository branch: `feature/documentation-foundation`
 * Repository working tree: `UNKNOWN`
-* Repository remote status: `ahead 17`
+* Repository remote status: `ahead 18`
 * Push status: `not done / not confirmed`
 * Session Package detected: `YES`
 * Git Context: `PRESENT`
@@ -305,7 +305,7 @@ Not applicable.
 Session package bootstrap detected stale `docs/10_SESSION_STATE.md`; this patch updates it.
 
 **Commit Status**
-Latest verified commit from package context: `81e4d07 docs: integrate SPS session package with bootstrap`.
+Latest verified commit from package context: `8b693cd docs: sync SPS session state and handoff`.
 
 **Push Status**
 Not done / not confirmed.
@@ -325,7 +325,7 @@ Open
 Session Result: `CAP-002 - SPS Lifecycle Engine` Functional Complete locally.
 Architecture: Session close, audit, state, handoff, package generation, and bootstrap integration are documented and locally implemented where applicable.
 Verification: Package bootstrap reported `Session Package: PARTIAL` because dated handoff was missing before this patch.
-Repository: `feature/documentation-foundation`, working tree `UNKNOWN`, ahead 17.
+Repository: `feature/documentation-foundation`, working tree `UNKNOWN`, ahead 18.
 Next Action: Regenerate `sps-session.zip` and run `SPS OS — START` again with the regenerated package.
 Additional Result: `CAP-001 - Bootstrap Engine` remains functionally complete.
 Additional Result: `CAP-002.1` through `CAP-002.6` are done locally.

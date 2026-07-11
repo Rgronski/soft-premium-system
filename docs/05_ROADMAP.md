@@ -20,7 +20,7 @@ Draft
 1.0
 
 **Source of Truth**
-Yes
+No
 
 **Depends On**
 00_PROJECT_BIBLE.md
@@ -37,6 +37,10 @@ Yes
 This document defines the planned evolution of Soft Premium System.
 
 It describes where the product is heading without describing implementation details or current project status.
+
+This document is a strategic roadmap / product direction document.
+
+Authoritative milestone order lives in `docs/04_ROADMAP.md`.
 
 ---
 
