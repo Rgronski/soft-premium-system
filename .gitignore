@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# SPS session package runtime files
+/sps-git-context.txt
+/sps-session-summary.txt
+/sps-session.zip
