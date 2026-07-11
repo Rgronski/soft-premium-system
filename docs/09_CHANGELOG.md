@@ -601,6 +601,22 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.4 - Release Readiness Contract
+
+### Date
+
+2026-07-12
+
+### Completed
+
+* Defined the minimal MS-001.4 release readiness contract in `docs/04_ROADMAP.md`.
+* Added release readiness validation categories.
+* Added out-of-scope boundaries.
+* Added Definition of Done for release readiness.
+* Confirmed implementation has not started and the milestone remains Planned.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

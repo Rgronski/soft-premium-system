@@ -214,7 +214,7 @@ Current capability state:
 * Session Summary: `PRESENT`
 * Session Handoff: `will be present after this patch`
 * Package Consistency: `PARTIAL until next package regeneration`
-* Next Safe Step: Regenerate `sps-session.zip` and run `SPS OS — START` again with the regenerated package.
+* Next Safe Step: Plan or validate MS-001.4 release readiness evidence after control-doc sync.
 
 SPDM-001 documentation foundation is completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
 SPDM-002 bootstrap alignment is completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
@@ -264,7 +264,7 @@ Status:
 
 Next:
 
-* Prepare MS-001.4 - Release Readiness
+* Plan or validate MS-001.4 release readiness evidence
 * Keep `SPDM-001` recorded as completed documentation foundation work
 * Keep `SPDM-003` recorded as completed repository access fallback work
 * Keep `SPDM-004` recorded as completed SPS launcher work
@@ -272,7 +272,7 @@ Next:
 * Keep `SPDM-006` recorded as completed full startup package work
 * Keep `SPDM-007` recorded as completed one-command startup enforcement work
 * Keep `CAP-003` active as parallel capability documentation work
-* Regenerate `sps-session.zip` and run `SPS OS — START` again with the regenerated package.
+* Plan or validate MS-001.4 release readiness evidence after control-doc sync.
 
 ---
 
@@ -286,6 +286,7 @@ Next:
 * Completed `CAP-002.5b - New-SpsSession.ps1 Implementation`.
 * Completed `CAP-002.6 - Bootstrap Integration`.
 * Added dated CAP-002 session handoff for next bootstrap package.
+* Defined the MS-001.4 release readiness contract in `docs/04_ROADMAP.md`.
 
 ---
 
@@ -326,7 +327,7 @@ Session Result: `CAP-002 - SPS Lifecycle Engine` Functional Complete locally.
 Architecture: Session close, audit, state, handoff, package generation, and bootstrap integration are documented and locally implemented where applicable.
 Verification: Package bootstrap reported `Session Package: PARTIAL` because dated handoff was missing before this patch.
 Repository: `feature/documentation-foundation`, working tree `UNKNOWN`, ahead 18.
-Next Action: Regenerate `sps-session.zip` and run `SPS OS — START` again with the regenerated package.
+Next Action: Plan or validate MS-001.4 release readiness evidence after control-doc sync.
 Additional Result: `CAP-001 - Bootstrap Engine` remains functionally complete.
 Additional Result: `CAP-002.1` through `CAP-002.6` are done locally.
 Additional Result: `CAP-002.1` formalizes `SPS OS — KONIEC`.
@@ -335,7 +336,7 @@ Additional Result: `CAP-002.1` formalizes `SPS OS — KONIEC`.
 
 # Next Logical Step
 
-Regenerate `sps-session.zip` and run `SPS OS — START` again with the regenerated package.
+Plan or validate MS-001.4 release readiness evidence after control-doc sync.
 
 ---
 

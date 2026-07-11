@@ -52,7 +52,7 @@ MS-001.4 - Release Readiness
 
 Objective:
 
-ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-001.3 - Workflow Engine has been completed and the project is prepared for MS-001.4 - Release Readiness.
+ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-001.3 - Workflow Engine has been completed and the MS-001.4 - Release Readiness contract is defined in `docs/04_ROADMAP.md`.
 
 Project Status:
 
@@ -195,7 +195,7 @@ Next:
 
 Next session priorities:
 
-* Prepare `MS-001.4 - Release Readiness`
+* Plan or validate MS-001.4 release readiness evidence
 * Keep ENG-000 / SPS Core / SPS OS 1.0 as the active platform priority
 * Keep workflow domain work isolated from UI
 * Keep workflow governance and project state documentation synchronized
@@ -215,7 +215,7 @@ Commit and push status must always be confirmed explicitly by the Product Owner.
 Priority 1
 
 Prepare `MS-001.4 - Release Readiness`.
-Confirm release-readiness scope and validation criteria.
+Use the release readiness contract defined in `docs/04_ROADMAP.md` to plan or validate required release evidence.
 
 Priority 2
 
