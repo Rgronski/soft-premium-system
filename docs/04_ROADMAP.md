@@ -104,11 +104,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-None
+MS-001.7 - SPS OS 1.0 Stabilization
 
 ## Next
 
-MS-001.7 - SPS OS 1.0 Stabilization
+None - to be defined after Stabilization Review
 
 ## Parallel Documentation Work
 
@@ -861,7 +861,7 @@ MS-001.7 - SPS OS 1.0 Stabilization
 MS-001.7 - SPS OS 1.0 Stabilization
 
 **Status**
-Planned
+In Progress
 
 **Purpose**
 Stabilize the accepted SPS OS 1.0 baseline before further core platform development.

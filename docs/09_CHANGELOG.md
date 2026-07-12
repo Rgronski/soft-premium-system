@@ -686,6 +686,25 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.7 - Stabilization Activated
+
+### Date
+
+2026-07-12
+
+### Completed
+
+* Definition of Ready Review returned `PASS`.
+* Product Owner approved activation.
+* Changed milestone status from Planned to In Progress.
+* Set active work item to Repository Baseline Review.
+* Confirmed no code changes.
+* Confirmed no merge performed.
+* Confirmed no test runner setup started.
+* Baseline commit before activation: `fcd640b`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

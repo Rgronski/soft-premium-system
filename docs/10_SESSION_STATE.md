@@ -216,13 +216,13 @@ The generator must not invent missing state.
 SPS lifecycle documentation and package integration
 
 **Current Milestone**
-None
+MS-001.7 - SPS OS 1.0 Stabilization
 
 **Latest Completed Milestone**
 MS-001.6 - Final Release Acceptance Review
 
 **Next Milestone**
-MS-001.7 - SPS OS 1.0 Stabilization
+None - to be defined after Stabilization Review
 
 **Session Focus**
 CAP-002 - SPS Lifecycle Engine completed locally through Bootstrap Integration.
@@ -238,10 +238,10 @@ Current capability state:
 * `CAP-002.5a - Session Package Generator Contract`: Done
 * `CAP-002.5b - New-SpsSession.ps1 Implementation`: Done
 * `CAP-002.6 - Bootstrap Integration`: Done
-* Current work item: `MS-001.7 Definition of Ready Review`
+* Current work item: `Repository Baseline Review`
 * Latest completed capability item: `CAP-002.6 - Bootstrap Integration`
-* Current mode: `milestone planning and SSOT synchronization`
-* Latest verified commit: `04c9045`
+* Current mode: `stabilization diagnosis and repository baseline review`
+* Latest verified commit: `fcd640b`
 * Repository branch: `feature/documentation-foundation`
 * Repository working tree: `CLEAN`
 * Repository remote status: `0 / 0`
@@ -253,12 +253,12 @@ Current capability state:
 * Package Consistency: `PARTIAL until next package regeneration`
 * Final Release Acceptance: `ACCEPTED`
 * SPS OS 1.0: `Released / Accepted`
-* Current Product Milestone: `NONE`
-* Next Product Milestone: `MS-001.7 - SPS OS 1.0 Stabilization`
-* Verification Status: `BLOCKED`
+* Current Product Milestone: `MS-001.7 - SPS OS 1.0 Stabilization`
+* Next Product Milestone: `None - to be defined after Stabilization Review`
+* Verification Status: `PASS`
 * Blockers: `NONE`
-* Open Risks: `MS-001.7 planning state requires SSOT synchronization before activation`
-* Next Safe Step: Repeat MS-001.7 Definition of Ready Review after SSOT synchronization.
+* Open Risks: `branch strategy and main baseline not yet reviewed`
+* Next Safe Step: Perform Repository Baseline Review without merge or code changes.
 
 SPDM-001 documentation foundation is completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
 SPDM-002 bootstrap alignment is completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
@@ -272,7 +272,7 @@ CAP-003.2 project domain model is completed and accepted with `docs/13_PROJECT_C
 
 MS-001.6 - Final Release Acceptance Review is completed and accepted.
 SPS OS 1.0 is Released / Accepted.
-MS-001.7 is planned but not active. Activation requires successful Definition of Ready Review.
+MS-001.7 is In Progress. Active work item: Repository Baseline Review.
 
 Completed in this milestone:
 
@@ -351,16 +351,16 @@ Next:
 Not applicable.
 
 **Documentation Verification**
-Session package bootstrap detected stale `docs/10_SESSION_STATE.md`; this patch updates it.
+MS-001.7 activation state synchronized.
 
 **Commit Status**
-Latest verified commit from package context: `8b693cd docs: sync SPS session state and handoff`.
+Latest verified commit: `fcd640b`.
 
 **Push Status**
-Not done / not confirmed.
+Pushed / synchronized before activation patch.
 
 **Working Tree Status**
-UNKNOWN. `sps-git-context.txt` reports `UNKNOWN`.
+CLEAN.
 
 **Responsibility Split**
 Diagnosis and scope definition: ChatGPT / Chief Architect.
@@ -375,7 +375,7 @@ Session Result: `CAP-002 - SPS Lifecycle Engine` Functional Complete locally.
 Architecture: Session close, audit, state, handoff, package generation, and bootstrap integration are documented and locally implemented where applicable.
 Verification: Package bootstrap reported `Session Package: PARTIAL` because dated handoff was missing before this patch.
 Repository: `feature/documentation-foundation`, working tree `CLEAN` at last confirmed checkpoint, remote up to date at last confirmed checkpoint.
-Next Action: Repeat MS-001.7 Definition of Ready Review after SSOT synchronization.
+Next Action: Perform Repository Baseline Review without merge or code changes.
 Additional Result: `CAP-001 - Bootstrap Engine` remains functionally complete.
 Additional Result: `CAP-002.1` through `CAP-002.6` are done locally.
 Additional Result: `CAP-002.1` formalizes `SPS OS — KONIEC`.
@@ -384,7 +384,7 @@ Additional Result: `CAP-002.1` formalizes `SPS OS — KONIEC`.
 
 # Next Logical Step
 
-Repeat MS-001.7 Definition of Ready Review after SSOT synchronization.
+Perform Repository Baseline Review without merge or code changes.
 
 ---
 

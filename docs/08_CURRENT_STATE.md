@@ -42,17 +42,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-**None**
+MS-001.7 - SPS OS 1.0 Stabilization
 
 **Latest Completed Milestone**
 MS-001.6 - Final Release Acceptance Review
 
 **Next Milestone**
-MS-001.7 - SPS OS 1.0 Stabilization
+None - to be defined after Stabilization Review
 
 Objective:
 
-SPS OS 1.0 has been Released / Accepted. No product milestone is active.
+Stabilize the accepted SPS OS 1.0 baseline before Project Brain Engine development.
 
 Project Status:
 
@@ -73,14 +73,14 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE.
+Current Product Milestone: MS-001.7 - SPS OS 1.0 Stabilization.
 Blockers: NONE.
-MS-001.7 contract is defined and approved for planning.
-MS-001.7 status is Planned.
-MS-001.7 is not active.
-Activation requires successful Definition of Ready Review.
+MS-001.7 is In Progress.
+Definition of Ready Review: PASS.
+Active Work Item: Repository Baseline Review.
+SPS OS 1.0 remains Released / Accepted.
 Verified branch: feature/documentation-foundation.
-Latest verified commit: 04c9045.
+Latest verified commit: fcd640b.
 Repository working tree: CLEAN.
 Ahead / behind: 0 / 0.
 
@@ -199,16 +199,15 @@ Next:
 
 # In Progress
 
-* No active milestone is currently open
+* `MS-001.7 - SPS OS 1.0 Stabilization` is In Progress
 * `MS-001.6 - Final Release Acceptance Review` is completed
 * Minimal Patch 7 diagnosis completed without implementation
 * SPS OS 1.0 is Released / Accepted
 * `CAP-003` remains active as parallel capability documentation work
-* MS-001.7 contract is defined and approved for planning
-* MS-001.7 status is Planned and not active
-* Activation requires successful Definition of Ready Review
+* Definition of Ready Review: `PASS`
+* Active Work Item: `Repository Baseline Review`
 * Verified branch: `feature/documentation-foundation`
-* Latest verified commit: `04c9045`
+* Latest verified commit: `fcd640b`
 * Repository working tree: `CLEAN`
 * Ahead / behind: `0 / 0`
 
@@ -218,7 +217,7 @@ Next:
 
 Next session priorities:
 
-* Repeat MS-001.7 Definition of Ready Review after SSOT synchronization
+* Perform Repository Baseline Review without merge or code changes
 
 ---
 
