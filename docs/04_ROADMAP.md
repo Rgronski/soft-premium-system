@@ -710,10 +710,10 @@ Any `PARTIAL` category requires follow-up evidence or Product Owner decision.
 Release-readiness decision remains blocked because not all required categories are `PASS` or `NOT APPLICABLE`.
 
 * Category: SSOT consistency
-  Status: `PARTIAL`
-  Evidence found: roadmap, current state, changelog, and session state record the MS-001.4 contract and evidence checklist.
-  Evidence missing: formal resolved-status assessment for all consistency items.
-  Blocks release-readiness decision: YES
+  Status: `PASS`
+  Evidence found: roadmap/backlog ownership was clarified by commit `1356170 docs(ssot): clarify roadmap and backlog ownership`; `04_ROADMAP.md` is milestone order SSOT; `05_ROADMAP.md` is strategic product direction, not milestone order; `06_BACKLOG.md` owns candidate future work; `docs/BACKLOG.md` is legacy from the current-state perspective.
+  Evidence missing: none for this category.
+  Blocks release-readiness decision: NO
 
 * Category: Bootstrap/runtime startup
   Status: `PASS`
