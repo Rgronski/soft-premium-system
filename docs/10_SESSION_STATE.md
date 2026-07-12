@@ -219,10 +219,10 @@ SPS lifecycle documentation and package integration
 None
 
 **Latest Completed Milestone**
-MS-001.3 - Workflow Engine
+MS-001.6 - Final Release Acceptance Review
 
 **Next Milestone**
-MS-001.4 - Release Readiness
+None - next stage requires a separate Product Owner-approved contract
 
 **Session Focus**
 CAP-002 - SPS Lifecycle Engine completed locally through Bootstrap Integration.
@@ -251,7 +251,11 @@ Current capability state:
 * Session Summary: `PRESENT`
 * Session Handoff: `will be present after this patch`
 * Package Consistency: `PARTIAL until next package regeneration`
-* Next Safe Step: Resolve remaining PARTIAL MS-001.4 readiness categories.
+* Final Release Acceptance: `ACCEPTED`
+* SPS OS 1.0: `Released / Accepted`
+* Current Product Milestone: `NONE`
+* Blockers: `NONE`
+* Next Safe Step: Do not activate the next stage until Product Owner approves a separate contract.
 
 SPDM-001 documentation foundation is completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
 SPDM-002 bootstrap alignment is completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
@@ -263,7 +267,9 @@ SPDM-007 one-command startup enforcement is completed and accepted with `docs/11
 CAP-003.1 project domain contract is completed and accepted with `docs/13_PROJECT_CAPABILITY.md`.
 CAP-003.2 project domain model is completed and accepted with `docs/13_PROJECT_CAPABILITY.md`.
 
-MS-001.3 - Workflow Engine is formally completed after Milestone Closure Review passed.
+MS-001.6 - Final Release Acceptance Review is completed and accepted.
+SPS OS 1.0 is Released / Accepted.
+The next stage is not active without a separate Product Owner-approved contract.
 
 Completed in this milestone:
 
@@ -301,7 +307,7 @@ Status:
 
 Next:
 
-* Resolve remaining PARTIAL MS-001.4 readiness categories
+* Do not activate the next stage until Product Owner approves a separate contract
 * Keep `SPDM-001` recorded as completed documentation foundation work
 * Keep `SPDM-003` recorded as completed repository access fallback work
 * Keep `SPDM-004` recorded as completed SPS launcher work
@@ -309,7 +315,6 @@ Next:
 * Keep `SPDM-006` recorded as completed full startup package work
 * Keep `SPDM-007` recorded as completed one-command startup enforcement work
 * Keep `CAP-003` active as parallel capability documentation work
-* Resolve remaining PARTIAL MS-001.4 readiness categories.
 
 ---
 
@@ -325,14 +330,15 @@ Next:
 * Added dated CAP-002 session handoff for next bootstrap package.
 * Defined the MS-001.4 release readiness contract in `docs/04_ROADMAP.md`.
 * Defined the MS-001.4 release readiness evidence checklist in `docs/04_ROADMAP.md`.
+* Completed `MS-001.6 - Final Release Acceptance Review`.
+* Recorded SPS OS 1.0 as Released / Accepted.
 * Updated MS-001.4 readiness evidence after successful `SPS OS — START`.
 
 ---
 
 # Not Completed In This Session
 
-* Push is not done / not confirmed.
-* Package Consistency remains `PARTIAL` until the next package regeneration includes the dated session handoff.
+* Next stage is not active without a separate Product Owner-approved contract.
 
 ---
 
@@ -366,7 +372,7 @@ Session Result: `CAP-002 - SPS Lifecycle Engine` Functional Complete locally.
 Architecture: Session close, audit, state, handoff, package generation, and bootstrap integration are documented and locally implemented where applicable.
 Verification: Package bootstrap reported `Session Package: PARTIAL` because dated handoff was missing before this patch.
 Repository: `feature/documentation-foundation`, working tree `CLEAN` at last confirmed checkpoint, remote up to date at last confirmed checkpoint.
-Next Action: Resolve remaining PARTIAL MS-001.4 readiness categories: session package consistency / session identity fields, formal documentation completeness review, milestone closure evidence review, and out-of-scope confirmation.
+Next Action: Do not activate the next stage until Product Owner approves a separate contract.
 Additional Result: `CAP-001 - Bootstrap Engine` remains functionally complete.
 Additional Result: `CAP-002.1` through `CAP-002.6` are done locally.
 Additional Result: `CAP-002.1` formalizes `SPS OS — KONIEC`.
@@ -375,7 +381,7 @@ Additional Result: `CAP-002.1` formalizes `SPS OS — KONIEC`.
 
 # Next Logical Step
 
-Resolve remaining PARTIAL MS-001.4 readiness categories: session package consistency / session identity fields, formal documentation completeness review, milestone closure evidence review, and out-of-scope confirmation.
+Do not activate the next stage until Product Owner approves a separate contract.
 
 ---
 

@@ -98,6 +98,9 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-001.2A` - UI Foundation
 * `MS-001.2B` - UI Foundation Continuation
 * `MS-001.3` - Workflow Engine
+* `MS-001.4` - Release Readiness
+* `MS-001.5` - SPS OS 1.0 Release Candidate
+* `MS-001.6` - Final Release Acceptance Review
 
 ## Current
 
@@ -105,8 +108,7 @@ None
 
 ## Next
 
-* `MS-001.4` - Release Readiness
-* `MS-001.5` - SPS OS 1.0 Release Candidate
+None - next stage requires a separate Product Owner-approved contract.
 
 ## Parallel Documentation Work
 
@@ -611,7 +613,7 @@ MS-001.4 - Release Readiness
 MS-001.4 - Release Readiness
 
 **Status**
-Planned
+Completed
 
 **Purpose**
 Prepare SPS OS 1.0 for controlled release qualification.
@@ -781,7 +783,7 @@ MS-001.5 - SPS OS 1.0 Release Candidate
 MS-001.5 - SPS OS 1.0 Release Candidate
 
 **Status**
-Planned
+Completed
 
 **Purpose**
 Define the final release candidate milestone for SPS OS 1.0.
@@ -822,7 +824,36 @@ Establish the release candidate contract and completion boundary for SPS OS 1.0.
 * Change Log
 
 **Next Milestone**
-To be planned after SPS OS 1.0 release candidate review.
+MS-001.6 - Final Release Acceptance Review
+
+## MS-001.6 - Final Release Acceptance Review
+
+**Milestone**
+MS-001.6 - Final Release Acceptance Review
+
+**Status**
+Completed
+
+**Purpose**
+Record final release acceptance for SPS OS 1.0.
+
+**Release Decision**
+* Final Release Acceptance: ACCEPTED
+* Offline Git limitation: accepted
+* SPS OS 1.0: Released / Accepted
+
+**Implementation Scope**
+Documentation-only acceptance record. No code or architecture changes.
+
+**Definition of Done**
+* MS-001.6 accepted by Product Owner.
+* SPS OS 1.0 release state recorded as Released / Accepted.
+* Current product milestone is NONE.
+* Blockers are NONE.
+* Next stage is not active without a separate Product Owner-approved contract.
+
+**Next Milestone**
+None - next stage requires a separate Product Owner-approved contract.
 
 ---
 

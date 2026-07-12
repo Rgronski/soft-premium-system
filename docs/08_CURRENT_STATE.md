@@ -45,14 +45,14 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 **None**
 
 **Latest Completed Milestone**
-MS-001.3 - Workflow Engine
+MS-001.6 - Final Release Acceptance Review
 
 **Next Milestone**
-MS-001.4 - Release Readiness
+None - next stage requires a separate Product Owner-approved contract
 
 Objective:
 
-ENG-000 / SPS Core / SPS OS 1.0 remains the active priority. MS-001.3 - Workflow Engine has been completed, and the MS-001.4 - Release Readiness contract and evidence checklist are defined in `docs/04_ROADMAP.md`.
+SPS OS 1.0 has been Released / Accepted. No product milestone is active.
 
 Project Status:
 
@@ -68,7 +68,14 @@ CAP-003.1 completed and accepted with `docs/13_PROJECT_CAPABILITY.md` created as
 CAP-003.2 completed and accepted with Project Domain Model added to `docs/13_PROJECT_CAPABILITY.md`.
 MS-001.4 release readiness evidence checklist is defined with status vocabulary and decision boundary in `docs/04_ROADMAP.md`.
 MS-001.4 readiness evidence was updated after successful `SPS OS — START`: Bootstrap/runtime startup is `PASS`, Git/repository state is `PASS`, and Session package generation remains `PARTIAL`.
-MS-001.4 remains Planned. Implementation has not started, and release-readiness decision remains blocked.
+MS-001.5 release candidate milestone is completed.
+MS-001.6 Final Release Acceptance Review is completed.
+Final Release Acceptance: ACCEPTED.
+Offline Git limitation: accepted.
+SPS OS 1.0: Released / Accepted.
+Current Product Milestone: NONE.
+Blockers: NONE.
+Next stage is not active without a separate Product Owner-approved contract.
 
 CAP-001 is reserved for the historical Bootstrap Engine. Project Capability documentation work is tracked as CAP-003.
 
@@ -186,9 +193,9 @@ Next:
 # In Progress
 
 * No active milestone is currently open
-* `MS-001.3 - Workflow Engine` is formally completed
+* `MS-001.6 - Final Release Acceptance Review` is completed
 * Minimal Patch 7 diagnosis completed without implementation
-* ENG-000 / SPS Core / SPS OS 1.0 remains the active platform priority
+* SPS OS 1.0 is Released / Accepted
 * `CAP-003` remains active as parallel capability documentation work
 * Verified branch state: `feature/documentation-foundation`, latest commit `caba05d`, working tree `clean`
 
@@ -198,16 +205,15 @@ Next:
 
 Next session priorities:
 
-* Resolve remaining PARTIAL MS-001.4 readiness categories
-* Keep ENG-000 / SPS Core / SPS OS 1.0 as the active platform priority
-* Keep workflow domain work isolated from UI
-* Keep workflow governance and project state documentation synchronized
+* Do not activate the next stage without a separate Product Owner-approved contract
 
 ---
 
 # Known Issues
 
 No known architectural issues.
+
+Blockers: NONE.
 
 Commit and push status must always be confirmed explicitly by the Product Owner.
 
@@ -217,8 +223,7 @@ Commit and push status must always be confirmed explicitly by the Product Owner.
 
 Priority 1
 
-Prepare `MS-001.4 - Release Readiness`.
-Use the release readiness contract and evidence checklist defined in `docs/04_ROADMAP.md` to resolve remaining PARTIAL readiness categories.
+Keep SPS OS 1.0 release acceptance state synchronized across SSOT documentation.
 
 Priority 2
 
@@ -226,7 +231,7 @@ Keep workflow governance and project state documentation aligned.
 
 Priority 3
 
-Do not start feature development before release-readiness review is complete.
+Do not start the next stage before a separate Product Owner-approved contract exists.
 
 ---
 
