@@ -201,16 +201,16 @@ The generator must not invent missing state.
 2026-07-11
 
 **Current Session ID**
-UNKNOWN
+001
 
 **Current Chat Title**
-UNKNOWN
+001 SPS OS — MS-001.4 Release Readiness
 
 **Next Session ID**
-UNKNOWN
+002
 
 **Suggested Next Chat Title**
-UNKNOWN
+002 SPS OS — MS-001.4 Release Readiness
 
 **Session Type**
 SPS lifecycle documentation and package integration
