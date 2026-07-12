@@ -298,8 +298,9 @@ Quality is measured by long-term clarity and maintainability, not by technical s
 | 02_ARCHITECTURE.md         | Knowledge, information, and software architecture |
 | 03_DEVELOPMENT_STANDARD.md | Development workflow                              |
 | 04_UI_STANDARD.md          | UI and UX standards                               |
-| 05_ROADMAP.md              | Planned development                               |
-| 06_BACKLOG.md              | Future work                                       |
+| 04_ROADMAP.md              | Milestone roadmap and milestone order SSOT        |
+| 05_ROADMAP.md              | Strategic product direction, not milestone order  |
+| 06_BACKLOG.md              | Candidate future work                             |
 | 07_DECISIONS.md            | Architecture Decision Records                     |
 | 08_CURRENT_STATE.md        | Current project status                            |
 | 09_CHANGELOG.md            | Project history                                   |

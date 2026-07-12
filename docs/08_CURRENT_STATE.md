@@ -280,9 +280,13 @@ The purpose of this document is to describe the present condition of the project
 
 Historical information belongs to the Change Log.
 
-Future plans belong to the Roadmap.
+Future milestone order belongs to `04_ROADMAP.md`.
 
-Candidate work belongs to the Backlog.
+Strategic product direction belongs to `05_ROADMAP.md`.
+
+Candidate work belongs to `06_BACKLOG.md`.
+
+`docs/BACKLOG.md` is a legacy backlog file. Candidate future work belongs to `06_BACKLOG.md` unless a separate migration task reactivates or removes the legacy file.
 
 ---
 
@@ -290,7 +294,8 @@ Candidate work belongs to the Backlog.
 
 | Document                   | Source of Truth           |
 | -------------------------- | ------------------------- |
-| 05_ROADMAP.md              | Planned product evolution |
+| 04_ROADMAP.md              | Milestone roadmap and milestone order SSOT |
+| 05_ROADMAP.md              | Strategic product direction |
 | 06_BACKLOG.md              | Candidate future work     |
 | 07_DECISIONS.md            | Architecture decisions    |
 | 09_CHANGELOG.md            | Project history           |
