@@ -61,6 +61,39 @@ function Get-WorkingTreeStatus {
     }
 }
 
+function Get-SessionStateField {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $SessionStatePath,
+
+        [Parameter(Mandatory = $true)]
+        [string] $FieldName
+    )
+
+    if (-not (Test-Path -LiteralPath $SessionStatePath)) {
+        return "UNKNOWN"
+    }
+
+    $lines = Get-Content -LiteralPath $SessionStatePath -ErrorAction SilentlyContinue
+    if ($null -eq $lines) {
+        return "UNKNOWN"
+    }
+
+    $heading = "**$FieldName**"
+    for ($i = 0; $i -lt @($lines).Count; $i++) {
+        if ("$($lines[$i])".Trim() -eq $heading) {
+            for ($j = $i + 1; $j -lt @($lines).Count; $j++) {
+                $value = "$($lines[$j])".Trim()
+                if ($value -ne "") {
+                    return $value
+                }
+            }
+        }
+    }
+
+    return "UNKNOWN"
+}
+
 $scriptRoot = Split-Path -Parent $PSCommandPath
 $candidateRoot = Split-Path -Parent $scriptRoot
 
@@ -74,6 +107,11 @@ if ($repoRoot -eq "UNKNOWN") {
 $repoRoot = (Resolve-Path -LiteralPath $repoRoot).Path
 
 $generatedAt = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss zzz")
+$sessionStatePath = Join-Path $repoRoot "docs\10_SESSION_STATE.md"
+$currentSessionId = Get-SessionStateField -SessionStatePath $sessionStatePath -FieldName "Current Session ID"
+$currentChatTitle = Get-SessionStateField -SessionStatePath $sessionStatePath -FieldName "Current Chat Title"
+$nextSessionId = Get-SessionStateField -SessionStatePath $sessionStatePath -FieldName "Next Session ID"
+$suggestedNextChatTitle = Get-SessionStateField -SessionStatePath $sessionStatePath -FieldName "Suggested Next Chat Title"
 
 $branch = Get-FirstOrUnknown (Invoke-Git -Arguments @("branch", "--show-current") -WorkingDirectory $repoRoot)
 $statusBranch = Invoke-Git -Arguments @("status", "--short", "--branch") -WorkingDirectory $repoRoot
@@ -140,6 +178,18 @@ $sessionSummary = @(
     ""
     "Repository root:"
     $repoRoot
+    ""
+    "Current Session ID:"
+    $currentSessionId
+    ""
+    "Current Chat Title:"
+    $currentChatTitle
+    ""
+    "Next Session ID:"
+    $nextSessionId
+    ""
+    "Suggested Next Chat Title:"
+    $suggestedNextChatTitle
     ""
     "Active capability:"
     "UNKNOWN"
