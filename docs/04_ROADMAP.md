@@ -108,7 +108,7 @@ None
 
 ## Next
 
-None - next stage requires a separate Product Owner-approved contract.
+MS-001.7 - SPS OS 1.0 Stabilization
 
 ## Parallel Documentation Work
 
@@ -853,7 +853,107 @@ Documentation-only acceptance record. No code or architecture changes.
 * Next stage is not active without a separate Product Owner-approved contract.
 
 **Next Milestone**
-None - next stage requires a separate Product Owner-approved contract.
+MS-001.7 - SPS OS 1.0 Stabilization
+
+## MS-001.7 - SPS OS 1.0 Stabilization
+
+**Milestone**
+MS-001.7 - SPS OS 1.0 Stabilization
+
+**Status**
+Planned
+
+**Purpose**
+Stabilize the accepted SPS OS 1.0 baseline before further core platform development.
+
+**Business Goal**
+Provide a technically verified and maintainable foundation for Project Brain Engine and subsequent SPS development.
+
+**Technical Goal**
+Verify repository baseline, clean-environment operation, minimal automated testing, and current SSOT accuracy without expanding product functionality.
+
+**Dependencies**
+* `MS-001.6 - Final Release Acceptance Review`
+* SPS OS 1.0 release state recorded as `Released / Accepted`
+* synchronized local and remote repository state
+
+**Definition of Ready**
+* MS-001.6 is completed.
+* SPS OS 1.0 Final Release Acceptance is `ACCEPTED`.
+* repository working tree is clean,
+* local branch and remote branch are synchronized,
+* no product milestone is currently active,
+* Product Owner approved stabilization as the next development stage.
+
+**Implementation Scope**
+* repository baseline and branch-strategy review,
+* clean dependency installation verification,
+* production build verification,
+* lint and startup verification,
+* minimal test-runner selection and setup,
+* baseline tests for critical SPS engines,
+* confirmed documentation cleanup,
+* final Stabilization Review.
+
+**Verification Scope**
+* dependency installation succeeds from a clean environment,
+* production build completes,
+* lint result is known and documented,
+* application starts,
+* primary project flow can be smoke-tested,
+* critical engine tests execute successfully,
+* SSOT documents reflect the current project state,
+* Git and remote synchronization state are known.
+
+**Initial Test Scope**
+* Workflow Engine,
+* Project Engine,
+* Task Engine,
+* Knowledge Engine.
+
+Tests should cover only:
+* basic happy paths,
+* input validation where already defined,
+* critical decision rules,
+* stability of public engine contracts.
+
+**Out of Scope**
+* Project Brain Engine implementation,
+* AI Workspace,
+* new business functionality,
+* GitHub, Vercel, Supabase, or AI-provider integrations,
+* UI redesign,
+* migration away from localStorage,
+* broad refactoring,
+* SPS OS 2.0.
+
+**Artifacts**
+* stabilization verification evidence,
+* minimal test-runner configuration if approved during execution,
+* baseline engine tests,
+* synchronized state documentation,
+* Stabilization Review result.
+
+**Definition of Done**
+* repository and branch strategy are explicitly confirmed,
+* clean installation and production build pass,
+* runtime smoke verification passes,
+* minimal test runner works,
+* agreed baseline engine tests pass,
+* known documentation inconsistencies are resolved,
+* no unresolved stabilization blocker exists,
+* final Stabilization Review returns `PASS`,
+* Product Owner accepts milestone closure.
+
+**Documentation Updates**
+* `08_CURRENT_STATE.md`
+* `09_CHANGELOG.md`
+* `10_SESSION_STATE.md`
+
+These documents are updated only after the milestone is formally activated or its work changes project state.
+
+**Next Milestone**
+To be defined after stabilization review. Expected direction: Project Brain Engine.
 
 ---
 
