@@ -222,7 +222,7 @@ None
 MS-001.6 - Final Release Acceptance Review
 
 **Next Milestone**
-None - next stage requires a separate Product Owner-approved contract
+MS-001.7 - SPS OS 1.0 Stabilization
 
 **Session Focus**
 CAP-002 - SPS Lifecycle Engine completed locally through Bootstrap Integration.
@@ -238,14 +238,14 @@ Current capability state:
 * `CAP-002.5a - Session Package Generator Contract`: Done
 * `CAP-002.5b - New-SpsSession.ps1 Implementation`: Done
 * `CAP-002.6 - Bootstrap Integration`: Done
-* Current work item: `NONE`
+* Current work item: `MS-001.7 Definition of Ready Review`
 * Latest completed capability item: `CAP-002.6 - Bootstrap Integration`
-* Current mode: `documentation and local tooling integration`
-* Latest verified commit: `8b693cd docs: sync SPS session state and handoff`
+* Current mode: `milestone planning and SSOT synchronization`
+* Latest verified commit: `04c9045`
 * Repository branch: `feature/documentation-foundation`
-* Repository working tree: `UNKNOWN`
-* Repository remote status: `ahead 18`
-* Push status: `not done / not confirmed`
+* Repository working tree: `CLEAN`
+* Repository remote status: `0 / 0`
+* Push status: `pushed / synchronized`
 * Session Package detected: `YES`
 * Git Context: `PRESENT`
 * Session Summary: `PRESENT`
@@ -254,8 +254,11 @@ Current capability state:
 * Final Release Acceptance: `ACCEPTED`
 * SPS OS 1.0: `Released / Accepted`
 * Current Product Milestone: `NONE`
+* Next Product Milestone: `MS-001.7 - SPS OS 1.0 Stabilization`
+* Verification Status: `BLOCKED`
 * Blockers: `NONE`
-* Next Safe Step: Do not activate the next stage until Product Owner approves a separate contract.
+* Open Risks: `MS-001.7 planning state requires SSOT synchronization before activation`
+* Next Safe Step: Repeat MS-001.7 Definition of Ready Review after SSOT synchronization.
 
 SPDM-001 documentation foundation is completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
 SPDM-002 bootstrap alignment is completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
@@ -269,7 +272,7 @@ CAP-003.2 project domain model is completed and accepted with `docs/13_PROJECT_C
 
 MS-001.6 - Final Release Acceptance Review is completed and accepted.
 SPS OS 1.0 is Released / Accepted.
-The next stage is not active without a separate Product Owner-approved contract.
+MS-001.7 is planned but not active. Activation requires successful Definition of Ready Review.
 
 Completed in this milestone:
 
@@ -372,7 +375,7 @@ Session Result: `CAP-002 - SPS Lifecycle Engine` Functional Complete locally.
 Architecture: Session close, audit, state, handoff, package generation, and bootstrap integration are documented and locally implemented where applicable.
 Verification: Package bootstrap reported `Session Package: PARTIAL` because dated handoff was missing before this patch.
 Repository: `feature/documentation-foundation`, working tree `CLEAN` at last confirmed checkpoint, remote up to date at last confirmed checkpoint.
-Next Action: Do not activate the next stage until Product Owner approves a separate contract.
+Next Action: Repeat MS-001.7 Definition of Ready Review after SSOT synchronization.
 Additional Result: `CAP-001 - Bootstrap Engine` remains functionally complete.
 Additional Result: `CAP-002.1` through `CAP-002.6` are done locally.
 Additional Result: `CAP-002.1` formalizes `SPS OS — KONIEC`.
@@ -381,7 +384,7 @@ Additional Result: `CAP-002.1` formalizes `SPS OS — KONIEC`.
 
 # Next Logical Step
 
-Do not activate the next stage until Product Owner approves a separate contract.
+Repeat MS-001.7 Definition of Ready Review after SSOT synchronization.
 
 ---
 

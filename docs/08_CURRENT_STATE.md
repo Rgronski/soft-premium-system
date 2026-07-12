@@ -48,7 +48,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 MS-001.6 - Final Release Acceptance Review
 
 **Next Milestone**
-None - next stage requires a separate Product Owner-approved contract
+MS-001.7 - SPS OS 1.0 Stabilization
 
 Objective:
 
@@ -75,7 +75,14 @@ Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE.
 Blockers: NONE.
-Next stage is not active without a separate Product Owner-approved contract.
+MS-001.7 contract is defined and approved for planning.
+MS-001.7 status is Planned.
+MS-001.7 is not active.
+Activation requires successful Definition of Ready Review.
+Verified branch: feature/documentation-foundation.
+Latest verified commit: 04c9045.
+Repository working tree: CLEAN.
+Ahead / behind: 0 / 0.
 
 CAP-001 is reserved for the historical Bootstrap Engine. Project Capability documentation work is tracked as CAP-003.
 
@@ -197,7 +204,13 @@ Next:
 * Minimal Patch 7 diagnosis completed without implementation
 * SPS OS 1.0 is Released / Accepted
 * `CAP-003` remains active as parallel capability documentation work
-* Verified branch state: `feature/documentation-foundation`, latest commit `caba05d`, working tree `clean`
+* MS-001.7 contract is defined and approved for planning
+* MS-001.7 status is Planned and not active
+* Activation requires successful Definition of Ready Review
+* Verified branch: `feature/documentation-foundation`
+* Latest verified commit: `04c9045`
+* Repository working tree: `CLEAN`
+* Ahead / behind: `0 / 0`
 
 ---
 
@@ -205,7 +218,7 @@ Next:
 
 Next session priorities:
 
-* Do not activate the next stage without a separate Product Owner-approved contract
+* Repeat MS-001.7 Definition of Ready Review after SSOT synchronization
 
 ---
 

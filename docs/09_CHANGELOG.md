@@ -668,6 +668,24 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.7 - Stabilization Contract Defined
+
+### Date
+
+2026-07-12
+
+### Completed
+
+* Added formal MS-001.7 stabilization contract to `docs/04_ROADMAP.md`.
+* Recorded milestone status as Planned.
+* Updated roadmap Next to `MS-001.7 - SPS OS 1.0 Stabilization`.
+* Updated MS-001.6 to point to MS-001.7 as the next milestone.
+* Confirmed no code changes.
+* Confirmed MS-001.7 is not activated.
+* Commit: `04c9045`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.
