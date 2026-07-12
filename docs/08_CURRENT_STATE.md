@@ -42,17 +42,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-001.7 - SPS OS 1.0 Stabilization
+None
 
 **Latest Completed Milestone**
-MS-001.6 - Final Release Acceptance Review
+MS-001.7 - SPS OS 1.0 Stabilization
 
 **Next Milestone**
-None - to be defined after Stabilization Review
+None - next milestone requires a separate Product Owner-approved contract
 
 Objective:
 
-Stabilize the accepted SPS OS 1.0 baseline before Project Brain Engine development.
+No active product milestone. SPS OS 1.0 stabilization is completed and accepted.
 
 Project Status:
 
@@ -73,14 +73,16 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: MS-001.7 - SPS OS 1.0 Stabilization.
+Current Product Milestone: NONE.
 Blockers: NONE.
-MS-001.7 remains In Progress.
-Active Work Item: Stabilization Evidence Review.
+MS-001.7 completed and accepted.
+No active product milestone.
 SPS OS 1.0 remains Released / Accepted.
 Known limitation: one non-blocking lint warning in `src/app/projects/[id]/tasks/page.tsx`.
-Verified branch: feature/documentation-foundation.
-Latest verified commit: 13933d8.
+main contains stabilization baseline.
+main HEAD: 5348116.
+Verified branch: main.
+Latest verified commit: 5348116.
 Repository working tree: CLEAN.
 Ahead / behind: 0 / 0.
 install PASS.
@@ -88,7 +90,7 @@ lint PASS.
 build PASS.
 startup PASS.
 4/4 engine tests PASS.
-merge not yet performed.
+fast-forward merge to `main` completed.
 
 CAP-001 is reserved for the historical Bootstrap Engine. Project Capability documentation work is tracked as CAP-003.
 
@@ -205,15 +207,15 @@ Next:
 
 # In Progress
 
-* `MS-001.7 - SPS OS 1.0 Stabilization` is In Progress
+* `MS-001.7 - SPS OS 1.0 Stabilization` is completed
 * `MS-001.6 - Final Release Acceptance Review` is completed
 * Minimal Patch 7 diagnosis completed without implementation
 * SPS OS 1.0 is Released / Accepted
 * `CAP-003` remains active as parallel capability documentation work
 * Definition of Ready Review: `PASS`
-* Active Work Item: `Stabilization Evidence Review`
-* Verified branch: `feature/documentation-foundation`
-* Latest verified commit: `13933d8`
+* Active Work Item: `NONE`
+* Verified branch: `main`
+* Latest verified commit: `5348116`
 * Repository working tree: `CLEAN`
 * Ahead / behind: `0 / 0`
 * install `PASS`
@@ -221,7 +223,7 @@ Next:
 * build `PASS`
 * startup `PASS`
 * `4/4` engine tests `PASS`
-* merge to `main` not yet performed
+* fast-forward merge to `main` completed
 
 ---
 
@@ -229,7 +231,7 @@ Next:
 
 Next session priorities:
 
-* Perform MS-001.7 Stabilization Review and decide whether the branch is ready for merge to main
+* Define the next Product Owner-approved milestone contract
 
 ---
 

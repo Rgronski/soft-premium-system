@@ -101,14 +101,15 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-001.4` - Release Readiness
 * `MS-001.5` - SPS OS 1.0 Release Candidate
 * `MS-001.6` - Final Release Acceptance Review
+* `MS-001.7` - SPS OS 1.0 Stabilization
 
 ## Current
 
-MS-001.7 - SPS OS 1.0 Stabilization
+None
 
 ## Next
 
-None - to be defined after Stabilization Review
+None - next milestone requires a separate Product Owner-approved contract
 
 ## Parallel Documentation Work
 
@@ -861,7 +862,7 @@ MS-001.7 - SPS OS 1.0 Stabilization
 MS-001.7 - SPS OS 1.0 Stabilization
 
 **Status**
-In Progress
+Completed
 
 **Purpose**
 Stabilize the accepted SPS OS 1.0 baseline before further core platform development.
@@ -935,17 +936,21 @@ Tests should cover only:
 * Stabilization Review result.
 
 **Current Progress**
-* Repository Baseline Review completed with result `PARTIAL`.
-* `main` is ancestor of the feature branch.
-* fast-forward merge is possible.
+* Repository Baseline Review completed.
+* `main` confirmed as ancestor of the feature branch.
+* fast-forward merge completed.
+* `main` HEAD after merge: `5348116`.
 * dependency installation `PASS`.
-* lint `PASS` with one non-blocking existing warning in `src/app/projects/[id]/tasks/page.tsx`.
+* lint `PASS` with one accepted non-blocking warning in `src/app/projects/[id]/tasks/page.tsx`.
 * production build `PASS`.
 * runtime startup `PASS`.
 * minimal Vitest foundation added.
 * `4` engine tests `PASS`.
 * test foundation commit: `13933d8`.
-* merge to `main` not yet performed.
+* working tree `CLEAN`.
+* `origin/main` synchronized `0 / 0`.
+* feature branch retained.
+* no blockers.
 
 **Definition of Done**
 * repository and branch strategy are explicitly confirmed,
@@ -966,7 +971,7 @@ Tests should cover only:
 These documents are updated only after the milestone is formally activated or its work changes project state.
 
 **Next Milestone**
-To be defined after stabilization review. Expected direction: Project Brain Engine.
+None - next milestone requires a separate Product Owner-approved contract
 
 ---
 
