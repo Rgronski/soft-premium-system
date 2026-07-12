@@ -705,6 +705,28 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.7 - Minimal Test Foundation and Verification
+
+### Date
+
+2026-07-12
+
+### Completed
+
+* Added `Vitest` as a dev dependency.
+* Added the `test` script.
+* Added four engine unit tests.
+* Confirmed no production-code changes.
+* `npm ci` returned `PASS`.
+* `lint` returned `PASS` with one existing warning in `src/app/projects/[id]/tasks/page.tsx`.
+* `build` returned `PASS`.
+* `startup` returned `PASS`.
+* `4` tests returned `PASS`.
+* Commit: `13933d8`.
+* Merge to `main` not performed.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

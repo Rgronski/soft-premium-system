@@ -238,10 +238,10 @@ Current capability state:
 * `CAP-002.5a - Session Package Generator Contract`: Done
 * `CAP-002.5b - New-SpsSession.ps1 Implementation`: Done
 * `CAP-002.6 - Bootstrap Integration`: Done
-* Current work item: `Repository Baseline Review`
+* Current work item: `Stabilization Evidence Review`
 * Latest completed capability item: `CAP-002.6 - Bootstrap Integration`
-* Current mode: `stabilization diagnosis and repository baseline review`
-* Latest verified commit: `fcd640b`
+* Current mode: `stabilization verification and SSOT synchronization`
+* Latest verified commit: `13933d8`
 * Repository branch: `feature/documentation-foundation`
 * Repository working tree: `CLEAN`
 * Repository remote status: `0 / 0`
@@ -255,10 +255,10 @@ Current capability state:
 * SPS OS 1.0: `Released / Accepted`
 * Current Product Milestone: `MS-001.7 - SPS OS 1.0 Stabilization`
 * Next Product Milestone: `None - to be defined after Stabilization Review`
-* Verification Status: `PASS`
+* Verification Status: `PARTIAL`
 * Blockers: `NONE`
-* Open Risks: `branch strategy and main baseline not yet reviewed`
-* Next Safe Step: Perform Repository Baseline Review without merge or code changes.
+* Open Risks: `merge to main not yet approved; one non-blocking lint warning remains`
+* Next Safe Step: Perform MS-001.7 Stabilization Review and decide whether the branch is ready for merge to main.
 
 SPDM-001 documentation foundation is completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
 SPDM-002 bootstrap alignment is completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
@@ -351,10 +351,10 @@ Next:
 Not applicable.
 
 **Documentation Verification**
-MS-001.7 activation state synchronized.
+MS-001.7 stabilization evidence synchronized.
 
 **Commit Status**
-Latest verified commit: `fcd640b`.
+Latest verified commit: `13933d8`.
 
 **Push Status**
 Pushed / synchronized before activation patch.
@@ -375,7 +375,7 @@ Session Result: `CAP-002 - SPS Lifecycle Engine` Functional Complete locally.
 Architecture: Session close, audit, state, handoff, package generation, and bootstrap integration are documented and locally implemented where applicable.
 Verification: Package bootstrap reported `Session Package: PARTIAL` because dated handoff was missing before this patch.
 Repository: `feature/documentation-foundation`, working tree `CLEAN` at last confirmed checkpoint, remote up to date at last confirmed checkpoint.
-Next Action: Perform Repository Baseline Review without merge or code changes.
+Next Action: Perform MS-001.7 Stabilization Review and decide whether the branch is ready for merge to main.
 Additional Result: `CAP-001 - Bootstrap Engine` remains functionally complete.
 Additional Result: `CAP-002.1` through `CAP-002.6` are done locally.
 Additional Result: `CAP-002.1` formalizes `SPS OS — KONIEC`.
@@ -384,7 +384,7 @@ Additional Result: `CAP-002.1` formalizes `SPS OS — KONIEC`.
 
 # Next Logical Step
 
-Perform Repository Baseline Review without merge or code changes.
+Perform MS-001.7 Stabilization Review and decide whether the branch is ready for merge to main.
 
 ---
 

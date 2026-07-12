@@ -75,14 +75,20 @@ Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: MS-001.7 - SPS OS 1.0 Stabilization.
 Blockers: NONE.
-MS-001.7 is In Progress.
-Definition of Ready Review: PASS.
-Active Work Item: Repository Baseline Review.
+MS-001.7 remains In Progress.
+Active Work Item: Stabilization Evidence Review.
 SPS OS 1.0 remains Released / Accepted.
+Known limitation: one non-blocking lint warning in `src/app/projects/[id]/tasks/page.tsx`.
 Verified branch: feature/documentation-foundation.
-Latest verified commit: fcd640b.
+Latest verified commit: 13933d8.
 Repository working tree: CLEAN.
 Ahead / behind: 0 / 0.
+install PASS.
+lint PASS.
+build PASS.
+startup PASS.
+4/4 engine tests PASS.
+merge not yet performed.
 
 CAP-001 is reserved for the historical Bootstrap Engine. Project Capability documentation work is tracked as CAP-003.
 
@@ -205,11 +211,17 @@ Next:
 * SPS OS 1.0 is Released / Accepted
 * `CAP-003` remains active as parallel capability documentation work
 * Definition of Ready Review: `PASS`
-* Active Work Item: `Repository Baseline Review`
+* Active Work Item: `Stabilization Evidence Review`
 * Verified branch: `feature/documentation-foundation`
-* Latest verified commit: `fcd640b`
+* Latest verified commit: `13933d8`
 * Repository working tree: `CLEAN`
 * Ahead / behind: `0 / 0`
+* install `PASS`
+* lint `PASS` with one non-blocking existing warning
+* build `PASS`
+* startup `PASS`
+* `4/4` engine tests `PASS`
+* merge to `main` not yet performed
 
 ---
 
@@ -217,7 +229,7 @@ Next:
 
 Next session priorities:
 
-* Perform Repository Baseline Review without merge or code changes
+* Perform MS-001.7 Stabilization Review and decide whether the branch is ready for merge to main
 
 ---
 
