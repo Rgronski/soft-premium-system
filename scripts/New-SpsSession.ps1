@@ -74,7 +74,7 @@ function Get-SessionStateField {
         return "UNKNOWN"
     }
 
-    $lines = Get-Content -LiteralPath $SessionStatePath -ErrorAction SilentlyContinue
+    $lines = Get-Content -LiteralPath $SessionStatePath -Encoding utf8 -ErrorAction SilentlyContinue
     if ($null -eq $lines) {
         return "UNKNOWN"
     }
