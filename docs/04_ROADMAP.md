@@ -115,7 +115,9 @@ None - next milestone requires a separate Product Owner-approved contract
 
 * `SPDM-001` - Soft Premium Development Method Foundation completed with `docs/00_SPS_DEVELOPMENT_METHOD.md`
 * `SPDM-002` - Bootstrap Alignment completed with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` updated to implement SPDM instead of defining methodology
-* `CAP-003` - Project Domain Contract active with `docs/13_PROJECT_CAPABILITY.md`
+* `CAP-003.1` - Project Domain Contract completed with `docs/13_PROJECT_CAPABILITY.md`
+* `CAP-003.2` - Project Domain Model completed with `docs/13_PROJECT_CAPABILITY.md`
+* `CAP-003` has no active work item
 * This documentation foundation does not change the next product milestone order
 
 ---

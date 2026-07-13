@@ -130,7 +130,6 @@ Status:
 
 Next:
 
-* Prepare MS-001.4 - Release Readiness
 * Keep `SPDM-001` recorded as completed documentation foundation work
 * Keep `SPDM-002` recorded as completed bootstrap alignment work
 * Keep `SPDM-003` recorded as completed repository access fallback work
@@ -138,7 +137,6 @@ Next:
 * Keep `SPDM-005` recorded as completed active branch validation work
 * Keep `SPDM-006` recorded as completed full startup package work
 * Keep `SPDM-007` recorded as completed one-command startup enforcement work
-* Keep `CAP-003` active as parallel capability documentation work
 
 ---
 
@@ -211,7 +209,6 @@ Next:
 * `MS-001.6 - Final Release Acceptance Review` is completed
 * Minimal Patch 7 diagnosis completed without implementation
 * SPS OS 1.0 is Released / Accepted
-* `CAP-003` remains active as parallel capability documentation work
 * Definition of Ready Review: `PASS`
 * Active Work Item: `NONE`
 * Verified branch: `main`
