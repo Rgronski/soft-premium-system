@@ -3,8 +3,10 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import * as knowledgeModule from "../knowledge/knowledge";
 import * as projectModule from "../project/project";
 import * as taskModule from "../task/task";
+import { evaluateWorkflow } from "../workflow/engine";
 import {
   buildProjectWorkflowState,
+  evaluateProjectWorkflow,
   getProjectBrainSnapshot,
 } from "./engine";
 
@@ -389,5 +391,222 @@ describe("Project Brain engine", () => {
     const secondSnapshot = getProjectBrainSnapshot("project-1");
 
     expect(secondSnapshot).toEqual(firstSnapshot);
+  });
+
+  test("returns a WorkflowResult for an existing project", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        },
+      ]),
+    );
+    storage.setItem(
+      "soft-premium-system.projects.project-1.tasks",
+      JSON.stringify([
+        {
+          id: "task-1",
+          projectId: "project-1",
+          title: "First task",
+          createdAt: "2026-07-13T12:00:00.000Z",
+        },
+      ]),
+    );
+
+    const result = evaluateProjectWorkflow("project-1");
+
+    expect(result.health).toBe("ready");
+    expect(result.nextStep.id).toBe("continue-active-work");
+  });
+
+  test("returns the same result as direct workflow evaluation of the snapshot workflowState", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        },
+      ]),
+    );
+    storage.setItem(
+      "soft-premium-system.projects.project-1.tasks",
+      JSON.stringify([
+        {
+          id: "task-1",
+          projectId: "project-1",
+          title: "First task",
+          createdAt: "2026-07-13T12:00:00.000Z",
+        },
+      ]),
+    );
+
+    const snapshot = getProjectBrainSnapshot("project-1");
+    const result = evaluateProjectWorkflow("project-1");
+
+    expect(result).toEqual(evaluateWorkflow(snapshot.workflowState));
+  });
+
+  test("returns equivalent workflow results for repeated reads of the same data", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        },
+      ]),
+    );
+    storage.setItem(
+      "soft-premium-system.projects.project-1.tasks",
+      JSON.stringify([
+        {
+          id: "task-1",
+          projectId: "project-1",
+          title: "First task",
+          createdAt: "2026-07-13T12:00:00.000Z",
+        },
+      ]),
+    );
+
+    const firstResult = evaluateProjectWorkflow("project-1");
+    const secondResult = evaluateProjectWorkflow("project-1");
+
+    expect(secondResult).toEqual(firstResult);
+  });
+
+  test("preserves activeWork behavior from the Workflow Engine", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        },
+      ]),
+    );
+    storage.setItem(
+      "soft-premium-system.projects.project-1.tasks",
+      JSON.stringify([
+        {
+          id: "task-1",
+          projectId: "project-1",
+          title: "First task",
+          createdAt: "2026-07-13T12:00:00.000Z",
+        },
+      ]),
+    );
+
+    const result = evaluateProjectWorkflow("project-1");
+
+    expect(result.health).toBe("ready");
+    expect(result.nextStep.id).toBe("continue-active-work");
+  });
+
+  test("preserves ready behavior when there is no activeWork", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        },
+      ]),
+    );
+
+    const result = evaluateProjectWorkflow("project-1");
+
+    expect(result.health).toBe("ready");
+    expect(result.nextStep.id).toBe("start-next-work");
+  });
+
+  test("propagates invalid-project-id from Project Brain", () => {
+    expect(getErrorCode(() => evaluateProjectWorkflow("   "))).toBe(
+      "invalid-project-id",
+    );
+  });
+
+  test("propagates project-not-found from Project Brain", () => {
+    storage.setItem("soft-premium-system.projects", JSON.stringify([]));
+
+    expect(getErrorCode(() => evaluateProjectWorkflow("project-1"))).toBe(
+      "project-not-found",
+    );
+  });
+
+  test("propagates source-read-failed from Project Brain", () => {
+    storage.setItem("soft-premium-system.projects", "{");
+
+    expect(getErrorCode(() => evaluateProjectWorkflow("project-1"))).toBe(
+      "source-read-failed",
+    );
+  });
+
+  test("propagates invalid-snapshot from Project Brain", () => {
+    vi.spyOn(projectModule, "getProjectById").mockReturnValue({
+      id: "project-2",
+      name: "Beta",
+      createdAt: "2026-07-13T10:00:00.000Z",
+    });
+
+    expect(getErrorCode(() => evaluateProjectWorkflow("project-1"))).toBe(
+      "invalid-snapshot",
+    );
+  });
+
+  test("does not write or persist workflow results", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        },
+      ]),
+    );
+    setItemSpy.mockClear();
+
+    evaluateProjectWorkflow("project-1");
+
+    expect(setItemSpy).not.toHaveBeenCalled();
+  });
+
+  test("does not mutate the source workflowState", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        },
+      ]),
+    );
+    storage.setItem(
+      "soft-premium-system.projects.project-1.tasks",
+      JSON.stringify([
+        {
+          id: "task-1",
+          projectId: "project-1",
+          title: "First task",
+          createdAt: "2026-07-13T12:00:00.000Z",
+        },
+      ]),
+    );
+
+    const snapshot = getProjectBrainSnapshot("project-1");
+    const workflowStateBefore = structuredClone(snapshot.workflowState);
+
+    evaluateProjectWorkflow("project-1");
+
+    expect(snapshot.workflowState).toEqual(workflowStateBefore);
   });
 });

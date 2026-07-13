@@ -1,7 +1,8 @@
 import { getKnowledge } from "../knowledge/knowledge";
 import { getProjectById } from "../project/project";
 import { getTasks } from "../task/task";
-import type { ProjectState } from "../workflow/types";
+import { evaluateWorkflow } from "../workflow/engine";
+import type { ProjectState, WorkflowResult } from "../workflow/types";
 
 import type { ProjectBrainSnapshot } from "./types";
 
@@ -246,4 +247,12 @@ export function getProjectBrainSnapshot(
   }
 
   return snapshot;
+}
+
+export function evaluateProjectWorkflow(
+  projectId: string,
+): WorkflowResult {
+  const snapshot = getProjectBrainSnapshot(projectId);
+
+  return evaluateWorkflow(snapshot.workflowState);
 }
