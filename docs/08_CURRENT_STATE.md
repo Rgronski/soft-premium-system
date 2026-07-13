@@ -42,17 +42,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-None
+MS-001.8 - Project Brain Engine Foundation
 
 **Latest Completed Milestone**
 MS-001.7 - SPS OS 1.0 Stabilization
 
 **Next Milestone**
-None - next milestone requires a separate Product Owner-approved contract
+None - successor requires a separate Product Owner-approved contract
 
 Objective:
 
-No active product milestone. SPS OS 1.0 stabilization is completed and accepted.
+Activate and prepare implementation of the minimal read-only Project Brain Engine Foundation.
 
 Project Status:
 
@@ -73,10 +73,10 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE.
+Current Product Milestone: MS-001.8 - Project Brain Engine Foundation.
 Blockers: NONE.
 MS-001.7 completed and accepted.
-No active product milestone.
+Active parallel capability: NONE.
 SPS OS 1.0 remains Released / Accepted.
 Known limitation: one non-blocking lint warning in `src/app/projects/[id]/tasks/page.tsx`.
 main contains stabilization baseline.
@@ -205,12 +205,13 @@ Next:
 
 # In Progress
 
-* `MS-001.7 - SPS OS 1.0 Stabilization` is completed
-* `MS-001.6 - Final Release Acceptance Review` is completed
-* Minimal Patch 7 diagnosis completed without implementation
+* `MS-001.8 - Project Brain Engine Foundation` is Active
+* boundary is read-only
+* public API has exactly two operations
+* implementation has not started
 * SPS OS 1.0 is Released / Accepted
 * Definition of Ready Review: `PASS`
-* Active Work Item: `NONE`
+* Active Work Item: `pre-implementation activation state`
 * Verified branch: `main`
 * Latest verified commit: `5348116`
 * Repository working tree: `CLEAN`

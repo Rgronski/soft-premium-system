@@ -216,21 +216,21 @@ Current Chat Title: 006 SPS OS — Project Brain Engine Planning
 Next Session ID: UNKNOWN — to be determined at session close
 Suggested Next Chat Title: UNKNOWN — to be determined at session close
 Active Capability: NONE
-Active Work Item: Project Brain Engine readiness and milestone contract planning
-Current Mode: diagnosis and contract planning
+Active Work Item: pre-implementation activation and implementation planning
+Current Mode: milestone activation and implementation preparation
 Completed Capability Items: MS-001.7 — SPS OS 1.0 Stabilization; CAP-002 — Session Close Protocol Fix; CAP-003.1 — Project Domain Contract; CAP-003.2 — Project Domain Model
-Current Product Milestone: NONE
-Next Product Milestone: NONE — requires a separate Product Owner-approved contract
+Current Product Milestone: MS-001.8 — Project Brain Engine Foundation
+Next Product Milestone: NONE — successor requires a separate Product Owner-approved contract
 Active Parallel Capability: NONE
 Latest Completed Capability Item: CAP-003.2 — Project Domain Model
 Current Sprint: NONE
-Platform Priority: Project Brain Engine milestone planning
+Platform Priority: Project Brain Engine Foundation
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: 584f7ca
 Session Start Repository HEAD: 1574eda
-Verification Status: PASS — bootstrap and SSOT correction verified; Project Brain readiness remains diagnosis-only
+Verification Status: PASS — milestone contract approved and DoR passed; implementation not started
 Blockers: NONE
 Open Risks: one non-blocking lint warning remains
-Next Safe Step: prepare the Product Owner-reviewable Project Brain Engine milestone contract
+Next Safe Step: prepare the minimal Codex implementation handoff for MS-001.8

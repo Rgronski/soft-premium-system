@@ -751,6 +751,26 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.8 - Project Brain Engine Foundation activated
+
+### Date
+
+2026-07-13
+
+### Completed
+
+* Product Owner approval confirmed.
+* DoR Review returned `PASS`.
+* Read-only boundary approved.
+* Two-operation API approved.
+* Internal validation confirmed.
+* Temporary localStorage-backed composition approved.
+* No implementation code included in activation patch.
+* Previous active product milestone state: `NONE`.
+* Current active product milestone: `MS-001.8`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

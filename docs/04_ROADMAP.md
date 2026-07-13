@@ -105,11 +105,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-None
+MS-001.8 - Project Brain Engine Foundation
 
 ## Next
 
-None - next milestone requires a separate Product Owner-approved contract
+None - successor requires a separate Product Owner-approved contract
 
 ## Parallel Documentation Work
 
@@ -973,7 +973,131 @@ Tests should cover only:
 These documents are updated only after the milestone is formally activated or its work changes project state.
 
 **Next Milestone**
-None - next milestone requires a separate Product Owner-approved contract
+MS-001.8 - Project Brain Engine Foundation
+
+---
+
+## MS-001.8 - Project Brain Engine Foundation
+
+**Milestone**
+MS-001.8 - Project Brain Engine Foundation
+
+**Status**
+Active
+
+**Purpose**
+Establish a minimal central runtime read layer for one projectId.
+
+**Business Goal**
+Provide one stable access point to current project context for future representations and workflow consumers.
+
+**Technical Goal**
+Compose a deterministic read-only ProjectBrainSnapshot from existing Project, Task and Knowledge modules and build workflow-ready state without duplicating storage or write ownership.
+
+**Dependencies**
+* `MS-001.7 - SPS OS 1.0 Stabilization`
+* Project module
+* Task module
+* Knowledge module
+* Workflow Engine
+* Vitest
+
+**Definition of Ready**
+* Product Owner approval confirmed
+* milestone ID approved
+* read-only boundary approved
+* two-operation API approved
+* snapshot shape approved
+* temporary storage strategy approved
+* error model approved
+* verification contract approved
+* no competing active milestone
+* DoR Review PASS
+
+**Implementation Scope**
+* one project-brain module
+* one ProjectBrainSnapshot type
+* read aggregation for one projectId
+* workflow-ready state construction
+* internal validation
+* unit and integration tests
+
+**Public API**
+* `getProjectBrainSnapshot(projectId)`
+* `buildProjectWorkflowState(projectId)`
+
+**Snapshot Shape**
+* `project`
+* `tasks`
+* `knowledgeEntries`
+* `workflowState`
+
+**Storage Strategy**
+* no new storage
+* no new localStorage key
+* no persisted aggregate
+* no migration
+* existing modules remain data sources and write owners
+
+**Error Model**
+* `invalid-project-id`
+* `project-not-found`
+* `source-read-failed`
+* `invalid-snapshot`
+
+**Out of Scope**
+* UI
+* routing
+* write API
+* AI Workspace
+* document generation
+* export layer
+* integrations
+* database
+* ORM
+* versioning
+* synchronization
+* multi-user
+* permissions
+* migration
+* replacing SPS OS documentation SSOT
+* other Canonical Project Model domains
+* refactoring existing engines
+
+**Artifacts**
+* `src/lib/project-brain/types.ts`
+* `src/lib/project-brain/engine.ts`
+* Project Brain tests
+* synchronized SSOT documentation
+
+**Verification**
+* `npm test`
+* `npm run lint`
+* `npm run build`
+* snapshot returned for existing project
+* tasks filtered by projectId
+* knowledge filtered by projectId
+* deterministic workflow state
+* project-not-found handled
+* no new localStorage writes
+* existing tests remain PASS
+
+**Definition of Done**
+* module exists
+* API matches contract
+* snapshot deterministic
+* no new storage
+* no UI changes
+* Project Brain tests PASS
+* existing tests PASS
+* lint PASS
+* build PASS
+* SSOT synchronized
+* Milestone Closure Review PASS
+* commit and push explicitly confirmed
+
+**Next Milestone**
+None - requires a separate Product Owner-approved contract
 
 ---
 
