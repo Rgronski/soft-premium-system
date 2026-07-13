@@ -396,6 +396,45 @@ If any critical field is missing or inconsistent, the result must be `PARTIAL` o
 
 ---
 
+# Mandatory Final Handoff Sequence
+
+Every `SPS OS â€” KONIEC` must end in this exact sequence:
+
+1. Session Audit
+2. Session State synchronized
+3. Current Session Handoff created
+4. documentation changes committed
+5. documentation changes pushed
+6. Product Owner instructed to run `New-SpsSession.ps1`
+7. generator result confirmed
+8. Package Consistency confirmed as `PASS`
+9. exact ZIP path and fresh timestamp confirmed
+10. Suggested Next Chat Title presented
+11. ready-to-use START prompt presented
+12. explicit instruction to attach `sps-session.zip` in the new chat
+13. Session Close may be declared `PASS`
+
+Rules:
+
+* the final START prompt must not be presented before fresh ZIP confirmation
+* Session Close must not be declared `PASS` before fresh ZIP confirmation
+* the assistant must explicitly provide the PowerShell generator command
+* the assistant must explicitly ask the Product Owner to confirm:
+* `Package Consistency: PASS`
+* ZIP path
+* ZIP `LastWriteTime`
+* Current Session ID
+* Next Session ID
+* Suggested Next Chat Title
+* after confirmation, the assistant must explicitly instruct:
+* open a new chat
+* attach `sps-session.zip`
+* paste the supplied START prompt
+* a local filesystem path written inside the prompt does not give the new chat access to the ZIP
+* the ZIP must be manually attached to the new conversation
+
+---
+
 # Session Package
 
 Session Package prepares the ZIP/context for the next chat.
@@ -406,7 +445,7 @@ It may include Session Handoff.
 
 The package generator contract is defined in `docs/16_SESSION_PACKAGE_GENERATOR.md`.
 
-The output of `SPS OS â€” KONIEC` may include a Session Package.
+The final `SPS OS â€” KONIEC` sequence requires a fresh Session Package.
 
 The next Bootstrap consumes Session Package according to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 

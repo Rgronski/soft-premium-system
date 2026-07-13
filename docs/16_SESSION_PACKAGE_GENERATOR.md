@@ -20,7 +20,7 @@ Script implementation is a separate step planned for `CAP-002.5b`.
 
 # Relation To SPS OS â€” KONIEC
 
-`SPS OS â€” KONIEC` closes the session, audits facts, updates Session State, prepares Session Handoff, and may prepare a session package for the next chat.
+`SPS OS â€” KONIEC` closes the session, audits facts, updates Session State, prepares Session Handoff, and requires a fresh session package for the next chat.
 
 The generator supports the close protocol by collecting confirmed context into a portable package.
 
@@ -60,7 +60,7 @@ Session State provides `Latest Verified Commit`.
 
 Session Handoff remains the transfer package for the next chat.
 
-The generator may include the current session handoff if available.
+The current session handoff is mandatory.
 
 The generator must not rewrite handoff content.
 
@@ -77,6 +77,10 @@ The generator only collects confirmed project context into a package.
 Git remains the source of repository facts such as branch, working tree state, ahead / behind status, and current HEAD.
 
 Git also provides Package HEAD for the generated package.
+
+The generator must be run after the final commit and push for the session.
+
+Package HEAD must therefore represent the published repository state.
 
 ---
 
@@ -107,7 +111,7 @@ The generator may collect:
 * `docs`,
 * `sps-git-context.txt`,
 * `sps-session-summary.txt`,
-* current session handoff if available.
+* current session handoff.
 
 ---
 
@@ -168,9 +172,21 @@ If the commit does not exist or is not an ancestor of `HEAD`, the generator must
 
 `Latest Verified Commit` does not need to equal Package HEAD.
 
+Generator failure or Package Consistency other than `PASS` blocks Session Close `PASS`.
+
 ZIP success may be reported only after package consistency is `PASS`.
 
 The generator must report the exact ZIP path after successful generation.
+
+After successful generation, the Product Owner must confirm:
+
+* exact ZIP path
+* generation timestamp or `LastWriteTime`
+* `Package Consistency: PASS`
+
+The generated ZIP must be manually attached to the next ChatGPT conversation.
+
+A local path alone is not sufficient for bootstrap access.
 
 ---
 
@@ -180,6 +196,21 @@ The expected ZIP output is:
 
 ```text
 sps-session.zip
+```
+
+Mandatory standard command:
+
+```powershell
+cd C:\Users\p700\soft-premium-system
+
+powershell -ExecutionPolicy Bypass -File .\scripts\New-SpsSession.ps1
+```
+
+Mandatory ZIP confirmation check:
+
+```powershell
+Get-Item .\sps-session.zip |
+  Select-Object Name, FullName, Length, LastWriteTime
 ```
 
 ---
