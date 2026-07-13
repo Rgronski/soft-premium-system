@@ -983,7 +983,7 @@ MS-001.8 - Project Brain Engine Foundation
 MS-001.8 - Project Brain Engine Foundation
 
 **Status**
-Active
+Completed
 
 **Purpose**
 Establish a minimal central runtime read layer for one projectId.
@@ -1069,6 +1069,24 @@ Compose a deterministic read-only ProjectBrainSnapshot from existing Project, Ta
 * `src/lib/project-brain/engine.ts`
 * Project Brain tests
 * synchronized SSOT documentation
+
+**Current Progress**
+* implementation commit: `94d7b0f`
+* implementation published: YES
+* read-only Project Brain snapshot foundation implemented
+* public API:
+* `getProjectBrainSnapshot(projectId)`
+* `buildProjectWorkflowState(projectId)`
+* snapshot:
+* `project`
+* `tasks`
+* `knowledgeEntries`
+* `workflowState`
+* no new storage
+* no persisted aggregate
+* no UI changes
+* tests, lint, and build: PASS
+* Milestone Closure Review: PASS
 
 **Verification**
 * `npm test`

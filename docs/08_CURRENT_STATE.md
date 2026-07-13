@@ -42,17 +42,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-001.8 - Project Brain Engine Foundation
+NONE - successor requires a separate Product Owner-approved contract
 
 **Latest Completed Milestone**
-MS-001.7 - SPS OS 1.0 Stabilization
+MS-001.8 - Project Brain Engine Foundation
 
 **Next Milestone**
 None - successor requires a separate Product Owner-approved contract
 
 Objective:
 
-Activate and prepare implementation of the minimal read-only Project Brain Engine Foundation.
+Reflect the completed and published minimal read-only Project Brain Engine Foundation.
 
 Project Status:
 
@@ -73,24 +73,35 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: MS-001.8 - Project Brain Engine Foundation.
+Current Product Milestone: NONE.
+Latest Completed Product Milestone: MS-001.8 - Project Brain Engine Foundation.
 Blockers: NONE.
 MS-001.7 completed and accepted.
 Active parallel capability: NONE.
 SPS OS 1.0 remains Released / Accepted.
 Known limitation: one non-blocking lint warning in `src/app/projects/[id]/tasks/page.tsx`.
-main contains stabilization baseline.
-main HEAD: 5348116.
+MS-001.8 implementation: Completed / Published.
+MS-001.8 implementation commit: 94d7b0f.
+Project Brain foundation is read-only.
+Project, Task, and Knowledge remain write owners.
+No new storage.
+No new localStorage key.
+No migration.
+No persisted aggregate.
+No UI changes.
+main contains published Project Brain foundation.
+main HEAD: 94d7b0f.
 Verified branch: main.
-Latest verified commit: 5348116.
+Latest verified commit: 94d7b0f.
 Repository working tree: CLEAN.
 Ahead / behind: 0 / 0.
 install PASS.
 lint PASS.
 build PASS.
 startup PASS.
-4/4 engine tests PASS.
-fast-forward merge to `main` completed.
+Project Brain tests PASS.
+18/18 tests PASS.
+implementation published to `origin/main`.
 
 CAP-001 is reserved for the historical Bootstrap Engine. Project Capability documentation work is tracked as CAP-003.
 
@@ -205,23 +216,23 @@ Next:
 
 # In Progress
 
-* `MS-001.8 - Project Brain Engine Foundation` is Active
+* `Current Product Milestone` is `NONE`
+* `MS-001.8 - Project Brain Engine Foundation` is completed and published
 * boundary is read-only
 * public API has exactly two operations
-* implementation has not started
 * SPS OS 1.0 is Released / Accepted
-* Definition of Ready Review: `PASS`
-* Active Work Item: `pre-implementation activation state`
+* Milestone Closure Review: `PASS`
+* Active Work Item: `NONE`
 * Verified branch: `main`
-* Latest verified commit: `5348116`
+* Latest verified commit: `94d7b0f`
 * Repository working tree: `CLEAN`
 * Ahead / behind: `0 / 0`
 * install `PASS`
 * lint `PASS` with one non-blocking existing warning
 * build `PASS`
 * startup `PASS`
-* `4/4` engine tests `PASS`
-* fast-forward merge to `main` completed
+* `18/18` tests `PASS`
+* implementation published to `origin/main`
 
 ---
 
@@ -229,7 +240,7 @@ Next:
 
 Next session priorities:
 
-* Define the next Product Owner-approved milestone contract
+* Prepare a separate Product Owner-approved milestone contract before activating any next milestone
 
 ---
 

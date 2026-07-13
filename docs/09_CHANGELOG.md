@@ -771,6 +771,31 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.8 - Project Brain Engine Foundation completed
+
+### Date
+
+2026-07-13
+
+### Completed
+
+* Recorded `MS-001.8 - Project Brain Engine Foundation` as completed.
+* Implementation commit: `94d7b0f`.
+* Implementation published to `origin/main`.
+* Added read-only `ProjectBrainSnapshot`.
+* Added public API `getProjectBrainSnapshot(projectId)` and `buildProjectWorkflowState(projectId)`.
+* Snapshot aggregates Project, Tasks, Knowledge, and workflow-ready `ProjectState`.
+* Preserved Project, Task, and Knowledge as write owners.
+* Added no new storage, localStorage key, migration, or persisted aggregate.
+* Changed no UI and refactored no existing engines.
+* Error model includes `invalid-project-id`, `project-not-found`, `source-read-failed`, and `invalid-snapshot`.
+* Tests returned `PASS` (`18`).
+* Lint returned `PASS` with one existing unrelated warning.
+* Build returned `PASS`.
+* Closure review returned `PASS`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.
