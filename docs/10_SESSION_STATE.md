@@ -126,6 +126,8 @@ Latest Verified Commit semantics:
 * Package HEAD is read from Git during package generation
 * Package HEAD is not a manual Session State field that requires another commit to keep updating
 
+Session Start Repository HEAD records the repository commit verified when the current session snapshot was established. It does not need to equal later commits created during the same session.
+
 Update timing:
 
 * update during `SPS OS — KONIEC`
@@ -227,7 +229,7 @@ Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: 584f7ca
-Current Repository HEAD: 1574eda
+Session Start Repository HEAD: 1574eda
 Verification Status: PASS — bootstrap and SSOT correction verified; Project Brain readiness remains diagnosis-only
 Blockers: NONE
 Open Risks: one non-blocking lint warning remains
