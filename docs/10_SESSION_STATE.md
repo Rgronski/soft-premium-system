@@ -128,7 +128,7 @@ Latest Verified Commit semantics:
 
 Update timing:
 
-* update during `SPS OS â€” KONIEC`
+* update during `SPS OS — KONIEC`
 * update after Session Audit
 * update before Session Handoff
 * update before the next START package
@@ -209,25 +209,26 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-07-13
-Current Session ID: 005
-Current Chat Title: 005 SPS OS â€” Session Close Protocol Fix
-Next Session ID: 006
-Suggested Next Chat Title: 006 SPS OS â€” Project Brain Engine Planning
-Active Capability: CAP-002 â€” Session Close Protocol Fix
-Active Work Item: deterministic session close repair
-Current Mode: protocol correction and end-to-end verification
-Completed Capability Items: MS-001.7 â€” SPS OS 1.0 Stabilization
+Current Session ID: 006
+Current Chat Title: 006 SPS OS — Project Brain Engine Planning
+Next Session ID: UNKNOWN — to be determined at session close
+Suggested Next Chat Title: UNKNOWN — to be determined at session close
+Active Capability: NONE
+Active Work Item: Project Brain Engine readiness and milestone contract planning
+Current Mode: diagnosis and contract planning
+Completed Capability Items: MS-001.7 — SPS OS 1.0 Stabilization; CAP-002 — Session Close Protocol Fix; CAP-003.1 — Project Domain Contract; CAP-003.2 — Project Domain Model
 Current Product Milestone: NONE
-Next Product Milestone: None â€” requires a separate Product Owner-approved contract
+Next Product Milestone: NONE — requires a separate Product Owner-approved contract
 Active Parallel Capability: NONE
-Latest Completed Capability Item: MS-001.7 â€” SPS OS 1.0 Stabilization
+Latest Completed Capability Item: CAP-003.2 — Project Domain Model
 Current Sprint: NONE
-Platform Priority: Session Close Protocol Fix
+Platform Priority: Project Brain Engine milestone planning
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: 584f7ca
-Verification Status: PASS
+Current Repository HEAD: 1574eda
+Verification Status: PASS — bootstrap and SSOT correction verified; Project Brain readiness remains diagnosis-only
 Blockers: NONE
 Open Risks: one non-blocking lint warning remains
-Next Safe Step: define the Product Owner-approved Project Brain Engine milestone contract
+Next Safe Step: prepare the Product Owner-reviewable Project Brain Engine milestone contract
