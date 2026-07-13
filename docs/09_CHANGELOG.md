@@ -796,6 +796,33 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.9 - Project Brain Workflow Evaluation Bridge activated
+
+### Date
+
+2026-07-13
+
+### Completed
+
+* Product Owner approval: `PASS`.
+* DoR Review: `PASS`.
+* Status: `Active`.
+* Implementation: `NOT STARTED`.
+* One intention: connect `ProjectBrainSnapshot.workflowState` to the existing Workflow Engine for one deterministic workflow evaluation result for one `projectId`.
+* API owner: `src/lib/project-brain`.
+* Planned public operation: `evaluateProjectWorkflow(projectId)`.
+* Return type: existing `WorkflowResult`.
+* Read-only boundary confirmed.
+* No new storage.
+* No new localStorage key.
+* No cache.
+* No persisted result.
+* No UI changes.
+* No Workflow Engine changes.
+* Project Brain errors will be propagated without a new bridge-specific error.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

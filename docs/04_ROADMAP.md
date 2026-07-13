@@ -1115,6 +1115,196 @@ Compose a deterministic read-only ProjectBrainSnapshot from existing Project, Ta
 * commit and push explicitly confirmed
 
 **Next Milestone**
+MS-001.9 - Project Brain Workflow Evaluation Bridge
+
+---
+
+## MS-001.9 - Project Brain Workflow Evaluation Bridge
+
+**Milestone**
+MS-001.9 - Project Brain Workflow Evaluation Bridge
+
+**Status**
+Active
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Expose one minimal read-only bridge between the published Project Brain snapshot and the existing Workflow Engine.
+
+**One Intention**
+Connect the existing read-only `ProjectBrainSnapshot.workflowState` to the existing Workflow Engine and expose one deterministic workflow evaluation result for one `projectId`.
+
+**Problem Statement**
+* `MS-001.8` can build a deterministic `ProjectBrainSnapshot`
+* the snapshot already contains `workflowState`
+* the existing Workflow Engine can evaluate a provided `ProjectState`
+* no public runtime path yet reads Project Brain state for one `projectId` and returns a Workflow Engine result
+* future consumers would otherwise need to compose these modules themselves
+
+**Business Goal**
+For an existing project, one public read returns a deterministic workflow evaluation based on the current Project Brain snapshot without requiring future consumers to compose the modules manually.
+
+**Technical Goal**
+* read the current Project Brain snapshot for `projectId`
+* pass `snapshot.workflowState` to existing `evaluateWorkflow`
+* return the existing `WorkflowResult`
+* preserve current storage and error boundaries
+
+**API Owner**
+* `src/lib/project-brain`
+
+**Public API**
+* `evaluateProjectWorkflow(projectId)`
+
+**Return Type**
+* existing `WorkflowResult`
+
+**Data Flow**
+* `projectId`
+* `getProjectBrainSnapshot(projectId)`
+* `snapshot.workflowState`
+* `evaluateWorkflow(workflowState)`
+* `WorkflowResult`
+
+**Read/Write Boundary**
+* read-only milestone
+* bridge performs no writes
+* result is not persisted
+* Project, Task, and Knowledge remain write owners
+* Workflow Engine remains a pure evaluator
+* no write API
+
+**Storage Strategy**
+* no new storage
+* no new localStorage key
+* no migration
+* no cache
+* no persisted `WorkflowResult`
+* no persisted bridge state
+* current Project Brain sources remain authoritative
+
+**Error Behavior**
+* direct propagation of `invalid-project-id`
+* direct propagation of `project-not-found`
+* direct propagation of `source-read-failed`
+* direct propagation of `invalid-snapshot`
+* no bridge-specific error
+
+**Dependencies**
+* `MS-001.8 - Project Brain Engine Foundation`
+* Project Brain module
+* Workflow Engine
+* `ProjectState`
+* `WorkflowResult`
+* existing Project Brain errors
+* Vitest
+* TypeScript
+* package.json scripts
+
+**Implementation Scope**
+* one new public operation
+* composition of `getProjectBrainSnapshot()` and `evaluateWorkflow()`
+* reuse of existing `WorkflowResult`
+* propagation of existing Project Brain errors
+* bridge tests
+* deterministic-result verification
+* no-write verification
+
+**Out of Scope**
+* UI
+* routing
+* workflow execution
+* automatic next-step execution
+* Workflow Engine changes
+* `ProjectState` changes
+* `WorkflowResult` changes
+* write API
+* storage
+* cache
+* migrations
+* batch evaluation
+* AI
+* integrations
+* exports
+* refactor
+* expanding Project Brain to additional domains
+
+**Verification Contract**
+* returns `WorkflowResult` for an existing project
+* result comes from evaluating `snapshot.workflowState`
+* result is deterministic for the same data
+* preserves existing Workflow Engine evaluation order
+* propagates `invalid-project-id`
+* propagates `project-not-found`
+* propagates `source-read-failed`
+* propagates `invalid-snapshot`
+* performs no `localStorage.setItem`
+* does not persist `WorkflowResult`
+* does not mutate snapshot or `workflowState`
+* existing tests remain `PASS`
+* `npm test`
+* `npm run lint`
+* `npm run build`
+
+**Definition of Ready**
+* Product Owner approves the problem and expected result
+* `MS-001.9` is approved
+* one intention is approved
+* API owner is approved
+* public operation name is approved
+* return type `WorkflowResult` is approved
+* read-only boundary is approved
+* data flow is approved
+* error propagation is approved
+* storage strategy is approved
+* verification contract is approved
+* exact implementation files are confirmed
+* lifecycle sync documents are identified
+* no competing active milestone exists
+* Product Owner Approval: PASS
+* Definition of Ready Review: PASS
+
+**Definition of Done**
+* one approved public operation exists
+* operation uses the public Project Brain API
+* operation uses existing `evaluateWorkflow`
+* operation returns existing `WorkflowResult`
+* no Workflow Engine logic is duplicated
+* `ProjectState` is unchanged
+* `WorkflowResult` is unchanged
+* Project Brain errors are correctly propagated
+* result is deterministic
+* no new storage exists
+* no writes are performed
+* no UI changes exist
+* no existing engine refactor was introduced
+* bridge tests pass
+* all existing tests pass
+* lint passes
+* build passes
+* implementation commit is explicitly confirmed
+* push is explicitly confirmed
+* lifecycle SSOT documentation is synchronized
+* Milestone Closure Review returns `PASS`
+
+**Documentation Impact**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+**Implementation Status**
+NOT STARTED
+
+**Next Milestone**
 None - requires a separate Product Owner-approved contract
 
 ---
