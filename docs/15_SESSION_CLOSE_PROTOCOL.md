@@ -37,9 +37,9 @@ Yes
 
 This document defines the formal SPS OS session closing protocol.
 
-It exists to freeze, audit, summarize, hand off, and prepare a session for the next `SPS OS — START`.
+It exists to freeze, audit, summarize, hand off, and prepare a session for the next `SPS OS â€” START`.
 
-`SPS OS — KONIEC` is an operational protocol, not a casual summary.
+`SPS OS â€” KONIEC` is an operational protocol, not a casual summary.
 
 ---
 
@@ -47,7 +47,7 @@ It exists to freeze, audit, summarize, hand off, and prepare a session for the n
 
 The formal trigger phrase is:
 
-`SPS OS — KONIEC`
+`SPS OS â€” KONIEC`
 
 When this command is used, the assistant must switch to the Session Close Protocol.
 
@@ -140,7 +140,7 @@ Implemented work, proposed work, and designed work must always be separated expl
 
 # Session Freeze
 
-When `SPS OS — KONIEC` is triggered:
+When `SPS OS â€” KONIEC` is triggered:
 
 * stop new implementation planning,
 * stop expanding scope,
@@ -374,6 +374,28 @@ Do not duplicate the full handoff template in this document.
 
 ---
 
+# Session Close PASS Checklist
+
+Before Session Close can be reported as `PASS`, all of the following must be present and consistent:
+
+* SPS OS version present
+* Current Session ID present
+* Current Chat Title present
+* Next Session ID present
+* Suggested Next Chat Title present
+* Session Audit completed
+* Session State synchronized
+* current Session Handoff created
+* Git Context generated
+* Session Summary generated
+* ZIP generated
+* ZIP consistency `PASS`
+* exactly one Next Safe Step
+
+If any critical field is missing or inconsistent, the result must be `PARTIAL` or `FAIL`, never `PASS`.
+
+---
+
 # Session Package
 
 Session Package prepares the ZIP/context for the next chat.
@@ -384,7 +406,7 @@ It may include Session Handoff.
 
 The package generator contract is defined in `docs/16_SESSION_PACKAGE_GENERATOR.md`.
 
-The output of `SPS OS — KONIEC` may include a Session Package.
+The output of `SPS OS â€” KONIEC` may include a Session Package.
 
 The next Bootstrap consumes Session Package according to `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 
@@ -394,7 +416,7 @@ Do not duplicate the full generator contract in this document.
 
 # Next Chat Prompt
 
-The close protocol must prepare a next-chat prompt suitable for the next `SPS OS — START`.
+The close protocol must prepare a next-chat prompt suitable for the next `SPS OS â€” START`.
 
 The prompt must preserve continuity without replacing SSOT validation in the next session.
 

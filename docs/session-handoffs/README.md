@@ -4,7 +4,7 @@
 
 # Purpose
 
-Session Handoff is the operational transfer document used by `SPS OS — KONIEC` to prepare the next `SPS OS — START`.
+Session Handoff is the operational transfer document used by `SPS OS â€” KONIEC` to prepare the next `SPS OS â€” START`.
 
 It answers only:
 
@@ -23,17 +23,23 @@ Session Handoff is not:
 
 # Naming Convention
 
-Recommended file naming:
+Required file naming:
 
 ```text
-docs/session-handoffs/YYYY-MM-DD_CAP-XXX_SESSION_HANDOFF.md
+docs/session-handoffs/YYYY-MM-DD_<CurrentSessionID>_SESSION_HANDOFF.md
 ```
 
 Example:
 
 ```text
-docs/session-handoffs/2026-07-11_CAP-002_SESSION_HANDOFF.md
+docs/session-handoffs/2026-07-13_005_SESSION_HANDOFF.md
 ```
+
+There must be exactly one current handoff for each closed session.
+
+Historical handoffs remain in the repository, but they must never be treated as the current handoff for a different session.
+
+The `Current Session ID` in the filename must match the `Current Session ID` inside the file.
 
 ---
 
@@ -65,17 +71,31 @@ Handoff remains factual and evidence-based.
 
 Session Handoff must include every field from the deterministic template.
 
+The four session identity fields are mandatory:
+
+* `Current Session ID`
+* `Current Chat Title`
+* `Next Session ID`
+* `Suggested Next Chat Title`
+
 Next Safe Step must be exactly one actionable step.
 
 Next Chat Prompt must be ready to paste into a new chat.
+
+Current handoff selection must not rely only on `LastWriteTime`.
+
+The current handoff must be selected by `Current Session ID` from Session State.
+
+Any mismatch between Session State identity and current handoff identity is a critical error.
 
 ---
 
 # Deterministic Template
 
 ```text
-SPS OS — SESSION HANDOFF
+SPS OS â€” SESSION HANDOFF
 
+SPS OS Version: [VALUE OR UNKNOWN]
 Date: [VALUE OR UNKNOWN]
 Chief Architect: [VALUE OR UNKNOWN]
 Product Owner: [VALUE OR UNKNOWN]
@@ -92,27 +112,20 @@ Completed Work Items: [VALUE OR NONE OR UNKNOWN]
 Next Work Item: [VALUE OR UNKNOWN]
 
 Repository State:
-Branch: [VALUE OR UNKNOWN]
-Working Tree: [CLEAN OR DIRTY OR UNKNOWN]
-Ahead / Behind: [VALUE OR UNKNOWN]
-Latest Commit: [VALUE OR UNKNOWN]
+Repository Branch: [VALUE OR UNKNOWN]
+Repository Working Tree State: [CLEAN OR DIRTY OR UNKNOWN]
+Ahead / Behind Status: [VALUE OR UNKNOWN]
+Latest Verified Commit: [VALUE OR UNKNOWN]
 Push Status: [VALUE OR UNKNOWN]
 
-Documentation State:
-Updated Docs: [VALUE OR NONE OR UNKNOWN]
-Known SSOT Issues: [VALUE OR NONE OR UNKNOWN]
-Pending Documentation Work: [VALUE OR NONE OR UNKNOWN]
+Milestone State:
+Current Product Milestone: [VALUE OR NONE OR UNKNOWN]
+Latest Completed Milestone: [VALUE OR NONE OR UNKNOWN]
 
 Verification:
-Verified: [VALUE OR NONE OR UNKNOWN]
-Partially Verified: [VALUE OR NONE OR UNKNOWN]
-Not Verified: [VALUE OR NONE OR UNKNOWN]
-Unknown: [VALUE OR NONE OR UNKNOWN]
-
-Decisions: [VALUE OR NONE OR UNKNOWN]
-Open Risks: [VALUE OR NONE OR UNKNOWN]
+Verification Status: [PASS OR FAIL OR PARTIAL OR BLOCKED OR UNKNOWN OR NOT APPLICABLE]
 Blockers: [VALUE OR NONE OR UNKNOWN]
-Parked Ideas: [VALUE OR NONE OR UNKNOWN]
+Open Risks: [VALUE OR NONE OR UNKNOWN]
 
 Recommendation: [EXACTLY ONE RECOMMENDATION]
 Next Safe Step: [EXACTLY ONE ACTIONABLE STEP]

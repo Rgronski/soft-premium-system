@@ -119,7 +119,7 @@ Evidence rules:
 
 Update timing:
 
-* update during `SPS OS — KONIEC`
+* update during `SPS OS â€” KONIEC`
 * update after Session Audit
 * update before Session Handoff
 * update before the next START package
@@ -197,236 +197,28 @@ The generator must not invent missing state.
 
 # Latest Session
 
-**Date**
-2026-07-11
+SPS OS Session State
 
-**Current Session ID**
-001
-
-**Current Chat Title**
-001 SPS OS — MS-001.4 Release Readiness
-
-**Next Session ID**
-002
-
-**Suggested Next Chat Title**
-002 SPS OS — MS-001.4 Release Readiness
-
-**Session Type**
-SPS lifecycle documentation and package integration
-
-**Current Milestone**
-None
-
-**Latest Completed Milestone**
-MS-001.7 - SPS OS 1.0 Stabilization
-
-**Next Milestone**
-None - next milestone requires a separate Product Owner-approved contract
-
-**Session Focus**
-CAP-002 - SPS Lifecycle Engine completed locally through Bootstrap Integration.
-
-Current capability state:
-
-* `CAP-001 - Bootstrap Engine`: Functional Complete
-* `CAP-002 - SPS Lifecycle Engine`: Functional Complete locally
-* `CAP-002.1 - Session Close Protocol`: Done
-* `CAP-002.2 - Session Audit`: Done
-* `CAP-002.3 - Session State`: Done
-* `CAP-002.4 - Session Handoff`: Done
-* `CAP-002.5a - Session Package Generator Contract`: Done
-* `CAP-002.5b - New-SpsSession.ps1 Implementation`: Done
-* `CAP-002.6 - Bootstrap Integration`: Done
-* Current work item: `NONE`
-* Latest completed capability item: `CAP-002.6 - Bootstrap Integration`
-* Current mode: `milestone closure and post-merge synchronization`
-* Latest verified commit: `5348116`
-* Repository branch: `main`
-* Repository working tree: `CLEAN`
-* Repository remote status: `0 / 0`
-* Push status: `pushed / synchronized`
-* Session Package detected: `YES`
-* Git Context: `PRESENT`
-* Session Summary: `PRESENT`
-* Session Handoff: `PRESENT`
-* Package Consistency: `UNKNOWN`
-* Final Release Acceptance: `ACCEPTED`
-* SPS OS 1.0: `Released / Accepted`
-* Current Product Milestone: `NONE`
-* Next Product Milestone: `None - next milestone requires a separate Product Owner-approved contract`
-* Verification Status: `PASS`
-* Blockers: `NONE`
-* Open Risks: `one non-blocking lint warning remains`
-* Next Safe Step: `define the next Product Owner-approved milestone contract`
-
-SPDM-001 documentation foundation is completed and accepted with `docs/00_SPS_DEVELOPMENT_METHOD.md`.
-SPDM-002 bootstrap alignment is completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
-SPDM-003 repository access fallback is completed and accepted with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
-SPDM-004 SPS launcher is completed and accepted with `docs/11_SPS_START.md`.
-SPDM-005 Git workflow and active branch validation are completed and accepted with `docs/14_GIT_WORKFLOW.md` and `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
-SPDM-006 full startup package is completed and accepted with `docs/11_SPS_START.md` and `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
-SPDM-007 one-command startup enforcement is completed and accepted with `docs/11_SPS_START.md` and `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
-CAP-003.1 project domain contract is completed and accepted with `docs/13_PROJECT_CAPABILITY.md`.
-CAP-003.2 project domain model is completed and accepted with `docs/13_PROJECT_CAPABILITY.md`.
-
-MS-001.6 - Final Release Acceptance Review is completed and accepted.
-SPS OS 1.0 is Released / Accepted.
-MS-001.7 is In Progress. Active work item: Repository Baseline Review.
-
-Completed in this milestone:
-
-* Minimal Patch 1 completed
-* Created `docs/11_WORKFLOW_ENGINE.md`
-* Minimal Patch 2 completed
-* Workflow domain contract created
-* Minimal Patch 3 completed
-* First warning decision rule added to `evaluateWorkflow()`
-* Minimal Patch 4 completed
-* First dynamic nextStep rule added for active work
-* Minimal Patch 5 completed
-* Second dynamic nextStep rule added for starting next work
-* Minimal Patch 6 completed
-* Evidence counters unified across all WorkflowResult branches
-* Minimal Patch 8 completed
-* First dynamic confidence policy added
-* Added `src/lib/workflow/types.ts`
-* Added `src/lib/workflow/engine.ts`
-* Commit: `7f6c634` - `feat(ms-001.3): add workflow engine foundation`
-* Workflow Engine remains isolated from UI
-* Workflow Engine now returns `health: "warning"` when blockers are absent and warnings exist
-* Decision priority is `blocked > warning > ready`
-* Workflow Engine now returns `nextStep.id: "continue-active-work"` when active work exists without blockers or warnings
-* Workflow Engine now returns `nextStep.id: "start-next-work"` when no blockers, warnings, or active work exist
-* Workflow Engine now returns consistent evidence with `phase`, `completed`, `active`, `warnings`, and `blockers` in every branch
-* Workflow Engine now returns confidence `1.0` for `blocked`, `0.75` for `warning`, and `0.5` for ready branches
-* Minimal Patch 7 remained diagnosis-only and was not implemented
-* No existing test setup was found in `package.json`, devDependencies, or test configuration
-* Test runner setup requires separate future scope
-
-Status:
-
-* Functional Complete locally
-
-Next:
-
-* Do not activate the next stage until Product Owner approves a separate contract
-* Keep `SPDM-001` recorded as completed documentation foundation work
-* Keep `SPDM-003` recorded as completed repository access fallback work
-* Keep `SPDM-004` recorded as completed SPS launcher work
-* Keep `SPDM-005` recorded as completed active branch validation work
-* Keep `SPDM-006` recorded as completed full startup package work
-* Keep `SPDM-007` recorded as completed one-command startup enforcement work
-* Keep `CAP-003` active as parallel capability documentation work
-
----
-
-# Completed In This Session
-
-* Completed `CAP-002.1 - Session Close Protocol`.
-* Completed `CAP-002.2 - Session Audit`.
-* Completed `CAP-002.3 - Session State`.
-* Completed `CAP-002.4 - Session Handoff`.
-* Completed `CAP-002.5a - Session Package Generator Contract`.
-* Completed `CAP-002.5b - New-SpsSession.ps1 Implementation`.
-* Completed `CAP-002.6 - Bootstrap Integration`.
-* Added dated CAP-002 session handoff for next bootstrap package.
-* Defined the MS-001.4 release readiness contract in `docs/04_ROADMAP.md`.
-* Defined the MS-001.4 release readiness evidence checklist in `docs/04_ROADMAP.md`.
-* Completed `MS-001.6 - Final Release Acceptance Review`.
-* Recorded SPS OS 1.0 as Released / Accepted.
-* Updated MS-001.4 readiness evidence after successful `SPS OS — START`.
-
----
-
-# Not Completed In This Session
-
-* Next stage is not active without a separate Product Owner-approved contract.
-
----
-
-# Verification Status
-
-**Code Verification**
-Not applicable.
-
-**Documentation Verification**
-MS-001.7 stabilization evidence synchronized.
-
-**Commit Status**
-Latest verified commit: `13933d8`.
-
-**Push Status**
-Pushed / synchronized before activation patch.
-
-**Working Tree Status**
-CLEAN.
-
-**Responsibility Split**
-Diagnosis and scope definition: ChatGPT / Chief Architect.
-Implementation execution: Codex.
-Commit and push: Product Owner.
-
-**Session Status**
-Open
-
-**Validation**
-Session Result: `CAP-002 - SPS Lifecycle Engine` Functional Complete locally.
-Architecture: Session close, audit, state, handoff, package generation, and bootstrap integration are documented and locally implemented where applicable.
-Verification: Package bootstrap reported `Session Package: PARTIAL` because dated handoff was missing before this patch.
-Repository: `feature/documentation-foundation`, working tree `CLEAN` at last confirmed checkpoint, remote up to date at last confirmed checkpoint.
-Next Action: Perform MS-001.7 Stabilization Review and decide whether the branch is ready for merge to main.
-Additional Result: `CAP-001 - Bootstrap Engine` remains functionally complete.
-Additional Result: `CAP-002.1` through `CAP-002.6` are done locally.
-Additional Result: `CAP-002.1` formalizes `SPS OS — KONIEC`.
-
----
-
-# Next Logical Step
-
-Perform MS-001.7 Stabilization Review and decide whether the branch is ready for merge to main.
-
----
-
-# Notes For Next AI Session
-
-Before continuing feature work, load the fresh session package and verify the current milestone state:
-
-* `00_ORIGINS.md`
-* `00_PROJECT_BIBLE.md`
-* `01_VISION.md`
-* `02_ARCHITECTURE.md`
-* `08_CURRENT_STATE.md`
-* `09_CHANGELOG.md`
-* `10_SESSION_STATE.md`
-* `docs/session-handoffs/2026-07-11_CAP-002_SESSION_HANDOFF.md`
-
-Then continue using the standard workflow with explicit role split:
-
-```text
-Project Context Loader
-    ->
-Project Integrity Check
-    ->
-Diagnosis by ChatGPT / Chief Architect
-    ->
-Review
-    ->
-Scope Approval
-    ->
-Chief Architect -> Codex Handoff
-    ->
-Implementation by Codex
-    ->
-Verification
-    ->
-Testing
-    ->
-Commit by Product Owner
-    ->
-Push by Product Owner
-    ->
-Documentation Update
-    ->
-Session Close
-```
+Date: 2026-07-13
+Current Session ID: 005
+Current Chat Title: 005 SPS OS â€” Session Close Protocol Fix
+Next Session ID: 006
+Suggested Next Chat Title: 006 SPS OS â€” Project Brain Engine Planning
+Active Capability: CAP-002 â€” Session Close Protocol Fix
+Active Work Item: deterministic session close repair
+Current Mode: protocol correction and end-to-end verification
+Completed Capability Items: MS-001.7 â€” SPS OS 1.0 Stabilization
+Current Product Milestone: NONE
+Next Product Milestone: None â€” requires a separate Product Owner-approved contract
+Active Parallel Capability: NONE
+Latest Completed Capability Item: MS-001.7 â€” SPS OS 1.0 Stabilization
+Current Sprint: NONE
+Platform Priority: Session Close Protocol Fix
+Repository Branch: main
+Repository Working Tree State: CLEAN
+Ahead / Behind Status: 0 / 0
+Latest Verified Commit: 584f7ca
+Verification Status: PASS
+Blockers: NONE
+Open Risks: one non-blocking lint warning remains
+Next Safe Step: define the Product Owner-approved Project Brain Engine milestone contract
