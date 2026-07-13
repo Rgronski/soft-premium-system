@@ -199,6 +199,60 @@ function Get-DocumentFields {
     return Get-KeyValueFields -Lines $lines
 }
 
+function Test-CommitExists {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $WorkingDirectory,
+
+        [Parameter(Mandatory = $true)]
+        [string] $Commit
+    )
+
+    $process = New-Object System.Diagnostics.Process
+    $process.StartInfo = New-Object System.Diagnostics.ProcessStartInfo
+    $process.StartInfo.FileName = "git"
+    $process.StartInfo.Arguments = "-C `"$WorkingDirectory`" cat-file -e `"$Commit`^{commit}`""
+    $process.StartInfo.UseShellExecute = $false
+    $process.StartInfo.RedirectStandardOutput = $true
+    $process.StartInfo.RedirectStandardError = $true
+    $process.StartInfo.CreateNoWindow = $true
+    try {
+        [void]$process.Start()
+        $process.WaitForExit()
+        return ($process.ExitCode -eq 0)
+    }
+    finally {
+        $process.Dispose()
+    }
+}
+
+function Test-IsAncestorCommit {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $WorkingDirectory,
+
+        [Parameter(Mandatory = $true)]
+        [string] $Commit
+    )
+
+    $process = New-Object System.Diagnostics.Process
+    $process.StartInfo = New-Object System.Diagnostics.ProcessStartInfo
+    $process.StartInfo.FileName = "git"
+    $process.StartInfo.Arguments = "-C `"$WorkingDirectory`" merge-base --is-ancestor $Commit HEAD"
+    $process.StartInfo.UseShellExecute = $false
+    $process.StartInfo.RedirectStandardOutput = $true
+    $process.StartInfo.RedirectStandardError = $true
+    $process.StartInfo.CreateNoWindow = $true
+    try {
+        [void]$process.Start()
+        $process.WaitForExit()
+        return ($process.ExitCode -eq 0)
+    }
+    finally {
+        $process.Dispose()
+    }
+}
+
 $scriptRoot = Split-Path -Parent $PSCommandPath
 $candidateRoot = Split-Path -Parent $scriptRoot
 $gitRoot = Invoke-Git -Arguments @("rev-parse", "--show-toplevel") -WorkingDirectory $candidateRoot
@@ -258,13 +312,13 @@ $openRisks = Get-RequiredField -Fields $sessionFields -FieldName "Open Risks"
 $nextSafeStep = Get-RequiredField -Fields $sessionFields -FieldName "Next Safe Step"
 $expectedBranch = Get-RequiredField -Fields $sessionFields -FieldName "Repository Branch"
 $expectedWorkingTree = Get-RequiredField -Fields $sessionFields -FieldName "Repository Working Tree State"
-$expectedLatestVerifiedCommit = Get-RequiredField -Fields $sessionFields -FieldName "Latest Verified Commit"
+$latestVerifiedCommit = Get-RequiredField -Fields $sessionFields -FieldName "Latest Verified Commit"
 $sessionDate = Get-RequiredField -Fields $sessionFields -FieldName "Date"
 
 $branch = Get-FirstOrUnknown (Invoke-Git -Arguments @("branch", "--show-current") -WorkingDirectory $repoRoot)
 $workingTreeStatus = Get-WorkingTreeStatus -WorkingDirectory $repoRoot
 $aheadBehind = Get-AheadBehindStatus -WorkingDirectory $repoRoot
-$currentHeadShort = Get-FirstOrUnknown (Invoke-Git -Arguments @("rev-parse", "--short", "HEAD") -WorkingDirectory $repoRoot)
+$packageHead = Get-FirstOrUnknown (Invoke-Git -Arguments @("rev-parse", "HEAD") -WorkingDirectory $repoRoot)
 $latestCommit = Get-FirstOrUnknown (Invoke-Git -Arguments @("log", "-1", "--oneline", "--decorate") -WorkingDirectory $repoRoot)
 $recentCommits = Invoke-Git -Arguments @("log", "--oneline", "--decorate", "-n", "10") -WorkingDirectory $repoRoot
 
@@ -280,8 +334,12 @@ if ($workingTreeStatus -ne $expectedWorkingTree) {
     Fail-Critical "Working tree state '$workingTreeStatus' does not match Session State '$expectedWorkingTree'."
 }
 
-if ($currentHeadShort -ne $expectedLatestVerifiedCommit) {
-    Fail-Critical "Latest verified commit '$expectedLatestVerifiedCommit' does not match HEAD '$currentHeadShort'."
+if (-not (Test-CommitExists -WorkingDirectory $repoRoot -Commit $latestVerifiedCommit)) {
+    Fail-Critical "Latest verified commit '$latestVerifiedCommit' does not exist in the repository."
+}
+
+if (-not (Test-IsAncestorCommit -WorkingDirectory $repoRoot -Commit $latestVerifiedCommit)) {
+    Fail-Critical "Latest verified commit '$latestVerifiedCommit' is not an ancestor of Package HEAD '$packageHead'."
 }
 
 $handoffFileName = "{0}_{1}_SESSION_HANDOFF.md" -f $sessionDate, $currentSessionId
@@ -389,6 +447,12 @@ $sessionSummary = @(
     ""
     "Ahead / Behind:"
     $aheadBehind
+    ""
+    "Latest Verified Commit:"
+    $latestVerifiedCommit
+    ""
+    "Package HEAD:"
+    $packageHead
     ""
     "Latest Commit:"
     $latestCommit

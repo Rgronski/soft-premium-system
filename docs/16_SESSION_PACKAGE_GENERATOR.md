@@ -52,6 +52,8 @@ The generator must not invent missing state.
 
 `docs/10_SESSION_STATE.md` is the single source of truth for operational summary fields.
 
+Session State provides `Latest Verified Commit`.
+
 ---
 
 # Relation To Session Handoff
@@ -73,6 +75,8 @@ The generator does not decide what is true about the project.
 The generator only collects confirmed project context into a package.
 
 Git remains the source of repository facts such as branch, working tree state, ahead / behind status, and current HEAD.
+
+Git also provides Package HEAD for the generated package.
 
 ---
 
@@ -137,6 +141,8 @@ The generator may collect:
 * blockers,
 * open risks,
 * repository state,
+* latest verified commit,
+* package head,
 * next safe step,
 * current handoff path if available,
 * package consistency status.
@@ -152,6 +158,15 @@ Before ZIP generation, the generator must validate agreement between Session Sta
 * `Next Safe Step`
 
 If any critical identity or Next Safe Step mismatch is detected, the generator must stop before ZIP creation.
+
+Before ZIP generation, the generator must also validate `Latest Verified Commit` by checking:
+
+* `git cat-file -e <LatestVerifiedCommit>^{commit}`
+* `git merge-base --is-ancestor <LatestVerifiedCommit> HEAD`
+
+If the commit does not exist or is not an ancestor of `HEAD`, the generator must fail critically.
+
+`Latest Verified Commit` does not need to equal Package HEAD.
 
 ZIP success may be reported only after package consistency is `PASS`.
 

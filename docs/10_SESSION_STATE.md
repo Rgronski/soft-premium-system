@@ -117,6 +117,15 @@ Evidence rules:
 * use `sps-git-context.txt` if available
 * use `UNKNOWN` when evidence is missing
 
+Latest Verified Commit semantics:
+
+* `Latest Verified Commit` means the last confirmed verification baseline commit
+* it does not need to equal the current Package HEAD
+* it must exist in the repository
+* it must be the same commit as Package HEAD or an ancestor of Package HEAD
+* Package HEAD is read from Git during package generation
+* Package HEAD is not a manual Session State field that requires another commit to keep updating
+
 Update timing:
 
 * update during `SPS OS â€” KONIEC`
