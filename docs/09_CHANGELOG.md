@@ -915,6 +915,33 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.11 - Project Brain Consumer Overview Model contract approved
+
+### Date
+
+2026-07-14
+
+### Approved
+
+* Product Owner approved the `MS-001.11 - Project Brain Consumer Overview Model` contract.
+* Synchronized the approved contract with lifecycle SSOT.
+* Recorded the milestone as the next product milestone.
+* Contract Status: `APPROVED`.
+* Runtime Status: `NOT ACTIVE`.
+* Definition of Ready Review: `PASS`.
+* Implementation Status: `NOT STARTED`.
+* Confirmed one intention: create one canonical deterministic read-only consumer overview projection over one existing `ProjectWorkflowSnapshot`.
+* Confirmed no UI, storage, cache, persistence, new source of truth, or Workflow Engine changes.
+* Confirmed that contract approval and SSOT synchronization do not activate the milestone.
+* Added no product implementation and changed no source code.
+* Formal `MS-001.11 Definition of Ready Review` concluded with `PASS`.
+* Blocking gates: `NONE`.
+* Contract changes required: `NO`.
+* Milestone remains `NOT ACTIVE`.
+* Implementation remains `NOT STARTED`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

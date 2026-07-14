@@ -48,11 +48,14 @@ NONE
 MS-001.10 - Project Brain Workflow Consumer Snapshot
 
 **Next Milestone**
-None - successor requires a separate Product Owner-approved contract
+MS-001.11 - Project Brain Consumer Overview Model
+
+**MS-001.11 State**
+APPROVED / NOT ACTIVE
 
 Objective:
 
-Keep lifecycle SSOT synchronized after the published completion of `MS-001.10 - Project Brain Workflow Consumer Snapshot`.
+Keep lifecycle SSOT synchronized after Product Owner approval of the `MS-001.11 - Project Brain Consumer Overview Model` contract and prepare its separate Definition of Ready Review.
 
 Project Status:
 
@@ -75,6 +78,17 @@ Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE.
 Latest Completed Product Milestone: MS-001.10 - Project Brain Workflow Consumer Snapshot.
+Next Product Milestone: MS-001.11 - Project Brain Consumer Overview Model.
+MS-001.11 contract status: APPROVED.
+MS-001.11 runtime status: NOT ACTIVE.
+MS-001.11 Definition of Ready status: PASS.
+MS-001.11 implementation status: NOT STARTED.
+MS-001.11 boundary: deterministic read-only consumer projection over one `ProjectWorkflowSnapshot`.
+MS-001.11 planned API owner: `src/lib/project-brain`.
+MS-001.11 planned public API: `getProjectConsumerOverview(projectId)`.
+MS-001.11 planned return type: `ProjectConsumerOverview`.
+MS-001.11 has no UI, storage, persistence, cache, new source of truth, or Workflow Engine changes in scope.
+MS-001.11 planned implementation scope is limited to `src/lib/project-brain/types.ts`, `src/lib/project-brain/engine.ts`, and `src/lib/project-brain/engine.test.ts`.
 Active Capability: NONE.
 Active Parallel Capability: NONE.
 Blockers: NONE.

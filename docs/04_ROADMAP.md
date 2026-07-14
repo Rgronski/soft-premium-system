@@ -115,7 +115,9 @@ MS-001.10 - Project Brain Workflow Consumer Snapshot
 
 ## Next
 
-None - successor requires a separate Product Owner-approved contract
+MS-001.11 - Project Brain Consumer Overview Model
+
+Status: APPROVED / NOT ACTIVE
 
 ## Parallel Documentation Work
 
@@ -1560,7 +1562,204 @@ PASS
 COMPLETED / PUBLISHED
 
 **Next Milestone**
-None - requires a separate Product Owner-approved contract
+MS-001.11 - Project Brain Consumer Overview Model
+
+---
+
+## MS-001.11 - Project Brain Consumer Overview Model
+
+**Milestone**
+MS-001.11 - Project Brain Consumer Overview Model
+
+**Contract Status**
+APPROVED
+
+**Runtime Status**
+NOT ACTIVE
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Introduce a minimal, read-only consumer overview model that presents the most important Project Brain information in a compact and deterministic form.
+
+**One Intention**
+Create one canonical consumer-facing overview projection over the existing `ProjectWorkflowSnapshot`.
+
+**Problem Statement**
+* `MS-001.10` introduced `getProjectWorkflowSnapshot(projectId)` returning the complete `ProjectBrainSnapshot` and `WorkflowResult`
+* future consumers would still need to inspect nested structures, calculate counters, and select overview-relevant workflow fields
+* repeated consumer-side projection would risk duplicated calculations and inconsistent interpretations
+* no canonical compact overview model exists yet
+
+**Business Goal**
+Provide future SPS consumers with one stable and understandable project overview model.
+
+**Technical Goal**
+Add a deterministic read-only projection derived from one `ProjectWorkflowSnapshot`.
+
+**Dependencies**
+* `MS-001.8 - Project Brain Engine Foundation`
+* `MS-001.9 - Project Brain Workflow Evaluation Bridge`
+* `MS-001.10 - Project Brain Workflow Consumer Snapshot`
+* `getProjectWorkflowSnapshot(projectId)`
+* `ProjectWorkflowSnapshot`
+* `ProjectBrainSnapshot`
+* `WorkflowResult`
+
+**API Owner**
+* `src/lib/project-brain`
+
+**Proposed Public API**
+* `getProjectConsumerOverview(projectId)`
+
+**Proposed Public Return Type**
+* `ProjectConsumerOverview`
+
+**Proposed Model Shape**
+```ts
+export type ProjectConsumerOverview = {
+  project: {
+    id: string;
+    name: string;
+  };
+  counts: {
+    tasks: number;
+    knowledgeEntries: number;
+  };
+  workflow: {
+    health: WorkflowResult["health"];
+    confidence: number;
+    nextStep: WorkflowResult["nextStep"];
+    warnings: number;
+    blockers: number;
+  };
+};
+```
+
+**Field Source Rules**
+* project identity is copied from `workflowSnapshot.snapshot.project`
+* task count equals `workflowSnapshot.snapshot.tasks.length`
+* knowledge entry count equals `workflowSnapshot.snapshot.knowledgeEntries.length`
+* workflow health, confidence, and next step are copied from `workflowSnapshot.workflowResult`
+* warning and blocker counts are derived only from canonical workflow evaluation evidence
+* no field may require an additional project, task, knowledge, or workflow read
+
+**Data Flow**
+* `projectId`
+* `getProjectWorkflowSnapshot(projectId)`
+* deterministic overview projection
+* `ProjectConsumerOverview`
+
+**Single-Read Consistency Rule**
+* `getProjectConsumerOverview(projectId)` calls `getProjectWorkflowSnapshot(projectId)` exactly once
+* every overview field is derived from that returned aggregate
+* the operation must not separately call Project Engine, Task Engine, Knowledge Engine, `getProjectBrainSnapshot(projectId)`, `evaluateProjectWorkflow(projectId)`, or `evaluateWorkflow(...)`
+
+**Read/Write Boundary**
+* strictly read-only
+* no create, update, or delete operation
+* no storage write
+* no cache
+* no persisted overview or snapshot copy
+* no source data mutation
+
+**Source of Truth Rule**
+* `ProjectConsumerOverview` is a disposable consumer projection, not a new source of truth
+* Project, Task, and Knowledge Engines remain write owners
+* Workflow Engine remains the workflow evaluation owner
+* Project Brain remains the canonical aggregation boundary
+
+**Determinism Rule**
+* the same `ProjectWorkflowSnapshot` must always produce the same `ProjectConsumerOverview`
+* no dependency on time, randomness, UI state, route state, external APIs, or unrelated mutable global state
+
+**Error Behavior**
+* preserve existing Project Brain errors unchanged
+* expected inherited errors: `invalid-project-id`, `project-not-found`, `source-read-failed`, `invalid-snapshot`
+* no fallback overview data
+* no swallowing, renaming, or remapping of inherited errors
+
+**Expected Implementation Scope**
+* `src/lib/project-brain/types.ts`
+* `src/lib/project-brain/engine.ts`
+* `src/lib/project-brain/engine.test.ts`
+* one public overview type
+* one public overview operation
+* focused projection, single-read, error propagation, determinism, and no-write tests
+
+**Out of Scope**
+* UI, dashboard, React components, routing, CSS
+* Workspace Engine changes
+* Workflow Engine or workflow decision-rule changes
+* Project, Task, or Knowledge Engine changes
+* storage, localStorage keys, cache, persistence, migrations
+* analytics, history, trends, timestamps, external integrations
+* new business rules or writable consumer models
+* API routes
+* refactor
+
+**Verification Contract**
+* public type is exported
+* project identity matches the source snapshot
+* task and knowledge counts match source collection lengths
+* workflow values match the canonical `WorkflowResult`
+* empty collections produce zero counters
+* `getProjectWorkflowSnapshot(projectId)` is invoked exactly once
+* no independent workflow evaluation occurs
+* inherited Project Brain errors propagate unchanged
+* no storage write occurs
+* `npm test` passes
+* `npm run lint` passes subject only to previously accepted warnings
+* `npm run build` passes
+
+**Definition of Ready**
+* milestone ID and name accepted
+* Purpose and One Intention accepted
+* API and return type names accepted
+* exact model shape accepted
+* field source rules accepted
+* single-read rule accepted
+* read-only and SSOT boundaries accepted
+* implementation scope and Out of Scope accepted
+* verification contract accepted
+* Product Owner approval recorded
+* approved contract synchronized into lifecycle SSOT
+* separate Definition of Ready Review returns `PASS`
+* no competing active milestone exists
+
+**Definition of Done**
+* approved type and operation exist
+* operation performs one workflow snapshot read
+* all fields derive from the same aggregate
+* no UI, storage, write, or Workflow Engine changes exist
+* focused and full tests pass
+* lint and build pass
+* implementation is reviewed and published
+* lifecycle SSOT and closure evidence are synchronized
+* Milestone Closure Review returns `PASS`
+
+**Activation Boundary**
+* contract approval and SSOT synchronization do not activate the milestone
+* activation requires a separate Definition of Ready Review and explicit Product Owner authorization
+
+**Product Owner Approval**
+PASS
+
+**Definition of Ready Review**
+PASS
+
+**Implementation Status**
+NOT STARTED
+
+**Next Safe Step**
+Perform the separate `MS-001.11 Definition of Ready Review` without activating the milestone or changing implementation files.
 
 ---
 
