@@ -111,11 +111,11 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.10 - Project Brain Workflow Consumer Snapshot
+MS-001.11 - Project Brain Consumer Overview Model
 
 ## Next
 
-None - MS-001.11 is the current active product milestone
+NONE
 
 ## Parallel Documentation Work
 
@@ -1560,7 +1560,7 @@ PASS
 COMPLETED / PUBLISHED
 
 **Next Milestone**
-MS-001.11 - Project Brain Consumer Overview Model
+NONE
 
 ---
 
@@ -1573,7 +1573,7 @@ MS-001.11 - Project Brain Consumer Overview Model
 APPROVED
 
 **Runtime Status**
-ACTIVE
+COMPLETED / PUBLISHED / CLOSED
 
 **Owner**
 Product Owner
@@ -1769,7 +1769,7 @@ NONE
 COMPLETED / PUBLISHED / CLOSED
 
 **Runtime Status**
-CLOSED
+COMPLETED / PUBLISHED / CLOSED
 
 **Implementation Status**
 IMPLEMENTED / PUBLISHED / VERIFIED

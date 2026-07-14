@@ -45,17 +45,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.10 - Project Brain Workflow Consumer Snapshot
-
-**Next Milestone**
 MS-001.11 - Project Brain Consumer Overview Model
 
+**Next Milestone**
+NONE
+
 **MS-001.11 State**
-APPROVED / ACTIVE
+COMPLETED / PUBLISHED / CLOSED
 
 Objective:
 
-Keep lifecycle SSOT synchronized after Product Owner activation of `MS-001.11 - Project Brain Consumer Overview Model` as the current product milestone.
+Keep lifecycle SSOT synchronized after closure of `MS-001.11 - Project Brain Consumer Overview Model` with `Next Product Milestone` set to `NONE`.
 
 Project Status:
 
@@ -76,9 +76,9 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE.
-Latest Completed Product Milestone: MS-001.10 - Project Brain Workflow Consumer Snapshot.
-Next Product Milestone: NONE.
+Current Product Milestone: NONE
+Latest Completed Product Milestone: MS-001.11 - Project Brain Consumer Overview Model
+Next Product Milestone: NONE
 MS-001.11 contract status: APPROVED.
 MS-001.11 runtime status: CLOSED.
 MS-001.11 Definition of Ready status: PASS.
@@ -86,7 +86,7 @@ MS-001.11 implementation status: IMPLEMENTED / PUBLISHED / VERIFIED.
 MS-001.11 milestone status: COMPLETED / PUBLISHED / CLOSED.
 MS-001.11 activation status: ACTIVATED.
 MS-001.11 activation decision: APPROVED BY PRODUCT OWNER.
-MS-001.11 active session: 007.
+MS-001.11 closure session: 007.
 MS-001.11 boundary: deterministic read-only consumer projection over one `ProjectWorkflowSnapshot`.
 MS-001.11 planned API owner: `src/lib/project-brain`.
 MS-001.11 planned public API: `getProjectConsumerOverview(projectId)`.
@@ -98,7 +98,7 @@ Active Parallel Capability: NONE.
 Blockers: NONE.
 MS-001.11 implementation commit `dac997f` is published on `origin/main`.
 MS-001.11 verification status: `npm test` PASS, `npm run lint` PASS with one accepted out-of-scope warning, `npm run build` PASS.
-MS-001.11 closure status: completed; no next product milestone is active yet.
+MS-001.11 closure status: completed; next product milestone remains NONE.
 MS-001.10 status: COMPLETED / PUBLISHED.
 MS-001.10 implementation status: COMPLETED / PUBLISHED.
 MS-001.10 contract approval: PASS.
@@ -260,15 +260,15 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.10 - Project Brain Workflow Consumer Snapshot`
-* public API is `getProjectWorkflowSnapshot(projectId)`
+* `Latest Completed Product Milestone` is `MS-001.11 - Project Brain Consumer Overview Model`
+* `Next Product Milestone` is `NONE`
+* public API is `getProjectConsumerOverview(projectId)`
 * API owner is `src/lib/project-brain`
-* return type is `ProjectWorkflowSnapshot`
-* aggregate type shape is `{ snapshot: ProjectBrainSnapshot; workflowResult: WorkflowResult; }`
+* return type is `ProjectConsumerOverview`
+* aggregate type shape is the deterministic consumer overview projection over one `ProjectWorkflowSnapshot`
 * single-read consistency rule requires exactly one snapshot read per operation
 * SPS OS 1.0 is Released / Accepted
-* `MS-001.10` contract status is `APPROVED`
-* `MS-001.10` runtime status is `COMPLETED / PUBLISHED`
+* `MS-001.11` state is `COMPLETED / PUBLISHED / CLOSED`
 * Active Capability is `NONE`
 * Active Parallel Capability is `NONE`
 * implementation status is `COMPLETED / PUBLISHED`
