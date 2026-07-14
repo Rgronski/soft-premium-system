@@ -5,6 +5,7 @@ import { evaluateWorkflow } from "../workflow/engine";
 import type { ProjectState, WorkflowResult } from "../workflow/types";
 
 import type {
+  ProjectConsumerOverview,
   ProjectBrainSnapshot,
   ProjectWorkflowSnapshot,
 } from "./types";
@@ -147,6 +148,21 @@ function withSourceReadHandling<T>(readOperation: () => T): T {
   }
 }
 
+function getEvidenceCount(
+  evidence: string[],
+  prefix: "warnings" | "blockers",
+): number {
+  const matchingEntry = evidence.find((entry) => entry.startsWith(`${prefix}:`));
+
+  if (!matchingEntry) {
+    return 0;
+  }
+
+  const parsedCount = Number.parseInt(matchingEntry.slice(prefix.length + 1), 10);
+
+  return Number.isNaN(parsedCount) ? 0 : parsedCount;
+}
+
 export function buildProjectWorkflowState(projectId: string): ProjectState {
   const normalizedProjectId = normalizeProjectId(projectId);
   const project = withSourceReadHandling(() => getProjectById(normalizedProjectId));
@@ -269,5 +285,32 @@ export function getProjectWorkflowSnapshot(
   return {
     snapshot,
     workflowResult,
+  };
+}
+
+export function getProjectConsumerOverview(
+  projectId: string,
+): ProjectConsumerOverview {
+  const workflowSnapshot = getProjectWorkflowSnapshot(projectId);
+
+  return {
+    project: {
+      id: workflowSnapshot.snapshot.project.id,
+      name: workflowSnapshot.snapshot.project.name,
+    },
+    counts: {
+      tasks: workflowSnapshot.snapshot.tasks.length,
+      knowledgeEntries: workflowSnapshot.snapshot.knowledgeEntries.length,
+    },
+    workflow: {
+      health: workflowSnapshot.workflowResult.health,
+      confidence: workflowSnapshot.workflowResult.confidence,
+      nextStep: workflowSnapshot.workflowResult.nextStep,
+      warnings: workflowSnapshot.workflowResult.warnings.length,
+      blockers: getEvidenceCount(
+        workflowSnapshot.workflowResult.evidence,
+        "blockers",
+      ),
+    },
   };
 }

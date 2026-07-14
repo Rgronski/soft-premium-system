@@ -14,3 +14,21 @@ export type ProjectWorkflowSnapshot = {
   snapshot: ProjectBrainSnapshot;
   workflowResult: WorkflowResult;
 };
+
+export type ProjectConsumerOverview = {
+  project: {
+    id: string;
+    name: string;
+  };
+  counts: {
+    tasks: number;
+    knowledgeEntries: number;
+  };
+  workflow: {
+    health: WorkflowResult["health"];
+    confidence: number;
+    nextStep: WorkflowResult["nextStep"];
+    warnings: number;
+    blockers: number;
+  };
+};

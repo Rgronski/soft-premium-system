@@ -4,9 +4,11 @@ import * as knowledgeModule from "../knowledge/knowledge";
 import * as projectModule from "../project/project";
 import * as taskModule from "../task/task";
 import { evaluateWorkflow } from "../workflow/engine";
+import * as workflowModule from "../workflow/engine";
 import {
   buildProjectWorkflowState,
   evaluateProjectWorkflow,
+  getProjectConsumerOverview,
   getProjectWorkflowSnapshot,
   getProjectBrainSnapshot,
 } from "./engine";
@@ -768,5 +770,158 @@ describe("Project Brain engine", () => {
 
     expect(result.snapshot).toEqual(snapshotBefore);
     expect(result.snapshot.workflowState).toEqual(workflowStateBefore);
+  });
+
+  test("returns a consumer overview with the expected public shape", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+
+    const result = getProjectConsumerOverview("project-1");
+
+    expect(Object.keys(result).sort()).toEqual(["counts", "project", "workflow"]);
+    expect(Object.keys(result.project).sort()).toEqual(["id", "name"]);
+    expect(Object.keys(result.counts).sort()).toEqual([
+      "knowledgeEntries",
+      "tasks",
+    ]);
+    expect(Object.keys(result.workflow).sort()).toEqual([
+      "blockers",
+      "confidence",
+      "health",
+      "nextStep",
+      "warnings",
+    ]);
+  });
+
+  test("maps project identity and collection counts into the consumer overview", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+
+    const result = getProjectConsumerOverview("project-1");
+
+    expect(result.project).toEqual({
+      id: "project-1",
+      name: "Alpha",
+    });
+    expect(result.counts.tasks).toBe(1);
+    expect(result.counts.knowledgeEntries).toBe(1);
+  });
+
+  test("copies workflow health, confidence, and nextStep into the consumer overview", () => {
+    seedWorkflowSnapshotProject({ includeTask: true });
+
+    const result = getProjectConsumerOverview("project-1");
+
+    expect(result.workflow.health).toBe("ready");
+    expect(result.workflow.confidence).toBe(0.5);
+    expect(result.workflow.nextStep).toEqual({
+      id: "continue-active-work",
+      label: "Continue active work",
+      description: "Continue the active workflow item before starting new work.",
+    });
+  });
+
+  test("derives warnings and blockers counts from the returned workflow aggregate", () => {
+    vi.spyOn(projectModule, "getProjectById").mockReturnValue({
+        id: "project-1",
+        name: "Alpha",
+        createdAt: "2026-07-13T10:00:00.000Z",
+      });
+    vi.spyOn(taskModule, "getTasks").mockReturnValue([]);
+    vi.spyOn(knowledgeModule, "getKnowledge").mockReturnValue([]);
+
+    const evaluateWorkflowSpy = vi.spyOn(workflowModule, "evaluateWorkflow");
+
+    evaluateWorkflowSpy.mockReturnValue({
+      health: "blocked",
+      confidence: 1,
+      nextStep: {
+        id: "review-project-state",
+        label: "Review project state",
+        description: "Review the current project state before applying rules.",
+      },
+      warnings: [
+        {
+          code: "warning-1",
+          message: "First warning",
+        },
+        {
+          code: "warning-2",
+          message: "Second warning",
+        },
+      ],
+      progress: 0,
+      reason: "Blocked for test.",
+      evidence: ["phase:test", "warnings:2", "blockers:3"],
+    });
+
+    const result = getProjectConsumerOverview("project-1");
+
+    expect(result.workflow.warnings).toBe(2);
+    expect(result.workflow.blockers).toBe(3);
+  });
+
+  test.each([
+    {
+      name: "invalid-project-id",
+      projectId: "   ",
+      setup: () => {},
+      expectedCode: "invalid-project-id",
+    },
+    {
+      name: "project-not-found",
+      projectId: "project-1",
+      setup: () => {
+        storage.setItem("soft-premium-system.projects", JSON.stringify([]));
+      },
+      expectedCode: "project-not-found",
+    },
+    {
+      name: "source-read-failed",
+      projectId: "project-1",
+      setup: () => {
+        storage.setItem("soft-premium-system.projects", "{");
+      },
+      expectedCode: "source-read-failed",
+    },
+    {
+      name: "invalid-snapshot",
+      projectId: "project-1",
+      setup: () => {
+        vi.spyOn(projectModule, "getProjectById").mockReturnValue({
+          id: "project-2",
+          name: "Beta",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        });
+      },
+      expectedCode: "invalid-snapshot",
+    },
+  ])(
+    "propagates $name from the consumer overview projection",
+    ({ projectId, setup, expectedCode }) => {
+      setup();
+
+      expect(getErrorCode(() => getProjectConsumerOverview(projectId))).toBe(
+        expectedCode,
+      );
+    },
+  );
+
+  test("does not write or persist the consumer overview projection", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+    setItemSpy.mockClear();
+
+    getProjectConsumerOverview("project-1");
+
+    expect(setItemSpy).not.toHaveBeenCalled();
+  });
+
+  test("uses a single workflow snapshot read for the consumer overview projection", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+    const getKnowledgeSpy = vi.spyOn(knowledgeModule, "getKnowledge");
+    const evaluateWorkflowSpy = vi.spyOn(workflowModule, "evaluateWorkflow");
+
+    getProjectConsumerOverview("project-1");
+
+    expect(getKnowledgeSpy).toHaveBeenCalledTimes(1);
+    expect(evaluateWorkflowSpy).toHaveBeenCalledTimes(1);
   });
 });
