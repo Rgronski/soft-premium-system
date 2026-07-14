@@ -1766,7 +1766,7 @@ APPROVED BY PRODUCT OWNER
 NONE
 
 **Implementation Status**
-NOT STARTED
+IMPLEMENTED / LOCAL / VERIFIED
 
 **Next Safe Step**
 Prepare the first implementation batch for `MS-001.11` without changing lifecycle or implementation status until work actually starts.

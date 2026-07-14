@@ -82,7 +82,7 @@ Next Product Milestone: NONE.
 MS-001.11 contract status: APPROVED.
 MS-001.11 runtime status: ACTIVE.
 MS-001.11 Definition of Ready status: PASS.
-MS-001.11 implementation status: NOT STARTED.
+MS-001.11 implementation status: IMPLEMENTED / LOCAL / VERIFIED.
 MS-001.11 activation status: ACTIVATED.
 MS-001.11 activation decision: APPROVED BY PRODUCT OWNER.
 MS-001.11 active session: 007.
@@ -95,6 +95,8 @@ MS-001.11 planned implementation scope is limited to `src/lib/project-brain/type
 Active Capability: NONE.
 Active Parallel Capability: NONE.
 Blockers: NONE.
+MS-001.11 implementation commit exists locally as `dac997f`.
+MS-001.11 verification status: `npm test` PASS, `npm run lint` PASS with one accepted out-of-scope warning, `npm run build` PASS.
 MS-001.10 status: COMPLETED / PUBLISHED.
 MS-001.10 implementation status: COMPLETED / PUBLISHED.
 MS-001.10 contract approval: PASS.
