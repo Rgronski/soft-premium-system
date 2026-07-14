@@ -1,7 +1,7 @@
 import type { KnowledgeEntry } from "../knowledge/types";
 import type { Project } from "../project/types";
 import type { Task } from "../task/types";
-import type { ProjectState } from "../workflow/types";
+import type { ProjectState, WorkflowResult } from "../workflow/types";
 
 export interface ProjectBrainSnapshot {
   project: Project;
@@ -9,3 +9,8 @@ export interface ProjectBrainSnapshot {
   knowledgeEntries: KnowledgeEntry[];
   workflowState: ProjectState;
 }
+
+export type ProjectWorkflowSnapshot = {
+  snapshot: ProjectBrainSnapshot;
+  workflowResult: WorkflowResult;
+};

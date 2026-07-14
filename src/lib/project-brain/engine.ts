@@ -4,7 +4,10 @@ import { getTasks } from "../task/task";
 import { evaluateWorkflow } from "../workflow/engine";
 import type { ProjectState, WorkflowResult } from "../workflow/types";
 
-import type { ProjectBrainSnapshot } from "./types";
+import type {
+  ProjectBrainSnapshot,
+  ProjectWorkflowSnapshot,
+} from "./types";
 
 type ProjectBrainErrorCode =
   | "invalid-project-id"
@@ -255,4 +258,16 @@ export function evaluateProjectWorkflow(
   const snapshot = getProjectBrainSnapshot(projectId);
 
   return evaluateWorkflow(snapshot.workflowState);
+}
+
+export function getProjectWorkflowSnapshot(
+  projectId: string,
+): ProjectWorkflowSnapshot {
+  const snapshot = getProjectBrainSnapshot(projectId);
+  const workflowResult = evaluateWorkflow(snapshot.workflowState);
+
+  return {
+    snapshot,
+    workflowResult,
+  };
 }

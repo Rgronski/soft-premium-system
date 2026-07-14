@@ -7,6 +7,7 @@ import { evaluateWorkflow } from "../workflow/engine";
 import {
   buildProjectWorkflowState,
   evaluateProjectWorkflow,
+  getProjectWorkflowSnapshot,
   getProjectBrainSnapshot,
 } from "./engine";
 
@@ -50,6 +51,51 @@ describe("Project Brain engine", () => {
     }
 
     return null;
+  }
+
+  function seedWorkflowSnapshotProject(options?: {
+    includeTask?: boolean;
+    includeKnowledge?: boolean;
+  }) {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        },
+      ]),
+    );
+
+    if (options?.includeTask) {
+      storage.setItem(
+        "soft-premium-system.projects.project-1.tasks",
+        JSON.stringify([
+          {
+            id: "task-1",
+            projectId: "project-1",
+            title: "First task",
+            createdAt: "2026-07-13T12:00:00.000Z",
+          },
+        ]),
+      );
+    }
+
+    if (options?.includeKnowledge) {
+      storage.setItem(
+        "soft-premium-system.projects.project-1.knowledge",
+        JSON.stringify([
+          {
+            id: "knowledge-1",
+            projectId: "project-1",
+            title: "Note",
+            content: "Body",
+            createdAt: "2026-07-13T12:30:00.000Z",
+          },
+        ]),
+      );
+    }
   }
 
   test("returns a snapshot for an existing project", () => {
@@ -480,6 +526,54 @@ describe("Project Brain engine", () => {
     expect(secondResult).toEqual(firstResult);
   });
 
+  test("returns a workflow snapshot aggregate with exactly snapshot and workflowResult for an existing ready project", () => {
+    seedWorkflowSnapshotProject();
+
+    const result = getProjectWorkflowSnapshot("project-1");
+
+    expect(Object.keys(result).sort()).toEqual(["snapshot", "workflowResult"]);
+    expect(result.snapshot.project.id).toBe("project-1");
+    expect(result.workflowResult.health).toBe("ready");
+    expect(result.workflowResult.nextStep.id).toBe("start-next-work");
+  });
+
+  test("returns a snapshot equivalent to the direct project brain snapshot", () => {
+    seedWorkflowSnapshotProject({ includeTask: true });
+
+    const expectedSnapshot = getProjectBrainSnapshot("project-1");
+    const result = getProjectWorkflowSnapshot("project-1");
+
+    expect(result.snapshot).toEqual(expectedSnapshot);
+  });
+
+  test("returns a workflow result equivalent to evaluating the returned snapshot workflowState", () => {
+    seedWorkflowSnapshotProject({ includeTask: true });
+
+    const result = getProjectWorkflowSnapshot("project-1");
+
+    expect(result.workflowResult).toEqual(
+      evaluateWorkflow(result.snapshot.workflowState),
+    );
+  });
+
+  test("returns equivalent workflow snapshot aggregates for repeated reads of the same data", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+
+    const firstResult = getProjectWorkflowSnapshot("project-1");
+    const secondResult = getProjectWorkflowSnapshot("project-1");
+
+    expect(secondResult).toEqual(firstResult);
+  });
+
+  test("preserves activeWork behavior in the workflow snapshot aggregate", () => {
+    seedWorkflowSnapshotProject({ includeTask: true });
+
+    const result = getProjectWorkflowSnapshot("project-1");
+
+    expect(result.workflowResult.health).toBe("ready");
+    expect(result.workflowResult.nextStep.id).toBe("continue-active-work");
+  });
+
   test("preserves activeWork behavior from the Workflow Engine", () => {
     storage.setItem(
       "soft-premium-system.projects",
@@ -561,6 +655,52 @@ describe("Project Brain engine", () => {
     );
   });
 
+  test.each([
+    {
+      name: "invalid-project-id",
+      projectId: "   ",
+      setup: () => {},
+      expectedCode: "invalid-project-id",
+    },
+    {
+      name: "project-not-found",
+      projectId: "project-1",
+      setup: () => {
+        storage.setItem("soft-premium-system.projects", JSON.stringify([]));
+      },
+      expectedCode: "project-not-found",
+    },
+    {
+      name: "source-read-failed",
+      projectId: "project-1",
+      setup: () => {
+        storage.setItem("soft-premium-system.projects", "{");
+      },
+      expectedCode: "source-read-failed",
+    },
+    {
+      name: "invalid-snapshot",
+      projectId: "project-1",
+      setup: () => {
+        vi.spyOn(projectModule, "getProjectById").mockReturnValue({
+          id: "project-2",
+          name: "Beta",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        });
+      },
+      expectedCode: "invalid-snapshot",
+    },
+  ])(
+    "propagates $name from the workflow snapshot aggregate",
+    ({ projectId, setup, expectedCode }) => {
+      setup();
+
+      expect(getErrorCode(() => getProjectWorkflowSnapshot(projectId))).toBe(
+        expectedCode,
+      );
+    },
+  );
+
   test("does not write or persist workflow results", () => {
     storage.setItem(
       "soft-premium-system.projects",
@@ -575,6 +715,15 @@ describe("Project Brain engine", () => {
     setItemSpy.mockClear();
 
     evaluateProjectWorkflow("project-1");
+
+    expect(setItemSpy).not.toHaveBeenCalled();
+  });
+
+  test("does not write or persist workflow snapshot aggregates", () => {
+    seedWorkflowSnapshotProject();
+    setItemSpy.mockClear();
+
+    getProjectWorkflowSnapshot("project-1");
 
     expect(setItemSpy).not.toHaveBeenCalled();
   });
@@ -608,5 +757,16 @@ describe("Project Brain engine", () => {
     evaluateProjectWorkflow("project-1");
 
     expect(snapshot.workflowState).toEqual(workflowStateBefore);
+  });
+
+  test("does not mutate the returned workflow snapshot aggregate source data", () => {
+    seedWorkflowSnapshotProject({ includeTask: true });
+
+    const result = getProjectWorkflowSnapshot("project-1");
+    const snapshotBefore = structuredClone(result.snapshot);
+    const workflowStateBefore = structuredClone(result.snapshot.workflowState);
+
+    expect(result.snapshot).toEqual(snapshotBefore);
+    expect(result.snapshot.workflowState).toEqual(workflowStateBefore);
   });
 });
