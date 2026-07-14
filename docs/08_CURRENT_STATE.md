@@ -51,11 +51,11 @@ MS-001.10 - Project Brain Workflow Consumer Snapshot
 MS-001.11 - Project Brain Consumer Overview Model
 
 **MS-001.11 State**
-APPROVED / NOT ACTIVE
+APPROVED / ACTIVE
 
 Objective:
 
-Keep lifecycle SSOT synchronized after Product Owner approval of the `MS-001.11 - Project Brain Consumer Overview Model` contract and prepare its separate Definition of Ready Review.
+Keep lifecycle SSOT synchronized after Product Owner activation of `MS-001.11 - Project Brain Consumer Overview Model` as the current product milestone.
 
 Project Status:
 
@@ -76,13 +76,16 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE.
+Current Product Milestone: MS-001.11 - Project Brain Consumer Overview Model.
 Latest Completed Product Milestone: MS-001.10 - Project Brain Workflow Consumer Snapshot.
-Next Product Milestone: MS-001.11 - Project Brain Consumer Overview Model.
+Next Product Milestone: NONE.
 MS-001.11 contract status: APPROVED.
-MS-001.11 runtime status: NOT ACTIVE.
+MS-001.11 runtime status: ACTIVE.
 MS-001.11 Definition of Ready status: PASS.
 MS-001.11 implementation status: NOT STARTED.
+MS-001.11 activation status: ACTIVATED.
+MS-001.11 activation decision: APPROVED BY PRODUCT OWNER.
+MS-001.11 active session: 007.
 MS-001.11 boundary: deterministic read-only consumer projection over one `ProjectWorkflowSnapshot`.
 MS-001.11 planned API owner: `src/lib/project-brain`.
 MS-001.11 planned public API: `getProjectConsumerOverview(projectId)`.

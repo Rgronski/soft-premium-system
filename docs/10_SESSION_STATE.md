@@ -216,24 +216,27 @@ Current Chat Title: 007 SPS OS - Next Product Milestone Contract Discovery
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
 Active Capability: NONE
-Active Work Item: MS-001.11 Contract SSOT Synchronization
-Current Mode: CONTRACT SYNCHRONIZATION / DOR PREPARATION
+Active Work Item: MS-001.11 Lifecycle Activation
+Current Mode: ACTIVE MILESTONE / IMPLEMENTATION NOT STARTED
 Completed Capability Items: MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
-Current Product Milestone: NONE
+Current Product Milestone: MS-001.11 - Project Brain Consumer Overview Model
 Latest Completed Product Milestone: MS-001.10 - Project Brain Workflow Consumer Snapshot
-Next Product Milestone: MS-001.11 - Project Brain Consumer Overview Model
+Next Product Milestone: NONE
 Active Parallel Capability: NONE
 Latest Completed Capability Item: MS-001.10 - Project Brain Workflow Consumer Snapshot
 Contract Status: APPROVED
-Milestone Runtime Status: NOT ACTIVE
+Milestone Runtime Status: ACTIVE
 DoR Status: PASS
+Activation Status: ACTIVATED
+Activation Decision: APPROVED BY PRODUCT OWNER
+Active Session: 007
 Implementation Status: NOT STARTED
 Implementation Commit: NOT APPLICABLE
 Implementation Handoff: NOT CREATED
 Milestone Closure: NOT APPLICABLE
-Code Changes in Session: NONE - documentation-only contract synchronization
+Code Changes in Session: NONE - documentation-only lifecycle activation synchronization
 Current Sprint: NONE
-Platform Priority: Perform the separate MS-001.11 Definition of Ready Review without activating the milestone
+Platform Priority: Prepare the first implementation batch for active milestone MS-001.11 without starting implementation yet
 Repository Branch: main
 Repository Working Tree State: MODIFIED - expected documentation-only SSOT synchronization in package workspace
 Ahead / Behind Status: 0 / 0 at session bootstrap
@@ -241,5 +244,5 @@ Latest Verified Commit: 8714bd6
 Session Start Repository HEAD: 8714bd6
 Verification Status: PENDING - documentation consistency verification required after patch
 Blockers: NONE
-Open Risks: one non-blocking lint warning remains; milestone activation remains prohibited until DoR PASS and separate Product Owner authorization
-Next Safe Step: Perform MS-001.11 Definition of Ready Review without activation or implementation.
+Open Risks: one non-blocking lint warning remains; implementation must remain separate from lifecycle activation
+Next Safe Step: Prepare the first implementation batch for MS-001.11 without starting implementation in this session.

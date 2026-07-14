@@ -115,9 +115,7 @@ MS-001.10 - Project Brain Workflow Consumer Snapshot
 
 ## Next
 
-MS-001.11 - Project Brain Consumer Overview Model
-
-Status: APPROVED / NOT ACTIVE
+None - MS-001.11 is the current active product milestone
 
 ## Parallel Documentation Work
 
@@ -1575,7 +1573,7 @@ MS-001.11 - Project Brain Consumer Overview Model
 APPROVED
 
 **Runtime Status**
-NOT ACTIVE
+ACTIVE
 
 **Owner**
 Product Owner
@@ -1755,11 +1753,23 @@ PASS
 **Definition of Ready Review**
 PASS
 
+**Activation Status**
+ACTIVATED
+
+**Activation Decision**
+APPROVED BY PRODUCT OWNER
+
+**Active Session**
+007
+
+**Blockers**
+NONE
+
 **Implementation Status**
 NOT STARTED
 
 **Next Safe Step**
-Perform the separate `MS-001.11 Definition of Ready Review` without activating the milestone or changing implementation files.
+Prepare the first implementation batch for `MS-001.11` without changing lifecycle or implementation status until work actually starts.
 
 ---
 
