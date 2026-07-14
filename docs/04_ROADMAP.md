@@ -107,7 +107,7 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE
+MS-001.10 - Project Brain Workflow Consumer Snapshot
 
 ## Latest Completed Product Milestone
 
@@ -1319,6 +1319,233 @@ For an existing project, one public read returns a deterministic workflow evalua
 
 **Implementation Status**
 COMPLETED / PUBLISHED
+
+**Next Milestone**
+MS-001.10 - Project Brain Workflow Consumer Snapshot
+
+---
+
+## MS-001.10 - Project Brain Workflow Consumer Snapshot
+
+**Milestone**
+MS-001.10 - Project Brain Workflow Consumer Snapshot
+
+**Status**
+Active
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Expose one consumer-ready read-only Project Brain operation that returns the current project snapshot together with its evaluated workflow result for one `projectId`.
+
+**One Intention**
+Return one consistent `ProjectBrainSnapshot` and its corresponding `WorkflowResult` through a single read-only Project Brain operation for one `projectId`.
+
+**Problem Statement**
+* the repository already exposes `getProjectBrainSnapshot(projectId)`
+* the repository already exposes `evaluateProjectWorkflow(projectId)`
+* a future consumer would still need to coordinate two separate reads to obtain project context and workflow evaluation
+* no single consumer-ready read model yet returns both the current snapshot and the workflow result together
+
+**Business Goal**
+Provide future consumers one coherent and deterministic read model without requiring them to compose Project Brain and Workflow Engine manually.
+
+**Technical Goal**
+* read one `ProjectBrainSnapshot` for `projectId`
+* evaluate `snapshot.workflowState`
+* return the same snapshot together with the resulting `WorkflowResult`
+* preserve current storage, error, and engine boundaries
+
+**API Owner**
+* `src/lib/project-brain`
+
+**Public API**
+* `getProjectWorkflowSnapshot(projectId)`
+
+**Return Type**
+* `ProjectWorkflowSnapshot`
+
+**Aggregate Type Shape**
+```ts
+type ProjectWorkflowSnapshot = {
+  snapshot: ProjectBrainSnapshot;
+  workflowResult: WorkflowResult;
+};
+```
+
+**Single-Read Consistency Rule**
+* operation reads `ProjectBrainSnapshot` exactly once
+* operation evaluates `snapshot.workflowState`
+* operation returns that same snapshot together with the workflow result
+* operation must not perform two independent snapshot reads
+
+**Data Flow**
+* `projectId`
+* `getProjectBrainSnapshot(projectId)`
+* `snapshot.workflowState`
+* `evaluateWorkflow(snapshot.workflowState)`
+* `{ snapshot, workflowResult }`
+
+**Read/Write Boundary**
+* read-only milestone
+* no write API
+* no writes
+* Project, Task, and Knowledge remain write owners
+* Workflow Engine remains a pure evaluator
+
+**Storage Strategy**
+* no new storage
+* no new localStorage key
+* no cache
+* no migration
+* no persisted aggregate
+* no persisted `WorkflowResult`
+* no persisted snapshot copy
+
+**Error Behavior**
+* direct propagation of `invalid-project-id`
+* direct propagation of `project-not-found`
+* direct propagation of `source-read-failed`
+* direct propagation of `invalid-snapshot`
+* no aggregate-specific error
+* no wrapper
+* no remapping
+* no `try/catch`
+
+**Dependencies**
+* `MS-001.9 - Project Brain Workflow Evaluation Bridge`
+* Project Brain module
+* Workflow Engine
+* `ProjectBrainSnapshot`
+* `WorkflowResult`
+* existing Project Brain errors
+* Vitest
+* TypeScript
+* package.json scripts
+
+**Expected Implementation Scope**
+* one new public operation
+* one aggregate return type
+* composition of `getProjectBrainSnapshot(projectId)` and `evaluateWorkflow(snapshot.workflowState)`
+* no-write verification
+* deterministic-result verification
+* single-read consistency verification
+
+**Out of Scope**
+* UI
+* routing
+* React hooks
+* Server Actions
+* API endpoints
+* workflow execution
+* automatic next steps
+* write API
+* storage
+* cache
+* migrations
+* new localStorage keys
+* Workflow Engine changes
+* `ProjectState` changes
+* `WorkflowResult` changes
+* new Project Brain domains
+* document export
+* integrations
+* GitHub
+* Supabase
+* Vercel
+* AI Workspace
+* multi-project reads
+* batch API
+* synchronization
+* multi-user
+* permissions
+* refactor
+
+**Verification Contract**
+* returns `ProjectWorkflowSnapshot` for an existing project
+* returned `snapshot` matches `getProjectBrainSnapshot(projectId)`
+* returned `workflowResult` matches `evaluateWorkflow(returnedSnapshot.workflowState)`
+* snapshot is read exactly once within the operation
+* result is deterministic for the same data
+* `workflowResult` and `snapshot.workflowState` remain consistent
+* active-work behavior remains aligned with Workflow Engine
+* ready behavior remains aligned with Workflow Engine
+* existing Project Brain errors are propagated unchanged
+* operation performs no `localStorage.setItem`
+* aggregate is not persisted
+* snapshot is not mutated
+* `workflowState` is not mutated
+* existing Project Brain APIs remain unchanged
+* existing tests remain `PASS`
+* `npm test`
+* `npm run lint`
+* `npm run build`
+
+**Definition of Ready**
+* Product Owner approves the problem
+* Product Owner approves the business goal
+* milestone ID `MS-001.10` is approved
+* milestone name is approved
+* one intention is approved
+* API owner is approved
+* public operation is approved
+* aggregate type and its exact shape are approved
+* single-read consistency rule is approved
+* data flow is approved
+* read-only boundary is approved
+* storage strategy is approved
+* error behavior is approved
+* verification contract is approved
+* exact implementation files are confirmed
+* no competing active milestone exists
+* Product Owner Approval: PASS
+* Definition of Ready Review: PASS
+
+**Definition of Done**
+* one approved public operation exists
+* one approved aggregate type exists
+* operation reads snapshot exactly once
+* `workflowResult` is computed from the returned snapshot workflow state
+* operation uses existing Project Brain API
+* operation uses existing Workflow Engine
+* Workflow Engine logic is not duplicated
+* result is deterministic
+* existing errors are propagated unchanged
+* snapshot is not mutated
+* `workflowState` is not mutated
+* no new storage exists
+* no writes are performed
+* no UI changes exist
+* no Workflow Engine changes exist
+* aggregate API tests pass
+* all existing tests pass
+* lint passes
+* build passes
+* implementation commit is published
+* lifecycle SSOT is synchronized
+* Milestone Closure Review returns `PASS`
+
+**Documentation Impact**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+**Product Owner Approval**
+PASS
+
+**Definition of Ready Review**
+PASS
+
+**Implementation Status**
+NOT STARTED
 
 **Next Milestone**
 None - requires a separate Product Owner-approved contract

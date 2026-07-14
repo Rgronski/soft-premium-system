@@ -854,6 +854,34 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.10 - Project Brain Workflow Consumer Snapshot activated
+
+### Date
+
+2026-07-14
+
+### Completed
+
+* Product Owner approval: `PASS`.
+* DoR Review: `PASS`.
+* Status: `Active`.
+* Implementation: `NOT STARTED`.
+* One intention: return one read-only `ProjectBrainSnapshot` together with its corresponding `WorkflowResult` for one `projectId`.
+* API owner: `src/lib/project-brain`.
+* Planned public operation: `getProjectWorkflowSnapshot(projectId)`.
+* Aggregate return type: `ProjectWorkflowSnapshot`.
+* Single-read consistency rule confirmed: one snapshot read, evaluate `snapshot.workflowState`, and return that same snapshot together with `workflowResult`.
+* Read-only boundary confirmed.
+* No new storage.
+* No new localStorage key.
+* No cache.
+* No persisted aggregate.
+* No UI changes.
+* No Workflow Engine changes.
+* Existing Project Brain errors will be propagated without change.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

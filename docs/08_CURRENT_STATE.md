@@ -42,7 +42,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE
+MS-001.10 - Project Brain Workflow Consumer Snapshot
 
 **Latest Completed Milestone**
 MS-001.9 - Project Brain Workflow Evaluation Bridge
@@ -52,7 +52,7 @@ None - successor requires a separate Product Owner-approved contract
 
 Objective:
 
-Maintain post-milestone SSOT consistency after the published MS-001.9 workflow evaluation bridge implementation.
+Prepare one read-only consumer-ready operation that returns a consistent `ProjectBrainSnapshot` together with its corresponding `WorkflowResult`.
 
 Project Status:
 
@@ -73,40 +73,42 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE.
+Current Product Milestone: MS-001.10 - Project Brain Workflow Consumer Snapshot.
 Latest Completed Product Milestone: MS-001.9 - Project Brain Workflow Evaluation Bridge.
+Active Capability: NONE.
 Blockers: NONE.
-MS-001.9 status: COMPLETED / PUBLISHED.
-MS-001.9 implementation status: COMPLETED / PUBLISHED.
-MS-001.9 contract approval: PASS.
-MS-001.9 DoR: PASS.
-MS-001.9 API owner: `src/lib/project-brain`.
-MS-001.9 public API: `evaluateProjectWorkflow(projectId)`.
-MS-001.9 return type: `WorkflowResult`.
-MS-001.9 data flow: `projectId` -> `getProjectBrainSnapshot(projectId)` -> `snapshot.workflowState` -> `evaluateWorkflow(snapshot.workflowState)` -> `WorkflowResult`.
-MS-001.9 boundary: read-only.
-MS-001.9 implementation commit: `acecbfe`.
-MS-001.9 implementation publication: `origin/main`.
+MS-001.10 status: ACTIVE.
+MS-001.10 implementation status: NOT STARTED.
+MS-001.10 contract approval: PASS.
+MS-001.10 DoR: PASS.
+MS-001.10 API owner: `src/lib/project-brain`.
+MS-001.10 planned public operation: `getProjectWorkflowSnapshot(projectId)`.
+MS-001.10 return type: `ProjectWorkflowSnapshot`.
+MS-001.10 aggregate type shape: `{ snapshot: ProjectBrainSnapshot; workflowResult: WorkflowResult; }`.
+MS-001.10 single-read consistency rule: read one `ProjectBrainSnapshot`, evaluate `snapshot.workflowState`, and return that same snapshot together with `workflowResult`.
+MS-001.10 data flow: `projectId` -> `getProjectBrainSnapshot(projectId)` -> `snapshot.workflowState` -> `evaluateWorkflow(snapshot.workflowState)` -> `{ snapshot, workflowResult }`.
+MS-001.10 boundary: read-only.
 MS-001.7 completed and accepted.
 Active parallel capability: NONE.
 SPS OS 1.0 remains Released / Accepted.
 Known limitation: one non-blocking lint warning in `src/app/projects/[id]/tasks/page.tsx`.
-Project Brain foundation remains read-only.
+Project Brain consumer snapshot remains read-only.
 Project, Task, and Knowledge remain write owners.
 No new storage.
 No new localStorage key.
-No migration.
 No cache.
+No migration.
+No persisted aggregate.
 No persisted WorkflowResult.
-No persisted bridge state.
+No persisted snapshot copy.
 No UI changes.
 No Workflow Engine changes.
-No type changes.
+No write API.
 No writes.
-main contains the published MS-001.9 implementation state.
-main HEAD: acecbfe.
+main contains the approved MS-001.10 activation preparation baseline.
+main HEAD: 1f81792.
 Verified branch: main.
-Latest verified commit: acecbfe.
+Latest verified commit: 1f81792.
 Repository working tree: CLEAN.
 Ahead / behind: 0 / 0.
 install PASS.
@@ -115,7 +117,7 @@ build PASS.
 startup PASS.
 Project Brain tests PASS.
 29/29 tests PASS.
-implementation is published.
+implementation has not started.
 
 CAP-001 is reserved for the historical Bootstrap Engine. Project Capability documentation work is tracked as CAP-003.
 
@@ -230,20 +232,22 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `NONE`
+* `Current Product Milestone` is `MS-001.10 - Project Brain Workflow Consumer Snapshot`
 * `Latest Completed Product Milestone` is `MS-001.9 - Project Brain Workflow Evaluation Bridge`
-* delivered public operation is `evaluateProjectWorkflow(projectId)`
+* planned public operation is `getProjectWorkflowSnapshot(projectId)`
 * API owner is `src/lib/project-brain`
-* return type is existing `WorkflowResult`
+* return type is `ProjectWorkflowSnapshot`
+* aggregate type shape is `{ snapshot: ProjectBrainSnapshot; workflowResult: WorkflowResult; }`
+* single-read consistency rule requires exactly one snapshot read per operation
 * SPS OS 1.0 is Released / Accepted
-* `MS-001.9` contract status is `APPROVED`
-* `MS-001.9` runtime status is `COMPLETED / PUBLISHED`
-* implementation status is `COMPLETED / PUBLISHED`
-* implementation commit is `acecbfe`
-* implementation publication is `origin/main`
-* Active Work Item: `NONE`
+* `MS-001.10` contract status is `APPROVED`
+* `MS-001.10` runtime status is `ACTIVE`
+* Active Capability is `NONE`
+* implementation status is `NOT STARTED`
+* implementation handoff is `NOT PREPARED`
+* Active Work Item: `MS-001.10 Implementation Readiness`
 * Verified branch: `main`
-* Latest verified commit: `acecbfe`
+* Latest verified commit: `1f81792`
 * Repository working tree: `CLEAN`
 * Ahead / behind: `0 / 0`
 * install `PASS`
@@ -251,8 +255,8 @@ Next:
 * build `PASS`
 * startup `PASS`
 * `29/29` tests `PASS`
-* no new storage, writes, or UI changes were introduced
-* no Workflow Engine changes or type changes were introduced
+* no new storage, writes, or UI changes are approved
+* no Workflow Engine changes are approved
 
 ---
 
@@ -260,7 +264,7 @@ Next:
 
 Next session priorities:
 
-* Prepare a separate Product Owner-approved contract before activating the next milestone
+* Conduct a separate implementation readiness assessment before any code edit for `MS-001.10`
 
 ---
 
