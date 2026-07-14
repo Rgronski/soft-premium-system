@@ -107,11 +107,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-001.10 - Project Brain Workflow Consumer Snapshot
+NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.9 - Project Brain Workflow Evaluation Bridge
+MS-001.10 - Project Brain Workflow Consumer Snapshot
 
 ## Next
 
@@ -1331,7 +1331,7 @@ MS-001.10 - Project Brain Workflow Consumer Snapshot
 MS-001.10 - Project Brain Workflow Consumer Snapshot
 
 **Status**
-Active
+Completed
 
 **Owner**
 Product Owner
@@ -1544,8 +1544,20 @@ PASS
 **Definition of Ready Review**
 PASS
 
+**Implementation Evidence**
+* Implementation Status: `COMPLETED / PUBLISHED`
+* Implementation Commit: `1f20905`
+* Implementation Publication: `origin/main`
+* Public type: `ProjectWorkflowSnapshot`
+* Public API: `getProjectWorkflowSnapshot(projectId)`
+* Tests: `40 PASS`
+* Lint: `PASS` with one existing unrelated warning
+* Build: `PASS`
+* Definition of Done Review: `PASS`
+* Milestone Closure Review: `PASS`
+
 **Implementation Status**
-NOT STARTED
+COMPLETED / PUBLISHED
 
 **Next Milestone**
 None - requires a separate Product Owner-approved contract

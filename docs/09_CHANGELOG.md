@@ -882,6 +882,39 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.10 - Project Brain Workflow Consumer Snapshot completed
+
+### Date
+
+2026-07-14
+
+### Completed
+
+* Recorded `MS-001.10 - Project Brain Workflow Consumer Snapshot` as completed.
+* Implementation published to `origin/main`.
+* Public type: `ProjectWorkflowSnapshot`.
+* Public API: `getProjectWorkflowSnapshot(projectId)`.
+* API owner: `src/lib/project-brain`.
+* Added a read-only consumer snapshot that returns the same `ProjectBrainSnapshot` together with its evaluated `WorkflowResult`.
+* Preserved single-read consistency: one snapshot read, `workflowResult` derived from returned `snapshot.workflowState`, and the same snapshot returned.
+* Preserved returned snapshot/result consistency for one `projectId`.
+* Implementation commit: `1f20905`.
+* Publication: `origin/main`.
+* Tests returned `PASS` (`40`).
+* Lint returned `PASS` with one existing unrelated warning.
+* Build returned `PASS`.
+* Added no new storage, localStorage key, cache, migration, persisted aggregate, or persisted `WorkflowResult`.
+* Added no write API and performed no writes.
+* Changed no UI.
+* Changed no Workflow Engine.
+* Changed no `ProjectState`.
+* Changed no `WorkflowResult`.
+* Existing Project Brain errors continue to propagate without change.
+* Definition of Done: `PASS`.
+* Milestone Closure Review: `PASS`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.
