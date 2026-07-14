@@ -823,6 +823,37 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.9 - Project Brain Workflow Evaluation Bridge completed
+
+### Date
+
+2026-07-14
+
+### Completed
+
+* Recorded `MS-001.9 - Project Brain Workflow Evaluation Bridge` as completed.
+* Implementation published to `origin/main`.
+* Public API: `evaluateProjectWorkflow(projectId)`.
+* API owner: `src/lib/project-brain`.
+* Return type: existing `WorkflowResult`.
+* Added a read-only bridge from `getProjectBrainSnapshot(projectId)` to `evaluateWorkflow(snapshot.workflowState)`.
+* Implementation commit: `acecbfe`.
+* Publication: `origin/main`.
+* Tests returned `PASS` (`29`).
+* Lint returned `PASS` with one existing unrelated warning.
+* Build returned `PASS`.
+* Added no new storage, localStorage key, cache, or persisted result.
+* Added no write API and performed no writes.
+* Changed no UI.
+* Changed no Workflow Engine logic.
+* Changed no `ProjectState`.
+* Changed no `WorkflowResult`.
+* Existing Project Brain errors continue to propagate without change.
+* Definition of Done: `PASS`.
+* Milestone Closure Review: `PASS`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

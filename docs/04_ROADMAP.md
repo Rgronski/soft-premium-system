@@ -102,10 +102,16 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-001.5` - SPS OS 1.0 Release Candidate
 * `MS-001.6` - Final Release Acceptance Review
 * `MS-001.7` - SPS OS 1.0 Stabilization
+* `MS-001.8` - Project Brain Engine Foundation
+* `MS-001.9` - Project Brain Workflow Evaluation Bridge
 
 ## Current
 
-MS-001.8 - Project Brain Engine Foundation
+NONE
+
+## Latest Completed Product Milestone
+
+MS-001.9 - Project Brain Workflow Evaluation Bridge
 
 ## Next
 
@@ -1125,7 +1131,7 @@ MS-001.9 - Project Brain Workflow Evaluation Bridge
 MS-001.9 - Project Brain Workflow Evaluation Bridge
 
 **Status**
-Active
+Completed
 
 **Owner**
 Product Owner
@@ -1295,6 +1301,16 @@ For an existing project, one public read returns a deterministic workflow evalua
 * lifecycle SSOT documentation is synchronized
 * Milestone Closure Review returns `PASS`
 
+**Implementation Evidence**
+* Implementation Status: `COMPLETED / PUBLISHED`
+* Implementation Commit: `acecbfe`
+* Implementation Publication: `origin/main`
+* Tests: `29 PASS`
+* Lint: `PASS` with one existing unrelated warning
+* Build: `PASS`
+* Definition of Done Review: `PASS`
+* Milestone Closure Review: `PASS`
+
 **Documentation Impact**
 * `docs/04_ROADMAP.md`
 * `docs/08_CURRENT_STATE.md`
@@ -1302,7 +1318,7 @@ For an existing project, one public read returns a deterministic workflow evalua
 * `docs/10_SESSION_STATE.md`
 
 **Implementation Status**
-NOT STARTED
+COMPLETED / PUBLISHED
 
 **Next Milestone**
 None - requires a separate Product Owner-approved contract

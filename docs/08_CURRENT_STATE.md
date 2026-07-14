@@ -42,17 +42,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-001.9 - Project Brain Workflow Evaluation Bridge
+NONE
 
 **Latest Completed Milestone**
-MS-001.8 - Project Brain Engine Foundation
+MS-001.9 - Project Brain Workflow Evaluation Bridge
 
 **Next Milestone**
 None - successor requires a separate Product Owner-approved contract
 
 Objective:
 
-Prepare the minimal read-only composition of the existing Project Brain with the existing Workflow Engine.
+Maintain post-milestone SSOT consistency after the published MS-001.9 workflow evaluation bridge implementation.
 
 Project Status:
 
@@ -73,20 +73,20 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: MS-001.9 - Project Brain Workflow Evaluation Bridge.
-Latest Completed Product Milestone: MS-001.8 - Project Brain Engine Foundation.
+Current Product Milestone: NONE.
+Latest Completed Product Milestone: MS-001.9 - Project Brain Workflow Evaluation Bridge.
 Blockers: NONE.
-MS-001.9 status: ACTIVE.
-MS-001.9 implementation status: NOT STARTED.
+MS-001.9 status: COMPLETED / PUBLISHED.
+MS-001.9 implementation status: COMPLETED / PUBLISHED.
 MS-001.9 contract approval: PASS.
 MS-001.9 DoR: PASS.
 MS-001.9 API owner: `src/lib/project-brain`.
-MS-001.9 planned public operation: `evaluateProjectWorkflow(projectId)`.
+MS-001.9 public API: `evaluateProjectWorkflow(projectId)`.
 MS-001.9 return type: `WorkflowResult`.
-MS-001.9 data flow: `projectId` -> `getProjectBrainSnapshot(projectId)` -> `snapshot.workflowState` -> `evaluateWorkflow(workflowState)` -> `WorkflowResult`.
+MS-001.9 data flow: `projectId` -> `getProjectBrainSnapshot(projectId)` -> `snapshot.workflowState` -> `evaluateWorkflow(snapshot.workflowState)` -> `WorkflowResult`.
 MS-001.9 boundary: read-only.
-MS-001.9 code changes: NONE.
-MS-001.9 implementation handoff: NOT PREPARED.
+MS-001.9 implementation commit: `acecbfe`.
+MS-001.9 implementation publication: `origin/main`.
 MS-001.7 completed and accepted.
 Active parallel capability: NONE.
 SPS OS 1.0 remains Released / Accepted.
@@ -101,11 +101,12 @@ No persisted WorkflowResult.
 No persisted bridge state.
 No UI changes.
 No Workflow Engine changes.
+No type changes.
 No writes.
-main contains the approved MS-001.9 activation state.
-main HEAD: 835c32b.
+main contains the published MS-001.9 implementation state.
+main HEAD: acecbfe.
 Verified branch: main.
-Latest verified commit: 835c32b.
+Latest verified commit: acecbfe.
 Repository working tree: CLEAN.
 Ahead / behind: 0 / 0.
 install PASS.
@@ -113,8 +114,8 @@ lint PASS.
 build PASS.
 startup PASS.
 Project Brain tests PASS.
-18/18 tests PASS.
-implementation has not started.
+29/29 tests PASS.
+implementation is published.
 
 CAP-001 is reserved for the historical Bootstrap Engine. Project Capability documentation work is tracked as CAP-003.
 
@@ -229,29 +230,29 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `MS-001.9 - Project Brain Workflow Evaluation Bridge`
-* `Latest Completed Product Milestone` remains `MS-001.8 - Project Brain Engine Foundation`
-* boundary is read-only
-* one planned public operation is `evaluateProjectWorkflow(projectId)`
+* `Current Product Milestone` is `NONE`
+* `Latest Completed Product Milestone` is `MS-001.9 - Project Brain Workflow Evaluation Bridge`
+* delivered public operation is `evaluateProjectWorkflow(projectId)`
 * API owner is `src/lib/project-brain`
 * return type is existing `WorkflowResult`
 * SPS OS 1.0 is Released / Accepted
 * `MS-001.9` contract status is `APPROVED`
-* `MS-001.9` runtime status is `ACTIVE`
-* implementation status is `NOT STARTED`
-* implementation handoff is `NOT PREPARED`
-* Active Work Item: `MS-001.9 Implementation Readiness`
+* `MS-001.9` runtime status is `COMPLETED / PUBLISHED`
+* implementation status is `COMPLETED / PUBLISHED`
+* implementation commit is `acecbfe`
+* implementation publication is `origin/main`
+* Active Work Item: `NONE`
 * Verified branch: `main`
-* Latest verified commit: `835c32b`
+* Latest verified commit: `acecbfe`
 * Repository working tree: `CLEAN`
 * Ahead / behind: `0 / 0`
 * install `PASS`
 * lint `PASS` with one non-blocking existing warning
 * build `PASS`
 * startup `PASS`
-* `18/18` tests `PASS`
-* no new storage, writes, or UI changes are approved
-* no Workflow Engine changes are approved
+* `29/29` tests `PASS`
+* no new storage, writes, or UI changes were introduced
+* no Workflow Engine changes or type changes were introduced
 
 ---
 
@@ -259,7 +260,7 @@ Next:
 
 Next session priorities:
 
-* Prepare a separate implementation readiness assessment before any code edit for `MS-001.9`
+* Prepare a separate Product Owner-approved contract before activating the next milestone
 
 ---
 
