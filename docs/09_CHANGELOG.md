@@ -955,8 +955,10 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 * `npm run lint`: `PASS` with one previously accepted out-of-scope warning.
 * `npm run build`: `PASS`.
 * Milestone remains `ACTIVE`.
-* Implementation status is now `IMPLEMENTED / LOCAL / VERIFIED`.
-* Implementation has not been published yet.
+* Commit `dac997f` is published on `origin/main`.
+* Commit `31941a7` is published on `origin/main`.
+* Implementation status is now `IMPLEMENTED / PUBLISHED / VERIFIED`.
+* MS-001.11 implementation is published.
 * Milestone is not `COMPLETED`, `PUBLISHED`, or `CLOSED`.
 
 ---
