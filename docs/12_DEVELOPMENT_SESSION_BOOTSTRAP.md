@@ -174,6 +174,34 @@ Runtime Lock and Session Lock should become `ACTIVE` after bootstrap passes requ
 
 An acceptable commit drift must not keep locks inactive by itself.
 
+Runtime Command Contract Load:
+
+During every `SPS OS — START`, bootstrap must read:
+
+- `docs/11_SPS_START.md`
+- `docs/15_SESSION_CLOSE_PROTOCOL.md`
+- `docs/00_SPS_DEVELOPMENT_METHOD.md`
+
+Bootstrap must verify that:
+
+- `START` is the bootstrap and runtime-entry trigger
+- `KONIEC` is the Session Close Protocol trigger
+- `KONIEC` does not automatically mean `CLOSED`
+- `Session Close Minimal Patch Rule` applies
+- `PASS` and `CLOSED` require full protocol evidence
+
+If runtime command semantics are missing, contradictory, or were not loaded, bootstrap must end with:
+
+- `Bootstrap Status: FAIL`
+- `Consistency Gate: FAIL`
+- `Runtime Lock: INACTIVE`
+- `Session Lock: INACTIVE`
+
+When bootstrap passes required gates, Runtime Command Contract becomes part of the active lock state:
+
+- `Runtime Lock: ACTIVE`
+- `Session Lock: ACTIVE`
+
 Tryb pracy:
 
 Execute this bootstrap in SPDM credit-saving mode and minimal patch mode:
@@ -359,6 +387,7 @@ The session lock covers:
 - No Refactoring
 - One Recommendation
 - One Next Safe Step
+- Runtime Command Contract
 
 Workflow:
 
@@ -379,6 +408,10 @@ Workflow:
 Consistency Gate:
 
 Consistency Gate must include Role Separation Check.
+
+Consistency Gate must also confirm Runtime Command Contract Load.
+
+If `START` / `KONIEC` semantics are missing, contradictory, or were not loaded from required documents, Consistency Gate must return `FAIL`.
 
 Role Separation Check confirms that:
 
@@ -534,6 +567,8 @@ Rules:
 - Use `NONE` only when SSOT explicitly confirms that no active item exists.
 - Use `UNKNOWN` when SSOT does not contain a clear value.
 - Do not derive values from conversation history.
+- Use existing fields only for Runtime Command Contract confirmation.
+- Report `Runtime Command Contract: PASS` or `Runtime Command Contract: FAIL` inside `Roadmap Status` or in a comment after all required fields.
 
 SSOT Loaded:
 

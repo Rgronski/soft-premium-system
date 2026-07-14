@@ -41,6 +41,50 @@ It does not replace `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`.
 
 ---
 
+# SPS OS Runtime Command Rules
+
+SPS OS commands are system runtime commands and must not be interpreted casually.
+
+## SPS OS — START
+
+`SPS OS — START`:
+
+* is a system runtime command,
+* starts repository access mode selection,
+* starts full bootstrap,
+* requires SPDM and `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`,
+* must not end with a readiness declaration only,
+* may activate runtime only after required bootstrap gates pass.
+
+## SPS OS — KONIEC
+
+`SPS OS — KONIEC`:
+
+* is a system runtime command,
+* starts or enforces Session Close Protocol,
+* is not a casual statement that the conversation is ending,
+* does not automatically mean:
+  * `Session runtime: CLOSED`
+  * `Session Close PASS`
+  * `Session closed`
+
+Immediately after command recognition, the required state is:
+
+* `Session Close Protocol: REQUIRED`
+* `Session runtime: CLOSURE PENDING`
+
+After procedure start, the required state is:
+
+* `Session Close Protocol: IN PROGRESS`
+* `Session runtime: CLOSURE PENDING`
+
+Final state may be declared only after full protocol evidence is `PASS`:
+
+* `Session Close Protocol: PASS`
+* `Session runtime: CLOSED`
+
+---
+
 # Session Modes
 
 ## 1. Workspace Mode

@@ -185,6 +185,69 @@ If evidence is missing, the status must be `UNKNOWN`.
 
 ---
 
+# Session Close Minimal Patch Rule
+
+Before declaring `Session Close PASS`, always check whether a required minimal session-close patch exists.
+
+The minimal session-close patch includes at least:
+
+* current `docs/10_SESSION_STATE.md`
+* current next-session handoff in `docs/session-handoffs/`
+* consistent `Next Session ID`
+* consistent `Suggested Next Chat Title`
+* state that allows generation of a fresh `sps-session.zip`
+
+If any required element is missing:
+
+* do not declare `Session Close PASS`
+* do not declare `Session runtime: CLOSED`
+* do not declare `Session closed`
+* first prepare, verify, and publish the required minimal patch according to this protocol
+
+Mandatory sequence after recognizing `SPS OS — KONIEC`:
+
+1. Recognize `SPS OS — KONIEC`.
+2. Set:
+   * `Session Close Protocol: REQUIRED`
+   * `Session runtime: CLOSURE PENDING`
+3. Read and apply:
+   * `docs/15_SESSION_CLOSE_PROTOCOL.md`
+   * `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`
+   * `docs/00_SPS_DEVELOPMENT_METHOD.md`
+4. Set:
+   * `Session Close Protocol: IN PROGRESS`
+   * `Session runtime: CLOSURE PENDING`
+5. Perform session audit and check whether a minimal patch is required.
+6. Synchronize required documents.
+7. Prepare the current next-session handoff.
+8. Confirm consistency of:
+   * Current Session ID
+   * Next Session ID
+   * Suggested Next Chat Title
+9. Perform required commit and push if the protocol requires repository changes.
+10. Run Session Package Generator.
+11. Generate a fresh `sps-session.zip`.
+12. Confirm `Package Consistency: PASS`.
+13. Check final repository state:
+   * correct branch
+   * working tree clean
+   * local/origin synchronized
+   * correct HEAD
+14. Only then declare:
+   * `SPS OS Session Close — PASS`
+   * `Session Close Protocol: PASS`
+   * `Session runtime: CLOSED`
+
+Missing evidence for any required step means closure remains `CLOSURE PENDING`.
+
+Missing evidence must not be replaced by assumption, declaration, or prediction.
+
+Preparing instructions, prompts, patches, or commands is not execution of Session Close Protocol.
+
+Commit without push, handoff without generator, or ZIP without `Package Consistency: PASS` is not sufficient for session closure.
+
+---
+
 # Session Audit Template
 
 Use this deterministic audit output template:
@@ -394,6 +457,8 @@ Before Session Close can be reported as `PASS`, all of the following must be pre
 
 If any critical field is missing or inconsistent, the result must be `PARTIAL` or `FAIL`, never `PASS`.
 
+`Session runtime: CLOSED` must not be declared before these preconditions and the mandatory final handoff sequence are fully satisfied.
+
 ---
 
 # Mandatory Final Handoff Sequence
@@ -418,6 +483,7 @@ Rules:
 
 * the final START prompt must not be presented before fresh ZIP confirmation
 * Session Close must not be declared `PASS` before fresh ZIP confirmation
+* `Session runtime: CLOSED` must not be declared before fresh ZIP confirmation
 * the assistant must explicitly provide the PowerShell generator command
 * the assistant must explicitly ask the Product Owner to confirm:
 * `Package Consistency: PASS`
@@ -432,6 +498,7 @@ Rules:
 * paste the supplied START prompt
 * a local filesystem path written inside the prompt does not give the new chat access to the ZIP
 * the ZIP must be manually attached to the new conversation
+* absence of proof for any mandatory step keeps closure in `CLOSURE PENDING`
 
 ---
 
