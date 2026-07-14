@@ -959,7 +959,11 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 * Commit `31941a7` is published on `origin/main`.
 * Implementation status is now `IMPLEMENTED / PUBLISHED / VERIFIED`.
 * MS-001.11 implementation is published.
-* Milestone is not `COMPLETED`, `PUBLISHED`, or `CLOSED`.
+* MS-001.11 is completed.
+* MS-001.11 lifecycle is closed.
+* Milestone status is `COMPLETED / PUBLISHED / CLOSED`.
+* `Current Product Milestone` returns to `NONE`.
+* No next product milestone has been activated yet.
 
 ---
 

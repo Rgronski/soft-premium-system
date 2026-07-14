@@ -76,13 +76,14 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: MS-001.11 - Project Brain Consumer Overview Model.
+Current Product Milestone: NONE.
 Latest Completed Product Milestone: MS-001.10 - Project Brain Workflow Consumer Snapshot.
 Next Product Milestone: NONE.
 MS-001.11 contract status: APPROVED.
-MS-001.11 runtime status: ACTIVE.
+MS-001.11 runtime status: CLOSED.
 MS-001.11 Definition of Ready status: PASS.
 MS-001.11 implementation status: IMPLEMENTED / PUBLISHED / VERIFIED.
+MS-001.11 milestone status: COMPLETED / PUBLISHED / CLOSED.
 MS-001.11 activation status: ACTIVATED.
 MS-001.11 activation decision: APPROVED BY PRODUCT OWNER.
 MS-001.11 active session: 007.
@@ -97,6 +98,7 @@ Active Parallel Capability: NONE.
 Blockers: NONE.
 MS-001.11 implementation commit `dac997f` is published on `origin/main`.
 MS-001.11 verification status: `npm test` PASS, `npm run lint` PASS with one accepted out-of-scope warning, `npm run build` PASS.
+MS-001.11 closure status: completed; no next product milestone is active yet.
 MS-001.10 status: COMPLETED / PUBLISHED.
 MS-001.10 implementation status: COMPLETED / PUBLISHED.
 MS-001.10 contract approval: PASS.

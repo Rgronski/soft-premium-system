@@ -1765,11 +1765,17 @@ APPROVED BY PRODUCT OWNER
 **Blockers**
 NONE
 
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Runtime Status**
+CLOSED
+
 **Implementation Status**
 IMPLEMENTED / PUBLISHED / VERIFIED
 
 **Next Safe Step**
-Prepare the first implementation batch for `MS-001.11` without changing lifecycle or implementation status until work actually starts.
+Wait for a separate Product Owner decision before activating the next product milestone.
 
 ---
 
