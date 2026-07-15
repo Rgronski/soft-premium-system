@@ -2013,14 +2013,35 @@ IMPLEMENTED
 **Implementation Review**
 PASS
 
-**Implementation Commit**
+**Original Implementation Commit**
 29802f3 - feat: add Project Brain consumer workspace model
 
+**Single-Read Fix Status**
+IMPLEMENTED / VERIFIED / PUBLISHED
+
+**Single-Read Fix Commit**
+d6913e5 - fix: remove duplicate Project Brain source reads
+
+**Post-Fix Verification**
+* focused tests: `PASS - 60 tests`
+* full tests: `PASS - 64 tests`
+* lint: `PASS - one previously accepted warning`
+* build: `PASS`
+* git diff --check: `PASS`
+
+**Read Count Contract**
+PASS - 1 project / 1 tasks / 1 knowledge / 1 workflow evaluation
+
 **Milestone Closure Review**
-NOT STARTED
+FAIL - blockers identified
+
+**Closure Blockers Status**
+* single-read blocker: `RESOLVED`
+* lifecycle SSOT drift: `IN CORRECTION`
+* verification evidence gap: `IN CORRECTION`
 
 **Next Safe Step**
-MS-001.12 Milestone Closure Review
+Repeat MS-001.12 Milestone Closure Review
 
 ---
 

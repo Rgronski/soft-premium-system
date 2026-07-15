@@ -42,7 +42,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE
+MS-001.12 - Project Brain Consumer Workspace Model
 
 **Latest Completed Milestone**
 MS-001.11 - Project Brain Consumer Overview Model
@@ -83,9 +83,11 @@ MS-001.12 contract status: APPROVED.
 MS-001.12 runtime status: ACTIVE.
 MS-001.12 milestone status: ACTIVE.
 MS-001.12 implementation status: IMPLEMENTED.
-MS-001.12 implementation review: PASS.
-MS-001.12 implementation commit: `29802f3`.
-MS-001.12 milestone closure review: NOT STARTED.
+MS-001.12 Original Implementation Commit: `29802f3`.
+MS-001.12 Single-Read Fix Commit: `d6913e5`.
+MS-001.12 Single-Read Contract: PASS.
+MS-001.12 milestone closure review: FAIL.
+MS-001.12 Single-Read Blocker: RESOLVED.
 MS-001.12 Definition of Ready Review: PASS.
 MS-001.12 activation status: ACTIVATED.
 MS-001.12 activation decision: AUTHORIZED.
@@ -143,17 +145,19 @@ No workflow type changes.
 No write API.
 No writes.
 main contains the published MS-001.10 implementation baseline.
-main HEAD: 1f20905.
+main HEAD: d6913e5.
 Verified branch: main.
-Latest verified commit: 1f20905.
+Latest verified commit: d6913e5.
 Repository working tree: CLEAN.
 Ahead / behind: 0 / 0.
 install PASS.
-lint PASS.
+lint PASS with one previously accepted warning in `src/app/projects/[id]/tasks/page.tsx`.
 build PASS.
 startup PASS.
 Project Brain tests PASS.
-40/40 tests PASS.
+focused tests: 60 PASS.
+full tests: 64 PASS.
+git diff --check PASS.
 implementation published to origin/main.
 
 CAP-001 is reserved for the historical Bootstrap Engine. Project Capability documentation work is tracked as CAP-003.
@@ -277,24 +281,28 @@ Next:
 * `MS-001.12` runtime status is `ACTIVE`
 * `MS-001.12` milestone status is `ACTIVE`
 * `MS-001.12` implementation status is `IMPLEMENTED`
-* `MS-001.12` implementation review is `PASS`
-* `MS-001.12` implementation commit is `29802f3`
-* `MS-001.12` milestone closure review is `NOT STARTED`
+* `MS-001.12` original implementation commit is `29802f3`
+* `MS-001.12` single-read fix commit is `d6913e5`
+* `MS-001.12` single-read contract is `PASS`
+* `MS-001.12` milestone closure review is `FAIL`
+* `MS-001.12` single-read blocker is `RESOLVED`
 * `MS-001.12` activation status is `ACTIVATED`
 * `MS-001.12` activation decision is `AUTHORIZED`
-* next controlled operation is `MS-001.12 Milestone Closure Review`
+* next controlled operation is `Repeat MS-001.12 Milestone Closure Review`
 * Active Capability is `NONE`
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
 * Verified branch: `main`
-* Latest verified commit: `1f20905`
+* Latest verified commit: `d6913e5`
 * Repository working tree: `CLEAN`
 * Ahead / behind: `0 / 0`
 * install `PASS`
-* lint `PASS` with one non-blocking existing warning
+* lint `PASS` with one previously accepted warning in `src/app/projects/[id]/tasks/page.tsx`
 * build `PASS`
 * startup `PASS`
-* `40/40` tests `PASS`
+* focused tests `60 PASS`
+* full tests `64 PASS`
+* diff check `PASS`
 * no new storage, writes, or UI changes were introduced
 * no Workflow Engine changes were introduced
 * no workflow type changes were introduced
@@ -305,7 +313,7 @@ Next:
 
 Next session priorities:
 
-* Prepare a separate Product Owner-approved contract for the next milestone
+* Repeat `MS-001.12 Milestone Closure Review`
 
 ---
 
@@ -331,7 +339,7 @@ Keep workflow governance and project state documentation aligned.
 
 Priority 3
 
-Next controlled lifecycle step: `MS-001.12 Milestone Closure Review`.
+Next controlled lifecycle step: `Repeat MS-001.12 Milestone Closure Review`.
 
 ---
 

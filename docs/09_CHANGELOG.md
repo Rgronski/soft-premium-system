@@ -988,6 +988,41 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.12 Single-Read Contract Fix
+
+### Date
+
+2026-07-15
+
+### Updated
+
+* Fix commit: `d6913e5 - fix: remove duplicate Project Brain source reads`.
+* Status: `IMPLEMENTED / VERIFIED / PUBLISHED`.
+* Problem:
+* snapshot path re-read Project and Task.
+* effective read count was `2 / 2 / 1 / 1`.
+* Resolution:
+* private read-only helper now builds `ProjectState` from already loaded data.
+* public `buildProjectWorkflowState(projectId)` remains a compatible wrapper.
+* Result:
+* Project read: `1`.
+* Task read: `1`.
+* Knowledge read: `1`.
+* Workflow evaluation: `1`.
+* Verification:
+* focused tests: `60 PASS`.
+* full tests: `64 PASS`.
+* lint: `PASS` with one previously accepted warning.
+* build: `PASS`.
+* diff check: `PASS`.
+* Scope:
+* `src/lib/project-brain/engine.ts`.
+* `src/lib/project-brain/engine.test.ts`.
+* Milestone state: `ACTIVE`.
+* Milestone Closure Review: `FAIL - repeat required after SSOT synchronization`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.
