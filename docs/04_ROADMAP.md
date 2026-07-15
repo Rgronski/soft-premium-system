@@ -2064,7 +2064,7 @@ MS-001.13 - Project Workspace Consumer Overview
 APPROVED
 
 **Runtime Status**
-ACTIVE
+CLOSED
 
 **Owner**
 Product Owner
@@ -2104,6 +2104,9 @@ Render one read-only Project Overview section from one call to `getProjectConsum
 * Build: `PASS`
 * git diff --check: `PASS`
 * Contract Deviations: `NONE`
+* Publication Status: `PUBLISHED`
+* Publication Commit: `78f28eb95b88d8ddecd66a09dc77c1962216e716`
+* Remote Branch: `origin/main`
 
 **Product Owner Approval**
 PASS
@@ -2118,13 +2121,13 @@ ACTIVATED
 AUTHORIZED
 
 **Active Session**
-009
+NONE
 
 **Blockers**
 NONE
 
 **Milestone Status**
-IMPLEMENTED / ACCEPTED / PENDING PUBLICATION
+COMPLETED / PUBLISHED / CLOSED
 
 **Implementation Status**
 COMPLETED
@@ -2133,16 +2136,19 @@ COMPLETED
 PASS
 
 **Implementation Publication**
-PENDING
+origin/main @ `78f28eb95b88d8ddecd66a09dc77c1962216e716`
 
 **Milestone Closure Review**
-PENDING REVIEW
+PASS
 
 **Closure Blockers**
 NONE
 
+**Product Owner Closure Decision**
+APPROVED
+
 **Next Safe Step**
-Run MS-001.13 Milestone Closure Review
+Run Next Product Milestone Contract Discovery
 
 ---
 
