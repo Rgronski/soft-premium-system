@@ -231,11 +231,11 @@ Current Milestone DoR Review: PASS
 Current Milestone Activation Status: ACTIVATED
 Current Milestone Activation Decision: AUTHORIZED
 Current Milestone Runtime Status: ACTIVE
-Current Milestone Status: ACTIVE
-Current Milestone Implementation Status: NOT STARTED
-Current Milestone Product Owner Acceptance Review: NONE
-Current Milestone Technical Verification: NONE
-Current Milestone Implementation Review: NONE
+Current Milestone Status: ACTIVE - READY FOR PUBLICATION
+Current Milestone Implementation Status: COMPLETED
+Current Milestone Product Owner Acceptance Review: PASS
+Current Milestone Technical Verification: PASS
+Current Milestone Implementation Review: PASS
 Current Milestone Original Implementation Commit: NONE
 Current Milestone Single-Read Fix Commit: NONE
 Current Milestone Single-Read Fix Status: NONE
@@ -267,9 +267,15 @@ MS-001.14 DoR Review: PASS
 MS-001.14 Activation Status: ACTIVATED
 MS-001.14 Activation Decision: AUTHORIZED
 MS-001.14 Runtime Status: ACTIVE
-MS-001.14 Milestone Status: ACTIVE
-MS-001.14 Implementation Status: NOT STARTED
+MS-001.14 Milestone Status: ACTIVE - READY FOR PUBLICATION
+MS-001.14 Implementation Status: COMPLETED
 MS-001.14 Product Owner Approval: PASS
+MS-001.14 Product Owner Acceptance Review: PASS
+MS-001.14 Technical Verification: PASS
+MS-001.14 Implementation Review: PASS
+MS-001.14 Publication Status: PENDING
+MS-001.14 Contract Deviations: NONE
+MS-001.14 Closure Status: PENDING REVIEW
 MS-001.14 Blockers: NONE
 MS-001.12 Contract Status: APPROVED
 MS-001.12 DoR Review: PASS
@@ -307,16 +313,16 @@ Implementation Handoff: CREATED - session close handoff prepared for the next SP
 Milestone Closure: COMPLETED / PUBLISHED / CLOSED
 Code Changes in Session: published implementation commit `dac997f`; published closure SSOT synchronization commits `31941a7`, `67b4931`, and `fb622d3`; session close handoff prepared
 Current Sprint: NONE
-Platform Priority: Keep `MS-001.14` active at the lifecycle level while preserving its diagnosis-only implementation start boundary
+Platform Priority: Keep `MS-001.14` active while preparing the controlled publication commit and closure review package
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: 78f28eb95b88d8ddecd66a09dc77c1962216e716
 Repository HEAD: 5a76aeaede301de7f0dac56563b3366e26a37d30
 Session Start Repository HEAD: 30d8205
-Verification Status: PASS - `MS-001.14` lifecycle activation is synchronized locally; repository remains documentation-only modified pending the controlled activation commit
+Verification Status: PASS - `MS-001.14` implementation, verification, and implementation review are complete; lifecycle SSOT is now being synchronized for publication preparation
 Blockers: NONE
-Open Risks: one non-blocking lint warning remains; `MS-001.14` implementation diagnosis is still pending and source edits must not start before that review
+Open Risks: one non-blocking lint warning remains; `MS-001.14` is not yet published or closed
 Repository Changes during diagnosis: NONE
 Session Close Protocol: PASS
-Next Safe Step: Run MS-001.14 implementation diagnosis
+Next Safe Step: Prepare controlled MS-001.14 publication commit

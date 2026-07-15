@@ -82,14 +82,21 @@ Next Product Milestone: NONE
 Proposed Next Milestone: NONE.
 Proposal Status: NONE.
 Activation: ACTIVATED.
-Implementation: NOT STARTED.
+Implementation: COMPLETED.
 MS-001.14 contract status: APPROVED.
 MS-001.14 runtime status: ACTIVE.
-MS-001.14 implementation status: NOT STARTED.
+MS-001.14 implementation status: COMPLETED.
 MS-001.14 Definition of Ready Review: PASS.
 MS-001.14 activation status: ACTIVATED.
 MS-001.14 activation decision: AUTHORIZED.
 MS-001.14 Product Owner Contract Approval: PASS.
+MS-001.14 Product Owner Acceptance Review: PASS.
+MS-001.14 technical verification: PASS.
+MS-001.14 implementation review: PASS.
+MS-001.14 contract deviations: NONE.
+MS-001.14 publication status: PENDING.
+MS-001.14 closure status: PENDING REVIEW.
+MS-001.14 milestone status: ACTIVE - READY FOR PUBLICATION.
 MS-001.14 blockers: NONE.
 MS-001.13 contract status: APPROVED.
 MS-001.13 runtime status: CLOSED.
@@ -305,14 +312,21 @@ Next:
 * proposed next milestone is `NONE`
 * proposal status is `NONE`
 * current activation is `ACTIVATED`
-* current implementation is `NOT STARTED`
+* current implementation is `COMPLETED`
 * `MS-001.14` contract status is `APPROVED`
 * `MS-001.14` runtime status is `ACTIVE`
-* `MS-001.14` implementation status is `NOT STARTED`
+* `MS-001.14` implementation status is `COMPLETED`
 * `MS-001.14` Definition of Ready Review is `PASS`
 * `MS-001.14` activation status is `ACTIVATED`
 * `MS-001.14` activation decision is `AUTHORIZED`
 * `MS-001.14` Product Owner Contract Approval is `PASS`
+* `MS-001.14` Product Owner Acceptance Review is `PASS`
+* `MS-001.14` technical verification is `PASS`
+* `MS-001.14` implementation review is `PASS`
+* `MS-001.14` contract deviations are `NONE`
+* `MS-001.14` publication status is `PENDING`
+* `MS-001.14` closure status is `PENDING REVIEW`
+* `MS-001.14` milestone status is `ACTIVE - READY FOR PUBLICATION`
 * `MS-001.14` blockers are `NONE`
 * `MS-001.13` contract status is `APPROVED`
 * `MS-001.13` runtime status is `CLOSED`
@@ -340,7 +354,7 @@ Next:
 * `MS-001.12` activation status is `ACTIVATED`
 * `MS-001.12` activation decision is `AUTHORIZED`
 * `MS-001.12` Product Owner Closure Decision is `APPROVED`
-* next controlled operation is `Run MS-001.14 implementation diagnosis`
+* next controlled operation is `Prepare controlled MS-001.14 publication commit`
 * Active Capability is `NONE`
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
@@ -365,7 +379,7 @@ Next:
 
 Next session priorities:
 
-* Run MS-001.14 implementation diagnosis
+* Prepare controlled MS-001.14 publication commit
 
 ---
 
@@ -391,7 +405,7 @@ Keep workflow governance and project state documentation aligned.
 
 Priority 3
 
-Next controlled lifecycle step: `Run MS-001.14 implementation diagnosis`.
+Next controlled lifecycle step: `Prepare controlled MS-001.14 publication commit`.
 
 ---
 

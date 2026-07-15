@@ -1,6 +1,7 @@
 "use client";
 
 import { WorkspaceContent } from "@/components/workspace/WorkspaceContent";
+import { WorkspaceCollections } from "@/components/workspace/WorkspaceCollections";
 import { WorkspaceHeader } from "@/components/workspace/WorkspaceHeader";
 import { WorkspaceLayout } from "@/components/workspace/WorkspaceLayout";
 import { WorkspacePanels } from "@/components/workspace/WorkspacePanels";
@@ -110,6 +111,10 @@ export default function ProjectWorkspacePage() {
             workflowNextStep={dashboard.workspace.overview.workflow.nextStep}
             warningCount={dashboard.workspace.overview.workflow.warnings}
             blockerCount={dashboard.workspace.overview.workflow.blockers}
+          />
+          <WorkspaceCollections
+            tasks={dashboard.workspace.tasks}
+            knowledgeEntries={dashboard.workspace.knowledgeEntries}
           />
           <WorkspacePanels
             clientsCount={dashboard.clientsCount}
