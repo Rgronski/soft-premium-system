@@ -211,17 +211,21 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-07-15
-Current Session ID: 007
-Current Chat Title: 007 SPS OS - Next Product Milestone Contract Discovery
-Next Session ID: 008
-Suggested Next Chat Title: 008 SPS OS - Next Product Milestone Decision
+Current Session ID: 008
+Current Chat Title: 008 SPS OS - Session Close Protocol
+Next Session ID: 009
+Suggested Next Chat Title: 009 SPS OS - MS-001.13 Formal Contract Draft
 Active Capability: NONE
 Active Work Item: NONE
-Current Mode: SESSION CLOSE / HANDOFF READY
+Current Mode: SESSION CLOSE / IN PROGRESS
 Completed Capability Items: MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
 Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-001.12 - Project Brain Consumer Workspace Model
 Next Product Milestone: NONE
+Proposed Next Milestone: MS-001.13 - Project Workspace Consumer Overview
+Proposed Contract Status: READY FOR FORMAL CONTRACT DRAFT
+Proposed Activation: NOT AUTHORIZED
+Proposed Implementation: NOT STARTED
 Current Milestone Contract Status: NONE
 Current Milestone DoR Review: NONE
 Current Milestone Activation Status: NONE
@@ -269,23 +273,23 @@ Milestone Runtime Status: CLOSED
 DoR Status: PASS
 Activation Status: ACTIVATED
 Activation Decision: APPROVED BY PRODUCT OWNER
-Active Session: 007
+Active Session: 008
 Implementation Status: IMPLEMENTED / PUBLISHED / VERIFIED
 Implementation Commit: dac997f
 Implementation Handoff: CREATED - session close handoff prepared for the next SPS OS - START
 Milestone Closure: COMPLETED / PUBLISHED / CLOSED
 Code Changes in Session: published implementation commit `dac997f`; published closure SSOT synchronization commits `31941a7`, `67b4931`, and `fb622d3`; session close handoff prepared
 Current Sprint: NONE
-Platform Priority: Keep lifecycle SSOT synchronized while no Product Milestone is active and the next milestone remains undefined
+Platform Priority: Preserve the closed `MS-001.12` lifecycle while preparing the formal `MS-001.13` contract draft without activation or implementation
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: d6913e5
-Repository HEAD: d6913e5
-Session Start Repository HEAD: 8714bd6
-Verification Status: PASS - MS-001.12 implementation commit `29802f3` and single-read fix commit `d6913e5` are published and verified; repository is synchronized `0 / 0`
+Latest Verified Commit: 30d8205
+Repository HEAD: 30d8205
+Session Start Repository HEAD: 30d8205
+Verification Status: PASS - `MS-001.12` lifecycle closure is published on `origin/main`; repository is synchronized `0 / 0`; next milestone discovery finished with `READY FOR CONTRACT DRAFT`
 Blockers: NONE
-Open Risks: one non-blocking lint warning remains; `MS-001.12` is completed and closed; no next Product Milestone is defined yet; Repository Changes during diagnosis: NONE; Blockers: NONE
+Open Risks: one non-blocking lint warning remains; `MS-001.13` has only discovery-level recommendation and no formal contract yet; Session Close Protocol remains in progress until commit, push, package generation, and package consistency confirmation complete
 Repository Changes during diagnosis: NONE
-Session Close Protocol: NOT STARTED
-Next Safe Step: Run Next Product Milestone Contract Discovery
+Session Close Protocol: IN PROGRESS
+Next Safe Step: Prepare formal MS-001.13 contract draft for Product Owner review

@@ -1055,6 +1055,26 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## SPS OS Session 008 Close Preparation
+
+### Date
+
+2026-07-15
+
+### Completed
+
+* Recorded the formal close-preparation state for `SPS OS — KONIEC`.
+* Preserved `MS-001.12 - Project Brain Consumer Workspace Model` as closed with lifecycle closure commit `30d8205`.
+* Recorded the single-read fix lineage for `MS-001.12`: `d6913e5`, `e75c773`, and `0c356ef`.
+* Recorded that `Next Product Milestone Contract Discovery` completed with result `READY FOR CONTRACT DRAFT`.
+* Recorded the recommended candidate `MS-001.13 - Project Workspace Consumer Overview`.
+* Confirmed `MS-001.13` remains a proposal only.
+* Confirmed `MS-001.13` activation is `NOT AUTHORIZED`.
+* Confirmed `MS-001.13` implementation is `NOT STARTED`.
+* Updated session continuity to prepare the formal next-session contract-draft handoff.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.
