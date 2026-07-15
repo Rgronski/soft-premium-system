@@ -2161,7 +2161,7 @@ MS-001.14 - Project Workspace Consumer Collections
 APPROVED
 
 **Runtime Status**
-ACTIVE
+CLOSED
 
 **Owner**
 Product Owner
@@ -2227,20 +2227,22 @@ NONE
 * Implementation Review: `PASS`
 * Technical Verification: `PASS`
 * Contract Deviations: `NONE`
-* Publication Status: `PENDING`
-* Closure Status: `PENDING REVIEW`
+* Publication Status: `PUBLISHED`
+* Publication Commit: `e8f8e6270316ea2199800aa8e8ee3c788315f2df`
+* Milestone Closure Review: `PASS`
+* Closure Status: `CLOSED`
 
 **Blockers**
 NONE
 
 **Milestone Status**
-ACTIVE - READY FOR PUBLICATION
+COMPLETED / PUBLISHED / CLOSED
 
 **Implementation Status**
 COMPLETED
 
 **Next Safe Step**
-Prepare controlled MS-001.14 publication commit
+Run Next Product Milestone Contract Discovery
 
 ---
 

@@ -219,23 +219,23 @@ Active Capability: NONE
 Active Work Item: NONE
 Current Mode: SESSION CLOSE / COMPLETED
 Completed Capability Items: MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
-Current Product Milestone: MS-001.14 - Project Workspace Consumer Collections
+Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-001.13 - Project Workspace Consumer Overview
 Next Product Milestone: NONE
 Proposed Next Milestone: NONE
 Proposed Contract Status: NONE
 Proposed Activation: NONE
 Proposed Implementation: NONE
-Current Milestone Contract Status: APPROVED
-Current Milestone DoR Review: PASS
-Current Milestone Activation Status: ACTIVATED
-Current Milestone Activation Decision: AUTHORIZED
-Current Milestone Runtime Status: ACTIVE
-Current Milestone Status: ACTIVE - READY FOR PUBLICATION
-Current Milestone Implementation Status: COMPLETED
-Current Milestone Product Owner Acceptance Review: PASS
-Current Milestone Technical Verification: PASS
-Current Milestone Implementation Review: PASS
+Current Milestone Contract Status: NONE
+Current Milestone DoR Review: NONE
+Current Milestone Activation Status: NONE
+Current Milestone Activation Decision: NONE
+Current Milestone Runtime Status: NONE
+Current Milestone Status: NONE
+Current Milestone Implementation Status: NONE
+Current Milestone Product Owner Acceptance Review: NONE
+Current Milestone Technical Verification: NONE
+Current Milestone Implementation Review: NONE
 Current Milestone Original Implementation Commit: NONE
 Current Milestone Single-Read Fix Commit: NONE
 Current Milestone Single-Read Fix Status: NONE
@@ -266,16 +266,18 @@ MS-001.14 Contract Status: APPROVED
 MS-001.14 DoR Review: PASS
 MS-001.14 Activation Status: ACTIVATED
 MS-001.14 Activation Decision: AUTHORIZED
-MS-001.14 Runtime Status: ACTIVE
-MS-001.14 Milestone Status: ACTIVE - READY FOR PUBLICATION
+MS-001.14 Runtime Status: CLOSED
+MS-001.14 Milestone Status: COMPLETED / PUBLISHED / CLOSED
 MS-001.14 Implementation Status: COMPLETED
 MS-001.14 Product Owner Approval: PASS
 MS-001.14 Product Owner Acceptance Review: PASS
 MS-001.14 Technical Verification: PASS
 MS-001.14 Implementation Review: PASS
-MS-001.14 Publication Status: PENDING
+MS-001.14 Publication Status: PUBLISHED
+MS-001.14 Publication Commit: e8f8e6270316ea2199800aa8e8ee3c788315f2df
+MS-001.14 Milestone Closure Review: PASS
 MS-001.14 Contract Deviations: NONE
-MS-001.14 Closure Status: PENDING REVIEW
+MS-001.14 Closure Status: CLOSED
 MS-001.14 Blockers: NONE
 MS-001.12 Contract Status: APPROVED
 MS-001.12 DoR Review: PASS
@@ -313,16 +315,16 @@ Implementation Handoff: CREATED - session close handoff prepared for the next SP
 Milestone Closure: COMPLETED / PUBLISHED / CLOSED
 Code Changes in Session: published implementation commit `dac997f`; published closure SSOT synchronization commits `31941a7`, `67b4931`, and `fb622d3`; session close handoff prepared
 Current Sprint: NONE
-Platform Priority: Keep `MS-001.14` active while preparing the controlled publication commit and closure review package
+Platform Priority: Preserve the closed `MS-001.14` lifecycle while keeping the next product milestone inactive until a separate Product Owner decision
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: 78f28eb95b88d8ddecd66a09dc77c1962216e716
 Repository HEAD: 5a76aeaede301de7f0dac56563b3366e26a37d30
 Session Start Repository HEAD: 30d8205
-Verification Status: PASS - `MS-001.14` implementation, verification, and implementation review are complete; lifecycle SSOT is now being synchronized for publication preparation
+Verification Status: PASS - `MS-001.14` implementation publication and lifecycle closure are synchronized; repository remains aligned with `origin/main`
 Blockers: NONE
-Open Risks: one non-blocking lint warning remains; `MS-001.14` is not yet published or closed
+Open Risks: one non-blocking lint warning remains; next product milestone is not yet activated
 Repository Changes during diagnosis: NONE
 Session Close Protocol: PASS
-Next Safe Step: Prepare controlled MS-001.14 publication commit
+Next Safe Step: Run Next Product Milestone Contract Discovery

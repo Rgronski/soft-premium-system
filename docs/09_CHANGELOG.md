@@ -1181,6 +1181,26 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.14 - Project Workspace Consumer Collections lifecycle closed
+
+### Date
+
+2026-07-15
+
+### Completed
+
+* Recorded publication status as `PUBLISHED`.
+* Recorded publication commit as `e8f8e6270316ea2199800aa8e8ee3c788315f2df`.
+* Recorded Milestone Closure Review as `PASS`.
+* Recorded contract deviations as `NONE`.
+* Recorded closure status as `CLOSED`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
+* Set current product milestone to `NONE`.
+* Kept active sprint as `NONE`.
+* Confirmed blockers remain `NONE`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.
