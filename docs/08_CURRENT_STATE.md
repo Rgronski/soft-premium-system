@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.13 - Project Workspace Consumer Overview
+Latest Completed Product Milestone: MS-001.14 - Project Workspace Consumer Collections
 Next Product Milestone: NONE
 Proposed Next Milestone: NONE.
 Proposal Status: NONE.
@@ -309,7 +309,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.13 - Project Workspace Consumer Overview`
+* `Latest Completed Product Milestone` is `MS-001.14 - Project Workspace Consumer Collections`
 * `Next Product Milestone` is `NONE`
 * proposed next milestone is `NONE`
 * proposal status is `NONE`
