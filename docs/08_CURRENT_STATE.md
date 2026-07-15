@@ -42,20 +42,20 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-001.12 - Project Brain Consumer Workspace Model
+NONE
 
 **Latest Completed Milestone**
-MS-001.11 - Project Brain Consumer Overview Model
+MS-001.12 - Project Brain Consumer Workspace Model
 
 **Next Milestone**
 NONE
 
 **MS-001.12 State**
-APPROVED / ACTIVATED / ACTIVE / IMPLEMENTED
+APPROVED / ACTIVATED / IMPLEMENTED / COMPLETED / PUBLISHED / CLOSED
 
 Objective:
 
-`MS-001.12 - Project Brain Consumer Workspace Model` remains active after implementation and is waiting for milestone closure review.
+`MS-001.12 - Project Brain Consumer Workspace Model` is implemented, verified, and formally closed by Product Owner decision.
 
 Project Status:
 
@@ -76,21 +76,23 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: MS-001.12 - Project Brain Consumer Workspace Model
-Latest Completed Product Milestone: MS-001.11 - Project Brain Consumer Overview Model
+Current Product Milestone: NONE
+Latest Completed Product Milestone: MS-001.12 - Project Brain Consumer Workspace Model
 Next Product Milestone: NONE
 MS-001.12 contract status: APPROVED.
-MS-001.12 runtime status: ACTIVE.
-MS-001.12 milestone status: ACTIVE.
+MS-001.12 runtime status: CLOSED.
+MS-001.12 milestone status: COMPLETED / PUBLISHED / CLOSED.
 MS-001.12 implementation status: IMPLEMENTED.
 MS-001.12 Original Implementation Commit: `29802f3`.
 MS-001.12 Single-Read Fix Commit: `d6913e5`.
 MS-001.12 Single-Read Contract: PASS.
-MS-001.12 milestone closure review: FAIL.
-MS-001.12 Single-Read Blocker: RESOLVED.
+MS-001.12 read-count contract: `1 / 1 / 1 / 1`.
+MS-001.12 milestone closure review: PASS.
+MS-001.12 Previous Blockers: ALL RESOLVED.
 MS-001.12 Definition of Ready Review: PASS.
 MS-001.12 activation status: ACTIVATED.
 MS-001.12 activation decision: AUTHORIZED.
+MS-001.12 Product Owner Closure Decision: APPROVED.
 MS-001.11 contract status: APPROVED.
 MS-001.11 runtime status: CLOSED.
 MS-001.11 Definition of Ready status: PASS.
@@ -110,7 +112,7 @@ Active Parallel Capability: NONE.
 Blockers: NONE.
 MS-001.11 implementation commit `dac997f` is published on `origin/main`.
 MS-001.11 verification status: `npm test` PASS, `npm run lint` PASS with one accepted out-of-scope warning, `npm run build` PASS.
-MS-001.11 closure status: completed; current product milestone is `MS-001.12 - Project Brain Consumer Workspace Model`.
+MS-001.11 closure status: completed; current product milestone is `NONE`.
 MS-001.10 status: COMPLETED / PUBLISHED.
 MS-001.10 implementation status: COMPLETED / PUBLISHED.
 MS-001.10 contract approval: PASS.
@@ -273,22 +275,24 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `MS-001.12 - Project Brain Consumer Workspace Model`
-* `Latest Completed Product Milestone` is `MS-001.11 - Project Brain Consumer Overview Model`
+* `Current Product Milestone` is `NONE`
+* `Latest Completed Product Milestone` is `MS-001.12 - Project Brain Consumer Workspace Model`
 * `Next Product Milestone` is `NONE`
 * SPS OS 1.0 is Released / Accepted
 * `MS-001.12` contract status is `APPROVED`
-* `MS-001.12` runtime status is `ACTIVE`
-* `MS-001.12` milestone status is `ACTIVE`
+* `MS-001.12` runtime status is `CLOSED`
+* `MS-001.12` milestone status is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.12` implementation status is `IMPLEMENTED`
 * `MS-001.12` original implementation commit is `29802f3`
 * `MS-001.12` single-read fix commit is `d6913e5`
 * `MS-001.12` single-read contract is `PASS`
-* `MS-001.12` milestone closure review is `FAIL`
-* `MS-001.12` single-read blocker is `RESOLVED`
+* `MS-001.12` read-count contract is `1 / 1 / 1 / 1`
+* `MS-001.12` milestone closure review is `PASS`
+* `MS-001.12` previous blockers are `ALL RESOLVED`
 * `MS-001.12` activation status is `ACTIVATED`
 * `MS-001.12` activation decision is `AUTHORIZED`
-* next controlled operation is `Repeat MS-001.12 Milestone Closure Review`
+* `MS-001.12` Product Owner Closure Decision is `APPROVED`
+* next controlled operation is `Run Next Product Milestone Contract Discovery`
 * Active Capability is `NONE`
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
@@ -313,7 +317,7 @@ Next:
 
 Next session priorities:
 
-* Repeat `MS-001.12 Milestone Closure Review`
+* Run `Next Product Milestone Contract Discovery`
 
 ---
 
@@ -339,7 +343,7 @@ Keep workflow governance and project state documentation aligned.
 
 Priority 3
 
-Next controlled lifecycle step: `Repeat MS-001.12 Milestone Closure Review`.
+Next controlled lifecycle step: `Run Next Product Milestone Contract Discovery`.
 
 ---
 
