@@ -107,7 +107,7 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE
+MS-001.12 - Project Brain Consumer Workspace Model
 
 ## Latest Completed Product Milestone
 
@@ -115,7 +115,7 @@ MS-001.11 - Project Brain Consumer Overview Model
 
 ## Next
 
-MS-001.12 - Project Brain Consumer Workspace Model
+NONE
 
 ## Parallel Documentation Work
 
@@ -1775,7 +1775,7 @@ COMPLETED / PUBLISHED / CLOSED
 IMPLEMENTED / PUBLISHED / VERIFIED
 
 **Next Safe Step**
-MS-001.12 Activation Decision
+Prepare MS-001.12 Implementation Handoff
 
 ---
 
@@ -1788,7 +1788,7 @@ MS-001.12 - Project Brain Consumer Workspace Model
 APPROVED
 
 **Runtime Status**
-NOT ACTIVE
+ACTIVE
 
 **Owner**
 Product Owner
@@ -1990,10 +1990,10 @@ APPROVED
 PASS
 
 **Activation Status**
-NOT ACTIVATED
+ACTIVATED
 
 **Activation Decision**
-NOT AUTHORIZED
+AUTHORIZED
 
 **Active Session**
 NONE
@@ -2002,10 +2002,10 @@ NONE
 NONE
 
 **Milestone Status**
-APPROVED
+ACTIVE
 
 **Runtime Status**
-NOT ACTIVE
+ACTIVE
 
 **Implementation Status**
 NOT STARTED

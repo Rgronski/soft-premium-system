@@ -51,11 +51,11 @@ MS-001.11 - Project Brain Consumer Overview Model
 MS-001.12 - Project Brain Consumer Workspace Model
 
 **MS-001.12 State**
-APPROVED / NOT ACTIVE / NOT STARTED
+APPROVED / ACTIVATED / ACTIVE / NOT STARTED
 
 Objective:
 
-Keep lifecycle SSOT synchronized after Product Owner approval of `MS-001.12 - Project Brain Consumer Workspace Model` with the milestone remaining inactive and not started.
+Keep lifecycle SSOT synchronized after Product Owner activation of `MS-001.12 - Project Brain Consumer Workspace Model` with the milestone active and implementation still not started.
 
 Project Status:
 
@@ -76,14 +76,16 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE
+Current Product Milestone: MS-001.12 - Project Brain Consumer Workspace Model
 Latest Completed Product Milestone: MS-001.11 - Project Brain Consumer Overview Model
-Next Product Milestone: MS-001.12 - Project Brain Consumer Workspace Model
+Next Product Milestone: NONE
 MS-001.12 contract status: APPROVED.
-MS-001.12 runtime status: NOT ACTIVE.
+MS-001.12 runtime status: ACTIVE.
 MS-001.12 implementation status: NOT STARTED.
 MS-001.12 Definition of Ready Review: PASS.
-MS-001.12 activation decision: NOT AUTHORIZED.
+MS-001.12 activation status: ACTIVATED.
+MS-001.12 activation decision: AUTHORIZED.
+MS-001.12 implementation authorized: NO.
 MS-001.11 contract status: APPROVED.
 MS-001.11 runtime status: CLOSED.
 MS-001.11 Definition of Ready status: PASS.
@@ -103,7 +105,7 @@ Active Parallel Capability: NONE.
 Blockers: NONE.
 MS-001.11 implementation commit `dac997f` is published on `origin/main`.
 MS-001.11 verification status: `npm test` PASS, `npm run lint` PASS with one accepted out-of-scope warning, `npm run build` PASS.
-MS-001.11 closure status: completed; next product milestone is `MS-001.12 - Project Brain Consumer Workspace Model` in approved inactive state.
+MS-001.11 closure status: completed; current product milestone is `MS-001.12 - Project Brain Consumer Workspace Model`.
 MS-001.10 status: COMPLETED / PUBLISHED.
 MS-001.10 implementation status: COMPLETED / PUBLISHED.
 MS-001.10 contract approval: PASS.
@@ -264,15 +266,17 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `NONE`
+* `Current Product Milestone` is `MS-001.12 - Project Brain Consumer Workspace Model`
 * `Latest Completed Product Milestone` is `MS-001.11 - Project Brain Consumer Overview Model`
-* `Next Product Milestone` is `MS-001.12 - Project Brain Consumer Workspace Model`
+* `Next Product Milestone` is `NONE`
 * SPS OS 1.0 is Released / Accepted
 * `MS-001.12` contract status is `APPROVED`
-* `MS-001.12` runtime status is `NOT ACTIVE`
+* `MS-001.12` runtime status is `ACTIVE`
 * `MS-001.12` implementation status is `NOT STARTED`
-* `MS-001.12` activation decision is `NOT AUTHORIZED`
-* next controlled operation is `MS-001.12 Activation Decision`
+* `MS-001.12` activation status is `ACTIVATED`
+* `MS-001.12` activation decision is `AUTHORIZED`
+* `MS-001.12` implementation authorized is `NO`
+* next controlled operation is `Prepare MS-001.12 Implementation Handoff`
 * Active Capability is `NONE`
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
@@ -321,7 +325,7 @@ Keep workflow governance and project state documentation aligned.
 
 Priority 3
 
-Next controlled lifecycle step: `MS-001.12 Activation Decision`.
+Next controlled lifecycle step: `Prepare MS-001.12 Implementation Handoff`.
 
 ---
 

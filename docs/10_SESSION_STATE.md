@@ -219,14 +219,16 @@ Active Capability: NONE
 Active Work Item: NONE
 Current Mode: SESSION CLOSE / HANDOFF READY
 Completed Capability Items: MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
-Current Product Milestone: NONE
+Current Product Milestone: MS-001.12 - Project Brain Consumer Workspace Model
 Latest Completed Product Milestone: MS-001.11 - Project Brain Consumer Overview Model
-Next Product Milestone: MS-001.12 - Project Brain Consumer Workspace Model
-Next Milestone Contract Status: APPROVED
-Next Milestone Runtime Status: NOT ACTIVE
-Next Milestone Implementation Status: NOT STARTED
-Next Milestone DoR Review: PASS
-Next Milestone Activation Decision: NOT AUTHORIZED
+Next Product Milestone: NONE
+Current Milestone Contract Status: APPROVED
+Current Milestone DoR Review: PASS
+Current Milestone Activation Status: ACTIVATED
+Current Milestone Activation Decision: AUTHORIZED
+Current Milestone Runtime Status: ACTIVE
+Current Milestone Implementation Status: NOT STARTED
+Current Milestone Implementation Authorized: NO
 Active Parallel Capability: NONE
 Latest Completed Capability Item: MS-001.11 - Project Brain Consumer Overview Model
 Contract Status: APPROVED
@@ -241,7 +243,7 @@ Implementation Handoff: CREATED - session close handoff prepared for the next SP
 Milestone Closure: COMPLETED / PUBLISHED / CLOSED
 Code Changes in Session: published implementation commit `dac997f`; published closure SSOT synchronization commits `31941a7`, `67b4931`, and `fb622d3`; session close handoff prepared
 Current Sprint: NONE
-Platform Priority: Keep `MS-001.12 - Project Brain Consumer Workspace Model` approved as the next backend Project Brain milestone without activation or implementation start
+Platform Priority: Keep `MS-001.12 - Project Brain Consumer Workspace Model` active as the current backend Project Brain milestone while implementation remains not started and not yet authorized
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
@@ -249,5 +251,5 @@ Latest Verified Commit: dac997f
 Session Start Repository HEAD: 8714bd6
 Verification Status: PASS - MS-001.11 implementation commit `dac997f` is published and verified; closure commits are published; repository is synchronized `0 / 0`
 Blockers: NONE
-Open Risks: one non-blocking lint warning remains; `MS-001.12` remains approved but inactive; Definition of Ready Review is PASS; Activation Decision remains NOT AUTHORIZED; implementation remains NOT STARTED; Repository Changes during review: NONE; Repository Gate: PASS; Contract Completeness: PASS; Architecture Compatibility: PASS; Single-Read Feasibility: PASS; Scope Feasibility: PASS; Verification Feasibility: PASS; Blockers: NONE
-Next Safe Step: MS-001.12 Activation Decision
+Open Risks: one non-blocking lint warning remains; `MS-001.12` is activated and runtime-active, but implementation remains NOT STARTED; Implementation Authorized remains NO; activation does not include implementation; Product Owner Activation Decision: APPROVED; Repository Changes during activation synchronization: NONE; Blockers: NONE
+Next Safe Step: Prepare MS-001.12 Implementation Handoff
