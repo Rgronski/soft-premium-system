@@ -2152,6 +2152,90 @@ Run Next Product Milestone Contract Discovery
 
 ---
 
+## MS-001.14 - Project Workspace Consumer Collections
+
+**Milestone**
+MS-001.14 - Project Workspace Consumer Collections
+
+**Contract Status**
+APPROVED
+
+**Runtime Status**
+ACTIVE
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Expose the canonical task and knowledge-entry collections already delivered by `ProjectConsumerWorkspace` inside the Project Workspace UI.
+
+**One Intention**
+Render one read-only Project Workspace collections section from the existing `ProjectConsumerWorkspace`, using only canonical `tasks` and `knowledgeEntries`.
+
+**Approved Presentation Fields**
+* Tasks visible field: `title`
+* Tasks technical key: `id`
+* Knowledge Entries visible field: `title`
+* Knowledge Entries technical key: `id`
+
+**Implementation Boundary**
+* reuse the existing single `getProjectConsumerWorkspace(projectId)` result
+* no second Project Brain consumer read
+* no direct Task Engine read
+* no direct Knowledge Engine read
+* render exactly two read-only lists: `Tasks` and `Knowledge Entries`
+* preserve canonical collection order
+* provide minimal empty states
+* keep legacy `WorkspacePanels` outside the new consumer-data boundary
+* maximum expected production scope: route plus one workspace presentation component
+
+**Out of Scope**
+* create, edit, delete, complete, or reorder actions
+* navigation to collection details
+* task status, priority, dates, project, description, or other task fields
+* knowledge-entry type, category, content, dates, project, or other knowledge-entry fields
+* sorting, filtering, searching, grouping, or pagination
+* new Project Brain APIs or model fields
+* changes to Task Engine, Knowledge Engine, or Workflow Engine
+* additional reads, cache, or persistence
+* removal or redesign of legacy panels
+* unrelated refactor
+
+**Product Owner Approval**
+PASS
+
+**Definition of Ready Review**
+PASS
+
+**Activation Status**
+ACTIVATED
+
+**Activation Decision**
+AUTHORIZED
+
+**Active Session**
+NONE
+
+**Blockers**
+NONE
+
+**Milestone Status**
+ACTIVE
+
+**Implementation Status**
+NOT STARTED
+
+**Next Safe Step**
+Run MS-001.14 implementation diagnosis
+
+---
+
 # Release Criteria
 
 SPS OS 1.0 release progression requires:

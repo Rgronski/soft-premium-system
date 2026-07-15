@@ -76,13 +76,21 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE
+Current Product Milestone: MS-001.14 - Project Workspace Consumer Collections
 Latest Completed Product Milestone: MS-001.13 - Project Workspace Consumer Overview
 Next Product Milestone: NONE
 Proposed Next Milestone: NONE.
 Proposal Status: NONE.
-Activation: AUTHORIZED.
-Implementation: COMPLETED.
+Activation: ACTIVATED.
+Implementation: NOT STARTED.
+MS-001.14 contract status: APPROVED.
+MS-001.14 runtime status: ACTIVE.
+MS-001.14 implementation status: NOT STARTED.
+MS-001.14 Definition of Ready Review: PASS.
+MS-001.14 activation status: ACTIVATED.
+MS-001.14 activation decision: AUTHORIZED.
+MS-001.14 Product Owner Contract Approval: PASS.
+MS-001.14 blockers: NONE.
 MS-001.13 contract status: APPROVED.
 MS-001.13 runtime status: CLOSED.
 MS-001.13 milestone status: COMPLETED / PUBLISHED / CLOSED.
@@ -291,13 +299,21 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `NONE`
+* `Current Product Milestone` is `MS-001.14 - Project Workspace Consumer Collections`
 * `Latest Completed Product Milestone` is `MS-001.13 - Project Workspace Consumer Overview`
 * `Next Product Milestone` is `NONE`
 * proposed next milestone is `NONE`
 * proposal status is `NONE`
-* current activation is `AUTHORIZED`
-* current implementation is `COMPLETED`
+* current activation is `ACTIVATED`
+* current implementation is `NOT STARTED`
+* `MS-001.14` contract status is `APPROVED`
+* `MS-001.14` runtime status is `ACTIVE`
+* `MS-001.14` implementation status is `NOT STARTED`
+* `MS-001.14` Definition of Ready Review is `PASS`
+* `MS-001.14` activation status is `ACTIVATED`
+* `MS-001.14` activation decision is `AUTHORIZED`
+* `MS-001.14` Product Owner Contract Approval is `PASS`
+* `MS-001.14` blockers are `NONE`
 * `MS-001.13` contract status is `APPROVED`
 * `MS-001.13` runtime status is `CLOSED`
 * `MS-001.13` milestone status is `COMPLETED / PUBLISHED / CLOSED`
@@ -324,7 +340,7 @@ Next:
 * `MS-001.12` activation status is `ACTIVATED`
 * `MS-001.12` activation decision is `AUTHORIZED`
 * `MS-001.12` Product Owner Closure Decision is `APPROVED`
-* next controlled operation is `Run Next Product Milestone Contract Discovery`
+* next controlled operation is `Run MS-001.14 implementation diagnosis`
 * Active Capability is `NONE`
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
@@ -349,7 +365,7 @@ Next:
 
 Next session priorities:
 
-* Run Next Product Milestone Contract Discovery
+* Run MS-001.14 implementation diagnosis
 
 ---
 
@@ -375,7 +391,7 @@ Keep workflow governance and project state documentation aligned.
 
 Priority 3
 
-Next controlled lifecycle step: `Run Next Product Milestone Contract Discovery`.
+Next controlled lifecycle step: `Run MS-001.14 implementation diagnosis`.
 
 ---
 

@@ -1116,6 +1116,49 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.14 - Project Workspace Consumer Collections contract approved
+
+### Date
+
+2026-07-15
+
+### Completed
+
+* Recorded Product Owner contract approval as `PASS`.
+* Recorded `MS-001.14 - Project Workspace Consumer Collections` with contract status `APPROVED`.
+* Recorded runtime status as `NOT ACTIVE`.
+* Recorded implementation status as `NOT STARTED`.
+* Recorded Definition of Ready Review as `PENDING`.
+* Recorded activation status as `NOT ACTIVATED`.
+* Recorded activation decision as `NOT AUTHORIZED`.
+* Kept active product milestone as `NONE`.
+* Kept active sprint as `NONE`.
+* Confirmed blockers remain `NONE`.
+
+---
+
+## MS-001.14 - Project Workspace Consumer Collections activated
+
+### Date
+
+2026-07-15
+
+### Completed
+
+* Recorded `MS-001.14 - Project Workspace Consumer Collections` as the current product milestone.
+* Recorded milestone status as `ACTIVE`.
+* Recorded runtime status as `ACTIVE`.
+* Recorded Product Owner Approval as `PASS`.
+* Recorded Definition of Ready Review as `PASS`.
+* Recorded activation status as `ACTIVATED`.
+* Recorded activation decision as `AUTHORIZED`.
+* Kept implementation status as `NOT STARTED`.
+* Kept active sprint as `NONE`.
+* Confirmed blockers remain `NONE`.
+* Recorded next safe step as `Run MS-001.14 implementation diagnosis`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.
