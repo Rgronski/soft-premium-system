@@ -32,3 +32,19 @@ export type ProjectConsumerOverview = {
     blockers: number;
   };
 };
+
+export type ProjectConsumerTask = {
+  id: string;
+  title: string;
+};
+
+export type ProjectConsumerKnowledgeEntry = {
+  id: string;
+  title: string;
+};
+
+export type ProjectConsumerWorkspace = {
+  overview: ProjectConsumerOverview;
+  tasks: ProjectConsumerTask[];
+  knowledgeEntries: ProjectConsumerKnowledgeEntry[];
+};

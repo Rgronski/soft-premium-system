@@ -7,6 +7,7 @@ import { evaluateWorkflow } from "../workflow/engine";
 import * as workflowModule from "../workflow/engine";
 import {
   buildProjectWorkflowState,
+  getProjectConsumerWorkspace,
   evaluateProjectWorkflow,
   getProjectConsumerOverview,
   getProjectWorkflowSnapshot,
@@ -923,5 +924,235 @@ describe("Project Brain engine", () => {
 
     expect(getKnowledgeSpy).toHaveBeenCalledTimes(1);
     expect(evaluateWorkflowSpy).toHaveBeenCalledTimes(1);
+  });
+
+  test("returns a consumer workspace with the expected public shape", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+
+    const result = getProjectConsumerWorkspace("project-1");
+
+    expect(Object.keys(result).sort()).toEqual([
+      "knowledgeEntries",
+      "overview",
+      "tasks",
+    ]);
+    expect(Object.keys(result.overview).sort()).toEqual([
+      "counts",
+      "project",
+      "workflow",
+    ]);
+    expect(Object.keys(result.tasks[0] ?? {}).sort()).toEqual(["id", "title"]);
+    expect(Object.keys(result.knowledgeEntries[0] ?? {}).sort()).toEqual([
+      "id",
+      "title",
+    ]);
+  });
+
+  test("projects overview, tasks, and knowledge entries from the same workflow snapshot aggregate", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+
+    const overview = getProjectConsumerOverview("project-1");
+    const workspace = getProjectConsumerWorkspace("project-1");
+
+    expect(workspace.overview).toEqual(overview);
+    expect(workspace.tasks).toEqual([{ id: "task-1", title: "First task" }]);
+    expect(workspace.knowledgeEntries).toEqual([
+      { id: "knowledge-1", title: "Note" },
+    ]);
+    expect(workspace.overview.counts.tasks).toBe(workspace.tasks.length);
+    expect(workspace.overview.counts.knowledgeEntries).toBe(
+      workspace.knowledgeEntries.length,
+    );
+  });
+
+  test("preserves source order and keeps duplicates in consumer workspace collections", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        },
+      ]),
+    );
+    storage.setItem(
+      "soft-premium-system.projects.project-1.tasks",
+      JSON.stringify([
+        {
+          id: "task-2",
+          projectId: "project-1",
+          title: "Second task",
+          createdAt: "2026-07-13T12:00:00.000Z",
+        },
+        {
+          id: "task-1",
+          projectId: "project-1",
+          title: "First task",
+          createdAt: "2026-07-13T11:00:00.000Z",
+        },
+        {
+          id: "task-1",
+          projectId: "project-1",
+          title: "First task",
+          createdAt: "2026-07-13T11:00:00.000Z",
+        },
+      ]),
+    );
+    storage.setItem(
+      "soft-premium-system.projects.project-1.knowledge",
+      JSON.stringify([
+        {
+          id: "knowledge-2",
+          projectId: "project-1",
+          title: "Second note",
+          content: "Body 2",
+          createdAt: "2026-07-13T12:30:00.000Z",
+        },
+        {
+          id: "knowledge-1",
+          projectId: "project-1",
+          title: "First note",
+          content: "Body 1",
+          createdAt: "2026-07-13T12:00:00.000Z",
+        },
+        {
+          id: "knowledge-1",
+          projectId: "project-1",
+          title: "First note",
+          content: "Body 1",
+          createdAt: "2026-07-13T12:00:00.000Z",
+        },
+      ]),
+    );
+
+    const workspace = getProjectConsumerWorkspace("project-1");
+
+    expect(workspace.tasks).toEqual([
+      { id: "task-2", title: "Second task" },
+      { id: "task-1", title: "First task" },
+      { id: "task-1", title: "First task" },
+    ]);
+    expect(workspace.knowledgeEntries).toEqual([
+      { id: "knowledge-2", title: "Second note" },
+      { id: "knowledge-1", title: "First note" },
+      { id: "knowledge-1", title: "First note" },
+    ]);
+  });
+
+  test("returns empty projected collections when the snapshot collections are empty", () => {
+    seedWorkflowSnapshotProject();
+
+    const workspace = getProjectConsumerWorkspace("project-1");
+
+    expect(workspace.tasks).toEqual([]);
+    expect(workspace.knowledgeEntries).toEqual([]);
+    expect(workspace.overview.counts.tasks).toBe(0);
+    expect(workspace.overview.counts.knowledgeEntries).toBe(0);
+  });
+
+  test.each([
+    {
+      name: "invalid-project-id",
+      projectId: "   ",
+      setup: () => {},
+      expectedCode: "invalid-project-id",
+    },
+    {
+      name: "project-not-found",
+      projectId: "project-1",
+      setup: () => {
+        storage.setItem("soft-premium-system.projects", JSON.stringify([]));
+      },
+      expectedCode: "project-not-found",
+    },
+    {
+      name: "source-read-failed",
+      projectId: "project-1",
+      setup: () => {
+        storage.setItem("soft-premium-system.projects", "{");
+      },
+      expectedCode: "source-read-failed",
+    },
+    {
+      name: "invalid-snapshot",
+      projectId: "project-1",
+      setup: () => {
+        vi.spyOn(projectModule, "getProjectById").mockReturnValue({
+          id: "project-2",
+          name: "Beta",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        });
+      },
+      expectedCode: "invalid-snapshot",
+    },
+  ])(
+    "propagates $name from the consumer workspace projection",
+    ({ projectId, setup, expectedCode }) => {
+      setup();
+
+      expect(getErrorCode(() => getProjectConsumerWorkspace(projectId))).toBe(
+        expectedCode,
+      );
+    },
+  );
+
+  test("does not write or persist the consumer workspace projection", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+    setItemSpy.mockClear();
+
+    getProjectConsumerWorkspace("project-1");
+
+    expect(setItemSpy).not.toHaveBeenCalled();
+  });
+
+  test("uses a single workflow snapshot path and one workflow evaluation for the consumer workspace projection", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+    const getProjectByIdSpy = vi.spyOn(projectModule, "getProjectById");
+    const getTasksSpy = vi.spyOn(taskModule, "getTasks");
+    const getKnowledgeSpy = vi.spyOn(knowledgeModule, "getKnowledge");
+    const evaluateWorkflowSpy = vi.spyOn(workflowModule, "evaluateWorkflow");
+
+    getProjectConsumerWorkspace("project-1");
+
+    expect(getProjectByIdSpy).toHaveBeenCalledTimes(2);
+    expect(getTasksSpy).toHaveBeenCalledTimes(2);
+    expect(getKnowledgeSpy).toHaveBeenCalledTimes(1);
+    expect(evaluateWorkflowSpy).toHaveBeenCalledTimes(1);
+  });
+
+  test("does not mutate source collections and returns narrowed consumer items", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+
+    const workflowSnapshot = getProjectWorkflowSnapshot("project-1");
+    const tasksBefore = structuredClone(workflowSnapshot.snapshot.tasks);
+    const knowledgeEntriesBefore = structuredClone(
+      workflowSnapshot.snapshot.knowledgeEntries,
+    );
+
+    const workspace = getProjectConsumerWorkspace("project-1");
+
+    expect(workflowSnapshot.snapshot.tasks).toEqual(tasksBefore);
+    expect(workflowSnapshot.snapshot.knowledgeEntries).toEqual(
+      knowledgeEntriesBefore,
+    );
+    expect(workspace.tasks[0]).not.toBe(workflowSnapshot.snapshot.tasks[0]);
+    expect(workspace.knowledgeEntries[0]).not.toBe(
+      workflowSnapshot.snapshot.knowledgeEntries[0],
+    );
+    expect("projectId" in (workspace.tasks[0] ?? {})).toBe(false);
+    expect("createdAt" in (workspace.tasks[0] ?? {})).toBe(false);
+    expect("projectId" in (workspace.knowledgeEntries[0] ?? {})).toBe(false);
+    expect("content" in (workspace.knowledgeEntries[0] ?? {})).toBe(false);
+    expect("createdAt" in (workspace.knowledgeEntries[0] ?? {})).toBe(false);
+  });
+
+  test("returns deterministic consumer workspace projections for equivalent source state", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+
+    const firstResult = getProjectConsumerWorkspace("project-1");
+    const secondResult = getProjectConsumerWorkspace("project-1");
+
+    expect(secondResult).toEqual(firstResult);
   });
 });

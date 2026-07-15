@@ -5,7 +5,10 @@ import { evaluateWorkflow } from "../workflow/engine";
 import type { ProjectState, WorkflowResult } from "../workflow/types";
 
 import type {
+  ProjectConsumerKnowledgeEntry,
   ProjectConsumerOverview,
+  ProjectConsumerTask,
+  ProjectConsumerWorkspace,
   ProjectBrainSnapshot,
   ProjectWorkflowSnapshot,
 } from "./types";
@@ -163,6 +166,47 @@ function getEvidenceCount(
   return Number.isNaN(parsedCount) ? 0 : parsedCount;
 }
 
+function projectConsumerOverview(
+  workflowSnapshot: ProjectWorkflowSnapshot,
+): ProjectConsumerOverview {
+  return {
+    project: {
+      id: workflowSnapshot.snapshot.project.id,
+      name: workflowSnapshot.snapshot.project.name,
+    },
+    counts: {
+      tasks: workflowSnapshot.snapshot.tasks.length,
+      knowledgeEntries: workflowSnapshot.snapshot.knowledgeEntries.length,
+    },
+    workflow: {
+      health: workflowSnapshot.workflowResult.health,
+      confidence: workflowSnapshot.workflowResult.confidence,
+      nextStep: workflowSnapshot.workflowResult.nextStep,
+      warnings: workflowSnapshot.workflowResult.warnings.length,
+      blockers: getEvidenceCount(
+        workflowSnapshot.workflowResult.evidence,
+        "blockers",
+      ),
+    },
+  };
+}
+
+function projectConsumerTask(task: ProjectBrainSnapshot["tasks"][number]): ProjectConsumerTask {
+  return {
+    id: task.id,
+    title: task.title,
+  };
+}
+
+function projectConsumerKnowledgeEntry(
+  knowledgeEntry: ProjectBrainSnapshot["knowledgeEntries"][number],
+): ProjectConsumerKnowledgeEntry {
+  return {
+    id: knowledgeEntry.id,
+    title: knowledgeEntry.title,
+  };
+}
+
 export function buildProjectWorkflowState(projectId: string): ProjectState {
   const normalizedProjectId = normalizeProjectId(projectId);
   const project = withSourceReadHandling(() => getProjectById(normalizedProjectId));
@@ -294,23 +338,20 @@ export function getProjectConsumerOverview(
   const workflowSnapshot = getProjectWorkflowSnapshot(projectId);
 
   return {
-    project: {
-      id: workflowSnapshot.snapshot.project.id,
-      name: workflowSnapshot.snapshot.project.name,
-    },
-    counts: {
-      tasks: workflowSnapshot.snapshot.tasks.length,
-      knowledgeEntries: workflowSnapshot.snapshot.knowledgeEntries.length,
-    },
-    workflow: {
-      health: workflowSnapshot.workflowResult.health,
-      confidence: workflowSnapshot.workflowResult.confidence,
-      nextStep: workflowSnapshot.workflowResult.nextStep,
-      warnings: workflowSnapshot.workflowResult.warnings.length,
-      blockers: getEvidenceCount(
-        workflowSnapshot.workflowResult.evidence,
-        "blockers",
-      ),
-    },
+    ...projectConsumerOverview(workflowSnapshot),
+  };
+}
+
+export function getProjectConsumerWorkspace(
+  projectId: string,
+): ProjectConsumerWorkspace {
+  const workflowSnapshot = getProjectWorkflowSnapshot(projectId);
+
+  return {
+    overview: projectConsumerOverview(workflowSnapshot),
+    tasks: workflowSnapshot.snapshot.tasks.map((task) => projectConsumerTask(task)),
+    knowledgeEntries: workflowSnapshot.snapshot.knowledgeEntries.map((entry) =>
+      projectConsumerKnowledgeEntry(entry),
+    ),
   };
 }
