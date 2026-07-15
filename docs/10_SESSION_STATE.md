@@ -242,8 +242,8 @@ Current Milestone Post-Fix Diff Check: PASS
 Current Milestone Milestone Closure Review: FAIL
 Current Milestone Closure Blockers:
 * single-read violation: RESOLVED
-* lifecycle drift: BEING SYNCHRONIZED BY THIS PATCH
-* verification evidence gap: BEING SYNCHRONIZED BY THIS PATCH
+* lifecycle drift: RESOLVED
+* verification evidence gap: RESOLVED
 Active Parallel Capability: NONE
 Latest Completed Capability Item: MS-001.11 - Project Brain Consumer Overview Model
 Contract Status: APPROVED

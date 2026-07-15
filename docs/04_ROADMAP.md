@@ -2037,8 +2037,8 @@ FAIL - blockers identified
 
 **Closure Blockers Status**
 * single-read blocker: `RESOLVED`
-* lifecycle SSOT drift: `IN CORRECTION`
-* verification evidence gap: `IN CORRECTION`
+* lifecycle SSOT drift: `RESOLVED`
+* verification evidence gap: `RESOLVED`
 
 **Next Safe Step**
 Repeat MS-001.12 Milestone Closure Review
