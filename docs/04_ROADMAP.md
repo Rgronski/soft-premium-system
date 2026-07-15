@@ -1775,7 +1775,7 @@ COMPLETED / PUBLISHED / CLOSED
 IMPLEMENTED / PUBLISHED / VERIFIED
 
 **Next Safe Step**
-MS-001.12 Definition of Ready Review
+MS-001.12 Activation Decision
 
 ---
 
@@ -1962,7 +1962,7 @@ export type ProjectConsumerWorkspace = {
 * verification contract accepted
 * Product Owner approval recorded
 * approved contract synchronized into lifecycle SSOT
-* separate Definition of Ready Review has not started yet
+* separate Definition of Ready Review returns `PASS`
 * no competing active milestone exists
 
 **Definition of Done**
@@ -1987,7 +1987,7 @@ export type ProjectConsumerWorkspace = {
 APPROVED
 
 **Definition of Ready Review**
-NOT STARTED
+PASS
 
 **Activation Status**
 NOT ACTIVATED

@@ -82,7 +82,7 @@ Next Product Milestone: MS-001.12 - Project Brain Consumer Workspace Model
 MS-001.12 contract status: APPROVED.
 MS-001.12 runtime status: NOT ACTIVE.
 MS-001.12 implementation status: NOT STARTED.
-MS-001.12 Definition of Ready Review: NOT STARTED.
+MS-001.12 Definition of Ready Review: PASS.
 MS-001.12 activation decision: NOT AUTHORIZED.
 MS-001.11 contract status: APPROVED.
 MS-001.11 runtime status: CLOSED.
@@ -272,7 +272,7 @@ Next:
 * `MS-001.12` runtime status is `NOT ACTIVE`
 * `MS-001.12` implementation status is `NOT STARTED`
 * `MS-001.12` activation decision is `NOT AUTHORIZED`
-* next controlled operation is `MS-001.12 Definition of Ready Review`
+* next controlled operation is `MS-001.12 Activation Decision`
 * Active Capability is `NONE`
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
@@ -321,7 +321,7 @@ Keep workflow governance and project state documentation aligned.
 
 Priority 3
 
-Next controlled lifecycle step: `MS-001.12 Definition of Ready Review`.
+Next controlled lifecycle step: `MS-001.12 Activation Decision`.
 
 ---
 
