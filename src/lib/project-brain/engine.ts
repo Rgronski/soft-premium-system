@@ -207,10 +207,11 @@ function projectConsumerKnowledgeEntry(
   };
 }
 
-export function buildProjectWorkflowState(projectId: string): ProjectState {
-  const normalizedProjectId = normalizeProjectId(projectId);
-  const project = withSourceReadHandling(() => getProjectById(normalizedProjectId));
-
+function projectWorkflowStateFromSnapshotParts(
+  project: unknown,
+  tasks: ProjectBrainSnapshot["tasks"],
+  normalizedProjectId: string,
+): ProjectState {
   if (!project) {
     throw createProjectBrainError(
       "project-not-found",
@@ -225,7 +226,6 @@ export function buildProjectWorkflowState(projectId: string): ProjectState {
     );
   }
 
-  const tasks = withSourceReadHandling(() => getTasks(normalizedProjectId));
   if (!tasks.every((task) => isValidTask(task, normalizedProjectId))) {
     throw createProjectBrainError(
       "invalid-snapshot",
@@ -250,6 +250,18 @@ export function buildProjectWorkflowState(projectId: string): ProjectState {
   }
 
   return workflowState;
+}
+
+export function buildProjectWorkflowState(projectId: string): ProjectState {
+  const normalizedProjectId = normalizeProjectId(projectId);
+  const project = withSourceReadHandling(() => getProjectById(normalizedProjectId));
+  const tasks = withSourceReadHandling(() => getTasks(normalizedProjectId));
+
+  return projectWorkflowStateFromSnapshotParts(
+    project,
+    tasks,
+    normalizedProjectId,
+  );
 }
 
 export function getProjectBrainSnapshot(
@@ -294,7 +306,11 @@ export function getProjectBrainSnapshot(
     );
   }
 
-  const workflowState = buildProjectWorkflowState(normalizedProjectId);
+  const workflowState = projectWorkflowStateFromSnapshotParts(
+    project,
+    tasks,
+    normalizedProjectId,
+  );
   const snapshot: ProjectBrainSnapshot = {
     project,
     tasks,

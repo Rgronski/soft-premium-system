@@ -242,6 +242,25 @@ describe("Project Brain engine", () => {
     });
   });
 
+  test("public buildProjectWorkflowState reads project and tasks once", () => {
+    seedWorkflowSnapshotProject({ includeTask: true });
+    const getProjectByIdSpy = vi.spyOn(projectModule, "getProjectById");
+    const getTasksSpy = vi.spyOn(taskModule, "getTasks");
+
+    const workflowState = buildProjectWorkflowState("project-1");
+
+    expect(getProjectByIdSpy).toHaveBeenCalledTimes(1);
+    expect(getTasksSpy).toHaveBeenCalledTimes(1);
+    expect(workflowState).toEqual({
+      phase: "project-brain-foundation",
+      completedWork: [],
+      activeWork: ["task-1"],
+      blockers: [],
+      warnings: [],
+      progress: 0,
+    });
+  });
+
   test("treats an empty projectId as invalid-project-id", () => {
     expect(getErrorCode(() => getProjectBrainSnapshot("   "))).toBe(
       "invalid-project-id",
@@ -917,11 +936,30 @@ describe("Project Brain engine", () => {
 
   test("uses a single workflow snapshot read for the consumer overview projection", () => {
     seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+    const getProjectByIdSpy = vi.spyOn(projectModule, "getProjectById");
+    const getTasksSpy = vi.spyOn(taskModule, "getTasks");
     const getKnowledgeSpy = vi.spyOn(knowledgeModule, "getKnowledge");
     const evaluateWorkflowSpy = vi.spyOn(workflowModule, "evaluateWorkflow");
 
     getProjectConsumerOverview("project-1");
 
+    expect(getProjectByIdSpy).toHaveBeenCalledTimes(1);
+    expect(getTasksSpy).toHaveBeenCalledTimes(1);
+    expect(getKnowledgeSpy).toHaveBeenCalledTimes(1);
+    expect(evaluateWorkflowSpy).toHaveBeenCalledTimes(1);
+  });
+
+  test("uses a single source read path for the workflow snapshot aggregate", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+    const getProjectByIdSpy = vi.spyOn(projectModule, "getProjectById");
+    const getTasksSpy = vi.spyOn(taskModule, "getTasks");
+    const getKnowledgeSpy = vi.spyOn(knowledgeModule, "getKnowledge");
+    const evaluateWorkflowSpy = vi.spyOn(workflowModule, "evaluateWorkflow");
+
+    getProjectWorkflowSnapshot("project-1");
+
+    expect(getProjectByIdSpy).toHaveBeenCalledTimes(1);
+    expect(getTasksSpy).toHaveBeenCalledTimes(1);
     expect(getKnowledgeSpy).toHaveBeenCalledTimes(1);
     expect(evaluateWorkflowSpy).toHaveBeenCalledTimes(1);
   });
@@ -1115,8 +1153,8 @@ describe("Project Brain engine", () => {
 
     getProjectConsumerWorkspace("project-1");
 
-    expect(getProjectByIdSpy).toHaveBeenCalledTimes(2);
-    expect(getTasksSpy).toHaveBeenCalledTimes(2);
+    expect(getProjectByIdSpy).toHaveBeenCalledTimes(1);
+    expect(getTasksSpy).toHaveBeenCalledTimes(1);
     expect(getKnowledgeSpy).toHaveBeenCalledTimes(1);
     expect(evaluateWorkflowSpy).toHaveBeenCalledTimes(1);
   });
