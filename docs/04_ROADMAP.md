@@ -115,7 +115,7 @@ MS-001.11 - Project Brain Consumer Overview Model
 
 ## Next
 
-NONE
+MS-001.12 - Project Brain Consumer Workspace Model
 
 ## Parallel Documentation Work
 
@@ -1560,7 +1560,7 @@ PASS
 COMPLETED / PUBLISHED
 
 **Next Milestone**
-NONE
+MS-001.12 - Project Brain Consumer Workspace Model
 
 ---
 
@@ -1775,7 +1775,240 @@ COMPLETED / PUBLISHED / CLOSED
 IMPLEMENTED / PUBLISHED / VERIFIED
 
 **Next Safe Step**
-Wait for a separate Product Owner decision before activating the next product milestone.
+MS-001.12 Definition of Ready Review
+
+---
+
+## MS-001.12 - Project Brain Consumer Workspace Model
+
+**Milestone**
+MS-001.12 - Project Brain Consumer Workspace Model
+
+**Contract Status**
+APPROVED
+
+**Runtime Status**
+NOT ACTIVE
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Introduce one deterministic, read-only consumer workspace model that exposes overview, task, and knowledge projections for one project through a single Project Brain read.
+
+**One Intention**
+Create one deterministic consumer-facing workspace projection over one existing `ProjectWorkflowSnapshot`.
+
+**Problem Statement**
+* `MS-001.11` introduced `getProjectConsumerOverview(projectId)` for a compact overview projection
+* future consumers would still need to inspect the original workflow snapshot to read task and knowledge collections
+* repeated consumer-side projection would duplicate mapping logic and risk inconsistent consumer workspace interpretations
+* no canonical consumer workspace projection exists yet
+
+**Business Goal**
+Provide future SPS consumers one stable workspace read model that exposes overview, tasks, and knowledge entries without requiring extra domain composition.
+
+**Technical Goal**
+Add one deterministic read-only projection derived from one existing `ProjectWorkflowSnapshot` without additional domain reads or workflow changes.
+
+**Dependencies**
+* `MS-001.11 - Project Brain Consumer Overview Model`
+* `MS-001.10 - Project Brain Workflow Consumer Snapshot`
+* `getProjectWorkflowSnapshot(projectId)`
+* `ProjectWorkflowSnapshot`
+* `ProjectConsumerOverview`
+* `ProjectBrainSnapshot`
+
+**API Owner**
+* `src/lib/project-brain`
+
+**Proposed Public API**
+* `getProjectConsumerWorkspace(projectId)`
+
+**Proposed Public Return Type**
+* `ProjectConsumerWorkspace`
+
+**Proposed Supporting Types**
+```ts
+export type ProjectConsumerTask = {
+  id: string;
+  title: string;
+};
+
+export type ProjectConsumerKnowledgeEntry = {
+  id: string;
+  title: string;
+};
+
+export type ProjectConsumerWorkspace = {
+  overview: ProjectConsumerOverview;
+  tasks: ProjectConsumerTask[];
+  knowledgeEntries: ProjectConsumerKnowledgeEntry[];
+};
+```
+
+**Model Boundary**
+* one consumer-facing workspace projection only
+* workspace is derived from one existing `ProjectWorkflowSnapshot`
+* no new source of truth is introduced
+
+**Field Source Rules**
+* `overview` is derived directly from the same snapshot and workflow aggregate used for the workspace projection
+* `tasks` are derived from source task collection entries in source order
+* `knowledgeEntries` are derived from source knowledge entry collection entries in source order
+* each projected task includes only `id` and `title`
+* each projected knowledge entry includes only `id` and `title`
+* no field may require an additional project, task, knowledge, or workflow read
+
+**Data Flow**
+* `projectId`
+* `getProjectWorkflowSnapshot(projectId)`
+* deterministic workspace projection
+* `ProjectConsumerWorkspace`
+
+**Single-Read Consistency Rule**
+* `getProjectConsumerWorkspace(projectId)` calls `getProjectWorkflowSnapshot(projectId)` exactly once
+* all returned fields are derived from that one returned aggregate
+* the operation must not perform any additional domain read
+
+**Overview Consistency Rule**
+* workspace overview is derived from the same aggregate as tasks and knowledge entries
+* the operation must not call `getProjectConsumerOverview(projectId)`
+* no workspace field may be derived from a second projection pass over separately loaded data
+
+**Read/Write Boundary**
+* strictly read-only
+* no create, update, or delete operation
+* no storage write
+* no cache
+* no persisted workspace copy
+* no source data mutation
+
+**Source of Truth Rule**
+* `ProjectConsumerWorkspace` is a disposable consumer projection, not a new source of truth
+* Project, Task, and Knowledge Engines remain write owners
+* Workflow Engine remains the workflow evaluation owner
+* Project Brain remains the canonical aggregation boundary
+
+**Determinism Rule**
+* the same `ProjectWorkflowSnapshot` must always produce the same `ProjectConsumerWorkspace`
+* no dependency on time, randomness, UI state, route state, external APIs, or unrelated mutable global state
+
+**Collection Rules**
+* preserve source collection order
+* no sorting
+* no filtering
+* no pagination
+* no derived grouping
+
+**Error Behavior**
+* preserve existing Project Brain errors unchanged
+* expected inherited errors: `invalid-project-id`, `project-not-found`, `source-read-failed`, `invalid-snapshot`
+* no fallback workspace data
+* no swallowing, renaming, or remapping of inherited errors
+
+**Expected Implementation Scope**
+* `src/lib/project-brain/types.ts`
+* `src/lib/project-brain/engine.ts`
+* `src/lib/project-brain/engine.test.ts`
+* one public workspace type
+* one public workspace operation
+* focused projection, single-read, order-preservation, error propagation, determinism, and no-write tests
+
+**Out of Scope**
+* UI, dashboard, React components, routing, CSS
+* Workflow Engine or workflow decision-rule changes
+* Project, Task, or Knowledge Engine changes
+* storage, localStorage keys, cache, persistence, migrations
+* sorting, filtering, pagination, search, grouping
+* additional domain reads
+* `getProjectConsumerOverview(projectId)` calls
+* new business rules or writable consumer models
+* API routes
+* refactor
+
+**Verification Contract**
+* public type is exported
+* `overview` is derived from the same aggregate as tasks and knowledge entries
+* task projection preserves source order
+* knowledge projection preserves source order
+* each task exposes only approved fields
+* each knowledge entry exposes only approved fields
+* `getProjectWorkflowSnapshot(projectId)` is invoked exactly once
+* no call to `getProjectConsumerOverview(projectId)` occurs
+* no independent workflow evaluation occurs
+* inherited Project Brain errors propagate unchanged
+* no storage write occurs
+* `npm test` passes
+* `npm run lint` passes subject only to previously accepted warnings
+* `npm run build` passes
+
+**Definition of Ready**
+* milestone ID and name accepted
+* Purpose and One Intention accepted
+* API and return type names accepted
+* supporting types accepted
+* model boundary accepted
+* field source rules accepted
+* single-read and overview consistency rules accepted
+* read-only and SSOT boundaries accepted
+* implementation scope and Out of Scope accepted
+* verification contract accepted
+* Product Owner approval recorded
+* approved contract synchronized into lifecycle SSOT
+* separate Definition of Ready Review has not started yet
+* no competing active milestone exists
+
+**Definition of Done**
+* approved type and operation exist
+* operation performs one workflow snapshot read
+* all fields derive from the same aggregate
+* source order is preserved for both collections
+* no additional domain read occurs
+* no `getProjectConsumerOverview(projectId)` call occurs
+* no UI, storage, write, or Workflow Engine changes exist
+* focused and full tests pass
+* lint and build pass
+* implementation is reviewed and published
+* lifecycle SSOT and closure evidence are synchronized
+* Milestone Closure Review returns `PASS`
+
+**Activation Boundary**
+* contract approval and SSOT synchronization do not activate the milestone
+* activation requires a separate Definition of Ready Review and explicit Product Owner authorization
+
+**Product Owner Approval**
+APPROVED
+
+**Definition of Ready Review**
+NOT STARTED
+
+**Activation Status**
+NOT ACTIVATED
+
+**Activation Decision**
+NOT AUTHORIZED
+
+**Active Session**
+NONE
+
+**Blockers**
+NONE
+
+**Milestone Status**
+APPROVED
+
+**Runtime Status**
+NOT ACTIVE
+
+**Implementation Status**
+NOT STARTED
 
 ---
 

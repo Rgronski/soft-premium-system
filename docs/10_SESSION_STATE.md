@@ -221,7 +221,12 @@ Current Mode: SESSION CLOSE / HANDOFF READY
 Completed Capability Items: MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
 Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-001.11 - Project Brain Consumer Overview Model
-Next Product Milestone: NONE
+Next Product Milestone: MS-001.12 - Project Brain Consumer Workspace Model
+Next Milestone Contract Status: APPROVED
+Next Milestone Runtime Status: NOT ACTIVE
+Next Milestone Implementation Status: NOT STARTED
+Next Milestone DoR Review: NOT STARTED
+Next Milestone Activation Decision: NOT AUTHORIZED
 Active Parallel Capability: NONE
 Latest Completed Capability Item: MS-001.11 - Project Brain Consumer Overview Model
 Contract Status: APPROVED
@@ -236,7 +241,7 @@ Implementation Handoff: CREATED - session close handoff prepared for the next SP
 Milestone Closure: COMPLETED / PUBLISHED / CLOSED
 Code Changes in Session: published implementation commit `dac997f`; published closure SSOT synchronization commits `31941a7`, `67b4931`, and `fb622d3`; session close handoff prepared
 Current Sprint: NONE
-Platform Priority: Await a separate Product Owner decision for the next product milestone
+Platform Priority: Keep `MS-001.12 - Project Brain Consumer Workspace Model` approved as the next backend Project Brain milestone without activation or implementation start
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
@@ -244,5 +249,5 @@ Latest Verified Commit: dac997f
 Session Start Repository HEAD: 8714bd6
 Verification Status: PASS - MS-001.11 implementation commit `dac997f` is published and verified; closure commits are published; repository is synchronized `0 / 0`
 Blockers: NONE
-Open Risks: one non-blocking lint warning remains; next product milestone remains unset until a separate Product Owner decision
-Next Safe Step: Wait for a separate Product Owner decision before activating the next product milestone.
+Open Risks: one non-blocking lint warning remains; `MS-001.12` remains approved but inactive; implementation has not started; Definition of Ready Review has not started; activation remains NOT AUTHORIZED
+Next Safe Step: MS-001.12 Definition of Ready Review

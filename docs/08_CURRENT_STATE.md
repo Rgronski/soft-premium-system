@@ -48,14 +48,14 @@ NONE
 MS-001.11 - Project Brain Consumer Overview Model
 
 **Next Milestone**
-NONE
+MS-001.12 - Project Brain Consumer Workspace Model
 
-**MS-001.11 State**
-COMPLETED / PUBLISHED / CLOSED
+**MS-001.12 State**
+APPROVED / NOT ACTIVE / NOT STARTED
 
 Objective:
 
-Keep lifecycle SSOT synchronized after closure of `MS-001.11 - Project Brain Consumer Overview Model` with `Next Product Milestone` set to `NONE`.
+Keep lifecycle SSOT synchronized after Product Owner approval of `MS-001.12 - Project Brain Consumer Workspace Model` with the milestone remaining inactive and not started.
 
 Project Status:
 
@@ -78,7 +78,12 @@ Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-001.11 - Project Brain Consumer Overview Model
-Next Product Milestone: NONE
+Next Product Milestone: MS-001.12 - Project Brain Consumer Workspace Model
+MS-001.12 contract status: APPROVED.
+MS-001.12 runtime status: NOT ACTIVE.
+MS-001.12 implementation status: NOT STARTED.
+MS-001.12 Definition of Ready Review: NOT STARTED.
+MS-001.12 activation decision: NOT AUTHORIZED.
 MS-001.11 contract status: APPROVED.
 MS-001.11 runtime status: CLOSED.
 MS-001.11 Definition of Ready status: PASS.
@@ -98,7 +103,7 @@ Active Parallel Capability: NONE.
 Blockers: NONE.
 MS-001.11 implementation commit `dac997f` is published on `origin/main`.
 MS-001.11 verification status: `npm test` PASS, `npm run lint` PASS with one accepted out-of-scope warning, `npm run build` PASS.
-MS-001.11 closure status: completed; next product milestone remains NONE.
+MS-001.11 closure status: completed; next product milestone is `MS-001.12 - Project Brain Consumer Workspace Model` in approved inactive state.
 MS-001.10 status: COMPLETED / PUBLISHED.
 MS-001.10 implementation status: COMPLETED / PUBLISHED.
 MS-001.10 contract approval: PASS.
@@ -261,19 +266,15 @@ Next:
 
 * `Current Product Milestone` is `NONE`
 * `Latest Completed Product Milestone` is `MS-001.11 - Project Brain Consumer Overview Model`
-* `Next Product Milestone` is `NONE`
-* public API is `getProjectConsumerOverview(projectId)`
-* API owner is `src/lib/project-brain`
-* return type is `ProjectConsumerOverview`
-* aggregate type shape is the deterministic consumer overview projection over one `ProjectWorkflowSnapshot`
-* single-read consistency rule requires exactly one snapshot read per operation
+* `Next Product Milestone` is `MS-001.12 - Project Brain Consumer Workspace Model`
 * SPS OS 1.0 is Released / Accepted
-* `MS-001.11` state is `COMPLETED / PUBLISHED / CLOSED`
+* `MS-001.12` contract status is `APPROVED`
+* `MS-001.12` runtime status is `NOT ACTIVE`
+* `MS-001.12` implementation status is `NOT STARTED`
+* `MS-001.12` activation decision is `NOT AUTHORIZED`
+* next controlled operation is `MS-001.12 Definition of Ready Review`
 * Active Capability is `NONE`
 * Active Parallel Capability is `NONE`
-* implementation status is `COMPLETED / PUBLISHED`
-* implementation commit is `1f20905`
-* implementation publication is `origin/main`
 * Active Work Item: `NONE`
 * Verified branch: `main`
 * Latest verified commit: `1f20905`
@@ -320,7 +321,7 @@ Keep workflow governance and project state documentation aligned.
 
 Priority 3
 
-Do not start the next stage before a separate Product Owner-approved contract exists.
+Next controlled lifecycle step: `MS-001.12 Definition of Ready Review`.
 
 ---
 
