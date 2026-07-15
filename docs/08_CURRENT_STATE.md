@@ -76,13 +76,22 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE
+Current Product Milestone: MS-001.13 - Project Workspace Consumer Overview
 Latest Completed Product Milestone: MS-001.12 - Project Brain Consumer Workspace Model
 Next Product Milestone: NONE
-Proposed Next Milestone: MS-001.13 - Project Workspace Consumer Overview
-Proposal Status: READY FOR FORMAL CONTRACT DRAFT.
-Activation: NOT AUTHORIZED.
-Implementation: NOT STARTED.
+Proposed Next Milestone: NONE.
+Proposal Status: NONE.
+Activation: AUTHORIZED.
+Implementation: COMPLETED.
+MS-001.13 contract status: APPROVED.
+MS-001.13 runtime status: ACTIVE.
+MS-001.13 milestone status: IMPLEMENTED / ACCEPTED / PENDING PUBLICATION.
+MS-001.13 implementation status: COMPLETED.
+MS-001.13 implementation review: PASS.
+MS-001.13 technical verification: PASS.
+MS-001.13 Product Owner Acceptance Review: PASS.
+MS-001.13 publication status: PENDING.
+MS-001.13 milestone closure review: PENDING REVIEW.
 MS-001.12 contract status: APPROVED.
 MS-001.12 runtime status: CLOSED.
 MS-001.12 milestone status: COMPLETED / PUBLISHED / CLOSED.
@@ -279,13 +288,22 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `NONE`
+* `Current Product Milestone` is `MS-001.13 - Project Workspace Consumer Overview`
 * `Latest Completed Product Milestone` is `MS-001.12 - Project Brain Consumer Workspace Model`
 * `Next Product Milestone` is `NONE`
-* proposed next milestone is `MS-001.13 - Project Workspace Consumer Overview`
-* proposal status is `READY FOR FORMAL CONTRACT DRAFT`
-* proposed activation is `NOT AUTHORIZED`
-* proposed implementation is `NOT STARTED`
+* proposed next milestone is `NONE`
+* proposal status is `NONE`
+* current activation is `AUTHORIZED`
+* current implementation is `COMPLETED`
+* `MS-001.13` contract status is `APPROVED`
+* `MS-001.13` runtime status is `ACTIVE`
+* `MS-001.13` milestone status is `IMPLEMENTED / ACCEPTED / PENDING PUBLICATION`
+* `MS-001.13` implementation status is `COMPLETED`
+* `MS-001.13` implementation review is `PASS`
+* `MS-001.13` technical verification is `PASS`
+* `MS-001.13` Product Owner Acceptance Review is `PASS`
+* `MS-001.13` publication status is `PENDING`
+* `MS-001.13` milestone closure review is `PENDING REVIEW`
 * SPS OS 1.0 is Released / Accepted
 * `MS-001.12` contract status is `APPROVED`
 * `MS-001.12` runtime status is `CLOSED`
@@ -300,7 +318,7 @@ Next:
 * `MS-001.12` activation status is `ACTIVATED`
 * `MS-001.12` activation decision is `AUTHORIZED`
 * `MS-001.12` Product Owner Closure Decision is `APPROVED`
-* next controlled operation is `Prepare formal MS-001.13 contract draft for Product Owner review`
+* next controlled operation is `Run MS-001.13 Milestone Closure Review`
 * Active Capability is `NONE`
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
@@ -325,7 +343,7 @@ Next:
 
 Next session priorities:
 
-* Prepare formal `MS-001.13 contract draft for Product Owner review`
+* Run `MS-001.13 Milestone Closure Review`
 
 ---
 
@@ -351,7 +369,7 @@ Keep workflow governance and project state documentation aligned.
 
 Priority 3
 
-Next controlled lifecycle step: `Prepare formal MS-001.13 contract draft for Product Owner review`.
+Next controlled lifecycle step: `Run MS-001.13 Milestone Closure Review`.
 
 ---
 

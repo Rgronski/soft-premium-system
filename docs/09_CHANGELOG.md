@@ -1075,6 +1075,26 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.13 - Project Workspace Consumer Overview accepted for publication preparation
+
+### Date
+
+2026-07-15
+
+### Completed
+
+* Recorded `MS-001.13 - Project Workspace Consumer Overview` as the current accepted product milestone.
+* Recorded Product Owner Acceptance Review as `PASS`.
+* Recorded implementation verification as `PASS`.
+* Recorded implementation review as `PASS`.
+* Recorded implementation status as `COMPLETED`.
+* Recorded publication status as `PENDING`.
+* Recorded Milestone Closure Review status as `PENDING REVIEW`.
+* Confirmed the accepted implementation diff remains limited to `src/app/projects/[id]/page.tsx` and `src/components/workspace/WorkspaceHeader.tsx`.
+* Confirmed the existing lint warning in `src/app/projects/[id]/tasks/page.tsx` remains outside MS-001.13 scope.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

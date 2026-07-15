@@ -2055,6 +2055,97 @@ Run Next Product Milestone Contract Discovery
 
 ---
 
+## MS-001.13 - Project Workspace Consumer Overview
+
+**Milestone**
+MS-001.13 - Project Workspace Consumer Overview
+
+**Contract Status**
+APPROVED
+
+**Runtime Status**
+ACTIVE
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Connect the existing Project Workspace overview surface to the canonical Project Brain consumer workspace model.
+
+**One Intention**
+Render one read-only Project Overview section from one call to `getProjectConsumerWorkspace(projectId)`.
+
+**Approved Overview Fields**
+* project name
+* task count
+* knowledge entry count
+* workflow health
+* workflow confidence
+* workflow next-step label
+* warning count
+* blocker count
+
+**Implementation Scope**
+* `src/app/projects/[id]/page.tsx`
+* `src/components/workspace/WorkspaceHeader.tsx`
+
+**Implementation Evidence**
+* Product Owner Acceptance Review: `PASS`
+* Implementation Review: `PASS`
+* Technical Verification: `PASS`
+* Tests: `PASS - 64 tests`
+* Lint: `PASS - one previously accepted warning outside milestone scope`
+* Build: `PASS`
+* git diff --check: `PASS`
+* Contract Deviations: `NONE`
+
+**Product Owner Approval**
+PASS
+
+**Definition of Ready Review**
+PASS
+
+**Activation Status**
+ACTIVATED
+
+**Activation Decision**
+AUTHORIZED
+
+**Active Session**
+009
+
+**Blockers**
+NONE
+
+**Milestone Status**
+IMPLEMENTED / ACCEPTED / PENDING PUBLICATION
+
+**Implementation Status**
+COMPLETED
+
+**Implementation Review**
+PASS
+
+**Implementation Publication**
+PENDING
+
+**Milestone Closure Review**
+PENDING REVIEW
+
+**Closure Blockers**
+NONE
+
+**Next Safe Step**
+Run MS-001.13 Milestone Closure Review
+
+---
+
 # Release Criteria
 
 SPS OS 1.0 release progression requires:
