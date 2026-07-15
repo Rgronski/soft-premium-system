@@ -48,14 +48,14 @@ NONE
 MS-001.11 - Project Brain Consumer Overview Model
 
 **Next Milestone**
-MS-001.12 - Project Brain Consumer Workspace Model
+NONE
 
 **MS-001.12 State**
-APPROVED / ACTIVATED / ACTIVE / NOT STARTED
+APPROVED / ACTIVATED / ACTIVE / IMPLEMENTED
 
 Objective:
 
-Keep lifecycle SSOT synchronized after Product Owner activation of `MS-001.12 - Project Brain Consumer Workspace Model` with the milestone active and implementation still not started.
+`MS-001.12 - Project Brain Consumer Workspace Model` remains active after implementation and is waiting for milestone closure review.
 
 Project Status:
 
@@ -81,11 +81,14 @@ Latest Completed Product Milestone: MS-001.11 - Project Brain Consumer Overview 
 Next Product Milestone: NONE
 MS-001.12 contract status: APPROVED.
 MS-001.12 runtime status: ACTIVE.
-MS-001.12 implementation status: NOT STARTED.
+MS-001.12 milestone status: ACTIVE.
+MS-001.12 implementation status: IMPLEMENTED.
+MS-001.12 implementation review: PASS.
+MS-001.12 implementation commit: `29802f3`.
+MS-001.12 milestone closure review: NOT STARTED.
 MS-001.12 Definition of Ready Review: PASS.
 MS-001.12 activation status: ACTIVATED.
 MS-001.12 activation decision: AUTHORIZED.
-MS-001.12 implementation authorized: NO.
 MS-001.11 contract status: APPROVED.
 MS-001.11 runtime status: CLOSED.
 MS-001.11 Definition of Ready status: PASS.
@@ -272,11 +275,14 @@ Next:
 * SPS OS 1.0 is Released / Accepted
 * `MS-001.12` contract status is `APPROVED`
 * `MS-001.12` runtime status is `ACTIVE`
-* `MS-001.12` implementation status is `NOT STARTED`
+* `MS-001.12` milestone status is `ACTIVE`
+* `MS-001.12` implementation status is `IMPLEMENTED`
+* `MS-001.12` implementation review is `PASS`
+* `MS-001.12` implementation commit is `29802f3`
+* `MS-001.12` milestone closure review is `NOT STARTED`
 * `MS-001.12` activation status is `ACTIVATED`
 * `MS-001.12` activation decision is `AUTHORIZED`
-* `MS-001.12` implementation authorized is `NO`
-* next controlled operation is `Prepare MS-001.12 Implementation Handoff`
+* next controlled operation is `MS-001.12 Milestone Closure Review`
 * Active Capability is `NONE`
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
@@ -325,7 +331,7 @@ Keep workflow governance and project state documentation aligned.
 
 Priority 3
 
-Next controlled lifecycle step: `Prepare MS-001.12 Implementation Handoff`.
+Next controlled lifecycle step: `MS-001.12 Milestone Closure Review`.
 
 ---
 
