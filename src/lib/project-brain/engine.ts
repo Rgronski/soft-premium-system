@@ -328,6 +328,12 @@ export function getProjectBrainSnapshot(
   return snapshot;
 }
 
+export function getCurrentProjectBrainState(
+  projectId: string,
+): ProjectBrainSnapshot {
+  return getProjectBrainSnapshot(projectId);
+}
+
 export function evaluateProjectWorkflow(
   projectId: string,
 ): WorkflowResult {
@@ -339,7 +345,7 @@ export function evaluateProjectWorkflow(
 export function getProjectWorkflowSnapshot(
   projectId: string,
 ): ProjectWorkflowSnapshot {
-  const snapshot = getProjectBrainSnapshot(projectId);
+  const snapshot = getCurrentProjectBrainState(projectId);
   const workflowResult = evaluateWorkflow(snapshot.workflowState);
 
   return {

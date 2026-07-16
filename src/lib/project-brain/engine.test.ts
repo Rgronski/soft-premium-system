@@ -7,6 +7,7 @@ import { evaluateWorkflow } from "../workflow/engine";
 import * as workflowModule from "../workflow/engine";
 import {
   buildProjectWorkflowState,
+  getCurrentProjectBrainState,
   getProjectConsumerWorkspace,
   evaluateProjectWorkflow,
   getProjectConsumerOverview,
@@ -459,6 +460,69 @@ describe("Project Brain engine", () => {
     const secondSnapshot = getProjectBrainSnapshot("project-1");
 
     expect(secondSnapshot).toEqual(firstSnapshot);
+  });
+
+  test("returns the current Project Brain state for an existing project", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+
+    const result = getCurrentProjectBrainState("project-1");
+
+    expect(result).toEqual(getProjectBrainSnapshot("project-1"));
+  });
+
+  test.each([
+    {
+      name: "invalid-project-id",
+      projectId: "   ",
+      setup: () => {},
+      expectedCode: "invalid-project-id",
+    },
+    {
+      name: "project-not-found",
+      projectId: "project-1",
+      setup: () => {
+        storage.setItem("soft-premium-system.projects", JSON.stringify([]));
+      },
+      expectedCode: "project-not-found",
+    },
+    {
+      name: "source-read-failed",
+      projectId: "project-1",
+      setup: () => {
+        storage.setItem("soft-premium-system.projects", "{");
+      },
+      expectedCode: "source-read-failed",
+    },
+    {
+      name: "invalid-snapshot",
+      projectId: "project-1",
+      setup: () => {
+        vi.spyOn(projectModule, "getProjectById").mockReturnValue({
+          id: "project-2",
+          name: "Beta",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        });
+      },
+      expectedCode: "invalid-snapshot",
+    },
+  ])(
+    "propagates $name from the current Project Brain state operation",
+    ({ projectId, setup, expectedCode }) => {
+      setup();
+
+      expect(getErrorCode(() => getCurrentProjectBrainState(projectId))).toBe(
+        expectedCode,
+      );
+    },
+  );
+
+  test("does not write while returning the current Project Brain state", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+    setItemSpy.mockClear();
+
+    getCurrentProjectBrainState("project-1");
+
+    expect(setItemSpy).not.toHaveBeenCalled();
   });
 
   test("returns a WorkflowResult for an existing project", () => {
@@ -962,6 +1026,14 @@ describe("Project Brain engine", () => {
     expect(getTasksSpy).toHaveBeenCalledTimes(1);
     expect(getKnowledgeSpy).toHaveBeenCalledTimes(1);
     expect(evaluateWorkflowSpy).toHaveBeenCalledTimes(1);
+  });
+
+  test("routes the workflow snapshot aggregate through getCurrentProjectBrainState", () => {
+    const currentStateSource = getCurrentProjectBrainState.toString();
+    const workflowSource = getProjectWorkflowSnapshot.toString();
+
+    expect(currentStateSource).toContain("return getProjectBrainSnapshot(projectId);");
+    expect(workflowSource).toContain("getCurrentProjectBrainState(projectId)");
   });
 
   test("returns a consumer workspace with the expected public shape", () => {
