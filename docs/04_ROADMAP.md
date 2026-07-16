@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.12 - Project Brain Consumer Workspace Model
+MS-001.14 - Project Workspace Consumer Collections
 
 ## Next
 

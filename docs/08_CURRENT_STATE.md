@@ -45,17 +45,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.12 - Project Brain Consumer Workspace Model
+MS-001.14 - Project Workspace Consumer Collections
 
 **Next Milestone**
 NONE
 
-**MS-001.12 State**
+**MS-001.14 State**
 APPROVED / ACTIVATED / IMPLEMENTED / COMPLETED / PUBLISHED / CLOSED
 
 Objective:
 
-`MS-001.12 - Project Brain Consumer Workspace Model` is implemented, verified, and formally closed by Product Owner decision.
+`MS-001.14 - Project Workspace Consumer Collections` is implemented, verified, and formally closed by Product Owner decision.
 
 Project Status:
 
