@@ -108,7 +108,8 @@ ChatGPT / Chief Architect:
 * verifies the implementation report, diff, and documentation,
 * does not patch application code in the sandbox by default,
 * does not generate ZIP patch packages by default,
-* may implement directly only if the Product Owner explicitly requests it or Codex is unavailable.
+* does not implement production code,
+* continues diagnosis, contract work, and review preparation when Codex is unavailable.
 
 ## Codex
 
@@ -168,6 +169,8 @@ Default operating model:
 5. Codex performs the local repository implementation.
 6. ChatGPT / Chief Architect verifies the report, diff, and documentation.
 7. Product Owner commits and pushes.
+
+If Codex is unavailable, implementation is paused rather than reassigned to ChatGPT / Chief Architect.
 
 At the beginning of every new session, ChatGPT / Chief Architect must perform Project Context Loader and Project Integrity Check before diagnosis.
 

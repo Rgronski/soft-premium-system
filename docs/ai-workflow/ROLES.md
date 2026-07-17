@@ -14,15 +14,18 @@ Responsibilities:
 Boundaries:
 
 * does not delegate architecture ownership,
-* does not treat implementation convenience as architecture approval.
+* does not treat implementation convenience as architecture approval,
+* does not implement production code.
 
-## Codex / Coder / Executor
+## Codex / Implementation Engine
 
 Responsibilities:
 
 * implement the approved minimal patch,
+* run verification,
 * stay within file scope,
 * report diff and verification results,
+* deliver the full implementation report,
 * update documentation only when explicitly assigned.
 
 Boundaries:
@@ -44,6 +47,12 @@ Boundaries:
 
 * does not need to provide implementation details for every step,
 * remains the final authority for repository actions.
+
+## Codex Availability Rule
+
+If Codex is unavailable, implementation is paused.
+
+Chief Architect may continue diagnosis, contract work, and review preparation, but does not take over the Implementation Engine role.
 
 ## GitHub / Source of Truth For Repository State
 

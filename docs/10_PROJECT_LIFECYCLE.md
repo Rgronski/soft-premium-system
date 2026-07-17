@@ -133,7 +133,8 @@ ChatGPT / Chief Architect:
 * verifies the implementation report, diff, and documentation,
 * does not perform code patches in the sandbox by default,
 * does not generate ZIP patch packages by default,
-* may implement directly only if the Product Owner explicitly requests it or Codex is unavailable.
+* does not implement production code,
+* continues diagnosis, contract work, and review preparation when Codex is unavailable.
 
 ## Codex
 
@@ -195,6 +196,8 @@ ChatGPT / Chief Architect must not assume access to the Product Owner's local fi
 If Codex is unavailable and the project is local, ChatGPT / Chief Architect should ask the Product Owner to upload a ZIP package containing the project or the smallest useful diagnostic subset.
 
 If Codex is available in the local repository, implementation should normally be delegated to Codex after diagnosis and scope approval instead of defaulting to ZIP-based patch exchange.
+
+If Codex is unavailable, production implementation is paused until an explicitly assigned Implementation Engine can execute the approved patch.
 
 Architectural distinction:
 
@@ -301,6 +304,20 @@ Diagnosis must not begin before a successful Project Integrity Check.
 Implementation must not begin before diagnosis, review, and scope approval.
 
 Implementation should normally be executed by Codex in the local repository after ChatGPT / Chief Architect prepares the approved scope and execution prompt.
+
+The intended execution flow is:
+
+```text
+Chief Architect
+    ->
+Codex
+    ->
+Chief Architect Review
+    ->
+Product Owner Approval
+    ->
+Commit / Push
+```
 
 Between Scope Approval and Codex implementation, Chief Architect should prepare a complete handoff prompt for Codex.
 

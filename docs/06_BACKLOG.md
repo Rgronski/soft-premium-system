@@ -158,7 +158,7 @@ Proposed
 
 **Description**
 
-Implement the operational layer of Project Brain.
+Extend Project Brain beyond its existing engine foundation and first public command with additional consumer and command reliability capabilities.
 
 **Business Value**
 
@@ -167,6 +167,30 @@ Supports the Canonical Project Model.
 **Priority**
 
 High
+
+**Status**
+
+Proposed
+
+---
+
+### Project Brain Command Reliability / Idempotency
+
+**Description**
+
+Distinguish a failed write from a successful write followed by a failed Project Brain snapshot refresh, and protect command retries from creating duplicate domain objects.
+
+**Business Value**
+
+Safe retries for public Project Brain commands.
+
+**Priority**
+
+High
+
+**Dependency**
+
+MS-001.16 - Project Brain Command Foundation
 
 **Status**
 

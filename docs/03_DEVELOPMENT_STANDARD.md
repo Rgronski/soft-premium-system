@@ -80,6 +80,12 @@ Implementation
     ->
 Testing
     ->
+Chief Architect Review
+    ->
+Risk-Based Quality Second Opinion
+    ->
+Product Owner Approval
+    ->
 Commit
     ->
 Push
@@ -171,6 +177,26 @@ Verification should confirm:
 
 ---
 
+# Codex Report Standard
+
+Codex must provide a report after verification and before any commit or push decision.
+
+The report must include:
+
+1. repository state before the change,
+2. diagnosis before editing,
+3. changed files list,
+4. diff summary,
+5. verification command results,
+6. `git diff --check`,
+7. `git diff --stat`,
+8. `git status --short`,
+9. intentional non-changes,
+10. whether commit or push happened,
+11. blockers and contract deviations.
+
+---
+
 # Commit Standard
 
 Each commit should:
@@ -185,6 +211,53 @@ Examples:
 * fix: correct project validation
 * docs: add Architecture
 * refactor: simplify visit form
+
+---
+
+# Publication Control
+
+Commit and push are approval-gated repository actions.
+
+Codex may complete implementation and verification, but commit and push require explicit Product Owner approval.
+
+---
+
+# Quality Second Opinion
+
+Risk-Based Quality Second Opinion is an additional stage after Chief Architect review.
+
+It may be used for additional feedback such as CodeRabbit when risk, scope, or explicit instruction justifies it.
+
+Quality Second Opinion is REQUIRED when the change:
+
+* affects security, authorization, or data,
+* changes a public API,
+* spans multiple modules,
+* includes a migration,
+* carries high risk,
+* is requested by the Chief Architect or Product Owner.
+
+Quality Second Opinion is OPTIONAL when the patch:
+
+* is small,
+* touches 1-2 files,
+* has a closed contract,
+* has complete targeted tests,
+* passes full tests, typecheck, lint, and build,
+* is easy for direct Chief Architect review.
+
+Quality Second Opinion does not automatically expand scope.
+
+Findings outside the patch do not block current publication without a Chief Architect decision.
+
+The tool does not replace tests, Chief Architect review, or Product Owner approval.
+
+Each finding must be classified as one of:
+
+* `VALID / FIX NOW`
+* `VALID / PARKED`
+* `INVALID`
+* `OUT OF SCOPE`
 
 ---
 
@@ -206,19 +279,31 @@ Documentation should never become outdated intentionally.
 
 # Definition of Done
 
-A workflow is complete only when all of the following conditions are satisfied:
+## Implementation Done
+
+Implementation Done requires all of the following:
 
 * Project Integrity Check completed
 * Diagnosis completed
 * Review completed
 * Scope approved
 * Chief Architect -> Codex handoff completed
-* Implementation finished
-* Tests completed
-* Commit created
-* Changes pushed
-* Documentation updated
-* Session closed or next-session state prepared
+* patch completed
+* tests executed
+* Codex report delivered
+* Chief Architect review completed
+
+## Publication Done
+
+Publication Done requires all of the following:
+
+* Implementation Done completed
+* explicit Product Owner approval
+* commit created
+* push confirmed
+* `origin/main` synchronization confirmed
+* documentation updated
+* session closed or next-session state prepared
 
 ---
 
