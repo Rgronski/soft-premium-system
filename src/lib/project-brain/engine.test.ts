@@ -7,6 +7,7 @@ import { evaluateWorkflow } from "../workflow/engine";
 import * as workflowModule from "../workflow/engine";
 import {
   buildProjectWorkflowState,
+  createProjectBrainTask,
   getCurrentProjectBrainState,
   getProjectConsumerWorkspace,
   evaluateProjectWorkflow,
@@ -523,6 +524,90 @@ describe("Project Brain engine", () => {
     getCurrentProjectBrainState("project-1");
 
     expect(setItemSpy).not.toHaveBeenCalled();
+  });
+
+  test("creates a task and returns the updated Project Brain snapshot", () => {
+    seedWorkflowSnapshotProject({ includeKnowledge: true });
+
+    const snapshot = createProjectBrainTask("project-1", "New task");
+
+    expect(snapshot.tasks).toHaveLength(1);
+    expect(snapshot.tasks[0]?.title).toBe("New task");
+    expect(snapshot.tasks[0]?.projectId).toBe("project-1");
+    expect(snapshot.workflowState.activeWork).toEqual([snapshot.tasks[0]?.id]);
+  });
+
+  test("normalizes projectId before delegating the write", () => {
+    seedWorkflowSnapshotProject();
+    const createTaskSpy = vi.spyOn(taskModule, "createTask");
+
+    createProjectBrainTask("  project-1  ", "New task");
+
+    expect(createTaskSpy).toHaveBeenCalledWith("project-1", "New task");
+  });
+
+  test("normalizes the task title before delegating the write", () => {
+    seedWorkflowSnapshotProject();
+    const createTaskSpy = vi.spyOn(taskModule, "createTask");
+
+    const snapshot = createProjectBrainTask("project-1", "  New task  ");
+
+    expect(createTaskSpy).toHaveBeenCalledWith("project-1", "New task");
+    expect(snapshot.tasks[0]?.title).toBe("New task");
+  });
+
+  test("rejects an empty projectId before writing", () => {
+    seedWorkflowSnapshotProject();
+    const createTaskSpy = vi.spyOn(taskModule, "createTask");
+    setItemSpy.mockClear();
+
+    expect(getErrorCode(() => createProjectBrainTask("   ", "New task"))).toBe(
+      "invalid-project-id",
+    );
+    expect(createTaskSpy).not.toHaveBeenCalled();
+    expect(setItemSpy).not.toHaveBeenCalled();
+  });
+
+  test("rejects an empty task title before writing", () => {
+    seedWorkflowSnapshotProject();
+    const createTaskSpy = vi.spyOn(taskModule, "createTask");
+    setItemSpy.mockClear();
+
+    expect(getErrorCode(() => createProjectBrainTask("project-1", "   "))).toBe(
+      "invalid-task-title",
+    );
+    expect(createTaskSpy).not.toHaveBeenCalled();
+    expect(setItemSpy).not.toHaveBeenCalled();
+  });
+
+  test("fails before writing when the project does not exist", () => {
+    storage.setItem("soft-premium-system.projects", JSON.stringify([]));
+    const createTaskSpy = vi.spyOn(taskModule, "createTask");
+
+    expect(getErrorCode(() => createProjectBrainTask("project-1", "New task"))).toBe(
+      "project-not-found",
+    );
+    expect(createTaskSpy).not.toHaveBeenCalled();
+  });
+
+  test("maps a Task Engine exception to source-write-failed", () => {
+    seedWorkflowSnapshotProject();
+    vi.spyOn(taskModule, "createTask").mockImplementation(() => {
+      throw new Error("write failed");
+    });
+
+    expect(getErrorCode(() => createProjectBrainTask("project-1", "New task"))).toBe(
+      "source-write-failed",
+    );
+  });
+
+  test("maps a null Task Engine write result to source-write-failed", () => {
+    seedWorkflowSnapshotProject();
+    vi.spyOn(taskModule, "createTask").mockReturnValue(null);
+
+    expect(getErrorCode(() => createProjectBrainTask("project-1", "New task"))).toBe(
+      "source-write-failed",
+    );
   });
 
   test("returns a WorkflowResult for an existing project", () => {

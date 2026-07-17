@@ -1,6 +1,6 @@
 import { getKnowledge } from "../knowledge/knowledge";
 import { getProjectById } from "../project/project";
-import { getTasks } from "../task/task";
+import { createTask, getTasks } from "../task/task";
 import { evaluateWorkflow } from "../workflow/engine";
 import type { ProjectState, WorkflowResult } from "../workflow/types";
 
@@ -15,7 +15,9 @@ import type {
 
 type ProjectBrainErrorCode =
   | "invalid-project-id"
+  | "invalid-task-title"
   | "project-not-found"
+  | "source-write-failed"
   | "source-read-failed"
   | "invalid-snapshot";
 
@@ -54,6 +56,19 @@ function normalizeProjectId(projectId: string): string {
   }
 
   return normalizedProjectId;
+}
+
+function normalizeTaskTitle(title: string): string {
+  const normalizedTitle = title.trim();
+
+  if (!normalizedTitle) {
+    throw createProjectBrainError(
+      "invalid-task-title",
+      "Project Brain requires a non-empty task title.",
+    );
+  }
+
+  return normalizedTitle;
 }
 
 function isProjectState(value: ProjectState): boolean {
@@ -332,6 +347,49 @@ export function getCurrentProjectBrainState(
   projectId: string,
 ): ProjectBrainSnapshot {
   return getProjectBrainSnapshot(projectId);
+}
+
+export function createProjectBrainTask(
+  projectId: string,
+  title: string,
+): ProjectBrainSnapshot {
+  const normalizedProjectId = normalizeProjectId(projectId);
+  const normalizedTitle = normalizeTaskTitle(title);
+  const project = withSourceReadHandling(() => getProjectById(normalizedProjectId));
+
+  if (!project) {
+    throw createProjectBrainError(
+      "project-not-found",
+      "Project Brain could not find the requested project.",
+    );
+  }
+
+  if (!isValidProject(project, normalizedProjectId)) {
+    throw createProjectBrainError(
+      "invalid-snapshot",
+      "Project Brain received an invalid project snapshot source.",
+    );
+  }
+
+  let createdTask: ReturnType<typeof createTask>;
+
+  try {
+    createdTask = createTask(normalizedProjectId, normalizedTitle);
+  } catch {
+    throw createProjectBrainError(
+      "source-write-failed",
+      "Project Brain could not write the requested task.",
+    );
+  }
+
+  if (!createdTask) {
+    throw createProjectBrainError(
+      "source-write-failed",
+      "Project Brain could not write the requested task.",
+    );
+  }
+
+  return getCurrentProjectBrainState(normalizedProjectId);
 }
 
 export function evaluateProjectWorkflow(
