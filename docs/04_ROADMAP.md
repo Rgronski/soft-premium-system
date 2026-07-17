@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.15 - Project Brain Engine Foundation
+MS-001.16 - Project Brain Command Foundation
 
 ## Next
 
@@ -2327,6 +2327,87 @@ APPROVED / IMPLEMENTED / COMPLETED / PUBLISHED / CLOSED
 
 **Implementation Status**
 IMPLEMENTED
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery
+
+---
+
+## MS-001.16 - Project Brain Command Foundation
+
+**Milestone**
+MS-001.16 - Project Brain Command Foundation
+
+**Contract Status**
+APPROVED
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Establish the first public Project Brain write command that creates one task through the existing Task Engine and returns the full current Project Brain snapshot.
+
+**One Intention**
+Expose `createProjectBrainTask(projectId, title)` as the first public Project Brain write operation.
+
+**Public API**
+* `createProjectBrainTask(projectId, title)`
+* return type: `ProjectBrainSnapshot`
+
+**Implementation Scope**
+* normalize `projectId`
+* normalize task title
+* reject invalid input before write
+* verify project existence before write
+* delegate exactly one write to existing `createTask`
+* map Task Engine exception or `null` to `source-write-failed`
+* call `getCurrentProjectBrainState(projectId)` after successful write
+* return the full current `ProjectBrainSnapshot`
+
+**Out of Scope**
+* UI
+* form handling
+* other Project Brain commands
+* edit or delete flows
+* command bus
+* rollback
+* transactions
+* storage changes
+* new DTOs or domain types
+* Task Engine refactor
+* ESLint configuration changes
+
+**Implementation Evidence**
+* implementation commit: `6671e69`
+* production file: `src/lib/project-brain/engine.ts`
+* test file: `src/lib/project-brain/engine.test.ts`
+* targeted tests: `PASS`
+* full tests: `PASS`
+* TypeScript: `PASS`
+* lint: `PASS - one previously accepted warning outside milestone scope`
+* production build: `PASS`
+* CodeRabbit review: `PASS WITH ACCEPTED RISK`
+
+**Accepted Risk**
+Lack of idempotency remains accepted when the write succeeds but the post-write read fails, because the milestone intentionally performs no rollback or transaction logic.
+
+**Blockers**
+NONE
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Status**
+IMPLEMENTED / VERIFIED / PUBLISHED
 
 **Next Safe Step**
 Run Next Product Milestone Contract Discovery

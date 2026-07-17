@@ -45,17 +45,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.15 - Project Brain Engine Foundation
+MS-001.16 - Project Brain Command Foundation
 
 **Next Milestone**
 NONE
 
-**MS-001.15 State**
-APPROVED / IMPLEMENTED / COMPLETED / PUBLISHED / CLOSED
+**MS-001.16 State**
+COMPLETED / PUBLISHED / CLOSED
 
 Objective:
 
-`MS-001.15 - Project Brain Engine Foundation` established the official public `getCurrentProjectBrainState(projectId)` read operation, reusing the existing Project Brain snapshot and error model, and the MS-001.14 consumer path now reads through it without UI or storage changes.
+`MS-001.16 - Project Brain Command Foundation` established the first public Project Brain write command `createProjectBrainTask(projectId, title)`, reusing the existing Task Engine write path and returning the canonical `ProjectBrainSnapshot` after a successful write.
 
 Project Status:
 
@@ -77,30 +77,30 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.15 - Project Brain Engine Foundation
+Latest Completed Product Milestone: MS-001.16 - Project Brain Command Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Proposed Next Milestone: NONE.
 Proposal Status: NONE.
-Activation: ACTIVATED.
-Implementation: COMPLETED.
-MS-001.15 contract status: APPROVED.
-MS-001.15 runtime status: CLOSED.
-MS-001.15 implementation status: IMPLEMENTED.
-MS-001.15 Product Owner Contract Approval: PASS.
-MS-001.15 technical verification: PASS - `67 / 67 tests`.
-MS-001.15 implementation review: PASS.
-MS-001.15 contract deviations: NONE.
-MS-001.15 publication status: PUBLISHED.
-MS-001.15 publication commit: `70e1be2`.
-MS-001.15 milestone closure review: PASS.
-MS-001.15 closure status: CLOSED.
-MS-001.15 milestone status: APPROVED / IMPLEMENTED / COMPLETED / PUBLISHED / CLOSED.
-MS-001.15 blockers: NONE.
-MS-001.15 lifecycle formalization was synchronized after implementation publication as an SSOT consistency correction.
-`getCurrentProjectBrainState(projectId)` is now the official public current-state read operation.
-MS-001.15 reuses the existing `ProjectBrainSnapshot` and existing `Error & { code }` model.
-MS-001.15 introduced no UI changes, no storage changes, and no new Project Brain DTOs.
+Activation: NONE.
+Implementation: NONE.
+MS-001.16 contract status: APPROVED.
+MS-001.16 runtime status: CLOSED.
+MS-001.16 implementation status: IMPLEMENTED / VERIFIED / PUBLISHED.
+MS-001.16 Product Owner Contract Approval: PASS.
+MS-001.16 technical verification: PASS - targeted tests, full tests, TypeScript, lint, and production build.
+MS-001.16 implementation review: PASS WITH ACCEPTED RISK.
+MS-001.16 accepted risk: lack of idempotency after successful write and failed post-write read.
+MS-001.16 contract deviations: NONE.
+MS-001.16 publication status: PUBLISHED.
+MS-001.16 publication commit: `6671e69`.
+MS-001.16 milestone closure review: PASS.
+MS-001.16 closure status: CLOSED.
+MS-001.16 milestone status: COMPLETED / PUBLISHED / CLOSED.
+MS-001.16 blockers: NONE.
+`createProjectBrainTask(projectId, title)` is now the official public Project Brain write operation.
+MS-001.16 preserves existing read operations and existing Project Brain read error codes.
+MS-001.16 introduced no UI changes, no storage changes, and no new Project Brain DTOs.
 MS-001.13 contract status: APPROVED.
 MS-001.13 runtime status: CLOSED.
 MS-001.13 milestone status: COMPLETED / PUBLISHED / CLOSED.
@@ -180,10 +180,10 @@ No Workflow Engine changes.
 No workflow type changes.
 No write API.
 No writes.
-main contains the published MS-001.10 implementation baseline.
-main HEAD: d6913e5.
+main contains the published MS-001.16 implementation baseline.
+main HEAD: 6671e69.
 Verified branch: main.
-Latest verified commit: d6913e5.
+Latest verified commit: 6671e69.
 Repository working tree: CLEAN.
 Ahead / behind: 0 / 0.
 install PASS.
@@ -191,8 +191,8 @@ lint PASS with one previously accepted warning in `src/app/projects/[id]/tasks/p
 build PASS.
 startup PASS.
 Project Brain tests PASS.
-focused tests: 60 PASS.
-full tests: 64 PASS.
+focused tests: 75 PASS.
+full tests: 79 PASS.
 git diff --check PASS.
 implementation published to origin/main.
 
@@ -310,7 +310,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.15 - Project Brain Engine Foundation`
+* `Latest Completed Product Milestone` is `MS-001.16 - Project Brain Command Foundation`
 * `Next Product Milestone` is `NONE`
 * proposed next milestone is `NONE`
 * proposal status is `NONE`

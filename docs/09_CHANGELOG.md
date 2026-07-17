@@ -1218,6 +1218,29 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.16 - Project Brain Command Foundation closed
+
+### Date
+
+2026-07-17
+
+### Completed
+
+* Recorded the first public Project Brain write command `createProjectBrainTask(projectId, title)`.
+* Confirmed the production implementation file `src/lib/project-brain/engine.ts`.
+* Confirmed the verification file `src/lib/project-brain/engine.test.ts`.
+* Recorded implementation commit `6671e69 - feat: add Project Brain task command`.
+* Recorded targeted tests as `PASS`.
+* Recorded full tests as `PASS`.
+* Recorded TypeScript as `PASS`.
+* Recorded lint as `PASS` with one existing warning outside milestone scope.
+* Recorded production build as `PASS`.
+* Recorded CodeRabbit review as `PASS WITH ACCEPTED RISK`.
+* Recorded accepted risk: no idempotency guarantee when write succeeds and the post-write read fails.
+* Marked `MS-001.16 - Project Brain Command Foundation` as `COMPLETED / PUBLISHED / CLOSED`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

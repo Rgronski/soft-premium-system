@@ -211,16 +211,16 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-07-17
-Current Session ID: 011
-Current Chat Title: 011 SPS OS - SESSION CLOSE
-Next Session ID: 012
-Suggested Next Chat Title: 012 SPS OS - Next Product Milestone Contract Discovery
+Current Session ID: 012
+Current Chat Title: 012 SPS OS - MS-001.16 Closure Sync
+Next Session ID: 013
+Suggested Next Chat Title: 013 SPS OS - Next Product Milestone Contract Discovery
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: SESSION CLOSE / PENDING
-Completed Capability Items: MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
+Completed Capability Items: MS-001.16 - Project Brain Command Foundation; MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.15 - Project Brain Engine Foundation
+Latest Completed Product Milestone: MS-001.16 - Project Brain Command Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Proposed Next Milestone: NONE
@@ -228,24 +228,24 @@ Proposed Contract Status: NONE
 Proposed Activation: NONE
 Proposed Implementation: NONE
 Current Milestone Contract Status: APPROVED
-Current Milestone DoR Review: NOT RECORDED PRE-PUBLICATION
+Current Milestone DoR Review: PASS
 Current Milestone Activation Status: FORMALIZED POST-PUBLICATION
-Current Milestone Activation Decision: NOT RECONSTRUCTED
+Current Milestone Activation Decision: AUTHORIZED
 Current Milestone Runtime Status: CLOSED
 Current Milestone Status: COMPLETED / PUBLISHED / CLOSED
-Current Milestone Implementation Status: IMPLEMENTED
+Current Milestone Implementation Status: IMPLEMENTED / VERIFIED / PUBLISHED
 Current Milestone Product Owner Acceptance Review: PASS
-Current Milestone Technical Verification: PASS - 67 / 67 tests
-Current Milestone Implementation Review: PASS
-Current Milestone Original Implementation Commit: 70e1be2
+Current Milestone Technical Verification: PASS - targeted tests, full tests, TypeScript, lint, and production build
+Current Milestone Implementation Review: PASS WITH ACCEPTED RISK
+Current Milestone Original Implementation Commit: 6671e69
 Current Milestone Single-Read Fix Commit: NONE
 Current Milestone Single-Read Fix Status: NONE
 Current Milestone Single-Read Contract Check: NONE
-Current Milestone Post-Fix Focused Tests: PASS - 67 / 67 tests
-Current Milestone Post-Fix Full Tests: PASS - 67 / 67 tests
-Current Milestone Post-Fix Lint: NONE
-Current Milestone Post-Fix Build: NONE
-Current Milestone Post-Fix Diff Check: NONE
+Current Milestone Post-Fix Focused Tests: PASS - 75 / 75 tests
+Current Milestone Post-Fix Full Tests: PASS - 79 / 79 tests
+Current Milestone Post-Fix Lint: PASS - one previously accepted warning
+Current Milestone Post-Fix Build: PASS
+Current Milestone Post-Fix Diff Check: PENDING DOCUMENTATION PATCH VERIFICATION
 Current Milestone Milestone Closure Review: PASS
 MS-001.13 Contract Status: APPROVED
 MS-001.13 DoR Review: PASS
@@ -303,7 +303,7 @@ MS-001.12 Milestone Closure Review: PASS
 MS-001.12 Previous Blockers: ALL RESOLVED
 MS-001.12 Product Owner Closure Decision: APPROVED
 Active Parallel Capability: NONE
-Latest Completed Capability Item: MS-001.15 - Project Brain Engine Foundation
+Latest Completed Capability Item: MS-001.16 - Project Brain Command Foundation
 Contract Status: APPROVED
 Milestone Runtime Status: CLOSED
 DoR Status: NOT RECORDED PRE-PUBLICATION
@@ -311,21 +311,21 @@ Activation Status: FORMALIZED POST-PUBLICATION
 Activation Decision: NOT RECONSTRUCTED
 Active Session: 011
 Implementation Status: COMPLETED / PUBLISHED / CLOSED
-Implementation Commit: 70e1be2
-Implementation Handoff: CREATED - Session 011 handoff prepared for the next SPS OS - START
+Implementation Commit: 6671e69
+Implementation Handoff: NOT REQUIRED
 Milestone Closure: COMPLETED / PUBLISHED / CLOSED
-Code Changes in Session: published implementation commit `70e1be2`; SSOT synchronization commit `6cfb496`; session close handoff prepared
+Code Changes in Session: implementation published in commit `6671e69`; SSOT synchronization present in the current working tree
 Current Sprint: NONE
-Platform Priority: Preserve the closed `MS-001.15` lifecycle while keeping the next product milestone inactive until a separate Product Owner decision
+Platform Priority: Preserve the closed `MS-001.16` lifecycle while keeping the next product milestone inactive until a separate Product Owner decision
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 6cfb496
-Repository HEAD: 6cfb496
-Session Start Repository HEAD: 6cfb496
-Verification Status: PASS - `MS-001.15` remains `COMPLETED / PUBLISHED / CLOSED`; implementation commit `70e1be2` and SSOT commit `6cfb496` are published on `main`; repository is aligned with `origin/main`
+Latest Verified Commit: 6671e69
+Repository HEAD: 6671e69
+Session Start Repository HEAD: 14a434e
+Verification Status: PARTIAL - published implementation commit `6671e69` is on `main` and aligned with `origin/main`; documentation patch verification is pending in the current working tree
 Blockers: NONE
-Open Risks: one non-blocking lint warning remains; fresh package generation and Package Consistency confirmation are still pending
+Open Risks: accepted lack of idempotency if the write succeeds and the post-write read fails; one non-blocking lint warning remains outside milestone scope
 Repository Changes during diagnosis: NONE
-Session Close Protocol: PENDING
+Session Close Protocol: NOT RUN
 Next Safe Step: Run Next Product Milestone Contract Discovery
