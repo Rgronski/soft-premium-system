@@ -212,17 +212,22 @@ SPS OS Session State
 
 Date: 2026-07-17
 Current Session ID: 012
-Current Chat Title: 012 SPS OS - MS-001.16 Closure Sync
+Current Chat Title: 012 SPS OS - CAP-004 Process Update
 Next Session ID: 013
 Suggested Next Chat Title: 013 SPS OS - Next Product Milestone Contract Discovery
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: SESSION CLOSE / PENDING
-Completed Capability Items: MS-001.16 - Project Brain Command Foundation; MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
+Completed Capability Items: CAP-004 - Architect-Codex Execution Boundary; MS-001.16 - Project Brain Command Foundation; MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
 Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-001.16 - Project Brain Command Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
+CAP-004 Contract Status: APPROVED
+CAP-004 Runtime Status: CLOSED
+CAP-004 Implementation Status: COMPLETED / VERIFIED / PUBLISHED
+CAP-004 Publication Commit: 688df2b
+CAP-004 Closure Status: CLOSED
 Proposed Next Milestone: NONE
 Proposed Contract Status: NONE
 Proposed Activation: NONE
@@ -303,7 +308,7 @@ MS-001.12 Milestone Closure Review: PASS
 MS-001.12 Previous Blockers: ALL RESOLVED
 MS-001.12 Product Owner Closure Decision: APPROVED
 Active Parallel Capability: NONE
-Latest Completed Capability Item: MS-001.16 - Project Brain Command Foundation
+Latest Completed Capability Item: CAP-004 - Architect-Codex Execution Boundary
 Contract Status: APPROVED
 Milestone Runtime Status: CLOSED
 DoR Status: NOT RECORDED PRE-PUBLICATION
@@ -314,18 +319,18 @@ Implementation Status: COMPLETED / PUBLISHED / CLOSED
 Implementation Commit: 6671e69
 Implementation Handoff: NOT REQUIRED
 Milestone Closure: COMPLETED / PUBLISHED / CLOSED
-Code Changes in Session: implementation published in commit `6671e69`; SSOT synchronization present in the current working tree
+Code Changes in Session: MS-001.16 implementation published in `6671e69`; MS-001.16 SSOT closure published in `c21fc00`; CAP-004 process update published in `688df2b`; CAP-004 closure synchronization present in the current working tree
 Current Sprint: NONE
 Platform Priority: Preserve the closed `MS-001.16` lifecycle while keeping the next product milestone inactive until a separate Product Owner decision
 Repository Branch: main
-Repository Working Tree State: DIRTY
+Repository Working Tree State: DIRTY during documentation patch
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 6671e69
-Repository HEAD: 6671e69
+Latest Verified Commit: 688df2b
+Repository HEAD: 688df2b
 Session Start Repository HEAD: 14a434e
-Verification Status: PARTIAL - published implementation commit `6671e69` is on `main` and aligned with `origin/main`; documentation patch verification is pending in the current working tree
+Verification Status: PARTIAL - published capability commit `688df2b` is on `main` and aligned with `origin/main`; documentation patch verification is pending in the current working tree
 Blockers: NONE
 Open Risks: accepted lack of idempotency if the write succeeds and the post-write read fails; one non-blocking lint warning remains outside milestone scope
 Repository Changes during diagnosis: NONE
-Session Close Protocol: NOT RUN
-Next Safe Step: Run Next Product Milestone Contract Discovery
+Session Close Protocol: PENDING
+Next Safe Step: Run Session Close Protocol

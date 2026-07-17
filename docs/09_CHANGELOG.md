@@ -1241,6 +1241,30 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## CAP-004 - Architect-Codex Execution Boundary closed
+
+### Date
+
+2026-07-17
+
+### Completed
+
+* Recorded implementation commit `688df2b`.
+* Recorded six documentation/process files updated.
+* Enforced the Chief Architect-Codex execution boundary.
+* Standardized the Codex final report.
+* Made commit and push approval-gated.
+* Separated Implementation Done from Publication Done.
+* Added risk-based Quality Second Opinion.
+* Added `Project Brain Command Reliability / Idempotency` as a Proposed backlog item.
+* Recorded tests `79 / 79` as `PASS`.
+* Recorded TypeScript as `PASS`.
+* Recorded lint as `PASS` with one existing warning outside scope.
+* Recorded build as `PASS`.
+* Marked the capability as `COMPLETED / PUBLISHED / CLOSED`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

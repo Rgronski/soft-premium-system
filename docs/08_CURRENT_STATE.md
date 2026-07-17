@@ -80,6 +80,18 @@ Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-001.16 - Project Brain Command Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
+Active Capability: NONE
+Latest Completed Capability: CAP-004 - Architect-Codex Execution Boundary
+CAP-004 status: COMPLETED / PUBLISHED / CLOSED
+CAP-004 publication commit: `688df2b`
+CAP-004 blockers: NONE
+Codex is the Implementation Engine.
+Chief Architect does not implement production code.
+Implementation pauses when no Implementation Engine is available.
+Commit and push require explicit Product Owner approval.
+Implementation Done and Publication Done are separate states.
+CodeRabbit / Quality Second Opinion is risk-based.
+Project Brain Command Reliability / Idempotency is parked as Proposed.
 Proposed Next Milestone: NONE.
 Proposal Status: NONE.
 Activation: NONE.
@@ -180,10 +192,10 @@ No Workflow Engine changes.
 No workflow type changes.
 No write API.
 No writes.
-main contains the published MS-001.16 implementation baseline.
-main HEAD: 6671e69.
+main contains the published MS-001.16 product baseline and the published CAP-004 process baseline.
+main HEAD: 688df2b.
 Verified branch: main.
-Latest verified commit: 6671e69.
+Latest verified commit: 688df2b.
 Repository working tree: CLEAN.
 Ahead / behind: 0 / 0.
 install PASS.
@@ -361,10 +373,11 @@ Next:
 * `MS-001.12` Product Owner Closure Decision is `APPROVED`
 * next controlled operation is `Run Next Product Milestone Contract Discovery`
 * Active Capability is `NONE`
+* Latest Completed Capability is `CAP-004 - Architect-Codex Execution Boundary`
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
 * Verified branch: `main`
-* Latest verified commit: `d6913e5`
+* Latest verified commit: `688df2b`
 * Repository working tree: `CLEAN`
 * Ahead / behind: `0 / 0`
 * install `PASS`

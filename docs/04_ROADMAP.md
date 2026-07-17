@@ -123,6 +123,9 @@ NONE
 * `SPDM-002` - Bootstrap Alignment completed with `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` updated to implement SPDM instead of defining methodology
 * `CAP-003.1` - Project Domain Contract completed with `docs/13_PROJECT_CAPABILITY.md`
 * `CAP-003.2` - Project Domain Model completed with `docs/13_PROJECT_CAPABILITY.md`
+* `CAP-004` - Architect-Codex Execution Boundary completed with process execution boundaries and risk-based quality review rules
+* Active Capability: `NONE`
+* Latest Completed Capability: `CAP-004 - Architect-Codex Execution Boundary`
 * `CAP-003` has no active work item
 * This documentation foundation does not change the next product milestone order
 
@@ -2411,6 +2414,59 @@ IMPLEMENTED / VERIFIED / PUBLISHED
 
 **Next Safe Step**
 Run Next Product Milestone Contract Discovery
+
+---
+
+## CAP-004 - Architect-Codex Execution Boundary
+
+**Capability**
+CAP-004 - Architect-Codex Execution Boundary
+
+**Contract Status**
+APPROVED
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Enforce the execution boundary between architecture, implementation, repository publication, and risk-based quality review.
+
+**One Intention**
+Make Codex the explicit Implementation Engine and prevent Chief Architect from taking over production implementation.
+
+**Implementation Evidence**
+* implementation commit: `688df2b`
+* changed files:
+  * `AGENTS.md`
+  * `docs/03_DEVELOPMENT_STANDARD.md`
+  * `docs/06_BACKLOG.md`
+  * `docs/10_PROJECT_LIFECYCLE.md`
+  * `docs/AI_CONTEXT.md`
+  * `docs/ai-workflow/ROLES.md`
+* verification:
+  * `npm test`: `PASS - 79 / 79`
+  * `TypeScript`: `PASS`
+  * `lint`: `PASS - one existing warning outside capability scope`
+  * `build`: `PASS`
+  * `git diff --check`: `PASS`
+
+**Blockers**
+NONE
+
+**Capability Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Next Safe Step**
+Run Session Close Protocol
 
 ---
 
