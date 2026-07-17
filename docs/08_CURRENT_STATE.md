@@ -45,17 +45,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.14 - Project Workspace Consumer Collections
+MS-001.15 - Project Brain Engine Foundation
 
 **Next Milestone**
 NONE
 
-**MS-001.14 State**
-APPROVED / ACTIVATED / IMPLEMENTED / COMPLETED / PUBLISHED / CLOSED
+**MS-001.15 State**
+APPROVED / IMPLEMENTED / COMPLETED / PUBLISHED / CLOSED
 
 Objective:
 
-`MS-001.14 - Project Workspace Consumer Collections` is implemented, verified, and formally closed by Product Owner decision.
+`MS-001.15 - Project Brain Engine Foundation` established the official public `getCurrentProjectBrainState(projectId)` read operation, reusing the existing Project Brain snapshot and error model, and the MS-001.14 consumer path now reads through it without UI or storage changes.
 
 Project Status:
 
@@ -77,29 +77,30 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.14 - Project Workspace Consumer Collections
+Latest Completed Product Milestone: MS-001.15 - Project Brain Engine Foundation
 Next Product Milestone: NONE
+Active Sprint: NONE
 Proposed Next Milestone: NONE.
 Proposal Status: NONE.
 Activation: ACTIVATED.
 Implementation: COMPLETED.
-MS-001.14 contract status: APPROVED.
-MS-001.14 runtime status: CLOSED.
-MS-001.14 implementation status: COMPLETED.
-MS-001.14 Definition of Ready Review: PASS.
-MS-001.14 activation status: ACTIVATED.
-MS-001.14 activation decision: AUTHORIZED.
-MS-001.14 Product Owner Contract Approval: PASS.
-MS-001.14 Product Owner Acceptance Review: PASS.
-MS-001.14 technical verification: PASS.
-MS-001.14 implementation review: PASS.
-MS-001.14 contract deviations: NONE.
-MS-001.14 publication status: PUBLISHED.
-MS-001.14 publication commit: `e8f8e6270316ea2199800aa8e8ee3c788315f2df`.
-MS-001.14 milestone closure review: PASS.
-MS-001.14 closure status: CLOSED.
-MS-001.14 milestone status: COMPLETED / PUBLISHED / CLOSED.
-MS-001.14 blockers: NONE.
+MS-001.15 contract status: APPROVED.
+MS-001.15 runtime status: CLOSED.
+MS-001.15 implementation status: IMPLEMENTED.
+MS-001.15 Product Owner Contract Approval: PASS.
+MS-001.15 technical verification: PASS - `67 / 67 tests`.
+MS-001.15 implementation review: PASS.
+MS-001.15 contract deviations: NONE.
+MS-001.15 publication status: PUBLISHED.
+MS-001.15 publication commit: `70e1be2`.
+MS-001.15 milestone closure review: PASS.
+MS-001.15 closure status: CLOSED.
+MS-001.15 milestone status: APPROVED / IMPLEMENTED / COMPLETED / PUBLISHED / CLOSED.
+MS-001.15 blockers: NONE.
+MS-001.15 lifecycle formalization was synchronized after implementation publication as an SSOT consistency correction.
+`getCurrentProjectBrainState(projectId)` is now the official public current-state read operation.
+MS-001.15 reuses the existing `ProjectBrainSnapshot` and existing `Error & { code }` model.
+MS-001.15 introduced no UI changes, no storage changes, and no new Project Brain DTOs.
 MS-001.13 contract status: APPROVED.
 MS-001.13 runtime status: CLOSED.
 MS-001.13 milestone status: COMPLETED / PUBLISHED / CLOSED.
@@ -309,7 +310,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.14 - Project Workspace Consumer Collections`
+* `Latest Completed Product Milestone` is `MS-001.15 - Project Brain Engine Foundation`
 * `Next Product Milestone` is `NONE`
 * proposed next milestone is `NONE`
 * proposal status is `NONE`

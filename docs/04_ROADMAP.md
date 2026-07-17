@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.14 - Project Workspace Consumer Collections
+MS-001.15 - Project Brain Engine Foundation
 
 ## Next
 
@@ -2240,6 +2240,93 @@ COMPLETED / PUBLISHED / CLOSED
 
 **Implementation Status**
 COMPLETED
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery
+
+---
+
+## MS-001.15 - Project Brain Engine Foundation
+
+**Milestone**
+MS-001.15 - Project Brain Engine Foundation
+
+**Contract Status**
+APPROVED
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Establish one official public Project Brain Engine read operation for the current Project Brain state without changing the existing storage, UI, or Project Brain success model.
+
+**One Intention**
+Expose `getCurrentProjectBrainState(projectId)` as the official public current-state read and route the existing consumer workflow path through it.
+
+**Approved Technical Contract**
+* Engine location remains `src/lib/project-brain/engine.ts`
+* public operation: `getCurrentProjectBrainState(projectId)`
+* success type: `ProjectBrainSnapshot`
+* error model: existing `Error & { code }`
+* allowed error codes:
+  * `invalid-project-id`
+  * `project-not-found`
+  * `source-read-failed`
+  * `invalid-snapshot`
+* no separate `state-unavailable`
+* empty `tasks` and empty `knowledgeEntries` remain valid states
+
+**Proof of Integration**
+* `getProjectConsumerWorkspace()`
+* `getProjectWorkflowSnapshot()`
+* `getCurrentProjectBrainState()`
+
+**Implementation Scope**
+* reuse existing `getProjectBrainSnapshot(projectId)` read and validation logic
+* add one public current-state operation
+* route the existing workflow snapshot path through the new public operation
+* keep the consumer UI contract unchanged
+
+**Out of Scope**
+* UI changes
+* storage changes
+* new DTOs
+* new `Result` type
+* write operations
+* cache
+* external integrations
+* unrelated refactor
+
+**Implementation Evidence**
+* implementation files:
+  * `src/lib/project-brain/engine.ts`
+  * `src/lib/project-brain/engine.test.ts`
+* verification: `PASS - 67 / 67 tests`
+* publication commit: `70e1be2`
+* publication status: `PUBLISHED`
+* milestone closure review: `PASS`
+* closure status: `CLOSED`
+
+**Process Note**
+Formal lifecycle synchronization for `MS-001.15` was recorded after implementation publication, based on the published commit `70e1be2` and verified test evidence. No earlier activation timeline is reconstructed.
+
+**Blockers**
+NONE
+
+**Milestone Status**
+APPROVED / IMPLEMENTED / COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Status**
+IMPLEMENTED
 
 **Next Safe Step**
 Run Next Product Milestone Contract Discovery
