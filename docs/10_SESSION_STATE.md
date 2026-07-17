@@ -223,6 +223,11 @@ Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-001.16 - Project Brain Command Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
+Latest Completed Capability Item: CAP-004 - Architect-Codex Execution Boundary
+MS-001.16 Implementation Commit: 6671e69
+MS-001.16 SSOT Closure Commit: c21fc00
+CAP-004 Implementation Commit: 688df2b
+CAP-004 SSOT Closure Commit: 484abc3
 CAP-004 Contract Status: APPROVED
 CAP-004 Runtime Status: CLOSED
 CAP-004 Implementation Status: COMPLETED / VERIFIED / PUBLISHED
@@ -308,7 +313,6 @@ MS-001.12 Milestone Closure Review: PASS
 MS-001.12 Previous Blockers: ALL RESOLVED
 MS-001.12 Product Owner Closure Decision: APPROVED
 Active Parallel Capability: NONE
-Latest Completed Capability Item: CAP-004 - Architect-Codex Execution Boundary
 Contract Status: APPROVED
 Milestone Runtime Status: CLOSED
 DoR Status: NOT RECORDED PRE-PUBLICATION
@@ -323,14 +327,18 @@ Code Changes in Session: MS-001.16 implementation published in `6671e69`; MS-001
 Current Sprint: NONE
 Platform Priority: Preserve the closed `MS-001.16` lifecycle while keeping the next product milestone inactive until a separate Product Owner decision
 Repository Branch: main
-Repository Working Tree State: DIRTY during documentation patch
+Repository Working Tree State: DIRTY during session-close documentation patch
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 688df2b
-Repository HEAD: 688df2b
+Latest Verified Commit: 484abc3
+Repository HEAD: 484abc3
 Session Start Repository HEAD: 14a434e
-Verification Status: PARTIAL - published capability commit `688df2b` is on `main` and aligned with `origin/main`; documentation patch verification is pending in the current working tree
+Verification Status: PASS - tests 79 / 79, TypeScript PASS, lint PASS with one existing warning outside scope, build PASS
 Blockers: NONE
-Open Risks: accepted lack of idempotency if the write succeeds and the post-write read fails; one non-blocking lint warning remains outside milestone scope
+Open Risks:
+- accepted lack of idempotency if a Project Brain command write succeeds and the post-write snapshot refresh fails
+- one non-blocking lint warning remains outside completed work scope
 Repository Changes during diagnosis: NONE
-Session Close Protocol: PENDING
-Next Safe Step: Run Session Close Protocol
+Session Close Protocol: IN PROGRESS
+Session runtime: CLOSURE PENDING
+Package Consistency: PENDING
+Next Safe Step: Run Session Package Generator after publishing the session-close patch
