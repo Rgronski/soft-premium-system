@@ -50,12 +50,12 @@ MS-001.16 - Project Brain Command Foundation
 **Next Milestone**
 NONE
 
-**MS-001.16 State**
+**MS-001.17 State**
 COMPLETED / PUBLISHED / CLOSED
 
 Objective:
 
-`MS-001.16 - Project Brain Command Foundation` established the first public Project Brain write command `createProjectBrainTask(projectId, title)`, reusing the existing Task Engine write path and returning the canonical `ProjectBrainSnapshot` after a successful write.
+`MS-001.17 - Project Brain Command Reliability Foundation` made the public Project Brain write command retry-safe by changing `createProjectBrainTask` to a command object with stable `commandId`, returning an explicit `completed` / `completed-with-refresh-failure` result, and persisting idempotency in the Task Engine task write path.
 
 Project Status:
 
@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.16 - Project Brain Command Foundation
+Latest Completed Product Milestone: MS-001.17 - Project Brain Command Reliability Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -91,28 +91,32 @@ Implementation pauses when no Implementation Engine is available.
 Commit and push require explicit Product Owner approval.
 Implementation Done and Publication Done are separate states.
 CodeRabbit / Quality Second Opinion is risk-based.
-Project Brain Command Reliability / Idempotency is parked as Proposed.
+Project Brain Command Reliability / Idempotency is implemented and closed by `MS-001.17`.
 Proposed Next Milestone: NONE.
 Proposal Status: NONE.
 Activation: NONE.
 Implementation: NONE.
-MS-001.16 contract status: APPROVED.
-MS-001.16 runtime status: CLOSED.
-MS-001.16 implementation status: IMPLEMENTED / VERIFIED / PUBLISHED.
-MS-001.16 Product Owner Contract Approval: PASS.
-MS-001.16 technical verification: PASS - targeted tests, full tests, TypeScript, lint, and production build.
-MS-001.16 implementation review: PASS WITH ACCEPTED RISK.
-MS-001.16 accepted risk: lack of idempotency after successful write and failed post-write read.
-MS-001.16 contract deviations: NONE.
-MS-001.16 publication status: PUBLISHED.
-MS-001.16 publication commit: `6671e69`.
-MS-001.16 milestone closure review: PASS.
-MS-001.16 closure status: CLOSED.
-MS-001.16 milestone status: COMPLETED / PUBLISHED / CLOSED.
-MS-001.16 blockers: NONE.
-`createProjectBrainTask(projectId, title)` is now the official public Project Brain write operation.
-MS-001.16 preserves existing read operations and existing Project Brain read error codes.
-MS-001.16 introduced no UI changes, no storage changes, and no new Project Brain DTOs.
+MS-001.17 contract status: APPROVED.
+MS-001.17 runtime status: CLOSED.
+MS-001.17 implementation status: IMPLEMENTED / VERIFIED / PUBLISHED.
+MS-001.17 Product Owner Contract Approval: PASS.
+MS-001.17 technical verification: PASS - targeted tests, full tests, TypeScript, lint, and production build.
+MS-001.17 implementation review: PASS.
+MS-001.17 contract deviations: NONE.
+MS-001.17 publication status: PUBLISHED.
+MS-001.17 milestone closure review: PASS.
+MS-001.17 closure status: CLOSED.
+MS-001.17 milestone status: COMPLETED / PUBLISHED / CLOSED.
+MS-001.17 blockers: NONE.
+`createProjectBrainTask(command)` is now the official public Project Brain write operation.
+`createProjectBrainTask(command)` accepts `{ commandId, projectId, title }`.
+`createProjectBrainTask(command)` returns `completed` with `snapshot` or `completed-with-refresh-failure` after a confirmed write.
+Task Engine remains the only task write owner.
+Retrying the same logical command does not create a duplicate task.
+Reusing a known `commandId` with different normalized input is rejected as a command identity conflict.
+Legacy task records without `commandId` remain compatible.
+The one existing `react-hooks/exhaustive-deps` warning in `src/app/projects/[id]/tasks/page.tsx` remains non-blocking and outside milestone scope.
+MS-001.16 remains completed and published as the earlier Project Brain command foundation baseline.
 MS-001.13 contract status: APPROVED.
 MS-001.13 runtime status: CLOSED.
 MS-001.13 milestone status: COMPLETED / PUBLISHED / CLOSED.
@@ -322,7 +326,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.16 - Project Brain Command Foundation`
+* `Latest Completed Product Milestone` is `MS-001.17 - Project Brain Command Reliability Foundation`
 * `Next Product Milestone` is `NONE`
 * proposed next milestone is `NONE`
 * proposal status is `NONE`
@@ -371,7 +375,7 @@ Next:
 * `MS-001.12` activation status is `ACTIVATED`
 * `MS-001.12` activation decision is `AUTHORIZED`
 * `MS-001.12` Product Owner Closure Decision is `APPROVED`
-* next controlled operation is `Run Next Product Milestone Contract Discovery`
+* next controlled operation is `NONE - awaiting separate Product Owner decision`
 * Active Capability is `NONE`
 * Latest Completed Capability is `CAP-004 - Architect-Codex Execution Boundary`
 * Active Parallel Capability is `NONE`
@@ -397,7 +401,8 @@ Next:
 
 Next session priorities:
 
-* Run Next Product Milestone Contract Discovery
+* Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision
+* Run a separate Next Product Milestone Contract Discovery only if explicitly authorized
 
 ---
 
@@ -423,7 +428,7 @@ Keep workflow governance and project state documentation aligned.
 
 Priority 3
 
-Next controlled lifecycle step: `Run Next Product Milestone Contract Discovery`.
+Next controlled lifecycle step: `NONE - awaiting Product Owner decision`.
 
 ---
 

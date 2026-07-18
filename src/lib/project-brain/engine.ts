@@ -8,14 +8,35 @@ import type {
   ProjectConsumerKnowledgeEntry,
   ProjectConsumerOverview,
   ProjectConsumerTask,
-  ProjectConsumerWorkspace,
   ProjectBrainSnapshot,
+  ProjectConsumerWorkspace,
   ProjectWorkflowSnapshot,
 } from "./types";
 
+export type CreateProjectBrainTaskCommand = {
+  commandId: string;
+  projectId: string;
+  title: string;
+};
+
+export type CreateProjectBrainTaskResult =
+  | {
+      status: "completed";
+      commandId: string;
+      taskId: string;
+      snapshot: ProjectBrainSnapshot;
+    }
+  | {
+      status: "completed-with-refresh-failure";
+      commandId: string;
+      taskId: string;
+    };
+
 type ProjectBrainErrorCode =
+  | "invalid-command-id"
   | "invalid-project-id"
   | "invalid-task-title"
+  | "command-identity-conflict"
   | "project-not-found"
   | "source-write-failed"
   | "source-read-failed"
@@ -56,6 +77,19 @@ function normalizeProjectId(projectId: string): string {
   }
 
   return normalizedProjectId;
+}
+
+function normalizeCommandId(commandId: string): string {
+  const normalizedCommandId = commandId.trim();
+
+  if (!normalizedCommandId) {
+    throw createProjectBrainError(
+      "invalid-command-id",
+      "Project Brain requires a non-empty commandId.",
+    );
+  }
+
+  return normalizedCommandId;
 }
 
 function normalizeTaskTitle(title: string): string {
@@ -350,11 +384,11 @@ export function getCurrentProjectBrainState(
 }
 
 export function createProjectBrainTask(
-  projectId: string,
-  title: string,
-): ProjectBrainSnapshot {
-  const normalizedProjectId = normalizeProjectId(projectId);
-  const normalizedTitle = normalizeTaskTitle(title);
+  command: CreateProjectBrainTaskCommand,
+): CreateProjectBrainTaskResult {
+  const normalizedCommandId = normalizeCommandId(command.commandId);
+  const normalizedProjectId = normalizeProjectId(command.projectId);
+  const normalizedTitle = normalizeTaskTitle(command.title);
   const project = withSourceReadHandling(() => getProjectById(normalizedProjectId));
 
   if (!project) {
@@ -374,8 +408,19 @@ export function createProjectBrainTask(
   let createdTask: ReturnType<typeof createTask>;
 
   try {
-    createdTask = createTask(normalizedProjectId, normalizedTitle);
-  } catch {
+    createdTask = createTask({
+      commandId: normalizedCommandId,
+      projectId: normalizedProjectId,
+      title: normalizedTitle,
+    });
+  } catch (error) {
+    if ((error as { code?: string }).code === "command-identity-conflict") {
+      throw createProjectBrainError(
+        "command-identity-conflict",
+        "Project Brain rejected a reused commandId with different normalized input.",
+      );
+    }
+
     throw createProjectBrainError(
       "source-write-failed",
       "Project Brain could not write the requested task.",
@@ -389,7 +434,20 @@ export function createProjectBrainTask(
     );
   }
 
-  return getCurrentProjectBrainState(normalizedProjectId);
+  try {
+    return {
+      status: "completed",
+      commandId: normalizedCommandId,
+      taskId: createdTask.id,
+      snapshot: getCurrentProjectBrainState(normalizedProjectId),
+    };
+  } catch {
+    return {
+      status: "completed-with-refresh-failure",
+      commandId: normalizedCommandId,
+      taskId: createdTask.id,
+    };
+  }
 }
 
 export function evaluateProjectWorkflow(

@@ -1,6 +1,7 @@
 "use client";
 
-import { createTask, getTasks } from "@/lib/task/task";
+import { createProjectBrainTask } from "@/lib/project-brain/engine";
+import { getTasks } from "@/lib/task/task";
 import type { Task } from "@/lib/task/types";
 import { useParams } from "next/navigation";
 import { useMemo, useState } from "react";
@@ -15,14 +16,24 @@ export default function ProjectTasksPage() {
   }, [params.id, refreshKey]);
 
   function handleAddTask() {
-    const createdTask = createTask(params.id, taskTitle);
+    const commandId = crypto.randomUUID();
+    const createdTask = createProjectBrainTask({
+      commandId,
+      projectId: params.id,
+      title: taskTitle,
+    });
 
     if (!createdTask) {
       return;
     }
 
-    setTaskTitle("");
-    setRefreshKey((currentValue) => currentValue + 1);
+    if (
+      createdTask.status === "completed" ||
+      createdTask.status === "completed-with-refresh-failure"
+    ) {
+      setTaskTitle("");
+      setRefreshKey((currentValue) => currentValue + 1);
+    }
   }
 
   return (

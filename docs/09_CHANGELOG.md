@@ -1265,6 +1265,25 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.17 - Project Brain Command Reliability Foundation
+
+### Completed
+
+* Closed `MS-001.17 - Project Brain Command Reliability Foundation`.
+* Changed `createProjectBrainTask` to the public command object form with stable `commandId`.
+* Added the explicit result union `completed` / `completed-with-refresh-failure`.
+* Persisted durable `commandId` idempotency in the Task Engine task write path.
+* Prevented duplicate task creation on safe retry and added explicit command identity conflict handling.
+* Preserved Task Engine as the only task write owner and kept legacy tasks without `commandId` compatible.
+* Updated the `/projects/[id]/tasks` UI call site to use the public Project Brain command.
+* Recorded targeted tests `85 / 85` as `PASS`.
+* Recorded full tests `88 / 88` as `PASS`.
+* Recorded TypeScript as `PASS`.
+* Recorded lint as `PASS` with one existing warning outside scope.
+* Recorded production build as `PASS`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

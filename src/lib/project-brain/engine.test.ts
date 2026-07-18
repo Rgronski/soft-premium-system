@@ -23,8 +23,16 @@ class MemoryStorage {
     this.store.clear();
   }
 
+  get length() {
+    return this.store.size;
+  }
+
   getItem(key: string) {
     return this.store.get(key) ?? null;
+  }
+
+  key(index: number) {
+    return [...this.store.keys()][index] ?? null;
   }
 
   setItem(key: string, value: string) {
@@ -40,6 +48,9 @@ describe("Project Brain engine", () => {
     storage.clear();
     vi.stubGlobal("window", {});
     vi.stubGlobal("localStorage", storage);
+    vi.stubGlobal("crypto", {
+      randomUUID: () => "task-uuid",
+    });
     setItemSpy = vi.spyOn(storage, "setItem");
   });
 
@@ -529,31 +540,67 @@ describe("Project Brain engine", () => {
   test("creates a task and returns the updated Project Brain snapshot", () => {
     seedWorkflowSnapshotProject({ includeKnowledge: true });
 
-    const snapshot = createProjectBrainTask("project-1", "New task");
+    const result = createProjectBrainTask({
+      commandId: "command-1",
+      projectId: "project-1",
+      title: "New task",
+    });
 
-    expect(snapshot.tasks).toHaveLength(1);
-    expect(snapshot.tasks[0]?.title).toBe("New task");
-    expect(snapshot.tasks[0]?.projectId).toBe("project-1");
-    expect(snapshot.workflowState.activeWork).toEqual([snapshot.tasks[0]?.id]);
+    expect(result.status).toBe("completed");
+    expect(result.commandId).toBe("command-1");
+    expect(result.taskId).toBe("task-uuid");
+
+    if (result.status !== "completed") {
+      throw new Error("Expected completed result");
+    }
+
+    expect(result.snapshot.tasks).toHaveLength(1);
+    expect(result.snapshot.tasks[0]?.title).toBe("New task");
+    expect(result.snapshot.tasks[0]?.projectId).toBe("project-1");
+    expect(result.snapshot.workflowState.activeWork).toEqual([
+      result.snapshot.tasks[0]?.id,
+    ]);
   });
 
   test("normalizes projectId before delegating the write", () => {
     seedWorkflowSnapshotProject();
     const createTaskSpy = vi.spyOn(taskModule, "createTask");
 
-    createProjectBrainTask("  project-1  ", "New task");
+    createProjectBrainTask({
+      commandId: "command-1",
+      projectId: "  project-1  ",
+      title: "New task",
+    });
 
-    expect(createTaskSpy).toHaveBeenCalledWith("project-1", "New task");
+    expect(createTaskSpy).toHaveBeenCalledWith({
+      commandId: "command-1",
+      projectId: "project-1",
+      title: "New task",
+    });
   });
 
   test("normalizes the task title before delegating the write", () => {
     seedWorkflowSnapshotProject();
     const createTaskSpy = vi.spyOn(taskModule, "createTask");
 
-    const snapshot = createProjectBrainTask("project-1", "  New task  ");
+    const result = createProjectBrainTask({
+      commandId: "command-1",
+      projectId: "project-1",
+      title: "  New task  ",
+    });
 
-    expect(createTaskSpy).toHaveBeenCalledWith("project-1", "New task");
-    expect(snapshot.tasks[0]?.title).toBe("New task");
+    expect(createTaskSpy).toHaveBeenCalledWith({
+      commandId: "command-1",
+      projectId: "project-1",
+      title: "New task",
+    });
+    expect(result.status).toBe("completed");
+
+    if (result.status !== "completed") {
+      throw new Error("Expected completed result");
+    }
+
+    expect(result.snapshot.tasks[0]?.title).toBe("New task");
   });
 
   test("rejects an empty projectId before writing", () => {
@@ -561,9 +608,15 @@ describe("Project Brain engine", () => {
     const createTaskSpy = vi.spyOn(taskModule, "createTask");
     setItemSpy.mockClear();
 
-    expect(getErrorCode(() => createProjectBrainTask("   ", "New task"))).toBe(
-      "invalid-project-id",
-    );
+    expect(
+      getErrorCode(() =>
+        createProjectBrainTask({
+          commandId: "command-1",
+          projectId: "   ",
+          title: "New task",
+        }),
+      ),
+    ).toBe("invalid-project-id");
     expect(createTaskSpy).not.toHaveBeenCalled();
     expect(setItemSpy).not.toHaveBeenCalled();
   });
@@ -573,9 +626,15 @@ describe("Project Brain engine", () => {
     const createTaskSpy = vi.spyOn(taskModule, "createTask");
     setItemSpy.mockClear();
 
-    expect(getErrorCode(() => createProjectBrainTask("project-1", "   "))).toBe(
-      "invalid-task-title",
-    );
+    expect(
+      getErrorCode(() =>
+        createProjectBrainTask({
+          commandId: "command-1",
+          projectId: "project-1",
+          title: "   ",
+        }),
+      ),
+    ).toBe("invalid-task-title");
     expect(createTaskSpy).not.toHaveBeenCalled();
     expect(setItemSpy).not.toHaveBeenCalled();
   });
@@ -584,9 +643,15 @@ describe("Project Brain engine", () => {
     storage.setItem("soft-premium-system.projects", JSON.stringify([]));
     const createTaskSpy = vi.spyOn(taskModule, "createTask");
 
-    expect(getErrorCode(() => createProjectBrainTask("project-1", "New task"))).toBe(
-      "project-not-found",
-    );
+    expect(
+      getErrorCode(() =>
+        createProjectBrainTask({
+          commandId: "command-1",
+          projectId: "project-1",
+          title: "New task",
+        }),
+      ),
+    ).toBe("project-not-found");
     expect(createTaskSpy).not.toHaveBeenCalled();
   });
 
@@ -596,18 +661,173 @@ describe("Project Brain engine", () => {
       throw new Error("write failed");
     });
 
-    expect(getErrorCode(() => createProjectBrainTask("project-1", "New task"))).toBe(
-      "source-write-failed",
-    );
+    expect(
+      getErrorCode(() =>
+        createProjectBrainTask({
+          commandId: "command-1",
+          projectId: "project-1",
+          title: "New task",
+        }),
+      ),
+    ).toBe("source-write-failed");
   });
 
   test("maps a null Task Engine write result to source-write-failed", () => {
     seedWorkflowSnapshotProject();
     vi.spyOn(taskModule, "createTask").mockReturnValue(null);
 
-    expect(getErrorCode(() => createProjectBrainTask("project-1", "New task"))).toBe(
-      "source-write-failed",
+    expect(
+      getErrorCode(() =>
+        createProjectBrainTask({
+          commandId: "command-1",
+          projectId: "project-1",
+          title: "New task",
+        }),
+      ),
+    ).toBe("source-write-failed");
+  });
+
+  test("returns the existing task for a repeated command without another write", () => {
+    seedWorkflowSnapshotProject({ includeKnowledge: true });
+
+    const firstResult = createProjectBrainTask({
+      commandId: "command-1",
+      projectId: "project-1",
+      title: "New task",
+    });
+
+    setItemSpy.mockClear();
+
+    const secondResult = createProjectBrainTask({
+      commandId: "command-1",
+      projectId: "project-1",
+      title: "  New task  ",
+    });
+    const savedTasks = JSON.parse(
+      storage.getItem("soft-premium-system.projects.project-1.tasks") ?? "[]",
     );
+
+    expect(firstResult.status).toBe("completed");
+    expect(secondResult.status).toBe("completed");
+    expect(savedTasks).toHaveLength(1);
+    expect(setItemSpy).not.toHaveBeenCalled();
+
+    if (firstResult.status !== "completed" || secondResult.status !== "completed") {
+      throw new Error("Expected completed results");
+    }
+
+    expect(secondResult.taskId).toBe(firstResult.taskId);
+    expect(secondResult.snapshot.tasks).toHaveLength(1);
+  });
+
+  test("rejects a reused commandId with a different normalized title", () => {
+    seedWorkflowSnapshotProject();
+
+    createProjectBrainTask({
+      commandId: "command-1",
+      projectId: "project-1",
+      title: "New task",
+    });
+
+    expect(
+      getErrorCode(() =>
+        createProjectBrainTask({
+          commandId: "command-1",
+          projectId: "project-1",
+          title: "Different task",
+        }),
+      ),
+    ).toBe("command-identity-conflict");
+  });
+
+  test("rejects a reused commandId with a different projectId", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        },
+        {
+          id: "project-2",
+          name: "Beta",
+          createdAt: "2026-07-13T11:00:00.000Z",
+        },
+      ]),
+    );
+
+    createProjectBrainTask({
+      commandId: "command-1",
+      projectId: "project-1",
+      title: "New task",
+    });
+
+    expect(
+      getErrorCode(() =>
+        createProjectBrainTask({
+          commandId: "command-1",
+          projectId: "project-2",
+          title: "New task",
+        }),
+      ),
+    ).toBe("command-identity-conflict");
+  });
+
+  test("returns completed-with-refresh-failure after a confirmed write when snapshot refresh fails", () => {
+    seedWorkflowSnapshotProject();
+    vi.spyOn(taskModule, "getTasks").mockImplementation(() => {
+      throw new Error("refresh failed");
+    });
+
+    const result = createProjectBrainTask({
+      commandId: "command-1",
+      projectId: "project-1",
+      title: "New task",
+    });
+
+    expect(result).toEqual({
+      status: "completed-with-refresh-failure",
+      commandId: "command-1",
+      taskId: "task-uuid",
+    });
+  });
+
+  test("does not report source-write-failed when the refresh fails after the write", () => {
+    seedWorkflowSnapshotProject();
+    vi.spyOn(taskModule, "getTasks").mockImplementation(() => {
+      throw new Error("refresh failed");
+    });
+
+    expect(() =>
+      createProjectBrainTask({
+        commandId: "command-1",
+        projectId: "project-1",
+        title: "New task",
+      }),
+    ).not.toThrow();
+  });
+
+  test("legacy tasks without commandId remain compatible with new command writes", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+
+    const result = createProjectBrainTask({
+      commandId: "command-2",
+      projectId: "project-1",
+      title: "New task",
+    });
+
+    expect(result.status).toBe("completed");
+
+    if (result.status !== "completed") {
+      throw new Error("Expected completed result");
+    }
+
+    expect(result.snapshot.tasks).toHaveLength(2);
+    expect(result.snapshot.tasks.map((task) => task.title)).toEqual([
+      "First task",
+      "New task",
+    ]);
   });
 
   test("returns a WorkflowResult for an existing project", () => {

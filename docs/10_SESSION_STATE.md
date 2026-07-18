@@ -210,17 +210,17 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-07-17
-Current Session ID: 012
-Current Chat Title: 012 SPS OS - CAP-004 Process Update
-Next Session ID: 013
-Suggested Next Chat Title: 013 SPS OS - Next Product Milestone Contract Discovery
+Date: 2026-07-18
+Current Session ID: 013
+Current Chat Title: 013 SPS OS - MS-001.17 Closure
+Next Session ID: 014
+Suggested Next Chat Title: 014 SPS OS - Session Close Protocol
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: SESSION CLOSE / PENDING
-Completed Capability Items: CAP-004 - Architect-Codex Execution Boundary; MS-001.16 - Project Brain Command Foundation; MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
+Completed Capability Items: CAP-004 - Architect-Codex Execution Boundary; MS-001.17 - Project Brain Command Reliability Foundation; MS-001.16 - Project Brain Command Foundation; MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.16 - Project Brain Command Foundation
+Latest Completed Product Milestone: MS-001.17 - Project Brain Command Reliability Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Latest Completed Capability Item: CAP-004 - Architect-Codex Execution Boundary
@@ -237,6 +237,14 @@ Proposed Next Milestone: NONE
 Proposed Contract Status: NONE
 Proposed Activation: NONE
 Proposed Implementation: NONE
+MS-001.17 Contract Status: APPROVED
+MS-001.17 Runtime Status: CLOSED
+MS-001.17 Implementation Status: COMPLETED / VERIFIED / PUBLISHED
+MS-001.17 Technical Verification: PASS - targeted tests 85 / 85, full tests 88 / 88, TypeScript PASS, lint PASS with one previously existing warning, production build PASS
+MS-001.17 Implementation Review: PASS
+MS-001.17 Closure Status: CLOSED
+MS-001.17 Milestone Status: COMPLETED / PUBLISHED / CLOSED
+MS-001.17 Blockers: NONE
 Current Milestone Contract Status: APPROVED
 Current Milestone DoR Review: PASS
 Current Milestone Activation Status: FORMALIZED POST-PUBLICATION
@@ -246,13 +254,13 @@ Current Milestone Status: COMPLETED / PUBLISHED / CLOSED
 Current Milestone Implementation Status: IMPLEMENTED / VERIFIED / PUBLISHED
 Current Milestone Product Owner Acceptance Review: PASS
 Current Milestone Technical Verification: PASS - targeted tests, full tests, TypeScript, lint, and production build
-Current Milestone Implementation Review: PASS WITH ACCEPTED RISK
-Current Milestone Original Implementation Commit: 6671e69
+Current Milestone Implementation Review: PASS
+Current Milestone Original Implementation Commit: PENDING CLOSURE COMMIT
 Current Milestone Single-Read Fix Commit: NONE
 Current Milestone Single-Read Fix Status: NONE
 Current Milestone Single-Read Contract Check: NONE
-Current Milestone Post-Fix Focused Tests: PASS - 75 / 75 tests
-Current Milestone Post-Fix Full Tests: PASS - 79 / 79 tests
+Current Milestone Post-Fix Focused Tests: PASS - 85 / 85 tests
+Current Milestone Post-Fix Full Tests: PASS - 88 / 88 tests
 Current Milestone Post-Fix Lint: PASS - one previously accepted warning
 Current Milestone Post-Fix Build: PASS
 Current Milestone Post-Fix Diff Check: PENDING DOCUMENTATION PATCH VERIFICATION
@@ -323,20 +331,20 @@ Implementation Status: COMPLETED / PUBLISHED / CLOSED
 Implementation Commit: 6671e69
 Implementation Handoff: NOT REQUIRED
 Milestone Closure: COMPLETED / PUBLISHED / CLOSED
-Code Changes in Session: MS-001.16 implementation published in `6671e69`; MS-001.16 SSOT closure published in `c21fc00`; CAP-004 process update published in `688df2b`; session 012 close patch published in `a168e6a`
+Code Changes in Session: MS-001.17 implementation completed with targeted tests PASS, full tests PASS, TypeScript PASS, lint PASS with one existing warning, and build PASS; MS-001.17 SSOT closure pending commit and push
 Current Sprint: NONE
-Platform Priority: Preserve the closed `MS-001.16` lifecycle while keeping the next product milestone inactive until a separate Product Owner decision
+Platform Priority: Preserve the closed `MS-001.17` lifecycle while keeping the next product milestone inactive until a separate Product Owner decision
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY - expected closure changes
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: a168e6a
-Repository HEAD: a168e6a
-Session Start Repository HEAD: 14a434e
-Verification Status: PASS - tests 79 / 79, TypeScript PASS, lint PASS with one existing warning outside scope, build PASS
+Latest Verified Commit: PRE-CLOSURE WORKING TREE
+Repository HEAD: PRE-CLOSURE WORKING TREE
+Session Start Repository HEAD: a168e6a
+Verification Status: PASS - tests 88 / 88, TypeScript PASS, lint PASS with one existing warning outside scope, build PASS
 Blockers: NONE
-Open Risks: accepted lack of idempotency if a Project Brain command write succeeds and the post-write snapshot refresh fails; one non-blocking lint warning remains outside completed work scope
+Open Risks: one non-blocking lint warning remains outside completed work scope
 Repository Changes during diagnosis: NONE
 Session Close Protocol: IN PROGRESS
 Session runtime: CLOSURE PENDING
 Package Consistency: PENDING
-Next Safe Step: Run Session Package Generator after publishing the session-close patch
+Next Safe Step: Complete Session Close Protocol publication, then only run a separate Next Product Milestone Contract Discovery if explicitly authorized

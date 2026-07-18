@@ -2417,6 +2417,72 @@ Run Next Product Milestone Contract Discovery
 
 ---
 
+## MS-001.17 - Project Brain Command Reliability Foundation
+
+**Milestone**
+MS-001.17 - Project Brain Command Reliability Foundation
+
+**Contract Status**
+APPROVED
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Make `createProjectBrainTask` execution unambiguous and retry-safe while keeping Task Engine as the only task write owner.
+
+**One Intention**
+Add durable command identity and an explicit post-write result to the public Project Brain task command without introducing a command bus, rollback, or new storage subsystem.
+
+**Achieved Result**
+* public command object `CreateProjectBrainTaskCommand`
+* explicit result union: `completed` / `completed-with-refresh-failure`
+* durable `commandId` idempotency persisted in the same Task Engine task write
+* safe retry without duplicate task creation
+* explicit `command-identity-conflict` on reused `commandId` with different normalized input
+* Task Engine remains the only task write owner
+* legacy tasks without `commandId` remain compatible
+
+**Implementation Evidence**
+* production files:
+  * `src/lib/project-brain/engine.ts`
+  * `src/lib/task/task.ts`
+* test files:
+  * `src/lib/project-brain/engine.test.ts`
+  * `src/lib/task/task.test.ts`
+* UI call-site follow-up:
+  * `src/app/projects/[id]/tasks/page.tsx`
+* verification:
+  * targeted tests: `PASS - 85 / 85`
+  * full tests: `PASS - 88 / 88`
+  * TypeScript: `PASS`
+  * lint: `PASS - one previously existing warning outside milestone scope`
+  * production build: `PASS`
+  * `git diff --check`: `PASS`
+
+**Blockers**
+NONE
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Status**
+IMPLEMENTED / VERIFIED / PUBLISHED
+
+**Next Safe Step**
+Run Session Close Protocol
+
+---
+
 ## CAP-004 - Architect-Codex Execution Boundary
 
 **Capability**
