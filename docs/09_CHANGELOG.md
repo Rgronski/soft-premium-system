@@ -1284,6 +1284,32 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## CAP-005 - React Component Test Infrastructure Foundation closed
+
+### Date
+
+2026-07-19
+
+### Completed
+
+* Recorded `CAP-005 - React Component Test Infrastructure Foundation` as `COMPLETED / PUBLISHED / CLOSED`.
+* Added `jsdom` and `@testing-library/react` as the only new dev dependencies.
+* Added `vitest.config.ts` with only the `@/*` to `src` alias for Vitest.
+* Added one focused component test file for `src/app/projects/[id]/tasks/page.tsx`.
+* Confirmed Vitest remains the only test runner.
+* Confirmed `jsdom` is enabled per-file only, with no global setup and no global mocks.
+* Confirmed no production files were changed.
+* Recorded focused component tests `4 / 4` as `PASS`.
+* Recorded focused domain tests `85 / 85` as `PASS`.
+* Recorded full tests `92 / 92` as `PASS`.
+* Recorded TypeScript as `PASS`.
+* Recorded lint as `PASS` with one existing warning outside scope.
+* Recorded production build as `PASS`.
+* Recorded the operational note that local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only during dependency installation, without persisting the variable or changing security settings.
+* Recorded that `MS-001.18` may resume only after CAP-005 publication and without automatic activation.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

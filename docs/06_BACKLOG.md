@@ -198,6 +198,26 @@ Completed by `MS-001.17 - Project Brain Command Reliability Foundation`
 
 ---
 
+### React Component Test Infrastructure Foundation
+
+**Description**
+
+Provide the minimal React component test infrastructure needed for focused Vitest coverage of the reference `/projects/[id]/tasks` consumer without changing production code.
+
+**Business Value**
+
+Allows consumer contract verification at the component level while keeping Vitest as the only test runner.
+
+**Priority**
+
+High
+
+**Status**
+
+Completed by `CAP-005 - React Component Test Infrastructure Foundation`
+
+---
+
 ### External Integrations
 
 **Description**

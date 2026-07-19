@@ -210,20 +210,29 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-07-18
-Current Session ID: 013
-Current Chat Title: 013 SPS OS - MS-001.17 Closure
-Next Session ID: 014
-Suggested Next Chat Title: 014 SPS OS - Session Close Protocol
+Date: 2026-07-19
+Current Session ID: 014
+Current Chat Title: 014 SPS OS - CAP-005 Closure
+Next Session ID: 015
+Suggested Next Chat Title: 015 SPS OS - MS-001.18 Resume Decision
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: SESSION CLOSE / PENDING
-Completed Capability Items: CAP-004 - Architect-Codex Execution Boundary; MS-001.17 - Project Brain Command Reliability Foundation; MS-001.16 - Project Brain Command Foundation; MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
+Completed Capability Items: CAP-005 - React Component Test Infrastructure Foundation; CAP-004 - Architect-Codex Execution Boundary; MS-001.17 - Project Brain Command Reliability Foundation; MS-001.16 - Project Brain Command Foundation; MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
 Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-001.17 - Project Brain Command Reliability Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
-Latest Completed Capability Item: CAP-004 - Architect-Codex Execution Boundary
+Latest Completed Capability Item: CAP-005 - React Component Test Infrastructure Foundation
+CAP-005 Contract Status: APPROVED
+CAP-005 Runtime Status: CLOSED
+CAP-005 Implementation Status: COMPLETED / VERIFIED / PUBLISHED
+CAP-005 Technical Verification: PASS - focused component tests 4 / 4, focused domain tests 85 / 85, full tests 92 / 92, TypeScript PASS, lint PASS with one previously existing warning, production build PASS
+CAP-005 Implementation Review: PASS
+CAP-005 Closure Status: CLOSED
+CAP-005 Capability Status: COMPLETED / PUBLISHED / CLOSED
+CAP-005 Blockers: NONE
+CAP-005 Operational Note: local Avast HTTPS interception required one-time NODE_OPTIONS=--use-system-ca only during dependency installation; the variable was removed immediately and no npm or security settings were changed
 MS-001.16 Implementation Commit: 6671e69
 MS-001.16 SSOT Closure Commit: c21fc00
 CAP-004 Implementation Commit: 688df2b
@@ -332,19 +341,20 @@ Implementation Commit: 6671e69
 Implementation Handoff: NOT REQUIRED
 Milestone Closure: COMPLETED / PUBLISHED / CLOSED
 Code Changes in Session: MS-001.17 implementation completed with targeted tests PASS, full tests PASS, TypeScript PASS, lint PASS with one existing warning, and build PASS; MS-001.17 SSOT closure pending commit and push
+Capability Changes in Session: CAP-005 implementation completed with no production code changes; focused component tests PASS, focused domain tests PASS, full tests PASS, TypeScript PASS, lint PASS with one existing warning, and build PASS
 Current Sprint: NONE
-Platform Priority: Preserve the closed `MS-001.17` lifecycle while keeping the next product milestone inactive until a separate Product Owner decision
+Platform Priority: Preserve the closed `MS-001.17` lifecycle, preserve the closed `CAP-005` capability, and keep the next product milestone inactive until a separate Product Owner decision
 Repository Branch: main
 Repository Working Tree State: DIRTY - expected closure changes
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: PRE-CLOSURE WORKING TREE
 Repository HEAD: PRE-CLOSURE WORKING TREE
 Session Start Repository HEAD: a168e6a
-Verification Status: PASS - tests 88 / 88, TypeScript PASS, lint PASS with one existing warning outside scope, build PASS
+Verification Status: PASS - focused component tests 4 / 4, focused domain tests 85 / 85, full tests 92 / 92, TypeScript PASS, lint PASS with one existing warning outside scope, build PASS
 Blockers: NONE
 Open Risks: one non-blocking lint warning remains outside completed work scope
 Repository Changes during diagnosis: NONE
-Session Close Protocol: IN PROGRESS
+Session Close Protocol: COMPLETED
 Session runtime: CLOSURE PENDING
-Package Consistency: PENDING
-Next Safe Step: Complete Session Close Protocol publication, then only run a separate Next Product Milestone Contract Discovery if explicitly authorized
+Package Consistency: PASS
+Next Safe Step: Keep `Current Product Milestone` at `NONE`; resume `MS-001.18` only through a separate explicit Product Owner decision

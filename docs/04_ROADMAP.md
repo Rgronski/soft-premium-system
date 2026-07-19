@@ -2536,6 +2536,76 @@ Run Session Close Protocol
 
 ---
 
+## CAP-005 - React Component Test Infrastructure Foundation
+
+**Capability**
+CAP-005 - React Component Test Infrastructure Foundation
+
+**Contract Status**
+APPROVED
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Establish the smallest React component test infrastructure needed to verify the reference Project Brain command consumer without changing production code.
+
+**One Intention**
+Enable focused Vitest component coverage for `src/app/projects/[id]/tasks/page.tsx` with the smallest approved infrastructure addition.
+
+**Implementation Evidence**
+* changed files:
+  * `package.json`
+  * `package-lock.json`
+  * `vitest.config.ts`
+  * `src/app/projects/[id]/tasks/page.test.tsx`
+  * `docs/04_ROADMAP.md`
+  * `docs/06_BACKLOG.md`
+  * `docs/08_CURRENT_STATE.md`
+  * `docs/09_CHANGELOG.md`
+  * `docs/10_SESSION_STATE.md`
+* achieved result:
+  * Vitest remains the only test runner
+  * `jsdom` is enabled per-file only
+  * `@testing-library/react` enables component rendering
+  * `vitest.config.ts` adds only the `@` to `src` alias
+  * no global setup or global mocks were introduced
+  * no production files were changed
+  * one reference component test covers `src/app/projects/[id]/tasks/page.tsx`
+  * four focused tests confirm the consumer contract
+* verification:
+  * focused component tests: `PASS - 4 / 4`
+  * focused domain tests: `PASS - 85 / 85`
+  * full tests: `PASS - 92 / 92`
+  * `TypeScript`: `PASS`
+  * `lint`: `PASS - one existing warning outside capability scope`
+  * `build`: `PASS`
+  * `git diff --check`: `PASS`
+* operational note:
+  * local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for dependency installation
+  * the environment variable was removed immediately after the install command
+  * `strict-ssl` and system security settings were not changed
+
+**Blockers**
+NONE
+
+**Capability Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Next Safe Step**
+Run Session Close Protocol or resume `MS-001.18` only through a separate authorized decision
+
+---
+
 # Release Criteria
 
 SPS OS 1.0 release progression requires:

@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.16 - Project Brain Command Foundation
+MS-001.17 - Project Brain Command Reliability Foundation
 
 **Next Milestone**
 NONE
@@ -81,7 +81,21 @@ Latest Completed Product Milestone: MS-001.17 - Project Brain Command Reliabilit
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
-Latest Completed Capability: CAP-004 - Architect-Codex Execution Boundary
+Latest Completed Capability: CAP-005 - React Component Test Infrastructure Foundation
+CAP-005 status: COMPLETED / PUBLISHED / CLOSED
+CAP-005 blockers: NONE
+CAP-005 verification: focused component `4 / 4` PASS, focused domain `85 / 85` PASS, full tests `92 / 92` PASS, TypeScript PASS, lint PASS with one existing warning, build PASS.
+CAP-005 achieved the minimal React component test foundation without production code changes.
+Vitest remains the only test runner.
+`jsdom` is enabled per-file only for the reference component test.
+`@testing-library/react` now supports rendering the reference tasks page component in Vitest.
+`vitest.config.ts` adds only the `@/*` alias to `src`.
+No global setup file or global mock layer was introduced.
+The reference component test file is `src/app/projects/[id]/tasks/page.test.tsx`.
+The four focused tests confirm the `createProjectBrainTask` consumer contract for no-write render, `completed`, `completed-with-refresh-failure`, and two explicit user intents.
+MS-001.18 is PAUSED and READY TO RESUME after CAP-005 publication.
+No new product milestone or capability is active.
+Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
 CAP-004 publication commit: `688df2b`
 CAP-004 blockers: NONE
@@ -328,6 +342,9 @@ Next:
 * `Current Product Milestone` is `NONE`
 * `Latest Completed Product Milestone` is `MS-001.17 - Project Brain Command Reliability Foundation`
 * `Next Product Milestone` is `NONE`
+* `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
+* `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
+* `MS-001.18` is `PAUSED / READY TO RESUME`
 * proposed next milestone is `NONE`
 * proposal status is `NONE`
 * current activation is `ACTIVATED`
@@ -402,6 +419,7 @@ Next:
 Next session priorities:
 
 * Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision
+* Keep `MS-001.18` paused until it is explicitly resumed after CAP-005 publication
 * Run a separate Next Product Milestone Contract Discovery only if explicitly authorized
 
 ---
