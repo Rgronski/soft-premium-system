@@ -1310,6 +1310,29 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.18 - Project Brain Command Consumer Foundation closed
+
+### Date
+
+2026-07-19
+
+### Completed
+
+* Recorded `MS-001.18 - Project Brain Command Consumer Foundation` as `COMPLETED / PUBLISHED / CLOSED`.
+* Recorded the approved architectural variant `A`: no extraction, single-consumer contract only.
+* Confirmed the single real application consumer remains `src/app/projects/[id]/tasks/page.tsx`.
+* Confirmed the milestone closed with no production code changes.
+* Confirmed the UI continues to use `createProjectBrainTask` rather than calling the Task Engine write API directly.
+* Recorded the consumer contract: one explicit Add click equals one new intent, each new intent gets a new `commandId`, both `completed` and `completed-with-refresh-failure` mean confirmed success, partial success does not retry the write, and list refresh remains a separate read-only flow.
+* Recorded focused component verification using the existing `4 / 4` tests.
+* Recorded full tests `92 / 92` as `PASS`.
+* Recorded TypeScript as `PASS`.
+* Recorded lint as `PASS` with one existing warning outside scope and no new warnings.
+* Recorded production build as `PASS`.
+* Confirmed no new milestone or capability was activated automatically.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

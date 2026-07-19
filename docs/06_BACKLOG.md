@@ -218,6 +218,26 @@ Completed by `CAP-005 - React Component Test Infrastructure Foundation`
 
 ---
 
+### Project Brain Command Consumer Contract
+
+**Description**
+
+Formalize the smallest justified consumer contract for the public `createProjectBrainTask` command at the single existing application consumer.
+
+**Business Value**
+
+Clarifies retry-safe consumer behavior without expanding architecture or changing the production implementation.
+
+**Priority**
+
+High
+
+**Status**
+
+Completed by `MS-001.18 - Project Brain Command Consumer Foundation`
+
+---
+
 ### External Integrations
 
 **Description**

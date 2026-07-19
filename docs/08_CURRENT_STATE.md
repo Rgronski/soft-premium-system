@@ -93,9 +93,18 @@ Vitest remains the only test runner.
 No global setup file or global mock layer was introduced.
 The reference component test file is `src/app/projects/[id]/tasks/page.test.tsx`.
 The four focused tests confirm the `createProjectBrainTask` consumer contract for no-write render, `completed`, `completed-with-refresh-failure`, and two explicit user intents.
-MS-001.18 is PAUSED and READY TO RESUME after CAP-005 publication.
+MS-001.18 is COMPLETED / PUBLISHED / CLOSED after formalizing the single-consumer contract without production changes.
 No new product milestone or capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
+`src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
+The approved `MS-001.18` variant is `A`: no extraction, single-consumer contract only.
+One explicit Add click represents one new user intent.
+Each new user intent receives a new `commandId`.
+`completed` means confirmed task creation success.
+`completed-with-refresh-failure` also means confirmed task creation success.
+After partial success, the UI does not retry the write path.
+Task-list refresh after command completion is a separate read-only flow.
+The UI uses `createProjectBrainTask` and does not call the Task Engine write API directly.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
 CAP-004 publication commit: `688df2b`
 CAP-004 blockers: NONE
@@ -344,7 +353,7 @@ Next:
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
-* `MS-001.18` is `PAUSED / READY TO RESUME`
+* `MS-001.18` is `COMPLETED / PUBLISHED / CLOSED`
 * proposed next milestone is `NONE`
 * proposal status is `NONE`
 * current activation is `ACTIVATED`
@@ -419,7 +428,6 @@ Next:
 Next session priorities:
 
 * Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision
-* Keep `MS-001.18` paused until it is explicitly resumed after CAP-005 publication
 * Run a separate Next Product Milestone Contract Discovery only if explicitly authorized
 
 ---

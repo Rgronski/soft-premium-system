@@ -2606,6 +2606,69 @@ Run Session Close Protocol or resume `MS-001.18` only through a separate authori
 
 ---
 
+## MS-001.18 - Project Brain Command Consumer Foundation
+
+**Milestone**
+MS-001.18 - Project Brain Command Consumer Foundation
+
+**Contract Status**
+APPROVED
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Formalize the minimal public consumer contract for `createProjectBrainTask` without introducing new consumer abstractions or changing the already working production flow.
+
+**One Intention**
+Resume and close the command consumer milestone using the approved architectural variant `A`: no extraction, single-consumer contract only.
+
+**Implementation Evidence**
+* resumed status:
+  * `MS-001.18` resumed after `CAP-005` removed the focused component test blocker
+* achieved result:
+  * milestone completed with no production code changes
+  * approved variant recorded as `no extraction, single-consumer contract only`
+  * `src/app/projects/[id]/tasks/page.tsx` remains the single reference application consumer
+  * the UI contract remains centered on the public `createProjectBrainTask` command, not direct Task Engine writes
+  * one explicit Add click maps to one new consumer intent
+  * each new intent receives a new `commandId`
+  * `completed` and `completed-with-refresh-failure` both represent confirmed command success
+  * partial success does not trigger a second write attempt
+  * task-list refresh remains a separate read-only flow
+* production changes:
+  * none
+* verification:
+  * focused component tests: `PASS - 4 / 4`
+  * full tests: `PASS - 92 / 92`
+  * `TypeScript`: `PASS`
+  * `lint`: `PASS - one existing warning outside milestone scope`
+  * `build`: `PASS`
+  * `git diff --check`: `PASS`
+
+**Blockers**
+NONE
+
+**Milestone Status**
+RESUMED / COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Status**
+VERIFIED / PUBLISHED / CLOSED
+
+**Next Safe Step**
+Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision
+
+---
+
 # Release Criteria
 
 SPS OS 1.0 release progression requires:
