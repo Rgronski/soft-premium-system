@@ -107,11 +107,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-001.22 - AI Model Server Transport Boundary
+NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.21 - AI Model Boundary Foundation
+MS-001.22 - AI Model Server Transport Boundary
 
 ## Next
 
@@ -2949,7 +2949,7 @@ MS-001.22 - AI Model Server Transport Boundary
 APPROVED
 
 **Runtime Status**
-ACTIVE
+CLOSED
 
 **Owner**
 Product Owner
@@ -3013,7 +3013,7 @@ AUTHORIZED
 AUTHORIZED
 
 **Implementation Status**
-IMPLEMENTED / VERIFIED
+IMPLEMENTED / VERIFIED / PUBLISHED
 
 **Implementation Review**
 PASS
@@ -3022,16 +3022,19 @@ PASS
 NONE
 
 **Publication Status**
-NOT PUBLISHED
+PUBLISHED
+
+**Closure Status**
+CLOSED
 
 **Milestone Status**
-ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION
+COMPLETED / PUBLISHED / CLOSED
 
 **Blockers**
 NONE
 
 **Next Safe Step**
-Prepare publication synchronization without activating a next milestone
+Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision
 
 ---
 

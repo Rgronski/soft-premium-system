@@ -1252,6 +1252,22 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.22 - AI Model Server Transport Boundary published and closed
+
+### Date
+
+2026-07-20
+
+### Completed
+
+* Recorded `MS-001.22` implementation as published.
+* Closed the milestone.
+* Set `Current Product Milestone` to `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.22 - AI Model Server Transport Boundary`.
+* Confirmed no next product milestone was activated.
+
+---
+
 ## MS-001.22 - AI Model Server Transport Boundary implementation completed and verified
 
 ### Date

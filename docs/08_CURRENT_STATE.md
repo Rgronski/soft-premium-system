@@ -76,8 +76,8 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: MS-001.22 - AI Model Server Transport Boundary
-Latest Completed Product Milestone: MS-001.21 - AI Model Boundary Foundation
+Current Product Milestone: NONE
+Latest Completed Product Milestone: MS-001.22 - AI Model Server Transport Boundary
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -176,17 +176,17 @@ MS-001.21 maps provider statuses and provider exceptions explicitly.
 MS-001.21 keeps the local fake provider only in tests.
 MS-001.21 verification: focused AI model tests `10 / 10` PASS, focused Project Brain tests `91 / 91` PASS, full tests `117 / 117` PASS, TypeScript `PASS` via `npx tsc --noEmit`, lint `PASS` with 0 errors and 1 existing warning outside milestone scope, production build `PASS`.
 MS-001.22 contract status: APPROVED.
-MS-001.22 runtime status: ACTIVE.
+MS-001.22 runtime status: CLOSED.
 MS-001.22 activation status: AUTHORIZED.
-MS-001.22 implementation status: IMPLEMENTED / VERIFIED.
+MS-001.22 implementation status: IMPLEMENTED / VERIFIED / PUBLISHED.
 MS-001.22 DoR status: PASS.
-MS-001.22 is the active transport-only milestone.
+MS-001.22 closure status: CLOSED.
 MS-001.22 accepted route: `POST /api/projects/[id]/ai/generate`.
 MS-001.22 reuses `createGenerateAiProjectResponse`.
 MS-001.22 implementation review: PASS.
 MS-001.22 contract deviations: NONE.
-MS-001.22 publication status: NOT PUBLISHED.
-MS-001.22 milestone status: ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION.
+MS-001.22 publication status: PUBLISHED.
+MS-001.22 milestone status: COMPLETED / PUBLISHED / CLOSED.
 MS-001.22 implementation created exactly `src/lib/ai-model/server.ts`, `src/lib/ai-model/server.test.ts`, and `src/app/api/projects/[id]/ai/generate/route.ts`.
 MS-001.22 uses exactly one POST Route Handler.
 MS-001.22 reads `projectId` from awaited route params and `instruction` from JSON body.
@@ -196,6 +196,7 @@ MS-001.22 preserves SPS status in response JSON with explicit HTTP mapping.
 MS-001.22 production composition returns `provider-unavailable` with no real provider, SDK, secrets, external network access, or write behavior.
 MS-001.22 route.ts is delegation only.
 MS-001.22 verification: focused server transport tests `13 / 13` PASS, focused AI model boundary tests `10 / 10` PASS, focused Project Brain tests `91 / 91` PASS, full tests `130 / 130` PASS, TypeScript `PASS` via `npx tsc --noEmit`, lint `PASS` with 0 errors and 1 existing warning outside milestone scope, production build `PASS`, implementation review `PASS`, contract deviations `NONE`.
+MS-001.22 publication evidence: commit `4e9a600`; branch `main`; origin/main synchronization after publication `0 / 0`; working tree after publication `CLEAN`; published files `src/lib/ai-model/server.ts`, `src/lib/ai-model/server.test.ts`, `src/app/api/projects/[id]/ai/generate/route.ts`, `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
 CAP-004 publication commit: `688df2b`
 CAP-004 blockers: NONE
@@ -437,8 +438,8 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `MS-001.22 - AI Model Server Transport Boundary`
-* `Latest Completed Product Milestone` is `MS-001.21 - AI Model Boundary Foundation`
+* `Current Product Milestone` is `NONE`
+* `Latest Completed Product Milestone` is `MS-001.22 - AI Model Server Transport Boundary`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
@@ -462,14 +463,15 @@ Next:
 * `MS-001.21` lint is `PASS - 0 errors, 1 existing warning outside milestone scope`
 * `MS-001.21` production build is `PASS`
 * `MS-001.22` contract status is `APPROVED`
-* `MS-001.22` runtime status is `ACTIVE`
+* `MS-001.22` runtime status is `CLOSED`
 * `MS-001.22` activation status is `AUTHORIZED`
-* `MS-001.22` implementation status is `IMPLEMENTED / VERIFIED`
+* `MS-001.22` implementation status is `IMPLEMENTED / VERIFIED / PUBLISHED`
 * `MS-001.22` DoR status is `PASS`
 * `MS-001.22` implementation review is `PASS`
 * `MS-001.22` contract deviations are `NONE`
-* `MS-001.22` publication status is `NOT PUBLISHED`
-* `MS-001.22` milestone status is `ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION`
+* `MS-001.22` publication status is `PUBLISHED`
+* `MS-001.22` closure status is `CLOSED`
+* `MS-001.22` milestone status is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.22` is limited to one transport-only Route Handler and no real provider
 * `MS-001.14` contract status is `APPROVED`
 * `MS-001.14` runtime status is `CLOSED`
