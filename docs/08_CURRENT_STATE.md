@@ -149,7 +149,12 @@ The UI uses no `localStorage`.
 The UI uses no `fetch`.
 The UI uses no network or model access.
 The Project Brain public contract remains unchanged by `MS-001.20`.
-MS-001.21 is DISCOVERED / INACTIVE / NOT AUTHORIZED.
+MS-001.21 contract status: APPROVED.
+MS-001.21 runtime status: INACTIVE.
+MS-001.21 activation status: NOT AUTHORIZED.
+MS-001.21 implementation status: NOT STARTED.
+MS-001.21 DoR status: PASS.
+MS-001.21 remains discovered and inactive.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
 CAP-004 publication commit: `688df2b`
 CAP-004 blockers: NONE

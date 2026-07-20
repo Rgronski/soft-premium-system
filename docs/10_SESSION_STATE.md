@@ -279,26 +279,14 @@ MS-001.20 Closure Status: CLOSED
 MS-001.20 Milestone Status: COMPLETED / PUBLISHED / CLOSED
 MS-001.20 Blockers: NONE
 MS-001.21 Status: DISCOVERED / INACTIVE / NOT AUTHORIZED
-Current Milestone Contract Status: APPROVED
-Current Milestone DoR Review: PASS
-Current Milestone Activation Status: FORMALIZED POST-PUBLICATION
-Current Milestone Activation Decision: AUTHORIZED
-Current Milestone Runtime Status: CLOSED
-Current Milestone Status: COMPLETED / PUBLISHED / CLOSED
-Current Milestone Implementation Status: COMPLETED / VERIFIED / PUBLISHED
-Current Milestone Product Owner Acceptance Review: PASS
-Current Milestone Technical Verification: PASS - focused AI page tests, focused Project Brain tests, full tests, TypeScript, lint, and production build
-Current Milestone Implementation Review: PASS
-Current Milestone Original Implementation Commit: 9b1e8e4
-Current Milestone Single-Read Fix Commit: NONE
-Current Milestone Single-Read Fix Status: NONE
-Current Milestone Single-Read Contract Check: NONE
-Current Milestone Post-Fix Focused Tests: PASS - 5 / 5 AI page tests and 91 / 91 Project Brain tests
-Current Milestone Post-Fix Full Tests: PASS - 107 / 107 tests
-Current Milestone Post-Fix Lint: PASS - one previously accepted warning
-Current Milestone Post-Fix Build: PASS
-Current Milestone Post-Fix Diff Check: PASS
-Current Milestone Milestone Closure Review: PASS
+MS-001.21 Contract Status: APPROVED
+MS-001.21 Runtime Status: INACTIVE
+MS-001.21 Activation Status: NOT AUTHORIZED
+MS-001.21 Activation Decision: NOT AUTHORIZED
+MS-001.21 Implementation Status: NOT STARTED
+MS-001.21 DoR Status: PASS
+MS-001.21 Blockers: NONE
+MS-001.21 Next Safe Step: Formal Definition of Ready Review only; implementation remains unauthorized
 MS-001.13 Contract Status: APPROVED
 MS-001.13 DoR Review: PASS
 MS-001.13 Activation Status: ACTIVATED

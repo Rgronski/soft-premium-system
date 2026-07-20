@@ -2810,6 +2810,80 @@ Keep `Current Product Milestone` at `NONE` until a separate Product Owner decisi
 
 ---
 
+## MS-001.21 - AI Model Boundary Foundation
+
+**Milestone**
+MS-001.21 - AI Model Boundary Foundation
+
+**Contract Status**
+APPROVED
+
+**Runtime Status**
+INACTIVE
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Establish the first controlled application boundary between SPS OS and an AI model, using only the published read-only AI project context supplied through Project Brain.
+
+**One Intention**
+Introduce one minimal read-only application contract that obtains canonical project context through `getAiProjectContext(projectId)`, transforms that context into a controlled model request, invokes a model through an internal provider boundary, and returns one explicit textual result or controlled failure.
+
+**Implementation Boundary**
+* one AI application service or use-case boundary
+* explicit input and result types
+* one internal provider interface
+* one deterministic test provider only
+* no production provider integration
+* no change to `getAiProjectContext(projectId)`
+* no UI activation
+* no network requirement
+* no write behavior
+
+**Out of Scope**
+* production model API integration
+* provider SDK installation
+* API keys or secret configuration
+* HTTP endpoints
+* streaming responses
+* chat UI
+* conversation history
+* persistence
+* agents
+* tool calling
+* project mutations
+* unrelated refactor
+
+**Product Owner Approval**
+APPROVED
+
+**Definition of Ready Review**
+PASS
+
+**Activation Status**
+NOT AUTHORIZED
+
+**Activation Decision**
+NOT AUTHORIZED
+
+**Implementation Status**
+NOT STARTED
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run the formal `MS-001.21 Definition of Ready Review` without activating implementation
+
+---
+
 # Release Criteria
 
 SPS OS 1.0 release progression requires:
