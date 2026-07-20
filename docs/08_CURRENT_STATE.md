@@ -152,9 +152,24 @@ The Project Brain public contract remains unchanged by `MS-001.20`.
 MS-001.21 contract status: APPROVED.
 MS-001.21 runtime status: ACTIVE.
 MS-001.21 activation status: AUTHORIZED.
-MS-001.21 implementation status: NOT STARTED.
+MS-001.21 implementation status: IMPLEMENTED / VERIFIED.
 MS-001.21 DoR status: PASS.
 MS-001.21 is now the active current product milestone.
+MS-001.21 implementation review: PASS.
+MS-001.21 contract deviations: NONE.
+MS-001.21 publication status: NOT PUBLISHED.
+MS-001.21 milestone status: ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION.
+MS-001.21 created:
+* `src/lib/ai-model/types.ts`
+* `src/lib/ai-model/engine.ts`
+* `src/lib/ai-model/engine.test.ts`
+MS-001.21 accepts `projectId` and `instruction`.
+MS-001.21 reads context only through `getAiProjectContext(projectId)`.
+MS-001.21 injects the provider explicitly with no global mutable state.
+MS-001.21 introduces no storage bypass, network access, production provider, or write behavior.
+MS-001.21 maps provider statuses and provider exceptions explicitly.
+MS-001.21 keeps the local fake provider only in tests.
+MS-001.21 verification: focused AI model tests `10 / 10` PASS, focused Project Brain tests `91 / 91` PASS, full tests `117 / 117` PASS, TypeScript `PASS` via `npx tsc --noEmit`, lint `PASS` with 0 errors and 1 existing warning outside milestone scope, production build `PASS`.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
 CAP-004 publication commit: `688df2b`
 CAP-004 blockers: NONE
@@ -407,7 +422,18 @@ Next:
 * proposed next milestone is `NONE`
 * proposal status is `NONE`
 * current activation is `ACTIVATED`
-* current implementation is `COMPLETED`
+* current implementation is `IMPLEMENTED / VERIFIED - PENDING PUBLICATION`
+* `MS-001.21` implementation status is `IMPLEMENTED / VERIFIED`
+* `MS-001.21` implementation review is `PASS`
+* `MS-001.21` contract deviations are `NONE`
+* `MS-001.21` publication status is `NOT PUBLISHED`
+* `MS-001.21` milestone status is `ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION`
+* `MS-001.21` focused AI model tests are `PASS - 10 / 10`
+* `MS-001.21` focused Project Brain tests are `PASS - 91 / 91`
+* `MS-001.21` full tests are `PASS - 117 / 117`
+* `MS-001.21` TypeScript is `PASS - npx tsc --noEmit`
+* `MS-001.21` lint is `PASS - 0 errors, 1 existing warning outside milestone scope`
+* `MS-001.21` production build is `PASS`
 * `MS-001.14` contract status is `APPROVED`
 * `MS-001.14` runtime status is `CLOSED`
 * `MS-001.14` implementation status is `COMPLETED`
@@ -477,7 +503,7 @@ Next:
 Next session priorities:
 
 * Keep `MS-001.21 - AI Model Boundary Foundation` as the active current product milestone
-* Run `MS-001.21` implementation diagnosis only within the approved contract boundary
+* Prepare `MS-001.21` publication synchronization without changing implementation scope
 
 ---
 
