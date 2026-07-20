@@ -218,9 +218,9 @@ Suggested Next Chat Title: 016 SPS OS - Next Product Milestone Contract Discover
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: SESSION CLOSE / PENDING
-Completed Capability Items: CAP-005 - React Component Test Infrastructure Foundation; CAP-004 - Architect-Codex Execution Boundary; MS-001.19 - AI Workspace Project Brain Read Foundation; MS-001.18 - Project Brain Command Consumer Foundation; MS-001.17 - Project Brain Command Reliability Foundation; MS-001.16 - Project Brain Command Foundation; MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
+Completed Capability Items: CAP-005 - React Component Test Infrastructure Foundation; CAP-004 - Architect-Codex Execution Boundary; MS-001.20 - AI Workspace Read-Only UI Consumer Foundation; MS-001.19 - AI Workspace Project Brain Read Foundation; MS-001.18 - Project Brain Command Consumer Foundation; MS-001.17 - Project Brain Command Reliability Foundation; MS-001.16 - Project Brain Command Foundation; MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.19 - AI Workspace Project Brain Read Foundation
+Latest Completed Product Milestone: MS-001.20 - AI Workspace Read-Only UI Consumer Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Latest Completed Capability Item: CAP-005 - React Component Test Infrastructure Foundation
@@ -270,6 +270,14 @@ MS-001.19 Implementation Review: PASS
 MS-001.19 Closure Status: CLOSED
 MS-001.19 Milestone Status: COMPLETED / PUBLISHED / CLOSED
 MS-001.19 Blockers: NONE
+MS-001.20 Contract Status: APPROVED
+MS-001.20 Runtime Status: CLOSED
+MS-001.20 Implementation Status: COMPLETED / VERIFIED / PUBLISHED
+MS-001.20 Technical Verification: PASS - focused AI page tests 5 / 5, focused Project Brain tests 91 / 91, full tests 107 / 107, TypeScript PASS, lint PASS with one previously existing warning and no new warnings, production build PASS
+MS-001.20 Implementation Review: PASS
+MS-001.20 Closure Status: CLOSED
+MS-001.20 Milestone Status: COMPLETED / PUBLISHED / CLOSED
+MS-001.20 Blockers: NONE
 Current Milestone Contract Status: APPROVED
 Current Milestone DoR Review: PASS
 Current Milestone Activation Status: FORMALIZED POST-PUBLICATION
@@ -278,14 +286,14 @@ Current Milestone Runtime Status: CLOSED
 Current Milestone Status: COMPLETED / PUBLISHED / CLOSED
 Current Milestone Implementation Status: COMPLETED / VERIFIED / PUBLISHED
 Current Milestone Product Owner Acceptance Review: PASS
-Current Milestone Technical Verification: PASS - focused Project Brain tests, full tests, TypeScript, lint, and production build
+Current Milestone Technical Verification: PASS - focused AI page tests, focused Project Brain tests, full tests, TypeScript, lint, and production build
 Current Milestone Implementation Review: PASS
 Current Milestone Original Implementation Commit: PENDING CLOSURE COMMIT
 Current Milestone Single-Read Fix Commit: NONE
 Current Milestone Single-Read Fix Status: NONE
 Current Milestone Single-Read Contract Check: NONE
-Current Milestone Post-Fix Focused Tests: PASS - 91 / 91 tests
-Current Milestone Post-Fix Full Tests: PASS - 102 / 102 tests
+Current Milestone Post-Fix Focused Tests: PASS - 5 / 5 AI page tests and 91 / 91 Project Brain tests
+Current Milestone Post-Fix Full Tests: PASS - 107 / 107 tests
 Current Milestone Post-Fix Lint: PASS - one previously accepted warning
 Current Milestone Post-Fix Build: PASS
 Current Milestone Post-Fix Diff Check: PENDING DOCUMENTATION PATCH VERIFICATION
@@ -356,17 +364,17 @@ Implementation Status: COMPLETED / PUBLISHED / CLOSED
 Implementation Commit: 6671e69
 Implementation Handoff: NOT REQUIRED
 Milestone Closure: COMPLETED / PUBLISHED / CLOSED
-Code Changes in Session: MS-001.19 implemented a new read-only AI project context boundary in Project Brain with `AiProjectContext`, `AiProjectContextResult`, and `getAiProjectContext(projectId)`; no UI, storage, dependency, or model integration changes
+Code Changes in Session: MS-001.20 implemented the first real read-only AI Workspace UI consumer at `/projects/[id]/ai` with one sidebar link, explicit inline states, and no write, storage, network, or model behavior
 Capability Changes in Session: NONE
 Current Sprint: NONE
-Platform Priority: Preserve the closed `MS-001.19` lifecycle, preserve the closed `CAP-005` capability, and keep the next product milestone inactive until a separate Product Owner decision
+Platform Priority: Preserve the closed `MS-001.20` lifecycle, preserve the closed `CAP-005` capability, and keep the next product milestone inactive until a separate Product Owner decision
 Repository Branch: main
 Repository Working Tree State: DIRTY - expected implementation, tests and documentation closure changes
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: PRE-CLOSURE WORKING TREE
 Repository HEAD: PRE-CLOSURE WORKING TREE
-Session Start Repository HEAD: fc14a5e
-Verification Status: PASS - focused Project Brain tests 91 / 91, full tests 102 / 102, TypeScript PASS, lint PASS with one existing warning outside scope and no new warnings, build PASS
+Session Start Repository HEAD: c43f4c4
+Verification Status: PASS - focused AI page tests 5 / 5, focused Project Brain tests 91 / 91, full tests 107 / 107, TypeScript PASS, lint PASS with one existing warning outside scope and no new warnings, build PASS
 Blockers: NONE
 Open Risks: one non-blocking lint warning remains outside completed work scope
 Repository Changes during diagnosis: NONE

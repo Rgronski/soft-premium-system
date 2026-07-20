@@ -2737,6 +2737,78 @@ Keep `Current Product Milestone` at `NONE` until a separate Product Owner decisi
 
 ---
 
+## MS-001.20 - AI Workspace Read-Only UI Consumer Foundation
+
+**Milestone**
+MS-001.20 - AI Workspace Read-Only UI Consumer Foundation
+
+**Contract Status**
+APPROVED
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Establish the first real application UI consumer of the published read-only AI project context without introducing model integration, network access, storage access, or write behavior.
+
+**One Intention**
+Publish one minimal project-scoped AI Workspace page that consumes `getAiProjectContext(projectId)` and renders explicit read-only result states.
+
+**Implementation Evidence**
+* changed files:
+  * `src/app/projects/[id]/ai/page.tsx`
+  * `src/app/projects/[id]/ai/page.test.tsx`
+  * `src/app/projects/[id]/layout.tsx`
+  * `docs/04_ROADMAP.md`
+  * `docs/06_BACKLOG.md`
+  * `docs/08_CURRENT_STATE.md`
+  * `docs/09_CHANGELOG.md`
+  * `docs/10_SESSION_STATE.md`
+* achieved result:
+  * milestone established the first real read-only AI Workspace UI consumer
+  * route `/projects/[id]/ai` was added
+  * the route is implemented as a Client Component
+  * `projectId` comes from `useParams<{ id: string }>()`
+  * the page consumes only `getAiProjectContext(projectId)`
+  * the UI renders explicit inline states for `available`, empty tasks, empty knowledge, `project-not-found`, and `unavailable`
+  * knowledge entry content is visible
+  * one project-scoped `AI Workspace` link was added to the existing project sidebar
+  * no model integration was added
+  * no network access was added
+  * no storage access was added in the consumer
+  * no write behavior was added
+* verification:
+  * focused AI page tests: `PASS - 5 / 5`
+  * focused Project Brain tests: `PASS - 91 / 91`
+  * full tests: `PASS - 107 / 107`
+  * `TypeScript`: `PASS`
+  * `lint`: `PASS - one existing warning outside milestone scope`
+  * `build`: `PASS`
+  * `git diff --check`: `PASS`
+
+**Blockers**
+NONE
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Status**
+IMPLEMENTED / VERIFIED / PUBLISHED
+
+**Next Safe Step**
+Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision
+
+---
+
 # Release Criteria
 
 SPS OS 1.0 release progression requires:

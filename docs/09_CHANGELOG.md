@@ -1358,6 +1358,32 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.20 - AI Workspace Read-Only UI Consumer Foundation closed
+
+### Date
+
+2026-07-20
+
+### Completed
+
+* Recorded `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation` as `COMPLETED / PUBLISHED / CLOSED`.
+* Added the first real read-only AI Workspace UI consumer at `/projects/[id]/ai`.
+* Confirmed the page is a Client Component and receives `projectId` from `useParams<{ id: string }>()`.
+* Confirmed the page consumes only `getAiProjectContext(projectId)`.
+* Recorded explicit UI states for `available`, empty tasks, empty knowledge, `project-not-found`, and `unavailable`.
+* Confirmed knowledge entry content is visible.
+* Added one `AI Workspace` link to the existing project sidebar.
+* Recorded focused AI page tests `5 / 5` as `PASS`.
+* Recorded focused Project Brain tests `91 / 91` as `PASS`.
+* Recorded full tests `107 / 107` as `PASS`.
+* Recorded TypeScript as `PASS`.
+* Recorded lint as `PASS` with one existing warning outside scope.
+* Recorded production build as `PASS`.
+* Recorded that the implementation changed exactly `2` production files and `1` test file.
+* Confirmed no dependency, configuration, storage, or model changes were introduced.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

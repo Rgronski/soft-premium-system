@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.19 - AI Workspace Project Brain Read Foundation
+MS-001.20 - AI Workspace Read-Only UI Consumer Foundation
 
 **Next Milestone**
 NONE
@@ -131,6 +131,24 @@ The AI read boundary remains strictly read-only:
 * no localStorage
 * no model or network access
 No AI UI, routing, storage, dependency, or model integration changes were introduced by `MS-001.19`.
+MS-001.20 is COMPLETED / PUBLISHED / CLOSED after establishing the first real read-only AI Workspace UI consumer.
+The AI Workspace UI route is `/projects/[id]/ai`.
+The page is a Client Component.
+The page obtains `projectId` through `useParams<{ id: string }>()`.
+`getAiProjectContext(projectId)` is the only public read boundary consumed by the page.
+The UI renders explicit states for:
+* `available`
+* empty tasks
+* empty knowledge
+* `project-not-found`
+* `unavailable`
+Knowledge entry content is visible in the UI.
+One `AI Workspace` link exists in the project sidebar.
+The UI exposes no write controls.
+The UI uses no `localStorage`.
+The UI uses no `fetch`.
+The UI uses no network or model access.
+The Project Brain public contract remains unchanged by `MS-001.20`.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
 CAP-004 publication commit: `688df2b`
 CAP-004 blockers: NONE
@@ -375,12 +393,13 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.19 - AI Workspace Project Brain Read Foundation`
+* `Latest Completed Product Milestone` is `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.18` is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.19` is `COMPLETED / PUBLISHED / CLOSED`
+* `MS-001.20` is `COMPLETED / PUBLISHED / CLOSED`
 * proposed next milestone is `NONE`
 * proposal status is `NONE`
 * current activation is `ACTIVATED`

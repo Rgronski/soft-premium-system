@@ -274,7 +274,7 @@ High
 
 **Status**
 
-Proposed
+Completed by `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation`
 
 ---
 
