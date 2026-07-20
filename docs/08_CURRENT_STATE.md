@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.20 - AI Workspace Read-Only UI Consumer Foundation
+MS-001.22 - AI Model Server Transport Boundary
 
 **Next Milestone**
 NONE

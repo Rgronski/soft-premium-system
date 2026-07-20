@@ -211,13 +211,14 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-07-20
-Current Session ID: 013
-Current Chat Title: 013 SPS OS - SESSION CLOSE
-Next Session ID: 014
-Suggested Next Chat Title: 014 SPS OS - Next Product Milestone Contract Discovery
+Current Session ID: 014
+Previous Session ID: 013
+Current Chat Title: UNKNOWN
+Next Session ID: 015
+Suggested Next Chat Title: UNKNOWN
 Active Capability: NONE
 Active Work Item: NONE
-Current Mode: SESSION CLOSE / COMPLETE
+Current Mode: PRE-CLOSE SSOT CONSISTENCY FIX
 Completed Capability Items: CAP-005 - React Component Test Infrastructure Foundation; CAP-004 - Architect-Codex Execution Boundary; MS-001.20 - AI Workspace Read-Only UI Consumer Foundation; MS-001.19 - AI Workspace Project Brain Read Foundation; MS-001.18 - Project Brain Command Consumer Foundation; MS-001.17 - Project Brain Command Reliability Foundation; MS-001.16 - Project Brain Command Foundation; MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
 Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-001.22 - AI Model Server Transport Boundary
@@ -386,14 +387,17 @@ Platform Priority: Preserve the closed `MS-001.20` lifecycle, preserve the close
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 9b1e8e4
-Repository HEAD: 9da1d82
-Session Start Repository HEAD: c43f4c4
-Verification Status: PASS - focused AI page tests 5 / 5, focused Project Brain tests 91 / 91, full tests 107 / 107, TypeScript PASS, lint PASS with one existing warning outside scope and no new warnings, build PASS
+Latest Verified Commit: 3c982d4 - docs: close MS-001.22
+Repository HEAD: 3c982d4
+Session Start Repository HEAD: 3c982d4
+Verification Status: PASS - MS-001.22 remains COMPLETED / PUBLISHED / CLOSED with published verification evidence recorded in SSOT
 Blockers: NONE
 Open Risks: one non-blocking lint warning remains outside completed work scope
 Repository Changes during diagnosis: NONE
-Session Close Protocol: PASS
-Session runtime: CLOSED
-Package Consistency: PASS
-Next Safe Step: Open session 014, attach the fresh sps-session.zip package, and run SPS OS - START
+Session Close Protocol: PENDING
+Session Runtime: ACTIVE
+Working Tree before correction: CLEAN
+origin/main synchronization: 0 / 0
+Latest Verified / Published Commit: 3c982d4 - docs: close MS-001.22
+Package Consistency: NOT APPLICABLE
+Next Safe Step: Re-run SPS OS - KONIEC after this SSOT consistency fix is reviewed and accepted
