@@ -76,7 +76,7 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: MS-001.21 - AI Model Boundary Foundation
+Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-001.20 - AI Workspace Read-Only UI Consumer Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
@@ -150,15 +150,20 @@ The UI uses no `fetch`.
 The UI uses no network or model access.
 The Project Brain public contract remains unchanged by `MS-001.20`.
 MS-001.21 contract status: APPROVED.
-MS-001.21 runtime status: ACTIVE.
+MS-001.21 runtime status: CLOSED.
 MS-001.21 activation status: AUTHORIZED.
-MS-001.21 implementation status: IMPLEMENTED / VERIFIED.
+MS-001.21 implementation status: IMPLEMENTED / VERIFIED / PUBLISHED.
 MS-001.21 DoR status: PASS.
-MS-001.21 is now the active current product milestone.
+MS-001.21 is completed, published, and closed.
 MS-001.21 implementation review: PASS.
 MS-001.21 contract deviations: NONE.
-MS-001.21 publication status: NOT PUBLISHED.
-MS-001.21 milestone status: ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION.
+MS-001.21 publication status: PUBLISHED.
+MS-001.21 closure status: CLOSED.
+MS-001.21 milestone status: COMPLETED / PUBLISHED / CLOSED.
+MS-001.21 publication commit: `345b835`.
+MS-001.21 branch: `main`.
+MS-001.21 origin/main synchronization after publication: `0 / 0`.
+MS-001.21 working tree after publication: `CLEAN`.
 MS-001.21 created:
 * `src/lib/ai-model/types.ts`
 * `src/lib/ai-model/engine.ts`
@@ -411,7 +416,7 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `MS-001.21 - AI Model Boundary Foundation`
+* `Current Product Milestone` is `NONE`
 * `Latest Completed Product Milestone` is `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
@@ -423,11 +428,12 @@ Next:
 * proposal status is `NONE`
 * current activation is `ACTIVATED`
 * current implementation is `IMPLEMENTED / VERIFIED - PENDING PUBLICATION`
-* `MS-001.21` implementation status is `IMPLEMENTED / VERIFIED`
+* `MS-001.21` implementation status is `IMPLEMENTED / VERIFIED / PUBLISHED`
 * `MS-001.21` implementation review is `PASS`
 * `MS-001.21` contract deviations are `NONE`
-* `MS-001.21` publication status is `NOT PUBLISHED`
-* `MS-001.21` milestone status is `ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION`
+* `MS-001.21` publication status is `PUBLISHED`
+* `MS-001.21` closure status is `CLOSED`
+* `MS-001.21` milestone status is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.21` focused AI model tests are `PASS - 10 / 10`
 * `MS-001.21` focused Project Brain tests are `PASS - 91 / 91`
 * `MS-001.21` full tests are `PASS - 117 / 117`
@@ -502,8 +508,8 @@ Next:
 
 Next session priorities:
 
-* Keep `MS-001.21 - AI Model Boundary Foundation` as the active current product milestone
-* Prepare `MS-001.21` publication synchronization without changing implementation scope
+* Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision
+* Run a separate Next Product Milestone Contract Discovery only if explicitly authorized
 
 ---
 

@@ -219,7 +219,7 @@ Active Capability: NONE
 Active Work Item: NONE
 Current Mode: SESSION CLOSE / COMPLETE
 Completed Capability Items: CAP-005 - React Component Test Infrastructure Foundation; CAP-004 - Architect-Codex Execution Boundary; MS-001.20 - AI Workspace Read-Only UI Consumer Foundation; MS-001.19 - AI Workspace Project Brain Read Foundation; MS-001.18 - Project Brain Command Consumer Foundation; MS-001.17 - Project Brain Command Reliability Foundation; MS-001.16 - Project Brain Command Foundation; MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
-Current Product Milestone: MS-001.21 - AI Model Boundary Foundation
+Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-001.20 - AI Workspace Read-Only UI Consumer Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
@@ -278,21 +278,24 @@ MS-001.20 Implementation Review: PASS
 MS-001.20 Closure Status: CLOSED
 MS-001.20 Milestone Status: COMPLETED / PUBLISHED / CLOSED
 MS-001.20 Blockers: NONE
-MS-001.21 Status: ACTIVE / IMPLEMENTED / VERIFIED / PENDING PUBLICATION
+MS-001.21 Status: COMPLETED / PUBLISHED / CLOSED
 MS-001.21 Contract Status: APPROVED
-MS-001.21 Runtime Status: ACTIVE
+MS-001.21 Runtime Status: CLOSED
 MS-001.21 Activation Status: AUTHORIZED
 MS-001.21 Activation Decision: AUTHORIZED
-MS-001.21 Implementation Status: IMPLEMENTED / VERIFIED
+MS-001.21 Implementation Status: IMPLEMENTED / VERIFIED / PUBLISHED
 MS-001.21 DoR Status: PASS
 MS-001.21 Technical Verification: PASS - focused AI model tests 10 / 10, focused Project Brain tests 91 / 91, full tests 117 / 117, TypeScript PASS via npx tsc --noEmit, lint PASS with 0 errors and 1 existing warning outside milestone scope, production build PASS
 MS-001.21 Implementation Review: PASS
 MS-001.21 Contract Deviations: NONE
-MS-001.21 Publication Status: NOT PUBLISHED
-MS-001.21 Milestone Status: ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION
+MS-001.21 Publication Status: PUBLISHED
+MS-001.21 Publication Commit: 345b835
+MS-001.21 Closure Status: CLOSED
+MS-001.21 Milestone Status: COMPLETED / PUBLISHED / CLOSED
 MS-001.21 Implementation Evidence: created src/lib/ai-model/types.ts, src/lib/ai-model/engine.ts, and src/lib/ai-model/engine.test.ts; boundary accepts projectId and instruction; context reads only through getAiProjectContext(projectId); provider is injected explicitly; no global mutable state, storage bypass, network access, production provider, or write behavior; provider statuses and provider exceptions are mapped explicitly; local fake provider exists only in tests
+MS-001.21 Publication Evidence: branch main; origin/main synchronization after publication 0 / 0; working tree after publication CLEAN; published files src/lib/ai-model/types.ts, src/lib/ai-model/engine.ts, src/lib/ai-model/engine.test.ts, docs/04_ROADMAP.md, docs/08_CURRENT_STATE.md, docs/09_CHANGELOG.md, docs/10_SESSION_STATE.md
 MS-001.21 Blockers: NONE
-MS-001.21 Next Safe Step: Prepare publication synchronization without changing implementation scope
+MS-001.21 Next Safe Step: Keep Current Product Milestone at NONE until a separate Product Owner decision
 MS-001.13 Contract Status: APPROVED
 MS-001.13 DoR Review: PASS
 MS-001.13 Activation Status: ACTIVATED
