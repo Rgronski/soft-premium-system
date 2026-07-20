@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.16 - Project Brain Command Foundation
+MS-001.20 - AI Workspace Read-Only UI Consumer Foundation
 
 ## Next
 
@@ -124,8 +124,9 @@ NONE
 * `CAP-003.1` - Project Domain Contract completed with `docs/13_PROJECT_CAPABILITY.md`
 * `CAP-003.2` - Project Domain Model completed with `docs/13_PROJECT_CAPABILITY.md`
 * `CAP-004` - Architect-Codex Execution Boundary completed with process execution boundaries and risk-based quality review rules
+* `CAP-005` - React Component Test Infrastructure Foundation completed with focused React component test infrastructure and no production code changes
 * Active Capability: `NONE`
-* Latest Completed Capability: `CAP-004 - Architect-Codex Execution Boundary`
+* Latest Completed Capability: `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-003` has no active work item
 * This documentation foundation does not change the next product milestone order
 

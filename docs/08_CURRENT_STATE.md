@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.17 - Project Brain Command Reliability Foundation
+Latest Completed Product Milestone: MS-001.20 - AI Workspace Read-Only UI Consumer Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -149,6 +149,7 @@ The UI uses no `localStorage`.
 The UI uses no `fetch`.
 The UI uses no network or model access.
 The Project Brain public contract remains unchanged by `MS-001.20`.
+MS-001.21 is DISCOVERED / INACTIVE / NOT AUTHORIZED.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
 CAP-004 publication commit: `688df2b`
 CAP-004 blockers: NONE
@@ -264,9 +265,9 @@ No workflow type changes.
 No write API.
 No writes.
 main contains the published MS-001.16 product baseline and the published CAP-004 process baseline.
-main HEAD: 688df2b.
+main HEAD: 7069670.
 Verified branch: main.
-Latest verified commit: 688df2b.
+Latest verified commit: 7069670.
 Repository working tree: CLEAN.
 Ahead / behind: 0 / 0.
 install PASS.
@@ -274,8 +275,8 @@ lint PASS with one previously accepted warning in `src/app/projects/[id]/tasks/p
 build PASS.
 startup PASS.
 Project Brain tests PASS.
-focused tests: 75 PASS.
-full tests: 79 PASS.
+focused tests: 107 PASS.
+full tests: 107 PASS.
 git diff --check PASS.
 implementation published to origin/main.
 
@@ -449,19 +450,19 @@ Next:
 * `MS-001.12` Product Owner Closure Decision is `APPROVED`
 * next controlled operation is `NONE - awaiting separate Product Owner decision`
 * Active Capability is `NONE`
-* Latest Completed Capability is `CAP-004 - Architect-Codex Execution Boundary`
+* Latest Completed Capability is `CAP-005 - React Component Test Infrastructure Foundation`
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
 * Verified branch: `main`
-* Latest verified commit: `688df2b`
+* Latest verified commit: `7069670`
 * Repository working tree: `CLEAN`
 * Ahead / behind: `0 / 0`
 * install `PASS`
 * lint `PASS` with one previously accepted warning in `src/app/projects/[id]/tasks/page.tsx`
 * build `PASS`
 * startup `PASS`
-* focused tests `60 PASS`
-* full tests `64 PASS`
+* focused tests `107 PASS`
+* full tests `107 PASS`
 * diff check `PASS`
 * no new storage, writes, or UI changes were introduced
 * no Workflow Engine changes were introduced
