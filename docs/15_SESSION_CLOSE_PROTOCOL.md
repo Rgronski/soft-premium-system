@@ -358,6 +358,14 @@ Do not duplicate the full Session Package Generator contract in this document.
 
 `SPS OS â€” KONIEC` should record current session identity, calculate or confirm the next session number, and include Suggested Next Chat Title in the handoff.
 
+Session ID is a chat lifecycle identifier.
+
+A session starts only with `SPS OS â€” START` and closes only with `SPS OS â€” KONIEC`.
+
+Tasks, milestones, capabilities, commits, discoveries and implementation stages performed inside one chat do not increment the Session ID.
+
+The next Session ID equals the closed chat Session ID plus one and becomes active only in the next chat after `SPS OS â€” START`.
+
 If the current session number is `UNKNOWN`, do not guess. Mark it as `UNKNOWN` and ask Product Owner to confirm if needed.
 
 The Suggested Next Chat Title is guidance for the next chat. It does not guarantee that the ChatGPT UI title was changed.

@@ -211,10 +211,10 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-07-20
-Current Session ID: 015
-Current Chat Title: 015 SPS OS - MS-001.19 Closure
-Next Session ID: 016
-Suggested Next Chat Title: 016 SPS OS - Next Product Milestone Contract Discovery
+Current Session ID: 013
+Current Chat Title: 013 SPS OS - SESSION CLOSE
+Next Session ID: 014
+Suggested Next Chat Title: 014 SPS OS - Next Product Milestone Contract Discovery
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: SESSION CLOSE / PENDING
@@ -278,6 +278,7 @@ MS-001.20 Implementation Review: PASS
 MS-001.20 Closure Status: CLOSED
 MS-001.20 Milestone Status: COMPLETED / PUBLISHED / CLOSED
 MS-001.20 Blockers: NONE
+MS-001.21 Status: DISCOVERED / INACTIVE / NOT AUTHORIZED
 Current Milestone Contract Status: APPROVED
 Current Milestone DoR Review: PASS
 Current Milestone Activation Status: FORMALIZED POST-PUBLICATION
@@ -381,4 +382,4 @@ Repository Changes during diagnosis: NONE
 Session Close Protocol: IN PROGRESS
 Session runtime: CLOSURE PENDING
 Package Consistency: UNKNOWN
-Next Safe Step: Run the Session Package Generator, confirm fresh sps-session.zip metadata, and then start session 016 with the published package
+Next Safe Step: Run the Session Package Generator, confirm fresh sps-session.zip metadata, and then start session 014 with the published package
