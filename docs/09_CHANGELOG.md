@@ -1333,6 +1333,31 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.19 - AI Workspace Project Brain Read Foundation closed
+
+### Date
+
+2026-07-20
+
+### Completed
+
+* Recorded `MS-001.19 - AI Workspace Project Brain Read Foundation` as `COMPLETED / PUBLISHED / CLOSED`.
+* Recorded the approved architecture choice `Option B - Narrow AI projection`.
+* Added the public types `AiProjectContext` and `AiProjectContextResult`.
+* Added the public read-only function `getAiProjectContext(projectId)`.
+* Confirmed the public AI projection exposes only `projectId`, `projectName`, `tasks: { id, title }`, and `knowledgeEntries: { id, title, content }`.
+* Confirmed the public AI projection does not expose `workflowState`, `createdAt`, child `projectId`, or storage internals.
+* Confirmed the result semantics `available`, `project-not-found`, and `unavailable`, while preserving `invalid-project-id` as an error and leaving unknown errors unmasked.
+* Recorded focused Project Brain tests `91 / 91` as `PASS`.
+* Recorded full tests `102 / 102` as `PASS`.
+* Recorded TypeScript as `PASS`.
+* Recorded lint as `PASS` with one existing warning outside scope.
+* Recorded production build as `PASS`.
+* Recorded that the implementation changed exactly `2` production files and `1` test file.
+* Confirmed no UI, storage, dependency, configuration, or model integration changes were introduced.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.17 - Project Brain Command Reliability Foundation
+MS-001.19 - AI Workspace Project Brain Read Foundation
 
 **Next Milestone**
 NONE
@@ -105,6 +105,32 @@ Each new user intent receives a new `commandId`.
 After partial success, the UI does not retry the write path.
 Task-list refresh after command completion is a separate read-only flow.
 The UI uses `createProjectBrainTask` and does not call the Task Engine write API directly.
+MS-001.19 is COMPLETED / PUBLISHED / CLOSED after establishing the first controlled read-only AI project context boundary from Project Brain.
+The approved `MS-001.19` variant is `Option B`: Narrow AI projection.
+The public AI read types are `AiProjectContext` and `AiProjectContextResult`.
+The public AI read function is `getAiProjectContext(projectId)`.
+`AiProjectContext` projects:
+* `projectId`
+* `projectName`
+* `tasks` with only `id` and `title`
+* `knowledgeEntries` with only `id`, `title`, and `content`
+The AI read boundary does not expose:
+* `workflowState`
+* `createdAt`
+* child `projectId`
+* storage internals
+`AiProjectContextResult` uses:
+* `available`
+* `project-not-found`
+* `unavailable`
+`invalid-project-id` remains an error rather than a result status.
+Unknown errors are not masked as `unavailable`.
+The AI read boundary remains strictly read-only:
+* no write
+* no commands
+* no localStorage
+* no model or network access
+No AI UI, routing, storage, dependency, or model integration changes were introduced by `MS-001.19`.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
 CAP-004 publication commit: `688df2b`
 CAP-004 blockers: NONE
@@ -349,11 +375,12 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.17 - Project Brain Command Reliability Foundation`
+* `Latest Completed Product Milestone` is `MS-001.19 - AI Workspace Project Brain Read Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.18` is `COMPLETED / PUBLISHED / CLOSED`
+* `MS-001.19` is `COMPLETED / PUBLISHED / CLOSED`
 * proposed next milestone is `NONE`
 * proposal status is `NONE`
 * current activation is `ACTIVATED`

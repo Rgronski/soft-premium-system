@@ -5,6 +5,8 @@ import { evaluateWorkflow } from "../workflow/engine";
 import type { ProjectState, WorkflowResult } from "../workflow/types";
 
 import type {
+  AiProjectContext,
+  AiProjectContextResult,
   ProjectConsumerKnowledgeEntry,
   ProjectConsumerOverview,
   ProjectConsumerTask,
@@ -381,6 +383,60 @@ export function getCurrentProjectBrainState(
   projectId: string,
 ): ProjectBrainSnapshot {
   return getProjectBrainSnapshot(projectId);
+}
+
+function aiProjectContextFromSnapshot(
+  snapshot: ProjectBrainSnapshot,
+): AiProjectContext {
+  return {
+    projectId: snapshot.project.id,
+    projectName: snapshot.project.name,
+    tasks: snapshot.tasks.map((task) => ({
+      id: task.id,
+      title: task.title,
+    })),
+    knowledgeEntries: snapshot.knowledgeEntries.map((knowledgeEntry) => ({
+      id: knowledgeEntry.id,
+      title: knowledgeEntry.title,
+      content: knowledgeEntry.content,
+    })),
+  };
+}
+
+export function getAiProjectContext(
+  projectId: string,
+): AiProjectContextResult {
+  const normalizedProjectId = normalizeProjectId(projectId);
+
+  try {
+    return {
+      status: "available",
+      context: aiProjectContextFromSnapshot(
+        getCurrentProjectBrainState(normalizedProjectId),
+      ),
+    };
+  } catch (error) {
+    const errorCode =
+      error instanceof Error && "code" in error && typeof error.code === "string"
+        ? error.code
+        : null;
+
+    if (errorCode === "project-not-found") {
+      return {
+        status: "project-not-found",
+        projectId: normalizedProjectId,
+      };
+    }
+
+    if (errorCode === "source-read-failed" || errorCode === "invalid-snapshot") {
+      return {
+        status: "unavailable",
+        projectId: normalizedProjectId,
+      };
+    }
+
+    throw error;
+  }
 }
 
 export function createProjectBrainTask(

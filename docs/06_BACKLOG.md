@@ -238,6 +238,106 @@ Completed by `MS-001.18 - Project Brain Command Consumer Foundation`
 
 ---
 
+### AI Workspace Project Brain Read Foundation
+
+**Description**
+
+Establish the smallest controlled read-only AI project context boundary that sources one project context only from Project Brain.
+
+**Business Value**
+
+Creates a safe public Project Brain read contract for future AI Workspace consumers without exposing raw snapshot internals or storage details.
+
+**Priority**
+
+High
+
+**Status**
+
+Completed by `MS-001.19 - AI Workspace Project Brain Read Foundation`
+
+---
+
+### AI Workspace UI
+
+**Description**
+
+Build the future AI Workspace user-facing surface that will consume the published read-only AI project context.
+
+**Business Value**
+
+Turns the published read boundary into a usable application surface.
+
+**Priority**
+
+High
+
+**Status**
+
+Proposed
+
+---
+
+### AI Model Integration
+
+**Description**
+
+Connect the future AI Workspace flow to a model boundary using the published read-only project context contract.
+
+**Business Value**
+
+Enables model-backed AI assistance without bypassing Project Brain.
+
+**Priority**
+
+High
+
+**Status**
+
+Proposed
+
+---
+
+### AI Chat, Prompts, and Agents
+
+**Description**
+
+Add future AI chat UX, prompt orchestration, agent behavior, and related interaction flows on top of the published read-only AI project context boundary.
+
+**Business Value**
+
+Supports structured AI collaboration while preserving the established source-of-truth boundary.
+
+**Priority**
+
+Medium
+
+**Status**
+
+Proposed
+
+---
+
+### AI Workspace Write Flows
+
+**Description**
+
+Add future write-capable AI Workspace flows only after separate command and safety contracts are approved.
+
+**Business Value**
+
+Keeps future AI actions aligned with explicit write ownership and controlled side effects.
+
+**Priority**
+
+High
+
+**Status**
+
+Proposed
+
+---
+
 ### External Integrations
 
 **Description**

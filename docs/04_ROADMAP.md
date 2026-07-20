@@ -2669,6 +2669,74 @@ Keep `Current Product Milestone` at `NONE` until a separate Product Owner decisi
 
 ---
 
+## MS-001.19 - AI Workspace Project Brain Read Foundation
+
+**Milestone**
+MS-001.19 - AI Workspace Project Brain Read Foundation
+
+**Contract Status**
+APPROVED
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Establish the first controlled read-only AI project context boundary sourced only from Project Brain without introducing UI, model integration, storage changes, or refactors.
+
+**One Intention**
+Publish the approved `Option B - Narrow AI projection` as the smallest safe public Project Brain read contract for one project AI context.
+
+**Implementation Evidence**
+* changed files:
+  * `src/lib/project-brain/types.ts`
+  * `src/lib/project-brain/engine.ts`
+  * `src/lib/project-brain/engine.test.ts`
+  * `docs/04_ROADMAP.md`
+  * `docs/06_BACKLOG.md`
+  * `docs/08_CURRENT_STATE.md`
+  * `docs/09_CHANGELOG.md`
+  * `docs/10_SESSION_STATE.md`
+* achieved result:
+  * milestone established the first controlled read-only AI project context boundary
+  * approved architecture decision recorded as `Option B - Narrow AI projection`
+  * public types `AiProjectContext` and `AiProjectContextResult` were added
+  * public read-only function `getAiProjectContext(projectId)` was added
+  * the boundary projects only `projectId`, `projectName`, `tasks: { id, title }`, and `knowledgeEntries: { id, title, content }`
+  * the boundary does not expose `workflowState`, `createdAt`, child `projectId`, or storage internals
+  * no UI was added
+  * no model integration was added
+  * no storage changes were made
+* verification:
+  * focused Project Brain tests: `PASS - 91 / 91`
+  * full tests: `PASS - 102 / 102`
+  * `TypeScript`: `PASS`
+  * `lint`: `PASS - one existing warning outside milestone scope`
+  * `build`: `PASS`
+  * `git diff --check`: `PASS`
+
+**Blockers**
+NONE
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Status**
+IMPLEMENTED / VERIFIED / PUBLISHED
+
+**Next Safe Step**
+Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision
+
+---
+
 # Release Criteria
 
 SPS OS 1.0 release progression requires:

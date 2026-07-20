@@ -10,6 +10,34 @@ export interface ProjectBrainSnapshot {
   workflowState: ProjectState;
 }
 
+export type AiProjectContext = {
+  projectId: string;
+  projectName: string;
+  tasks: Array<{
+    id: string;
+    title: string;
+  }>;
+  knowledgeEntries: Array<{
+    id: string;
+    title: string;
+    content: string;
+  }>;
+};
+
+export type AiProjectContextResult =
+  | {
+      status: "available";
+      context: AiProjectContext;
+    }
+  | {
+      status: "project-not-found";
+      projectId: string;
+    }
+  | {
+      status: "unavailable";
+      projectId: string;
+    };
+
 export type ProjectWorkflowSnapshot = {
   snapshot: ProjectBrainSnapshot;
   workflowResult: WorkflowResult;

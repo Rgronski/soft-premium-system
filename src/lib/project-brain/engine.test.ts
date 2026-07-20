@@ -8,6 +8,7 @@ import * as workflowModule from "../workflow/engine";
 import {
   buildProjectWorkflowState,
   createProjectBrainTask,
+  getAiProjectContext,
   getCurrentProjectBrainState,
   getProjectConsumerWorkspace,
   evaluateProjectWorkflow,
@@ -535,6 +536,157 @@ describe("Project Brain engine", () => {
     getCurrentProjectBrainState("project-1");
 
     expect(setItemSpy).not.toHaveBeenCalled();
+  });
+
+  test("returns available AI project context with projectId and projectName", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+
+    const result = getAiProjectContext("project-1");
+
+    expect(result).toEqual({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [{ id: "task-1", title: "First task" }],
+        knowledgeEntries: [
+          { id: "knowledge-1", title: "Note", content: "Body" },
+        ],
+      },
+    });
+  });
+
+  test("returns narrowed AI context collections without workflowState or storage-shaped fields", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+
+    const result = getAiProjectContext("project-1");
+
+    expect(result.status).toBe("available");
+
+    if (result.status !== "available") {
+      throw new Error("Expected available AI project context");
+    }
+
+    expect("workflowState" in result.context).toBe(false);
+    expect(Object.keys(result.context.tasks[0] ?? {}).sort()).toEqual([
+      "id",
+      "title",
+    ]);
+    expect(Object.keys(result.context.knowledgeEntries[0] ?? {}).sort()).toEqual([
+      "content",
+      "id",
+      "title",
+    ]);
+    expect("projectId" in (result.context.tasks[0] ?? {})).toBe(false);
+    expect("createdAt" in (result.context.tasks[0] ?? {})).toBe(false);
+    expect("projectId" in (result.context.knowledgeEntries[0] ?? {})).toBe(false);
+    expect("createdAt" in (result.context.knowledgeEntries[0] ?? {})).toBe(false);
+  });
+
+  test("returns empty arrays for empty AI context collections", () => {
+    seedWorkflowSnapshotProject();
+
+    const result = getAiProjectContext("project-1");
+
+    expect(result).toEqual({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+  });
+
+  test("maps project-not-found to the AI context status result", () => {
+    storage.setItem("soft-premium-system.projects", JSON.stringify([]));
+
+    expect(getAiProjectContext("project-1")).toEqual({
+      status: "project-not-found",
+      projectId: "project-1",
+    });
+  });
+
+  test("maps source-read-failed to unavailable for AI context", () => {
+    storage.setItem("soft-premium-system.projects", "{");
+
+    expect(getAiProjectContext("project-1")).toEqual({
+      status: "unavailable",
+      projectId: "project-1",
+    });
+  });
+
+  test("maps invalid-snapshot to unavailable for AI context", () => {
+    vi.spyOn(projectModule, "getProjectById").mockReturnValue({
+      id: "project-2",
+      name: "Beta",
+      createdAt: "2026-07-13T10:00:00.000Z",
+    });
+
+    expect(getAiProjectContext("project-1")).toEqual({
+      status: "unavailable",
+      projectId: "project-1",
+    });
+  });
+
+  test("preserves invalid-project-id as an error for AI context", () => {
+    expect(getErrorCode(() => getAiProjectContext("   "))).toBe(
+      "invalid-project-id",
+    );
+  });
+
+  test("does not mask unknown errors during AI context projection", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        },
+      ]),
+    );
+    vi.spyOn(projectModule, "getProjectById").mockReturnValue({
+      id: "project-1",
+      get name() {
+        const error = new Error("unknown projection failure") as Error & {
+          code?: string;
+        };
+        error.code = "unexpected-ai-context-error";
+        throw error;
+      },
+      createdAt: "2026-07-13T10:00:00.000Z",
+    } as unknown as ReturnType<typeof projectModule.getProjectById>);
+
+    expect(() => getAiProjectContext("project-1")).toThrow(
+      "unknown projection failure",
+    );
+  });
+
+  test("does not write or cause side effects while building AI context", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+    setItemSpy.mockClear();
+
+    getAiProjectContext("project-1");
+
+    expect(setItemSpy).not.toHaveBeenCalled();
+  });
+
+  test("uses the current Project Brain state read path once per AI context call", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+    const getProjectByIdSpy = vi.spyOn(projectModule, "getProjectById");
+    const getTasksSpy = vi.spyOn(taskModule, "getTasks");
+    const getKnowledgeSpy = vi.spyOn(knowledgeModule, "getKnowledge");
+    const aiContextSource = getAiProjectContext.toString();
+
+    getAiProjectContext("project-1");
+
+    expect(aiContextSource).toContain(
+      "getCurrentProjectBrainState(normalizedProjectId)",
+    );
+    expect(getProjectByIdSpy).toHaveBeenCalledTimes(1);
+    expect(getTasksSpy).toHaveBeenCalledTimes(1);
+    expect(getKnowledgeSpy).toHaveBeenCalledTimes(1);
   });
 
   test("creates a task and returns the updated Project Brain snapshot", () => {
