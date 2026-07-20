@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.20 - AI Workspace Read-Only UI Consumer Foundation
+MS-001.21 - AI Model Boundary Foundation
 
 ## Next
 
@@ -2937,6 +2937,89 @@ NONE
 
 **Next Safe Step**
 Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision
+
+---
+
+## MS-001.22 - AI Model Server Transport Boundary
+
+**Milestone**
+MS-001.22 - AI Model Server Transport Boundary
+
+**Contract Status**
+APPROVED
+
+**Runtime Status**
+INACTIVE
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Establish the first controlled server-side transport surface for the existing AI model application boundary.
+
+**One Intention**
+Add one read-only server-side request/response path that accepts `projectId` and `instruction`, validates the transport request, delegates generation to the existing AI application boundary, and returns an explicit transport representation of `GenerateAiProjectResponseResult`.
+
+**Server Surface**
+* transport-only milestone
+* exactly one Next.js Route Handler
+* accepted route: `POST /api/projects/[id]/ai/generate`
+* explicit SPS status remains in response JSON
+* approved HTTP/result mapping applies at the transport boundary
+
+**Runtime State**
+* temporary server-side unavailable-provider composition is accepted
+* valid runtime may return `{ status: "provider-unavailable" }`
+* no real provider is included in this milestone
+
+**Implementation Boundary**
+* maximum two production files:
+  * `src/app/api/projects/[id]/ai/generate/route.ts`
+  * `src/lib/ai-model/server.ts`
+* maximum one test file:
+  * `src/lib/ai-model/server.test.ts`
+* existing `createGenerateAiProjectResponse` must be reused
+* no Project Brain bypass
+* no direct storage access
+
+**Out of Scope**
+* real provider integration
+* provider SDK installation
+* secrets or env rollout
+* network calls to external AI services
+* UI changes
+* chat behavior
+* streaming
+* agents
+* tool calling
+* write flows
+
+**Product Owner Approval**
+APPROVED
+
+**Definition of Ready Review**
+PASS
+
+**Activation Status**
+NOT AUTHORIZED
+
+**Activation Decision**
+NOT AUTHORIZED
+
+**Implementation Status**
+NOT STARTED
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Perform the formal `MS-001.22` Definition of Ready Review without activating implementation
 
 ---
 

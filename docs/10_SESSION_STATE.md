@@ -220,7 +220,7 @@ Active Work Item: NONE
 Current Mode: SESSION CLOSE / COMPLETE
 Completed Capability Items: CAP-005 - React Component Test Infrastructure Foundation; CAP-004 - Architect-Codex Execution Boundary; MS-001.20 - AI Workspace Read-Only UI Consumer Foundation; MS-001.19 - AI Workspace Project Brain Read Foundation; MS-001.18 - Project Brain Command Consumer Foundation; MS-001.17 - Project Brain Command Reliability Foundation; MS-001.16 - Project Brain Command Foundation; MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.20 - AI Workspace Read-Only UI Consumer Foundation
+Latest Completed Product Milestone: MS-001.21 - AI Model Boundary Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Latest Completed Capability Item: CAP-005 - React Component Test Infrastructure Foundation
@@ -296,6 +296,16 @@ MS-001.21 Implementation Evidence: created src/lib/ai-model/types.ts, src/lib/ai
 MS-001.21 Publication Evidence: branch main; origin/main synchronization after publication 0 / 0; working tree after publication CLEAN; published files src/lib/ai-model/types.ts, src/lib/ai-model/engine.ts, src/lib/ai-model/engine.test.ts, docs/04_ROADMAP.md, docs/08_CURRENT_STATE.md, docs/09_CHANGELOG.md, docs/10_SESSION_STATE.md
 MS-001.21 Blockers: NONE
 MS-001.21 Next Safe Step: Keep Current Product Milestone at NONE until a separate Product Owner decision
+MS-001.22 Status: APPROVED / INACTIVE / NOT AUTHORIZED
+MS-001.22 Contract Status: APPROVED
+MS-001.22 Runtime Status: INACTIVE
+MS-001.22 Activation Status: NOT AUTHORIZED
+MS-001.22 Activation Decision: NOT AUTHORIZED
+MS-001.22 Implementation Status: NOT STARTED
+MS-001.22 DoR Status: PASS
+MS-001.22 Boundaries: transport-only milestone; one accepted POST Route Handler at /api/projects/[id]/ai/generate; explicit SPS status preserved in response JSON; temporary provider-unavailable server runtime only; no real provider, SDK, secrets, external network calls, UI changes, chat, agents, or write behavior
+MS-001.22 Blockers: NONE
+MS-001.22 Next Safe Step: Perform the formal Definition of Ready Review without activating implementation
 MS-001.13 Contract Status: APPROVED
 MS-001.13 DoR Review: PASS
 MS-001.13 Activation Status: ACTIVATED
