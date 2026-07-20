@@ -219,7 +219,7 @@ Active Capability: NONE
 Active Work Item: NONE
 Current Mode: SESSION CLOSE / COMPLETE
 Completed Capability Items: CAP-005 - React Component Test Infrastructure Foundation; CAP-004 - Architect-Codex Execution Boundary; MS-001.20 - AI Workspace Read-Only UI Consumer Foundation; MS-001.19 - AI Workspace Project Brain Read Foundation; MS-001.18 - Project Brain Command Consumer Foundation; MS-001.17 - Project Brain Command Reliability Foundation; MS-001.16 - Project Brain Command Foundation; MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
-Current Product Milestone: NONE
+Current Product Milestone: MS-001.21 - AI Model Boundary Foundation
 Latest Completed Product Milestone: MS-001.20 - AI Workspace Read-Only UI Consumer Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
@@ -278,15 +278,15 @@ MS-001.20 Implementation Review: PASS
 MS-001.20 Closure Status: CLOSED
 MS-001.20 Milestone Status: COMPLETED / PUBLISHED / CLOSED
 MS-001.20 Blockers: NONE
-MS-001.21 Status: DISCOVERED / INACTIVE / NOT AUTHORIZED
+MS-001.21 Status: ACTIVE / AUTHORIZED / NOT STARTED
 MS-001.21 Contract Status: APPROVED
-MS-001.21 Runtime Status: INACTIVE
-MS-001.21 Activation Status: NOT AUTHORIZED
-MS-001.21 Activation Decision: NOT AUTHORIZED
+MS-001.21 Runtime Status: ACTIVE
+MS-001.21 Activation Status: AUTHORIZED
+MS-001.21 Activation Decision: AUTHORIZED
 MS-001.21 Implementation Status: NOT STARTED
 MS-001.21 DoR Status: PASS
 MS-001.21 Blockers: NONE
-MS-001.21 Next Safe Step: Formal Definition of Ready Review only; implementation remains unauthorized
+MS-001.21 Next Safe Step: Run implementation diagnosis within the approved contract boundary
 MS-001.13 Contract Status: APPROVED
 MS-001.13 DoR Review: PASS
 MS-001.13 Activation Status: ACTIVATED

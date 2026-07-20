@@ -1197,6 +1197,26 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## MS-001.21 - AI Model Boundary Foundation activated
+
+### Date
+
+2026-07-20
+
+### Completed
+
+* Recorded `MS-001.21 - AI Model Boundary Foundation` as the current product milestone.
+* Recorded runtime status as `ACTIVE`.
+* Recorded activation status as `AUTHORIZED`.
+* Recorded activation decision as `AUTHORIZED`.
+* Kept contract status as `APPROVED`.
+* Kept Definition of Ready Review as `PASS`.
+* Kept implementation status as `NOT STARTED`.
+* Kept blockers as `NONE`.
+* Recorded the next safe step as `MS-001.21` implementation diagnosis.
+
+---
+
 ## MS-001.14 - Project Workspace Consumer Collections accepted for publication preparation
 
 ### Date

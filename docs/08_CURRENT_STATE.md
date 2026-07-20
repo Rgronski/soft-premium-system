@@ -76,7 +76,7 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE
+Current Product Milestone: MS-001.21 - AI Model Boundary Foundation
 Latest Completed Product Milestone: MS-001.20 - AI Workspace Read-Only UI Consumer Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
@@ -150,11 +150,11 @@ The UI uses no `fetch`.
 The UI uses no network or model access.
 The Project Brain public contract remains unchanged by `MS-001.20`.
 MS-001.21 contract status: APPROVED.
-MS-001.21 runtime status: INACTIVE.
-MS-001.21 activation status: NOT AUTHORIZED.
+MS-001.21 runtime status: ACTIVE.
+MS-001.21 activation status: AUTHORIZED.
 MS-001.21 implementation status: NOT STARTED.
 MS-001.21 DoR status: PASS.
-MS-001.21 remains discovered and inactive.
+MS-001.21 is now the active current product milestone.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
 CAP-004 publication commit: `688df2b`
 CAP-004 blockers: NONE
@@ -396,7 +396,7 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `NONE`
+* `Current Product Milestone` is `MS-001.21 - AI Model Boundary Foundation`
 * `Latest Completed Product Milestone` is `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
@@ -476,8 +476,8 @@ Next:
 
 Next session priorities:
 
-* Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision
-* Run a separate Next Product Milestone Contract Discovery only if explicitly authorized
+* Keep `MS-001.21 - AI Model Boundary Foundation` as the active current product milestone
+* Run `MS-001.21` implementation diagnosis only within the approved contract boundary
 
 ---
 
