@@ -178,13 +178,24 @@ MS-001.21 verification: focused AI model tests `10 / 10` PASS, focused Project B
 MS-001.22 contract status: APPROVED.
 MS-001.22 runtime status: ACTIVE.
 MS-001.22 activation status: AUTHORIZED.
-MS-001.22 implementation status: NOT STARTED.
+MS-001.22 implementation status: IMPLEMENTED / VERIFIED.
 MS-001.22 DoR status: PASS.
 MS-001.22 is the active transport-only milestone.
 MS-001.22 accepted route: `POST /api/projects/[id]/ai/generate`.
 MS-001.22 reuses `createGenerateAiProjectResponse`.
-MS-001.22 allows only a temporary server-side `provider-unavailable` runtime without a real provider.
-MS-001.22 introduces no SDK, secrets, external network calls, UI changes, chat, agents, or write behavior.
+MS-001.22 implementation review: PASS.
+MS-001.22 contract deviations: NONE.
+MS-001.22 publication status: NOT PUBLISHED.
+MS-001.22 milestone status: ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION.
+MS-001.22 implementation created exactly `src/lib/ai-model/server.ts`, `src/lib/ai-model/server.test.ts`, and `src/app/api/projects/[id]/ai/generate/route.ts`.
+MS-001.22 uses exactly one POST Route Handler.
+MS-001.22 reads `projectId` from awaited route params and `instruction` from JSON body.
+MS-001.22 validates only transport request shape and preserves domain validation in the application boundary.
+MS-001.22 delegates exactly once to `createGenerateAiProjectResponse`.
+MS-001.22 preserves SPS status in response JSON with explicit HTTP mapping.
+MS-001.22 production composition returns `provider-unavailable` with no real provider, SDK, secrets, external network access, or write behavior.
+MS-001.22 route.ts is delegation only.
+MS-001.22 verification: focused server transport tests `13 / 13` PASS, focused AI model boundary tests `10 / 10` PASS, focused Project Brain tests `91 / 91` PASS, full tests `130 / 130` PASS, TypeScript `PASS` via `npx tsc --noEmit`, lint `PASS` with 0 errors and 1 existing warning outside milestone scope, production build `PASS`, implementation review `PASS`, contract deviations `NONE`.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
 CAP-004 publication commit: `688df2b`
 CAP-004 blockers: NONE
@@ -453,8 +464,12 @@ Next:
 * `MS-001.22` contract status is `APPROVED`
 * `MS-001.22` runtime status is `ACTIVE`
 * `MS-001.22` activation status is `AUTHORIZED`
-* `MS-001.22` implementation status is `NOT STARTED`
+* `MS-001.22` implementation status is `IMPLEMENTED / VERIFIED`
 * `MS-001.22` DoR status is `PASS`
+* `MS-001.22` implementation review is `PASS`
+* `MS-001.22` contract deviations are `NONE`
+* `MS-001.22` publication status is `NOT PUBLISHED`
+* `MS-001.22` milestone status is `ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION`
 * `MS-001.22` is limited to one transport-only Route Handler and no real provider
 * `MS-001.14` contract status is `APPROVED`
 * `MS-001.14` runtime status is `CLOSED`
