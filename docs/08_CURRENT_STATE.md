@@ -76,7 +76,7 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE
+Current Product Milestone: MS-001.22 - AI Model Server Transport Boundary
 Latest Completed Product Milestone: MS-001.21 - AI Model Boundary Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
@@ -176,11 +176,11 @@ MS-001.21 maps provider statuses and provider exceptions explicitly.
 MS-001.21 keeps the local fake provider only in tests.
 MS-001.21 verification: focused AI model tests `10 / 10` PASS, focused Project Brain tests `91 / 91` PASS, full tests `117 / 117` PASS, TypeScript `PASS` via `npx tsc --noEmit`, lint `PASS` with 0 errors and 1 existing warning outside milestone scope, production build `PASS`.
 MS-001.22 contract status: APPROVED.
-MS-001.22 runtime status: INACTIVE.
-MS-001.22 activation status: NOT AUTHORIZED.
+MS-001.22 runtime status: ACTIVE.
+MS-001.22 activation status: AUTHORIZED.
 MS-001.22 implementation status: NOT STARTED.
 MS-001.22 DoR status: PASS.
-MS-001.22 is approved for transport-only discovery state only.
+MS-001.22 is the active transport-only milestone.
 MS-001.22 accepted route: `POST /api/projects/[id]/ai/generate`.
 MS-001.22 reuses `createGenerateAiProjectResponse`.
 MS-001.22 allows only a temporary server-side `provider-unavailable` runtime without a real provider.
@@ -426,7 +426,7 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `NONE`
+* `Current Product Milestone` is `MS-001.22 - AI Model Server Transport Boundary`
 * `Latest Completed Product Milestone` is `MS-001.21 - AI Model Boundary Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
@@ -451,8 +451,8 @@ Next:
 * `MS-001.21` lint is `PASS - 0 errors, 1 existing warning outside milestone scope`
 * `MS-001.21` production build is `PASS`
 * `MS-001.22` contract status is `APPROVED`
-* `MS-001.22` runtime status is `INACTIVE`
-* `MS-001.22` activation status is `NOT AUTHORIZED`
+* `MS-001.22` runtime status is `ACTIVE`
+* `MS-001.22` activation status is `AUTHORIZED`
 * `MS-001.22` implementation status is `NOT STARTED`
 * `MS-001.22` DoR status is `PASS`
 * `MS-001.22` is limited to one transport-only Route Handler and no real provider

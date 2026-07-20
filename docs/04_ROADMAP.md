@@ -107,7 +107,7 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE
+MS-001.22 - AI Model Server Transport Boundary
 
 ## Latest Completed Product Milestone
 
@@ -2949,7 +2949,7 @@ MS-001.22 - AI Model Server Transport Boundary
 APPROVED
 
 **Runtime Status**
-INACTIVE
+ACTIVE
 
 **Owner**
 Product Owner
@@ -3007,10 +3007,10 @@ APPROVED
 PASS
 
 **Activation Status**
-NOT AUTHORIZED
+AUTHORIZED
 
 **Activation Decision**
-NOT AUTHORIZED
+AUTHORIZED
 
 **Implementation Status**
 NOT STARTED
@@ -3019,7 +3019,7 @@ NOT STARTED
 NONE
 
 **Next Safe Step**
-Perform the formal `MS-001.22` Definition of Ready Review without activating implementation
+Maintain the activated milestone state until a separate implementation step is authorized
 
 ---
 
