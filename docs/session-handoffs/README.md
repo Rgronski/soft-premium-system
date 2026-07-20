@@ -82,6 +82,33 @@ Next Safe Step must be exactly one actionable step.
 
 Next Chat Prompt must be ready to paste into a new chat.
 
+Every `Next Chat Prompt` must include the following exact permanent section:
+
+```text
+## Stałe zasady pracy
+
+Pamiętaj o oszczędzaniu kredytów w Codexie:
+
+- najpierw diagnoza,
+- minimalny zakres odczytu,
+- minimalny patch,
+- bez zbędnych iteracji, ponownych testów i refaktoryzacji,
+- nie uruchamiaj długich procesów bez wyraźnego uzasadnienia,
+- po pozytywnej weryfikacji nie powtarzaj jej bez potrzeby.
+
+Komenda:
+
+SPS OS — KONIEC
+
+zawsze uruchamia pełny Session Close Protocol zgodnie z dokumentacją repozytorium.
+
+Nie traktuj jej jako zwykłego zakończenia rozmowy, prośby o podsumowanie ani automatycznego potwierdzenia zamknięcia.
+
+Sesję można uznać za zamkniętą dopiero po wykonaniu całego protokołu, publikacji wymaganych commitów, wygenerowaniu świeżej paczki sesyjnej i uzyskaniu:
+
+Package Consistency: PASS
+```
+
 Current handoff selection must not rely only on `LastWriteTime`.
 
 The current handoff must be selected by `Current Session ID` from Session State.
