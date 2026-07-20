@@ -265,9 +265,7 @@ No workflow type changes.
 No write API.
 No writes.
 main contains the published MS-001.16 product baseline and the published CAP-004 process baseline.
-main HEAD: 7069670.
 Verified branch: main.
-Latest verified commit: 7069670.
 Repository working tree: CLEAN.
 Ahead / behind: 0 / 0.
 install PASS.
@@ -275,8 +273,8 @@ lint PASS with one previously accepted warning in `src/app/projects/[id]/tasks/p
 build PASS.
 startup PASS.
 Project Brain tests PASS.
-focused tests: 107 PASS.
-full tests: 107 PASS.
+focused milestone verification: AI page `5 / 5` PASS and Project Brain `91 / 91` PASS.
+full tests: `107 / 107` PASS.
 git diff --check PASS.
 implementation published to origin/main.
 
@@ -454,15 +452,14 @@ Next:
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
 * Verified branch: `main`
-* Latest verified commit: `7069670`
 * Repository working tree: `CLEAN`
 * Ahead / behind: `0 / 0`
 * install `PASS`
 * lint `PASS` with one previously accepted warning in `src/app/projects/[id]/tasks/page.tsx`
 * build `PASS`
 * startup `PASS`
-* focused tests `107 PASS`
-* full tests `107 PASS`
+* focused milestone verification is `PASS` for AI page `5 / 5` and Project Brain `91 / 91`
+* full tests `107 / 107 PASS`
 * diff check `PASS`
 * no new storage, writes, or UI changes were introduced
 * no Workflow Engine changes were introduced
