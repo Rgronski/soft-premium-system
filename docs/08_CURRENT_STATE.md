@@ -76,7 +76,7 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE
+Current Product Milestone: MS-001.23 - AI Model Production Provider Foundation
 Latest Completed Product Milestone: MS-001.22 - AI Model Server Transport Boundary
 Next Product Milestone: NONE
 Active Sprint: NONE
@@ -94,7 +94,8 @@ No global setup file or global mock layer was introduced.
 The reference component test file is `src/app/projects/[id]/tasks/page.test.tsx`.
 The four focused tests confirm the `createProjectBrainTask` consumer contract for no-write render, `completed`, `completed-with-refresh-failure`, and two explicit user intents.
 MS-001.18 is COMPLETED / PUBLISHED / CLOSED after formalizing the single-consumer contract without production changes.
-No new product milestone or capability is active.
+MS-001.23 is now the active product milestone.
+No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
 The approved `MS-001.18` variant is `A`: no extraction, single-consumer contract only.
@@ -197,6 +198,13 @@ MS-001.22 production composition returns `provider-unavailable` with no real pro
 MS-001.22 route.ts is delegation only.
 MS-001.22 verification: focused server transport tests `13 / 13` PASS, focused AI model boundary tests `10 / 10` PASS, focused Project Brain tests `91 / 91` PASS, full tests `130 / 130` PASS, TypeScript `PASS` via `npx tsc --noEmit`, lint `PASS` with 0 errors and 1 existing warning outside milestone scope, production build `PASS`, implementation review `PASS`, contract deviations `NONE`.
 MS-001.22 publication evidence: commit `4e9a600`; branch `main`; origin/main synchronization after publication `0 / 0`; working tree after publication `CLEAN`; published files `src/lib/ai-model/server.ts`, `src/lib/ai-model/server.test.ts`, `src/app/api/projects/[id]/ai/generate/route.ts`, `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`.
+MS-001.23 contract status: APPROVED.
+MS-001.23 runtime status: ACTIVE.
+MS-001.23 activation status: AUTHORIZED.
+MS-001.23 Product Owner Decision: ACCEPT.
+MS-001.23 DoR status: PASS.
+MS-001.23 implementation status: NOT STARTED.
+MS-001.23 remains active without implementation start.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
 CAP-004 publication commit: `688df2b`
 CAP-004 blockers: NONE
