@@ -3166,8 +3166,24 @@ AUTHORIZED
 **Activation Decision**
 AUTHORIZED
 
-**Implementation Status**
-NOT STARTED
+**Published Implementation State**
+* published implementation exists for:
+  * OpenAI provider adapter
+  * production provider wiring
+* controlled verification without secret: `PASS`
+* live verification status: `BLOCKED before provider boundary`
+* the published code remains valid publication evidence and is not reverted by this contract correction
+
+**Completion Blocker**
+Server-readable read-only project context is not currently available.
+
+The existing server route cannot reach the provider boundary because project lookup ultimately depends on browser-only localStorage and returns project-not-found in server runtime.
+
+**Required Prerequisite**
+`MS-001.24 - Server-Readable Read-Only Project Context Foundation`
+
+**Continuation Rule**
+No further live OpenAI verification or completion work for `MS-001.23` may continue until `MS-001.24` is completed and published.
 
 **Acceptance Criteria**
 1. Exactly one production implementation exists for the current `AiModelProvider.generate(request)` contract.
@@ -3203,10 +3219,133 @@ This milestone may be considered complete only when:
 * required verification and publication pass under SPS OS rules
 
 **Blockers**
+* server-readable read-only project context is not currently available
+* `MS-001.24 - Server-Readable Read-Only Project Context Foundation` must be completed and published before `MS-001.23` completion work resumes
+
+**Next Safe Step**
+Activate and complete `MS-001.24 - Server-Readable Read-Only Project Context Foundation` before resuming live verification or completion work for `MS-001.23`.
+
+---
+
+## MS-001.24 - Server-Readable Read-Only Project Context Foundation
+
+**Milestone**
+MS-001.24 - Server-Readable Read-Only Project Context Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+YES
+
+**Runtime Status**
+ACTIVE
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Establish one canonical read-only project context that can be reached through Project Brain from both browser runtime and server runtime without expanding into broader persistence redesign.
+
+**Product Outcome**
+One canonical, read-only project context is available to both the browser AI Workspace consumer and the server-side AI application boundary through Project Brain without bypassing Project Brain.
+
+**Problem Statement**
+Current project data is stored only in browser localStorage. The server-side AI route cannot read the project and terminates with `project-not-found` before reaching the provider boundary.
+
+**Dependencies**
+* active contract correction from `MS-001.23 - AI Model Production Provider Foundation`
+* preservation of the closed boundaries of `MS-001.19 - AI Workspace Project Brain Read Foundation`
+* preservation of the closed boundaries of `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation`
+* preservation of the closed boundaries of `MS-001.21 - AI Model Boundary Foundation`
+* preservation of the closed boundaries of `MS-001.22 - AI Model Server Transport Boundary`
+
+**Product Owner Decision**
+GO
+
+**Product Owner Approval**
+APPROVED
+
+**Definition of Ready Review**
+PASS
+
+**Activation Status**
+AUTHORIZED
+
+**Activation Decision**
+AUTHORIZED
+
+**Implementation Status**
+NOT STARTED
+
+**Architecture Decision Required before implementation**
+Canonical server-readable project source
+
+**In Scope**
+* exactly one canonical read-only project-context boundary that is reachable in browser runtime and server runtime
+* preservation of Project Brain as the only read boundary for AI project context
+* enabling `getAiProjectContext(projectId)` to read a valid project in server runtime
+* preservation of the existing browser AI Workspace consumer
+* controlled `project-not-found` for a non-existent project
+* minimal tests for browser/server read-boundary behavior
+* confirmation that the AI route without `OPENAI_API_KEY` reaches `provider-unavailable` rather than `project-not-found`
+
+**Out of Scope**
+* OpenAI integration changes
+* adapter changes
+* another live OpenAI request
+* write flow
+* server-side project editing
+* offline synchronization
+* full application migration away from `localStorage`
+* multi-user behavior
+* authentication
+* authorization
+* full backend persistence redesign
+* Supabase or any other concrete backend not required by later discovery
+* UI redesign
+* chat behavior
+* streaming
+* agents
+* tool calling
+* additional endpoints not directly required for read-only project context
+
+**Acceptance Criteria**
+1. Exactly one canonical source of read-only project context exists and is used by Project Brain.
+2. The browser AI Workspace can still read an existing project.
+3. Server runtime can read the same canonical project through the existing boundary.
+4. `getAiProjectContext(projectId)` does not bypass Project Brain.
+5. An existing project in server runtime does not return `project-not-found`.
+6. A non-existent project still returns controlled `project-not-found`.
+7. Without `OPENAI_API_KEY`, the existing AI route reaches the provider boundary and returns:
+   * HTTP `503`
+   * `provider-unavailable`
+8. No write flow, auth, multi-user behavior, or full persistence redesign is added.
+9. After this milestone is completed, `MS-001.23` may resume exactly one live OpenAI request.
+
+**Completion Boundary**
+This milestone may be considered complete only when:
+
+* browser runtime and server runtime read the same canonical read-only project context
+* Project Brain remains the mandatory boundary
+* local preflight without secret for an existing project terminates with `provider-unavailable`
+* SSOT documents the real architecture
+* required tests and publication pass under SPS OS rules
+
+**Blockers**
 NONE
 
 **Next Safe Step**
-Keep implementation at `NOT STARTED` until an explicit implementation session begins under active `MS-001.23`.
+Keep implementation at `NOT STARTED` until a separate implementation session begins under active `MS-001.24`.
 
 ---
 

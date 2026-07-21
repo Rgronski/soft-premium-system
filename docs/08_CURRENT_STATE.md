@@ -76,9 +76,9 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: MS-001.23 - AI Model Production Provider Foundation
+Current Product Milestone: MS-001.24 - Server-Readable Read-Only Project Context Foundation
 Latest Completed Product Milestone: MS-001.22 - AI Model Server Transport Boundary
-Next Product Milestone: NONE
+Next Product Milestone: MS-001.23 - AI Model Production Provider Foundation (resume after MS-001.24)
 Active Sprint: NONE
 Active Capability: NONE
 Latest Completed Capability: CAP-005 - React Component Test Infrastructure Foundation
@@ -94,7 +94,7 @@ No global setup file or global mock layer was introduced.
 The reference component test file is `src/app/projects/[id]/tasks/page.test.tsx`.
 The four focused tests confirm the `createProjectBrainTask` consumer contract for no-write render, `completed`, `completed-with-refresh-failure`, and two explicit user intents.
 MS-001.18 is COMPLETED / PUBLISHED / CLOSED after formalizing the single-consumer contract without production changes.
-MS-001.23 is now the active product milestone.
+MS-001.24 is now the active product milestone.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
@@ -203,8 +203,26 @@ MS-001.23 runtime status: ACTIVE.
 MS-001.23 activation status: AUTHORIZED.
 MS-001.23 Product Owner Decision: ACCEPT.
 MS-001.23 DoR status: PASS.
-MS-001.23 implementation status: NOT STARTED.
-MS-001.23 remains active without implementation start.
+MS-001.23 published implementation state:
+* OpenAI provider adapter: PUBLISHED
+* production provider wiring: PUBLISHED
+* completion verification: BLOCKED BY `MS-001.24`
+MS-001.23 controlled verification without secret: PASS.
+MS-001.23 live OpenAI request: NOT PERFORMED.
+MS-001.23 completion blocker: server-readable read-only project context is not currently available.
+MS-001.23 required prerequisite: `MS-001.24 - Server-Readable Read-Only Project Context Foundation`.
+MS-001.23 completion remains blocked before provider boundary because server runtime reaches `project-not-found`.
+MS-001.23 remains approved, not completed, and may not continue live verification or completion work until `MS-001.24` is completed and published.
+MS-001.24 contract status: APPROVED.
+MS-001.24 runtime status: ACTIVE.
+MS-001.24 activation status: AUTHORIZED.
+MS-001.24 Product Owner Decision: GO.
+MS-001.24 Product Owner Approval: APPROVED.
+MS-001.24 DoR status: PASS.
+MS-001.24 implementation status: NOT STARTED.
+MS-001.24 is the only active product milestone.
+MS-001.24 product outcome: one canonical read-only project context must be available through Project Brain to both browser runtime and server runtime without bypassing Project Brain.
+MS-001.24 architecture decision required before implementation: canonical server-readable project source.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
 CAP-004 publication commit: `688df2b`
 CAP-004 blockers: NONE

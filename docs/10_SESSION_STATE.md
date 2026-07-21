@@ -220,7 +220,7 @@ Active Capability: NONE
 Active Work Item: Session Close Protocol
 Current Mode: SESSION CLOSE / IN PROGRESS
 Completed Capability Items: CAP-005 - React Component Test Infrastructure Foundation; CAP-004 - Architect-Codex Execution Boundary; MS-001.20 - AI Workspace Read-Only UI Consumer Foundation; MS-001.19 - AI Workspace Project Brain Read Foundation; MS-001.18 - Project Brain Command Consumer Foundation; MS-001.17 - Project Brain Command Reliability Foundation; MS-001.16 - Project Brain Command Foundation; MS-001.15 - Project Brain Engine Foundation; MS-001.14 - Project Workspace Consumer Collections; MS-001.11 - Project Brain Consumer Overview Model; MS-001.10 - Project Brain Workflow Consumer Snapshot; MS-001.9 - Project Brain Workflow Evaluation Bridge; MS-001.8 - Project Brain Engine Foundation; MS-001.7 - SPS OS 1.0 Stabilization; CAP-002 - Session Close Protocol Fix; CAP-003.1 - Project Domain Contract; CAP-003.2 - Project Domain Model
-Current Product Milestone: MS-001.23 - AI Model Production Provider Foundation
+Current Product Milestone: MS-001.24 - Server-Readable Read-Only Project Context Foundation
 Latest Completed Product Milestone: MS-001.22 - AI Model Server Transport Boundary
 Next Product Milestone: NONE
 Active Sprint: NONE
@@ -243,7 +243,7 @@ CAP-004 Runtime Status: CLOSED
 CAP-004 Implementation Status: COMPLETED / VERIFIED / PUBLISHED
 CAP-004 Publication Commit: 688df2b
 CAP-004 Closure Status: CLOSED
-Proposed Next Milestone: MS-001.23 - AI Model Production Provider Foundation
+Proposed Next Milestone: MS-001.23 - AI Model Production Provider Foundation (resume after MS-001.24)
 Proposed Contract Status: APPROVED
 Proposed Activation: AUTHORIZED
 Proposed Implementation: NOT STARTED
@@ -320,10 +320,26 @@ MS-001.23 Runtime Status: ACTIVE
 MS-001.23 Activation Status: AUTHORIZED
 MS-001.23 Activation Decision: AUTHORIZED
 MS-001.23 Product Owner Decision: ACCEPT
-MS-001.23 Implementation Status: NOT STARTED
 MS-001.23 DoR Status: PASS
-MS-001.23 Blockers: NONE
-MS-001.23 Next Safe Step: Keep implementation at NOT STARTED until an explicit implementation session begins under active MS-001.23
+MS-001.23 Published Implementation State:
+* OpenAI provider adapter: PUBLISHED
+* Production provider wiring: PUBLISHED
+* Completion verification: BLOCKED BY `MS-001.24`
+MS-001.23 Controlled Verification Without Secret: PASS
+MS-001.23 Live OpenAI Request: NOT PERFORMED
+MS-001.23 Blockers: server-readable read-only project context is not currently available; completion depends on MS-001.24
+MS-001.23 Next Safe Step: Complete and publish MS-001.24 before resuming live verification or completion work for MS-001.23
+MS-001.24 Status: APPROVED / ACTIVE / AUTHORIZED
+MS-001.24 Contract Status: APPROVED
+MS-001.24 Runtime Status: ACTIVE
+MS-001.24 Activation Status: AUTHORIZED
+MS-001.24 Activation Decision: AUTHORIZED
+MS-001.24 Product Owner Decision: GO
+MS-001.24 Product Owner Approval: APPROVED
+MS-001.24 Implementation Status: NOT STARTED
+MS-001.24 DoR Status: PASS
+MS-001.24 Blockers: NONE
+MS-001.24 Next Safe Step: Keep implementation at NOT STARTED until an explicit implementation session begins under active MS-001.24
 MS-001.13 Contract Status: APPROVED
 MS-001.13 DoR Review: PASS
 MS-001.13 Activation Status: ACTIVATED
