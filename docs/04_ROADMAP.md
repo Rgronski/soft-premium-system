@@ -3038,6 +3038,172 @@ Keep `Current Product Milestone` at `NONE` until a separate Product Owner decisi
 
 ---
 
+## MS-001.23 - AI Model Production Provider Foundation
+
+**Milestone**
+MS-001.23 - AI Model Production Provider Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+DRAFT
+
+**Active**
+NO
+
+**Runtime Status**
+INACTIVE
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Establish the first real production provider behind the existing AI model boundary without expanding the published transport or UI scope.
+
+**Product Outcome**
+One real provider-backed generation flow is available through the existing `POST /api/projects/[id]/ai/generate` route and the existing AI application/provider boundaries.
+
+**Problem Statement**
+The published AI generation path currently terminates with controlled `provider-unavailable` because no production provider implementation exists behind the current `AiModelProvider.generate(request)` boundary.
+
+**One Intention**
+Add exactly one production provider implementation behind the existing provider interface so the current published route can complete one controlled text-generation request and return one controlled success or failure result.
+
+**Dependencies**
+* closed `MS-001.19 - AI Workspace Project Brain Read Foundation`
+* closed `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation`
+* closed `MS-001.21 - AI Model Boundary Foundation`
+* closed `MS-001.22 - AI Model Server Transport Boundary`
+
+**Provider Decision**
+Product Owner accepted the following contract decisions:
+
+* Provider: `OpenAI`
+* Integration method: official `OpenAI Node SDK`
+* Generation mode: single non-streaming text generation
+* Server secret: `OPENAI_API_KEY`
+
+**Product Owner Decision**
+ACCEPT
+
+No provider implementation, SDK installation, secret creation, or network call is authorized by this draft.
+
+**Secrets Boundary**
+This milestone may define only the minimum runtime secret boundary required for one approved provider integration.
+
+Allowed contract scope:
+
+* one server-side provider API key in `OPENAI_API_KEY` for local runtime verification
+* one explicit missing-secret failure path
+
+Out of scope for this milestone:
+
+* committing any `.env` file
+* storing any real secret in the repository
+* preview/production secret rollout
+* multi-environment secret management
+* secret rotation
+* secret vault integration
+
+**In Scope**
+* exactly one production implementation of the existing `AiModelProvider.generate(request)` contract
+* exactly one controlled text-generation path
+* minimal runtime configuration contract required for one provider
+* preservation of the existing `POST /api/projects/[id]/ai/generate` transport boundary
+* preservation of the existing `createGenerateAiProjectResponse` application boundary
+* controlled mapping for provider success, unavailable configuration, and provider failure
+* testable production composition
+
+**Implementation Boundary**
+* provider integration must remain behind the existing provider interface
+* existing route contract and application contract must remain the only published entry path
+* exactly one provider and exactly one integration method are allowed
+* no bypass of `createGenerateAiProjectResponse`
+* no bypass of `getAiProjectContext(projectId)`
+* no expansion into model routing or provider fallback
+
+**Out of Scope**
+* AI Workspace UI changes
+* new UI generate consumer
+* streaming
+* chat behavior
+* conversation history
+* agents
+* tool calling
+* write behavior
+* project mutations
+* persistence of generation results
+* additional endpoints
+* multiple providers
+* automatic provider fallback
+* model routing
+* expanded cost management
+* telemetry unrelated to acceptance of this boundary
+* refactoring of the existing transport or application boundaries
+
+**Product Owner Approval**
+REQUIRED
+
+**Definition of Ready Review**
+REQUIRED
+
+**Activation Status**
+NOT AUTHORIZED
+
+**Activation Decision**
+NOT AUTHORIZED - Product Owner accepted the draft contract without milestone activation
+
+**Implementation Status**
+NOT STARTED
+
+**Acceptance Criteria**
+1. Exactly one production implementation exists for the current `AiModelProvider.generate(request)` contract.
+2. The existing `createGenerateAiProjectResponse` application service delegates to that provider implementation without bypassing the established application boundary.
+3. The existing `POST /api/projects/[id]/ai/generate` route executes one controlled provider-backed request through the published transport and application boundaries.
+4. A valid request can return one controlled generated-text result through the existing route.
+5. Missing or invalid `OPENAI_API_KEY` configuration returns one explicit controlled failure result rather than an uncontrolled exception.
+6. Provider failure is mapped to a controlled application result and does not leak as an uncaught exception.
+7. No UI, streaming, agents, tool calling, additional endpoints, or write flow are added.
+8. The closed boundaries of `MS-001.21` and `MS-001.22` remain preserved.
+
+**Verification Strategy**
+Do not execute verification at draft stage.
+
+Required milestone verification should remain minimal and boundary-focused:
+
+* unit tests for the provider adapter
+* application-boundary test proving controlled delegation and failure mapping
+* transport-boundary test proving the existing route uses the provider-backed production composition
+* one controlled integration test that requires an approved runtime secret
+* one explicit verification of behavior when the secret is missing
+
+Full build, broad regression expansion, and unrelated milestone verification are not required unless the implementation changes force them.
+
+**Completion Boundary**
+This milestone may be considered complete only when:
+
+* one real provider-backed flow works through the existing route
+* success and failure paths are controlled
+* scope remains limited to the provider/runtime boundary
+* no UI or broader AI feature scope is introduced
+* SSOT documents the real post-implementation state
+* required verification and publication pass under SPS OS rules
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Submit this draft for Product Owner review, provider decision approval, and Formal Contract Draft acceptance before any activation or implementation step.
+
+---
+
 # Release Criteria
 
 SPS OS 1.0 release progression requires:
