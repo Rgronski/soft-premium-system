@@ -339,6 +339,10 @@ MS-001.24 Product Owner Approval: APPROVED
 MS-001.24 Implementation Status: NOT STARTED
 MS-001.24 DoR Status: PASS
 MS-001.24 Blockers: NONE
+MS-001.24 Architecture Decision: `ADR-0005 - Canonical Serverless Project Repository for Project Identity`
+MS-001.24 Approved Mechanism: managed serverless PostgreSQL
+MS-001.24 Provider Selected: NO
+MS-001.24 Next Required Decision: managed PostgreSQL provider selection
 MS-001.24 Next Safe Step: Keep implementation at NOT STARTED until an explicit implementation session begins under active MS-001.24
 MS-001.13 Contract Status: APPROVED
 MS-001.13 DoR Review: PASS

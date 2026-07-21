@@ -223,6 +223,12 @@ MS-001.24 implementation status: NOT STARTED.
 MS-001.24 is the only active product milestone.
 MS-001.24 product outcome: one canonical read-only project context must be available through Project Brain to both browser runtime and server runtime without bypassing Project Brain.
 MS-001.24 architecture decision required before implementation: canonical server-readable project source.
+MS-001.24 architecture decision: `ADR-0005 - Canonical Serverless Project Repository for Project Identity`.
+MS-001.24 approved mechanism: managed serverless PostgreSQL.
+MS-001.24 provider selected: NO.
+MS-001.24 next required decision: managed PostgreSQL provider selection.
+MS-001.23 remains blocked by `MS-001.24`.
+Live OpenAI request remains not allowed.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
 CAP-004 publication commit: `688df2b`
 CAP-004 blockers: NONE

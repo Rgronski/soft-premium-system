@@ -3290,6 +3290,18 @@ NOT STARTED
 **Architecture Decision Required before implementation**
 Canonical server-readable project source
 
+**Architecture Decision**
+`ADR-0005 - Canonical Serverless Project Repository for Project Identity`
+
+**Selected Mechanism**
+`managed serverless PostgreSQL`
+
+**Provider**
+`NOT SELECTED`
+
+**Provider Selection Required before implementation**
+YES
+
 **In Scope**
 * exactly one canonical read-only project-context boundary that is reachable in browser runtime and server runtime
 * preservation of Project Brain as the only read boundary for AI project context
