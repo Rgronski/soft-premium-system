@@ -3087,10 +3087,16 @@ Product Owner accepted the following contract decisions:
 
 * Provider: `OpenAI`
 * Integration method: official `OpenAI Node SDK`
+* API method: `client.responses.create(...)`
+* Model: `gpt-5-nano`
 * Generation mode: single non-streaming text generation
+* Output mapping: `response.output_text`
 * Server secret: `OPENAI_API_KEY`
 
 **Product Owner Decision**
+ACCEPT
+
+**OpenAI Model Decision**
 ACCEPT
 
 No provider implementation, SDK installation, secret creation, or network call is authorized by this draft.
