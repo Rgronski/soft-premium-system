@@ -12,6 +12,7 @@ import type { GenerateAiProjectResponseResult } from "./types";
 vi.mock("server-only", () => ({}));
 
 async function loadServerModule() {
+  vi.resetModules();
   return import("./server");
 }
 
@@ -58,14 +59,21 @@ function createMalformedJsonRequest(): Request {
 }
 
 const storage = new MemoryStorage();
+const originalOpenAiApiKey = process.env.OPENAI_API_KEY;
 
 beforeEach(() => {
   storage.clear();
   vi.stubGlobal("window", {});
   vi.stubGlobal("localStorage", storage);
+  delete process.env.OPENAI_API_KEY;
 });
 
 afterEach(() => {
+  if (typeof originalOpenAiApiKey === "string") {
+    process.env.OPENAI_API_KEY = originalOpenAiApiKey;
+  } else {
+    delete process.env.OPENAI_API_KEY;
+  }
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
@@ -345,7 +353,148 @@ describe("createPostGenerateAiProjectRoute", () => {
 });
 
 describe("postGenerateAiProjectRoute", () => {
-  it("uses the production unavailable provider composition", async () => {
+  it.each([
+    undefined,
+    "",
+    "   ",
+  ])(
+    "uses the production unavailable provider composition when OPENAI_API_KEY is %j",
+    async (apiKey) => {
+      if (typeof apiKey === "string") {
+        process.env.OPENAI_API_KEY = apiKey;
+      } else {
+        delete process.env.OPENAI_API_KEY;
+      }
+
+      const { postGenerateAiProjectRoute } =
+        await loadServerModule();
+      storage.setItem(
+        "soft-premium-system.projects",
+        JSON.stringify([
+          {
+            id: "project-1",
+            name: "Alpha",
+            createdAt: "2026-07-13T10:00:00.000Z",
+          },
+        ]),
+      );
+
+      const response = await postGenerateAiProjectRoute(
+        createJsonRequest({
+          instruction: "generate",
+        }),
+        createContext("project-1"),
+      );
+
+      expect(response.status).toBe(503);
+      await expect(response.json()).resolves.toEqual({
+        status: "provider-unavailable",
+      });
+    },
+  );
+
+  it("uses the OpenAI provider in production composition when OPENAI_API_KEY is present", async () => {
+    const { createProductionGenerateAiProjectResponse } =
+      await loadServerModule();
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        },
+      ]),
+    );
+    const createClient = vi.fn(() => ({
+      responses: {
+        create: vi.fn(async () => ({
+          output_text: "Generated response",
+        })),
+      },
+    }));
+    const createProvider = vi.fn(() => ({
+      generate: vi.fn(async () => ({
+        status: "generated" as const,
+        content: "Generated response",
+      })),
+    }));
+    const generateAiProjectResponse =
+      createProductionGenerateAiProjectResponse({
+        env: {
+          OPENAI_API_KEY: "test-openai-key",
+        } as NodeJS.ProcessEnv,
+        createClient,
+        createProvider,
+      });
+
+    const result = await generateAiProjectResponse({
+      projectId: "project-1",
+      instruction: "Summarize project",
+    });
+
+    expect(createClient).toHaveBeenCalledTimes(1);
+    expect(createClient).toHaveBeenCalledWith("test-openai-key");
+    expect(createProvider).toHaveBeenCalledTimes(1);
+    expect(createProvider).toHaveBeenCalledWith({
+      client: expect.objectContaining({
+        responses: expect.any(Object),
+      }),
+      model: "gpt-5-nano",
+    });
+    expect(result).toEqual({
+      status: "generated",
+      content: "Generated response",
+    });
+  });
+
+  it("returns generated response through the existing transport boundary when the production OpenAI composition succeeds", async () => {
+    const { createPostGenerateAiProjectRoute, createProductionGenerateAiProjectResponse } =
+      await loadServerModule();
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        },
+      ]),
+    );
+    const generateAiProjectResponse =
+      createProductionGenerateAiProjectResponse({
+        env: {
+          OPENAI_API_KEY: "test-openai-key",
+        } as NodeJS.ProcessEnv,
+        createClient: () => ({
+          responses: {
+            create: vi.fn(async () => ({
+              output_text: "Generated response",
+            })),
+          },
+        }),
+      });
+    const handler = createPostGenerateAiProjectRoute({
+      generateAiProjectResponse,
+    });
+
+    const response = await handler(
+      createJsonRequest({
+        instruction: "generate",
+      }),
+      createContext("project-1"),
+    );
+
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toEqual({
+      status: "generated",
+      content: "Generated response",
+    });
+  });
+});
+
+describe("createProductionGenerateAiProjectResponse", () => {
+  it("keeps provider-unavailable behavior when context exists and OPENAI_API_KEY is missing", async () => {
     const { postGenerateAiProjectRoute } =
       await loadServerModule();
     storage.setItem(

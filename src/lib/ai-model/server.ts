@@ -1,6 +1,9 @@
 import "server-only";
 
+import OpenAI from "openai";
+
 import { createGenerateAiProjectResponse } from "./engine";
+import { createOpenAiProvider } from "./openai-provider";
 import type {
   GenerateAiProjectResponseInput,
   GenerateAiProjectResponseResult,
@@ -114,9 +117,45 @@ const unavailableProvider = {
   },
 };
 
-const generateAiProjectResponse = createGenerateAiProjectResponse({
-  provider: unavailableProvider,
-});
+type OpenAiProviderFactory = typeof createOpenAiProvider;
+type OpenAiProviderClient =
+  Parameters<OpenAiProviderFactory>[0]["client"];
+
+function createOpenAiClient(
+  apiKey: string,
+): OpenAiProviderClient {
+  return new OpenAI({ apiKey });
+}
+
+export function createProductionGenerateAiProjectResponse(deps?: {
+  env?: NodeJS.ProcessEnv;
+  createClient?: (
+    apiKey: string,
+  ) => OpenAiProviderClient;
+  createProvider?: OpenAiProviderFactory;
+  model?: "gpt-5-nano";
+}): (
+  input: GenerateAiProjectResponseInput,
+) => Promise<GenerateAiProjectResponseResult> {
+  const apiKey = deps?.env?.OPENAI_API_KEY?.trim();
+  const provider = apiKey
+    ? (deps?.createProvider ?? createOpenAiProvider)({
+        client: (deps?.createClient ?? createOpenAiClient)(
+          apiKey,
+        ),
+        model: deps?.model ?? "gpt-5-nano",
+      })
+    : unavailableProvider;
+
+  return createGenerateAiProjectResponse({
+    provider,
+  });
+}
+
+const generateAiProjectResponse =
+  createProductionGenerateAiProjectResponse({
+    env: process.env,
+  });
 
 export function createPostGenerateAiProjectRoute(deps: {
   generateAiProjectResponse: (
