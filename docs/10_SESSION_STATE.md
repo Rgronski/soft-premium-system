@@ -232,4 +232,4 @@ Latest Verified Commit: c57e8a2
 Verification Status: PASS - MS-001.23 no-secret verification remains PASS with 33 / 33 focused tests; live OpenAI verification remains NOT PERFORMED
 Blockers: Session 015 close publication, push confirmation, and fresh package generation are still pending; MS-001.23 remains blocked by MS-001.24 until server-readable project context is implemented
 Open Risks: Minimal Neon infrastructure exists, but application secrets, schema, repository implementation, and connectivity verification remain not started; `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only and is not an accepted ADR
-Next Safe Step: Commit and push the Session 015 close synchronization, then run `.\scripts\New-SpsSession.ps1` and confirm `Package Consistency: PASS`
+Next Safe Step: Verify `.gitignore`, then configure local `DATABASE_URL` and `DATABASE_URL_DIRECT` without exposing values before planning the first implementation batch of MS-001.24.
