@@ -228,14 +228,25 @@ MS-001.24 approved mechanism: managed serverless PostgreSQL.
 MS-001.24 provider selection: COMPLETED.
 MS-001.24 selected provider: Neon.
 MS-001.24 selected product: Neon Serverless Postgres.
-MS-001.24 preferred region: Europe / Frankfurt.
+MS-001.24 preferred region: AWS Europe Central 1 (Frankfurt).
 MS-001.24 runtime connection: pooled.
 MS-001.24 migration/admin connection: direct.
 MS-001.24 required environment variable names: `DATABASE_URL`, `DATABASE_URL_DIRECT`.
-MS-001.24 infrastructure setup: NOT STARTED.
-MS-001.24 next step: controlled Neon infrastructure setup discovery.
+MS-001.24 minimal Neon infrastructure: PROVISIONED.
+MS-001.24 default Neon branch: production.
+MS-001.24 initial Neon database: present.
+MS-001.24 initial Neon role: present.
+MS-001.24 pooled connection available: YES.
+MS-001.24 direct connection available: YES.
+MS-001.24 application secret configuration: NOT STARTED.
+MS-001.24 schema status: NOT STARTED.
+MS-001.24 `projects` table status: NOT CREATED.
+MS-001.24 application connectivity verification: NOT PERFORMED.
+MS-001.24 repository implementation: NOT STARTED.
+MS-001.24 next step: verify `.gitignore`, then configure local `DATABASE_URL` and `DATABASE_URL_DIRECT` without exposing values.
 MS-001.23 remains blocked by `MS-001.24`.
 Live OpenAI request remains not allowed.
+Pending deployment topic: `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only, is not an accepted ADR, and had no implementation in this session.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
 CAP-004 publication commit: `688df2b`
 CAP-004 blockers: NONE

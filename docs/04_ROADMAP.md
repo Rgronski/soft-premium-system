@@ -3303,7 +3303,7 @@ Canonical server-readable project source
 `Neon Serverless Postgres`
 
 **Preferred Region**
-`Europe / Frankfurt`
+`AWS Europe Central 1 (Frankfurt)`
 
 **Runtime Connection**
 `pooled`
@@ -3319,7 +3319,34 @@ Canonical server-readable project source
 YES
 
 **Infrastructure Configured**
-NO
+YES - minimal Neon infrastructure only
+
+**Default Neon Branch**
+`production`
+
+**Initial Neon Database**
+`present`
+
+**Initial Neon Role**
+`present`
+
+**Pooled Connection Available**
+YES
+
+**Direct Connection Available**
+YES
+
+**Application Secret Configuration**
+NOT STARTED
+
+**Schema Status**
+NOT STARTED
+
+**Projects Table**
+NOT CREATED
+
+**Application Connectivity Verification**
+NOT PERFORMED
 
 **In Scope**
 * exactly one canonical read-only project-context boundary that is reachable in browser runtime and server runtime

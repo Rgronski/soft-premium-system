@@ -1557,6 +1557,28 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## Session 015 - AI model provider and canonical project repository preparation
+
+### Date
+
+2026-07-22
+
+### Completed
+
+* Added permanent `Next Chat Prompt` session-start rules to the session handoff contract.
+* Published the `MS-001.23 - AI Model Production Provider Foundation` contract and activation.
+* Recorded the accepted OpenAI production model decision for `MS-001.23` with `gpt-5-nano`, official OpenAI Node SDK usage, `client.responses.create(...)`, `response.output_text`, and `OPENAI_API_KEY`.
+* Published the OpenAI provider adapter implementation and server composition wiring for `MS-001.23`.
+* Recorded focused no-secret verification as `PASS` with `33 / 33` tests across the published adapter and server wiring steps.
+* Formalized the `MS-001.23` blocker caused by missing server-readable project context and activated the prerequisite milestone `MS-001.24 - Server-Readable Read-Only Project Context Foundation`.
+* Published `ADR-0005 - Canonical Serverless Project Repository for Project Identity`.
+* Published `ADR-0006 - Managed PostgreSQL Provider for Canonical Project Repository`.
+* Recorded that the selected managed PostgreSQL provider is Neon and the selected product is Neon Serverless Postgres.
+* Recorded the manually provisioned minimal Neon infrastructure state for `MS-001.24` without storing secrets, connection strings, hostnames, project IDs, or branch IDs in the repository.
+* Confirmed that application secret configuration, schema creation, repository implementation, connectivity verification, and live OpenAI verification all remain not started or not performed.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.
