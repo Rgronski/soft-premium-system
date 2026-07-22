@@ -298,6 +298,108 @@ Mitigations:
 * keep schema limited to Project identity
 * keep provider-specific details behind the repository adapter
 * keep SQL portable
+
+---
+
+# ADR-0006
+
+## Status
+
+Accepted
+
+## Context
+
+`ADR-0005` accepted managed serverless PostgreSQL as the canonical Project Repository mechanism for `MS-001.24 - Server-Readable Read-Only Project Context Foundation`.
+
+The concrete managed PostgreSQL provider remained intentionally undecided and had to be selected before implementation.
+
+Provider selection must preserve a provider-neutral repository contract, keep Project Brain independent from provider SDK details, and avoid recording any runtime secret values in the repository.
+
+No Neon infrastructure has been confirmed as created or configured yet.
+
+## Decision
+
+Use Neon Serverless Postgres as the managed PostgreSQL provider for the canonical Project Repository.
+
+Related Milestone: `MS-001.24 - Server-Readable Read-Only Project Context Foundation`
+
+Related Decision: `ADR-0005 - Canonical Serverless Project Repository for Project Identity`
+
+Decision Owner: `Chief Architect`
+
+Approval Owner: `Product Owner`
+
+Product Owner Decision: `GO`
+
+Configuration decision:
+
+* Provider: `Neon`
+* Product: `Neon Serverless Postgres`
+* Preferred region: `Europe / Frankfurt`
+* Runtime connection: `pooled`
+* Migration/admin connection: `direct`
+* Environment variable names:
+  * `DATABASE_URL`
+  * `DATABASE_URL_DIRECT`
+
+Repository boundary:
+
+* provider-neutral repository contract
+* domain code and Project Brain do not depend on Neon SDK
+* provider-specific configuration remains in a future infrastructure adapter
+* schema remains portable SQL
+
+Security:
+
+* credentials are server-side only
+* no `NEXT_PUBLIC_*` secrets
+* no repository secrets
+* browser has no direct database access
+
+Infrastructure state:
+
+* Neon infrastructure configured: `NO`
+* Neon project created: `NO / NOT CONFIRMED`
+* Secrets configured: `NO`
+* Repository implementation started: `NO`
+
+Out of scope:
+
+* Neon provisioning
+* account configuration
+* database creation and migrations
+* client installation
+* `.env`
+* repository code
+* endpoints
+* data import
+* OpenAI
+
+## Consequences
+
+Positive:
+
+* provider selection for `MS-001.24` is complete
+* implementation can standardize on `DATABASE_URL` and `DATABASE_URL_DIRECT`
+* runtime and migration connection strategies are clarified before coding
+* provider-neutral repository and Project Brain boundaries remain intact
+
+Negative:
+
+* infrastructure setup is still required before implementation can begin
+* provider-specific adapter work remains to be implemented
+
+Risks:
+
+* premature infrastructure assumptions before controlled setup discovery
+* accidental leakage of secrets into repository files during future setup
+
+Mitigations:
+
+* keep this decision documentation-only
+* record variable names only, never values
+* keep implementation status at `NOT STARTED` until a separate implementation session
+* keep provisioning and secret configuration outside this decision
 * keep other domains out of scope
 * keep `localStorage` out of canonical ownership
 

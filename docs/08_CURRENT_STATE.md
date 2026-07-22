@@ -225,8 +225,15 @@ MS-001.24 product outcome: one canonical read-only project context must be avail
 MS-001.24 architecture decision required before implementation: canonical server-readable project source.
 MS-001.24 architecture decision: `ADR-0005 - Canonical Serverless Project Repository for Project Identity`.
 MS-001.24 approved mechanism: managed serverless PostgreSQL.
-MS-001.24 provider selected: NO.
-MS-001.24 next required decision: managed PostgreSQL provider selection.
+MS-001.24 provider selection: COMPLETED.
+MS-001.24 selected provider: Neon.
+MS-001.24 selected product: Neon Serverless Postgres.
+MS-001.24 preferred region: Europe / Frankfurt.
+MS-001.24 runtime connection: pooled.
+MS-001.24 migration/admin connection: direct.
+MS-001.24 required environment variable names: `DATABASE_URL`, `DATABASE_URL_DIRECT`.
+MS-001.24 infrastructure setup: NOT STARTED.
+MS-001.24 next step: controlled Neon infrastructure setup discovery.
 MS-001.23 remains blocked by `MS-001.24`.
 Live OpenAI request remains not allowed.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED

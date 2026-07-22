@@ -3296,11 +3296,30 @@ Canonical server-readable project source
 **Selected Mechanism**
 `managed serverless PostgreSQL`
 
-**Provider**
-`NOT SELECTED`
+**Selected Provider**
+`Neon`
 
-**Provider Selection Required before implementation**
+**Selected Product**
+`Neon Serverless Postgres`
+
+**Preferred Region**
+`Europe / Frankfurt`
+
+**Runtime Connection**
+`pooled`
+
+**Migration Connection**
+`direct`
+
+**Required Environment Variable Names**
+* `DATABASE_URL`
+* `DATABASE_URL_DIRECT`
+
+**Provider Selection Completed**
 YES
+
+**Infrastructure Configured**
+NO
 
 **In Scope**
 * exactly one canonical read-only project-context boundary that is reachable in browser runtime and server runtime

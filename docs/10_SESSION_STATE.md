@@ -341,9 +341,15 @@ MS-001.24 DoR Status: PASS
 MS-001.24 Blockers: NONE
 MS-001.24 Architecture Decision: `ADR-0005 - Canonical Serverless Project Repository for Project Identity`
 MS-001.24 Approved Mechanism: managed serverless PostgreSQL
-MS-001.24 Provider Selected: NO
-MS-001.24 Next Required Decision: managed PostgreSQL provider selection
-MS-001.24 Next Safe Step: Keep implementation at NOT STARTED until an explicit implementation session begins under active MS-001.24
+MS-001.24 Provider Selection: COMPLETED
+MS-001.24 Selected Provider: Neon
+MS-001.24 Selected Product: Neon Serverless Postgres
+MS-001.24 Preferred Region: Europe / Frankfurt
+MS-001.24 Runtime Connection: pooled
+MS-001.24 Migration/Admin Connection: direct
+MS-001.24 Required Environment Variable Names: `DATABASE_URL`, `DATABASE_URL_DIRECT`
+MS-001.24 Infrastructure Setup: NOT STARTED
+MS-001.24 Next Safe Step: Controlled Neon infrastructure setup discovery before implementation begins under active MS-001.24
 MS-001.13 Contract Status: APPROVED
 MS-001.13 DoR Review: PASS
 MS-001.13 Activation Status: ACTIVATED
