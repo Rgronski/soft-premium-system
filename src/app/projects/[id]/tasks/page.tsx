@@ -1,38 +1,147 @@
 "use client";
 
-import { createProjectBrainTask } from "@/lib/project-brain/engine";
-import { getTasks } from "@/lib/task/task";
+import {
+  createTaskOnServer,
+  getTasksFromServer,
+  TaskServerError,
+} from "@/lib/task/browser-server";
 import type { Task } from "@/lib/task/types";
 import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+function getTaskErrorMessage(error: unknown): string {
+  if (error instanceof TaskServerError) {
+    switch (error.code) {
+      case "invalid-request":
+        return "Nie udało się dodać zadania. Sprawdź dane.";
+      case "project-not-found":
+        return "Projekt nie istnieje.";
+      case "context-unavailable":
+        return "Dane projektu są chwilowo niedostępne.";
+      case "network-error":
+        return "Nie udało się połączyć z serwerem.";
+      case "invalid-response":
+        return "Serwer zwrócił nieprawidłową odpowiedź.";
+    }
+  }
+
+  return "Nie udało się wykonać operacji na zadaniach.";
+}
 
 export default function ProjectTasksPage() {
   const params = useParams<{ id: string }>();
+  const projectId = params.id;
   const [taskTitle, setTaskTitle] = useState("");
-  const [refreshKey, setRefreshKey] = useState(0);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const mountedRef = useRef(true);
+  const projectIdRef = useRef(projectId);
 
-  const tasks = useMemo<Task[]>(() => {
-    return getTasks(params.id);
-  }, [params.id, refreshKey]);
+  projectIdRef.current = projectId;
 
-  function handleAddTask() {
-    const commandId = crypto.randomUUID();
-    const createdTask = createProjectBrainTask({
-      commandId,
-      projectId: params.id,
-      title: taskTitle,
-    });
+  useEffect(() => {
+    setIsSubmitting(false);
+  }, [projectId]);
 
-    if (!createdTask) {
+  useEffect(() => {
+    mountedRef.current = true;
+
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadTasks() {
+      setIsLoading(true);
+      setErrorMessage(null);
+
+      try {
+        const loadedTasks = await getTasksFromServer(projectId);
+
+        if (ignore) {
+          return;
+        }
+
+        setTasks(loadedTasks);
+      } catch (error) {
+        if (ignore) {
+          return;
+        }
+
+        setErrorMessage(getTaskErrorMessage(error));
+      } finally {
+        if (!ignore) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    void loadTasks();
+
+    return () => {
+      ignore = true;
+    };
+  }, [projectId]);
+
+  async function handleAddTask(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const title = taskTitle.trim();
+
+    if (!title) {
+      setErrorMessage("Nie udało się dodać zadania. Sprawdź dane.");
       return;
     }
 
-    if (
-      createdTask.status === "completed" ||
-      createdTask.status === "completed-with-refresh-failure"
-    ) {
+    if (isSubmitting) {
+      return;
+    }
+
+    const submittedProjectId = projectId;
+
+    function isCurrentSubmission() {
+      return (
+        mountedRef.current &&
+        projectIdRef.current === submittedProjectId
+      );
+    }
+
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      await createTaskOnServer({
+        projectId: submittedProjectId,
+        title,
+      });
+
+      if (!isCurrentSubmission()) {
+        return;
+      }
+
+      const refreshedTasks = await getTasksFromServer(submittedProjectId);
+
+      if (!isCurrentSubmission()) {
+        return;
+      }
+
+      setTasks(refreshedTasks);
       setTaskTitle("");
-      setRefreshKey((currentValue) => currentValue + 1);
+    } catch (error) {
+      if (!isCurrentSubmission()) {
+        return;
+      }
+
+      setErrorMessage(getTaskErrorMessage(error));
+    } finally {
+      if (isCurrentSubmission()) {
+        setIsSubmitting(false);
+      }
     }
   }
 
@@ -47,7 +156,12 @@ export default function ProjectTasksPage() {
         </div>
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
-          <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
+          <form
+            onSubmit={(event) => {
+              void handleAddTask(event);
+            }}
+            className="grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]"
+          >
             <input
               type="text"
               value={taskTitle}
@@ -57,17 +171,21 @@ export default function ProjectTasksPage() {
             />
 
             <button
-              type="button"
-              onClick={handleAddTask}
-              className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-200 transition-colors hover:border-zinc-700 hover:bg-zinc-800"
+              type="submit"
+              disabled={isSubmitting || isLoading}
+              className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-200 transition-colors hover:border-zinc-700 hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Add
+              {isSubmitting ? "Zapisywanie..." : "Add"}
             </button>
-          </div>
+          </form>
         </div>
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
-          {tasks.length === 0 ? (
+          {isLoading ? (
+            <p className="text-sm text-zinc-400">Loading tasks...</p>
+          ) : errorMessage ? (
+            <p className="text-sm text-zinc-400">{errorMessage}</p>
+          ) : tasks.length === 0 ? (
             <p className="text-sm text-zinc-400">No tasks yet</p>
           ) : (
             <div className="space-y-3">
