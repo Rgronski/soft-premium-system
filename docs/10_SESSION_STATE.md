@@ -217,7 +217,7 @@ Next Session ID: 017
 Suggested Next Chat Title: 017 SPS OS - MS-001.24 Server Consumer Integration Discovery
 Active Capability: NONE
 Active Work Item: Session Close Protocol
-Current Mode: SESSION CLOSE / IN PROGRESS
+Current Mode: SESSION CLOSED
 Completed Capability Items: MS-001.24 Local Secret Setup; MS-001.24 Minimal Projects Schema; MS-001.24 Existing Project Seed Record; MS-001.24 First Read-Only Server Client Batch; MS-001.24 Live Read Verification
 Current Product Milestone: MS-001.24 - Server-Readable Read-Only Project Context Foundation
 Next Product Milestone: MS-001.23 - AI Model Production Provider Foundation (resume after MS-001.24)
@@ -228,8 +228,8 @@ Platform Priority: Keep MS-001.24 active while connecting the verified read-only
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 4fb9a3a
+Latest Verified Commit: 9c9b8a2
 Verification Status: PASS - local secret setup verified, manual Neon schema and seed record verified, focused server repository tests `2 / 2` PASS, scoped ESLint PASS, and live read through `getServerProjectById()` PASS; live OpenAI verification remains NOT PERFORMED
-Blockers: Session 016 close publication, push confirmation, and fresh package generation remain pending; MS-001.23 remains blocked by MS-001.24 until one existing server-side consumer uses the verified read-only Neon project repository
+Blockers: MS-001.23 remains blocked by MS-001.24 until one existing server-side consumer uses the verified read-only Neon project repository
 Open Risks: hydration mismatch was noticed during local dev runtime and was not diagnosed in this session; browser project reads still use localStorage; AI route does not yet use the Neon Project repository; `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` remains pending discovery only and is not an accepted ADR
 Next Safe Step: Przeprowadzić discovery minimalnego patcha podłączającego getServerProjectById() do jednego istniejącego konsumenta serwerowego, preferencyjnie AI route, bez zmian w UI i bez zapisu do bazy.
