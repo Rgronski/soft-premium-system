@@ -4,6 +4,7 @@ import OpenAI from "openai";
 
 import { createGenerateAiProjectResponse } from "./engine";
 import { createOpenAiProvider } from "./openai-provider";
+import { getServerProjectById } from "../project/server";
 import type {
   GenerateAiProjectResponseInput,
   GenerateAiProjectResponseResult,
@@ -161,6 +162,9 @@ export function createPostGenerateAiProjectRoute(deps: {
   generateAiProjectResponse: (
     input: GenerateAiProjectResponseInput,
   ) => Promise<GenerateAiProjectResponseResult>;
+  getServerProjectById?: (
+    projectId: string,
+  ) => Promise<Awaited<ReturnType<typeof getServerProjectById>>>;
 }): GenerateAiProjectHttpHandler {
   return async function postGenerateAiProjectRoute(
     request: Request,
@@ -173,6 +177,29 @@ export function createPostGenerateAiProjectRoute(deps: {
     }
 
     const { id } = await context.params;
+
+    try {
+      const project =
+        await (deps.getServerProjectById ?? getServerProjectById)(id);
+
+      if (!project) {
+        const result = {
+          status: "project-not-found",
+        } satisfies GenerateAiProjectResponseResult;
+
+        return Response.json(result, {
+          status: mapGenerateResultToHttpStatus(result),
+        });
+      }
+    } catch {
+      const result = {
+        status: "context-unavailable",
+      } satisfies GenerateAiProjectResponseResult;
+
+      return Response.json(result, {
+        status: mapGenerateResultToHttpStatus(result),
+      });
+    }
 
     try {
       const result = await deps.generateAiProjectResponse({
@@ -192,4 +219,5 @@ export function createPostGenerateAiProjectRoute(deps: {
 export const postGenerateAiProjectRoute =
   createPostGenerateAiProjectRoute({
     generateAiProjectResponse,
+    getServerProjectById,
   });

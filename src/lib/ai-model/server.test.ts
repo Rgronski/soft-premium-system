@@ -11,6 +11,12 @@ import type { GenerateAiProjectResponseResult } from "./types";
 
 vi.mock("server-only", () => ({}));
 
+const getServerProjectByIdMock = vi.fn();
+
+vi.mock("../project/server", () => ({
+  getServerProjectById: getServerProjectByIdMock,
+}));
+
 async function loadServerModule() {
   vi.resetModules();
   return import("./server");
@@ -75,6 +81,12 @@ afterEach(() => {
     delete process.env.OPENAI_API_KEY;
   }
   vi.unstubAllGlobals();
+  getServerProjectByIdMock.mockReset();
+  getServerProjectByIdMock.mockResolvedValue({
+    id: "project-123",
+    name: "Alpha",
+    createdAt: "2026-07-13T10:00:00.000Z",
+  });
   vi.restoreAllMocks();
 });
 
@@ -96,6 +108,7 @@ describe("createPostGenerateAiProjectRoute", () => {
     await expect(response.json()).resolves.toEqual({
       status: "invalid-request",
     });
+    expect(getServerProjectByIdMock).not.toHaveBeenCalled();
     expect(generateAiProjectResponse).not.toHaveBeenCalled();
   });
 
@@ -116,6 +129,7 @@ describe("createPostGenerateAiProjectRoute", () => {
     await expect(response.json()).resolves.toEqual({
       status: "invalid-request",
     });
+    expect(getServerProjectByIdMock).not.toHaveBeenCalled();
     expect(generateAiProjectResponse).not.toHaveBeenCalled();
   });
 
@@ -136,6 +150,7 @@ describe("createPostGenerateAiProjectRoute", () => {
     await expect(response.json()).resolves.toEqual({
       status: "invalid-request",
     });
+    expect(getServerProjectByIdMock).not.toHaveBeenCalled();
     expect(generateAiProjectResponse).not.toHaveBeenCalled();
   });
 
@@ -156,10 +171,11 @@ describe("createPostGenerateAiProjectRoute", () => {
     await expect(response.json()).resolves.toEqual({
       status: "invalid-request",
     });
+    expect(getServerProjectByIdMock).not.toHaveBeenCalled();
     expect(generateAiProjectResponse).not.toHaveBeenCalled();
   });
 
-  it("delegates exactly once with route param projectId and untrimmed instruction", async () => {
+  it("reads the server project once and delegates with route param projectId and untrimmed instruction when the project exists", async () => {
     const { createPostGenerateAiProjectRoute } =
       await loadServerModule();
     const generateAiProjectResponse = vi
@@ -168,6 +184,11 @@ describe("createPostGenerateAiProjectRoute", () => {
         status: "generated",
         content: "ok",
       });
+    getServerProjectByIdMock.mockResolvedValueOnce({
+      id: "route-project-id",
+      name: "Alpha",
+      createdAt: "2026-07-13T10:00:00.000Z",
+    });
     const handler = createPostGenerateAiProjectRoute({
       generateAiProjectResponse,
     });
@@ -181,10 +202,64 @@ describe("createPostGenerateAiProjectRoute", () => {
     );
 
     expect(response.status).toBe(200);
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
+    expect(getServerProjectByIdMock).toHaveBeenCalledWith("route-project-id");
     expect(generateAiProjectResponse).toHaveBeenCalledTimes(1);
     expect(generateAiProjectResponse).toHaveBeenCalledWith({
       projectId: "route-project-id",
       instruction: "  keep spacing  ",
+    });
+  });
+
+  it("returns project-not-found when the server repository returns null without delegating to AI generation", async () => {
+    const { createPostGenerateAiProjectRoute } =
+      await loadServerModule();
+    const generateAiProjectResponse = vi.fn();
+    getServerProjectByIdMock.mockResolvedValueOnce(null);
+    const handler = createPostGenerateAiProjectRoute({
+      generateAiProjectResponse,
+    });
+
+    const response = await handler(
+      createJsonRequest({
+        instruction: "generate",
+      }),
+      createContext("missing-project"),
+    );
+
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
+    expect(getServerProjectByIdMock).toHaveBeenCalledWith("missing-project");
+    expect(generateAiProjectResponse).not.toHaveBeenCalled();
+    expect(response.status).toBe(404);
+    await expect(response.json()).resolves.toEqual({
+      status: "project-not-found",
+    });
+  });
+
+  it("returns context-unavailable when the server repository throws without delegating to AI generation", async () => {
+    const { createPostGenerateAiProjectRoute } =
+      await loadServerModule();
+    const generateAiProjectResponse = vi.fn();
+    getServerProjectByIdMock.mockRejectedValueOnce(
+      new Error("repository failure"),
+    );
+    const handler = createPostGenerateAiProjectRoute({
+      generateAiProjectResponse,
+    });
+
+    const response = await handler(
+      createJsonRequest({
+        instruction: "generate",
+      }),
+      createContext("project-123"),
+    );
+
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
+    expect(getServerProjectByIdMock).toHaveBeenCalledWith("project-123");
+    expect(generateAiProjectResponse).not.toHaveBeenCalled();
+    expect(response.status).toBe(503);
+    await expect(response.json()).resolves.toEqual({
+      status: "context-unavailable",
     });
   });
 
@@ -208,6 +283,7 @@ describe("createPostGenerateAiProjectRoute", () => {
     );
 
     expect(generateAiProjectResponse).toHaveBeenCalledTimes(1);
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
     expect(response.status).toBe(400);
     await expect(response.json()).resolves.toEqual({
       status: "invalid-instruction",
@@ -235,6 +311,7 @@ describe("createPostGenerateAiProjectRoute", () => {
     );
 
     expect(response.status).toBe(200);
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
     await expect(response.json()).resolves.toEqual({
       status: "generated",
       content: "generated content",
@@ -258,6 +335,7 @@ describe("createPostGenerateAiProjectRoute", () => {
     );
 
     expect(response.status).toBe(404);
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
     await expect(response.json()).resolves.toEqual({
       status: "project-not-found",
     });
@@ -280,6 +358,7 @@ describe("createPostGenerateAiProjectRoute", () => {
     );
 
     expect(response.status).toBe(503);
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
     await expect(response.json()).resolves.toEqual({
       status: "context-unavailable",
     });
@@ -302,6 +381,7 @@ describe("createPostGenerateAiProjectRoute", () => {
     );
 
     expect(response.status).toBe(503);
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
     await expect(response.json()).resolves.toEqual({
       status: "provider-unavailable",
     });
@@ -324,6 +404,7 @@ describe("createPostGenerateAiProjectRoute", () => {
     );
 
     expect(response.status).toBe(502);
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
     await expect(response.json()).resolves.toEqual({
       status: "generation-failed",
     });
@@ -346,6 +427,7 @@ describe("createPostGenerateAiProjectRoute", () => {
     );
 
     expect(response.status).toBe(500);
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
     await expect(response.json()).resolves.toEqual({
       status: "internal-error",
     });
