@@ -1579,6 +1579,23 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## Session 017 - MS-001.24 first AI route server repository guard integration
+
+### Date
+
+2026-07-23
+
+### Completed
+
+* Updated `src/lib/ai-model/server.ts` so the AI route performs a read-only `getServerProjectById(projectId)` guard before AI engine execution.
+* Updated `src/lib/ai-model/server.test.ts` with mocked repository coverage for the existing project path, `null` mapping to `project-not-found`, and repository exception mapping to `context-unavailable`.
+* Confirmed that AI generation is not invoked when the repository returns `null` or throws.
+* Confirmed focused verification with `npx.cmd vitest run src/lib/ai-model/server.test.ts` and result `1 test file passed, 20 tests passed`.
+* Published commit `e0f3186 - feat: connect AI route to server project repository`.
+* Confirmed `MS-001.24` remains `IN PROGRESS`.
+
+---
+
 ## Session 016 - MS-001.24 local secret setup, minimal schema, and first read-only Neon repository verification
 
 ### Date
