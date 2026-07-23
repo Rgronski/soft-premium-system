@@ -1579,6 +1579,32 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## Session 016 - MS-001.24 local secret setup, minimal schema, and first read-only Neon repository verification
+
+### Date
+
+2026-07-23
+
+### Completed
+
+* Confirmed `.gitignore` protects `.env.*` while keeping `.env.example` allowed.
+* Recorded that local `.env.local` contains `DATABASE_URL` and `DATABASE_URL_DIRECT` and remains ignored by Git.
+* Published commit `f2be439 - chore: protect local environment files`.
+* Added `scripts/projects.sql` with the minimal portable `projects` schema and published commit `d0766a6 - feat: add projects schema sql`.
+* Recorded that `public.projects` was created manually in Neon.
+* Recorded one existing seeded project in Neon with ID `306b5cba-7a7e-4d94-91a7-949f1ec8bf27`, name `testowy projekt`, and `createdAt` `2026-07-01T22:20:49.783Z`.
+* Recorded that a manual `SELECT` returned exactly one matching seeded project record.
+* Added `@neondatabase/serverless` pinned to version `1.1.0`.
+* Added `src/lib/project/server.ts` with the read-only `getServerProjectById(id: string): Promise<Project | null>` repository.
+* Added `src/lib/project/server.test.ts` with mocked `server-only` and mocked `@neondatabase/serverless` coverage for `DATABASE_URL`, parameterized `SELECT`, row mapping, and `null` for empty results.
+* Confirmed the repository uses `import "server-only"` and runtime access only through `DATABASE_URL`, while `DATABASE_URL_DIRECT` remains unused in runtime code.
+* Recorded focused verification as `PASS` with `2 / 2` tests and scoped ESLint `PASS`.
+* Recorded live read verification through application code as `PASS`.
+* Published commit `4fb9a3a - feat: add read-only project server repository`.
+* Confirmed all implementation commits for session 016 were pushed to `origin/main`.
+
+---
+
 # Future Releases
 
 Future releases should summarize completed milestones rather than individual implementation details whenever possible.

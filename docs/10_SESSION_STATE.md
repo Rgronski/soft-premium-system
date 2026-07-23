@@ -210,26 +210,26 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-07-22
-Current Session ID: 015
-Current Chat Title: SPS OS - SESSION 015 FULL CLOSE PROTOCOL
-Next Session ID: 016
-Suggested Next Chat Title: 016 SPS OS - MS-001.24 Local Secret Setup Discovery
+Date: 2026-07-23
+Current Session ID: 016
+Current Chat Title: 016 SPS OS - MS-001.24 Local Secret Setup Discovery
+Next Session ID: 017
+Suggested Next Chat Title: 017 SPS OS - MS-001.24 Server Consumer Integration Discovery
 Active Capability: NONE
 Active Work Item: Session Close Protocol
 Current Mode: SESSION CLOSE / IN PROGRESS
-Completed Capability Items: CAP-005 - React Component Test Infrastructure Foundation; CAP-004 - Architect-Codex Execution Boundary; MS-001.23 contract and partial implementation publication; MS-001.24 prerequisite activation; ADR-0005; ADR-0006
+Completed Capability Items: MS-001.24 Local Secret Setup; MS-001.24 Minimal Projects Schema; MS-001.24 Existing Project Seed Record; MS-001.24 First Read-Only Server Client Batch; MS-001.24 Live Read Verification
 Current Product Milestone: MS-001.24 - Server-Readable Read-Only Project Context Foundation
 Next Product Milestone: MS-001.23 - AI Model Production Provider Foundation (resume after MS-001.24)
 Active Parallel Capability: NONE
 Latest Completed Capability Item: CAP-005 - React Component Test Infrastructure Foundation
 Current Sprint: NONE
-Platform Priority: Keep SPS OS 1.0 release acceptance state synchronized while preparing the first safe infrastructure-to-application bridge for MS-001.24
+Platform Priority: Keep MS-001.24 active while connecting the verified read-only Neon Project identity repository to exactly one server-side consumer without expanding persistence scope
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: c57e8a2
-Verification Status: PASS - MS-001.23 no-secret verification remains PASS with 33 / 33 focused tests; live OpenAI verification remains NOT PERFORMED
-Blockers: Session 015 close publication, push confirmation, and fresh package generation are still pending; MS-001.23 remains blocked by MS-001.24 until server-readable project context is implemented
-Open Risks: Minimal Neon infrastructure exists, but application secrets, schema, repository implementation, and connectivity verification remain not started; `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only and is not an accepted ADR
-Next Safe Step: Verify `.gitignore`, then configure local `DATABASE_URL` and `DATABASE_URL_DIRECT` without exposing values before planning the first implementation batch of MS-001.24.
+Latest Verified Commit: 4fb9a3a
+Verification Status: PASS - local secret setup verified, manual Neon schema and seed record verified, focused server repository tests `2 / 2` PASS, scoped ESLint PASS, and live read through `getServerProjectById()` PASS; live OpenAI verification remains NOT PERFORMED
+Blockers: Session 016 close publication, push confirmation, and fresh package generation remain pending; MS-001.23 remains blocked by MS-001.24 until one existing server-side consumer uses the verified read-only Neon project repository
+Open Risks: hydration mismatch was noticed during local dev runtime and was not diagnosed in this session; browser project reads still use localStorage; AI route does not yet use the Neon Project repository; `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` remains pending discovery only and is not an accepted ADR
+Next Safe Step: Przeprowadzić discovery minimalnego patcha podłączającego getServerProjectById() do jednego istniejącego konsumenta serwerowego, preferencyjnie AI route, bez zmian w UI i bez zapisu do bazy.

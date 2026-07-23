@@ -219,7 +219,7 @@ MS-001.24 activation status: AUTHORIZED.
 MS-001.24 Product Owner Decision: GO.
 MS-001.24 Product Owner Approval: APPROVED.
 MS-001.24 DoR status: PASS.
-MS-001.24 implementation status: NOT STARTED.
+MS-001.24 implementation status: IN PROGRESS.
 MS-001.24 is the only active product milestone.
 MS-001.24 product outcome: one canonical read-only project context must be available through Project Brain to both browser runtime and server runtime without bypassing Project Brain.
 MS-001.24 architecture decision required before implementation: canonical server-readable project source.
@@ -238,12 +238,21 @@ MS-001.24 initial Neon database: present.
 MS-001.24 initial Neon role: present.
 MS-001.24 pooled connection available: YES.
 MS-001.24 direct connection available: YES.
-MS-001.24 application secret configuration: NOT STARTED.
-MS-001.24 schema status: NOT STARTED.
-MS-001.24 `projects` table status: NOT CREATED.
-MS-001.24 application connectivity verification: NOT PERFORMED.
-MS-001.24 repository implementation: NOT STARTED.
-MS-001.24 next step: verify `.gitignore`, then configure local `DATABASE_URL` and `DATABASE_URL_DIRECT` without exposing values.
+MS-001.24 application secret configuration: COMPLETED LOCALLY; `.env.local` contains `DATABASE_URL` and `DATABASE_URL_DIRECT` and remains ignored by Git.
+MS-001.24 schema status: MINIMAL `projects` SCHEMA CREATED MANUALLY IN NEON.
+MS-001.24 `projects` table status: CREATED.
+MS-001.24 existing project seed record status: CREATED AND VERIFIED.
+MS-001.24 application connectivity verification: PASS - one live read through `getServerProjectById()` returned the known seeded project record.
+MS-001.24 repository implementation: FIRST READ-ONLY SERVER PROJECT REPOSITORY PUBLISHED.
+MS-001.24 runtime dependency: `@neondatabase/serverless` `1.1.0`.
+MS-001.24 server read module: `src/lib/project/server.ts`.
+MS-001.24 server read test module: `src/lib/project/server.test.ts`.
+MS-001.24 public server read contract: `getServerProjectById(id: string): Promise<Project | null>`.
+MS-001.24 runtime uses only `DATABASE_URL`.
+MS-001.24 runtime does not use `DATABASE_URL_DIRECT`.
+MS-001.24 browser project source remains `localStorage`.
+MS-001.24 AI route does not yet consume the Neon project repository.
+MS-001.24 next step: connect `getServerProjectById()` to exactly one existing server-side consumer, preferably the AI route, without UI changes and without database writes.
 MS-001.23 remains blocked by `MS-001.24`.
 Live OpenAI request remains not allowed.
 Pending deployment topic: `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only, is not an accepted ADR, and had no implementation in this session.
