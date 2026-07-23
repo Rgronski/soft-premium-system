@@ -251,10 +251,14 @@ MS-001.24 public server read contract: `getServerProjectById(id: string): Promis
 MS-001.24 runtime uses only `DATABASE_URL`.
 MS-001.24 runtime does not use `DATABASE_URL_DIRECT`.
 MS-001.24 browser project source remains `localStorage`.
+MS-001.24 canonical source target is Neon for `Project`, `Tasks`, and `KnowledgeEntries`.
+MS-001.24 selected boundary model: server-first.
+MS-001.24 minimal server-first create boundary for `Tasks` and `KnowledgeEntries` is allowed only as the required exception for feeding the canonical read-only project context.
+MS-001.24 this exception does not approve full CRUD, full write-flow migration, or general write-architecture redesign.
 MS-001.24 AI route is now the first existing server-side consumer of `getServerProjectById(projectId)`.
 MS-001.24 AI route integration is a read-only project-existence guard before AI engine execution; an existing project continues through the current payload unchanged, `null` returns `project-not-found`, and a repository exception returns `context-unavailable`.
 MS-001.24 this guard does not yet establish the same canonical read-only project context through Project Brain for server runtime.
-MS-001.24 next step: discovery the smallest safe integration that lets server runtime read the same canonical project context through Project Brain without UI changes and without database writes.
+MS-001.24 next step: prepare the smallest vertical slice contract covering `Tasks` and `KnowledgeEntries` schema, server-readable read contracts, minimal server-first create contracts, and focused tests, without changing Project Brain composition or AI route before a separate implementation approval.
 MS-001.23 remains blocked by `MS-001.24`.
 Live OpenAI request remains not allowed.
 Pending deployment topic: `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only, is not an accepted ADR, and had no implementation in this session.

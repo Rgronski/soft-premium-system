@@ -3356,12 +3356,15 @@ NOT PERFORMED
 * controlled `project-not-found` for a non-existent project
 * minimal tests for browser/server read-boundary behavior
 * confirmation that the AI route without `OPENAI_API_KEY` reaches `provider-unavailable` rather than `project-not-found`
+* minimal server-first create boundary for `Tasks` and `KnowledgeEntries` only when required to feed the canonical read-only project context
+* minimal server-readable read contracts and schema for `Tasks` and `KnowledgeEntries` only when required to feed the canonical read-only project context
+* server-side generation or persistence of IDs and timestamps only for the minimal `Tasks` and `KnowledgeEntries` create boundary
 
 **Out of Scope**
 * OpenAI integration changes
 * adapter changes
 * another live OpenAI request
-* write flow
+* full write flow beyond the minimal server-first create boundary required to feed the canonical read-only project context
 * server-side project editing
 * offline synchronization
 * full application migration away from `localStorage`
@@ -3376,6 +3379,12 @@ NOT PERFORMED
 * agents
 * tool calling
 * additional endpoints not directly required for read-only project context
+* update operations
+* delete operations
+* bulk operations
+* full CRUD
+* retry queue
+* conflict resolution
 
 **Acceptance Criteria**
 1. Exactly one canonical source of read-only project context exists and is used by Project Brain.
@@ -3387,7 +3396,7 @@ NOT PERFORMED
 7. Without `OPENAI_API_KEY`, the existing AI route reaches the provider boundary and returns:
    * HTTP `503`
    * `provider-unavailable`
-8. No write flow, auth, multi-user behavior, or full persistence redesign is added.
+8. No write flow beyond the minimal server-first create boundary required to feed the canonical read-only project context, and no auth, multi-user behavior, or full persistence redesign is added.
 9. After this milestone is completed, `MS-001.23` may resume exactly one live OpenAI request.
 
 **Completion Boundary**
