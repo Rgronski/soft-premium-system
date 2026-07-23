@@ -44,3 +44,5 @@ next-env.d.ts
 /sps-git-context.txt
 /sps-session-summary.txt
 /sps-session.zip
+.env.*
+!.env.example
