@@ -1,7 +1,14 @@
 import "server-only";
 
+import { getServerProjectById } from "../project/server";
+import { getServerTasksByProjectId } from "./server";
 import { createServerTask } from "./server";
 import type { Task } from "./types";
+
+type GetTasksHttpHandler = (
+  request: Request,
+  context: RouteContext<"/api/projects/[id]/tasks">,
+) => Promise<Response>;
 
 type PostTaskHttpHandler = (
   request: Request,
@@ -101,6 +108,44 @@ function createTransportErrorResponse(
   );
 }
 
+export function createGetTasksRoute(deps: {
+  getServerProjectById: typeof getServerProjectById;
+  getServerTasksByProjectId: typeof getServerTasksByProjectId;
+}): GetTasksHttpHandler {
+  return async function getTasksRoute(
+    _request: Request,
+    context: RouteContext<"/api/projects/[id]/tasks">,
+  ): Promise<Response> {
+    const { id } = await context.params;
+
+    try {
+      const project = await deps.getServerProjectById(id);
+
+      if (!project) {
+        return createTransportErrorResponse("project-not-found", 404);
+      }
+    } catch {
+      return createTransportErrorResponse(
+        "context-unavailable",
+        503,
+      );
+    }
+
+    try {
+      const tasks = await deps.getServerTasksByProjectId(id);
+
+      return Response.json(tasks satisfies Task[], {
+        status: 200,
+      });
+    } catch {
+      return createTransportErrorResponse(
+        "context-unavailable",
+        503,
+      );
+    }
+  };
+}
+
 function isProjectForeignKeyViolation(error: unknown): boolean {
   if (typeof error !== "object" || error === null) {
     return false;
@@ -161,4 +206,9 @@ export function createPostTaskRoute(deps: {
 
 export const postTaskRoute = createPostTaskRoute({
   createServerTask,
+});
+
+export const getTasksRoute = createGetTasksRoute({
+  getServerProjectById,
+  getServerTasksByProjectId,
 });

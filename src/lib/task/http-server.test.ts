@@ -1,4 +1,6 @@
 import {
+  afterEach,
+  beforeEach,
   describe,
   expect,
   it,
@@ -8,6 +10,22 @@ import {
 import type { Task } from "./types";
 
 vi.mock("server-only", () => ({}));
+
+const getServerProjectByIdMock = vi.fn();
+const getServerTasksByProjectIdMock = vi.fn();
+
+vi.mock("../project/server", () => ({
+  getServerProjectById: getServerProjectByIdMock,
+}));
+
+vi.mock("./server", async () => {
+  const actual = await vi.importActual<typeof import("./server")>("./server");
+
+  return {
+    ...actual,
+    getServerTasksByProjectId: getServerTasksByProjectIdMock,
+  };
+});
 
 async function loadTaskHttpServerModule() {
   vi.resetModules();
@@ -39,6 +57,164 @@ function createMalformedJsonRequest(): Request {
     body: "{",
   });
 }
+
+function createGetRequest(): Request {
+  return new Request("http://localhost/api/projects/project-123/tasks", {
+    method: "GET",
+  });
+}
+
+beforeEach(() => {
+  getServerProjectByIdMock.mockReset();
+  getServerTasksByProjectIdMock.mockReset();
+});
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
+
+describe("createGetTasksRoute", () => {
+  it("returns 200 with the full tasks list for an existing project", async () => {
+    const { createGetTasksRoute } =
+      await loadTaskHttpServerModule();
+    const tasks: Task[] = [
+      {
+        id: "task-1",
+        projectId: "route-project-id",
+        title: "First",
+        createdAt: "2026-07-23T10:00:00.000Z",
+      },
+      {
+        id: "task-2",
+        projectId: "route-project-id",
+        title: "Second",
+        createdAt: "2026-07-23T10:05:00.000Z",
+      },
+    ];
+    getServerProjectByIdMock.mockResolvedValueOnce({
+      id: "route-project-id",
+      name: "Alpha",
+      createdAt: "2026-07-23T09:00:00.000Z",
+    });
+    getServerTasksByProjectIdMock.mockResolvedValueOnce(tasks);
+    const handler = createGetTasksRoute({
+      getServerProjectById: getServerProjectByIdMock,
+      getServerTasksByProjectId: getServerTasksByProjectIdMock,
+    });
+
+    const response = await handler(
+      createGetRequest(),
+      createContext("route-project-id"),
+    );
+
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
+    expect(getServerProjectByIdMock).toHaveBeenCalledWith("route-project-id");
+    expect(getServerTasksByProjectIdMock).toHaveBeenCalledTimes(1);
+    expect(getServerTasksByProjectIdMock).toHaveBeenCalledWith("route-project-id");
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toEqual(tasks);
+  });
+
+  it("returns 200 with an empty array for an existing project without tasks", async () => {
+    const { createGetTasksRoute } =
+      await loadTaskHttpServerModule();
+    getServerProjectByIdMock.mockResolvedValueOnce({
+      id: "project-123",
+      name: "Alpha",
+      createdAt: "2026-07-23T09:00:00.000Z",
+    });
+    getServerTasksByProjectIdMock.mockResolvedValueOnce([]);
+    const handler = createGetTasksRoute({
+      getServerProjectById: getServerProjectByIdMock,
+      getServerTasksByProjectId: getServerTasksByProjectIdMock,
+    });
+
+    const response = await handler(
+      createGetRequest(),
+      createContext("project-123"),
+    );
+
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toEqual([]);
+  });
+
+  it("returns 404 for a missing project without calling the task reader", async () => {
+    const { createGetTasksRoute } =
+      await loadTaskHttpServerModule();
+    getServerProjectByIdMock.mockResolvedValueOnce(null);
+    const handler = createGetTasksRoute({
+      getServerProjectById: getServerProjectByIdMock,
+      getServerTasksByProjectId: getServerTasksByProjectIdMock,
+    });
+
+    const response = await handler(
+      createGetRequest(),
+      createContext("missing-project"),
+    );
+
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
+    expect(getServerProjectByIdMock).toHaveBeenCalledWith("missing-project");
+    expect(getServerTasksByProjectIdMock).not.toHaveBeenCalled();
+    expect(response.status).toBe(404);
+    await expect(response.json()).resolves.toEqual({
+      status: "project-not-found",
+    });
+  });
+
+  it("returns 503 when the project repository throws without calling the task reader", async () => {
+    const { createGetTasksRoute } =
+      await loadTaskHttpServerModule();
+    getServerProjectByIdMock.mockRejectedValueOnce(
+      new Error("project repository failure"),
+    );
+    const handler = createGetTasksRoute({
+      getServerProjectById: getServerProjectByIdMock,
+      getServerTasksByProjectId: getServerTasksByProjectIdMock,
+    });
+
+    const response = await handler(
+      createGetRequest(),
+      createContext("project-123"),
+    );
+
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
+    expect(getServerTasksByProjectIdMock).not.toHaveBeenCalled();
+    expect(response.status).toBe(503);
+    await expect(response.json()).resolves.toEqual({
+      status: "context-unavailable",
+    });
+  });
+
+  it("returns 503 when the task repository throws for an existing project", async () => {
+    const { createGetTasksRoute } =
+      await loadTaskHttpServerModule();
+    getServerProjectByIdMock.mockResolvedValueOnce({
+      id: "project-123",
+      name: "Alpha",
+      createdAt: "2026-07-23T09:00:00.000Z",
+    });
+    getServerTasksByProjectIdMock.mockRejectedValueOnce(
+      new Error("task repository failure"),
+    );
+    const handler = createGetTasksRoute({
+      getServerProjectById: getServerProjectByIdMock,
+      getServerTasksByProjectId: getServerTasksByProjectIdMock,
+    });
+
+    const response = await handler(
+      createGetRequest(),
+      createContext("project-123"),
+    );
+
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
+    expect(getServerTasksByProjectIdMock).toHaveBeenCalledTimes(1);
+    expect(getServerTasksByProjectIdMock).toHaveBeenCalledWith("project-123");
+    expect(response.status).toBe(503);
+    await expect(response.json()).resolves.toEqual({
+      status: "context-unavailable",
+    });
+  });
+});
 
 describe("createPostTaskRoute", () => {
   it("creates a task once from route params, trims title, and returns 201 with the full task", async () => {
