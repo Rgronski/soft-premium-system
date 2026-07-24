@@ -1624,6 +1624,47 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## Session 018 - MS-001.23 live OpenAI verification and closure
+
+### Date
+
+2026-07-24
+
+### Completed
+
+* Completed controlled live OpenAI provider verification.
+* Confirmed HTTP `200` and SPS status `generated`.
+* Confirmed real generated text was returned.
+* Confirmed one provider attempt and zero retries.
+* Confirmed zero data writes.
+* Confirmed canonical route, application, and provider boundaries remained preserved.
+* Diagnosed earlier failures as malformed local `OPENAI_API_KEY` configuration.
+* Added explicit `maxRetries: 0`.
+* Aligned provider typing with the installed OpenAI SDK.
+* Removed all temporary diagnostic logging before finalization.
+* Closed `MS-001.23`.
+
+### Evidence
+
+* `a2ec3d2` - `fix: disable OpenAI SDK retries`
+* `1caa5eb` - `refactor: align OpenAI provider types with SDK`
+* Final verification project ID: `306b5cba-7a7e-4d94-91a7-949f1ec8bf27`
+* Final HTTP status: `200`
+* Final SPS status: `generated`
+* Generated text returned: `YES`
+* Provider attempts: `1`
+* Retry count: `0`
+* Data writes: `0`
+
+### Notes
+
+* No secret values were committed or documented.
+* `.env.local` remains ignored by Git.
+* No UI, streaming, agents, tool calling, additional endpoint, or write scope was introduced.
+* Commits and SSOT remain local until Product Owner approves push.
+
+---
+
 ## Session 016 - MS-001.24 local secret setup, minimal schema, and first read-only Neon repository verification
 
 ### Date

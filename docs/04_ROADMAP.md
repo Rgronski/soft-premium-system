@@ -107,11 +107,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-001.23 - AI Model Production Provider Foundation
+NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.24 - Server-Readable Read-Only Project Context Foundation
+MS-001.23 - AI Model Production Provider Foundation
 
 ## Next
 
@@ -3050,10 +3050,10 @@ Product Milestone
 APPROVED
 
 **Active**
-YES
+NO
 
 **Runtime Status**
-ACTIVE
+CLOSED
 
 **Owner**
 Product Owner
@@ -3161,18 +3161,22 @@ APPROVED
 PASS
 
 **Activation Status**
-AUTHORIZED
+CLOSED
 
 **Activation Decision**
 AUTHORIZED
 
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Milestone Status**
+COMPLETED / VERIFIED / READY FOR PUBLICATION
+
 **Published Implementation State**
-* published implementation exists for:
+* local implementation exists for:
   * OpenAI provider adapter
   * production provider wiring
-* controlled verification without secret: `PASS`
-* live verification status: `READY TO RESUME after MS-001.24 publication`
-* the published code remains valid publication evidence and is not reverted by this contract correction
+* the local code remains valid publication evidence pending approved push to `origin/main`
 
 **Completion Blocker**
 NONE
@@ -3184,14 +3188,14 @@ NONE
 `MS-001.24` is completed and published, so `MS-001.23` may resume from the existing provider-backed foundation.
 
 **Acceptance Criteria**
-1. Exactly one production implementation exists for the current `AiModelProvider.generate(request)` contract.
-2. The existing `createGenerateAiProjectResponse` application service delegates to that provider implementation without bypassing the established application boundary.
-3. The existing `POST /api/projects/[id]/ai/generate` route executes one controlled provider-backed request through the published transport and application boundaries.
-4. A valid request can return one controlled generated-text result through the existing route.
-5. Missing or invalid `OPENAI_API_KEY` configuration returns one explicit controlled failure result rather than an uncontrolled exception.
-6. Provider failure is mapped to a controlled application result and does not leak as an uncaught exception.
-7. No UI, streaming, agents, tool calling, additional endpoints, or write flow are added.
-8. The closed boundaries of `MS-001.21` and `MS-001.22` remain preserved.
+1. PASS - Exactly one production implementation exists for the current `AiModelProvider.generate(request)` contract.
+2. PASS - The existing `createGenerateAiProjectResponse` application service delegates to that provider implementation without bypassing the established application boundary.
+3. PASS - The existing `POST /api/projects/[id]/ai/generate` route executed one controlled provider-backed request through the existing transport and application boundaries.
+4. PASS - A valid request returned one controlled generated-text result through the existing route.
+5. PASS - Missing or invalid `OPENAI_API_KEY` configuration remained a controlled failure path rather than an uncontrolled exception.
+6. PASS - Provider failure remains mapped to a controlled application result and does not leak as an uncaught exception.
+7. PASS - No UI, streaming, agents, tool calling, additional endpoints, or write flow were added.
+8. PASS - The closed boundaries of `MS-001.21` and `MS-001.22` remain preserved.
 
 **Verification Strategy**
 Do not execute verification at draft stage.
@@ -3216,11 +3220,26 @@ This milestone may be considered complete only when:
 * SSOT documents the real post-implementation state
 * required verification and publication pass under SPS OS rules
 
+Completion Boundary: PASS
+
+**Implementation Evidence**
+* OpenAI provider adapter works through the existing `AiModelProvider.generate(...)` boundary.
+* The existing `POST /api/projects/[id]/ai/generate` route returned HTTP `200`.
+* SPS response status: `generated`.
+* Generated text returned: `YES`.
+* Exactly one provider attempt was used.
+* `maxRetries: 0`.
+* Retry count: `0`.
+* Data writes: `0`.
+* No UI, routing, streaming, agents, tool calling, or write flow changes were introduced.
+* Canonical Project Brain context was used through the existing boundaries.
+* Earlier failures were caused by malformed local `OPENAI_API_KEY` configuration, not SPS architecture.
+
 **Blockers**
 NONE
 
 **Next Safe Step**
-Resume `MS-001.23 - AI Model Production Provider Foundation` with the minimal approved provider-boundary verification flow.
+Prepare publication of the two local commits and SSOT documentation, then request explicit Product Owner approval before push. Do not assign the next product milestone until a separate Product Owner decision.
 
 ---
 

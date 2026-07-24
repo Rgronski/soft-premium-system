@@ -211,25 +211,25 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-07-24
-Current Session ID: 017
-Current Chat Title: 017 SPS OS - MS-001.23 Controlled Live OpenAI Verification
-Next Session ID: 018
-Suggested Next Chat Title: 018 SPS OS - MS-001.23 Controlled Live OpenAI Verification
+Current Session ID: 018
+Current Chat Title: 018 SPS OS - MS-001.23 Controlled Live OpenAI Verification
+Next Session ID: 019
+Suggested Next Chat Title: 019 SPS OS - Next Product Milestone Decision
 Active Capability: NONE
-Active Work Item: Session Close Protocol
-Current Mode: SESSION CLOSED
-Completed Capability Items: MS-001.24 canonical server repositories; MS-001.24 minimal server-first Task and Knowledge boundaries; canonical browser/server Project Brain context; AI browser/server canonical context integration; MS-001.24 documentation closure; MS-001.23 reactivation; controlled live OpenAI verification preflight blocked by missing local runtime `OPENAI_API_KEY`
-Current Product Milestone: MS-001.23 - AI Model Production Provider Foundation
+Active Work Item: SSOT publication and repository synchronization
+Current Mode: ACTIVE SESSION
+Completed Capability Items: MS-001.24 canonical server repositories; MS-001.24 minimal server-first Task and Knowledge boundaries; canonical browser/server Project Brain context; AI browser/server canonical context integration; MS-001.24 documentation closure; MS-001.23 reactivation; MS-001.23 controlled live provider verification and closure
+Current Product Milestone: NONE
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
 Latest Completed Capability Item: CAP-005 - React Component Test Infrastructure Foundation
 Current Sprint: NONE
-Platform Priority: Complete exactly one controlled live OpenAI provider-backed verification through the existing AI route after `OPENAI_API_KEY` is available in the same local runtime
+Platform Priority: Publish MS-001.23 closure and synchronize approved commits
 Repository Branch: main
-Repository Working Tree State: CLEAN
-Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 8da8536
-Verification Status: BLOCKED - Session 017 publications are on `origin/main`, `MS-001.24` is closed, `MS-001.23` is active, and the only remaining completion step is one controlled live provider-backed verification; no live OpenAI request was executed because local runtime `OPENAI_API_KEY` was missing; provider attempts `0`
-Blockers: LOCAL CONFIGURATION - `OPENAI_API_KEY` missing in the local runtime required for the single approved live provider-backed verification of `MS-001.23`
-Open Risks: `MS-001.23` remains unclosed until one controlled live OpenAI request is executed successfully or fails in a controlled way; the extra AI Project guard read remains intentionally parked outside the active verification step; broader browser/localStorage migration and canonical browser Knowledge UI remain parked outside the active milestone
-Next Safe Step: Confirm `main` is CLEAN and `0 / 0`, confirm `OPENAI_API_KEY` is available in the same local runtime without revealing it, run one canonical Project/context read-only preflight, and if it passes execute exactly one live provider-backed `POST /api/projects/[id]/ai/generate` request with no retry.
+Repository Working Tree State: DIRTY - SSOT documentation update in progress
+Ahead / Behind Status: 0 / 2 before documentation commit
+Latest Verified Commit: 1caa5eb
+Verification Status: PASS
+Blockers: NONE
+Open Risks: Only publication/push approval remains; no active technical blocker
+Next Safe Step: Review SSOT diff, commit documentation closure, then request explicit Product Owner approval before push.

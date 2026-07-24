@@ -76,8 +76,8 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: MS-001.23 - AI Model Production Provider Foundation
-Latest Completed Product Milestone: MS-001.24 - Server-Readable Read-Only Project Context Foundation
+Current Product Milestone: NONE
+Latest Completed Product Milestone: MS-001.23 - AI Model Production Provider Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -94,7 +94,7 @@ No global setup file or global mock layer was introduced.
 The reference component test file is `src/app/projects/[id]/tasks/page.test.tsx`.
 The four focused tests confirm the `createProjectBrainTask` consumer contract for no-write render, `completed`, `completed-with-refresh-failure`, and two explicit user intents.
 MS-001.18 is COMPLETED / PUBLISHED / CLOSED after formalizing the single-consumer contract without production changes.
-MS-001.23 is now the active product milestone.
+MS-001.23 is locally completed and verified and is awaiting publication approval.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
@@ -199,19 +199,30 @@ MS-001.22 route.ts is delegation only.
 MS-001.22 verification: focused server transport tests `13 / 13` PASS, focused AI model boundary tests `10 / 10` PASS, focused Project Brain tests `91 / 91` PASS, full tests `130 / 130` PASS, TypeScript `PASS` via `npx tsc --noEmit`, lint `PASS` with 0 errors and 1 existing warning outside milestone scope, production build `PASS`, implementation review `PASS`, contract deviations `NONE`.
 MS-001.22 publication evidence: commit `4e9a600`; branch `main`; origin/main synchronization after publication `0 / 0`; working tree after publication `CLEAN`; published files `src/lib/ai-model/server.ts`, `src/lib/ai-model/server.test.ts`, `src/app/api/projects/[id]/ai/generate/route.ts`, `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`.
 MS-001.23 contract status: APPROVED.
-MS-001.23 runtime status: ACTIVE.
-MS-001.23 activation status: AUTHORIZED.
+MS-001.23 runtime status: CLOSED.
+MS-001.23 activation status: CLOSED.
 MS-001.23 Product Owner Decision: ACCEPT.
 MS-001.23 DoR status: PASS.
+MS-001.23 implementation status: COMPLETED / VERIFIED.
+MS-001.23 milestone status: COMPLETED / VERIFIED / READY FOR PUBLICATION.
 MS-001.23 published implementation state:
-* OpenAI provider adapter: PUBLISHED
-* production provider wiring: PUBLISHED
-* completion verification: READY TO RESUME AFTER `MS-001.24`
+* OpenAI provider adapter: LOCAL COMPLETION VERIFIED
+* production provider wiring: LOCAL COMPLETION VERIFIED
+* completion verification: PASS
 MS-001.23 controlled verification without secret: PASS.
-MS-001.23 live OpenAI request: NOT PERFORMED.
-MS-001.23 completion blocker removed: `MS-001.24` is completed and published.
+MS-001.23 live OpenAI request: PASS.
+MS-001.23 final HTTP status: 200.
+MS-001.23 SPS status: generated.
+MS-001.23 generated text returned: YES.
+MS-001.23 provider attempts: 1.
+MS-001.23 retry count: 0.
+MS-001.23 data writes: 0.
+MS-001.23 completion blocker: NONE.
 MS-001.23 required prerequisite satisfied: `MS-001.24 - Server-Readable Read-Only Project Context Foundation`.
-MS-001.23 may resume the minimal provider-boundary completion flow.
+MS-001.23 durable corrections:
+* OpenAI SDK automatic retries disabled through `maxRetries: 0`.
+* Provider client type aligned with the installed OpenAI SDK using `Pick<OpenAI, "responses">`.
+* Public route and provider result contracts unchanged.
 MS-001.24 contract status: APPROVED.
 MS-001.24 runtime status: CLOSED.
 MS-001.24 activation status: CLOSED.
@@ -502,7 +513,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.22 - AI Model Server Transport Boundary`
+* `Latest Completed Product Milestone` is `MS-001.23 - AI Model Production Provider Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
@@ -604,8 +615,8 @@ Next:
 
 Next session priorities:
 
-* Resume `MS-001.23 - AI Model Production Provider Foundation`
-* Keep the next product milestone at `NONE` until `MS-001.23` is completed
+* Publish `MS-001.23` closure and synchronize `main` with `origin/main`
+* Keep the next product milestone at `NONE` pending Product Owner decision
 
 ---
 
