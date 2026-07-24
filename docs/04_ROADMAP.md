@@ -107,11 +107,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE
+MS-001.23 - AI Model Production Provider Foundation
 
 ## Latest Completed Product Milestone
 
-MS-001.22 - AI Model Server Transport Boundary
+MS-001.24 - Server-Readable Read-Only Project Context Foundation
 
 ## Next
 
@@ -3171,19 +3171,17 @@ AUTHORIZED
   * OpenAI provider adapter
   * production provider wiring
 * controlled verification without secret: `PASS`
-* live verification status: `BLOCKED before provider boundary`
+* live verification status: `READY TO RESUME after MS-001.24 publication`
 * the published code remains valid publication evidence and is not reverted by this contract correction
 
 **Completion Blocker**
-Server-readable read-only project context is not currently available.
-
-The existing server route cannot reach the provider boundary because project lookup ultimately depends on browser-only localStorage and returns project-not-found in server runtime.
+NONE
 
 **Required Prerequisite**
 `MS-001.24 - Server-Readable Read-Only Project Context Foundation`
 
 **Continuation Rule**
-No further live OpenAI verification or completion work for `MS-001.23` may continue until `MS-001.24` is completed and published.
+`MS-001.24` is completed and published, so `MS-001.23` may resume from the existing provider-backed foundation.
 
 **Acceptance Criteria**
 1. Exactly one production implementation exists for the current `AiModelProvider.generate(request)` contract.
@@ -3219,11 +3217,10 @@ This milestone may be considered complete only when:
 * required verification and publication pass under SPS OS rules
 
 **Blockers**
-* server-readable read-only project context is not currently available
-* `MS-001.24 - Server-Readable Read-Only Project Context Foundation` must be completed and published before `MS-001.23` completion work resumes
+NONE
 
 **Next Safe Step**
-Activate and complete `MS-001.24 - Server-Readable Read-Only Project Context Foundation` before resuming live verification or completion work for `MS-001.23`.
+Resume `MS-001.23 - AI Model Production Provider Foundation` with the minimal approved provider-boundary verification flow.
 
 ---
 
@@ -3239,10 +3236,10 @@ Product Milestone
 APPROVED
 
 **Active**
-YES
+NO
 
 **Runtime Status**
-ACTIVE
+CLOSED
 
 **Owner**
 Product Owner
@@ -3285,7 +3282,7 @@ AUTHORIZED
 AUTHORIZED
 
 **Implementation Status**
-NOT STARTED
+IMPLEMENTED / VERIFIED / PUBLISHED
 
 **Architecture Decision Required before implementation**
 Canonical server-readable project source
@@ -3337,16 +3334,16 @@ YES
 YES
 
 **Application Secret Configuration**
-NOT STARTED
+COMPLETED LOCALLY
 
 **Schema Status**
-NOT STARTED
+MINIMAL CANONICAL PROJECT / TASK / KNOWLEDGE READ SUPPORT PUBLISHED
 
 **Projects Table**
-NOT CREATED
+CREATED
 
 **Application Connectivity Verification**
-NOT PERFORMED
+PASS
 
 **In Scope**
 * exactly one canonical read-only project-context boundary that is reachable in browser runtime and server runtime
@@ -3412,7 +3409,21 @@ This milestone may be considered complete only when:
 NONE
 
 **Next Safe Step**
-Keep implementation at `NOT STARTED` until a separate implementation session begins under active `MS-001.24`.
+Keep `MS-001.24` closed and resume `MS-001.23` through the existing provider boundary.
+
+**Implementation Evidence**
+* canonical Project server reader delivered
+* canonical Tasks reader delivered
+* canonical KnowledgeEntries reader delivered
+* server Project Brain context delivered
+* browser Project Brain context delivered
+* server AI integration delivered
+* browser AI Workspace integration delivered
+* minimal server-first write boundaries required to feed canonical read context delivered
+* browser runtime and server runtime now use the same canonical read-only Project Brain context through shared `composeProjectBrainSnapshot(...)` and `aiProjectContextFromSnapshot(...)`
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
 
 ---
 

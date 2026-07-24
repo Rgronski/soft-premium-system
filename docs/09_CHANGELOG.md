@@ -1596,6 +1596,34 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## Session 017 - MS-001.24 closed and MS-001.23 unblocked
+
+### Date
+
+2026-07-24
+
+### Completed
+
+* Closed `MS-001.24 - Server-Readable Read-Only Project Context Foundation`.
+* Confirmed canonical Project, Tasks, and Knowledge context is available to both browser runtime and server runtime.
+* Confirmed browser and server Project Brain flows share the same central composition through `composeProjectBrainSnapshot(...)` and `aiProjectContextFromSnapshot(...)`.
+* Confirmed canonical Task browser flow is published with server GET/POST and read-after-write refresh on the Tasks page.
+* Confirmed browser AI Workspace and server AI flow are both integrated with the canonical Project Brain context.
+* Confirmed the minimal server-first write boundaries required to feed canonical context were published without expanding to full CRUD or full persistence migration.
+* Removed the `MS-001.23` blocker created by missing server-readable read-only project context.
+* Set `MS-001.23 - AI Model Production Provider Foundation` as the next active product milestone after `MS-001.24` closure.
+
+### Notes
+
+* `MS-001.24` closure evidence includes commits `4fb9a3a`, `33a62f3`, `4e11e35`, `030687f`, `c835a3c`, `58196f6`, `90400e6`, `f10ee5a`, `1a93f8c`, and `62c56bd`.
+* Parked follow-up topics remain outside `MS-001.24` completion scope:
+  * removal of the extra AI Project guard read
+  * canonical browser Knowledge UI slice
+  * broader browser Project Brain / localStorage migration
+  * cleanup of types and adapters
+
+---
+
 ## Session 016 - MS-001.24 local secret setup, minimal schema, and first read-only Neon repository verification
 
 ### Date

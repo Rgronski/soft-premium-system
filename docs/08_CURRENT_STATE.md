@@ -76,9 +76,9 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: MS-001.24 - Server-Readable Read-Only Project Context Foundation
-Latest Completed Product Milestone: MS-001.22 - AI Model Server Transport Boundary
-Next Product Milestone: MS-001.23 - AI Model Production Provider Foundation (resume after MS-001.24)
+Current Product Milestone: MS-001.23 - AI Model Production Provider Foundation
+Latest Completed Product Milestone: MS-001.24 - Server-Readable Read-Only Project Context Foundation
+Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
 Latest Completed Capability: CAP-005 - React Component Test Infrastructure Foundation
@@ -94,7 +94,7 @@ No global setup file or global mock layer was introduced.
 The reference component test file is `src/app/projects/[id]/tasks/page.test.tsx`.
 The four focused tests confirm the `createProjectBrainTask` consumer contract for no-write render, `completed`, `completed-with-refresh-failure`, and two explicit user intents.
 MS-001.18 is COMPLETED / PUBLISHED / CLOSED after formalizing the single-consumer contract without production changes.
-MS-001.24 is now the active product milestone.
+MS-001.23 is now the active product milestone.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
@@ -206,21 +206,20 @@ MS-001.23 DoR status: PASS.
 MS-001.23 published implementation state:
 * OpenAI provider adapter: PUBLISHED
 * production provider wiring: PUBLISHED
-* completion verification: BLOCKED BY `MS-001.24`
+* completion verification: READY TO RESUME AFTER `MS-001.24`
 MS-001.23 controlled verification without secret: PASS.
 MS-001.23 live OpenAI request: NOT PERFORMED.
-MS-001.23 completion blocker: server-readable read-only project context is not currently available.
-MS-001.23 required prerequisite: `MS-001.24 - Server-Readable Read-Only Project Context Foundation`.
-MS-001.23 completion remains blocked before provider boundary because server runtime reaches `project-not-found`.
-MS-001.23 remains approved, not completed, and may not continue live verification or completion work until `MS-001.24` is completed and published.
+MS-001.23 completion blocker removed: `MS-001.24` is completed and published.
+MS-001.23 required prerequisite satisfied: `MS-001.24 - Server-Readable Read-Only Project Context Foundation`.
+MS-001.23 may resume the minimal provider-boundary completion flow.
 MS-001.24 contract status: APPROVED.
-MS-001.24 runtime status: ACTIVE.
-MS-001.24 activation status: AUTHORIZED.
+MS-001.24 runtime status: CLOSED.
+MS-001.24 activation status: CLOSED.
 MS-001.24 Product Owner Decision: GO.
 MS-001.24 Product Owner Approval: APPROVED.
 MS-001.24 DoR status: PASS.
-MS-001.24 implementation status: IN PROGRESS.
-MS-001.24 is the only active product milestone.
+MS-001.24 implementation status: COMPLETED / VERIFIED / PUBLISHED.
+MS-001.24 milestone status: COMPLETED / PUBLISHED / CLOSED.
 MS-001.24 product outcome: one canonical read-only project context must be available through Project Brain to both browser runtime and server runtime without bypassing Project Brain.
 MS-001.24 architecture decision required before implementation: canonical server-readable project source.
 MS-001.24 architecture decision: `ADR-0005 - Canonical Serverless Project Repository for Project Identity`.
@@ -239,27 +238,26 @@ MS-001.24 initial Neon role: present.
 MS-001.24 pooled connection available: YES.
 MS-001.24 direct connection available: YES.
 MS-001.24 application secret configuration: COMPLETED LOCALLY; `.env.local` contains `DATABASE_URL` and `DATABASE_URL_DIRECT` and remains ignored by Git.
-MS-001.24 schema status: MINIMAL `projects` SCHEMA CREATED MANUALLY IN NEON.
+MS-001.24 schema status: MINIMAL canonical Project / Task / Knowledge read support is published.
 MS-001.24 `projects` table status: CREATED.
 MS-001.24 existing project seed record status: CREATED AND VERIFIED.
 MS-001.24 application connectivity verification: PASS - one live read through `getServerProjectById()` returned the known seeded project record.
-MS-001.24 repository implementation: FIRST READ-ONLY SERVER PROJECT REPOSITORY PUBLISHED.
+MS-001.24 canonical server repositories are published for Project, Tasks, and KnowledgeEntries.
 MS-001.24 runtime dependency: `@neondatabase/serverless` `1.1.0`.
-MS-001.24 server read module: `src/lib/project/server.ts`.
-MS-001.24 server read test module: `src/lib/project/server.test.ts`.
-MS-001.24 public server read contract: `getServerProjectById(id: string): Promise<Project | null>`.
+MS-001.24 browser-safe canonical read clients are published for Project, Tasks, and KnowledgeEntries.
+MS-001.24 Tasks page uses canonical GET/POST with read-after-write refresh.
+MS-001.24 server Project Brain uses canonical server context.
+MS-001.24 browser AI Workspace uses canonical browser Project Brain context.
+MS-001.24 server AI flow uses canonical server Project Brain context.
+MS-001.24 browser and server share the same central Project Brain composition through `composeProjectBrainSnapshot(...)` and `aiProjectContextFromSnapshot(...)`.
+MS-001.24 AI Project guard remains as the consciously accepted additional Project read before provider access.
 MS-001.24 runtime uses only `DATABASE_URL`.
 MS-001.24 runtime does not use `DATABASE_URL_DIRECT`.
-MS-001.24 browser project source remains `localStorage`.
 MS-001.24 canonical source target is Neon for `Project`, `Tasks`, and `KnowledgeEntries`.
 MS-001.24 selected boundary model: server-first.
 MS-001.24 minimal server-first create boundary for `Tasks` and `KnowledgeEntries` is allowed only as the required exception for feeding the canonical read-only project context.
 MS-001.24 this exception does not approve full CRUD, full write-flow migration, or general write-architecture redesign.
-MS-001.24 AI route is now the first existing server-side consumer of `getServerProjectById(projectId)`.
-MS-001.24 AI route integration is a read-only project-existence guard before AI engine execution; an existing project continues through the current payload unchanged, `null` returns `project-not-found`, and a repository exception returns `context-unavailable`.
-MS-001.24 this guard does not yet establish the same canonical read-only project context through Project Brain for server runtime.
-MS-001.24 next step: prepare the smallest vertical slice contract covering `Tasks` and `KnowledgeEntries` schema, server-readable read contracts, minimal server-first create contracts, and focused tests, without changing Project Brain composition or AI route before a separate implementation approval.
-MS-001.23 remains blocked by `MS-001.24`.
+MS-001.24 does not require full migration of the whole application away from `localStorage`, browser Knowledge create/read UI, removal of the extra AI Project guard read, full CRUD, auth, or multi-user behavior.
 Live OpenAI request remains not allowed.
 Pending deployment topic: `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only, is not an accepted ADR, and had no implementation in this session.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
@@ -606,8 +604,8 @@ Next:
 
 Next session priorities:
 
-* Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision
-* Run a separate Next Product Milestone Contract Discovery only if explicitly authorized
+* Resume `MS-001.23 - AI Model Production Provider Foundation`
+* Keep the next product milestone at `NONE` until `MS-001.23` is completed
 
 ---
 
