@@ -127,7 +127,10 @@ type OpenAiProviderClient =
 function createOpenAiClient(
   apiKey: string,
 ): OpenAiProviderClient {
-  return new OpenAI({ apiKey });
+  return new OpenAI({
+    apiKey,
+    maxRetries: 0,
+  });
 }
 
 async function getCanonicalServerProjectContext(
