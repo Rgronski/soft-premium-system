@@ -1,7 +1,14 @@
 import "server-only";
 
+import { getServerProjectById } from "../project/server";
+import { getServerKnowledgeEntriesByProjectId } from "./server";
 import { createServerKnowledgeEntry } from "./server";
 import type { KnowledgeEntry } from "./types";
+
+type GetKnowledgeHttpHandler = (
+  request: Request,
+  context: RouteContext<"/api/projects/[id]/knowledge">,
+) => Promise<Response>;
 
 type PostKnowledgeHttpHandler = (
   request: Request,
@@ -128,6 +135,40 @@ function isProjectForeignKeyViolation(error: unknown): boolean {
   return true;
 }
 
+export function createGetKnowledgeEntriesRoute(deps: {
+  getServerProjectById: typeof getServerProjectById;
+  getServerKnowledgeEntriesByProjectId:
+    typeof getServerKnowledgeEntriesByProjectId;
+}): GetKnowledgeHttpHandler {
+  return async function getKnowledgeEntriesRoute(
+    _request: Request,
+    context: RouteContext<"/api/projects/[id]/knowledge">,
+  ): Promise<Response> {
+    const { id } = await context.params;
+
+    try {
+      const project = await deps.getServerProjectById(id);
+
+      if (!project) {
+        return createTransportErrorResponse("project-not-found", 404);
+      }
+    } catch {
+      return createTransportErrorResponse("context-unavailable", 503);
+    }
+
+    try {
+      const knowledgeEntries =
+        await deps.getServerKnowledgeEntriesByProjectId(id);
+
+      return Response.json(knowledgeEntries satisfies KnowledgeEntry[], {
+        status: 200,
+      });
+    } catch {
+      return createTransportErrorResponse("context-unavailable", 503);
+    }
+  };
+}
+
 export function createPostKnowledgeRoute(deps: {
   createServerKnowledgeEntry: typeof createServerKnowledgeEntry;
 }): PostKnowledgeHttpHandler {
@@ -172,4 +213,9 @@ export function createPostKnowledgeRoute(deps: {
 
 export const postKnowledgeRoute = createPostKnowledgeRoute({
   createServerKnowledgeEntry,
+});
+
+export const getKnowledgeEntriesRoute = createGetKnowledgeEntriesRoute({
+  getServerProjectById,
+  getServerKnowledgeEntriesByProjectId,
 });
