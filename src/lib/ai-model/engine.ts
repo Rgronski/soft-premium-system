@@ -34,7 +34,7 @@ interface AiModelProvider {
 
 type GetAiProjectContext = (
   projectId: string,
-) => AiProjectContextResult;
+) => AiProjectContextResult | Promise<AiProjectContextResult>;
 
 export function createGenerateAiProjectResponse(deps: {
   provider: AiModelProvider;
@@ -55,7 +55,7 @@ export function createGenerateAiProjectResponse(deps: {
       };
     }
 
-    const projectContextResult = getProjectContext(input.projectId);
+    const projectContextResult = await getProjectContext(input.projectId);
 
     if (projectContextResult.status === "project-not-found") {
       return {

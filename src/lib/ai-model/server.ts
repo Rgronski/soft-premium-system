@@ -4,7 +4,9 @@ import OpenAI from "openai";
 
 import { createGenerateAiProjectResponse } from "./engine";
 import { createOpenAiProvider } from "./openai-provider";
+import { getServerAiProjectContext } from "../project-brain/server";
 import { getServerProjectById } from "../project/server";
+import type { AiProjectContextResult } from "../project-brain/types";
 import type {
   GenerateAiProjectResponseInput,
   GenerateAiProjectResponseResult,
@@ -128,6 +130,28 @@ function createOpenAiClient(
   return new OpenAI({ apiKey });
 }
 
+async function getCanonicalServerProjectContext(
+  projectId: string,
+): Promise<AiProjectContextResult> {
+  const result = await getServerAiProjectContext(projectId);
+
+  if (result.status === "available") {
+    return result;
+  }
+
+  if (result.status === "project-not-found") {
+    return {
+      status: "project-not-found",
+      projectId,
+    };
+  }
+
+  return {
+    status: "unavailable",
+    projectId,
+  };
+}
+
 export function createProductionGenerateAiProjectResponse(deps?: {
   env?: NodeJS.ProcessEnv;
   createClient?: (
@@ -135,6 +159,9 @@ export function createProductionGenerateAiProjectResponse(deps?: {
   ) => OpenAiProviderClient;
   createProvider?: OpenAiProviderFactory;
   model?: "gpt-5-nano";
+  getProjectContext?: (
+    projectId: string,
+  ) => Promise<AiProjectContextResult>;
 }): (
   input: GenerateAiProjectResponseInput,
 ) => Promise<GenerateAiProjectResponseResult> {
@@ -150,6 +177,8 @@ export function createProductionGenerateAiProjectResponse(deps?: {
 
   return createGenerateAiProjectResponse({
     provider,
+    getProjectContext:
+      deps?.getProjectContext ?? getCanonicalServerProjectContext,
   });
 }
 
