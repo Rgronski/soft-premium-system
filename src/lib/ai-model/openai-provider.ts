@@ -1,3 +1,4 @@
+import type OpenAI from "openai";
 import type { AiProjectContext } from "../project-brain/types";
 
 type ModelGenerationRequest = {
@@ -17,16 +18,7 @@ type ModelGenerationResult =
       status: "failed";
     };
 
-type OpenAiResponsesClient = {
-  responses: {
-    create(request: {
-      model: string;
-      input: string;
-    }): Promise<{
-      output_text?: string | null;
-    }>;
-  };
-};
+type OpenAiResponsesClient = Pick<OpenAI, "responses">;
 
 type CreateOpenAiProviderOptions = {
   client: OpenAiResponsesClient;
