@@ -1,10 +1,17 @@
 // @vitest-environment jsdom
 
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 const useParamsMock = vi.fn(() => ({ id: "project-1" }));
 const getBrowserAiProjectContextMock = vi.fn();
+const fetchMock = vi.fn<typeof fetch>();
 
 vi.mock("next/navigation", () => ({
   useParams: () => useParamsMock(),
@@ -21,6 +28,8 @@ describe("ProjectAiWorkspacePage", () => {
   beforeEach(() => {
     useParamsMock.mockReturnValue({ id: "project-1" });
     getBrowserAiProjectContextMock.mockReset();
+    fetchMock.mockReset();
+    vi.stubGlobal("fetch", fetchMock);
   });
 
   afterEach(() => {
@@ -108,7 +117,7 @@ describe("ProjectAiWorkspacePage", () => {
     });
   });
 
-  test("does not render write or chat controls", async () => {
+  test("renders the instruction field and generate button with the existing project context view", async () => {
     getBrowserAiProjectContextMock.mockResolvedValue({
       status: "available",
       context: {
@@ -124,13 +133,188 @@ describe("ProjectAiWorkspacePage", () => {
     await waitFor(() => {
       expect(screen.getByText("Alpha")).toBeTruthy();
     });
-    expect(screen.queryByRole("button")).toBeNull();
-    expect(screen.queryByRole("textbox")).toBeNull();
-    expect(screen.queryByRole("form")).toBeNull();
-    expect(screen.queryByText(/send/i)).toBeNull();
-    expect(screen.queryByText(/create/i)).toBeNull();
-    expect(screen.queryByText(/update/i)).toBeNull();
-    expect(screen.queryByText(/delete/i)).toBeNull();
+    expect(screen.getByRole("textbox", { name: "Instruction" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Generate" })).toBeTruthy();
+    expect(screen.getByText("No tasks available.")).toBeTruthy();
+    expect(screen.getByText("No knowledge entries available.")).toBeTruthy();
+  });
+
+  test("sends the correct request and renders the generated text", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+    fetchMock.mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          status: "generated",
+          content: "Generated response",
+        }),
+        {
+          status: 200,
+          headers: {
+            "content-type": "application/json",
+          },
+        },
+      ),
+    );
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+    fireEvent.change(instructionField, {
+      target: { value: "Summarize project" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      expect(screen.getByText("Generated response")).toBeTruthy();
+    });
+    expect(fetchMock).toHaveBeenCalledWith("/api/projects/project-1/ai/generate", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        instruction: "Summarize project",
+      }),
+    });
+  });
+
+  test("renders generating state and blocks duplicate submission while the request is active", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+
+    let resolveResponse:
+      | ((value: Response | PromiseLike<Response>) => void)
+      | undefined;
+    fetchMock.mockReturnValue(
+      new Promise<Response>((resolve) => {
+        resolveResponse = resolve;
+      }),
+    );
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+    fireEvent.change(instructionField, {
+      target: { value: "Summarize project" },
+    });
+
+    const button = screen.getByRole("button", { name: "Generate" });
+    fireEvent.click(button);
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", { name: "Generating..." }),
+      ).toHaveProperty("disabled", true);
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Generating..." }));
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+
+    resolveResponse?.(
+      new Response(
+        JSON.stringify({
+          status: "generated",
+          content: "Generated response",
+        }),
+        {
+          status: 200,
+          headers: {
+            "content-type": "application/json",
+          },
+        },
+      ),
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText("Generated response")).toBeTruthy();
+    });
+  });
+
+  test("does not send a request for a whitespace-only instruction and shows a validation message", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+    fireEvent.change(instructionField, {
+      target: { value: "   " },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(
+      screen.queryByRole("button", { name: "Generating..." }),
+    ).toBeNull();
+    expect(screen.getByText("Enter a valid instruction.")).toBeTruthy();
+  });
+
+  test("renders a controlled generation error", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+    fetchMock.mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          status: "provider-unavailable",
+        }),
+        {
+          status: 503,
+          headers: {
+            "content-type": "application/json",
+          },
+        },
+      ),
+    );
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+    fireEvent.change(instructionField, {
+      target: { value: "Summarize project" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("AI provider unavailable.")).toBeTruthy();
+    });
   });
 
   test("changing projectId triggers a new canonical request", async () => {
