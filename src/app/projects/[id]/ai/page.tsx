@@ -1,24 +1,65 @@
 "use client";
 
-import { getAiProjectContext } from "@/lib/project-brain/engine";
+import { getBrowserAiProjectContext } from "@/lib/project-brain/browser";
+import type { AiProjectContext } from "@/lib/project-brain/types";
 import { useParams } from "next/navigation";
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 
 export default function ProjectAiWorkspacePage() {
   const params = useParams<{ id: string }>();
-  const aiProjectContextResult = useMemo(() => {
-    if (typeof window === "undefined") {
-      return null;
-    }
+  const [context, setContext] = useState<AiProjectContext | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    return getAiProjectContext(params.id);
+  useEffect(() => {
+    let ignore = false;
+
+    setIsLoading(true);
+    setErrorMessage(null);
+    setContext(null);
+
+    void getBrowserAiProjectContext(params.id).then((result) => {
+      if (ignore) {
+        return;
+      }
+
+      if (result.status === "available") {
+        setContext(result.context);
+        setIsLoading(false);
+        return;
+      }
+
+      if (result.status === "project-not-found") {
+        setErrorMessage("Project not found.");
+        setIsLoading(false);
+        return;
+      }
+
+      setErrorMessage("AI project context unavailable.");
+      setIsLoading(false);
+    });
+
+    return () => {
+      ignore = true;
+    };
   }, [params.id]);
 
-  if (!aiProjectContextResult) {
-    return null;
+  if (isLoading) {
+    return (
+      <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
+        <div className="space-y-2">
+          <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
+            AI Workspace
+          </p>
+          <h2 className="text-2xl font-semibold text-zinc-50">
+            Loading AI project context...
+          </h2>
+        </div>
+      </section>
+    );
   }
 
-  if (aiProjectContextResult.status === "project-not-found") {
+  if (errorMessage === "Project not found.") {
     return (
       <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
         <div className="space-y-2">
@@ -33,7 +74,7 @@ export default function ProjectAiWorkspacePage() {
     );
   }
 
-  if (aiProjectContextResult.status === "unavailable") {
+  if (errorMessage) {
     return (
       <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
         <div className="space-y-2">
@@ -41,14 +82,16 @@ export default function ProjectAiWorkspacePage() {
             AI Workspace
           </p>
           <h2 className="text-2xl font-semibold text-zinc-50">
-            AI project context unavailable.
+            {errorMessage}
           </h2>
         </div>
       </section>
     );
   }
 
-  const { context } = aiProjectContextResult;
+  if (!context) {
+    return null;
+  }
 
   return (
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
