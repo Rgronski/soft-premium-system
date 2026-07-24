@@ -58,8 +58,13 @@ function parseTransportError(
 
   switch (value.status) {
     case "project-not-found":
+      return {
+        status: "project-not-found",
+      };
     case "context-unavailable":
-      return value;
+      return {
+        status: "context-unavailable",
+      };
     default:
       return null;
   }
