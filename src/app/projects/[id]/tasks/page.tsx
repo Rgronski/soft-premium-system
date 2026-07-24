@@ -34,15 +34,18 @@ export default function ProjectTasksPage() {
   const [taskTitle, setTaskTitle] = useState("");
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittingProjectId, setSubmittingProjectId] = useState<string | null>(
+    null,
+  );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const mountedRef = useRef(true);
   const projectIdRef = useRef(projectId);
+  const submittingProjectIdRef = useRef<string | null>(null);
 
-  projectIdRef.current = projectId;
+  const isSubmitting = submittingProjectId === projectId;
 
   useEffect(() => {
-    setIsSubmitting(false);
+    projectIdRef.current = projectId;
   }, [projectId]);
 
   useEffect(() => {
@@ -88,6 +91,11 @@ export default function ProjectTasksPage() {
     };
   }, [projectId]);
 
+  function setActiveSubmittingProjectId(nextProjectId: string | null) {
+    submittingProjectIdRef.current = nextProjectId;
+    setSubmittingProjectId(nextProjectId);
+  }
+
   async function handleAddTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -107,11 +115,12 @@ export default function ProjectTasksPage() {
     function isCurrentSubmission() {
       return (
         mountedRef.current &&
-        projectIdRef.current === submittedProjectId
+        projectIdRef.current === submittedProjectId &&
+        submittingProjectIdRef.current === submittedProjectId
       );
     }
 
-    setIsSubmitting(true);
+    setActiveSubmittingProjectId(submittedProjectId);
     setErrorMessage(null);
 
     try {
@@ -140,7 +149,7 @@ export default function ProjectTasksPage() {
       setErrorMessage(getTaskErrorMessage(error));
     } finally {
       if (isCurrentSubmission()) {
-        setIsSubmitting(false);
+        setActiveSubmittingProjectId(null);
       }
     }
   }
