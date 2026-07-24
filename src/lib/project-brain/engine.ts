@@ -2,6 +2,7 @@ import { getKnowledge } from "../knowledge/knowledge";
 import { getProjectById } from "../project/project";
 import { createTask, getTasks } from "../task/task";
 import { evaluateWorkflow } from "../workflow/engine";
+import type { Project } from "../project/types";
 import type { ProjectState, WorkflowResult } from "../workflow/types";
 
 import type {
@@ -142,11 +143,16 @@ function isProjectState(value: ProjectState): boolean {
   );
 }
 
-function isValidProject(value: unknown, normalizedProjectId: string): boolean {
+function isValidProject(
+  value: unknown,
+  normalizedProjectId: string,
+): value is Project {
   return (
     isRecord(value) &&
     isNonEmptyString(value.id) &&
-    value.id === normalizedProjectId
+    value.id === normalizedProjectId &&
+    typeof value.name === "string" &&
+    typeof value.createdAt === "string"
   );
 }
 
