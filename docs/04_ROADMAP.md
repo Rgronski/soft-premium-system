@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.26 - AI Workspace Controlled Knowledge Save
+MS-001.27 - AI Workspace Controlled Prompt Foundation
 
 ## Next
 
@@ -3578,6 +3578,77 @@ COMPLETED / VERIFIED
 * existing Knowledge boundary, Project Brain boundary, and storage boundary remain unchanged
 * final repository verification passed with full tests `21 / 267`, TypeScript `PASS`, lint `PASS`, build `PASS`, and `git diff --check` `PASS`
 * implementation commit: `ff7dc59`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone. Repository commits remain local until push is explicitly approved.
+
+---
+
+## MS-001.27 - AI Workspace Controlled Prompt Foundation
+
+**Milestone**
+MS-001.27 - AI Workspace Controlled Prompt Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Add the first controlled prompt-selection capability to the existing AI Workspace without changing the AI generation endpoint, Project Brain, Knowledge boundaries, AI provider integration, or persistence model.
+
+**Product Outcome**
+The AI Workspace at `/projects/[id]/ai` provides a small static catalog of approved starter prompts. Selecting one prompt fills the existing instruction field, manual editing remains allowed, manual generation remains required, and the browser request body remains exactly `{ instruction }`.
+
+**Dependencies**
+* closed `MS-001.19 - AI Workspace Project Brain Read Foundation`
+* closed `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation`
+* closed `MS-001.21 - AI Model Boundary Foundation`
+* closed `MS-001.22 - AI Model Server Transport Boundary`
+* closed `MS-001.23 - AI Model Production Provider Foundation`
+* closed `MS-001.24 - Server-Readable Read-Only Project Context Foundation`
+* closed `MS-001.25 - AI Workspace Generation UI Foundation`
+* closed `MS-001.26 - AI Workspace Controlled Knowledge Save`
+
+**Product Owner Decision**
+GO
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Implementation Evidence**
+* AI Workspace starter-prompt UI published in `src/app/projects/[id]/ai/page.tsx`
+* AI Workspace prompt-selection component coverage published in `src/app/projects/[id]/ai/page.test.tsx`
+* a static local catalog of 5 approved starter prompts was added
+* selecting a prompt fills the existing instruction field and replaces the previous instruction deterministically
+* manual instruction editing remains allowed and clears the selected prompt UI state
+* prompt selection does not trigger automatic generation
+* browser generation request body remains exactly `{ instruction }`
+* existing AI endpoint, provider composition, Project Brain boundary, Knowledge boundary, and persistence model remain unchanged
+* final repository verification passed with full tests `21 / 269`, TypeScript `PASS`, lint `PASS`, build `PASS`, and `git diff --check` `PASS`
+* implementation commit: `1e5158f`
 
 **Blockers**
 NONE

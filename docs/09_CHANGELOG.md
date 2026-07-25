@@ -1739,6 +1739,36 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## Session 020 - MS-001.27 AI Workspace Controlled Prompt Foundation closed
+
+### Date
+
+2026-07-25
+
+### Completed
+
+* Recorded `MS-001.27 - AI Workspace Controlled Prompt Foundation` as `COMPLETED / VERIFIED`.
+* Confirmed the AI Workspace now provides one controlled static catalog of five approved starter prompts.
+* Confirmed selecting a starter prompt fills the existing instruction field and deterministically replaces the previous instruction.
+* Confirmed manual editing of the instruction remains allowed and clears the selected prompt UI state.
+* Confirmed prompt selection does not trigger automatic generation or automatic submit.
+* Confirmed the browser generation request body remains exactly `{ instruction }`.
+* Confirmed the existing AI endpoint, provider composition, Project Brain boundary, Knowledge boundary, and persistence model remain unchanged.
+* Recorded final repository verification as `PASS` with full tests `21 / 269`, TypeScript `PASS`, lint `PASS`, production build `PASS`, and `git diff --check` `PASS`.
+* Recorded that the implementation commit remains local and push has not been performed.
+
+### Evidence
+
+* `1e5158f` - `feat: add controlled AI starter prompts`
+
+### Notes
+
+* No known blockers remain.
+* Working tree was confirmed `CLEAN` after the implementation commit.
+* No push was performed.
+
+---
+
 ## Session 016 - MS-001.24 local secret setup, minimal schema, and first read-only Neon repository verification
 
 ### Date

@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.26 - AI Workspace Controlled Knowledge Save
+MS-001.27 - AI Workspace Controlled Prompt Foundation
 
 **Next Milestone**
 NONE
@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.26 - AI Workspace Controlled Knowledge Save
+Latest Completed Product Milestone: MS-001.27 - AI Workspace Controlled Prompt Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -96,6 +96,7 @@ The four focused tests confirm the `createProjectBrainTask` consumer contract fo
 MS-001.18 is COMPLETED / PUBLISHED / CLOSED after formalizing the single-consumer contract without production changes.
 MS-001.25 is COMPLETED / VERIFIED after formal acceptance of the first controlled AI Workspace generation flow, and the related commits remain local because push has not been performed.
 MS-001.26 is COMPLETED / VERIFIED after formal acceptance of the controlled AI Workspace Knowledge save flow, and the related implementation commit remains local because push has not been performed.
+MS-001.27 is COMPLETED / VERIFIED after formal acceptance of the controlled AI Workspace starter prompt foundation, and the related implementation commit remains local because push has not been performed.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
@@ -323,6 +324,24 @@ MS-001.26 final verification: full tests `21 / 267` PASS, `npx.cmd tsc --noEmit`
 MS-001.26 blocker status: NONE.
 MS-001.26 local completion evidence commit:
 * `ff7dc59` - `feat: save AI results to knowledge`
+MS-001.27 contract status: APPROVED.
+MS-001.27 runtime status: CLOSED.
+MS-001.27 activation status: CLOSED.
+MS-001.27 implementation status: COMPLETED / VERIFIED.
+MS-001.27 milestone status: COMPLETED / VERIFIED.
+MS-001.27 product outcome: one controlled static starter-prompt catalog exists in the AI Workspace without changing the existing AI route, Project Brain, Knowledge, provider, or persistence boundaries.
+MS-001.27 preserved boundaries:
+* prompt selection fills the existing instruction field only
+* prompt selection replaces the previous instruction deterministically
+* manual instruction editing clears the selected prompt UI state
+* prompt selection does not trigger automatic generation
+* browser generation request body remains exactly `{ instruction }`
+* browser request body still does not include `projectId`, prompt metadata, or project context
+* no endpoint, provider, Project Brain, Knowledge, or persistence changes were introduced
+MS-001.27 final verification: full tests `21 / 269` PASS, `npx.cmd tsc --noEmit` PASS, `npm.cmd run lint` PASS, `npm.cmd run build` PASS, `git diff --check` PASS.
+MS-001.27 blocker status: NONE.
+MS-001.27 local completion evidence commit:
+* `1e5158f` - `feat: add controlled AI starter prompts`
 Live OpenAI request remains not allowed.
 Pending deployment topic: `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only, is not an accepted ADR, and had no implementation in this session.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
@@ -567,7 +586,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.26 - AI Workspace Controlled Knowledge Save`
+* `Latest Completed Product Milestone` is `MS-001.27 - AI Workspace Controlled Prompt Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
