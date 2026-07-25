@@ -6,6 +6,8 @@ import {
   it,
   vi,
 } from "vitest";
+import OpenAI from "openai";
+import type { Response as OpenAiResponse } from "openai/resources/responses/responses";
 
 import type { GenerateAiProjectResponseResult } from "./types";
 
@@ -50,6 +52,53 @@ function createMalformedJsonRequest(): Request {
       "content-type": "application/json",
     },
     body: "{",
+  });
+}
+
+function createMockOpenAiResponse(
+  outputText: string,
+): OpenAiResponse {
+  return {
+    id: "resp_test_123",
+    created_at: 0,
+    output_text: outputText,
+    error: null,
+    incomplete_details: null,
+    instructions: null,
+    metadata: null,
+    model: "gpt-5-nano",
+    object: "response",
+    output: [],
+    parallel_tool_calls: false,
+    temperature: 1,
+    tool_choice: "auto",
+    tools: [],
+    top_p: 1,
+  };
+}
+
+function createTestOpenAiClient(): OpenAI {
+  return new OpenAI({
+    apiKey: "test-openai-key",
+    maxRetries: 0,
+  });
+}
+
+function createTestClientFactory(options?: {
+  response?: OpenAiResponse;
+  error?: Error;
+}) {
+  const client = createTestOpenAiClient();
+
+  if (options?.error) {
+    vi.spyOn(client.responses, "create").mockRejectedValue(options.error);
+  } else if (options?.response) {
+    vi.spyOn(client.responses, "create").mockResolvedValue(options.response);
+  }
+
+  return vi.fn((apiKey: string) => {
+    void apiKey;
+    return client;
   });
 }
 
@@ -470,11 +519,7 @@ describe("createProductionGenerateAiProjectResponse", () => {
         env: {
           OPENAI_API_KEY: "test-openai-key",
         } as NodeJS.ProcessEnv,
-        createClient: () => ({
-          responses: {
-            create: vi.fn(),
-          },
-        }),
+        createClient: createTestClientFactory(),
         createProvider,
       });
 
@@ -515,11 +560,7 @@ describe("createProductionGenerateAiProjectResponse", () => {
         env: {
           OPENAI_API_KEY: "test-openai-key",
         } as NodeJS.ProcessEnv,
-        createClient: () => ({
-          responses: {
-            create: vi.fn(),
-          },
-        }),
+        createClient: createTestClientFactory(),
         createProvider: () => ({
           generate: providerGenerate,
         }),
@@ -559,11 +600,7 @@ describe("createProductionGenerateAiProjectResponse", () => {
         env: {
           OPENAI_API_KEY: "test-openai-key",
         } as NodeJS.ProcessEnv,
-        createClient: () => ({
-          responses: {
-            create: vi.fn(),
-          },
-        }),
+        createClient: createTestClientFactory(),
         createProvider: () => ({
           generate: providerGenerate,
         }),
@@ -593,11 +630,7 @@ describe("createProductionGenerateAiProjectResponse", () => {
         env: {
           OPENAI_API_KEY: "test-openai-key",
         } as NodeJS.ProcessEnv,
-        createClient: () => ({
-          responses: {
-            create: vi.fn(),
-          },
-        }),
+        createClient: createTestClientFactory(),
         createProvider: () => ({
           generate: providerGenerate,
         }),
@@ -665,13 +698,9 @@ describe("createProductionGenerateAiProjectResponse", () => {
         projectId: "project-1",
       }),
     );
-    const createClient = vi.fn(() => ({
-      responses: {
-        create: vi.fn(async () => ({
-          output_text: "Generated response",
-        })),
-      },
-    }));
+    const createClient = createTestClientFactory({
+      response: createMockOpenAiResponse("Generated response"),
+    });
     const createProvider = vi.fn(() => ({
       generate: vi.fn(async () => ({
         status: "generated" as const,
@@ -729,12 +758,8 @@ describe("createProductionGenerateAiProjectResponse", () => {
         env: {
           OPENAI_API_KEY: "test-openai-key",
         } as NodeJS.ProcessEnv,
-        createClient: () => ({
-          responses: {
-            create: vi.fn(async () => ({
-              output_text: "Generated response",
-            })),
-          },
+        createClient: createTestClientFactory({
+          response: createMockOpenAiResponse("Generated response"),
         }),
       });
     const handler = createPostGenerateAiProjectRoute({

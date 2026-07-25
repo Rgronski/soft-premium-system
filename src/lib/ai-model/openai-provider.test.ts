@@ -1,8 +1,39 @@
+import OpenAI from "openai";
+import type { Response as OpenAiResponse } from "openai/resources/responses/responses";
 import { describe, expect, test, vi } from "vitest";
 
 import type { AiProjectContext } from "../project-brain/types";
 
 import { createOpenAiProvider } from "./openai-provider";
+
+function createMockOpenAiResponse(
+  outputText: string,
+): OpenAiResponse {
+  return {
+    id: "resp_test_123",
+    created_at: 0,
+    output_text: outputText,
+    error: null,
+    incomplete_details: null,
+    instructions: null,
+    metadata: null,
+    model: "gpt-5-nano",
+    object: "response",
+    output: [],
+    parallel_tool_calls: false,
+    temperature: 1,
+    tool_choice: "auto",
+    tools: [],
+    top_p: 1,
+  };
+}
+
+function createTestOpenAiClient(): OpenAI {
+  return new OpenAI({
+    apiKey: "test-openai-key",
+    maxRetries: 0,
+  });
+}
 
 describe("createOpenAiProvider", () => {
   const projectContext: AiProjectContext = {
@@ -19,15 +50,12 @@ describe("createOpenAiProvider", () => {
   };
 
   test("returns generated content from non-empty output_text", async () => {
-    const create = vi.fn(async () => ({
-      output_text: "Generated response",
-    }));
+    const client = createTestOpenAiClient();
+    const create = vi
+      .spyOn(client.responses, "create")
+      .mockResolvedValue(createMockOpenAiResponse("Generated response"));
     const provider = createOpenAiProvider({
-      client: {
-        responses: {
-          create,
-        },
-      },
+      client,
     });
 
     const result = await provider.generate({
@@ -48,16 +76,20 @@ describe("createOpenAiProvider", () => {
   });
 
   test.each([
-    { output_text: "" },
-    { output_text: "   " },
-    {},
+    createMockOpenAiResponse(""),
+    createMockOpenAiResponse("   "),
+    (() => {
+      const response = createMockOpenAiResponse("");
+      Object.defineProperty(response, "output_text", {
+        value: undefined,
+      });
+      return response;
+    })(),
   ])("returns failed for empty or missing output_text: %j", async (response) => {
+    const client = createTestOpenAiClient();
+    vi.spyOn(client.responses, "create").mockResolvedValue(response);
     const provider = createOpenAiProvider({
-      client: {
-        responses: {
-          create: vi.fn(async () => response),
-        },
-      },
+      client,
     });
 
     const result = await provider.generate({
@@ -71,14 +103,12 @@ describe("createOpenAiProvider", () => {
   });
 
   test("returns failed when the client throws", async () => {
+    const client = createTestOpenAiClient();
+    vi.spyOn(client.responses, "create").mockRejectedValue(
+      new Error("OpenAI request failed"),
+    );
     const provider = createOpenAiProvider({
-      client: {
-        responses: {
-          create: vi.fn(async () => {
-            throw new Error("OpenAI request failed");
-          }),
-        },
-      },
+      client,
     });
 
     await expect(provider.generate({
