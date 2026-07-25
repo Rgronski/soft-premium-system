@@ -146,10 +146,91 @@ describe("ProjectAiWorkspacePage", () => {
     await waitFor(() => {
       expect(screen.getByText("Alpha")).toBeTruthy();
     });
+    expect(screen.getByText("Starter Prompts")).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Summarize Project State/i })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Identify Project Risks/i })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Review Backlog/i })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Recommend Next Safe Step/i })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Review Decisions/i })).toBeTruthy();
     expect(screen.getByRole("textbox", { name: "Instruction" })).toBeTruthy();
     expect(screen.getByRole("button", { name: "Generate" })).toBeTruthy();
     expect(screen.getByText("No tasks available.")).toBeTruthy();
     expect(screen.getByText("No knowledge entries available.")).toBeTruthy();
+  });
+
+  test("selecting a starter prompt fills and replaces the instruction field without submitting", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+
+    fireEvent.change(instructionField, {
+      target: { value: "Custom draft" },
+    });
+    fireEvent.click(
+      screen.getByRole("button", { name: /Summarize Project State/i }),
+    );
+
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(instructionField).toHaveProperty(
+      "value",
+      "Produce a concise summary of the current project state based only on the provided canonical project context.",
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: /Review Decisions/i }));
+
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(instructionField).toHaveProperty(
+      "value",
+      "Summarize the most relevant existing project decisions and identify any visible unresolved decision gap based only on the provided canonical project context.",
+    );
+  });
+
+  test("selected starter prompt content remains manually editable before submission", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+    const starterPromptButton = screen.getByRole("button", {
+      name: /Recommend Next Safe Step/i,
+    });
+
+    fireEvent.click(starterPromptButton);
+    fireEvent.change(instructionField, {
+      target: {
+        value:
+          "Recommend exactly one smallest safe next step based only on the provided canonical project context. Keep it under 3 bullets.",
+      },
+    });
+
+    expect(instructionField).toHaveProperty(
+      "value",
+      "Recommend exactly one smallest safe next step based only on the provided canonical project context. Keep it under 3 bullets.",
+    );
+    expect(starterPromptButton.getAttribute("aria-pressed")).toBe("false");
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
   test("does not render save controls before a generated result exists", async () => {

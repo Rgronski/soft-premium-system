@@ -38,6 +38,45 @@ type SaveUiState = {
   errorMessage: string | null;
 };
 
+type StarterPrompt = {
+  id: string;
+  label: string;
+  instruction: string;
+};
+
+const STARTER_PROMPTS: StarterPrompt[] = [
+  {
+    id: "summarize-project-state",
+    label: "Summarize Project State",
+    instruction:
+      "Produce a concise summary of the current project state based only on the provided canonical project context.",
+  },
+  {
+    id: "identify-project-risks",
+    label: "Identify Project Risks",
+    instruction:
+      "Identify the most important current project risks based only on the provided canonical project context.",
+  },
+  {
+    id: "review-backlog",
+    label: "Review Backlog",
+    instruction:
+      "Review the current backlog and identify the most relevant unresolved work based only on the provided canonical project context.",
+  },
+  {
+    id: "recommend-next-safe-step",
+    label: "Recommend Next Safe Step",
+    instruction:
+      "Recommend exactly one smallest safe next step based only on the provided canonical project context.",
+  },
+  {
+    id: "review-decisions",
+    label: "Review Decisions",
+    instruction:
+      "Summarize the most relevant existing project decisions and identify any visible unresolved decision gap based only on the provided canonical project context.",
+  },
+];
+
 function getGenerationErrorMessage(status: string): string {
   switch (status) {
     case "invalid-request":
@@ -79,6 +118,7 @@ export default function ProjectAiWorkspacePage() {
   const [instructionState, setInstructionState] = useState({
     projectId: params.id,
     value: "",
+    selectedPromptId: null as string | null,
   });
   const [generationUiState, setGenerationUiState] = useState<GenerationUiState>(
     {
@@ -134,6 +174,10 @@ export default function ProjectAiWorkspacePage() {
 
   const instruction =
     instructionState.projectId === params.id ? instructionState.value : "";
+  const selectedPromptId =
+    instructionState.projectId === params.id
+      ? instructionState.selectedPromptId
+      : null;
   const activeGenerationState =
     generationUiState.projectId === params.id
       ? generationUiState
@@ -208,6 +252,14 @@ export default function ProjectAiWorkspacePage() {
   }
 
   const context = contextState.context;
+
+  function setInstructionValue(value: string, promptId: string | null) {
+    setInstructionState({
+      projectId: params.id,
+      value,
+      selectedPromptId: promptId,
+    });
+  }
 
   async function handleGenerate(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -460,6 +512,28 @@ export default function ProjectAiWorkspacePage() {
           </div>
 
           <form className="mt-4 space-y-4" onSubmit={handleGenerate}>
+            <div className="space-y-3">
+              <p className="text-sm font-medium text-zinc-100">Starter Prompts</p>
+              <div className="space-y-3">
+                {STARTER_PROMPTS.map((prompt) => (
+                  <button
+                    key={prompt.id}
+                    type="button"
+                    onClick={() => setInstructionValue(prompt.instruction, prompt.id)}
+                    aria-pressed={selectedPromptId === prompt.id}
+                    className="block w-full rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-left transition hover:border-zinc-700 aria-pressed:border-zinc-600"
+                  >
+                    <span className="block text-sm font-medium text-zinc-100">
+                      {prompt.label}
+                    </span>
+                    <span className="mt-2 block text-sm text-zinc-400">
+                      {prompt.instruction}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <label className="block space-y-2">
               <span className="text-sm font-medium text-zinc-100">
                 Instruction
@@ -467,10 +541,7 @@ export default function ProjectAiWorkspacePage() {
               <textarea
                 value={instruction}
                 onChange={(event) =>
-                  setInstructionState({
-                    projectId: params.id,
-                    value: event.target.value,
-                  })
+                  setInstructionValue(event.target.value, null)
                 }
                 rows={4}
                 className="w-full rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-100 outline-none transition focus:border-zinc-600"
