@@ -214,7 +214,7 @@ Date: 2026-07-25
 Current Session ID: 019
 Current Chat Title: 019 SPS OS - MS-001.25 — AI Workspace Generation UI Foundat…
 Next Session ID: 020
-Suggested Next Chat Title: 020 SPS OS - Next Product Milestone Contract Discovery
+Suggested Next Chat Title: 020 SPS OS — Next Product Milestone Contract Discovery
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: SESSION CLOSE PENDING
