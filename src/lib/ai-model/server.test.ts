@@ -102,6 +102,16 @@ function createTestClientFactory(options?: {
   });
 }
 
+function createTestEnv(
+  overrides: Partial<NodeJS.ProcessEnv> = {},
+): NodeJS.ProcessEnv {
+  return {
+    ...process.env,
+    NODE_ENV: "test",
+    ...overrides,
+  };
+}
+
 function createAvailableContext(options?: {
   projectId?: string;
   projectName?: string;
@@ -516,9 +526,9 @@ describe("createProductionGenerateAiProjectResponse", () => {
     }));
     const generateAiProjectResponse =
       createProductionGenerateAiProjectResponse({
-        env: {
+        env: createTestEnv({
           OPENAI_API_KEY: "test-openai-key",
-        } as NodeJS.ProcessEnv,
+        }),
         createClient: createTestClientFactory(),
         createProvider,
       });
@@ -557,9 +567,9 @@ describe("createProductionGenerateAiProjectResponse", () => {
     });
     const generateAiProjectResponse =
       createProductionGenerateAiProjectResponse({
-        env: {
+        env: createTestEnv({
           OPENAI_API_KEY: "test-openai-key",
-        } as NodeJS.ProcessEnv,
+        }),
         createClient: createTestClientFactory(),
         createProvider: () => ({
           generate: providerGenerate,
@@ -597,9 +607,9 @@ describe("createProductionGenerateAiProjectResponse", () => {
     const providerGenerate = vi.fn();
     const generateAiProjectResponse =
       createProductionGenerateAiProjectResponse({
-        env: {
+        env: createTestEnv({
           OPENAI_API_KEY: "test-openai-key",
-        } as NodeJS.ProcessEnv,
+        }),
         createClient: createTestClientFactory(),
         createProvider: () => ({
           generate: providerGenerate,
@@ -627,9 +637,9 @@ describe("createProductionGenerateAiProjectResponse", () => {
     const providerGenerate = vi.fn();
     const generateAiProjectResponse =
       createProductionGenerateAiProjectResponse({
-        env: {
+        env: createTestEnv({
           OPENAI_API_KEY: "test-openai-key",
-        } as NodeJS.ProcessEnv,
+        }),
         createClient: createTestClientFactory(),
         createProvider: () => ({
           generate: providerGenerate,
@@ -709,9 +719,9 @@ describe("createProductionGenerateAiProjectResponse", () => {
     }));
     const generateAiProjectResponse =
       createProductionGenerateAiProjectResponse({
-        env: {
+        env: createTestEnv({
           OPENAI_API_KEY: "test-openai-key",
-        } as NodeJS.ProcessEnv,
+        }),
         createClient,
         createProvider,
       });
@@ -755,9 +765,9 @@ describe("createProductionGenerateAiProjectResponse", () => {
     );
     const generateAiProjectResponse =
       createProductionGenerateAiProjectResponse({
-        env: {
+        env: createTestEnv({
           OPENAI_API_KEY: "test-openai-key",
-        } as NodeJS.ProcessEnv,
+        }),
         createClient: createTestClientFactory({
           response: createMockOpenAiResponse("Generated response"),
         }),
