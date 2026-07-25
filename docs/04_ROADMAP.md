@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.25 - AI Workspace Generation UI Foundation
+MS-001.26 - AI Workspace Controlled Knowledge Save
 
 ## Next
 
@@ -3506,6 +3506,78 @@ COMPLETED / VERIFIED
 * generated result remains ephemeral UI state only
 * final repository verification passed with full tests `21 / 258`, TypeScript `PASS`, lint `PASS`, build `PASS`, and `git diff --check` `PASS`
 * final milestone and DoD unblock commits: `19da642`, `002f95f`, `4c08b7c`, `398470a`, `7fbc023`, `f4672ec`, `f63e285`, `db0c1a3`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone. Repository commits remain local until push is explicitly approved.
+
+---
+
+## MS-001.26 - AI Workspace Controlled Knowledge Save
+
+**Milestone**
+MS-001.26 - AI Workspace Controlled Knowledge Save
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Add one explicit and controlled AI Workspace action that saves the current generated result as a new Knowledge entry through the existing canonical write boundary.
+
+**Product Outcome**
+The AI Workspace at `/projects/[id]/ai` preserves the existing generation flow, shows Knowledge save controls only after a successful generation, requires a non-empty explicit title, sends exactly `{ title, content }` to `POST /api/projects/[id]/knowledge`, blocks duplicate save while a request is active, prevents re-saving the same generated result after success, preserves the generated result on save error with conscious retry, resets save state on a new generation, and protects against stale save completion after a new generation or project change without auto-save, canonical refresh, new browser write boundary, chat, streaming, retry UI, agents, or storage changes.
+
+**Dependencies**
+* closed `MS-001.19 - AI Workspace Project Brain Read Foundation`
+* closed `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation`
+* closed `MS-001.21 - AI Model Boundary Foundation`
+* closed `MS-001.22 - AI Model Server Transport Boundary`
+* closed `MS-001.23 - AI Model Production Provider Foundation`
+* closed `MS-001.24 - Server-Readable Read-Only Project Context Foundation`
+* closed `MS-001.25 - AI Workspace Generation UI Foundation`
+
+**Product Owner Decision**
+GO
+
+**Chief Architect Closure Decision**
+FORMALLY ACCEPTED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Implementation Evidence**
+* AI Workspace save UI published in `src/app/projects/[id]/ai/page.tsx`
+* AI Workspace save-flow component coverage published in `src/app/projects/[id]/ai/page.test.tsx`
+* browser save request uses exactly `POST /api/projects/[id]/knowledge`
+* browser save request body remains exactly `{ title, content }`
+* browser save request does not include `projectId` or project context
+* duplicate save and stale save protections are implemented in local UI state only
+* existing Knowledge boundary, Project Brain boundary, and storage boundary remain unchanged
+* final repository verification passed with full tests `21 / 267`, TypeScript `PASS`, lint `PASS`, build `PASS`, and `git diff --check` `PASS`
+* implementation commit: `ff7dc59`
 
 **Blockers**
 NONE

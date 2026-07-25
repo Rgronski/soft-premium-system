@@ -1706,6 +1706,39 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## Session 019 - MS-001.26 AI Workspace Controlled Knowledge Save closed
+
+### Date
+
+2026-07-25
+
+### Completed
+
+* Recorded `MS-001.26 - AI Workspace Controlled Knowledge Save` as `COMPLETED / VERIFIED`.
+* Confirmed the AI Workspace preserves the existing generation flow and shows the save form only after a successful generation.
+* Confirmed the browser requires a non-empty `Title` before dispatching the Knowledge save request.
+* Confirmed the browser sends exactly `{ title, content }` to `POST /api/projects/[id]/knowledge`.
+* Confirmed the browser uses the current generated result as `content`.
+* Confirmed the browser does not send `projectId` or canonical project context in the request body.
+* Confirmed duplicate save is blocked during `saving` and the same generated result cannot be saved again after `saved`.
+* Confirmed the generated result remains visible after save error and a conscious retry is allowed.
+* Confirmed save state resets on a new generation and stale save completion does not leak into a newer generation or a different project.
+* Confirmed no auto-save, canonical refresh, Knowledge boundary change, browser client addition, chat, streaming, retry UI, agents, or storage change was introduced.
+* Recorded final repository verification as `PASS` with full tests `21 / 267`, TypeScript `PASS`, lint `PASS`, production build `PASS`, and `git diff --check` `PASS`.
+* Recorded that the implementation commit remains local and push has not been performed.
+
+### Evidence
+
+* `ff7dc59` - `feat: save AI results to knowledge`
+
+### Notes
+
+* No known blockers remain.
+* Working tree was confirmed `CLEAN` at final verification.
+* No push was performed.
+
+---
+
 ## Session 016 - MS-001.24 local secret setup, minimal schema, and first read-only Neon repository verification
 
 ### Date

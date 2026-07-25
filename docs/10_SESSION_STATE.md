@@ -218,7 +218,7 @@ Suggested Next Chat Title: 020 SPS OS - Next Product Milestone Decision
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: SESSION CLOSED
-Completed Capability Items: MS-001.25 AI Workspace Generation UI Foundation; final AI Workspace UI verification; global DoD blocker removal for browser transport typing, Project Brain snapshot typing, Tasks lint, Vitest server-only mock typing, deferred test typing, OpenAI mock typing, and OpenAI test env typing
+Completed Capability Items: MS-001.25 AI Workspace Generation UI Foundation; MS-001.26 AI Workspace Controlled Knowledge Save; final AI Workspace verification including controlled generation and Knowledge save flows
 Current Product Milestone: NONE
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
@@ -227,8 +227,8 @@ Current Sprint: NONE
 Platform Priority: Keep SSOT synchronized after formal milestone acceptance and wait for explicit Product Owner decisions on push and the next milestone
 Repository Branch: main
 Repository Working Tree State: CLEAN
-Ahead / Behind Status: 0 / 8
-Latest Verified Commit: db0c1a3
+Ahead / Behind Status: 0 / 10
+Latest Verified Commit: ff7dc59
 Verification Status: PASS
 Blockers: NONE
 Open Risks: Next product milestone has not been selected; local milestone and DoD commits are not pushed

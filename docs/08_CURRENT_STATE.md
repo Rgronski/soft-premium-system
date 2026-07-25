@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.25 - AI Workspace Generation UI Foundation
+MS-001.26 - AI Workspace Controlled Knowledge Save
 
 **Next Milestone**
 NONE
@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.25 - AI Workspace Generation UI Foundation
+Latest Completed Product Milestone: MS-001.26 - AI Workspace Controlled Knowledge Save
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -95,6 +95,7 @@ The reference component test file is `src/app/projects/[id]/tasks/page.test.tsx`
 The four focused tests confirm the `createProjectBrainTask` consumer contract for no-write render, `completed`, `completed-with-refresh-failure`, and two explicit user intents.
 MS-001.18 is COMPLETED / PUBLISHED / CLOSED after formalizing the single-consumer contract without production changes.
 MS-001.25 is COMPLETED / VERIFIED after formal acceptance of the first controlled AI Workspace generation flow, and the related commits remain local because push has not been performed.
+MS-001.26 is COMPLETED / VERIFIED after formal acceptance of the controlled AI Workspace Knowledge save flow, and the related implementation commit remains local because push has not been performed.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
@@ -301,6 +302,27 @@ MS-001.25 local completion evidence commits:
 * `f4672ec` - `test: type task submission deferreds`
 * `f63e285` - `test: align openai mocks with sdk`
 * `db0c1a3` - `test: provide complete openai test env`
+MS-001.26 contract status: APPROVED.
+MS-001.26 runtime status: CLOSED.
+MS-001.26 activation status: CLOSED.
+MS-001.26 Chief Architect closure decision: FORMALLY ACCEPTED.
+MS-001.26 implementation status: COMPLETED / VERIFIED.
+MS-001.26 milestone status: COMPLETED / VERIFIED.
+MS-001.26 product outcome: one controlled AI Workspace Knowledge save flow exists on top of the published AI Workspace generation flow and the existing canonical Knowledge write endpoint.
+MS-001.26 preserved boundaries:
+* save UI appears only after successful generation
+* browser sends exactly `{ title, content }`
+* browser does not send `projectId` or canonical project context in request body
+* current generated result is used as `content`
+* explicit non-empty `Title` is required
+* duplicate save is blocked during the active request
+* re-saving the same generated result is blocked after `saved`
+* stale save completion is blocked after a new generation and project change
+* no auto-save, canonical refresh, Knowledge boundary change, browser client addition, chat, streaming, retry UI, agents, or storage change was introduced
+MS-001.26 final verification: full tests `21 / 267` PASS, `npx.cmd tsc --noEmit` PASS, `npm.cmd run lint` PASS, `npm.cmd run build` PASS, `git diff --check` PASS.
+MS-001.26 blocker status: NONE.
+MS-001.26 local completion evidence commit:
+* `ff7dc59` - `feat: save AI results to knowledge`
 Live OpenAI request remains not allowed.
 Pending deployment topic: `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only, is not an accepted ADR, and had no implementation in this session.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
@@ -545,7 +567,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.25 - AI Workspace Generation UI Foundation`
+* `Latest Completed Product Milestone` is `MS-001.26 - AI Workspace Controlled Knowledge Save`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

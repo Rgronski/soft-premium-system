@@ -333,8 +333,7 @@ Keeps future AI actions aligned with explicit write ownership and controlled sid
 High
 
 **Status**
-
-Proposed
+Completed by `MS-001.26 - AI Workspace Controlled Knowledge Save`
 
 ---
 
