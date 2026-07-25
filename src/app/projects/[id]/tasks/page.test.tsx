@@ -3,9 +3,24 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
+import type { Task } from "@/lib/task/types";
+
 const useParamsMock = vi.fn(() => ({ id: "project-1" }));
 const getTasksFromServerMock = vi.fn();
 const createTaskOnServerMock = vi.fn();
+
+function createDeferred<T>() {
+  let resolve!: (value: T | PromiseLike<T>) => void;
+
+  const promise = new Promise<T>((promiseResolve) => {
+    resolve = promiseResolve;
+  });
+
+  return {
+    promise,
+    resolve,
+  };
+}
 
 vi.mock("next/navigation", () => ({
   useParams: () => useParamsMock(),
@@ -105,12 +120,9 @@ describe("ProjectTasksPage", () => {
           createdAt: "2026-07-23T10:00:00.000Z",
         },
       ]);
-    let resolveCreateTask: ((value: unknown) => void) | null = null;
+    const deferredCreateTask = createDeferred<Task>();
     createTaskOnServerMock.mockImplementation(
-      () =>
-        new Promise((resolve) => {
-          resolveCreateTask = resolve;
-        }),
+      () => deferredCreateTask.promise,
     );
 
     render(<ProjectTasksPage />);
@@ -142,7 +154,7 @@ describe("ProjectTasksPage", () => {
 
     expect(createTaskOnServerMock).toHaveBeenCalledTimes(1);
 
-    resolveCreateTask?.({
+    deferredCreateTask.resolve({
       id: "task-1",
       projectId: "project-1",
       title: "First task",
@@ -233,12 +245,9 @@ describe("ProjectTasksPage", () => {
 
   test("ignores a stale submit result after the route projectId changes", async () => {
     getTasksFromServerMock.mockResolvedValueOnce([]).mockResolvedValueOnce([]);
-    let resolveCreateTask: ((value: unknown) => void) | null = null;
+    const deferredCreateTask = createDeferred<Task>();
     createTaskOnServerMock.mockImplementation(
-      () =>
-        new Promise((resolve) => {
-          resolveCreateTask = resolve;
-        }),
+      () => deferredCreateTask.promise,
     );
 
     const { rerender } = render(<ProjectTasksPage />);
@@ -277,7 +286,7 @@ describe("ProjectTasksPage", () => {
       expect((screen.getByRole("button", { name: "Add" }) as HTMLButtonElement).disabled).toBe(false);
     });
 
-    resolveCreateTask?.({
+    deferredCreateTask.resolve({
       id: "task-1",
       projectId: "project-1",
       title: "First task",
