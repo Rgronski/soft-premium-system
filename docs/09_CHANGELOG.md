@@ -1665,6 +1665,47 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## Session 019 - MS-001.25 AI Workspace Generation UI Foundation closed
+
+### Date
+
+2026-07-25
+
+### Completed
+
+* Recorded `MS-001.25 - AI Workspace Generation UI Foundation` as `COMPLETED / VERIFIED`.
+* Confirmed the AI Workspace preserves the canonical read-only project context.
+* Confirmed the AI Workspace provides one instruction field and one `Generate` action at `/projects/[id]/ai`.
+* Confirmed the browser blocks empty and whitespace-only instruction locally before request dispatch.
+* Confirmed the browser sends exactly `{ instruction }` to `POST /api/projects/[id]/ai/generate`.
+* Confirmed the browser does not send `projectId` or canonical project context in the request body.
+* Confirmed duplicate submission is blocked while the request is active.
+* Confirmed generating, generated, and controlled error UI states are implemented.
+* Confirmed the generated output remains ephemeral UI state only.
+* Confirmed no chat, history, streaming, retry, Markdown, agents, tool calling, or Project Brain writes were introduced.
+* Removed the remaining global DoD blockers in browser transport typing, Project Brain snapshot typing, Tasks component lint, Vitest `server-only` mock typing, deferred test typing, OpenAI SDK mock typing, and OpenAI test `ProcessEnv` typing.
+* Recorded final repository verification as `PASS` with full tests `21 / 258`, TypeScript `PASS`, lint `PASS`, production build `PASS`, and `git diff --check` `PASS`.
+* Recorded that the implementation and DoD-unblock commits remain local and push has not been performed.
+
+### Evidence
+
+* `19da642` - `feat: add AI workspace generation UI`
+* `002f95f` - `fix: narrow browser transport errors`
+* `4c08b7c` - `fix: validate project brain project shape`
+* `398470a` - `fix: preserve task submit state across projects`
+* `7fbc023` - `test: align project brain mock with vitest`
+* `f4672ec` - `test: type task submission deferreds`
+* `f63e285` - `test: align openai mocks with sdk`
+* `db0c1a3` - `test: provide complete openai test env`
+
+### Notes
+
+* No known blockers remain.
+* Working tree was confirmed `CLEAN` at final verification.
+* No push was performed.
+
+---
+
 ## Session 016 - MS-001.24 local secret setup, minimal schema, and first read-only Neon repository verification
 
 ### Date

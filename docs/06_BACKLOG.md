@@ -294,7 +294,7 @@ High
 
 **Status**
 
-Proposed
+Completed by `MS-001.25 - AI Workspace Generation UI Foundation`
 
 ---
 

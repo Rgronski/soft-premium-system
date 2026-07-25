@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.23 - AI Model Production Provider Foundation
+MS-001.25 - AI Workspace Generation UI Foundation
 
 ## Next
 
@@ -3443,6 +3443,75 @@ Keep `MS-001.24` closed and resume `MS-001.23` through the existing provider bou
 
 **Milestone Status**
 COMPLETED / PUBLISHED / CLOSED
+
+---
+
+## MS-001.25 - AI Workspace Generation UI Foundation
+
+**Milestone**
+MS-001.25 - AI Workspace Generation UI Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Add the first controlled AI generation flow to the existing AI Workspace without changing Project Brain, the AI engine, or the canonical server-side context boundary.
+
+**Product Outcome**
+The AI Workspace at `/projects/[id]/ai` preserves the canonical read-only project context, accepts one instruction, sends exactly `{ instruction }` to `POST /api/projects/[id]/ai/generate`, blocks empty and whitespace-only input locally, blocks duplicate submit while a request is active, renders one text result, and renders controlled errors without persistence, chat, streaming, retry, Markdown, agents, or Project Brain writes.
+
+**Dependencies**
+* closed `MS-001.19 - AI Workspace Project Brain Read Foundation`
+* closed `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation`
+* closed `MS-001.21 - AI Model Boundary Foundation`
+* closed `MS-001.22 - AI Model Server Transport Boundary`
+* closed `MS-001.23 - AI Model Production Provider Foundation`
+* closed `MS-001.24 - Server-Readable Read-Only Project Context Foundation`
+
+**Product Owner Decision**
+GO
+
+**Chief Architect Closure Decision**
+FORMALLY ACCEPTED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Implementation Evidence**
+* AI Workspace generate UI published in `src/app/projects/[id]/ai/page.tsx`
+* AI Workspace component coverage published in `src/app/projects/[id]/ai/page.test.tsx`
+* browser request body remains exactly `{ instruction }`
+* browser request body does not include `projectId` or project context
+* generated result remains ephemeral UI state only
+* final repository verification passed with full tests `21 / 258`, TypeScript `PASS`, lint `PASS`, build `PASS`, and `git diff --check` `PASS`
+* final milestone and DoD unblock commits: `19da642`, `002f95f`, `4c08b7c`, `398470a`, `7fbc023`, `f4672ec`, `f63e285`, `db0c1a3`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone. Repository commits remain local until push is explicitly approved.
 
 ---
 

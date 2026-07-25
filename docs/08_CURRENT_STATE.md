@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.22 - AI Model Server Transport Boundary
+MS-001.25 - AI Workspace Generation UI Foundation
 
 **Next Milestone**
 NONE
@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.23 - AI Model Production Provider Foundation
+Latest Completed Product Milestone: MS-001.25 - AI Workspace Generation UI Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -94,7 +94,7 @@ No global setup file or global mock layer was introduced.
 The reference component test file is `src/app/projects/[id]/tasks/page.test.tsx`.
 The four focused tests confirm the `createProjectBrainTask` consumer contract for no-write render, `completed`, `completed-with-refresh-failure`, and two explicit user intents.
 MS-001.18 is COMPLETED / PUBLISHED / CLOSED after formalizing the single-consumer contract without production changes.
-MS-001.23 is locally completed and verified and is awaiting publication approval.
+MS-001.25 is COMPLETED / VERIFIED after formal acceptance of the first controlled AI Workspace generation flow, and the related commits remain local because push has not been performed.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
@@ -269,6 +269,38 @@ MS-001.24 selected boundary model: server-first.
 MS-001.24 minimal server-first create boundary for `Tasks` and `KnowledgeEntries` is allowed only as the required exception for feeding the canonical read-only project context.
 MS-001.24 this exception does not approve full CRUD, full write-flow migration, or general write-architecture redesign.
 MS-001.24 does not require full migration of the whole application away from `localStorage`, browser Knowledge create/read UI, removal of the extra AI Project guard read, full CRUD, auth, or multi-user behavior.
+MS-001.25 contract status: APPROVED.
+MS-001.25 runtime status: CLOSED.
+MS-001.25 activation status: CLOSED.
+MS-001.25 Chief Architect closure decision: FORMALLY ACCEPTED.
+MS-001.25 implementation status: COMPLETED / VERIFIED.
+MS-001.25 milestone status: COMPLETED / VERIFIED.
+MS-001.25 product outcome: one controlled AI Workspace generation flow exists on top of the published canonical read-only project context and existing AI route.
+MS-001.25 preserved boundaries:
+* browser sends exactly `{ instruction }`
+* browser does not send `projectId` or canonical project context in request body
+* Project Brain remains the only canonical context source
+* generated output remains ephemeral UI state only
+* no chat, history, streaming, retry, Markdown, agents, tool calling, or writes to Project Brain were introduced
+MS-001.25 user-visible behavior:
+* one instruction field exists
+* one `Generate` action exists
+* empty and whitespace-only instruction is blocked locally
+* duplicate submit is blocked during the active request
+* generating state is visible
+* one text result is rendered
+* controlled error messages are rendered
+MS-001.25 final verification: full tests `21 / 258` PASS, `npx.cmd tsc --noEmit` PASS, `npm.cmd run lint` PASS, `npm.cmd run build` PASS, `git diff --check` PASS.
+MS-001.25 blocker status: NONE.
+MS-001.25 local completion evidence commits:
+* `19da642` - `feat: add AI workspace generation UI`
+* `002f95f` - `fix: narrow browser transport errors`
+* `4c08b7c` - `fix: validate project brain project shape`
+* `398470a` - `fix: preserve task submit state across projects`
+* `7fbc023` - `test: align project brain mock with vitest`
+* `f4672ec` - `test: type task submission deferreds`
+* `f63e285` - `test: align openai mocks with sdk`
+* `db0c1a3` - `test: provide complete openai test env`
 Live OpenAI request remains not allowed.
 Pending deployment topic: `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only, is not an accepted ADR, and had no implementation in this session.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
@@ -513,7 +545,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.23 - AI Model Production Provider Foundation`
+* `Latest Completed Product Milestone` is `MS-001.25 - AI Workspace Generation UI Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
@@ -615,8 +647,8 @@ Next:
 
 Next session priorities:
 
-* Publish `MS-001.23` closure and synchronize `main` with `origin/main`
 * Keep the next product milestone at `NONE` pending Product Owner decision
+* Keep milestone closure documentation aligned until push is explicitly approved
 
 ---
 
