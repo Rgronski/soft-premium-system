@@ -3,7 +3,7 @@
 import { getBrowserAiProjectContext } from "@/lib/project-brain/browser";
 import type { AiProjectContext } from "@/lib/project-brain/types";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 type GenerationState = "idle" | "generating" | "generated" | "error";
 type SaveState = "idle" | "ready-to-save" | "saving" | "saved" | "save-error";
@@ -36,6 +36,7 @@ type SaveUiState = {
   state: SaveState;
   title: string;
   errorMessage: string | null;
+  refreshErrorMessage: string | null;
 };
 
 type StarterPrompt = {
@@ -111,6 +112,10 @@ function getSaveErrorMessage(status: string): string {
 
 export default function ProjectAiWorkspacePage() {
   const params = useParams<{ id: string }>();
+  const currentProjectIdRef = useRef(params.id);
+  useLayoutEffect(() => {
+    currentProjectIdRef.current = params.id;
+  }, [params.id]);
   const [contextState, setContextState] = useState<ContextState>({
     projectId: params.id,
     status: "loading",
@@ -134,6 +139,7 @@ export default function ProjectAiWorkspacePage() {
     state: "idle",
     title: "",
     errorMessage: null,
+    refreshErrorMessage: null,
   });
 
   useEffect(() => {
@@ -200,6 +206,7 @@ export default function ProjectAiWorkspacePage() {
             : ("idle" as const),
           title: "",
           errorMessage: null,
+          refreshErrorMessage: null,
         };
 
   if (contextState.projectId !== params.id || contextState.status === "loading") {
@@ -290,6 +297,7 @@ export default function ProjectAiWorkspacePage() {
       state: "idle",
       title: "",
       errorMessage: null,
+      refreshErrorMessage: null,
     });
 
     try {
@@ -320,6 +328,7 @@ export default function ProjectAiWorkspacePage() {
           state: "ready-to-save",
           title: "",
           errorMessage: null,
+          refreshErrorMessage: null,
         });
         return;
       }
@@ -363,6 +372,7 @@ export default function ProjectAiWorkspacePage() {
         state: "save-error",
         title: activeSaveState.title,
         errorMessage: "Enter a valid title.",
+        refreshErrorMessage: null,
       });
       return;
     }
@@ -377,6 +387,7 @@ export default function ProjectAiWorkspacePage() {
       state: "saving",
       title,
       errorMessage: null,
+      refreshErrorMessage: null,
     });
 
     try {
@@ -415,7 +426,46 @@ export default function ProjectAiWorkspacePage() {
           state: "saved",
           title,
           errorMessage: null,
+          refreshErrorMessage: null,
         });
+        try {
+          const contextResult = await getBrowserAiProjectContext(projectId);
+
+          if (currentProjectIdRef.current !== projectId) {
+            return;
+          }
+
+          if (contextResult.status === "available") {
+            setContextState({
+              projectId,
+              status: "available",
+              context: contextResult.context,
+            });
+            return;
+          }
+
+          setSaveUiState({
+            projectId,
+            sourceContent: generatedContent,
+            state: "saved",
+            title,
+            errorMessage: null,
+            refreshErrorMessage: "Saved to Knowledge, but AI project context could not be refreshed.",
+          });
+        } catch {
+          if (currentProjectIdRef.current !== projectId) {
+            return;
+          }
+
+          setSaveUiState({
+            projectId,
+            sourceContent: generatedContent,
+            state: "saved",
+            title,
+            errorMessage: null,
+            refreshErrorMessage: "Saved to Knowledge, but AI project context could not be refreshed.",
+          });
+        }
         return;
       }
 
@@ -428,6 +478,7 @@ export default function ProjectAiWorkspacePage() {
           "status" in result
             ? getSaveErrorMessage(result.status)
             : "Unexpected save error.",
+        refreshErrorMessage: null,
       });
     } catch {
       setSaveUiState({
@@ -436,6 +487,7 @@ export default function ProjectAiWorkspacePage() {
         state: "save-error",
         title,
         errorMessage: "Knowledge save unavailable.",
+        refreshErrorMessage: null,
       });
     }
   }
@@ -585,6 +637,7 @@ export default function ProjectAiWorkspacePage() {
                             : "ready-to-save",
                         title: event.target.value,
                         errorMessage: null,
+                        refreshErrorMessage: activeSaveState.refreshErrorMessage,
                       })
                     }
                     className="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-sm text-zinc-100 outline-none transition focus:border-zinc-600"
@@ -611,6 +664,14 @@ export default function ProjectAiWorkspacePage() {
                 <div className="mt-4 rounded-xl border border-red-900/60 bg-red-950/30 px-4 py-3">
                   <p className="text-sm text-red-200">
                     {activeSaveState.errorMessage}
+                  </p>
+                </div>
+              ) : null}
+
+              {activeSaveState.refreshErrorMessage ? (
+                <div className="mt-4 rounded-xl border border-amber-900/60 bg-amber-950/30 px-4 py-3">
+                  <p className="text-sm text-amber-200">
+                    {activeSaveState.refreshErrorMessage}
                   </p>
                 </div>
               ) : null}

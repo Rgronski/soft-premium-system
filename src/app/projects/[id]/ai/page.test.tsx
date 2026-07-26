@@ -307,7 +307,32 @@ describe("ProjectAiWorkspacePage", () => {
   });
 
   test("renders title and save action after generation and sends the exact knowledge request", async () => {
-    getBrowserAiProjectContextMock.mockResolvedValue({
+    getBrowserAiProjectContextMock
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [],
+        },
+      })
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [
+            {
+              id: "knowledge-1",
+              title: "Architecture note",
+              content: "Generated response",
+            },
+          ],
+        },
+      })
+      .mockResolvedValue({
       status: "available",
       context: {
         projectId: "project-1",
@@ -372,8 +397,11 @@ describe("ProjectAiWorkspacePage", () => {
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
+      expect(screen.getByText("Architecture note")).toBeTruthy();
     });
 
+    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(2);
+    expect(getBrowserAiProjectContextMock).toHaveBeenNthCalledWith(2, "project-1");
     expect(fetchMock).toHaveBeenNthCalledWith(2, "/api/projects/project-1/knowledge", {
       method: "POST",
       headers: {
@@ -396,6 +424,8 @@ describe("ProjectAiWorkspacePage", () => {
     expect(saveBody).not.toHaveProperty("tasks");
     expect(saveBody).not.toHaveProperty("knowledgeEntries");
     expect(saveBody).not.toHaveProperty("instruction");
+    expect(screen.getAllByText("Generated response").length).toBeGreaterThan(0);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
   test("renders generating state and blocks duplicate submission while the request is active", async () => {
@@ -576,7 +606,32 @@ describe("ProjectAiWorkspacePage", () => {
   });
 
   test("renders saving state, blocks duplicate save, and prevents re-saving the same generated result after success", async () => {
-    getBrowserAiProjectContextMock.mockResolvedValue({
+    getBrowserAiProjectContextMock
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [],
+        },
+      })
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [
+            {
+              id: "knowledge-1",
+              title: "Architecture note",
+              content: "Generated response",
+            },
+          ],
+        },
+      })
+      .mockResolvedValue({
       status: "available",
       context: {
         projectId: "project-1",
@@ -657,6 +712,7 @@ describe("ProjectAiWorkspacePage", () => {
       );
     });
 
+    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(2);
     fireEvent.click(screen.getByRole("button", { name: "Saved" }));
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
@@ -747,6 +803,292 @@ describe("ProjectAiWorkspacePage", () => {
       expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
     });
     expect(fetchMock).toHaveBeenCalledTimes(3);
+  });
+
+  test("does not refresh context after an unsuccessful save", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+    fetchMock
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Generated response",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "context-unavailable",
+          }),
+          {
+            status: 503,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      );
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+    fireEvent.change(instructionField, {
+      target: { value: "Summarize project" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Generated response")).toBeTruthy();
+    });
+
+    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+      target: { value: "Architecture note" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Knowledge save unavailable.")).toBeTruthy();
+    });
+
+    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
+  test("shows a separate refresh error after a successful save and keeps generated result and save success", async () => {
+    getBrowserAiProjectContextMock
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [],
+        },
+      })
+      .mockRejectedValueOnce(new Error("refresh failed"))
+      .mockResolvedValue({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [],
+        },
+      });
+    fetchMock
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Generated response",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            id: "knowledge-1",
+            projectId: "project-1",
+            title: "Architecture note",
+            content: "Generated response",
+            createdAt: "2026-07-25T09:00:00.000Z",
+          }),
+          {
+            status: 201,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      );
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+    fireEvent.change(instructionField, {
+      target: { value: "Summarize project" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Generated response")).toBeTruthy();
+    });
+
+    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+      target: { value: "Architecture note" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
+      expect(
+        screen.getByText(
+          "Saved to Knowledge, but AI project context could not be refreshed.",
+        ),
+      ).toBeTruthy();
+    });
+
+    expect(screen.getByText("Generated response")).toBeTruthy();
+    expect(screen.queryByText("Knowledge save unavailable.")).toBeNull();
+    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(2);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
+  test("stale knowledge refresh from the previous project does not overwrite the current project", async () => {
+    const refreshDeferred = createDeferred<{
+      status: "available";
+      context: {
+        projectId: string;
+        projectName: string;
+        tasks: Array<{ id: string; title: string }>;
+        knowledgeEntries: Array<{
+          id: string;
+          title: string;
+          content: string;
+        }>;
+      };
+    }>();
+
+    getBrowserAiProjectContextMock
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [],
+        },
+      })
+      .mockReturnValueOnce(refreshDeferred.promise)
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-2",
+          projectName: "Beta",
+          tasks: [],
+          knowledgeEntries: [],
+        },
+      });
+    fetchMock
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Generated response",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            id: "knowledge-1",
+            projectId: "project-1",
+            title: "Architecture note",
+            content: "Generated response",
+            createdAt: "2026-07-25T09:00:00.000Z",
+          }),
+          {
+            status: 201,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      );
+
+    const { rerender } = render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+    fireEvent.change(instructionField, {
+      target: { value: "Summarize project" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Generated response")).toBeTruthy();
+    });
+
+    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+      target: { value: "Architecture note" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
+    });
+
+    useParamsMock.mockReturnValue({ id: "project-2" });
+    rerender(<ProjectAiWorkspacePage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Beta")).toBeTruthy();
+    });
+
+    refreshDeferred.resolve({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [
+          {
+            id: "knowledge-1",
+            title: "Architecture note",
+            content: "Generated response",
+          },
+        ],
+      },
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText("Beta")).toBeTruthy();
+    });
+
+    expect(screen.queryByText("Alpha")).toBeNull();
+    expect(screen.queryByText("Architecture note")).toBeNull();
+    expect(
+      screen.queryByText(
+        "Saved to Knowledge, but AI project context could not be refreshed.",
+      ),
+    ).toBeNull();
+    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(3);
+    expect(getBrowserAiProjectContextMock).toHaveBeenNthCalledWith(1, "project-1");
+    expect(getBrowserAiProjectContextMock).toHaveBeenNthCalledWith(2, "project-1");
+    expect(getBrowserAiProjectContextMock).toHaveBeenNthCalledWith(3, "project-2");
+    expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
   test("renders a controlled save error for project-not-found and a network error for rejected save requests", async () => {
