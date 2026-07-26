@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.27 - AI Workspace Controlled Prompt Foundation
+MS-001.28 - AI Workspace Controlled Knowledge Refresh
 
 **Next Milestone**
 NONE
@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.27 - AI Workspace Controlled Prompt Foundation
+Latest Completed Product Milestone: MS-001.28 - AI Workspace Controlled Knowledge Refresh
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -97,6 +97,7 @@ MS-001.18 is COMPLETED / PUBLISHED / CLOSED after formalizing the single-consume
 MS-001.25 is COMPLETED / VERIFIED after formal acceptance of the first controlled AI Workspace generation flow, and the related commits remain local because push has not been performed.
 MS-001.26 is COMPLETED / VERIFIED after formal acceptance of the controlled AI Workspace Knowledge save flow, and the related implementation commit remains local because push has not been performed.
 MS-001.27 is COMPLETED / VERIFIED after formal acceptance of the controlled AI Workspace starter prompt foundation, and the related implementation commit remains local because push has not been performed.
+MS-001.28 is COMPLETED / VERIFIED after formal acceptance of the controlled AI Workspace Knowledge refresh flow, and the related implementation commit remains local because push has not been performed.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
@@ -342,6 +343,28 @@ MS-001.27 final verification: full tests `21 / 269` PASS, `npx.cmd tsc --noEmit`
 MS-001.27 blocker status: NONE.
 MS-001.27 local completion evidence commit:
 * `1e5158f` - `feat: add controlled AI starter prompts`
+MS-001.28 contract status: APPROVED.
+MS-001.28 runtime status: CLOSED.
+MS-001.28 activation status: CLOSED.
+MS-001.28 implementation status: COMPLETED / VERIFIED.
+MS-001.28 milestone status: COMPLETED / VERIFIED.
+MS-001.28 product outcome: one controlled read-after-save AI Workspace Knowledge refresh exists on top of the published AI Workspace save flow and the existing canonical Project Brain context reader.
+MS-001.28 preserved boundaries:
+* exactly one canonical context refresh runs only after successful Knowledge save
+* the visible Knowledge list is updated only from the existing reader result
+* generated result remains visible
+* save success remains preserved
+* refresh failure uses a separate message and does not become save failure
+* save failure does not trigger refresh
+* stale refresh from a previous project cannot overwrite the current project state
+* no optimistic update was introduced
+* generate request body remains exactly `{ instruction }`
+* save request body remains exactly `{ title, content }`
+* no endpoint, Project Brain, Knowledge model, provider, or persistence changes were introduced
+MS-001.28 final verification: full tests `21 / 272` PASS, `npx.cmd tsc --noEmit` PASS, `npm.cmd run lint` PASS, `npm.cmd run build` PASS, `git diff --check` PASS.
+MS-001.28 blocker status: NONE.
+MS-001.28 local completion evidence commit:
+* `0d56046` - `feat: refresh AI knowledge context after save`
 Live OpenAI request remains not allowed.
 Pending deployment topic: `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only, is not an accepted ADR, and had no implementation in this session.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
@@ -586,7 +609,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.27 - AI Workspace Controlled Prompt Foundation`
+* `Latest Completed Product Milestone` is `MS-001.28 - AI Workspace Controlled Knowledge Refresh`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

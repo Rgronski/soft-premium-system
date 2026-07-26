@@ -1769,6 +1769,40 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## Session 020 - MS-001.28 AI Workspace Controlled Knowledge Refresh closed
+
+### Date
+
+2026-07-26
+
+### Completed
+
+* Recorded `MS-001.28 - AI Workspace Controlled Knowledge Refresh` as `COMPLETED / VERIFIED`.
+* Confirmed the AI Workspace performs exactly one canonical context refresh only after confirmed successful Knowledge save.
+* Confirmed the visible Knowledge list updates from the state returned by the existing reader.
+* Confirmed the generated result remains visible after refresh.
+* Confirmed save success remains preserved after refresh.
+* Confirmed refresh failure shows a separate message and does not become save failure.
+* Confirmed save failure does not trigger refresh.
+* Confirmed stale refresh from a previous project cannot overwrite the current project state.
+* Confirmed no optimistic update was introduced.
+* Confirmed the request contracts remain exactly `{ instruction }` for generate and `{ title, content }` for save.
+* Confirmed the existing endpoints, Project Brain, Knowledge model, provider composition, and persistence remain unchanged.
+* Recorded final repository verification as `PASS` with full tests `21 / 272`, TypeScript `PASS`, lint `PASS`, production build `PASS`, and `git diff --check` `PASS`.
+* Recorded that the implementation commit remains local and push has not been performed.
+
+### Evidence
+
+* `0d56046` - `feat: refresh AI knowledge context after save`
+
+### Notes
+
+* No known blockers remain.
+* Working tree was confirmed `CLEAN` after the implementation commit.
+* No push was performed.
+
+---
+
 ## Session 016 - MS-001.24 local secret setup, minimal schema, and first read-only Neon repository verification
 
 ### Date
