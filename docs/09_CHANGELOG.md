@@ -69,6 +69,27 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 021 - MS-001.32 AI Workspace Conversation Context Budget Foundation implemented locally
+
+### Date
+
+2026-07-27
+
+### Completed
+
+* Confirmed the AI Workspace now limits local conversation context to the last 3 successful exchanges.
+* Confirmed the first `Generate` still sends no conversation history.
+* Confirmed older exchanges outside the fixed budget do not enter the next `instruction`.
+* Confirmed reset still clears local conversation context.
+* Confirmed Save to Knowledge remains bound only to the latest generated result.
+* Recorded focused verification as `PASS` with component tests `31 / 31`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded that no commit or push was performed for `MS-001.32`.
+
+### Notes
+
+* The context budget is fixed and not user-configurable.
+* Endpoint shape, Project Brain boundaries, starter prompts, and Knowledge refresh remain unchanged.
+
 ## Session 021 - MS-001.31 AI Workspace Conversation Reset Control Foundation implemented locally
 
 ### Date

@@ -53,15 +53,19 @@ type StarterPrompt = {
   instruction: string;
 };
 
+const CONVERSATION_CONTEXT_EXCHANGE_LIMIT = 3;
+
 function buildGenerationInstruction(
   instruction: string,
   exchanges: ConversationExchange[],
 ): string {
-  if (exchanges.length === 0) {
+  const budgetedExchanges = exchanges.slice(-CONVERSATION_CONTEXT_EXCHANGE_LIMIT);
+
+  if (budgetedExchanges.length === 0) {
     return instruction;
   }
 
-  const conversationContext = exchanges
+  const conversationContext = budgetedExchanges
     .map(
       (exchange, index) =>
         [

@@ -656,6 +656,154 @@ describe("ProjectAiWorkspacePage", () => {
     expect(thirdGenerateBody.instruction).not.toContain("First response");
   });
 
+  test("generation context uses only the latest three successful exchanges", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+    fetchMock
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Response 1",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Response 2",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Response 3",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Response 4",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Response 5",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      );
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+
+    fireEvent.change(instructionField, {
+      target: { value: "Instruction 1" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Response 1")).toBeTruthy();
+    });
+
+    fireEvent.change(instructionField, {
+      target: { value: "Instruction 2" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Response 2")).toBeTruthy();
+    });
+
+    fireEvent.change(instructionField, {
+      target: { value: "Instruction 3" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Response 3")).toBeTruthy();
+    });
+
+    fireEvent.change(instructionField, {
+      target: { value: "Instruction 4" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Response 4")).toBeTruthy();
+    });
+
+    fireEvent.change(instructionField, {
+      target: { value: "Instruction 5" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Response 5")).toBeTruthy();
+    });
+
+    const fifthGenerateBody = JSON.parse(
+      String(fetchMock.mock.calls[4]?.[1]?.body),
+    ) as Record<string, string>;
+
+    expect(fifthGenerateBody.instruction).toContain("Instruction 2");
+    expect(fifthGenerateBody.instruction).toContain("Response 2");
+    expect(fifthGenerateBody.instruction).toContain("Instruction 3");
+    expect(fifthGenerateBody.instruction).toContain("Response 3");
+    expect(fifthGenerateBody.instruction).toContain("Instruction 4");
+    expect(fifthGenerateBody.instruction).toContain("Response 4");
+    expect(fifthGenerateBody.instruction).toContain("Instruction 5");
+    expect(fifthGenerateBody.instruction).not.toContain("Instruction 1");
+    expect(fifthGenerateBody.instruction).not.toContain("Response 1");
+  });
+
   test("renders title and save action after generation and sends the exact knowledge request", async () => {
     getBrowserAiProjectContextMock
       .mockResolvedValueOnce({

@@ -3965,6 +3965,85 @@ Run Chief Architect review and formal Product Owner acceptance for `MS-001.31` b
 
 ---
 
+## MS-001.32 - AI Workspace Conversation Context Budget Foundation
+
+**Milestone**
+MS-001.32 - AI Workspace Conversation Context Budget Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+YES
+
+**Runtime Status**
+OPEN
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Add one minimal fixed local conversation-context budget inside the AI Workspace so later `Generate` actions do not send an unbounded local session history.
+
+**Product Outcome**
+The AI Workspace at `/projects/[id]/ai` sends the first `Generate` with no conversation history, sends later `Generate` actions with only the last 3 successful local exchanges from the current UI session, keeps reset behavior from `MS-001.31`, and keeps Save to Knowledge bound only to the latest generated result.
+
+**Dependencies**
+* closed `MS-001.19 - AI Workspace Project Brain Read Foundation`
+* closed `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation`
+* closed `MS-001.21 - AI Model Boundary Foundation`
+* closed `MS-001.22 - AI Model Server Transport Boundary`
+* closed `MS-001.23 - AI Model Production Provider Foundation`
+* closed `MS-001.24 - Server-Readable Read-Only Project Context Foundation`
+* closed `MS-001.25 - AI Workspace Generation UI Foundation`
+* closed `MS-001.26 - AI Workspace Controlled Knowledge Save`
+* closed `MS-001.27 - AI Workspace Controlled Prompt Foundation`
+* closed `MS-001.28 - AI Workspace Controlled Knowledge Refresh`
+* closed `MS-001.29 - AI Workspace Controlled Conversation Foundation`
+* closed `MS-001.30 - AI Workspace Controlled Conversation Context Foundation`
+* closed `MS-001.31 - AI Workspace Conversation Reset Control Foundation`
+
+**Product Owner Decision**
+GO
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Milestone Status**
+PENDING FORMAL ACCEPTANCE
+
+**Implementation Evidence**
+* AI Workspace fixed conversation-context budget behavior is implemented in `src/app/projects/[id]/ai/page.tsx`
+* AI Workspace context-budget coverage is implemented in `src/app/projects/[id]/ai/page.test.tsx`
+* first `Generate` sends no conversation history
+* later `Generate` actions include only the last 3 successful local exchanges from the current UI session
+* older exchanges beyond that budget do not enter the next `instruction`
+* reset still clears the local conversation state
+* browser generate request body remains exactly `{ instruction }`
+* browser save request body remains exactly `{ title, content }`
+* Save to Knowledge remains bound only to the latest generated result
+* no persistence, new endpoint, streaming, agents, tool calling, Markdown rendering, retry UI, or Project Brain change was introduced
+* targeted component verification passed with `31 / 31` tests in `src/app/projects/[id]/ai/page.test.tsx`
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Chief Architect review and formal Product Owner acceptance for `MS-001.32` before any commit or push decision.
+
+---
+
 # Release Criteria
 
 SPS OS 1.0 release progression requires:
