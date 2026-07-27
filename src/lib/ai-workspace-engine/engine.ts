@@ -80,6 +80,17 @@ export function buildGenerationInstruction(
   ].join("\n");
 }
 
+export function deriveLatestExchange(
+  latestExchangeId: number | null,
+  exchanges: ConversationExchange[],
+): ConversationExchange | null {
+  if (latestExchangeId === null) {
+    return null;
+  }
+
+  return exchanges.find((exchange) => exchange.id === latestExchangeId) ?? null;
+}
+
 export function deriveActiveSaveState(
   projectId: string,
   latestExchange: ConversationExchange | null,

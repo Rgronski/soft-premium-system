@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 025 - MS-001.39 AI Workspace Engine Latest Exchange Derivation Foundation verified locally
+
+### Date
+
+2026-07-27
+
+### Completed
+
+* Moved the pure latest-exchange derivation from `src/app/projects/[id]/ai/page.tsx` into `src/lib/ai-workspace-engine/engine.ts`.
+* Added one typed engine helper that derives the latest local exchange from `latestExchangeId` and `exchanges`.
+* Added focused unit coverage in `src/lib/ai-workspace-engine/engine.test.ts` for null, found, and not-found latest-exchange derivation.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now reuses the engine helper without changing save semantics, request shapes, copy behavior, reset behavior, or broader generation/save flows.
+* Recorded focused verification as `PASS` with engine tests `13 / 13`, component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded publication status as `NOT PUBLISHED`.
+* Recorded milestone status as `COMPLETED / VERIFIED / READY FOR PUBLICATION`.
+* Kept `Current Product Milestone` as `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.39 - AI Workspace Engine Latest Exchange Derivation Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No Project Brain, Knowledge API, provider, endpoint, storage, Command Center, Conductor, workflow, or UI redesign changes were introduced.
+* No commit or push was performed for `MS-001.39`.
+
 ## Session 025 - MS-001.38 AI Workspace Engine Save State Derivation Foundation published
 
 ### Date
@@ -82,6 +106,8 @@ Each release entry should contain:
 * Added focused unit coverage in `src/lib/ai-workspace-engine/engine.test.ts` for stored save-state reuse and default fallback derivation.
 * Confirmed `src/app/projects/[id]/ai/page.tsx` now reuses the engine helper without changing copy, save, reset, title-editing, refresh-error, or API flow behavior.
 * Recorded focused verification as `PASS` with engine tests `10 / 10`, component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded publication commit `a7b7696`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
 
 ### Notes
 

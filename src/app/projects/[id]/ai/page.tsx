@@ -5,6 +5,7 @@ import type { AiProjectContext } from "@/lib/project-brain/types";
 import {
   buildGenerationInstruction,
   deriveActiveSaveState,
+  deriveLatestExchange,
   getConversationContextStatusMessage,
   getGenerationErrorMessage,
   getSaveErrorMessage,
@@ -175,12 +176,10 @@ export default function ProjectAiWorkspacePage() {
           latestExchangeId: null,
           errorMessage: null,
         };
-  const latestExchange =
-    activeGenerationState.latestExchangeId === null
-      ? null
-      : activeGenerationState.exchanges.find(
-          (exchange) => exchange.id === activeGenerationState.latestExchangeId,
-        ) ?? null;
+  const latestExchange = deriveLatestExchange(
+    activeGenerationState.latestExchangeId,
+    activeGenerationState.exchanges,
+  );
   const conversationContextStatusMessage = getConversationContextStatusMessage(
     activeGenerationState.exchanges,
   );

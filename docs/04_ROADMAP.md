@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.38 - AI Workspace Engine Save State Derivation Foundation
+MS-001.39 - AI Workspace Engine Latest Exchange Derivation Foundation
 
 ## Next
 
@@ -4428,7 +4428,10 @@ ACCEPT
 COMPLETED / VERIFIED
 
 **Milestone Status**
-COMPLETED / VERIFIED / PUSHED
+COMPLETED / PUBLISHED / CLOSED
+
+**Publication Commit**
+`a7b7696`
 
 **Implementation Evidence**
 * `src/lib/ai-workspace-engine/engine.ts` now contains the typed active save-state derivation helper and save-state types
@@ -4444,6 +4447,70 @@ NONE
 
 **Next Safe Step**
 Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.39 - AI Workspace Engine Latest Exchange Derivation Foundation
+
+**Milestone**
+MS-001.39 - AI Workspace Engine Latest Exchange Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move only the pure latest-exchange derivation logic from the AI Workspace page into the AI Workspace Engine module without changing UX, UI text, save semantics, provider wiring, Project Brain boundaries, or broader generation/save state management.
+
+**Product Outcome**
+The repository contains one small extension of the AI Workspace Engine runtime module that owns the typed derivation of the latest local exchange from `latestExchangeId` and `exchanges`, while the existing AI Workspace page reuses that helper with unchanged behavior.
+
+**Dependencies**
+* closed `MS-001.38 - AI Workspace Engine Save State Derivation Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / READY FOR PUBLICATION
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now contains the typed latest-exchange derivation helper
+* `src/lib/ai-workspace-engine/engine.test.ts` contains focused unit coverage for null, found, and not-found latest-exchange derivation
+* `src/app/projects/[id]/ai/page.tsx` reuses the engine helper and no longer derives the latest exchange inline
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `13 / 13` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Obtain Product Owner publication approval for `MS-001.39`.
 
 ---
 

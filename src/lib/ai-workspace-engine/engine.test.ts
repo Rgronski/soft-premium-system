@@ -1,6 +1,7 @@
 import {
   buildGenerationInstruction,
   deriveActiveSaveState,
+  deriveLatestExchange,
   getConversationContextExchangeCount,
   getConversationContextStatusMessage,
   getGenerationErrorMessage,
@@ -94,6 +95,32 @@ describe("ai workspace engine", () => {
     expect(instruction).toContain("Current User Instruction:\nInstruction 5");
     expect(instruction).not.toContain("Instruction 1");
     expect(instruction).not.toContain("Response 1");
+  });
+
+  test("derives no latest exchange when the latest exchange id is null", () => {
+    expect(
+      deriveLatestExchange(null, [createExchange(1, "Instruction 1", "Response 1")]),
+    ).toBeNull();
+  });
+
+  test("derives the matching latest exchange when the id exists", () => {
+    const exchange = createExchange(2, "Instruction 2", "Response 2");
+
+    expect(
+      deriveLatestExchange(2, [
+        createExchange(1, "Instruction 1", "Response 1"),
+        exchange,
+      ]),
+    ).toBe(exchange);
+  });
+
+  test("derives no latest exchange when the id does not exist", () => {
+    expect(
+      deriveLatestExchange(3, [
+        createExchange(1, "Instruction 1", "Response 1"),
+        createExchange(2, "Instruction 2", "Response 2"),
+      ]),
+    ).toBeNull();
   });
 
   test("reuses stored save UI state only when it still matches the latest exchange", () => {
