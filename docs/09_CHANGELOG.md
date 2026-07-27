@@ -69,6 +69,27 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 021 - MS-001.33 AI Workspace Conversation Context Visibility Foundation implemented locally
+
+### Date
+
+2026-07-27
+
+### Completed
+
+* Confirmed the AI Workspace now shows a simple visibility status for local conversation context.
+* Confirmed the initial state shows no local conversation context for the next `Generate`.
+* Confirmed successful generations update the status to show use of the last `X` local exchanges within the existing fixed budget.
+* Confirmed reset returns the status to no local conversation context.
+* Confirmed the new status does not expose full local conversation content.
+* Confirmed Save to Knowledge remains bound only to the latest generated result.
+* Recorded focused verification as `PASS` with component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded that no commit or push was performed for `MS-001.33`.
+
+### Notes
+
+* Request shape, Project Brain boundaries, starter prompts, reset behavior, and context budget behavior remain unchanged.
+
 ## Session 021 - MS-001.32 AI Workspace Conversation Context Budget Foundation implemented locally
 
 ### Date

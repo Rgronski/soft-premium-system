@@ -55,6 +55,24 @@ type StarterPrompt = {
 
 const CONVERSATION_CONTEXT_EXCHANGE_LIMIT = 3;
 
+function getConversationContextExchangeCount(
+  exchanges: ConversationExchange[],
+): number {
+  return exchanges.slice(-CONVERSATION_CONTEXT_EXCHANGE_LIMIT).length;
+}
+
+function getConversationContextStatusMessage(
+  exchanges: ConversationExchange[],
+): string {
+  const count = getConversationContextExchangeCount(exchanges);
+
+  if (count === 0) {
+    return "Next Generate will use no local conversation context.";
+  }
+
+  return `Next Generate will use the last ${count} local exchange${count === 1 ? "" : "s"}.`;
+}
+
 function buildGenerationInstruction(
   instruction: string,
   exchanges: ConversationExchange[],
@@ -246,6 +264,9 @@ export default function ProjectAiWorkspacePage() {
       : activeGenerationState.exchanges.find(
           (exchange) => exchange.id === activeGenerationState.latestExchangeId,
         ) ?? null;
+  const conversationContextStatusMessage = getConversationContextStatusMessage(
+    activeGenerationState.exchanges,
+  );
   const generationInstruction = buildGenerationInstruction(
     instruction,
     activeGenerationState.exchanges,
@@ -683,6 +704,9 @@ export default function ProjectAiWorkspacePage() {
             </p>
             <p className="text-sm text-zinc-400">
               Enter one instruction to add the next local AI exchange.
+            </p>
+            <p className="text-sm text-zinc-500">
+              {conversationContextStatusMessage}
             </p>
           </div>
 

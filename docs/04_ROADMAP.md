@@ -4044,6 +4044,86 @@ Run Chief Architect review and formal Product Owner acceptance for `MS-001.32` b
 
 ---
 
+## MS-001.33 - AI Workspace Conversation Context Visibility Foundation
+
+**Milestone**
+MS-001.33 - AI Workspace Conversation Context Visibility Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+YES
+
+**Runtime Status**
+OPEN
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Add one minimal visibility layer inside the AI Workspace so the user can see whether the next `Generate` will use local conversation context without exposing full local conversation content.
+
+**Product Outcome**
+The AI Workspace at `/projects/[id]/ai` shows a simple status for the next `Generate`, starts with no local conversation context, reports use of the last `X` exchanges within the existing budget from `MS-001.32`, returns to no context after reset, and keeps Save to Knowledge bound only to the latest generated result.
+
+**Dependencies**
+* closed `MS-001.19 - AI Workspace Project Brain Read Foundation`
+* closed `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation`
+* closed `MS-001.21 - AI Model Boundary Foundation`
+* closed `MS-001.22 - AI Model Server Transport Boundary`
+* closed `MS-001.23 - AI Model Production Provider Foundation`
+* closed `MS-001.24 - Server-Readable Read-Only Project Context Foundation`
+* closed `MS-001.25 - AI Workspace Generation UI Foundation`
+* closed `MS-001.26 - AI Workspace Controlled Knowledge Save`
+* closed `MS-001.27 - AI Workspace Controlled Prompt Foundation`
+* closed `MS-001.28 - AI Workspace Controlled Knowledge Refresh`
+* closed `MS-001.29 - AI Workspace Controlled Conversation Foundation`
+* closed `MS-001.30 - AI Workspace Controlled Conversation Context Foundation`
+* closed `MS-001.31 - AI Workspace Conversation Reset Control Foundation`
+* closed `MS-001.32 - AI Workspace Conversation Context Budget Foundation`
+
+**Product Owner Decision**
+GO
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Milestone Status**
+PENDING FORMAL ACCEPTANCE
+
+**Implementation Evidence**
+* AI Workspace context-visibility status is implemented in `src/app/projects/[id]/ai/page.tsx`
+* AI Workspace context-visibility coverage is implemented in `src/app/projects/[id]/ai/page.test.tsx`
+* initial state shows no local conversation context for the next `Generate`
+* after successful generations, the status shows use of the last `X` local exchanges within the current fixed budget
+* after reset, the status returns to no local conversation context
+* full conversation content is not exposed through the new status
+* browser generate request body remains exactly `{ instruction }`
+* browser save request body remains exactly `{ title, content }`
+* Save to Knowledge remains bound only to the latest generated result
+* no persistence, new endpoint, streaming, agents, tool calling, Markdown rendering, retry UI, or Project Brain change was introduced
+* targeted component verification passed with `32 / 32` tests in `src/app/projects/[id]/ai/page.test.tsx`
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Chief Architect review and formal Product Owner acceptance for `MS-001.33` before any commit or push decision.
+
+---
+
 # Release Criteria
 
 SPS OS 1.0 release progression requires:

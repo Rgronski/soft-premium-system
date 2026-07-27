@@ -154,6 +154,9 @@ describe("ProjectAiWorkspacePage", () => {
     expect(screen.getByRole("button", { name: /Review Decisions/i })).toBeTruthy();
     expect(screen.getByRole("textbox", { name: "Instruction" })).toBeTruthy();
     expect(screen.getByRole("button", { name: "Generate" })).toBeTruthy();
+    expect(
+      screen.getByText("Next Generate will use no local conversation context."),
+    ).toBeTruthy();
     expect(screen.getByText("No tasks available.")).toBeTruthy();
     expect(screen.getByText("No knowledge entries available.")).toBeTruthy();
   });
@@ -401,6 +404,9 @@ describe("ProjectAiWorkspacePage", () => {
     expect(secondGenerateBody.instruction).toContain("First instruction");
     expect(secondGenerateBody.instruction).toContain("First response");
     expect(secondGenerateBody.instruction).toContain("Second instruction");
+    expect(
+      screen.getByText("Next Generate will use the last 2 local exchanges."),
+    ).toBeTruthy();
   });
 
   test("first generate does not include local conversation context", async () => {
@@ -534,6 +540,9 @@ describe("ProjectAiWorkspacePage", () => {
     expect(screen.queryByText("First response")).toBeNull();
     expect(screen.queryByText("Second response")).toBeNull();
     expect(screen.queryByRole("textbox", { name: "Title" })).toBeNull();
+    expect(
+      screen.getByText("Next Generate will use no local conversation context."),
+    ).toBeTruthy();
     expect(
       screen.queryByRole("button", { name: "Reset Conversation" }),
     ).toBeNull();
@@ -802,6 +811,9 @@ describe("ProjectAiWorkspacePage", () => {
     expect(fifthGenerateBody.instruction).toContain("Instruction 5");
     expect(fifthGenerateBody.instruction).not.toContain("Instruction 1");
     expect(fifthGenerateBody.instruction).not.toContain("Response 1");
+    expect(
+      screen.getByText("Next Generate will use the last 3 local exchanges."),
+    ).toBeTruthy();
   });
 
   test("renders title and save action after generation and sends the exact knowledge request", async () => {
