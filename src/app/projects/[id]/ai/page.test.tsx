@@ -306,6 +306,95 @@ describe("ProjectAiWorkspacePage", () => {
     });
   });
 
+  test("adds each successful generate call as a new local conversation exchange", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+    fetchMock
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "First response",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Second response",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      );
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+
+    fireEvent.change(instructionField, {
+      target: { value: "First instruction" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("First response")).toBeTruthy();
+    });
+
+    fireEvent.change(instructionField, {
+      target: { value: "Second instruction" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Second response")).toBeTruthy();
+    });
+
+    expect(screen.getAllByText("Instruction").length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByText("First instruction")).toBeTruthy();
+    expect(screen.getAllByText("Second instruction").length).toBeGreaterThan(0);
+    expect(screen.getByText("First response")).toBeTruthy();
+    expect(screen.getAllByText("Second response").length).toBeGreaterThan(0);
+    expect(fetchMock).toHaveBeenNthCalledWith(1, "/api/projects/project-1/ai/generate", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        instruction: "First instruction",
+      }),
+    });
+    expect(fetchMock).toHaveBeenNthCalledWith(2, "/api/projects/project-1/ai/generate", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        instruction: "Second instruction",
+      }),
+    });
+  });
+
   test("renders title and save action after generation and sends the exact knowledge request", async () => {
     getBrowserAiProjectContextMock
       .mockResolvedValueOnce({
@@ -426,6 +515,127 @@ describe("ProjectAiWorkspacePage", () => {
     expect(saveBody).not.toHaveProperty("instruction");
     expect(screen.getAllByText("Generated response").length).toBeGreaterThan(0);
     expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
+  test("save to knowledge uses only the latest generated exchange after multiple successful generations", async () => {
+    getBrowserAiProjectContextMock
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [],
+        },
+      })
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [
+            {
+              id: "knowledge-1",
+              title: "Latest note",
+              content: "Second response",
+            },
+          ],
+        },
+      });
+    fetchMock
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "First response",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Second response",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            id: "knowledge-1",
+            projectId: "project-1",
+            title: "Latest note",
+            content: "Second response",
+            createdAt: "2026-07-27T09:00:00.000Z",
+          }),
+          {
+            status: 201,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      );
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+
+    fireEvent.change(instructionField, {
+      target: { value: "First instruction" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("First response")).toBeTruthy();
+    });
+
+    fireEvent.change(instructionField, {
+      target: { value: "Second instruction" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Second response")).toBeTruthy();
+    });
+
+    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+      target: { value: "Latest note" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
+      expect(screen.getByText("Latest note")).toBeTruthy();
+    });
+
+    expect(fetchMock).toHaveBeenNthCalledWith(3, "/api/projects/project-1/knowledge", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        title: "Latest note",
+        content: "Second response",
+      }),
+    });
+    expect(screen.getByText("First response")).toBeTruthy();
+    expect(screen.getAllByText("Second response").length).toBeGreaterThan(0);
   });
 
   test("renders generating state and blocks duplicate submission while the request is active", async () => {
@@ -1248,7 +1458,7 @@ describe("ProjectAiWorkspacePage", () => {
 
     await waitFor(() => {
       expect(screen.getByText("Second generated response")).toBeTruthy();
-      expect(screen.queryByText("First generated response")).toBeNull();
+      expect(screen.getByText("First generated response")).toBeTruthy();
       expect(screen.getByRole("button", { name: "Save to Knowledge" })).toBeTruthy();
     });
 
@@ -1345,7 +1555,7 @@ describe("ProjectAiWorkspacePage", () => {
       expect(screen.getByText("result B")).toBeTruthy();
     });
 
-    expect(screen.queryByText("result A")).toBeNull();
+    expect(screen.getByText("result A")).toBeTruthy();
     expect(screen.queryByRole("button", { name: "Saved" })).toBeNull();
     expect(screen.getByRole("textbox", { name: "Title" })).toHaveProperty(
       "value",

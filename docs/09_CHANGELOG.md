@@ -1769,6 +1769,35 @@ Correction note: CAP-001 remains the historical Bootstrap Engine. Project Capabi
 
 ---
 
+## Session 021 - MS-001.29 AI Workspace Controlled Conversation Foundation implemented locally
+
+### Date
+
+2026-07-27
+
+### Completed
+
+* Recorded `MS-001.29 - AI Workspace Controlled Conversation Foundation` as the active Product Milestone after Product Owner contract acceptance.
+* Confirmed the AI Workspace now keeps a local non-persistent conversation list at `/projects/[id]/ai`.
+* Confirmed each successful `Generate` appends one new instruction/response exchange to the same UI view.
+* Confirmed Save to Knowledge remains bound only to the latest generated result.
+* Confirmed starter prompts and Knowledge refresh behavior remain unchanged.
+* Confirmed the browser request contracts remain exactly `{ instruction }` for generate and `{ title, content }` for save.
+* Recorded targeted verification as `PASS` with component tests `27 / 27` and `npx.cmd tsc --noEmit` `PASS`.
+* Recorded that full tests, lint, and build were not run in this implementation handoff.
+* Recorded that the implementation remains local and no commit or push was performed.
+
+### Evidence
+
+* Local uncommitted changes in `src/app/projects/[id]/ai/page.tsx` and `src/app/projects/[id]/ai/page.test.tsx`
+
+### Notes
+
+* Formal acceptance is still pending.
+* No known blockers were found during the local implementation handoff.
+
+---
+
 ## Session 020 - MS-001.28 AI Workspace Controlled Knowledge Refresh closed
 
 ### Date

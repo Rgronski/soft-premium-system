@@ -8,6 +8,12 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 type GenerationState = "idle" | "generating" | "generated" | "error";
 type SaveState = "idle" | "ready-to-save" | "saving" | "saved" | "save-error";
 
+type ConversationExchange = {
+  id: number;
+  instruction: string;
+  response: string;
+};
+
 type ContextState =
   | {
       projectId: string;
@@ -26,12 +32,14 @@ type ContextState =
 type GenerationUiState = {
   projectId: string;
   state: GenerationState;
-  generatedContent: string | null;
+  exchanges: ConversationExchange[];
+  latestExchangeId: number | null;
   errorMessage: string | null;
 };
 
 type SaveUiState = {
   projectId: string;
+  sourceExchangeId: number | null;
   sourceContent: string | null;
   state: SaveState;
   title: string;
@@ -113,6 +121,7 @@ function getSaveErrorMessage(status: string): string {
 export default function ProjectAiWorkspacePage() {
   const params = useParams<{ id: string }>();
   const currentProjectIdRef = useRef(params.id);
+  const nextExchangeIdRef = useRef(1);
   useLayoutEffect(() => {
     currentProjectIdRef.current = params.id;
   }, [params.id]);
@@ -129,12 +138,14 @@ export default function ProjectAiWorkspacePage() {
     {
       projectId: params.id,
       state: "idle",
-      generatedContent: null,
+      exchanges: [],
+      latestExchangeId: null,
       errorMessage: null,
     },
   );
   const [saveUiState, setSaveUiState] = useState<SaveUiState>({
     projectId: params.id,
+    sourceExchangeId: null,
     sourceContent: null,
     state: "idle",
     title: "",
@@ -190,18 +201,27 @@ export default function ProjectAiWorkspacePage() {
       : {
           projectId: params.id,
           state: "idle" as const,
-          generatedContent: null,
+          exchanges: [],
+          latestExchangeId: null,
           errorMessage: null,
         };
+  const latestExchange =
+    activeGenerationState.latestExchangeId === null
+      ? null
+      : activeGenerationState.exchanges.find(
+          (exchange) => exchange.id === activeGenerationState.latestExchangeId,
+        ) ?? null;
   const activeSaveState =
     saveUiState.projectId === params.id &&
+    saveUiState.sourceExchangeId === latestExchange?.id &&
     saveUiState.sourceContent !== null &&
-    saveUiState.sourceContent === activeGenerationState.generatedContent
+    saveUiState.sourceContent === latestExchange?.response
       ? saveUiState
       : {
           projectId: params.id,
-          sourceContent: activeGenerationState.generatedContent,
-          state: activeGenerationState.generatedContent
+          sourceExchangeId: latestExchange?.id ?? null,
+          sourceContent: latestExchange?.response ?? null,
+          state: latestExchange?.response
             ? ("ready-to-save" as const)
             : ("idle" as const),
           title: "",
@@ -276,23 +296,34 @@ export default function ProjectAiWorkspacePage() {
     }
 
     if (!instruction.trim()) {
-      setGenerationUiState({
+      setGenerationUiState((currentState) => ({
         projectId: params.id,
         state: "error",
-        generatedContent: null,
+        exchanges:
+          currentState.projectId === params.id ? currentState.exchanges : [],
+        latestExchangeId:
+          currentState.projectId === params.id
+            ? currentState.latestExchangeId
+            : null,
         errorMessage: "Enter a valid instruction.",
-      });
+      }));
       return;
     }
 
-    setGenerationUiState({
+    setGenerationUiState((currentState) => ({
       projectId: params.id,
       state: "generating",
-      generatedContent: null,
+      exchanges:
+        currentState.projectId === params.id ? currentState.exchanges : [],
+      latestExchangeId:
+        currentState.projectId === params.id
+          ? currentState.latestExchangeId
+          : null,
       errorMessage: null,
-    });
+    }));
     setSaveUiState({
       projectId: params.id,
+      sourceExchangeId: null,
       sourceContent: null,
       state: "idle",
       title: "",
@@ -316,14 +347,30 @@ export default function ProjectAiWorkspacePage() {
         | { status: string };
 
       if (result.status === "generated" && "content" in result) {
-        setGenerationUiState({
+        const exchangeId = nextExchangeIdRef.current;
+        nextExchangeIdRef.current += 1;
+
+        const exchange: ConversationExchange = {
+          id: exchangeId,
+          instruction,
+          response: result.content,
+        };
+
+        setGenerationUiState((currentState) => ({
           projectId: params.id,
           state: "generated",
-          generatedContent: result.content,
+          exchanges: [
+            ...(currentState.projectId === params.id
+              ? currentState.exchanges
+              : []),
+            exchange,
+          ],
+          latestExchangeId: exchangeId,
           errorMessage: null,
-        });
+        }));
         setSaveUiState({
           projectId: params.id,
+          sourceExchangeId: exchangeId,
           sourceContent: result.content,
           state: "ready-to-save",
           title: "",
@@ -333,19 +380,29 @@ export default function ProjectAiWorkspacePage() {
         return;
       }
 
-      setGenerationUiState({
+      setGenerationUiState((currentState) => ({
         projectId: params.id,
         state: "error",
-        generatedContent: null,
+        exchanges:
+          currentState.projectId === params.id ? currentState.exchanges : [],
+        latestExchangeId:
+          currentState.projectId === params.id
+            ? currentState.latestExchangeId
+            : null,
         errorMessage: getGenerationErrorMessage(result.status),
-      });
+      }));
     } catch {
-      setGenerationUiState({
+      setGenerationUiState((currentState) => ({
         projectId: params.id,
         state: "error",
-        generatedContent: null,
+        exchanges:
+          currentState.projectId === params.id ? currentState.exchanges : [],
+        latestExchangeId:
+          currentState.projectId === params.id
+            ? currentState.latestExchangeId
+            : null,
         errorMessage: "Unexpected generation error.",
-      });
+      }));
     }
   }
 
@@ -356,7 +413,7 @@ export default function ProjectAiWorkspacePage() {
 
     if (
       activeGenerationState.state !== "generated" ||
-      !activeGenerationState.generatedContent
+      !latestExchange?.response
     ) {
       return;
     }
@@ -368,7 +425,8 @@ export default function ProjectAiWorkspacePage() {
     if (!activeSaveState.title.trim()) {
       setSaveUiState({
         projectId: params.id,
-        sourceContent: activeGenerationState.generatedContent,
+        sourceExchangeId: latestExchange.id,
+        sourceContent: latestExchange.response,
         state: "save-error",
         title: activeSaveState.title,
         errorMessage: "Enter a valid title.",
@@ -378,11 +436,12 @@ export default function ProjectAiWorkspacePage() {
     }
 
     const projectId = params.id;
-    const generatedContent = activeGenerationState.generatedContent;
+    const generatedContent = latestExchange.response;
     const title = activeSaveState.title;
 
     setSaveUiState({
       projectId,
+      sourceExchangeId: latestExchange.id,
       sourceContent: generatedContent,
       state: "saving",
       title,
@@ -422,6 +481,7 @@ export default function ProjectAiWorkspacePage() {
       ) {
         setSaveUiState({
           projectId,
+          sourceExchangeId: latestExchange.id,
           sourceContent: generatedContent,
           state: "saved",
           title,
@@ -446,6 +506,7 @@ export default function ProjectAiWorkspacePage() {
 
           setSaveUiState({
             projectId,
+            sourceExchangeId: latestExchange.id,
             sourceContent: generatedContent,
             state: "saved",
             title,
@@ -459,6 +520,7 @@ export default function ProjectAiWorkspacePage() {
 
           setSaveUiState({
             projectId,
+            sourceExchangeId: latestExchange.id,
             sourceContent: generatedContent,
             state: "saved",
             title,
@@ -471,6 +533,7 @@ export default function ProjectAiWorkspacePage() {
 
       setSaveUiState({
         projectId,
+        sourceExchangeId: latestExchange.id,
         sourceContent: generatedContent,
         state: "save-error",
         title,
@@ -483,6 +546,7 @@ export default function ProjectAiWorkspacePage() {
     } catch {
       setSaveUiState({
         projectId,
+        sourceExchangeId: latestExchange.id,
         sourceContent: generatedContent,
         state: "save-error",
         title,
@@ -559,7 +623,7 @@ export default function ProjectAiWorkspacePage() {
               Generation
             </p>
             <p className="text-sm text-zinc-400">
-              Enter one instruction to generate a single AI response.
+              Enter one instruction to add the next local AI exchange.
             </p>
           </div>
 
@@ -611,70 +675,102 @@ export default function ProjectAiWorkspacePage() {
             </button>
           </form>
 
-          {activeGenerationState.state === "generated" &&
-          activeGenerationState.generatedContent ? (
-            <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3">
+          {activeGenerationState.exchanges.length > 0 ? (
+            <div className="mt-4 space-y-4">
               <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-                Result
-              </p>
-              <p className="mt-3 whitespace-pre-wrap text-sm text-zinc-100">
-                {activeGenerationState.generatedContent}
+                Conversation
               </p>
 
-              <form className="mt-4 space-y-4" onSubmit={handleSaveToKnowledge}>
-                <label className="block space-y-2">
-                  <span className="text-sm font-medium text-zinc-100">Title</span>
-                  <input
-                    type="text"
-                    value={activeSaveState.title}
-                    onChange={(event) =>
-                      setSaveUiState({
-                        projectId: params.id,
-                        sourceContent: activeGenerationState.generatedContent,
-                        state:
-                          activeSaveState.state === "saved"
-                            ? "saved"
-                            : "ready-to-save",
-                        title: event.target.value,
-                        errorMessage: null,
-                        refreshErrorMessage: activeSaveState.refreshErrorMessage,
-                      })
-                    }
-                    className="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-sm text-zinc-100 outline-none transition focus:border-zinc-600"
-                  />
-                </label>
+              {activeGenerationState.exchanges.map((exchange) => {
+                const isLatestExchange = latestExchange?.id === exchange.id;
 
-                <button
-                  type="submit"
-                  disabled={
-                    activeSaveState.state === "saving" ||
-                    activeSaveState.state === "saved"
-                  }
-                  className="rounded-xl border border-zinc-700 bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-950 disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  {activeSaveState.state === "saving"
-                    ? "Saving..."
-                    : activeSaveState.state === "saved"
-                      ? "Saved"
-                      : "Save to Knowledge"}
-                </button>
-              </form>
+                return (
+                  <div
+                    key={exchange.id}
+                    className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3"
+                  >
+                    <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
+                      Instruction
+                    </p>
+                    <p className="mt-3 whitespace-pre-wrap text-sm text-zinc-100">
+                      {exchange.instruction}
+                    </p>
 
-              {activeSaveState.errorMessage ? (
-                <div className="mt-4 rounded-xl border border-red-900/60 bg-red-950/30 px-4 py-3">
-                  <p className="text-sm text-red-200">
-                    {activeSaveState.errorMessage}
-                  </p>
-                </div>
-              ) : null}
+                    <p className="mt-4 text-sm uppercase tracking-[0.2em] text-zinc-400">
+                      Result
+                    </p>
+                    <p className="mt-3 whitespace-pre-wrap text-sm text-zinc-100">
+                      {exchange.response}
+                    </p>
 
-              {activeSaveState.refreshErrorMessage ? (
-                <div className="mt-4 rounded-xl border border-amber-900/60 bg-amber-950/30 px-4 py-3">
-                  <p className="text-sm text-amber-200">
-                    {activeSaveState.refreshErrorMessage}
-                  </p>
-                </div>
-              ) : null}
+                    {isLatestExchange ? (
+                      <>
+                        <form
+                          className="mt-4 space-y-4"
+                          onSubmit={handleSaveToKnowledge}
+                        >
+                          <label className="block space-y-2">
+                            <span className="text-sm font-medium text-zinc-100">
+                              Title
+                            </span>
+                            <input
+                              type="text"
+                              value={activeSaveState.title}
+                              onChange={(event) =>
+                                setSaveUiState({
+                                  projectId: params.id,
+                                  sourceExchangeId: exchange.id,
+                                  sourceContent: exchange.response,
+                                  state:
+                                    activeSaveState.state === "saved"
+                                      ? "saved"
+                                      : "ready-to-save",
+                                  title: event.target.value,
+                                  errorMessage: null,
+                                  refreshErrorMessage:
+                                    activeSaveState.refreshErrorMessage,
+                                })
+                              }
+                              className="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-sm text-zinc-100 outline-none transition focus:border-zinc-600"
+                            />
+                          </label>
+
+                          <button
+                            type="submit"
+                            disabled={
+                              activeSaveState.state === "saving" ||
+                              activeSaveState.state === "saved"
+                            }
+                            className="rounded-xl border border-zinc-700 bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-950 disabled:cursor-not-allowed disabled:opacity-60"
+                          >
+                            {activeSaveState.state === "saving"
+                              ? "Saving..."
+                              : activeSaveState.state === "saved"
+                                ? "Saved"
+                                : "Save to Knowledge"}
+                          </button>
+                        </form>
+
+                        {activeSaveState.errorMessage ? (
+                          <div className="mt-4 rounded-xl border border-red-900/60 bg-red-950/30 px-4 py-3">
+                            <p className="text-sm text-red-200">
+                              {activeSaveState.errorMessage}
+                            </p>
+                          </div>
+                        ) : null}
+
+                        {activeSaveState.refreshErrorMessage ? (
+                          <div className="mt-4 rounded-xl border border-amber-900/60 bg-amber-950/30 px-4 py-3">
+                            <p className="text-sm text-amber-200">
+                              {activeSaveState.refreshErrorMessage}
+                            </p>
+                          </div>
+                        ) : null}
+                      </>
+                    ) : null}
+                  </div>
+                );
+              })}
             </div>
           ) : null}
 

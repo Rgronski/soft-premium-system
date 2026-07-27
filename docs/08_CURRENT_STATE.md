@@ -42,7 +42,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE
+MS-001.29 - AI Workspace Controlled Conversation Foundation
 
 **Latest Completed Milestone**
 MS-001.28 - AI Workspace Controlled Knowledge Refresh
@@ -76,7 +76,7 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE
+Current Product Milestone: MS-001.29 - AI Workspace Controlled Conversation Foundation
 Latest Completed Product Milestone: MS-001.28 - AI Workspace Controlled Knowledge Refresh
 Next Product Milestone: NONE
 Active Sprint: NONE
@@ -98,6 +98,7 @@ MS-001.25 is COMPLETED / VERIFIED after formal acceptance of the first controlle
 MS-001.26 is COMPLETED / VERIFIED after formal acceptance of the controlled AI Workspace Knowledge save flow, and the related implementation commit remains local because push has not been performed.
 MS-001.27 is COMPLETED / VERIFIED after formal acceptance of the controlled AI Workspace starter prompt foundation, and the related implementation commit remains local because push has not been performed.
 MS-001.28 is COMPLETED / VERIFIED after formal acceptance of the controlled AI Workspace Knowledge refresh flow, and the related implementation commit remains local because push has not been performed.
+MS-001.29 is the active Product Milestone after Product Owner contract acceptance and local Codex implementation handoff.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
@@ -365,6 +366,24 @@ MS-001.28 final verification: full tests `21 / 272` PASS, `npx.cmd tsc --noEmit`
 MS-001.28 blocker status: NONE.
 MS-001.28 local completion evidence commit:
 * `0d56046` - `feat: refresh AI knowledge context after save`
+MS-001.29 contract status: APPROVED.
+MS-001.29 runtime status: OPEN.
+MS-001.29 activation status: OPEN.
+MS-001.29 implementation status: COMPLETED / VERIFIED.
+MS-001.29 milestone status: PENDING FORMAL ACCEPTANCE.
+MS-001.29 product outcome: one local non-persistent multi-exchange AI Workspace conversation exists without changing the existing generation endpoint, Project Brain boundaries, or persistence model.
+MS-001.29 preserved boundaries:
+* scope remains only `/projects/[id]/ai` and its nearest tests
+* each successful `Generate` appends one local instruction/response pair to the visible conversation
+* Save to Knowledge remains bound only to the latest generated result
+* starter prompts remain unchanged
+* Knowledge refresh remains unchanged
+* generate request body remains exactly `{ instruction }`
+* save request body remains exactly `{ title, content }`
+* no persistence, new endpoint, streaming, agents, Markdown rendering, retry UI, or Project Brain change was introduced
+MS-001.29 verification: targeted component tests `27 / 27` PASS, `npx.cmd tsc --noEmit` PASS, full tests NOT RUN, lint NOT RUN, build NOT RUN.
+MS-001.29 blocker status: NONE.
+MS-001.29 local completion evidence commit: NONE - changes are local and uncommitted.
 Live OpenAI request remains not allowed.
 Pending deployment topic: `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only, is not an accepted ADR, and had no implementation in this session.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
