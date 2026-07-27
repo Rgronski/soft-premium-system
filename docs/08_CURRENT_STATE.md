@@ -110,7 +110,7 @@ MS-001.37 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Wor
 MS-001.38 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine save-state derivation foundation with commit `a7b7696`.
 MS-001.39 is COMPLETED / VERIFIED / READY FOR PUBLICATION after formal acceptance of the AI Workspace engine latest-exchange derivation foundation.
 MS-001.40 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine active-generation-state derivation foundation with commit `6a608d1`.
-MS-001.41 is COMPLETED / VERIFIED / READY FOR PUBLICATION after formal acceptance of the AI Workspace engine active-save-state derivation foundation.
+MS-001.41 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine active-save-state derivation foundation with commit `48ad94e`.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
@@ -581,8 +581,9 @@ MS-001.41 contract status: APPROVED.
 MS-001.41 runtime status: CLOSED.
 MS-001.41 activation status: CLOSED.
 MS-001.41 implementation status: COMPLETED / VERIFIED.
-MS-001.41 publication status: NOT PUBLISHED.
-MS-001.41 milestone status: COMPLETED / VERIFIED / READY FOR PUBLICATION.
+MS-001.41 publication status: PUBLISHED.
+MS-001.41 publication commit: `48ad94e`.
+MS-001.41 milestone status: COMPLETED / PUBLISHED / CLOSED.
 MS-001.41 product outcome: the repository already contains one minimal AI Workspace Engine active-save-state derivation layer that owns the pure derivation of the active local save state from `projectId`, `saveUiState`, and `latestExchange` while the existing AI Workspace page already reuses that helper with unchanged behavior.
 MS-001.41 preserved boundaries:
 * no UI text changes

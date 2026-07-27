@@ -4492,10 +4492,13 @@ ACCEPT
 COMPLETED / VERIFIED
 
 **Publication Status**
-NOT PUBLISHED
+PUBLISHED
+
+**Publication Commit**
+`48ad94e`
 
 **Milestone Status**
-COMPLETED / VERIFIED / READY FOR PUBLICATION
+COMPLETED / PUBLISHED / CLOSED
 
 **Implementation Evidence**
 * `src/lib/ai-workspace-engine/engine.ts` now contains the typed latest-exchange derivation helper
@@ -4623,10 +4626,13 @@ ACCEPT
 COMPLETED / VERIFIED
 
 **Publication Status**
-NOT PUBLISHED
+PUBLISHED
+
+**Publication Commit**
+`48ad94e`
 
 **Milestone Status**
-COMPLETED / VERIFIED / READY FOR PUBLICATION
+COMPLETED / PUBLISHED / CLOSED
 
 **Implementation Evidence**
 * `src/lib/ai-workspace-engine/engine.ts` already contains the typed active-save-state derivation helper
@@ -4641,7 +4647,7 @@ COMPLETED / VERIFIED / READY FOR PUBLICATION
 NONE
 
 **Next Safe Step**
-Obtain Product Owner publication approval for `MS-001.41`.
+None.
 
 ---
 
