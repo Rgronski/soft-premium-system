@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 025 - MS-001.38 AI Workspace Engine Save State Derivation Foundation published
+
+### Date
+
+2026-07-27
+
+### Completed
+
+* Moved the pure active save-state derivation for the latest AI Workspace exchange from `src/app/projects/[id]/ai/page.tsx` into `src/lib/ai-workspace-engine/engine.ts`.
+* Added typed save-state types and the engine helper for matching the stored save state only when `projectId`, latest exchange id, non-null `sourceContent`, and `sourceContent === latestExchange.response` all match.
+* Added focused unit coverage in `src/lib/ai-workspace-engine/engine.test.ts` for stored save-state reuse and default fallback derivation.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now reuses the engine helper without changing copy, save, reset, title-editing, refresh-error, or API flow behavior.
+* Recorded focused verification as `PASS` with engine tests `10 / 10`, component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+
+### Notes
+
+* No Project Brain, Knowledge API, provider, endpoint, storage, Command Center, Conductor, workflow, or UI redesign changes were introduced.
+
 ## Session 024 - SSOT operational milestone records synchronized
 
 ### Date
@@ -86,7 +104,7 @@ Each release entry should contain:
 ### Notes
 
 * Next Product Milestone Contract Discovery remained paused during the SSOT repair session.
-* `MS-001.38` was not activated, designed, or implemented.
+* `MS-001.38` had not been activated, designed, or implemented at the time of Session 024 closure.
 
 ## Session 023 - MS-001.37 AI Workspace Engine Status Mapping Foundation published
 

@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.37 - AI Workspace Engine Status Mapping Foundation
+MS-001.38 - AI Workspace Engine Save State Derivation Foundation
 
 **Next Milestone**
 NONE
@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.37 - AI Workspace Engine Status Mapping Foundation
+Latest Completed Product Milestone: MS-001.38 - AI Workspace Engine Save State Derivation Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -107,6 +107,7 @@ MS-001.34 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Wor
 MS-001.35 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace engine contract foundation.
 MS-001.36 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace engine runtime foundation.
 MS-001.37 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace engine status mapping foundation.
+MS-001.38 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace engine save-state derivation foundation.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
@@ -526,6 +527,20 @@ MS-001.37 preserved boundaries:
 * no provider, API route, or Project Brain boundary changes
 MS-001.37 verification: targeted engine tests `7 / 7` PASS, targeted component tests `32 / 32` PASS, `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS, full tests NOT RUN, lint NOT RUN, build NOT RUN.
 MS-001.37 blocker status: NONE.
+MS-001.38 contract status: APPROVED.
+MS-001.38 runtime status: CLOSED.
+MS-001.38 activation status: CLOSED.
+MS-001.38 implementation status: COMPLETED / VERIFIED.
+MS-001.38 milestone status: COMPLETED / VERIFIED / PUSHED.
+MS-001.38 product outcome: one minimal AI Workspace Engine save-state derivation layer now owns the pure active save-state matching rule for the latest exchange while the existing AI Workspace page reuses that helper with unchanged UI behavior and save semantics.
+MS-001.38 preserved boundaries:
+* no UI text changes
+* no new UI controls
+* no save-semantic changes
+* no copy or reset behavior changes
+* no provider, API route, or Project Brain boundary changes
+MS-001.38 verification: targeted engine tests `10 / 10` PASS, targeted component tests `32 / 32` PASS, `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS, full tests NOT RUN, lint NOT RUN, build NOT RUN.
+MS-001.38 blocker status: NONE.
 Live OpenAI request remains not allowed.
 Pending deployment topic: `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only, is not an accepted ADR, and had no implementation in this session.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
@@ -770,7 +785,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.37 - AI Workspace Engine Status Mapping Foundation`
+* `Latest Completed Product Milestone` is `MS-001.38 - AI Workspace Engine Save State Derivation Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

@@ -1,10 +1,12 @@
 import {
   buildGenerationInstruction,
+  deriveActiveSaveState,
   getConversationContextExchangeCount,
   getConversationContextStatusMessage,
   getGenerationErrorMessage,
   getSaveErrorMessage,
   type ConversationExchange,
+  type SaveUiState,
 } from "./engine";
 import { describe, expect, test } from "vitest";
 
@@ -17,6 +19,21 @@ function createExchange(
     id,
     instruction,
     response,
+  };
+}
+
+function createSaveUiState(
+  overrides: Partial<SaveUiState> = {},
+): SaveUiState {
+  return {
+    projectId: "project-1",
+    sourceExchangeId: 1,
+    sourceContent: "Response 1",
+    state: "ready-to-save",
+    title: "Architecture note",
+    errorMessage: "Existing error",
+    refreshErrorMessage: "Existing refresh error",
+    ...overrides,
   };
 }
 
@@ -77,6 +94,60 @@ describe("ai workspace engine", () => {
     expect(instruction).toContain("Current User Instruction:\nInstruction 5");
     expect(instruction).not.toContain("Instruction 1");
     expect(instruction).not.toContain("Response 1");
+  });
+
+  test("reuses stored save UI state only when it still matches the latest exchange", () => {
+    const saveUiState = createSaveUiState({
+      state: "saved",
+      refreshErrorMessage: "Saved to Knowledge, but AI project context could not be refreshed.",
+    });
+
+    expect(
+      deriveActiveSaveState(
+        "project-1",
+        createExchange(1, "Instruction 1", "Response 1"),
+        saveUiState,
+      ),
+    ).toBe(saveUiState);
+  });
+
+  test("derives a fresh ready-to-save state when the stored save source no longer matches", () => {
+    expect(
+      deriveActiveSaveState(
+        "project-1",
+        createExchange(2, "Instruction 2", "Response 2"),
+        createSaveUiState(),
+      ),
+    ).toEqual({
+      projectId: "project-1",
+      sourceExchangeId: 2,
+      sourceContent: "Response 2",
+      state: "ready-to-save",
+      title: "",
+      errorMessage: null,
+      refreshErrorMessage: null,
+    });
+  });
+
+  test("derives an idle state when there is no latest exchange response to save", () => {
+    expect(
+      deriveActiveSaveState(
+        "project-1",
+        null,
+        createSaveUiState({
+          sourceExchangeId: null,
+          sourceContent: null,
+        }),
+      ),
+    ).toEqual({
+      projectId: "project-1",
+      sourceExchangeId: null,
+      sourceContent: null,
+      state: "idle",
+      title: "",
+      errorMessage: null,
+      refreshErrorMessage: null,
+    });
   });
 
   test("maps generation statuses to the existing UI error messages", () => {

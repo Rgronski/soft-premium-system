@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.37 - AI Workspace Engine Status Mapping Foundation
+MS-001.38 - AI Workspace Engine Save State Derivation Foundation
 
 ## Next
 
@@ -4374,6 +4374,67 @@ COMPLETED / VERIFIED / PUSHED
 * `src/lib/ai-workspace-engine/engine.test.ts` contains focused unit coverage for the moved mappings
 * `src/app/projects/[id]/ai/page.tsx` reuses the engine exports and no longer defines those mappings locally
 * `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `7 / 7` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.38 - AI Workspace Engine Save State Derivation Foundation
+
+**Milestone**
+MS-001.38 - AI Workspace Engine Save State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move only the pure active save-state derivation logic for the latest AI Workspace exchange into the AI Workspace Engine module without changing UX, UI text, save semantics, API flows, provider wiring, or Project Brain ownership boundaries.
+
+**Product Outcome**
+The repository contains one small extension of the AI Workspace Engine runtime module that owns the typed active save-state derivation rule for the latest local exchange, while the existing AI Workspace page reuses that helper with unchanged copy, save, reset, and refresh behavior.
+
+**Dependencies**
+* closed `MS-001.37 - AI Workspace Engine Status Mapping Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUSHED
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now contains the typed active save-state derivation helper and save-state types
+* `src/lib/ai-workspace-engine/engine.test.ts` contains focused unit coverage for matching save-state reuse and default fallback derivation
+* `src/app/projects/[id]/ai/page.tsx` reuses the engine helper and no longer derives the active save state inline
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `10 / 10` tests
 * `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
 * `npx.cmd tsc --noEmit` passed
 * `git diff --check` passed

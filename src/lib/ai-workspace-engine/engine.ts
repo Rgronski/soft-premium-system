@@ -4,6 +4,23 @@ export type ConversationExchange = {
   response: string;
 };
 
+export type SaveState =
+  | "idle"
+  | "ready-to-save"
+  | "saving"
+  | "saved"
+  | "save-error";
+
+export type SaveUiState = {
+  projectId: string;
+  sourceExchangeId: number | null;
+  sourceContent: string | null;
+  state: SaveState;
+  title: string;
+  errorMessage: string | null;
+  refreshErrorMessage: string | null;
+};
+
 const CONVERSATION_CONTEXT_EXCHANGE_LIMIT = 3;
 
 function getBudgetedConversationContext(
@@ -61,6 +78,31 @@ export function buildGenerationInstruction(
     "Current User Instruction:",
     instruction,
   ].join("\n");
+}
+
+export function deriveActiveSaveState(
+  projectId: string,
+  latestExchange: ConversationExchange | null,
+  saveUiState: SaveUiState,
+): SaveUiState {
+  if (
+    saveUiState.projectId === projectId &&
+    saveUiState.sourceExchangeId === latestExchange?.id &&
+    saveUiState.sourceContent !== null &&
+    saveUiState.sourceContent === latestExchange?.response
+  ) {
+    return saveUiState;
+  }
+
+  return {
+    projectId,
+    sourceExchangeId: latestExchange?.id ?? null,
+    sourceContent: latestExchange?.response ?? null,
+    state: latestExchange?.response ? "ready-to-save" : "idle",
+    title: "",
+    errorMessage: null,
+    refreshErrorMessage: null,
+  };
 }
 
 export function getGenerationErrorMessage(status: string): string {

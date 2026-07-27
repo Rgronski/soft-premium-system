@@ -4,6 +4,7 @@ import { getBrowserAiProjectContext } from "@/lib/project-brain/browser";
 import type { AiProjectContext } from "@/lib/project-brain/types";
 import {
   buildGenerationInstruction,
+  deriveActiveSaveState,
   getConversationContextStatusMessage,
   getGenerationErrorMessage,
   getSaveErrorMessage,
@@ -187,23 +188,11 @@ export default function ProjectAiWorkspacePage() {
     instruction,
     activeGenerationState.exchanges,
   );
-  const activeSaveState =
-    saveUiState.projectId === params.id &&
-    saveUiState.sourceExchangeId === latestExchange?.id &&
-    saveUiState.sourceContent !== null &&
-    saveUiState.sourceContent === latestExchange?.response
-      ? saveUiState
-      : {
-          projectId: params.id,
-          sourceExchangeId: latestExchange?.id ?? null,
-          sourceContent: latestExchange?.response ?? null,
-          state: latestExchange?.response
-            ? ("ready-to-save" as const)
-            : ("idle" as const),
-          title: "",
-          errorMessage: null,
-          refreshErrorMessage: null,
-        };
+  const activeSaveState = deriveActiveSaveState(
+    params.id,
+    latestExchange,
+    saveUiState,
+  );
 
   if (contextState.projectId !== params.id || contextState.status === "loading") {
     return (
