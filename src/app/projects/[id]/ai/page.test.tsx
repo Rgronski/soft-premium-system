@@ -384,14 +384,70 @@ describe("ProjectAiWorkspacePage", () => {
         instruction: "First instruction",
       }),
     });
-    expect(fetchMock).toHaveBeenNthCalledWith(2, "/api/projects/project-1/ai/generate", {
+    const secondGenerateRequest = fetchMock.mock.calls[2 - 1];
+    const secondGenerateBody = JSON.parse(
+      String(secondGenerateRequest?.[1]?.body),
+    ) as Record<string, string>;
+
+    expect(secondGenerateRequest?.[0]).toBe("/api/projects/project-1/ai/generate");
+    expect(secondGenerateRequest?.[1]).toMatchObject({
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({
-        instruction: "Second instruction",
-      }),
+    });
+    expect(secondGenerateBody).not.toHaveProperty("history");
+    expect(secondGenerateBody).not.toHaveProperty("conversation");
+    expect(secondGenerateBody.instruction).toContain("First instruction");
+    expect(secondGenerateBody.instruction).toContain("First response");
+    expect(secondGenerateBody.instruction).toContain("Second instruction");
+  });
+
+  test("first generate does not include local conversation context", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+    fetchMock.mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({
+          status: "generated",
+          content: "Generated response",
+        }),
+        {
+          status: 200,
+          headers: {
+            "content-type": "application/json",
+          },
+        },
+      ),
+    );
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+    fireEvent.change(instructionField, {
+      target: { value: "Summarize project" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Generated response")).toBeTruthy();
+    });
+
+    const firstGenerateBody = JSON.parse(
+      String(fetchMock.mock.calls[0]?.[1]?.body),
+    ) as Record<string, string>;
+
+    expect(firstGenerateBody).toEqual({
+      instruction: "Summarize project",
     });
   });
 

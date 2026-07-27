@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 021 - MS-001.30 AI Workspace Controlled Conversation Context Foundation implemented locally
+
+### Date
+
+2026-07-27
+
+### Completed
+
+* Confirmed the AI Workspace now sends second and later `Generate` actions with controlled local context from prior successful exchanges in the same UI session.
+* Confirmed the first `Generate` still sends no conversation history.
+* Confirmed the browser generate request body remains exactly `{ instruction }`.
+* Confirmed Save to Knowledge remains bound only to the latest generated result.
+* Recorded focused verification as `PASS` with component tests `29 / 29`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded that no commit or push was performed for `MS-001.30`.
+
+### Notes
+
+* Conversation context remains local and non-persistent.
+* Starter prompts, Knowledge refresh, endpoint shape, and Project Brain boundaries remain unchanged.
+
 ## Documentation Sprint
 
 ### Completed

@@ -53,6 +53,37 @@ type StarterPrompt = {
   instruction: string;
 };
 
+function buildGenerationInstruction(
+  instruction: string,
+  exchanges: ConversationExchange[],
+): string {
+  if (exchanges.length === 0) {
+    return instruction;
+  }
+
+  const conversationContext = exchanges
+    .map(
+      (exchange, index) =>
+        [
+          `Exchange ${index + 1} - User Instruction:`,
+          exchange.instruction,
+          `Exchange ${index + 1} - AI Response:`,
+          exchange.response,
+        ].join("\n"),
+    )
+    .join("\n\n");
+
+  return [
+    "Use the following local conversation context from the current AI Workspace session.",
+    "Do not assume any context beyond the exchanges below and the current canonical project context.",
+    "",
+    conversationContext,
+    "",
+    "Current User Instruction:",
+    instruction,
+  ].join("\n");
+}
+
 const STARTER_PROMPTS: StarterPrompt[] = [
   {
     id: "summarize-project-state",
@@ -211,6 +242,10 @@ export default function ProjectAiWorkspacePage() {
       : activeGenerationState.exchanges.find(
           (exchange) => exchange.id === activeGenerationState.latestExchangeId,
         ) ?? null;
+  const generationInstruction = buildGenerationInstruction(
+    instruction,
+    activeGenerationState.exchanges,
+  );
   const activeSaveState =
     saveUiState.projectId === params.id &&
     saveUiState.sourceExchangeId === latestExchange?.id &&
@@ -338,7 +373,7 @@ export default function ProjectAiWorkspacePage() {
           "content-type": "application/json",
         },
         body: JSON.stringify({
-          instruction,
+          instruction: generationInstruction,
         }),
       });
 

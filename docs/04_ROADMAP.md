@@ -3809,6 +3809,84 @@ Run Chief Architect review and formal Product Owner acceptance for `MS-001.29` b
 
 ---
 
+## MS-001.30 - AI Workspace Controlled Conversation Context Foundation
+
+**Milestone**
+MS-001.30 - AI Workspace Controlled Conversation Context Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+YES
+
+**Runtime Status**
+OPEN
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Add one minimal local non-persistent conversation-context layer inside the AI Workspace so second and later Generate actions reuse previous exchanges from the current UI session without changing the existing AI or persistence boundaries.
+
+**Product Outcome**
+The AI Workspace at `/projects/[id]/ai` sends the first `Generate` with no conversation history, sends second and later `Generate` actions with one controlled local context built from prior successful exchanges in the current UI session, keeps that context local and non-persistent, and keeps Save to Knowledge bound only to the latest generated result.
+
+**Dependencies**
+* closed `MS-001.19 - AI Workspace Project Brain Read Foundation`
+* closed `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation`
+* closed `MS-001.21 - AI Model Boundary Foundation`
+* closed `MS-001.22 - AI Model Server Transport Boundary`
+* closed `MS-001.23 - AI Model Production Provider Foundation`
+* closed `MS-001.24 - Server-Readable Read-Only Project Context Foundation`
+* closed `MS-001.25 - AI Workspace Generation UI Foundation`
+* closed `MS-001.26 - AI Workspace Controlled Knowledge Save`
+* closed `MS-001.27 - AI Workspace Controlled Prompt Foundation`
+* closed `MS-001.28 - AI Workspace Controlled Knowledge Refresh`
+* closed `MS-001.29 - AI Workspace Controlled Conversation Foundation`
+
+**Product Owner Decision**
+GO
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Milestone Status**
+PENDING FORMAL ACCEPTANCE
+
+**Implementation Evidence**
+* AI Workspace controlled conversation-context behavior is implemented in `src/app/projects/[id]/ai/page.tsx`
+* AI Workspace conversation-context coverage is implemented in `src/app/projects/[id]/ai/page.test.tsx`
+* first `Generate` sends no conversation history
+* second and later `Generate` actions include one controlled local context derived from prior successful exchanges in the same UI session
+* conversation context remains local and non-persistent
+* browser generate request body remains exactly `{ instruction }`
+* browser save request body remains exactly `{ title, content }`
+* Save to Knowledge remains bound only to the latest generated result
+* existing starter prompts remain unchanged
+* existing Knowledge refresh behavior remains unchanged
+* no persistence, new endpoint, streaming, agents, tool calling, or Project Brain change was introduced
+* targeted component verification passed with `29 / 29` tests in `src/app/projects/[id]/ai/page.test.tsx`
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Chief Architect review and formal Product Owner acceptance for `MS-001.30` before any commit or push decision.
+
+---
+
 # Release Criteria
 
 SPS OS 1.0 release progression requires:
