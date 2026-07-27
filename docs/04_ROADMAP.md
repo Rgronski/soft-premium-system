@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.35 - AI Workspace Engine Contract Foundation
+MS-001.36 - AI Workspace Engine Runtime Foundation
 
 ## Next
 
@@ -4255,6 +4255,67 @@ COMPLETED / VERIFIED / PUSHED
 * documentation consistency review was completed against `docs/00_SPS_DEVELOPMENT_METHOD.md`, `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`, `docs/ai-workflow/ROLES.md`, and `docs/ai-workflow/COMMAND_CENTER.md`
 * `git diff --check` passed
 * implementation commit: `2cda65b`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.36 - AI Workspace Engine Runtime Foundation
+
+**Milestone**
+MS-001.36 - AI Workspace Engine Runtime Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Create one minimal AI Workspace Engine runtime layer by extracting the pure local AI Workspace conversation logic from the page into a controlled engine module without changing UX, persistence, provider wiring, or Project Brain ownership boundaries.
+
+**Product Outcome**
+The repository contains one small AI Workspace Engine runtime module that owns the local conversation exchange type, fixed context budget of `3` exchanges, conversation context status message, and bounded generation instruction builder, while the existing AI Workspace page reuses that module with unchanged behavior.
+
+**Dependencies**
+* closed `MS-001.35 - AI Workspace Engine Contract Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUSHED
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` contains the pure local AI Workspace runtime logic
+* `src/lib/ai-workspace-engine/engine.test.ts` provides focused unit coverage for the new engine module
+* `src/app/projects/[id]/ai/page.tsx` reuses the engine module without changing UI text, request shape, reset behavior, or save boundaries
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `5 / 5` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
 
 **Blockers**
 NONE

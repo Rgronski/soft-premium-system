@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 023 - MS-001.36 AI Workspace Engine Runtime Foundation published
+
+### Date
+
+2026-07-27
+
+### Completed
+
+* Added `src/lib/ai-workspace-engine/engine.ts` as the first minimal AI Workspace Engine runtime module for pure local conversation logic.
+* Added `src/lib/ai-workspace-engine/engine.test.ts` with focused unit tests for the new runtime module.
+* Moved the local conversation exchange type, fixed context budget of `3`, conversation context status message, and bounded generation instruction builder out of `src/app/projects/[id]/ai/page.tsx`.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now reuses the engine module without changing UI text, request shape, reset behavior, save flow, or Project Brain boundaries.
+* Recorded focused verification as `PASS` with engine tests `5 / 5`, component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+
+### Notes
+
+* No provider, API route, persistence, dependency, configuration, or Project Brain storage changes were introduced.
+
 ## Session 022 - MS-001.35 AI Workspace Engine Contract Foundation published
 
 ### Date
