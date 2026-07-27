@@ -770,7 +770,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.28 - AI Workspace Controlled Knowledge Refresh`
+* `Latest Completed Product Milestone` is `MS-001.37 - AI Workspace Engine Status Mapping Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
@@ -779,8 +779,8 @@ Next:
 * `MS-001.20` is `COMPLETED / PUBLISHED / CLOSED`
 * proposed next milestone is `NONE`
 * proposal status is `NONE`
-* current activation is `ACTIVATED`
-* current implementation is `IMPLEMENTED / VERIFIED - PENDING PUBLICATION`
+* current activation is `NONE`
+* current implementation is `NONE`
 * `MS-001.21` implementation status is `IMPLEMENTED / VERIFIED / PUBLISHED`
 * `MS-001.21` implementation review is `PASS`
 * `MS-001.21` contract deviations are `NONE`
@@ -873,7 +873,7 @@ Next:
 Next session priorities:
 
 * Keep the next product milestone at `NONE` pending Product Owner decision
-* Keep milestone closure documentation aligned until push is explicitly approved
+* Run Next Product Milestone Contract Discovery before any new implementation scope.
 
 ---
 
