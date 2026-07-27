@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.40 - AI Workspace Engine Active Generation State Derivation Foundation
+MS-001.41 - AI Workspace Engine Active Save State Derivation Foundation
 
 ## Next
 
@@ -4556,10 +4556,13 @@ ACCEPT
 COMPLETED / VERIFIED
 
 **Publication Status**
-NOT PUBLISHED
+PUBLISHED
+
+**Publication Commit**
+`6a608d1`
 
 **Milestone Status**
-COMPLETED / VERIFIED / READY FOR PUBLICATION
+COMPLETED / PUBLISHED / CLOSED
 
 **Implementation Evidence**
 * `src/lib/ai-workspace-engine/engine.ts` now contains the typed active-generation-state derivation helper and generation-state types
@@ -4575,6 +4578,70 @@ NONE
 
 **Next Safe Step**
 Obtain Product Owner publication approval for `MS-001.40`.
+
+---
+
+## MS-001.41 - AI Workspace Engine Active Save State Derivation Foundation
+
+**Milestone**
+MS-001.41 - AI Workspace Engine Active Save State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Formalize the pure active-save-state derivation already used by the AI Workspace page as a verified milestone without changing UX, UI text, request shapes, save mutation flow, provider wiring, or Project Brain boundaries.
+
+**Product Outcome**
+The repository already contains a small AI Workspace Engine runtime helper that owns the typed derivation of the active local save state from `projectId`, `saveUiState`, and `latestExchange`, while the existing AI Workspace page already reuses that helper with unchanged behavior.
+
+**Dependencies**
+* closed `MS-001.40 - AI Workspace Engine Active Generation State Derivation Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / READY FOR PUBLICATION
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` already contains the typed active-save-state derivation helper
+* `src/app/projects/[id]/ai/page.tsx` already reuses the engine helper and does not derive the active save state inline
+* `src/lib/ai-workspace-engine/engine.test.ts` already contains focused unit coverage for matched and fallback active-save-state derivation
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `15 / 15` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Obtain Product Owner publication approval for `MS-001.41`.
 
 ---
 
