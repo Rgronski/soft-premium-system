@@ -4,17 +4,18 @@ import { getBrowserAiProjectContext } from "@/lib/project-brain/browser";
 import type { AiProjectContext } from "@/lib/project-brain/types";
 import {
   buildGenerationInstruction,
+  deriveActiveGenerationState,
   deriveActiveSaveState,
   deriveLatestExchange,
   getConversationContextStatusMessage,
   getGenerationErrorMessage,
   getSaveErrorMessage,
   type ConversationExchange,
+  type GenerationUiState,
 } from "@/lib/ai-workspace-engine/engine";
 import { useParams } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-type GenerationState = "idle" | "generating" | "generated" | "error";
 type SaveState = "idle" | "ready-to-save" | "saving" | "saved" | "save-error";
 
 type ContextState =
@@ -31,14 +32,6 @@ type ContextState =
       projectId: string;
       status: "project-not-found" | "unavailable";
     };
-
-type GenerationUiState = {
-  projectId: string;
-  state: GenerationState;
-  exchanges: ConversationExchange[];
-  latestExchangeId: number | null;
-  errorMessage: string | null;
-};
 
 type SaveUiState = {
   projectId: string;
@@ -166,16 +159,10 @@ export default function ProjectAiWorkspacePage() {
     instructionState.projectId === params.id
       ? instructionState.selectedPromptId
       : null;
-  const activeGenerationState =
-    generationUiState.projectId === params.id
-      ? generationUiState
-      : {
-          projectId: params.id,
-          state: "idle" as const,
-          exchanges: [],
-          latestExchangeId: null,
-          errorMessage: null,
-        };
+  const activeGenerationState = deriveActiveGenerationState(
+    params.id,
+    generationUiState,
+  );
   const latestExchange = deriveLatestExchange(
     activeGenerationState.latestExchangeId,
     activeGenerationState.exchanges,

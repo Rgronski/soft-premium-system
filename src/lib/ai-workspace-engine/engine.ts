@@ -4,6 +4,16 @@ export type ConversationExchange = {
   response: string;
 };
 
+export type GenerationState = "idle" | "generating" | "generated" | "error";
+
+export type GenerationUiState = {
+  projectId: string;
+  state: GenerationState;
+  exchanges: ConversationExchange[];
+  latestExchangeId: number | null;
+  errorMessage: string | null;
+};
+
 export type SaveState =
   | "idle"
   | "ready-to-save"
@@ -78,6 +88,23 @@ export function buildGenerationInstruction(
     "Current User Instruction:",
     instruction,
   ].join("\n");
+}
+
+export function deriveActiveGenerationState(
+  projectId: string,
+  generationUiState: GenerationUiState,
+): GenerationUiState {
+  if (generationUiState.projectId === projectId) {
+    return generationUiState;
+  }
+
+  return {
+    projectId,
+    state: "idle",
+    exchanges: [],
+    latestExchangeId: null,
+    errorMessage: null,
+  };
 }
 
 export function deriveLatestExchange(

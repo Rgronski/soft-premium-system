@@ -1,7 +1,9 @@
 import {
   buildGenerationInstruction,
+  deriveActiveGenerationState,
   deriveActiveSaveState,
   deriveLatestExchange,
+  type GenerationUiState,
   getConversationContextExchangeCount,
   getConversationContextStatusMessage,
   getGenerationErrorMessage,
@@ -34,6 +36,19 @@ function createSaveUiState(
     title: "Architecture note",
     errorMessage: "Existing error",
     refreshErrorMessage: "Existing refresh error",
+    ...overrides,
+  };
+}
+
+function createGenerationUiState(
+  overrides: Partial<GenerationUiState> = {},
+): GenerationUiState {
+  return {
+    projectId: "project-1",
+    state: "generated",
+    exchanges: [createExchange(1, "Instruction 1", "Response 1")],
+    latestExchangeId: 1,
+    errorMessage: null,
     ...overrides,
   };
 }
@@ -95,6 +110,31 @@ describe("ai workspace engine", () => {
     expect(instruction).toContain("Current User Instruction:\nInstruction 5");
     expect(instruction).not.toContain("Instruction 1");
     expect(instruction).not.toContain("Response 1");
+  });
+
+  test("reuses the current generation state when it matches the active project id", () => {
+    const generationUiState = createGenerationUiState();
+
+    expect(
+      deriveActiveGenerationState("project-1", generationUiState),
+    ).toBe(generationUiState);
+  });
+
+  test("derives an idle fallback generation state when the project id does not match", () => {
+    expect(
+      deriveActiveGenerationState(
+        "project-2",
+        createGenerationUiState({
+          errorMessage: "Existing error",
+        }),
+      ),
+    ).toEqual({
+      projectId: "project-2",
+      state: "idle",
+      exchanges: [],
+      latestExchangeId: null,
+      errorMessage: null,
+    });
   });
 
   test("derives no latest exchange when the latest exchange id is null", () => {

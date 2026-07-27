@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.39 - AI Workspace Engine Latest Exchange Derivation Foundation
+MS-001.40 - AI Workspace Engine Active Generation State Derivation Foundation
 
 ## Next
 
@@ -4511,6 +4511,70 @@ NONE
 
 **Next Safe Step**
 Obtain Product Owner publication approval for `MS-001.39`.
+
+---
+
+## MS-001.40 - AI Workspace Engine Active Generation State Derivation Foundation
+
+**Milestone**
+MS-001.40 - AI Workspace Engine Active Generation State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move only the pure active-generation-state derivation logic from the AI Workspace page into the AI Workspace Engine module without changing UX, UI text, request shapes, provider wiring, Project Brain boundaries, or broader generation/save state management.
+
+**Product Outcome**
+The repository contains one small extension of the AI Workspace Engine runtime module that owns the typed derivation of the active local generation state from `projectId` and `generationUiState`, while the existing AI Workspace page reuses that helper with unchanged behavior.
+
+**Dependencies**
+* closed `MS-001.39 - AI Workspace Engine Latest Exchange Derivation Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / READY FOR PUBLICATION
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now contains the typed active-generation-state derivation helper and generation-state types
+* `src/lib/ai-workspace-engine/engine.test.ts` contains focused unit coverage for matched and fallback active-generation-state derivation
+* `src/app/projects/[id]/ai/page.tsx` reuses the engine helper and no longer derives the active generation state inline
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `15 / 15` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Obtain Product Owner publication approval for `MS-001.40`.
 
 ---
 

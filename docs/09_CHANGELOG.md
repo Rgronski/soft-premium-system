@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 025 - MS-001.40 AI Workspace Engine Active Generation State Derivation Foundation verified locally
+
+### Date
+
+2026-07-27
+
+### Completed
+
+* Moved the pure active-generation-state derivation from `src/app/projects/[id]/ai/page.tsx` into `src/lib/ai-workspace-engine/engine.ts`.
+* Added one typed engine helper that derives the active local generation state from `projectId` and `generationUiState`.
+* Added focused unit coverage in `src/lib/ai-workspace-engine/engine.test.ts` for matched and fallback active-generation-state derivation.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now reuses the engine helper without changing request shapes, save semantics, copy/reset behavior, or broader generation/save flows.
+* Recorded focused verification as `PASS` with engine tests `15 / 15`, component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded publication status as `NOT PUBLISHED`.
+* Recorded milestone status as `COMPLETED / VERIFIED / READY FOR PUBLICATION`.
+* Kept `Current Product Milestone` as `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.40 - AI Workspace Engine Active Generation State Derivation Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No Project Brain, Knowledge API, provider, endpoint, storage, Command Center, Conductor, workflow, or UI redesign changes were introduced.
+* No commit or push was performed for `MS-001.40`.
+
 ## Session 025 - MS-001.39 AI Workspace Engine Latest Exchange Derivation Foundation verified locally
 
 ### Date
