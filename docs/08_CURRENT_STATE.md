@@ -375,10 +375,10 @@ MS-001.28 blocker status: NONE.
 MS-001.28 local completion evidence commit:
 * `0d56046` - `feat: refresh AI knowledge context after save`
 MS-001.29 contract status: APPROVED.
-MS-001.29 runtime status: OPEN.
-MS-001.29 activation status: OPEN.
+MS-001.29 runtime status: CLOSED.
+MS-001.29 activation status: CLOSED.
 MS-001.29 implementation status: COMPLETED / VERIFIED.
-MS-001.29 milestone status: COMPLETED / VERIFIED.
+MS-001.29 milestone status: COMPLETED / VERIFIED / PUSHED.
 MS-001.29 product outcome: one local non-persistent multi-exchange AI Workspace conversation exists without changing the existing generation endpoint, Project Brain boundaries, or persistence model.
 MS-001.29 preserved boundaries:
 * scope remains only `/projects/[id]/ai` and its nearest tests
@@ -393,10 +393,10 @@ MS-001.29 verification: targeted component tests `27 / 27` PASS, `npx.cmd tsc --
 MS-001.29 blocker status: NONE.
 MS-001.29 local completion evidence commit: `573fa5a` - `feat(ai-workspace): add controlled conversation foundation`.
 MS-001.30 contract status: APPROVED.
-MS-001.30 runtime status: OPEN.
-MS-001.30 activation status: OPEN.
+MS-001.30 runtime status: CLOSED.
+MS-001.30 activation status: CLOSED.
 MS-001.30 implementation status: COMPLETED / VERIFIED.
-MS-001.30 milestone status: PENDING FORMAL ACCEPTANCE.
+MS-001.30 milestone status: COMPLETED / VERIFIED / PUSHED.
 MS-001.30 product outcome: controlled local conversation context now exists in the AI Workspace without changing the existing generation endpoint, Project Brain boundaries, or persistence model.
 MS-001.30 preserved boundaries:
 * scope remains only `/projects/[id]/ai` and its nearest tests
@@ -413,10 +413,10 @@ MS-001.30 verification: targeted component tests `29 / 29` PASS, `npx.cmd tsc --
 MS-001.30 blocker status: NONE.
 MS-001.30 local completion evidence commit: `422b44e` - `feat(ai-workspace): add controlled conversation context`.
 MS-001.31 contract status: APPROVED.
-MS-001.31 runtime status: OPEN.
-MS-001.31 activation status: OPEN.
+MS-001.31 runtime status: CLOSED.
+MS-001.31 activation status: CLOSED.
 MS-001.31 implementation status: COMPLETED / VERIFIED.
-MS-001.31 milestone status: PENDING FORMAL ACCEPTANCE.
+MS-001.31 milestone status: COMPLETED / VERIFIED / PUSHED.
 MS-001.31 product outcome: one explicit local conversation reset control now exists in the AI Workspace without changing the existing generation endpoint, Project Brain boundaries, or persistence model.
 MS-001.31 preserved boundaries:
 * scope remains only `/projects/[id]/ai` and its nearest tests
@@ -433,10 +433,10 @@ MS-001.31 verification: targeted component tests `30 / 30` PASS, `npx.cmd tsc --
 MS-001.31 blocker status: NONE.
 MS-001.31 local completion evidence commit: `f756a57` - `feat(ai-workspace): add conversation reset control`.
 MS-001.32 contract status: APPROVED.
-MS-001.32 runtime status: OPEN.
-MS-001.32 activation status: OPEN.
+MS-001.32 runtime status: CLOSED.
+MS-001.32 activation status: CLOSED.
 MS-001.32 implementation status: COMPLETED / VERIFIED.
-MS-001.32 milestone status: PENDING FORMAL ACCEPTANCE.
+MS-001.32 milestone status: COMPLETED / VERIFIED / PUSHED.
 MS-001.32 product outcome: one fixed local conversation-context budget now exists in the AI Workspace without changing the existing generation endpoint, Project Brain boundaries, or persistence model.
 MS-001.32 preserved boundaries:
 * scope remains only `/projects/[id]/ai` and its nearest tests
