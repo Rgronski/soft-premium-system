@@ -451,6 +451,211 @@ describe("ProjectAiWorkspacePage", () => {
     });
   });
 
+  test("reset conversation clears local exchanges and the next generate starts without prior history", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+    fetchMock
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "First response",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Second response",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Third response",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      );
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+
+    fireEvent.change(instructionField, {
+      target: { value: "First instruction" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("First response")).toBeTruthy();
+    });
+
+    fireEvent.change(instructionField, {
+      target: { value: "Second instruction" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Second response")).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Reset Conversation" }));
+
+    expect(screen.queryByText("First response")).toBeNull();
+    expect(screen.queryByText("Second response")).toBeNull();
+    expect(screen.queryByRole("textbox", { name: "Title" })).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: "Reset Conversation" }),
+    ).toBeNull();
+
+    fireEvent.change(instructionField, {
+      target: { value: "Third instruction" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Third response")).toBeTruthy();
+    });
+
+    const thirdGenerateBody = JSON.parse(
+      String(fetchMock.mock.calls[2]?.[1]?.body),
+    ) as Record<string, string>;
+
+    expect(thirdGenerateBody).toEqual({
+      instruction: "Third instruction",
+    });
+  });
+
+  test("after reset, a new successful exchange becomes the only local context source for later generates", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+    fetchMock
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "First response",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Second response",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Third response",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      );
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+
+    fireEvent.change(instructionField, {
+      target: { value: "First instruction" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("First response")).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Reset Conversation" }));
+
+    fireEvent.change(instructionField, {
+      target: { value: "Second instruction" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Second response")).toBeTruthy();
+    });
+
+    fireEvent.change(instructionField, {
+      target: { value: "Third instruction" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Third response")).toBeTruthy();
+    });
+
+    const thirdGenerateBody = JSON.parse(
+      String(fetchMock.mock.calls[2]?.[1]?.body),
+    ) as Record<string, string>;
+
+    expect(thirdGenerateBody.instruction).toContain("Second instruction");
+    expect(thirdGenerateBody.instruction).toContain("Second response");
+    expect(thirdGenerateBody.instruction).toContain("Third instruction");
+    expect(thirdGenerateBody.instruction).not.toContain("First instruction");
+    expect(thirdGenerateBody.instruction).not.toContain("First response");
+  });
+
   test("renders title and save action after generation and sends the exact knowledge request", async () => {
     getBrowserAiProjectContextMock
       .mockResolvedValueOnce({

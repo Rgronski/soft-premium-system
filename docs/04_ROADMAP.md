@@ -3887,6 +3887,84 @@ Run Chief Architect review and formal Product Owner acceptance for `MS-001.30` b
 
 ---
 
+## MS-001.31 - AI Workspace Conversation Reset Control Foundation
+
+**Milestone**
+MS-001.31 - AI Workspace Conversation Reset Control Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+YES
+
+**Runtime Status**
+OPEN
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Add one minimal explicit reset control inside the AI Workspace so the user can consciously clear the current local conversation state without changing the existing AI or persistence boundaries.
+
+**Product Outcome**
+The AI Workspace at `/projects/[id]/ai` provides one reset control that clears the current local non-persistent conversation state, makes the next `Generate` behave like a first request with no prior history, and keeps later `Generate` actions using only the new post-reset local context.
+
+**Dependencies**
+* closed `MS-001.19 - AI Workspace Project Brain Read Foundation`
+* closed `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation`
+* closed `MS-001.21 - AI Model Boundary Foundation`
+* closed `MS-001.22 - AI Model Server Transport Boundary`
+* closed `MS-001.23 - AI Model Production Provider Foundation`
+* closed `MS-001.24 - Server-Readable Read-Only Project Context Foundation`
+* closed `MS-001.25 - AI Workspace Generation UI Foundation`
+* closed `MS-001.26 - AI Workspace Controlled Knowledge Save`
+* closed `MS-001.27 - AI Workspace Controlled Prompt Foundation`
+* closed `MS-001.28 - AI Workspace Controlled Knowledge Refresh`
+* closed `MS-001.29 - AI Workspace Controlled Conversation Foundation`
+* closed `MS-001.30 - AI Workspace Controlled Conversation Context Foundation`
+
+**Product Owner Decision**
+GO
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Milestone Status**
+PENDING FORMAL ACCEPTANCE
+
+**Implementation Evidence**
+* AI Workspace conversation reset control is implemented in `src/app/projects/[id]/ai/page.tsx`
+* AI Workspace reset-flow coverage is implemented in `src/app/projects/[id]/ai/page.test.tsx`
+* one explicit reset control clears the current local conversation state
+* after reset, the next `Generate` sends no prior conversation history
+* after reset and one new successful exchange, later `Generate` actions use only the new post-reset local context
+* browser generate request body remains exactly `{ instruction }`
+* browser save request body remains exactly `{ title, content }`
+* Save to Knowledge remains bound only to the latest generated result
+* existing starter prompts and Knowledge refresh behavior remain unchanged
+* no persistence, new endpoint, streaming, agents, tool calling, Markdown rendering, retry UI, or Project Brain change was introduced
+* targeted component verification passed with `30 / 30` tests in `src/app/projects/[id]/ai/page.test.tsx`
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Chief Architect review and formal Product Owner acceptance for `MS-001.31` before any commit or push decision.
+
+---
+
 # Release Criteria
 
 SPS OS 1.0 release progression requires:

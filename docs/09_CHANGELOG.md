@@ -69,6 +69,27 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 021 - MS-001.31 AI Workspace Conversation Reset Control Foundation implemented locally
+
+### Date
+
+2026-07-27
+
+### Completed
+
+* Confirmed the AI Workspace now provides one explicit conversation reset control.
+* Confirmed reset clears the current local conversation state in the active UI session.
+* Confirmed the next `Generate` after reset sends no prior conversation history.
+* Confirmed later `Generate` actions after a new successful post-reset exchange use only the new local context.
+* Confirmed Save to Knowledge remains bound only to the latest generated result.
+* Recorded focused verification as `PASS` with component tests `30 / 30`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded that no commit or push was performed for `MS-001.31`.
+
+### Notes
+
+* Reset remains local and non-persistent.
+* Endpoint shape, Project Brain boundaries, starter prompts, and Knowledge refresh remain unchanged.
+
 ## Session 021 - MS-001.30 AI Workspace Controlled Conversation Context Foundation implemented locally
 
 ### Date

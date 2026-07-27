@@ -323,6 +323,26 @@ export default function ProjectAiWorkspacePage() {
     });
   }
 
+  function handleResetConversation() {
+    nextExchangeIdRef.current = 1;
+    setGenerationUiState({
+      projectId: params.id,
+      state: "idle",
+      exchanges: [],
+      latestExchangeId: null,
+      errorMessage: null,
+    });
+    setSaveUiState({
+      projectId: params.id,
+      sourceExchangeId: null,
+      sourceContent: null,
+      state: "idle",
+      title: "",
+      errorMessage: null,
+      refreshErrorMessage: null,
+    });
+  }
+
   async function handleGenerate(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -712,9 +732,19 @@ export default function ProjectAiWorkspacePage() {
 
           {activeGenerationState.exchanges.length > 0 ? (
             <div className="mt-4 space-y-4">
-              <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-                Conversation
-              </p>
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
+                  Conversation
+                </p>
+                <button
+                  type="button"
+                  onClick={handleResetConversation}
+                  disabled={activeGenerationState.state === "generating"}
+                  className="rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-sm font-medium text-zinc-100 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  Reset Conversation
+                </button>
+              </div>
 
               {activeGenerationState.exchanges.map((exchange) => {
                 const isLatestExchange = latestExchange?.id === exchange.id;
