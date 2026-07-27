@@ -1,6 +1,7 @@
 import {
   buildGenerationInstruction,
   deriveActiveGenerationState,
+  deriveSaveActionPresentation,
   deriveActiveSaveState,
   deriveLatestExchange,
   type GenerationUiState,
@@ -214,6 +215,32 @@ describe("ai workspace engine", () => {
       title: "",
       errorMessage: null,
       refreshErrorMessage: null,
+    });
+  });
+
+  test("derives the default save action presentation for editable save states", () => {
+    expect(deriveSaveActionPresentation("idle")).toEqual({
+      label: "Save to Knowledge",
+      disabled: false,
+    });
+    expect(deriveSaveActionPresentation("ready-to-save")).toEqual({
+      label: "Save to Knowledge",
+      disabled: false,
+    });
+    expect(deriveSaveActionPresentation("save-error")).toEqual({
+      label: "Save to Knowledge",
+      disabled: false,
+    });
+  });
+
+  test("derives disabled save action presentations for saving and saved states", () => {
+    expect(deriveSaveActionPresentation("saving")).toEqual({
+      label: "Saving...",
+      disabled: true,
+    });
+    expect(deriveSaveActionPresentation("saved")).toEqual({
+      label: "Saved",
+      disabled: true,
     });
   });
 

@@ -31,6 +31,11 @@ export type SaveUiState = {
   refreshErrorMessage: string | null;
 };
 
+export type SaveActionPresentation = {
+  label: "Save to Knowledge" | "Saving..." | "Saved";
+  disabled: boolean;
+};
+
 const CONVERSATION_CONTEXT_EXCHANGE_LIMIT = 3;
 
 function getBudgetedConversationContext(
@@ -140,6 +145,29 @@ export function deriveActiveSaveState(
     title: "",
     errorMessage: null,
     refreshErrorMessage: null,
+  };
+}
+
+export function deriveSaveActionPresentation(
+  saveState: SaveState,
+): SaveActionPresentation {
+  if (saveState === "saving") {
+    return {
+      label: "Saving...",
+      disabled: true,
+    };
+  }
+
+  if (saveState === "saved") {
+    return {
+      label: "Saved",
+      disabled: true,
+    };
+  }
+
+  return {
+    label: "Save to Knowledge",
+    disabled: false,
   };
 }
 

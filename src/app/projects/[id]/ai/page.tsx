@@ -5,6 +5,7 @@ import type { AiProjectContext } from "@/lib/project-brain/types";
 import {
   buildGenerationInstruction,
   deriveActiveGenerationState,
+  deriveSaveActionPresentation,
   deriveActiveSaveState,
   deriveLatestExchange,
   getConversationContextStatusMessage,
@@ -178,6 +179,9 @@ export default function ProjectAiWorkspacePage() {
     params.id,
     latestExchange,
     saveUiState,
+  );
+  const saveActionPresentation = deriveSaveActionPresentation(
+    activeSaveState.state,
   );
 
   if (contextState.projectId !== params.id || contextState.status === "loading") {
@@ -736,17 +740,10 @@ export default function ProjectAiWorkspacePage() {
 
                           <button
                             type="submit"
-                            disabled={
-                              activeSaveState.state === "saving" ||
-                              activeSaveState.state === "saved"
-                            }
+                            disabled={saveActionPresentation.disabled}
                             className="rounded-xl border border-zinc-700 bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-950 disabled:cursor-not-allowed disabled:opacity-60"
                           >
-                            {activeSaveState.state === "saving"
-                              ? "Saving..."
-                              : activeSaveState.state === "saved"
-                                ? "Saved"
-                                : "Save to Knowledge"}
+                            {saveActionPresentation.label}
                           </button>
                         </form>
 

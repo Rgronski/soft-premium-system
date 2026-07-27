@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## MS-001.42 - AI Workspace Engine Save Action Presentation Derivation Foundation published
+
+### Date
+
+2026-07-27
+
+### Completed
+
+* Moved the pure save-action presentation derivation from `src/app/projects/[id]/ai/page.tsx` into `src/lib/ai-workspace-engine/engine.ts`.
+* Added one typed engine helper that derives the Save action label and disabled state from the active save state.
+* Added focused unit coverage in `src/lib/ai-workspace-engine/engine.test.ts` for editable, saving, and saved save-action presentation states.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now reuses the engine helper without changing button text, disabled behavior, save flow, provider wiring, or Project Brain boundaries.
+* Recorded focused verification as `PASS` with engine tests `17 / 17`, component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded publication status as `PUBLISHED`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
+* Kept `Current Product Milestone` as `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.42 - AI Workspace Engine Save Action Presentation Derivation Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No backend, API, Project Brain, provider wiring, or broader component refactor changes were introduced.
+
 ## Session 025 - MS-001.41 AI Workspace Engine Active Save State Derivation Foundation verified on existing implementation
 
 ### Date
