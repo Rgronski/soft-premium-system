@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.33 - AI Workspace Conversation Context Visibility Foundation
+MS-001.35 - AI Workspace Engine Contract Foundation
 
 **Next Milestone**
 NONE
@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.33 - AI Workspace Conversation Context Visibility Foundation
+Latest Completed Product Milestone: MS-001.35 - AI Workspace Engine Contract Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -103,6 +103,8 @@ MS-001.30 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the contro
 MS-001.31 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace conversation reset control foundation.
 MS-001.32 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace conversation context budget foundation.
 MS-001.33 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace conversation context visibility foundation.
+MS-001.34 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace conversation copy foundation.
+MS-001.35 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace engine contract foundation.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
@@ -466,6 +468,34 @@ MS-001.33 preserved boundaries:
 MS-001.33 verification: targeted component tests `32 / 32` PASS, `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS, full tests NOT RUN, lint NOT RUN, build NOT RUN.
 MS-001.33 blocker status: NONE.
 MS-001.33 local completion evidence commit: `14acba9` - `feat(ai-workspace): show conversation context status`.
+MS-001.34 contract status: APPROVED.
+MS-001.34 runtime status: CLOSED.
+MS-001.34 activation status: CLOSED.
+MS-001.34 implementation status: COMPLETED / VERIFIED.
+MS-001.34 milestone status: COMPLETED / VERIFIED / PUSHED.
+MS-001.34 product outcome: one visible copy control now exists for generated AI Workspace result text without changing the existing generation, Knowledge save, Project Brain, or persistence boundaries.
+MS-001.34 preserved boundaries:
+* clicking `Copy` uses the browser clipboard API only
+* copy uses the exact generated result text
+* generate, reset conversation, and save to Knowledge behavior remain unchanged
+* copy does not mutate conversation state, save state, Project Brain state, Knowledge state, or persistence state
+MS-001.34 verification: targeted component tests `32 / 32` PASS, `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS, full tests NOT RUN, lint NOT RUN, build NOT RUN.
+MS-001.34 blocker status: NONE.
+MS-001.34 publication commit: `8991a45` - `feat(ai-workspace): add response copy control`.
+MS-001.35 contract status: APPROVED.
+MS-001.35 runtime status: CLOSED.
+MS-001.35 activation status: CLOSED.
+MS-001.35 implementation status: COMPLETED / VERIFIED.
+MS-001.35 milestone status: COMPLETED / VERIFIED / PUSHED.
+MS-001.35 product outcome: one explicit AI Workspace Engine readiness contract now defines the engine as a consumer and coordinator over Project Brain with non-canonical local conversation state and explicit save boundaries.
+MS-001.35 preserved boundaries:
+* Project Brain remains the Single Source of Truth
+* no production UI behavior changed
+* no backend or provider behavior changed
+* no dependency or configuration change was introduced
+MS-001.35 verification: documentation consistency review PASS, `git diff --check` PASS.
+MS-001.35 blocker status: NONE.
+MS-001.35 publication commit: `2cda65b` - `docs(ai-workspace): add engine contract foundation`.
 Live OpenAI request remains not allowed.
 Pending deployment topic: `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only, is not an accepted ADR, and had no implementation in this session.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED

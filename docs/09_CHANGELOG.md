@@ -69,6 +69,46 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 022 - MS-001.35 AI Workspace Engine Contract Foundation published
+
+### Date
+
+2026-07-27
+
+### Completed
+
+* Added `docs/ai-workflow/AI_WORKSPACE_ENGINE_CONTRACT.md` as the minimal AI Workspace Engine readiness contract.
+* Confirmed the new contract defines AI Workspace Engine as a consumer and coordinator over Project Brain rather than a source of truth.
+* Confirmed the contract preserves local AI Workspace conversation state as non-canonical.
+* Confirmed the contract defines explicit save as the only path from generated text to canonical Knowledge.
+* Confirmed the contract defines local copy as non-persistent and non-mutating.
+* Recorded documentation consistency review against `docs/00_SPS_DEVELOPMENT_METHOD.md`, `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`, `docs/ai-workflow/ROLES.md`, and `docs/ai-workflow/COMMAND_CENTER.md`.
+* Recorded `git diff --check` as `PASS`.
+* Recorded pushed commit `2cda65b - docs(ai-workspace): add engine contract foundation`.
+
+### Notes
+
+* No production UI, backend, provider, dependency, or configuration changes were introduced.
+
+## Session 022 - MS-001.34 AI Workspace Conversation Copy Foundation published
+
+### Date
+
+2026-07-27
+
+### Completed
+
+* Added one visible `Copy` control for generated AI Workspace result text.
+* Confirmed clicking `Copy` calls `navigator.clipboard.writeText` with the exact generated response text.
+* Confirmed generate, reset conversation, and save to Knowledge behavior remain unchanged.
+* Confirmed copy does not mutate conversation state, save state, Project Brain state, Knowledge state, or persistence state.
+* Recorded focused verification as `PASS` with component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded pushed commit `8991a45 - feat(ai-workspace): add response copy control`.
+
+### Notes
+
+* No backend, provider, dependency, or configuration changes were introduced.
+
 ## Session 021 - MS-001.33 AI Workspace Conversation Context Visibility Foundation implemented locally
 
 ### Date

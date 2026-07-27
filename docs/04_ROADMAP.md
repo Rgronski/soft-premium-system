@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.33 - AI Workspace Conversation Context Visibility Foundation
+MS-001.35 - AI Workspace Engine Contract Foundation
 
 ## Next
 
@@ -4121,6 +4121,146 @@ NONE
 
 **Next Safe Step**
 Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone.
+
+---
+
+## MS-001.34 - AI Workspace Conversation Copy Foundation
+
+**Milestone**
+MS-001.34 - AI Workspace Conversation Copy Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Add one minimal explicit copy control for generated AI Workspace results without changing the existing generation, Knowledge save, Project Brain, or persistence boundaries.
+
+**Product Outcome**
+The AI Workspace at `/projects/[id]/ai` shows one visible `Copy` control for generated result text and copies the exact response text through the browser clipboard API without mutating conversation state, save state, Project Brain state, Knowledge state, or local persistence.
+
+**Dependencies**
+* closed `MS-001.19 - AI Workspace Project Brain Read Foundation`
+* closed `MS-001.20 - AI Workspace Read-Only UI Consumer Foundation`
+* closed `MS-001.21 - AI Model Boundary Foundation`
+* closed `MS-001.22 - AI Model Server Transport Boundary`
+* closed `MS-001.23 - AI Model Production Provider Foundation`
+* closed `MS-001.24 - Server-Readable Read-Only Project Context Foundation`
+* closed `MS-001.25 - AI Workspace Generation UI Foundation`
+* closed `MS-001.26 - AI Workspace Controlled Knowledge Save`
+* closed `MS-001.27 - AI Workspace Controlled Prompt Foundation`
+* closed `MS-001.28 - AI Workspace Controlled Knowledge Refresh`
+* closed `MS-001.29 - AI Workspace Controlled Conversation Foundation`
+* closed `MS-001.30 - AI Workspace Controlled Conversation Context Foundation`
+* closed `MS-001.31 - AI Workspace Conversation Reset Control Foundation`
+* closed `MS-001.32 - AI Workspace Conversation Context Budget Foundation`
+* closed `MS-001.33 - AI Workspace Conversation Context Visibility Foundation`
+
+**Product Owner Decision**
+GO
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUSHED
+
+**Implementation Evidence**
+* AI Workspace result copy control is implemented in `src/app/projects/[id]/ai/page.tsx`
+* AI Workspace copy-flow coverage is implemented in `src/app/projects/[id]/ai/page.test.tsx`
+* one visible `Copy` control exists for generated AI response text
+* clicking `Copy` calls `navigator.clipboard.writeText` with the exact generated response text
+* generate, reset conversation, and save to Knowledge behavior remain unchanged
+* copy does not mutate conversation state, save state, Project Brain state, Knowledge state, or persistence state
+* focused component verification passed with `32 / 32` tests in `src/app/projects/[id]/ai/page.test.tsx`
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
+* implementation commit: `8991a45`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.35 - AI Workspace Engine Contract Foundation
+
+**Milestone**
+MS-001.35 - AI Workspace Engine Contract Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Add one minimal architecture and documentation contract for AI Workspace Engine readiness without changing UI runtime, backend behavior, provider wiring, or Project Brain ownership boundaries.
+
+**Product Outcome**
+The repository contains one explicit AI Workspace Engine contract that defines AI Workspace Engine as a consumer and coordinator over Project Brain, separates local workspace conversation state from canonical project knowledge, and defines the minimal operation boundaries for load, generate, reset, copy, and explicit save.
+
+**Dependencies**
+* closed `MS-001.34 - AI Workspace Conversation Copy Foundation`
+
+**Product Owner Decision**
+GO
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUSHED
+
+**Implementation Evidence**
+* AI Workspace Engine readiness contract is published in `docs/ai-workflow/AI_WORKSPACE_ENGINE_CONTRACT.md`
+* the contract preserves Project Brain as the Single Source of Truth
+* the contract defines local AI Workspace conversation state as non-canonical
+* the contract defines explicit save as the only path from generated text to canonical Knowledge
+* the contract defines local copy as non-persistent and non-mutating
+* documentation consistency review was completed against `docs/00_SPS_DEVELOPMENT_METHOD.md`, `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`, `docs/ai-workflow/ROLES.md`, and `docs/ai-workflow/COMMAND_CENTER.md`
+* `git diff --check` passed
+* implementation commit: `2cda65b`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery.
 
 ---
 
