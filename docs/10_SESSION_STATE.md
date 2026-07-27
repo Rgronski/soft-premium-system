@@ -212,25 +212,25 @@ SPS OS Session State
 
 Date: 2026-07-27
 Current Session ID: 025
-Current Chat Title: 025 SPS OS - MS-001.38 Publication Scope
+Current Chat Title: Codex Task - SPS OS Session 025 Close Protocol
 Next Session ID: 026
 Suggested Next Chat Title: 026 SPS OS - Next Product Milestone Contract Discovery
 Active Capability: NONE
 Active Work Item: NONE
-Current Mode: VERIFIED EXISTING IMPLEMENTATION / READY FOR PUBLICATION
-Completed Capability Items: Session 025 MS-001.41 AI Workspace Engine Active Save State Derivation Foundation verified on existing implementation
+Current Mode: SESSION CLOSE PASS / CLOSED
+Completed Capability Items: Session 025 published MS-001.39, MS-001.40, and MS-001.41 on main and prepared fresh session package handoff
 Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-001.41 - AI Workspace Engine Active Save State Derivation Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
 Latest Completed Capability Item: CAP-005 - React Component Test Infrastructure Foundation
 Current Sprint: NONE
-Platform Priority: Keep SPS OS 1.0 release acceptance synchronized, keep the verified `MS-001.41` publication package ready, and run Next Product Milestone Contract Discovery before any new implementation scope.
+Platform Priority: Keep SPS OS 1.0 release acceptance synchronized and start Session 026 from a fresh generated package before any new implementation scope.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: UNKNOWN
+Latest Verified Commit: 48ad94e
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Obtain Product Owner publication approval for MS-001.41
+Next Safe Step: Start Session 026 from fresh generated package
