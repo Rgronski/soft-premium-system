@@ -12,6 +12,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 const useParamsMock = vi.fn(() => ({ id: "project-1" }));
 const getBrowserAiProjectContextMock = vi.fn();
 const fetchMock = vi.fn<typeof fetch>();
+const clipboardWriteTextMock = vi.fn<(text: string) => Promise<void>>();
 
 vi.mock("next/navigation", () => ({
   useParams: () => useParamsMock(),
@@ -42,7 +43,14 @@ describe("ProjectAiWorkspacePage", () => {
     useParamsMock.mockReturnValue({ id: "project-1" });
     getBrowserAiProjectContextMock.mockReset();
     fetchMock.mockReset();
+    clipboardWriteTextMock.mockReset();
     vi.stubGlobal("fetch", fetchMock);
+    Object.defineProperty(window.navigator, "clipboard", {
+      configurable: true,
+      value: {
+        writeText: clipboardWriteTextMock,
+      },
+    });
   });
 
   afterEach(() => {
@@ -307,6 +315,56 @@ describe("ProjectAiWorkspacePage", () => {
         instruction: "Summarize project",
       }),
     });
+  });
+
+  test("renders a copy control for a generated result and copies the exact response text", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+    clipboardWriteTextMock.mockResolvedValue(undefined);
+    fetchMock.mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          status: "generated",
+          content: "Generated response",
+        }),
+        {
+          status: 200,
+          headers: {
+            "content-type": "application/json",
+          },
+        },
+      ),
+    );
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+    fireEvent.change(instructionField, {
+      target: { value: "Summarize project" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Generated response")).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Copy" })).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Copy" }));
+
+    await waitFor(() => {
+      expect(clipboardWriteTextMock).toHaveBeenCalledTimes(1);
+      expect(clipboardWriteTextMock).toHaveBeenCalledWith("Generated response");
+    });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
   test("adds each successful generate call as a new local conversation exchange", async () => {
