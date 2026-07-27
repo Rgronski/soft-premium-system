@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.28 - AI Workspace Controlled Knowledge Refresh
+MS-001.33 - AI Workspace Conversation Context Visibility Foundation
 
 ## Next
 
@@ -3746,10 +3746,10 @@ Product Milestone
 APPROVED
 
 **Active**
-YES
+NO
 
 **Runtime Status**
-OPEN
+CLOSED
 
 **Owner**
 Product Owner
@@ -3785,7 +3785,7 @@ GO
 COMPLETED / VERIFIED
 
 **Milestone Status**
-PENDING FORMAL ACCEPTANCE
+COMPLETED / VERIFIED / PUSHED
 
 **Implementation Evidence**
 * AI Workspace local conversation behavior is implemented in `src/app/projects/[id]/ai/page.tsx`
@@ -4120,7 +4120,7 @@ PENDING FORMAL ACCEPTANCE
 NONE
 
 **Next Safe Step**
-Run Chief Architect review and formal Product Owner acceptance for `MS-001.33` before any commit or push decision.
+Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone.
 
 ---
 
