@@ -2,6 +2,8 @@ import {
   buildGenerationInstruction,
   getConversationContextExchangeCount,
   getConversationContextStatusMessage,
+  getGenerationErrorMessage,
+  getSaveErrorMessage,
   type ConversationExchange,
 } from "./engine";
 import { describe, expect, test } from "vitest";
@@ -75,5 +77,47 @@ describe("ai workspace engine", () => {
     expect(instruction).toContain("Current User Instruction:\nInstruction 5");
     expect(instruction).not.toContain("Instruction 1");
     expect(instruction).not.toContain("Response 1");
+  });
+
+  test("maps generation statuses to the existing UI error messages", () => {
+    expect(getGenerationErrorMessage("invalid-request")).toBe(
+      "Enter a valid instruction.",
+    );
+    expect(getGenerationErrorMessage("invalid-instruction")).toBe(
+      "Enter a valid instruction.",
+    );
+    expect(getGenerationErrorMessage("project-not-found")).toBe(
+      "Project not found.",
+    );
+    expect(getGenerationErrorMessage("context-unavailable")).toBe(
+      "AI project context unavailable.",
+    );
+    expect(getGenerationErrorMessage("provider-unavailable")).toBe(
+      "AI provider unavailable.",
+    );
+    expect(getGenerationErrorMessage("generation-failed")).toBe(
+      "Generation failed.",
+    );
+    expect(getGenerationErrorMessage("internal-error")).toBe(
+      "Generation failed.",
+    );
+    expect(getGenerationErrorMessage("unexpected-status")).toBe(
+      "Unexpected generation error.",
+    );
+  });
+
+  test("maps save statuses to the existing UI error messages", () => {
+    expect(getSaveErrorMessage("invalid-request")).toBe(
+      "Enter a valid title.",
+    );
+    expect(getSaveErrorMessage("project-not-found")).toBe(
+      "Project not found.",
+    );
+    expect(getSaveErrorMessage("context-unavailable")).toBe(
+      "Knowledge save unavailable.",
+    );
+    expect(getSaveErrorMessage("unexpected-status")).toBe(
+      "Unexpected save error.",
+    );
   });
 });

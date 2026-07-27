@@ -5,6 +5,8 @@ import type { AiProjectContext } from "@/lib/project-brain/types";
 import {
   buildGenerationInstruction,
   getConversationContextStatusMessage,
+  getGenerationErrorMessage,
+  getSaveErrorMessage,
   type ConversationExchange,
 } from "@/lib/ai-workspace-engine/engine";
 import { useParams } from "next/navigation";
@@ -84,38 +86,6 @@ const STARTER_PROMPTS: StarterPrompt[] = [
       "Summarize the most relevant existing project decisions and identify any visible unresolved decision gap based only on the provided canonical project context.",
   },
 ];
-
-function getGenerationErrorMessage(status: string): string {
-  switch (status) {
-    case "invalid-request":
-    case "invalid-instruction":
-      return "Enter a valid instruction.";
-    case "project-not-found":
-      return "Project not found.";
-    case "context-unavailable":
-      return "AI project context unavailable.";
-    case "provider-unavailable":
-      return "AI provider unavailable.";
-    case "generation-failed":
-    case "internal-error":
-      return "Generation failed.";
-    default:
-      return "Unexpected generation error.";
-  }
-}
-
-function getSaveErrorMessage(status: string): string {
-  switch (status) {
-    case "invalid-request":
-      return "Enter a valid title.";
-    case "project-not-found":
-      return "Project not found.";
-    case "context-unavailable":
-      return "Knowledge save unavailable.";
-    default:
-      return "Unexpected save error.";
-  }
-}
 
 export default function ProjectAiWorkspacePage() {
   const params = useParams<{ id: string }>();

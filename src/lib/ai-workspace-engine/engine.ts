@@ -62,3 +62,35 @@ export function buildGenerationInstruction(
     instruction,
   ].join("\n");
 }
+
+export function getGenerationErrorMessage(status: string): string {
+  switch (status) {
+    case "invalid-request":
+    case "invalid-instruction":
+      return "Enter a valid instruction.";
+    case "project-not-found":
+      return "Project not found.";
+    case "context-unavailable":
+      return "AI project context unavailable.";
+    case "provider-unavailable":
+      return "AI provider unavailable.";
+    case "generation-failed":
+    case "internal-error":
+      return "Generation failed.";
+    default:
+      return "Unexpected generation error.";
+  }
+}
+
+export function getSaveErrorMessage(status: string): string {
+  switch (status) {
+    case "invalid-request":
+      return "Enter a valid title.";
+    case "project-not-found":
+      return "Project not found.";
+    case "context-unavailable":
+      return "Knowledge save unavailable.";
+    default:
+      return "Unexpected save error.";
+  }
+}

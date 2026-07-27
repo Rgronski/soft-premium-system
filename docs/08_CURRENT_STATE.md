@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.36 - AI Workspace Engine Runtime Foundation
+MS-001.37 - AI Workspace Engine Status Mapping Foundation
 
 **Next Milestone**
 NONE
@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.36 - AI Workspace Engine Runtime Foundation
+Latest Completed Product Milestone: MS-001.37 - AI Workspace Engine Status Mapping Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -106,6 +106,7 @@ MS-001.33 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Wor
 MS-001.34 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace conversation copy foundation.
 MS-001.35 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace engine contract foundation.
 MS-001.36 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace engine runtime foundation.
+MS-001.37 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace engine status mapping foundation.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
@@ -511,6 +512,20 @@ MS-001.36 preserved boundaries:
 * local conversation remains non-canonical
 MS-001.36 verification: targeted engine tests `5 / 5` PASS, targeted component tests `32 / 32` PASS, `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS, full tests NOT RUN, lint NOT RUN, build NOT RUN.
 MS-001.36 blocker status: NONE.
+MS-001.37 contract status: APPROVED.
+MS-001.37 runtime status: CLOSED.
+MS-001.37 activation status: CLOSED.
+MS-001.37 implementation status: COMPLETED / VERIFIED.
+MS-001.37 milestone status: COMPLETED / VERIFIED / PUSHED.
+MS-001.37 product outcome: one minimal AI Workspace Engine status-mapping layer now owns the pure generation error/status message mapping and save-to-Knowledge error/status message mapping while the existing AI Workspace page reuses those engine exports with unchanged UI text and behavior.
+MS-001.37 preserved boundaries:
+* no UI text changes
+* no new UI controls
+* no save-flow behavior changes
+* no generation behavior changes
+* no provider, API route, or Project Brain boundary changes
+MS-001.37 verification: targeted engine tests `7 / 7` PASS, targeted component tests `32 / 32` PASS, `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS, full tests NOT RUN, lint NOT RUN, build NOT RUN.
+MS-001.37 blocker status: NONE.
 Live OpenAI request remains not allowed.
 Pending deployment topic: `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only, is not an accepted ADR, and had no implementation in this session.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED

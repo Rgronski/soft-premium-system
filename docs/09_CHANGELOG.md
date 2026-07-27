@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 023 - MS-001.37 AI Workspace Engine Status Mapping Foundation published
+
+### Date
+
+2026-07-27
+
+### Completed
+
+* Moved the pure generation error/status message mapping from `src/app/projects/[id]/ai/page.tsx` into `src/lib/ai-workspace-engine/engine.ts`.
+* Moved the pure save-to-Knowledge error/status message mapping from `src/app/projects/[id]/ai/page.tsx` into `src/lib/ai-workspace-engine/engine.ts`.
+* Added focused unit coverage in `src/lib/ai-workspace-engine/engine.test.ts` for the moved generation and save mappings.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now reuses the engine exports without changing UI text, save flow, generation behavior, or Project Brain boundaries.
+* Recorded focused verification as `PASS` with engine tests `7 / 7`, component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+
+### Notes
+
+* No provider, API route, persistence, dependency, configuration, or Project Brain storage changes were introduced.
+
 ## Session 023 - MS-001.36 AI Workspace Engine Runtime Foundation published
 
 ### Date

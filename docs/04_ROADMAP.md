@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.36 - AI Workspace Engine Runtime Foundation
+MS-001.37 - AI Workspace Engine Status Mapping Foundation
 
 ## Next
 
@@ -4313,6 +4313,67 @@ COMPLETED / VERIFIED / PUSHED
 * `src/lib/ai-workspace-engine/engine.test.ts` provides focused unit coverage for the new engine module
 * `src/app/projects/[id]/ai/page.tsx` reuses the engine module without changing UI text, request shape, reset behavior, or save boundaries
 * `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `5 / 5` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.37 - AI Workspace Engine Status Mapping Foundation
+
+**Milestone**
+MS-001.37 - AI Workspace Engine Status Mapping Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move only the pure AI Workspace status and error message mapping logic into the AI Workspace Engine module without changing UX, UI text, save flow, generation behavior, provider wiring, or Project Brain ownership boundaries.
+
+**Product Outcome**
+The repository contains one small extension of the AI Workspace Engine runtime module that owns the generation error/status message mapping and save-to-Knowledge error/status message mapping, while the existing AI Workspace page reuses those exports with unchanged UI behavior and text.
+
+**Dependencies**
+* closed `MS-001.36 - AI Workspace Engine Runtime Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUSHED
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now contains the pure generation and save status/error message mapping functions
+* `src/lib/ai-workspace-engine/engine.test.ts` contains focused unit coverage for the moved mappings
+* `src/app/projects/[id]/ai/page.tsx` reuses the engine exports and no longer defines those mappings locally
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `7 / 7` tests
 * `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
 * `npx.cmd tsc --noEmit` passed
 * `git diff --check` passed
