@@ -5,6 +5,7 @@ import type { AiProjectContext } from "@/lib/project-brain/types";
 import {
   buildGenerationInstruction,
   deriveActiveGenerationState,
+  deriveGenerateActionPresentation,
   deriveSaveActionPresentation,
   deriveActiveSaveState,
   deriveLatestExchange,
@@ -163,6 +164,9 @@ export default function ProjectAiWorkspacePage() {
   const activeGenerationState = deriveActiveGenerationState(
     params.id,
     generationUiState,
+  );
+  const generateActionPresentation = deriveGenerateActionPresentation(
+    activeGenerationState.state,
   );
   const latestExchange = deriveLatestExchange(
     activeGenerationState.latestExchangeId,
@@ -648,12 +652,10 @@ export default function ProjectAiWorkspacePage() {
 
             <button
               type="submit"
-              disabled={activeGenerationState.state === "generating"}
+              disabled={generateActionPresentation.disabled}
               className="rounded-xl border border-zinc-700 bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-950 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {activeGenerationState.state === "generating"
-                ? "Generating..."
-                : "Generate"}
+              {generateActionPresentation.label}
             </button>
           </form>
 

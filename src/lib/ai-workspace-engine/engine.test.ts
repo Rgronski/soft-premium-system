@@ -1,6 +1,7 @@
 import {
   buildGenerationInstruction,
   deriveActiveGenerationState,
+  deriveGenerateActionPresentation,
   deriveSaveActionPresentation,
   deriveActiveSaveState,
   deriveLatestExchange,
@@ -135,6 +136,28 @@ describe("ai workspace engine", () => {
       exchanges: [],
       latestExchangeId: null,
       errorMessage: null,
+    });
+  });
+
+  test("derives the default generate action presentation outside active generation", () => {
+    expect(deriveGenerateActionPresentation("idle")).toEqual({
+      label: "Generate",
+      disabled: false,
+    });
+    expect(deriveGenerateActionPresentation("generated")).toEqual({
+      label: "Generate",
+      disabled: false,
+    });
+    expect(deriveGenerateActionPresentation("error")).toEqual({
+      label: "Generate",
+      disabled: false,
+    });
+  });
+
+  test("derives a disabled generate action presentation during active generation", () => {
+    expect(deriveGenerateActionPresentation("generating")).toEqual({
+      label: "Generating...",
+      disabled: true,
     });
   });
 

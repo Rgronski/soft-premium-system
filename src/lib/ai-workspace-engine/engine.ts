@@ -36,6 +36,11 @@ export type SaveActionPresentation = {
   disabled: boolean;
 };
 
+export type GenerateActionPresentation = {
+  label: "Generate" | "Generating...";
+  disabled: boolean;
+};
+
 const CONVERSATION_CONTEXT_EXCHANGE_LIMIT = 3;
 
 function getBudgetedConversationContext(
@@ -109,6 +114,22 @@ export function deriveActiveGenerationState(
     exchanges: [],
     latestExchangeId: null,
     errorMessage: null,
+  };
+}
+
+export function deriveGenerateActionPresentation(
+  generationState: GenerationState,
+): GenerateActionPresentation {
+  if (generationState === "generating") {
+    return {
+      label: "Generating...",
+      disabled: true,
+    };
+  }
+
+  return {
+    label: "Generate",
+    disabled: false,
   };
 }
 
