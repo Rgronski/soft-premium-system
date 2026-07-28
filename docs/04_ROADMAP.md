@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.46 - AI Workspace Engine Save UI Type Adoption Foundation
+MS-001.47 - AI Workspace Engine Instruction UI Type Adoption Foundation
 
 ## Next
 
@@ -4969,6 +4969,70 @@ COMPLETED / PUBLISHED / CLOSED
 * `npx.cmd tsc --noEmit` passed
 * `git diff --check` passed with line-ending warnings only
 * published on `origin/main` in commit `826ad96`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.47 - AI Workspace Engine Instruction UI Type Adoption Foundation
+
+**Milestone**
+MS-001.47 - AI Workspace Engine Instruction UI Type Adoption Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Adopt the existing engine-owned `InstructionUiState` type in the AI Workspace page without changing starter prompt behavior, instruction editing behavior, fetch flow, generation flow, save flow, reset flow, copy flow, provider wiring, or broader state management.
+
+**Product Outcome**
+The repository now contains one minimal AI Workspace page update that reuses the engine-owned `InstructionUiState` type directly and removes the local `selectedPromptId` typing workaround, while preserving the existing runtime behavior.
+
+**Dependencies**
+* closed `MS-001.46 - AI Workspace Engine Save UI Type Adoption Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/app/projects/[id]/ai/page.tsx` now imports and reuses the engine-owned `InstructionUiState` type directly
+* `src/app/projects/[id]/ai/page.tsx` no longer uses the local `selectedPromptId: null as string | null` typing workaround
+* no starter prompt, instruction editing, generate, save, reset, copy, or layout behavior changes were introduced
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `23 / 23` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed with line-ending warnings only
 
 **Blockers**
 NONE

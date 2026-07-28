@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## MS-001.47 - AI Workspace Engine Instruction UI Type Adoption Foundation published
+
+### Date
+
+2026-07-28
+
+### Completed
+
+* Imported the engine-owned `InstructionUiState` type into `src/app/projects/[id]/ai/page.tsx`.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now types local `instructionState` as `useState<InstructionUiState>(...)`.
+* Removed the local `selectedPromptId: null as string | null` typing workaround from `src/app/projects/[id]/ai/page.tsx`.
+* Confirmed no starter prompt, instruction editing, generate, save, reset, copy, or layout behavior changes were introduced.
+* Recorded focused verification as `PASS` with engine tests `23 / 23`, component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS` with line-ending warnings only.
+* Recorded publication status as `PUBLISHED`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
+* Kept `Current Product Milestone` as `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.47 - AI Workspace Engine Instruction UI Type Adoption Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No backend, API, Project Brain, provider wiring, or AI Workspace behavior changes were introduced.
+
 ## MS-001.46 - AI Workspace Engine Save UI Type Adoption Foundation published
 
 ### Date

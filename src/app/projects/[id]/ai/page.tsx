@@ -16,6 +16,7 @@ import {
   getSaveErrorMessage,
   type ConversationExchange,
   type GenerationUiState,
+  type InstructionUiState,
   type SaveUiState,
 } from "@/lib/ai-workspace-engine/engine";
 import { useParams } from "next/navigation";
@@ -86,10 +87,10 @@ export default function ProjectAiWorkspacePage() {
     projectId: params.id,
     status: "loading",
   });
-  const [instructionState, setInstructionState] = useState({
+  const [instructionState, setInstructionState] = useState<InstructionUiState>({
     projectId: params.id,
     value: "",
-    selectedPromptId: null as string | null,
+    selectedPromptId: null,
   });
   const [generationUiState, setGenerationUiState] = useState<GenerationUiState>(
     {
