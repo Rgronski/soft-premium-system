@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## MS-001.46 - AI Workspace Engine Save UI Type Adoption Foundation verified locally
+## MS-001.46 - AI Workspace Engine Save UI Type Adoption Foundation published
 
 ### Date
 
@@ -81,8 +81,9 @@ Each release entry should contain:
 * Confirmed `src/app/projects/[id]/ai/page.tsx` now reuses the engine-owned `SaveUiState` type directly.
 * Confirmed no fetch, save, reset, copy, or layout behavior changes were introduced.
 * Recorded focused verification as `PASS` with component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS` with line-ending warnings only.
-* Recorded publication status as `NOT PUBLISHED`.
-* Recorded milestone status as `COMPLETED / VERIFIED / READY FOR PUBLICATION`.
+* Recorded publication status as `PUBLISHED`.
+* Recorded publication commit `826ad96`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
 * Kept `Current Product Milestone` as `NONE`.
 * Set `Latest Completed Product Milestone` to `MS-001.46 - AI Workspace Engine Save UI Type Adoption Foundation`.
 * Kept `Next Product Milestone` as `NONE`.
@@ -90,7 +91,7 @@ Each release entry should contain:
 ### Notes
 
 * No backend, API, Project Brain, provider wiring, or AI Workspace behavior changes were introduced.
-* No commit or push was performed for `MS-001.46`.
+* The implementation was published to `origin/main` in commit `826ad96`.
 
 ## MS-001.45 - AI Workspace Engine Instruction State Derivation Foundation published
 

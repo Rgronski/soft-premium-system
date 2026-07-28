@@ -115,7 +115,7 @@ MS-001.42 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI W
 MS-001.43 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine generate-action presentation derivation foundation.
 MS-001.44 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine reset-action presentation derivation foundation.
 MS-001.45 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine instruction-state derivation foundation with commit `ba6f3fa`.
-MS-001.46 is COMPLETED / VERIFIED / READY FOR PUBLICATION after formal acceptance of the AI Workspace engine Save UI type adoption foundation, and the implementation remains local because commit and push have not been approved.
+MS-001.46 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine Save UI type adoption foundation with commit `826ad96`.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
@@ -665,8 +665,8 @@ MS-001.46 contract status: APPROVED.
 MS-001.46 runtime status: CLOSED.
 MS-001.46 activation status: CLOSED.
 MS-001.46 implementation status: COMPLETED / VERIFIED.
-MS-001.46 publication status: NOT PUBLISHED.
-MS-001.46 milestone status: COMPLETED / VERIFIED / READY FOR PUBLICATION.
+MS-001.46 publication status: PUBLISHED.
+MS-001.46 milestone status: COMPLETED / PUBLISHED / CLOSED.
 MS-001.46 product outcome: the repository now contains one minimal AI Workspace page update that removes duplicate local `SaveState` and `SaveUiState` declarations and reuses the engine-owned `SaveUiState` type directly while preserving the existing behavior.
 MS-001.46 preserved boundaries:
 * no fetch flow changes
@@ -675,6 +675,7 @@ MS-001.46 preserved boundaries:
 * no provider, API route, or Project Brain boundary changes
 * no broader component refactor
 MS-001.46 verification: targeted component tests `32 / 32` PASS, `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS with line-ending warnings only, full tests NOT RUN, lint NOT RUN, build NOT RUN.
+MS-001.46 publication commit: `826ad96`.
 MS-001.46 blocker status: NONE.
 Live OpenAI request remains not allowed.
 Pending deployment topic: `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only, is not an accepted ADR, and had no implementation in this session.
