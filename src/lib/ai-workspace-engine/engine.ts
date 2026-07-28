@@ -37,6 +37,12 @@ export type InstructionUiState = {
   selectedPromptId: string | null;
 };
 
+export type StarterPromptUiState = {
+  id: string;
+  label: string;
+  instruction: string;
+};
+
 export type SaveState =
   | "idle"
   | "ready-to-save"

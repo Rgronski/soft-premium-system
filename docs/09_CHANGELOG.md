@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## MS-001.49 - AI Workspace Engine Prompt UI Type Foundation published
+
+### Date
+
+2026-07-28
+
+### Completed
+
+* Added the engine-owned `StarterPromptUiState` export to `src/lib/ai-workspace-engine/engine.ts`.
+* Confirmed `StarterPromptUiState` preserves the existing `id`, `label`, and `instruction` shape exactly.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now types `STARTER_PROMPTS` with `StarterPromptUiState`.
+* Removed the local `StarterPrompt` alias from `src/app/projects/[id]/ai/page.tsx`.
+* Confirmed no prompt text, context loading, generation, save, reset, copy, or layout behavior changes were introduced.
+* Recorded focused verification as `PASS` with engine tests `23 / 23`, component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS` with line-ending warnings only.
+* Recorded publication status as `PUBLISHED`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
+* Kept `Current Product Milestone` as `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.49 - AI Workspace Engine Prompt UI Type Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No backend, API, Project Brain, provider wiring, or AI Workspace runtime behavior changes were introduced.
+
 ## MS-001.48 - AI Workspace Engine Context UI State Type Foundation published
 
 ### Date

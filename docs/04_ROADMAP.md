@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.48 - AI Workspace Engine Context UI State Type Foundation
+MS-001.49 - AI Workspace Engine Prompt UI Type Foundation
 
 ## Next
 
@@ -5095,6 +5095,72 @@ COMPLETED / PUBLISHED / CLOSED
 * `src/app/projects/[id]/ai/page.tsx` now imports and reuses `ContextUiState`
 * `src/app/projects/[id]/ai/page.tsx` no longer declares the local `ContextState` type or imports `AiProjectContext` directly for that local alias
 * no context loading, generate, save, reset, copy, prompt, or layout behavior changes were introduced
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `23 / 23` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed with line-ending warnings only
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.49 - AI Workspace Engine Prompt UI Type Foundation
+
+**Milestone**
+MS-001.49 - AI Workspace Engine Prompt UI Type Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move the AI Workspace prompt UI type boundary into the AI Workspace Engine contract without changing prompt content, UX, generation behavior, save behavior, or broader page logic.
+
+**Product Outcome**
+The repository now contains one minimal AI Workspace Engine type addition that owns the `StarterPromptUiState` shape for starter prompts, while the existing AI Workspace page reuses that type with unchanged prompt content and runtime behavior.
+
+**Dependencies**
+* closed `MS-001.48 - AI Workspace Engine Context UI State Type Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exports the engine-owned `StarterPromptUiState` type
+* `StarterPromptUiState` preserves the existing `id`, `label`, and `instruction` shape exactly
+* `src/app/projects/[id]/ai/page.tsx` now types `STARTER_PROMPTS` with `StarterPromptUiState`
+* `src/app/projects/[id]/ai/page.tsx` no longer declares the local `StarterPrompt` alias
+* no prompt text, generate, save, reset, copy, context-loading, or layout behavior changes were introduced
 * `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `23 / 23` tests
 * `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
 * `npx.cmd tsc --noEmit` passed

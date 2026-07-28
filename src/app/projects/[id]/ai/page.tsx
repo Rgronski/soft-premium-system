@@ -18,17 +18,12 @@ import {
   type GenerationUiState,
   type InstructionUiState,
   type SaveUiState,
+  type StarterPromptUiState,
 } from "@/lib/ai-workspace-engine/engine";
 import { useParams } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-type StarterPrompt = {
-  id: string;
-  label: string;
-  instruction: string;
-};
-
-const STARTER_PROMPTS: StarterPrompt[] = [
+const STARTER_PROMPTS: StarterPromptUiState[] = [
   {
     id: "summarize-project-state",
     label: "Summarize Project State",
