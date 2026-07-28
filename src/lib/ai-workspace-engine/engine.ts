@@ -41,6 +41,12 @@ export type GenerateActionPresentation = {
   disabled: boolean;
 };
 
+export type ResetActionPresentation = {
+  label: "Reset Conversation";
+  disabled: boolean;
+  visible: boolean;
+};
+
 const CONVERSATION_CONTEXT_EXCHANGE_LIMIT = 3;
 
 function getBudgetedConversationContext(
@@ -130,6 +136,17 @@ export function deriveGenerateActionPresentation(
   return {
     label: "Generate",
     disabled: false,
+  };
+}
+
+export function deriveResetActionPresentation(
+  generationState: GenerationState,
+  exchanges: ConversationExchange[],
+): ResetActionPresentation {
+  return {
+    label: "Reset Conversation",
+    disabled: generationState === "generating",
+    visible: exchanges.length > 0,
   };
 }
 

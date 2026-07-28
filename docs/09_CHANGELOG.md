@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## MS-001.44 - AI Workspace Engine Reset Action Presentation Derivation Foundation published
+
+### Date
+
+2026-07-28
+
+### Completed
+
+* Moved the pure reset-action presentation derivation from `src/app/projects/[id]/ai/page.tsx` into `src/lib/ai-workspace-engine/engine.ts`.
+* Added one typed engine helper that derives the Reset action label, visibility, and disabled state from the active generation state and local exchanges.
+* Added focused unit coverage in `src/lib/ai-workspace-engine/engine.test.ts` for hidden, visible, and generating reset-action presentation states.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now reuses the engine helper without changing button text, visibility behavior, disabled behavior, generation flow, provider wiring, or Project Brain boundaries.
+* Recorded focused verification as `PASS` with engine tests `21 / 21`, component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded publication status as `PUBLISHED`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
+* Kept `Current Product Milestone` as `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.44 - AI Workspace Engine Reset Action Presentation Derivation Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No backend, API, Project Brain, provider wiring, copy/status text, layout cleanup, or broader component refactor changes were introduced.
+
 ## MS-001.43 - AI Workspace Engine Generate Action Presentation Derivation Foundation published
 
 ### Date

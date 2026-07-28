@@ -2,6 +2,7 @@ import {
   buildGenerationInstruction,
   deriveActiveGenerationState,
   deriveGenerateActionPresentation,
+  deriveResetActionPresentation,
   deriveSaveActionPresentation,
   deriveActiveSaveState,
   deriveLatestExchange,
@@ -158,6 +159,29 @@ describe("ai workspace engine", () => {
     expect(deriveGenerateActionPresentation("generating")).toEqual({
       label: "Generating...",
       disabled: true,
+    });
+  });
+
+  test("derives a hidden reset action presentation when no exchanges exist", () => {
+    expect(deriveResetActionPresentation("idle", [])).toEqual({
+      label: "Reset Conversation",
+      disabled: false,
+      visible: false,
+    });
+  });
+
+  test("derives reset action presentation visibility and disabled state from generation activity", () => {
+    const exchanges = [createExchange(1, "Instruction 1", "Response 1")];
+
+    expect(deriveResetActionPresentation("generated", exchanges)).toEqual({
+      label: "Reset Conversation",
+      disabled: false,
+      visible: true,
+    });
+    expect(deriveResetActionPresentation("generating", exchanges)).toEqual({
+      label: "Reset Conversation",
+      disabled: true,
+      visible: true,
     });
   });
 
