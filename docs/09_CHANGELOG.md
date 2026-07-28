@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## MS-001.45 - AI Workspace Engine Instruction State Derivation Foundation verified locally
+
+### Date
+
+2026-07-28
+
+### Completed
+
+* Moved the pure active instruction-state derivation for the current project from `src/app/projects/[id]/ai/page.tsx` into `src/lib/ai-workspace-engine/engine.ts`.
+* Added one typed engine helper that derives the active instruction text and selected starter prompt id from the current project id and local instruction state.
+* Added focused unit coverage in `src/lib/ai-workspace-engine/engine.test.ts` for matching and fallback active instruction-state derivation.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now reuses the engine helper without changing request shapes, generated instruction behavior, starter prompt behavior, save flow, reset behavior, copy behavior, provider wiring, or Project Brain boundaries.
+* Recorded focused verification as `PASS` with engine tests `23 / 23`, component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded publication status as `NOT PUBLISHED`.
+* Recorded milestone status as `COMPLETED / VERIFIED / READY FOR PUBLICATION`.
+* Kept `Current Product Milestone` as `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.45 - AI Workspace Engine Instruction State Derivation Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No backend, API, Project Brain, provider wiring, AI Workspace UX change, or broader component refactor changes were introduced.
+* No commit or push was performed for `MS-001.45`.
+
 ## MS-001.44 - AI Workspace Engine Reset Action Presentation Derivation Foundation published
 
 ### Date

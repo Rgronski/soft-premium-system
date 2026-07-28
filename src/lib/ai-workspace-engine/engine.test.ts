@@ -1,12 +1,14 @@
 import {
   buildGenerationInstruction,
   deriveActiveGenerationState,
+  deriveActiveInstructionState,
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
   deriveSaveActionPresentation,
   deriveActiveSaveState,
   deriveLatestExchange,
   type GenerationUiState,
+  type InstructionUiState,
   getConversationContextExchangeCount,
   getConversationContextStatusMessage,
   getGenerationErrorMessage,
@@ -56,7 +58,39 @@ function createGenerationUiState(
   };
 }
 
+function createInstructionUiState(
+  overrides: Partial<InstructionUiState> = {},
+): InstructionUiState {
+  return {
+    projectId: "project-1",
+    value: "Summarize project",
+    selectedPromptId: "summarize-project-state",
+    ...overrides,
+  };
+}
+
 describe("ai workspace engine", () => {
+  test("reuses the current instruction state when it matches the active project id", () => {
+    const instructionUiState = createInstructionUiState();
+
+    expect(
+      deriveActiveInstructionState("project-1", instructionUiState),
+    ).toBe(instructionUiState);
+  });
+
+  test("derives an empty fallback instruction state when the project id does not match", () => {
+    expect(
+      deriveActiveInstructionState(
+        "project-2",
+        createInstructionUiState(),
+      ),
+    ).toEqual({
+      projectId: "project-2",
+      value: "",
+      selectedPromptId: null,
+    });
+  });
+
   test("reports zero local context when no exchanges exist", () => {
     expect(getConversationContextExchangeCount([])).toBe(0);
     expect(getConversationContextStatusMessage([])).toBe(

@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.44 - AI Workspace Engine Reset Action Presentation Derivation Foundation
+MS-001.45 - AI Workspace Engine Instruction State Derivation Foundation
 
 ## Next
 
@@ -4840,6 +4840,70 @@ NONE
 
 **Next Safe Step**
 None.
+
+---
+
+## MS-001.45 - AI Workspace Engine Instruction State Derivation Foundation
+
+**Milestone**
+MS-001.45 - AI Workspace Engine Instruction State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move only the pure active instruction-state derivation for the current project from the AI Workspace page into the AI Workspace Engine without changing request shapes, generated instruction behavior, starter prompt behavior, UX text, provider wiring, or broader component structure.
+
+**Product Outcome**
+The repository now contains one small extension of the AI Workspace Engine runtime module that owns the pure derivation of the active instruction text and selected starter prompt id for the current project, while the existing AI Workspace page reuses that helper with unchanged behavior.
+
+**Dependencies**
+* closed `MS-001.44 - AI Workspace Engine Reset Action Presentation Derivation Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / READY FOR PUBLICATION
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now contains the typed active instruction-state derivation helper
+* `src/lib/ai-workspace-engine/engine.test.ts` now contains focused unit coverage for matching and fallback active instruction-state derivation
+* `src/app/projects/[id]/ai/page.tsx` now reuses the engine helper for the active instruction text and selected starter prompt id without changing the generate, save, reset, or copy flows
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `23 / 23` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Obtain Chief Architect review of `MS-001.45` and Product Owner approval before any commit or push preparation.
 
 ---
 

@@ -5,6 +5,7 @@ import type { AiProjectContext } from "@/lib/project-brain/types";
 import {
   buildGenerationInstruction,
   deriveActiveGenerationState,
+  deriveActiveInstructionState,
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
   deriveSaveActionPresentation,
@@ -156,12 +157,12 @@ export default function ProjectAiWorkspacePage() {
     };
   }, [params.id]);
 
-  const instruction =
-    instructionState.projectId === params.id ? instructionState.value : "";
-  const selectedPromptId =
-    instructionState.projectId === params.id
-      ? instructionState.selectedPromptId
-      : null;
+  const activeInstructionState = deriveActiveInstructionState(
+    params.id,
+    instructionState,
+  );
+  const instruction = activeInstructionState.value;
+  const selectedPromptId = activeInstructionState.selectedPromptId;
   const activeGenerationState = deriveActiveGenerationState(
     params.id,
     generationUiState,

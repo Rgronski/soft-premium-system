@@ -14,6 +14,12 @@ export type GenerationUiState = {
   errorMessage: string | null;
 };
 
+export type InstructionUiState = {
+  projectId: string;
+  value: string;
+  selectedPromptId: string | null;
+};
+
 export type SaveState =
   | "idle"
   | "ready-to-save"
@@ -46,6 +52,21 @@ export type ResetActionPresentation = {
   disabled: boolean;
   visible: boolean;
 };
+
+export function deriveActiveInstructionState(
+  projectId: string,
+  instructionUiState: InstructionUiState,
+): InstructionUiState {
+  if (instructionUiState.projectId === projectId) {
+    return instructionUiState;
+  }
+
+  return {
+    projectId,
+    value: "",
+    selectedPromptId: null,
+  };
+}
 
 const CONVERSATION_CONTEXT_EXCHANGE_LIMIT = 3;
 
