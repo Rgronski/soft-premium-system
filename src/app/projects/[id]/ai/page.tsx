@@ -1,9 +1,9 @@
 "use client";
 
 import { getBrowserAiProjectContext } from "@/lib/project-brain/browser";
-import type { AiProjectContext } from "@/lib/project-brain/types";
 import {
   buildGenerationInstruction,
+  type ContextUiState,
   deriveActiveGenerationState,
   deriveActiveInstructionState,
   deriveGenerateActionPresentation,
@@ -21,21 +21,6 @@ import {
 } from "@/lib/ai-workspace-engine/engine";
 import { useParams } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-
-type ContextState =
-  | {
-      projectId: string;
-      status: "loading";
-    }
-  | {
-      projectId: string;
-      status: "available";
-      context: AiProjectContext;
-    }
-  | {
-      projectId: string;
-      status: "project-not-found" | "unavailable";
-    };
 
 type StarterPrompt = {
   id: string;
@@ -83,7 +68,7 @@ export default function ProjectAiWorkspacePage() {
   useLayoutEffect(() => {
     currentProjectIdRef.current = params.id;
   }, [params.id]);
-  const [contextState, setContextState] = useState<ContextState>({
+  const [contextState, setContextState] = useState<ContextUiState>({
     projectId: params.id,
     status: "loading",
   });

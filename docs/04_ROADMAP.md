@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.47 - AI Workspace Engine Instruction UI Type Adoption Foundation
+MS-001.48 - AI Workspace Engine Context UI State Type Foundation
 
 ## Next
 
@@ -5029,6 +5029,72 @@ COMPLETED / PUBLISHED / CLOSED
 * `src/app/projects/[id]/ai/page.tsx` now imports and reuses the engine-owned `InstructionUiState` type directly
 * `src/app/projects/[id]/ai/page.tsx` no longer uses the local `selectedPromptId: null as string | null` typing workaround
 * no starter prompt, instruction editing, generate, save, reset, copy, or layout behavior changes were introduced
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `23 / 23` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed with line-ending warnings only
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.48 - AI Workspace Engine Context UI State Type Foundation
+
+**Milestone**
+MS-001.48 - AI Workspace Engine Context UI State Type Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move the AI Workspace context UI state type boundary into the AI Workspace Engine contract without changing context loading behavior, Project Brain reads, UX text, provider wiring, or broader page logic.
+
+**Product Outcome**
+The repository now contains one minimal AI Workspace Engine type addition that owns the `ContextUiState` union for context availability, while the existing AI Workspace page reuses that type with unchanged runtime behavior.
+
+**Dependencies**
+* closed `MS-001.47 - AI Workspace Engine Instruction UI Type Adoption Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exports the engine-owned `ContextUiState` type
+* `ContextUiState` preserves the existing `loading`, `available`, `project-not-found`, and `unavailable` variants exactly
+* `src/app/projects/[id]/ai/page.tsx` now imports and reuses `ContextUiState`
+* `src/app/projects/[id]/ai/page.tsx` no longer declares the local `ContextState` type or imports `AiProjectContext` directly for that local alias
+* no context loading, generate, save, reset, copy, prompt, or layout behavior changes were introduced
 * `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `23 / 23` tests
 * `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
 * `npx.cmd tsc --noEmit` passed

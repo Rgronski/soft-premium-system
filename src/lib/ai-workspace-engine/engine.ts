@@ -1,8 +1,25 @@
+import type { AiProjectContext } from "@/lib/project-brain/types";
+
 export type ConversationExchange = {
   id: number;
   instruction: string;
   response: string;
 };
+
+export type ContextUiState =
+  | {
+      projectId: string;
+      status: "loading";
+    }
+  | {
+      projectId: string;
+      status: "available";
+      context: AiProjectContext;
+    }
+  | {
+      projectId: string;
+      status: "project-not-found" | "unavailable";
+    };
 
 export type GenerationState = "idle" | "generating" | "generated" | "error";
 
