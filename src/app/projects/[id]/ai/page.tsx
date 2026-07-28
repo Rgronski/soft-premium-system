@@ -16,11 +16,10 @@ import {
   getSaveErrorMessage,
   type ConversationExchange,
   type GenerationUiState,
+  type SaveUiState,
 } from "@/lib/ai-workspace-engine/engine";
 import { useParams } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-
-type SaveState = "idle" | "ready-to-save" | "saving" | "saved" | "save-error";
 
 type ContextState =
   | {
@@ -36,16 +35,6 @@ type ContextState =
       projectId: string;
       status: "project-not-found" | "unavailable";
     };
-
-type SaveUiState = {
-  projectId: string;
-  sourceExchangeId: number | null;
-  sourceContent: string | null;
-  state: SaveState;
-  title: string;
-  errorMessage: string | null;
-  refreshErrorMessage: string | null;
-};
 
 type StarterPrompt = {
   id: string;

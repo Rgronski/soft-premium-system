@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.45 - AI Workspace Engine Instruction State Derivation Foundation
+MS-001.46 - AI Workspace Engine Save UI Type Adoption Foundation
 
 ## Next
 
@@ -4885,10 +4885,13 @@ ACCEPT
 COMPLETED / VERIFIED
 
 **Publication Status**
-NOT PUBLISHED
+PUBLISHED
+
+**Publication Commit**
+`ba6f3fa`
 
 **Milestone Status**
-COMPLETED / VERIFIED / READY FOR PUBLICATION
+COMPLETED / PUBLISHED / CLOSED
 
 **Implementation Evidence**
 * `src/lib/ai-workspace-engine/engine.ts` now contains the typed active instruction-state derivation helper
@@ -4898,12 +4901,76 @@ COMPLETED / VERIFIED / READY FOR PUBLICATION
 * `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
 * `npx.cmd tsc --noEmit` passed
 * `git diff --check` passed
+* published on `origin/main` in commit `ba6f3fa`
 
 **Blockers**
 NONE
 
 **Next Safe Step**
-Obtain Chief Architect review of `MS-001.45` and Product Owner approval before any commit or push preparation.
+Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.46 - AI Workspace Engine Save UI Type Adoption Foundation
+
+**Milestone**
+MS-001.46 - AI Workspace Engine Save UI Type Adoption Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Adopt the existing engine-owned `SaveState` and `SaveUiState` types in the AI Workspace page without changing fetch flow, save logic, reset or copy behavior, layout behavior, provider wiring, or broader state management.
+
+**Product Outcome**
+The repository now contains one minimal AI Workspace page update that removes duplicate local save UI type declarations and reuses the engine-owned `SaveUiState` type directly, while preserving the existing runtime behavior.
+
+**Dependencies**
+* closed `MS-001.45 - AI Workspace Engine Instruction State Derivation Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / READY FOR PUBLICATION
+
+**Implementation Evidence**
+* `src/app/projects/[id]/ai/page.tsx` no longer declares local duplicate `SaveState` and `SaveUiState` types
+* `src/app/projects/[id]/ai/page.tsx` now reuses the engine-owned `SaveUiState` type directly
+* no fetch, save, reset, copy, or layout behavior changes were introduced
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed with line-ending warnings only
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Obtain Chief Architect review of `MS-001.46` and Product Owner approval before any commit or push preparation.
 
 ---
 
