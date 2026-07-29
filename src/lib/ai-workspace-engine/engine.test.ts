@@ -13,6 +13,7 @@ import {
   deriveResetSaveState,
   deriveSaveActionPresentation,
   deriveSaveSavingState,
+  deriveSaveSuccessState,
   deriveActiveSaveState,
   deriveLatestExchange,
   type GenerationUiState,
@@ -492,6 +493,24 @@ describe("ai workspace engine", () => {
       sourceExchangeId: 2,
       sourceContent: "Response 2",
       state: "saving",
+      title: "Architecture note",
+      errorMessage: null,
+      refreshErrorMessage: null,
+    });
+  });
+
+  test("derives the saved save state with the existing inline field values", () => {
+    expect(
+      deriveSaveSuccessState(
+        "project-1",
+        createExchange(2, "Instruction 2", "Response 2"),
+        "Architecture note",
+      ),
+    ).toEqual({
+      projectId: "project-1",
+      sourceExchangeId: 2,
+      sourceContent: "Response 2",
+      state: "saved",
       title: "Architecture note",
       errorMessage: null,
       refreshErrorMessage: null,

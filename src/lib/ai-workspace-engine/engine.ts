@@ -346,6 +346,22 @@ export function deriveSaveSavingState(
   };
 }
 
+export function deriveSaveSuccessState(
+  projectId: string,
+  latestExchange: ConversationExchange,
+  title: string,
+): SaveUiState {
+  return {
+    projectId,
+    sourceExchangeId: latestExchange.id,
+    sourceContent: latestExchange.response,
+    state: "saved",
+    title,
+    errorMessage: null,
+    refreshErrorMessage: null,
+  };
+}
+
 export function deriveSaveActionPresentation(
   saveState: SaveState,
 ): SaveActionPresentation {

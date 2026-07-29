@@ -17,6 +17,7 @@ import {
   deriveResetActionPresentation,
   deriveSaveActionPresentation,
   deriveSaveSavingState,
+  deriveSaveSuccessState,
   deriveActiveSaveState,
   deriveLatestExchange,
   getConversationContextStatusMessage,
@@ -403,15 +404,7 @@ export default function ProjectAiWorkspacePage() {
         "content" in result &&
         "createdAt" in result
       ) {
-        setSaveUiState({
-          projectId,
-          sourceExchangeId: latestExchange.id,
-          sourceContent: generatedContent,
-          state: "saved",
-          title,
-          errorMessage: null,
-          refreshErrorMessage: null,
-        });
+        setSaveUiState(deriveSaveSuccessState(projectId, latestExchange, title));
         try {
           const contextResult = await getBrowserAiProjectContext(projectId);
 

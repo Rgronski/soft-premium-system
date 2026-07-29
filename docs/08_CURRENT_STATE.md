@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.56 - AI Workspace Engine Save Saving State Derivation Foundation
+MS-001.57 - AI Workspace Engine Save Success State Derivation Foundation
 
 **Next Milestone**
 NONE
@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.56 - AI Workspace Engine Save Saving State Derivation Foundation
+Latest Completed Product Milestone: MS-001.57 - AI Workspace Engine Save Success State Derivation Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -125,6 +125,7 @@ MS-001.52 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI W
 MS-001.53 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine generation-start state derivation foundation.
 MS-001.54 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine generation-error-state derivation foundation.
 MS-001.55 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine generation-success-state derivation foundation.
+MS-001.57 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine save-success-state derivation foundation.
 MS-001.56 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine save-saving-state derivation foundation with commit `bfb889b`.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
@@ -837,6 +838,23 @@ MS-001.55 preserved boundaries:
 * no instruction behavior changes
 MS-001.55 verification: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` PASS (`33 / 33`), `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` PASS (`32 / 32`), `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS.
 MS-001.55 blocker status: NONE.
+MS-001.57 contract status: APPROVED.
+MS-001.57 runtime status: CLOSED.
+MS-001.57 activation status: CLOSED.
+MS-001.57 implementation status: COMPLETED.
+MS-001.57 publication status: PUBLISHED.
+MS-001.57 milestone status: COMPLETED / PUBLISHED / CLOSED.
+MS-001.57 product outcome: the AI Workspace engine now owns the deterministic `saved` `SaveUiState` derivation via `deriveSaveSuccessState` while `handleSaveToKnowledge` delegates only the save-success state construction and preserves the existing save flow and refresh path behavior.
+MS-001.57 preserved boundaries:
+* no save-error derivation
+* no refresh-warning derivation
+* no save flow changes
+* no UX, text, or layout changes
+* no backend, API, or provider wiring changes
+* no Project Brain changes
+* no full save-flow refactoring
+MS-001.57 verification: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` PASS (`35 / 35`), `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` PASS (`32 / 32`), `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS.
+MS-001.57 blocker status: NONE.
 MS-001.56 contract status: APPROVED.
 MS-001.56 runtime status: CLOSED.
 MS-001.56 activation status: CLOSED.
@@ -1100,7 +1118,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.56 - AI Workspace Engine Save Saving State Derivation Foundation`
+* `Latest Completed Product Milestone` is `MS-001.57 - AI Workspace Engine Save Success State Derivation Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
@@ -1202,7 +1220,7 @@ Next:
 
 Next session priorities:
 
-* Keep the next product milestone at `NONE` pending Product Owner decision
+* Keep the next product milestone at `NONE`
 * Run Next Product Milestone Contract Discovery before any new implementation scope.
 
 ---

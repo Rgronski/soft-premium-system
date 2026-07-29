@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.56 - AI Workspace Engine Save Saving State Derivation Foundation
+MS-001.57 - AI Workspace Engine Save Success State Derivation Foundation
 
 ## Next
 
@@ -3800,6 +3800,89 @@ COMPLETED / VERIFIED / PUSHED
 * targeted component verification passed with `27 / 27` tests in `src/app/projects/[id]/ai/page.test.tsx`
 * `npx.cmd tsc --noEmit` passed
 * full tests, lint, and build were not run in this implementation handoff
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.57 - AI Workspace Engine Save Success State Derivation Foundation
+
+**Milestone**
+MS-001.57 - AI Workspace Engine Save Success State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move only the existing deterministic `saved` `SaveUiState` construction from the success branch of `handleSaveToKnowledge` into the AI Workspace Engine.
+
+**Dependencies**
+* closed `MS-001.56 - AI Workspace Engine Save Saving State Derivation Foundation`
+
+**Allowed Future Implementation Files**
+* `src/lib/ai-workspace-engine/engine.ts`
+* `src/lib/ai-workspace-engine/engine.test.ts`
+* `src/app/projects/[id]/ai/page.tsx`
+* `src/app/projects/[id]/ai/page.test.tsx` only if existing tests do not confirm behavior after delegation
+
+**Out of Scope**
+* save-error derivation
+* refresh-warning derivation
+* save flow changes
+* UX, text, and layout
+* backend, API, and provider wiring
+* Project Brain
+* full save-flow refactoring
+
+**Product Owner Decision**
+ACCEPT
+
+**Activation Status**
+CLOSED
+
+**Implementation Status**
+COMPLETED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Acceptance Criteria**
+* the engine exposes one helper that constructs the existing `saved` `SaveUiState`
+* the page delegates only the success-state construction to that helper
+* state shape and save-success behavior remain unchanged
+* the post-save refresh path remains unchanged
+* scope does not include error states or refresh-warning states
+
+**Verification Contract**
+* focused engine test
+* focused AI page test
+* `npx.cmd tsc --noEmit`
+* `git diff --check`
 
 **Blockers**
 NONE
