@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.52 - AI Workspace Engine Reset State Derivation Foundation
+MS-001.53 - AI Workspace Engine Generation Start State Derivation Foundation
 
 ## Next
 
@@ -3806,6 +3806,72 @@ NONE
 
 **Next Safe Step**
 Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.53 - AI Workspace Engine Generation Start State Derivation Foundation
+
+**Milestone**
+MS-001.53 - AI Workspace Engine Generation Start State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move the pure generation-start UI-state derivation from the AI Workspace page component into the AI Workspace engine without changing UX, copy, layout, API/fetch/provider behavior, Project Brain behavior, Knowledge save behavior, reset behavior, starter prompt behavior, or manual instruction behavior.
+
+**Product Outcome**
+The AI Workspace engine now owns generation-start state derivation, while `handleGenerate` delegates the `"generating"` `GenerationUiState` construction to the engine with unchanged runtime behavior.
+
+**Dependencies**
+* closed `MS-001.52 - AI Workspace Engine Reset State Derivation Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exports a helper that derives the `"generating"` `GenerationUiState`
+* `src/app/projects/[id]/ai/page.tsx` now delegates generation-start state construction to the engine helper
+* existing exchanges and `latestExchangeId` are preserved only when the current generation state belongs to the same `projectId`
+* generation-start state still resets to empty exchanges and `null` latest exchange id for a different `projectId`
+* no UX, copy, layout, API/fetch/provider, Project Brain, Knowledge save, reset, starter prompt, or manual instruction behavior changes were introduced
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `29 / 29` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+None.
 
 ---
 

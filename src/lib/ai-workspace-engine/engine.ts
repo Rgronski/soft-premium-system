@@ -201,6 +201,25 @@ export function deriveResetGenerationState(
   };
 }
 
+export function deriveGenerationStartState(
+  projectId: string,
+  generationUiState: GenerationUiState,
+): GenerationUiState {
+  return {
+    projectId,
+    state: "generating",
+    exchanges:
+      generationUiState.projectId === projectId
+        ? generationUiState.exchanges
+        : [],
+    latestExchangeId:
+      generationUiState.projectId === projectId
+        ? generationUiState.latestExchangeId
+        : null,
+    errorMessage: null,
+  };
+}
+
 export function deriveGenerateActionPresentation(
   generationState: GenerationState,
 ): GenerateActionPresentation {
