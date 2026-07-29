@@ -2,6 +2,7 @@ import {
   buildGenerationInstruction,
   deriveActiveGenerationState,
   deriveGenerationErrorState,
+  deriveGenerationSuccessState,
   deriveGenerationStartState,
   deriveActiveInstructionState,
   deriveManualInstructionChangeState,
@@ -292,6 +293,52 @@ describe("ai workspace engine", () => {
       exchanges: [],
       latestExchangeId: null,
       errorMessage: "Generation failed.",
+    });
+  });
+
+  test("derives the generated state while preserving local exchanges for the active project", () => {
+    const newExchange = createExchange(2, "Instruction 2", "Response 2");
+
+    expect(
+      deriveGenerationSuccessState(
+        "project-1",
+        createGenerationUiState({
+          state: "error",
+          errorMessage: "Existing error",
+        }),
+        newExchange,
+        2,
+      ),
+    ).toEqual({
+      projectId: "project-1",
+      state: "generated",
+      exchanges: [
+        createExchange(1, "Instruction 1", "Response 1"),
+        newExchange,
+      ],
+      latestExchangeId: 2,
+      errorMessage: null,
+    });
+  });
+
+  test("derives the generated state with only the new exchange for a different project", () => {
+    const newExchange = createExchange(2, "Instruction 2", "Response 2");
+
+    expect(
+      deriveGenerationSuccessState(
+        "project-2",
+        createGenerationUiState({
+          errorMessage: "Existing error",
+        }),
+        newExchange,
+        2,
+      ),
+    ).toEqual({
+      projectId: "project-2",
+      state: "generated",
+      exchanges: [newExchange],
+      latestExchangeId: 2,
+      errorMessage: null,
     });
   });
 

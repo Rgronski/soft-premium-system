@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## MS-001.55 - AI Workspace Engine Generation Success State Derivation Foundation published
+
+### Date
+
+2026-07-29
+
+### Completed
+
+* Added the pure engine helper `deriveGenerationSuccessState(projectId, currentState, exchange, latestExchangeId)` to `src/lib/ai-workspace-engine/engine.ts`.
+* Confirmed the AI Workspace engine now owns generation-success state derivation.
+* Confirmed the helper preserves previous exchanges only when the current generation state belongs to the same `projectId`.
+* Confirmed generation-success state starts history with only the new exchange for a different `projectId`.
+* Confirmed the helper sets the provided `latestExchangeId` and resets `errorMessage` to `null`.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now delegates the success-path `GenerationUiState` construction to the engine helper.
+* Added focused engine unit coverage in `src/lib/ai-workspace-engine/engine.test.ts` for matched and fallback generation-success-state derivation.
+* Confirmed no UX, copy, layout, API/fetch/provider, Project Brain, Knowledge save, reset, or instruction behavior changes were introduced.
+* Recorded verification exactly as reported: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` `PASS (33 / 33)`, `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` `PASS (32 / 32)`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded publication status as `PUBLISHED`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
+* Kept `Current Product Milestone` as `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.55 - AI Workspace Engine Generation Success State Derivation Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* The outcome was limited to generation-success state derivation ownership in the AI Workspace engine with no broader runtime or UI scope changes.
+
 ## MS-001.54 - AI Workspace Engine Generation Error State Derivation Foundation published
 
 ### Date

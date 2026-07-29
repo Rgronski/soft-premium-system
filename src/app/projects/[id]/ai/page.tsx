@@ -6,6 +6,7 @@ import {
   type ContextUiState,
   deriveActiveGenerationState,
   deriveGenerationErrorState,
+  deriveGenerationSuccessState,
   deriveGenerationStartState,
   deriveActiveInstructionState,
   deriveManualInstructionChangeState,
@@ -298,18 +299,14 @@ export default function ProjectAiWorkspacePage() {
           response: result.content,
         };
 
-        setGenerationUiState((currentState) => ({
-          projectId: params.id,
-          state: "generated",
-          exchanges: [
-            ...(currentState.projectId === params.id
-              ? currentState.exchanges
-              : []),
+        setGenerationUiState((currentState) =>
+          deriveGenerationSuccessState(
+            params.id,
+            currentState,
             exchange,
-          ],
-          latestExchangeId: exchangeId,
-          errorMessage: null,
-        }));
+            exchangeId,
+          ),
+        );
         setSaveUiState({
           projectId: params.id,
           sourceExchangeId: exchangeId,

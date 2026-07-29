@@ -237,6 +237,24 @@ export function deriveGenerationErrorState(
   };
 }
 
+export function deriveGenerationSuccessState(
+  projectId: string,
+  currentState: GenerationUiState,
+  exchange: ConversationExchange,
+  latestExchangeId: number,
+): GenerationUiState {
+  return {
+    projectId,
+    state: "generated",
+    exchanges: [
+      ...(currentState.projectId === projectId ? currentState.exchanges : []),
+      exchange,
+    ],
+    latestExchangeId,
+    errorMessage: null,
+  };
+}
+
 export function deriveGenerateActionPresentation(
   generationState: GenerationState,
 ): GenerateActionPresentation {
