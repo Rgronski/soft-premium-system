@@ -16,6 +16,7 @@ import {
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
   deriveSaveActionPresentation,
+  deriveSaveSavingState,
   deriveActiveSaveState,
   deriveLatestExchange,
   getConversationContextStatusMessage,
@@ -370,15 +371,7 @@ export default function ProjectAiWorkspacePage() {
     const generatedContent = latestExchange.response;
     const title = activeSaveState.title;
 
-    setSaveUiState({
-      projectId,
-      sourceExchangeId: latestExchange.id,
-      sourceContent: generatedContent,
-      state: "saving",
-      title,
-      errorMessage: null,
-      refreshErrorMessage: null,
-    });
+    setSaveUiState(deriveSaveSavingState(projectId, latestExchange, title));
 
     try {
       const response = await fetch(`/api/projects/${projectId}/knowledge`, {
