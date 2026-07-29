@@ -6,6 +6,7 @@ import {
   type ContextUiState,
   deriveActiveGenerationState,
   deriveActiveInstructionState,
+  deriveManualInstructionChangeState,
   deriveSelectedStarterPromptInstructionState,
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
@@ -217,6 +218,13 @@ export default function ProjectAiWorkspacePage() {
   const context = contextState.context;
 
   function setInstructionValue(value: string, promptId: string | null) {
+    if (promptId === null) {
+      setInstructionState(
+        deriveManualInstructionChangeState(params.id, value),
+      );
+      return;
+    }
+
     setInstructionState({
       projectId: params.id,
       value,

@@ -2,6 +2,7 @@ import {
   buildGenerationInstruction,
   deriveActiveGenerationState,
   deriveActiveInstructionState,
+  deriveManualInstructionChangeState,
   deriveSelectedStarterPromptInstructionState,
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
@@ -114,6 +115,19 @@ describe("ai workspace engine", () => {
       projectId: "project-2",
       value: "Produce a concise summary.",
       selectedPromptId: "summarize-project-state",
+    });
+  });
+
+  test("derives instruction state from manual instruction input", () => {
+    expect(
+      deriveManualInstructionChangeState(
+        "project-2",
+        "Write a custom instruction.",
+      ),
+    ).toEqual({
+      projectId: "project-2",
+      value: "Write a custom instruction.",
+      selectedPromptId: null,
     });
   });
 

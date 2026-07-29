@@ -102,6 +102,17 @@ export function deriveSelectedStarterPromptInstructionState(
   };
 }
 
+export function deriveManualInstructionChangeState(
+  projectId: string,
+  value: string,
+): InstructionUiState {
+  return {
+    projectId,
+    value,
+    selectedPromptId: null,
+  };
+}
+
 const CONVERSATION_CONTEXT_EXCHANGE_LIMIT = 3;
 
 function getBudgetedConversationContext(

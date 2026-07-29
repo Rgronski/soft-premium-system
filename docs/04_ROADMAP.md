@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.50 - AI Workspace Engine Starter Prompt Selection Derivation Foundation
+MS-001.51 - AI Workspace Engine Manual Instruction Change Derivation Foundation
 
 ## Next
 
@@ -3800,6 +3800,72 @@ COMPLETED / VERIFIED / PUSHED
 * targeted component verification passed with `27 / 27` tests in `src/app/projects/[id]/ai/page.test.tsx`
 * `npx.cmd tsc --noEmit` passed
 * full tests, lint, and build were not run in this implementation handoff
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.51 - AI Workspace Engine Manual Instruction Change Derivation Foundation
+
+**Milestone**
+MS-001.51 - AI Workspace Engine Manual Instruction Change Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move the pure manual instruction change derivation into the AI Workspace Engine without changing prompt content, UX, generation behavior, save behavior, or broader page logic.
+
+**Product Outcome**
+The repository now contains one minimal AI Workspace Engine helper that owns the derivation of `InstructionUiState` from the current project id and manual instruction text input, while the existing AI Workspace page reuses that helper with unchanged runtime behavior.
+
+**Dependencies**
+* closed `MS-001.50 - AI Workspace Engine Starter Prompt Selection Derivation Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exports `deriveManualInstructionChangeState(projectId, value)`
+* the helper derives `InstructionUiState.value` from manual instruction input and preserves `InstructionUiState.selectedPromptId` as `null`
+* `src/lib/ai-workspace-engine/engine.test.ts` now contains focused unit coverage for the new pure derivation helper
+* `src/app/projects/[id]/ai/page.tsx` now uses the engine helper for the manual instruction edit path
+* no prompt text, generate, save, reset, copy, context-loading, or layout behavior changes were introduced
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `25 / 25` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed with line-ending warnings only
 
 **Blockers**
 NONE
