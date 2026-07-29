@@ -108,7 +108,7 @@ MS-001.35 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Wor
 MS-001.36 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace engine runtime foundation.
 MS-001.37 is COMPLETED / VERIFIED / PUSHED after formal acceptance of the AI Workspace engine status mapping foundation.
 MS-001.38 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine save-state derivation foundation with commit `a7b7696`.
-MS-001.39 is COMPLETED / VERIFIED / READY FOR PUBLICATION after formal acceptance of the AI Workspace engine latest-exchange derivation foundation.
+MS-001.39 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine latest-exchange derivation foundation with commit `4eac640`.
 MS-001.40 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine active-generation-state derivation foundation with commit `6a608d1`.
 MS-001.41 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine active-save-state derivation foundation with commit `48ad94e`.
 MS-001.42 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine save-action presentation derivation foundation.
@@ -564,8 +564,9 @@ MS-001.39 contract status: APPROVED.
 MS-001.39 runtime status: CLOSED.
 MS-001.39 activation status: CLOSED.
 MS-001.39 implementation status: COMPLETED / VERIFIED.
-MS-001.39 publication status: NOT PUBLISHED.
-MS-001.39 milestone status: COMPLETED / VERIFIED / READY FOR PUBLICATION.
+MS-001.39 publication status: PUBLISHED.
+MS-001.39 publication commit: `4eac640`.
+MS-001.39 milestone status: COMPLETED / PUBLISHED / CLOSED.
 MS-001.39 product outcome: one minimal AI Workspace Engine latest-exchange derivation layer now owns the pure lookup of the latest local exchange from `latestExchangeId` and `exchanges` while the existing AI Workspace page reuses that helper with unchanged behavior.
 MS-001.39 preserved boundaries:
 * no UI text changes

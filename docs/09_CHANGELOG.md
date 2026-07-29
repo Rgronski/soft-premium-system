@@ -456,7 +456,7 @@ Each release entry should contain:
 * No Project Brain, Knowledge API, provider, endpoint, storage, Command Center, Conductor, workflow, or UI redesign changes were introduced.
 * No commit or push was performed for `MS-001.40`.
 
-## Session 025 - MS-001.39 AI Workspace Engine Latest Exchange Derivation Foundation verified locally
+## Session 025 - MS-001.39 AI Workspace Engine Latest Exchange Derivation Foundation published
 
 ### Date
 
@@ -469,8 +469,9 @@ Each release entry should contain:
 * Added focused unit coverage in `src/lib/ai-workspace-engine/engine.test.ts` for null, found, and not-found latest-exchange derivation.
 * Confirmed `src/app/projects/[id]/ai/page.tsx` now reuses the engine helper without changing save semantics, request shapes, copy behavior, reset behavior, or broader generation/save flows.
 * Recorded focused verification as `PASS` with engine tests `13 / 13`, component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
-* Recorded publication status as `NOT PUBLISHED`.
-* Recorded milestone status as `COMPLETED / VERIFIED / READY FOR PUBLICATION`.
+* Recorded publication status as `PUBLISHED`.
+* Recorded publication commit `4eac640`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
 * Kept `Current Product Milestone` as `NONE`.
 * Set `Latest Completed Product Milestone` to `MS-001.39 - AI Workspace Engine Latest Exchange Derivation Foundation`.
 * Kept `Next Product Milestone` as `NONE`.
@@ -478,7 +479,7 @@ Each release entry should contain:
 ### Notes
 
 * No Project Brain, Knowledge API, provider, endpoint, storage, Command Center, Conductor, workflow, or UI redesign changes were introduced.
-* No commit or push was performed for `MS-001.39`.
+* Publication commit `4eac640` was performed for `MS-001.39`.
 
 ## Session 025 - MS-001.38 AI Workspace Engine Save State Derivation Foundation published
 
