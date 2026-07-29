@@ -189,6 +189,18 @@ export function deriveActiveGenerationState(
   };
 }
 
+export function deriveResetGenerationState(
+  projectId: string,
+): GenerationUiState {
+  return {
+    projectId,
+    state: "idle",
+    exchanges: [],
+    latestExchangeId: null,
+    errorMessage: null,
+  };
+}
+
 export function deriveGenerateActionPresentation(
   generationState: GenerationState,
 ): GenerateActionPresentation {
@@ -246,6 +258,18 @@ export function deriveActiveSaveState(
     sourceExchangeId: latestExchange?.id ?? null,
     sourceContent: latestExchange?.response ?? null,
     state: latestExchange?.response ? "ready-to-save" : "idle",
+    title: "",
+    errorMessage: null,
+    refreshErrorMessage: null,
+  };
+}
+
+export function deriveResetSaveState(projectId: string): SaveUiState {
+  return {
+    projectId,
+    sourceExchangeId: null,
+    sourceContent: null,
+    state: "idle",
     title: "",
     errorMessage: null,
     refreshErrorMessage: null,

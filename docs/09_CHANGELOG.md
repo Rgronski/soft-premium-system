@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## MS-001.52 - AI Workspace Engine Reset State Derivation Foundation published
+
+### Date
+
+2026-07-29
+
+### Completed
+
+* Added the pure engine helpers for reset `GenerationUiState` and reset `SaveUiState` to `src/lib/ai-workspace-engine/engine.ts`.
+* Confirmed the AI Workspace engine now owns reset-state derivation for `GenerationUiState` and `SaveUiState`.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now delegates reset-state object construction to engine helpers while preserving `nextExchangeIdRef.current = 1`.
+* Added focused engine unit tests for reset generation-state and reset save-state derivation in `src/lib/ai-workspace-engine/engine.test.ts`.
+* Confirmed no UX, copy, layout, API/fetch/provider, Project Brain, Knowledge save, starter prompt, or manual instruction behavior changes were introduced.
+* Recorded focused verification exactly as reported: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` `PASS`, `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` `PASS`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded publication status as `PUBLISHED`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
+* Kept `Current Product Milestone` as `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.52 - AI Workspace Engine Reset State Derivation Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* The outcome was limited to reset-state derivation ownership in the AI Workspace engine with no broader runtime or UI scope changes.
+
 ## MS-001.51 - AI Workspace Engine Manual Instruction Change Derivation Foundation published
 
 ### Date

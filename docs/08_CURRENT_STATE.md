@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.51 - AI Workspace Engine Manual Instruction Change Derivation Foundation
+MS-001.52 - AI Workspace Engine Reset State Derivation Foundation
 
 **Next Milestone**
 NONE
@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.51 - AI Workspace Engine Manual Instruction Change Derivation Foundation
+Latest Completed Product Milestone: MS-001.52 - AI Workspace Engine Reset State Derivation Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -121,6 +121,7 @@ MS-001.48 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI W
 MS-001.49 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine Prompt UI type foundation.
 MS-001.50 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine starter prompt selection derivation foundation.
 MS-001.51 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine manual instruction change derivation foundation.
+MS-001.52 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine reset-state derivation foundation.
 No new capability is active.
 Operational note: local Avast HTTPS interception required one-time `NODE_OPTIONS=--use-system-ca` only for npm dependency installation; the variable was not persisted and security settings were not changed.
 `src/app/projects/[id]/tasks/page.tsx` is the only real application consumer of `createProjectBrainTask`.
@@ -757,6 +758,24 @@ MS-001.51 preserved boundaries:
 * no broader component refactor
 MS-001.51 verification: targeted engine tests `25 / 25` PASS, targeted component tests `32 / 32` PASS, `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS with line-ending warnings only, full tests NOT RUN, lint NOT RUN, build NOT RUN.
 MS-001.51 blocker status: NONE.
+MS-001.52 contract status: APPROVED.
+MS-001.52 runtime status: CLOSED.
+MS-001.52 activation status: CLOSED.
+MS-001.52 implementation status: COMPLETED / VERIFIED.
+MS-001.52 publication status: PUBLISHED.
+MS-001.52 milestone status: COMPLETED / PUBLISHED / CLOSED.
+MS-001.52 product outcome: the AI Workspace engine now owns reset-state derivation for `GenerationUiState` and `SaveUiState`; the AI Workspace page reset handler delegates those state objects to engine helpers while preserving behavior.
+MS-001.52 preserved boundaries:
+* no UX changes
+* no copy changes
+* no layout changes
+* no API/fetch/provider changes
+* no Project Brain behavior changes
+* no Knowledge save behavior changes
+* no starter prompt behavior changes
+* no manual instruction behavior changes
+MS-001.52 verification: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` PASS, `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` PASS, `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS.
+MS-001.52 blocker status: NONE.
 Live OpenAI request remains not allowed.
 Pending deployment topic: `Deployment Architecture Discovery - OVH VPS + Coolify + Neon` is pending discovery only, is not an accepted ADR, and had no implementation in this session.
 CAP-004 status: COMPLETED / PUBLISHED / CLOSED
@@ -1001,7 +1020,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.51 - AI Workspace Engine Manual Instruction Change Derivation Foundation`
+* `Latest Completed Product Milestone` is `MS-001.52 - AI Workspace Engine Reset State Derivation Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

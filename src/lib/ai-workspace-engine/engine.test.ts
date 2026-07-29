@@ -6,6 +6,8 @@ import {
   deriveSelectedStarterPromptInstructionState,
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
+  deriveResetGenerationState,
+  deriveResetSaveState,
   deriveSaveActionPresentation,
   deriveActiveSaveState,
   deriveLatestExchange,
@@ -214,6 +216,16 @@ describe("ai workspace engine", () => {
     });
   });
 
+  test("derives the reset generation state with the existing idle defaults", () => {
+    expect(deriveResetGenerationState("project-2")).toEqual({
+      projectId: "project-2",
+      state: "idle",
+      exchanges: [],
+      latestExchangeId: null,
+      errorMessage: null,
+    });
+  });
+
   test("derives the default generate action presentation outside active generation", () => {
     expect(deriveGenerateActionPresentation("idle")).toEqual({
       label: "Generate",
@@ -330,6 +342,18 @@ describe("ai workspace engine", () => {
       ),
     ).toEqual({
       projectId: "project-1",
+      sourceExchangeId: null,
+      sourceContent: null,
+      state: "idle",
+      title: "",
+      errorMessage: null,
+      refreshErrorMessage: null,
+    });
+  });
+
+  test("derives the reset save state with the existing idle defaults", () => {
+    expect(deriveResetSaveState("project-2")).toEqual({
+      projectId: "project-2",
       sourceExchangeId: null,
       sourceContent: null,
       state: "idle",

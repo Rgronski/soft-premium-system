@@ -7,6 +7,8 @@ import {
   deriveActiveGenerationState,
   deriveActiveInstructionState,
   deriveManualInstructionChangeState,
+  deriveResetGenerationState,
+  deriveResetSaveState,
   deriveSelectedStarterPromptInstructionState,
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
@@ -234,22 +236,8 @@ export default function ProjectAiWorkspacePage() {
 
   function handleResetConversation() {
     nextExchangeIdRef.current = 1;
-    setGenerationUiState({
-      projectId: params.id,
-      state: "idle",
-      exchanges: [],
-      latestExchangeId: null,
-      errorMessage: null,
-    });
-    setSaveUiState({
-      projectId: params.id,
-      sourceExchangeId: null,
-      sourceContent: null,
-      state: "idle",
-      title: "",
-      errorMessage: null,
-      refreshErrorMessage: null,
-    });
+    setGenerationUiState(deriveResetGenerationState(params.id));
+    setSaveUiState(deriveResetSaveState(params.id));
   }
 
   async function handleGenerate(event: React.FormEvent<HTMLFormElement>) {

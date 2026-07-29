@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.51 - AI Workspace Engine Manual Instruction Change Derivation Foundation
+MS-001.52 - AI Workspace Engine Reset State Derivation Foundation
 
 ## Next
 
@@ -3806,6 +3806,71 @@ NONE
 
 **Next Safe Step**
 Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.52 - AI Workspace Engine Reset State Derivation Foundation
+
+**Milestone**
+MS-001.52 - AI Workspace Engine Reset State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move the pure reset-state derivation for AI Workspace conversation reset from the page component into the AI Workspace Engine without changing UX, copy, layout, API/fetch/provider behavior, Project Brain behavior, Knowledge save behavior, starter prompt behavior, or manual instruction behavior.
+
+**Product Outcome**
+The AI Workspace engine now owns reset-state derivation for `GenerationUiState` and `SaveUiState`, while the existing AI Workspace page reset handler delegates those state objects to engine helpers with unchanged runtime behavior.
+
+**Dependencies**
+* closed `MS-001.51 - AI Workspace Engine Manual Instruction Change Derivation Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exports reset-state helpers for `GenerationUiState` and `SaveUiState`
+* `src/app/projects/[id]/ai/page.tsx` now delegates reset-state object construction to the engine helpers while preserving `nextExchangeIdRef.current = 1`
+* `src/lib/ai-workspace-engine/engine.test.ts` now contains focused unit coverage for the reset generation-state and reset save-state helpers
+* no UX, copy, layout, API/fetch/provider, Project Brain, Knowledge save, starter prompt, or manual instruction behavior changes were introduced
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+None.
 
 ---
 
