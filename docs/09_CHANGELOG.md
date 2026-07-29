@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## MS-001.50 - AI Workspace Engine Starter Prompt Selection Derivation Foundation published
+
+### Date
+
+2026-07-29
+
+### Completed
+
+* Added the pure engine helper `deriveSelectedStarterPromptInstructionState(projectId, starterPromptUiState)` to `src/lib/ai-workspace-engine/engine.ts`.
+* Confirmed the helper derives `InstructionUiState.value` from `starterPromptUiState.instruction` and `InstructionUiState.selectedPromptId` from `starterPromptUiState.id`.
+* Added one focused engine unit test for the new pure derivation helper in `src/lib/ai-workspace-engine/engine.test.ts`.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now uses the engine helper when a starter prompt is selected.
+* Confirmed no prompt text, context loading, generation, save, reset, copy, or layout behavior changes were introduced.
+* Recorded focused verification as `PASS` with engine tests `24 / 24`, component tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS` with line-ending warnings only.
+* Recorded publication status as `PUBLISHED`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
+* Kept `Current Product Milestone` as `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.50 - AI Workspace Engine Starter Prompt Selection Derivation Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No backend, API, Project Brain, provider wiring, or AI Workspace runtime behavior changes were introduced.
+
 ## MS-001.49 - AI Workspace Engine Prompt UI Type Foundation published
 
 ### Date

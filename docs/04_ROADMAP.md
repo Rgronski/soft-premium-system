@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.49 - AI Workspace Engine Prompt UI Type Foundation
+MS-001.50 - AI Workspace Engine Starter Prompt Selection Derivation Foundation
 
 ## Next
 
@@ -5162,6 +5162,72 @@ COMPLETED / PUBLISHED / CLOSED
 * `src/app/projects/[id]/ai/page.tsx` no longer declares the local `StarterPrompt` alias
 * no prompt text, generate, save, reset, copy, context-loading, or layout behavior changes were introduced
 * `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `23 / 23` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed with line-ending warnings only
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.50 - AI Workspace Engine Starter Prompt Selection Derivation Foundation
+
+**Milestone**
+MS-001.50 - AI Workspace Engine Starter Prompt Selection Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move the pure starter prompt selection derivation into the AI Workspace Engine without changing prompt content, UX, generation behavior, save behavior, or broader page logic.
+
+**Product Outcome**
+The repository now contains one minimal AI Workspace Engine helper that owns the derivation of `InstructionUiState` from the current project id and a selected `StarterPromptUiState`, while the existing AI Workspace page reuses that helper with unchanged runtime behavior.
+
+**Dependencies**
+* closed `MS-001.49 - AI Workspace Engine Prompt UI Type Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exports `deriveSelectedStarterPromptInstructionState(projectId, starterPromptUiState)`
+* the helper derives `InstructionUiState.value` from `starterPromptUiState.instruction` and `InstructionUiState.selectedPromptId` from `starterPromptUiState.id`
+* `src/lib/ai-workspace-engine/engine.test.ts` now contains focused unit coverage for the new pure derivation helper
+* `src/app/projects/[id]/ai/page.tsx` now uses the engine helper when a starter prompt is selected
+* no prompt text, generate, save, reset, copy, context-loading, or layout behavior changes were introduced
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `24 / 24` tests
 * `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
 * `npx.cmd tsc --noEmit` passed
 * `git diff --check` passed with line-ending warnings only

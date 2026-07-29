@@ -91,6 +91,17 @@ export function deriveActiveInstructionState(
   };
 }
 
+export function deriveSelectedStarterPromptInstructionState(
+  projectId: string,
+  starterPromptUiState: StarterPromptUiState,
+): InstructionUiState {
+  return {
+    projectId,
+    value: starterPromptUiState.instruction,
+    selectedPromptId: starterPromptUiState.id,
+  };
+}
+
 const CONVERSATION_CONTEXT_EXCHANGE_LIMIT = 3;
 
 function getBudgetedConversationContext(

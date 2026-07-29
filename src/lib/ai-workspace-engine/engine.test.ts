@@ -2,6 +2,7 @@ import {
   buildGenerationInstruction,
   deriveActiveGenerationState,
   deriveActiveInstructionState,
+  deriveSelectedStarterPromptInstructionState,
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
   deriveSaveActionPresentation,
@@ -15,6 +16,7 @@ import {
   getSaveErrorMessage,
   type ConversationExchange,
   type SaveUiState,
+  type StarterPromptUiState,
 } from "./engine";
 import { describe, expect, test } from "vitest";
 
@@ -69,6 +71,17 @@ function createInstructionUiState(
   };
 }
 
+function createStarterPromptUiState(
+  overrides: Partial<StarterPromptUiState> = {},
+): StarterPromptUiState {
+  return {
+    id: "summarize-project-state",
+    label: "Summarize Project State",
+    instruction: "Produce a concise summary.",
+    ...overrides,
+  };
+}
+
 describe("ai workspace engine", () => {
   test("reuses the current instruction state when it matches the active project id", () => {
     const instructionUiState = createInstructionUiState();
@@ -88,6 +101,19 @@ describe("ai workspace engine", () => {
       projectId: "project-2",
       value: "",
       selectedPromptId: null,
+    });
+  });
+
+  test("derives instruction state from the selected starter prompt", () => {
+    expect(
+      deriveSelectedStarterPromptInstructionState(
+        "project-2",
+        createStarterPromptUiState(),
+      ),
+    ).toEqual({
+      projectId: "project-2",
+      value: "Produce a concise summary.",
+      selectedPromptId: "summarize-project-state",
     });
   });
 

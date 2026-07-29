@@ -6,6 +6,7 @@ import {
   type ContextUiState,
   deriveActiveGenerationState,
   deriveActiveInstructionState,
+  deriveSelectedStarterPromptInstructionState,
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
   deriveSaveActionPresentation,
@@ -597,7 +598,14 @@ export default function ProjectAiWorkspacePage() {
                   <button
                     key={prompt.id}
                     type="button"
-                    onClick={() => setInstructionValue(prompt.instruction, prompt.id)}
+                    onClick={() =>
+                      setInstructionState(
+                        deriveSelectedStarterPromptInstructionState(
+                          params.id,
+                          prompt,
+                        ),
+                      )
+                    }
                     aria-pressed={selectedPromptId === prompt.id}
                     className="block w-full rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-left transition hover:border-zinc-700 aria-pressed:border-zinc-600"
                   >
