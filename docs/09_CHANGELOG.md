@@ -69,6 +69,34 @@ Each release entry should contain:
 
 # Unreleased
 
+## MS-001.56 - AI Workspace Engine Save Saving State Derivation Foundation published
+
+### Date
+
+2026-07-29
+
+### Completed
+
+* Activated `MS-001.56 - AI Workspace Engine Save Saving State Derivation Foundation` as the current product milestone.
+* Recorded contract status as `APPROVED`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
+* Recorded implementation status as `COMPLETED / VERIFIED`.
+* Recorded publication status as `PUBLISHED`.
+* Recorded publication commit `bfb889b`.
+* Set `Current Product Milestone` to `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.56 - AI Workspace Engine Save Saving State Derivation Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+* Added the pure engine helper `deriveSaveSavingState(projectId, latestExchange, title)` to `src/lib/ai-workspace-engine/engine.ts`.
+* Confirmed the helper reproduces exactly the existing inline `saving` `SaveUiState` field values with no side effects.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now delegates only the matching inline `saving` construction to the helper and preserves save operation order.
+* Added focused engine unit coverage for the exact `saving` state result.
+* Recorded verification exactly as reported: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` `PASS (34 / 34)`, `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` `PASS (32 / 32)`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded that save success derivation, save error derivation, validation error derivation, refresh-warning derivation, reset and active-save derivations, Copy Result, backend/API, provider wiring, Project Brain, and full save-flow refactoring remain out of scope.
+
+### Notes
+
+* The outcome is published and the next milestone remains intentionally undiscovered at session-close time.
+
 ## MS-001.55 - AI Workspace Engine Generation Success State Derivation Foundation published
 
 ### Date

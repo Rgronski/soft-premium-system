@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.55 - AI Workspace Engine Generation Success State Derivation Foundation
+MS-001.56 - AI Workspace Engine Save Saving State Derivation Foundation
 
 ## Next
 
@@ -3800,6 +3800,74 @@ COMPLETED / VERIFIED / PUSHED
 * targeted component verification passed with `27 / 27` tests in `src/app/projects/[id]/ai/page.test.tsx`
 * `npx.cmd tsc --noEmit` passed
 * full tests, lint, and build were not run in this implementation handoff
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.56 - AI Workspace Engine Save Saving State Derivation Foundation
+
+**Milestone**
+MS-001.56 - AI Workspace Engine Save Saving State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move only the deterministic `saving` `SaveUiState` construction from the AI Workspace page component into the AI Workspace engine without changing UX, save flow, API behavior, provider wiring, or Project Brain boundaries.
+
+**Product Outcome**
+The AI Workspace engine now owns the deterministic `saving` `SaveUiState` derivation through `deriveSaveSavingState`, while `handleSaveToKnowledge` delegates the matching save-start construction with unchanged runtime behavior.
+
+**Dependencies**
+* closed `MS-001.55 - AI Workspace Engine Generation Success State Derivation Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Publication Commit**
+`bfb889b`
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exports `deriveSaveSavingState(projectId, latestExchange, title)`
+* the helper returns the existing `saving` `SaveUiState` with identical field values and no side effects
+* `src/app/projects/[id]/ai/page.tsx` now delegates only the matching inline `saving` construction to the engine helper
+* save success derivation, save error derivation, validation error derivation, refresh-warning derivation, reset and active-save derivations, Copy Result, backend/API, provider wiring, Project Brain, and full save-flow refactoring remained out of scope
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `34 / 34` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
 
 **Blockers**
 NONE
