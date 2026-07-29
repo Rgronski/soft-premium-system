@@ -5,6 +5,7 @@ import {
   buildGenerationInstruction,
   type ContextUiState,
   deriveActiveGenerationState,
+  deriveGenerationErrorState,
   deriveGenerationStartState,
   deriveActiveInstructionState,
   deriveManualInstructionChangeState,
@@ -249,17 +250,13 @@ export default function ProjectAiWorkspacePage() {
     }
 
     if (!instruction.trim()) {
-      setGenerationUiState((currentState) => ({
-        projectId: params.id,
-        state: "error",
-        exchanges:
-          currentState.projectId === params.id ? currentState.exchanges : [],
-        latestExchangeId:
-          currentState.projectId === params.id
-            ? currentState.latestExchangeId
-            : null,
-        errorMessage: "Enter a valid instruction.",
-      }));
+      setGenerationUiState((currentState) =>
+        deriveGenerationErrorState(
+          params.id,
+          currentState,
+          "Enter a valid instruction.",
+        ),
+      );
       return;
     }
 
@@ -325,29 +322,21 @@ export default function ProjectAiWorkspacePage() {
         return;
       }
 
-      setGenerationUiState((currentState) => ({
-        projectId: params.id,
-        state: "error",
-        exchanges:
-          currentState.projectId === params.id ? currentState.exchanges : [],
-        latestExchangeId:
-          currentState.projectId === params.id
-            ? currentState.latestExchangeId
-            : null,
-        errorMessage: getGenerationErrorMessage(result.status),
-      }));
+      setGenerationUiState((currentState) =>
+        deriveGenerationErrorState(
+          params.id,
+          currentState,
+          getGenerationErrorMessage(result.status),
+        ),
+      );
     } catch {
-      setGenerationUiState((currentState) => ({
-        projectId: params.id,
-        state: "error",
-        exchanges:
-          currentState.projectId === params.id ? currentState.exchanges : [],
-        latestExchangeId:
-          currentState.projectId === params.id
-            ? currentState.latestExchangeId
-            : null,
-        errorMessage: "Unexpected generation error.",
-      }));
+      setGenerationUiState((currentState) =>
+        deriveGenerationErrorState(
+          params.id,
+          currentState,
+          "Unexpected generation error.",
+        ),
+      );
     }
   }
 

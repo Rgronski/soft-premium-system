@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.53 - AI Workspace Engine Generation Start State Derivation Foundation
+MS-001.54 - AI Workspace Engine Generation Error State Derivation Foundation
 
 ## Next
 
@@ -3806,6 +3806,74 @@ NONE
 
 **Next Safe Step**
 Run Next Product Milestone Contract Discovery.
+
+---
+
+## MS-001.54 - AI Workspace Engine Generation Error State Derivation Foundation
+
+**Milestone**
+MS-001.54 - AI Workspace Engine Generation Error State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move the repeated generation-error UI-state derivation from the AI Workspace page component into the AI Workspace engine without changing UX, copy, layout, API/fetch/provider behavior, Project Brain behavior, Knowledge save behavior, generation success behavior, reset behavior, or instruction behavior.
+
+**Product Outcome**
+The AI Workspace engine now owns generation-error state derivation, while `handleGenerate` delegates the three approved error-state `GenerationUiState` constructions to the engine with unchanged runtime behavior.
+
+**Dependencies**
+* closed `MS-001.53 - AI Workspace Engine Generation Start State Derivation Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exports `deriveGenerationErrorState(projectId, currentState, errorMessage)`
+* the helper always returns `state: "error"` and applies the provided `errorMessage`
+* exchanges and `latestExchangeId` are preserved only when the current generation state belongs to the same `projectId`
+* generation-error state resets to empty exchanges and `null` latest exchange id for a different `projectId`
+* `src/app/projects/[id]/ai/page.tsx` now delegates the empty-instruction, endpoint-error, and transport-exception error states to the engine helper
+* `src/lib/ai-workspace-engine/engine.test.ts` now contains focused unit coverage for matched and fallback generation-error-state derivation
+* no UX, copy, layout, API/fetch/provider, Project Brain, Knowledge save, generation success, reset, or instruction behavior changes were introduced
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` passed with `31 / 31` tests
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` passed with `32 / 32` tests
+* `npx.cmd tsc --noEmit` passed
+* `git diff --check` passed
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+None.
 
 ---
 

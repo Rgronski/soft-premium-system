@@ -69,6 +69,32 @@ Each release entry should contain:
 
 # Unreleased
 
+## MS-001.54 - AI Workspace Engine Generation Error State Derivation Foundation published
+
+### Date
+
+2026-07-29
+
+### Completed
+
+* Added the pure engine helper `deriveGenerationErrorState(projectId, currentState, errorMessage)` to `src/lib/ai-workspace-engine/engine.ts`.
+* Confirmed the AI Workspace engine now owns generation-error state derivation.
+* Confirmed the helper preserves exchanges and `latestExchangeId` only when the current generation state belongs to the same `projectId`.
+* Confirmed generation-error state resets to empty exchanges and `null` latest exchange id for a different `projectId`.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now delegates the empty-instruction, endpoint-error, and transport-exception `GenerationUiState` error construction to the engine helper.
+* Added focused engine unit coverage in `src/lib/ai-workspace-engine/engine.test.ts` for matched and fallback generation-error-state derivation.
+* Confirmed no UX, copy, layout, API/fetch/provider, Project Brain, Knowledge save, generation success, reset, or instruction behavior changes were introduced.
+* Recorded verification exactly as reported: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` `PASS (31 / 31)`, `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` `PASS (32 / 32)`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded publication status as `PUBLISHED`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
+* Kept `Current Product Milestone` as `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.54 - AI Workspace Engine Generation Error State Derivation Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* The outcome was limited to generation-error state derivation ownership in the AI Workspace engine with no broader runtime or UI scope changes.
+
 ## MS-001.53 - AI Workspace Engine Generation Start State Derivation Foundation published
 
 ### Date

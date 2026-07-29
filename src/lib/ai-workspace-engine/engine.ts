@@ -220,6 +220,23 @@ export function deriveGenerationStartState(
   };
 }
 
+export function deriveGenerationErrorState(
+  projectId: string,
+  currentState: GenerationUiState,
+  errorMessage: string,
+): GenerationUiState {
+  return {
+    projectId,
+    state: "error",
+    exchanges: currentState.projectId === projectId ? currentState.exchanges : [],
+    latestExchangeId:
+      currentState.projectId === projectId
+        ? currentState.latestExchangeId
+        : null,
+    errorMessage,
+  };
+}
+
 export function deriveGenerateActionPresentation(
   generationState: GenerationState,
 ): GenerateActionPresentation {
