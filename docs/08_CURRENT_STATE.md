@@ -1241,7 +1241,7 @@ Next:
 * `MS-001.12` activation status is `ACTIVATED`
 * `MS-001.12` activation decision is `AUTHORIZED`
 * `MS-001.12` Product Owner Closure Decision is `APPROVED`
-* next controlled operation is `SSOT consistency restoration / Session 034 bootstrap completion`
+* next controlled operation is `rerun / complete Session 034 bootstrap and perform next product milestone discovery after published semantic consistency repair c6a1946`
 * Active Capability is `NONE`
 * Latest Completed Capability is `CAP-005 - React Component Test Infrastructure Foundation`
 * Active Parallel Capability is `NONE`
@@ -1269,8 +1269,9 @@ Next:
 Next session priorities:
 
 * Keep `Next Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone.
-* Restore SSOT consistency where stale operational state still references Session 033 as active.
-* Complete Session 034 bootstrap after SSOT consistency is restored.
+* Semantic consistency repair is completed and published in `c6a1946`.
+* Rerun and complete Session 034 bootstrap from the truthful current state.
+* Perform next-product-milestone discovery after bootstrap completes.
 
 ---
 
