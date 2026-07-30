@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 033 - MS-001.59 AI Workspace Engine Save Refresh Warning State Derivation Foundation verified locally
+## MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation published
 
 ### Date
 
@@ -77,7 +77,7 @@ Each release entry should contain:
 
 ### Completed
 
-* Recorded `MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation` as `COMPLETED / VERIFIED`.
+* Recorded `MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation` as `COMPLETED / PUBLISHED / CLOSED`.
 * Added the pure engine helper `deriveSaveRefreshWarningState(projectId, latestExchange, title)` to `src/lib/ai-workspace-engine/engine.ts`.
 * Confirmed the helper reproduces exactly the existing `saved` `SaveUiState` field values with `errorMessage: null` and the unchanged refresh warning message.
 * Confirmed `src/app/projects/[id]/ai/page.tsx` now delegates exactly the two local refresh-warning save-state constructions to the helper.
@@ -85,16 +85,17 @@ Each release entry should contain:
 * Added focused engine unit coverage for the exact refresh-warning state result.
 * Recorded focused verification as `PASS` with engine tests `37 / 37`, page tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
 * Recorded architectural review as `PASS`.
-* Recorded publication status as `NOT PUBLISHED`.
-* Recorded milestone status as `ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION`.
-* Kept `Current Product Milestone` as `MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation`.
-* Kept `Latest Completed Product Milestone` as `MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation`.
+* Recorded publication status as `PUBLISHED`.
+* Recorded publication commit `0d11707`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
+* Set `Current Product Milestone` to `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation`.
 * Kept `Next Product Milestone` as `NONE`.
 
 ### Notes
 
 * No validation-title derivation, title-input change-state derivation, additional save-error changes, save-saving changes, ordinary save-success changes, Generate changes, Reset changes, backend changes, API changes, provider changes, or Project Brain changes were introduced.
-* No commit or push was performed for `MS-001.59`.
+* The publication commit is now present on `origin/main`.
 
 ## MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation published
 

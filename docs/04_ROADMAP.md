@@ -107,11 +107,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation
+NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation
+MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation
 
 ## Next
 
@@ -146,7 +146,7 @@ Product Milestone
 APPROVED
 
 **Active**
-YES
+NO
 
 **Runtime Status**
 CLOSED
@@ -195,13 +195,16 @@ CLOSED
 AUTHORIZED
 
 **Implementation Status**
-COMPLETED / VERIFIED
+COMPLETED
 
 **Publication Status**
-NOT PUBLISHED
+PUBLISHED
+
+**Publication Commit**
+`0d11707`
 
 **Milestone Status**
-ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION
+COMPLETED / PUBLISHED / CLOSED
 
 **Implementation Evidence**
 * `src/lib/ai-workspace-engine/engine.ts` now exports `deriveSaveRefreshWarningState(projectId, latestExchange, title)`
@@ -231,7 +234,7 @@ ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION
 NONE
 
 **Next Safe Step**
-Obtain Product Owner publication approval for `MS-001.59`.
+Run `SPS OS - KONIEC` for Session 033.
 
 ---
 
