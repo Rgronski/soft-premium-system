@@ -1311,14 +1311,15 @@ Next:
 * `MS-001.12` activation status is `ACTIVATED`
 * `MS-001.12` activation decision is `AUTHORIZED`
 * `MS-001.12` Product Owner Closure Decision is `APPROVED`
-* next controlled operation is `start Session 035 from a fresh generated package and perform next product milestone contract discovery`
+* next controlled operation is `start Session 036 from a fresh generated package and inspect the remaining inline save-title change state derivation candidate`
 * Active Capability is `NONE`
 * Latest Completed Capability is `CAP-005 - React Component Test Infrastructure Foundation`
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
 * Session 033 status: `CLOSED`
 * Session 034 status: `CLOSED`
-* Next session after fresh `SPS OS - START`: `035`
+* Session 035 status: `CLOSED`
+* Next session after fresh `SPS OS - START`: `036`
 * Verified branch: `main`
 * Repository working tree: verify live with `git status -sb` or fresh `sps-git-context.txt`
 * Ahead / behind: `0 / 0`
@@ -1342,8 +1343,9 @@ Next session priorities:
 * Keep `Next Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone.
 * Semantic consistency repair is completed and published in `c6a1946`.
 * Current-state finalization is completed and published in `40f457e`.
-* Start Session 035 from a fresh generated package.
-* Perform next-product-milestone contract discovery during Session 035.
+* Session 035 close synchronization is completed and published in `e9a64c0`.
+* Start Session 036 from a fresh generated package.
+* Inspect the remaining inline save-title change state derivation candidate during Session 036.
 
 ---
 

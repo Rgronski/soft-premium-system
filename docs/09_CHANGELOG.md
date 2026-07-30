@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 035 - MS-001.62 publication and session close synchronization published
+
+### Date
+
+2026-07-30
+
+### Completed
+
+* Published `9e876e4 - feat(ai-workspace): derive save reset state` on `main`.
+* Published `e9a64c0 - docs(session-035): sync ms-001.62 publication state` on `main`.
+* Synchronized Session 035 close-state continuity in `docs/08_CURRENT_STATE.md`, `docs/10_SESSION_STATE.md`, and the Session 035 handoff.
+* Confirmed Session 035 closed after MS-001.60, MS-001.61, and MS-001.62 publication with no additional milestone activated.
+* Kept `Current Product Milestone` as `NONE`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No application code, tests, provider, API, or Project Brain changes were introduced by the Session 035 close synchronization.
+* The publication endpoint is now present on `origin/main`.
+
 ## MS-001.62 - AI Workspace Engine Generate Transition Save Reset State Derivation Foundation published
 
 ### Date
