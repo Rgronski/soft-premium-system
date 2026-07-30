@@ -13,6 +13,7 @@ import {
   deriveResetSaveState,
   deriveSaveActionPresentation,
   deriveSaveErrorState,
+  deriveSaveRefreshWarningState,
   deriveSaveSavingState,
   deriveSaveSuccessState,
   deriveActiveSaveState,
@@ -515,6 +516,25 @@ describe("ai workspace engine", () => {
       title: "Architecture note",
       errorMessage: null,
       refreshErrorMessage: null,
+    });
+  });
+
+  test("derives the saved refresh-warning state with the existing inline field values", () => {
+    expect(
+      deriveSaveRefreshWarningState(
+        "project-1",
+        createExchange(2, "Instruction 2", "Response 2"),
+        "Architecture note",
+      ),
+    ).toEqual({
+      projectId: "project-1",
+      sourceExchangeId: 2,
+      sourceContent: "Response 2",
+      state: "saved",
+      title: "Architecture note",
+      errorMessage: null,
+      refreshErrorMessage:
+        "Saved to Knowledge, but AI project context could not be refreshed.",
     });
   });
 

@@ -42,7 +42,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE
+MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation
 
 **Latest Completed Milestone**
 MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation
@@ -76,7 +76,7 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE
+Current Product Milestone: MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation
 Latest Completed Product Milestone: MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
@@ -125,6 +125,30 @@ MS-001.52 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI W
 MS-001.53 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine generation-start state derivation foundation.
 MS-001.54 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine generation-error-state derivation foundation.
 MS-001.55 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine generation-success-state derivation foundation.
+MS-001.59 contract status: APPROVED.
+MS-001.59 runtime status: CLOSED.
+MS-001.59 activation status: CLOSED.
+MS-001.59 activation decision: AUTHORIZED.
+MS-001.59 implementation status: COMPLETED / VERIFIED.
+MS-001.59 architectural review: PASS.
+MS-001.59 publication status: NOT PUBLISHED.
+MS-001.59 milestone status: ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION.
+MS-001.59 product outcome: the AI Workspace engine now owns the deterministic `saved-with-refresh-warning` `SaveUiState` derivation via `deriveSaveRefreshWarningState` while `handleSaveToKnowledge` delegates exactly the two existing refresh-warning save-state constructions and preserves the existing save and refresh operation order.
+MS-001.59 preserved boundaries:
+* no validation-title derivation
+* no title-input change-state derivation
+* no further save-error, save-saving, or save-success changes
+* no full save-flow refactoring
+* no refresh orchestration changes
+* no Generate or Reset changes
+* no UX, copy, or layout changes
+* no backend, API, provider, or Project Brain changes
+MS-001.59 verification: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` PASS (`37 / 37`), `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` PASS (`32 / 32`), `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS.
+MS-001.59 blocker status: NONE.
+MS-001.59 local completion evidence:
+* `src/lib/ai-workspace-engine/engine.ts`
+* `src/lib/ai-workspace-engine/engine.test.ts`
+* `src/app/projects/[id]/ai/page.tsx`
 MS-001.58 contract status: APPROVED.
 MS-001.58 runtime status: CLOSED.
 MS-001.58 activation status: CLOSED.
@@ -1138,7 +1162,7 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `NONE`
+* `Current Product Milestone` is `MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation`
 * `Latest Completed Product Milestone` is `MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
@@ -1146,10 +1170,10 @@ Next:
 * `MS-001.18` is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.19` is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.20` is `COMPLETED / PUBLISHED / CLOSED`
-* proposed next milestone is `NONE`
-* proposal status is `NONE`
-* current activation is `NONE`
-* current implementation is `NONE`
+* proposed next milestone is `MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation`
+* proposal status is `APPROVED`
+* current activation is `MS-001.59 - CLOSED`
+* current implementation is `MS-001.59 - COMPLETED / VERIFIED`
 * `MS-001.21` implementation status is `IMPLEMENTED / VERIFIED / PUBLISHED`
 * `MS-001.21` implementation review is `PASS`
 * `MS-001.21` contract deviations are `NONE`
@@ -1241,8 +1265,8 @@ Next:
 
 Next session priorities:
 
-* Keep the next product milestone at `NONE`
-* Run Next Product Milestone Contract Discovery before any broader implementation scope.
+* Keep `Next Product Milestone` at `NONE` until MS-001.59 publication is completed or explicitly superseded by Product Owner decision.
+* Obtain controlled publication approval for `MS-001.59`.
 
 ---
 

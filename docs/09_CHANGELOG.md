@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 033 - MS-001.59 AI Workspace Engine Save Refresh Warning State Derivation Foundation verified locally
+
+### Date
+
+2026-07-30
+
+### Completed
+
+* Recorded `MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation` as `COMPLETED / VERIFIED`.
+* Added the pure engine helper `deriveSaveRefreshWarningState(projectId, latestExchange, title)` to `src/lib/ai-workspace-engine/engine.ts`.
+* Confirmed the helper reproduces exactly the existing `saved` `SaveUiState` field values with `errorMessage: null` and the unchanged refresh warning message.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now delegates exactly the two local refresh-warning save-state constructions to the helper.
+* Confirmed save semantics, refresh orchestration, and broader save flow behavior remain unchanged.
+* Added focused engine unit coverage for the exact refresh-warning state result.
+* Recorded focused verification as `PASS` with engine tests `37 / 37`, page tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`.
+* Recorded architectural review as `PASS`.
+* Recorded publication status as `NOT PUBLISHED`.
+* Recorded milestone status as `ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION`.
+* Kept `Current Product Milestone` as `MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation`.
+* Kept `Latest Completed Product Milestone` as `MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No validation-title derivation, title-input change-state derivation, additional save-error changes, save-saving changes, ordinary save-success changes, Generate changes, Reset changes, backend changes, API changes, provider changes, or Project Brain changes were introduced.
+* No commit or push was performed for `MS-001.59`.
+
 ## MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation published
 
 ### Date

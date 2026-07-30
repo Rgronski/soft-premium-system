@@ -17,6 +17,7 @@ import {
   deriveResetActionPresentation,
   deriveSaveActionPresentation,
   deriveSaveErrorState,
+  deriveSaveRefreshWarningState,
   deriveSaveSavingState,
   deriveSaveSuccessState,
   deriveActiveSaveState,
@@ -422,29 +423,17 @@ export default function ProjectAiWorkspacePage() {
             return;
           }
 
-          setSaveUiState({
-            projectId,
-            sourceExchangeId: latestExchange.id,
-            sourceContent: generatedContent,
-            state: "saved",
-            title,
-            errorMessage: null,
-            refreshErrorMessage: "Saved to Knowledge, but AI project context could not be refreshed.",
-          });
+          setSaveUiState(
+            deriveSaveRefreshWarningState(projectId, latestExchange, title),
+          );
         } catch {
           if (currentProjectIdRef.current !== projectId) {
             return;
           }
 
-          setSaveUiState({
-            projectId,
-            sourceExchangeId: latestExchange.id,
-            sourceContent: generatedContent,
-            state: "saved",
-            title,
-            errorMessage: null,
-            refreshErrorMessage: "Saved to Knowledge, but AI project context could not be refreshed.",
-          });
+          setSaveUiState(
+            deriveSaveRefreshWarningState(projectId, latestExchange, title),
+          );
         }
         return;
       }

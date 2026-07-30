@@ -107,7 +107,7 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE
+MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation
 
 ## Latest Completed Product Milestone
 
@@ -133,6 +133,107 @@ NONE
 ---
 
 # Milestone Contracts
+
+## MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation
+
+**Milestone**
+MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+YES
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move only the existing deterministic `saved-with-refresh-warning` `SaveUiState` construction from the save-success refresh-warning branches of `handleSaveToKnowledge` into the AI Workspace Engine.
+
+**Dependencies**
+* closed `MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation`
+
+**Allowed Future Implementation Files**
+* `src/lib/ai-workspace-engine/engine.ts`
+* `src/lib/ai-workspace-engine/engine.test.ts`
+* `src/app/projects/[id]/ai/page.tsx`
+
+**Out of Scope**
+* validation-title derivation
+* title-input change-state derivation
+* further save-error, save-saving, or save-success changes
+* full save-flow refactoring
+* refresh orchestration changes
+* Generate and Reset changes
+* UX, copy, and layout
+* backend, API, provider wiring, and Project Brain
+* dependencies
+
+**Product Owner Decision**
+ACCEPT
+
+**Definition of Ready Review**
+PASS
+
+**Activation Status**
+CLOSED
+
+**Activation Decision**
+AUTHORIZED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+ACTIVE - IMPLEMENTED / VERIFIED - PENDING PUBLICATION
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exports `deriveSaveRefreshWarningState(projectId, latestExchange, title)`
+* the helper reproduces exactly the existing `saved` `SaveUiState` field values with `errorMessage: null` and the unchanged refresh warning message
+* `src/lib/ai-workspace-engine/engine.test.ts` now contains focused unit coverage for the exact refresh-warning derivation result
+* `src/app/projects/[id]/ai/page.tsx` now delegates exactly the two existing refresh-warning save-state constructions to the engine helper
+* verified gates passed: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` `PASS (37 / 37)`, `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` `PASS (32 / 32)`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`
+* architectural review passed with no contract deviations
+
+**Acceptance Criteria**
+* the engine exposes exactly one helper for the existing `saved-with-refresh-warning` `SaveUiState`
+* the page delegates exactly the two current local constructions to that helper
+* `state` remains `saved`
+* `errorMessage` remains `null`
+* `refreshErrorMessage` remains exactly `Saved to Knowledge, but AI project context could not be refreshed.`
+* save flow order and successful-save semantics remain unchanged
+* validation-title and broader refresh orchestration remain untouched
+* required focused tests and `npx.cmd tsc --noEmit` pass during implementation verification
+
+**Verification Contract**
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts`
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
+* `npx.cmd tsc --noEmit`
+* `git diff --check`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Obtain Product Owner publication approval for `MS-001.59`.
+
+---
 
 ## MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation
 

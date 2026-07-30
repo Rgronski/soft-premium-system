@@ -362,6 +362,23 @@ export function deriveSaveSuccessState(
   };
 }
 
+export function deriveSaveRefreshWarningState(
+  projectId: string,
+  latestExchange: ConversationExchange,
+  title: string,
+): SaveUiState {
+  return {
+    projectId,
+    sourceExchangeId: latestExchange.id,
+    sourceContent: latestExchange.response,
+    state: "saved",
+    title,
+    errorMessage: null,
+    refreshErrorMessage:
+      "Saved to Knowledge, but AI project context could not be refreshed.",
+  };
+}
+
 export function deriveSaveErrorState(
   projectId: string,
   latestExchange: ConversationExchange,
