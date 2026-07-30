@@ -1,4 +1,8 @@
-param()
+param(
+    [switch] $ValidationOnly,
+    [switch] $SelfTest,
+    [string] $RepoRoot
+)
 
 $ErrorActionPreference = "Stop"
 
@@ -44,6 +48,162 @@ function Fail-Critical {
 
     Write-Error "CRITICAL: $Message"
     exit 1
+}
+
+function Get-MarkdownSectionLines {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $Path,
+
+        [Parameter(Mandatory = $true)]
+        [string] $Heading
+    )
+
+    if (-not (Test-Path -LiteralPath $Path)) {
+        Fail-Critical "Required document not found: $Path"
+    }
+
+    $lines = Get-Content -LiteralPath $Path -Encoding utf8
+    $sectionLines = New-Object System.Collections.Generic.List[string]
+    $inSection = $false
+
+    foreach ($line in $lines) {
+        if ($line -match '^#\s+(?<title>.+)$') {
+            if ($Matches.title.Trim() -eq $Heading) {
+                $inSection = $true
+                continue
+            }
+
+            if ($inSection) {
+                break
+            }
+        }
+
+        if ($inSection) {
+            $sectionLines.Add($line)
+        }
+    }
+
+    return $sectionLines.ToArray()
+}
+
+function Get-CurrentStateOperationalLines {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $CurrentStatePath
+    )
+
+    $operationalLines = New-Object System.Collections.Generic.List[string]
+    foreach ($section in @("In Progress", "Next")) {
+        foreach ($line in Get-MarkdownSectionLines -Path $CurrentStatePath -Heading $section) {
+            $operationalLines.Add($line)
+        }
+    }
+
+    return $operationalLines.ToArray()
+}
+
+function Get-CurrentStateConsistencyIssues {
+    param(
+        [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
+        [string[]] $Lines,
+
+        [Parameter(Mandatory = $true)]
+        [string] $CurrentSessionId,
+
+        [Parameter(Mandatory = $true)]
+        [string] $NextSessionId
+    )
+
+    $issues = New-Object System.Collections.Generic.List[string]
+    $currentSessionPattern = [regex]::Escape($CurrentSessionId)
+    $nextSessionPattern = [regex]::Escape($NextSessionId)
+
+    foreach ($line in $Lines) {
+        $trimmed = "$line".Trim()
+        if ($trimmed -eq "") {
+            continue
+        }
+
+        if ($trimmed -match '^(\*\s+)?Repository working tree:\s*`?(CLEAN|DIRTY)`?$') {
+            $issues.Add("Active current-state content must not persist a manual Repository working tree value.")
+        }
+
+        if ($trimmed -match ("Run\s+`?SPS OS\s*-\s*KONIEC`?\s+for Session\s+{0}\.?" -f $currentSessionPattern)) {
+            $issues.Add("Active current-state content still instructs closing Session $CurrentSessionId.")
+        }
+
+        if ($trimmed -match ("Session\s+{0}\s+status:\s*`?(?<status>[A-Z]+)`?$" -f $currentSessionPattern)) {
+            if ($Matches.status -ne "CLOSED") {
+                $issues.Add("Session $CurrentSessionId status must be CLOSED in active current-state content.")
+            }
+        }
+
+        if ($trimmed -match '^(\*\s+)?Live session:\s*`?(?<live>\d+)`?$') {
+            if ($Matches.live -eq $CurrentSessionId) {
+                $issues.Add("Active current-state content still presents Session $CurrentSessionId as live.")
+            }
+
+            if ($Matches.live -notmatch ("^{0}$" -f $nextSessionPattern)) {
+                $issues.Add("Active current-state content has contradictory Live session identity '$($Matches.live)'; expected '$NextSessionId'.")
+            }
+        }
+    }
+
+    return $issues.ToArray()
+}
+
+function Assert-CurrentStateConsistency {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $CurrentStatePath,
+
+        [Parameter(Mandatory = $true)]
+        [string] $CurrentSessionId,
+
+        [Parameter(Mandatory = $true)]
+        [string] $NextSessionId
+    )
+
+    $operationalLines = @(Get-CurrentStateOperationalLines -CurrentStatePath $CurrentStatePath | Where-Object {
+            $_ -ne $null -and "$_".Trim() -ne ""
+        })
+
+    $issues = Get-CurrentStateConsistencyIssues `
+        -Lines $operationalLines `
+        -CurrentSessionId $CurrentSessionId `
+        -NextSessionId $NextSessionId
+
+    if ($issues.Count -gt 0) {
+        Fail-Critical ($issues -join " ")
+    }
+}
+
+function Invoke-SelfTest {
+    $validLines = @(
+        '* Session 033 status: `CLOSED`',
+        '* Live session: `034`',
+        '* Next step: complete Session 034 bootstrap.'
+    )
+
+    $validIssues = Get-CurrentStateConsistencyIssues -Lines $validLines -CurrentSessionId "033" -NextSessionId "034"
+    if ($validIssues.Count -ne 0) {
+        Fail-Critical "Self-test expected a valid current-state fixture to pass."
+    }
+
+    $invalidLines = @(
+        '* Live session: `033`',
+        '* Repository working tree: `DIRTY`',
+        '* Run `SPS OS - KONIEC` for Session 033.'
+    )
+
+    $invalidIssues = Get-CurrentStateConsistencyIssues -Lines $invalidLines -CurrentSessionId "033" -NextSessionId "034"
+    if ($invalidIssues.Count -lt 3) {
+        Fail-Critical "Self-test expected stale current-state fixture to fail."
+    }
+
+    Write-Host "Self-test PASS"
 }
 
 function Get-WorkingTreeStatus {
@@ -253,10 +413,21 @@ function Test-IsAncestorCommit {
     }
 }
 
+if ($SelfTest) {
+    Invoke-SelfTest
+    exit 0
+}
+
 $scriptRoot = Split-Path -Parent $PSCommandPath
 $candidateRoot = Split-Path -Parent $scriptRoot
-$gitRoot = Invoke-Git -Arguments @("rev-parse", "--show-toplevel") -WorkingDirectory $candidateRoot
-$repoRoot = Get-FirstOrUnknown $gitRoot
+
+if ($RepoRoot -and $RepoRoot.Trim() -ne "") {
+    $repoRoot = $RepoRoot.Trim()
+}
+else {
+    $gitRoot = Invoke-Git -Arguments @("rev-parse", "--show-toplevel") -WorkingDirectory $candidateRoot
+    $repoRoot = Get-FirstOrUnknown $gitRoot
+}
 
 if ($repoRoot -eq "UNKNOWN") {
     $repoRoot = $candidateRoot
@@ -266,6 +437,7 @@ $repoRoot = (Resolve-Path -LiteralPath $repoRoot).Path
 $generatedAt = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss zzz")
 
 $sessionStatePath = Join-Path $repoRoot "docs\10_SESSION_STATE.md"
+$currentStatePath = Join-Path $repoRoot "docs\08_CURRENT_STATE.md"
 $sessionState = Get-SessionStateSnapshot -SessionStatePath $sessionStatePath
 $sessionFields = $sessionState.Fields
 
@@ -372,10 +544,21 @@ if ($handoffNextSafeStep -ne $nextSafeStep) {
     Fail-Critical "Handoff Next Safe Step does not match Session State."
 }
 
+Assert-CurrentStateConsistency `
+    -CurrentStatePath $currentStatePath `
+    -CurrentSessionId $currentSessionId `
+    -NextSessionId $nextSessionId
+
 $gitContextPath = Join-Path $repoRoot "sps-git-context.txt"
 $sessionSummaryPath = Join-Path $repoRoot "sps-session-summary.txt"
 $zipPath = Join-Path $repoRoot "sps-session.zip"
 $currentHandoffPath = Resolve-Path -LiteralPath $handoffPath -Relative
+
+if ($ValidationOnly) {
+    Write-Host "Session package validation PASS."
+    Write-Host "Package Consistency: PASS"
+    exit 0
+}
 
 $gitContext = @(
     "Generated at:"

@@ -1241,13 +1241,15 @@ Next:
 * `MS-001.12` activation status is `ACTIVATED`
 * `MS-001.12` activation decision is `AUTHORIZED`
 * `MS-001.12` Product Owner Closure Decision is `APPROVED`
-* next controlled operation is `NONE - awaiting separate Product Owner decision`
+* next controlled operation is `SSOT consistency restoration / Session 034 bootstrap completion`
 * Active Capability is `NONE`
 * Latest Completed Capability is `CAP-005 - React Component Test Infrastructure Foundation`
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
+* Session 033 status: `CLOSED`
+* Live session: `034`
 * Verified branch: `main`
-* Repository working tree: `DIRTY`
+* Repository working tree: verify live with `git status -sb` or fresh `sps-git-context.txt`
 * Ahead / behind: `0 / 0`
 * install `PASS`
 * lint `PASS` with one previously accepted warning in `src/app/projects/[id]/tasks/page.tsx`
@@ -1267,7 +1269,8 @@ Next:
 Next session priorities:
 
 * Keep `Next Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone.
-* Run `SPS OS - KONIEC` for Session 033.
+* Restore SSOT consistency where stale operational state still references Session 033 as active.
+* Complete Session 034 bootstrap after SSOT consistency is restored.
 
 ---
 

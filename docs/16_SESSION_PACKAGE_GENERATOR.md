@@ -163,6 +163,10 @@ Before ZIP generation, the generator must validate agreement between Session Sta
 
 If any critical identity or Next Safe Step mismatch is detected, the generator must stop before ZIP creation.
 
+Session identity used by semantic validation must be resolved dynamically from the current Session State snapshot and the current Session Handoff.
+
+Fixed session numbers such as `033` or `034` are allowed only inside built-in self-test fixture data and must not control real package validation.
+
 Before ZIP generation, the generator must also validate `Latest Verified Commit` by checking:
 
 * `git cat-file -e <LatestVerifiedCommit>^{commit}`
@@ -172,9 +176,27 @@ If the commit does not exist or is not an ancestor of `HEAD`, the generator must
 
 `Latest Verified Commit` does not need to equal Package HEAD.
 
+Before Package Consistency can be reported as `PASS`, the generator must also validate the active `In Progress` and `Next` sections of `docs/08_CURRENT_STATE.md`.
+
+The generator must reject active current-state content when it:
+
+* still presents the closing session as live,
+* still contains an instruction to close the session that is already being closed or has already been closed,
+* contains contradictory live-session identity compared with Session State / current Session Handoff identity,
+* manually persists current `Repository working tree: CLEAN`,
+* manually persists current `Repository working tree: DIRTY`.
+
+Git or a fresh generated `sps-git-context.txt` remains the authoritative source for current repository cleanliness.
+
+Semantic validation failure blocks ZIP generation and blocks Session Close `PASS`.
+
 Generator failure or Package Consistency other than `PASS` blocks Session Close `PASS`.
 
 ZIP success may be reported only after package consistency is `PASS`.
+
+`-ValidationOnly` runs the same validation path without generating package artifacts.
+
+`-SelfTest` runs the built-in regression checks for the current-state semantic validator.
 
 The generator must report the exact ZIP path after successful generation.
 
