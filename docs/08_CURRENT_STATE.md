@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation
+MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation
 
 **Next Milestone**
 NONE
@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation
+Latest Completed Product Milestone: MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -125,6 +125,26 @@ MS-001.52 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI W
 MS-001.53 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine generation-start state derivation foundation.
 MS-001.54 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine generation-error-state derivation foundation.
 MS-001.55 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine generation-success-state derivation foundation.
+MS-001.60 contract status: APPROVED.
+MS-001.60 runtime status: CLOSED.
+MS-001.60 activation status: CLOSED.
+MS-001.60 activation decision: AUTHORIZED.
+MS-001.60 implementation status: COMPLETED / VERIFIED.
+MS-001.60 publication status: NOT PUBLISHED.
+MS-001.60 milestone status: COMPLETED / VERIFIED / READY FOR PUBLICATION.
+MS-001.60 product outcome: the AI Workspace page now delegates the remaining empty-title validation `save-error` state construction in `handleSaveToKnowledge` to the existing `deriveSaveErrorState(...)` helper while preserving the same validation message, title value, source exchange, early return, and zero-request behavior for invalid titles.
+MS-001.60 preserved boundaries:
+* no new helper or type
+* no `engine.ts` change
+* no title-input change-state derivation
+* no generation-transition save-state changes
+* no wider save-flow refactoring
+* no UX, copy, or layout changes
+* no API, backend, provider, or Project Brain changes
+MS-001.60 verification: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` PASS (`37 / 37`), `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` PASS (`32 / 32`), `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS with line-ending warning only.
+MS-001.60 blocker status: NONE.
+MS-001.60 local completion evidence:
+* `src/app/projects/[id]/ai/page.tsx`
 MS-001.59 contract status: APPROVED.
 MS-001.59 runtime status: CLOSED.
 MS-001.59 activation status: CLOSED.
@@ -1164,7 +1184,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation`
+* `Latest Completed Product Milestone` is `MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

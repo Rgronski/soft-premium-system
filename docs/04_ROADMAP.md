@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation
+MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation
 
 ## Next
 
@@ -133,6 +133,100 @@ NONE
 ---
 
 # Milestone Contracts
+
+## MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation
+
+**Milestone**
+MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Replace only the remaining inline `save-error` `SaveUiState` construction used when the Knowledge title is empty or whitespace-only inside `handleSaveToKnowledge` with the existing AI Workspace Engine helper `deriveSaveErrorState(...)`.
+
+**Dependencies**
+* closed `MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation`
+
+**Allowed Future Implementation Files**
+* `src/app/projects/[id]/ai/page.tsx`
+
+**Out of Scope**
+* creating a new helper or type
+* modifying `src/lib/ai-workspace-engine/engine.ts`
+* modifying test files unless required by a genuine exposed contract mismatch
+* title-input change-state derivation
+* generation-transition save-state changes
+* wider save-flow refactoring
+* UX, copy, and layout changes
+* API, backend, provider, and Project Brain changes
+* dependencies and configuration
+
+**Product Owner Decision**
+ACCEPT
+
+**Definition of Ready Review**
+PASS
+
+**Activation Status**
+CLOSED
+
+**Activation Decision**
+AUTHORIZED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / READY FOR PUBLICATION
+
+**Implementation Evidence**
+* `src/app/projects/[id]/ai/page.tsx` now delegates the remaining empty-title validation `save-error` state construction in `handleSaveToKnowledge` to `deriveSaveErrorState(...)`
+* the validation message remains exactly `Enter a valid title.`
+* the current title value, current source exchange, early return behavior, and zero save requests for invalid titles remain unchanged
+* required verification passed: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` `PASS (37 / 37)`, `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` `PASS (32 / 32)`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS` with line-ending warning only
+
+**Acceptance Criteria**
+* the page delegates only the remaining inline empty-title validation `save-error` construction to `deriveSaveErrorState(...)`
+* the validation message remains exactly `Enter a valid title.`
+* the current title value remains unchanged
+* the current source exchange remains unchanged
+* the early return behavior remains unchanged
+* invalid title input triggers zero save requests
+* no helper, type, UX, API, provider, Project Brain, or broader save-flow changes are introduced
+
+**Verification Contract**
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts`
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
+* `npx.cmd tsc --noEmit`
+* `git diff --check`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Obtain Product Owner review of the verified local milestone result and decide whether to commit and publish it.
 
 ## MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation
 

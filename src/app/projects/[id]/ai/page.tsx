@@ -358,15 +358,14 @@ export default function ProjectAiWorkspacePage() {
     }
 
     if (!activeSaveState.title.trim()) {
-      setSaveUiState({
-        projectId: params.id,
-        sourceExchangeId: latestExchange.id,
-        sourceContent: latestExchange.response,
-        state: "save-error",
-        title: activeSaveState.title,
-        errorMessage: "Enter a valid title.",
-        refreshErrorMessage: null,
-      });
+      setSaveUiState(
+        deriveSaveErrorState(
+          params.id,
+          latestExchange,
+          activeSaveState.title,
+          "Enter a valid title.",
+        ),
+      );
       return;
     }
 
