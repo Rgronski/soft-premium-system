@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.57 - AI Workspace Engine Save Success State Derivation Foundation
+MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation
 
 ## Next
 
@@ -133,6 +133,103 @@ NONE
 ---
 
 # Milestone Contracts
+
+## MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation
+
+**Milestone**
+MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Move only the existing deterministic `save-error` `SaveUiState` construction from the save-error branches of `handleSaveToKnowledge` into the AI Workspace Engine.
+
+**Dependencies**
+* closed `MS-001.57 - AI Workspace Engine Save Success State Derivation Foundation`
+
+**Allowed Future Implementation Files**
+* `src/lib/ai-workspace-engine/engine.ts`
+* `src/lib/ai-workspace-engine/engine.test.ts`
+* `src/app/projects/[id]/ai/page.tsx`
+* `src/app/projects/[id]/ai/page.test.tsx`
+
+**Out of Scope**
+* refresh-warning derivation
+* validation-title derivation
+* full save-flow refactoring
+* Generate and Reset changes
+* UX, copy, and layout
+* backend, API, provider wiring, and Project Brain
+* dependencies
+
+**Product Owner Decision**
+ACCEPT
+
+**Definition of Ready Review**
+PASS
+
+**Activation Status**
+CLOSED
+
+**Activation Decision**
+AUTHORIZED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exports `deriveSaveErrorState(projectId, latestExchange, title, errorMessage)`
+* the helper reproduces exactly the existing `save-error` `SaveUiState` field values
+* `src/lib/ai-workspace-engine/engine.test.ts` now contains focused unit coverage for the exact `save-error` state result
+* `src/app/projects/[id]/ai/page.tsx` now delegates the controlled save-error response branch and rejected save-request branch to the engine helper
+* no UX, text, layout, refresh-warning, validation-title, backend/API, provider, or Project Brain changes were introduced
+* previously verified implementation evidence remains: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` `PASS (36 / 36)`, `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` `PASS (32 / 32)`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS`
+
+**Acceptance Criteria**
+* the engine exposes one helper that constructs the existing `save-error` `SaveUiState`
+* the page delegates only the two existing save-error state constructions to that helper
+* `projectId`, `latestExchange`, `title`, `errorMessage`, and current texts remain unchanged
+* save flow order and behavior remain unchanged
+* scope does not include refresh-warning or validation-title derivation
+
+**Verification Contract**
+* focused engine test
+* focused AI page test
+* `npx.cmd tsc --noEmit`
+* `git diff --check`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Run Next Product Milestone Contract Discovery.
+
+---
 
 ## MS-000.6 - Roadmap Engine
 

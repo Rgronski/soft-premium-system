@@ -16,6 +16,7 @@ import {
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
   deriveSaveActionPresentation,
+  deriveSaveErrorState,
   deriveSaveSavingState,
   deriveSaveSuccessState,
   deriveActiveSaveState,
@@ -448,28 +449,25 @@ export default function ProjectAiWorkspacePage() {
         return;
       }
 
-      setSaveUiState({
-        projectId,
-        sourceExchangeId: latestExchange.id,
-        sourceContent: generatedContent,
-        state: "save-error",
-        title,
-        errorMessage:
+      setSaveUiState(
+        deriveSaveErrorState(
+          projectId,
+          latestExchange,
+          title,
           "status" in result
             ? getSaveErrorMessage(result.status)
             : "Unexpected save error.",
-        refreshErrorMessage: null,
-      });
+        ),
+      );
     } catch {
-      setSaveUiState({
-        projectId,
-        sourceExchangeId: latestExchange.id,
-        sourceContent: generatedContent,
-        state: "save-error",
-        title,
-        errorMessage: "Knowledge save unavailable.",
-        refreshErrorMessage: null,
-      });
+      setSaveUiState(
+        deriveSaveErrorState(
+          projectId,
+          latestExchange,
+          title,
+          "Knowledge save unavailable.",
+        ),
+      );
     }
   }
 

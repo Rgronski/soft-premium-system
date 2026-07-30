@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.57 - AI Workspace Engine Save Success State Derivation Foundation
+MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation
 
 **Next Milestone**
 NONE
@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.57 - AI Workspace Engine Save Success State Derivation Foundation
+Latest Completed Product Milestone: MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -125,6 +125,27 @@ MS-001.52 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI W
 MS-001.53 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine generation-start state derivation foundation.
 MS-001.54 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine generation-error-state derivation foundation.
 MS-001.55 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine generation-success-state derivation foundation.
+MS-001.58 contract status: APPROVED.
+MS-001.58 runtime status: CLOSED.
+MS-001.58 activation status: CLOSED.
+MS-001.58 activation decision: AUTHORIZED.
+MS-001.58 implementation status: COMPLETED.
+MS-001.58 publication status: PUBLISHED.
+MS-001.58 milestone status: COMPLETED / PUBLISHED / CLOSED.
+MS-001.58 product outcome: the AI Workspace engine now owns the deterministic `save-error` `SaveUiState` derivation, and the AI Workspace page delegates the existing controlled save-error response branch and rejected save-request branch to the engine without changing save flow behavior.
+MS-001.58 preserved boundaries:
+* no refresh-warning derivation
+* no validation-title derivation
+* no full save-flow refactoring
+* no Generate or Reset changes
+* no UX, copy, or layout changes
+* no backend, API, provider, or Project Brain changes
+MS-001.58 final verification: focused engine tests `36 / 36` PASS, focused AI page tests `32 / 32` PASS, `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS.
+MS-001.58 blocker status: NONE.
+MS-001.58 local completion evidence:
+* `src/lib/ai-workspace-engine/engine.ts`
+* `src/lib/ai-workspace-engine/engine.test.ts`
+* `src/app/projects/[id]/ai/page.tsx`
 MS-001.57 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine save-success-state derivation foundation.
 MS-001.56 is COMPLETED / PUBLISHED / CLOSED after formal publication of the AI Workspace engine save-saving-state derivation foundation with commit `bfb889b`.
 No new capability is active.
@@ -1118,7 +1139,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.57 - AI Workspace Engine Save Success State Derivation Foundation`
+* `Latest Completed Product Milestone` is `MS-001.58 - AI Workspace Engine Save Error State Derivation Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
@@ -1201,7 +1222,7 @@ Next:
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
 * Verified branch: `main`
-* Repository working tree: `CLEAN`
+* Repository working tree: `DIRTY`
 * Ahead / behind: `0 / 0`
 * install `PASS`
 * lint `PASS` with one previously accepted warning in `src/app/projects/[id]/tasks/page.tsx`
@@ -1221,7 +1242,7 @@ Next:
 Next session priorities:
 
 * Keep the next product milestone at `NONE`
-* Run Next Product Milestone Contract Discovery before any new implementation scope.
+* Run Next Product Milestone Contract Discovery before any broader implementation scope.
 
 ---
 

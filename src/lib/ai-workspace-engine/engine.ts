@@ -362,6 +362,23 @@ export function deriveSaveSuccessState(
   };
 }
 
+export function deriveSaveErrorState(
+  projectId: string,
+  latestExchange: ConversationExchange,
+  title: string,
+  errorMessage: string,
+): SaveUiState {
+  return {
+    projectId,
+    sourceExchangeId: latestExchange.id,
+    sourceContent: latestExchange.response,
+    state: "save-error",
+    title,
+    errorMessage,
+    refreshErrorMessage: null,
+  };
+}
+
 export function deriveSaveActionPresentation(
   saveState: SaveState,
 ): SaveActionPresentation {
