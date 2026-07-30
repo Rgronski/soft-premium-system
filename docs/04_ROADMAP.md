@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation
+MS-001.62 - AI Workspace Engine Generate Transition Save Reset State Derivation Foundation
 
 ## Next
 
@@ -230,6 +230,95 @@ NONE
 
 **Next Safe Step**
 Keep `MS-001.60` published and do not start the next milestone without a separate Product Owner decision.
+
+## MS-001.62 - AI Workspace Engine Generate Transition Save Reset State Derivation Foundation
+
+**Milestone**
+MS-001.62 - AI Workspace Engine Generate Transition Save Reset State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Replace only the inline save-state reset at the start of `handleGenerate` with the existing AI Workspace Engine helper `deriveResetSaveState(params.id)`.
+
+**Dependencies**
+* closed `MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation`
+
+**Allowed Future Implementation Files**
+* `src/app/projects/[id]/ai/page.tsx`
+
+**Out of Scope**
+* engine.ts changes
+* title-input derivation
+* save-error, saving, saved, refresh-warning, or generation-success logic changes
+* any generation-flow behavior change
+* UX, copy, layout, API, backend, provider, Project Brain, dependencies, or configuration changes
+* refactoring or formatting cleanup
+
+**Product Owner Decision**
+ACCEPT
+
+**Definition of Ready Review**
+PASS
+
+**Activation Status**
+CLOSED
+
+**Activation Decision**
+AUTHORIZED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / READY FOR PUBLICATION
+
+**Implementation Evidence**
+* `src/app/projects/[id]/ai/page.tsx` now delegates the inline save-state reset at the start of `handleGenerate` to `deriveResetSaveState(params.id)`
+* the reset timing and behavior remain unchanged
+* generation flow remains unchanged
+* required verification passed: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` `PASS (38 / 38)`, `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` `PASS (32 / 32)`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS` with line-ending warning only
+
+**Acceptance Criteria**
+* the page delegates only the inline save-state reset at the start of `handleGenerate` to `deriveResetSaveState(params.id)`
+* the reset timing remains unchanged
+* generation flow behavior remains unchanged
+* no title-input, save-error, saving, saved, refresh-warning, or generation-success changes are introduced
+* no helper, type, UX, API, provider, Project Brain, or broader save-flow changes are introduced
+
+**Verification Contract**
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts`
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
+* `npx.cmd tsc --noEmit`
+* `git diff --check`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Keep `MS-001.62` ready for publication and do not start the next milestone without a separate Product Owner decision.
 
 ## MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation
 

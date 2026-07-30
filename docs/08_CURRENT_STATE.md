@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation
+MS-001.62 - AI Workspace Engine Generate Transition Save Reset State Derivation Foundation
 
 **Next Milestone**
 NONE
@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation
+Latest Completed Product Milestone: MS-001.62 - AI Workspace Engine Generate Transition Save Reset State Derivation Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -171,6 +171,25 @@ MS-001.61 publication evidence:
 * commit `11c2616`
 * branch `main`
 * published files `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`
+
+MS-001.62 contract status: APPROVED.
+MS-001.62 runtime status: CLOSED.
+MS-001.62 activation status: CLOSED.
+MS-001.62 activation decision: AUTHORIZED.
+MS-001.62 implementation status: COMPLETED / VERIFIED.
+MS-001.62 publication status: NOT PUBLISHED.
+MS-001.62 milestone status: COMPLETED / VERIFIED / READY FOR PUBLICATION.
+MS-001.62 product outcome: the AI Workspace page now delegates the inline save-state reset at the start of `handleGenerate` to the existing `deriveResetSaveState(params.id)` helper while preserving the same timing and generation behavior.
+MS-001.62 preserved boundaries:
+* no engine.ts changes
+* no title-input derivation
+* no save-error, saving, saved, refresh-warning, or generation-success logic changes
+* no generation-flow behavior change
+* no UX, copy, or layout changes
+* no API, backend, provider, or Project Brain changes
+MS-001.62 verification: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` PASS (`38 / 38`), `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` PASS (`32 / 32`), `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS with line-ending warning only.
+MS-001.62 blocker status: NONE.
+MS-001.62 publication evidence: NONE.
 
 MS-001.59 contract status: APPROVED.
 MS-001.59 runtime status: CLOSED.
@@ -1211,7 +1230,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation`
+* `Latest Completed Product Milestone` is `MS-001.62 - AI Workspace Engine Generate Transition Save Reset State Derivation Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

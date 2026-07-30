@@ -269,15 +269,7 @@ export default function ProjectAiWorkspacePage() {
     setGenerationUiState((currentState) =>
       deriveGenerationStartState(params.id, currentState),
     );
-    setSaveUiState({
-      projectId: params.id,
-      sourceExchangeId: null,
-      sourceContent: null,
-      state: "idle",
-      title: "",
-      errorMessage: null,
-      refreshErrorMessage: null,
-    });
+    setSaveUiState(deriveResetSaveState(params.id));
 
     try {
       const response = await fetch(`/api/projects/${params.id}/ai/generate`, {
