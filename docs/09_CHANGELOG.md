@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation verified locally
+## MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation published
 
 ### Date
 
@@ -77,18 +77,21 @@ Each release entry should contain:
 
 ### Completed
 
-* Recorded `MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation` as `COMPLETED / VERIFIED / READY FOR PUBLICATION`.
+* Recorded `MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation` as `COMPLETED / PUBLISHED / CLOSED`.
 * Confirmed `src/app/projects/[id]/ai/page.tsx` now delegates the remaining empty-title validation `save-error` state construction in `handleSaveToKnowledge` to the existing `deriveSaveErrorState(projectId, latestExchange, title, errorMessage)` helper.
 * Confirmed the validation message remains exactly `Enter a valid title.`.
 * Confirmed the current title value, current source exchange, early return behavior, and zero save requests for invalid titles remain unchanged.
 * Recorded focused verification as `PASS` with engine tests `37 / 37`, page tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS` with line-ending warning only.
+* Recorded publication status as `PUBLISHED`.
+* Recorded publication commit `c5aee32`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
 * Set `Current Product Milestone` to `NONE`.
 * Set `Latest Completed Product Milestone` to `MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation`.
 * Kept `Next Product Milestone` as `NONE`.
 
 ### Notes
 
-* The result is verified locally and not published.
+* The publication commit is now present on `origin/main`.
 * No new helper, no `engine.ts` change, no test-file change, no title-input change-state derivation, no generation-transition save-state change, no wider save-flow refactor, and no API, backend, provider, or Project Brain change were introduced.
 
 ## Session 034 - Semantic close validation maintenance published

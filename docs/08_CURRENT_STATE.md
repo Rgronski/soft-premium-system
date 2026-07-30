@@ -130,8 +130,9 @@ MS-001.60 runtime status: CLOSED.
 MS-001.60 activation status: CLOSED.
 MS-001.60 activation decision: AUTHORIZED.
 MS-001.60 implementation status: COMPLETED / VERIFIED.
-MS-001.60 publication status: NOT PUBLISHED.
-MS-001.60 milestone status: COMPLETED / VERIFIED / READY FOR PUBLICATION.
+MS-001.60 publication status: PUBLISHED.
+MS-001.60 publication commit: `c5aee32`.
+MS-001.60 milestone status: COMPLETED / PUBLISHED / CLOSED.
 MS-001.60 product outcome: the AI Workspace page now delegates the remaining empty-title validation `save-error` state construction in `handleSaveToKnowledge` to the existing `deriveSaveErrorState(...)` helper while preserving the same validation message, title value, source exchange, early return, and zero-request behavior for invalid titles.
 MS-001.60 preserved boundaries:
 * no new helper or type
@@ -143,8 +144,10 @@ MS-001.60 preserved boundaries:
 * no API, backend, provider, or Project Brain changes
 MS-001.60 verification: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` PASS (`37 / 37`), `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` PASS (`32 / 32`), `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS with line-ending warning only.
 MS-001.60 blocker status: NONE.
-MS-001.60 local completion evidence:
-* `src/app/projects/[id]/ai/page.tsx`
+MS-001.60 publication evidence:
+* commit `c5aee32`
+* branch `main`
+* published file `src/app/projects/[id]/ai/page.tsx`
 MS-001.59 contract status: APPROVED.
 MS-001.59 runtime status: CLOSED.
 MS-001.59 activation status: CLOSED.

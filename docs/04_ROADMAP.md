@@ -196,10 +196,13 @@ AUTHORIZED
 COMPLETED / VERIFIED
 
 **Publication Status**
-NOT PUBLISHED
+PUBLISHED
+
+**Publication Commit**
+`c5aee32`
 
 **Milestone Status**
-COMPLETED / VERIFIED / READY FOR PUBLICATION
+COMPLETED / PUBLISHED / CLOSED
 
 **Implementation Evidence**
 * `src/app/projects/[id]/ai/page.tsx` now delegates the remaining empty-title validation `save-error` state construction in `handleSaveToKnowledge` to `deriveSaveErrorState(...)`
@@ -226,7 +229,7 @@ COMPLETED / VERIFIED / READY FOR PUBLICATION
 NONE
 
 **Next Safe Step**
-Obtain Product Owner review of the verified local milestone result and decide whether to commit and publish it.
+Keep `MS-001.60` published and do not start the next milestone without a separate Product Owner decision.
 
 ## MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation
 
