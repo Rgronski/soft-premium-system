@@ -17,6 +17,7 @@ import {
   deriveResetActionPresentation,
   deriveSaveActionPresentation,
   deriveSaveErrorState,
+  deriveSaveReadyState,
   deriveSaveRefreshWarningState,
   deriveSaveSavingState,
   deriveSaveSuccessState,
@@ -311,15 +312,7 @@ export default function ProjectAiWorkspacePage() {
             exchangeId,
           ),
         );
-        setSaveUiState({
-          projectId: params.id,
-          sourceExchangeId: exchangeId,
-          sourceContent: result.content,
-          state: "ready-to-save",
-          title: "",
-          errorMessage: null,
-          refreshErrorMessage: null,
-        });
+        setSaveUiState(deriveSaveReadyState(params.id, exchange));
         return;
       }
 

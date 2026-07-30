@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation
+MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation
 
 ## Next
 
@@ -230,6 +230,101 @@ NONE
 
 **Next Safe Step**
 Keep `MS-001.60` published and do not start the next milestone without a separate Product Owner decision.
+
+## MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation
+
+**Milestone**
+MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Extract only the inline ready-to-save `SaveUiState` literal created after successful generation into the existing AI Workspace Engine helper `deriveSaveReadyState(...)`, then use that helper in `src/app/projects/[id]/ai/page.tsx` with identical behavior.
+
+**Dependencies**
+* closed `MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation`
+
+**Allowed Future Implementation Files**
+* `src/lib/ai-workspace-engine/engine.ts`
+* `src/app/projects/[id]/ai/page.tsx`
+* `src/lib/ai-workspace-engine/engine.test.ts` if required by a genuine exposed contract mismatch
+* `src/app/projects/[id]/ai/page.test.tsx` if required by a genuine exposed contract mismatch
+
+**Out of Scope**
+* title validation or title-input change derivation
+* changes to saving, saved, save-error, or refresh-warning logic
+* generation-flow changes
+* save-flow refactoring
+* API, backend, provider, and Project Brain changes
+* dependencies and configuration
+* unrelated cleanup or formatting
+
+**Product Owner Decision**
+ACCEPT
+
+**Definition of Ready Review**
+PASS
+
+**Activation Status**
+CLOSED
+
+**Activation Decision**
+AUTHORIZED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / READY FOR PUBLICATION
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exposes `deriveSaveReadyState(projectId, latestExchange)` as a pure helper
+* `src/app/projects/[id]/ai/page.tsx` now delegates the ready-to-save state construction after successful generation to `deriveSaveReadyState(params.id, exchange)`
+* the title and source exchange values remain unchanged
+* generation and save transitions remain unchanged
+* required verification passed: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` `PASS (38 / 38)`, `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` `PASS (32 / 32)`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS` with line-ending warning only
+
+**Acceptance Criteria**
+* the page delegates only the ready-to-save `SaveUiState` literal created after successful generation to `deriveSaveReadyState(...)`
+* the title value remains unchanged
+* the source exchange remains unchanged
+* generation and save transitions remain unchanged
+* no title validation, save-error, save-saving, saved, or refresh-warning behavior changes are introduced
+* no helper, type, UX, API, provider, Project Brain, or broader save-flow changes are introduced
+
+**Verification Contract**
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts`
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
+* `npx.cmd tsc --noEmit`
+* `git diff --check`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Keep `MS-001.61` ready for publication and do not start the next milestone without a separate Product Owner decision.
 
 ## MS-001.59 - AI Workspace Engine Save Refresh Warning State Derivation Foundation
 

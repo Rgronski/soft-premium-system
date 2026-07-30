@@ -330,6 +330,21 @@ export function deriveResetSaveState(projectId: string): SaveUiState {
   };
 }
 
+export function deriveSaveReadyState(
+  projectId: string,
+  latestExchange: ConversationExchange,
+): SaveUiState {
+  return {
+    projectId,
+    sourceExchangeId: latestExchange.id,
+    sourceContent: latestExchange.response,
+    state: "ready-to-save",
+    title: "",
+    errorMessage: null,
+    refreshErrorMessage: null,
+  };
+}
+
 export function deriveSaveSavingState(
   projectId: string,
   latestExchange: ConversationExchange,

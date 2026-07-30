@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation
+MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation
 
 **Next Milestone**
 NONE
@@ -77,7 +77,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation
+Latest Completed Product Milestone: MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -148,6 +148,26 @@ MS-001.60 publication evidence:
 * commit `c5aee32`
 * branch `main`
 * published file `src/app/projects/[id]/ai/page.tsx`
+
+MS-001.61 contract status: APPROVED.
+MS-001.61 runtime status: CLOSED.
+MS-001.61 activation status: CLOSED.
+MS-001.61 activation decision: AUTHORIZED.
+MS-001.61 implementation status: COMPLETED / VERIFIED.
+MS-001.61 publication status: NOT PUBLISHED.
+MS-001.61 milestone status: COMPLETED / VERIFIED / READY FOR PUBLICATION.
+MS-001.61 product outcome: the AI Workspace page now delegates the ready-to-save `SaveUiState` construction after successful generation to the existing `deriveSaveReadyState(...)` helper while preserving the same title and source exchange values and all generation/save transitions.
+MS-001.61 preserved boundaries:
+* no title validation derivation
+* no save-error, save-saving, saved, or refresh-warning logic changes
+* no generation-flow changes
+* no save-flow refactoring
+* no UX, copy, or layout changes
+* no API, backend, provider, or Project Brain changes
+MS-001.61 verification: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` PASS (`38 / 38`), `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` PASS (`32 / 32`), `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS with line-ending warning only.
+MS-001.61 blocker status: NONE.
+MS-001.61 publication evidence: NONE.
+
 MS-001.59 contract status: APPROVED.
 MS-001.59 runtime status: CLOSED.
 MS-001.59 activation status: CLOSED.
@@ -1187,7 +1207,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation`
+* `Latest Completed Product Milestone` is `MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
