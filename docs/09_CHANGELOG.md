@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## MS-001.62 - AI Workspace Engine Generate Transition Save Reset State Derivation Foundation
+## MS-001.62 - AI Workspace Engine Generate Transition Save Reset State Derivation Foundation published
 
 ### Date
 
@@ -77,12 +77,13 @@ Each release entry should contain:
 
 ### Completed
 
-* Recorded `MS-001.62 - AI Workspace Engine Generate Transition Save Reset State Derivation Foundation` as `COMPLETED / VERIFIED / READY FOR PUBLICATION`.
+* Recorded `MS-001.62 - AI Workspace Engine Generate Transition Save Reset State Derivation Foundation` as `COMPLETED / PUBLISHED / CLOSED`.
 * Confirmed `src/app/projects/[id]/ai/page.tsx` now delegates the inline save-state reset at the start of `handleGenerate` to `deriveResetSaveState(params.id)`.
 * Confirmed the reset timing and generation behavior remain unchanged.
 * Recorded focused verification as `PASS` with engine tests `38 / 38`, page tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS` with line-ending warning only.
-* Recorded publication status as `NOT PUBLISHED`.
-* Recorded milestone status as `COMPLETED / VERIFIED / READY FOR PUBLICATION`.
+* Recorded publication status as `PUBLISHED`.
+* Recorded publication commit `9e876e4`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
 * Set `Current Product Milestone` to `NONE`.
 * Set `Latest Completed Product Milestone` to `MS-001.62 - AI Workspace Engine Generate Transition Save Reset State Derivation Foundation`.
 * Kept `Next Product Milestone` as `NONE`.
@@ -90,7 +91,7 @@ Each release entry should contain:
 ### Notes
 
 * No engine.ts change, title-input derivation, save-error, saving, saved, refresh-warning, generation-success, API, backend, provider, or Project Brain changes were introduced.
-* No commit or push was performed for `MS-001.62`.
+* The publication commit is now present on `origin/main`.
 
 ## MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation published
 

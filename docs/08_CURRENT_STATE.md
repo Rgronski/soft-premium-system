@@ -177,8 +177,9 @@ MS-001.62 runtime status: CLOSED.
 MS-001.62 activation status: CLOSED.
 MS-001.62 activation decision: AUTHORIZED.
 MS-001.62 implementation status: COMPLETED / VERIFIED.
-MS-001.62 publication status: NOT PUBLISHED.
-MS-001.62 milestone status: COMPLETED / VERIFIED / READY FOR PUBLICATION.
+MS-001.62 publication status: PUBLISHED.
+MS-001.62 publication commit: `9e876e4`.
+MS-001.62 milestone status: COMPLETED / PUBLISHED / CLOSED.
 MS-001.62 product outcome: the AI Workspace page now delegates the inline save-state reset at the start of `handleGenerate` to the existing `deriveResetSaveState(params.id)` helper while preserving the same timing and generation behavior.
 MS-001.62 preserved boundaries:
 * no engine.ts changes
@@ -189,7 +190,10 @@ MS-001.62 preserved boundaries:
 * no API, backend, provider, or Project Brain changes
 MS-001.62 verification: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` PASS (`38 / 38`), `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` PASS (`32 / 32`), `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS with line-ending warning only.
 MS-001.62 blocker status: NONE.
-MS-001.62 publication evidence: NONE.
+MS-001.62 publication evidence:
+* commit `9e876e4`
+* branch `main`
+* published file `src/app/projects/[id]/ai/page.tsx`
 
 MS-001.59 contract status: APPROVED.
 MS-001.59 runtime status: CLOSED.
