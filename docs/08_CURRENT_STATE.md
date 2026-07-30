@@ -1241,13 +1241,14 @@ Next:
 * `MS-001.12` activation status is `ACTIVATED`
 * `MS-001.12` activation decision is `AUTHORIZED`
 * `MS-001.12` Product Owner Closure Decision is `APPROVED`
-* next controlled operation is `rerun / complete Session 034 bootstrap and perform next product milestone discovery after published semantic consistency repair c6a1946`
+* next controlled operation is `start Session 035 from a fresh generated package and perform next product milestone contract discovery`
 * Active Capability is `NONE`
 * Latest Completed Capability is `CAP-005 - React Component Test Infrastructure Foundation`
 * Active Parallel Capability is `NONE`
 * Active Work Item: `NONE`
 * Session 033 status: `CLOSED`
-* Live session: `034`
+* Session 034 status: `CLOSED`
+* Next session after fresh `SPS OS - START`: `035`
 * Verified branch: `main`
 * Repository working tree: verify live with `git status -sb` or fresh `sps-git-context.txt`
 * Ahead / behind: `0 / 0`
@@ -1270,8 +1271,9 @@ Next session priorities:
 
 * Keep `Next Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone.
 * Semantic consistency repair is completed and published in `c6a1946`.
-* Rerun and complete Session 034 bootstrap from the truthful current state.
-* Perform next-product-milestone discovery after bootstrap completes.
+* Current-state finalization is completed and published in `40f457e`.
+* Start Session 035 from a fresh generated package.
+* Perform next-product-milestone contract discovery during Session 035.
 
 ---
 
