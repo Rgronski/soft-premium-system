@@ -294,10 +294,13 @@ AUTHORIZED
 COMPLETED / VERIFIED
 
 **Publication Status**
-NOT PUBLISHED
+PUBLISHED
+
+**Publication Commit**
+`11c2616`
 
 **Milestone Status**
-COMPLETED / VERIFIED / READY FOR PUBLICATION
+COMPLETED / PUBLISHED / CLOSED
 
 **Implementation Evidence**
 * `src/lib/ai-workspace-engine/engine.ts` now exposes `deriveSaveReadyState(projectId, latestExchange)` as a pure helper

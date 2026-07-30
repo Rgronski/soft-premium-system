@@ -154,8 +154,9 @@ MS-001.61 runtime status: CLOSED.
 MS-001.61 activation status: CLOSED.
 MS-001.61 activation decision: AUTHORIZED.
 MS-001.61 implementation status: COMPLETED / VERIFIED.
-MS-001.61 publication status: NOT PUBLISHED.
-MS-001.61 milestone status: COMPLETED / VERIFIED / READY FOR PUBLICATION.
+MS-001.61 publication status: PUBLISHED.
+MS-001.61 publication commit: `11c2616`.
+MS-001.61 milestone status: COMPLETED / PUBLISHED / CLOSED.
 MS-001.61 product outcome: the AI Workspace page now delegates the ready-to-save `SaveUiState` construction after successful generation to the existing `deriveSaveReadyState(...)` helper while preserving the same title and source exchange values and all generation/save transitions.
 MS-001.61 preserved boundaries:
 * no title validation derivation
@@ -166,7 +167,10 @@ MS-001.61 preserved boundaries:
 * no API, backend, provider, or Project Brain changes
 MS-001.61 verification: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` PASS (`38 / 38`), `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` PASS (`32 / 32`), `npx.cmd tsc --noEmit` PASS, `git diff --check` PASS with line-ending warning only.
 MS-001.61 blocker status: NONE.
-MS-001.61 publication evidence: NONE.
+MS-001.61 publication evidence:
+* commit `11c2616`
+* branch `main`
+* published files `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`
 
 MS-001.59 contract status: APPROVED.
 MS-001.59 runtime status: CLOSED.

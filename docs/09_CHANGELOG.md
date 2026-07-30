@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation
+## MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation published
 
 ### Date
 
@@ -77,14 +77,15 @@ Each release entry should contain:
 
 ### Completed
 
-* Recorded `MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation` as `COMPLETED / VERIFIED / READY FOR PUBLICATION`.
+* Recorded `MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation` as `COMPLETED / PUBLISHED / CLOSED`.
 * Added the pure engine helper `deriveSaveReadyState(projectId, latestExchange)` to `src/lib/ai-workspace-engine/engine.ts`.
 * Confirmed `src/app/projects/[id]/ai/page.tsx` now delegates the ready-to-save `SaveUiState` construction after successful generation to the helper.
 * Confirmed the title and source exchange values remain unchanged.
 * Confirmed generation and save transitions remain unchanged.
 * Recorded focused verification as `PASS` with engine tests `38 / 38`, page tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS` with line-ending warning only.
-* Recorded publication status as `NOT PUBLISHED`.
-* Recorded milestone status as `COMPLETED / VERIFIED / READY FOR PUBLICATION`.
+* Recorded publication status as `PUBLISHED`.
+* Recorded publication commit `11c2616`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
 * Set `Current Product Milestone` to `NONE`.
 * Set `Latest Completed Product Milestone` to `MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation`.
 * Kept `Next Product Milestone` as `NONE`.
@@ -92,7 +93,7 @@ Each release entry should contain:
 ### Notes
 
 * No title validation, save-error, save-saving, saved, or refresh-warning changes were introduced.
-* No commit or push was performed for `MS-001.61`.
+* The publication commit is now present on `origin/main`.
 
 ## MS-001.60 - AI Workspace Engine Save Title Validation State Derivation Foundation published
 
