@@ -44,7 +44,7 @@ Blockers: NONE
 Open Risks: NONE
 
 Recommendation: Start Session 039 from a fresh generated package and inspect the published MS-001.73 SSOT state.
-Next Safe Step: Start Session 039 from a fresh generated package and inspect the published MS-001.73 SSOT state.
+Next Safe Step: Run `powershell -ExecutionPolicy Bypass -File .\scripts\New-SpsSession.ps1`.
 Next Chat Prompt:
 039 SPS OS - START
 
