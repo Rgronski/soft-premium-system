@@ -152,6 +152,18 @@ export function deriveInstructionValueChangeState(
   };
 }
 
+export function derivePromptOrchestrationInstructionState(
+  projectId: string,
+  value: string,
+  promptId: string | null,
+): InstructionUiState {
+  if (promptId === null) {
+    return deriveManualInstructionChangeState(projectId, value);
+  }
+
+  return deriveInstructionValueChangeState(projectId, value, promptId);
+}
+
 const CONVERSATION_CONTEXT_EXCHANGE_LIMIT = 3;
 
 function getBudgetedConversationContext(

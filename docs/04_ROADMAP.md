@@ -111,11 +111,96 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.66 - AI Workspace Engine Instruction Value Change State Derivation Foundation
+MS-001.71 - AI Chat, Prompts, and Agents Foundation
 
 ## Next
 
 NONE
+
+## MS-001.71 - AI Chat, Prompts, and Agents Foundation
+
+**Milestone**
+MS-001.71 - AI Chat, Prompts, and Agents Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Create the smallest pure prompt-orchestration boundary around the existing AI Workspace instruction state without changing starter prompt selection, manual instruction editing, generation flow, save flow, or the current Project Brain read boundary.
+
+**Product Outcome**
+The repository contains one minimal AI Workspace Engine helper that owns the derivation of `InstructionUiState` from the current project id, instruction value, and optional prompt id, while the existing AI Workspace page reuses that helper with unchanged runtime behavior.
+
+**Dependencies**
+* closed `MS-001.66 - AI Workspace Engine Instruction Value Change State Derivation Foundation`
+
+**Allowed Future Implementation Files**
+* `src/app/projects/[id]/ai/page.tsx`
+* `src/lib/ai-workspace-engine/engine.ts`
+* `src/app/projects/[id]/ai/page.test.tsx`
+* `src/lib/ai-workspace-engine/engine.test.ts`
+
+**Out of Scope**
+* agent runtime
+* tool calling
+* streaming
+* new API routes
+* Project Brain write changes
+* persistence changes
+* provider / model integration
+* Markdown / chat transcript system
+* UX / layout rewrite
+* unrelated refactoring
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Publication Commit**
+`8a5adb3`
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exports `derivePromptOrchestrationInstructionState(...)` as the single pure boundary for manual and starter-prompt instruction updates
+* `src/app/projects/[id]/ai/page.tsx` now routes `setInstructionValue(...)` through the new engine helper without changing starter prompt selection or manual instruction editing behavior
+* `src/lib/ai-workspace-engine/engine.test.ts` now covers the manual and starter-prompt orchestration branches of the new boundary
+
+**Acceptance Criteria**
+* starter prompt selection still fills the instruction field
+* manual instruction editing still clears the selected prompt
+* generation flow remains unchanged
+* save flow remains unchanged
+* no new endpoint, persistence, provider, or Project Brain behavior is introduced
+
+**Verification Contract**
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts`
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
+* `git diff --check`
 
 ## MS-001.66 - AI Workspace Engine Instruction Value Change State Derivation Foundation
 

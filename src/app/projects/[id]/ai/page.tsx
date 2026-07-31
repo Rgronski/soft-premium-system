@@ -9,10 +9,10 @@ import {
   deriveGenerationSuccessState,
   deriveGenerationStartState,
   deriveActiveInstructionState,
-  deriveManualInstructionChangeState,
   deriveResetGenerationState,
   deriveResetSaveState,
   deriveSelectedStarterPromptInstructionState,
+  derivePromptOrchestrationInstructionState,
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
   deriveSaveActionPresentation,
@@ -25,7 +25,6 @@ import {
   deriveContextLoadState,
   deriveActiveSaveState,
   deriveLatestExchange,
-  deriveInstructionValueChangeState,
   getConversationContextStatusMessage,
   getGenerationErrorMessage,
   getSaveErrorMessage,
@@ -211,15 +210,8 @@ export default function ProjectAiWorkspacePage() {
   const context = contextState.context;
 
   function setInstructionValue(value: string, promptId: string | null) {
-    if (promptId === null) {
-      setInstructionState(
-        deriveManualInstructionChangeState(params.id, value),
-      );
-      return;
-    }
-
     setInstructionState(
-      deriveInstructionValueChangeState(params.id, value, promptId),
+      derivePromptOrchestrationInstructionState(params.id, value, promptId),
     );
   }
 

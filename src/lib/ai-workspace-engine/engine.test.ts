@@ -7,6 +7,7 @@ import {
   deriveActiveInstructionState,
   deriveManualInstructionChangeState,
   deriveInstructionValueChangeState,
+  derivePromptOrchestrationInstructionState,
   deriveSelectedStarterPromptInstructionState,
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
@@ -144,9 +145,37 @@ describe("ai workspace engine", () => {
     });
   });
 
+  test("orchestrates manual instruction input through the prompt boundary", () => {
+    expect(
+      derivePromptOrchestrationInstructionState(
+        "project-2",
+        "Write a custom instruction.",
+        null,
+      ),
+    ).toEqual({
+      projectId: "project-2",
+      value: "Write a custom instruction.",
+      selectedPromptId: null,
+    });
+  });
+
   test("derives instruction state from starter prompt input", () => {
     expect(
       deriveInstructionValueChangeState(
+        "project-2",
+        "Use the selected prompt text.",
+        "review-backlog",
+      ),
+    ).toEqual({
+      projectId: "project-2",
+      value: "Use the selected prompt text.",
+      selectedPromptId: "review-backlog",
+    });
+  });
+
+  test("orchestrates starter prompt input through the prompt boundary", () => {
+    expect(
+      derivePromptOrchestrationInstructionState(
         "project-2",
         "Use the selected prompt text.",
         "review-backlog",

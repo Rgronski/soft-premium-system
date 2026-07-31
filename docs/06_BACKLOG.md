@@ -169,8 +169,7 @@ Supports the Canonical Project Model.
 High
 
 **Status**
-
-Proposed
+Completed by `MS-001.71 - AI Chat, Prompts, and Agents Foundation`
 
 ---
 

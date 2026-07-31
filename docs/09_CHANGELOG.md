@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 038 - MS-001.71 publication and SSOT synchronization published
+
+### Date
+
+2026-07-31
+
+### Completed
+
+* Published `8a5adb3 - docs(session): align next product milestone after session 037` on `main`.
+* Added the `MS-001.71 - AI Chat, Prompts, and Agents Foundation` contract to `docs/04_ROADMAP.md`.
+* Synchronized `docs/04_ROADMAP.md`, `docs/06_BACKLOG.md`, and `docs/08_CURRENT_STATE.md` to reflect the completed MS-001.71 state.
+* Kept `docs/10_SESSION_STATE.md` unchanged because no session handoff was requested.
+
+### Notes
+
+* No application code, tests, provider, API, or Project Brain changes were introduced by the SSOT synchronization itself.
+* The publication endpoint is now present on `origin/main`.
+
 ## Session 036 - MS-001.66 publication and session close synchronization published
 
 ### Date
