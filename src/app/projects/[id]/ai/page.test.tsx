@@ -358,12 +358,43 @@ describe("ProjectAiWorkspacePage", () => {
       expect(screen.getByRole("button", { name: "Copy" })).toBeTruthy();
     });
 
+    expect(
+      (screen.getByRole("textbox", { name: "Instruction" }) as HTMLInputElement)
+        .value,
+    ).toBe("Summarize project");
+    expect(
+      (screen.getByRole("textbox", { name: "Title" }) as HTMLInputElement).value,
+    ).toBe("");
+    expect(screen.getByRole("button", { name: "Generate" })).toBeTruthy();
+    expect(
+      screen.getByRole("button", { name: "Reset Conversation" }),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Next Generate will use the last 1 local exchange."),
+    ).toBeTruthy();
+
     fireEvent.click(screen.getByRole("button", { name: "Copy" }));
 
     await waitFor(() => {
       expect(clipboardWriteTextMock).toHaveBeenCalledTimes(1);
       expect(clipboardWriteTextMock).toHaveBeenCalledWith("Generated response");
     });
+    expect(screen.getByText("Generated response")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Copy" })).toBeTruthy();
+    expect(
+      (screen.getByRole("textbox", { name: "Instruction" }) as HTMLInputElement)
+        .value,
+    ).toBe("Summarize project");
+    expect(
+      (screen.getByRole("textbox", { name: "Title" }) as HTMLInputElement).value,
+    ).toBe("");
+    expect(screen.getByRole("button", { name: "Generate" })).toBeTruthy();
+    expect(
+      screen.getByRole("button", { name: "Reset Conversation" }),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Next Generate will use the last 1 local exchange."),
+    ).toBeTruthy();
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 

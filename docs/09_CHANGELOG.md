@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 039 - MS-001.75 publication and SSOT synchronization published
+
+### Date
+
+2026-07-31
+
+### Completed
+
+* Confirmed `src/app/projects/[id]/ai/page.test.tsx` now proves the copy path keeps the instruction field, title field, generate control, reset control, and conversation state unchanged while still copying the exact response text.
+* Kept the existing copy behavior intact and local to the browser clipboard call.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to reflect `MS-001.75` as the latest completed milestone.
+* Published commit `PENDING_FINAL_HASH` on `main`.
+
+### Notes
+
+* No new endpoint, persistence, provider, Project Brain, Knowledge, generation, save, or reset behavior was introduced during the publication step.
+* The publication commit hash is recorded in this entry after the commit is created.
+
 ## Session 039 - MS-001.74 publication and SSOT synchronization published
 
 ### Date

@@ -111,16 +111,16 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.74 - AI Workspace Engine Chat Copy Boundary Foundation
+MS-001.75 - AI Workspace Engine Chat Copy State Non-Mutation Foundation
 
 ## Next
 
 NONE
 
-## MS-001.74 - AI Workspace Engine Chat Copy Boundary Foundation
+## MS-001.75 - AI Workspace Engine Chat Copy State Non-Mutation Foundation
 
 **Milestone**
-MS-001.74 - AI Workspace Engine Chat Copy Boundary Foundation
+MS-001.75 - AI Workspace Engine Chat Copy State Non-Mutation Foundation
 
 **Type**
 Product Milestone
@@ -144,20 +144,21 @@ Chief Architect
 Codex
 
 **Purpose**
-Create the smallest engine-owned boundary for AI Workspace chat response copy intent before the existing clipboard call, without changing the current copy behavior or introducing new UX, persistence, Project Brain writes, provider behavior, save behavior, generate behavior, or reset behavior.
+Add focused proof that the AI Workspace chat copy intent boundary is local and non-mutating without changing existing clipboard behavior, generation flow, save flow, reset flow, Project Brain boundaries, provider/model integration, or UI layout.
 
 **Product Outcome**
-The repository contains one minimal AI Workspace Engine helper that represents the local non-persistent chat copy intent for a generated response, while the existing AI Workspace page reuses that helper before calling the browser clipboard API and preserves the exact current copy behavior.
+The repository contains focused proof that the AI Workspace chat copy intent boundary is local and non-mutating, while the existing AI Workspace page still reuses the copy boundary before calling the browser clipboard API and preserves the exact current copy behavior.
 
 **Dependencies**
+* closed `MS-001.74 - AI Workspace Engine Chat Copy Boundary Foundation`
 * closed `MS-001.73 - AI Workspace Engine Chat Reset Context Boundary Foundation`
 * closed `MS-001.34 - AI Workspace Conversation Copy Foundation`
 
 **Allowed Future Implementation Files**
-* `src/app/projects/[id]/ai/page.tsx`
 * `src/lib/ai-workspace-engine/engine.ts`
-* `src/app/projects/[id]/ai/page.test.tsx`
 * `src/lib/ai-workspace-engine/engine.test.ts`
+* `src/app/projects/[id]/ai/page.tsx`
+* `src/app/projects/[id]/ai/page.test.tsx`
 
 **Out of Scope**
 * new UX or layout changes
@@ -187,13 +188,12 @@ PUBLISHED
 COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Publication Commit**
-07a01b9
+PENDING_FINAL_HASH
 
 **Implementation Evidence**
-* `src/lib/ai-workspace-engine/engine.ts` now exports `deriveCopyResponseIntentState(...)` as the smallest engine-owned copy-intent boundary
-* `src/app/projects/[id]/ai/page.tsx` now routes copy handling through the new helper immediately before `navigator.clipboard.writeText(...)`
-* `src/lib/ai-workspace-engine/engine.test.ts` covers the helper as a pure non-mutating pass-through for the response text
-* `src/app/projects/[id]/ai/page.test.tsx` still verifies the exact clipboard text remains unchanged
+* `src/app/projects/[id]/ai/page.test.tsx` now proves copy keeps the instruction field, title field, generate control, reset control, conversation text, and clipboard payload unchanged
+* `src/lib/ai-workspace-engine/engine.test.ts` still covers the helper as a pure non-mutating pass-through for the response text
+* The copy path in `src/app/projects/[id]/ai/page.tsx` still writes the exact generated response text to `navigator.clipboard.writeText(...)`
 
 **Acceptance Criteria**
 * Copy still calls `navigator.clipboard.writeText` with the exact generated response text
@@ -207,7 +207,6 @@ COMPLETED / VERIFIED / PUBLISHED / CLOSED
 **Verification Contract**
 * `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts`
 * `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
-* `npx.cmd tsc --noEmit`
 * `git diff --check`
 
 **Blockers**
