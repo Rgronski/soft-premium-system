@@ -111,11 +111,101 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.64 - AI Workspace Engine Context Load State Derivation Foundation
+MS-001.65 - AI Workspace Engine Save Context Refresh State Derivation Foundation
 
 ## Next
 
 NONE
+
+## MS-001.65 - AI Workspace Engine Save Context Refresh State Derivation Foundation
+
+**Milestone**
+MS-001.65 - AI Workspace Engine Save Context Refresh State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Replace only the remaining inline `ContextUiState` derivation in the save-flow AI project context refresh path with the existing AI Workspace Engine helper `deriveContextLoadState(projectId, result)`.
+
+**Dependencies**
+* closed `MS-001.64 - AI Workspace Engine Context Load State Derivation Foundation`
+
+**Allowed Future Implementation Files**
+* `src/app/projects/[id]/ai/page.tsx`
+
+**Out of Scope**
+* API routes
+* provider logic
+* Project Brain schema or persistence contracts
+* unrelated UI layout, copy, or style changes
+* unrelated refactoring
+* save-flow refresh warning fallback changes
+* dependencies and configuration
+
+**Product Owner Decision**
+ACCEPT
+
+**Definition of Ready Review**
+PASS
+
+**Activation Status**
+CLOSED
+
+**Activation Decision**
+AUTHORIZED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Publication Commit**
+`7b8769c`
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/app/projects/[id]/ai/page.tsx` now delegates the save-flow context refresh success branch to `deriveContextLoadState(projectId, contextResult)`
+* the helper preserves the available branch exactly and leaves the refresh-warning fallback unchanged
+* required verification passed: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` `PASS (43 / 43)`, `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` `PASS (32 / 32)`, and `git diff --check` `PASS` with line-ending warning only
+
+**Acceptance Criteria**
+* the page delegates only the save-flow context refresh success branch to `deriveContextLoadState(projectId, contextResult)`
+* the available branch behavior remains unchanged
+* the refresh-warning fallback remains unchanged
+* no helper, type, UX, API, provider, Project Brain, or persistence changes are introduced
+
+**Verification Contract**
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts`
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
+* `git diff --check`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Keep `MS-001.65` published and do not start the next milestone without a separate Product Owner decision.
 
 ## MS-001.64 - AI Workspace Engine Context Load State Derivation Foundation
 
