@@ -211,26 +211,26 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-07-31
-Current Session ID: 037
-Current Chat Title: 037 SPS OS - SESSION CLOSE HANDOFF
-Next Session ID: 038
-Suggested Next Chat Title: 038 SPS OS - Next Product Milestone Contract Discovery
+Current Session ID: 038
+Current Chat Title: 038 SPS OS - SESSION CLOSE PROTOCOL
+Next Session ID: 039
+Suggested Next Chat Title: 039 SPS OS - Next Product Milestone Contract Discovery
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: SESSION CLOSED / READY FOR NEXT START
-Completed Capability Items: Session 037 confirmed `main` matched `origin/main`, the working tree was clean, and the latest HEAD was `a46b72a`; Session 037 validated `MS-001.67`, `MS-001.68`, `MS-001.69`, and `MS-001.70` as no-op PASS with no files changed; Session 037 completed Session Close Protocol preparation for Session 038
+Completed Capability Items: Session 038 implemented and published MS-001.71 `16bca08` / `594f39e`, MS-001.72 `8fbebfb` / `8daa9f3`, and MS-001.73 `ae2c48c` / `c383eaa`; Session 038 completed the close protocol preparation for Session 039
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.66 - AI Workspace Engine Instruction Value Change State Derivation Foundation
-Next Product Milestone: MS-001.71 - AI Chat, Prompts, and Agents Foundation
+Latest Completed Product Milestone: MS-001.73 - AI Workspace Engine Chat Reset Context Boundary Foundation
+Next Product Milestone: NONE
 Active Parallel Capability: NONE
 Latest Completed Capability Item: CAP-005 - React Component Test Infrastructure Foundation
 Current Sprint: NONE
-Platform Priority: Keep SPS OS 1.0 release acceptance synchronized and prepare Session 038 from a fresh generated package.
+Platform Priority: Keep SPS OS 1.0 close state synchronized and prepare Session 039 from a fresh generated package.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: a46b72a
+Latest Verified Commit: c383eaa
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Run Next Product Milestone Contract Discovery for MS-001.71.
+Next Safe Step: Run `powershell -ExecutionPolicy Bypass -File .\scripts\New-SpsSession.ps1`.
