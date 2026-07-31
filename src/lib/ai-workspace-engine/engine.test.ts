@@ -17,6 +17,7 @@ import {
   deriveSaveRefreshWarningState,
   deriveSaveSavingState,
   deriveSaveSuccessState,
+  deriveSaveTitleChangeState,
   deriveActiveSaveState,
   deriveLatestExchange,
   type GenerationUiState,
@@ -469,6 +470,52 @@ describe("ai workspace engine", () => {
       title: "",
       errorMessage: null,
       refreshErrorMessage: null,
+    });
+  });
+
+  test("derives save title change state while preserving saved state and refresh error", () => {
+    expect(
+      deriveSaveTitleChangeState(
+        "project-1",
+        createExchange(2, "Instruction 2", "Response 2"),
+        createSaveUiState({
+          state: "saved",
+          refreshErrorMessage:
+            "Saved to Knowledge, but AI project context could not be refreshed.",
+        }),
+        "Updated title",
+      ),
+    ).toEqual({
+      projectId: "project-1",
+      sourceExchangeId: 2,
+      sourceContent: "Response 2",
+      state: "saved",
+      title: "Updated title",
+      errorMessage: null,
+      refreshErrorMessage:
+        "Saved to Knowledge, but AI project context could not be refreshed.",
+    });
+  });
+
+  test("derives save title change state as ready-to-save when the current state is not saved", () => {
+    expect(
+      deriveSaveTitleChangeState(
+        "project-1",
+        createExchange(2, "Instruction 2", "Response 2"),
+        createSaveUiState({
+          state: "ready-to-save",
+          refreshErrorMessage: "Existing refresh error",
+        }),
+        "Updated title",
+      ),
+    ).toEqual({
+      projectId: "project-1",
+      sourceExchangeId: 2,
+      sourceContent: "Response 2",
+      state: "ready-to-save",
+      title: "Updated title",
+      errorMessage: null,
+      refreshErrorMessage: "Existing refresh error",
     });
   });
 

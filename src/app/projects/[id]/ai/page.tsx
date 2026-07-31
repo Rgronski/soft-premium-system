@@ -21,6 +21,7 @@ import {
   deriveSaveRefreshWarningState,
   deriveSaveSavingState,
   deriveSaveSuccessState,
+  deriveSaveTitleChangeState,
   deriveActiveSaveState,
   deriveLatestExchange,
   getConversationContextStatusMessage,
@@ -638,19 +639,14 @@ export default function ProjectAiWorkspacePage() {
                               type="text"
                               value={activeSaveState.title}
                               onChange={(event) =>
-                                setSaveUiState({
-                                  projectId: params.id,
-                                  sourceExchangeId: exchange.id,
-                                  sourceContent: exchange.response,
-                                  state:
-                                    activeSaveState.state === "saved"
-                                      ? "saved"
-                                      : "ready-to-save",
-                                  title: event.target.value,
-                                  errorMessage: null,
-                                  refreshErrorMessage:
-                                    activeSaveState.refreshErrorMessage,
-                                })
+                                setSaveUiState(
+                                  deriveSaveTitleChangeState(
+                                    params.id,
+                                    exchange,
+                                    activeSaveState,
+                                    event.target.value,
+                                  ),
+                                )
                               }
                               className="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-sm text-zinc-100 outline-none transition focus:border-zinc-600"
                             />

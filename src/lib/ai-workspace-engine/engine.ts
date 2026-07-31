@@ -318,6 +318,23 @@ export function deriveActiveSaveState(
   };
 }
 
+export function deriveSaveTitleChangeState(
+  projectId: string,
+  latestExchange: ConversationExchange,
+  saveUiState: SaveUiState,
+  title: string,
+): SaveUiState {
+  return {
+    projectId,
+    sourceExchangeId: latestExchange.id,
+    sourceContent: latestExchange.response,
+    state: saveUiState.state === "saved" ? "saved" : "ready-to-save",
+    title,
+    errorMessage: null,
+    refreshErrorMessage: saveUiState.refreshErrorMessage,
+  };
+}
+
 export function deriveResetSaveState(projectId: string): SaveUiState {
   return {
     projectId,
