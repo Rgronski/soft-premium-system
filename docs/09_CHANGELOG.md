@@ -80,7 +80,7 @@ Each release entry should contain:
 * Confirmed `src/app/projects/[id]/ai/page.test.tsx` now proves the copy path keeps the instruction field, title field, generate control, reset control, and conversation state unchanged while still copying the exact response text.
 * Kept the existing copy behavior intact and local to the browser clipboard call.
 * Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to reflect `MS-001.75` as the latest completed milestone.
-* Published commit `PENDING_FINAL_HASH` on `main`.
+* Published commit `f86e139` on `main`.
 
 ### Notes
 

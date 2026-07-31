@@ -188,7 +188,7 @@ PUBLISHED
 COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Publication Commit**
-PENDING_FINAL_HASH
+f86e139
 
 **Implementation Evidence**
 * `src/app/projects/[id]/ai/page.test.tsx` now proves copy keeps the instruction field, title field, generate control, reset control, conversation text, and clipboard payload unchanged
