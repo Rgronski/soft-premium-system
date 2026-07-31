@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 036 - MS-001.64 publication and session close synchronization published
+
+### Date
+
+2026-07-31
+
+### Completed
+
+* Published `0eecd53 - chore(ai-workspace): derive context load state` on `main`.
+* Synchronized Session 036 close-state continuity in `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and the Session 036 handoff.
+* Confirmed Session 036 closed after MS-001.64 publication with no additional milestone activated.
+* Kept `Current Product Milestone` as `NONE`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No application code, tests, provider, API, or Project Brain changes were introduced by the Session 036 close synchronization.
+* The publication endpoint is now present on `origin/main`.
+
 ## Session 036 - MS-001.63 publication and session close synchronization published
 
 ### Date
@@ -151,6 +170,31 @@ Each release entry should contain:
 * Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
 * Set `Current Product Milestone` to `NONE`.
 * Set `Latest Completed Product Milestone` to `MS-001.63 - AI Workspace Engine Save Title Change State Derivation Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No API, backend, provider, or Project Brain changes were introduced.
+* The publication commit is now present on `origin/main`.
+
+## MS-001.64 - AI Workspace Engine Context Load State Derivation Foundation published
+
+### Date
+
+2026-07-31
+
+### Completed
+
+* Recorded `MS-001.64 - AI Workspace Engine Context Load State Derivation Foundation` as `COMPLETED / PUBLISHED / CLOSED`.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now delegates the initial `getBrowserAiProjectContext(params.id)` effect result mapping to `deriveContextLoadState(params.id, result)`.
+* Confirmed the helper preserves the available, project-not-found, and unavailable branches exactly.
+* Confirmed the page’s later save-flow refresh path remains unchanged.
+* Recorded focused verification as `PASS` with engine tests `43 / 43`, page tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS` with line-ending warning only.
+* Recorded publication status as `PUBLISHED`.
+* Recorded publication commit `0eecd53`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
+* Set `Current Product Milestone` to `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.64 - AI Workspace Engine Context Load State Derivation Foundation`.
 * Kept `Next Product Milestone` as `NONE`.
 
 ### Notes

@@ -111,11 +111,105 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.63 - AI Workspace Engine Save Title Change State Derivation Foundation
+MS-001.64 - AI Workspace Engine Context Load State Derivation Foundation
 
 ## Next
 
 NONE
+
+## MS-001.64 - AI Workspace Engine Context Load State Derivation Foundation
+
+**Milestone**
+MS-001.64 - AI Workspace Engine Context Load State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Replace only the inline AI project context load result state derivation in the initial `getBrowserAiProjectContext(params.id)` effect with the existing AI Workspace Engine helper `deriveContextLoadState(projectId, result)`.
+
+**Dependencies**
+* closed `MS-001.63 - AI Workspace Engine Save Title Change State Derivation Foundation`
+
+**Allowed Future Implementation Files**
+* `src/lib/ai-workspace-engine/engine.ts`
+* `src/lib/ai-workspace-engine/engine.test.ts`
+* `src/app/projects/[id]/ai/page.tsx`
+
+**Out of Scope**
+* API routes
+* provider logic
+* Project Brain schema or persistence contracts
+* unrelated UI layout, copy, or style changes
+* unrelated refactoring
+* save-flow refresh path changes
+* dependencies and configuration
+
+**Product Owner Decision**
+ACCEPT
+
+**Definition of Ready Review**
+PASS
+
+**Activation Status**
+CLOSED
+
+**Activation Decision**
+AUTHORIZED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Publication Commit**
+`0eecd53`
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/app/projects/[id]/ai/page.tsx` now delegates the initial context-load result mapping to `deriveContextLoadState(params.id, result)`
+* the helper preserves the available, project-not-found, and unavailable branches exactly
+* the page’s later save-flow refresh path remains unchanged
+* required verification passed: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` `PASS (43 / 43)`, `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` `PASS (32 / 32)`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS` with line-ending warning only
+
+**Acceptance Criteria**
+* the page delegates only the initial `getBrowserAiProjectContext(params.id)` effect result mapping to `deriveContextLoadState(projectId, result)`
+* the available, project-not-found, and unavailable branch behavior remains unchanged
+* the save-flow refresh path remains unchanged
+* no helper, type, UX, API, provider, Project Brain, or persistence changes are introduced
+
+**Verification Contract**
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts`
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
+* `npx.cmd tsc --noEmit`
+* `git diff --check`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Keep `MS-001.64` published and do not start the next milestone without a separate Product Owner decision.
 
 ## Parallel Documentation Work
 
