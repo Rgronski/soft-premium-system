@@ -82,7 +82,7 @@ Each release entry should contain:
 * Added focused engine coverage for the non-mutating copy intent pass-through helper.
 * Confirmed `src/app/projects/[id]/ai/page.test.tsx` still passes and keeps verifying the exact clipboard write text.
 * Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to reflect `MS-001.74` as the latest completed milestone.
-* Published commit `PENDING_PUBLICATION_COMMIT` on `main`.
+* Published commit `07a01b9` on `main`.
 
 ### Notes
 

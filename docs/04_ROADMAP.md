@@ -187,7 +187,7 @@ PUBLISHED
 COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Publication Commit**
-PENDING_PUBLICATION_COMMIT
+07a01b9
 
 **Implementation Evidence**
 * `src/lib/ai-workspace-engine/engine.ts` now exports `deriveCopyResponseIntentState(...)` as the smallest engine-owned copy-intent boundary
