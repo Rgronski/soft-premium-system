@@ -85,6 +85,12 @@ export type ResetActionPresentation = {
   visible: boolean;
 };
 
+export type ConversationContextUiState = {
+  projectId: string;
+  exchanges: ConversationExchange[];
+  statusMessage: string;
+};
+
 export function deriveActiveInstructionState(
   projectId: string,
   instructionUiState: InstructionUiState,
@@ -162,6 +168,24 @@ export function derivePromptOrchestrationInstructionState(
   }
 
   return deriveInstructionValueChangeState(projectId, value, promptId);
+}
+
+export function deriveConversationContextState(
+  projectId: string,
+  generationUiState: GenerationUiState,
+): ConversationContextUiState {
+  const activeGenerationState = deriveActiveGenerationState(
+    projectId,
+    generationUiState,
+  );
+
+  return {
+    projectId,
+    exchanges: activeGenerationState.exchanges,
+    statusMessage: getConversationContextStatusMessage(
+      activeGenerationState.exchanges,
+    ),
+  };
 }
 
 const CONVERSATION_CONTEXT_EXCHANGE_LIMIT = 3;

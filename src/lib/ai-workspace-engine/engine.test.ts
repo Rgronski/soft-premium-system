@@ -1,5 +1,6 @@
 import {
   buildGenerationInstruction,
+  deriveConversationContextState,
   deriveActiveGenerationState,
   deriveGenerationErrorState,
   deriveGenerationSuccessState,
@@ -185,6 +186,47 @@ describe("ai workspace engine", () => {
       value: "Use the selected prompt text.",
       selectedPromptId: "review-backlog",
     });
+  });
+
+  test("derives the active conversation context from the current generation state", () => {
+    const generationUiState = createGenerationUiState({
+      exchanges: [
+        createExchange(1, "Instruction 1", "Response 1"),
+        createExchange(2, "Instruction 2", "Response 2"),
+      ],
+      latestExchangeId: 2,
+    });
+
+    expect(deriveConversationContextState("project-1", generationUiState)).toEqual(
+      {
+        projectId: "project-1",
+        exchanges: [
+          createExchange(1, "Instruction 1", "Response 1"),
+          createExchange(2, "Instruction 2", "Response 2"),
+        ],
+        statusMessage: "Next Generate will use the last 2 local exchanges.",
+      },
+    );
+  });
+
+  test("derives an empty conversation context when the generation state belongs to another project", () => {
+    const generationUiState = createGenerationUiState({
+      projectId: "project-2",
+      exchanges: [
+        createExchange(1, "Instruction 1", "Response 1"),
+        createExchange(2, "Instruction 2", "Response 2"),
+      ],
+      latestExchangeId: 2,
+    });
+
+    expect(deriveConversationContextState("project-1", generationUiState)).toEqual(
+      {
+        projectId: "project-1",
+        exchanges: [],
+        statusMessage:
+          "Next Generate will use no local conversation context.",
+      },
+    );
   });
 
   test("derives the available context load state with the loaded context", () => {

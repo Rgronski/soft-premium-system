@@ -13,6 +13,7 @@ import {
   deriveResetSaveState,
   deriveSelectedStarterPromptInstructionState,
   derivePromptOrchestrationInstructionState,
+  deriveConversationContextState,
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
   deriveSaveActionPresentation,
@@ -25,7 +26,6 @@ import {
   deriveContextLoadState,
   deriveActiveSaveState,
   deriveLatestExchange,
-  getConversationContextStatusMessage,
   getGenerationErrorMessage,
   getSaveErrorMessage,
   type ConversationExchange,
@@ -131,6 +131,10 @@ export default function ProjectAiWorkspacePage() {
     params.id,
     generationUiState,
   );
+  const conversationContextState = deriveConversationContextState(
+    params.id,
+    generationUiState,
+  );
   const generateActionPresentation = deriveGenerateActionPresentation(
     activeGenerationState.state,
   );
@@ -142,12 +146,9 @@ export default function ProjectAiWorkspacePage() {
     activeGenerationState.latestExchangeId,
     activeGenerationState.exchanges,
   );
-  const conversationContextStatusMessage = getConversationContextStatusMessage(
-    activeGenerationState.exchanges,
-  );
   const generationInstruction = buildGenerationInstruction(
     instruction,
-    activeGenerationState.exchanges,
+    conversationContextState.exchanges,
   );
   const activeSaveState = deriveActiveSaveState(
     params.id,
@@ -487,7 +488,7 @@ export default function ProjectAiWorkspacePage() {
               Enter one instruction to add the next local AI exchange.
             </p>
             <p className="text-sm text-zinc-500">
-              {conversationContextStatusMessage}
+              {conversationContextState.statusMessage}
             </p>
           </div>
 
@@ -560,7 +561,7 @@ export default function ProjectAiWorkspacePage() {
                 </button>
               </div>
 
-              {activeGenerationState.exchanges.map((exchange) => {
+              {conversationContextState.exchanges.map((exchange) => {
                 const isLatestExchange = latestExchange?.id === exchange.id;
 
                 return (
