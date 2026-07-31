@@ -211,26 +211,26 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-07-31
-Current Session ID: 039
-Current Chat Title: 039 SPS OS - SESSION CLOSE PROTOCOL
-Next Session ID: 040
-Suggested Next Chat Title: 040 SPS OS - START
+Current Session ID: 040
+Current Chat Title: 040 SPS OS - SESSION CLOSE PROTOCOL
+Next Session ID: 041
+Suggested Next Chat Title: 041 SPS OS - Next Product Milestone Contract Discovery
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: SESSION CLOSED
-Completed Capability Items: Session 039 implemented and published MS-001.74 `30da99e`; Session 039 implemented and published MS-001.75 `f86e139`; Session 039 published the MS-001.75 SSOT sync commit `8ff05f0`; Session 039 completed the Session 039 close protocol preparation
+Completed Capability Items: Session 040 implemented and published MS-001.76 `792c970`; Session 040 synchronized the MS-001.76 close SSOT state; Session 040 generated a fresh `sps-session.zip`; Session 040 completed the Session 040 close protocol preparation
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.75 - AI Workspace Engine Chat Copy State Non-Mutation Foundation
+Latest Completed Product Milestone: MS-001.76 - AI Workspace Engine Chat Project Switch State Isolation Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
 Latest Completed Capability Item: CAP-005 - React Component Test Infrastructure Foundation
 Current Sprint: NONE
-Platform Priority: Keep SPS OS 1.0 close state synchronized and prepare the Session 040 start package.
+Platform Priority: Keep SPS OS 1.0 close state synchronized and prepare the Session 041 start package for next product milestone contract discovery.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 8ff05f0
+Latest Verified Commit: 792c970
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Run `powershell -ExecutionPolicy Bypass -File .\scripts\New-SpsSession.ps1`.
+Next Safe Step: Open a new chat, attach `sps-session.zip`, and paste the Session 041 START prompt.

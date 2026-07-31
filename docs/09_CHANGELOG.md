@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 040 - MS-001.76 publication and session close synchronization published
+
+### Date
+
+2026-07-31
+
+### Completed
+
+* Confirmed `src/app/projects/[id]/ai/page.test.tsx` now proves the AI Workspace project switch boundary clears stale instruction, conversation, and save UI state while keeping the new active project view stable.
+* Kept the existing copy, generation, save, and context-loading behavior intact.
+* Tightened the Chief Architect / Codex close-protocol boundary so Chief Architect prepares the handoff and prompt after acceptance while Codex owns local diff, tests, commit, push, publication, and close patch execution.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to reflect `MS-001.76` as the latest completed milestone.
+* Prepared `docs/session-handoffs/2026-07-31_040_SESSION_HANDOFF.md` for Session 041 bootstrap continuity.
+* Published commit `792c970` on `main`.
+
+### Notes
+
+* No new endpoint, persistence, provider, Project Brain, Knowledge, generation, save, reset, or layout behavior was introduced during the publication step.
+* The publication commit hash is recorded in this entry after the commit is created.
+
 ## Session 039 - MS-001.75 publication and SSOT synchronization published
 
 ### Date

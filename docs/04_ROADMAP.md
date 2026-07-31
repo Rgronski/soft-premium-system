@@ -111,11 +111,111 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.75 - AI Workspace Engine Chat Copy State Non-Mutation Foundation
+MS-001.76 - AI Workspace Engine Chat Project Switch State Isolation Foundation
 
 ## Next
 
 NONE
+
+## MS-001.76 - AI Workspace Engine Chat Project Switch State Isolation Foundation
+
+**Milestone**
+MS-001.76 - AI Workspace Engine Chat Project Switch State Isolation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Prove that AI Workspace local chat state stays isolated to the active project when `projectId` changes without changing persistence, API/provider/model behavior, Project Brain behavior, UX copy, or layout.
+
+**Product Outcome**
+The repository contains focused proof that AI Workspace local instruction, generation, conversation, and save state stay scoped to the active project, and stale previous-project async results cannot overwrite the current project view.
+
+**Dependencies**
+* closed `MS-001.75 - AI Workspace Engine Chat Copy State Non-Mutation Foundation`
+* closed `MS-001.73 - AI Workspace Engine Chat Reset Context Boundary Foundation`
+* closed `MS-001.72 - AI Workspace Engine Chat Exchange Boundary Foundation`
+
+**Allowed Future Implementation Files**
+* `src/lib/ai-workspace-engine/engine.ts`
+* `src/lib/ai-workspace-engine/engine.test.ts`
+* `src/app/projects/[id]/ai/page.tsx`
+* `src/app/projects/[id]/ai/page.test.tsx`
+
+**Out of Scope**
+* new UX or layout changes
+* copy success/failure status UI
+* clipboard abstraction/service
+* persistence
+* Project Brain writes
+* Knowledge writes
+* new API routes
+* provider/model changes
+* agent runtime
+* tool calling
+* streaming
+* Markdown/chat transcript system
+* unrelated refactoring
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Publication Commit**
+792c970
+
+**Implementation Evidence**
+* `src/app/projects/[id]/ai/page.test.tsx` now proves the active project view clears stale instruction, conversation, and save UI state after a `projectId` change.
+* The existing project-scoped engine helpers continue to supply the active local state boundary.
+* The current page still shields the active project view from stale async results from the previous project.
+
+**Acceptance Criteria**
+* Switching `projectId` rebinds or resets AI Workspace local instruction state.
+* Switching `projectId` rebinds or resets generation and conversation state.
+* Switching `projectId` rebinds or resets save state.
+* No stale instruction text, exchange history, latest exchange, save title, or save status from the previous project remains visible on the new project.
+* Copy remains local and non-mutating.
+* Generate request shape remains unchanged.
+* Save request shape remains unchanged.
+* Context loading behavior remains unchanged.
+* Stale async results from a previous project do not overwrite the current project page.
+
+**Verification Contract**
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts`
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
+* `git diff --check`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone.
 
 ## MS-001.75 - AI Workspace Engine Chat Copy State Non-Mutation Foundation
 

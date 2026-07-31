@@ -64,6 +64,7 @@ Chief Architect:
 * prepares the closing report,
 * separates implemented work, proposed work, and designed work,
 * prepares the handoff for the next session,
+* does not commit, push, or publish,
 * must not claim files were changed unless this was confirmed.
 
 ## Product Owner
@@ -82,6 +83,7 @@ Codex:
 * may have performed implementation work earlier in the session,
 * is reported as the Implementation Engine when implementation actually occurred,
 * does not replace Chief Architect in the close protocol,
+* performs the local diff, tests, commit, push, publication, and close patch when approved,
 * does not convert proposed work into confirmed work by implication.
 
 ---

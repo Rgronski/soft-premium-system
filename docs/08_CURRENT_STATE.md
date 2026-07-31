@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.75 - AI Workspace Engine Chat Copy State Non-Mutation Foundation
+MS-001.76 - AI Workspace Engine Chat Project Switch State Isolation Foundation
 
 **Next Milestone**
 NONE
+
+MS-001.76 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the AI Workspace Engine Chat Project Switch State Isolation Foundation with commit `792c970`.
 
 **MS-001.17 State**
 COMPLETED / PUBLISHED / CLOSED
