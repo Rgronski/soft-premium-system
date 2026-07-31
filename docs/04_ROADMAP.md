@@ -177,10 +177,13 @@ ACCEPT
 COMPLETED / VERIFIED
 
 **Publication Status**
-NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / READY FOR PUBLICATION
+COMPLETED / PUBLISHED / CLOSED
+
+**Publication Commit**
+`ae2c48c`
 
 **Implementation Evidence**
 * `src/lib/ai-workspace-engine/engine.ts` now exports `deriveResetConversationContextState(...)` as the pure engine-owned reset boundary

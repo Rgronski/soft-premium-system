@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 039 - MS-001.73 reset conversation context boundary verified locally
+## Session 039 - MS-001.73 reset conversation context boundary published
 
 ### Date
 
@@ -82,10 +82,11 @@ Each release entry should contain:
 * Added focused engine coverage for cleared exchanges, cleared `latestExchangeId`, and the empty post-reset conversation context.
 * Confirmed `src/app/projects/[id]/ai/page.test.tsx` still passes without any reset-flow behavior change.
 * Synchronized `docs/04_ROADMAP.md` and `docs/08_CURRENT_STATE.md` to reflect `MS-001.73` as the latest completed milestone.
+* Published commit `ae2c48c` on `main`.
 
 ### Notes
 
-* No commit or push was performed in this local completion step.
+* No application code, tests, provider, endpoint, persistence, or Project Brain behavior changed during the publication step.
 * No new endpoint, persistence, provider, Project Brain, or generation/save behavior was introduced.
 
 ## Session 038 - MS-001.72 publication and SSOT synchronization published
