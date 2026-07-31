@@ -2238,6 +2238,20 @@ describe("ProjectAiWorkspacePage", () => {
       expect(screen.getByText("Beta")).toBeTruthy();
     });
 
+    expect(
+      (screen.getByRole("textbox", { name: "Instruction" }) as HTMLInputElement)
+        .value,
+    ).toBe("");
+    expect(screen.queryByText("Generated response")).toBeNull();
+    expect(screen.queryByRole("textbox", { name: "Title" })).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: "Save to Knowledge" }),
+    ).toBeNull();
+    expect(screen.queryByRole("button", { name: "Reset Conversation" })).toBeNull();
+    expect(screen.getByRole("button", { name: "Generate" })).toBeTruthy();
+    expect(
+      screen.getByText("Next Generate will use no local conversation context."),
+    ).toBeTruthy();
     expect(screen.queryByRole("button", { name: "Saved" })).toBeNull();
     expect(screen.queryByText("Generated response")).toBeNull();
   });
