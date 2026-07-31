@@ -48,7 +48,7 @@ NONE
 MS-001.66 - AI Workspace Engine Instruction Value Change State Derivation Foundation
 
 **Next Milestone**
-NONE
+MS-001.71 - AI Chat, Prompts, and Agents Foundation
 
 **MS-001.17 State**
 COMPLETED / PUBLISHED / CLOSED
@@ -1235,7 +1235,7 @@ Next:
 
 * `Current Product Milestone` is `NONE`
 * `Latest Completed Product Milestone` is `MS-001.66 - AI Workspace Engine Instruction Value Change State Derivation Foundation`
-* `Next Product Milestone` is `NONE`
+* `Next Product Milestone` is `MS-001.71 - AI Chat, Prompts, and Agents Foundation`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.18` is `COMPLETED / PUBLISHED / CLOSED`

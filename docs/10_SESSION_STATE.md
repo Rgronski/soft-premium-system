@@ -221,7 +221,7 @@ Current Mode: SESSION CLOSED / READY FOR NEXT START
 Completed Capability Items: Session 037 confirmed `main` matched `origin/main`, the working tree was clean, and the latest HEAD was `a46b72a`; Session 037 validated `MS-001.67`, `MS-001.68`, `MS-001.69`, and `MS-001.70` as no-op PASS with no files changed; Session 037 completed Session Close Protocol preparation for Session 038
 Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-001.66 - AI Workspace Engine Instruction Value Change State Derivation Foundation
-Next Product Milestone: NONE
+Next Product Milestone: MS-001.71 - AI Chat, Prompts, and Agents Foundation
 Active Parallel Capability: NONE
 Latest Completed Capability Item: CAP-005 - React Component Test Infrastructure Foundation
 Current Sprint: NONE
@@ -233,4 +233,4 @@ Latest Verified Commit: a46b72a
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Start Session 038 from a fresh generated package and inspect the published MS-001.66 SSOT state.
+Next Safe Step: Run Next Product Milestone Contract Discovery for MS-001.71.
