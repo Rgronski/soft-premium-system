@@ -25,6 +25,7 @@ import {
   deriveContextLoadState,
   deriveActiveSaveState,
   deriveLatestExchange,
+  deriveInstructionValueChangeState,
   getConversationContextStatusMessage,
   getGenerationErrorMessage,
   getSaveErrorMessage,
@@ -217,11 +218,9 @@ export default function ProjectAiWorkspacePage() {
       return;
     }
 
-    setInstructionState({
-      projectId: params.id,
-      value,
-      selectedPromptId: promptId,
-    });
+    setInstructionState(
+      deriveInstructionValueChangeState(params.id, value, promptId),
+    );
   }
 
   function handleResetConversation() {

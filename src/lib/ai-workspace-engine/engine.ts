@@ -140,6 +140,18 @@ export function deriveManualInstructionChangeState(
   };
 }
 
+export function deriveInstructionValueChangeState(
+  projectId: string,
+  value: string,
+  promptId: string,
+): InstructionUiState {
+  return {
+    projectId,
+    value,
+    selectedPromptId: promptId,
+  };
+}
+
 const CONVERSATION_CONTEXT_EXCHANGE_LIMIT = 3;
 
 function getBudgetedConversationContext(
