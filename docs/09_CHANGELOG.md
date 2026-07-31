@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 036 - MS-001.66 publication and session close synchronization published
+
+### Date
+
+2026-07-31
+
+### Completed
+
+* Published `f65cb2e - chore(ai-workspace): derive instruction value change state` on `main`.
+* Synchronized Session 036 close-state continuity in `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and the Session 036 handoff.
+* Confirmed Session 036 closed after MS-001.66 publication with no additional milestone activated.
+* Kept `Current Product Milestone` as `NONE`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No application code, tests, provider, API, or Project Brain changes were introduced by the Session 036 close synchronization.
+* The publication endpoint is now present on `origin/main`.
+
 ## Session 036 - MS-001.65 publication and session close synchronization published
 
 ### Date

@@ -23,28 +23,31 @@ Completed Work Items:
 - Published `7b8769c - chore(ai-workspace): derive save context refresh state` on `main`.
 - Synchronized MS-001.65 publication truth in `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and this Session 036 handoff.
 - Recorded `MS-001.65` as `COMPLETED / PUBLISHED / CLOSED`.
+- Published `f65cb2e - chore(ai-workspace): derive instruction value change state` on `main`.
+- Synchronized MS-001.66 publication truth in `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and this Session 036 handoff.
+- Recorded `MS-001.66` as `COMPLETED / PUBLISHED / CLOSED`.
 Designed But Not Implemented: NONE
 Intentional Non-Changes: No application code, tests, provider logic, API routes, or Project Brain contracts were changed during the SSOT sync.
-Next Work Item: Start Session 037 from a fresh generated package and inspect the published MS-001.65 SSOT state.
+Next Work Item: Start Session 037 from a fresh generated package and inspect the published MS-001.66 SSOT state.
 
 Repository State:
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 7b8769c
+Latest Verified Commit: f65cb2e
 Push Status: Session 036 SSOT synchronization is published on origin/main
 
 Milestone State:
 Current Product Milestone: NONE
-Latest Completed Milestone: MS-001.65 - AI Workspace Engine Save Context Refresh State Derivation Foundation
+Latest Completed Milestone: MS-001.66 - AI Workspace Engine Instruction Value Change State Derivation Foundation
 
 Verification:
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
 
-Recommendation: Start Session 037 from a fresh generated package and inspect the published MS-001.65 SSOT state.
-Next Safe Step: Start Session 037 from a fresh generated package and inspect the published MS-001.65 SSOT state.
+Recommendation: Start Session 037 from a fresh generated package and inspect the published MS-001.66 SSOT state.
+Next Safe Step: Start Session 037 from a fresh generated package and inspect the published MS-001.66 SSOT state.
 Next Chat Prompt:
 037 SPS OS - Next Product Milestone Contract Discovery
 
@@ -69,11 +72,11 @@ Confirmed state:
 - previous session: 036
 - current session: 037
 - branch: main
-- package HEAD / final close commit: 96833ed
-- origin/main endpoint at Session 036 close: 96833ed
+- package HEAD / final close commit: f65cb2e
+- origin/main endpoint at Session 036 close: f65cb2e
 - origin/main synchronization at close: 0 / 0
 - working tree at close: CLEAN
-- latest completed product milestone: MS-001.65 - AI Workspace Engine Save Context Refresh State Derivation Foundation
+- latest completed product milestone: MS-001.66 - AI Workspace Engine Instruction Value Change State Derivation Foundation
 - current product milestone: NONE
 - next product milestone: NONE
 - blockers: NONE

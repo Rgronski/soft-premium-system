@@ -111,13 +111,94 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.65 - AI Workspace Engine Save Context Refresh State Derivation Foundation
+MS-001.66 - AI Workspace Engine Instruction Value Change State Derivation Foundation
 
 ## Next
 
 NONE
 
-## MS-001.65 - AI Workspace Engine Save Context Refresh State Derivation Foundation
+## MS-001.66 - AI Workspace Engine Instruction Value Change State Derivation Foundation
+
+**Milestone**
+MS-001.66 - AI Workspace Engine Instruction Value Change State Derivation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Replace only the remaining inline `InstructionUiState` derivation in `setInstructionValue(...)` when `promptId !== null` with the existing AI Workspace Engine helper `deriveInstructionValueChangeState(projectId, value, promptId)`.
+
+**Dependencies**
+* closed `MS-001.65 - AI Workspace Engine Save Context Refresh State Derivation Foundation`
+
+**Allowed Future Implementation Files**
+* `src/app/projects/[id]/ai/page.tsx`
+
+**Out of Scope**
+* API routes
+* provider logic
+* Project Brain schema or persistence contracts
+* unrelated UI layout, copy, or style changes
+* unrelated refactoring
+* manual instruction input path changes
+* dependencies and configuration
+
+**Product Owner Decision**
+ACCEPT
+
+**Definition of Ready Review**
+PASS
+
+**Activation Status**
+CLOSED
+
+**Activation Decision**
+AUTHORIZED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Publication Commit**
+`f65cb2e`
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/app/projects/[id]/ai/page.tsx` now delegates the starter prompt branch in `setInstructionValue(...)` to `deriveInstructionValueChangeState(projectId, value, promptId)`
+* the helper preserves the `promptId === null` manual instruction path by continuing to use `deriveManualInstructionChangeState(...)`
+* required verification passed: `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts` `PASS (44 / 44)`, `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx` `PASS (32 / 32)`, and `git diff --check` `PASS` with line-ending warning only
+
+**Acceptance Criteria**
+* the page delegates only the `promptId !== null` branch in `setInstructionValue(...)` to `deriveInstructionValueChangeState(projectId, value, promptId)`
+* the manual input path remains handled by `deriveManualInstructionChangeState(...)`
+* no helper, type, UX, API, provider, Project Brain, or persistence changes are introduced
+
+**Verification Contract**
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts`
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
+* `git diff --check`
 
 **Milestone**
 MS-001.65 - AI Workspace Engine Save Context Refresh State Derivation Foundation
