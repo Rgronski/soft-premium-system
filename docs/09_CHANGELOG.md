@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 038 - MS-001.71 publication and SSOT synchronization published
+## Session 038 - MS-001.72 publication and SSOT synchronization published
 
 ### Date
 
@@ -77,9 +77,9 @@ Each release entry should contain:
 
 ### Completed
 
-* Published `16bca08 - feat(ai-workspace): add MS-001.71 prompt orchestration boundary` on `main`.
-* Added the `MS-001.71 - AI Chat, Prompts, and Agents Foundation` contract to `docs/04_ROADMAP.md`.
-* Synchronized `docs/04_ROADMAP.md`, `docs/06_BACKLOG.md`, and `docs/08_CURRENT_STATE.md` to reflect the completed MS-001.71 state.
+* Published `8fbebfb - feat(ai-workspace): add MS-001.72 conversation context boundary` on `main`.
+* Added the `MS-001.72 - AI Workspace Engine Chat Exchange Boundary Foundation` contract to `docs/04_ROADMAP.md`.
+* Synchronized `docs/04_ROADMAP.md` and `docs/08_CURRENT_STATE.md` to reflect the completed MS-001.72 state.
 * Kept `docs/10_SESSION_STATE.md` unchanged because no session handoff was requested.
 
 ### Notes

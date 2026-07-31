@@ -111,11 +111,102 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.71 - AI Chat, Prompts, and Agents Foundation
+MS-001.72 - AI Workspace Engine Chat Exchange Boundary Foundation
 
 ## Next
 
 NONE
+
+## MS-001.72 - AI Workspace Engine Chat Exchange Boundary Foundation
+
+**Milestone**
+MS-001.72 - AI Workspace Engine Chat Exchange Boundary Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Create the smallest engine-owned boundary for the current AI Workspace conversation context and local chat exchanges without changing the existing generation flow, save flow, or local exchange budget behavior.
+
+**Product Outcome**
+The repository contains one minimal AI Workspace Engine helper that owns the current project conversation context derived from `GenerationUiState`, while the existing AI Workspace page reuses that helper with unchanged conversation rendering and generation behavior.
+
+**Dependencies**
+* closed `MS-001.71 - AI Chat, Prompts, and Agents Foundation`
+
+**Allowed Future Implementation Files**
+* `src/app/projects/[id]/ai/page.tsx`
+* `src/lib/ai-workspace-engine/engine.ts`
+* `src/app/projects/[id]/ai/page.test.tsx`
+* `src/lib/ai-workspace-engine/engine.test.ts`
+
+**Out of Scope**
+* agent runtime
+* tool calling
+* streaming
+* new API routes
+* persistence changes
+* provider / model changes
+* Project Brain writes
+* chat transcript / Markdown system
+* UX / layout rewrite
+* unrelated refactoring
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Publication Commit**
+`8fbebfb`
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exports `deriveConversationContextState(...)` as the single engine-owned conversation-context boundary
+* `src/app/projects/[id]/ai/page.tsx` now routes the conversation context status message, generation instruction context, and conversation rendering through the new helper
+* `src/lib/ai-workspace-engine/engine.test.ts` now covers matched and cross-project conversation context derivation
+
+**Acceptance Criteria**
+* the current conversation context still reflects the active generation exchange list for the current project
+* the local exchange limit remains unchanged
+* Generate flow remains unchanged
+* Save flow remains unchanged
+* no new endpoint, persistence, provider, or Project Brain behavior is introduced
+
+**Verification Contract**
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts`
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
+* `git diff --check`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone.
 
 ## MS-001.71 - AI Chat, Prompts, and Agents Foundation
 
