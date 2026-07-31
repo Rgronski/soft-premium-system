@@ -91,6 +91,11 @@ export type ConversationContextUiState = {
   statusMessage: string;
 };
 
+export type ConversationContextResetUiState = {
+  generationUiState: GenerationUiState;
+  conversationContextState: ConversationContextUiState;
+};
+
 export function deriveActiveInstructionState(
   projectId: string,
   instructionUiState: InstructionUiState,
@@ -184,6 +189,20 @@ export function deriveConversationContextState(
     exchanges: activeGenerationState.exchanges,
     statusMessage: getConversationContextStatusMessage(
       activeGenerationState.exchanges,
+    ),
+  };
+}
+
+export function deriveResetConversationContextState(
+  projectId: string,
+): ConversationContextResetUiState {
+  const generationUiState = deriveResetGenerationState(projectId);
+
+  return {
+    generationUiState,
+    conversationContextState: deriveConversationContextState(
+      projectId,
+      generationUiState,
     ),
   };
 }

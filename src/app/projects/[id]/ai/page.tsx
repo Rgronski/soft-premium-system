@@ -9,7 +9,7 @@ import {
   deriveGenerationSuccessState,
   deriveGenerationStartState,
   deriveActiveInstructionState,
-  deriveResetGenerationState,
+  deriveResetConversationContextState,
   deriveResetSaveState,
   deriveSelectedStarterPromptInstructionState,
   derivePromptOrchestrationInstructionState,
@@ -217,8 +217,12 @@ export default function ProjectAiWorkspacePage() {
   }
 
   function handleResetConversation() {
+    const resetConversationState = deriveResetConversationContextState(
+      params.id,
+    );
+
     nextExchangeIdRef.current = 1;
-    setGenerationUiState(deriveResetGenerationState(params.id));
+    setGenerationUiState(resetConversationState.generationUiState);
     setSaveUiState(deriveResetSaveState(params.id));
   }
 

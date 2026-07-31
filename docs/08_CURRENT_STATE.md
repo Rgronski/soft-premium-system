@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.72 - AI Workspace Engine Chat Exchange Boundary Foundation
+MS-001.73 - AI Workspace Engine Chat Reset Context Boundary Foundation
 
 **Next Milestone**
 NONE

@@ -12,6 +12,7 @@ import {
   deriveSelectedStarterPromptInstructionState,
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
+  deriveResetConversationContextState,
   deriveResetGenerationState,
   deriveResetSaveState,
   deriveContextLoadState,
@@ -364,6 +365,24 @@ describe("ai workspace engine", () => {
       exchanges: [],
       latestExchangeId: null,
       errorMessage: null,
+    });
+  });
+
+  test("derives the reset conversation context state with cleared exchanges and empty render context", () => {
+    expect(deriveResetConversationContextState("project-2")).toEqual({
+      generationUiState: {
+        projectId: "project-2",
+        state: "idle",
+        exchanges: [],
+        latestExchangeId: null,
+        errorMessage: null,
+      },
+      conversationContextState: {
+        projectId: "project-2",
+        exchanges: [],
+        statusMessage:
+          "Next Generate will use no local conversation context.",
+      },
     });
   });
 

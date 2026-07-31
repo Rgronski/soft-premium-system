@@ -111,11 +111,100 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.72 - AI Workspace Engine Chat Exchange Boundary Foundation
+MS-001.73 - AI Workspace Engine Chat Reset Context Boundary Foundation
 
 ## Next
 
 NONE
+
+## MS-001.73 - AI Workspace Engine Chat Reset Context Boundary Foundation
+
+**Milestone**
+MS-001.73 - AI Workspace Engine Chat Reset Context Boundary Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Create the smallest pure engine-owned boundary for resetting the local AI Workspace conversation context without changing the existing generation flow, save flow, or local exchange budget behavior.
+
+**Product Outcome**
+The repository contains one minimal AI Workspace Engine helper that owns the reset of the current project conversation context derived from `GenerationUiState`, while the existing AI Workspace page reuses that helper with unchanged reset timing, conversation rendering, and generation behavior.
+
+**Dependencies**
+* closed `MS-001.72 - AI Workspace Engine Chat Exchange Boundary Foundation`
+
+**Allowed Future Implementation Files**
+* `src/app/projects/[id]/ai/page.tsx`
+* `src/lib/ai-workspace-engine/engine.ts`
+* `src/app/projects/[id]/ai/page.test.tsx`
+* `src/lib/ai-workspace-engine/engine.test.ts`
+
+**Out of Scope**
+* agent runtime
+* tool calling
+* streaming
+* new API routes
+* persistence changes
+* provider / model changes
+* Project Brain writes
+* chat transcript / Markdown system
+* UX / layout rewrite
+* unrelated refactoring
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / READY FOR PUBLICATION
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exports `deriveResetConversationContextState(...)` as the pure engine-owned reset boundary
+* `src/app/projects/[id]/ai/page.tsx` now routes `handleResetConversation()` through the new helper while preserving `nextExchangeIdRef.current = 1`
+* `src/lib/ai-workspace-engine/engine.test.ts` now covers cleared exchanges, cleared latest exchange id, and the empty post-reset conversation context
+
+**Acceptance Criteria**
+* reset still clears local exchanges
+* status context after reset returns to the absence of local conversation context
+* `nextExchangeIdRef.current = 1` behavior remains unchanged
+* Generate flow remains unchanged
+* Save flow remains unchanged
+* no new endpoint, persistence, provider, or Project Brain behavior is introduced
+
+**Verification Contract**
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts`
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
+* `git diff --check`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone.
 
 ## MS-001.72 - AI Workspace Engine Chat Exchange Boundary Foundation
 

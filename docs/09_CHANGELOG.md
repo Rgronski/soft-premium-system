@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 039 - MS-001.73 reset conversation context boundary verified locally
+
+### Date
+
+2026-07-31
+
+### Completed
+
+* Added `deriveResetConversationContextState(...)` to `src/lib/ai-workspace-engine/engine.ts` as the smallest pure engine-owned reset boundary for local conversation context.
+* Updated `src/app/projects/[id]/ai/page.tsx` so `handleResetConversation()` now uses the new helper while preserving `nextExchangeIdRef.current = 1`.
+* Added focused engine coverage for cleared exchanges, cleared `latestExchangeId`, and the empty post-reset conversation context.
+* Confirmed `src/app/projects/[id]/ai/page.test.tsx` still passes without any reset-flow behavior change.
+* Synchronized `docs/04_ROADMAP.md` and `docs/08_CURRENT_STATE.md` to reflect `MS-001.73` as the latest completed milestone.
+
+### Notes
+
+* No commit or push was performed in this local completion step.
+* No new endpoint, persistence, provider, Project Brain, or generation/save behavior was introduced.
+
 ## Session 038 - MS-001.72 publication and SSOT synchronization published
 
 ### Date
