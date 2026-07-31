@@ -111,11 +111,110 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.73 - AI Workspace Engine Chat Reset Context Boundary Foundation
+MS-001.74 - AI Workspace Engine Chat Copy Boundary Foundation
 
 ## Next
 
 NONE
+
+## MS-001.74 - AI Workspace Engine Chat Copy Boundary Foundation
+
+**Milestone**
+MS-001.74 - AI Workspace Engine Chat Copy Boundary Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+PROPOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Create the smallest engine-owned boundary for AI Workspace chat response copy intent before the existing clipboard call, without changing the current copy behavior or introducing new UX, persistence, Project Brain writes, provider behavior, save behavior, generate behavior, or reset behavior.
+
+**Product Outcome**
+The repository contains one minimal AI Workspace Engine helper that represents the local non-persistent chat copy intent for a generated response, while the existing AI Workspace page reuses that helper before calling the browser clipboard API and preserves the exact current copy behavior.
+
+**Dependencies**
+* closed `MS-001.73 - AI Workspace Engine Chat Reset Context Boundary Foundation`
+* closed `MS-001.34 - AI Workspace Conversation Copy Foundation`
+
+**Allowed Future Implementation Files**
+* `src/app/projects/[id]/ai/page.tsx`
+* `src/lib/ai-workspace-engine/engine.ts`
+* `src/app/projects/[id]/ai/page.test.tsx`
+* `src/lib/ai-workspace-engine/engine.test.ts`
+
+**Out of Scope**
+* new UX or layout changes
+* copy success/failure status UI
+* clipboard abstraction/service
+* persistence
+* Project Brain writes
+* Knowledge writes
+* new API routes
+* provider/model changes
+* agent runtime
+* tool calling
+* streaming
+* Markdown/chat transcript system
+* unrelated refactoring
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Publication Commit**
+PENDING_PUBLICATION_COMMIT
+
+**Implementation Evidence**
+* `src/lib/ai-workspace-engine/engine.ts` now exports `deriveCopyResponseIntentState(...)` as the smallest engine-owned copy-intent boundary
+* `src/app/projects/[id]/ai/page.tsx` now routes copy handling through the new helper immediately before `navigator.clipboard.writeText(...)`
+* `src/lib/ai-workspace-engine/engine.test.ts` covers the helper as a pure non-mutating pass-through for the response text
+* `src/app/projects/[id]/ai/page.test.tsx` still verifies the exact clipboard text remains unchanged
+
+**Acceptance Criteria**
+* Copy still calls `navigator.clipboard.writeText` with the exact generated response text
+* Copy remains local, non-persistent, and non-mutating
+* Conversation state remains unchanged by copy
+* Save state remains unchanged by copy
+* Generate flow remains unchanged
+* Reset flow remains unchanged
+* No new endpoint, persistence, provider, Project Brain, or Knowledge behavior is introduced
+
+**Verification Contract**
+* `npm.cmd test -- src/lib/ai-workspace-engine/engine.test.ts`
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
+* `npx.cmd tsc --noEmit`
+* `git diff --check`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone.
 
 ## MS-001.73 - AI Workspace Engine Chat Reset Context Boundary Foundation
 

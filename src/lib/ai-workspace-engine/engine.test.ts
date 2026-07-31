@@ -13,6 +13,7 @@ import {
   deriveGenerateActionPresentation,
   deriveResetActionPresentation,
   deriveResetConversationContextState,
+  deriveCopyResponseIntentState,
   deriveResetGenerationState,
   deriveResetSaveState,
   deriveContextLoadState,
@@ -383,6 +384,15 @@ describe("ai workspace engine", () => {
         statusMessage:
           "Next Generate will use no local conversation context.",
       },
+    });
+  });
+
+  test("derives the copy response intent state without changing the response text", () => {
+    expect(
+      deriveCopyResponseIntentState("project-2", "Generated response"),
+    ).toEqual({
+      projectId: "project-2",
+      response: "Generated response",
     });
   });
 

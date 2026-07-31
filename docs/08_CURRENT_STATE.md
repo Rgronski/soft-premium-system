@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.73 - AI Workspace Engine Chat Reset Context Boundary Foundation
+MS-001.74 - AI Workspace Engine Chat Copy Boundary Foundation
 
 **Next Milestone**
 NONE
@@ -1234,7 +1234,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.72 - AI Workspace Engine Chat Exchange Boundary Foundation`
+* `Latest Completed Product Milestone` is `MS-001.74 - AI Workspace Engine Chat Copy Boundary Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

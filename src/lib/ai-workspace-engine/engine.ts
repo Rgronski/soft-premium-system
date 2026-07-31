@@ -96,6 +96,11 @@ export type ConversationContextResetUiState = {
   conversationContextState: ConversationContextUiState;
 };
 
+export type CopyResponseIntentUiState = {
+  projectId: string;
+  response: string;
+};
+
 export function deriveActiveInstructionState(
   projectId: string,
   instructionUiState: InstructionUiState,
@@ -204,6 +209,16 @@ export function deriveResetConversationContextState(
       projectId,
       generationUiState,
     ),
+  };
+}
+
+export function deriveCopyResponseIntentState(
+  projectId: string,
+  response: string,
+): CopyResponseIntentUiState {
+  return {
+    projectId,
+    response,
   };
 }
 

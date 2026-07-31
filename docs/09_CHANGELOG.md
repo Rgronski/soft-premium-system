@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 039 - MS-001.74 publication and SSOT synchronization published
+
+### Date
+
+2026-07-31
+
+### Completed
+
+* Added `deriveCopyResponseIntentState(...)` to `src/lib/ai-workspace-engine/engine.ts` as the smallest pure engine-owned copy-intent boundary for local conversation response copy handling.
+* Updated `src/app/projects/[id]/ai/page.tsx` so `handleCopyResponse()` now uses the new helper immediately before `navigator.clipboard.writeText(...)`.
+* Added focused engine coverage for the non-mutating copy intent pass-through helper.
+* Confirmed `src/app/projects/[id]/ai/page.test.tsx` still passes and keeps verifying the exact clipboard write text.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to reflect `MS-001.74` as the latest completed milestone.
+* Published commit `PENDING_PUBLICATION_COMMIT` on `main`.
+
+### Notes
+
+* No new endpoint, persistence, provider, Project Brain, Knowledge, or generation/save/reset behavior was introduced during the publication step.
+* The publication commit will be recorded with the final commit hash after the commit is created.
+
 ## Session 039 - MS-001.73 reset conversation context boundary published
 
 ### Date

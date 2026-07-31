@@ -211,26 +211,26 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-07-31
-Current Session ID: 038
-Current Chat Title: 038 SPS OS - SESSION CLOSE PROTOCOL
-Next Session ID: 039
-Suggested Next Chat Title: 039 SPS OS - Next Product Milestone Contract Discovery
+Current Session ID: 039
+Current Chat Title: 039 SPS OS - MS-001.74 Publication
+Next Session ID: 040
+Suggested Next Chat Title: 040 SPS OS - SESSION CLOSE PROTOCOL
 Active Capability: NONE
-Active Work Item: NONE
-Current Mode: SESSION CLOSED / READY FOR NEXT START
-Completed Capability Items: Session 038 implemented and published MS-001.71 `16bca08` / `594f39e`, MS-001.72 `8fbebfb` / `8daa9f3`, and MS-001.73 `ae2c48c` / `c383eaa`; Session 038 completed the close protocol preparation for Session 039
+Active Work Item: MS-001.74 Publication
+Current Mode: SESSION ACTIVE / PUBLICATION COMPLETE
+Completed Capability Items: Session 039 implemented and published MS-001.74 `PENDING_PUBLICATION_COMMIT`; Session 039 completed the publication sync for MS-001.74
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.73 - AI Workspace Engine Chat Reset Context Boundary Foundation
+Latest Completed Product Milestone: MS-001.74 - AI Workspace Engine Chat Copy Boundary Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
 Latest Completed Capability Item: CAP-005 - React Component Test Infrastructure Foundation
 Current Sprint: NONE
-Platform Priority: Keep SPS OS 1.0 close state synchronized and prepare Session 039 from a fresh generated package.
+Platform Priority: Keep SPS OS 1.0 close state synchronized and prepare the Session 039 publication close-out.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: c383eaa
+Latest Verified Commit: PENDING_PUBLICATION_COMMIT
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Run `powershell -ExecutionPolicy Bypass -File .\scripts\New-SpsSession.ps1`.
+Next Safe Step: Wait for Product Owner approval of `SPS OS - KONIEC` before running the session close protocol.

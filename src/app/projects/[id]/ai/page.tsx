@@ -9,6 +9,7 @@ import {
   deriveGenerationSuccessState,
   deriveGenerationStartState,
   deriveActiveInstructionState,
+  deriveCopyResponseIntentState,
   deriveResetConversationContextState,
   deriveResetSaveState,
   deriveSelectedStarterPromptInstructionState,
@@ -419,7 +420,12 @@ export default function ProjectAiWorkspacePage() {
   }
 
   async function handleCopyResponse(response: string) {
-    await navigator.clipboard.writeText(response);
+    const copyResponseIntentState = deriveCopyResponseIntentState(
+      params.id,
+      response,
+    );
+
+    await navigator.clipboard.writeText(copyResponseIntentState.response);
   }
 
   return (
