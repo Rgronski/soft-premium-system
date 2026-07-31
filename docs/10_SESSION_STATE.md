@@ -212,25 +212,25 @@ SPS OS Session State
 
 Date: 2026-07-31
 Current Session ID: 039
-Current Chat Title: 039 SPS OS - MS-001.75 Publication
+Current Chat Title: 039 SPS OS - SESSION CLOSE PROTOCOL
 Next Session ID: 040
-Suggested Next Chat Title: 040 SPS OS - SESSION CLOSE PROTOCOL
+Suggested Next Chat Title: 040 SPS OS - START
 Active Capability: NONE
-Active Work Item: MS-001.75 Publication
-Current Mode: SESSION ACTIVE / PUBLICATION COMPLETE
-Completed Capability Items: Session 039 implemented and published MS-001.74 `30da99e`; Session 039 implemented and published MS-001.75 `f86e139`; Session 039 completed the publication sync for MS-001.75
+Active Work Item: NONE
+Current Mode: SESSION CLOSED
+Completed Capability Items: Session 039 implemented and published MS-001.74 `30da99e`; Session 039 implemented and published MS-001.75 `f86e139`; Session 039 published the MS-001.75 SSOT sync commit `8ff05f0`; Session 039 completed the Session 039 close protocol preparation
 Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-001.75 - AI Workspace Engine Chat Copy State Non-Mutation Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
 Latest Completed Capability Item: CAP-005 - React Component Test Infrastructure Foundation
 Current Sprint: NONE
-Platform Priority: Keep SPS OS 1.0 close state synchronized and prepare the Session 039 publication close-out.
+Platform Priority: Keep SPS OS 1.0 close state synchronized and prepare the Session 040 start package.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: f86e139
+Latest Verified Commit: 8ff05f0
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Wait for Product Owner approval of `SPS OS - KONIEC` before running the session close protocol.
+Next Safe Step: Run `powershell -ExecutionPolicy Bypass -File .\scripts\New-SpsSession.ps1`.
