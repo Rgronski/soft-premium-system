@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 036 - MS-001.63 publication and session close synchronization published
+
+### Date
+
+2026-07-31
+
+### Completed
+
+* Published `96833ed - chore(ai-workspace): derive save title change state` on `main`.
+* Synchronized Session 036 close-state continuity in `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and the Session 036 handoff.
+* Confirmed Session 036 closed after MS-001.63 publication with no additional milestone activated.
+* Kept `Current Product Milestone` as `NONE`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No application code, tests, provider, API, or Project Brain changes were introduced by the Session 036 close synchronization.
+* The publication endpoint is now present on `origin/main`.
+
 ## Session 035 - MS-001.62 publication and session close synchronization published
 
 ### Date
@@ -111,6 +130,32 @@ Each release entry should contain:
 ### Notes
 
 * No engine.ts change, title-input derivation, save-error, saving, saved, refresh-warning, generation-success, API, backend, provider, or Project Brain changes were introduced.
+* The publication commit is now present on `origin/main`.
+
+## MS-001.63 - AI Workspace Engine Save Title Change State Derivation Foundation published
+
+### Date
+
+2026-07-31
+
+### Completed
+
+* Recorded `MS-001.63 - AI Workspace Engine Save Title Change State Derivation Foundation` as `COMPLETED / PUBLISHED / CLOSED`.
+* Confirmed `src/app/projects/[id]/ai/page.tsx` now delegates the inline title-input save-state derivation to `deriveSaveTitleChangeState(...)`.
+* Confirmed the saved-vs-ready-to-save branch behavior remains unchanged.
+* Confirmed the refresh-error preservation remains unchanged.
+* Confirmed the inline object spread is removed from the page title input handler.
+* Recorded focused verification as `PASS` with engine tests `40 / 40`, page tests `32 / 32`, `npx.cmd tsc --noEmit` `PASS`, and `git diff --check` `PASS` with line-ending warning only.
+* Recorded publication status as `PUBLISHED`.
+* Recorded publication commit `96833ed`.
+* Recorded milestone status as `COMPLETED / PUBLISHED / CLOSED`.
+* Set `Current Product Milestone` to `NONE`.
+* Set `Latest Completed Product Milestone` to `MS-001.63 - AI Workspace Engine Save Title Change State Derivation Foundation`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No API, backend, provider, or Project Brain changes were introduced.
 * The publication commit is now present on `origin/main`.
 
 ## MS-001.61 - AI Workspace Engine Save Ready State Derivation Foundation published
