@@ -42,9 +42,11 @@ Blockers: NONE
 Open Risks: NONE
 
 Recommendation: Open a new chat, attach `sps-session.zip`, and paste the Session 041 START prompt.
-Next Safe Step: Open a new chat, attach `sps-session.zip`, and paste the Session 041 START prompt.
+Next Safe Step: Open a new chat titled `041 SPS OS - Next Product Milestone Contract Discovery`, attach `sps-session.zip`, and paste the START prompt.
 Next Chat Prompt:
-041 SPS OS - START
+041 SPS OS - Next Product Milestone Contract Discovery
+
+SPS OS - START
 
 Attached file:
 sps-session.zip

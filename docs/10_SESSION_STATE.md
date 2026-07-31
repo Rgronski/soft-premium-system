@@ -233,4 +233,4 @@ Latest Verified Commit: 792c970
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat, attach `sps-session.zip`, and paste the Session 041 START prompt.
+Next Safe Step: Open a new chat titled `041 SPS OS - Next Product Milestone Contract Discovery`, attach `sps-session.zip`, and paste the START prompt.
