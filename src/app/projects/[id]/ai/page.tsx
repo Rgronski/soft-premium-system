@@ -22,6 +22,7 @@ import {
   deriveSaveSavingState,
   deriveSaveSuccessState,
   deriveSaveTitleChangeState,
+  deriveContextLoadState,
   deriveActiveSaveState,
   deriveLatestExchange,
   getConversationContextStatusMessage,
@@ -112,27 +113,7 @@ export default function ProjectAiWorkspacePage() {
         return;
       }
 
-      if (result.status === "available") {
-        setContextState({
-          projectId: params.id,
-          status: "available",
-          context: result.context,
-        });
-        return;
-      }
-
-      if (result.status === "project-not-found") {
-        setContextState({
-          projectId: params.id,
-          status: "project-not-found",
-        });
-        return;
-      }
-
-      setContextState({
-        projectId: params.id,
-        status: "unavailable",
-      });
+      setContextState(deriveContextLoadState(params.id, result));
     });
 
     return () => {

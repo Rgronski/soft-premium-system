@@ -11,6 +11,7 @@ import {
   deriveResetActionPresentation,
   deriveResetGenerationState,
   deriveResetSaveState,
+  deriveContextLoadState,
   deriveSaveActionPresentation,
   deriveSaveErrorState,
   deriveSaveReadyState,
@@ -139,6 +140,51 @@ describe("ai workspace engine", () => {
       projectId: "project-2",
       value: "Write a custom instruction.",
       selectedPromptId: null,
+    });
+  });
+
+  test("derives the available context load state with the loaded context", () => {
+    expect(
+      deriveContextLoadState("project-2", {
+        status: "available",
+        context: {
+          projectId: "project-2",
+          projectName: "Project 2",
+          tasks: [],
+          knowledgeEntries: [],
+        },
+      }),
+    ).toEqual({
+      projectId: "project-2",
+      status: "available",
+      context: {
+        projectId: "project-2",
+        projectName: "Project 2",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+  });
+
+  test("derives the project-not-found context load state", () => {
+    expect(
+      deriveContextLoadState("project-2", {
+        status: "project-not-found",
+      }),
+    ).toEqual({
+      projectId: "project-2",
+      status: "project-not-found",
+    });
+  });
+
+  test("derives the unavailable context load state", () => {
+    expect(
+      deriveContextLoadState("project-2", {
+        status: "unavailable",
+      }),
+    ).toEqual({
+      projectId: "project-2",
+      status: "unavailable",
     });
   });
 

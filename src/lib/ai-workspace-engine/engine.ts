@@ -21,6 +21,15 @@ export type ContextUiState =
       status: "project-not-found" | "unavailable";
     };
 
+export type BrowserAiProjectContextLoadResult =
+  | {
+      status: "available";
+      context: AiProjectContext;
+    }
+  | {
+      status: "project-not-found" | "unavailable";
+    };
+
 export type GenerationState = "idle" | "generating" | "generated" | "error";
 
 export type GenerationUiState = {
@@ -88,6 +97,24 @@ export function deriveActiveInstructionState(
     projectId,
     value: "",
     selectedPromptId: null,
+  };
+}
+
+export function deriveContextLoadState(
+  projectId: string,
+  result: BrowserAiProjectContextLoadResult,
+): ContextUiState {
+  if (result.status === "available") {
+    return {
+      projectId,
+      status: "available",
+      context: result.context,
+    };
+  }
+
+  return {
+    projectId,
+    status: result.status,
   };
 }
 
