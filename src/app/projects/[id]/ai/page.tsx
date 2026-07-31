@@ -381,11 +381,7 @@ export default function ProjectAiWorkspacePage() {
           }
 
           if (contextResult.status === "available") {
-            setContextState({
-              projectId,
-              status: "available",
-              context: contextResult.context,
-            });
+            setContextState(deriveContextLoadState(projectId, contextResult));
             return;
           }
 
