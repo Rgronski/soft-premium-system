@@ -119,6 +119,77 @@ NONE
 
 MS-001.79 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Creation Contract Foundation with commit `6881e86`.
 
+## MS-002.z - Workspace Project Route Shell Boundary Foundation
+
+**Milestone**
+MS-002.z - Workspace Project Route Shell Boundary Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+PROPOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Make the `/workspace` vs `/projects/[id]` route shell boundary real before Project Brain access changes or the first read-only Salon Module.
+
+**Product Outcome**
+The repository contains the smallest safe route shell split between `/workspace` and `/projects/[id]` while Project Brain remains canonical and Salon Modules remain workspace-scoped.
+
+**Dependencies**
+* `MS-002.x - Salon Modules Boundary Contract Foundation`
+* `MS-002.y - Workspace Project Route Boundary Contract Foundation`
+* `docs/02_ARCHITECTURE.md`
+
+**Allowed Implementation Scope**
+* minimal route shell split between `/workspace` and `/projects/[id]`
+* route entry and handoff behavior needed for the shell boundary
+* focused tests for route ownership and navigation handoff
+
+**Forbidden Scope**
+* Project Brain behavior changes
+* API/provider changes
+* persistence or storage ownership changes
+* UI redesign
+* first read-only Salon Module implementation
+* broad route refactors unrelated to the shell boundary
+
+**Ownership Boundaries**
+* `/workspace` owns workspace-level navigation, shared shell behavior, and non-canonical orchestration
+* `/projects/[id]` owns project-specific presentation and interaction flows
+* Project Brain owns canonical project truth across both routes
+
+**Activation Gates**
+* Product Owner approval is recorded
+* SSOT contract is published and consistent
+* `Current Product Milestone` remains `NONE` until activation is authorized
+* `Next Product Milestone` remains `NONE` unless a future SSOT note explicitly requires a candidate
+
+**Verification Plan**
+* targeted route-shell tests for ownership and navigation handoff
+* `git diff --check`
+* targeted SSOT consistency check
+* focused review that no Project Brain behavior changed
+
+**Rollback / Safety Expectations**
+* stop if route shell work requires Project Brain changes
+* stop if route shell work requires broader route refactoring
+* keep the milestone non-active until approval
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
 ## MS-002.y - Workspace Project Route Boundary Contract Foundation
 
 **Milestone**

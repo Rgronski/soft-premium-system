@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 043 - MS-002.z route shell boundary contract drafted
+
+### Date
+
+2026-08-01
+
+### Completed
+
+* Drafted `MS-002.z - Workspace Project Route Shell Boundary Foundation` in `docs/04_ROADMAP.md`.
+* Synchronized `docs/08_CURRENT_STATE.md` and `docs/10_SESSION_STATE.md` to reflect the non-active route shell draft.
+* Preserved `Current Product Milestone` as `NONE` and `Next Product Milestone` as `NONE`.
+* Confirmed no product code, UI, API, provider, or Project Brain behavior changed.
+
+### Notes
+
+* The draft milestone keeps the route shell boundary as the first implementation step after the docs-only contracts.
+
 ## Session 043 - MS-002.y docs-only route boundary contract SSOT synchronization
 
 ### Date
