@@ -81,7 +81,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.75 - AI Workspace Engine Chat Copy State Non-Mutation Foundation
+Latest Completed Product Milestone: MS-001.78 - SPS OS Token Guardian Session Usage Review Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -1238,7 +1238,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.75 - AI Workspace Engine Chat Copy State Non-Mutation Foundation`
+* `Latest Completed Product Milestone` is `MS-001.78 - SPS OS Token Guardian Session Usage Review Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

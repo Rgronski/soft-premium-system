@@ -177,6 +177,7 @@ If the commit does not exist or is not an ancestor of `HEAD`, the generator must
 `Latest Verified Commit` does not need to equal Package HEAD.
 
 Before Package Consistency can be reported as `PASS`, the generator must also validate the active `In Progress` and `Next` sections of `docs/08_CURRENT_STATE.md`.
+It must also compare every `Latest Completed Product Milestone` occurrence in `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`, and fail with file and line details if any value differs.
 
 The generator must reject active current-state content when it:
 

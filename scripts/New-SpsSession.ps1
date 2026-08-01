@@ -103,6 +103,105 @@ function Get-CurrentStateOperationalLines {
     return $operationalLines.ToArray()
 }
 
+function Get-DocumentFieldOccurrences {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $Path,
+
+        [Parameter(Mandatory = $true)]
+        [string] $FieldName
+    )
+
+    if (-not (Test-Path -LiteralPath $Path)) {
+        Fail-Critical "Required document not found: $Path"
+    }
+
+    $lines = Get-Content -LiteralPath $Path -Encoding utf8
+    $occurrences = New-Object System.Collections.Generic.List[object]
+    $escapedFieldName = [regex]::Escape($FieldName)
+
+    for ($i = 0; $i -lt $lines.Count; $i++) {
+        $trimmed = "$($lines[$i])".Trim()
+        if ($trimmed -eq "") {
+            continue
+        }
+
+        if ($trimmed -match ("^{0}:\s*(?<value>.+)$" -f $escapedFieldName)) {
+            $occurrences.Add([pscustomobject]@{
+                    Path = $Path
+                    Line = $i + 1
+                    Value = "$($Matches.value)".Trim()
+                })
+            continue
+        }
+
+        if ($trimmed -match ("^\*\s+`?{0}`?\s+is\s+`?(?<value>.+?)`?$" -f $escapedFieldName)) {
+            $occurrences.Add([pscustomobject]@{
+                    Path = $Path
+                    Line = $i + 1
+                    Value = "$($Matches.value)".Trim()
+                })
+            continue
+        }
+
+        if ($trimmed -eq $FieldName -or $trimmed -eq ("## {0}" -f $FieldName) -or $trimmed -eq ("### {0}" -f $FieldName)) {
+            for ($j = $i + 1; $j -lt $lines.Count; $j++) {
+                $nextTrimmed = "$($lines[$j])".Trim()
+                if ($nextTrimmed -eq "") {
+                    continue
+                }
+
+                if ($nextTrimmed.StartsWith("#")) {
+                    break
+                }
+
+                $occurrences.Add([pscustomobject]@{
+                        Path = $Path
+                        Line = $j + 1
+                        Value = $nextTrimmed
+                    })
+                break
+            }
+        }
+    }
+
+    return $occurrences.ToArray()
+}
+
+function Assert-FieldConsistency {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $FieldName,
+
+        [Parameter(Mandatory = $true)]
+        [string[]] $Paths
+    )
+
+    $occurrences = New-Object System.Collections.Generic.List[object]
+
+    foreach ($path in $Paths) {
+        $fileOccurrences = @(Get-DocumentFieldOccurrences -Path $path -FieldName $FieldName)
+        if ($fileOccurrences.Count -eq 0) {
+            Fail-Critical "$FieldName not found in $path."
+        }
+
+        foreach ($occurrence in $fileOccurrences) {
+            $occurrences.Add($occurrence)
+        }
+    }
+
+    $reference = $occurrences[0].Value
+    $mismatches = @($occurrences | Where-Object { $_.Value -ne $reference })
+
+    if ($mismatches.Count -gt 0) {
+        $details = @($mismatches | ForEach-Object {
+                "{0}:{1} has '{2}' but expected '{3}'" -f $_.Path, $_.Line, $_.Value, $reference
+            })
+
+        Fail-Critical ("{0} mismatch detected. {1}" -f $FieldName, ($details -join " "))
+    }
+}
+
 function Get-CurrentStateConsistencyIssues {
     param(
         [Parameter(Mandatory = $true)]
@@ -137,6 +236,12 @@ function Get-CurrentStateConsistencyIssues {
         if ($trimmed -match ("Session\s+{0}\s+status:\s*`?(?<status>[A-Z]+)`?$" -f $currentSessionPattern)) {
             if ($Matches.status -ne "CLOSED") {
                 $issues.Add("Session $CurrentSessionId status must be CLOSED in active current-state content.")
+            }
+        }
+
+        if ($trimmed -match '^(\*\s+)?`?Latest Completed Product Milestone`?\s+(is|:)\s*`?(?<milestone>.+?)`?$') {
+            if ($Matches.milestone -ne "MS-001.78 - SPS OS Token Guardian Session Usage Review Foundation") {
+                $issues.Add("Active current-state content has inconsistent Latest Completed Product Milestone value '$($Matches.milestone)'.")
             }
         }
 
@@ -201,6 +306,42 @@ function Invoke-SelfTest {
     $invalidIssues = Get-CurrentStateConsistencyIssues -Lines $invalidLines -CurrentSessionId "033" -NextSessionId "034"
     if ($invalidIssues.Count -lt 3) {
         Fail-Critical "Self-test expected stale current-state fixture to fail."
+    }
+
+    $testRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("sps-session-guard-" + [guid]::NewGuid().ToString("N"))
+    New-Item -ItemType Directory -Path $testRoot | Out-Null
+
+    try {
+        $roadmapPath = Join-Path $testRoot "04_ROADMAP.md"
+        $currentStatePath = Join-Path $testRoot "08_CURRENT_STATE.md"
+        $sessionStatePath = Join-Path $testRoot "10_SESSION_STATE.md"
+
+        @(
+            '## Latest Completed Product Milestone'
+            ''
+            'MS-001.78 - SPS OS Token Guardian Session Usage Review Foundation'
+        ) | Set-Content -LiteralPath $roadmapPath -Encoding utf8
+
+        @(
+            '# Current Milestone'
+            ''
+            '* `Latest Completed Product Milestone` is `MS-001.78 - SPS OS Token Guardian Session Usage Review Foundation`'
+            ''
+            'Latest Completed Product Milestone: MS-001.78 - SPS OS Token Guardian Session Usage Review Foundation'
+        ) | Set-Content -LiteralPath $currentStatePath -Encoding utf8
+
+        @(
+            'SPS OS Session State'
+            ''
+            'Latest Completed Product Milestone: MS-001.78 - SPS OS Token Guardian Session Usage Review Foundation'
+        ) | Set-Content -LiteralPath $sessionStatePath -Encoding utf8
+
+        Assert-FieldConsistency `
+            -FieldName "Latest Completed Product Milestone" `
+            -Paths @($currentStatePath, $sessionStatePath, $roadmapPath)
+    }
+    finally {
+        Remove-Item -LiteralPath $testRoot -Recurse -Force -ErrorAction SilentlyContinue
     }
 
     Write-Host "Self-test PASS"
@@ -548,6 +689,14 @@ Assert-CurrentStateConsistency `
     -CurrentStatePath $currentStatePath `
     -CurrentSessionId $currentSessionId `
     -NextSessionId $nextSessionId
+
+Assert-FieldConsistency `
+    -FieldName "Latest Completed Product Milestone" `
+    -Paths @(
+        $currentStatePath
+        $sessionStatePath
+        (Join-Path $repoRoot "docs\04_ROADMAP.md")
+    )
 
 $gitContextPath = Join-Path $repoRoot "sps-git-context.txt"
 $sessionSummaryPath = Join-Path $repoRoot "sps-session-summary.txt"
