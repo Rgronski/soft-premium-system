@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 041 - MS-001.77 and MS-001.78 publication and close synchronization published
+
+### Date
+
+2026-08-01
+
+### Completed
+
+* Confirmed `src/app/projects/[id]/ai/page.tsx` and `src/app/projects/[id]/ai/page.test.tsx` had already published `MS-001.77 - AI Workspace Engine Generate Project Switch Stale Result Guard Foundation` with commit `78743a3`.
+* Confirmed `docs/15_SESSION_CLOSE_PROTOCOL.md` and `.usage/session.jsonl` had already published `MS-001.78 - SPS OS Token Guardian Session Usage Review Foundation` with commit `9e90080`.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record `MS-001.78` as the latest completed milestone for the closed Session 041.
+* Prepared `docs/session-handoffs/2026-08-01_041_SESSION_HANDOFF.md` for Session 042 bootstrap continuity.
+* Kept `Current Product Milestone` as `NONE`.
+* Kept `Next Product Milestone` as `NONE`.
+
+### Notes
+
+* No product code, UI, API, provider, Project Brain, Knowledge, or runtime behavior was changed during the Session 041 close synchronization.
+* The publication commit hashes were already confirmed in the publication reports before this changelog entry was added.
+
 ## Session 040 - MS-001.76 publication and session close synchronization published
 
 ### Date

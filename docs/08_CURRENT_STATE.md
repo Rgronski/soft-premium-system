@@ -45,12 +45,14 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.76 - AI Workspace Engine Chat Project Switch State Isolation Foundation
+MS-001.78 - SPS OS Token Guardian Session Usage Review Foundation
 
 **Next Milestone**
 NONE
 
 MS-001.76 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the AI Workspace Engine Chat Project Switch State Isolation Foundation with commit `792c970`.
+MS-001.77 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the AI Workspace Engine Generate Project Switch Stale Result Guard Foundation with commit `78743a3`.
+MS-001.78 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the SPS OS Token Guardian Session Usage Review Foundation with commit `9e90080`.
 
 **MS-001.17 State**
 COMPLETED / PUBLISHED / CLOSED
