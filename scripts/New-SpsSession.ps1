@@ -240,7 +240,7 @@ function Get-CurrentStateConsistencyIssues {
         }
 
         if ($trimmed -match '^(\*\s+)?`?Latest Completed Product Milestone`?\s+(is|:)\s*`?(?<milestone>.+?)`?$') {
-            if ($Matches.milestone -ne "MS-001.78 - SPS OS Token Guardian Session Usage Review Foundation") {
+            if ($Matches.milestone -ne "MS-001.79 - Project Workspace Creation Contract Foundation") {
                 $issues.Add("Active current-state content has inconsistent Latest Completed Product Milestone value '$($Matches.milestone)'.")
             }
         }
@@ -319,21 +319,21 @@ function Invoke-SelfTest {
         @(
             '## Latest Completed Product Milestone'
             ''
-            'MS-001.78 - SPS OS Token Guardian Session Usage Review Foundation'
+            'MS-001.79 - Project Workspace Creation Contract Foundation'
         ) | Set-Content -LiteralPath $roadmapPath -Encoding utf8
 
         @(
             '# Current Milestone'
             ''
-            '* `Latest Completed Product Milestone` is `MS-001.78 - SPS OS Token Guardian Session Usage Review Foundation`'
+            '* `Latest Completed Product Milestone` is `MS-001.79 - Project Workspace Creation Contract Foundation`'
             ''
-            'Latest Completed Product Milestone: MS-001.78 - SPS OS Token Guardian Session Usage Review Foundation'
+            'Latest Completed Product Milestone: MS-001.79 - Project Workspace Creation Contract Foundation'
         ) | Set-Content -LiteralPath $currentStatePath -Encoding utf8
 
         @(
             'SPS OS Session State'
             ''
-            'Latest Completed Product Milestone: MS-001.78 - SPS OS Token Guardian Session Usage Review Foundation'
+            'Latest Completed Product Milestone: MS-001.79 - Project Workspace Creation Contract Foundation'
         ) | Set-Content -LiteralPath $sessionStatePath -Encoding utf8
 
         Assert-FieldConsistency `
