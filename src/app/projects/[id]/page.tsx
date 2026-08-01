@@ -5,8 +5,10 @@ import { WorkspaceCollections } from "@/components/workspace/WorkspaceCollection
 import { WorkspaceHeader } from "@/components/workspace/WorkspaceHeader";
 import { WorkspaceLayout } from "@/components/workspace/WorkspaceLayout";
 import { WorkspacePanels } from "@/components/workspace/WorkspacePanels";
-import { getProjectConsumerWorkspace } from "@/lib/project-brain/engine";
-import type { ProjectConsumerWorkspace } from "@/lib/project-brain/types";
+import {
+  getProjectWorkspaceEntry,
+  type ProjectWorkspaceEntry,
+} from "@/lib/project-brain/engine";
 import { useParams } from "next/navigation";
 import { useMemo } from "react";
 
@@ -25,7 +27,7 @@ type Visit = {
 };
 
 type DashboardSnapshot = {
-  workspace: ProjectConsumerWorkspace | null;
+  workspaceEntry: ProjectWorkspaceEntry | null;
   clientsCount: number;
   servicesCount: number;
   visitsCount: number;
@@ -39,7 +41,7 @@ export default function ProjectWorkspacePage() {
   const dashboard = useMemo<DashboardSnapshot>(() => {
     if (typeof window === "undefined") {
       return {
-        workspace: null,
+        workspaceEntry: null,
         clientsCount: 0,
         servicesCount: 0,
         visitsCount: 0,
@@ -50,7 +52,7 @@ export default function ProjectWorkspacePage() {
     }
 
     try {
-      const workspace = getProjectConsumerWorkspace(params.id);
+      const workspaceEntry = getProjectWorkspaceEntry(params.id);
       const savedClients = localStorage.getItem(
         `soft-premium-system.projects.${params.id}.clients`,
       );
@@ -72,7 +74,7 @@ export default function ProjectWorkspacePage() {
       });
 
       return {
-        workspace,
+        workspaceEntry,
         clientsCount: clients.length,
         servicesCount: services.length,
         visitsCount: visits.length,
@@ -87,7 +89,7 @@ export default function ProjectWorkspacePage() {
           : "source-read-failed";
 
       return {
-        workspace: null,
+        workspaceEntry: null,
         clientsCount: 0,
         servicesCount: 0,
         visitsCount: 0,
@@ -100,28 +102,34 @@ export default function ProjectWorkspacePage() {
 
   return (
     <WorkspaceLayout>
-      {!dashboard.isLoaded ? null : dashboard.workspace ? (
+      {!dashboard.isLoaded ? null : dashboard.workspaceEntry ? (
         <WorkspaceContent>
           <WorkspaceHeader
-            projectName={dashboard.workspace.overview.project.name}
-            taskCount={dashboard.workspace.overview.counts.tasks}
-            knowledgeCount={dashboard.workspace.overview.counts.knowledgeEntries}
-            workflowHealth={dashboard.workspace.overview.workflow.health}
-            workflowConfidence={dashboard.workspace.overview.workflow.confidence}
-            workflowNextStep={dashboard.workspace.overview.workflow.nextStep}
-            warningCount={dashboard.workspace.overview.workflow.warnings}
-            blockerCount={dashboard.workspace.overview.workflow.blockers}
+            projectName={dashboard.workspaceEntry.workspace.overview.project.name}
+            taskCount={dashboard.workspaceEntry.workspace.overview.counts.tasks}
+            knowledgeCount={
+              dashboard.workspaceEntry.workspace.overview.counts.knowledgeEntries
+            }
+            workflowHealth={dashboard.workspaceEntry.workspace.overview.workflow.health}
+            workflowConfidence={
+              dashboard.workspaceEntry.workspace.overview.workflow.confidence
+            }
+            workflowNextStep={
+              dashboard.workspaceEntry.workspace.overview.workflow.nextStep
+            }
+            warningCount={dashboard.workspaceEntry.workspace.overview.workflow.warnings}
+            blockerCount={dashboard.workspaceEntry.workspace.overview.workflow.blockers}
           />
           <WorkspaceCollections
-            tasks={dashboard.workspace.tasks}
-            knowledgeEntries={dashboard.workspace.knowledgeEntries}
+            tasks={dashboard.workspaceEntry.workspace.tasks}
+            knowledgeEntries={dashboard.workspaceEntry.workspace.knowledgeEntries}
           />
           <WorkspacePanels
             clientsCount={dashboard.clientsCount}
             servicesCount={dashboard.servicesCount}
             visitsCount={dashboard.visitsCount}
             upcomingVisitsCount={dashboard.upcomingVisitsCount}
-            projectId={params.id}
+            projectId={dashboard.workspaceEntry.projectId}
           />
         </WorkspaceContent>
       ) : (

@@ -596,3 +596,17 @@ export function getProjectConsumerWorkspace(
     ),
   };
 }
+
+export type ProjectWorkspaceEntry = {
+  projectId: string;
+  workspace: ProjectConsumerWorkspace;
+};
+
+export function getProjectWorkspaceEntry(
+  projectId: string,
+): ProjectWorkspaceEntry {
+  return {
+    projectId,
+    workspace: getProjectConsumerWorkspace(projectId),
+  };
+}

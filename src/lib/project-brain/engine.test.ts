@@ -11,6 +11,7 @@ import {
   getAiProjectContext,
   getCurrentProjectBrainState,
   getProjectConsumerWorkspace,
+  getProjectWorkspaceEntry,
   evaluateProjectWorkflow,
   getProjectConsumerOverview,
   getProjectWorkflowSnapshot,
@@ -1530,6 +1531,17 @@ describe("Project Brain engine", () => {
     expect(workspace.overview.counts.knowledgeEntries).toBe(
       workspace.knowledgeEntries.length,
     );
+  });
+
+  test("projects the workspace entry contract from the same route projectId and workspace snapshot", () => {
+    seedWorkflowSnapshotProject({ includeTask: true, includeKnowledge: true });
+
+    const result = getProjectWorkspaceEntry("project-1");
+
+    expect(Object.keys(result).sort()).toEqual(["projectId", "workspace"]);
+    expect(result.projectId).toBe("project-1");
+    expect(result.workspace.overview.project.id).toBe(result.projectId);
+    expect(result.workspace).toEqual(getProjectConsumerWorkspace("project-1"));
   });
 
   test("preserves source order and keeps duplicates in consumer workspace collections", () => {
