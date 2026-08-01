@@ -429,6 +429,23 @@ using only confirmed information.
 
 ---
 
+# Usage Review
+
+`.usage/session.jsonl` is the per-session usage log for SPS OS.
+
+Codex usage review must confirm:
+
+* exactly one JSONL usage record is appended for each Codex task or report,
+* `session_id` matches the current Session ID,
+* valid `measurement` values are `official`, `estimated`, and `unavailable`,
+* `estimated` means nonzero estimated token values and never real Codex credits,
+* `unavailable` is valid when official telemetry is not exposed and no estimate was calculated,
+* `SPS OS — KONIEC` includes a usage summary for the current session usage record.
+
+The usage summary must be treated as part of the close review and must be reported with the other confirmed session facts before `PASS`.
+
+---
+
 # Session Handoff
 
 Session Handoff must leave enough structured information for the next safe session start.
@@ -464,6 +481,7 @@ Before Session Close can be reported as `PASS`, all of the following must be pre
 * ZIP generated
 * ZIP consistency `PASS`
 * exactly one Next Safe Step
+* usage summary reviewed
 
 If any critical field is missing or inconsistent, the result must be `PARTIAL` or `FAIL`, never `PASS`.
 
