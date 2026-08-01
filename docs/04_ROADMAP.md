@@ -119,6 +119,100 @@ NONE
 
 MS-001.79 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Creation Contract Foundation with commit `6881e86`.
 
+## MS-002.y - Workspace Project Route Boundary Contract Foundation
+
+**Milestone**
+MS-002.y - Workspace Project Route Boundary Contract Foundation
+
+**Type**
+Documentation Contract
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Make the `/workspace` vs `/projects/[id]` boundary explicit in SSOT documentation before any implementation begins.
+
+**Product Outcome**
+The repository now documents the route responsibility split between `/workspace`, `/projects/[id]`, and Project Brain without changing product code.
+
+**Dependencies**
+* `MS-002.x - Salon Modules Boundary Contract Foundation`
+* `docs/02_ARCHITECTURE.md`
+
+**Out of Scope**
+* product code changes
+* UI changes
+* API/provider changes
+* Project Brain behavior changes
+* refactor
+* dependency changes
+
+**Documentation Updates**
+* `docs/02_ARCHITECTURE.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+**Next Safe Step**
+Keep `Current Product Milestone` at `NONE` until a Product Owner-approved product milestone is introduced.
+
+## MS-002.x - Salon Modules Boundary Contract Foundation
+
+**Milestone**
+MS-002.x - Salon Modules Boundary Contract Foundation
+
+**Type**
+Documentation Contract
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Make the Salon Modules boundary explicit in SSOT documentation before any product implementation begins.
+
+**Product Outcome**
+The repository now documents the ownership boundary between Project Brain, Workspace, and Salon Modules without changing product code.
+
+**Dependencies**
+* `MS-001.79 - Project Workspace Creation Contract Foundation`
+* `docs/02_ARCHITECTURE.md`
+
+**Out of Scope**
+* product code changes
+* UI changes
+* API/provider changes
+* Project Brain behavior changes
+* refactor
+* dependency changes
+
+**Documentation Updates**
+* `docs/02_ARCHITECTURE.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+**Next Safe Step**
+Keep `Current Product Milestone` at `NONE` until a Product Owner-approved product milestone is introduced.
+
 ## MS-001.76 - AI Workspace Engine Chat Project Switch State Isolation Foundation
 
 **Milestone**

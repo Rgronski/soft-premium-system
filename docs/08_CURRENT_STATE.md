@@ -53,6 +53,9 @@ NONE
 MS-001.76 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the AI Workspace Engine Chat Project Switch State Isolation Foundation with commit `792c970`.
 MS-001.77 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the AI Workspace Engine Generate Project Switch Stale Result Guard Foundation with commit `78743a3`.
 MS-001.79 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Creation Contract Foundation with commit `6881e86`.
+MS-002.x is COMPLETED / VERIFIED / PUBLISHED / CLOSED as a docs-only boundary contract after formal publication of the Salon Modules boundary contract in `docs/02_ARCHITECTURE.md`.
+MS-002.y is COMPLETED / VERIFIED / PUBLISHED / CLOSED as a docs-only route boundary contract after formal publication of the `/workspace` vs `/projects/[id]` boundary in `docs/02_ARCHITECTURE.md`.
+No product code, UI, API, provider, or Project Brain behavior changed.
 
 **MS-001.17 State**
 COMPLETED / PUBLISHED / CLOSED

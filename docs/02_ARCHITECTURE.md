@@ -263,6 +263,153 @@ External integrations must never become the authoritative owner of project knowl
 
 ---
 
+## Workspace
+
+Workspace is the project-facing application boundary.
+
+Responsible for:
+
+* composing project workspace routes and screens,
+* navigation inside the project workspace,
+* presentation orchestration,
+* local non-canonical UI state,
+* coordinating consumers and application modules.
+
+Not responsible for:
+
+* canonical project truth,
+* persistence authority,
+* Project Brain ownership,
+* redefining canonical project knowledge.
+
+---
+
+## Salon Modules
+
+Salon Modules are application and reference-domain modules inside the workspace boundary.
+
+Responsible for:
+
+* feature-local workspace logic,
+* bounded UI interaction flows,
+* projecting authoritative data for display,
+* isolated experiments that do not change canonical ownership.
+
+Not responsible for:
+
+* canonical project knowledge,
+* persistence authority,
+* Project Brain rules,
+* cross-workspace routing policy,
+* source-of-truth decisions.
+
+---
+
+# Boundary Rules
+
+The following overlaps are forbidden:
+
+* Salon Modules must not own canonical project truth.
+* Workspace must not silently duplicate Project Brain ownership.
+* Project Brain must not absorb presentation or local interaction state.
+* No module may change a canonical contract without an explicit SSOT update.
+
+Open questions:
+
+* Should Salon Modules stay a workspace-only convention or gain a named SSOT contract?
+* Should `/workspace` and `/projects/[id]` share one navigation shell contract or remain separate?
+* Which Salon Modules are read-only projections and which are workspace writes?
+
+Future implementation gates:
+
+* document the route ownership split before any code moves,
+* require an SSOT update before adding a Salon Module that writes project knowledge,
+* keep `Current Product Milestone` at `NONE` until a Product Owner-approved milestone contract exists.
+
+---
+
+## Route Boundary
+
+### `/workspace`
+
+`/workspace` is the workspace entry and coordination route.
+
+Responsible for:
+
+* workspace-level navigation,
+* shared workspace shell behavior,
+* non-canonical orchestration across workspace modules,
+* entry points to workspace-scoped application modules.
+
+Not responsible for:
+
+* canonical project truth,
+* project-specific route ownership,
+* Project Brain ownership,
+* persistence authority.
+
+### `/projects/[id]`
+
+`/projects/[id]` is the project-scoped route.
+
+Responsible for:
+
+* project-specific presentation,
+* project-specific interaction flows,
+* rendering Project Brain-derived state for one project,
+* route-local orchestration that stays inside the project boundary.
+
+Not responsible for:
+
+* canonical project truth,
+* cross-project navigation policy,
+* workspace shell ownership,
+* persistence authority.
+
+### Project Brain Across Both Routes
+
+Project Brain remains the canonical owner across `/workspace` and `/projects/[id]`.
+
+It is responsible for:
+
+* canonical project truth,
+* relationships,
+* architectural context,
+* decisions,
+* consistency.
+
+It is not responsible for:
+
+* route ownership,
+* presentation,
+* navigation,
+* local UI state,
+* shell behavior.
+
+### Forbidden Overlaps
+
+The following overlaps are forbidden:
+
+* `/workspace` must not become the owner of canonical project truth.
+* `/projects/[id]` must not duplicate Project Brain ownership.
+* Either route must not change canonical contracts without an SSOT update.
+* Workspace shell behavior must not silently absorb project ownership.
+
+### Open Questions
+
+* Should `/workspace` and `/projects/[id]` share a common shell contract or remain separate route contracts?
+* Which route owns the navigation handoff between workspace entry and project entry?
+* Which route is allowed to host shared Salon Modules without duplicating ownership?
+
+### Future Implementation Gates
+
+* document route ownership before moving any route code,
+* require an SSOT update before introducing shared route shell state,
+* require explicit approval before any route starts writing project knowledge,
+* keep `Current Product Milestone` at `NONE` until a Product Owner-approved milestone exists.
+
+---
+
 # Cross-Cutting Principles
 
 The following principles apply across the entire architecture:

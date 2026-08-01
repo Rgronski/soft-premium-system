@@ -69,6 +69,40 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 043 - MS-002.y docs-only route boundary contract SSOT synchronization
+
+### Date
+
+2026-08-01
+
+### Completed
+
+* Added a docs-only `/workspace` vs `/projects/[id]` route boundary contract to `docs/02_ARCHITECTURE.md`.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the completed docs-only route boundary state.
+* Preserved `Current Product Milestone` as `NONE` and `Next Product Milestone` as `NONE`.
+* Confirmed no product code, UI, API, provider, or Project Brain behavior changed.
+
+### Notes
+
+* The boundary now explicitly separates route ownership, workspace shell responsibility, and Project Brain authority.
+
+## Session 043 - MS-002.x docs-only boundary contract SSOT synchronization
+
+### Date
+
+2026-08-01
+
+### Completed
+
+* Added a docs-only Salon Modules boundary contract to `docs/02_ARCHITECTURE.md`.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the completed docs-only boundary state.
+* Preserved `Current Product Milestone` as `NONE` and `Next Product Milestone` as `NONE`.
+* Confirmed no product code, UI, API, provider, or Project Brain behavior changed.
+
+### Notes
+
+* The boundary now explicitly separates Project Brain, Workspace, and Salon Modules ownership.
+
 ## Session 042 - session close and package synchronization published
 
 ### Date
