@@ -27,14 +27,17 @@ import ProjectAiWorkspacePage from "./page";
 
 function createDeferred<T>() {
   let resolve!: (value: T | PromiseLike<T>) => void;
+  let reject!: (reason?: unknown) => void;
 
-  const promise = new Promise<T>((promiseResolve) => {
+  const promise = new Promise<T>((promiseResolve, promiseReject) => {
     resolve = promiseResolve;
+    reject = promiseReject;
   });
 
   return {
     promise,
     resolve,
+    reject,
   };
 }
 
@@ -2254,6 +2257,140 @@ describe("ProjectAiWorkspacePage", () => {
     ).toBeTruthy();
     expect(screen.queryByRole("button", { name: "Saved" })).toBeNull();
     expect(screen.queryByText("Generated response")).toBeNull();
+  });
+
+  test("stale generate success after a project switch does not update the current project", async () => {
+    const generateDeferred = createDeferred<Response>();
+
+    getBrowserAiProjectContextMock
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [],
+        },
+      })
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-2",
+          projectName: "Beta",
+          tasks: [],
+          knowledgeEntries: [],
+        },
+      });
+    fetchMock.mockReturnValueOnce(generateDeferred.promise);
+
+    const { rerender } = render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+    fireEvent.change(instructionField, {
+      target: { value: "Summarize project" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Generating..." })).toBeTruthy();
+    });
+
+    useParamsMock.mockReturnValue({ id: "project-2" });
+    rerender(<ProjectAiWorkspacePage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Beta")).toBeTruthy();
+    });
+
+    generateDeferred.resolve(
+      new Response(
+        JSON.stringify({
+          status: "generated",
+          content: "Generated response",
+        }),
+        {
+          status: 200,
+          headers: {
+            "content-type": "application/json",
+          },
+        },
+      ),
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText("Beta")).toBeTruthy();
+    });
+
+    expect(screen.queryByText("Generated response")).toBeNull();
+    expect(screen.queryByRole("textbox", { name: "Title" })).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: "Save to Knowledge" }),
+    ).toBeNull();
+    expect(screen.queryByText("Unexpected generation error.")).toBeNull();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("stale generate error after a project switch does not set the current project error", async () => {
+    const generateDeferred = createDeferred<Response>();
+
+    getBrowserAiProjectContextMock
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [],
+        },
+      })
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-2",
+          projectName: "Beta",
+          tasks: [],
+          knowledgeEntries: [],
+        },
+      });
+    fetchMock.mockReturnValueOnce(generateDeferred.promise);
+
+    const { rerender } = render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+    fireEvent.change(instructionField, {
+      target: { value: "Summarize project" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Generating..." })).toBeTruthy();
+    });
+
+    useParamsMock.mockReturnValue({ id: "project-2" });
+    rerender(<ProjectAiWorkspacePage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Beta")).toBeTruthy();
+    });
+
+    generateDeferred.reject(new Error("stale generation failed"));
+    await generateDeferred.promise.catch(() => undefined);
+
+    await waitFor(() => {
+      expect(screen.getByText("Beta")).toBeTruthy();
+    });
+
+    expect(screen.queryByText("Unexpected generation error.")).toBeNull();
+    expect(screen.queryByText("Generated response")).toBeNull();
+    expect(screen.queryByRole("textbox", { name: "Title" })).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: "Save to Knowledge" }),
+    ).toBeNull();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
   test("stale results from the previous project do not replace the new project page", async () => {

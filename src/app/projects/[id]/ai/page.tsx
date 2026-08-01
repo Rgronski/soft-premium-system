@@ -234,24 +234,22 @@ export default function ProjectAiWorkspacePage() {
       return;
     }
 
+    const projectId = params.id;
+
     if (!instruction.trim()) {
       setGenerationUiState((currentState) =>
-        deriveGenerationErrorState(
-          params.id,
-          currentState,
-          "Enter a valid instruction.",
-        ),
+        deriveGenerationErrorState(projectId, currentState, "Enter a valid instruction."),
       );
       return;
     }
 
     setGenerationUiState((currentState) =>
-      deriveGenerationStartState(params.id, currentState),
+      deriveGenerationStartState(projectId, currentState),
     );
-    setSaveUiState(deriveResetSaveState(params.id));
+    setSaveUiState(deriveResetSaveState(projectId));
 
     try {
-      const response = await fetch(`/api/projects/${params.id}/ai/generate`, {
+      const response = await fetch(`/api/projects/${projectId}/ai/generate`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -265,6 +263,10 @@ export default function ProjectAiWorkspacePage() {
         | { status: "generated"; content: string }
         | { status: string };
 
+      if (currentProjectIdRef.current !== projectId) {
+        return;
+      }
+
       if (result.status === "generated" && "content" in result) {
         const exchangeId = nextExchangeIdRef.current;
         nextExchangeIdRef.current += 1;
@@ -277,27 +279,31 @@ export default function ProjectAiWorkspacePage() {
 
         setGenerationUiState((currentState) =>
           deriveGenerationSuccessState(
-            params.id,
+            projectId,
             currentState,
             exchange,
             exchangeId,
           ),
         );
-        setSaveUiState(deriveSaveReadyState(params.id, exchange));
+        setSaveUiState(deriveSaveReadyState(projectId, exchange));
         return;
       }
 
       setGenerationUiState((currentState) =>
         deriveGenerationErrorState(
-          params.id,
+          projectId,
           currentState,
           getGenerationErrorMessage(result.status),
         ),
       );
     } catch {
+      if (currentProjectIdRef.current !== projectId) {
+        return;
+      }
+
       setGenerationUiState((currentState) =>
         deriveGenerationErrorState(
-          params.id,
+          projectId,
           currentState,
           "Unexpected generation error.",
         ),
