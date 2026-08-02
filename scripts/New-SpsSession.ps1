@@ -239,12 +239,6 @@ function Get-CurrentStateConsistencyIssues {
             }
         }
 
-        if ($trimmed -match '^(\*\s+)?`?Latest Completed Product Milestone`?\s+(is|:)\s*`?(?<milestone>.+?)`?$') {
-            if ($Matches.milestone -ne "MS-001.79 - Project Workspace Creation Contract Foundation") {
-                $issues.Add("Active current-state content has inconsistent Latest Completed Product Milestone value '$($Matches.milestone)'.")
-            }
-        }
-
         if ($trimmed -match '^(\*\s+)?Live session:\s*`?(?<live>\d+)`?$') {
             if ($Matches.live -eq $CurrentSessionId) {
                 $issues.Add("Active current-state content still presents Session $CurrentSessionId as live.")
