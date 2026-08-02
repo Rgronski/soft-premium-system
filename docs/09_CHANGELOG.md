@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 047 - MS-002.d project workspace task-entry shortcut publication
+## Session 046 - MS-002.d project workspace task-entry shortcut publication
 
 ### Date
 
