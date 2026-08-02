@@ -233,4 +233,4 @@ Latest Verified Commit: 34e8c47
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Run the Session Package Generator and confirm Package Consistency: PASS for Session 047.
+Next Safe Step: Open a new chat titled `048 SPS OS - Next Product Milestone Contract Discovery`, attach `sps-session.zip`, and paste the START prompt.
