@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 048 - MS-002.j project workspace task intake publication
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Published `MS-002.j - Project Task Intake Foundation` as the next visible workspace milestone after `MS-002.i`.
+* Labeled the existing `/projects/[id]/tasks` surface as `Task Intake` and added a short intake description without changing the task write flow.
+* Kept the current task form, mount-time focus behavior, and task list flow intact.
+* Added a focused task-page test assertion for the intake label and helper text.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the published MS-002.j state.
+* Recorded the Session 048 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No repository creation, cloning, GitHub integration, storage migration, salon module, or repository-context loading scope changed.
+
 ## Session 048 - MS-002.i project workspace repository link publication
 
 ### Date

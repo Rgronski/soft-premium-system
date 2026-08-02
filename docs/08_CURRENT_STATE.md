@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-002.i - Project Repository Link Foundation
+MS-002.j - Project Task Intake Foundation
 
 **Next Milestone**
 NONE
@@ -63,6 +63,7 @@ MS-002.d is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace T
 MS-002.e is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace Task Quick Action Foundation; the project workspace dashboard now exposes an `Add Task` handoff to the task entry screen.
 MS-002.f is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace Task Collection Handoff Foundation; the project workspace dashboard now exposes a `View all tasks` handoff from the Tasks collection.
 MS-002.i is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Repository Link Foundation; the project contract now includes an optional `repositoryUrl`, Project Brain carries it through the consumer overview, `/projects/[id]` passes it into `WorkspaceHeader`, and `WorkspaceHeader` shows `Open repository` only when `repositoryUrl` exists.
+MS-002.j is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Task Intake Foundation; the project task screen now labels the intake surface explicitly and keeps the existing task form, focus behavior, and task list flow.
 No runtime product code, UI, API, provider, or Project Brain behavior changed in this SSOT synchronization.
 
 **MS-001.17 State**

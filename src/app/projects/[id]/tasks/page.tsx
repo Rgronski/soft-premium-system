@@ -165,9 +165,14 @@ export default function ProjectTasksPage() {
       <div className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-            Project Tasks
+            Task Intake
           </p>
-          <h2 className="text-2xl font-semibold text-zinc-50">Tasks</h2>
+          <h2 className="text-2xl font-semibold text-zinc-50">
+            Capture the next task
+          </h2>
+          <p className="text-sm text-zinc-400">
+            Capture the next task for the current project workspace.
+          </p>
         </div>
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">

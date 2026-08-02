@@ -77,6 +77,8 @@ describe("ProjectTasksPage", () => {
       expect(screen.getByPlaceholderText("Task title")).toBeTruthy();
     });
 
+    expect(screen.getByText("Task Intake")).toBeTruthy();
+    expect(screen.getByText("Capture the next task")).toBeTruthy();
     expect(document.activeElement).toBe(
       screen.getByPlaceholderText("Task title"),
     );
