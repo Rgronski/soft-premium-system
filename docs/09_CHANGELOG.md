@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 047 - MS-002.g project workspace knowledge collection publication
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Published `MS-002.g - Project Workspace Knowledge Collection Handoff Foundation` as the next visible workspace milestone after `MS-002.f`.
+* Added the `View all knowledge` handoff in `src/components/workspace/WorkspaceCollections.tsx` inside the Knowledge Entries card.
+* Added the read-only `/projects/[id]/knowledge` route and focused tests for the dashboard handoff and knowledge page.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the published MS-002.g state.
+* Recorded the Session 047 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No Project Brain, workflow engine, task engine, storage/provider/API, sidebar, route-shell, salon modules, or AI workspace scope changed.
+
 ## Session 046 - MS-002.f project workspace task collection handoff publication
 
 ### Date

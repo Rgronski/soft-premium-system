@@ -15,9 +15,9 @@ vi.mock("@/lib/project-brain/engine", () => ({
     getProjectWorkspaceEntryMock(projectId),
 }));
 
-import ProjectWorkspacePage from "./page";
+import ProjectKnowledgePage from "./page";
 
-describe("ProjectWorkspacePage", () => {
+describe("ProjectKnowledgePage", () => {
   beforeEach(() => {
     useParamsMock.mockReturnValue({ id: "project-1" });
     getProjectWorkspaceEntryMock.mockReset();
@@ -30,7 +30,7 @@ describe("ProjectWorkspacePage", () => {
             name: "Alpha Workspace",
           },
           counts: {
-            tasks: 1,
+            tasks: 0,
             knowledgeEntries: 1,
           },
           workflow: {
@@ -46,12 +46,7 @@ describe("ProjectWorkspacePage", () => {
             blockers: 0,
           },
         },
-        tasks: [
-          {
-            id: "task-1",
-            title: "Task A",
-          },
-        ],
+        tasks: [],
         knowledgeEntries: [
           {
             id: "knowledge-1",
@@ -67,23 +62,20 @@ describe("ProjectWorkspacePage", () => {
     vi.restoreAllMocks();
   });
 
-  test("uses the Project Brain workspace access boundary for the route project id", () => {
-    render(<ProjectWorkspacePage />);
+  test("renders the workspace knowledge collection for the route project id", () => {
+    render(<ProjectKnowledgePage />);
 
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledTimes(1);
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledWith("project-1");
-    expect(screen.getByText("Alpha Workspace")).toBeTruthy();
-    expect(screen.getByText("Task A")).toBeTruthy();
+    expect(screen.getByText("Knowledge")).toBeTruthy();
+    expect(
+      screen.getByText("Read-only knowledge entries for the current project workspace."),
+    ).toBeTruthy();
     expect(screen.getByText("Knowledge note")).toBeTruthy();
-    expect(screen.getAllByText("Continue active work")).toHaveLength(2);
-    expect(screen.getByRole("link", { name: "Open tasks" })).toBeTruthy();
-    expect(screen.getByRole("link", { name: "Add Task" })).toBeTruthy();
-    expect(screen.getByRole("link", { name: "View all tasks" })).toBeTruthy();
-    expect(screen.getByRole("link", { name: "View all knowledge" })).toBeTruthy();
   });
 
-  test("surfaces the Project Brain start-next-work readiness boundary when no active work exists", () => {
-    getProjectWorkspaceEntryMock.mockReturnValue({
+  test("renders the empty state when the knowledge collection is empty", () => {
+    getProjectWorkspaceEntryMock.mockReturnValueOnce({
       projectId: "project-1",
       workspace: {
         overview: {
@@ -99,9 +91,10 @@ describe("ProjectWorkspacePage", () => {
             health: "ready",
             confidence: 0.5,
             nextStep: {
-              id: "start-next-work",
-              label: "Start next work",
-              description: "Start the next safe workflow item.",
+              id: "continue-active-work",
+              label: "Continue active work",
+              description:
+                "Continue the active workflow item before starting new work.",
             },
             warnings: 0,
             blockers: 0,
@@ -112,10 +105,8 @@ describe("ProjectWorkspacePage", () => {
       },
     });
 
-    render(<ProjectWorkspacePage />);
+    render(<ProjectKnowledgePage />);
 
-    expect(getProjectWorkspaceEntryMock).toHaveBeenCalledTimes(1);
-    expect(getProjectWorkspaceEntryMock).toHaveBeenCalledWith("project-1");
-    expect(screen.getAllByText("Start next work")).toHaveLength(2);
+    expect(screen.getByText("No knowledge entries available.")).toBeTruthy();
   });
 });

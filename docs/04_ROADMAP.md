@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-002.f - Project Workspace Task Collection Handoff Foundation
+MS-002.g - Project Workspace Knowledge Collection Handoff Foundation
 
 ## Next
 
