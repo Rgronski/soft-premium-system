@@ -69,6 +69,19 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 049 - MS-002.p task completion local action publication
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Published `MS-002.p - Task Completion Local Action Foundation` as a minimal local-only task workspace completion action.
+* Added a local `Complete task` action to `/projects/[id]/tasks/[taskId]/workspace`.
+* Blocked completion until result notes were saved locally and showed a local completion status after completion.
+* Kept the task workspace free of backend persistence, Project Brain writes, Task Engine writes, repository cloning, or automated handoff.
+
 ## Session 049 - MS-002.o task result save action publication
 
 ### Date

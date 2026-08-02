@@ -35,6 +35,7 @@ type TaskWorkspaceState = {
 };
 
 type TaskResultSaveState = "idle" | "saved";
+type TaskCompletionState = "idle" | "completed";
 
 export default function ProjectTaskWorkspacePage() {
   const params = useParams<{ id: string; taskId: string }>();
@@ -46,6 +47,8 @@ export default function ProjectTaskWorkspacePage() {
   const [resultNotes, setResultNotes] = useState("");
   const [resultSaveState, setResultSaveState] =
     useState<TaskResultSaveState>("idle");
+  const [taskCompletionState, setTaskCompletionState] =
+    useState<TaskCompletionState>("idle");
 
   const projectId = params.id;
   const taskId = params.taskId;
@@ -72,6 +75,15 @@ export default function ProjectTaskWorkspacePage() {
     }
 
     setResultSaveState("saved");
+    setTaskCompletionState("idle");
+  }
+
+  function handleCompleteTask() {
+    if (resultSaveState !== "saved") {
+      return;
+    }
+
+    setTaskCompletionState("completed");
   }
 
   useEffect(() => {
@@ -192,6 +204,7 @@ export default function ProjectTaskWorkspacePage() {
               onChange={(event) => {
                 setResultNotes(event.target.value);
                 setResultSaveState("idle");
+                setTaskCompletionState("idle");
               }}
             />
             <div className="mt-3 flex items-center gap-3">
@@ -206,6 +219,21 @@ export default function ProjectTaskWorkspacePage() {
               {resultSaveState === "saved" ? (
                 <p className="text-sm text-zinc-400" aria-live="polite">
                   Result saved locally.
+                </p>
+              ) : null}
+            </div>
+            <div className="mt-3 flex items-center gap-3">
+              <button
+                type="button"
+                className="inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800 disabled:cursor-not-allowed disabled:border-zinc-800 disabled:text-zinc-600"
+                disabled={resultSaveState !== "saved"}
+                onClick={handleCompleteTask}
+              >
+                Complete task
+              </button>
+              {taskCompletionState === "completed" ? (
+                <p className="text-sm text-zinc-400" aria-live="polite">
+                  Task completed locally.
                 </p>
               ) : null}
             </div>

@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-002.o - Task Result Save Action Foundation
+MS-002.p - Task Completion Local Action Foundation
 
 ## Next
 
@@ -130,6 +130,7 @@ MS-002.l is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication o
 MS-002.m is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Handoff To Codex Foundation.
 MS-002.n is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Result Capture Foundation.
 MS-002.o is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Result Save Action Foundation.
+MS-002.p is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Completion Local Action Foundation.
 
 ## MS-002.o - Task Result Save Action Foundation
 
@@ -197,6 +198,79 @@ The task workspace now lets the user write result notes, blocks empty saves, and
 **Rollback / Safety Expectations**
 * stop if the save action needs backend persistence
 * stop if the save action requires Project Brain writes
+* keep the milestone non-active until approval
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+## MS-002.p - Task Completion Local Action Foundation
+
+**Milestone**
+MS-002.p - Task Completion Local Action Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Purpose**
+Add a minimal local-only task completion action on `/projects/[id]/tasks/[taskId]/workspace` that becomes available after result notes are saved locally.
+
+**Product Outcome**
+After a local result save, the task workspace lets the user mark the task complete locally and shows a visible local completion status in the current UI session.
+
+**Dependencies**
+* closed `MS-002.o - Task Result Save Action Foundation`
+
+**Allowed Implementation Scope**
+* local task completion action on the existing task workspace route
+* completion blocked until result notes are saved locally
+* local completion status visibility
+* focused tests for the workspace completion interaction
+
+**Forbidden Scope**
+* Project Brain behavior changes
+* backend/API route changes
+* task engine/storage ownership changes
+* GitHub integration
+* Codex automation handoff
+* route redesign
+* broader UI refactor
+
+**Ownership Boundaries**
+* `/projects/[id]/tasks/[taskId]/workspace` owns the local task completion interaction
+* Task Engine and Project Brain remain outside this local UI-only completion action
+
+**Verification Plan**
+* focused workspace completion interaction test
+* `git diff --check`
+* targeted SSOT consistency check
+* confirm no backend persistence or Project Brain writes were introduced
+
+**Rollback / Safety Expectations**
+* stop if the completion action needs backend persistence
+* stop if the completion action requires Project Brain writes
 * keep the milestone non-active until approval
 
 **Documentation Updates**

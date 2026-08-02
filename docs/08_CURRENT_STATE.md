@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-002.o - Task Result Save Action Foundation
+MS-002.p - Task Completion Local Action Foundation
 
 **Next Milestone**
 NONE
@@ -68,6 +68,7 @@ MS-002.k is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Task Workspace Star
 MS-002.l is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Repository Context Load Foundation; the task workspace route now loads Project Brain workspace context via `getProjectWorkspaceEntry(projectId)`, displays a minimal Repository Context block, and shows `Open repository` only when `repositoryUrl` exists.
 MS-002.m is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Task Handoff To Codex Foundation; the task workspace route now includes a minimal Task Handoff block and a `Handoff to Codex` anchor action that stays on the same page and does not automate handoff.
 MS-002.n is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Task Result Capture Foundation; the task workspace route now includes a minimal local-only Task Result / Result Capture block while keeping the Repository Context and Handoff to Codex surfaces intact.
+MS-002.o is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Task Result Save Action Foundation; the task workspace route now includes a minimal local-only Save result action that blocks empty notes and shows a local saved status.
 No runtime product code, UI, API, provider, or Project Brain behavior changed in this SSOT synchronization.
 
 **MS-001.17 State**
@@ -97,7 +98,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-002.o - Task Result Save Action Foundation
+Latest Completed Product Milestone: MS-002.p - Task Completion Local Action Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -1254,7 +1255,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-002.o - Task Result Save Action Foundation`
+* `Latest Completed Product Milestone` is `MS-002.p - Task Completion Local Action Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
