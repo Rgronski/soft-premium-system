@@ -97,7 +97,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-002.l - Repository Context Load Foundation
+Latest Completed Product Milestone: MS-002.n - Task Result Capture Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
