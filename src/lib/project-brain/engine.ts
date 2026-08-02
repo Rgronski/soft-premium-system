@@ -254,6 +254,11 @@ function projectConsumerOverview(
     project: {
       id: workflowSnapshot.snapshot.project.id,
       name: workflowSnapshot.snapshot.project.name,
+      ...(workflowSnapshot.snapshot.project.repositoryUrl
+        ? {
+            repositoryUrl: workflowSnapshot.snapshot.project.repositoryUrl,
+          }
+        : {}),
     },
     counts: {
       tasks: workflowSnapshot.snapshot.tasks.length,

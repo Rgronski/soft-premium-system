@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-002.h - Project Workspace Task Detail Handoff Foundation
+MS-002.i - Project Repository Link Foundation
 
 ## Next
 
@@ -123,6 +123,7 @@ MS-002.c is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication o
 MS-002.d is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Task Entry Shortcut Foundation.
 MS-002.e is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Task Quick Action Foundation.
 MS-002.f is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Task Collection Handoff Foundation.
+MS-002.i is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Repository Link Foundation.
 
 ## MS-002.d - Project Workspace Task Entry Shortcut Foundation
 

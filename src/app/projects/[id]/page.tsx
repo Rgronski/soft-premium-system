@@ -106,6 +106,9 @@ export default function ProjectWorkspacePage() {
         <WorkspaceContent>
           <WorkspaceHeader
             projectName={dashboard.workspaceEntry.workspace.overview.project.name}
+            repositoryUrl={
+              dashboard.workspaceEntry.workspace.overview.project.repositoryUrl
+            }
             taskCount={dashboard.workspaceEntry.workspace.overview.counts.tasks}
             knowledgeCount={
               dashboard.workspaceEntry.workspace.overview.counts.knowledgeEntries

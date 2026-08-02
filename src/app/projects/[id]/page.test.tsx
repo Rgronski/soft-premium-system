@@ -28,6 +28,7 @@ describe("ProjectWorkspacePage", () => {
           project: {
             id: "project-1",
             name: "Alpha Workspace",
+            repositoryUrl: "https://example.com/repos/alpha-workspace",
           },
           counts: {
             tasks: 1,
@@ -75,6 +76,9 @@ describe("ProjectWorkspacePage", () => {
     expect(screen.getByText("Alpha Workspace")).toBeTruthy();
     expect(screen.getByText("Task A")).toBeTruthy();
     expect(screen.getByText("Knowledge note")).toBeTruthy();
+    expect(
+      screen.getByRole("link", { name: "Open repository" }).getAttribute("href"),
+    ).toBe("https://example.com/repos/alpha-workspace");
     expect(screen.getAllByText("Continue active work")).toHaveLength(2);
     expect(screen.getByRole("link", { name: "Open tasks" })).toBeTruthy();
     expect(screen.getByRole("link", { name: "Add Task" })).toBeTruthy();

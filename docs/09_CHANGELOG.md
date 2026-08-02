@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 048 - MS-002.i project workspace repository link publication
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Published `MS-002.i - Project Repository Link Foundation` as the next visible workspace milestone after `MS-002.h`.
+* Added optional `repositoryUrl` support to the `Project` contract and carried it through the Project Brain consumer overview.
+* Passed `repositoryUrl` into `/projects/[id]` and rendered `Open repository` in `WorkspaceHeader` only when the repository URL exists.
+* Added focused tests for the Project Brain repository link projection and the workspace page repository link rendering.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the published MS-002.i state.
+* Recorded the Session 048 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No repository creation, cloning, GitHub integration, storage migration, salon module, or broader UI redesign scope changed.
+
 ## Session 047 - MS-002.h project workspace task detail publication
 
 ### Date

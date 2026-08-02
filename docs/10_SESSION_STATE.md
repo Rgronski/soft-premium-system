@@ -211,26 +211,26 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-02
-Current Session ID: 047
-Current Chat Title: 047 SPS OS - CODEX SESSION CLOSE HANDOFF
-Next Session ID: 048
-Suggested Next Chat Title: 048 SPS OS - Next Product Milestone Contract Discovery
+Current Session ID: 048
+Current Chat Title: 048 SPS OS - MS-002.i SSOT Sync
+Next Session ID: 049
+Suggested Next Chat Title: 049 SPS OS - Next Product Milestone Contract Discovery
 Active Capability: NONE
 Active Work Item: NONE
-Current Mode: CODEX SESSION CLOSE
-Completed Capability Items: Session 047 published MS-002.g; Session 047 synchronized SSOT; Session 047 recorded usage; Session 047 published MS-002.h; Session 047 prepared the Session 047 close handoff
+Current Mode: CODEX DOCUMENTATION SYNC
+Completed Capability Items: Session 048 synchronized SSOT; Session 048 recorded usage
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-002.h - Project Workspace Task Detail Handoff Foundation
+Latest Completed Product Milestone: MS-002.i - Project Repository Link Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 047 prepared the Session 047 close handoff
+Latest Completed Capability Item: Session 048 completed the MS-002.i SSOT sync
 Current Sprint: NONE
-Platform Priority: Close Session 047, generate the Session 047 package, and prepare the next discovery session.
+Platform Priority: Close Session 048, generate the Session 048 package, and prepare the next discovery session.
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: 34e8c47
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `048 SPS OS - Next Product Milestone Contract Discovery`, attach `sps-session.zip`, and paste the START prompt.
+Next Safe Step: Open a new chat titled `049 SPS OS - Next Product Milestone Contract Discovery`, attach `sps-session.zip`, and paste the START prompt.

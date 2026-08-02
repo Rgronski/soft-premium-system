@@ -3,6 +3,7 @@ import type { WorkflowNextStep } from "@/lib/workflow/types";
 
 type WorkspaceHeaderProps = {
   projectName: string;
+  repositoryUrl?: string;
   taskCount: number;
   knowledgeCount: number;
   workflowHealth: string;
@@ -14,6 +15,7 @@ type WorkspaceHeaderProps = {
 
 export function WorkspaceHeader({
   projectName,
+  repositoryUrl,
   taskCount,
   knowledgeCount,
   workflowHealth,
@@ -83,6 +85,22 @@ export function WorkspaceHeader({
           </div>
         ))}
       </div>
+
+      {repositoryUrl ? (
+        <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+            Repository
+          </p>
+          <a
+            href={repositoryUrl}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mt-2 inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+          >
+            Open repository
+          </a>
+        </div>
+      ) : null}
 
       <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
         <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">

@@ -1347,6 +1347,28 @@ describe("Project Brain engine", () => {
     expect(result.counts.knowledgeEntries).toBe(1);
   });
 
+  test("projects the repositoryUrl into the consumer overview when present", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          repositoryUrl: "https://example.com/repos/alpha",
+          createdAt: "2026-07-13T10:00:00.000Z",
+        },
+      ]),
+    );
+
+    const result = getProjectConsumerOverview("project-1");
+
+    expect(result.project).toEqual({
+      id: "project-1",
+      name: "Alpha",
+      repositoryUrl: "https://example.com/repos/alpha",
+    });
+  });
+
   test("copies workflow health, confidence, and nextStep into the consumer overview", () => {
     seedWorkflowSnapshotProject({ includeTask: true });
 

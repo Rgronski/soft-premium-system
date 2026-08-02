@@ -47,6 +47,7 @@ export type ProjectConsumerOverview = {
   project: {
     id: string;
     name: string;
+    repositoryUrl?: string;
   };
   counts: {
     tasks: number;
