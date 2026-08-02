@@ -41,6 +41,7 @@ export default function ProjectTasksPage() {
   const mountedRef = useRef(true);
   const projectIdRef = useRef(projectId);
   const submittingProjectIdRef = useRef<string | null>(null);
+  const taskTitleInputRef = useRef<HTMLInputElement | null>(null);
 
   const isSubmitting = submittingProjectId === projectId;
 
@@ -54,6 +55,10 @@ export default function ProjectTasksPage() {
     return () => {
       mountedRef.current = false;
     };
+  }, []);
+
+  useEffect(() => {
+    taskTitleInputRef.current?.focus();
   }, []);
 
   useEffect(() => {
@@ -172,6 +177,7 @@ export default function ProjectTasksPage() {
             className="grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]"
           >
             <input
+              ref={taskTitleInputRef}
               type="text"
               value={taskTitle}
               onChange={(event) => setTaskTitle(event.target.value)}

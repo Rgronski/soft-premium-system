@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-002.c - Project Workspace Next Step Action Foundation
+MS-002.d - Project Workspace Task Entry Shortcut Foundation
 
 ## Next
 
@@ -120,6 +120,82 @@ NONE
 MS-001.79 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Creation Contract Foundation with commit `6881e86`.
 MS-002.b is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Start Action Boundary Foundation with commit `043d744`.
 MS-002.c is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Next Step Action Foundation.
+MS-002.d is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Task Entry Shortcut Foundation.
+
+## MS-002.d - Project Workspace Task Entry Shortcut Foundation
+
+**Milestone**
+MS-002.d - Project Workspace Task Entry Shortcut Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Purpose**
+Make the `/projects/[id]/tasks` workspace flow immediately ready for task capture by focusing the task title input on mount.
+
+**Product Outcome**
+The project task screen now lands on the task title field so a user can start entering the next task without an extra click.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/page.tsx` focuses the task title input on mount with a local ref and effect.
+* `src/app/projects/[id]/tasks/page.test.tsx` verifies the task title input receives focus when the page mounts.
+
+**Dependencies**
+* `MS-002.c - Project Workspace Next Step Action Foundation`
+
+**Allowed Implementation Scope**
+* task-entry shortcut behavior on the existing project tasks page
+* focused tests for mount-time task entry readiness
+
+**Forbidden Scope**
+* Project Brain behavior changes
+* task engine, API, provider, or storage ownership changes
+* broader route refactors
+* salon modules
+* UI redesign unrelated to task entry
+
+**Ownership Boundaries**
+* `/projects/[id]/tasks` owns the focused task-entry surface for the current project workspace
+* Project Brain remains the canonical source for project truth
+* the workspace header and route shell stay unchanged by this milestone
+
+**Activation Gates**
+* Product Owner approval is recorded
+* SSOT contract is published and consistent
+* `Current Product Milestone` remains `NONE`
+* `Next Product Milestone` remains `NONE`
+
+**Verification Plan**
+* focused mount-time task-entry test
+* `git diff --check`
+* targeted SSOT consistency check
+* confirm no Project Brain or route-shell behavior changed
+
+**Rollback / Safety Expectations**
+* stop if task-entry readiness requires Project Brain changes
+* stop if the task page needs broader route or workflow refactoring
+* keep the milestone non-active until approval
 
 ## MS-002.z - Workspace Project Route Shell Boundary Foundation
 

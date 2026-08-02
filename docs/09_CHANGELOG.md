@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 047 - MS-002.d project workspace task-entry shortcut publication
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Published `MS-002.d - Project Workspace Task Entry Shortcut Foundation` as the smallest safe task-entry follow-on milestone after `MS-002.c`.
+* Added mount-time autofocus for the task title input in `src/app/projects/[id]/tasks/page.tsx` so the project task screen is ready for immediate entry.
+* Updated `src/app/projects/[id]/tasks/page.test.tsx` to verify the task title input receives focus on mount.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the published MS-002.d state.
+
+### Notes
+
+* No Project Brain, workflow engine, API, provider, or storage ownership changed.
+
 ## Session 046 - MS-002.c project workspace next-step action publication
 
 ### Date

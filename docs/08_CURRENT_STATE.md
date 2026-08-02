@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-002.c - Project Workspace Next Step Action Foundation
+MS-002.d - Project Workspace Task Entry Shortcut Foundation
 
 **Next Milestone**
 NONE
@@ -59,6 +59,7 @@ MS-002.z is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Workspace Project R
 MS-002.a is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Brain Access Boundary Foundation; the project workspace route now proves its canonical access point through `getProjectWorkspaceEntry(projectId)`.
 MS-002.b is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace Start Action Boundary Foundation; the project workspace route now proves its ready-state start boundary through the projected workflow next step surfaced by the workspace header.
 MS-002.c is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace Next Step Action Foundation; the project workspace header now exposes the projected next step as an Open tasks action that routes to the existing project tasks screen.
+MS-002.d is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace Task Entry Shortcut Foundation; the project task screen now autofocuses the task title input on mount for faster task capture.
 No runtime product code, UI, API, provider, or Project Brain behavior changed in this SSOT synchronization.
 
 **MS-001.17 State**

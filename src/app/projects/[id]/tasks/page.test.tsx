@@ -70,6 +70,18 @@ describe("ProjectTasksPage", () => {
     expect(getTasksFromServerMock).toHaveBeenCalledWith("project-1");
   });
 
+  test("focuses the task title input on mount for quick entry", async () => {
+    render(<ProjectTasksPage />);
+
+    await waitFor(() => {
+      expect(screen.getByPlaceholderText("Task title")).toBeTruthy();
+    });
+
+    expect(document.activeElement).toBe(
+      screen.getByPlaceholderText("Task title"),
+    );
+  });
+
   test("renders canonical tasks after initial load success", async () => {
     getTasksFromServerMock.mockResolvedValueOnce([
       {

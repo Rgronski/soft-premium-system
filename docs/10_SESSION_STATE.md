@@ -211,26 +211,26 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-02
-Current Session ID: 046
-Current Chat Title: 046 SPS OS - MS-002.c Publication
-Next Session ID: 047
-Suggested Next Chat Title: 047 SPS OS - Next Product Milestone Contract Discovery
+Current Session ID: 047
+Current Chat Title: 047 SPS OS - MS-002.d Publication
+Next Session ID: 048
+Suggested Next Chat Title: 048 SPS OS - Next Product Milestone Contract Discovery
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: CODEX SESSION PUBLISH
-Completed Capability Items: Session 046 published MS-002.c; Session 046 synchronized the SSOT snapshot; Session 046 prepared the commit and push
+Completed Capability Items: Session 047 published MS-002.d; Session 047 synchronized the SSOT snapshot; Session 047 prepared the commit and push
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-002.c - Project Workspace Next Step Action Foundation
+Latest Completed Product Milestone: MS-002.d - Project Workspace Task Entry Shortcut Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 046 published MS-002.c
+Latest Completed Capability Item: Session 047 published MS-002.d
 Current Sprint: NONE
-Platform Priority: Publish MS-002.c and prepare the next discovery session.
+Platform Priority: Publish MS-002.d and prepare the next discovery session.
 Repository Branch: main
-Repository Working Tree State: CLEAN
-Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 87642d8
+Repository Working Tree State: DIRTY
+Ahead / Behind Status: UNKNOWN
+Latest Verified Commit: 29e5c07
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `047 SPS OS - Next Product Milestone Contract Discovery`, attach `sps-session.zip`, and paste the START prompt.
+Next Safe Step: Commit the MS-002.d publication SSOT and code changes, then push them to origin/main.
