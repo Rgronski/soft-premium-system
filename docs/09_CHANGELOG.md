@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 048 - MS-002.k task workspace start publication
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Published `MS-002.k - Task Workspace Start Foundation` as the next visible workspace milestone after `MS-002.j`.
+* Added an `Open task workspace` link on the task detail page so the current task can open the new workspace-start route.
+* Added the minimal `/projects/[id]/tasks/[taskId]/workspace` route that loads the current task and renders a task-workspace start surface without repository context loading.
+* Added focused tests for the task detail link and the new task workspace route.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the published MS-002.k state.
+* Recorded the Session 048 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No repository context loading, GitHub integration, Codex handoff automation, task result capture, salon module, or broader UI redesign scope changed.
+
 ## Session 048 - MS-002.j project workspace task intake publication
 
 ### Date

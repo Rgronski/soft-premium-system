@@ -25,9 +25,9 @@ vi.mock("@/lib/task/browser-server", () => ({
     getTasksFromServerMock(projectId),
 }));
 
-import ProjectTaskDetailPage from "./page";
+import ProjectTaskWorkspacePage from "./page";
 
-describe("ProjectTaskDetailPage", () => {
+describe("ProjectTaskWorkspacePage", () => {
   beforeEach(() => {
     useParamsMock.mockReturnValue({ id: "project-1", taskId: "task-1" });
     getTasksFromServerMock.mockReset();
@@ -38,12 +38,6 @@ describe("ProjectTaskDetailPage", () => {
         title: "First task",
         createdAt: "2026-07-23T10:00:00.000Z",
       },
-      {
-        id: "task-2",
-        projectId: "project-1",
-        title: "Second task",
-        createdAt: "2026-07-24T10:00:00.000Z",
-      },
     ]);
   });
 
@@ -52,28 +46,32 @@ describe("ProjectTaskDetailPage", () => {
     vi.restoreAllMocks();
   });
 
-  test("renders an existing task from the current project", async () => {
-    render(<ProjectTaskDetailPage />);
-    const expectedCreatedAt = new Date("2026-07-23T10:00:00.000Z").toLocaleDateString();
+  test("loads the task workspace start surface for the current task", async () => {
+    render(<ProjectTaskWorkspacePage />);
+
+    expect(screen.getByText("Loading task workspace...")).toBeTruthy();
 
     await waitFor(() => {
-      expect(screen.getByText("First task")).toBeTruthy();
+      expect(getTasksFromServerMock).toHaveBeenCalledTimes(1);
     });
 
-    expect(getTasksFromServerMock).toHaveBeenCalledTimes(1);
     expect(getTasksFromServerMock).toHaveBeenCalledWith("project-1");
     expect(screen.getByText("Task Workspace")).toBeTruthy();
-    expect(screen.getByText("Start task workspace")).toBeTruthy();
-    expect(screen.getByText("Open task workspace")).toBeTruthy();
+    expect(screen.getByText("Task workspace start")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Start the task workspace for the current project task.",
+      ),
+    ).toBeTruthy();
+    expect(screen.getByText("First task")).toBeTruthy();
     expect(screen.getByText("task-1")).toBeTruthy();
     expect(screen.getByText("project-1")).toBeTruthy();
-    expect(screen.getByText(expectedCreatedAt)).toBeTruthy();
   });
 
   test("shows the missing state for an unknown taskId", async () => {
     useParamsMock.mockReturnValue({ id: "project-1", taskId: "missing-task" });
 
-    render(<ProjectTaskDetailPage />);
+    render(<ProjectTaskWorkspacePage />);
 
     await waitFor(() => {
       expect(screen.getByText("Task not found")).toBeTruthy();

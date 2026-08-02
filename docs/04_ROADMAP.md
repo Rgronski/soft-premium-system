@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-002.j - Project Task Intake Foundation
+MS-002.k - Task Workspace Start Foundation
 
 ## Next
 
@@ -125,6 +125,7 @@ MS-002.e is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication o
 MS-002.f is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Task Collection Handoff Foundation.
 MS-002.i is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Repository Link Foundation.
 MS-002.j is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Task Intake Foundation.
+MS-002.k is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Workspace Start Foundation.
 
 ## MS-002.d - Project Workspace Task Entry Shortcut Foundation
 

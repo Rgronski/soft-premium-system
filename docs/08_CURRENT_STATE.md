@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-002.j - Project Task Intake Foundation
+MS-002.k - Task Workspace Start Foundation
 
 **Next Milestone**
 NONE
@@ -64,6 +64,7 @@ MS-002.e is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace T
 MS-002.f is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace Task Collection Handoff Foundation; the project workspace dashboard now exposes a `View all tasks` handoff from the Tasks collection.
 MS-002.i is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Repository Link Foundation; the project contract now includes an optional `repositoryUrl`, Project Brain carries it through the consumer overview, `/projects/[id]` passes it into `WorkspaceHeader`, and `WorkspaceHeader` shows `Open repository` only when `repositoryUrl` exists.
 MS-002.j is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Task Intake Foundation; the project task screen now labels the intake surface explicitly and keeps the existing task form, focus behavior, and task list flow.
+MS-002.k is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Task Workspace Start Foundation; the task detail page now links to the task workspace route and the new `/projects/[id]/tasks/[taskId]/workspace` route renders a minimal task-workspace start surface without repository context loading.
 No runtime product code, UI, API, provider, or Project Brain behavior changed in this SSOT synchronization.
 
 **MS-001.17 State**
@@ -93,7 +94,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-002.h - Project Workspace Task Detail Handoff Foundation
+Latest Completed Product Milestone: MS-002.k - Task Workspace Start Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
