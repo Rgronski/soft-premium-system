@@ -69,6 +69,18 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 048 - MS-002.n task result capture publication
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Published `MS-002.n - Task Result Capture Foundation` as a minimal local-only task workspace surface.
+* Added a `Task Result` / `Result Capture` block to `/projects/[id]/tasks/[taskId]/workspace`.
+* Preserved the existing Repository Context and `Handoff to Codex` blocks without adding backend persistence, repository cloning, GitHub integration, or automated handoff.
+
 ## Session 048 - MS-002.m task handoff to codex publication
 
 ### Date

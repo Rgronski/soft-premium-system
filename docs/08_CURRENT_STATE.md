@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-002.m - Task Handoff To Codex Foundation
+MS-002.n - Task Result Capture Foundation
 
 **Next Milestone**
 NONE
@@ -67,6 +67,7 @@ MS-002.j is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Task Intake
 MS-002.k is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Task Workspace Start Foundation; the task detail page now links to the task workspace route and the new `/projects/[id]/tasks/[taskId]/workspace` route renders a minimal task-workspace start surface without repository context loading.
 MS-002.l is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Repository Context Load Foundation; the task workspace route now loads Project Brain workspace context via `getProjectWorkspaceEntry(projectId)`, displays a minimal Repository Context block, and shows `Open repository` only when `repositoryUrl` exists.
 MS-002.m is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Task Handoff To Codex Foundation; the task workspace route now includes a minimal Task Handoff block and a `Handoff to Codex` anchor action that stays on the same page and does not automate handoff.
+MS-002.n is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Task Result Capture Foundation; the task workspace route now includes a minimal local-only Task Result / Result Capture block while keeping the Repository Context and Handoff to Codex surfaces intact.
 No runtime product code, UI, API, provider, or Project Brain behavior changed in this SSOT synchronization.
 
 **MS-001.17 State**
