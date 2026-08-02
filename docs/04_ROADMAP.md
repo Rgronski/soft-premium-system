@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-002.b - Project Workspace Start Action Boundary Foundation
+MS-001.79 - Project Workspace Creation Contract Foundation
 
 ## Next
 

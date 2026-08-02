@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 MS-002.b - Project Workspace Start Action Boundary Foundation
 
 **Latest Completed Milestone**
-MS-002.b - Project Workspace Start Action Boundary Foundation
+MS-001.79 - Project Workspace Creation Contract Foundation
 
 **Next Milestone**
 NONE
