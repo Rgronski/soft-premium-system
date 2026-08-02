@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   createTaskOnServer,
   getTasksFromServer,
@@ -205,8 +206,9 @@ export default function ProjectTasksPage() {
           ) : (
             <div className="space-y-3">
               {tasks.map((task) => (
-                <div
+                <Link
                   key={task.id}
+                  href={`/projects/${projectId}/tasks/${task.id}`}
                   className="rounded-xl border border-zinc-800 bg-zinc-900 p-4"
                 >
                   <p className="text-base font-medium text-zinc-100">
@@ -215,7 +217,7 @@ export default function ProjectTasksPage() {
                   <p className="mt-1 text-sm text-zinc-400">
                     {new Date(task.createdAt).toLocaleDateString()}
                   </p>
-                </div>
+                </Link>
               ))}
             </div>
           )}

@@ -212,20 +212,20 @@ SPS OS Session State
 
 Date: 2026-08-02
 Current Session ID: 047
-Current Chat Title: 047 SPS OS - MS-002.g project workspace knowledge collection publication
+Current Chat Title: 047 SPS OS - MS-002.h project workspace task detail publication
 Next Session ID: 048
 Suggested Next Chat Title: 048 SPS OS - Next Product Milestone Contract Discovery
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: CODEX SESSION CLOSE
-Completed Capability Items: Session 047 published MS-002.g; Session 047 synchronized SSOT; Session 047 recorded usage
+Completed Capability Items: Session 047 published MS-002.g; Session 047 synchronized SSOT; Session 047 recorded usage; Session 047 published MS-002.h
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-002.g - Project Workspace Knowledge Collection Handoff Foundation
+Latest Completed Product Milestone: MS-002.h - Project Workspace Task Detail Handoff Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 047 published MS-002.g
+Latest Completed Capability Item: Session 047 published MS-002.h
 Current Sprint: NONE
-Platform Priority: Close Session 047, publish the MS-002.g package, and prepare the next discovery session.
+Platform Priority: Close Session 047, publish the MS-002.h package, and prepare the next discovery session.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
@@ -233,4 +233,4 @@ Latest Verified Commit: f928707
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Create the MS-002.g publication commit, push it, and prepare the next discovery session.
+Next Safe Step: Create the MS-002.h publication commit, push it, and prepare the next discovery session.

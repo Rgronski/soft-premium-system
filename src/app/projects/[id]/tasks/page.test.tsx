@@ -97,6 +97,9 @@ describe("ProjectTasksPage", () => {
     await waitFor(() => {
       expect(screen.getByText("First task")).toBeTruthy();
     });
+    expect(
+      screen.getByRole("link", { name: /First task/ }),
+    ).toBeTruthy();
   });
 
   test("renders the empty state when the canonical task list is empty", async () => {

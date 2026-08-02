@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 047 - MS-002.h project workspace task detail publication
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Published `MS-002.h - Project Workspace Task Detail Handoff Foundation` as the next visible workspace milestone after `MS-002.g`.
+* Added the read-only `/projects/[id]/tasks/[taskId]` route and minimal task detail links from the existing task list.
+* Added focused tests for the task detail route and the task list link.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the published MS-002.h state.
+* Recorded the Session 047 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No Project Brain, workflow engine, task engine, storage/provider/API, sidebar, route-shell, salon modules, or AI workspace scope changed.
+
 ## Session 047 - MS-002.g project workspace knowledge collection publication
 
 ### Date
