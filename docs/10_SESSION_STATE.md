@@ -211,26 +211,26 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-02
-Current Session ID: 048
-Current Chat Title: 048 SPS OS - CODEX SESSION CLOSE HANDOFF
-Next Session ID: 049
-Suggested Next Chat Title: 049 SPS OS - Next Product Milestone Contract Discovery
+Current Session ID: 049
+Current Chat Title: 049 SPS OS - Task Result Save Action Foundation
+Next Session ID: UNKNOWN
+Suggested Next Chat Title: UNKNOWN
 Active Capability: NONE
-Active Work Item: NONE
-Current Mode: CODEX SESSION CLOSE
-Completed Capability Items: Session 048 published MS-002.i; Session 048 synchronized SSOT; Session 048 recorded usage; Session 048 published MS-002.j; Session 048 synchronized SSOT; Session 048 recorded usage; Session 048 published MS-002.k; Session 048 synchronized SSOT; Session 048 recorded usage; Session 048 published MS-002.l; Session 048 synchronized SSOT; Session 048 recorded usage; Session 048 published MS-002.m; Session 048 synchronized SSOT; Session 048 recorded usage; Session 048 published MS-002.n; Session 048 synchronized SSOT; Session 048 recorded usage; Session 048 prepared the Session 048 close handoff
+Active Work Item: MS-002.o - Task Result Save Action Foundation
+Current Mode: CODEX IMPLEMENTATION
+Completed Capability Items: Session 049 implemented MS-002.o; Session 049 synchronized SSOT
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-002.n - Task Result Capture Foundation
+Latest Completed Product Milestone: MS-002.o - Task Result Save Action Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 048 prepared the Session 048 close handoff
+Latest Completed Capability Item: Session 049 synchronized SSOT
 Current Sprint: NONE
-Platform Priority: Close Session 048, generate the Session 048 package, and prepare the next discovery session.
+Platform Priority: Complete MS-002.o SSOT synchronization and keep Session 049 open until close handoff.
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: 6673352
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `049 SPS OS - Next Product Milestone Contract Discovery`, attach `sps-session.zip`, and paste the START prompt.
+Next Safe Step: Append the Session 049 usage record, then prepare the Session 049 close handoff.

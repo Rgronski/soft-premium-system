@@ -69,6 +69,19 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 049 - MS-002.o task result save action publication
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Published `MS-002.o - Task Result Save Action Foundation` as a minimal local-only task workspace save action.
+* Added a local `Save result` action to `/projects/[id]/tasks/[taskId]/workspace`.
+* Blocked empty task result note saves and showed a saved status in the current UI session after save.
+* Kept the task workspace free of backend persistence, Project Brain writes, repository cloning, or automated handoff.
+
 ## Session 048 - MS-002.n task result capture publication
 
 ### Date

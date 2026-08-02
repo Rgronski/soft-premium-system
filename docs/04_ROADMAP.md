@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-002.n - Task Result Capture Foundation
+MS-002.o - Task Result Save Action Foundation
 
 ## Next
 
@@ -129,6 +129,80 @@ MS-002.k is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication o
 MS-002.l is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Repository Context Load Foundation.
 MS-002.m is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Handoff To Codex Foundation.
 MS-002.n is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Result Capture Foundation.
+MS-002.o is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Result Save Action Foundation.
+
+## MS-002.o - Task Result Save Action Foundation
+
+**Milestone**
+MS-002.o - Task Result Save Action Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Purpose**
+Add a minimal local UI save action for task result notes on `/projects/[id]/tasks/[taskId]/workspace` without backend persistence or Project Brain writes.
+
+**Product Outcome**
+The task workspace now lets the user write result notes, blocks empty saves, and shows a local saved status in the current UI session.
+
+**Dependencies**
+* closed `MS-002.n - Task Result Capture Foundation`
+
+**Allowed Implementation Scope**
+* local task result save action on the existing task workspace route
+* empty-note save blocking
+* local saved status visibility
+* focused tests for the workspace save interaction
+
+**Forbidden Scope**
+* Project Brain behavior changes
+* backend/API route changes
+* task engine/storage ownership changes
+* GitHub integration
+* Codex automation handoff
+* route redesign
+* broader UI refactor
+
+**Ownership Boundaries**
+* `/projects/[id]/tasks/[taskId]/workspace` owns the local task result save interaction
+* Task Engine and Project Brain remain outside this local UI-only save action
+
+**Verification Plan**
+* focused workspace save interaction test
+* `git diff --check`
+* targeted SSOT consistency check
+* confirm no backend persistence or Project Brain writes were introduced
+
+**Rollback / Safety Expectations**
+* stop if the save action needs backend persistence
+* stop if the save action requires Project Brain writes
+* keep the milestone non-active until approval
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-002.d - Project Workspace Task Entry Shortcut Foundation
 

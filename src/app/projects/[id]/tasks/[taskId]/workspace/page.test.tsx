@@ -1,6 +1,12 @@
 // @vitest-environment jsdom
 
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 const useParamsMock = vi.fn(() => ({ id: "project-1", taskId: "task-1" }));
@@ -106,6 +112,10 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("Task Result")).toBeTruthy();
     expect(screen.getByText("Capture the current task result locally for now.")).toBeTruthy();
     expect(screen.getByLabelText("Result notes")).toBeTruthy();
+    const initialSaveButton = screen.getByRole("button", {
+      name: "Save result",
+    }) as HTMLButtonElement;
+    expect(initialSaveButton.disabled).toBe(true);
     expect(getTasksFromServerMock).toHaveBeenCalledWith("project-1");
     expect(screen.getByText("Task Workspace")).toBeTruthy();
     expect(screen.getByText("Task workspace start")).toBeTruthy();
@@ -117,6 +127,19 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("First task")).toBeTruthy();
     expect(screen.getByText("task-1")).toBeTruthy();
     expect(screen.getByText("project-1")).toBeTruthy();
+
+    fireEvent.change(screen.getByLabelText("Result notes"), {
+      target: { value: "Finished the task locally." },
+    });
+
+    const saveButton = screen.getByRole("button", {
+      name: "Save result",
+    }) as HTMLButtonElement;
+    expect(saveButton.disabled).toBe(false);
+
+    fireEvent.click(saveButton);
+
+    expect(screen.getByText("Result saved locally.")).toBeTruthy();
   });
 
   test("shows the missing state for an unknown taskId", async () => {
