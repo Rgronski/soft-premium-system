@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 046 - MS-002.e project workspace task quick action publication
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Published `MS-002.e - Project Workspace Task Quick Action Foundation` as the smallest visible follow-on workspace milestone after `MS-002.d`.
+* Added the `Add Task` quick action in `src/components/workspace/WorkspacePanels.tsx` so the project workspace now hands off directly to the existing task entry screen.
+* Updated `src/app/projects/[id]/page.test.tsx` to cover the new visible workspace action.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the published MS-002.e state.
+
+### Notes
+
+* No Project Brain, workflow engine, API, provider, or storage ownership changed.
+
 ## Session 046 - MS-002.d project workspace task-entry shortcut publication
 
 ### Date

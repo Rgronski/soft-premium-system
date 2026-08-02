@@ -77,6 +77,7 @@ describe("ProjectWorkspacePage", () => {
     expect(screen.getByText("Knowledge note")).toBeTruthy();
     expect(screen.getAllByText("Continue active work")).toHaveLength(2);
     expect(screen.getByRole("link", { name: "Open tasks" })).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Add Task" })).toBeTruthy();
   });
 
   test("surfaces the Project Brain start-next-work readiness boundary when no active work exists", () => {

@@ -121,6 +121,7 @@ MS-001.79 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication 
 MS-002.b is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Start Action Boundary Foundation with commit `043d744`.
 MS-002.c is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Next Step Action Foundation.
 MS-002.d is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Task Entry Shortcut Foundation.
+MS-002.e is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Task Quick Action Foundation.
 
 ## MS-002.d - Project Workspace Task Entry Shortcut Foundation
 
@@ -195,6 +196,81 @@ The project task screen now lands on the task title field so a user can start en
 **Rollback / Safety Expectations**
 * stop if task-entry readiness requires Project Brain changes
 * stop if the task page needs broader route or workflow refactoring
+* keep the milestone non-active until approval
+
+## MS-002.e - Project Workspace Task Quick Action Foundation
+
+**Milestone**
+MS-002.e - Project Workspace Task Quick Action Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Purpose**
+Make `/projects/[id]` expose a direct task-creation handoff so users can jump to the task entry screen from the workspace dashboard.
+
+**Product Outcome**
+The project workspace now includes an `Add Task` quick action that routes directly to the existing tasks screen.
+
+**Implementation Evidence**
+* `src/components/workspace/WorkspacePanels.tsx` adds the `Add Task` quick action to the existing workspace quick-action set.
+* `src/app/projects/[id]/page.test.tsx` verifies the project workspace shows the `Add Task` link.
+
+**Dependencies**
+* `MS-002.d - Project Workspace Task Entry Shortcut Foundation`
+
+**Allowed Implementation Scope**
+* direct task-creation handoff from the existing project workspace dashboard
+* focused tests for the new visible workspace quick action
+
+**Forbidden Scope**
+* Project Brain behavior changes
+* task engine, API, provider, or storage ownership changes
+* broader route refactors
+* salon modules
+* UI redesign unrelated to the quick action handoff
+
+**Ownership Boundaries**
+* `/projects/[id]` owns the visible workspace dashboard handoff
+* `/projects/[id]/tasks` owns the task entry surface
+* Project Brain remains the canonical source for project truth
+
+**Activation Gates**
+* Product Owner approval is recorded
+* SSOT contract is published and consistent
+* `Current Product Milestone` remains `NONE`
+* `Next Product Milestone` remains `NONE`
+
+**Verification Plan**
+* focused workspace dashboard test
+* `git diff --check`
+* targeted SSOT consistency check
+* confirm no Project Brain or task model changes occurred
+
+**Rollback / Safety Expectations**
+* stop if the quick action requires Project Brain changes
+* stop if the dashboard needs broader route or workflow refactoring
 * keep the milestone non-active until approval
 
 ## MS-002.z - Workspace Project Route Shell Boundary Foundation

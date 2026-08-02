@@ -37,6 +37,10 @@ export function WorkspacePanels({
 
   const quickActions = [
     {
+      href: `/projects/${projectId}/tasks`,
+      label: "Add Task",
+    },
+    {
       href: `/projects/${projectId}/clients/new`,
       label: "Add Client",
     },
@@ -78,7 +82,7 @@ export function WorkspacePanels({
         <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
           Quick Actions
         </p>
-        <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
           {quickActions.map((quickAction) => (
             <Link
               key={quickAction.href}
