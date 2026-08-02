@@ -111,13 +111,14 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-001.79 - Project Workspace Creation Contract Foundation
+MS-002.b - Project Workspace Start Action Boundary Foundation
 
 ## Next
 
 NONE
 
 MS-001.79 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Creation Contract Foundation with commit `6881e86`.
+MS-002.b is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Start Action Boundary Foundation with commit `043d744`.
 
 ## MS-002.z - Workspace Project Route Shell Boundary Foundation
 
@@ -284,7 +285,7 @@ MS-002.b - Project Workspace Start Action Boundary Foundation
 Product Milestone
 
 **Contract Status**
-VERIFIED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
 YES
@@ -299,10 +300,10 @@ Codex
 COMPLETED / VERIFIED
 
 **Publication Status**
-PENDING PO APPROVAL
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED
+COMPLETED / PUBLISHED / CLOSED
 
 **Purpose**
 Define the smallest workspace start-action boundary for `/projects/[id]`.

@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 044 - Session close and handoff synchronization
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Closed Session 044 after publishing `655e09a - docs(session): publish session 044 ms-002.z`, `e324c05 - test(projects): prove project brain access boundary`, and `043d744 - test(projects): prove workspace start boundary` on `main`.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to reflect the closed Session 044 state.
+* Prepared `docs/session-handoffs/2026-08-02_044_SESSION_HANDOFF.md` for Session 045 bootstrap continuity.
+
+### Notes
+
+* No runtime code, UI, API, provider, or storage behavior changed.
+
 ## Session 044 - MS-002.b Project Workspace start-action readiness verification
 
 ### Date

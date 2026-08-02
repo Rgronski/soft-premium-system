@@ -57,7 +57,7 @@ MS-002.x is COMPLETED / VERIFIED / PUBLISHED / CLOSED as a docs-only boundary co
 MS-002.y is COMPLETED / VERIFIED / PUBLISHED / CLOSED as a docs-only route boundary contract after formal publication of the `/workspace` vs `/projects/[id]` boundary in `docs/02_ARCHITECTURE.md`.
 MS-002.z is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Workspace Project Route Shell Boundary Foundation; the project-facing shell already exists in `src/app/projects/[id]/layout.tsx`, and this session synchronized SSOT to match the live route tree.
 MS-002.a is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Brain Access Boundary Foundation; the project workspace route now proves its canonical access point through `getProjectWorkspaceEntry(projectId)`.
-MS-002.b is COMPLETED / VERIFIED in this session as the Project Workspace Start Action Boundary Foundation; the project workspace route now proves its ready-state start boundary through the projected workflow next step surfaced by the workspace header.
+MS-002.b is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace Start Action Boundary Foundation; the project workspace route now proves its ready-state start boundary through the projected workflow next step surfaced by the workspace header.
 No runtime product code, UI, API, provider, or Project Brain behavior changed in this SSOT synchronization.
 
 **MS-001.17 State**
