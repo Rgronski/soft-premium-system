@@ -100,6 +100,9 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledWith("project-1");
     expect(screen.getByText("Repository Context")).toBeTruthy();
     expect(screen.getByText("Open repository")).toBeTruthy();
+    expect(screen.getByText("Task Handoff")).toBeTruthy();
+    expect(screen.getByText("Prepare this task for Codex review with the current workspace and repository context.")).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Handoff to Codex" })).toBeTruthy();
     expect(getTasksFromServerMock).toHaveBeenCalledWith("project-1");
     expect(screen.getByText("Task Workspace")).toBeTruthy();
     expect(screen.getByText("Task workspace start")).toBeTruthy();

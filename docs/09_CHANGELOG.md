@@ -69,6 +69,18 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 048 - MS-002.m task handoff to codex publication
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Published `MS-002.m - Task Handoff To Codex Foundation` as a minimal workspace handoff surface after `MS-002.l`.
+* Added a minimal `Task Handoff` block and a `Handoff to Codex` anchor action on `/projects/[id]/tasks/[taskId]/workspace`.
+* Kept the handoff on the same page without task result capture, repository cloning, GitHub integration, or automated Codex handoff.
+
 ## Session 048 - MS-002.l repository context load publication
 
 ### Date

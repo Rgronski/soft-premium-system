@@ -138,6 +138,25 @@ export default function ProjectTaskWorkspacePage() {
             )}
           </div>
 
+          <div
+            id="codex-handoff"
+            className="mb-4 rounded-xl border border-zinc-800 bg-zinc-900 p-4"
+          >
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              Task Handoff
+            </p>
+            <p className="mt-2 text-sm text-zinc-400">
+              Prepare this task for Codex review with the current workspace and
+              repository context.
+            </p>
+            <a
+              href="#codex-handoff"
+              className="mt-3 inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+            >
+              Handoff to Codex
+            </a>
+          </div>
+
           {state.isLoading ? (
             <p className="text-sm text-zinc-400">Loading task workspace...</p>
           ) : state.errorMessage ? (

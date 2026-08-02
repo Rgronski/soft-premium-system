@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-002.l - Repository Context Load Foundation
+MS-002.m - Task Handoff To Codex Foundation
 
 ## Next
 
@@ -127,6 +127,7 @@ MS-002.i is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication o
 MS-002.j is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Task Intake Foundation.
 MS-002.k is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Workspace Start Foundation.
 MS-002.l is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Repository Context Load Foundation.
+MS-002.m is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Handoff To Codex Foundation.
 
 ## MS-002.d - Project Workspace Task Entry Shortcut Foundation
 
