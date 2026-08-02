@@ -139,11 +139,24 @@ Chief Architect
 **Implementation Engine**
 Codex
 
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
 **Purpose**
 Make the `/workspace` vs `/projects/[id]` route shell boundary real before Project Brain access changes or the first read-only Salon Module.
 
 **Product Outcome**
 The repository contains the smallest safe route shell split between `/workspace` and `/projects/[id]` while Project Brain remains canonical and Salon Modules remain workspace-scoped.
+
+**Implementation Evidence**
+* The project-facing shell already lives in `src/app/projects/[id]/layout.tsx` and owns the route-local header, navigation links, and child outlet.
+* `src/app/projects/[id]/page.tsx` remains the content layer nested under that shell.
 
 **Dependencies**
 * `MS-002.x - Salon Modules Boundary Contract Foundation`

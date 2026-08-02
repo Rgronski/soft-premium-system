@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 044 - MS-002.z SSOT publish check and continuity sync
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Confirmed the MS-002.z route shell boundary state was synchronized in `docs/04_ROADMAP.md` and `docs/08_CURRENT_STATE.md`.
+* Refreshed the Session 044 operational snapshot in `docs/10_SESSION_STATE.md` to match the current working session.
+* Appended the required Session 044 usage record for this Codex task.
+
+### Notes
+
+* No runtime code, UI, API, provider, storage, or Project Brain behavior changed.
+
 ## Session 043 - session close and package synchronization published
 
 ### Date

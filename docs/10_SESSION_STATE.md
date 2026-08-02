@@ -210,27 +210,27 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-08-01
-Current Session ID: 043
-Current Chat Title: 043 SPS OS - CODEX SESSION CLOSE HANDOFF
-Next Session ID: 044
-Suggested Next Chat Title: 044 SPS OS - MS-002.z - Workspace Project Route Shell Boundary Foundation
+Date: 2026-08-02
+Current Session ID: 044
+Current Chat Title: 044 SPS OS - CODEX PUBLISH CHECK
+Next Session ID: UNKNOWN
+Suggested Next Chat Title: UNKNOWN
 Active Capability: NONE
 Active Work Item: NONE
-Current Mode: SESSION CLOSED
-Completed Capability Items: Session 043 synchronized the docs-only Salon Modules boundary contract in SSOT; Session 043 synchronized the docs-only route boundary contract in SSOT; Session 043 drafted and published the MS-002.z route shell boundary contract; Session 043 completed close protocol and prepared the Session 044 handoff; Session 042 implemented and pushed MS-001.79 `6881e86`; Session 042 published MS-001.79 SSOT `b45572d`; Session 042 aligned the package validator with MS-001.79 `1143273`; Session 042 completed close protocol and prepared the Session 043 handoff
+Current Mode: CODEX PUBLISH CHECK
+Completed Capability Items: Session 044 confirmed the MS-002.z SSOT publish check; Session 044 synchronized the session continuity docs; Session 043 synchronized the docs-only Salon Modules boundary contract in SSOT; Session 043 synchronized the docs-only route boundary contract in SSOT; Session 043 drafted and published the MS-002.z route shell boundary contract; Session 043 completed close protocol and prepared the Session 044 handoff
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.79 - Project Workspace Creation Contract Foundation
+Latest Completed Product Milestone: MS-002.z - Workspace Project Route Shell Boundary Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: CAP-005 - React Component Test Infrastructure Foundation
+Latest Completed Capability Item: Session 044 MS-002.z SSOT publish check
 Current Sprint: NONE
-Platform Priority: Preserve `Current Product Milestone = NONE` while preparing Session 044 for the Workspace Project Route Shell Boundary contract.
+Platform Priority: Keep SPS OS milestone continuity synchronized while awaiting Product Owner confirmation for any commit or push.
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: d12999f
+Latest Verified Commit: 95f6f84
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `044 SPS OS - MS-002.z - Workspace Project Route Shell Boundary Foundation`, attach `sps-session.zip`, and paste the START prompt.
+Next Safe Step: Await Product Owner confirmation before any commit or push.

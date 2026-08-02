@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-001.79 - Project Workspace Creation Contract Foundation
+MS-002.z - Workspace Project Route Shell Boundary Foundation
 
 **Next Milestone**
 NONE
@@ -55,8 +55,8 @@ MS-001.77 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication 
 MS-001.79 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Creation Contract Foundation with commit `6881e86`.
 MS-002.x is COMPLETED / VERIFIED / PUBLISHED / CLOSED as a docs-only boundary contract after formal publication of the Salon Modules boundary contract in `docs/02_ARCHITECTURE.md`.
 MS-002.y is COMPLETED / VERIFIED / PUBLISHED / CLOSED as a docs-only route boundary contract after formal publication of the `/workspace` vs `/projects/[id]` boundary in `docs/02_ARCHITECTURE.md`.
-MS-002.z is PROPOSED / NON-ACTIVE as the draft Workspace Project Route Shell Boundary Foundation and does not change Current Product Milestone or Next Product Milestone.
-No product code, UI, API, provider, or Project Brain behavior changed.
+MS-002.z is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Workspace Project Route Shell Boundary Foundation; the project-facing shell already exists in `src/app/projects/[id]/layout.tsx`, and this session synchronized SSOT to match the live route tree.
+No product code, UI, API, provider, or Project Brain behavior changed in this SSOT synchronization.
 
 **MS-001.17 State**
 COMPLETED / PUBLISHED / CLOSED
