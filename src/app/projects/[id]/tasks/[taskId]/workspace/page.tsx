@@ -1,5 +1,9 @@
 "use client";
 
+import {
+  getProjectWorkspaceEntry,
+  type ProjectWorkspaceEntry,
+} from "@/lib/project-brain/engine";
 import { getTasksFromServer, TaskServerError } from "@/lib/task/browser-server";
 import type { Task } from "@/lib/task/types";
 import { useParams } from "next/navigation";
@@ -41,7 +45,20 @@ export default function ProjectTaskWorkspacePage() {
   const projectId = params.id;
   const taskId = params.taskId;
 
+  const workspaceEntry = useMemo<ProjectWorkspaceEntry | null>(() => {
+    if (typeof window === "undefined") {
+      return null;
+    }
+
+    try {
+      return getProjectWorkspaceEntry(projectId);
+    } catch {
+      return null;
+    }
+  }, [projectId]);
+
   const taskWorkspace = useMemo(() => state.task, [state.task]);
+  const repositoryUrl = workspaceEntry?.workspace.overview.project.repositoryUrl;
 
   useEffect(() => {
     let ignore = false;
@@ -101,6 +118,26 @@ export default function ProjectTaskWorkspacePage() {
         </div>
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+          <div className="mb-4 rounded-xl border border-zinc-800 bg-zinc-900 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              Repository Context
+            </p>
+            {repositoryUrl ? (
+              <a
+                href={repositoryUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="mt-2 inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+              >
+                Open repository
+              </a>
+            ) : (
+              <p className="mt-2 text-sm text-zinc-400">
+                Repository context unavailable.
+              </p>
+            )}
+          </div>
+
           {state.isLoading ? (
             <p className="text-sm text-zinc-400">Loading task workspace...</p>
           ) : state.errorMessage ? (

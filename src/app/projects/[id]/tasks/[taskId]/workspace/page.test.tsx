@@ -4,10 +4,16 @@ import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 const useParamsMock = vi.fn(() => ({ id: "project-1", taskId: "task-1" }));
+const getProjectWorkspaceEntryMock = vi.fn();
 const getTasksFromServerMock = vi.fn();
 
 vi.mock("next/navigation", () => ({
   useParams: () => useParamsMock(),
+}));
+
+vi.mock("@/lib/project-brain/engine", () => ({
+  getProjectWorkspaceEntry: (projectId: string) =>
+    getProjectWorkspaceEntryMock(projectId),
 }));
 
 vi.mock("@/lib/task/browser-server", () => ({
@@ -30,6 +36,41 @@ import ProjectTaskWorkspacePage from "./page";
 describe("ProjectTaskWorkspacePage", () => {
   beforeEach(() => {
     useParamsMock.mockReturnValue({ id: "project-1", taskId: "task-1" });
+    getProjectWorkspaceEntryMock.mockReset();
+    getProjectWorkspaceEntryMock.mockReturnValue({
+      projectId: "project-1",
+      workspace: {
+        overview: {
+          project: {
+            id: "project-1",
+            name: "Project Alpha",
+            repositoryUrl: "https://example.com/repos/project-alpha",
+          },
+          counts: {
+            tasks: 1,
+            knowledgeEntries: 0,
+          },
+          workflow: {
+            health: "ready",
+            confidence: 0.5,
+            nextStep: {
+              id: "start-next-work",
+              label: "Start next work",
+              description: "Ready to start the next work item.",
+            },
+            warnings: 0,
+            blockers: 0,
+          },
+        },
+        tasks: [
+          {
+            id: "task-1",
+            title: "First task",
+          },
+        ],
+        knowledgeEntries: [],
+      },
+    });
     getTasksFromServerMock.mockReset();
     getTasksFromServerMock.mockResolvedValue([
       {
@@ -52,9 +93,13 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("Loading task workspace...")).toBeTruthy();
 
     await waitFor(() => {
-      expect(getTasksFromServerMock).toHaveBeenCalledTimes(1);
+    expect(getTasksFromServerMock).toHaveBeenCalledTimes(1);
     });
 
+    expect(getProjectWorkspaceEntryMock).toHaveBeenCalledTimes(1);
+    expect(getProjectWorkspaceEntryMock).toHaveBeenCalledWith("project-1");
+    expect(screen.getByText("Repository Context")).toBeTruthy();
+    expect(screen.getByText("Open repository")).toBeTruthy();
     expect(getTasksFromServerMock).toHaveBeenCalledWith("project-1");
     expect(screen.getByText("Task Workspace")).toBeTruthy();
     expect(screen.getByText("Task workspace start")).toBeTruthy();

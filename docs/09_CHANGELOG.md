@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 048 - MS-002.l repository context load publication
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Published `MS-002.l - Repository Context Load Foundation` as the next visible workspace milestone after `MS-002.k`.
+* Extended the task workspace route to load Project Brain workspace context via `getProjectWorkspaceEntry(projectId)`.
+* Added a minimal `Repository Context` block and an `Open repository` link that appears only when `repositoryUrl` exists.
+* Added focused test coverage for the repository context display in the task workspace route.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the published MS-002.l state.
+* Recorded the Session 048 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No Codex handoff automation, task result capture, repository cloning, GitHub integration, salon module, or workspace UI redesign scope changed.
+
 ## Session 048 - MS-002.k task workspace start publication
 
 ### Date
