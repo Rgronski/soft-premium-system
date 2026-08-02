@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-002.d - Project Workspace Task Entry Shortcut Foundation
+MS-002.f - Project Workspace Task Collection Handoff Foundation
 
 ## Next
 
@@ -122,6 +122,7 @@ MS-002.b is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication o
 MS-002.c is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Next Step Action Foundation.
 MS-002.d is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Task Entry Shortcut Foundation.
 MS-002.e is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Task Quick Action Foundation.
+MS-002.f is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Task Collection Handoff Foundation.
 
 ## MS-002.d - Project Workspace Task Entry Shortcut Foundation
 
@@ -270,6 +271,81 @@ The project workspace now includes an `Add Task` quick action that routes direct
 
 **Rollback / Safety Expectations**
 * stop if the quick action requires Project Brain changes
+* stop if the dashboard needs broader route or workflow refactoring
+* keep the milestone non-active until approval
+
+## MS-002.f - Project Workspace Task Collection Handoff Foundation
+
+**Milestone**
+MS-002.f - Project Workspace Task Collection Handoff Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Purpose**
+Make the Tasks collection on `/projects/[id]` hand off directly to the existing task entry screen for fast navigation from the workspace dashboard.
+
+**Product Outcome**
+The workspace now exposes a `View all tasks` link from the Tasks collection so users can jump straight to the task entry screen.
+
+**Implementation Evidence**
+* `src/components/workspace/WorkspaceCollections.tsx` adds the `View all tasks` handoff beneath the Tasks collection.
+* `src/app/projects/[id]/page.test.tsx` verifies the project workspace shows the `View all tasks` link.
+
+**Dependencies**
+* `MS-002.e - Project Workspace Task Quick Action Foundation`
+
+**Allowed Implementation Scope**
+* direct task-entry handoff from the existing Tasks collection
+* focused tests for the new visible workspace handoff
+
+**Forbidden Scope**
+* Project Brain behavior changes
+* task engine, API, provider, or storage ownership changes
+* broader route refactors
+* salon modules
+* UI redesign unrelated to the collection handoff
+
+**Ownership Boundaries**
+* `/projects/[id]` owns the visible workspace dashboard handoff
+* `/projects/[id]/tasks` owns the task entry surface
+* Project Brain remains the canonical source for project truth
+
+**Activation Gates**
+* Product Owner approval is recorded
+* SSOT contract is published and consistent
+* `Current Product Milestone` remains `NONE`
+* `Next Product Milestone` remains `NONE`
+
+**Verification Plan**
+* focused workspace dashboard test
+* `git diff --check`
+* targeted SSOT consistency check
+* confirm no Project Brain or task model changes occurred
+
+**Rollback / Safety Expectations**
+* stop if the collection handoff requires Project Brain changes
 * stop if the dashboard needs broader route or workflow refactoring
 * keep the milestone non-active until approval
 

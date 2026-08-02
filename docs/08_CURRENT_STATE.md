@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-002.e - Project Workspace Task Quick Action Foundation
+MS-002.f - Project Workspace Task Collection Handoff Foundation
 
 **Next Milestone**
 NONE
@@ -61,6 +61,7 @@ MS-002.b is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace S
 MS-002.c is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace Next Step Action Foundation; the project workspace header now exposes the projected next step as an Open tasks action that routes to the existing project tasks screen.
 MS-002.d is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace Task Entry Shortcut Foundation; the project task screen now autofocuses the task title input on mount for faster task capture.
 MS-002.e is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace Task Quick Action Foundation; the project workspace dashboard now exposes an `Add Task` handoff to the task entry screen.
+MS-002.f is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace Task Collection Handoff Foundation; the project workspace dashboard now exposes a `View all tasks` handoff from the Tasks collection.
 No runtime product code, UI, API, provider, or Project Brain behavior changed in this SSOT synchronization.
 
 **MS-001.17 State**

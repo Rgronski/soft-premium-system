@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 046 - MS-002.f project workspace task collection handoff publication
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Published `MS-002.f - Project Workspace Task Collection Handoff Foundation` as the smallest visible follow-on workspace milestone after `MS-002.e`.
+* Added the `View all tasks` handoff in `src/components/workspace/WorkspaceCollections.tsx` so the Tasks collection now routes directly to the existing task entry screen.
+* Updated `src/app/projects/[id]/page.test.tsx` to cover the new visible workspace handoff.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the published MS-002.f state.
+
+### Notes
+
+* No Project Brain, workflow engine, API, provider, or storage ownership changed.
+
 ## Session 046 - MS-002.e project workspace task quick action publication
 
 ### Date
