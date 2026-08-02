@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 MS-002.b - Project Workspace Start Action Boundary Foundation
 
 **Latest Completed Milestone**
-MS-001.79 - Project Workspace Creation Contract Foundation
+MS-002.b - Project Workspace Start Action Boundary Foundation
 
 **Next Milestone**
 NONE
@@ -87,7 +87,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-001.79 - Project Workspace Creation Contract Foundation
+Latest Completed Product Milestone: MS-002.b - Project Workspace Start Action Boundary Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -1244,7 +1244,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-001.79 - Project Workspace Creation Contract Foundation`
+* `Latest Completed Product Milestone` is `MS-002.b - Project Workspace Start Action Boundary Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
