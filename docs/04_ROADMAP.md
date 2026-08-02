@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-002.b - Project Workspace Start Action Boundary Foundation
+MS-002.c - Project Workspace Next Step Action Foundation
 
 ## Next
 
@@ -119,6 +119,7 @@ NONE
 
 MS-001.79 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Creation Contract Foundation with commit `6881e86`.
 MS-002.b is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Start Action Boundary Foundation with commit `043d744`.
+MS-002.c is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Next Step Action Foundation.
 
 ## MS-002.z - Workspace Project Route Shell Boundary Foundation
 
@@ -349,6 +350,83 @@ The `/projects/[id]` route proves the Project Brain ready-state start boundary t
 * stop if route access requires Project Brain ownership changes
 * stop if route access requires broader route refactoring
 * keep the milestone implementation minimal and focused on the boundary proof
+
+## MS-002.c - Project Workspace Next Step Action Foundation
+
+**Milestone**
+MS-002.c - Project Workspace Next Step Action Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Purpose**
+Make the projected workspace next step actionable from `/projects/[id]` without changing Project Brain ownership or the existing task route.
+
+**Product Outcome**
+The `/projects/[id]` workspace header now exposes the projected next step as an `Open tasks` action that routes to the existing project tasks screen.
+
+**Implementation Evidence**
+* `src/components/workspace/WorkspaceHeader.tsx` renders the projected next-step action and links it to `./tasks`.
+* `src/app/projects/[id]/page.test.tsx` proves the workspace route shows the new tasks action alongside the projected next step.
+* `src/app/projects/[id]/page.tsx` continues to own the workspace read boundary for the route project id.
+
+**Dependencies**
+* `MS-002.b - Project Workspace Start Action Boundary Foundation`
+* `MS-002.a - Project Brain Access Boundary Foundation`
+
+**Allowed Implementation Scope**
+* minimal next-step action affordance in the project workspace header
+* route handoff to the existing tasks screen
+* focused tests for the visible workspace action
+
+**Forbidden Scope**
+* Project Brain behavior changes
+* workflow engine changes
+* API/provider changes
+* storage or persistence ownership changes
+* broad workspace or route refactors
+* new task creation behavior
+
+**Ownership Boundaries**
+* `/projects/[id]` owns project-specific presentation and interaction flows
+* Project Brain owns the canonical next-step decision surfaced by the workspace header
+* `/projects/[id]/tasks` owns the existing task list interaction surface
+
+**Verification Plan**
+* targeted route test for `/projects/[id]`
+* `git diff --check`
+* focused review that the action only hands off to the existing tasks route
+
+**Rollback / Safety Expectations**
+* stop if the action requires Project Brain changes
+* stop if the action requires a new task model or task write flow
+* keep the milestone minimal and route-local
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-002.y - Workspace Project Route Boundary Contract Foundation
 

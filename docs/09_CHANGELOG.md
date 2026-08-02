@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 046 - MS-002.c project workspace next-step action publication
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Published `MS-002.c - Project Workspace Next Step Action Foundation` as the smallest visible follow-on workspace milestone after `MS-002.b`.
+* Added the workspace next-step action in `src/components/workspace/WorkspaceHeader.tsx` so the projected next step now hands off to `./tasks`.
+* Updated `src/app/projects/[id]/page.test.tsx` to cover the new visible workspace action.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the published MS-002.c state.
+
+### Notes
+
+* No Project Brain, workflow engine, API, provider, or storage ownership changed.
+
 ## Session 045 - local SSOT repair and close synchronization
 
 ### Date

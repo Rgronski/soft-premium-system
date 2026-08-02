@@ -75,6 +75,8 @@ describe("ProjectWorkspacePage", () => {
     expect(screen.getByText("Alpha Workspace")).toBeTruthy();
     expect(screen.getByText("Task A")).toBeTruthy();
     expect(screen.getByText("Knowledge note")).toBeTruthy();
+    expect(screen.getAllByText("Continue active work")).toHaveLength(2);
+    expect(screen.getByRole("link", { name: "Open tasks" })).toBeTruthy();
   });
 
   test("surfaces the Project Brain start-next-work readiness boundary when no active work exists", () => {
@@ -111,6 +113,6 @@ describe("ProjectWorkspacePage", () => {
 
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledTimes(1);
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledWith("project-1");
-    expect(screen.getByText("Start next work")).toBeTruthy();
+    expect(screen.getAllByText("Start next work")).toHaveLength(2);
   });
 });

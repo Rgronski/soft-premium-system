@@ -42,10 +42,10 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-002.b - Project Workspace Start Action Boundary Foundation
+NONE
 
 **Latest Completed Milestone**
-MS-002.b - Project Workspace Start Action Boundary Foundation
+MS-002.c - Project Workspace Next Step Action Foundation
 
 **Next Milestone**
 NONE
@@ -58,6 +58,7 @@ MS-002.y is COMPLETED / VERIFIED / PUBLISHED / CLOSED as a docs-only route bound
 MS-002.z is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Workspace Project Route Shell Boundary Foundation; the project-facing shell already exists in `src/app/projects/[id]/layout.tsx`, and this session synchronized SSOT to match the live route tree.
 MS-002.a is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Brain Access Boundary Foundation; the project workspace route now proves its canonical access point through `getProjectWorkspaceEntry(projectId)`.
 MS-002.b is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace Start Action Boundary Foundation; the project workspace route now proves its ready-state start boundary through the projected workflow next step surfaced by the workspace header.
+MS-002.c is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace Next Step Action Foundation; the project workspace header now exposes the projected next step as an Open tasks action that routes to the existing project tasks screen.
 No runtime product code, UI, API, provider, or Project Brain behavior changed in this SSOT synchronization.
 
 **MS-001.17 State**
@@ -1244,7 +1245,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-002.b - Project Workspace Start Action Boundary Foundation`
+* `Latest Completed Product Milestone` is `MS-002.c - Project Workspace Next Step Action Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
