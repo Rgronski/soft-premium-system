@@ -203,6 +203,78 @@ The repository contains the smallest safe route shell split between `/workspace`
 * `docs/09_CHANGELOG.md`
 * `docs/10_SESSION_STATE.md`
 
+## MS-002.a - Project Brain Access Boundary Foundation
+
+**Milestone**
+MS-002.a - Project Brain Access Boundary Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Purpose**
+Define the smallest Project Brain access boundary used by the project workspace route.
+
+**Product Outcome**
+The `/projects/[id]` route reaches Project Brain through `getProjectWorkspaceEntry(projectId)` as its canonical workspace access point.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/page.tsx` calls `getProjectWorkspaceEntry(params.id)` for the route workspace snapshot.
+* `src/app/projects/[id]/page.test.tsx` proves the route uses the Project Brain boundary for the active route project id.
+* `src/lib/project-brain/engine.ts` continues to own `getProjectWorkspaceEntry(projectId)` as the workspace projection boundary.
+
+**Dependencies**
+* `MS-002.z - Workspace Project Route Shell Boundary Foundation`
+* `docs/02_ARCHITECTURE.md`
+
+**Allowed Implementation Scope**
+* focused route boundary proof for `/projects/[id]`
+* minimal helper verification for the canonical Project Brain access point
+* focused tests for the route-owned Project Brain access boundary
+
+**Forbidden Scope**
+* Salon Modules migration
+* localStorage migration
+* API/provider changes
+* UI redesign
+* broad refactor
+* Project Brain ownership changes
+
+**Ownership Boundaries**
+* `/projects/[id]` owns project-specific presentation and interaction flows
+* Project Brain owns the canonical project truth and the workspace read boundary used by the route
+* Workspace shell behavior remains separate from Project Brain ownership
+
+**Verification Plan**
+* targeted route test for `/projects/[id]`
+* `git diff --check`
+* focused review that the route calls the canonical Project Brain access point
+
+**Rollback / Safety Expectations**
+* stop if route access requires Project Brain ownership changes
+* stop if route access requires broader route refactoring
+* keep the milestone implementation minimal and focused on the boundary proof
+
 ## MS-002.y - Workspace Project Route Boundary Contract Foundation
 
 **Milestone**
