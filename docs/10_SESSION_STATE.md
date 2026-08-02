@@ -211,26 +211,26 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-02
-Current Session ID: 044
-Current Chat Title: 044 SPS OS - CODEX SESSION CLOSE
-Next Session ID: 045
-Suggested Next Chat Title: 045 SPS OS - Next Product Milestone Contract Discovery
+Current Session ID: 045
+Current Chat Title: 045 SPS OS - CODEX SESSION CLOSE HANDOFF
+Next Session ID: 046
+Suggested Next Chat Title: 046 SPS OS - Next Product Milestone Contract Discovery
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: CODEX SESSION CLOSE
-Completed Capability Items: Session 044 published MS-002.z, MS-002.a, and MS-002.b on main; Session 044 synchronized the close-state SSOT docs; Session 044 committed and pushed 043d744; Session 044 prepared the Session 045 handoff
+Completed Capability Items: Session 045 repaired the local SSOT milestone state to MS-002.b; Session 045 committed 87642d8; Session 045 prepared the Session 046 handoff
 Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-002.b - Project Workspace Start Action Boundary Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 044 prepared the Session 045 handoff
+Latest Completed Capability Item: Session 045 prepared the Session 046 handoff
 Current Sprint: NONE
 Platform Priority: Prepare the next session from the verified close package.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 043d744
+Latest Verified Commit: 87642d8
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `045 SPS OS - Next Product Milestone Contract Discovery`, attach `sps-session.zip`, and paste the START prompt.
+Next Safe Step: Open a new chat titled `046 SPS OS - Next Product Milestone Contract Discovery`, attach `sps-session.zip`, and paste the START prompt.
