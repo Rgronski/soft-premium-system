@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 044 - MS-002.b Project Workspace start-action readiness verification
+
+### Date
+
+2026-08-02
+
+### Completed
+
+* Added a focused route-level test at `src/app/projects/[id]/page.test.tsx` proving `/projects/[id]` surfaces the Project Brain `start-next-work` readiness boundary when no active work exists.
+* Confirmed the project workspace route already projects the canonical ready-state next step through `WorkspaceHeader`.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the verified start-action readiness state.
+
+### Notes
+
+* No runtime code, UI, API, provider, or storage behavior changed.
+
 ## Session 044 - MS-002.a Project Brain access boundary verification
 
 ### Date

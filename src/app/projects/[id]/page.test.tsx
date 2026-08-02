@@ -76,4 +76,41 @@ describe("ProjectWorkspacePage", () => {
     expect(screen.getByText("Task A")).toBeTruthy();
     expect(screen.getByText("Knowledge note")).toBeTruthy();
   });
+
+  test("surfaces the Project Brain start-next-work readiness boundary when no active work exists", () => {
+    getProjectWorkspaceEntryMock.mockReturnValue({
+      projectId: "project-1",
+      workspace: {
+        overview: {
+          project: {
+            id: "project-1",
+            name: "Alpha Workspace",
+          },
+          counts: {
+            tasks: 0,
+            knowledgeEntries: 0,
+          },
+          workflow: {
+            health: "ready",
+            confidence: 0.5,
+            nextStep: {
+              id: "start-next-work",
+              label: "Start next work",
+              description: "Start the next safe workflow item.",
+            },
+            warnings: 0,
+            blockers: 0,
+          },
+        },
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+
+    render(<ProjectWorkspacePage />);
+
+    expect(getProjectWorkspaceEntryMock).toHaveBeenCalledTimes(1);
+    expect(getProjectWorkspaceEntryMock).toHaveBeenCalledWith("project-1");
+    expect(screen.getByText("Start next work")).toBeTruthy();
+  });
 });

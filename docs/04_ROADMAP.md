@@ -275,6 +275,80 @@ The `/projects/[id]` route reaches Project Brain through `getProjectWorkspaceEnt
 * stop if route access requires broader route refactoring
 * keep the milestone implementation minimal and focused on the boundary proof
 
+## MS-002.b - Project Workspace Start Action Boundary Foundation
+
+**Milestone**
+MS-002.b - Project Workspace Start Action Boundary Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+VERIFIED
+
+**Active**
+YES
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PENDING PO APPROVAL
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Purpose**
+Define the smallest workspace start-action boundary for `/projects/[id]`.
+
+**Product Outcome**
+The `/projects/[id]` route proves the Project Brain ready-state start boundary through the projected workflow next step surfaced by the workspace header.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/page.test.tsx` proves the route surfaces `Start next work` when Project Brain has no active work.
+* `src/components/workspace/WorkspaceHeader.tsx` renders the projected workflow next step from Project Brain.
+* `src/lib/workflow/engine.ts` continues to own the canonical `start-next-work` readiness decision.
+* `src/app/projects/[id]/page.tsx` continues to consume `getProjectWorkspaceEntry(params.id)` as the workspace boundary.
+
+**Dependencies**
+* `MS-002.a - Project Brain Access Boundary Foundation`
+* `docs/02_ARCHITECTURE.md`
+
+**Allowed Implementation Scope**
+* focused route readiness proof for `/projects/[id]`
+* minimal helper verification for the canonical workspace start-step projection
+* focused tests for the route-owned start-action readiness boundary
+
+**Forbidden Scope**
+* Salon Modules migration
+* localStorage migration
+* API/provider changes
+* UI redesign
+* broad refactor
+* Project Brain ownership changes
+
+**Ownership Boundaries**
+* `/projects/[id]` owns project-specific presentation and interaction flows
+* Project Brain owns the canonical project truth and the workspace read boundary used by the route
+* Workflow Engine owns the ready-state next-step decision used by the route start boundary
+* Workspace shell behavior remains separate from Project Brain ownership
+
+**Verification Plan**
+* targeted route test for `/projects/[id]`
+* `git diff --check`
+* focused review that the route exposes the canonical Project Brain ready-state next step
+
+**Rollback / Safety Expectations**
+* stop if route access requires Project Brain ownership changes
+* stop if route access requires broader route refactoring
+* keep the milestone implementation minimal and focused on the boundary proof
+
 ## MS-002.y - Workspace Project Route Boundary Contract Foundation
 
 **Milestone**
