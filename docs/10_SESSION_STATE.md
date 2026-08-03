@@ -233,4 +233,4 @@ Latest Verified Commit: 9569ec9
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `052 SPS OS - MS-004.0 External Integrations Foundation`, attach `sps-session.zip`, and paste the START prompt.
+Next Safe Step: Obtain Product Owner approval for `MS-004.0 - External Integrations Foundation`.
