@@ -1271,14 +1271,14 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-005.2 - Project Delete Action Foundation`
-* `Next Product Milestone` is `NONE`
+* `Latest Completed Product Milestone` is `MS-006.1 - Next Milestone Queue Foundation`
+* `Next Product Milestone` is `MS-006.2 - New Task Start Contract Foundation`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.18` is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.19` is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.20` is `COMPLETED / PUBLISHED / CLOSED`
-* proposed next milestone is `NONE`
+* proposed next milestone is `MS-006.2 - New Task Start Contract Foundation`
 * proposal status is `NONE`
 * current activation is `NONE`
 * current implementation is `NONE`
@@ -1377,7 +1377,7 @@ Next:
 
 Next session priorities:
 
-* Keep `Next Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone.
+* Keep `Next Product Milestone` aligned with `MS-006.2 - New Task Start Contract Foundation` until a separate Product Owner decision changes the approved queue.
 * Semantic consistency repair is completed and published in `c6a1946`.
 * Current-state finalization is completed and published in `40f457e`.
 * Session 035 close synchronization is completed and published in `e9a64c0`.

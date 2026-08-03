@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-005.2 - Project Delete Action Foundation
+MS-006.1 - Next Milestone Queue Foundation
 
 ## Next
 
