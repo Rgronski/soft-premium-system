@@ -212,20 +212,20 @@ SPS OS Session State
 
 Date: 2026-08-03
 Current Session ID: 054
-Current Chat Title: 054 SPS OS - MS-006.3 New Task Repository / Workspace Intake Foundation
+Current Chat Title: 054 SPS OS - MS-006.4 New Task Handoff To Codex Foundation
 Next Session ID: 055
-Suggested Next Chat Title: 055 SPS OS - MS-006.4 New Task Handoff To Codex Foundation
+Suggested Next Chat Title: 055 SPS OS - Next Milestone Direction Decision
 Active Capability: NONE
 Active Work Item: Session 054 close protocol
 Current Mode: CODEX SESSION CLOSE
-Completed Capability Items: Session 054 published MS-006.2; Session 054 published MS-006.3; Session 054 synchronized SSOT; Session 054 confirmed Package Consistency PASS; Session 054 recorded close usage summary
+Completed Capability Items: Session 054 published MS-006.2; Session 054 published MS-006.3; Session 054 published MS-006.4; Session 054 synchronized SSOT; Session 054 recorded close usage summary
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-006.3 - New Task Repository / Workspace Intake Foundation
-Next Product Milestone: MS-006.4 - New Task Handoff To Codex Foundation
+Latest Completed Product Milestone: MS-006.4 - New Task Handoff To Codex Foundation
+Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 054 confirmed Package Consistency PASS
+Latest Completed Capability Item: Session 054 published MS-006.4
 Current Sprint: NONE
-Platform Priority: Prepare Session 055 bootstrap for MS-006.4 after Session 054 close.
+Platform Priority: Prepare Session 055 bootstrap for next milestone decision after Session 054 close.
 Repository Branch: main
 Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
@@ -233,4 +233,4 @@ Latest Verified Commit: 28bbc50
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `055 SPS OS - MS-006.4 New Task Handoff To Codex Foundation`, attach `sps-session.zip`, and paste the START prompt.
+Next Safe Step: Open a new chat titled `055 SPS OS - Next Milestone Direction Decision`, attach `sps-session.zip`, and paste the START prompt.

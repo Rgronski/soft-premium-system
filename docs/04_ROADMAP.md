@@ -111,11 +111,98 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-006.3 - New Task Repository / Workspace Intake Foundation
+MS-006.4 - New Task Handoff To Codex Foundation
 
 ## Next
 
+NONE
+
+## MS-006.4 - New Task Handoff To Codex Foundation
+
+**Milestone**
 MS-006.4 - New Task Handoff To Codex Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Product Owner Decision**
+ACCEPT
+
+**Purpose**
+Define the minimal handoff-to-Codex contract for a new task after the task start contract and repository/workspace intake foundation already exist, without expanding into any later milestone.
+
+**Product Outcome**
+The roadmap now records the handoff contents, role boundary, repository/workspace context, verification expectations, and reporting expectations for handing a new task to Codex.
+
+**Dependencies**
+* closed `MS-006.2 - New Task Start Contract Foundation`
+* closed `MS-006.3 - New Task Repository / Workspace Intake Foundation`
+
+**Required Handoff Contents**
+* task title
+* task objective
+* repository/workspace context
+* source of truth pointer
+* verification expectations
+* reporting expectations
+
+**Allowed Implementation Scope**
+* handoff contents wording
+* role-boundary wording
+* repository/workspace context wording
+* verification/reporting expectation wording
+* SSOT continuity updates
+* publication metadata for the milestone
+
+**Forbidden Scope**
+* any post-handoff milestone
+* `src` changes
+* feature implementation
+* expanding the queue beyond the approved three steps
+* alternative product directions
+* unrelated refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* the Codex handoff itself stays outside the next product milestone
+
+**Verification Plan**
+* `git diff --check`
+* SSOT consistency review across `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`
+* confirm no `src` changes were introduced
+
+**Rollback / Safety Expectations**
+* stop if a later milestone starts before a separate Product Owner decision
+* stop if handoff scope expands beyond Codex transfer preparation
+* keep the contract docs-only
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-006.3 - New Task Repository / Workspace Intake Foundation
 
