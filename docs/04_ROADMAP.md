@@ -115,7 +115,84 @@ MS-002.t - AI Chat, Prompts, and Agents Foundation
 
 ## Next
 
-NONE
+MS-004.0 - External Integrations Foundation
+
+## MS-004.0 - External Integrations Foundation
+
+**Milestone**
+MS-004.0 - External Integrations Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+NOT STARTED
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+APPROVED
+
+**Purpose**
+Define the smallest provider-neutral boundary for future external integrations so the project can name one canonical integration entry point without changing application code, Project Brain ownership, or connector-specific implementation details.
+
+**Product Outcome**
+The repository has one approved contract for an `External Integrations` entry point that can be used as the canonical starting point for future connector work while keeping project truth in Project Brain and keeping provider/model wiring out of scope.
+
+**Dependencies**
+* `MS-002.t - AI Chat, Prompts, and Agents Foundation`
+* `docs/05_ROADMAP.md`
+
+**Allowed Implementation Scope**
+* one provider-neutral external integrations entry point
+* ownership boundary wording for future connectors
+* verification-path wording for docs-only SSOT publication
+
+**Forbidden Scope**
+* application code
+* API routes
+* provider/model wiring
+* persistence
+* UI redesign
+* Project Brain write paths
+* connector-specific implementation
+* unrelated refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* future connector implementations own their connector-specific wiring
+* Project Brain remains the canonical source of project truth
+* provider/model wiring remains outside this contract
+
+**Verification Plan**
+* `git diff --check`
+* SSOT consistency review across `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`
+* confirm no application, provider, persistence, or Project Brain write-path changes were introduced
+
+**Rollback / Safety Expectations**
+* stop if the integration entry point needs connector-specific implementation
+* stop if the integration boundary needs Project Brain write paths
+* keep the milestone non-active until Product Owner approval is recorded
+
+**Documentation Updates**
+* `docs/05_ROADMAP.md`
+* `docs/06_BACKLOG.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-002.s - Task Completion Handoff Text Foundation
 

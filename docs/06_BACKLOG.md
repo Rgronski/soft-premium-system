@@ -108,7 +108,7 @@ High
 
 **Status**
 
-Proposed
+Planned for `MS-004.0 - External Integrations Foundation`
 
 ---
 
@@ -128,7 +128,7 @@ Medium
 
 **Status**
 
-Proposed
+Planned for `MS-004.0 - External Integrations Foundation`
 
 ---
 
@@ -150,7 +150,7 @@ High
 
 **Status**
 
-Proposed
+Planned for `MS-004.0 - External Integrations Foundation`
 
 ---
 
@@ -352,7 +352,7 @@ Medium
 
 **Status**
 
-Proposed
+Planned for `MS-004.0 - External Integrations Foundation`
 
 ---
 

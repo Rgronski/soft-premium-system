@@ -211,26 +211,26 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-03
-Current Session ID: 050
-Current Chat Title: 050 SPS OS - MS-002.t AI Chat, Prompts, and Agents Foundation
-Next Session ID: 051
-Suggested Next Chat Title: 051 SPS OS - Next Product Milestone Contract Discovery
+Current Session ID: 051
+Current Chat Title: 051 SPS OS - MS-004.0 External Integrations Foundation Contract Discovery
+Next Session ID: 052
+Suggested Next Chat Title: 052 SPS OS - MS-004.0 External Integrations Foundation
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: CODEX SESSION CLOSE
-Completed Capability Items: Session 050 implemented MS-002.t; Session 050 synchronized SSOT; Session 050 prepared close handoff
+Completed Capability Items: Session 051 discovered MS-004.0; Session 051 synchronized SSOT; Session 051 prepared close handoff
 Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-002.t - AI Chat, Prompts, and Agents Foundation
-Next Product Milestone: NONE
+Next Product Milestone: MS-004.0 - External Integrations Foundation
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 050 prepared close handoff
+Latest Completed Capability Item: Session 051 prepared close handoff
 Current Sprint: NONE
-Platform Priority: Prepare Session 051 package and keep Session 050 closed.
+Platform Priority: Prepare Session 052 package and keep Session 051 closed.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 6a2303e
+Latest Verified Commit: 9569ec9
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `051 SPS OS - Next Product Milestone Contract Discovery`, attach `sps-session.zip`, and paste the START prompt.
+Next Safe Step: Open a new chat titled `052 SPS OS - MS-004.0 External Integrations Foundation`, attach `sps-session.zip`, and paste the START prompt.

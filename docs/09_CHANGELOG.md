@@ -69,6 +69,19 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 051 - MS-004.0 external integrations contract discovery publication
+
+### Date
+
+2026-08-03
+
+### Completed
+
+* Published `MS-004.0 - External Integrations Foundation` as the next provider-neutral contract milestone after `MS-002.t`.
+* Added the minimal external integrations contract to `docs/04_ROADMAP.md` with one canonical integration entry point, one ownership boundary, and one verification path.
+* Marked the `External Integrations` backlog item as planned for `MS-004.0` without changing application code, API routes, provider wiring, persistence, or Project Brain writes.
+* Synchronized the SSOT continuity docs and prepared the Session 051 handoff for the next approval step.
+
 ## Session 050 - MS-002.t AI chat, prompts, and agents foundation publication
 
 ### Date
