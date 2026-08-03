@@ -111,11 +111,93 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-006.2 - New Task Start Contract Foundation
+MS-006.3 - New Task Repository / Workspace Intake Foundation
 
 ## Next
 
+MS-006.4 - New Task Handoff To Codex Foundation
+
+## MS-006.3 - New Task Repository / Workspace Intake Foundation
+
+**Milestone**
 MS-006.3 - New Task Repository / Workspace Intake Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Product Owner Decision**
+ACCEPT
+
+**Purpose**
+Define the minimal repository/workspace intake contract for connecting a new task to the right repository or workspace while keeping the final Codex handoff flow out of scope until MS-006.4.
+
+**Product Outcome**
+The roadmap now records the intake data needed to connect a new task to a repository/workspace and the boundary that stops short of the full handoff-to-Codex flow.
+
+**Required Inputs**
+* task title
+* task objective
+* repository or workspace reference
+* source of truth pointer for the intake
+* explicit handoff constraints
+
+**Allowed Implementation Scope**
+* intake wording
+* required input wording
+* validation expectations
+* boundary wording that excludes the final handoff flow
+* SSOT continuity updates
+* publication metadata for the milestone
+
+**Forbidden Scope**
+* full Codex handoff flow
+* `src` changes
+* feature implementation
+* expanding the queue beyond the approved three steps
+* alternative product directions
+* unrelated refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* repository/workspace intake preparation stays outside the final handoff to Codex
+
+**Verification Plan**
+* `git diff --check`
+* SSOT consistency review across `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`
+* confirm no `src` changes were introduced
+
+**Rollback / Safety Expectations**
+* stop if the full handoff flow needs to begin before MS-006.4
+* stop if implementation scope grows beyond intake contract wording
+* keep the contract docs-only
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-006.2 - New Task Start Contract Foundation
 

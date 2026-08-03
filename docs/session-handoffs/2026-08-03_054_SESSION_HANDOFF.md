@@ -6,19 +6,20 @@ Chief Architect: ChatGPT
 Product Owner: Radoslaw Gronski
 Session Status: CLOSED
 Current Session ID: 054
-Current Chat Title: 054 SPS OS - MS-006.2 New Task Start Contract Foundation
+Current Chat Title: 054 SPS OS - MS-006.3 New Task Repository / Workspace Intake Foundation
 Next Session ID: 055
-Suggested Next Chat Title: 055 SPS OS - MS-006.3 New Task Repository / Workspace Intake Foundation
+Suggested Next Chat Title: 055 SPS OS - MS-006.4 New Task Handoff To Codex Foundation
 
 Capability: NONE
 Capability Status: NONE
 Active Work Item: Session 054 close protocol
 Completed Work Items:
 - Published MS-006.2 - New Task Start Contract Foundation at commit 28bbc50.
-- Synchronized the SSOT so docs/04_ROADMAP.md, docs/08_CURRENT_STATE.md, docs/09_CHANGELOG.md, and docs/10_SESSION_STATE.md now record MS-006.2 as the latest completed milestone and MS-006.3 as the next milestone.
+- Published MS-006.3 - New Task Repository / Workspace Intake Foundation.
+- Synchronized the SSOT so docs/04_ROADMAP.md, docs/08_CURRENT_STATE.md, docs/09_CHANGELOG.md, and docs/10_SESSION_STATE.md now record MS-006.3 as the latest completed milestone and MS-006.4 as the next milestone.
 - Recorded the Session 054 usage entry in .usage/session.jsonl.
 
-Next Work Item: Open a new chat titled `055 SPS OS - MS-006.3 New Task Repository / Workspace Intake Foundation`, attach `sps-session.zip`, and paste the START prompt.
+Next Work Item: Open a new chat titled `055 SPS OS - MS-006.4 New Task Handoff To Codex Foundation`, attach `sps-session.zip`, and paste the START prompt.
 
 Repository State:
 Repository Branch: main
@@ -29,16 +30,16 @@ Push Status: Published on origin/main
 
 Milestone State:
 Current Product Milestone: NONE
-Latest Completed Milestone: MS-006.2 - New Task Start Contract Foundation
+Latest Completed Milestone: MS-006.3 - New Task Repository / Workspace Intake Foundation
 
 Verification:
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
 
-Recommendation: Open a new chat titled `055 SPS OS - MS-006.3 New Task Repository / Workspace Intake Foundation`, attach `sps-session.zip`, and paste the START prompt.
-Next Safe Step: Open a new chat titled `055 SPS OS - MS-006.3 New Task Repository / Workspace Intake Foundation`, attach `sps-session.zip`, and paste the START prompt.
-Next Chat Prompt: 055 SPS OS - MS-006.3 New Task Repository / Workspace Intake Foundation
+Recommendation: Open a new chat titled `055 SPS OS - MS-006.4 New Task Handoff To Codex Foundation`, attach `sps-session.zip`, and paste the START prompt.
+Next Safe Step: Open a new chat titled `055 SPS OS - MS-006.4 New Task Handoff To Codex Foundation`, attach `sps-session.zip`, and paste the START prompt.
+Next Chat Prompt: 055 SPS OS - MS-006.4 New Task Handoff To Codex Foundation
 
 SPS OS - START
 
@@ -58,9 +59,9 @@ Confirmed state:
 - previous session: 054
 - current session: 055
 - branch: main
-- latest completed product milestone: MS-006.2 - New Task Start Contract Foundation
+- latest completed product milestone: MS-006.3 - New Task Repository / Workspace Intake Foundation
 - current product milestone: NONE
-- next product milestone: MS-006.3 - New Task Repository / Workspace Intake Foundation
+- next product milestone: MS-006.4 - New Task Handoff To Codex Foundation
 - blockers: NONE
 - Session Package Consistency: UNKNOWN
 

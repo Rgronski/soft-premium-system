@@ -45,16 +45,18 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-006.2 - New Task Start Contract Foundation
+MS-006.3 - New Task Repository / Workspace Intake Foundation
 
 **Next Milestone**
-MS-006.3 - New Task Repository / Workspace Intake Foundation
+MS-006.4 - New Task Handoff To Codex Foundation
 
 MS-006.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Milestone Queue Foundation; the repository now records the next three small milestones toward the New Task / New Project Start Flow without introducing application code after Session 053 close.
 
 MS-006.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Milestone Direction Contract Foundation; the repository now records a single approved post-MS-005.2 direction contract without introducing application code.
 
 MS-006.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the New Task Start Contract Foundation; the repository now records the minimal task-start contract boundary and keeps repository/workspace intake for MS-006.3.
+
+MS-006.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the New Task Repository / Workspace Intake Foundation; the repository now records the intake contract boundary needed to connect a new task to a repository/workspace while leaving the full Codex handoff for MS-006.4.
 
 MS-002.s is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Completion Handoff Text Foundation; the task workspace route now shows a local handoff text block after completion.
 MS-002.t is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Chat, Prompts, and Agents Foundation; the AI Workspace now owns the starter prompt catalog in the engine boundary.
@@ -116,8 +118,8 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-006.2 - New Task Start Contract Foundation
-Next Product Milestone: MS-006.3 - New Task Repository / Workspace Intake Foundation
+Latest Completed Product Milestone: MS-006.3 - New Task Repository / Workspace Intake Foundation
+Next Product Milestone: MS-006.4 - New Task Handoff To Codex Foundation
 Active Sprint: NONE
 Active Capability: NONE
 Latest Completed Capability: CAP-005 - React Component Test Infrastructure Foundation
@@ -1280,7 +1282,7 @@ Next:
 * `MS-001.18` is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.19` is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.20` is `COMPLETED / PUBLISHED / CLOSED`
-* proposed next milestone is `MS-006.3 - New Task Repository / Workspace Intake Foundation`
+* proposed next milestone is `MS-006.4 - New Task Handoff To Codex Foundation`
 * proposal status is `NONE`
 * current activation is `NONE`
 * current implementation is `NONE`
@@ -1379,7 +1381,7 @@ Next:
 
 Next session priorities:
 
-* Keep `Next Product Milestone` aligned with `MS-006.3 - New Task Repository / Workspace Intake Foundation` until a separate Product Owner decision changes the approved queue.
+* Keep `Next Product Milestone` aligned with `MS-006.4 - New Task Handoff To Codex Foundation` until a separate Product Owner decision changes the approved queue.
 * Semantic consistency repair is completed and published in `c6a1946`.
 * Current-state finalization is completed and published in `40f457e`.
 * Session 035 close synchronization is completed and published in `e9a64c0`.
