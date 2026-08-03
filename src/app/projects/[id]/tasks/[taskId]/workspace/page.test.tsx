@@ -112,6 +112,7 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("Task Result")).toBeTruthy();
     expect(screen.getByText("Capture the current task result locally for now.")).toBeTruthy();
     expect(screen.getByLabelText("Result notes")).toBeTruthy();
+    expect(screen.queryByText("Completion Summary")).toBeNull();
     const initialSaveButton = screen.getByRole("button", {
       name: "Save result",
     }) as HTMLButtonElement;
@@ -153,6 +154,19 @@ describe("ProjectTaskWorkspacePage", () => {
     fireEvent.click(completeButton);
 
     expect(screen.getByText("Task completed locally.")).toBeTruthy();
+    expect(screen.getByText("Completion Summary")).toBeTruthy();
+    expect(screen.getByText("Saved result notes: Finished the task locally.")).toBeTruthy();
+
+    fireEvent.change(screen.getByLabelText("Result notes"), {
+      target: { value: "Edited after completion." },
+    });
+
+    expect(screen.queryByText("Completion Summary")).toBeNull();
+    expect(screen.queryByText("Task completed locally.")).toBeNull();
+    expect(
+      (screen.getByRole("button", { name: "Complete task" }) as HTMLButtonElement)
+        .disabled,
+    ).toBe(true);
   });
 
   test("shows the missing state for an unknown taskId", async () => {

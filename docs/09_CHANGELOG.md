@@ -69,6 +69,19 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 049 - MS-002.q task completion summary publication
+
+### Date
+
+2026-08-03
+
+### Completed
+
+* Published `MS-002.q - Task Completion Summary Foundation` as a minimal local-only task workspace summary.
+* Added a local completion summary block to `/projects/[id]/tasks/[taskId]/workspace`.
+* Kept the summary hidden until local task completion and reset it when the result notes changed.
+* Kept the task workspace free of backend persistence, Project Brain writes, Task Engine writes, repository cloning, or automated handoff.
+
 ## Session 049 - MS-002.p task completion local action publication
 
 ### Date

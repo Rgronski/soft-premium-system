@@ -231,12 +231,20 @@ export default function ProjectTaskWorkspacePage() {
               >
                 Complete task
               </button>
-              {taskCompletionState === "completed" ? (
-                <p className="text-sm text-zinc-400" aria-live="polite">
+            </div>
+            {taskCompletionState === "completed" ? (
+              <div className="mt-3 rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                  Completion Summary
+                </p>
+                <p className="mt-2 text-sm text-zinc-400">
                   Task completed locally.
                 </p>
-              ) : null}
-            </div>
+                <p className="mt-2 text-sm text-zinc-300">
+                  Saved result notes: {resultNotes}
+                </p>
+              </div>
+            ) : null}
           </div>
 
           {state.isLoading ? (
