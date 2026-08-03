@@ -211,26 +211,26 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-03
-Current Session ID: 053
-Current Chat Title: 053 SPS OS - Publish MS-006.1 - Next Milestone Queue Foundation
-Next Session ID: 054
-Suggested Next Chat Title: 054 SPS OS - MS-006.2 New Task Start Contract Foundation
+Current Session ID: 054
+Current Chat Title: 054 SPS OS - MS-006.2 New Task Start Contract Foundation
+Next Session ID: 055
+Suggested Next Chat Title: 055 SPS OS - MS-006.3 New Task Repository / Workspace Intake Foundation
 Active Capability: NONE
-Active Work Item: Session 053 close protocol
+Active Work Item: Session 054 close protocol
 Current Mode: CODEX SESSION CLOSE
-Completed Capability Items: Session 053 published MS-006.0; Session 053 published MS-006.1; Session 053 synchronized SSOT; Session 053 corrected MS-006.1 queue to New Task / New Project Start Flow; Session 053 created the close handoff; Session 053 generated the session package; Session 053 confirmed Package Consistency PASS; Session 053 recorded close usage summary
+Completed Capability Items: Session 054 published MS-006.2; Session 054 synchronized SSOT; Session 054 recorded close usage summary
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-005.2 - Project Delete Action Foundation
-Next Product Milestone: MS-006.2 - New Task Start Contract Foundation
+Latest Completed Product Milestone: MS-006.2 - New Task Start Contract Foundation
+Next Product Milestone: MS-006.3 - New Task Repository / Workspace Intake Foundation
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 053 confirmed Package Consistency PASS
+Latest Completed Capability Item: Session 054 synchronized SSOT
 Current Sprint: NONE
-Platform Priority: Prepare Session 054 bootstrap for MS-006.2 after Session 053 close.
+Platform Priority: Prepare Session 055 bootstrap for MS-006.3 after Session 054 close.
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 1fbfef3
+Latest Verified Commit: 28bbc50
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `054 SPS OS - MS-006.2 New Task Start Contract Foundation`, attach `sps-session.zip`, and paste the START prompt.
+Next Safe Step: Open a new chat titled `055 SPS OS - MS-006.3 New Task Repository / Workspace Intake Foundation`, attach `sps-session.zip`, and paste the START prompt.

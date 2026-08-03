@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 054 - MS-006.2 new task start contract foundation publication
+
+### Date
+
+2026-08-03
+
+### Completed
+
+* Published `MS-006.2 - New Task Start Contract Foundation` as the docs-only start contract for a new task.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-006.2` as the latest completed milestone and `MS-006.3` as the next milestone.
+* Recorded the Session 054 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No `src` changes, tests, or product implementation were introduced.
+
 ## Session 053 - MS-006.1 session close and package synchronization
 
 ### Date

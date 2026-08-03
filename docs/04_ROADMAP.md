@@ -111,11 +111,92 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-006.1 - Next Milestone Queue Foundation
+MS-006.2 - New Task Start Contract Foundation
 
 ## Next
 
+MS-006.3 - New Task Repository / Workspace Intake Foundation
+
+## MS-006.2 - New Task Start Contract Foundation
+
+**Milestone**
 MS-006.2 - New Task Start Contract Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Product Owner Decision**
+ACCEPT
+
+**Purpose**
+Define the minimal contract for starting a new task so the required inputs, handoff boundary, and role split are explicit before repository/workspace intake begins in MS-006.3.
+
+**Product Outcome**
+The roadmap now records the new-task start contract boundary, the required inputs for a new task, and the point where task start stops before repository/workspace intake.
+
+**Required Inputs**
+* task title
+* task objective
+* source of truth pointer for the task start
+* owning session or chat context
+* explicit handoff constraints
+
+**Allowed Implementation Scope**
+* start-contract wording
+* required input wording
+* boundary wording that excludes repository/workspace intake
+* SSOT continuity updates
+* publication metadata for the milestone
+
+**Forbidden Scope**
+* repository/workspace intake
+* `src` changes
+* feature implementation
+* expanding the queue beyond the approved three steps
+* alternative product directions
+* unrelated refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* task start preparation stays outside repository/workspace intake
+
+**Verification Plan**
+* `git diff --check`
+* SSOT consistency review across `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`
+* confirm no `src` changes were introduced
+
+**Rollback / Safety Expectations**
+* stop if repository/workspace intake needs to begin before MS-006.3
+* stop if implementation scope grows beyond task start contract wording
+* keep the contract docs-only
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-006.1 - Next Milestone Queue Foundation
 
