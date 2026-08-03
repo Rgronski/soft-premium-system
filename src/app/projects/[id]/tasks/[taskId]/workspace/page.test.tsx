@@ -12,6 +12,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 const useParamsMock = vi.fn(() => ({ id: "project-1", taskId: "task-1" }));
 const getProjectWorkspaceEntryMock = vi.fn();
 const getTasksFromServerMock = vi.fn();
+const writeTextMock = vi.fn();
 
 vi.mock("next/navigation", () => ({
   useParams: () => useParamsMock(),
@@ -42,6 +43,14 @@ import ProjectTaskWorkspacePage from "./page";
 describe("ProjectTaskWorkspacePage", () => {
   beforeEach(() => {
     useParamsMock.mockReturnValue({ id: "project-1", taskId: "task-1" });
+    writeTextMock.mockReset();
+    writeTextMock.mockResolvedValue(undefined);
+    Object.defineProperty(navigator, "clipboard", {
+      value: {
+        writeText: writeTextMock,
+      },
+      configurable: true,
+    });
     getProjectWorkspaceEntryMock.mockReset();
     getProjectWorkspaceEntryMock.mockReturnValue({
       projectId: "project-1",
@@ -156,6 +165,17 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("Task completed locally.")).toBeTruthy();
     expect(screen.getByText("Completion Summary")).toBeTruthy();
     expect(screen.getByText("Saved result notes: Finished the task locally.")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Copy report" })).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "Copy report" }));
+
+    await waitFor(() => {
+      expect(writeTextMock).toHaveBeenCalledWith(
+        "Task completed locally.\nSaved result notes: Finished the task locally.",
+      );
+    });
+
+    expect(screen.getByText("Completion report copied.")).toBeTruthy();
 
     fireEvent.change(screen.getByLabelText("Result notes"), {
       target: { value: "Edited after completion." },
@@ -163,10 +183,12 @@ describe("ProjectTaskWorkspacePage", () => {
 
     expect(screen.queryByText("Completion Summary")).toBeNull();
     expect(screen.queryByText("Task completed locally.")).toBeNull();
+    expect(screen.queryByText("Completion report copied.")).toBeNull();
     expect(
       (screen.getByRole("button", { name: "Complete task" }) as HTMLButtonElement)
         .disabled,
     ).toBe(true);
+    expect(screen.queryByRole("button", { name: "Copy report" })).toBeNull();
   });
 
   test("shows the missing state for an unknown taskId", async () => {

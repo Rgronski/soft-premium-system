@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-002.q - Task Completion Summary Foundation
+MS-002.r - Task Completion Report Copy Foundation
 
 ## Next
 
@@ -132,6 +132,7 @@ MS-002.n is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication o
 MS-002.o is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Result Save Action Foundation.
 MS-002.p is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Completion Local Action Foundation.
 MS-002.q is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Completion Summary Foundation.
+MS-002.r is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Completion Report Copy Foundation.
 
 ## MS-002.o - Task Result Save Action Foundation
 
@@ -199,6 +200,81 @@ The task workspace now lets the user write result notes, blocks empty saves, and
 **Rollback / Safety Expectations**
 * stop if the save action needs backend persistence
 * stop if the save action requires Project Brain writes
+* keep the milestone non-active until approval
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+## MS-002.r - Task Completion Report Copy Foundation
+
+**Milestone**
+MS-002.r - Task Completion Report Copy Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / PUBLISHED / CLOSED
+
+**Purpose**
+Add a minimal local-only copy action for the task completion report on `/projects/[id]/tasks/[taskId]/workspace` after local task completion.
+
+**Product Outcome**
+After local task completion, the completion summary can be copied as a concise report for downstream handoff or documentation.
+
+**Dependencies**
+* closed `MS-002.q - Task Completion Summary Foundation`
+
+**Allowed Implementation Scope**
+* local completion report copy action on the existing task workspace route
+* copy action hidden or disabled before local task completion
+* copied report includes saved result notes and local completion status
+* visible local copy status after action
+* copy action/status reset when the completion summary resets
+* focused tests for the workspace copy interaction
+
+**Forbidden Scope**
+* Project Brain behavior changes
+* backend/API route changes
+* task engine/storage ownership changes
+* GitHub integration
+* Codex automation handoff
+* route redesign
+* broader UI refactor
+
+**Ownership Boundaries**
+* `/projects/[id]/tasks/[taskId]/workspace` owns the local task completion report copy action
+* Task Engine and Project Brain remain outside this local UI-only copy action
+
+**Verification Plan**
+* focused workspace copy interaction test
+* `git diff --check`
+* targeted SSOT consistency check
+* confirm no backend persistence or Project Brain writes were introduced
+
+**Rollback / Safety Expectations**
+* stop if the copy action needs backend persistence
+* stop if the copy action requires Project Brain writes
 * keep the milestone non-active until approval
 
 **Documentation Updates**

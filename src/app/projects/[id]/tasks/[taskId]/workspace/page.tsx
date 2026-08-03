@@ -36,6 +36,7 @@ type TaskWorkspaceState = {
 
 type TaskResultSaveState = "idle" | "saved";
 type TaskCompletionState = "idle" | "completed";
+type TaskCompletionReportCopyState = "idle" | "copied";
 
 export default function ProjectTaskWorkspacePage() {
   const params = useParams<{ id: string; taskId: string }>();
@@ -49,6 +50,8 @@ export default function ProjectTaskWorkspacePage() {
     useState<TaskResultSaveState>("idle");
   const [taskCompletionState, setTaskCompletionState] =
     useState<TaskCompletionState>("idle");
+  const [taskCompletionReportCopyState, setTaskCompletionReportCopyState] =
+    useState<TaskCompletionReportCopyState>("idle");
 
   const projectId = params.id;
   const taskId = params.taskId;
@@ -76,6 +79,7 @@ export default function ProjectTaskWorkspacePage() {
 
     setResultSaveState("saved");
     setTaskCompletionState("idle");
+    setTaskCompletionReportCopyState("idle");
   }
 
   function handleCompleteTask() {
@@ -84,6 +88,22 @@ export default function ProjectTaskWorkspacePage() {
     }
 
     setTaskCompletionState("completed");
+    setTaskCompletionReportCopyState("idle");
+  }
+
+  async function handleCopyCompletionReport() {
+    const completionReport = [
+      "Task completed locally.",
+      `Saved result notes: ${resultNotes}`,
+    ].join("\n");
+
+    try {
+      await navigator.clipboard.writeText(completionReport);
+    } catch {
+      return;
+    }
+
+    setTaskCompletionReportCopyState("copied");
   }
 
   useEffect(() => {
@@ -205,6 +225,7 @@ export default function ProjectTaskWorkspacePage() {
                 setResultNotes(event.target.value);
                 setResultSaveState("idle");
                 setTaskCompletionState("idle");
+                setTaskCompletionReportCopyState("idle");
               }}
             />
             <div className="mt-3 flex items-center gap-3">
@@ -243,6 +264,20 @@ export default function ProjectTaskWorkspacePage() {
                 <p className="mt-2 text-sm text-zinc-300">
                   Saved result notes: {resultNotes}
                 </p>
+                <div className="mt-3 flex items-center gap-3">
+                  <button
+                    type="button"
+                    className="inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800 disabled:cursor-not-allowed disabled:border-zinc-800 disabled:text-zinc-600"
+                    onClick={handleCopyCompletionReport}
+                  >
+                    Copy report
+                  </button>
+                  {taskCompletionReportCopyState === "copied" ? (
+                    <p className="text-sm text-zinc-400" aria-live="polite">
+                      Completion report copied.
+                    </p>
+                  ) : null}
+                </div>
               </div>
             ) : null}
           </div>
