@@ -212,25 +212,25 @@ SPS OS Session State
 
 Date: 2026-08-03
 Current Session ID: 053
-Current Chat Title: 053 SPS OS - Publish MS-006.0 - Next Milestone Direction Contract Foundation
+Current Chat Title: 053 SPS OS - Publish MS-006.1 - Next Milestone Queue Foundation
 Next Session ID: 054
 Suggested Next Chat Title: 054 SPS OS - Next Milestone Direction Decision
 Active Capability: NONE
-Active Work Item: MS-006.0 direction contract publication
+Active Work Item: MS-006.1 next milestone queue publication
 Current Mode: CODEX SESSION PUBLICATION
-Completed Capability Items: Session 053 published MS-006.0; Session 053 synchronized SSOT; Session 053 recorded usage summary
-Current Product Milestone: MS-006.0 - Next Milestone Direction Contract Foundation
+Completed Capability Items: Session 053 published MS-006.1; Session 053 synchronized SSOT; Session 053 recorded usage summary; Session 053 corrected MS-006.1 queue to New Task / New Project Start Flow
+Current Product Milestone: MS-006.1 - Next Milestone Queue Foundation
 Latest Completed Product Milestone: MS-005.2 - Project Delete Action Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 053 published MS-006.0
+Latest Completed Capability Item: Session 053 published MS-006.1
 Current Sprint: NONE
-Platform Priority: Await the next Product Owner decision after MS-006.0 publication.
+Platform Priority: Await the next Product Owner decision after MS-006.1 publication.
 Repository Branch: main
 Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 027e9da docs(session-052): close MS-005.2 session
+Latest Verified Commit: 0590540 docs(roadmap): publish MS-006.0 direction contract
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Await formal approval for the next small milestone contract after MS-006.0 publication.
+Next Safe Step: Await formal approval for the first New Task / New Project Start Flow milestone after MS-006.1 correction.

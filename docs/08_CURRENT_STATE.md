@@ -42,13 +42,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-006.0 - Next Milestone Direction Contract Foundation
+MS-006.1 - Next Milestone Queue Foundation
 
 **Latest Completed Milestone**
 MS-005.2 - Project Delete Action Foundation
 
 **Next Milestone**
 NONE
+
+MS-006.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Milestone Queue Foundation; the repository now records the next three small milestones toward the New Task / New Project Start Flow without introducing application code.
 
 MS-006.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Milestone Direction Contract Foundation; the repository now records a single approved post-MS-005.2 direction contract without introducing application code.
 

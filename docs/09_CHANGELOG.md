@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 053 - MS-006.1 next milestone queue foundation publication
+
+### Date
+
+2026-08-03
+
+### Completed
+
+* Published `MS-006.1 - Next Milestone Queue Foundation` as the docs-only queue contract after `MS-006.0`.
+* Updated the ordered queue to lead into the New Task / New Project Start Flow.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the approved queue.
+* Recorded the Session 053 usage entry for the queue publication task.
+
+### Notes
+
+* No `src` changes, tests, or product implementation were introduced.
+
 ## Session 053 - MS-006.0 next milestone direction contract publication
 
 ### Date

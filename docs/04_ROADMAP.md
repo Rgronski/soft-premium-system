@@ -107,7 +107,7 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-006.0 - Next Milestone Direction Contract Foundation
+MS-006.1 - Next Milestone Queue Foundation
 
 ## Latest Completed Product Milestone
 
@@ -116,6 +116,82 @@ MS-005.2 - Project Delete Action Foundation
 ## Next
 
 NONE
+
+## MS-006.1 - Next Milestone Queue Foundation
+
+**Milestone**
+MS-006.1 - Next Milestone Queue Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+YES
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Product Owner Decision**
+ACCEPT
+
+**Purpose**
+Define a single ordered queue of the next small milestones after MS-006.0 so the next execution step can be chosen without guessing.
+
+**Product Outcome**
+The roadmap now includes a compact, ordered queue of the next executable milestones while keeping implementation out of scope until each later milestone is separately approved.
+
+**Queued Next Milestones**
+1. `MS-006.2 - New Task Start Contract Foundation`
+2. `MS-006.3 - New Task Repository / Workspace Intake Foundation`
+3. `MS-006.4 - New Task Handoff To Codex Foundation`
+
+**Allowed Implementation Scope**
+* queue wording for the next small milestones
+* SSOT continuity updates
+* publication metadata for the milestone
+
+**Forbidden Scope**
+* `src` changes
+* feature implementation
+* expanding the queue beyond the approved three steps
+* alternative product directions
+* unrelated refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* product implementation stays outside this contract
+
+**Verification Plan**
+* `git diff --check`
+* SSOT consistency review across `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`
+* confirm no `src` changes were introduced
+
+**Rollback / Safety Expectations**
+* stop if a later step needs multiple competing options
+* stop if implementation scope appears before approval of a later milestone
+* keep the queue docs-only
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-006.0 - Next Milestone Direction Contract Foundation
 
