@@ -111,11 +111,11 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-002.t - AI Chat, Prompts, and Agents Foundation
+MS-005.0 - SPS OS Pilot Test Foundation
 
 ## Next
 
-MS-004.0 - External Integrations Foundation
+NONE
 
 ## MS-004.0 - External Integrations Foundation
 
@@ -126,7 +126,7 @@ MS-004.0 - External Integrations Foundation
 Product Milestone
 
 **Contract Status**
-APPROVED
+COMPLETED / VERIFIED
 
 **Active**
 NO
@@ -138,13 +138,13 @@ Chief Architect
 Codex
 
 **Implementation Status**
-NOT STARTED
+COMPLETED / VERIFIED
 
 **Publication Status**
-NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-APPROVED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Purpose**
 Define the smallest provider-neutral boundary for future external integrations so the project can name one canonical integration entry point without changing application code, Project Brain ownership, or connector-specific implementation details.
@@ -190,6 +190,73 @@ The repository has one approved contract for an `External Integrations` entry po
 **Documentation Updates**
 * `docs/05_ROADMAP.md`
 * `docs/06_BACKLOG.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+## MS-005.0 - SPS OS Pilot Test Foundation
+
+**Milestone**
+MS-005.0 - SPS OS Pilot Test Foundation
+
+**Type**
+Documentation Contract
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the smallest controlled SPS OS pilot test contract that spans Project creation, Task creation, Codex handoff, Result capture, Completion, Session Close, and a clean START handoff without changing application code.
+
+**Product Outcome**
+The repository documents one controlled SPS OS pilot test sequence that can be used to verify the end-to-end session flow from Project to Task to Codex Handoff to Result to Completion to Session Close to a clean START.
+
+**Dependencies**
+* `MS-004.0 - External Integrations Foundation`
+* `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`
+* `docs/15_SESSION_CLOSE_PROTOCOL.md`
+
+**Allowed Implementation Scope**
+* docs-only pilot test contract
+* session identity and handoff wording for the controlled SPS OS flow
+* verification wording for the clean START and session close sequence
+
+**Forbidden Scope**
+* application code
+* API routes
+* provider/model wiring
+* persistence
+* UI redesign
+* Project Brain write paths
+* executing the actual pilot test without Product Owner approval
+* unrelated refactors
+
+**Ownership Boundaries**
+* `docs/10_SESSION_STATE.md` owns the session snapshot for the pilot test contract
+* `docs/session-handoffs/*` owns the next-chat transfer package
+* `docs/15_SESSION_CLOSE_PROTOCOL.md` and `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md` remain the operational references for close/start flow
+* application code remains unchanged by this contract
+
+**Verification Plan**
+* `git diff --check`
+* SSOT consistency review across `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`
+* confirm no application, provider, persistence, or Project Brain behavior changes were introduced
+
+**Rollback / Safety Expectations**
+* stop if the pilot test requires application code changes
+* stop if the pilot test requires execution before Product Owner approval
+* keep the milestone non-active until the pilot test is explicitly authorized
+
+**Documentation Updates**
 * `docs/08_CURRENT_STATE.md`
 * `docs/09_CHANGELOG.md`
 * `docs/10_SESSION_STATE.md`

@@ -69,7 +69,20 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 051 - MS-004.0 external integrations contract discovery publication
+## Session 050 - MS-005.0 SPS OS pilot test foundation contract publication
+
+### Date
+
+2026-08-03
+
+### Completed
+
+* Published `MS-005.0 - SPS OS Pilot Test Foundation` as the docs-only contract for the controlled SPS OS pilot test sequence.
+* Defined the smallest controlled flow for Project creation, Task creation, Codex handoff, Result capture, Completion, Session Close, and a clean START handoff.
+* Kept the pilot test contract free of application code, API routes, provider wiring, persistence, UI redesign, and Project Brain write paths.
+* Synchronized the SSOT docs to reflect the corrected session numbering and the new latest completed milestone.
+
+## Session 050 - MS-004.0 external integrations contract discovery publication
 
 ### Date
 
@@ -80,7 +93,7 @@ Each release entry should contain:
 * Published `MS-004.0 - External Integrations Foundation` as the next provider-neutral contract milestone after `MS-002.t`.
 * Added the minimal external integrations contract to `docs/04_ROADMAP.md` with one canonical integration entry point, one ownership boundary, and one verification path.
 * Marked the `External Integrations` backlog item as planned for `MS-004.0` without changing application code, API routes, provider wiring, persistence, or Project Brain writes.
-* Synchronized the SSOT continuity docs and prepared the Session 051 handoff for the next approval step.
+* Synchronized the SSOT continuity docs and prepared the Session 050 handoff for the next approval step.
 
 ## Session 050 - MS-002.t AI chat, prompts, and agents foundation publication
 
