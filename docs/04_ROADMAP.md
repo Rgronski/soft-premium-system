@@ -107,7 +107,7 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE
+MS-006.0 - Next Milestone Direction Contract Foundation
 
 ## Latest Completed Product Milestone
 
@@ -116,6 +116,77 @@ MS-005.2 - Project Delete Action Foundation
 ## Next
 
 NONE
+
+## MS-006.0 - Next Milestone Direction Contract Foundation
+
+**Milestone**
+MS-006.0 - Next Milestone Direction Contract Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+YES
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Product Owner Decision**
+ACCEPT
+
+**Purpose**
+Close the post-MS-005.2 roadmap gap by naming the next approved direction contract and establishing the minimal SSOT boundary for subsequent small milestones.
+
+**Product Outcome**
+The roadmap now has an explicit current direction contract that points future work toward a single approved development axis while keeping implementation out of scope until a later milestone is separately approved.
+
+**Allowed Implementation Scope**
+* formal next-direction contract wording
+* SSOT continuity updates
+* publication metadata for the milestone
+
+**Forbidden Scope**
+* `src` changes
+* feature implementation
+* alternative product directions
+* roadmap expansion beyond one approved direction
+* unrelated refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* product implementation stays outside this contract
+
+**Verification Plan**
+* `git diff --check`
+* SSOT consistency review across `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`
+* confirm no `src` changes were introduced
+
+**Rollback / Safety Expectations**
+* stop if the next direction needs multiple competing options
+* stop if implementation scope appears before approval of a later milestone
+* keep the contract docs-only
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-004.0 - External Integrations Foundation
 

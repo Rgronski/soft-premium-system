@@ -42,13 +42,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE
+MS-006.0 - Next Milestone Direction Contract Foundation
 
 **Latest Completed Milestone**
 MS-005.2 - Project Delete Action Foundation
 
 **Next Milestone**
 NONE
+
+MS-006.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Milestone Direction Contract Foundation; the repository now records a single approved post-MS-005.2 direction contract without introducing application code.
 
 MS-002.s is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Completion Handoff Text Foundation; the task workspace route now shows a local handoff text block after completion.
 MS-002.t is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Chat, Prompts, and Agents Foundation; the AI Workspace now owns the starter prompt catalog in the engine boundary.

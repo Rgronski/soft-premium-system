@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 053 - MS-006.0 next milestone direction contract publication
+
+### Date
+
+2026-08-03
+
+### Completed
+
+* Published `MS-006.0 - Next Milestone Direction Contract Foundation` as the docs-only SSOT contract after `MS-005.2`.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the approved next direction.
+* Recorded the Session 053 usage entry for the publication task.
+
+### Notes
+
+* No `src` changes, tests, or product implementation were introduced.
+
 ## Session 052 - MS-005.2 project delete action publication
 
 ### Date
