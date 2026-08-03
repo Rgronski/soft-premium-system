@@ -264,6 +264,16 @@ export default function ProjectTaskWorkspacePage() {
                 <p className="mt-2 text-sm text-zinc-300">
                   Saved result notes: {resultNotes}
                 </p>
+                <div className="mt-3 rounded-xl border border-zinc-800 bg-zinc-900 p-4">
+                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                    Task completion handoff
+                  </p>
+                  <p className="mt-2 whitespace-pre-wrap rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-300">
+                    {`Task completion handoff
+Task completed locally.
+Saved result notes: ${resultNotes}`}
+                  </p>
+                </div>
                 <div className="mt-3 flex items-center gap-3">
                   <button
                     type="button"

@@ -121,6 +121,7 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("Task Result")).toBeTruthy();
     expect(screen.getByText("Capture the current task result locally for now.")).toBeTruthy();
     expect(screen.getByLabelText("Result notes")).toBeTruthy();
+    expect(screen.queryByText("Task completion handoff")).toBeNull();
     expect(screen.queryByText("Completion Summary")).toBeNull();
     const initialSaveButton = screen.getByRole("button", {
       name: "Save result",
@@ -165,6 +166,7 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("Task completed locally.")).toBeTruthy();
     expect(screen.getByText("Completion Summary")).toBeTruthy();
     expect(screen.getByText("Saved result notes: Finished the task locally.")).toBeTruthy();
+    expect(screen.getByText("Task completion handoff")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Copy report" })).toBeTruthy();
 
     fireEvent.click(screen.getByRole("button", { name: "Copy report" }));
@@ -184,6 +186,7 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.queryByText("Completion Summary")).toBeNull();
     expect(screen.queryByText("Task completed locally.")).toBeNull();
     expect(screen.queryByText("Completion report copied.")).toBeNull();
+    expect(screen.queryByText("Task completion handoff")).toBeNull();
     expect(
       (screen.getByRole("button", { name: "Complete task" }) as HTMLButtonElement)
         .disabled,

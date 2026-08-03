@@ -111,11 +111,84 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-002.r - Task Completion Report Copy Foundation
+MS-002.s - Task Completion Handoff Text Foundation
 
 ## Next
 
 NONE
+
+## MS-002.s - Task Completion Handoff Text Foundation
+
+**Milestone**
+MS-002.s - Task Completion Handoff Text Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / NOT PUBLISHED
+
+**Purpose**
+Add a minimal local-only task completion handoff text block on `/projects/[id]/tasks/[taskId]/workspace` without backend persistence or Project Brain writes.
+
+**Product Outcome**
+The task workspace now shows a ready-to-copy local handoff text block after local completion, including the saved result notes and local completion status.
+
+**Dependencies**
+* closed `MS-002.r - Task Completion Report Copy Foundation`
+
+**Allowed Implementation Scope**
+* local-only handoff text block near the completion summary/report copy area
+* hidden before local task completion
+* resets when result notes change and the completion state resets
+* focused tests for the workspace handoff interaction
+
+**Forbidden Scope**
+* backend/API route changes
+* Project Brain behavior changes
+* task engine/storage ownership changes
+* GitHub integration
+* Codex automation handoff
+* route redesign
+* broader UI refactor
+
+**Ownership Boundaries**
+* `/projects/[id]/tasks/[taskId]/workspace` owns the local task completion handoff text
+* Task Engine and Project Brain remain outside this local UI-only handoff text block
+
+**Verification Plan**
+* focused workspace handoff interaction test
+* `git diff --check`
+* targeted SSOT consistency check
+* confirm no backend persistence, Project Brain writes, or Task Engine changes were introduced
+
+**Rollback / Safety Expectations**
+* stop if the handoff text needs backend persistence
+* stop if the handoff text requires Project Brain writes
+* keep the milestone non-active until publication approval
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 MS-001.79 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Creation Contract Foundation with commit `6881e86`.
 MS-002.b is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Project Workspace Start Action Boundary Foundation with commit `043d744`.

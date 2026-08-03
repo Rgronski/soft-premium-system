@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-002.r - Task Completion Report Copy Foundation
+MS-002.s - Task Completion Handoff Text Foundation
 
 **Next Milestone**
 NONE
+
+MS-002.s is COMPLETED / VERIFIED in the current local workspace as the Task Completion Handoff Text Foundation; the task workspace route now shows a local handoff text block after completion.
 
 MS-001.76 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the AI Workspace Engine Chat Project Switch State Isolation Foundation with commit `792c970`.
 MS-001.77 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the AI Workspace Engine Generate Project Switch Stale Result Guard Foundation with commit `78743a3`.
@@ -72,6 +74,7 @@ MS-002.o is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Task Result Save Ac
 MS-002.p is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Task Completion Local Action Foundation; the task workspace route now includes a minimal local-only Complete task action that becomes available after a local result save.
 MS-002.q is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Task Completion Summary Foundation; the task workspace route now shows a local completion summary with the saved result notes text and local completion status after completion.
 MS-002.r is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Task Completion Report Copy Foundation; the task workspace route now adds a local-only Copy report action and copies the saved result notes with local completion status.
+MS-002.s is COMPLETED / VERIFIED as the Task Completion Handoff Text Foundation; the task workspace route now adds a local-only handoff text block with the saved result notes and local completion status.
 No runtime product code, UI, API, provider, or Project Brain behavior changed in this SSOT synchronization.
 
 **MS-001.17 State**
@@ -101,7 +104,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-002.r - Task Completion Report Copy Foundation
+Latest Completed Product Milestone: MS-002.s - Task Completion Handoff Text Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -1258,7 +1261,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-002.r - Task Completion Report Copy Foundation`
+* `Latest Completed Product Milestone` is `MS-002.s - Task Completion Handoff Text Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
