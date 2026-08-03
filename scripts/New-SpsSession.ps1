@@ -384,6 +384,66 @@ function Assert-LatestCompletedMilestonePublicationStatus {
     }
 }
 
+function Get-CurrentStateLatestCompletedMilestoneIssues {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $CurrentStatePath,
+
+        [Parameter(Mandatory = $true)]
+        [string] $LatestCompletedMilestone
+    )
+
+    if (-not (Test-Path -LiteralPath $CurrentStatePath)) {
+        Fail-Critical "Required document not found: $CurrentStatePath"
+    }
+
+    $lines = Get-Content -LiteralPath $CurrentStatePath -Encoding utf8
+    $statusLines = New-Object System.Collections.Generic.List[string]
+    $latestCompletedMilestoneId = $LatestCompletedMilestone
+    if ($latestCompletedMilestoneId -match '^(?<id>MS-[^\s]+)\s+-\s+') {
+        $latestCompletedMilestoneId = $Matches.id
+    }
+
+    $escapedMilestone = [regex]::Escape($latestCompletedMilestoneId)
+
+    foreach ($line in $lines) {
+        $trimmed = "$line".Trim()
+        if ($trimmed -match ("^{0}\s+is\s+(?<status>.+)$" -f $escapedMilestone)) {
+            $statusLines.Add("$($Matches.status)".Trim())
+        }
+    }
+
+    $issues = New-Object System.Collections.Generic.List[string]
+
+    if ($statusLines.Count -eq 0) {
+        $issues.Add("Current State does not contain a status line for '$latestCompletedMilestoneId'.")
+        return $issues.ToArray()
+    }
+
+    foreach ($status in $statusLines) {
+        if ($status -notmatch '\bPUBLISHED\b' -or $status -match 'NOT PUBLISHED' -or $status -notmatch '\bCLOSED\b') {
+            $issues.Add("Current State must report '$latestCompletedMilestoneId' as PUBLISHED / CLOSED, but found '$status'.")
+        }
+    }
+
+    return $issues.ToArray()
+}
+
+function Assert-CurrentStateLatestCompletedMilestoneStatus {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $CurrentStatePath,
+
+        [Parameter(Mandatory = $true)]
+        [string] $LatestCompletedMilestone
+    )
+
+    $issues = @(Get-CurrentStateLatestCompletedMilestoneIssues -CurrentStatePath $CurrentStatePath -LatestCompletedMilestone $LatestCompletedMilestone)
+    if ($issues.Count -gt 0) {
+        Fail-Critical ($issues -join " ")
+    }
+}
+
 function Assert-CurrentStateConsistency {
     param(
         [Parameter(Mandatory = $true)]
@@ -461,6 +521,8 @@ function Invoke-SelfTest {
             '* `Latest Completed Product Milestone` is `MS-001.79 - Project Workspace Creation Contract Foundation`'
             ''
             'Latest Completed Product Milestone: MS-001.79 - Project Workspace Creation Contract Foundation'
+            ''
+            'MS-001.79 is COMPLETED / VERIFIED / PUBLISHED / CLOSED as the Project Workspace Creation Contract Foundation; the task workspace route already matches the published state.'
         ) | Set-Content -LiteralPath $currentStatePath -Encoding utf8
 
         @(
@@ -472,6 +534,13 @@ function Invoke-SelfTest {
         Assert-FieldConsistency `
             -FieldName "Latest Completed Product Milestone" `
             -Paths @($currentStatePath, $sessionStatePath, $roadmapPath)
+
+        $publishedCurrentStateIssues = @(Get-CurrentStateLatestCompletedMilestoneIssues `
+                -CurrentStatePath $currentStatePath `
+                -LatestCompletedMilestone "MS-001.79")
+        if ($publishedCurrentStateIssues.Count -ne 0) {
+            Fail-Critical "Self-test expected a published current-state fixture to pass."
+        }
 
         $publishedIssues = @(Get-LatestCompletedMilestonePublicationIssues `
                 -RoadmapPath $roadmapPath `
@@ -493,6 +562,23 @@ function Invoke-SelfTest {
             '**Milestone Status**'
             'COMPLETED / VERIFIED / NOT PUBLISHED'
         ) | Set-Content -LiteralPath $roadmapPath -Encoding utf8
+
+        @(
+            '# Current Milestone'
+            ''
+            '* `Latest Completed Product Milestone` is `MS-001.79 - Project Workspace Creation Contract Foundation`'
+            ''
+            'Latest Completed Product Milestone: MS-001.79 - Project Workspace Creation Contract Foundation'
+            ''
+            'MS-001.79 is COMPLETED / VERIFIED as the Project Workspace Creation Contract Foundation; the task workspace route still lacks the published state.'
+        ) | Set-Content -LiteralPath $currentStatePath -Encoding utf8
+
+        $staleCurrentStateIssues = @(Get-CurrentStateLatestCompletedMilestoneIssues `
+                -CurrentStatePath $currentStatePath `
+                -LatestCompletedMilestone "MS-001.79")
+        if ($staleCurrentStateIssues.Count -lt 1) {
+            Fail-Critical "Self-test expected a stale current-state fixture to fail."
+        }
 
         $unpublishedIssues = @(Get-LatestCompletedMilestonePublicationIssues `
                 -RoadmapPath $roadmapPath `
@@ -864,6 +950,10 @@ Assert-LatestCompletedMilestonePublicationStatus `
     -RoadmapPath (Join-Path $repoRoot "docs\04_ROADMAP.md") `
     -LatestCompletedMilestone $latestCompletedMilestone
 
+Assert-CurrentStateLatestCompletedMilestoneStatus `
+    -CurrentStatePath $currentStatePath `
+    -LatestCompletedMilestone $latestCompletedMilestone
+
 $gitContextPath = Join-Path $repoRoot "sps-git-context.txt"
 $sessionSummaryPath = Join-Path $repoRoot "sps-session-summary.txt"
 $zipPath = Join-Path $repoRoot "sps-session.zip"
@@ -987,6 +1077,10 @@ Compress-Archive -LiteralPath $zipItems.ToArray() -DestinationPath $zipPath -For
 
 Assert-LatestCompletedMilestonePublicationStatus `
     -RoadmapPath (Join-Path $repoRoot "docs\04_ROADMAP.md") `
+    -LatestCompletedMilestone $latestCompletedMilestone
+
+Assert-CurrentStateLatestCompletedMilestoneStatus `
+    -CurrentStatePath $currentStatePath `
     -LatestCompletedMilestone $latestCompletedMilestone
 
 Write-Host "SPS session package generated."
