@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-005.1 - SPS OS Pilot Test Execution Contract
+MS-005.2 - Project Delete Action Foundation
 
 **Next Milestone**
 NONE
