@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-005.0 - SPS OS Pilot Test Foundation
+MS-005.1 - SPS OS Pilot Test Execution Contract
 
 ## Next
 
@@ -264,6 +264,123 @@ The repository documents one controlled SPS OS pilot test sequence that can be u
 * stop if the pilot test requires application code changes
 * stop if the pilot test requires execution before Product Owner approval
 * keep the milestone non-active until the pilot test is explicitly authorized
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+## MS-005.1 - SPS OS Pilot Test Execution Contract
+
+**Milestone**
+MS-005.1 - SPS OS Pilot Test Execution Contract
+
+**Type**
+Documentation Contract
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Define the exact controlled SPS OS pilot execution contract so the following Codex step can run the real pilot sequence after Product Owner approval without changing application code.
+
+**Product Outcome**
+The repository documents the exact pilot execution contract, including the objective, step order, allowed artifacts, forbidden actions, pass / fail criteria, and final report fields needed for the next pilot step.
+
+**Execution Authorization**
+Product Owner approval authorizes the controlled pilot execution described in this contract.
+
+**Dependencies**
+* `MS-005.0 - SPS OS Pilot Test Foundation`
+* `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`
+* `docs/15_SESSION_CLOSE_PROTOCOL.md`
+
+**Allowed Implementation Scope**
+* docs-only execution contract
+* exact pilot objective and step order
+* allowed artifacts, forbidden actions, pass / fail criteria, and final report fields
+* controlled pilot execution after Product Owner approval
+
+**Forbidden Scope**
+* application code
+* API routes
+* provider/model wiring
+* persistence
+* UI redesign
+* Project Brain write paths
+* unrelated refactors
+
+**Pilot Execution Steps**
+1. Verify the real repository state.
+2. Read this contract and the directly referenced SSOT documents.
+3. Execute the controlled pilot sequence in order: Project creation, Task creation, Codex handoff, Result capture, Completion, Session Close readiness, and Clean START readiness.
+4. Record the execution result and the required Session 051 usage entry.
+
+**Allowed Artifacts**
+* `.usage/session.jsonl`
+* SSOT documents required to record the pilot execution result
+* repository evidence produced by the controlled pilot execution
+
+**PASS Criteria**
+* the controlled pilot sequence is executed in the order defined above
+* no forbidden action occurs
+* the required result record is produced
+* SSOT remains consistent
+
+**FAIL Criteria**
+* the execution order is broken
+* a forbidden action occurs
+* required result evidence is missing
+* SSOT becomes inconsistent
+
+**Required Final Report Fields**
+* Session Identity
+* MS-005.1 pilot steps executed
+* Pilot result
+* Files changed
+* Artifacts created or updated
+* Verification
+* SSOT consistency
+* Usage record written
+* Measurement status
+* Real credits
+* Deviations or blockers
+* Git status after work
+* Commit / push
+* One recommended next safe step
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the execution contract
+* `docs/08_CURRENT_STATE.md` and `docs/10_SESSION_STATE.md` record the enabled SSOT state
+* application code remains unchanged by this contract
+
+**Verification Plan**
+* `git diff --check`
+* SSOT consistency review across `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`
+* confirm no application, provider, persistence, or Project Brain changes were introduced
+
+**Rollback / Safety Expectations**
+* stop if pilot execution would require application code changes
+* stop if pilot execution would require provider, persistence, UI, or Project Brain changes
+* stop if required result evidence cannot be recorded
 
 **Documentation Updates**
 * `docs/08_CURRENT_STATE.md`

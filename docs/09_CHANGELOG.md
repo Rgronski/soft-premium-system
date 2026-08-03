@@ -69,6 +69,41 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 051 - MS-005.1 controlled pilot test execution verified
+
+### Date
+
+2026-08-03
+
+### Completed
+
+* Executed the controlled SPS OS pilot sequence under `MS-005.1 - SPS OS Pilot Test Execution Contract`.
+* Verified the pilot against the targeted project, task, task workspace, and completion surfaces with `npm.cmd test -- src/app/projects/[id]/page.test.tsx src/app/projects/[id]/tasks/page.test.tsx src/app/projects/[id]/tasks/[taskId]/page.test.tsx src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`.
+* Confirmed the pilot result as PASS without changing application code, UI, persistence, Project Brain write paths, routes, or tests.
+* Recorded the Session 051 usage entry for the pilot execution task.
+
+### Notes
+
+* No product code, UI, API, provider, route implementation, persistence, or Project Brain behavior changed during the controlled pilot execution.
+
+## Session 051 - MS-005.1 SPS OS pilot test execution contract publication
+
+### Date
+
+2026-08-03
+
+### Completed
+
+* Published `MS-005.1 - SPS OS Pilot Test Execution Contract` as the docs-only execution contract for the controlled SPS OS pilot test sequence.
+* Defined the exact pilot objective, step order, allowed artifacts, forbidden actions, pass / fail criteria, and required final report fields for the controlled pilot sequence.
+* Updated the contract so Product Owner approval authorizes the controlled pilot execution after MS-005.1.
+* Kept the execution contract free of application code, API routes, provider wiring, persistence, UI redesign, and Project Brain write paths.
+* Synchronized the SSOT docs to record the new pilot execution contract as the latest completed milestone.
+
+### Notes
+
+* No product code, UI, API, provider, route implementation, persistence, or Project Brain behavior changed during this SSOT enabling publication.
+
 ## Session 050 - session close and package synchronization published
 
 ### Date

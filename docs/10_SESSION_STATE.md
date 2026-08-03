@@ -211,26 +211,26 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-03
-Current Session ID: 050
-Current Chat Title: 050 SPS OS - MS-005.0 SPS OS Pilot Test Foundation Contract Publication
-Next Session ID: 051
-Suggested Next Chat Title: 051 SPS OS - Pilot Test Execution
+Current Session ID: 051
+Current Chat Title: 051 SPS OS - Pilot Test Execution
+Next Session ID: 052
+Suggested Next Chat Title: 052 SPS OS - Post-Pilot Review and Next Milestone Decision
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: CODEX SESSION CLOSE
-Completed Capability Items: Session 050 published MS-005.0; Session 050 synchronized SSOT; Session 050 prepared close handoff; Session 050 recorded usage summary
+Completed Capability Items: Session 051 verified MS-005.0; Session 051 published MS-005.1; Session 051 amended MS-005.1 to authorize controlled pilot execution; Session 051 executed controlled pilot test under MS-005.1; Session 051 completed Session Close Protocol; Session 051 synchronized SSOT; Session 051 recorded usage summary
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-005.0 - SPS OS Pilot Test Foundation
+Latest Completed Product Milestone: MS-005.1 - SPS OS Pilot Test Execution Contract
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 050 prepared close handoff
+Latest Completed Capability Item: Session 051 completed Session Close Protocol
 Current Sprint: NONE
-Platform Priority: Start pilot test execution in session 051.
+Platform Priority: Await the next session after the closed pilot review.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: df26d45
+Latest Verified Commit: 5a90611
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `051 SPS OS - Pilot Test Execution`, attach `sps-session.zip`, and paste the START prompt.
+Next Safe Step: Open a new chat titled `052 SPS OS - Post-Pilot Review and Next Milestone Decision`, attach `sps-session.zip`, and paste the START prompt.
