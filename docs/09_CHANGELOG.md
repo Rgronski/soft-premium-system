@@ -69,6 +69,57 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 055 - MS-007.1 project creation server persistence foundation publication
+
+### Date
+
+2026-08-03
+
+### Completed
+
+* Published `MS-007.1 - Project Creation Server Persistence Foundation` to make project creation persist through the same server-side Project Brain/state boundary used by task APIs.
+* Verified the real pilot path now succeeds end-to-end: project creation, task creation on the fresh project, and exposure of the task workspace handoff surface.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT records `MS-007.1` as the latest completed milestone and `MS-007.0` as PASS / unblocked.
+* Recorded the task detail `Open task workspace` link quirk as a follow-up only, because the direct `/projects/[id]/tasks/[taskId]/workspace` route works and the issue does not block the pilot outcome.
+* Recorded the Session 055 usage entry for the MS-007.1 publication task in `.usage/session.jsonl`.
+
+### Notes
+
+* No broad storage rewrite or unrelated UI redesign was introduced.
+
+## Session 055 - MS-007.0 new task pilot execution blocked
+
+### Date
+
+2026-08-03
+
+### Completed
+
+* Ran the real new-task pilot flow for `MS-007.0 - New Task Pilot Execution Foundation`.
+* Verified that a newly created UI project reaches the task intake screen and the task workspace handoff surface exists.
+* Confirmed the pilot is blocked at task creation because the UI project lives in localStorage while `/api/projects/[id]/tasks` resolves against server-side project state and returns `project-not-found` for the fresh UI-created project.
+* Recorded the blocked pilot result in `.usage/session.jsonl` and synchronized the SSOT snapshot.
+
+### Notes
+
+* No `src` changes were introduced.
+
+## Session 055 - MS-007.0 new task pilot execution foundation publication
+
+### Date
+
+2026-08-03
+
+### Completed
+
+* Published `MS-007.0 - New Task Pilot Execution Foundation` as the docs-only pilot execution foundation for the first real new-task flow pilot.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-007.0` as the latest completed milestone and `NONE` as the next milestone.
+* Recorded the Session 055 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No `src` changes, tests, or product implementation were introduced.
+
 ## Session 054 - MS-006.4 new task handoff to codex foundation publication
 
 ### Date

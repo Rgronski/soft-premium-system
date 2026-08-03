@@ -12,9 +12,11 @@ import type { Project } from "./types";
 vi.mock("server-only", () => ({}));
 
 const getServerProjectByIdMock = vi.fn();
+const createServerProjectMock = vi.fn();
 
 vi.mock("./server", () => ({
   getServerProjectById: getServerProjectByIdMock,
+  createServerProject: createServerProjectMock,
 }));
 
 async function loadProjectHttpServerModule() {
@@ -34,6 +36,16 @@ function createGetRequest(): Request {
   });
 }
 
+function createPostRequest(body: unknown): Request {
+  return new Request("http://localhost/api/projects/project-123", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+}
+
 function createProject(overrides?: Partial<Project>): Project {
   return {
     id: "project-123",
@@ -45,6 +57,7 @@ function createProject(overrides?: Partial<Project>): Project {
 
 beforeEach(() => {
   getServerProjectByIdMock.mockReset();
+  createServerProjectMock.mockReset();
 });
 
 afterEach(() => {
@@ -137,5 +150,81 @@ describe("createGetProjectRoute", () => {
     expect(getServerProjectByIdMock).toHaveBeenCalledWith("params-project-id");
     expect(response.status).toBe(200);
     await expect(response.json()).resolves.toEqual(project);
+  });
+});
+
+describe("createPostProjectRoute", () => {
+  it("returns 201 with the created project for a valid request", async () => {
+    const { createPostProjectRoute } = await loadProjectHttpServerModule();
+    const project = createProject({
+      id: "route-project-id",
+      name: "Route Project",
+    });
+    createServerProjectMock.mockResolvedValueOnce(project);
+    const handler = createPostProjectRoute({
+      createServerProject: createServerProjectMock,
+    });
+
+    const response = await handler(
+      createPostRequest({
+        name: "Route Project",
+      }),
+      createContext("route-project-id"),
+    );
+
+    expect(createServerProjectMock).toHaveBeenCalledTimes(1);
+    expect(createServerProjectMock).toHaveBeenCalledWith({
+      id: "route-project-id",
+      name: "Route Project",
+    });
+    expect(response.status).toBe(201);
+    await expect(response.json()).resolves.toEqual(project);
+  });
+
+  it("returns 400 for malformed JSON without calling the repository", async () => {
+    const { createPostProjectRoute } = await loadProjectHttpServerModule();
+    const handler = createPostProjectRoute({
+      createServerProject: createServerProjectMock,
+    });
+
+    const response = await handler(
+      new Request("http://localhost/api/projects/project-123", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: "{",
+      }),
+      createContext("project-123"),
+    );
+
+    expect(createServerProjectMock).not.toHaveBeenCalled();
+    expect(response.status).toBe(400);
+    await expect(response.json()).resolves.toEqual({
+      status: "invalid-request",
+    });
+  });
+
+  it("returns 503 when the repository throws", async () => {
+    const { createPostProjectRoute } = await loadProjectHttpServerModule();
+    createServerProjectMock.mockRejectedValueOnce(
+      new Error("repository failure"),
+    );
+    const handler = createPostProjectRoute({
+      createServerProject: createServerProjectMock,
+    });
+
+    const response = await handler(
+      createPostRequest({
+        name: "Route Project",
+      }),
+      createContext("project-123"),
+    );
+
+    expect(createServerProjectMock).toHaveBeenCalledTimes(1);
+    expect(response.status).toBe(503);
+    await expect(response.json()).resolves.toEqual({
+      status: "context-unavailable",
+    });
   });
 });

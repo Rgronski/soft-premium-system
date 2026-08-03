@@ -2,24 +2,69 @@
 
 import { SectionCard } from "@/components/ui/SectionCard";
 import { createProject } from "@/lib/project/project";
+import type { Project } from "@/lib/project/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+function isProject(value: unknown): value is Project {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    typeof (value as Project).id === "string" &&
+    typeof (value as Project).name === "string" &&
+    typeof (value as Project).createdAt === "string"
+  );
+}
 
 export default function ProjectsPage() {
   const router = useRouter();
   const [projectName, setProjectName] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  function handleCreateProject() {
+  async function handleCreateProject() {
     const trimmedProjectName = projectName.trim();
 
-    if (!trimmedProjectName) {
+    if (!trimmedProjectName || isSubmitting) {
       return;
     }
 
-    createProject(trimmedProjectName);
+    const projectId = crypto.randomUUID();
+    setIsSubmitting(true);
+    setErrorMessage(null);
 
-    setProjectName("");
-    router.push("/");
+    try {
+      const response = await fetch(
+        `/api/projects/${encodeURIComponent(projectId)}`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name: trimmedProjectName,
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error(`Project create request failed with ${response.status}`);
+      }
+
+      const createdProject = await response.json();
+
+      if (!isProject(createdProject)) {
+        throw new Error("Project create response is invalid.");
+      }
+
+      createProject(createdProject.name, createdProject.id);
+      setProjectName("");
+      router.push(`/projects/${createdProject.id}`);
+    } catch {
+      setErrorMessage("Nie udało się utworzyć projektu. Spróbuj ponownie.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -61,10 +106,17 @@ export default function ProjectsPage() {
           <button
             type="button"
             onClick={handleCreateProject}
+            disabled={isSubmitting}
             className="mt-6 rounded-full bg-white px-5 py-2 text-sm font-medium text-zinc-950"
           >
-            Create Project
+            {isSubmitting ? "Creating..." : "Create Project"}
           </button>
+
+          {errorMessage ? (
+            <p className="mt-4 text-sm text-red-300" aria-live="polite">
+              {errorMessage}
+            </p>
+          ) : null}
         </SectionCard>
       </div>
     </main>

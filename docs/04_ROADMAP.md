@@ -111,11 +111,170 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-006.4 - New Task Handoff To Codex Foundation
+MS-007.1 - Project Creation Server Persistence Foundation
 
 ## Next
 
 NONE
+
+## MS-007.0 - New Task Pilot Execution Foundation
+
+**Milestone**
+MS-007.0 - New Task Pilot Execution Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Define the first real pilot execution foundation for the new-task flow so the next Codex step can verify real repository status, SSOT continuity, and result reporting without introducing application code.
+
+**Product Outcome**
+The repository records the pilot execution foundation, the minimal verification scope, the usage record requirement, and the next safe step for the first real new-task pilot.
+
+**Dependencies**
+* `MS-006.2 - New Task Start Contract Foundation`
+* `MS-006.3 - New Task Repository / Workspace Intake Foundation`
+* `MS-006.4 - New Task Handoff To Codex Foundation`
+* `docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md`
+* `docs/15_SESSION_CLOSE_PROTOCOL.md`
+
+**Allowed Implementation Scope**
+* docs-only pilot execution foundation
+* real repository status verification wording
+* SSOT verification and result-report wording
+* usage-record wording for the Codex task
+* publication metadata for the milestone
+
+**Forbidden Scope**
+* application code
+* API routes
+* provider/model wiring
+* persistence
+* UI redesign
+* Project Brain write paths
+* unrelated refactors
+* expanding beyond the approved new-task pilot
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* `docs/session-handoffs/*` stays outside this milestone unless the session is being closed
+
+**Verification Plan**
+* `git status -sb`
+* `git log --oneline -5`
+* `git diff --check`
+* SSOT consistency review across `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`
+* append the required `.usage/session.jsonl` record
+* confirm no `src` changes were introduced
+
+**Rollback / Safety Expectations**
+* stop if the pilot requires application code changes
+* stop if the pilot requires additional architecture cleanup
+* stop if repository evidence and SSOT cannot stay consistent
+* keep the milestone docs-only
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+## MS-007.1 - Project Creation Server Persistence Foundation
+
+**Milestone**
+MS-007.1 - Project Creation Server Persistence Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Make project creation persist through the same server-side Project Brain/state boundary used by task APIs so a freshly created project can immediately accept tasks.
+
+**Product Outcome**
+The repository now persists newly created projects through the server-side project boundary and keeps the local workspace list in sync, allowing the fresh project to accept tasks immediately.
+
+**Dependencies**
+* `MS-007.0 - New Task Pilot Execution Foundation`
+* `src/lib/project/server.ts`
+* `src/lib/task/http-server.ts`
+
+**Allowed Implementation Scope**
+* server-side project persistence for creation
+* client project create flow alignment
+* targeted tests for the project/task creation boundary
+* publication metadata for the milestone
+
+**Forbidden Scope**
+* broad storage-model replacement
+* unrelated UI redesign
+* client-side error hiding
+* Project Brain ownership changes
+* unrelated refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* Project Brain remains the shared server-side state boundary used by task APIs
+
+**Verification Plan**
+* targeted project and task creation tests
+* real pilot rerun through project creation -> task creation -> handoff surface
+* `git diff --check`
+* confirm no unrelated `src` changes were introduced beyond the narrow boundary fix
+
+**Rollback / Safety Expectations**
+* stop if the fix requires a broad storage rewrite
+* stop if the project-task boundary still leaves fresh projects invisible to tasks
+* keep the milestone narrow and consistent with the existing server boundary
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-006.4 - New Task Handoff To Codex Foundation
 

@@ -1,4 +1,4 @@
-import { getProjectRoute } from "@/lib/project/http-server";
+import { getProjectRoute, postProjectRoute } from "@/lib/project/http-server";
 import { deleteServerProjectById } from "@/lib/project/server";
 
 export async function GET(
@@ -6,6 +6,13 @@ export async function GET(
   context: RouteContext<"/api/projects/[id]">,
 ): Promise<Response> {
   return getProjectRoute(request, context);
+}
+
+export async function POST(
+  request: Request,
+  context: RouteContext<"/api/projects/[id]">,
+): Promise<Response> {
+  return postProjectRoute(request, context);
 }
 
 export async function DELETE(

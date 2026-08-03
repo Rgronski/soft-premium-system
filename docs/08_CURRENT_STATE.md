@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-006.4 - New Task Handoff To Codex Foundation
+MS-007.1 - Project Creation Server Persistence Foundation
 
 **Next Milestone**
 NONE
@@ -59,6 +59,12 @@ MS-006.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 MS-006.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the New Task Repository / Workspace Intake Foundation; the repository now records the intake contract boundary needed to connect a new task to a repository/workspace while leaving the full Codex handoff for MS-006.4.
 
 MS-006.4 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the New Task Handoff To Codex Foundation; the repository now records the handoff contract boundary needed to prepare a new task for Codex while leaving any later milestone out of scope.
+
+MS-007.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED and now PASS / unblocked in the current local workspace as the New Task Pilot Execution Foundation; after MS-007.1, the repository proves that a freshly created server-persisted project can accept a task and expose the Codex handoff surface.
+
+MS-007.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Creation Server Persistence Foundation; the repository now persists project creation through the server-side Project Brain/state boundary used by task APIs, so a freshly created project can immediately accept tasks.
+
+Follow-up only: the task detail `Open task workspace` link still resolves to the workspace route without the task id, while the direct `/projects/[id]/tasks/[taskId]/workspace` route works; this is a minor quirk to track, not a blocker.
 
 MS-002.s is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Completion Handoff Text Foundation; the task workspace route now shows a local handoff text block after completion.
 MS-002.t is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Chat, Prompts, and Agents Foundation; the AI Workspace now owns the starter prompt catalog in the engine boundary.
@@ -1277,8 +1283,8 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-006.1 - Next Milestone Queue Foundation`
-* `Next Product Milestone` is `MS-006.2 - New Task Start Contract Foundation`
+* `Latest Completed Product Milestone` is `MS-007.1 - Project Creation Server Persistence Foundation`
+* `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.18` is `COMPLETED / PUBLISHED / CLOSED`

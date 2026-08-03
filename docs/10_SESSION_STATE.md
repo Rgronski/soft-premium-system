@@ -211,26 +211,26 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-03
-Current Session ID: 054
-Current Chat Title: 054 SPS OS - MS-006.4 New Task Handoff To Codex Foundation
-Next Session ID: 055
-Suggested Next Chat Title: 055 SPS OS - Next Milestone Direction Decision
+Current Session ID: 055
+Current Chat Title: 055 SPS OS - MS-007.0 New Task Pilot Execution Foundation
+Next Session ID: 056
+Suggested Next Chat Title: 056 SPS OS - New Task Pilot Result Review
 Active Capability: NONE
-Active Work Item: Session 054 close protocol
-Current Mode: CODEX SESSION CLOSE
-Completed Capability Items: Session 054 published MS-006.2; Session 054 published MS-006.3; Session 054 published MS-006.4; Session 054 synchronized SSOT; Session 054 recorded close usage summary
+Active Work Item: Session 055 SSOT publication finalization
+Current Mode: CODEX DOCUMENTATION UPDATE
+Completed Capability Items: Session 055 verified real repo status; Session 055 published MS-007.0; Session 055 ran the real new-task pilot; Session 055 resolved the project persistence blocker; Session 055 published MS-007.1; Session 055 synchronized SSOT; Session 055 recorded usage entry
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-006.4 - New Task Handoff To Codex Foundation
+Latest Completed Product Milestone: MS-007.1 - Project Creation Server Persistence Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 054 published MS-006.4
+Latest Completed Capability Item: Session 055 published MS-007.1
 Current Sprint: NONE
-Platform Priority: Prepare Session 055 bootstrap for next milestone decision after Session 054 close.
+Platform Priority: Prepare the next approved milestone after the project persistence boundary is proven.
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: f353ca4
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `055 SPS OS - Next Milestone Direction Decision`, attach `sps-session.zip`, and paste the START prompt.
+Next Safe Step: Prepare the next session bootstrap or the next approved milestone.
