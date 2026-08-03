@@ -42,15 +42,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-006.1 - Next Milestone Queue Foundation
-
-**Latest Completed Milestone**
-MS-005.2 - Project Delete Action Foundation
-
-**Next Milestone**
 NONE
 
-MS-006.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Milestone Queue Foundation; the repository now records the next three small milestones toward the New Task / New Project Start Flow without introducing application code.
+**Latest Completed Milestone**
+MS-006.1 - Next Milestone Queue Foundation
+
+**Next Milestone**
+MS-006.2 - New Task Start Contract Foundation
+
+MS-006.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Milestone Queue Foundation; the repository now records the next three small milestones toward the New Task / New Project Start Flow without introducing application code after Session 053 close.
 
 MS-006.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Milestone Direction Contract Foundation; the repository now records a single approved post-MS-005.2 direction contract without introducing application code.
 
@@ -60,6 +60,7 @@ MS-004.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 MS-005.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS OS Pilot Test Foundation; the repository now documents the controlled Project -> Task -> Codex Handoff -> Result -> Completion -> Session Close -> Clean START sequence.
 MS-005.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS OS Pilot Test Execution Contract; Product Owner approval now authorizes the controlled pilot execution described in the contract.
 MS-005.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Delete Action Foundation; the repository now exposes a confirmation-gated project delete action from Recent Projects and the project detail page with canonical project removal and redirect back to the home view.
+MS-006.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Milestone Queue Foundation; the approved queue now leads to `MS-006.2 - New Task Start Contract Foundation`, `MS-006.3 - New Task Repository / Workspace Intake Foundation`, and `MS-006.4 - New Task Handoff To Codex Foundation`.
 
 MS-001.76 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the AI Workspace Engine Chat Project Switch State Isolation Foundation with commit `792c970`.
 MS-001.77 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the AI Workspace Engine Generate Project Switch Stale Result Guard Foundation with commit `78743a3`.

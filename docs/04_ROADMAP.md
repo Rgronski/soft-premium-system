@@ -107,7 +107,7 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-006.1 - Next Milestone Queue Foundation
+NONE
 
 ## Latest Completed Product Milestone
 
@@ -115,7 +115,7 @@ MS-005.2 - Project Delete Action Foundation
 
 ## Next
 
-NONE
+MS-006.2 - New Task Start Contract Foundation
 
 ## MS-006.1 - Next Milestone Queue Foundation
 
@@ -129,7 +129,7 @@ Product Milestone
 COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
-YES
+NO
 
 **Owner**
 Chief Architect
