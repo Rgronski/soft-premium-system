@@ -87,6 +87,43 @@ function Get-MarkdownSectionLines {
     return $sectionLines.ToArray()
 }
 
+function Get-MarkdownSubsectionLines {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $Path,
+
+        [Parameter(Mandatory = $true)]
+        [string] $Heading
+    )
+
+    if (-not (Test-Path -LiteralPath $Path)) {
+        Fail-Critical "Required document not found: $Path"
+    }
+
+    $lines = Get-Content -LiteralPath $Path -Encoding utf8
+    $sectionLines = New-Object System.Collections.Generic.List[string]
+    $inSection = $false
+
+    foreach ($line in $lines) {
+        if ($line -match '^##\s+(?<title>.+)$') {
+            if ($Matches.title.Trim() -eq $Heading) {
+                $inSection = $true
+                continue
+            }
+
+            if ($inSection) {
+                break
+            }
+        }
+
+        if ($inSection) {
+            $sectionLines.Add($line)
+        }
+    }
+
+    return $sectionLines.ToArray()
+}
+
 function Get-CurrentStateOperationalLines {
     param(
         [Parameter(Mandatory = $true)]
@@ -253,6 +290,100 @@ function Get-CurrentStateConsistencyIssues {
     return $issues.ToArray()
 }
 
+function Get-SectionFieldValue {
+    param(
+        [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
+        [string[]] $Lines,
+
+        [Parameter(Mandatory = $true)]
+        [string] $FieldName
+    )
+
+    $escapedFieldName = [regex]::Escape($FieldName)
+
+    for ($i = 0; $i -lt $Lines.Count; $i++) {
+        $trimmed = "$($Lines[$i])".Trim()
+        if ($trimmed -eq "") {
+            continue
+        }
+
+        if (
+            $trimmed -eq $FieldName -or
+            $trimmed -eq ("**{0}**" -f $FieldName) -or
+            $trimmed -eq ("## {0}" -f $FieldName) -or
+            $trimmed -eq ("### {0}" -f $FieldName)
+        ) {
+            for ($j = $i + 1; $j -lt $Lines.Count; $j++) {
+                $nextTrimmed = "$($Lines[$j])".Trim()
+                if ($nextTrimmed -eq "") {
+                    continue
+                }
+
+                if ($nextTrimmed.StartsWith("#")) {
+                    break
+                }
+
+                return $nextTrimmed
+            }
+        }
+
+        if ($trimmed -match ("^{0}:\s*(?<value>.+)$" -f $escapedFieldName)) {
+            return "$($Matches.value)".Trim()
+        }
+    }
+
+    return "UNKNOWN"
+}
+
+function Get-LatestCompletedMilestonePublicationIssues {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $RoadmapPath,
+
+        [Parameter(Mandatory = $true)]
+        [string] $LatestCompletedMilestone
+    )
+
+    $sectionLines = @(Get-MarkdownSubsectionLines -Path $RoadmapPath -Heading $LatestCompletedMilestone | Where-Object {
+            $_ -ne $null -and "$_".Trim() -ne ""
+        })
+
+    if ($sectionLines.Count -eq 0) {
+        return @("Latest completed milestone section not found in $RoadmapPath.")
+    }
+
+    $publicationStatus = Get-SectionFieldValue -Lines $sectionLines -FieldName "Publication Status"
+    $milestoneStatus = Get-SectionFieldValue -Lines $sectionLines -FieldName "Milestone Status"
+
+    $issues = New-Object System.Collections.Generic.List[string]
+
+    if ($publicationStatus -ne "PUBLISHED") {
+        $issues.Add("Latest completed milestone '$LatestCompletedMilestone' must report Publication Status: PUBLISHED in $RoadmapPath.")
+    }
+
+    if ($milestoneStatus -notmatch '\bPUBLISHED\b' -or $milestoneStatus -match 'NOT PUBLISHED') {
+        $issues.Add("Latest completed milestone '$LatestCompletedMilestone' must report a published Milestone Status in $RoadmapPath.")
+    }
+
+    return $issues.ToArray()
+}
+
+function Assert-LatestCompletedMilestonePublicationStatus {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $RoadmapPath,
+
+        [Parameter(Mandatory = $true)]
+        [string] $LatestCompletedMilestone
+    )
+
+    $issues = @(Get-LatestCompletedMilestonePublicationIssues -RoadmapPath $RoadmapPath -LatestCompletedMilestone $LatestCompletedMilestone)
+    if ($issues.Count -gt 0) {
+        Fail-Critical ($issues -join " ")
+    }
+}
+
 function Assert-CurrentStateConsistency {
     param(
         [Parameter(Mandatory = $true)]
@@ -314,6 +445,14 @@ function Invoke-SelfTest {
             '## Latest Completed Product Milestone'
             ''
             'MS-001.79 - Project Workspace Creation Contract Foundation'
+            ''
+            '## MS-001.79 - Project Workspace Creation Contract Foundation'
+            ''
+            '**Publication Status**'
+            'PUBLISHED'
+            ''
+            '**Milestone Status**'
+            'COMPLETED / PUBLISHED / CLOSED'
         ) | Set-Content -LiteralPath $roadmapPath -Encoding utf8
 
         @(
@@ -333,6 +472,34 @@ function Invoke-SelfTest {
         Assert-FieldConsistency `
             -FieldName "Latest Completed Product Milestone" `
             -Paths @($currentStatePath, $sessionStatePath, $roadmapPath)
+
+        $publishedIssues = @(Get-LatestCompletedMilestonePublicationIssues `
+                -RoadmapPath $roadmapPath `
+                -LatestCompletedMilestone "MS-001.79 - Project Workspace Creation Contract Foundation")
+        if ($publishedIssues.Count -ne 0) {
+            Fail-Critical "Self-test expected a published milestone fixture to pass."
+        }
+
+        @(
+            '## Latest Completed Product Milestone'
+            ''
+            'MS-001.79 - Project Workspace Creation Contract Foundation'
+            ''
+            '## MS-001.79 - Project Workspace Creation Contract Foundation'
+            ''
+            '**Publication Status**'
+            'NOT PUBLISHED'
+            ''
+            '**Milestone Status**'
+            'COMPLETED / VERIFIED / NOT PUBLISHED'
+        ) | Set-Content -LiteralPath $roadmapPath -Encoding utf8
+
+        $unpublishedIssues = @(Get-LatestCompletedMilestonePublicationIssues `
+                -RoadmapPath $roadmapPath `
+                -LatestCompletedMilestone "MS-001.79 - Project Workspace Creation Contract Foundation")
+        if ($unpublishedIssues.Count -lt 1) {
+            Fail-Critical "Self-test expected an unpublished milestone fixture to fail."
+        }
     }
     finally {
         Remove-Item -LiteralPath $testRoot -Recurse -Force -ErrorAction SilentlyContinue
@@ -692,6 +859,11 @@ Assert-FieldConsistency `
         (Join-Path $repoRoot "docs\04_ROADMAP.md")
     )
 
+$latestCompletedMilestone = Get-RequiredField -Fields $sessionFields -FieldName "Latest Completed Product Milestone"
+Assert-LatestCompletedMilestonePublicationStatus `
+    -RoadmapPath (Join-Path $repoRoot "docs\04_ROADMAP.md") `
+    -LatestCompletedMilestone $latestCompletedMilestone
+
 $gitContextPath = Join-Path $repoRoot "sps-git-context.txt"
 $sessionSummaryPath = Join-Path $repoRoot "sps-session-summary.txt"
 $zipPath = Join-Path $repoRoot "sps-session.zip"
@@ -812,6 +984,10 @@ if (Test-Path -LiteralPath $zipPath) {
 }
 
 Compress-Archive -LiteralPath $zipItems.ToArray() -DestinationPath $zipPath -Force
+
+Assert-LatestCompletedMilestonePublicationStatus `
+    -RoadmapPath (Join-Path $repoRoot "docs\04_ROADMAP.md") `
+    -LatestCompletedMilestone $latestCompletedMilestone
 
 Write-Host "SPS session package generated."
 Write-Host "Repository root: $repoRoot"

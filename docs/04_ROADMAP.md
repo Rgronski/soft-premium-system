@@ -141,10 +141,10 @@ Codex
 COMPLETED / VERIFIED
 
 **Publication Status**
-NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / NOT PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Purpose**
 Add a minimal local-only task completion handoff text block on `/projects/[id]/tasks/[taskId]/workspace` without backend persistence or Project Brain writes.
