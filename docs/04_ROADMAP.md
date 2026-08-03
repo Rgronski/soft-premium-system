@@ -214,6 +214,15 @@ Chief Architect
 **Implementation Engine**
 Codex
 
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
 **Purpose**
 Define the smallest controlled SPS OS pilot test contract that spans Project creation, Task creation, Codex handoff, Result capture, Completion, Session Close, and a clean START handoff without changing application code.
 
