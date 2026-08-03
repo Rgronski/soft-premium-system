@@ -69,6 +69,19 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 050 - MS-002.t AI chat, prompts, and agents foundation publication
+
+### Date
+
+2026-08-03
+
+### Completed
+
+* Published `MS-002.t - AI Chat, Prompts, and Agents Foundation` as the smallest chat and prompt orchestration boundary on the AI Workspace read surface.
+* Moved the shared starter prompt catalog into `src/lib/ai-workspace-engine/engine.ts` and imported it from `src/app/projects/[id]/ai/page.tsx`.
+* Kept the AI Workspace boundary free of Project Brain writes, provider wiring, persistence, API routes, and unrelated refactors.
+* Synchronized the SSOT docs and prepared the Session 050 handoff for the next discovery step.
+
 ## Session 049 - MS-002.s task completion handoff implementation
 
 ### Date

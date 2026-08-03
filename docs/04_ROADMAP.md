@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-002.s - Task Completion Handoff Text Foundation
+MS-002.t - AI Chat, Prompts, and Agents Foundation
 
 ## Next
 
@@ -206,6 +206,78 @@ MS-002.o is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication o
 MS-002.p is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Completion Local Action Foundation.
 MS-002.q is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Completion Summary Foundation.
 MS-002.r is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the Task Completion Report Copy Foundation.
+
+## MS-002.t - AI Chat, Prompts, and Agents Foundation
+
+**Milestone**
+MS-002.t - AI Chat, Prompts, and Agents Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Add the smallest chat and prompt orchestration boundary on the existing AI Workspace read surface without changing Project Brain persistence, provider wiring, or persistence ownership.
+
+**Product Outcome**
+The AI Workspace now owns the shared starter prompt catalog and prompt-orchestration state boundary in `src/lib/ai-workspace-engine/engine.ts`, while the page consumes that catalog without changing the underlying provider or Project Brain read contract.
+
+**Dependencies**
+* closed `MS-002.s - Task Completion Handoff Text Foundation`
+
+**Allowed Implementation Scope**
+* shared starter prompt catalog in the AI workspace engine boundary
+* prompt orchestration state derivation on the existing AI Workspace page
+* focused tests for the shared prompt catalog and orchestration boundary
+
+**Forbidden Scope**
+* API routes
+* Project Brain storage/write paths
+* provider/model wiring
+* persistence
+* route redesign
+* unrelated refactors
+
+**Ownership Boundaries**
+* `src/lib/ai-workspace-engine/engine.ts` owns the shared prompt catalog and orchestration helpers
+* `src/app/projects/[id]/ai/page.tsx` consumes the shared prompt catalog and boundary helpers
+* Project Brain and provider wiring remain outside this milestone
+
+**Verification Plan**
+* focused engine and page tests
+* `npx.cmd tsc --noEmit`
+* `git diff --check`
+* confirm no Project Brain write-path, provider, API, or persistence behavior changes were introduced
+
+**Rollback / Safety Expectations**
+* stop if the prompt boundary needs API routes
+* stop if the prompt boundary needs Project Brain writes
+* keep the milestone closed after publication
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-002.o - Task Result Save Action Foundation
 

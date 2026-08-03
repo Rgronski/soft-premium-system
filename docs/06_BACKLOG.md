@@ -313,7 +313,7 @@ Medium
 
 **Status**
 
-Proposed
+Completed by `MS-002.t - AI Chat, Prompts, and Agents Foundation`
 
 ---
 

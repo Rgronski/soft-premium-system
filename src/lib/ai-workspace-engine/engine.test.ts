@@ -26,6 +26,7 @@ import {
   deriveSaveTitleChangeState,
   deriveActiveSaveState,
   deriveLatestExchange,
+  STARTER_PROMPTS,
   type GenerationUiState,
   type InstructionUiState,
   getConversationContextExchangeCount,
@@ -132,6 +133,23 @@ describe("ai workspace engine", () => {
       projectId: "project-2",
       value: "Produce a concise summary.",
       selectedPromptId: "summarize-project-state",
+    });
+  });
+
+  test("exposes the starter prompt catalog used by the AI Workspace page", () => {
+    expect(STARTER_PROMPTS).toHaveLength(5);
+    expect(STARTER_PROMPTS.map((prompt) => prompt.id)).toEqual([
+      "summarize-project-state",
+      "identify-project-risks",
+      "review-backlog",
+      "recommend-next-safe-step",
+      "review-decisions",
+    ]);
+    expect(STARTER_PROMPTS[0]).toMatchObject({
+      label: "Summarize Project State",
+    });
+    expect(STARTER_PROMPTS[4]).toMatchObject({
+      label: "Review Decisions",
     });
   });
 

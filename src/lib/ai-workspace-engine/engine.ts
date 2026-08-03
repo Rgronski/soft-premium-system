@@ -52,6 +52,39 @@ export type StarterPromptUiState = {
   instruction: string;
 };
 
+export const STARTER_PROMPTS: StarterPromptUiState[] = [
+  {
+    id: "summarize-project-state",
+    label: "Summarize Project State",
+    instruction:
+      "Produce a concise summary of the current project state based only on the provided canonical project context.",
+  },
+  {
+    id: "identify-project-risks",
+    label: "Identify Project Risks",
+    instruction:
+      "Identify the most important current project risks based only on the provided canonical project context.",
+  },
+  {
+    id: "review-backlog",
+    label: "Review Backlog",
+    instruction:
+      "Review the current backlog and identify the most relevant unresolved work based only on the provided canonical project context.",
+  },
+  {
+    id: "recommend-next-safe-step",
+    label: "Recommend Next Safe Step",
+    instruction:
+      "Recommend exactly one smallest safe next step based only on the provided canonical project context.",
+  },
+  {
+    id: "review-decisions",
+    label: "Review Decisions",
+    instruction:
+      "Summarize the most relevant existing project decisions and identify any visible unresolved decision gap based only on the provided canonical project context.",
+  },
+];
+
 export type SaveState =
   | "idle"
   | "ready-to-save"
