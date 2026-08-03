@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-005.1 - SPS OS Pilot Test Execution Contract
+MS-005.2 - Project Delete Action Foundation
 
 ## Next
 
@@ -2799,6 +2799,92 @@ NONE
 
 **Next Safe Step**
 Run Next Product Milestone Contract Discovery.
+
+## MS-005.2 - Project Delete Action Foundation
+
+**Milestone**
+MS-005.2 - Project Delete Action Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Product Owner Decision**
+ACCEPT
+
+**Purpose**
+Add a confirmation-gated project delete action from Recent Projects and the project detail page, with both the local project list/storage and the canonical Project Brain/project data path removed on confirmed delete.
+
+**Product Outcome**
+The repository exposes a minimal project deletion flow that lets users remove a project safely from the recent-projects list or the project detail page after confirmation, while returning to the home view after a detail-page delete.
+
+**Dependencies**
+* `MS-005.1 - SPS OS Pilot Test Execution Contract`
+
+**Allowed Implementation Scope**
+* right-side delete action in Recent Projects
+* delete action on the project detail page
+* confirmation prompt before delete
+* local project list/storage removal
+* canonical project data deletion through the project API route
+* redirect to the projects/home view after detail-page delete
+* targeted tests for delete confirmation, cancellation, removal, and redirect behavior
+
+**Forbidden Scope**
+* broad refactors
+* unrelated cleanup
+* destructive delete without confirmation
+* changes beyond the approved delete semantics
+
+**Ownership Boundaries**
+* the home Recent Projects list owns the local project list/storage presentation
+* the project detail route owns the canonical project view and redirect after delete
+* `src/app/api/projects/[id]/route.ts` owns the canonical delete transport boundary
+* Project Brain remains the canonical project data source for project detail reads
+
+**Verification Plan**
+* `npm.cmd test -- src/lib/project/project.test.ts src/lib/project/browser-server.test.ts src/lib/project/server.test.ts src/app/page.test.tsx src/app/projects/[id]/page.test.tsx`
+* `npx.cmd tsc --noEmit`
+* `git diff --check`
+* `git status -sb`
+
+**Rollback / Safety Expectations**
+* stop if deletion needs broader storage migration
+* stop if deletion needs additional product scopes
+* keep the milestone minimal and confirmation-gated
+
+**Implementation Evidence**
+* `src/app/page.tsx` adds the Recent Projects delete action and confirmation flow
+* `src/app/projects/[id]/page.tsx` adds the project detail delete action and redirect flow
+* `src/app/api/projects/[id]/route.ts` now supports `DELETE`
+* `src/lib/project/project.ts` now removes a project from the local project list
+* `src/lib/project/server.ts` now deletes the canonical project row
+* targeted tests passed for local list deletion, browser/server delete transport, canonical server delete, and both UI entry points
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ---
 

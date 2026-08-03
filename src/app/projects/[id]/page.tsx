@@ -1,5 +1,6 @@
 "use client";
 
+import { deleteProjectFromServer } from "@/lib/project/browser-server";
 import { WorkspaceContent } from "@/components/workspace/WorkspaceContent";
 import { WorkspaceCollections } from "@/components/workspace/WorkspaceCollections";
 import { WorkspaceHeader } from "@/components/workspace/WorkspaceHeader";
@@ -9,7 +10,8 @@ import {
   getProjectWorkspaceEntry,
   type ProjectWorkspaceEntry,
 } from "@/lib/project-brain/engine";
-import { useParams } from "next/navigation";
+import { deleteProject } from "@/lib/project/project";
+import { useParams, useRouter } from "next/navigation";
 import { useMemo } from "react";
 
 type Client = {
@@ -38,6 +40,7 @@ type DashboardSnapshot = {
 
 export default function ProjectWorkspacePage() {
   const params = useParams<{ id: string }>();
+  const router = useRouter();
   const dashboard = useMemo<DashboardSnapshot>(() => {
     if (typeof window === "undefined") {
       return {
@@ -100,10 +103,43 @@ export default function ProjectWorkspacePage() {
     }
   }, [params.id]);
 
+  async function handleDeleteProject() {
+    if (!dashboard.workspaceEntry) {
+      return;
+    }
+
+    const projectName =
+      dashboard.workspaceEntry.workspace.overview.project.name;
+    const confirmed = window.confirm(
+      `Delete "${projectName}"? This cannot be undone.`,
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      await deleteProjectFromServer(params.id);
+      deleteProject(params.id);
+      router.push("/");
+    } catch {
+      window.alert("Project deletion failed.");
+    }
+  }
+
   return (
     <WorkspaceLayout>
       {!dashboard.isLoaded ? null : dashboard.workspaceEntry ? (
         <WorkspaceContent>
+          <div className="flex justify-end">
+            <button
+              type="button"
+              onClick={() => void handleDeleteProject()}
+              className="rounded-full border border-red-500/40 px-5 py-2 text-sm font-medium text-red-200 transition-colors hover:border-red-400 hover:bg-red-500/10"
+            >
+              Usuń projekt
+            </button>
+          </div>
           <WorkspaceHeader
             projectName={dashboard.workspaceEntry.workspace.overview.project.name}
             repositoryUrl={

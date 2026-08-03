@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 052 - MS-005.2 project delete action publication
+
+### Date
+
+2026-08-03
+
+### Completed
+
+* Published `MS-005.2 - Project Delete Action Foundation` as the minimal confirmation-gated project delete contract.
+* Added delete actions for Recent Projects and the project detail page, with both local project list/storage removal and canonical project data deletion behind confirmation.
+* Added targeted delete verification for the local project list, browser transport, canonical server delete, and both UI entry points.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to record the completed milestone.
+
+### Notes
+
+* No unrelated cleanup, broad refactor, or delete behavior outside the approved scope was introduced.
+
 ## Session 051 - MS-005.1 controlled pilot test execution verified
 
 ### Date

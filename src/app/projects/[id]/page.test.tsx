@@ -1,13 +1,19 @@
 // @vitest-environment jsdom
 
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 const useParamsMock = vi.fn(() => ({ id: "project-1" }));
+const pushMock = vi.fn();
 const getProjectWorkspaceEntryMock = vi.fn();
+const deleteProjectFromServerMock = vi.fn();
+let confirmSpy: ReturnType<typeof vi.spyOn>;
 
 vi.mock("next/navigation", () => ({
   useParams: () => useParamsMock(),
+  useRouter: () => ({
+    push: pushMock,
+  }),
 }));
 
 vi.mock("@/lib/project-brain/engine", () => ({
@@ -15,11 +21,20 @@ vi.mock("@/lib/project-brain/engine", () => ({
     getProjectWorkspaceEntryMock(projectId),
 }));
 
+vi.mock("@/lib/project/browser-server", () => ({
+  deleteProjectFromServer: (projectId: string) =>
+    deleteProjectFromServerMock(projectId),
+}));
+
 import ProjectWorkspacePage from "./page";
 
 describe("ProjectWorkspacePage", () => {
   beforeEach(() => {
+    localStorage.clear();
     useParamsMock.mockReturnValue({ id: "project-1" });
+    pushMock.mockReset();
+    deleteProjectFromServerMock.mockReset();
+    deleteProjectFromServerMock.mockResolvedValue(undefined);
     getProjectWorkspaceEntryMock.mockReset();
     getProjectWorkspaceEntryMock.mockReturnValue({
       projectId: "project-1",
@@ -61,11 +76,25 @@ describe("ProjectWorkspacePage", () => {
         ],
       },
     });
+    confirmSpy = vi.spyOn(window, "confirm");
+    confirmSpy.mockReturnValue(true);
+    vi.spyOn(window, "alert").mockImplementation(() => {});
+    localStorage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha Workspace",
+          createdAt: "2026-08-03T10:00:00.000Z",
+        },
+      ]),
+    );
   });
 
   afterEach(() => {
     cleanup();
     vi.restoreAllMocks();
+    localStorage.clear();
   });
 
   test("uses the Project Brain workspace access boundary for the route project id", () => {
@@ -84,6 +113,7 @@ describe("ProjectWorkspacePage", () => {
     expect(screen.getByRole("link", { name: "Add Task" })).toBeTruthy();
     expect(screen.getByRole("link", { name: "View all tasks" })).toBeTruthy();
     expect(screen.getByRole("link", { name: "View all knowledge" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Usuń projekt" })).toBeTruthy();
   });
 
   test("surfaces the Project Brain start-next-work readiness boundary when no active work exists", () => {
@@ -121,5 +151,20 @@ describe("ProjectWorkspacePage", () => {
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledTimes(1);
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledWith("project-1");
     expect(screen.getAllByText("Start next work")).toHaveLength(2);
+  });
+
+  test("confirms delete, removes the project, and redirects home", async () => {
+    render(<ProjectWorkspacePage />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Usuń projekt" }));
+
+    await waitFor(() => {
+      expect(deleteProjectFromServerMock).toHaveBeenCalledWith("project-1");
+    });
+
+    expect(pushMock).toHaveBeenCalledWith("/");
+    expect(
+      JSON.parse(localStorage.getItem("soft-premium-system.projects") ?? "[]"),
+    ).toEqual([]);
   });
 });

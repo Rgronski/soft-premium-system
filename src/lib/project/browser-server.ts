@@ -129,3 +129,21 @@ export async function getProjectFromServer(
 
   throw new ProjectServerError("invalid-response", response.status);
 }
+
+export async function deleteProjectFromServer(
+  projectId: string,
+): Promise<void> {
+  const response = await executeFetch(buildProjectUrl(projectId), {
+    method: "DELETE",
+  });
+
+  if (response.status === 204) {
+    return;
+  }
+
+  if (response.status === 503) {
+    throw new ProjectServerError("context-unavailable", response.status);
+  }
+
+  throw new ProjectServerError("invalid-response", response.status);
+}

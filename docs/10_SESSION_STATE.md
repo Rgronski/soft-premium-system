@@ -211,21 +211,21 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-03
-Current Session ID: 051
-Current Chat Title: 051 SPS OS - Pilot Test Execution
-Next Session ID: 052
-Suggested Next Chat Title: 052 SPS OS - Post-Pilot Review and Next Milestone Decision
+Current Session ID: 052
+Current Chat Title: 052 SPS OS - Publish MS-005.2 - Project Delete Action Foundation
+Next Session ID: 053
+Suggested Next Chat Title: 053 SPS OS - Next Product Milestone Decision
 Active Capability: NONE
-Active Work Item: NONE
-Current Mode: CODEX SESSION CLOSE
-Completed Capability Items: Session 051 verified MS-005.0; Session 051 published MS-005.1; Session 051 amended MS-005.1 to authorize controlled pilot execution; Session 051 executed controlled pilot test under MS-005.1; Session 051 completed Session Close Protocol; Session 051 synchronized SSOT; Session 051 recorded usage summary
+Active Work Item: MS-005.2 publication
+Current Mode: CODEX SESSION PUBLISH
+Completed Capability Items: Session 052 implemented MS-005.2; Session 052 verified targeted delete tests; Session 052 synchronized SSOT; Session 052 recorded usage summary; Session 052 published MS-005.2
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-005.1 - SPS OS Pilot Test Execution Contract
+Latest Completed Product Milestone: MS-005.2 - Project Delete Action Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 051 completed Session Close Protocol
+Latest Completed Capability Item: Session 052 published MS-005.2
 Current Sprint: NONE
-Platform Priority: Await the next session after the closed pilot review.
+Platform Priority: Await the next Product Owner decision after MS-005.2 publication.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
@@ -233,4 +233,4 @@ Latest Verified Commit: 5a90611
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `052 SPS OS - Post-Pilot Review and Next Milestone Decision`, attach `sps-session.zip`, and paste the START prompt.
+Next Safe Step: Open a new chat titled `053 SPS OS - Next Product Milestone Decision` and run Next Product Milestone Contract Discovery.

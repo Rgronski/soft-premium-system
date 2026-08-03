@@ -31,3 +31,10 @@ export function createProject(name: string): Project {
 
   return newProject;
 }
+
+export function deleteProject(id: string): void {
+  const projects = getProjects();
+  const updatedProjects = projects.filter((project) => project.id !== id);
+
+  localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(updatedProjects));
+}

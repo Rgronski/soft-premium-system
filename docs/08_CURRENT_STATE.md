@@ -55,6 +55,7 @@ MS-002.t is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 MS-004.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the External Integrations Foundation; the project keeps Current Product Milestone at NONE until Product Owner approval is recorded.
 MS-005.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS OS Pilot Test Foundation; the repository now documents the controlled Project -> Task -> Codex Handoff -> Result -> Completion -> Session Close -> Clean START sequence.
 MS-005.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS OS Pilot Test Execution Contract; Product Owner approval now authorizes the controlled pilot execution described in the contract.
+MS-005.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Delete Action Foundation; the repository now exposes a confirmation-gated project delete action from Recent Projects and the project detail page with canonical project removal and redirect back to the home view.
 
 MS-001.76 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the AI Workspace Engine Chat Project Switch State Isolation Foundation with commit `792c970`.
 MS-001.77 is COMPLETED / VERIFIED / PUBLISHED / CLOSED after formal publication of the AI Workspace Engine Generate Project Switch Stale Result Guard Foundation with commit `78743a3`.
@@ -108,7 +109,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-005.1 - SPS OS Pilot Test Execution Contract
+Latest Completed Product Milestone: MS-005.2 - Project Delete Action Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -1265,7 +1266,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-005.1 - SPS OS Pilot Test Execution Contract`
+* `Latest Completed Product Milestone` is `MS-005.2 - Project Delete Action Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

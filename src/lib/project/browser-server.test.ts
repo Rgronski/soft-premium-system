@@ -8,6 +8,7 @@ import {
 } from "vitest";
 
 import {
+  deleteProjectFromServer,
   getProjectFromServer,
   ProjectServerError,
 } from "./browser-server";
@@ -153,6 +154,35 @@ describe("getProjectFromServer", () => {
     await expect(getProjectFromServer("project-1")).rejects.toMatchObject({
       code: "invalid-response",
       status: 500,
+    } satisfies Partial<ProjectServerError>);
+  });
+});
+
+describe("deleteProjectFromServer", () => {
+  it("uses encoded projectId and sends DELETE", async () => {
+    fetchMock.mockResolvedValueOnce(new Response(null, { status: 204 }));
+
+    await expect(deleteProjectFromServer("project/1")).resolves.toBeUndefined();
+
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledWith("/api/projects/project%2F1", {
+      method: "DELETE",
+    });
+  });
+
+  it("maps 503 context-unavailable to the controlled error", async () => {
+    fetchMock.mockResolvedValueOnce(
+      new Response(JSON.stringify({ status: "context-unavailable" }), {
+        status: 503,
+        headers: {
+          "content-type": "application/json",
+        },
+      }),
+    );
+
+    await expect(deleteProjectFromServer("project-1")).rejects.toMatchObject({
+      code: "context-unavailable",
+      status: 503,
     } satisfies Partial<ProjectServerError>);
   });
 });

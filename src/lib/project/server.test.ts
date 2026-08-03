@@ -84,3 +84,26 @@ LIMIT 1`,
     );
   });
 });
+
+describe("deleteServerProjectById", () => {
+  it("uses DATABASE_URL and executes a delete query for the project id", async () => {
+    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
+
+    const queryMock = vi.fn().mockResolvedValue([]);
+
+    neonMock.mockReturnValue({
+      query: queryMock,
+    });
+
+    const { deleteServerProjectById } = await loadServerModule();
+    await deleteServerProjectById("project-1");
+
+    expect(neonMock).toHaveBeenCalledWith("postgresql://pooled-runtime-url");
+    expect(queryMock).toHaveBeenCalledTimes(1);
+    expect(queryMock).toHaveBeenCalledWith(
+      `DELETE FROM public.projects
+WHERE id = $1`,
+      ["project-1"],
+    );
+  });
+});

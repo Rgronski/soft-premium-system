@@ -1,14 +1,35 @@
 "use client";
 
-import { getProjects } from "@/lib/project/project";
+import { deleteProjectFromServer } from "@/lib/project/browser-server";
+import { deleteProject, getProjects } from "@/lib/project/project";
 import type { Project } from "@/lib/project/types";
 import Link from "next/link";
-import { useMemo } from "react";
+import { useState } from "react";
 
 export default function Home() {
-  const projects = useMemo<Project[]>(() => {
-    return getProjects();
-  }, []);
+  const [projects, setProjects] = useState<Project[]>(() => getProjects());
+
+  async function handleDeleteProject(project: Project) {
+    const confirmed = window.confirm(
+      `Delete "${project.name}"? This cannot be undone.`,
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      await deleteProjectFromServer(project.id);
+      deleteProject(project.id);
+      setProjects((currentProjects) =>
+        currentProjects.filter(
+          (currentProject) => currentProject.id !== project.id,
+        ),
+      );
+    } catch {
+      window.alert("Project deletion failed.");
+    }
+  }
 
   return (
     <main className="min-h-screen bg-zinc-950 px-6 py-10 text-zinc-50">
@@ -89,16 +110,28 @@ export default function Home() {
               <p className="text-sm text-zinc-400">No projects yet.</p>
             ) : (
               projects.map((project) => (
-                <Link
+                <div
                   key={project.id}
-                  href={`/projects/${project.id}`}
-                  className="block w-full rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
+                  className="flex w-full items-center justify-between gap-4 rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
                 >
-                  <p className="text-base font-medium">{project.name}</p>
-                  <p className="mt-1 text-sm text-zinc-400">
-                    {new Date(project.createdAt).toLocaleDateString()}
-                  </p>
-                </Link>
+                  <Link
+                    href={`/projects/${project.id}`}
+                    className="min-w-0 flex-1"
+                  >
+                    <p className="text-base font-medium">{project.name}</p>
+                    <p className="mt-1 text-sm text-zinc-400">
+                      {new Date(project.createdAt).toLocaleDateString()}
+                    </p>
+                  </Link>
+
+                  <button
+                    type="button"
+                    onClick={() => void handleDeleteProject(project)}
+                    className="shrink-0 rounded-full border border-red-500/40 px-4 py-2 text-sm font-medium text-red-200 transition-colors hover:border-red-400 hover:bg-red-500/10"
+                  >
+                    Usuń
+                  </button>
+                </div>
               ))
             )}
           </div>

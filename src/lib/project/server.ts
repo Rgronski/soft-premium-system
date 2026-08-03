@@ -15,6 +15,9 @@ FROM public.projects
 WHERE id = $1
 LIMIT 1`;
 
+const DELETE_PROJECT_BY_ID = `DELETE FROM public.projects
+WHERE id = $1`;
+
 function getDatabaseUrl(): string {
   const databaseUrl = process.env.DATABASE_URL?.trim();
 
@@ -41,4 +44,10 @@ export async function getServerProjectById(
     name: row.name,
     createdAt: new Date(row.created_at).toISOString(),
   };
+}
+
+export async function deleteServerProjectById(id: string): Promise<void> {
+  const sql = neon(getDatabaseUrl());
+
+  await sql.query(DELETE_PROJECT_BY_ID, [id]);
 }
