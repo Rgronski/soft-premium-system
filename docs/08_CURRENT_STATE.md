@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-007.3 - New Task Flow Final Pilot Foundation
+MS-007.4 - Session Close Package Freshness Guard
 
 **Next Milestone**
 NONE
@@ -67,6 +67,8 @@ MS-007.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 MS-007.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Link Route Foundation; the task detail `Open task workspace` link now preserves both `projectId` and `taskId` and routes directly to the task workspace surface.
 
 MS-007.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the New Task Flow Final Pilot Foundation; the final real pilot now proves the new-task flow passes end to end from fresh project creation through the task workspace handoff surface.
+
+MS-007.4 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Session Close Package Freshness Guard; the repository now proves the fresh session package is generated only after the final close push and that the generated package reflects the same SSOT state.
 
 MS-002.s is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Completion Handoff Text Foundation; the task workspace route now shows a local handoff text block after completion.
 MS-002.t is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Chat, Prompts, and Agents Foundation; the AI Workspace now owns the starter prompt catalog in the engine boundary.
@@ -128,7 +130,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-007.3 - New Task Flow Final Pilot Foundation
+Latest Completed Product Milestone: MS-007.4 - Session Close Package Freshness Guard
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -1285,7 +1287,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-007.3 - New Task Flow Final Pilot Foundation`
+* `Latest Completed Product Milestone` is `MS-007.4 - Session Close Package Freshness Guard`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-007.3 - New Task Flow Final Pilot Foundation
+MS-007.4 - Session Close Package Freshness Guard
 
 ## Next
 
@@ -399,6 +399,84 @@ The repository now proves the final new-task flow pilot passes end to end: `/pro
 * `docs/08_CURRENT_STATE.md`
 * `docs/09_CHANGELOG.md`
 * `docs/10_SESSION_STATE.md`
+
+## MS-007.4 - Session Close Package Freshness Guard
+
+**Milestone**
+MS-007.4 - Session Close Package Freshness Guard
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Define the session-close package freshness guard that requires the final close commit to be pushed and the repository to be clean and aligned before a fresh `sps-session.zip` is generated.
+
+**Product Outcome**
+The repository now proves the fresh session package is generated only after the final close push, and the resulting package reflects the same SSOT state as the source documents.
+
+**Dependencies**
+* `MS-007.3 - New Task Flow Final Pilot Foundation`
+* `docs/15_SESSION_CLOSE_PROTOCOL.md`
+
+**Allowed Implementation Scope**
+* docs-only close package freshness publication
+* SSOT verification and result-report wording
+* package freshness verification wording
+* publication metadata for the milestone
+
+**Forbidden Scope**
+* application code
+* API routes
+* provider/model wiring
+* persistence
+* UI redesign
+* unrelated refactors
+* expanding beyond the approved close-package freshness guard
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* `docs/session-handoffs/*` stays outside this milestone unless the session is being closed
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* `powershell -ExecutionPolicy Bypass -File .\scripts\New-SpsSession.ps1 -ValidationOnly`
+* regenerate the fresh session package only after the close push and clean/aligned repo state
+* confirm no `src` changes were introduced
+
+**Rollback / Safety Expectations**
+* stop if the freshness guard cannot be expressed as docs-only SSOT publication
+* stop if the package generator would still consume stale milestone state
+* keep the milestone narrow and consistent with the existing close protocol
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+* `docs/session-handoffs/2026-08-04_055_SESSION_HANDOFF.md`
 
 ## MS-006.4 - New Task Handoff To Codex Foundation
 
