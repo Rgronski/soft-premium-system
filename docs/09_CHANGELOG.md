@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 055 - MS-007.3 new task flow final pilot foundation publication
+
+### Date
+
+2026-08-04
+
+### Completed
+
+* Published `MS-007.3 - New Task Flow Final Pilot Foundation` after the real browser pilot proved the new-task flow works end to end from fresh project creation through task workspace handoff.
+* Verified the pilot path: `/projects` -> create fresh project -> open fresh project -> open task intake -> create fresh task -> open task detail -> open task workspace -> confirm `/projects/<projectId>/tasks/<taskId>/workspace` and visible `Handoff to Codex`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT records `MS-007.3` as the latest completed milestone.
+* Recorded the Session 055 usage entry for the MS-007.3 publication task in `.usage/session.jsonl`.
+
+### Notes
+
+* No source code changes were introduced for the final pilot publication.
+
 ## Session 055 - MS-007.2 task workspace link route foundation publication
 
 ### Date

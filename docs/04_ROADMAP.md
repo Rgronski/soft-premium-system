@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-007.2 - Task Workspace Link Route Foundation
+MS-007.3 - New Task Flow Final Pilot Foundation
 
 ## Next
 
@@ -319,6 +319,73 @@ The task detail `Open task workspace` link now routes directly to `/projects/[id
 **Verification Plan**
 * targeted project and task creation tests
 * real pilot rerun through project creation -> task creation -> handoff surface
+
+## MS-007.3 - New Task Flow Final Pilot Foundation
+
+**Milestone**
+MS-007.3 - New Task Flow Final Pilot Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Run the final real pilot of the new-task flow after the project persistence fix and task workspace link fix, and record the verified end-to-end result in SSOT.
+
+**Product Outcome**
+The repository now proves the final new-task flow pilot passes end to end: `/projects` creates a fresh project, the fresh project opens task intake, a fresh task opens its detail page, the task workspace link preserves both `projectId` and `taskId`, and the `Handoff to Codex` surface is visible and reachable.
+
+**Dependencies**
+* `MS-007.2 - Task Workspace Link Route Foundation`
+* real browser pilot path through project creation, task creation, task detail, and task workspace
+
+**Allowed Implementation Scope**
+* docs-only final pilot publication
+* real pilot verification wording
+* SSOT verification and result-report wording
+* usage-record wording for the Codex task
+* publication metadata for the milestone
+
+**Forbidden Scope**
+* application code
+* API routes
+* provider/model wiring
+* persistence
+* UI redesign
+* unrelated refactors
+* expanding beyond the approved final new-task pilot
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* `docs/session-handoffs/*` stays outside this milestone unless the session is being closed
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* real browser pilot path through `/projects` -> create project -> add task -> open detail -> open task workspace -> confirm handoff surface
+* append the required `.usage/session.jsonl` record
+* confirm no `src` changes were introduced
 * `git diff --check`
 * confirm no unrelated `src` changes were introduced beyond the narrow boundary fix
 
