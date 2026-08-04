@@ -233,4 +233,4 @@ Latest Verified Commit: e51e17a
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open Session 056 from the fresh package and perform Project Integrity Check.
+Next Safe Step: Open a new chat titled `056 SPS OS - New Task Flow Result Review`, attach `sps-session.zip`, and paste the START prompt.
