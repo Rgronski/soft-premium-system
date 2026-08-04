@@ -227,14 +227,14 @@ Mandatory sequence after recognizing `SPS OS — KONIEC`:
    * Next Session ID
    * Suggested Next Chat Title
 9. Perform required commit and push if the protocol requires repository changes.
-10. Run Session Package Generator.
-11. Generate a fresh `sps-session.zip`.
-12. Confirm `Package Consistency: PASS`.
-13. Check final repository state:
+10. Check final repository state:
    * correct branch
    * working tree clean
    * local/origin synchronized
    * correct HEAD
+11. Run Session Package Generator.
+12. Generate a fresh `sps-session.zip`.
+13. Confirm `Package Consistency: PASS`.
 14. Only then declare:
    * `SPS OS Session Close — PASS`
    * `Session Close Protocol: PASS`
@@ -247,6 +247,12 @@ Missing evidence must not be replaced by assumption, declaration, or prediction.
 Preparing instructions, prompts, patches, or commands is not execution of Session Close Protocol.
 
 Commit without push, handoff without generator, or ZIP without `Package Consistency: PASS` is not sufficient for session closure.
+
+Fresh Package Guard:
+
+`sps-session.zip` may be generated only after the final close commit has been pushed, `git status -sb` reports `## main...origin/main`, and the working tree is clean.
+
+If any of those checks fail, the session remains `PARTIAL` and no fresh package may be declared as final close evidence.
 
 ---
 
