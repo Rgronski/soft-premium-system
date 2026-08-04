@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-007.4 - Session Close Package Freshness Guard
+MS-007.5 - New Task Flow Result Review Foundation
 
 **Next Milestone**
 NONE
@@ -69,6 +69,8 @@ MS-007.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 MS-007.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the New Task Flow Final Pilot Foundation; the final real pilot now proves the new-task flow passes end to end from fresh project creation through the task workspace handoff surface.
 
 MS-007.4 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Session Close Package Freshness Guard; the repository now proves the fresh session package is generated only after the final close push and that the generated package reflects the same SSOT state.
+
+MS-007.5 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the New Task Flow Result Review Foundation; the repository now records the reviewed New Task Flow outcome as a docs-only milestone and keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-002.s is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Completion Handoff Text Foundation; the task workspace route now shows a local handoff text block after completion.
 MS-002.t is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Chat, Prompts, and Agents Foundation; the AI Workspace now owns the starter prompt catalog in the engine boundary.
@@ -130,7 +132,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-007.4 - Session Close Package Freshness Guard
+Latest Completed Product Milestone: MS-007.5 - New Task Flow Result Review Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -1287,7 +1289,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-007.4 - Session Close Package Freshness Guard`
+* `Latest Completed Product Milestone` is `MS-007.5 - New Task Flow Result Review Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

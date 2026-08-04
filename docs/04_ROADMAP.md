@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-007.4 - Session Close Package Freshness Guard
+MS-007.5 - New Task Flow Result Review Foundation
 
 ## Next
 
@@ -477,6 +477,78 @@ The repository now proves the fresh session package is generated only after the 
 * `docs/09_CHANGELOG.md`
 * `docs/10_SESSION_STATE.md`
 * `docs/session-handoffs/2026-08-04_055_SESSION_HANDOFF.md`
+
+## MS-007.5 - New Task Flow Result Review Foundation
+
+**Milestone**
+MS-007.5 - New Task Flow Result Review Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Formalize the reviewed New Task Flow result so SSOT records the verified end-to-end outcome and review summary without changing application behavior.
+
+**Product Outcome**
+The repository now captures the reviewed New Task Flow result as a docs-only milestone and keeps the next product milestone at NONE until a separate Product Owner decision is recorded.
+
+**Dependencies**
+* `MS-007.4 - Session Close Package Freshness Guard`
+
+**Allowed Implementation Scope**
+* docs-only result review publication
+* SSOT verification and result-summary wording
+* publication metadata for the milestone
+
+**Forbidden Scope**
+* application code
+* API routes
+* provider/model wiring
+* persistence
+* UI redesign
+* unrelated refactors
+* expanding beyond the approved result review boundary
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* `docs/session-handoffs/*` stays outside this milestone unless the session is being closed
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* SSOT consistency review across `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`
+
+**Rollback / Safety Expectations**
+* stop if the result review requires application code or any broader follow-up
+* keep the milestone narrow and docs-only
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-006.4 - New Task Handoff To Codex Foundation
 
