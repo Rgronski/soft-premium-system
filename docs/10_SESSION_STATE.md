@@ -216,8 +216,8 @@ Current Chat Title: 055 SPS OS - MS-007.3 New Task Flow Final Pilot Foundation
 Next Session ID: 056
 Suggested Next Chat Title: 056 SPS OS - New Task Flow Result Review
 Active Capability: NONE
-Active Work Item: Session 055 MS-007.3 publication finalization
-Current Mode: CODEX DOCUMENTATION UPDATE
+Active Work Item: Session 055 close protocol
+Current Mode: CODEX SESSION CLOSE
 Completed Capability Items: Session 055 verified real repo status; Session 055 published MS-007.0; Session 055 ran the real new-task pilot; Session 055 resolved the project persistence blocker; Session 055 published MS-007.1; Session 055 fixed the task workspace link route; Session 055 published MS-007.2; Session 055 ran the final new-task pilot; Session 055 published MS-007.3; Session 055 synchronized SSOT; Session 055 recorded usage entry
 Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-007.3 - New Task Flow Final Pilot Foundation
@@ -233,4 +233,4 @@ Latest Verified Commit: 71a69f2
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Prepare the next session bootstrap or the next approved milestone.
+Next Safe Step: Approve and commit the current close patch, then rerun the Session Package Generator.
