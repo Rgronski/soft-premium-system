@@ -65,6 +65,9 @@ describe("ProjectTaskDetailPage", () => {
     expect(screen.getByText("Task Workspace")).toBeTruthy();
     expect(screen.getByText("Start task workspace")).toBeTruthy();
     expect(screen.getByText("Open task workspace")).toBeTruthy();
+    expect(
+      screen.getByRole("link", { name: "Open task workspace" }).getAttribute("href"),
+    ).toBe("/projects/project-1/tasks/task-1/workspace");
     expect(screen.getByText("task-1")).toBeTruthy();
     expect(screen.getByText("project-1")).toBeTruthy();
     expect(screen.getByText(expectedCreatedAt)).toBeTruthy();

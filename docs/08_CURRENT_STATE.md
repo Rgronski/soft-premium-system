@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-007.1 - Project Creation Server Persistence Foundation
+MS-007.2 - Task Workspace Link Route Foundation
 
 **Next Milestone**
 NONE
@@ -64,7 +64,7 @@ MS-007.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED and now PASS / unblocked i
 
 MS-007.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Creation Server Persistence Foundation; the repository now persists project creation through the server-side Project Brain/state boundary used by task APIs, so a freshly created project can immediately accept tasks.
 
-Follow-up only: the task detail `Open task workspace` link still resolves to the workspace route without the task id, while the direct `/projects/[id]/tasks/[taskId]/workspace` route works; this is a minor quirk to track, not a blocker.
+MS-007.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Link Route Foundation; the task detail `Open task workspace` link now preserves both `projectId` and `taskId` and routes directly to the task workspace surface.
 
 MS-002.s is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Completion Handoff Text Foundation; the task workspace route now shows a local handoff text block after completion.
 MS-002.t is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Chat, Prompts, and Agents Foundation; the AI Workspace now owns the starter prompt catalog in the engine boundary.
@@ -126,7 +126,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-006.4 - New Task Handoff To Codex Foundation
+Latest Completed Product Milestone: MS-007.2 - Task Workspace Link Route Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -1283,7 +1283,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-007.1 - Project Creation Server Persistence Foundation`
+* `Latest Completed Product Milestone` is `MS-007.2 - Task Workspace Link Route Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

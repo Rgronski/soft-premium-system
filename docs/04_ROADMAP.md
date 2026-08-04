@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-007.1 - Project Creation Server Persistence Foundation
+MS-007.2 - Task Workspace Link Route Foundation
 
 ## Next
 
@@ -258,6 +258,63 @@ The repository now persists newly created projects through the server-side proje
 * `docs/04_ROADMAP.md` owns the milestone contract
 * `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
 * Project Brain remains the shared server-side state boundary used by task APIs
+
+## MS-007.2 - Task Workspace Link Route Foundation
+
+**Milestone**
+MS-007.2 - Task Workspace Link Route Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Fix the task detail workspace link so it preserves both `projectId` and `taskId` when opening the task workspace.
+
+**Product Outcome**
+The task detail `Open task workspace` link now routes directly to `/projects/[id]/tasks/[taskId]/workspace` and keeps the task workspace route intact.
+
+**Dependencies**
+* `MS-007.1 - Project Creation Server Persistence Foundation`
+* `src/app/projects/[id]/tasks/[taskId]/page.tsx`
+* `src/app/projects/[id]/tasks/[taskId]/page.test.tsx`
+
+**Allowed Implementation Scope**
+* task detail workspace link route
+* targeted test coverage for the link href
+* publication metadata for the milestone
+
+**Forbidden Scope**
+* broad route refactor
+* UI redesign
+* storage changes
+* unrelated test cleanup
+* unrelated refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* task workspace content remains owned by the existing workspace route
 
 **Verification Plan**
 * targeted project and task creation tests

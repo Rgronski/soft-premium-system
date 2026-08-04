@@ -107,7 +107,7 @@ export default function ProjectTaskDetailPage() {
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
           <div className="mb-4">
             <Link
-              href="./workspace"
+              href={`/projects/${projectId}/tasks/${taskId}/workspace`}
               className="inline-flex items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
             >
               Open task workspace

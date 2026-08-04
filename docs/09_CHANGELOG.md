@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 055 - MS-007.2 task workspace link route foundation publication
+
+### Date
+
+2026-08-03
+
+### Completed
+
+* Published `MS-007.2 - Task Workspace Link Route Foundation` to fix the task detail `Open task workspace` link so it preserves both `projectId` and `taskId`.
+* Verified the task detail link now routes directly to `/projects/[id]/tasks/[taskId]/workspace`, while the workspace route itself remains unchanged.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT records `MS-007.2` as the latest completed milestone.
+* Recorded the Session 055 usage entry for the MS-007.2 publication task in `.usage/session.jsonl`.
+
+### Notes
+
+* No broad route refactor, UI redesign, or storage change was introduced.
+
 ## Session 055 - MS-007.1 project creation server persistence foundation publication
 
 ### Date
