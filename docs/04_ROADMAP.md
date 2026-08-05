@@ -111,11 +111,88 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.1 - Task Workspace Evidence Review Action Foundation
+MS-008.2 - Task Workspace Evidence Review Completion Summary Foundation
 
 ## Next
 
 NONE
+
+## MS-008.2 - Task Workspace Evidence Review Completion Summary Foundation
+
+**Milestone**
+MS-008.2 - Task Workspace Evidence Review Completion Summary Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Make the acknowledged evidence review outcome visible in the task workspace completion summary and final task outcome while keeping the behavior local to task workspace and tied only to existing local review state.
+
+**Product Outcome**
+The task workspace completion summary now reflects the local evidence review acknowledgement state, and the final task outcome shows the acknowledged review alongside the saved result notes.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now keeps the acknowledged review state visible through completion and shows it in the completion summary and task completion handoff.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now covers the acknowledged review state in the completion summary and confirms it clears again when the result changes.
+* no persistence, project overview, AI workspace, routing, or broader handoff flow changed.
+
+**Dependencies**
+* `MS-008.1 - Task Workspace Evidence Review Action Foundation`
+
+**Allowed Implementation Scope**
+* completion summary visibility for the acknowledged evidence review state
+* final task outcome visibility for the acknowledged evidence review state
+* focused task workspace test coverage
+* SSOT verification and publication metadata
+
+**Forbidden Scope**
+* persistence work
+* project overview changes
+* AI workspace changes
+* routing changes
+* unrelated refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* product implementation stays outside this contract
+
+**Verification Plan**
+* `npm.cmd test -- src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* `git diff --check`
+* SSOT consistency review across `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`
+* confirm no unrelated files were changed
+
+**Rollback / Safety Expectations**
+* stop if the completion summary needs broader workspace refactoring
+* keep the milestone minimal and local to the task workspace evidence surface
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-008.1 - Task Workspace Evidence Review Action Foundation
 

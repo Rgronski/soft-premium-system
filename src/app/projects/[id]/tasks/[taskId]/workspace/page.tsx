@@ -103,7 +103,6 @@ export default function ProjectTaskWorkspacePage() {
 
     setTaskCompletionState("completed");
     setTaskCompletionReportCopyState("idle");
-    setTaskEvidenceReviewState("idle");
   }
 
   function handleAcknowledgeEvidenceReview() {
@@ -268,6 +267,7 @@ export default function ProjectTaskWorkspacePage() {
                 setResultSaveState("idle");
                 setTaskCompletionState("idle");
                 setTaskCompletionReportCopyState("idle");
+                setTaskEvidenceReviewState("idle");
               }}
             />
             <div className="mt-3 flex items-center gap-3">
@@ -306,6 +306,11 @@ export default function ProjectTaskWorkspacePage() {
                 <p className="mt-2 text-sm text-zinc-300">
                   Saved result notes: {resultNotes}
                 </p>
+                {taskEvidenceReviewState === "acknowledged" ? (
+                  <p className="mt-2 text-sm text-zinc-300">
+                    Evidence review acknowledged locally.
+                  </p>
+                ) : null}
                 <div className="mt-3 rounded-xl border border-zinc-800 bg-zinc-900 p-4">
                   <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
                     Task completion handoff
@@ -313,7 +318,7 @@ export default function ProjectTaskWorkspacePage() {
                   <p className="mt-2 whitespace-pre-wrap rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-300">
                     {`Task completion handoff
 Task completed locally.
-Saved result notes: ${resultNotes}`}
+Saved result notes: ${resultNotes}${taskEvidenceReviewState === "acknowledged" ? "\nEvidence review acknowledged locally." : ""}`}
                   </p>
                 </div>
                 <div className="mt-3 flex items-center gap-3">

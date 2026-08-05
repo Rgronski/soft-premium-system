@@ -179,9 +179,11 @@ describe("ProjectTaskWorkspacePage", () => {
     fireEvent.click(completeButton);
 
     expect(screen.getByText("Task completed locally.")).toBeTruthy();
-    expect(screen.getByText("Result evidence reviewed locally.")).toBeTruthy();
     expect(screen.getByText("Completion Summary")).toBeTruthy();
     expect(screen.getByText("Saved result notes: Finished the task locally.")).toBeTruthy();
+    expect(
+      screen.getAllByText("Evidence review acknowledged locally."),
+    ).toHaveLength(2);
     expect(screen.getByText("Task completion handoff")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Copy report" })).toBeTruthy();
 
@@ -203,6 +205,7 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.queryByText("Task completed locally.")).toBeNull();
     expect(screen.queryByText("Completion report copied.")).toBeNull();
     expect(screen.queryByText("Task completion handoff")).toBeNull();
+    expect(screen.queryAllByText("Evidence review acknowledged locally.")).toHaveLength(0);
     expect(screen.getByText("Awaiting result evidence.")).toBeTruthy();
     expect(
       (screen.getByRole("button", { name: "Acknowledge review" }) as HTMLButtonElement)

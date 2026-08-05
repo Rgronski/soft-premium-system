@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-008.1 - Task Workspace Evidence Review Action Foundation
+MS-008.2 - Task Workspace Evidence Review Completion Summary Foundation
 
 **Next Milestone**
 NONE
@@ -77,6 +77,8 @@ MS-007.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 MS-008.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Evidence Visibility Foundation; the task workspace now shows a visible Evidence Review panel tied to local result notes and completion state while keeping the rest of the task flow unchanged.
 
 MS-008.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Evidence Review Action Foundation; the task workspace now exposes a local `Acknowledge review` action in the Evidence Review panel and keeps the action tied to local result notes and completion state only.
+
+MS-008.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Evidence Review Completion Summary Foundation; the task workspace completion summary now reflects the acknowledged evidence review state and carries it into the final task outcome while keeping the behavior local.
 
 MS-002.s is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Completion Handoff Text Foundation; the task workspace route now shows a local handoff text block after completion.
 MS-002.t is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Chat, Prompts, and Agents Foundation; the AI Workspace now owns the starter prompt catalog in the engine boundary.

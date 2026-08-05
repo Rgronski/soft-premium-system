@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 056 - MS-008.2 task workspace evidence review completion summary foundation publication
+
+### Date
+
+2026-08-05
+
+### Completed
+
+* Published `MS-008.2 - Task Workspace Evidence Review Completion Summary Foundation` as the smallest completion-summary visibility step for the acknowledged evidence review outcome.
+* Made the acknowledged evidence review state visible in the task workspace completion summary and final task outcome while keeping the behavior local to the task workspace.
+* Verified the focused task workspace test, synchronized the SSOT snapshot, and kept unrelated project, AI, and routing surfaces unchanged.
+
+### Notes
+
+* No persistence work, project overview changes, AI workspace changes, routing changes, or broad handoff redesign was introduced.
+
 ## Session 056 - MS-008.1 task workspace evidence review action foundation publication
 
 ### Date
