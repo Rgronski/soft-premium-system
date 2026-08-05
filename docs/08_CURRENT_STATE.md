@@ -140,7 +140,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-007.6 - New Task Flow Result Evidence Contract Foundation
+Latest Completed Product Milestone: MS-008.2 - Task Workspace Evidence Review Completion Summary Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -1297,7 +1297,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-007.6 - New Task Flow Result Evidence Contract Foundation`
+* `Latest Completed Product Milestone` is `MS-008.2 - Task Workspace Evidence Review Completion Summary Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
