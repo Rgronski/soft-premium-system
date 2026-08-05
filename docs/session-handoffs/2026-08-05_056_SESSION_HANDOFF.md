@@ -24,10 +24,10 @@ Next Work Item: Open a new chat, attach `sps-session.zip`, and paste the START p
 
 Repository State:
 Repository Branch: main
-Repository Working Tree State: DIRTY
+Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: 72b3417
-Push Status: Pending final close commit and package generation.
+Push Status: Published on origin/main
 
 Milestone State:
 Current Product Milestone: NONE
