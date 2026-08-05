@@ -37,6 +37,7 @@ type TaskWorkspaceState = {
 type TaskResultSaveState = "idle" | "saved";
 type TaskCompletionState = "idle" | "completed";
 type TaskCompletionReportCopyState = "idle" | "copied";
+type TaskEvidenceReviewState = "idle" | "acknowledged";
 
 export default function ProjectTaskWorkspacePage() {
   const params = useParams<{ id: string; taskId: string }>();
@@ -52,6 +53,8 @@ export default function ProjectTaskWorkspacePage() {
     useState<TaskCompletionState>("idle");
   const [taskCompletionReportCopyState, setTaskCompletionReportCopyState] =
     useState<TaskCompletionReportCopyState>("idle");
+  const [taskEvidenceReviewState, setTaskEvidenceReviewState] =
+    useState<TaskEvidenceReviewState>("idle");
 
   const projectId = params.id;
   const taskId = params.taskId;
@@ -72,11 +75,15 @@ export default function ProjectTaskWorkspacePage() {
   const repositoryUrl = workspaceEntry?.workspace.overview.project.repositoryUrl;
   const isResultNotesEmpty = resultNotes.trim().length === 0;
   const evidenceReviewStatus =
-    taskCompletionState === "completed"
+    taskEvidenceReviewState === "acknowledged"
+      ? "Evidence review acknowledged locally."
+      : taskCompletionState === "completed"
       ? "Result evidence reviewed locally."
       : resultSaveState === "saved"
         ? "Result evidence saved locally."
         : "Awaiting result evidence.";
+
+  const canAcknowledgeEvidenceReview = resultSaveState === "saved";
 
   function handleSaveResult() {
     if (isResultNotesEmpty) {
@@ -86,6 +93,7 @@ export default function ProjectTaskWorkspacePage() {
     setResultSaveState("saved");
     setTaskCompletionState("idle");
     setTaskCompletionReportCopyState("idle");
+    setTaskEvidenceReviewState("idle");
   }
 
   function handleCompleteTask() {
@@ -95,6 +103,15 @@ export default function ProjectTaskWorkspacePage() {
 
     setTaskCompletionState("completed");
     setTaskCompletionReportCopyState("idle");
+    setTaskEvidenceReviewState("idle");
+  }
+
+  function handleAcknowledgeEvidenceReview() {
+    if (!canAcknowledgeEvidenceReview) {
+      return;
+    }
+
+    setTaskEvidenceReviewState("acknowledged");
   }
 
   async function handleCopyCompletionReport() {
@@ -229,6 +246,14 @@ export default function ProjectTaskWorkspacePage() {
               <p className="mt-2 text-sm text-zinc-300">
                 Review source: local result notes and completion state.
               </p>
+              <button
+                type="button"
+                className="mt-3 inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800 disabled:cursor-not-allowed disabled:border-zinc-800 disabled:text-zinc-600"
+                disabled={!canAcknowledgeEvidenceReview}
+                onClick={handleAcknowledgeEvidenceReview}
+              >
+                Acknowledge review
+              </button>
             </div>
             <label className="mt-3 block text-sm text-zinc-300" htmlFor="task-result-notes">
               Result notes

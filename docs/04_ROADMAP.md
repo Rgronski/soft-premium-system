@@ -111,11 +111,89 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.0 - Task Workspace Evidence Visibility Foundation
+MS-008.1 - Task Workspace Evidence Review Action Foundation
 
 ## Next
 
 NONE
+
+## MS-008.1 - Task Workspace Evidence Review Action Foundation
+
+**Milestone**
+MS-008.1 - Task Workspace Evidence Review Action Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Add the smallest explicit task workspace evidence review action directly inside the visible Evidence Review panel while keeping the action local to the task workspace and tied only to existing local result and completion state.
+
+**Product Outcome**
+The task workspace now exposes an `Acknowledge review` action in the Evidence Review panel, and the visible review state updates locally without changing persistence or unrelated task flows.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now renders the `Acknowledge review` action inside the Evidence Review panel.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now keeps the review action local to task workspace state and resets it when the underlying result changes.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now covers the disabled initial action, the visible acknowledgement state, and the reset behavior after result edits.
+* no persistence, project overview, AI workspace, or unrelated task flow behavior changed.
+
+**Dependencies**
+* `MS-008.0 - Task Workspace Evidence Visibility Foundation`
+
+**Allowed Implementation Scope**
+* one explicit local evidence review action in task workspace
+* local review acknowledgement state only
+* focused task workspace test coverage
+* SSOT verification and publication metadata
+
+**Forbidden Scope**
+* persistence work
+* project overview changes
+* AI workspace changes
+* broader task flow redesign
+* unrelated refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* product implementation stays outside this contract
+
+**Verification Plan**
+* `npm.cmd test -- src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* `git diff --check`
+* SSOT consistency review across `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`
+* confirm no unrelated files were changed
+
+**Rollback / Safety Expectations**
+* stop if the review action requires broader workspace refactoring
+* keep the milestone minimal and local to the task workspace evidence surface
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-008.0 - Task Workspace Evidence Visibility Foundation
 

@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 056 - MS-008.1 task workspace evidence review action foundation publication
+
+### Date
+
+2026-08-05
+
+### Completed
+
+* Published `MS-008.1 - Task Workspace Evidence Review Action Foundation` as the smallest explicit review action inside the task workspace evidence panel.
+* Added the `Acknowledge review` action and kept it local to the task workspace while tying the visible review state to existing result and completion state.
+* Verified the focused task workspace test, synchronized the SSOT snapshot, and kept unrelated project and task surfaces unchanged.
+
+### Notes
+
+* No persistence work, project overview changes, AI workspace changes, or broad task flow redesign was introduced.
+
 ## Session 056 - MS-008.0 task workspace evidence visibility foundation publication
 
 ### Date

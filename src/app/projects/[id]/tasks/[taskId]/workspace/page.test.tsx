@@ -122,6 +122,10 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("Capture the current task result locally for now.")).toBeTruthy();
     expect(screen.getByText("Evidence Review")).toBeTruthy();
     expect(screen.getByText("Awaiting result evidence.")).toBeTruthy();
+    const initialAcknowledgeReviewButton = screen.getByRole("button", {
+      name: "Acknowledge review",
+    }) as HTMLButtonElement;
+    expect(initialAcknowledgeReviewButton.disabled).toBe(true);
     expect(screen.getByLabelText("Result notes")).toBeTruthy();
     expect(screen.queryByText("Task completion handoff")).toBeNull();
     expect(screen.queryByText("Completion Summary")).toBeNull();
@@ -158,6 +162,14 @@ describe("ProjectTaskWorkspacePage", () => {
 
     expect(screen.getByText("Result saved locally.")).toBeTruthy();
     expect(screen.getByText("Result evidence saved locally.")).toBeTruthy();
+    const acknowledgeReviewButton = screen.getByRole("button", {
+      name: "Acknowledge review",
+    }) as HTMLButtonElement;
+    expect(acknowledgeReviewButton.disabled).toBe(false);
+
+    fireEvent.click(acknowledgeReviewButton);
+
+    expect(screen.getByText("Evidence review acknowledged locally.")).toBeTruthy();
 
     const completeButton = screen.getByRole("button", {
       name: "Complete task",
@@ -192,6 +204,10 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.queryByText("Completion report copied.")).toBeNull();
     expect(screen.queryByText("Task completion handoff")).toBeNull();
     expect(screen.getByText("Awaiting result evidence.")).toBeTruthy();
+    expect(
+      (screen.getByRole("button", { name: "Acknowledge review" }) as HTMLButtonElement)
+        .disabled,
+    ).toBe(true);
     expect(
       (screen.getByRole("button", { name: "Complete task" }) as HTMLButtonElement)
         .disabled,

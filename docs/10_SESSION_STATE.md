@@ -216,16 +216,16 @@ Current Chat Title: 056 SPS OS - New Task Flow Result Review
 Next Session ID: 057
 Suggested Next Chat Title: UNKNOWN
 Active Capability: NONE
-Active Work Item: MS-008.0 task workspace evidence visibility publication
+Active Work Item: MS-008.1 task workspace evidence review action publication
 Current Mode: CODEX IMPLEMENTATION
-Completed Capability Items: Session 055 verified real repo status; Session 055 published MS-007.0; Session 055 ran the real new-task pilot; Session 055 resolved the project persistence blocker; Session 055 published MS-007.1; Session 055 fixed the task workspace link route; Session 055 published MS-007.2; Session 055 ran the final new-task pilot; Session 055 published MS-007.3; Session 055 refreshed close SSOT for package generation; Session 055 published MS-007.4; Session 055 regenerated the fresh package after the final close push; Session 055 synchronized SSOT; Session 055 recorded usage entry; Session 056 published MS-007.5; Session 056 published MS-007.6; Session 056 published MS-008.0; Session 056 synchronized SSOT; Session 056 recorded usage entry
+Completed Capability Items: Session 055 verified real repo status; Session 055 published MS-007.0; Session 055 ran the real new-task pilot; Session 055 resolved the project persistence blocker; Session 055 published MS-007.1; Session 055 fixed the task workspace link route; Session 055 published MS-007.2; Session 055 ran the final new-task pilot; Session 055 published MS-007.3; Session 055 refreshed close SSOT for package generation; Session 055 published MS-007.4; Session 055 regenerated the fresh package after the final close push; Session 055 synchronized SSOT; Session 055 recorded usage entry; Session 056 published MS-007.5; Session 056 published MS-007.6; Session 056 published MS-008.0; Session 056 published MS-008.1; Session 056 synchronized SSOT; Session 056 recorded usage entry
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-008.0 - Task Workspace Evidence Visibility Foundation
+Latest Completed Product Milestone: MS-008.1 - Task Workspace Evidence Review Action Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 056 published MS-008.0
+Latest Completed Capability Item: Session 056 published MS-008.1
 Current Sprint: NONE
-Platform Priority: Prepare the next approved milestone after the task workspace evidence visibility foundation.
+Platform Priority: Prepare the next approved milestone after the task workspace evidence review action foundation.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
