@@ -71,6 +71,12 @@ export default function ProjectTaskWorkspacePage() {
   const taskWorkspace = useMemo(() => state.task, [state.task]);
   const repositoryUrl = workspaceEntry?.workspace.overview.project.repositoryUrl;
   const isResultNotesEmpty = resultNotes.trim().length === 0;
+  const evidenceReviewStatus =
+    taskCompletionState === "completed"
+      ? "Result evidence reviewed locally."
+      : resultSaveState === "saved"
+        ? "Result evidence saved locally."
+        : "Awaiting result evidence.";
 
   function handleSaveResult() {
     if (isResultNotesEmpty) {
@@ -213,6 +219,17 @@ export default function ProjectTaskWorkspacePage() {
             <p className="mt-2 text-sm text-zinc-400">
               Capture the current task result locally for now.
             </p>
+            <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                Evidence Review
+              </p>
+              <p className="mt-2 text-sm text-zinc-400" aria-live="polite">
+                {evidenceReviewStatus}
+              </p>
+              <p className="mt-2 text-sm text-zinc-300">
+                Review source: local result notes and completion state.
+              </p>
+            </div>
             <label className="mt-3 block text-sm text-zinc-300" htmlFor="task-result-notes">
               Result notes
             </label>

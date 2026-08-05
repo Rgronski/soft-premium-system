@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-007.6 - New Task Flow Result Evidence Contract Foundation
+MS-008.0 - Task Workspace Evidence Visibility Foundation
 
 **Next Milestone**
 NONE
@@ -73,6 +73,8 @@ MS-007.4 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 MS-007.5 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the New Task Flow Result Review Foundation; the repository now records the reviewed New Task Flow outcome as a docs-only milestone and keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-007.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the New Task Flow Result Evidence Contract Foundation; the repository now records the exact evidence contract for the reviewed New Task Flow result as a docs-only milestone and keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-008.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Evidence Visibility Foundation; the task workspace now shows a visible Evidence Review panel tied to local result notes and completion state while keeping the rest of the task flow unchanged.
 
 MS-002.s is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Completion Handoff Text Foundation; the task workspace route now shows a local handoff text block after completion.
 MS-002.t is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Chat, Prompts, and Agents Foundation; the AI Workspace now owns the starter prompt catalog in the engine boundary.

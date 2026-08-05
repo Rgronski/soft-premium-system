@@ -120,6 +120,8 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByRole("link", { name: "Handoff to Codex" })).toBeTruthy();
     expect(screen.getByText("Task Result")).toBeTruthy();
     expect(screen.getByText("Capture the current task result locally for now.")).toBeTruthy();
+    expect(screen.getByText("Evidence Review")).toBeTruthy();
+    expect(screen.getByText("Awaiting result evidence.")).toBeTruthy();
     expect(screen.getByLabelText("Result notes")).toBeTruthy();
     expect(screen.queryByText("Task completion handoff")).toBeNull();
     expect(screen.queryByText("Completion Summary")).toBeNull();
@@ -155,6 +157,7 @@ describe("ProjectTaskWorkspacePage", () => {
     fireEvent.click(saveButton);
 
     expect(screen.getByText("Result saved locally.")).toBeTruthy();
+    expect(screen.getByText("Result evidence saved locally.")).toBeTruthy();
 
     const completeButton = screen.getByRole("button", {
       name: "Complete task",
@@ -164,6 +167,7 @@ describe("ProjectTaskWorkspacePage", () => {
     fireEvent.click(completeButton);
 
     expect(screen.getByText("Task completed locally.")).toBeTruthy();
+    expect(screen.getByText("Result evidence reviewed locally.")).toBeTruthy();
     expect(screen.getByText("Completion Summary")).toBeTruthy();
     expect(screen.getByText("Saved result notes: Finished the task locally.")).toBeTruthy();
     expect(screen.getByText("Task completion handoff")).toBeTruthy();
@@ -187,6 +191,7 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.queryByText("Task completed locally.")).toBeNull();
     expect(screen.queryByText("Completion report copied.")).toBeNull();
     expect(screen.queryByText("Task completion handoff")).toBeNull();
+    expect(screen.getByText("Awaiting result evidence.")).toBeTruthy();
     expect(
       (screen.getByRole("button", { name: "Complete task" }) as HTMLButtonElement)
         .disabled,

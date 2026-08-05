@@ -111,11 +111,88 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-007.6 - New Task Flow Result Evidence Contract Foundation
+MS-008.0 - Task Workspace Evidence Visibility Foundation
 
 ## Next
 
 NONE
+
+## MS-008.0 - Task Workspace Evidence Visibility Foundation
+
+**Milestone**
+MS-008.0 - Task Workspace Evidence Visibility Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Product Owner
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Make task workspace evidence and review visible at the point where task work happens without widening the new-task flow or changing unrelated project surfaces.
+
+**Product Outcome**
+The task workspace now shows a visible Evidence Review panel tied to local result notes and completion state, while preserving repository context, handoff, result capture, save, completion, and completion-summary behavior.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now renders the Evidence Review panel from local result and completion state.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now covers the visible evidence status before save, after save, after completion, and after edits reset the status.
+* no unrelated task flow, project flow, or handoff behavior changed.
+
+**Dependencies**
+* `MS-007.6 - New Task Flow Result Evidence Contract Foundation`
+
+**Allowed Implementation Scope**
+* visible task workspace evidence/review foundation
+* local result-state and completion-state presentation
+* focused task workspace test coverage
+* SSOT verification and publication metadata
+
+**Forbidden Scope**
+* unrelated task flow changes
+* project workspace redesign
+* repository-context redesign
+* broader completion-flow changes
+* unrelated refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* product implementation stays outside this contract
+
+**Verification Plan**
+* `npm.cmd test -- src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* `git diff --check`
+* SSOT consistency review across `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`
+* confirm no unrelated files were changed
+
+**Rollback / Safety Expectations**
+* stop if evidence visibility requires broader workspace refactoring
+* keep the milestone minimal and local to the task workspace evidence surface
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-007.0 - New Task Pilot Execution Foundation
 

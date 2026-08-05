@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 056 - MS-008.0 task workspace evidence visibility foundation publication
+
+### Date
+
+2026-08-05
+
+### Completed
+
+* Published `MS-008.0 - Task Workspace Evidence Visibility Foundation` as the smallest visible task workspace foundation for evidence and review.
+* Added the Evidence Review panel to the task workspace so the visible review state follows local result notes and completion state without widening the existing task flow.
+* Verified the focused task workspace test, synchronized the SSOT snapshot, and kept unrelated project and task surfaces unchanged.
+
+### Notes
+
+* No unrelated refactor, broad UI redesign, or extra task flow expansion was introduced.
+
 ## Session 056 - MS-007.6 new task flow result evidence contract foundation publication
 
 ### Date
