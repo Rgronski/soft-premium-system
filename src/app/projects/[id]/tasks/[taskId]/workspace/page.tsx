@@ -39,6 +39,20 @@ type TaskCompletionState = "idle" | "completed";
 type TaskCompletionReportCopyState = "idle" | "copied";
 type TaskEvidenceReviewState = "idle" | "acknowledged";
 
+function getTaskResultNotesStorageKey(projectId: string, taskId: string) {
+  return `soft-premium-system.projects.${projectId}.tasks.${taskId}.workspace.result-notes`;
+}
+
+function readSavedTaskResultNotes(projectId: string, taskId: string) {
+  if (typeof window === "undefined") {
+    return "";
+  }
+
+  return (
+    localStorage.getItem(getTaskResultNotesStorageKey(projectId, taskId)) ?? ""
+  );
+}
+
 export default function ProjectTaskWorkspacePage() {
   const params = useParams<{ id: string; taskId: string }>();
   const [state, setState] = useState<TaskWorkspaceState>({
@@ -90,6 +104,10 @@ export default function ProjectTaskWorkspacePage() {
       return;
     }
 
+    localStorage.setItem(
+      getTaskResultNotesStorageKey(projectId, taskId),
+      resultNotes,
+    );
     setResultSaveState("saved");
     setTaskCompletionState("idle");
     setTaskCompletionReportCopyState("idle");
@@ -168,6 +186,14 @@ export default function ProjectTaskWorkspacePage() {
     return () => {
       ignore = true;
     };
+  }, [projectId, taskId]);
+
+  useEffect(() => {
+    setResultNotes(readSavedTaskResultNotes(projectId, taskId));
+    setResultSaveState("idle");
+    setTaskCompletionState("idle");
+    setTaskCompletionReportCopyState("idle");
+    setTaskEvidenceReviewState("idle");
   }, [projectId, taskId]);
 
   return (

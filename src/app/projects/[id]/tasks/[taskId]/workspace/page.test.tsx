@@ -39,10 +39,12 @@ vi.mock("@/lib/task/browser-server", () => ({
 }));
 
 import ProjectTaskWorkspacePage from "./page";
+import ProjectTaskDetailPage from "../page";
 
 describe("ProjectTaskWorkspacePage", () => {
   beforeEach(() => {
     useParamsMock.mockReturnValue({ id: "project-1", taskId: "task-1" });
+    localStorage.clear();
     writeTextMock.mockReset();
     writeTextMock.mockResolvedValue(undefined);
     Object.defineProperty(navigator, "clipboard", {
@@ -231,5 +233,59 @@ describe("ProjectTaskWorkspacePage", () => {
     await waitFor(() => {
       expect(screen.getByText("Task not found")).toBeTruthy();
     });
+  });
+
+  test("restores saved result notes and task context after leaving and returning through the task detail path", async () => {
+    const resultNotes = "Finished the task locally.";
+
+    const { unmount } = render(<ProjectTaskWorkspacePage />);
+
+    await waitFor(() => {
+      expect(getTasksFromServerMock).toHaveBeenCalledTimes(1);
+    });
+
+    fireEvent.change(screen.getByLabelText("Result notes"), {
+      target: { value: resultNotes },
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Save result" }));
+
+    expect(
+      localStorage.getItem(
+        "soft-premium-system.projects.project-1.tasks.task-1.workspace.result-notes",
+      ),
+    ).toBe(resultNotes);
+
+    unmount();
+
+    const detailRender = render(<ProjectTaskDetailPage />);
+
+    await waitFor(() => {
+      expect(screen.getByRole("link", { name: "Open task workspace" })).toBeTruthy();
+    });
+
+    expect(
+      screen.getByRole("link", { name: "Open task workspace" }).getAttribute("href"),
+    ).toBe("/projects/project-1/tasks/task-1/workspace");
+
+    detailRender.unmount();
+
+    render(<ProjectTaskWorkspacePage />);
+
+    await waitFor(() => {
+      expect(getTasksFromServerMock).toHaveBeenCalledTimes(3);
+    });
+
+    await waitFor(() => {
+      expect((screen.getByLabelText("Result notes") as HTMLTextAreaElement).value).toBe(
+        resultNotes,
+      );
+    });
+
+    expect(screen.getByText("First task")).toBeTruthy();
+    expect(screen.getByText("task-1")).toBeTruthy();
+    expect(screen.getByText("project-1")).toBeTruthy();
+    expect(screen.queryByText("Result saved locally.")).toBeNull();
+    expect(screen.queryByText("Task completed locally.")).toBeNull();
   });
 });

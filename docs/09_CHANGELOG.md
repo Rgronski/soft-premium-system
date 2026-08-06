@@ -69,6 +69,68 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 059 - MS-008.10 task workspace usable flow completion summary publication
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Published `MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation` as the minimal completion summary for the verified task/workspace evidence line.
+* Recorded that the workspace flow now supports entering task workspace, saving result notes, leaving and returning through the existing task detail navigation, and preserving task context plus saved notes.
+* Kept the completion summary aligned to the existing workspace test evidence rather than introducing new product behavior.
+
+### Notes
+
+* No route redesign, task creation changes, AI workspace changes, project flow redesign, or unrelated persistence-layer changes were introduced.
+
+## Session 059 - MS-008.9 task workspace return link usability evidence foundation publication
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Published `MS-008.9 - Task Workspace Return Link Usability Evidence Foundation` as the smallest follow-up usability evidence step that proves the same task context and saved result notes remain available when returning to the workspace through the existing task detail navigation path.
+* Strengthened the focused workspace verification so it saves notes, visits the task detail route, confirms the existing `Open task workspace` link, and then restores the same notes and task context after returning to the workspace.
+
+### Notes
+
+* No route redesign, task creation changes, AI workspace changes, project flow redesign, or unrelated persistence-layer changes were introduced.
+
+## Session 059 - MS-008.8 task workspace result notes revisit evidence foundation publication
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Published `MS-008.8 - Task Workspace Result Notes Revisit Evidence Foundation` as the smallest follow-up evidence step that proves saved task result notes remain available when returning to the same task workspace through the existing task detail navigation path.
+* Extended the focused workspace verification so it saves notes, visits the task detail route, confirms the existing `Open task workspace` link, and then restores the same notes after returning to the workspace.
+
+### Notes
+
+* No route redesign, task creation changes, AI workspace changes, project flow redesign, or unrelated persistence-layer changes were introduced.
+
+## Session 059 - MS-008.7 task workspace result notes persistence foundation publication
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Published `MS-008.7 - Task Workspace Result Notes Persistence Foundation` as the smallest workspace persistence step that keeps saved task result notes available after reload or revisit without changing the rest of the task flow.
+* Added task-scoped local persistence for saved result notes in the task workspace and restored the notes when the workspace mounts for the same project/task pair.
+* Added focused workspace verification that proves the saved notes survive a revisit to the same task workspace.
+
+### Notes
+
+* No route redesign, task creation changes, AI workspace changes, project flow redesign, or unrelated persistence-layer changes were introduced.
+
 ## Session 058 - MS-008.6 next usable sps app state discovery foundation publication
 
 ### Date

@@ -45,10 +45,18 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-008.6 - Next Usable SPS App State Discovery Foundation
+MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation
 
 **Next Milestone**
 NONE
+
+MS-008.10 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Usable Flow Completion Summary Foundation; the repository now records the minimal completion summary for the workspace flow while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-008.9 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Return Link Usability Evidence Foundation; the repository now proves the same task context and saved result notes remain available when returning through the existing task detail navigation path while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-008.8 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Result Notes Revisit Evidence Foundation; the repository now proves saved task workspace result notes remain available when returning through the existing task detail navigation path while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-008.7 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Result Notes Persistence Foundation; the repository now restores saved task workspace result notes after reload or revisit while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-008.5 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project and Task Flow Reliability Foundation; the repository now keeps the latest completed milestone baseline stable while the next usable app state discovery remains documented separately.
 
@@ -146,7 +154,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-008.5 - Project and Task Flow Reliability Foundation
+Latest Completed Product Milestone: MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation
 Next Product Milestone: NONE
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
@@ -1304,7 +1312,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-008.5 - Project and Task Flow Reliability Foundation`
+* `Latest Completed Product Milestone` is `MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

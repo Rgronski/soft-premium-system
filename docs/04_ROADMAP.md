@@ -111,11 +111,280 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.5 - Project and Task Flow Reliability Foundation
+MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation
 
 ## Next
 
 NONE
+
+## MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation
+
+**Milestone**
+MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Close the current MS-008 usable task/workspace evidence line by recording a minimal completion summary that the flow now supports: entering task workspace, saving result notes, leaving/returning, and preserving task context and saved notes.
+
+**Product Outcome**
+The repository now records the usable task/workspace flow completion summary and keeps the verified result-notes persistence and return-link evidence aligned.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` already proves the workspace can save result notes, leave through the task detail route, return through the existing `Open task workspace` link, and preserve task context plus saved notes.
+* `git diff --check` and the targeted workspace test passed during verification.
+
+**Dependencies**
+* `MS-008.9 - Task Workspace Return Link Usability Evidence Foundation`
+
+**Allowed Implementation Scope**
+* completion-summary SSOT updates
+* focused workspace evidence alignment
+
+**Forbidden Scope**
+* route redesign
+* project flow redesign
+* task creation redesign
+* AI workspace changes
+* broad persistence layer changes
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md` and `docs/09_CHANGELOG.md` own the synchronized SSOT snapshot for this product milestone
+
+**Verification Plan**
+* `npx.cmd vitest run src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* `git diff --check`
+* `git status -sb`
+
+**Codex Implementation Handoff Boundary**
+
+## MS-008.9 - Task Workspace Return Link Usability Evidence Foundation
+
+**Milestone**
+MS-008.9 - Task Workspace Return Link Usability Evidence Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Prove the existing task/workspace flow remains usable after result-notes persistence: user can enter workspace, save result notes, return through existing task/project navigation, and re-enter workspace without losing task context or saved notes.
+
+**Product Outcome**
+The workspace return-link path now proves the same task context and saved result notes remain available after leaving and returning through the existing task detail navigation flow.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now proves the saved result notes and task context survive leaving the workspace, opening the task detail route, and returning through the existing `Open task workspace` link.
+* `git diff --check` and the targeted workspace test passed during verification.
+
+**Dependencies**
+* `MS-008.8 - Task Workspace Result Notes Revisit Evidence Foundation`
+
+**Allowed Implementation Scope**
+* return-link usability evidence for task workspace result notes
+* SSOT synchronization
+* focused workspace testing
+
+**Forbidden Scope**
+* route redesign
+* project flow redesign
+* task creation redesign
+* AI workspace changes
+* broad persistence layer changes
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` owns the return-link usability evidence
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md` and `docs/09_CHANGELOG.md` own the synchronized SSOT snapshot for this product milestone
+
+**Verification Plan**
+* `npx.cmd vitest run src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* `git diff --check`
+* `git status -sb`
+
+**Codex Implementation Handoff Boundary**
+
+## MS-008.8 - Task Workspace Result Notes Revisit Evidence Foundation
+
+**Milestone**
+MS-008.8 - Task Workspace Result Notes Revisit Evidence Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Verify and strengthen the existing usable task/workspace flow after MS-008.7 by proving saved result notes remain available when returning to the same task workspace from the existing project/task navigation path.
+
+**Product Outcome**
+The workspace revisit path now proves saved result notes remain available after leaving and returning through the existing task detail link flow.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now proves saved result notes survive leaving the workspace, opening the task detail route, and returning through the existing `Open task workspace` link.
+* `git diff --check` and the targeted workspace test passed during verification.
+
+**Dependencies**
+* `MS-008.7 - Task Workspace Result Notes Persistence Foundation`
+
+**Allowed Implementation Scope**
+* revisit evidence for task workspace result notes
+* SSOT synchronization
+* focused workspace testing
+
+**Forbidden Scope**
+* route redesign
+* project flow redesign
+* task creation redesign
+* AI workspace changes
+* broad persistence layer changes
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` owns the revisit evidence
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md` and `docs/09_CHANGELOG.md` own the synchronized SSOT snapshot for this product milestone
+
+**Verification Plan**
+* `npx.cmd vitest run src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* `git diff --check`
+* `git status -sb`
+
+**Codex Implementation Handoff Boundary**
+
+## MS-008.7 - Task Workspace Result Notes Persistence Foundation
+
+**Milestone**
+MS-008.7 - Task Workspace Result Notes Persistence Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Make saved task workspace result notes persist through the existing SPS project/task/workspace flow and survive page reload or revisit, while keeping the change local to the workspace and avoiding any broader task, project, or route redesign.
+
+**Product Outcome**
+The task workspace now restores saved result notes for the active project task after reload or revisit, and the visible workspace behavior otherwise stays the same.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now stores saved result notes under a task-scoped local persistence key and restores them when the workspace mounts.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies saved notes survive a revisit to the same task workspace.
+* `git diff --check` and the targeted workspace test passed during verification.
+
+**Dependencies**
+* `MS-008.6 - Next Usable SPS App State Discovery Foundation`
+
+**Allowed Implementation Scope**
+* task workspace result notes persistence
+* SSOT synchronization
+* focused workspace testing
+
+**Forbidden Scope**
+* route redesign
+* project flow redesign
+* task creation redesign
+* AI workspace changes
+* broad persistence layer changes
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` owns the task workspace result notes persistence behavior
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` owns the focused revisit verification
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md` and `docs/09_CHANGELOG.md` own the synchronized SSOT snapshot for this product milestone
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* `npx.cmd vitest run src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* confirm no unrelated files were changed
+
+**Codex Implementation Handoff Boundary**
 
 ## MS-008.6 - Next Usable SPS App State Discovery Foundation
 
@@ -154,7 +423,7 @@ The repository now records the next smallest application-state discovery boundar
 
 **Implementation Evidence**
 * `docs/04_ROADMAP.md` now records the MS-008.6 discovery contract while preserving the MS-008.5 latest completed milestone baseline.
-* `docs/08_CURRENT_STATE.md` keeps `Latest Completed Product Milestone` at `MS-008.5 - Project and Task Flow Reliability Foundation`.
+* `docs/08_CURRENT_STATE.md` keeps `Latest Completed Product Milestone` at `MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation`.
 * `docs/09_CHANGELOG.md` now records the published discovery milestone in the official history.
 * no application code, UI, route, persistence, or product behavior changed.
 
