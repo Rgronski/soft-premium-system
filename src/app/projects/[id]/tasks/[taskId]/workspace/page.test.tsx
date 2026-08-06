@@ -122,6 +122,11 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("Capture the current task result locally for now.")).toBeTruthy();
     expect(screen.getByText("Evidence Review")).toBeTruthy();
     expect(screen.getByText("Awaiting result evidence.")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Sequence: save the result, acknowledge the review, then complete the task.",
+      ),
+    ).toBeTruthy();
     const initialAcknowledgeReviewButton = screen.getByRole("button", {
       name: "Acknowledge review",
     }) as HTMLButtonElement;
