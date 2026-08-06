@@ -30,7 +30,7 @@ Push Status: Published on origin/main
 
 Milestone State:
 Current Product Milestone: NONE
-Latest Completed Milestone: MS-008.6 - Next Usable SPS App State Discovery Foundation
+Latest Completed Milestone: MS-008.5 - Project and Task Flow Reliability Foundation
 
 Verification:
 Verification Status: PASS

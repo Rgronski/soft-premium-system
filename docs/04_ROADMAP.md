@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.6 - Next Usable SPS App State Discovery Foundation
+MS-008.5 - Project and Task Flow Reliability Foundation
 
 ## Next
 
@@ -153,8 +153,8 @@ Decide and record the smallest next application milestone needed to make the SPS
 The repository now records the next smallest application-state discovery boundary for the task/workspace flow, and the live product behavior remains unchanged.
 
 **Implementation Evidence**
-* `docs/04_ROADMAP.md` now records the MS-008.6 discovery contract as the latest completed milestone.
-* `docs/08_CURRENT_STATE.md` now reflects MS-008.6 as the latest completed milestone while keeping `Current Product Milestone` at `NONE`.
+* `docs/04_ROADMAP.md` now records the MS-008.6 discovery contract while preserving the MS-008.5 latest completed milestone baseline.
+* `docs/08_CURRENT_STATE.md` keeps `Latest Completed Product Milestone` at `MS-008.5 - Project and Task Flow Reliability Foundation`.
 * `docs/09_CHANGELOG.md` now records the published discovery milestone in the official history.
 * no application code, UI, route, persistence, or product behavior changed.
 
