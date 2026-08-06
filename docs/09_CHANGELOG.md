@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 058 - MS-008.6 next usable sps app state discovery foundation publication
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Published `MS-008.6 - Next Usable SPS App State Discovery Foundation` as a docs-only milestone that records the next smallest application milestone candidate after `MS-008.5` without changing UI or product behavior.
+* Updated the roadmap and current-state SSOT so the repository records the completed discovery boundary and keeps `Current Product Milestone` at `NONE`.
+* Kept the change limited to docs-only product discovery with no application code, UI, route, persistence, or provider/model changes.
+
+### Notes
+
+* No application code, UI, route, persistence, or product behavior changes were introduced.
+
 ## Session 057 - MS-008.5 project and task flow reliability foundation publication
 
 ### Date

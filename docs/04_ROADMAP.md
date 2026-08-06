@@ -111,11 +111,94 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.5 - Project and Task Flow Reliability Foundation
+MS-008.6 - Next Usable SPS App State Discovery Foundation
 
 ## Next
 
 NONE
+
+## MS-008.6 - Next Usable SPS App State Discovery Foundation
+
+**Milestone**
+MS-008.6 - Next Usable SPS App State Discovery Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Decide and record the smallest next application milestone needed to make the SPS task/workspace flow more usable after MS-008.5, while keeping the step docs-only and avoiding any UI, route, or product behavior changes.
+
+**Product Outcome**
+The repository now records the next smallest application-state discovery boundary for the task/workspace flow, and the live product behavior remains unchanged.
+
+**Implementation Evidence**
+* `docs/04_ROADMAP.md` now records the MS-008.6 discovery contract as the latest completed milestone.
+* `docs/08_CURRENT_STATE.md` now reflects MS-008.6 as the latest completed milestone while keeping `Current Product Milestone` at `NONE`.
+* `docs/09_CHANGELOG.md` now records the published discovery milestone in the official history.
+* no application code, UI, route, persistence, or product behavior changed.
+
+**Dependencies**
+* `MS-008.5 - Project and Task Flow Reliability Foundation`
+
+**Allowed Implementation Scope**
+* docs-only product discovery
+* SSOT synchronization
+* publication metadata
+* history recording for the completed discovery milestone
+
+**Forbidden Scope**
+* UI changes
+* product behavior changes
+* route changes
+* persistence changes
+* provider/model wiring
+* broad refactors
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md` and `docs/09_CHANGELOG.md` own the synchronized SSOT snapshot for this docs-only milestone
+* any future implementation must stay outside UI or product behavior until a separate Product Owner-approved milestone exists
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* `git diff -- docs/04_ROADMAP.md docs/08_CURRENT_STATE.md docs/09_CHANGELOG.md`
+* confirm no unrelated files were changed
+
+**Codex Implementation Handoff Boundary**
+* If implementation is approved later, Codex may only continue after a separate Product Owner-approved application milestone is defined.
+
+**Rollback / Safety Expectations**
+* stop if the discovery step needs UI or product behavior
+* stop if the scope expands beyond docs-only product discovery
+* keep the milestone minimal and documentation-only
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
 
 ## MS-008.5 - Project and Task Flow Reliability Foundation
 

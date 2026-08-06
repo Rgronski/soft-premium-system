@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-008.5 - Project and Task Flow Reliability Foundation
+MS-008.6 - Next Usable SPS App State Discovery Foundation
 
 **Next Milestone**
 NONE
+
+MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository now records the next smallest application milestone candidate for usable SPS task/workspace flow without changing UI or product behavior.
 
 MS-006.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Milestone Queue Foundation; the repository now records the next three small milestones toward the New Task / New Project Start Flow without introducing application code after Session 053 close.
 
@@ -146,7 +148,7 @@ SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
 Latest Completed Product Milestone: MS-008.5 - Project and Task Flow Reliability Foundation
 Next Product Milestone: NONE
-MS-008.5 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project and Task Flow Reliability Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
 Active Capability: NONE
 Latest Completed Capability: CAP-005 - React Component Test Infrastructure Foundation
