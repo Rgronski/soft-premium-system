@@ -1026,7 +1026,7 @@ The repository now records the next smallest application-state discovery boundar
 
 **Implementation Evidence**
 * `docs/04_ROADMAP.md` now records the MS-008.6 discovery contract while preserving the MS-008.5 latest completed milestone baseline.
-* `docs/08_CURRENT_STATE.md` keeps `Latest Completed Product Milestone` at `MS-008.18 - Main Usability Recovery Regression Verification Foundation`.
+* `docs/08_CURRENT_STATE.md` keeps `Latest Completed Product Milestone` at `MS-008.20 - Task List Card Layout Fix Foundation`.
 * `docs/09_CHANGELOG.md` now records the published discovery milestone in the official history.
 * no application code, UI, route, persistence, or product behavior changed.
 
