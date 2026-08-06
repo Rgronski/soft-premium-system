@@ -177,7 +177,7 @@ The project task list now renders each task card as a full-width clickable row w
 **Ownership Boundaries**
 * `src/app/projects/[id]/tasks/page.tsx` owns the task list card wrapper layout
 * `/projects/[id]/tasks` owns the project-specific task list route
-* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `docs/session-handoffs/2026-08-06_062_SESSION_HANDOFF.md` own the synchronized close-state records for this milestone
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `docs/session-handoffs/2026-08-06_061_SESSION_HANDOFF.md` own the synchronized close-state records for this milestone
 
 **Verification Plan**
 * targeted test for `src/app/projects/[id]/tasks/page.test.tsx`
@@ -193,7 +193,7 @@ The project task list now renders each task card as a full-width clickable row w
 * `docs/08_CURRENT_STATE.md`
 * `docs/09_CHANGELOG.md`
 * `docs/10_SESSION_STATE.md`
-* `docs/session-handoffs/2026-08-06_062_SESSION_HANDOFF.md`
+* `docs/session-handoffs/2026-08-06_061_SESSION_HANDOFF.md`
 
 ## MS-008.19 - Dashboard Tasks Link Project Route Fix Foundation
 

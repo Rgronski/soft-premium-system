@@ -6,7 +6,7 @@ Chief Architect: ChatGPT
 Product Owner: Radoslaw Gronski
 Session Status: CLOSED
 Current Session ID: 061
-Current Chat Title: 061 SPS OS - MS-008.19 Dashboard Tasks Link Project Route Fix Foundation
+Current Chat Title: 061 SPS OS - MS-008.20 Task List Card Layout Fix Foundation
 Next Session ID: 062
 Suggested Next Chat Title: 062 SPS OS - Project Integrity Check
 
@@ -16,6 +16,8 @@ Active Work Item: Session 061 close protocol
 Completed Work Items:
 - Published `MS-008.19 - Dashboard Tasks Link Project Route Fix Foundation`.
 - Recorded the targeted route verification for the dashboard `Open tasks` CTA.
+- Published `MS-008.20 - Task List Card Layout Fix Foundation`.
+- Recorded the targeted task list card layout verification.
 - Synchronized the close SSOT for Session 061.
 - Recorded the final Session 061 usage entry.
 - Prepared the current session handoff for Session 062.
@@ -26,12 +28,12 @@ Repository State:
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: a810dd83b2531c9eeebd6081ada247640974abc0
+Latest Verified Commit: 18089ab2950ab6920276e5775d5b00fbec846fe6
 Push Status: Published on origin/main
 
 Milestone State:
 Current Product Milestone: NONE
-Latest Completed Milestone: MS-008.19 - Dashboard Tasks Link Project Route Fix Foundation
+Latest Completed Milestone: MS-008.20 - Task List Card Layout Fix Foundation
 
 Verification:
 Verification Status: PASS

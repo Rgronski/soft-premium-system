@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 062 - MS-008.20 task list card layout fix implementation acceptance sync
+## Session 061 - MS-008.20 task list card layout fix implementation acceptance sync
 
 ### Date
 
