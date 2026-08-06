@@ -6,6 +6,19 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 const useParamsMock = vi.fn(() => ({ id: "project-1" }));
 const pushMock = vi.fn();
 const getProjectWorkspaceEntryMock = vi.fn();
+const getProjectByIdMock = vi.fn();
+const getTasksMock = vi.fn();
+const getKnowledgeMock = vi.fn();
+const deleteProjectMock = vi.fn((projectId: string) => {
+  const savedProjects = localStorage.getItem("soft-premium-system.projects");
+  const projects = savedProjects ? JSON.parse(savedProjects) : [];
+  localStorage.setItem(
+    "soft-premium-system.projects",
+    JSON.stringify(
+      projects.filter((project: { id: string }) => project.id !== projectId),
+    ),
+  );
+});
 const deleteProjectFromServerMock = vi.fn();
 let confirmSpy: ReturnType<typeof vi.spyOn>;
 
@@ -21,6 +34,19 @@ vi.mock("@/lib/project-brain/engine", () => ({
     getProjectWorkspaceEntryMock(projectId),
 }));
 
+vi.mock("@/lib/project/project", () => ({
+  deleteProject: (projectId: string) => deleteProjectMock(projectId),
+  getProjectById: (projectId: string) => getProjectByIdMock(projectId),
+}));
+
+vi.mock("@/lib/task/task", () => ({
+  getTasks: (projectId: string) => getTasksMock(projectId),
+}));
+
+vi.mock("@/lib/knowledge/knowledge", () => ({
+  getKnowledge: (projectId: string) => getKnowledgeMock(projectId),
+}));
+
 vi.mock("@/lib/project/browser-server", () => ({
   deleteProjectFromServer: (projectId: string) =>
     deleteProjectFromServerMock(projectId),
@@ -33,9 +59,20 @@ describe("ProjectWorkspacePage", () => {
     localStorage.clear();
     useParamsMock.mockReturnValue({ id: "project-1" });
     pushMock.mockReset();
+    deleteProjectMock.mockClear();
     deleteProjectFromServerMock.mockReset();
     deleteProjectFromServerMock.mockResolvedValue(undefined);
     getProjectWorkspaceEntryMock.mockReset();
+    getProjectByIdMock.mockReset();
+    getTasksMock.mockReset();
+    getKnowledgeMock.mockReset();
+    getProjectByIdMock.mockReturnValue({
+      id: "project-1",
+      name: "Alpha Workspace",
+      createdAt: "2026-08-03T10:00:00.000Z",
+    });
+    getTasksMock.mockReturnValue([]);
+    getKnowledgeMock.mockReturnValue([]);
     getProjectWorkspaceEntryMock.mockReturnValue({
       projectId: "project-1",
       workspace: {
@@ -166,5 +203,44 @@ describe("ProjectWorkspacePage", () => {
     expect(
       JSON.parse(localStorage.getItem("soft-premium-system.projects") ?? "[]"),
     ).toEqual([]);
+  });
+
+  test("recovers from a stale Project Brain miss using local project state", () => {
+    getProjectWorkspaceEntryMock.mockImplementation(() => {
+      const error = new Error("Project Brain could not find the requested project.") as Error & {
+        code: string;
+      };
+      error.code = "project-not-found";
+      throw error;
+    });
+    getTasksMock.mockReturnValue([
+      {
+        id: "task-1",
+        projectId: "project-1",
+        title: "Local task",
+        createdAt: "2026-08-03T12:00:00.000Z",
+      },
+    ]);
+    getKnowledgeMock.mockReturnValue([
+      {
+        id: "knowledge-1",
+        projectId: "project-1",
+        title: "Local knowledge",
+        content: "Recovered from local project state.",
+        createdAt: "2026-08-03T13:00:00.000Z",
+      },
+    ]);
+
+    render(<ProjectWorkspacePage />);
+
+    expect(screen.queryByText("Project not found")).toBeNull();
+    expect(screen.getByText("Alpha Workspace")).toBeTruthy();
+    expect(screen.getByText("Local task")).toBeTruthy();
+    expect(screen.getByText("Local knowledge")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Project Brain context is unavailable, but the local project workspace is still available.",
+      ),
+    ).toBeTruthy();
   });
 });

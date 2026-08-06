@@ -43,6 +43,14 @@ function getTaskResultNotesStorageKey(projectId: string, taskId: string) {
   return `soft-premium-system.projects.${projectId}.tasks.${taskId}.workspace.result-notes`;
 }
 
+function getTaskCompletionStorageKey(projectId: string, taskId: string) {
+  return `soft-premium-system.projects.${projectId}.tasks.${taskId}.workspace.completion`;
+}
+
+function getTaskEvidenceReviewStorageKey(projectId: string, taskId: string) {
+  return `soft-premium-system.projects.${projectId}.tasks.${taskId}.workspace.evidence-review`;
+}
+
 function readSavedTaskResultNotes(projectId: string, taskId: string) {
   if (typeof window === "undefined") {
     return "";
@@ -51,6 +59,35 @@ function readSavedTaskResultNotes(projectId: string, taskId: string) {
   return (
     localStorage.getItem(getTaskResultNotesStorageKey(projectId, taskId)) ?? ""
   );
+}
+
+function readSavedTaskCompletionState(
+  projectId: string,
+  taskId: string,
+): TaskCompletionState {
+  if (typeof window === "undefined") {
+    return "idle";
+  }
+
+  return localStorage.getItem(getTaskCompletionStorageKey(projectId, taskId)) ===
+    "completed"
+    ? "completed"
+    : "idle";
+}
+
+function readSavedTaskEvidenceReviewState(
+  projectId: string,
+  taskId: string,
+): TaskEvidenceReviewState {
+  if (typeof window === "undefined") {
+    return "idle";
+  }
+
+  return localStorage.getItem(
+    getTaskEvidenceReviewStorageKey(projectId, taskId),
+  ) === "acknowledged"
+    ? "acknowledged"
+    : "idle";
 }
 
 export default function ProjectTaskWorkspacePage() {
@@ -119,6 +156,10 @@ export default function ProjectTaskWorkspacePage() {
       return;
     }
 
+    localStorage.setItem(
+      getTaskCompletionStorageKey(projectId, taskId),
+      "completed",
+    );
     setTaskCompletionState("completed");
     setTaskCompletionReportCopyState("idle");
   }
@@ -128,6 +169,10 @@ export default function ProjectTaskWorkspacePage() {
       return;
     }
 
+    localStorage.setItem(
+      getTaskEvidenceReviewStorageKey(projectId, taskId),
+      "acknowledged",
+    );
     setTaskEvidenceReviewState("acknowledged");
   }
 
@@ -190,10 +235,12 @@ export default function ProjectTaskWorkspacePage() {
 
   useEffect(() => {
     setResultNotes(readSavedTaskResultNotes(projectId, taskId));
+    setTaskCompletionState(readSavedTaskCompletionState(projectId, taskId));
+    setTaskEvidenceReviewState(
+      readSavedTaskEvidenceReviewState(projectId, taskId),
+    );
     setResultSaveState("idle");
-    setTaskCompletionState("idle");
     setTaskCompletionReportCopyState("idle");
-    setTaskEvidenceReviewState("idle");
   }, [projectId, taskId]);
 
   return (
@@ -283,7 +330,10 @@ export default function ProjectTaskWorkspacePage() {
                 Acknowledge review
               </button>
             </div>
-            <label className="mt-3 block text-sm text-zinc-300" htmlFor="task-result-notes">
+            <label
+              className="mt-3 block text-sm text-zinc-300"
+              htmlFor="task-result-notes"
+            >
               Result notes
             </label>
             <textarea
@@ -292,6 +342,12 @@ export default function ProjectTaskWorkspacePage() {
               placeholder="Summarize the result of this task."
               value={resultNotes}
               onChange={(event) => {
+                localStorage.removeItem(
+                  getTaskCompletionStorageKey(projectId, taskId),
+                );
+                localStorage.removeItem(
+                  getTaskEvidenceReviewStorageKey(projectId, taskId),
+                );
                 setResultNotes(event.target.value);
                 setResultSaveState("idle");
                 setTaskCompletionState("idle");

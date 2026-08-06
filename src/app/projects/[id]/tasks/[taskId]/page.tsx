@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { getTasksFromServer, TaskServerError } from "@/lib/task/browser-server";
+import { getProjectById } from "@/lib/project/project";
+import { getTask } from "@/lib/task/task";
 import type { Task } from "@/lib/task/types";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -12,23 +14,49 @@ function getTaskDetailErrorMessage(error: unknown): string {
       case "project-not-found":
         return "Projekt nie istnieje.";
       case "context-unavailable":
-        return "Dane projektu sÄ… chwilowo niedostÄ™pne.";
+        return "Dane projektu są chwilowo niedostępne.";
       case "network-error":
-        return "Nie udaĹ‚o siÄ™ poĹ‚Ä…czyÄ‡ z serwerem.";
+        return "Nie udało się połączyć z serwerem.";
       case "invalid-response":
-        return "Serwer zwrĂłciĹ‚ nieprawidĹ‚owÄ… odpowiedĹş.";
+        return "Serwer zwrócił nieprawidłową odpowiedź.";
       case "invalid-request":
-        return "Nie udaĹ‚o siÄ™ wykonaÄ‡ operacji na zadaniach.";
+        return "Nie udało się wykonać operacji na zadaniach.";
     }
   }
 
-  return "Nie udaĹ‚o siÄ™ wykonaÄ‡ operacji na zadaniach.";
+  return "Nie udało się wykonać operacji na zadaniach.";
+}
+
+function createLocalRecoveryTask(
+  projectId: string,
+  taskId: string,
+): { task: Task; recoveryMessage: string } | null {
+  try {
+    if (!getProjectById(projectId)) {
+      return null;
+    }
+
+    const localTask = getTask(projectId, taskId);
+
+    if (!localTask) {
+      return null;
+    }
+
+    return {
+      task: localTask,
+      recoveryMessage:
+        "Project Brain context is unavailable, so showing locally saved task details for this project.",
+    };
+  } catch {
+    return null;
+  }
 }
 
 type TaskDetailState = {
   task: Task | null;
   isLoading: boolean;
   errorMessage: string | null;
+  recoveryMessage: string | null;
 };
 
 export default function ProjectTaskDetailPage() {
@@ -37,15 +65,13 @@ export default function ProjectTaskDetailPage() {
     task: null,
     isLoading: true,
     errorMessage: null,
+    recoveryMessage: null,
   });
 
   const projectId = params.id;
   const taskId = params.taskId;
 
-  const taskDetail = useMemo(
-    () => state.task,
-    [state.task],
-  );
+  const taskDetail = useMemo(() => state.task, [state.task]);
 
   useEffect(() => {
     let ignore = false;
@@ -55,6 +81,7 @@ export default function ProjectTaskDetailPage() {
         task: null,
         isLoading: true,
         errorMessage: null,
+        recoveryMessage: null,
       });
 
       try {
@@ -68,9 +95,28 @@ export default function ProjectTaskDetailPage() {
           task: loadedTasks.find((task) => task.id === taskId) ?? null,
           isLoading: false,
           errorMessage: null,
+          recoveryMessage: null,
         });
       } catch (error) {
         if (ignore) {
+          return;
+        }
+
+        const errorCode =
+          error instanceof TaskServerError ? error.code : null;
+        const recoveryTask =
+          errorCode === "project-not-found" ||
+          errorCode === "context-unavailable"
+            ? createLocalRecoveryTask(projectId, taskId)
+            : null;
+
+        if (recoveryTask) {
+          setState({
+            task: recoveryTask.task,
+            isLoading: false,
+            errorMessage: null,
+            recoveryMessage: recoveryTask.recoveryMessage,
+          });
           return;
         }
 
@@ -78,6 +124,7 @@ export default function ProjectTaskDetailPage() {
           task: null,
           isLoading: false,
           errorMessage: getTaskDetailErrorMessage(error),
+          recoveryMessage: null,
         });
       }
     }
@@ -103,6 +150,12 @@ export default function ProjectTaskDetailPage() {
             Open the task workspace start surface for the current project task.
           </p>
         </div>
+
+        {state.recoveryMessage ? (
+          <div className="rounded-xl border border-amber-900/50 bg-amber-950/30 p-4">
+            <p className="text-sm text-amber-200">{state.recoveryMessage}</p>
+          </div>
+        ) : null}
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
           <div className="mb-4">

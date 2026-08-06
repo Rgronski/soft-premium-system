@@ -69,6 +69,150 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 060 - MS-008.18 main usability recovery regression verification foundation implementation acceptance sync
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Synced the SSOT for the `MS-008.18 - Main Usability Recovery Regression Verification Foundation` verification result.
+* Recorded that the focused regression verification for `/`, `/projects/[id]`, `/projects/[id]/tasks`, `/projects/[id]/tasks/[taskId]`, and `/projects/[id]/knowledge` passed after the accumulated usability recovery line was exercised.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.18`.
+
+### Notes
+
+* No backend persistence, AI workspace changes, Project Brain writes, redesign, broad route refactor, or unrelated cleanup were introduced in this sync step.
+
+## Session 060 - MS-008.17 sps app usability sweep diagnosis foundation implementation acceptance sync
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Synced the SSOT for the `MS-008.17 - SPS App Usability Sweep Diagnosis Foundation` sweep result.
+* Recorded the diagnosis outcome for the next highest-impact SPS App usability issue after reviewing the main `/`, `/projects`, `/projects/[id]`, `/projects/[id]/tasks`, `/projects/[id]/tasks/[taskId]`, `/projects/[id]/tasks/[taskId]/workspace`, and `/projects/[id]/knowledge` routes.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.17`.
+
+### Notes
+
+* No backend persistence, AI workspace changes, Project Brain writes, redesign, broad route refactor, or unrelated cleanup were introduced in this sync step.
+
+## Session 060 - MS-008.16 project knowledge stale context recovery foundation implementation acceptance sync
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Synced the SSOT for the approved `MS-008.16 - Project Knowledge Stale Context Recovery Foundation` implementation result.
+* Recorded that `/projects/[id]/knowledge` now falls back to locally saved project/knowledge state when the Project Brain context is stale or missing so the page stays usable instead of dead-ending on a project-context error.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.16`.
+
+### Notes
+
+* No backend persistence, Project Brain writes, AI workspace changes, route redesign, broad UI polish, or unrelated refactors were introduced in this sync step.
+
+## Session 060 - MS-008.15 task detail stale context recovery foundation implementation acceptance sync
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Synced the SSOT for the approved `MS-008.15 - Task Detail Stale Context Recovery Foundation` implementation result.
+* Recorded that `/projects/[id]/tasks/[taskId]` now falls back to locally saved project/task detail state when the Project Brain context is stale or missing so the page stays usable instead of dead-ending on a project/task-context error.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.15`.
+
+### Notes
+
+* No backend persistence, Project Brain writes, AI workspace changes, route redesign, broad UI polish, or unrelated refactors were introduced in this sync step.
+
+## Session 060 - MS-008.14 project tasks stale context recovery foundation implementation acceptance sync
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Synced the SSOT for the approved `MS-008.14 - Project Tasks Stale Context Recovery Foundation` implementation result.
+* Recorded that `/projects/[id]/tasks` now falls back to locally saved tasks when the Project Brain context is stale or missing so the page stays usable instead of showing a dead-end project-context error.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.14`.
+
+### Notes
+
+* No backend persistence, AI workspace changes, Project Brain writes, redesign, broad navigation refactor, or unrelated cleanup were introduced in this sync step.
+
+## Session 060 - MS-008.13 project not found recovery foundation implementation acceptance sync
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Synced the SSOT for the approved `MS-008.13 - Project Not Found Recovery Foundation` implementation result.
+* Recorded that `/projects/[id]` now falls back to local project, task, and knowledge state when the Project Brain workspace entry is stale or missing so the page stays usable instead of showing a dead-end `Project not found` screen.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.13`.
+
+### Notes
+
+* No backend persistence, Project Brain writes, AI workspace changes, route redesign, broad UI polish, or unrelated refactors were introduced in this sync step.
+
+## Session 060 - MS-008.12 SPS App usability recovery foundation publication
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Published `MS-008.12 - SPS App Usability Recovery Foundation` as the minimal navigation-recovery step for the main SPS App entrypoint.
+* Updated the Home `Continue` action to open the latest real project, or `/projects` when no projects exist, instead of leading to the empty `/workspace` screen.
+* Kept the change tightly scoped to the Home entrypoint and its focused test coverage.
+
+### Notes
+
+* No backend persistence, Project Brain writes, AI workspace changes, route redesign, broad UI polish, or unrelated refactors were introduced in this sync step.
+
+## Session 060 - MS-008.11 task workspace completion state persistence implementation acceptance sync
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Synced the SSOT for the approved `MS-008.11 - Task Workspace Completion State Persistence Foundation` implementation result.
+* Recorded that the task workspace now persists local completion and evidence-review state per `projectId` / `taskId` and restores it on revisit alongside the existing result-notes persistence.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.11`.
+
+### Notes
+
+* No backend persistence, Project Brain writes, AI workspace changes, route changes, UI redesign, or unrelated refactors were introduced in this sync step.
+
+## Session 060 - MS-008.11 task workspace completion state persistence foundation publication
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Published `MS-008.11 - Task Workspace Completion State Persistence Foundation` as the docs-only contract for the next small task/workspace milestone.
+* Recorded the local-only, task-scoped completion and evidence-review persistence boundary for the task workspace while keeping the live product behavior unchanged.
+* Kept the contract aligned with the existing result-notes persistence pattern and explicitly constrained the future implementation surface.
+
+### Notes
+
+* No backend persistence, Project Brain writes, AI workspace changes, project overview redesign, route redesign, new task flow changes, broad UI polish, or unrelated workspace logic changes were introduced.
+
 ## Session 059 - MS-008.10 task workspace usable flow completion summary publication
 
 ### Date

@@ -45,10 +45,26 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation
+MS-008.18 - Main Usability Recovery Regression Verification Foundation
 
 **Next Milestone**
 NONE
+
+MS-008.18 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Main Usability Recovery Regression Verification Foundation; the repository now records the regression verification outcome for the accumulated usability recovery line while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-008.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS App Usability Sweep Diagnosis Foundation; the repository now records the sweep result and the selected next usability issue while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-008.16 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Knowledge Stale Context Recovery Foundation; the repository now recovers the project knowledge route from stale Project Brain context by falling back to local project and knowledge state so `/projects/[id]/knowledge` stays usable instead of dead-ending on a project-context error while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-008.15 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Detail Stale Context Recovery Foundation; the repository now recovers the task detail route from stale Project Brain context by falling back to local project and task state so `/projects/[id]/tasks/[taskId]` stays usable instead of dead-ending on a project/task-context error while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-008.14 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Tasks Stale Context Recovery Foundation; the repository now recovers the project tasks route from stale Project Brain context by falling back to local project task state so `/projects/[id]/tasks` stays usable instead of dead-ending on a project-context error while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-008.13 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Not Found Recovery Foundation; the repository now recovers the project overview route from stale Project Brain context by falling back to local project state so `/projects/[id]` stays usable instead of dead-ending on `Project not found` while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-008.12 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS App Usability Recovery Foundation; the repository now routes the Home `Continue` action to the latest real project instead of the empty workspace landing page while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-008.11 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Completion State Persistence Foundation; the repository now persists local completion and evidence-review state for the task workspace while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-008.10 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Usable Flow Completion Summary Foundation; the repository now records the minimal completion summary for the workspace flow while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
@@ -154,7 +170,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation
+Latest Completed Product Milestone: MS-008.18 - Main Usability Recovery Regression Verification Foundation
 Next Product Milestone: NONE
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
@@ -1312,8 +1328,9 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation`
+* `Latest Completed Product Milestone` is `MS-008.18 - Main Usability Recovery Regression Verification Foundation`
 * `Next Product Milestone` is `NONE`
+* `MS-008.12` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`
 * `MS-001.18` is `COMPLETED / PUBLISHED / CLOSED`

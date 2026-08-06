@@ -8,6 +8,10 @@ import { useState } from "react";
 
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>(() => getProjects());
+  const latestProject = projects[projects.length - 1] ?? null;
+  const continueHref = latestProject
+    ? `/projects/${latestProject.id}`
+    : "/projects";
 
   async function handleDeleteProject(project: Project) {
     const confirmed = window.confirm(
@@ -57,7 +61,7 @@ export default function Home() {
             </div>
 
             <Link
-              href="/workspace"
+              href={continueHref}
               className="rounded-full bg-white px-5 py-2 text-sm font-medium text-zinc-950 transition-colors hover:bg-zinc-200"
             >
               Continue

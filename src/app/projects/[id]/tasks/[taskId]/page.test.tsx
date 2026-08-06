@@ -5,13 +5,11 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 const useParamsMock = vi.fn(() => ({ id: "project-1", taskId: "task-1" }));
 const getTasksFromServerMock = vi.fn();
+const getProjectByIdMock = vi.fn();
+const getTaskMock = vi.fn();
 
-vi.mock("next/navigation", () => ({
-  useParams: () => useParamsMock(),
-}));
-
-vi.mock("@/lib/task/browser-server", () => ({
-  TaskServerError: class TaskServerError extends Error {
+const { TaskServerErrorMock } = vi.hoisted(() => ({
+  TaskServerErrorMock: class TaskServerErrorMock extends Error {
     readonly code: string;
     readonly status?: number;
 
@@ -21,8 +19,25 @@ vi.mock("@/lib/task/browser-server", () => ({
       this.status = status;
     }
   },
+}));
+
+vi.mock("next/navigation", () => ({
+  useParams: () => useParamsMock(),
+}));
+
+vi.mock("@/lib/task/browser-server", () => ({
+  TaskServerError: TaskServerErrorMock,
   getTasksFromServer: (projectId: string) =>
     getTasksFromServerMock(projectId),
+}));
+
+vi.mock("@/lib/project/project", () => ({
+  getProjectById: (projectId: string) => getProjectByIdMock(projectId),
+}));
+
+vi.mock("@/lib/task/task", () => ({
+  getTask: (projectId: string, taskId: string) =>
+    getTaskMock(projectId, taskId),
 }));
 
 import ProjectTaskDetailPage from "./page";
@@ -31,6 +46,10 @@ describe("ProjectTaskDetailPage", () => {
   beforeEach(() => {
     useParamsMock.mockReturnValue({ id: "project-1", taskId: "task-1" });
     getTasksFromServerMock.mockReset();
+    getProjectByIdMock.mockReset();
+    getTaskMock.mockReset();
+    getProjectByIdMock.mockReturnValue(null);
+    getTaskMock.mockReturnValue(null);
     getTasksFromServerMock.mockResolvedValue([
       {
         id: "task-1",
@@ -81,5 +100,35 @@ describe("ProjectTaskDetailPage", () => {
     await waitFor(() => {
       expect(screen.getByText("Task not found")).toBeTruthy();
     });
+  });
+
+  test("recovers from stale project context with local task data", async () => {
+    useParamsMock.mockReturnValue({ id: "project-1", taskId: "task-1" });
+    getTasksFromServerMock.mockRejectedValueOnce(
+      new TaskServerErrorMock("project-not-found"),
+    );
+    getProjectByIdMock.mockReturnValue({
+      id: "project-1",
+      title: "Recovered project",
+    });
+    getTaskMock.mockReturnValue({
+      id: "task-1",
+      projectId: "project-1",
+      title: "Recovered task",
+      createdAt: "2026-07-23T10:00:00.000Z",
+    });
+
+    render(<ProjectTaskDetailPage />);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(
+          "Project Brain context is unavailable, so showing locally saved task details for this project.",
+        ),
+      ).toBeTruthy();
+    });
+
+    expect(screen.getByText("Recovered task")).toBeTruthy();
+    expect(screen.queryByText("Task not found")).toBeNull();
   });
 });

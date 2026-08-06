@@ -70,6 +70,30 @@ describe("Home", () => {
     ]);
   });
 
+  test("continue working opens the latest project instead of the empty workspace route", () => {
+    localStorage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-08-03T10:00:00.000Z",
+        },
+        {
+          id: "project-2",
+          name: "Beta",
+          createdAt: "2026-08-03T11:00:00.000Z",
+        },
+      ]),
+    );
+
+    render(<Home />);
+
+    expect(
+      screen.getByRole("link", { name: "Continue" }).getAttribute("href"),
+    ).toBe("/projects/project-2");
+  });
+
   test("keeps the project when deletion is cancelled", () => {
     confirmSpy.mockReturnValue(false);
     localStorage.setItem(

@@ -10,7 +10,9 @@ import {
   getProjectWorkspaceEntry,
   type ProjectWorkspaceEntry,
 } from "@/lib/project-brain/engine";
-import { deleteProject } from "@/lib/project/project";
+import { getKnowledge } from "@/lib/knowledge/knowledge";
+import { deleteProject, getProjectById } from "@/lib/project/project";
+import { getTasks } from "@/lib/task/task";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo } from "react";
 
@@ -37,6 +39,59 @@ type DashboardSnapshot = {
   isLoaded: boolean;
   errorCode: string | null;
 };
+
+function createLocalRecoveryWorkspaceEntry(
+  projectId: string,
+): ProjectWorkspaceEntry | null {
+  try {
+    const localProject = getProjectById(projectId);
+
+    if (!localProject) {
+      return null;
+    }
+
+    const tasks = getTasks(projectId);
+    const knowledgeEntries = getKnowledge(projectId);
+
+    return {
+      projectId: localProject.id,
+      workspace: {
+        overview: {
+          project: {
+            id: localProject.id,
+            name: localProject.name,
+          },
+          counts: {
+            tasks: tasks.length,
+            knowledgeEntries: knowledgeEntries.length,
+          },
+          workflow: {
+            health: "warning",
+            confidence: 0,
+            nextStep: {
+              id: "local-project-recovery",
+              label: "Continue local project state",
+              description:
+                "Project Brain context is unavailable, but the local project workspace is still available.",
+            },
+            warnings: 0,
+            blockers: 0,
+          },
+        },
+        tasks: tasks.map((task) => ({
+          id: task.id,
+          title: task.title,
+        })),
+        knowledgeEntries: knowledgeEntries.map((knowledgeEntry) => ({
+          id: knowledgeEntry.id,
+          title: knowledgeEntry.title,
+        })),
+      },
+    };
+  } catch {
+    return null;
+  }
+}
 
 export default function ProjectWorkspacePage() {
   const params = useParams<{ id: string }>();
@@ -90,15 +145,19 @@ export default function ProjectWorkspacePage() {
         error instanceof Error && "code" in error && typeof error.code === "string"
           ? error.code
           : "source-read-failed";
+      const recoveryWorkspaceEntry =
+        errorCode === "project-not-found"
+          ? createLocalRecoveryWorkspaceEntry(params.id)
+          : null;
 
       return {
-        workspaceEntry: null,
+        workspaceEntry: recoveryWorkspaceEntry,
         clientsCount: 0,
         servicesCount: 0,
         visitsCount: 0,
         upcomingVisitsCount: 0,
         isLoaded: true,
-        errorCode,
+        errorCode: recoveryWorkspaceEntry ? null : errorCode,
       };
     }
   }, [params.id]);

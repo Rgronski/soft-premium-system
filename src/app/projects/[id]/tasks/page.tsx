@@ -6,6 +6,8 @@ import {
   getTasksFromServer,
   TaskServerError,
 } from "@/lib/task/browser-server";
+import { getProjectById } from "@/lib/project/project";
+import { getTasks } from "@/lib/task/task";
 import type { Task } from "@/lib/task/types";
 import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -29,6 +31,24 @@ function getTaskErrorMessage(error: unknown): string {
   return "Nie udało się wykonać operacji na zadaniach.";
 }
 
+function createLocalRecoveryState(
+  projectId: string,
+): { tasks: Task[]; recoveryMessage: string } | null {
+  try {
+    if (!getProjectById(projectId)) {
+      return null;
+    }
+
+    return {
+      tasks: getTasks(projectId),
+      recoveryMessage:
+        "Project Brain context is unavailable, so showing locally saved tasks for this project.",
+    };
+  } catch {
+    return null;
+  }
+}
+
 export default function ProjectTasksPage() {
   const params = useParams<{ id: string }>();
   const projectId = params.id;
@@ -39,6 +59,7 @@ export default function ProjectTasksPage() {
     null,
   );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [recoveryMessage, setRecoveryMessage] = useState<string | null>(null);
   const mountedRef = useRef(true);
   const projectIdRef = useRef(projectId);
   const submittingProjectIdRef = useRef<string | null>(null);
@@ -68,6 +89,7 @@ export default function ProjectTasksPage() {
     async function loadTasks() {
       setIsLoading(true);
       setErrorMessage(null);
+      setRecoveryMessage(null);
 
       try {
         const loadedTasks = await getTasksFromServer(projectId);
@@ -82,7 +104,20 @@ export default function ProjectTasksPage() {
           return;
         }
 
-        setErrorMessage(getTaskErrorMessage(error));
+        const errorCode =
+          error instanceof TaskServerError ? error.code : null;
+        const recoveryState =
+          errorCode === "project-not-found" ||
+          errorCode === "context-unavailable"
+            ? createLocalRecoveryState(projectId)
+            : null;
+
+        if (recoveryState) {
+          setTasks(recoveryState.tasks);
+          setRecoveryMessage(recoveryState.recoveryMessage);
+        } else {
+          setErrorMessage(getTaskErrorMessage(error));
+        }
       } finally {
         if (!ignore) {
           setIsLoading(false);
@@ -128,6 +163,7 @@ export default function ProjectTasksPage() {
 
     setActiveSubmittingProjectId(submittedProjectId);
     setErrorMessage(null);
+    setRecoveryMessage(null);
 
     try {
       await createTaskOnServer({
@@ -174,6 +210,12 @@ export default function ProjectTasksPage() {
             Capture the next task for the current project workspace.
           </p>
         </div>
+
+        {recoveryMessage ? (
+          <div className="rounded-xl border border-amber-900/50 bg-amber-950/30 p-4">
+            <p className="text-sm text-amber-200">{recoveryMessage}</p>
+          </div>
+        ) : null}
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
           <form

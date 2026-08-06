@@ -111,11 +111,458 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation
+MS-008.18 - Main Usability Recovery Regression Verification Foundation
 
 ## Next
 
 NONE
+
+## MS-008.18 - Main Usability Recovery Regression Verification Foundation
+
+**Milestone**
+MS-008.18 - Main Usability Recovery Regression Verification Foundation
+
+**Type**
+Docs-Only Verification Foundation
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Record the targeted regression verification for the accumulated main SPS App usability recovery line after confirming the changed routes still pass focused tests.
+
+**Product Outcome**
+The repository now records the verification outcome while preserving the already implemented route recovery behavior in the working tree.
+
+**Implementation Evidence**
+* `npx.cmd vitest run src/app/page.test.tsx` passed.
+* `npx.cmd vitest run src/app/projects/[id]/page.test.tsx` passed.
+* `npx.cmd vitest run src/app/projects/[id]/tasks/page.test.tsx` passed.
+* `npx.cmd vitest run src/app/projects/[id]/tasks/[taskId]/page.test.tsx` passed.
+* `npx.cmd vitest run src/app/projects/[id]/knowledge/page.test.tsx` passed.
+* `git diff --check` passed with only CRLF normalization warnings.
+
+**Dependencies**
+* `MS-008.17 - SPS App Usability Sweep Diagnosis Foundation`
+
+**Allowed Implementation Scope**
+* targeted verification of the main SPS App recovery routes
+* docs-only recording of the verification result
+* preserving the already implemented usability recovery behavior
+
+**Forbidden Scope**
+* backend persistence
+* AI workspace
+* Project Brain writes
+* redesign
+* broad navigation refactor
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/page.test.tsx`, `src/app/projects/[id]/page.test.tsx`, `src/app/projects/[id]/tasks/page.test.tsx`, `src/app/projects/[id]/tasks/[taskId]/page.test.tsx`, and `src/app/projects/[id]/knowledge/page.test.tsx` own the already verified recovery behavior
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md` and `docs/09_CHANGELOG.md` own the synchronized SSOT snapshot for this product milestone
+
+## MS-008.15 - Task Detail Stale Context Recovery Foundation
+
+**Milestone**
+MS-008.15 - Task Detail Stale Context Recovery Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Recover the task detail route from stale or missing Project Brain context by falling back to local project and task state so `/projects/[id]/tasks/[taskId]` stays usable instead of dead-ending on a project/task-context error.
+
+**Product Outcome**
+The task detail route now recovers from stale server context by rendering locally saved project/task details when the local project and task still exist.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/page.tsx` now falls back to local project/task state when the canonical task load reports a stale project-context error.
+* `src/app/projects/[id]/tasks/[taskId]/page.test.tsx` now verifies the stale Project Brain recovery path and preserves the existing task-detail coverage.
+* `npx.cmd vitest run src/app/projects/[id]/tasks/[taskId]/page.test.tsx` and `git diff --check` passed during verification.
+
+**Dependencies**
+* `MS-008.14 - Project Tasks Stale Context Recovery Foundation`
+
+**Allowed Implementation Scope**
+* `src/app/projects/[id]/tasks/[taskId]/page.tsx`
+* `src/app/projects/[id]/tasks/[taskId]/page.test.tsx`
+* local project/task-state recovery for the task detail route
+
+**Forbidden Scope**
+* backend persistence
+* AI workspace
+* Project Brain writes
+* redesign
+* broad navigation refactor
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/projects/[id]/tasks/[taskId]/page.tsx` owns the task detail recovery behavior
+* `src/app/projects/[id]/tasks/[taskId]/page.test.tsx` owns the focused recovery verification
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md` and `docs/09_CHANGELOG.md` own the synchronized SSOT snapshot for this product milestone
+
+## MS-008.14 - Project Tasks Stale Context Recovery Foundation
+
+**Milestone**
+MS-008.14 - Project Tasks Stale Context Recovery Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Recover the project tasks route from stale or missing Project Brain context by falling back to local project task state so `/projects/[id]/tasks` stays usable instead of dead-ending on a project-context error.
+
+**Product Outcome**
+The project tasks route now recovers from stale server context by rendering locally saved tasks when the local project still exists.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/page.tsx` now falls back to local project task state when the canonical task load reports a stale project-context error.
+* `src/app/projects/[id]/tasks/page.test.tsx` now verifies the stale Project Brain recovery path and preserves the existing submit behavior coverage.
+* `npx.cmd vitest run src/app/projects/[id]/tasks/page.test.tsx` and `git diff --check` passed during verification.
+
+**Dependencies**
+* `MS-008.13 - Project Not Found Recovery Foundation`
+
+**Allowed Implementation Scope**
+* `src/app/projects/[id]/tasks/page.tsx`
+* `src/app/projects/[id]/tasks/page.test.tsx`
+* local project/task-state recovery for the project tasks route
+
+**Forbidden Scope**
+* backend persistence
+* AI workspace
+* Project Brain writes
+* redesign
+* broad navigation refactor
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/projects/[id]/tasks/page.tsx` owns the project tasks recovery behavior
+* `src/app/projects/[id]/tasks/page.test.tsx` owns the focused recovery verification
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md` and `docs/09_CHANGELOG.md` own the synchronized SSOT snapshot for this product milestone
+
+**Verification Plan**
+* `npx.cmd vitest run src/app/projects/[id]/tasks/page.test.tsx`
+* `git diff --check`
+* `git status -sb`
+
+**Codex Implementation Handoff Boundary**
+* If implementation is approved later, Codex may only continue after a separate Product Owner-approved application milestone is defined.
+
+**Rollback / Safety Expectations**
+* stop if recovery needs backend persistence, AI workspace work, Project Brain writes, redesign, broad navigation refactoring, or unrelated cleanup
+* keep the recovery minimal and route-focused
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+
+## MS-008.13 - Project Not Found Recovery Foundation
+
+**Milestone**
+MS-008.13 - Project Not Found Recovery Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Recover the project overview route from a stale or missing Project Brain workspace entry by falling back to local project state so `/projects/[id]` stays usable instead of dead-ending on `Project not found`.
+
+**Product Outcome**
+The project overview route now recovers from a stale Project Brain miss by rendering the local project workspace shell when local project data is still available.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/page.tsx` now falls back to local project, task, and knowledge state when the Project Brain workspace entry is unavailable.
+* `src/app/projects/[id]/page.test.tsx` now verifies the stale Project Brain recovery path and keeps the delete flow intact.
+* `npx.cmd vitest run src/app/projects/[id]/page.test.tsx` and `git diff --check` passed during verification.
+
+**Dependencies**
+* `MS-008.12 - SPS App Usability Recovery Foundation`
+
+**Allowed Implementation Scope**
+* `src/app/projects/[id]/page.tsx`
+* `src/app/projects/[id]/page.test.tsx`
+* local project-state recovery for the project overview route
+
+**Forbidden Scope**
+* backend persistence
+* Project Brain writes
+* AI workspace
+* project overview redesign
+* route redesign
+* broad UI polish
+* unrelated refactor
+
+**Ownership Boundaries**
+* `src/app/projects/[id]/page.tsx` owns the project overview recovery behavior
+* `src/app/projects/[id]/page.test.tsx` owns the focused recovery verification
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md` and `docs/09_CHANGELOG.md` own the synchronized SSOT snapshot for this product milestone
+
+**Verification Plan**
+* `npx.cmd vitest run src/app/projects/[id]/page.test.tsx`
+* `git diff --check`
+* `git status -sb`
+
+**Codex Implementation Handoff Boundary**
+* If implementation is approved later, Codex may only continue after a separate Product Owner-approved application milestone is defined.
+
+**Rollback / Safety Expectations**
+* stop if recovery needs backend persistence, Project Brain writes, AI workspace work, project overview redesign, route redesign, broad UI polish, or unrelated refactoring
+* keep the recovery minimal and route-focused
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+
+## MS-008.12 - SPS App Usability Recovery Foundation
+
+**Milestone**
+MS-008.12 - SPS App Usability Recovery Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Recover the SPS App main navigation by making the Home `Continue` action open the latest real project instead of the empty workspace landing page, so the first step of the app returns the user to a useful project screen and the main project -> task -> workspace journey stays reachable.
+
+**Product Outcome**
+The Home `Continue` action now routes to the latest available project in local storage, or to `/projects` when no projects exist, instead of leading to the empty `/workspace` screen.
+
+**Implementation Evidence**
+* `src/app/page.tsx` now computes the `Continue` destination from the latest local project and falls back to `/projects`.
+* `src/app/page.test.tsx` now verifies the `Continue` link opens the latest project.
+* `git diff --check` and the targeted Home test passed during verification.
+
+**Dependencies**
+* `MS-008.11 - Task Workspace Completion State Persistence Foundation`
+
+**Allowed Implementation Scope**
+* `src/app/page.tsx`
+* `src/app/page.test.tsx`
+* Home navigation recovery for the main SPS App entrypoint
+
+**Forbidden Scope**
+* backend persistence
+* Project Brain writes
+* AI workspace changes
+* route redesign
+* broad UI polish
+* unrelated refactor
+
+**Ownership Boundaries**
+* `src/app/page.tsx` owns the Home continue destination
+* `src/app/page.test.tsx` owns the Home continue verification
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md` and `docs/09_CHANGELOG.md` own the synchronized SSOT snapshot for this product milestone
+
+**Verification Plan**
+* `npx.cmd vitest run src/app/page.test.tsx`
+* `git diff --check`
+* `git status -sb`
+
+**Codex Implementation Handoff Boundary**
+* If implementation is approved later, Codex may only continue after a separate Product Owner-approved application milestone is defined.
+
+**Rollback / Safety Expectations**
+* stop if fixing the Home continue path needs backend persistence, Project Brain writes, AI workspace work, route redesign, broad UI polish, or unrelated refactoring
+* keep the milestone minimal and navigation-focused
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+
+## MS-008.11 - Task Workspace Completion State Persistence Foundation
+
+**Milestone**
+MS-008.11 - Task Workspace Completion State Persistence Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Define the next small application milestone after MS-008.10: persist local task completion and evidence review state for the task workspace so returning to the same project/task workspace preserves completion and review context analogously to existing result-notes persistence.
+
+**Product Outcome**
+The repository now persists local task completion and evidence review state for the task workspace so returning to the same project/task workspace preserves completion and review context analogously to existing result-notes persistence.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now stores and restores task-scoped completion and evidence-review state under local persistence keys alongside the existing result-notes persistence.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies completion state, evidence-review state, revisit restoration, and reset behavior when result notes materially change.
+* `git diff --check` and the targeted workspace test passed during verification.
+
+**Dependencies**
+* `MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation`
+
+**Allowed Implementation Scope**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx`
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* local-only persistence
+* task-scoped by `projectId` / `taskId`
+* preserve task completion state and evidence review acknowledgement state after reload or revisit
+* reset completion and review state when result notes materially change if that matches existing workspace behavior
+
+**Forbidden Scope**
+* backend persistence
+* Project Brain writes
+* AI workspace
+* project overview redesign
+* route redesign
+* new task flow changes
+* broad UI polish
+* refactoring unrelated workspace logic
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md` and `docs/09_CHANGELOG.md` own the synchronized SSOT snapshot for this product milestone
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* targeted SSOT consistency check across `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`
+
+**Codex Implementation Handoff Boundary**
+* If implementation is approved later, Codex may only continue after a separate Product Owner-approved application milestone is defined.
+
+**Rollback / Safety Expectations**
+* stop if the implementation needs backend persistence, Project Brain writes, AI workspace work, project overview redesign, route redesign, new task flow changes, broad UI polish, or unrelated workspace logic refactoring
+* stop if the scope expands beyond local-only task-scoped workspace persistence
+* keep the milestone minimal and documentation-only
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
 
 ## MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation
 
@@ -138,7 +585,7 @@ Chief Architect
 Codex
 
 **Implementation Status**
-COMPLETED / VERIFIED
+COMPLETED / VERIFIED / PUBLISHED
 
 **Publication Status**
 PUBLISHED
@@ -423,7 +870,7 @@ The repository now records the next smallest application-state discovery boundar
 
 **Implementation Evidence**
 * `docs/04_ROADMAP.md` now records the MS-008.6 discovery contract while preserving the MS-008.5 latest completed milestone baseline.
-* `docs/08_CURRENT_STATE.md` keeps `Latest Completed Product Milestone` at `MS-008.10 - Task Workspace Usable Flow Completion Summary Foundation`.
+* `docs/08_CURRENT_STATE.md` keeps `Latest Completed Product Milestone` at `MS-008.18 - Main Usability Recovery Regression Verification Foundation`.
 * `docs/09_CHANGELOG.md` now records the published discovery milestone in the official history.
 * no application code, UI, route, persistence, or product behavior changed.
 

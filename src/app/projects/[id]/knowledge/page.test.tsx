@@ -1,10 +1,23 @@
 // @vitest-environment jsdom
 
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 const useParamsMock = vi.fn(() => ({ id: "project-1" }));
 const getProjectWorkspaceEntryMock = vi.fn();
+const getProjectByIdMock = vi.fn();
+const getKnowledgeMock = vi.fn();
+
+const { ProjectBrainErrorMock } = vi.hoisted(() => ({
+  ProjectBrainErrorMock: class ProjectBrainErrorMock extends Error {
+    readonly code: string;
+
+    constructor(code: string) {
+      super(code);
+      this.code = code;
+    }
+  },
+}));
 
 vi.mock("next/navigation", () => ({
   useParams: () => useParamsMock(),
@@ -15,12 +28,24 @@ vi.mock("@/lib/project-brain/engine", () => ({
     getProjectWorkspaceEntryMock(projectId),
 }));
 
+vi.mock("@/lib/project/project", () => ({
+  getProjectById: (projectId: string) => getProjectByIdMock(projectId),
+}));
+
+vi.mock("@/lib/knowledge/knowledge", () => ({
+  getKnowledge: (projectId: string) => getKnowledgeMock(projectId),
+}));
+
 import ProjectKnowledgePage from "./page";
 
 describe("ProjectKnowledgePage", () => {
   beforeEach(() => {
     useParamsMock.mockReturnValue({ id: "project-1" });
     getProjectWorkspaceEntryMock.mockReset();
+    getProjectByIdMock.mockReset();
+    getKnowledgeMock.mockReset();
+    getProjectByIdMock.mockReturnValue(null);
+    getKnowledgeMock.mockReturnValue([]);
     getProjectWorkspaceEntryMock.mockReturnValue({
       projectId: "project-1",
       workspace: {
@@ -108,5 +133,40 @@ describe("ProjectKnowledgePage", () => {
     render(<ProjectKnowledgePage />);
 
     expect(screen.getByText("No knowledge entries available.")).toBeTruthy();
+  });
+
+  test("recovers from stale project context with local knowledge entries", async () => {
+    getProjectWorkspaceEntryMock.mockImplementation(() => {
+      throw new ProjectBrainErrorMock("project-not-found");
+    });
+    getProjectByIdMock.mockReturnValue({
+      id: "project-1",
+      name: "Recovered project",
+      createdAt: "2026-08-03T12:00:00.000Z",
+    });
+    getKnowledgeMock.mockReturnValue([
+      {
+        id: "knowledge-1",
+        projectId: "project-1",
+        title: "Recovered knowledge",
+        content: "Recovered from local project state.",
+        createdAt: "2026-08-03T13:00:00.000Z",
+      },
+    ]);
+
+    render(<ProjectKnowledgePage />);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(
+          "Project Brain context is unavailable, so showing locally saved knowledge entries for this project.",
+        ),
+      ).toBeTruthy();
+    });
+
+    expect(getProjectByIdMock).toHaveBeenCalledWith("project-1");
+    expect(getKnowledgeMock).toHaveBeenCalledWith("project-1");
+    expect(screen.getByText("Recovered knowledge")).toBeTruthy();
+    expect(screen.queryByText("Project not found")).toBeNull();
   });
 });

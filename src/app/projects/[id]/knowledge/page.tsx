@@ -1,42 +1,76 @@
 "use client";
 
+import { getProjectById } from "@/lib/project/project";
+import { getKnowledge } from "@/lib/knowledge/knowledge";
 import { getProjectWorkspaceEntry } from "@/lib/project-brain/engine";
 import { useParams } from "next/navigation";
 import { useMemo } from "react";
 
 type DashboardSnapshot = {
-  workspaceEntry: ReturnType<typeof getProjectWorkspaceEntry> | null;
+  knowledgeEntries: Array<{
+    id: string;
+    title: string;
+  }> | null;
   isLoaded: boolean;
   errorCode: string | null;
+  recoveryMessage: string | null;
 };
+
+function createLocalRecoveryKnowledgeSnapshot(projectId: string) {
+  try {
+    if (!getProjectById(projectId)) {
+      return null;
+    }
+
+    const knowledgeEntries = getKnowledge(projectId);
+
+    return {
+      knowledgeEntries,
+      recoveryMessage:
+        "Project Brain context is unavailable, so showing locally saved knowledge entries for this project.",
+    };
+  } catch {
+    return null;
+  }
+}
 
 export default function ProjectKnowledgePage() {
   const params = useParams<{ id: string }>();
   const dashboard = useMemo<DashboardSnapshot>(() => {
     if (typeof window === "undefined") {
       return {
-        workspaceEntry: null,
+        knowledgeEntries: null,
         isLoaded: false,
         errorCode: null,
+        recoveryMessage: null,
       };
     }
 
     try {
+      const workspaceEntry = getProjectWorkspaceEntry(params.id);
+
       return {
-        workspaceEntry: getProjectWorkspaceEntry(params.id),
+        knowledgeEntries: workspaceEntry.workspace.knowledgeEntries,
         isLoaded: true,
         errorCode: null,
+        recoveryMessage: null,
       };
     } catch (error) {
       const errorCode =
         error instanceof Error && "code" in error && typeof error.code === "string"
           ? error.code
           : "source-read-failed";
+      const recoveryKnowledge =
+        errorCode === "project-not-found" ||
+        errorCode === "context-unavailable"
+          ? createLocalRecoveryKnowledgeSnapshot(params.id)
+          : null;
 
       return {
-        workspaceEntry: null,
+        knowledgeEntries: recoveryKnowledge?.knowledgeEntries ?? null,
         isLoaded: true,
-        errorCode,
+        errorCode: recoveryKnowledge ? null : errorCode,
+        recoveryMessage: recoveryKnowledge?.recoveryMessage ?? null,
       };
     }
   }, [params.id]);
@@ -54,26 +88,30 @@ export default function ProjectKnowledgePage() {
           </p>
         </div>
 
-        {!dashboard.isLoaded ? null : dashboard.workspaceEntry ? (
+        {dashboard.recoveryMessage ? (
+          <div className="rounded-xl border border-amber-900/50 bg-amber-950/30 p-4">
+            <p className="text-sm text-amber-200">{dashboard.recoveryMessage}</p>
+          </div>
+        ) : null}
+
+        {!dashboard.isLoaded ? null : dashboard.knowledgeEntries ? (
           <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
-            {dashboard.workspaceEntry.workspace.knowledgeEntries.length === 0 ? (
+            {dashboard.knowledgeEntries?.length === 0 ? (
               <p className="text-sm text-zinc-400">
                 No knowledge entries available.
               </p>
             ) : (
               <div className="space-y-3">
-                {dashboard.workspaceEntry.workspace.knowledgeEntries.map(
-                  (knowledgeEntry) => (
-                    <div
-                      key={knowledgeEntry.id}
-                      className="rounded-xl border border-zinc-800 bg-zinc-900 p-4"
-                    >
-                      <p className="text-base font-medium text-zinc-100">
-                        {knowledgeEntry.title}
-                      </p>
-                    </div>
-                  ),
-                )}
+                {dashboard.knowledgeEntries?.map((knowledgeEntry) => (
+                  <div
+                    key={knowledgeEntry.id}
+                    className="rounded-xl border border-zinc-800 bg-zinc-900 p-4"
+                  >
+                    <p className="text-base font-medium text-zinc-100">
+                      {knowledgeEntry.title}
+                    </p>
+                  </div>
+                ))}
               </div>
             )}
           </div>

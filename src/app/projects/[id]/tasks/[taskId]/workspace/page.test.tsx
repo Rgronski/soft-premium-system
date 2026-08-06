@@ -177,6 +177,11 @@ describe("ProjectTaskWorkspacePage", () => {
     fireEvent.click(acknowledgeReviewButton);
 
     expect(screen.getByText("Evidence review acknowledged locally.")).toBeTruthy();
+    expect(
+      localStorage.getItem(
+        "soft-premium-system.projects.project-1.tasks.task-1.workspace.evidence-review",
+      ),
+    ).toBe("acknowledged");
 
     const completeButton = screen.getByRole("button", {
       name: "Complete task",
@@ -186,6 +191,11 @@ describe("ProjectTaskWorkspacePage", () => {
     fireEvent.click(completeButton);
 
     expect(screen.getByText("Task completed locally.")).toBeTruthy();
+    expect(
+      localStorage.getItem(
+        "soft-premium-system.projects.project-1.tasks.task-1.workspace.completion",
+      ),
+    ).toBe("completed");
     expect(screen.getByText("Completion Summary")).toBeTruthy();
     expect(screen.getByText("Saved result notes: Finished the task locally.")).toBeTruthy();
     expect(
@@ -213,6 +223,16 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.queryByText("Completion report copied.")).toBeNull();
     expect(screen.queryByText("Task completion handoff")).toBeNull();
     expect(screen.queryAllByText("Evidence review acknowledged locally.")).toHaveLength(0);
+    expect(
+      localStorage.getItem(
+        "soft-premium-system.projects.project-1.tasks.task-1.workspace.completion",
+      ),
+    ).toBeNull();
+    expect(
+      localStorage.getItem(
+        "soft-premium-system.projects.project-1.tasks.task-1.workspace.evidence-review",
+      ),
+    ).toBeNull();
     expect(screen.getByText("Awaiting result evidence.")).toBeTruthy();
     expect(
       (screen.getByRole("button", { name: "Acknowledge review" }) as HTMLButtonElement)
@@ -249,6 +269,19 @@ describe("ProjectTaskWorkspacePage", () => {
     });
 
     fireEvent.click(screen.getByRole("button", { name: "Save result" }));
+    fireEvent.click(screen.getByRole("button", { name: "Acknowledge review" }));
+    fireEvent.click(screen.getByRole("button", { name: "Complete task" }));
+
+    expect(
+      localStorage.getItem(
+        "soft-premium-system.projects.project-1.tasks.task-1.workspace.completion",
+      ),
+    ).toBe("completed");
+    expect(
+      localStorage.getItem(
+        "soft-premium-system.projects.project-1.tasks.task-1.workspace.evidence-review",
+      ),
+    ).toBe("acknowledged");
 
     expect(
       localStorage.getItem(
@@ -286,6 +319,11 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("task-1")).toBeTruthy();
     expect(screen.getByText("project-1")).toBeTruthy();
     expect(screen.queryByText("Result saved locally.")).toBeNull();
-    expect(screen.queryByText("Task completed locally.")).toBeNull();
+    expect(screen.getByText("Task completed locally.")).toBeTruthy();
+    expect(screen.getByText("Completion Summary")).toBeTruthy();
+    expect(screen.getByText("Task completion handoff")).toBeTruthy();
+    expect(
+      screen.getAllByText("Evidence review acknowledged locally."),
+    ).toHaveLength(2);
   });
 });
