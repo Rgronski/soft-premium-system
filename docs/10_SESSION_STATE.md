@@ -64,6 +64,7 @@ It should answer only:
 * What is the verified repository state?
 * What is blocked or unknown?
 * What is the one Next Safe Step?
+* What is the mandatory Next Session Plan?
 
 It should also record who owned diagnosis, implementation, verification, and repository actions when responsibilities are split between ChatGPT / Chief Architect, Codex, and Product Owner.
 
@@ -97,6 +98,7 @@ Allowed fields:
 * verification status
 * blockers
 * open risks
+* next session plan
 * next safe step
 
 Forbidden content:
@@ -163,6 +165,7 @@ Verification Status: [PASS OR FAIL OR PARTIAL OR BLOCKED OR UNKNOWN OR NOT APPLI
 Blockers: [VALUE OR NONE OR UNKNOWN]
 Open Risks: [VALUE OR NONE OR UNKNOWN]
 Next Safe Step: [EXACTLY ONE NEXT SAFE STEP]
+Next Session Plan: [EXACTLY ONE NEXT SESSION PLAN; MUST NOT INTRODUCE AN UNAPPROVED NEXT MILESTONE]
 ```
 
 ---
@@ -234,3 +237,4 @@ Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
 Next Safe Step: Open a new chat, attach `sps-session.zip`, and paste the START prompt.
+Next Session Plan: Open a new chat, attach `sps-session.zip`, and paste the START prompt; keep the next chat focused on Project Integrity Check before any new milestone work.

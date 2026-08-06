@@ -173,6 +173,7 @@ The audit must check:
 * Open Risks
 * Blockers
 * Parked Ideas
+* Next Session Plan
 * Next Safe Step
 
 The audit must use only factual evidence from:
@@ -340,9 +341,9 @@ Next START
 
 Session Audit checks facts.
 
-Session State records the current operational snapshot.
+Session State records the current operational snapshot and the mandatory Next Session Plan.
 
-Session Handoff transfers only the context needed by the next chat.
+Session Handoff transfers only the context needed by the next chat, including the mandatory Next Session Plan.
 
 Session Package prepares the ZIP/context for the next chat.
 
@@ -365,6 +366,8 @@ Do not duplicate the full Session Package Generator contract in this document.
 # Session Numbering
 
 `SPS OS â€” KONIEC` should record current session identity, calculate or confirm the next session number, and include Suggested Next Chat Title in the handoff.
+
+It must also record a mandatory Next Session Plan in Session State and in the handoff without inventing an unapproved next milestone.
 
 Session ID is a chat lifecycle identifier.
 
@@ -479,6 +482,7 @@ Before Session Close can be reported as `PASS`, all of the following must be pre
 * Current Chat Title present
 * Next Session ID present
 * Suggested Next Chat Title present
+* mandatory Next Session Plan present in Session State and handoff
 * Session Audit completed
 * Session State synchronized
 * current Session Handoff created
@@ -559,6 +563,7 @@ Do not duplicate the full generator contract in this document.
 The close protocol must prepare a next-chat prompt suitable for the next `SPS OS â€” START`.
 
 The prompt must preserve continuity without replacing SSOT validation in the next session.
+It must include the mandatory Next Session Plan and must not invent an unapproved next milestone.
 
 ---
 
