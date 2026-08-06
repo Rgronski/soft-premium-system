@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 061 - MS-008.19 dashboard tasks link project route fix implementation acceptance sync
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Synced the SSOT for the `MS-008.19 - Dashboard Tasks Link Project Route Fix Foundation` close result.
+* Recorded that the project dashboard `Open tasks` CTA now preserves the active project id and routes to `/projects/[id]/tasks` instead of the shared `/projects/tasks` path.
+* Recorded that the focused `src/app/projects/[id]/page.test.tsx` verification passed and the smoke test confirmed the corrected dashboard route target.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.19`.
+
+### Notes
+
+* No backend persistence, AI workspace changes, Project Brain writes, redesign, broad navigation refactor, or unrelated cleanup were introduced in this sync step.
+
 ## Session 060 - MS-008.18 main usability recovery regression verification foundation implementation acceptance sync
 
 ### Date

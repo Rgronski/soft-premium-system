@@ -146,7 +146,9 @@ describe("ProjectWorkspacePage", () => {
       screen.getByRole("link", { name: "Open repository" }).getAttribute("href"),
     ).toBe("https://example.com/repos/alpha-workspace");
     expect(screen.getAllByText("Continue active work")).toHaveLength(2);
-    expect(screen.getByRole("link", { name: "Open tasks" })).toBeTruthy();
+    expect(
+      screen.getByRole("link", { name: "Open tasks" }).getAttribute("href"),
+    ).toBe("/projects/project-1/tasks");
     expect(screen.getByRole("link", { name: "Add Task" })).toBeTruthy();
     expect(screen.getByRole("link", { name: "View all tasks" })).toBeTruthy();
     expect(screen.getByRole("link", { name: "View all knowledge" })).toBeTruthy();

@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-008.18 - Main Usability Recovery Regression Verification Foundation
+MS-008.19 - Dashboard Tasks Link Project Route Fix Foundation
 
 **Next Milestone**
 NONE
+
+MS-008.19 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Dashboard Tasks Link Project Route Fix Foundation; the repository now preserves the project-specific `Open tasks` dashboard route so `/projects/[id]/tasks` stays reachable from the project workspace header while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-008.18 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Main Usability Recovery Regression Verification Foundation; the repository now records the regression verification outcome for the accumulated usability recovery line while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 

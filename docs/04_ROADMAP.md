@@ -111,11 +111,89 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.18 - Main Usability Recovery Regression Verification Foundation
+MS-008.19 - Dashboard Tasks Link Project Route Fix Foundation
 
 ## Next
 
 NONE
+
+## MS-008.19 - Dashboard Tasks Link Project Route Fix Foundation
+
+**Milestone**
+MS-008.19 - Dashboard Tasks Link Project Route Fix Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Make the dashboard `Open tasks` action route to the project-specific tasks screen by preserving the active project id in the link target.
+
+**Product Outcome**
+The project dashboard `Open tasks` CTA now routes to `/projects/[id]/tasks` instead of the shared `/projects/tasks` path.
+
+**Implementation Evidence**
+* `src/components/workspace/WorkspaceHeader.tsx` now reads the active route project id and builds the `Open tasks` link with `/projects/${projectId}/tasks`.
+* `src/app/projects/[id]/page.test.tsx` now asserts the `Open tasks` link resolves to `/projects/project-1/tasks`.
+* Targeted verification for `src/app/projects/[id]/page.test.tsx` passed.
+* Product Owner smoke test confirmed the dashboard `Open tasks` CTA now reaches `/projects/<id>/tasks` and no longer reaches `/projects/tasks`.
+
+**Dependencies**
+* `MS-008.18 - Main Usability Recovery Regression Verification Foundation`
+
+**Allowed Implementation Scope**
+* minimal project-id-preserving route fix for the dashboard `Open tasks` CTA
+* focused test coverage for the dashboard route target
+* SSOT synchronization for the completed route fix
+
+**Forbidden Scope**
+* redesign
+* backend persistence
+* Project Brain writes
+* AI workspace changes
+* broad navigation refactor
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/components/workspace/WorkspaceHeader.tsx` owns the dashboard `Open tasks` CTA target
+* `/projects/[id]/tasks` owns the project-specific task list route
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `docs/session-handoffs/2026-08-06_061_SESSION_HANDOFF.md` own the synchronized close-state records for this milestone
+
+**Verification Plan**
+* targeted test for `src/app/projects/[id]/page.test.tsx`
+* `git diff --check`
+* smoke verification that the CTA no longer resolves to `/projects/tasks`
+
+**Rollback / Safety Expectations**
+* stop if the CTA cannot access the active project id
+* stop if the fix requires a broader route or state refactor
+* keep the milestone minimal and route-local
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+* `docs/session-handoffs/2026-08-06_061_SESSION_HANDOFF.md`
 
 ## MS-008.18 - Main Usability Recovery Regression Verification Foundation
 
