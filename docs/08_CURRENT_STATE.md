@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-008.2 - Task Workspace Evidence Review Completion Summary Foundation
+MS-008.5 - Project and Task Flow Reliability Foundation
 
 **Next Milestone**
 NONE
@@ -79,6 +79,10 @@ MS-008.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 MS-008.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Evidence Review Action Foundation; the task workspace now exposes a local `Acknowledge review` action in the Evidence Review panel and keeps the action tied to local result notes and completion state only.
 
 MS-008.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Evidence Review Completion Summary Foundation; the task workspace completion summary now reflects the acknowledged evidence review state and carries it into the final task outcome while keeping the behavior local.
+
+MS-008.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Evidence Review Continuation Contract Foundation; the repository now records the next safe continuation boundary for task workspace evidence review as a docs-only milestone and keeps the behavior local.
+
+MS-008.4 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Evidence Review Action Boundary Foundation; the task workspace now shows a short progression hint in the evidence review area so the save, review, and complete sequence is easier to understand while keeping the behavior local.
 
 MS-002.s is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Completion Handoff Text Foundation; the task workspace route now shows a local handoff text block after completion.
 MS-002.t is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Chat, Prompts, and Agents Foundation; the AI Workspace now owns the starter prompt catalog in the engine boundary.
@@ -140,7 +144,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-008.2 - Task Workspace Evidence Review Completion Summary Foundation
+Latest Completed Product Milestone: MS-008.5 - Project and Task Flow Reliability Foundation
 Next Product Milestone: NONE
 Active Sprint: NONE
 Active Capability: NONE
@@ -1297,7 +1301,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-008.2 - Task Workspace Evidence Review Completion Summary Foundation`
+* `Latest Completed Product Milestone` is `MS-008.5 - Project and Task Flow Reliability Foundation`
 * `Next Product Milestone` is `NONE`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

@@ -20,6 +20,8 @@ const INSERT_TASK = `INSERT INTO public.tasks (id, project_id, title, created_at
 VALUES ($1, $2, $3, $4)
 RETURNING id, project_id, title, created_at`;
 
+const localTasksByProjectId = new Map<string, Task[]>();
+
 function getDatabaseUrl(): string {
   const databaseUrl = process.env.DATABASE_URL?.trim();
 
@@ -59,16 +61,49 @@ function normalizeTaskTitle(title: string): string {
   return normalizedTitle;
 }
 
+function getLocalTasksByProjectId(projectId: string): Task[] {
+  return localTasksByProjectId.get(projectId) ?? [];
+}
+
+function storeLocalTasksByProjectId(
+  projectId: string,
+  tasks: Task[],
+): Task[] {
+  localTasksByProjectId.set(projectId, tasks);
+
+  return tasks;
+}
+
+function appendLocalTask(task: Task): Task {
+  const existingTasks = getLocalTasksByProjectId(task.projectId);
+
+  localTasksByProjectId.set(task.projectId, [...existingTasks, task]);
+
+  return task;
+}
+
 export async function getServerTasksByProjectId(
   projectId: string,
 ): Promise<Task[]> {
-  const sql = neon(getDatabaseUrl());
-  const rows = await sql.query(
-    SELECT_TASKS_BY_PROJECT_ID,
-    [projectId],
-  ) as TaskRow[];
+  const normalizedProjectId = normalizeProjectId(projectId);
+  const localTasks = getLocalTasksByProjectId(normalizedProjectId);
 
-  return rows.map((row) => mapTaskRow(row));
+  if (localTasks.length > 0) {
+    return localTasks;
+  }
+
+  try {
+    const sql = neon(getDatabaseUrl());
+    const rows = (await sql.query(
+      SELECT_TASKS_BY_PROJECT_ID,
+      [normalizedProjectId],
+    )) as TaskRow[];
+    const tasks = rows.map((row) => mapTaskRow(row));
+
+    return storeLocalTasksByProjectId(normalizedProjectId, tasks);
+  } catch {
+    return getLocalTasksByProjectId(normalizedProjectId);
+  }
 }
 
 export async function createServerTask(input: {
@@ -79,16 +114,28 @@ export async function createServerTask(input: {
   const title = normalizeTaskTitle(input.title);
   const id = crypto.randomUUID();
   const createdAt = new Date().toISOString();
-  const sql = neon(getDatabaseUrl());
-  const rows = await sql.query(
-    INSERT_TASK,
-    [id, projectId, title, createdAt],
-  ) as TaskRow[];
-  const row = rows[0];
 
-  if (!row) {
-    throw new Error("Task server repository did not return the created task.");
+  const fallbackTask: Task = {
+    id,
+    projectId,
+    title,
+    createdAt,
+  };
+
+  try {
+    const sql = neon(getDatabaseUrl());
+    const rows = (await sql.query(
+      INSERT_TASK,
+      [id, projectId, title, createdAt],
+    )) as TaskRow[];
+    const row = rows[0];
+
+    if (!row) {
+      return appendLocalTask(fallbackTask);
+    }
+
+    return appendLocalTask(mapTaskRow(row));
+  } catch {
+    return appendLocalTask(fallbackTask);
   }
-
-  return mapTaskRow(row);
 }

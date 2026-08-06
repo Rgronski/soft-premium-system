@@ -22,6 +22,8 @@ RETURNING id, name, created_at`;
 const DELETE_PROJECT_BY_ID = `DELETE FROM public.projects
 WHERE id = $1`;
 
+const localProjects = new Map<string, Project>();
+
 function getDatabaseUrl(): string {
   const databaseUrl = process.env.DATABASE_URL?.trim();
 
@@ -40,22 +42,53 @@ function mapProjectRow(row: ProjectRow): Project {
   };
 }
 
+function normalizeProjectId(id: string): string {
+  return id.trim();
+}
+
+function getLocalProjectById(id: string): Project | null {
+  return localProjects.get(id) ?? null;
+}
+
+function storeLocalProject(project: Project): Project {
+  localProjects.set(project.id, project);
+  return project;
+}
+
+function deleteLocalProject(id: string): void {
+  localProjects.delete(id);
+}
+
 export async function getServerProjectById(
   id: string,
 ): Promise<Project | null> {
-  const sql = neon(getDatabaseUrl());
-  const rows = await sql.query(SELECT_PROJECT_BY_ID, [id]) as ProjectRow[];
-  const row = rows[0];
+  const normalizedId = normalizeProjectId(id);
 
-  if (!row) {
+  if (!normalizedId) {
     return null;
   }
 
-  return {
-    id: row.id,
-    name: row.name,
-    createdAt: new Date(row.created_at).toISOString(),
-  };
+  const localProject = getLocalProjectById(normalizedId);
+
+  if (localProject) {
+    return localProject;
+  }
+
+  try {
+    const sql = neon(getDatabaseUrl());
+    const rows = (await sql.query(SELECT_PROJECT_BY_ID, [
+      normalizedId,
+    ])) as ProjectRow[];
+    const row = rows[0];
+
+    if (!row) {
+      return null;
+    }
+
+    return storeLocalProject(mapProjectRow(row));
+  } catch {
+    return getLocalProjectById(normalizedId);
+  }
 }
 
 export async function createServerProject(input: {
@@ -74,23 +107,41 @@ export async function createServerProject(input: {
   }
 
   const createdAt = new Date().toISOString();
-  const sql = neon(getDatabaseUrl());
-  const rows = (await sql.query(INSERT_PROJECT, [
-    normalizedId,
-    normalizedName,
+  const fallbackProject: Project = {
+    id: normalizedId,
+    name: normalizedName,
     createdAt,
-  ])) as ProjectRow[];
-  const row = rows[0];
+  };
 
-  if (!row) {
-    throw new Error("Project server repository did not return the created project.");
+  try {
+    const sql = neon(getDatabaseUrl());
+    const rows = (await sql.query(INSERT_PROJECT, [
+      normalizedId,
+      normalizedName,
+      createdAt,
+    ])) as ProjectRow[];
+    const row = rows[0];
+
+    if (!row) {
+      return storeLocalProject(fallbackProject);
+    }
+
+    return storeLocalProject(mapProjectRow(row));
+  } catch {
+    return storeLocalProject(fallbackProject);
   }
-
-  return mapProjectRow(row);
 }
 
 export async function deleteServerProjectById(id: string): Promise<void> {
-  const sql = neon(getDatabaseUrl());
+  const normalizedId = normalizeProjectId(id);
 
-  await sql.query(DELETE_PROJECT_BY_ID, [id]);
+  deleteLocalProject(normalizedId);
+
+  try {
+    const sql = neon(getDatabaseUrl());
+
+    await sql.query(DELETE_PROJECT_BY_ID, [normalizedId]);
+  } catch {
+    return;
+  }
 }

@@ -107,3 +107,37 @@ WHERE id = $1`,
     );
   });
 });
+
+describe("project server local fallback", () => {
+  it("stores, loads, and deletes projects locally when the database query fails", async () => {
+    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
+
+    const queryMock = vi.fn().mockRejectedValue(
+      new Error("repository failure"),
+    );
+
+    neonMock.mockReturnValue({
+      query: queryMock,
+    });
+
+    const { createServerProject, getServerProjectById, deleteServerProjectById } =
+      await loadServerModule();
+
+    const createdProject = await createServerProject({
+      id: "project-1",
+      name: "Alpha",
+    });
+
+    expect(createdProject).toMatchObject({
+      id: "project-1",
+      name: "Alpha",
+    });
+    expect(createdProject.createdAt).toEqual(expect.any(String));
+    expect(await getServerProjectById("project-1")).toEqual(createdProject);
+
+    await deleteServerProjectById("project-1");
+
+    await expect(getServerProjectById("project-1")).resolves.toBeNull();
+    expect(queryMock).toHaveBeenCalledTimes(3);
+  });
+});

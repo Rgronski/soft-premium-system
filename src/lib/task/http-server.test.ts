@@ -67,6 +67,11 @@ function createGetRequest(): Request {
 beforeEach(() => {
   getServerProjectByIdMock.mockReset();
   getServerTasksByProjectIdMock.mockReset();
+  getServerProjectByIdMock.mockResolvedValue({
+    id: "project-123",
+    name: "Alpha",
+    createdAt: "2026-07-23T09:00:00.000Z",
+  });
 });
 
 afterEach(() => {
@@ -230,6 +235,7 @@ describe("createPostTaskRoute", () => {
       .fn<(_: { projectId: string; title: string }) => Promise<Task>>()
       .mockResolvedValue(createdTask);
     const handler = createPostTaskRoute({
+      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -241,6 +247,8 @@ describe("createPostTaskRoute", () => {
       createContext("route-project-id"),
     );
 
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
+    expect(getServerProjectByIdMock).toHaveBeenCalledWith("route-project-id");
     expect(createServerTask).toHaveBeenCalledTimes(1);
     expect(createServerTask).toHaveBeenCalledWith({
       projectId: "route-project-id",
@@ -255,6 +263,7 @@ describe("createPostTaskRoute", () => {
       await loadTaskHttpServerModule();
     const createServerTask = vi.fn();
     const handler = createPostTaskRoute({
+      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -275,6 +284,7 @@ describe("createPostTaskRoute", () => {
       await loadTaskHttpServerModule();
     const createServerTask = vi.fn();
     const handler = createPostTaskRoute({
+      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -295,6 +305,7 @@ describe("createPostTaskRoute", () => {
       await loadTaskHttpServerModule();
     const createServerTask = vi.fn();
     const handler = createPostTaskRoute({
+      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -317,6 +328,7 @@ describe("createPostTaskRoute", () => {
       await loadTaskHttpServerModule();
     const createServerTask = vi.fn();
     const handler = createPostTaskRoute({
+      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -343,6 +355,7 @@ describe("createPostTaskRoute", () => {
       message: "ignored",
     });
     const handler = createPostTaskRoute({
+      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -372,6 +385,7 @@ describe("createPostTaskRoute", () => {
       message: "syntax error",
     });
     const handler = createPostTaskRoute({
+      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -396,6 +410,7 @@ describe("createPostTaskRoute", () => {
       new Error("DATABASE_URL is not configured."),
     );
     const handler = createPostTaskRoute({
+      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -410,6 +425,31 @@ describe("createPostTaskRoute", () => {
     expect(response.status).toBe(503);
     await expect(response.json()).resolves.toEqual({
       status: "context-unavailable",
+    });
+  });
+
+  it("returns 404 and skips create when the project lookup is missing", async () => {
+    const { createPostTaskRoute } =
+      await loadTaskHttpServerModule();
+    getServerProjectByIdMock.mockResolvedValueOnce(null);
+    const createServerTask = vi.fn();
+    const handler = createPostTaskRoute({
+      getServerProjectById: getServerProjectByIdMock,
+      createServerTask,
+    });
+
+    const response = await handler(
+      createJsonRequest({
+        title: "Ship route boundary",
+      }),
+      createContext("missing-project"),
+    );
+
+    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
+    expect(createServerTask).not.toHaveBeenCalled();
+    expect(response.status).toBe(404);
+    await expect(response.json()).resolves.toEqual({
+      status: "project-not-found",
     });
   });
 });

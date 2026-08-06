@@ -69,6 +69,54 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 057 - MS-008.5 project and task flow reliability foundation publication
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Published `MS-008.5 - Project and Task Flow Reliability Foundation` as the minimal usability improvement that keeps the project -> task -> detail -> workspace chain usable when the database-backed route layer is unavailable.
+* Added a local runtime fallback to the project and task server helpers so create/load/delete continuity stays available without changing the task workspace UI.
+* Added focused server and route tests that cover the fallback path and the task intake project existence precheck.
+
+### Notes
+
+* No task workspace UX hint work, AI workspace changes, project overview redesign, broad routing redesign, provider/model wiring, completion-summary redesign, evidence-review expansion, or unrelated refactors were introduced.
+
+## Session 057 - MS-008.4 task workspace evidence review action boundary foundation publication
+
+### Date
+
+2026-08-05
+
+### Completed
+
+* Published `MS-008.4 - Task Workspace Evidence Review Action Boundary Foundation` as the minimal usability improvement that clarifies the save, review, and complete progression inside the task workspace.
+* Added a short progression hint in the task workspace evidence review area without changing the local-only behavior.
+* Verified the focused workspace test and synchronized the SSOT snapshot while keeping unrelated surfaces unchanged.
+
+### Notes
+
+* No persistence work, API routes, provider/model wiring, routing redesign, project overview changes, AI workspace changes, broad task flow redesign, or unrelated refactors were introduced.
+
+## Session 057 - MS-008.3 task workspace evidence review continuation contract publication
+
+### Date
+
+2026-08-05
+
+### Completed
+
+* Published `MS-008.3 - Task Workspace Evidence Review Continuation Contract Foundation` as the next safe docs-only continuation contract after the completion summary milestone.
+* Kept the task workspace evidence review line local to SSOT by updating the roadmap, current state, changelog, and session state without introducing product behavior.
+* Verified the targeted SSOT diff and kept application code, persistence, routing, AI workspace, and project overview unchanged.
+
+### Notes
+
+* No application code, persistence work, routing changes, AI workspace changes, or unrelated refactors were introduced.
+
 ## Session 056 - MS-008.2 task workspace evidence review completion summary foundation publication
 
 ### Date

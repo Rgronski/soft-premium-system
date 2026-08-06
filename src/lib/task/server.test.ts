@@ -92,17 +92,7 @@ ORDER BY created_at ASC, id ASC`,
     await expect(getServerTasksByProjectId("project-1")).resolves.toEqual([]);
   });
 
-  it("throws when DATABASE_URL is missing", async () => {
-    delete process.env.DATABASE_URL;
-
-    const { getServerTasksByProjectId } = await loadServerModule();
-
-    await expect(getServerTasksByProjectId("project-1")).rejects.toThrow(
-      "DATABASE_URL is not configured.",
-    );
-  });
-
-  it("propagates SQL errors", async () => {
+  it("falls back locally when the database query fails during read", async () => {
     process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
 
     const queryMock = vi.fn().mockRejectedValue(new Error("SQL failed"));
@@ -113,9 +103,45 @@ ORDER BY created_at ASC, id ASC`,
 
     const { getServerTasksByProjectId } = await loadServerModule();
 
-    await expect(getServerTasksByProjectId("project-1")).rejects.toThrow(
-      "SQL failed",
+    await expect(getServerTasksByProjectId("project-1")).resolves.toEqual([]);
+    expect(queryMock).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("task server local fallback", () => {
+  it("stores and loads tasks locally when the database query fails", async () => {
+    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-07-23T10:11:12.000Z"));
+    vi.stubGlobal("crypto", {
+      randomUUID: vi.fn(() => "generated-task-id"),
+    });
+
+    const queryMock = vi.fn().mockRejectedValue(
+      new Error("repository failure"),
     );
+
+    neonMock.mockReturnValue({
+      query: queryMock,
+    });
+
+    const { createServerTask, getServerTasksByProjectId } =
+      await loadServerModule();
+    const createdTask = await createServerTask({
+      projectId: "project-1",
+      title: "Alpha task",
+    });
+
+    expect(createdTask).toEqual({
+      id: "generated-task-id",
+      projectId: "project-1",
+      title: "Alpha task",
+      createdAt: "2026-07-23T10:11:12.000Z",
+    });
+    await expect(getServerTasksByProjectId("project-1")).resolves.toEqual([
+      createdTask,
+    ]);
+    expect(queryMock).toHaveBeenCalledTimes(1);
   });
 });
 
@@ -192,7 +218,7 @@ RETURNING id, project_id, title, created_at`,
     ).rejects.toThrow("Task server repository requires a non-empty title.");
   });
 
-  it("propagates SQL or foreign key errors", async () => {
+  it("falls back locally when the database insert fails", async () => {
     process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-07-23T10:11:12.000Z"));
@@ -215,6 +241,12 @@ RETURNING id, project_id, title, created_at`,
         projectId: "project-1",
         title: "Task",
       }),
-    ).rejects.toThrow("violates foreign key constraint");
+    ).resolves.toEqual({
+      id: "generated-task-id",
+      projectId: "project-1",
+      title: "Task",
+      createdAt: "2026-07-23T10:11:12.000Z",
+    });
+    expect(queryMock).toHaveBeenCalledTimes(1);
   });
 });

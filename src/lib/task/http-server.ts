@@ -168,6 +168,7 @@ function isProjectForeignKeyViolation(error: unknown): boolean {
 }
 
 export function createPostTaskRoute(deps: {
+  getServerProjectById: typeof getServerProjectById;
   createServerTask: typeof createServerTask;
 }): PostTaskHttpHandler {
   return async function postTaskRoute(
@@ -183,6 +184,12 @@ export function createPostTaskRoute(deps: {
     const { id } = await context.params;
 
     try {
+      const project = await deps.getServerProjectById(id);
+
+      if (!project) {
+        return createTransportErrorResponse("project-not-found", 404);
+      }
+
       const task = await deps.createServerTask({
         projectId: id,
         title: transportBody.body.title,
@@ -205,6 +212,7 @@ export function createPostTaskRoute(deps: {
 }
 
 export const postTaskRoute = createPostTaskRoute({
+  getServerProjectById,
   createServerTask,
 });
 

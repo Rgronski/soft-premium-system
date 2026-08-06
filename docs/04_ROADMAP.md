@@ -111,11 +111,271 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.2 - Task Workspace Evidence Review Completion Summary Foundation
+MS-008.5 - Project and Task Flow Reliability Foundation
 
 ## Next
 
 NONE
+
+## MS-008.5 - Project and Task Flow Reliability Foundation
+
+**Milestone**
+MS-008.5 - Project and Task Flow Reliability Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Make the first practical SPS OS project-use path dependable by keeping project create/load and task create/load usable when the database-backed route layer is unavailable, while preserving the existing task detail and workspace flow.
+
+**Product Outcome**
+The project -> task -> detail -> workspace chain now falls back to a local runtime store when the database path is unavailable, so the project and task entry points stay usable for the real project workflow.
+
+**Implementation Evidence**
+* `src/lib/project/server.ts` now preserves project create/load/delete continuity with a local runtime fallback when the database is unavailable.
+* `src/lib/task/server.ts` now preserves task create/load continuity with a local runtime fallback when the database is unavailable.
+* `src/lib/task/http-server.ts` now checks project existence before task creation so the task intake path stays aligned with the canonical project route.
+* `src/lib/project/server.test.ts`, `src/lib/task/server.test.ts`, and `src/lib/task/http-server.test.ts` now cover the fallback and route continuity behavior.
+* `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` now keep the SSOT snapshot aligned with the published milestone.
+
+**Dependencies**
+* `MS-008.4 - Task Workspace Evidence Review Action Boundary Foundation`
+
+**Allowed Implementation Scope**
+* small project and task reliability fallback in server helpers
+* focused route/server tests for project and task continuity
+* SSOT verification and publication metadata
+* usage record for the Codex task
+
+**Forbidden Scope**
+* task workspace UX hint work
+* AI workspace changes
+* project overview redesign
+* broad routing redesign
+* provider/model wiring
+* completion-summary redesign
+* evidence-review expansion
+* persistence schema expansion unless strictly required for the minimal reliability fix
+* unrelated refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* any future implementation must stay inside the project and task flow reliability surface only
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* targeted project/task route and server tests
+* optional cheap route continuity verification if the local server is available
+* `git diff -- docs/04_ROADMAP.md docs/08_CURRENT_STATE.md docs/09_CHANGELOG.md docs/10_SESSION_STATE.md src/lib/project/server.ts src/lib/project/server.test.ts src/lib/task/server.ts src/lib/task/server.test.ts src/lib/task/http-server.ts src/lib/task/http-server.test.ts`
+* append exactly one `.usage/session.jsonl` record for Session 057
+* confirm no unrelated files were changed
+
+**Codex Implementation Handoff Boundary**
+* If implementation is approved later, Codex may only continue inside project and task flow reliability and must not expand into task workspace UI polish, AI workspace, project overview redesign, completion-summary redesign, or unrelated flow changes.
+
+**Rollback / Safety Expectations**
+* stop if the reliability fix needs schema changes or a broader persistence layer
+* stop if the scope expands beyond project and task create/load continuity
+* keep the milestone minimal and local to the project/task route and server surface
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+## MS-008.4 - Task Workspace Evidence Review Action Boundary Foundation
+
+**Milestone**
+MS-008.4 - Task Workspace Evidence Review Action Boundary Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Make the evidence review step a clearer first-class action boundary in the task workspace so the save, review, and complete progression is easier to understand without changing the local-only flow.
+
+**Product Outcome**
+The task workspace now shows a short progression hint in the evidence review area that makes the save -> review -> complete sequence clearer while keeping the behavior local.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now shows a short evidence-review progression hint in the task result panel.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now covers the visible progression hint along with the existing review and completion states.
+* `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` now keep the SSOT snapshot aligned with the published milestone.
+
+**Dependencies**
+* `MS-008.3 - Task Workspace Evidence Review Continuation Contract Foundation`
+
+**Allowed Implementation Scope**
+* one small UI clarity improvement in the task workspace evidence review area
+* focused task workspace test coverage
+* SSOT verification and publication metadata
+* usage record for the Codex task
+
+**Forbidden Scope**
+* persistence work
+* API routes
+* provider/model wiring
+* routing redesign
+* project overview changes
+* AI workspace changes
+* broad task flow redesign
+* unrelated refactors
+* expanding beyond the task workspace evidence review surface
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* any future implementation must stay inside the task workspace evidence review surface only
+
+**Verification Plan**
+* `git status -sb`
+* `npm.cmd test -- src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* `git diff --check`
+* `git diff -- docs/04_ROADMAP.md docs/08_CURRENT_STATE.md docs/09_CHANGELOG.md docs/10_SESSION_STATE.md src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* append exactly one `.usage/session.jsonl` record for Session 057
+* confirm no unrelated files were changed
+
+**Codex Implementation Handoff Boundary**
+* If implementation is approved later, Codex may only continue inside the task workspace evidence review surface and must not expand into persistence, routing, AI workspace, project overview, or unrelated task flow changes.
+
+**Rollback / Safety Expectations**
+* stop if the clarity hint needs broader workspace refactoring
+* stop if the scope expands beyond task workspace evidence review continuity
+* keep the milestone minimal and local to the task workspace evidence surface
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+## MS-008.3 - Task Workspace Evidence Review Continuation Contract Foundation
+
+**Milestone**
+MS-008.3 - Task Workspace Evidence Review Continuation Contract Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Formalize the next safe continuation boundary for task workspace evidence review after the completion summary milestone without introducing product behavior or widening the task workspace surface.
+
+**Product Outcome**
+The repository now captures the MS-008.3 continuation contract as a docs-only milestone and keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+**Implementation Evidence**
+* `docs/04_ROADMAP.md` now records the MS-008.3 continuation contract as the latest completed milestone.
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` now keep the synchronized SSOT snapshot aligned with the published contract.
+* no application code, persistence, routing, AI workspace, or project overview behavior changed.
+
+**Dependencies**
+* `MS-008.2 - Task Workspace Evidence Review Completion Summary Foundation`
+
+**Allowed Implementation Scope**
+* docs-only continuation contract publication
+* SSOT verification and publication metadata
+* usage record for the Codex task
+
+**Forbidden Scope**
+* application code
+* API routes
+* provider/model wiring
+* persistence
+* UI redesign
+* unrelated refactors
+* expanding beyond the approved task workspace evidence review continuation boundary
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot
+* any future implementation must stay inside the task workspace evidence review surface only
+
+**Verification Plan**
+* `git status -sb`
+* `git diff -- docs/04_ROADMAP.md docs/08_CURRENT_STATE.md docs/09_CHANGELOG.md docs/10_SESSION_STATE.md`
+* `git diff --check`
+* append exactly one `.usage/session.jsonl` record for Session 057
+* confirm no unrelated files were changed
+
+**Codex Implementation Handoff Boundary**
+* If implementation is approved later, Codex may only continue inside the task workspace evidence review surface and must not expand into persistence, routing, AI workspace, project overview, or unrelated task flow changes.
+
+**Rollback / Safety Expectations**
+* stop if the continuation contract needs product behavior
+* stop if the scope expands beyond task workspace evidence review continuity
+* keep the milestone minimal and docs-only
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-008.2 - Task Workspace Evidence Review Completion Summary Foundation
 
