@@ -214,27 +214,27 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-06
-Current Session ID: 057
-Current Chat Title: 057 SPS OS - MS-008.5 Project and Task Flow Reliability Foundation
-Next Session ID: 058
-Suggested Next Chat Title: 058 SPS OS - Project Integrity Check
+Current Session ID: 058
+Current Chat Title: 058 SPS OS - MS-008.6 Next Usable SPS App State Discovery Foundation
+Next Session ID: 059
+Suggested Next Chat Title: 059 SPS OS - Usable App State Next Step Decision
 Active Capability: NONE
-Active Work Item: Session 057 close protocol
+Active Work Item: Session 058 close protocol
 Current Mode: CODEX EXECUTION
-Completed Capability Items: Session 055 verified real repo status; Session 055 published MS-007.0; Session 055 ran the real new-task pilot; Session 055 resolved the project persistence blocker; Session 055 published MS-007.1; Session 055 fixed the task workspace link route; Session 055 published MS-007.2; Session 055 ran the final new-task pilot; Session 055 published MS-007.3; Session 055 refreshed close SSOT for package generation; Session 055 published MS-007.4; Session 055 regenerated the fresh package after the final close push; Session 055 synchronized SSOT; Session 055 recorded usage entry; Session 056 published MS-007.5; Session 056 published MS-007.6; Session 056 published MS-008.0; Session 056 published MS-008.1; Session 056 published MS-008.2; Session 056 synchronized SSOT; Session 056 recorded usage entry; Session 057 published MS-008.3; Session 057 published MS-008.4; Session 057 published MS-008.5; Session 057 reconciled the remaining MS-008.4 workspace files; Session 057 synchronized the close SSOT; Session 057 prepared the current handoff; Session 057 closed the session package
+Completed Capability Items: Session 055 verified real repo status; Session 055 published MS-007.0; Session 055 ran the real new-task pilot; Session 055 resolved the project persistence blocker; Session 055 published MS-007.1; Session 055 fixed the task workspace link route; Session 055 published MS-007.2; Session 055 ran the final new-task pilot; Session 055 published MS-007.3; Session 055 refreshed close SSOT for package generation; Session 055 published MS-007.4; Session 055 regenerated the fresh package after the final close push; Session 055 synchronized SSOT; Session 055 recorded usage entry; Session 056 published MS-007.5; Session 056 published MS-007.6; Session 056 published MS-008.0; Session 056 published MS-008.1; Session 056 published MS-008.2; Session 056 synchronized SSOT; Session 056 recorded usage entry; Session 057 published MS-008.3; Session 057 published MS-008.4; Session 057 published MS-008.5; Session 057 reconciled the remaining MS-008.4 workspace files; Session 057 synchronized the close SSOT; Session 057 prepared the current handoff; Session 057 closed the session package; Session 058 published CAP-002 protocol/docs patch; Session 058 published MS-008.6; Session 058 synchronized the close SSOT; Session 058 prepared the current handoff; Session 058 closed the session package
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-008.5 - Project and Task Flow Reliability Foundation
+Latest Completed Product Milestone: MS-008.6 - Next Usable SPS App State Discovery Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 057 closed the session package
+Latest Completed Capability Item: Session 058 closed the session package
 Current Sprint: NONE
-Platform Priority: Prepare Session 058 bootstrap and Project Integrity Check.
+Platform Priority: Prepare Session 059 bootstrap and Project Integrity Check.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 37f427b
+Latest Verified Commit: 9b3ad57
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
 Next Safe Step: Open a new chat, attach `sps-session.zip`, and paste the START prompt.
-Next Session Plan: Open a new chat, attach `sps-session.zip`, and paste the START prompt; keep the next chat focused on Project Integrity Check before any new milestone work.
+Next Session Plan: Open a new chat, attach `sps-session.zip`, and paste the START prompt; start with Project Integrity Check, then decide the next concrete MS-008.x application milestone after MS-008.6.
