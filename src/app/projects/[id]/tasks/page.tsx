@@ -256,7 +256,7 @@ export default function ProjectTasksPage() {
                 <Link
                   key={task.id}
                   href={`/projects/${projectId}/tasks/${task.id}`}
-                  className="rounded-xl border border-zinc-800 bg-zinc-900 p-4"
+                  className="block w-full rounded-xl border border-zinc-800 bg-zinc-900 p-4 text-left"
                 >
                   <p className="text-base font-medium text-zinc-100">
                     {task.title}

@@ -111,11 +111,89 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.19 - Dashboard Tasks Link Project Route Fix Foundation
+MS-008.20 - Task List Card Layout Fix Foundation
 
 ## Next
 
 NONE
+
+## MS-008.20 - Task List Card Layout Fix Foundation
+
+**Milestone**
+MS-008.20 - Task List Card Layout Fix Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Make task cards on `/projects/[id]/tasks` stretch to a consistent full-width layout while preserving the existing task link behavior.
+
+**Product Outcome**
+The project task list now renders each task card as a full-width clickable row with left-aligned content.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/page.tsx` now renders each task card link with `block w-full text-left`.
+* `src/app/projects/[id]/tasks/page.test.tsx` now asserts the first task card remains a link, keeps the correct `href`, and carries the full-width layout classes.
+* Targeted verification for `src/app/projects/[id]/tasks/page.test.tsx` passed.
+* Smoke check confirmed the task card stays clickable, full-width, and evenly laid out.
+
+**Dependencies**
+* `MS-008.19 - Dashboard Tasks Link Project Route Fix Foundation`
+
+**Allowed Implementation Scope**
+* minimal task card layout fix on the project task list route
+* focused test coverage for the task card link wrapper
+* SSOT synchronization for the completed layout fix
+
+**Forbidden Scope**
+* redesign
+* backend persistence
+* Project Brain writes
+* AI workspace changes
+* broad refactor
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/projects/[id]/tasks/page.tsx` owns the task list card wrapper layout
+* `/projects/[id]/tasks` owns the project-specific task list route
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `docs/session-handoffs/2026-08-06_062_SESSION_HANDOFF.md` own the synchronized close-state records for this milestone
+
+**Verification Plan**
+* targeted test for `src/app/projects/[id]/tasks/page.test.tsx`
+* `git diff --check`
+* smoke check of `/projects/<id>/tasks` to confirm the cards stay full-width and clickable
+
+**Rollback / Safety Expectations**
+* stop if the task card requires broader page redesign
+* stop if the fix requires backend or Project Brain changes
+* keep the milestone minimal and layout-local
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+* `docs/session-handoffs/2026-08-06_062_SESSION_HANDOFF.md`
 
 ## MS-008.19 - Dashboard Tasks Link Project Route Fix Foundation
 

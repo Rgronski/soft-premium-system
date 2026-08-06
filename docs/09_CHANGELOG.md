@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 062 - MS-008.20 task list card layout fix implementation acceptance sync
+
+### Date
+
+2026-08-06
+
+### Completed
+
+* Synced the SSOT for the `MS-008.20 - Task List Card Layout Fix Foundation` close result.
+* Recorded that each task card on `/projects/[id]/tasks` now renders as a full-width clickable row with left-aligned content.
+* Recorded that the focused `src/app/projects/[id]/tasks/page.test.tsx` verification passed and the smoke check confirmed the cards stay full-width and clickable.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.20`.
+
+### Notes
+
+* No backend persistence, AI workspace changes, Project Brain writes, redesign, broad refactor, or unrelated cleanup were introduced in this sync step.
+
 ## Session 061 - MS-008.19 dashboard tasks link project route fix implementation acceptance sync
 
 ### Date
