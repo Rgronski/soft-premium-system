@@ -50,7 +50,7 @@ MS-008.6 - Next Usable SPS App State Discovery Foundation
 **Next Milestone**
 NONE
 
-MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository now records the next smallest application milestone candidate for usable SPS task/workspace flow without changing UI or product behavior.
+MS-008.5 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project and Task Flow Reliability Foundation; the repository now keeps the latest completed milestone baseline stable while the next usable app state discovery remains documented separately.
 
 MS-006.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Milestone Queue Foundation; the repository now records the next three small milestones toward the New Task / New Project Start Flow without introducing application code after Session 053 close.
 
