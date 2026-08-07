@@ -111,11 +111,86 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.25 - Task Workspace Complete Task Feedback Foundation
+MS-008.26 - Task Workspace Copy Report Feedback Foundation
 
 ## Next
 
 NONE
+
+## MS-008.26 - Task Workspace Copy Report Feedback Foundation
+
+**Milestone**
+MS-008.26 - Task Workspace Copy Report Feedback Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Give the task workspace copy-report action a visible local completion signal without changing persistence, backend flow, or the existing completion handoff content.
+
+**Product Outcome**
+The task workspace completion area now shows a local `Copied locally` button state after the completion report is copied while preserving the completion summary and handoff output.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now shows `Copied locally` on the copy-report button after the completion report is copied locally.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies the copy-report button reports the copied state after a successful local copy.
+* Targeted verification for `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` passed.
+
+**Dependencies**
+* `MS-008.25 - Task Workspace Complete Task Feedback Foundation`
+
+**Allowed Implementation Scope**
+* minimal local copy-feedback change in the task workspace completion area
+* focused test coverage for the visible copied state
+* SSOT synchronization for the completed workspace milestone
+
+**Forbidden Scope**
+* backend changes
+* persistence changes
+* workflow branching
+* broad refactor
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` owns the task workspace copy-report feedback
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` owns the focused verification for the copied-state feedback
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized close-state records for this milestone
+
+**Verification Plan**
+* targeted test for `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* `git diff --check`
+* focused manual smoke of the copy-feedback state if needed
+
+**Rollback / Safety Expectations**
+* stop if the copy-feedback state requires broader workflow changes
+* stop if the fix requires backend or Project Brain engine changes
+* keep the milestone minimal and local
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-008.25 - Task Workspace Complete Task Feedback Foundation
 

@@ -243,6 +243,9 @@ describe("ProjectTaskWorkspacePage", () => {
     });
 
     expect(screen.getByText("Completion report copied.")).toBeTruthy();
+    expect(
+      screen.getByRole("button", { name: "Copied locally" }),
+    ).toBeTruthy();
 
     fireEvent.change(screen.getByLabelText("Result notes"), {
       target: { value: "Edited after completion." },

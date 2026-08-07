@@ -508,7 +508,9 @@ Saved result notes: ${resultNotes}${taskEvidenceReviewState === "acknowledged" ?
                     className="inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800 disabled:cursor-not-allowed disabled:border-zinc-800 disabled:text-zinc-600"
                     onClick={handleCopyCompletionReport}
                   >
-                    Copy report
+                    {taskCompletionReportCopyState === "copied"
+                      ? "Copied locally"
+                      : "Copy report"}
                   </button>
                   {taskCompletionReportCopyState === "copied" ? (
                     <p className="text-sm text-zinc-400" aria-live="polite">
