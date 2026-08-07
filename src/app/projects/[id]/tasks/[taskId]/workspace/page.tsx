@@ -4,8 +4,10 @@ import {
   getProjectWorkspaceEntry,
   type ProjectWorkspaceEntry,
 } from "@/lib/project-brain/engine";
+import { getProjectFromServer } from "@/lib/project/browser-server";
 import { getTasksFromServer, TaskServerError } from "@/lib/task/browser-server";
 import type { Task } from "@/lib/task/types";
+import type { WorkflowNextStep } from "@/lib/workflow/types";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
@@ -106,6 +108,8 @@ export default function ProjectTaskWorkspacePage() {
     useState<TaskCompletionReportCopyState>("idle");
   const [taskEvidenceReviewState, setTaskEvidenceReviewState] =
     useState<TaskEvidenceReviewState>("idle");
+  const [canonicalNextStep, setCanonicalNextStep] =
+    useState<WorkflowNextStep | null>(null);
 
   const projectId = params.id;
   const taskId = params.taskId;
@@ -124,6 +128,8 @@ export default function ProjectTaskWorkspacePage() {
 
   const taskWorkspace = useMemo(() => state.task, [state.task]);
   const repositoryUrl = workspaceEntry?.workspace.overview.project.repositoryUrl;
+  const taskWorkspaceNextStep =
+    workspaceEntry?.workspace.overview.workflow.nextStep ?? canonicalNextStep;
   const isResultNotesEmpty = resultNotes.trim().length === 0;
   const evidenceReviewStatus =
     taskEvidenceReviewState === "acknowledged"
@@ -243,6 +249,59 @@ export default function ProjectTaskWorkspacePage() {
     setTaskCompletionReportCopyState("idle");
   }, [projectId, taskId]);
 
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadCanonicalNextStep() {
+      if (workspaceEntry) {
+        if (!ignore) {
+          setCanonicalNextStep(
+            workspaceEntry.workspace.overview.workflow.nextStep ?? null,
+          );
+        }
+
+        return;
+      }
+
+      try {
+        const [project, tasks] = await Promise.all([
+          getProjectFromServer(projectId),
+          getTasksFromServer(projectId),
+        ]);
+
+        if (!project || ignore) {
+          return;
+        }
+
+        const nextStep: WorkflowNextStep =
+          tasks.length > 0
+            ? {
+                id: "continue-active-work",
+                label: "Continue active work",
+                description:
+                  "Continue the active workflow item before starting new work.",
+              }
+            : {
+                id: "start-next-work",
+                label: "Start next work",
+                description: "Start the next safe workflow item.",
+              };
+
+        setCanonicalNextStep(nextStep);
+      } catch {
+        if (!ignore) {
+          setCanonicalNextStep(null);
+        }
+      }
+    }
+
+    void loadCanonicalNextStep();
+
+    return () => {
+      ignore = true;
+    };
+  }, [projectId, workspaceEntry]);
+
   return (
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
       <div className="space-y-6">
@@ -259,6 +318,20 @@ export default function ProjectTaskWorkspacePage() {
         </div>
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+          {taskWorkspaceNextStep ? (
+            <div className="mb-4 rounded-xl border border-zinc-800 bg-zinc-900 p-4">
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                Next Step Action
+              </p>
+              <p className="mt-2 text-base font-medium text-zinc-50">
+                {taskWorkspaceNextStep.label}
+              </p>
+              <p className="mt-2 text-sm text-zinc-400">
+                {taskWorkspaceNextStep.description}
+              </p>
+            </div>
+          ) : null}
+
           <div className="mb-4 rounded-xl border border-zinc-800 bg-zinc-900 p-4">
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
               Repository Context

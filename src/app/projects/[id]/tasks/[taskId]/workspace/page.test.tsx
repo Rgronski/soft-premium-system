@@ -11,6 +11,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 const useParamsMock = vi.fn(() => ({ id: "project-1", taskId: "task-1" }));
 const getProjectWorkspaceEntryMock = vi.fn();
+const getProjectFromServerMock = vi.fn();
 const getTasksFromServerMock = vi.fn();
 const writeTextMock = vi.fn();
 
@@ -21,6 +22,11 @@ vi.mock("next/navigation", () => ({
 vi.mock("@/lib/project-brain/engine", () => ({
   getProjectWorkspaceEntry: (projectId: string) =>
     getProjectWorkspaceEntryMock(projectId),
+}));
+
+vi.mock("@/lib/project/browser-server", () => ({
+  getProjectFromServer: (projectId: string) =>
+    getProjectFromServerMock(projectId),
 }));
 
 vi.mock("@/lib/task/browser-server", () => ({
@@ -88,6 +94,8 @@ describe("ProjectTaskWorkspacePage", () => {
         knowledgeEntries: [],
       },
     });
+    getProjectFromServerMock.mockReset();
+    getProjectFromServerMock.mockResolvedValue(null);
     getTasksFromServerMock.mockReset();
     getTasksFromServerMock.mockResolvedValue([
       {
@@ -115,6 +123,13 @@ describe("ProjectTaskWorkspacePage", () => {
 
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledTimes(1);
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledWith("project-1");
+    expect(screen.getByText("Next Step Action")).toBeTruthy();
+    expect(screen.getByText("Start next work")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Ready to start the next work item.",
+      ),
+    ).toBeTruthy();
     expect(screen.getByText("Repository Context")).toBeTruthy();
     expect(screen.getByText("Open repository")).toBeTruthy();
     expect(screen.getByText("Task Handoff")).toBeTruthy();
@@ -325,5 +340,74 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(
       screen.getAllByText("Evidence review acknowledged locally."),
     ).toHaveLength(2);
+  });
+
+  test("does not render the next step block when workflow nextStep is unavailable", async () => {
+    getProjectWorkspaceEntryMock.mockReturnValueOnce({
+      projectId: "project-1",
+      workspace: {
+        overview: {
+          project: {
+            id: "project-1",
+            name: "Project Alpha",
+          },
+          counts: {
+            tasks: 1,
+            knowledgeEntries: 0,
+          },
+          workflow: {
+            health: "ready",
+            confidence: 0.5,
+            warnings: 0,
+            blockers: 0,
+          },
+        },
+        tasks: [
+          {
+            id: "task-1",
+            title: "First task",
+          },
+        ],
+        knowledgeEntries: [],
+      },
+    });
+
+    render(<ProjectTaskWorkspacePage />);
+
+    await waitFor(() => {
+      expect(getTasksFromServerMock).toHaveBeenCalledTimes(1);
+    });
+
+    expect(screen.queryByText("Next Step Action")).toBeNull();
+  });
+
+  test("falls back to the canonical server workspace path when Project Brain is unavailable", async () => {
+    getProjectWorkspaceEntryMock.mockReturnValueOnce(null);
+    getProjectFromServerMock.mockResolvedValueOnce({
+      id: "project-1",
+      name: "Project Alpha",
+      createdAt: "2026-08-03T10:00:00.000Z",
+    });
+    getTasksFromServerMock.mockResolvedValueOnce([
+      {
+        id: "task-1",
+        projectId: "project-1",
+        title: "First task",
+        createdAt: "2026-07-23T10:00:00.000Z",
+      },
+    ]);
+
+    render(<ProjectTaskWorkspacePage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Next Step Action")).toBeTruthy();
+    });
+
+    expect(screen.getByText("Continue active work")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Continue the active workflow item before starting new work.",
+      ),
+    ).toBeTruthy();
   });
 });
