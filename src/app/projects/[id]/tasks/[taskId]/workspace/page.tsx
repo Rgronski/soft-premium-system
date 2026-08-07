@@ -418,7 +418,9 @@ export default function ProjectTaskWorkspacePage() {
                 disabled={!canAcknowledgeEvidenceReview}
                 onClick={handleAcknowledgeEvidenceReview}
               >
-                Acknowledge review
+                {taskEvidenceReviewState === "acknowledged"
+                  ? "Acknowledged locally"
+                  : "Acknowledge review"}
               </button>
             </div>
             <label

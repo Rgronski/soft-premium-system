@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 063 - MS-008.24 task workspace evidence review acknowledgement feedback foundation implementation acceptance sync
+
+### Date
+
+2026-08-07
+
+### Completed
+
+* Synced the SSOT for the `MS-008.24 - Task Workspace Evidence Review Acknowledgement Feedback Foundation` close result.
+* Recorded that the task workspace evidence review area now shows a local `Acknowledged locally` state on the evidence-review button after a successful local acknowledgement.
+* Recorded that the focused `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` verification passed.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.24`.
+
+### Notes
+
+* No backend persistence, Project Brain writes, navigation changes, redesign, broad refactor, or unrelated cleanup were introduced in this sync step.
+* Recorded the Session 063 usage entry in `.usage/session.jsonl`.
+
 ## Session 063 - MS-008.23 task workspace result notes save feedback foundation implementation acceptance sync
 
 ### Date

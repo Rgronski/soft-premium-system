@@ -206,6 +206,9 @@ describe("ProjectTaskWorkspacePage", () => {
         "soft-premium-system.projects.project-1.tasks.task-1.workspace.evidence-review",
       ),
     ).toBe("acknowledged");
+    expect(
+      screen.getByRole("button", { name: "Acknowledged locally" }),
+    ).toBeTruthy();
 
     const completeButton = screen.getByRole("button", {
       name: "Complete task",
