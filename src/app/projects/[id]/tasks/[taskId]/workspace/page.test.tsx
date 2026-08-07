@@ -138,6 +138,8 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(document.activeElement).toBe(screen.getByLabelText("Result notes"));
     expect(screen.getByText("Repository Context")).toBeTruthy();
     expect(screen.getByText("Open repository")).toBeTruthy();
+    fireEvent.click(screen.getByRole("link", { name: "Open repository" }));
+    expect(screen.getByText("Repository opened locally.")).toBeTruthy();
     expect(screen.getByText("Task Handoff")).toBeTruthy();
     expect(screen.getByText("Prepare this task for Codex review with the current workspace and repository context.")).toBeTruthy();
     const codexHandoffLink = screen.getByRole("link", { name: "Handoff to Codex" });

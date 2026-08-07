@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-008.32 - Task Workspace Codex Handoff Jump Feedback Foundation
+MS-008.33 - Task Workspace Repository Open Feedback Foundation
 
 **Next Milestone**
 NONE
+
+MS-008.33 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Repository Open Feedback Foundation; the repository now shows a local `Repository opened locally.` status after the repository link is used while keeping the repository context visible and keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-008.32 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Codex Handoff Jump Feedback Foundation; the repository now shows a local `Codex handoff opened locally.` status after the Codex handoff link is used while keeping the task handoff section visible and keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 

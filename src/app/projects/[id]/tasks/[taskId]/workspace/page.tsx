@@ -40,6 +40,7 @@ type TaskResultSaveState = "idle" | "saved";
 type TaskCompletionState = "idle" | "completed";
 type TaskCompletionReportCopyState = "idle" | "copied";
 type TaskEvidenceReviewState = "idle" | "acknowledged";
+type TaskRepositoryOpenState = "idle" | "opened";
 
 function getTaskResultNotesStorageKey(projectId: string, taskId: string) {
   return `soft-premium-system.projects.${projectId}.tasks.${taskId}.workspace.result-notes`;
@@ -116,6 +117,8 @@ export default function ProjectTaskWorkspacePage() {
     useState<"idle" | "restored">("idle");
   const [taskCodexHandoffJumpState, setTaskCodexHandoffJumpState] =
     useState<"idle" | "jumped">("idle");
+  const [taskRepositoryOpenState, setTaskRepositoryOpenState] =
+    useState<TaskRepositoryOpenState>("idle");
   const [taskEvidenceReviewState, setTaskEvidenceReviewState] =
     useState<TaskEvidenceReviewState>("idle");
   const [canonicalNextStep, setCanonicalNextStep] =
@@ -178,6 +181,7 @@ export default function ProjectTaskWorkspacePage() {
       taskCompletionResetState === "reset" ? "restored" : "idle",
     );
     setTaskCodexHandoffJumpState("idle");
+    setTaskRepositoryOpenState("idle");
     setTaskEvidenceReviewState("idle");
   }
 
@@ -197,6 +201,7 @@ export default function ProjectTaskWorkspacePage() {
     setTaskCompletionResetState("idle");
     setTaskCompletionRestoreState("idle");
     setTaskCodexHandoffJumpState("idle");
+    setTaskRepositoryOpenState("idle");
   }
 
   function handleAcknowledgeEvidenceReview() {
@@ -231,6 +236,10 @@ export default function ProjectTaskWorkspacePage() {
 
   function handleCodexHandoffJump() {
     setTaskCodexHandoffJumpState("jumped");
+  }
+
+  function handleRepositoryOpen() {
+    setTaskRepositoryOpenState("opened");
   }
 
   useEffect(() => {
@@ -390,6 +399,7 @@ export default function ProjectTaskWorkspacePage() {
                 href={repositoryUrl}
                 target="_blank"
                 rel="noreferrer noopener"
+                onClick={handleRepositoryOpen}
                 className="mt-2 inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
               >
                 Open repository
@@ -399,6 +409,11 @@ export default function ProjectTaskWorkspacePage() {
                 Repository context unavailable.
               </p>
             )}
+            {taskRepositoryOpenState === "opened" ? (
+              <p className="mt-2 text-sm text-zinc-400" aria-live="polite">
+                Repository opened locally.
+              </p>
+            ) : null}
           </div>
 
           <div
