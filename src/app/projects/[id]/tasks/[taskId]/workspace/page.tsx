@@ -108,6 +108,8 @@ export default function ProjectTaskWorkspacePage() {
     useState<TaskCompletionReportCopyState>("idle");
   const [taskCompletionReportCopyResetState, setTaskCompletionReportCopyResetState] =
     useState<"idle" | "reset">("idle");
+  const [taskCompletionReportCopyRestoreState, setTaskCompletionReportCopyRestoreState] =
+    useState<"idle" | "restored">("idle");
   const [taskCompletionResetState, setTaskCompletionResetState] =
     useState<"idle" | "reset">("idle");
   const [taskCompletionRestoreState, setTaskCompletionRestoreState] =
@@ -166,6 +168,9 @@ export default function ProjectTaskWorkspacePage() {
     setTaskCompletionState("idle");
     setTaskCompletionReportCopyState("idle");
     setTaskCompletionReportCopyResetState("idle");
+    setTaskCompletionReportCopyRestoreState(
+      taskCompletionReportCopyResetState === "reset" ? "restored" : "idle",
+    );
     setTaskCompletionResetState("idle");
     setTaskCompletionRestoreState(
       taskCompletionResetState === "reset" ? "restored" : "idle",
@@ -185,6 +190,7 @@ export default function ProjectTaskWorkspacePage() {
     setTaskCompletionState("completed");
     setTaskCompletionReportCopyState("idle");
     setTaskCompletionReportCopyResetState("idle");
+    setTaskCompletionReportCopyRestoreState("idle");
     setTaskCompletionResetState("idle");
     setTaskCompletionRestoreState("idle");
   }
@@ -216,6 +222,7 @@ export default function ProjectTaskWorkspacePage() {
 
     setTaskCompletionReportCopyState("copied");
     setTaskCompletionReportCopyResetState("idle");
+    setTaskCompletionReportCopyRestoreState("idle");
   }
 
   useEffect(() => {
@@ -471,6 +478,7 @@ export default function ProjectTaskWorkspacePage() {
                 setTaskCompletionReportCopyResetState(
                   hadCopiedCompletionHandoff ? "reset" : "idle",
                 );
+                setTaskCompletionReportCopyRestoreState("idle");
                 setTaskCompletionResetState(hadCompletedFlow ? "reset" : "idle");
                 setTaskCompletionRestoreState("idle");
                 setTaskEvidenceReviewState("idle");
@@ -496,6 +504,11 @@ export default function ProjectTaskWorkspacePage() {
               ) : resultSaveState === "saved" ? (
                 <p className="text-sm text-zinc-400" aria-live="polite">
                   Result saved locally.
+                </p>
+              ) : null}
+              {taskCompletionReportCopyRestoreState === "restored" ? (
+                <p className="text-sm text-zinc-400" aria-live="polite">
+                  Completion handoff restored locally.
                 </p>
               ) : null}
             </div>

@@ -111,16 +111,16 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.30 - Task Workspace Completion Handoff Reset Feedback Foundation
+MS-008.31 - Task Workspace Completion Handoff Restore Feedback Foundation
 
 ## Next
 
 NONE
 
-## MS-008.30 - Task Workspace Completion Handoff Reset Feedback Foundation
+## MS-008.31 - Task Workspace Completion Handoff Restore Feedback Foundation
 
 **Milestone**
-MS-008.30 - Task Workspace Completion Handoff Reset Feedback Foundation
+MS-008.31 - Task Workspace Completion Handoff Restore Feedback Foundation
 
 **Type**
 Product Milestone
@@ -147,14 +147,14 @@ PUBLISHED
 COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Purpose**
-Give the task workspace completion handoff copy state a visible local signal when edited result notes clear the copied completion handoff, without changing persistence, backend flow, or the existing completion flow.
+Give the task workspace completion handoff copy state a visible local signal when updated result notes restore the copied completion handoff, without changing persistence, backend flow, or the existing completion flow.
 
 **Product Outcome**
-The task workspace now shows a local `Completion handoff reset locally.` status after edited result notes clear a copied completion handoff while keeping the completion summary and handoff output visible until the edit clears it.
+The task workspace now shows a local `Completion handoff restored locally.` status after updated result notes restore a copied completion handoff while keeping the completion summary and handoff output visible after the restoration.
 
 **Implementation Evidence**
-* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now shows `Completion handoff reset locally.` after edited result notes clear the copied completion handoff state.
-* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies the handoff reset message appears after editing result notes from the copied handoff state.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now shows `Completion handoff restored locally.` after updated result notes restore the copied completion handoff state.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies the handoff restore message appears after saving updated result notes from the copied handoff reset state.
 * Targeted verification for `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` passed.
 
 **Dependencies**

@@ -264,6 +264,7 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(
       screen.getByRole("button", { name: "Restored locally" }),
     ).toBeTruthy();
+    expect(screen.getByText("Completion handoff restored locally.")).toBeTruthy();
     expect(screen.queryByText("Completion Summary")).toBeNull();
     expect(screen.queryByText("Task completed locally.")).toBeNull();
     expect(screen.queryByText("Completion handoff copied.")).toBeNull();
