@@ -130,6 +130,12 @@ describe("ProjectTaskWorkspacePage", () => {
         "Ready to start the next work item.",
       ),
     ).toBeTruthy();
+    const continueToResultNotesButton = screen.getByRole("button", {
+      name: "Continue to result notes",
+    }) as HTMLButtonElement;
+    expect(continueToResultNotesButton).toBeTruthy();
+    fireEvent.click(continueToResultNotesButton);
+    expect(document.activeElement).toBe(screen.getByLabelText("Result notes"));
     expect(screen.getByText("Repository Context")).toBeTruthy();
     expect(screen.getByText("Open repository")).toBeTruthy();
     expect(screen.getByText("Task Handoff")).toBeTruthy();

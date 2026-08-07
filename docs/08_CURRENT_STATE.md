@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-008.21 - Task Workspace Next Product Step Foundation
+MS-008.22 - Task Workspace Next Step Action Foundation
 
 **Next Milestone**
 NONE
+
+MS-008.22 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Next Step Action Foundation; the repository now offers a local `Continue to result notes` action that focuses the task result notes field while keeping the projected next step visible and keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-008.21 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Next Product Step Foundation; the repository now shows the projected next step as a neutral read-only block in the task workspace start area while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
@@ -1334,8 +1336,9 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-008.21 - Task Workspace Next Product Step Foundation`
+* `Latest Completed Product Milestone` is `MS-008.22 - Task Workspace Next Step Action Foundation`
 * `Next Product Milestone` is `NONE`
+* `MS-008.22` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Next Step Action Foundation; the repository now offers a local `Continue to result notes` action that focuses the task result notes field while keeping the projected next step visible and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.12` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`
 * `CAP-005` is `COMPLETED / PUBLISHED / CLOSED`

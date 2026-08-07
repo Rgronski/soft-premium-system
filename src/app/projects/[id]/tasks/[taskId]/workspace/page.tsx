@@ -9,7 +9,7 @@ import { getTasksFromServer, TaskServerError } from "@/lib/task/browser-server";
 import type { Task } from "@/lib/task/types";
 import type { WorkflowNextStep } from "@/lib/workflow/types";
 import { useParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 function getTaskWorkspaceErrorMessage(error: unknown): string {
   if (error instanceof TaskServerError) {
@@ -110,6 +110,7 @@ export default function ProjectTaskWorkspacePage() {
     useState<TaskEvidenceReviewState>("idle");
   const [canonicalNextStep, setCanonicalNextStep] =
     useState<WorkflowNextStep | null>(null);
+  const taskResultNotesRef = useRef<HTMLTextAreaElement | null>(null);
 
   const projectId = params.id;
   const taskId = params.taskId;
@@ -141,6 +142,10 @@ export default function ProjectTaskWorkspacePage() {
         : "Awaiting result evidence.";
 
   const canAcknowledgeEvidenceReview = resultSaveState === "saved";
+
+  function handleNextStepAction() {
+    taskResultNotesRef.current?.focus();
+  }
 
   function handleSaveResult() {
     if (isResultNotesEmpty) {
@@ -323,12 +328,25 @@ export default function ProjectTaskWorkspacePage() {
               <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
                 Next Step Action
               </p>
-              <p className="mt-2 text-base font-medium text-zinc-50">
-                {taskWorkspaceNextStep.label}
-              </p>
-              <p className="mt-2 text-sm text-zinc-400">
-                {taskWorkspaceNextStep.description}
-              </p>
+              <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="space-y-1">
+                  <p className="text-base font-medium text-zinc-50">
+                    {taskWorkspaceNextStep.label}
+                  </p>
+                  <p className="text-sm text-zinc-400">
+                    {taskWorkspaceNextStep.description}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  className="inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+                  aria-controls="task-result-notes"
+                  onClick={handleNextStepAction}
+                >
+                  Continue to result notes
+                </button>
+              </div>
             </div>
           ) : null}
 
@@ -410,6 +428,7 @@ export default function ProjectTaskWorkspacePage() {
               Result notes
             </label>
             <textarea
+              ref={taskResultNotesRef}
               id="task-result-notes"
               className="mt-2 min-h-28 w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-sm text-zinc-50 outline-none transition-colors placeholder:text-zinc-600 focus:border-zinc-500"
               placeholder="Summarize the result of this task."

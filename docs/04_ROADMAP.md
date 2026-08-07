@@ -111,11 +111,88 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.21 - Task Workspace Next Product Step Foundation
+MS-008.22 - Task Workspace Next Step Action Foundation
 
 ## Next
 
 NONE
+
+## MS-008.22 - Task Workspace Next Step Action Foundation
+
+**Milestone**
+MS-008.22 - Task Workspace Next Step Action Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Turn the task workspace next-step block into one local action that moves focus to the task result notes area while keeping the projected next step visible.
+
+**Product Outcome**
+The task workspace start area now offers a local `Continue to result notes` action that focuses the task result notes field without changing the next-step data source.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now renders a local `Continue to result notes` action next to the next-step block and focuses the result notes field on click.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies the action focuses the `Result notes` field.
+* Targeted verification for `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` passed.
+
+**Dependencies**
+* `MS-008.21 - Task Workspace Next Product Step Foundation`
+
+**Allowed Implementation Scope**
+* minimal local action in the task workspace start area
+* focused test coverage for the new affordance
+* SSOT synchronization for the completed workspace milestone
+
+**Forbidden Scope**
+* navigation changes
+* persistence changes
+* workflow branching
+* backend logic
+* broad refactor
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` owns the task workspace start-area action and focus behavior
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` owns the focused verification for the action
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `docs/session-handoffs/2026-08-07_062_SESSION_HANDOFF.md` own the synchronized close-state records for this milestone
+
+**Verification Plan**
+* targeted test for `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* `git diff --check`
+* focused manual smoke of the result-notes focus action if needed
+
+**Rollback / Safety Expectations**
+* stop if the next-step affordance requires broader workflow changes
+* stop if the fix requires backend or Project Brain engine changes
+* keep the milestone minimal and local
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+* `docs/session-handoffs/2026-08-07_062_SESSION_HANDOFF.md`
 
 ## MS-008.21 - Task Workspace Next Product Step Foundation
 
