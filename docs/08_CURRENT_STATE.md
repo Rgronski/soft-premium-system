@@ -48,9 +48,11 @@ NONE
 MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
 
 **Next Milestone**
-NONE
+MS-009.0 - Dyrygent/Konduktor Foundation
 
 MS-008.36 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Repository Open Feedback Persistence Foundation; the repository now restores a local `Repository opened locally.` status after refresh or revisit while keeping the repository context visible and keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-008 is stopped after the continuation gate returned B and the micro-sequence reached its natural boundary.
 
 MS-008.35 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Repository Open Feedback Restore Foundation; the repository now shows a local `Repository open restored locally.` status after saving updated result notes again while keeping the repository context visible and keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 

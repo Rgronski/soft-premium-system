@@ -115,7 +115,7 @@ MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
 
 ## Next
 
-NONE
+* `MS-009.0` - Dyrygent/Konduktor Foundation
 
 ## MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
 

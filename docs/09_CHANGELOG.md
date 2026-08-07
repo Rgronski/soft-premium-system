@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 063 - close protocol for MS-008.36 and handoff to MS-009.0
+
+### Date
+
+2026-08-07
+
+### Completed
+
+* Confirmed `MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation` as the latest completed milestone.
+* Confirmed the MS-008 micro-sequence is stopped after continuation gate result `B`.
+* Recorded the next session direction as `MS-009.0 - Dyrygent/Konduktor Foundation`.
+* Prepared the close handoff for Session 064 and aligned the session state for the next orchestration-layer milestone.
+
+### Notes
+
+* No product implementation was introduced during the close protocol.
+* Recorded the Session 063 close usage entry in `.usage/session.jsonl`.
+
 ## Session 063 - MS-008.36 task workspace repository open feedback persistence foundation implementation acceptance sync
 
 ### Date
