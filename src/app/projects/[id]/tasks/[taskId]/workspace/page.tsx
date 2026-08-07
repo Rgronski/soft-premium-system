@@ -40,7 +40,7 @@ type TaskResultSaveState = "idle" | "saved";
 type TaskCompletionState = "idle" | "completed";
 type TaskCompletionReportCopyState = "idle" | "copied";
 type TaskEvidenceReviewState = "idle" | "acknowledged";
-type TaskRepositoryOpenState = "idle" | "opened" | "reset";
+type TaskRepositoryOpenState = "idle" | "opened" | "reset" | "restored";
 
 function getTaskResultNotesStorageKey(projectId: string, taskId: string) {
   return `soft-premium-system.projects.${projectId}.tasks.${taskId}.workspace.result-notes`;
@@ -182,7 +182,11 @@ export default function ProjectTaskWorkspacePage() {
     );
     setTaskCodexHandoffJumpState("idle");
     setTaskRepositoryOpenState(
-      taskRepositoryOpenState === "opened" ? "reset" : "idle",
+      taskRepositoryOpenState === "opened"
+        ? "reset"
+        : taskRepositoryOpenState === "reset"
+          ? "restored"
+          : "idle",
     );
     setTaskEvidenceReviewState("idle");
   }
@@ -418,6 +422,10 @@ export default function ProjectTaskWorkspacePage() {
             ) : taskRepositoryOpenState === "reset" ? (
               <p className="mt-2 text-sm text-zinc-400" aria-live="polite">
                 Repository open reset locally.
+              </p>
+            ) : taskRepositoryOpenState === "restored" ? (
+              <p className="mt-2 text-sm text-zinc-400" aria-live="polite">
+                Repository open restored locally.
               </p>
             ) : null}
           </div>

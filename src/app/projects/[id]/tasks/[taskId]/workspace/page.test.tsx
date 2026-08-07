@@ -200,6 +200,16 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("Repository open reset locally.")).toBeTruthy();
     expect(screen.queryByText("Repository opened locally.")).toBeNull();
     expect(screen.getByText("Result evidence saved locally.")).toBeTruthy();
+    fireEvent.change(screen.getByLabelText("Result notes"), {
+      target: { value: "Finished the task locally again." },
+    });
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Save result" }) as HTMLButtonElement,
+    );
+
+    expect(screen.getByText("Repository open restored locally.")).toBeTruthy();
+    expect(screen.queryByText("Repository open reset locally.")).toBeNull();
     const acknowledgeReviewButton = screen.getByRole("button", {
       name: "Acknowledge review",
     }) as HTMLButtonElement;
@@ -234,7 +244,7 @@ describe("ProjectTaskWorkspacePage", () => {
       ),
     ).toBe("completed");
     expect(screen.getByText("Completion Summary")).toBeTruthy();
-    expect(screen.getByText("Saved result notes: Finished the task locally.")).toBeTruthy();
+    expect(screen.getByText("Saved result notes: Finished the task locally again.")).toBeTruthy();
     expect(
       screen.getAllByText("Evidence review acknowledged locally."),
     ).toHaveLength(2);
@@ -245,7 +255,7 @@ describe("ProjectTaskWorkspacePage", () => {
 
     await waitFor(() => {
       expect(writeTextMock).toHaveBeenCalledWith(
-        "Task completion handoff\nTask completed locally.\nSaved result notes: Finished the task locally.",
+        "Task completion handoff\nTask completed locally.\nSaved result notes: Finished the task locally again.",
       );
     });
 

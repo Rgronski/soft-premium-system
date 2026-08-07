@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-008.34 - Task Workspace Repository Open Feedback Reset Foundation
+MS-008.35 - Task Workspace Repository Open Feedback Restore Foundation
 
 **Next Milestone**
 NONE
+
+MS-008.35 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Repository Open Feedback Restore Foundation; the repository now shows a local `Repository open restored locally.` status after saving updated result notes again while keeping the repository context visible and keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-008.34 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Repository Open Feedback Reset Foundation; the repository now shows a local `Repository open reset locally.` status after saving updated result notes clears the repository-open signal while keeping the repository context visible and keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
