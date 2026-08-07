@@ -197,6 +197,8 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(
       screen.getByRole("button", { name: "Saved locally" }),
     ).toBeTruthy();
+    expect(screen.getByText("Repository open reset locally.")).toBeTruthy();
+    expect(screen.queryByText("Repository opened locally.")).toBeNull();
     expect(screen.getByText("Result evidence saved locally.")).toBeTruthy();
     const acknowledgeReviewButton = screen.getByRole("button", {
       name: "Acknowledge review",
