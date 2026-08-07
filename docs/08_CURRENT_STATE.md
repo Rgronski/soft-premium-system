@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-008.22 - Task Workspace Next Step Action Foundation
+MS-008.23 - Task Workspace Result Notes Save Feedback Foundation
 
 **Next Milestone**
 NONE
+
+MS-008.23 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Result Notes Save Feedback Foundation; the repository now shows a local `Saved locally` state on the result-notes save button after a successful local save while keeping the projected next step visible and keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-008.22 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Next Step Action Foundation; the repository now offers a local `Continue to result notes` action that focuses the task result notes field while keeping the projected next step visible and keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
@@ -178,7 +180,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-008.21 - Task Workspace Next Product Step Foundation
+Latest Completed Product Milestone: MS-008.23 - Task Workspace Result Notes Save Feedback Foundation
 Next Product Milestone: NONE
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
@@ -1336,8 +1338,9 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-008.22 - Task Workspace Next Step Action Foundation`
+* `Latest Completed Product Milestone` is `MS-008.23 - Task Workspace Result Notes Save Feedback Foundation`
 * `Next Product Milestone` is `NONE`
+* `MS-008.23` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Result Notes Save Feedback Foundation; the repository now shows a local `Saved locally` state on the result-notes save button after a successful local save while keeping the projected next step visible and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.22` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Next Step Action Foundation; the repository now offers a local `Continue to result notes` action that focuses the task result notes field while keeping the projected next step visible and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.12` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`

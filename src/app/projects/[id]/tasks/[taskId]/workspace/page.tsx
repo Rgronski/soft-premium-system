@@ -454,7 +454,7 @@ export default function ProjectTaskWorkspacePage() {
                 disabled={isResultNotesEmpty}
                 onClick={handleSaveResult}
               >
-                Save result
+                {resultSaveState === "saved" ? "Saved locally" : "Save result"}
               </button>
               {resultSaveState === "saved" ? (
                 <p className="text-sm text-zinc-400" aria-live="polite">

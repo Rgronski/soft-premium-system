@@ -189,6 +189,9 @@ describe("ProjectTaskWorkspacePage", () => {
     fireEvent.click(saveButton);
 
     expect(screen.getByText("Result saved locally.")).toBeTruthy();
+    expect(
+      screen.getByRole("button", { name: "Saved locally" }),
+    ).toBeTruthy();
     expect(screen.getByText("Result evidence saved locally.")).toBeTruthy();
     const acknowledgeReviewButton = screen.getByRole("button", {
       name: "Acknowledge review",
