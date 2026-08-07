@@ -6,6 +6,7 @@ import { WorkspaceCollections } from "@/components/workspace/WorkspaceCollection
 import { WorkspaceHeader } from "@/components/workspace/WorkspaceHeader";
 import { WorkspaceLayout } from "@/components/workspace/WorkspaceLayout";
 import { WorkspacePanels } from "@/components/workspace/WorkspacePanels";
+import { getTasksFromServer } from "@/lib/task/browser-server";
 import {
   getProjectWorkspaceEntry,
   type ProjectWorkspaceEntry,
@@ -14,7 +15,7 @@ import { getKnowledge } from "@/lib/knowledge/knowledge";
 import { deleteProject, getProjectById } from "@/lib/project/project";
 import { getTasks } from "@/lib/task/task";
 import { useParams, useRouter } from "next/navigation";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type Client = {
   id: string;
@@ -96,6 +97,9 @@ function createLocalRecoveryWorkspaceEntry(
 export default function ProjectWorkspacePage() {
   const params = useParams<{ id: string }>();
   const router = useRouter();
+  const [canonicalTasks, setCanonicalTasks] = useState<
+    ProjectWorkspaceEntry["workspace"]["tasks"] | null
+  >(null);
   const dashboard = useMemo<DashboardSnapshot>(() => {
     if (typeof window === "undefined") {
       return {
@@ -162,6 +166,37 @@ export default function ProjectWorkspacePage() {
     }
   }, [params.id]);
 
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadCanonicalTasks() {
+      try {
+        const loadedTasks = await getTasksFromServer(params.id);
+
+        if (!ignore) {
+          setCanonicalTasks(loadedTasks);
+        }
+      } catch {
+        if (!ignore) {
+          setCanonicalTasks(null);
+        }
+      }
+    }
+
+    void loadCanonicalTasks();
+
+    return () => {
+      ignore = true;
+    };
+  }, [params.id]);
+
+  const localWorkspaceTasks = dashboard.workspaceEntry?.workspace.tasks ?? [];
+  const workspaceTasks =
+    canonicalTasks && canonicalTasks.length > 0
+      ? canonicalTasks
+      : localWorkspaceTasks;
+  const workspaceTaskCount = workspaceTasks.length;
+
   async function handleDeleteProject() {
     if (!dashboard.workspaceEntry) {
       return;
@@ -204,7 +239,7 @@ export default function ProjectWorkspacePage() {
             repositoryUrl={
               dashboard.workspaceEntry.workspace.overview.project.repositoryUrl
             }
-            taskCount={dashboard.workspaceEntry.workspace.overview.counts.tasks}
+            taskCount={workspaceTaskCount}
             knowledgeCount={
               dashboard.workspaceEntry.workspace.overview.counts.knowledgeEntries
             }
@@ -219,7 +254,8 @@ export default function ProjectWorkspacePage() {
             blockerCount={dashboard.workspaceEntry.workspace.overview.workflow.blockers}
           />
           <WorkspaceCollections
-            tasks={dashboard.workspaceEntry.workspace.tasks}
+            projectId={params.id}
+            tasks={workspaceTasks}
             knowledgeEntries={dashboard.workspaceEntry.workspace.knowledgeEntries}
           />
           <WorkspacePanels

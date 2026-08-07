@@ -5,11 +5,13 @@ import type {
 } from "@/lib/project-brain/types";
 
 type WorkspaceCollectionsProps = {
+  projectId: string;
   tasks: ProjectConsumerTask[];
   knowledgeEntries: ProjectConsumerKnowledgeEntry[];
 };
 
 export function WorkspaceCollections({
+  projectId,
   tasks,
   knowledgeEntries,
 }: WorkspaceCollectionsProps) {
@@ -33,7 +35,7 @@ export function WorkspaceCollections({
         )}
 
         <Link
-          href="./tasks"
+          href={`/projects/${projectId}/tasks`}
           className="mt-4 inline-flex rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
         >
           View all tasks
@@ -62,7 +64,7 @@ export function WorkspaceCollections({
         )}
 
         <Link
-          href="./knowledge"
+          href={`/projects/${projectId}/knowledge`}
           className="mt-4 inline-flex rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
         >
           View all knowledge

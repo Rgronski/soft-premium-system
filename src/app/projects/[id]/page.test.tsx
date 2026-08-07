@@ -8,6 +8,7 @@ const pushMock = vi.fn();
 const getProjectWorkspaceEntryMock = vi.fn();
 const getProjectByIdMock = vi.fn();
 const getTasksMock = vi.fn();
+const getTasksFromServerMock = vi.fn();
 const getKnowledgeMock = vi.fn();
 const deleteProjectMock = vi.fn((projectId: string) => {
   const savedProjects = localStorage.getItem("soft-premium-system.projects");
@@ -39,6 +40,10 @@ vi.mock("@/lib/project/project", () => ({
   getProjectById: (projectId: string) => getProjectByIdMock(projectId),
 }));
 
+vi.mock("@/lib/task/browser-server", () => ({
+  getTasksFromServer: (projectId: string) => getTasksFromServerMock(projectId),
+}));
+
 vi.mock("@/lib/task/task", () => ({
   getTasks: (projectId: string) => getTasksMock(projectId),
 }));
@@ -65,6 +70,8 @@ describe("ProjectWorkspacePage", () => {
     getProjectWorkspaceEntryMock.mockReset();
     getProjectByIdMock.mockReset();
     getTasksMock.mockReset();
+    getTasksFromServerMock.mockReset();
+    getTasksFromServerMock.mockResolvedValue([]);
     getKnowledgeMock.mockReset();
     getProjectByIdMock.mockReturnValue({
       id: "project-1",
@@ -150,8 +157,12 @@ describe("ProjectWorkspacePage", () => {
       screen.getByRole("link", { name: "Open tasks" }).getAttribute("href"),
     ).toBe("/projects/project-1/tasks");
     expect(screen.getByRole("link", { name: "Add Task" })).toBeTruthy();
-    expect(screen.getByRole("link", { name: "View all tasks" })).toBeTruthy();
-    expect(screen.getByRole("link", { name: "View all knowledge" })).toBeTruthy();
+    expect(
+      screen.getByRole("link", { name: "View all tasks" }).getAttribute("href"),
+    ).toBe("/projects/project-1/tasks");
+    expect(
+      screen.getByRole("link", { name: "View all knowledge" }).getAttribute("href"),
+    ).toBe("/projects/project-1/knowledge");
     expect(screen.getByRole("button", { name: "Usuń projekt" })).toBeTruthy();
   });
 
