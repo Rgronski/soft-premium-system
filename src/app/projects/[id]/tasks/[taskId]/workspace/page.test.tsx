@@ -252,6 +252,7 @@ describe("ProjectTaskWorkspacePage", () => {
     });
 
     expect(screen.getByText("Completion reset locally.")).toBeTruthy();
+    expect(screen.getByText("Completion handoff reset locally.")).toBeTruthy();
     const restoredSaveButton = screen.getByRole("button", {
       name: "Save result",
     }) as HTMLButtonElement;
@@ -268,6 +269,7 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.queryByText("Completion handoff copied.")).toBeNull();
     expect(screen.queryByText("Copied locally")).toBeNull();
     expect(screen.queryByText("Completion reset locally.")).toBeNull();
+    expect(screen.queryByText("Completion handoff reset locally.")).toBeNull();
     expect(screen.queryByText("Task completion handoff")).toBeNull();
     expect(screen.queryAllByText("Evidence review acknowledged locally.")).toHaveLength(0);
     expect(

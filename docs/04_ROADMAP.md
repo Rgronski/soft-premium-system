@@ -111,16 +111,16 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.29 - Task Workspace Completion Handoff Copy Feedback Foundation
+MS-008.30 - Task Workspace Completion Handoff Reset Feedback Foundation
 
 ## Next
 
 NONE
 
-## MS-008.29 - Task Workspace Completion Handoff Copy Feedback Foundation
+## MS-008.30 - Task Workspace Completion Handoff Reset Feedback Foundation
 
 **Milestone**
-MS-008.29 - Task Workspace Completion Handoff Copy Feedback Foundation
+MS-008.30 - Task Workspace Completion Handoff Reset Feedback Foundation
 
 **Type**
 Product Milestone
@@ -147,14 +147,14 @@ PUBLISHED
 COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Purpose**
-Give the task workspace completion handoff copy action a visible local signal after the completion handoff is copied, without changing persistence, backend flow, or the existing completion flow.
+Give the task workspace completion handoff copy state a visible local signal when edited result notes clear the copied completion handoff, without changing persistence, backend flow, or the existing completion flow.
 
 **Product Outcome**
-The task workspace now shows a local `Completion handoff copied.` status after the completion handoff is copied while keeping the completion summary and handoff output visible.
+The task workspace now shows a local `Completion handoff reset locally.` status after edited result notes clear a copied completion handoff while keeping the completion summary and handoff output visible until the edit clears it.
 
 **Implementation Evidence**
-* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now shows `Completion handoff copied.` after the completion handoff copy action succeeds.
-* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies the handoff copy message appears after the copy action succeeds.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now shows `Completion handoff reset locally.` after edited result notes clear the copied completion handoff state.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies the handoff reset message appears after editing result notes from the copied handoff state.
 * Targeted verification for `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` passed.
 
 **Dependencies**
