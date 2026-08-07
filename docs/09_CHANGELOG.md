@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 063 - MS-008.31 task workspace completion handoff restore feedback foundation implementation acceptance sync
+## Session 063 - MS-008.32 task workspace codex handoff jump feedback foundation implementation acceptance sync
 
 ### Date
 
@@ -77,10 +77,10 @@ Each release entry should contain:
 
 ### Completed
 
-* Synced the SSOT for the `MS-008.31 - Task Workspace Completion Handoff Restore Feedback Foundation` close result.
-* Recorded that the task workspace now shows a local `Completion handoff restored locally.` status after updated result notes restore a copied completion handoff.
+* Synced the SSOT for the `MS-008.32 - Task Workspace Codex Handoff Jump Feedback Foundation` close result.
+* Recorded that the task workspace now shows a local `Codex handoff opened locally.` status after the Codex handoff link is used.
 * Recorded that the focused `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` verification passed.
-* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.31`.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.32`.
 
 ### Notes
 

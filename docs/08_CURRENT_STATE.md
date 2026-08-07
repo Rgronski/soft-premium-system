@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-008.31 - Task Workspace Completion Handoff Restore Feedback Foundation
+MS-008.32 - Task Workspace Codex Handoff Jump Feedback Foundation
 
 **Next Milestone**
 NONE
+
+MS-008.32 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Codex Handoff Jump Feedback Foundation; the repository now shows a local `Codex handoff opened locally.` status after the Codex handoff link is used while keeping the task handoff section visible and keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-008.31 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Completion Handoff Restore Feedback Foundation; the repository now shows a local `Completion handoff restored locally.` status after updated result notes restore a copied completion handoff while keeping the completion summary and handoff output visible after the restoration and keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
@@ -1354,8 +1356,9 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-008.31 - Task Workspace Completion Handoff Restore Feedback Foundation`
+* `Latest Completed Product Milestone` is `MS-008.32 - Task Workspace Codex Handoff Jump Feedback Foundation`
 * `Next Product Milestone` is `NONE`
+* `MS-008.32` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Codex Handoff Jump Feedback Foundation; the repository now shows a local `Codex handoff opened locally.` status after the Codex handoff link is used while keeping the task handoff section visible and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.31` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Completion Handoff Restore Feedback Foundation; the repository now shows a local `Completion handoff restored locally.` status after updated result notes restore a copied completion handoff while keeping the completion summary and handoff output visible after the restoration and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.30` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Completion Handoff Reset Feedback Foundation; the repository now shows a local `Completion handoff reset locally.` status after edited result notes clear a copied completion handoff while keeping the completion summary and handoff output visible until the edit clears it and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.29` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Completion Handoff Copy Feedback Foundation; the repository now shows a local `Completion handoff copied.` status after the task completion handoff is copied while keeping the completion summary and handoff output visible and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

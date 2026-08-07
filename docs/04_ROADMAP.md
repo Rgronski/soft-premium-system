@@ -111,16 +111,16 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.31 - Task Workspace Completion Handoff Restore Feedback Foundation
+MS-008.32 - Task Workspace Codex Handoff Jump Feedback Foundation
 
 ## Next
 
 NONE
 
-## MS-008.31 - Task Workspace Completion Handoff Restore Feedback Foundation
+## MS-008.32 - Task Workspace Codex Handoff Jump Feedback Foundation
 
 **Milestone**
-MS-008.31 - Task Workspace Completion Handoff Restore Feedback Foundation
+MS-008.32 - Task Workspace Codex Handoff Jump Feedback Foundation
 
 **Type**
 Product Milestone
@@ -147,14 +147,14 @@ PUBLISHED
 COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Purpose**
-Give the task workspace completion handoff copy state a visible local signal when updated result notes restore the copied completion handoff, without changing persistence, backend flow, or the existing completion flow.
+Give the task workspace Codex handoff link a visible local signal when the handoff is opened, without changing persistence, backend flow, or the existing completion flow.
 
 **Product Outcome**
-The task workspace now shows a local `Completion handoff restored locally.` status after updated result notes restore a copied completion handoff while keeping the completion summary and handoff output visible after the restoration.
+The task workspace now shows a local `Codex handoff opened locally.` status after the Codex handoff is opened while keeping the task handoff section visible.
 
 **Implementation Evidence**
-* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now shows `Completion handoff restored locally.` after updated result notes restore the copied completion handoff state.
-* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies the handoff restore message appears after saving updated result notes from the copied handoff reset state.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now shows `Codex handoff opened locally.` after the Codex handoff link is used.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies the handoff jump message appears after clicking the Codex handoff link.
 * Targeted verification for `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` passed.
 
 **Dependencies**

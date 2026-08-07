@@ -114,6 +114,8 @@ export default function ProjectTaskWorkspacePage() {
     useState<"idle" | "reset">("idle");
   const [taskCompletionRestoreState, setTaskCompletionRestoreState] =
     useState<"idle" | "restored">("idle");
+  const [taskCodexHandoffJumpState, setTaskCodexHandoffJumpState] =
+    useState<"idle" | "jumped">("idle");
   const [taskEvidenceReviewState, setTaskEvidenceReviewState] =
     useState<TaskEvidenceReviewState>("idle");
   const [canonicalNextStep, setCanonicalNextStep] =
@@ -175,6 +177,7 @@ export default function ProjectTaskWorkspacePage() {
     setTaskCompletionRestoreState(
       taskCompletionResetState === "reset" ? "restored" : "idle",
     );
+    setTaskCodexHandoffJumpState("idle");
     setTaskEvidenceReviewState("idle");
   }
 
@@ -193,6 +196,7 @@ export default function ProjectTaskWorkspacePage() {
     setTaskCompletionReportCopyRestoreState("idle");
     setTaskCompletionResetState("idle");
     setTaskCompletionRestoreState("idle");
+    setTaskCodexHandoffJumpState("idle");
   }
 
   function handleAcknowledgeEvidenceReview() {
@@ -223,6 +227,10 @@ export default function ProjectTaskWorkspacePage() {
     setTaskCompletionReportCopyState("copied");
     setTaskCompletionReportCopyResetState("idle");
     setTaskCompletionReportCopyRestoreState("idle");
+  }
+
+  function handleCodexHandoffJump() {
+    setTaskCodexHandoffJumpState("jumped");
   }
 
   useEffect(() => {
@@ -406,10 +414,16 @@ export default function ProjectTaskWorkspacePage() {
             </p>
             <a
               href="#codex-handoff"
+              onClick={handleCodexHandoffJump}
               className="mt-3 inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
             >
               Handoff to Codex
             </a>
+            {taskCodexHandoffJumpState === "jumped" ? (
+              <p className="mt-2 text-sm text-zinc-400" aria-live="polite">
+                Codex handoff opened locally.
+              </p>
+            ) : null}
           </div>
 
           <div
@@ -481,6 +495,7 @@ export default function ProjectTaskWorkspacePage() {
                 setTaskCompletionReportCopyRestoreState("idle");
                 setTaskCompletionResetState(hadCompletedFlow ? "reset" : "idle");
                 setTaskCompletionRestoreState("idle");
+                setTaskCodexHandoffJumpState("idle");
                 setTaskEvidenceReviewState("idle");
               }}
             />
