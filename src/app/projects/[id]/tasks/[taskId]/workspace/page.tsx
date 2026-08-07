@@ -471,7 +471,9 @@ export default function ProjectTaskWorkspacePage() {
                 disabled={resultSaveState !== "saved"}
                 onClick={handleCompleteTask}
               >
-                Complete task
+                {taskCompletionState === "completed"
+                  ? "Completed locally"
+                  : "Complete task"}
               </button>
             </div>
             {taskCompletionState === "completed" ? (

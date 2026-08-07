@@ -111,11 +111,86 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.24 - Task Workspace Evidence Review Acknowledgement Feedback Foundation
+MS-008.25 - Task Workspace Complete Task Feedback Foundation
 
 ## Next
 
 NONE
+
+## MS-008.25 - Task Workspace Complete Task Feedback Foundation
+
+**Milestone**
+MS-008.25 - Task Workspace Complete Task Feedback Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Give the task workspace complete-task action a visible local completion signal without changing persistence, backend flow, or the existing handoff content.
+
+**Product Outcome**
+The task workspace completion area now shows a local `Completed locally` button state after the task is completed while preserving the completion summary and handoff output.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now shows `Completed locally` on the complete-task button after the task is completed locally.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies the complete-task button reports the completed state after a successful local completion.
+* Targeted verification for `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` passed.
+
+**Dependencies**
+* `MS-008.24 - Task Workspace Evidence Review Acknowledgement Feedback Foundation`
+
+**Allowed Implementation Scope**
+* minimal local completion-feedback change in the task workspace completion area
+* focused test coverage for the visible completed state
+* SSOT synchronization for the completed workspace milestone
+
+**Forbidden Scope**
+* backend changes
+* persistence changes
+* workflow branching
+* broad refactor
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` owns the task workspace complete-task feedback
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` owns the focused verification for the completed-state feedback
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized close-state records for this milestone
+
+**Verification Plan**
+* targeted test for `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* `git diff --check`
+* focused manual smoke of the complete-feedback state if needed
+
+**Rollback / Safety Expectations**
+* stop if the completion-feedback state requires broader workflow changes
+* stop if the fix requires backend or Project Brain engine changes
+* keep the milestone minimal and local
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-008.24 - Task Workspace Evidence Review Acknowledgement Feedback Foundation
 

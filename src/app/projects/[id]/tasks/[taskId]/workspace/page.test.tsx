@@ -219,6 +219,9 @@ describe("ProjectTaskWorkspacePage", () => {
 
     expect(screen.getByText("Task completed locally.")).toBeTruthy();
     expect(
+      screen.getByRole("button", { name: "Completed locally" }),
+    ).toBeTruthy();
+    expect(
       localStorage.getItem(
         "soft-premium-system.projects.project-1.tasks.task-1.workspace.completion",
       ),
