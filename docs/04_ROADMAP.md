@@ -111,11 +111,89 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.20 - Task List Card Layout Fix Foundation
+MS-008.21 - Task Workspace Next Product Step Foundation
 
 ## Next
 
 NONE
+
+## MS-008.21 - Task Workspace Next Product Step Foundation
+
+**Milestone**
+MS-008.21 - Task Workspace Next Product Step Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Expose the existing Project Brain `workflow.nextStep` contract inside the Task Workspace start area as a small read-only block.
+
+**Product Outcome**
+The task workspace start area now shows a neutral Next Step Action block when the projected next step exists on the live canonical project/task path.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now derives the next-step view from the task workspace data path and renders the read-only block in the start area when next-step data is available.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now proves the block renders the label and description from the resolved workspace data and stays hidden when no next step exists.
+* Targeted verification for `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` passed.
+* Smoke check confirmed the block is visible on the real live workspace route and remains neutral / read-only.
+
+**Dependencies**
+* `MS-008.20 - Task List Card Layout Fix Foundation`
+
+**Allowed Implementation Scope**
+* minimal read-only next-step block in the task workspace start area
+* focused test coverage for the next-step display contract
+* SSOT synchronization for the completed workspace milestone
+
+**Forbidden Scope**
+* navigation changes
+* persistence changes
+* workflow branching
+* mutations
+* broad refactor
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` owns the task workspace start-area next-step block
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` owns the focused verification for the block
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `docs/session-handoffs/2026-08-07_062_SESSION_HANDOFF.md` own the synchronized close-state records for this milestone
+
+**Verification Plan**
+* targeted test for `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* `git diff --check`
+* smoke check of the real task workspace route to confirm the block is visible and neutral
+
+**Rollback / Safety Expectations**
+* stop if the next-step block requires broader workflow changes
+* stop if the fix requires backend or Project Brain engine changes
+* keep the milestone minimal and read-only
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+* `docs/session-handoffs/2026-08-07_062_SESSION_HANDOFF.md`
 
 ## MS-008.20 - Task List Card Layout Fix Foundation
 
@@ -1026,7 +1104,7 @@ The repository now records the next smallest application-state discovery boundar
 
 **Implementation Evidence**
 * `docs/04_ROADMAP.md` now records the MS-008.6 discovery contract while preserving the MS-008.5 latest completed milestone baseline.
-* `docs/08_CURRENT_STATE.md` keeps `Latest Completed Product Milestone` at `MS-008.20 - Task List Card Layout Fix Foundation`.
+* `docs/08_CURRENT_STATE.md` keeps `Latest Completed Product Milestone` at `MS-008.21 - Task Workspace Next Product Step Foundation`.
 * `docs/09_CHANGELOG.md` now records the published discovery milestone in the official history.
 * no application code, UI, route, persistence, or product behavior changed.
 

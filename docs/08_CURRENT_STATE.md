@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-008.20 - Task List Card Layout Fix Foundation
+MS-008.21 - Task Workspace Next Product Step Foundation
 
 **Next Milestone**
 NONE
+
+MS-008.21 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Next Product Step Foundation; the repository now shows the projected next step as a neutral read-only block in the task workspace start area while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-008.20 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task List Card Layout Fix Foundation; the repository now renders each task card on `/projects/[id]/tasks` as a full-width clickable row with left-aligned content while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
@@ -1332,7 +1334,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-008.20 - Task List Card Layout Fix Foundation`
+* `Latest Completed Product Milestone` is `MS-008.21 - Task Workspace Next Product Step Foundation`
 * `Next Product Milestone` is `NONE`
 * `MS-008.12` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED`
 * `Latest Completed Capability` is `CAP-005 - React Component Test Infrastructure Foundation`

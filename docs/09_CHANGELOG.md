@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 062 - MS-008.21 task workspace next product step foundation implementation acceptance sync
+
+### Date
+
+2026-08-07
+
+### Completed
+
+* Synced the SSOT for the `MS-008.21 - Task Workspace Next Product Step Foundation` close result.
+* Recorded that the task workspace now shows the projected next step as a neutral read-only block on the real live workspace route.
+* Recorded that the focused `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` verification passed and the live smoke check confirmed the block appears without breaking layout.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.21`.
+
+### Notes
+
+* No backend persistence, Project Brain writes, navigation changes, redesign, broad refactor, or unrelated cleanup were introduced in this sync step.
+
 ## Session 061 - MS-008.20 task list card layout fix implementation acceptance sync
 
 ### Date
