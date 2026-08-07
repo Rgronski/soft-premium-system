@@ -54,6 +54,10 @@ function getTaskEvidenceReviewStorageKey(projectId: string, taskId: string) {
   return `soft-premium-system.projects.${projectId}.tasks.${taskId}.workspace.evidence-review`;
 }
 
+function getTaskRepositoryOpenStorageKey(projectId: string, taskId: string) {
+  return `soft-premium-system.projects.${projectId}.tasks.${taskId}.workspace.repository-open`;
+}
+
 function readSavedTaskResultNotes(projectId: string, taskId: string) {
   if (typeof window === "undefined") {
     return "";
@@ -90,6 +94,21 @@ function readSavedTaskEvidenceReviewState(
     getTaskEvidenceReviewStorageKey(projectId, taskId),
   ) === "acknowledged"
     ? "acknowledged"
+    : "idle";
+}
+
+function readSavedTaskRepositoryOpenState(
+  projectId: string,
+  taskId: string,
+): "idle" | "opened" {
+  if (typeof window === "undefined") {
+    return "idle";
+  }
+
+  return localStorage.getItem(
+    getTaskRepositoryOpenStorageKey(projectId, taskId),
+  ) === "opened"
+    ? "opened"
     : "idle";
 }
 
@@ -245,6 +264,7 @@ export default function ProjectTaskWorkspacePage() {
   }
 
   function handleRepositoryOpen() {
+    localStorage.setItem(getTaskRepositoryOpenStorageKey(projectId, taskId), "opened");
     setTaskRepositoryOpenState("opened");
   }
 
@@ -295,6 +315,9 @@ export default function ProjectTaskWorkspacePage() {
     setTaskCompletionState(readSavedTaskCompletionState(projectId, taskId));
     setTaskEvidenceReviewState(
       readSavedTaskEvidenceReviewState(projectId, taskId),
+    );
+    setTaskRepositoryOpenState(
+      readSavedTaskRepositoryOpenState(projectId, taskId),
     );
     setResultSaveState("idle");
     setTaskCompletionReportCopyState("idle");

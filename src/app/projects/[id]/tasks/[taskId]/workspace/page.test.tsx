@@ -331,6 +331,13 @@ describe("ProjectTaskWorkspacePage", () => {
       expect(getTasksFromServerMock).toHaveBeenCalledTimes(1);
     });
 
+    fireEvent.click(screen.getByRole("link", { name: "Open repository" }));
+    expect(
+      localStorage.getItem(
+        "soft-premium-system.projects.project-1.tasks.task-1.workspace.repository-open",
+      ),
+    ).toBe("opened");
+
     fireEvent.change(screen.getByLabelText("Result notes"), {
       target: { value: resultNotes },
     });
@@ -385,6 +392,7 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("First task")).toBeTruthy();
     expect(screen.getByText("task-1")).toBeTruthy();
     expect(screen.getByText("project-1")).toBeTruthy();
+    expect(screen.getByText("Repository opened locally.")).toBeTruthy();
     expect(screen.queryByText("Result saved locally.")).toBeNull();
     expect(screen.getByText("Task completed locally.")).toBeTruthy();
     expect(screen.getByText("Completion Summary")).toBeTruthy();

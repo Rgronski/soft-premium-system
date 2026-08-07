@@ -111,11 +111,22 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.35 - Task Workspace Repository Open Feedback Restore Foundation
+MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
 
 ## Next
 
 NONE
+
+## MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
+
+**Milestone**
+MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 ## MS-008.35 - Task Workspace Repository Open Feedback Restore Foundation
 

@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 063 - MS-008.36 task workspace repository open feedback persistence foundation implementation acceptance sync
+
+### Date
+
+2026-08-07
+
+### Completed
+
+* Synced the SSOT for the `MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation` close result.
+* Recorded that the task workspace now restores a local `Repository opened locally.` status after refresh or revisit.
+* Recorded that the focused `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` verification passed.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.36`.
+
+### Notes
+
+* No backend persistence, Project Brain writes, navigation changes, redesign, broad refactor, or unrelated cleanup were introduced in this sync step.
+* Recorded the Session 063 usage entry in `.usage/session.jsonl`.
+
 ## Session 063 - MS-008.35 task workspace repository open feedback restore foundation implementation acceptance sync
 
 ### Date
