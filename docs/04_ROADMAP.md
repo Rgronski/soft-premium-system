@@ -111,16 +111,16 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.27 - Task Workspace Completion Reset Feedback Foundation
+MS-008.28 - Task Workspace Completion Restore Feedback Foundation
 
 ## Next
 
 NONE
 
-## MS-008.27 - Task Workspace Completion Reset Feedback Foundation
+## MS-008.28 - Task Workspace Completion Restore Feedback Foundation
 
 **Milestone**
-MS-008.27 - Task Workspace Completion Reset Feedback Foundation
+MS-008.28 - Task Workspace Completion Restore Feedback Foundation
 
 **Type**
 Product Milestone
@@ -147,14 +147,14 @@ PUBLISHED
 COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Purpose**
-Give the task workspace completion reset path a visible local signal when result notes are edited after the task has been completed, without changing persistence, backend flow, or the existing completion handoff content.
+Give the task workspace completion restore path a visible local signal when updated result notes are saved after a completion reset, without changing persistence, backend flow, or the existing completion handoff content.
 
 **Product Outcome**
-The task workspace now shows a local `Completion reset locally.` status after result notes are edited from a completed task state while preserving the completion summary and handoff output for the completed state until the edit clears it.
+The task workspace now shows a local `Completion restored locally.` status after updated result notes are saved following a completion reset while restoring the completion flow and keeping the handoff output consistent with the restored task state.
 
 **Implementation Evidence**
-* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now shows `Completion reset locally.` when completed task flow is cleared by editing result notes.
-* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies the reset message appears after editing result notes from the completed state.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now shows `Completion restored locally.` after saving updated result notes following a completion reset.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies the restore message appears after saving updated result notes from the reset state.
 * Targeted verification for `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` passed.
 
 **Dependencies**

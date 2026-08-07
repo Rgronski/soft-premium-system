@@ -108,6 +108,8 @@ export default function ProjectTaskWorkspacePage() {
     useState<TaskCompletionReportCopyState>("idle");
   const [taskCompletionResetState, setTaskCompletionResetState] =
     useState<"idle" | "reset">("idle");
+  const [taskCompletionRestoreState, setTaskCompletionRestoreState] =
+    useState<"idle" | "restored">("idle");
   const [taskEvidenceReviewState, setTaskEvidenceReviewState] =
     useState<TaskEvidenceReviewState>("idle");
   const [canonicalNextStep, setCanonicalNextStep] =
@@ -162,6 +164,9 @@ export default function ProjectTaskWorkspacePage() {
     setTaskCompletionState("idle");
     setTaskCompletionReportCopyState("idle");
     setTaskCompletionResetState("idle");
+    setTaskCompletionRestoreState(
+      taskCompletionResetState === "reset" ? "restored" : "idle",
+    );
     setTaskEvidenceReviewState("idle");
   }
 
@@ -177,6 +182,7 @@ export default function ProjectTaskWorkspacePage() {
     setTaskCompletionState("completed");
     setTaskCompletionReportCopyState("idle");
     setTaskCompletionResetState("idle");
+    setTaskCompletionRestoreState("idle");
   }
 
   function handleAcknowledgeEvidenceReview() {
@@ -455,6 +461,7 @@ export default function ProjectTaskWorkspacePage() {
                 setTaskCompletionState("idle");
                 setTaskCompletionReportCopyState("idle");
                 setTaskCompletionResetState(hadCompletedFlow ? "reset" : "idle");
+                setTaskCompletionRestoreState("idle");
                 setTaskEvidenceReviewState("idle");
               }}
             />
@@ -465,9 +472,17 @@ export default function ProjectTaskWorkspacePage() {
                 disabled={isResultNotesEmpty}
                 onClick={handleSaveResult}
               >
-                {resultSaveState === "saved" ? "Saved locally" : "Save result"}
+                {taskCompletionRestoreState === "restored"
+                  ? "Restored locally"
+                  : resultSaveState === "saved"
+                    ? "Saved locally"
+                    : "Save result"}
               </button>
-              {resultSaveState === "saved" ? (
+              {taskCompletionRestoreState === "restored" ? (
+                <p className="text-sm text-zinc-400" aria-live="polite">
+                  Completion restored locally.
+                </p>
+              ) : resultSaveState === "saved" ? (
                 <p className="text-sm text-zinc-400" aria-live="polite">
                   Result saved locally.
                 </p>

@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-008.27 - Task Workspace Completion Reset Feedback Foundation
+MS-008.28 - Task Workspace Completion Restore Feedback Foundation
 
 **Next Milestone**
 NONE
+
+MS-008.28 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Completion Restore Feedback Foundation; the repository now shows a local `Completion restored locally.` status after saving updated result notes following a completion reset while restoring the completion flow and keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-008.23 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Result Notes Save Feedback Foundation; the repository now shows a local `Saved locally` state on the result-notes save button after a successful local save while keeping the projected next step visible and keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
@@ -1346,8 +1348,9 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-008.27 - Task Workspace Completion Reset Feedback Foundation`
+* `Latest Completed Product Milestone` is `MS-008.28 - Task Workspace Completion Restore Feedback Foundation`
 * `Next Product Milestone` is `NONE`
+* `MS-008.28` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Completion Restore Feedback Foundation; the repository now shows a local `Completion restored locally.` status after saving updated result notes following a completion reset while restoring the completion flow and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.27` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Completion Reset Feedback Foundation; the repository now shows a local `Completion reset locally.` status after editing result notes from the completed task state while keeping the completion summary and handoff output visible until the edit clears it and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.26` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Copy Report Feedback Foundation; the repository now shows a local `Copied locally` state on the copy-report button after the completion report is copied while keeping the completion summary and handoff output visible and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.25` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Complete Task Feedback Foundation; the repository now shows a local `Completed locally` state on the complete-task button after the task is completed while keeping the completion summary and handoff output visible and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
