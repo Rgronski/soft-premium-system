@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 063 - MS-008.28 task workspace completion restore feedback foundation implementation acceptance sync
+## Session 063 - MS-008.29 task workspace completion handoff copy feedback foundation implementation acceptance sync
 
 ### Date
 
@@ -77,10 +77,10 @@ Each release entry should contain:
 
 ### Completed
 
-* Synced the SSOT for the `MS-008.28 - Task Workspace Completion Restore Feedback Foundation` close result.
-* Recorded that the task workspace now shows a local `Completion restored locally.` status after saving updated result notes following a completion reset.
+* Synced the SSOT for the `MS-008.29 - Task Workspace Completion Handoff Copy Feedback Foundation` close result.
+* Recorded that the task workspace now shows a local `Completion handoff copied.` status after the completion handoff is copied.
 * Recorded that the focused `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` verification passed.
-* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.28`.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.29`.
 
 ### Notes
 

@@ -232,17 +232,17 @@ describe("ProjectTaskWorkspacePage", () => {
       screen.getAllByText("Evidence review acknowledged locally."),
     ).toHaveLength(2);
     expect(screen.getByText("Task completion handoff")).toBeTruthy();
-    expect(screen.getByRole("button", { name: "Copy report" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Copy handoff" })).toBeTruthy();
 
-    fireEvent.click(screen.getByRole("button", { name: "Copy report" }));
+    fireEvent.click(screen.getByRole("button", { name: "Copy handoff" }));
 
     await waitFor(() => {
       expect(writeTextMock).toHaveBeenCalledWith(
-        "Task completed locally.\nSaved result notes: Finished the task locally.",
+        "Task completion handoff\nTask completed locally.\nSaved result notes: Finished the task locally.",
       );
     });
 
-    expect(screen.getByText("Completion report copied.")).toBeTruthy();
+    expect(screen.getByText("Completion handoff copied.")).toBeTruthy();
     expect(
       screen.getByRole("button", { name: "Copied locally" }),
     ).toBeTruthy();
@@ -265,7 +265,7 @@ describe("ProjectTaskWorkspacePage", () => {
     ).toBeTruthy();
     expect(screen.queryByText("Completion Summary")).toBeNull();
     expect(screen.queryByText("Task completed locally.")).toBeNull();
-    expect(screen.queryByText("Completion report copied.")).toBeNull();
+    expect(screen.queryByText("Completion handoff copied.")).toBeNull();
     expect(screen.queryByText("Copied locally")).toBeNull();
     expect(screen.queryByText("Completion reset locally.")).toBeNull();
     expect(screen.queryByText("Task completion handoff")).toBeNull();
@@ -289,7 +289,7 @@ describe("ProjectTaskWorkspacePage", () => {
       (screen.getByRole("button", { name: "Complete task" }) as HTMLButtonElement)
         .disabled,
     ).toBe(false);
-    expect(screen.queryByRole("button", { name: "Copy report" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Copy handoff" })).toBeNull();
   });
 
   test("shows the missing state for an unknown taskId", async () => {

@@ -199,6 +199,7 @@ export default function ProjectTaskWorkspacePage() {
 
   async function handleCopyCompletionReport() {
     const completionReport = [
+      "Task completion handoff",
       "Task completed locally.",
       `Saved result notes: ${resultNotes}`,
     ].join("\n");
@@ -539,11 +540,11 @@ Saved result notes: ${resultNotes}${taskEvidenceReviewState === "acknowledged" ?
                   >
                     {taskCompletionReportCopyState === "copied"
                       ? "Copied locally"
-                      : "Copy report"}
+                      : "Copy handoff"}
                   </button>
                   {taskCompletionReportCopyState === "copied" ? (
                     <p className="text-sm text-zinc-400" aria-live="polite">
-                      Completion report copied.
+                      Completion handoff copied.
                     </p>
                   ) : null}
                 </div>
