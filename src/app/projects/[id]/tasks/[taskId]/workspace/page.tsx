@@ -106,6 +106,8 @@ export default function ProjectTaskWorkspacePage() {
     useState<TaskCompletionState>("idle");
   const [taskCompletionReportCopyState, setTaskCompletionReportCopyState] =
     useState<TaskCompletionReportCopyState>("idle");
+  const [taskCompletionResetState, setTaskCompletionResetState] =
+    useState<"idle" | "reset">("idle");
   const [taskEvidenceReviewState, setTaskEvidenceReviewState] =
     useState<TaskEvidenceReviewState>("idle");
   const [canonicalNextStep, setCanonicalNextStep] =
@@ -159,6 +161,7 @@ export default function ProjectTaskWorkspacePage() {
     setResultSaveState("saved");
     setTaskCompletionState("idle");
     setTaskCompletionReportCopyState("idle");
+    setTaskCompletionResetState("idle");
     setTaskEvidenceReviewState("idle");
   }
 
@@ -173,6 +176,7 @@ export default function ProjectTaskWorkspacePage() {
     );
     setTaskCompletionState("completed");
     setTaskCompletionReportCopyState("idle");
+    setTaskCompletionResetState("idle");
   }
 
   function handleAcknowledgeEvidenceReview() {
@@ -436,6 +440,10 @@ export default function ProjectTaskWorkspacePage() {
               placeholder="Summarize the result of this task."
               value={resultNotes}
               onChange={(event) => {
+                const hadCompletedFlow =
+                  taskCompletionState === "completed" ||
+                  taskCompletionReportCopyState === "copied" ||
+                  taskEvidenceReviewState === "acknowledged";
                 localStorage.removeItem(
                   getTaskCompletionStorageKey(projectId, taskId),
                 );
@@ -446,6 +454,7 @@ export default function ProjectTaskWorkspacePage() {
                 setResultSaveState("idle");
                 setTaskCompletionState("idle");
                 setTaskCompletionReportCopyState("idle");
+                setTaskCompletionResetState(hadCompletedFlow ? "reset" : "idle");
                 setTaskEvidenceReviewState("idle");
               }}
             />
@@ -476,6 +485,11 @@ export default function ProjectTaskWorkspacePage() {
                   : "Complete task"}
               </button>
             </div>
+            {taskCompletionResetState === "reset" ? (
+              <p className="mt-3 text-sm text-zinc-400" aria-live="polite">
+                Completion reset locally.
+              </p>
+            ) : null}
             {taskCompletionState === "completed" ? (
               <div className="mt-3 rounded-xl border border-zinc-800 bg-zinc-950 p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">

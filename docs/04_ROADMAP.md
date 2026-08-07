@@ -111,11 +111,86 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.26 - Task Workspace Copy Report Feedback Foundation
+MS-008.27 - Task Workspace Completion Reset Feedback Foundation
 
 ## Next
 
 NONE
+
+## MS-008.27 - Task Workspace Completion Reset Feedback Foundation
+
+**Milestone**
+MS-008.27 - Task Workspace Completion Reset Feedback Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Give the task workspace completion reset path a visible local signal when result notes are edited after the task has been completed, without changing persistence, backend flow, or the existing completion handoff content.
+
+**Product Outcome**
+The task workspace now shows a local `Completion reset locally.` status after result notes are edited from a completed task state while preserving the completion summary and handoff output for the completed state until the edit clears it.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now shows `Completion reset locally.` when completed task flow is cleared by editing result notes.
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies the reset message appears after editing result notes from the completed state.
+* Targeted verification for `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` passed.
+
+**Dependencies**
+* `MS-008.26 - Task Workspace Copy Report Feedback Foundation`
+
+**Allowed Implementation Scope**
+* minimal local reset-feedback change in the task workspace completion path
+* focused test coverage for the visible reset state
+* SSOT synchronization for the completed workspace milestone
+
+**Forbidden Scope**
+* backend changes
+* persistence changes
+* workflow branching
+* broad refactor
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` owns the task workspace completion reset feedback
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` owns the focused verification for the reset state
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized close-state records for this milestone
+
+**Verification Plan**
+* targeted test for `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx`
+* `git diff --check`
+* focused manual smoke of the reset-feedback state if needed
+
+**Rollback / Safety Expectations**
+* stop if the reset-feedback state requires broader workflow changes
+* stop if the fix requires backend or Project Brain engine changes
+* keep the milestone minimal and local
+
+**Documentation Updates**
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
 
 ## MS-008.26 - Task Workspace Copy Report Feedback Foundation
 

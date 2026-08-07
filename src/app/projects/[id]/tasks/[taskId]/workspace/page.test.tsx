@@ -251,9 +251,11 @@ describe("ProjectTaskWorkspacePage", () => {
       target: { value: "Edited after completion." },
     });
 
+    expect(screen.getByText("Completion reset locally.")).toBeTruthy();
     expect(screen.queryByText("Completion Summary")).toBeNull();
     expect(screen.queryByText("Task completed locally.")).toBeNull();
     expect(screen.queryByText("Completion report copied.")).toBeNull();
+    expect(screen.queryByText("Copied locally")).toBeNull();
     expect(screen.queryByText("Task completion handoff")).toBeNull();
     expect(screen.queryAllByText("Evidence review acknowledged locally.")).toHaveLength(0);
     expect(

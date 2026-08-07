@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 063 - MS-008.27 task workspace completion reset feedback foundation implementation acceptance sync
+
+### Date
+
+2026-08-07
+
+### Completed
+
+* Synced the SSOT for the `MS-008.27 - Task Workspace Completion Reset Feedback Foundation` close result.
+* Recorded that the task workspace now shows a local `Completion reset locally.` status after editing result notes from the completed task state.
+* Recorded that the focused `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` verification passed.
+* Kept `Current Product Milestone` at `NONE`, `Next Product Milestone` at `NONE`, and the latest completed milestone aligned with `MS-008.27`.
+
+### Notes
+
+* No backend persistence, Project Brain writes, navigation changes, redesign, broad refactor, or unrelated cleanup were introduced in this sync step.
+* Recorded the Session 063 usage entry in `.usage/session.jsonl`.
+
 ## Session 063 - MS-008.26 task workspace copy report feedback foundation implementation acceptance sync
 
 ### Date
