@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 064 - close protocol and handoff for MS-009.7
+
+### Date
+
+2026-08-08
+
+### Completed
+
+* Closed Session 064 after publishing `MS-009.7 - Dyrygent/Konduktor First Implementation Scope Foundation`.
+* Synchronized the close-state SSOT, prepared the Session 064 handoff for Session 065, and recorded the Session 064 usage entry in `.usage/session.jsonl`.
+* Preserved Workflow Engine as the rules/interpretation owner and kept Project Brain plus SSOT docs as canonical truth.
+
+### Notes
+
+* No `src` changes, UI changes, scheduling automation, tests, or product implementation were introduced by the close protocol.
+
 ## Session 064 - MS-009.7 Dyrygent/Konduktor First Implementation Scope Foundation publication
 
 ### Date
