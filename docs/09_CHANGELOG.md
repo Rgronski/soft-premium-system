@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 065 - MS-009.10 controlled contract SSOT sync
+
+### Date
+
+2026-08-08
+
+### Completed
+
+* Published `MS-009.10 - Dyrygent/Konduktor Boundary Validation Consumption Contract Foundation` as the docs-only contract milestone for the next controlled consumption step after `MS-009.8` and `MS-009.9`.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-009.10` as the latest completed product milestone while keeping `Current Product Milestone` at `NONE`.
+* Recorded the published contract milestone in the official history and kept Workflow Engine, Project Brain, and SSOT ownership unchanged.
+* Recorded the Session 065 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No runtime product code changed.
+* No UI, automation, scheduling, recovery, or command-executor ownership changed.
+
 ## Session 065 - MS-009.9 controlled discovery SSOT sync
 
 ### Date

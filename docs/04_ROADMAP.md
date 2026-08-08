@@ -111,11 +111,99 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-009.9 - Dyrygent/Konduktor Next Controlled Step Discovery Foundation
+MS-009.10 - Dyrygent/Konduktor Boundary Validation Consumption Contract Foundation
 
 ## Next
 
 * `NONE`
+
+## MS-009.10 - Dyrygent/Konduktor Boundary Validation Consumption Contract Foundation
+
+**Milestone**
+MS-009.10 - Dyrygent/Konduktor Boundary Validation Consumption Contract Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Define the next minimal controlled step after `MS-009.8` and `MS-009.9` by recording how the new conductor boundary validator may be consumed safely by Dyrygent/Konduktor without changing Workflow Engine ownership, Project Brain, SSOT, UI, automation, scheduling, recovery, or executor responsibilities.
+
+**Product Outcome**
+The repository now records the next controlled consumption boundary for the conductor validator, so any future implementation can consume the validator output as explicit read-only input without shifting canonical truth or ownership boundaries.
+
+**Allowed Future Implementation Target**
+* a minimal controlled consumer seam under `src/lib/conductor` that accepts an explicit boundary-validation snapshot or validation result and derives the next deterministic conductor-facing decision from that input
+* read-only consumption of the validator output as explicit input
+* compatibility with the existing `getConductorState()` surface if the future implementation needs to expose the same compatibility boundary
+* no file reads, file writes, or direct mutation of Project Brain or SSOT state
+
+**Implementation Evidence**
+* `docs/04_ROADMAP.md` now records the MS-009.10 consumption contract and updates the latest completed product milestone baseline
+* `docs/08_CURRENT_STATE.md` keeps the synchronized latest completed milestone snapshot aligned with MS-009.10
+* `docs/09_CHANGELOG.md` records the published contract milestone in the official history
+* `docs/10_SESSION_STATE.md` records the live Session 065 snapshot for the contract sync
+* `.usage/session.jsonl` records the Session 065 contract publication usage entry
+* no runtime product code, UI, automation, scheduling, recovery, executor, Project Brain, or Workflow Engine ownership changed
+
+**Dependencies**
+* `MS-009.9 - Dyrygent/Konduktor Next Controlled Step Discovery Foundation`
+* `MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation`
+
+**Allowed Implementation Scope**
+* docs-only product contract creation
+* SSOT synchronization
+* publication metadata
+* history recording for the completed contract milestone
+
+**Forbidden Scope**
+* `src` changes
+* UI changes
+* automation changes
+* scheduling changes
+* recovery changes
+* command executor ownership changes
+* any Workflow Engine ownership change
+* direct writes to Project Brain facts or SSOT history outside this contract
+* broad refactors
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this docs-only milestone
+* any future implementation must stay inside the allowed future implementation target and outside UI, automation, scheduling, recovery, executor, Project Brain, and Workflow Engine ownership until a separate Product Owner-approved milestone exists
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* `git diff -- docs/04_ROADMAP.md docs/08_CURRENT_STATE.md docs/09_CHANGELOG.md docs/10_SESSION_STATE.md .usage/session.jsonl`
+* confirm no unrelated files were changed
+
+**Codex Implementation Handoff Boundary**
+* If implementation is approved later, Codex may only continue after a separate Product Owner-approved implementation milestone is defined.
+
+**Rollback / Safety Expectations**
+* If the contract needs revision, update only the SSOT docs that define the milestone boundary and keep `Current Product Milestone` at `NONE` until a separate Product Owner decision is recorded.
 
 ## MS-009.9 - Dyrygent/Konduktor Next Controlled Step Discovery Foundation
 
