@@ -77,3 +77,31 @@ export function validateConductorBoundarySnapshot(
     violations,
   };
 }
+
+export function deriveConductorBoundaryConsumerState(
+  validationResult: ConductorBoundaryValidationResult,
+): ConductorState {
+  const firstViolation = validationResult.violations[0];
+
+  if (validationResult.ready) {
+    return {
+      currentMilestone:
+        "MS-009.11 - Dyrygent/Konduktor Boundary Validation Consumer Implementation Authorization Foundation",
+      currentPhase: "Boundary Consumption",
+      currentTask: "Consume validated conductor boundary output",
+      nextAction: "Proceed with the read-only conductor consumer seam.",
+      projectHealth: "ready",
+    };
+  }
+
+  return {
+    currentMilestone:
+      "MS-009.11 - Dyrygent/Konduktor Boundary Validation Consumer Implementation Authorization Foundation",
+    currentPhase: "Boundary Consumption",
+    currentTask: "Review conductor boundary validation violations",
+    nextAction: firstViolation
+      ? `Resolve ${firstViolation.code} before consuming the validator output.`
+      : "Resolve conductor boundary validation violations before consuming the validator output.",
+    projectHealth: "blocked",
+  };
+}
