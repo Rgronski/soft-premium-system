@@ -144,7 +144,7 @@ COMPLETED / VERIFIED
 PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / PUBLISHED / CLOSED
+COMPLETED / VERIFIED / PUBLISHED / PUSHED
 
 **Purpose**
 Publish SSOT authorization for the minimal controlled implementation of the consumer seam defined by `MS-009.10` so the repository can move from contract definition to an explicitly authorized future implementation boundary without changing Workflow Engine ownership, Project Brain, SSOT, UI, automation, scheduling, recovery, or executor responsibilities.
@@ -159,12 +159,13 @@ The repository now records the authorization boundary for the minimal conductor 
 * deterministic behavior with no file reads, file writes, or runtime mutation of Project Brain or SSOT state
 
 **Implementation Evidence**
-* `docs/04_ROADMAP.md` now records the MS-009.11 implementation authorization contract and updates the latest completed product milestone baseline
-* `docs/08_CURRENT_STATE.md` keeps the synchronized latest completed milestone snapshot aligned with MS-009.11
-* `docs/09_CHANGELOG.md` records the published authorization milestone in the official history
-* `docs/10_SESSION_STATE.md` records the live Session 065 snapshot for the authorization sync
-* `.usage/session.jsonl` records the Session 065 authorization task usage entry
-* no runtime product code, UI, automation, scheduling, recovery, executor, Project Brain, or Workflow Engine ownership changed
+* `src/lib/conductor/conductor.ts` exports the pure conductor boundary consumer helper and keeps `getConductorState()` compatible
+* `src/lib/conductor/conductor.test.ts` covers ready and blocked consumer states plus legacy compatibility
+* `npm.cmd test -- src/lib/conductor/conductor.test.ts` passed with `5 / 5` tests
+* implementation commit `c9299c8c17b1f5574d7f6191080e3a079bdb5fc2` was pushed to `origin/main`
+* `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` still preserve the MS-009.11 authorization boundary
+* `.usage/session.jsonl` records the Session 065 execution-sync usage entry
+* no UI, automation, scheduling, recovery, executor, Project Brain, or Workflow Engine ownership changed
 
 **Dependencies**
 * `MS-009.10 - Dyrygent/Konduktor Boundary Validation Consumption Contract Foundation`
