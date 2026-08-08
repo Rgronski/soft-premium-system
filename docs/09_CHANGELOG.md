@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 064 - MS-009.5 Dyrygent/Konduktor Failure Boundary Foundation publication
+
+### Date
+
+2026-08-08
+
+### Completed
+
+* Published `MS-009.5 - Dyrygent/Konduktor Failure Boundary Foundation` as the docs-only failure boundary contract for Dyrygent and Konduktor.
+* Defined the bounded failure and blocker categories, stop rules, clarification rules, and failure-to-signal / failure-to-command mappings.
+* Preserved Workflow Engine as the rules/interpretation owner and kept Project Brain plus SSOT docs as canonical truth.
+* Synced `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to reflect the new published milestone.
+
+### Notes
+
+* No `src` changes, UI changes, scheduling automation, tests, or product implementation were introduced.
+
 ## Session 064 - MS-009.4 Dyrygent/Konduktor Command Boundary Foundation publication
 
 ### Date

@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-009.4 - Dyrygent/Konduktor Command Boundary Foundation
+MS-009.5 - Dyrygent/Konduktor Failure Boundary Foundation
 
 **Next Milestone**
 NONE
+
+MS-009.5 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Dyrygent/Konduktor Failure Boundary Foundation; the repository now defines the bounded failure and blocker contract for ambiguous, forbidden, unsafe, inconsistent, or incomplete orchestration paths while keeping Workflow Engine as the rules/interpretation owner and keeping Project Brain and SSOT docs as canonical truth.
 
 MS-009.4 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Dyrygent/Konduktor Command Boundary Foundation; the repository now defines the allowed command categories, forbidden commands, and authority boundaries while keeping Workflow Engine as the rules/interpretation owner and keeping Project Brain and SSOT docs as canonical truth.
 

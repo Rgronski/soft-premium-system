@@ -111,11 +111,76 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-009.4 - Dyrygent/Konduktor Command Boundary Foundation
+MS-009.5 - Dyrygent/Konduktor Failure Boundary Foundation
 
 ## Next
 
 * `NONE`
+
+## MS-009.5 - Dyrygent/Konduktor Failure Boundary Foundation
+
+**Milestone**
+MS-009.5 - Dyrygent/Konduktor Failure Boundary Foundation
+
+**Type**
+Product Milestone
+
+**Status**
+Published
+
+**Purpose**
+Define the bounded failure and blocker contract for Dyrygent and Konduktor so ambiguous, forbidden, unsafe, or incomplete orchestration paths stop or request clarification before they can be treated as valid guidance.
+
+**Failure and Blocker Categories**
+* `ambiguous-input` - the requested orchestration action lacks enough context to decide safely.
+* `missing-state` - a required orchestration state, signal, or handoff is absent or stale.
+* `forbidden-action` - the request would cross authority boundaries or mutate canonical truth.
+* `unsafe-path` - the request would imply automation, scheduling, runtime execution, or another out-of-scope action.
+* `inconsistent-state` - the observable state conflicts with SSOT or Project Brain facts.
+
+**Stop and Clarification Rules**
+* Dyrygent must stop instead of deciding when the request would require inventing missing canonical facts or overriding Workflow Engine interpretation.
+* Konduktor must ask for clarification instead of guiding when the request is ambiguous, incomplete, or cannot be expressed safely through the allowed command boundary.
+* Dyrygent must block the path when the request is forbidden, unsafe, or would alter canonical truth.
+* Konduktor must block the path when presenting guidance would imply execution authority or recovery automation.
+* Neither side may fabricate a recovery path outside the published milestone contract.
+
+**Failure-to-Signal Mapping**
+* `ambiguous-input` maps to `needs-clarification` and `clarification-needed`.
+* `missing-state` maps to `warning`, then `needs-clarification` if the missing state cannot be reconstructed from SSOT.
+* `forbidden-action` maps to `blocked` and `cannot-continue`.
+* `unsafe-path` maps to `warning`, then `blocked` if the safe boundary cannot be maintained.
+* `inconsistent-state` maps to `blocked`.
+
+**Failure-to-Command Mapping**
+* `request-clarification` is the correct response for ambiguous or missing-state conditions.
+* `block-command` is the correct response for forbidden, unsafe, or inconsistent-state conditions.
+* `present-guidance` is forbidden while the orchestration state is `clarification-needed` or `blocked`.
+* `acknowledge-state` may only follow a valid handoff that is still inside the MS-009.3 state model.
+
+**Authority Boundaries**
+* Workflow Engine remains the rules/interpretation owner.
+* Project Brain remains the canonical project fact source.
+* SSOT docs remain the canonical milestone and session history source.
+* Dyrygent stops before deciding when the contract requires missing truth to be reconstructed from canonical sources.
+* Konduktor stops before guiding when the contract requires clarification or blocking instead of presentation.
+
+**Out of Scope**
+* application code
+* UI changes
+* command executor implementation
+* automation logic
+* recovery engine implementation
+* refactors
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+**Next Milestone**
+NONE
 
 ## MS-009.4 - Dyrygent/Konduktor Command Boundary Foundation
 
