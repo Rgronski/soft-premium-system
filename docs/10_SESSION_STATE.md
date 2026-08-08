@@ -236,5 +236,5 @@ Latest Verified Commit: 300bf37
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open Session 065 from the fresh package and begin the first controlled implementation milestone after MS-009.7.
+Next Safe Step: Open a new chat titled `065 SPS OS - MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation`, attach `sps-session.zip`, and paste the START prompt.
 Next Session Plan: Open Session 065 from a fresh generated package and begin the first controlled implementation milestone after MS-009.7 only after a separate Product Owner decision authorizes it.
