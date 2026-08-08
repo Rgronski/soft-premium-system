@@ -33,7 +33,7 @@ Blockers: NONE
 Open Risks: NONE
 
 Recommendation: Run `SPS OS - START` for Session 066 after attaching the fresh session package and verifying package consistency.
-Next Safe Step: Start Session 066 with the fresh session package and perform the post-MS-009.11 integrity check
+Next Safe Step: Start Session 066 with the fresh session package and perform the post-MS-009.11 integrity check.
 Next Chat Prompt: SPS OS - START. Project: C:\Users\p700\soft-premium-system. Attach C:\Users\p700\soft-premium-system\sps-session.zip to the new chat before bootstrap; the local path alone does not give the next chat access to the ZIP. Run the full bootstrap, confirm package Git Context and SSOT consistency, keep Current Product Milestone as `NONE`, keep Next Product Milestone as `NONE`, preserve `MS-009.11 - Dyrygent/Konduktor Boundary Validation Consumer Implementation Authorization Foundation` as `COMPLETED / VERIFIED / PUBLISHED / PUSHED`, and perform a post-MS-009.11 integrity check before any new milestone is discussed.
 
 ## StaĹ‚e zasady pracy
