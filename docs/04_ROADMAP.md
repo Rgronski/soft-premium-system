@@ -111,11 +111,92 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation
+MS-009.9 - Dyrygent/Konduktor Next Controlled Step Discovery Foundation
 
 ## Next
 
 * `NONE`
+
+## MS-009.9 - Dyrygent/Konduktor Next Controlled Step Discovery Foundation
+
+**Milestone**
+MS-009.9 - Dyrygent/Konduktor Next Controlled Step Discovery Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Define and record the next safe controlled implementation boundary after `MS-009.8` so the repository has a published SSOT-backed discovery contract for the next Dyrygent/Konduktor step without shifting Workflow Engine, Project Brain, or SSOT ownership.
+
+**Product Outcome**
+The repository now records the next smallest controlled implementation boundary after the first controlled Dyrygent/Konduktor validation seam, and the live product behavior remains unchanged.
+
+**Implementation Evidence**
+* `docs/04_ROADMAP.md` now records the MS-009.9 discovery contract and updates the latest completed product milestone baseline
+* `docs/08_CURRENT_STATE.md` keeps the synchronized latest completed milestone snapshot aligned with MS-009.9
+* `docs/09_CHANGELOG.md` records the published discovery milestone in the official history
+* `docs/10_SESSION_STATE.md` records the live Session 065 snapshot for the discovery sync
+* `.usage/session.jsonl` records the Session 065 publication task usage entry
+* no runtime product code, UI, automation, scheduling, recovery, executor, or Workflow Engine ownership changed
+
+**Dependencies**
+* `MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation`
+
+**Allowed Implementation Scope**
+* docs-only product discovery
+* SSOT synchronization
+* publication metadata
+* history recording for the completed discovery milestone
+
+**Forbidden Scope**
+* `src` changes
+* UI changes
+* automation changes
+* scheduling changes
+* recovery changes
+* command executor ownership changes
+* any Workflow Engine ownership change
+* direct writes to Project Brain facts or SSOT history outside this contract
+* broad refactors
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this docs-only milestone
+* any future implementation must stay outside UI, automation, scheduling, recovery, executor, and Workflow Engine ownership until a separate Product Owner-approved milestone exists
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* `git diff -- docs/04_ROADMAP.md docs/08_CURRENT_STATE.md docs/09_CHANGELOG.md docs/10_SESSION_STATE.md .usage/session.jsonl`
+* confirm no unrelated files were changed
+
+**Codex Implementation Handoff Boundary**
+* If implementation is approved later, Codex may only continue after a separate Product Owner-approved implementation milestone is defined.
+
+**Rollback / Safety Expectations**
+* If the discovery contract needs revision, update only the SSOT docs that define the milestone boundary and keep `Current Product Milestone` at `NONE` until a separate Product Owner decision is recorded.
 
 ## MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation
 

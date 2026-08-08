@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation
+MS-009.9 - Dyrygent/Konduktor Next Controlled Step Discovery Foundation
 
 **Next Milestone**
 NONE
+
+MS-009.9 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Dyrygent/Konduktor Next Controlled Step Discovery Foundation; the repository now records the next safe controlled implementation boundary after MS-009.8, keeps the discovery docs-only, and preserves Workflow Engine, Project Brain, and SSOT boundaries while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-009.8 is COMPLETED / VERIFIED / PUBLISHED / PUSHED in the current local workspace as the Dyrygent/Konduktor First Controlled Implementation Foundation; the repository now contains the first controlled orchestration validation seam, keeps the validation deterministic and read-only, and preserves Workflow Engine, Project Brain, and SSOT boundaries while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
@@ -1382,7 +1384,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation`
+* `Latest Completed Product Milestone` is `MS-009.9 - Dyrygent/Konduktor Next Controlled Step Discovery Foundation`
 * `Next Product Milestone` is `NONE`
 * `MS-008.32` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Codex Handoff Jump Feedback Foundation; the repository now shows a local `Codex handoff opened locally.` status after the Codex handoff link is used while keeping the task handoff section visible and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.31` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Completion Handoff Restore Feedback Foundation; the repository now shows a local `Completion handoff restored locally.` status after updated result notes restore a copied completion handoff while keeping the completion summary and handoff output visible after the restoration and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
