@@ -111,11 +111,72 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-009.6 - Dyrygent/Konduktor Readiness Gate Foundation
+MS-009.7 - Dyrygent/Konduktor First Implementation Scope Foundation
 
 ## Next
 
 * `NONE`
+
+## MS-009.7 - Dyrygent/Konduktor First Implementation Scope Foundation
+
+**Milestone**
+MS-009.7 - Dyrygent/Konduktor First Implementation Scope Foundation
+
+**Type**
+Product Milestone
+
+**Status**
+Published
+
+**Purpose**
+Define the first controlled Dyrygent/Konduktor implementation milestone scope so the next implementation step can begin only inside the published MS-009 contract boundary and without displacing Workflow Engine, Project Brain, or SSOT authority.
+
+**Allowed Implementation Scope**
+* a minimal orchestration implementation seam that consumes the published MS-009.0 through MS-009.6 contracts
+* read-only contract enforcement for command, signal, state, failure, and readiness checks
+* deterministic orchestration validation helpers that do not mutate canonical truth
+* minimal implementation verification hooks for boundary compliance and SSOT consistency
+* the smallest controlled runtime surface needed to execute the published orchestration contract without expanding product behavior
+
+**Forbidden Implementation Scope**
+* UI implementation for Dyrygent or Konduktor
+* automation logic, scheduling logic, or recovery engine logic
+* runtime state machine ownership or command executor ownership
+* direct writes to Project Brain facts or SSOT history
+* any change to Workflow Engine rules or interpretation ownership
+* any MS-008 reopen, refactor, or unrelated cleanup
+
+**Pre-Implementation Verification**
+* MS-009.0 through MS-009.6 are published, recorded in SSOT, and mutually consistent
+* `git status` is clean before implementation begins
+* `git diff --check` passes before implementation begins
+* the implementation target is explicitly limited to the published MS-009 contract boundary
+* no unresolved SSOT contradiction remains in `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, or `docs/10_SESSION_STATE.md`
+
+**Post-Implementation Verification**
+* focused checks confirm the new implementation stays inside the published MS-009 boundary
+* verification confirms no canonical truth moved out of Project Brain or SSOT docs
+* verification confirms Workflow Engine remains the rules/interpretation owner
+* verification confirms no UI, automation, recovery, or runtime state-machine scope was added
+* SSOT docs are updated to reflect the actual implementation result only after verification succeeds
+
+**Implementation Authorization Rule**
+* the first controlled implementation milestone may start only after the readiness gate remains satisfied and a separate Product Owner decision authorizes implementation
+
+**Out of Scope**
+* application code in this milestone
+* UI changes in this milestone
+* automation logic in this milestone
+* refactors in this milestone
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+**Next Milestone**
+NONE
 
 ## MS-009.6 - Dyrygent/Konduktor Readiness Gate Foundation
 
