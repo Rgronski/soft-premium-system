@@ -208,7 +208,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-008.25 - Task Workspace Complete Task Feedback Foundation
+Latest Completed Product Milestone: MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
 Next Product Milestone: NONE
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
