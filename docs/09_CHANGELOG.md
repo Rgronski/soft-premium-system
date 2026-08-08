@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 064 - MS-009.1 Dyrygent/Konduktor Responsibility Map Foundation publication
+
+### Date
+
+2026-08-08
+
+### Completed
+
+* Published `MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation` as the docs-only responsibility map for the Dyrygent/Konduktor orchestration boundary.
+* Clarified the ownership split for `Workflow Engine`, `Dyrygent`, `Konduktor`, `Project Brain`, and `SSOT docs`.
+* Recorded the forbidden responsibility transfers that must stay outside the orchestration boundary.
+* Synced `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to reflect the new published milestone.
+
+### Notes
+
+* No `src` changes, UI changes, scheduling automation, tests, or product implementation were introduced.
+
 ## Session 064 - MS-009.0 Dyrygent/Konduktor Foundation publication
 
 ### Date

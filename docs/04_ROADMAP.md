@@ -111,11 +111,57 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
+MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation
 
 ## Next
 
-* `MS-009.0` - Dyrygent/Konduktor Foundation
+* `NONE`
+
+## MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation
+
+**Milestone**
+MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation
+
+**Type**
+Product Milestone
+
+**Status**
+Published
+
+**Purpose**
+Define the responsibility map for Dyrygent and Konduktor so orchestration ownership stays unambiguous before any implementation work begins.
+
+**Responsibility Map**
+* `Workflow Engine` interprets workflow state, blocker state, progression guidance, and recommendation confidence.
+* `Dyrygent` owns orchestration sequencing, milestone boundary publication, and the coordination between published contracts.
+* `Konduktor` owns presentation of operational guidance and human-facing orchestration surfaces.
+* `Project Brain` owns canonical project facts and runtime project state inputs.
+* `SSOT docs` own milestone order, contract publication history, and session continuity records.
+
+**Forbidden Responsibility Transfers**
+* `Workflow Engine` must not take over canonical truth from `Project Brain` or `SSOT docs`.
+* `Workflow Engine` must not render UI or become a presentation layer.
+* `Dyrygent` must not define workflow rules or replace Workflow Engine interpretation.
+* `Dyrygent` must not become the canonical store for project facts.
+* `Konduktor` must not define workflow rules or own project facts.
+* `Project Brain` must not become the roadmap, session log, or changelog authority.
+* `SSOT docs` must not become a runtime execution layer or bypass `Project Brain`.
+
+**Out of Scope**
+* application code
+* UI changes
+* scheduling automation
+* workflow rule refactors
+* architecture rewrites
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+**Next Milestone**
+NONE
 
 ## MS-009.0 - Dyrygent/Konduktor Foundation
 
@@ -156,9 +202,6 @@ Establish the orchestration contract boundary while keeping the Workflow Engine 
 **Documentation Updates**
 * `docs/04_ROADMAP.md`
 * `docs/09_CHANGELOG.md`
-
-**Next Milestone**
-NONE
 
 ## MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
 

@@ -213,28 +213,28 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-08-07
-Current Session ID: 063
-Current Chat Title: 063 SPS OS - MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
-Next Session ID: 064
-Suggested Next Chat Title: 064 SPS OS - MS-009.0 - Dyrygent/Konduktor Foundation
-Active Capability: NONE
-Active Work Item: Session 063 close protocol
-Current Mode: CLOSED
-Completed Capability Items: Session 055 verified real repo status; Session 055 published MS-007.0; Session 055 ran the real new-task pilot; Session 055 resolved the project persistence blocker; Session 055 published MS-007.1; Session 055 fixed the task workspace link route; Session 055 published MS-007.2; Session 055 ran the final new-task pilot; Session 055 published MS-007.3; Session 055 refreshed close SSOT for package generation; Session 055 published MS-007.4; Session 055 regenerated the fresh package after the final close push; Session 055 synchronized SSOT; Session 055 recorded usage entry; Session 056 published MS-007.5; Session 056 published MS-007.6; Session 056 published MS-008.0; Session 056 published MS-008.1; Session 056 published MS-008.2; Session 056 synchronized SSOT; Session 056 recorded usage entry; Session 057 published MS-008.3; Session 057 published MS-008.4; Session 057 published MS-008.5; Session 057 reconciled the remaining MS-008.4 workspace files; Session 057 synchronized the close SSOT; Session 057 prepared the current handoff; Session 057 closed the session package; Session 058 published CAP-002 protocol/docs patch; Session 058 published MS-008.6; Session 058 synchronized the close SSOT; Session 058 prepared the current handoff; Session 058 closed the session package; Session 059 published MS-008.7; Session 059 synchronized the SSOT; Session 059 published MS-008.8; Session 059 synchronized the SSOT; Session 059 published MS-008.9; Session 059 synchronized the SSOT; Session 059 published MS-008.10; Session 059 synchronized the SSOT; Session 059 prepared the close handoff; Session 059 recorded the close usage entry; Session 060 published MS-008.11; Session 060 synchronized the SSOT; Session 060 recorded usage entry; Session 060 synced the MS-008.11 implementation result; Session 060 published MS-008.12; Session 060 synchronized the SSOT; Session 060 recorded usage entry; Session 060 published MS-008.13; Session 060 synchronized the SSOT; Session 060 recorded usage entry; Session 060 published MS-008.14; Session 060 synchronized the SSOT; Session 060 recorded usage entry; Session 060 synced the MS-008.15 implementation result; Session 060 published MS-008.16; Session 060 synchronized the SSOT; Session 060 recorded usage entry; Session 060 synced the MS-008.17 implementation result; Session 060 synchronized the close SSOT; Session 060 prepared the current handoff; Session 060 recorded the close usage entry; Session 061 published MS-008.19; Session 061 recorded the targeted Open tasks route verification; Session 061 synchronized the close SSOT; Session 061 recorded usage entry; Session 061 prepared the current handoff; Session 061 published MS-008.20; Session 061 recorded the targeted task list card layout verification; Session 061 synchronized the close SSOT; Session 061 recorded usage entry; Session 061 prepared the current handoff; Session 062 published MS-008.21; Session 062 recorded the live task workspace smoke result; Session 062 synchronized the close SSOT; Session 062 recorded usage entry; Session 062 prepared the current handoff; Session 063 synchronized MS-008.22 SSOT/control-file sync; Session 063 recorded usage entry; Session 063 synchronized MS-008.23 SSOT/control-file sync; Session 063 recorded usage entry; Session 063 synchronized MS-008.24 SSOT/control-file sync; Session 063 recorded usage entry; Session 063 synchronized MS-008.25 SSOT/control-file sync; Session 063 recorded usage entry; Session 063 synchronized MS-008.26 SSOT/control-file sync; Session 063 recorded usage entry; Session 063 synchronized MS-008.27 SSOT/control-file sync; Session 063 recorded usage entry; Session 063 synchronized MS-008.28 SSOT/control-file sync; Session 063 recorded usage entry; Session 063 synchronized MS-008.29 SSOT/control-file sync; Session 063 recorded usage entry; Session 063 synchronized MS-008.30 SSOT/control-file sync; Session 063 recorded usage entry; Session 063 synchronized MS-008.31 SSOT/control-file sync; Session 063 recorded usage entry; Session 063 synchronized MS-008.32 SSOT/control-file sync; Session 063 recorded usage entry; Session 063 synchronized MS-008.33 SSOT/control-file sync; Session 063 recorded usage entry; Session 063 synchronized MS-008.34 SSOT/control-file sync; Session 063 recorded usage entry; Session 063 synchronized MS-008.35 SSOT/control-file sync; Session 063 recorded usage entry; Session 063 synchronized MS-008.36 SSOT/control-file sync; Session 063 recorded usage entry
+Date: 2026-08-08
+Current Session ID: 064
+Current Chat Title: 064 SPS OS - MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation
+Next Session ID: UNKNOWN
+Suggested Next Chat Title: UNKNOWN
+Active Capability: MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation
+Active Work Item: Publish the MS-009.1 responsibility map
+Current Mode: OPEN
+Completed Capability Items: Session 064 published MS-009.0; Session 064 started MS-009.1 publication; Session 064 synchronized SSOT boundaries for the responsibility map
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
-Next Product Milestone: MS-009.0 - Dyrygent/Konduktor Foundation
+Latest Completed Product Milestone: MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation
+Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 063 recorded usage entry
+Latest Completed Capability Item: Session 064 published MS-009.1
 Current Sprint: NONE
-Platform Priority: Close Session 063 and prepare Session 064 for MS-009.0.
+Platform Priority: Continue Session 064 with the MS-009 responsibility map.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: d97fd57
+Latest Verified Commit: 44227e0
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `064 SPS OS - MS-009.0 - Dyrygent/Konduktor Foundation`, attach `sps-session.zip`, and paste the START prompt.
-Next Session Plan: Begin Session 064 with `064 SPS OS - MS-009.0 - Dyrygent/Konduktor Foundation` and continue the orchestration-layer discovery.
+Next Safe Step: Review the MS-009.1 responsibility map publication patch.
+Next Session Plan: Continue Session 064 with the responsibility map review and keep the session open.

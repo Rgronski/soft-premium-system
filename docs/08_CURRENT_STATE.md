@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
+MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation
 
 **Next Milestone**
-MS-009.0 - Dyrygent/Konduktor Foundation
+NONE
+
+MS-009.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Dyrygent/Konduktor Responsibility Map Foundation; the repository now records the responsibility split between Workflow Engine, Dyrygent, Konduktor, Project Brain, and SSOT docs while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-008.36 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Workspace Repository Open Feedback Persistence Foundation; the repository now restores a local `Repository opened locally.` status after refresh or revisit while keeping the repository context visible and keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
