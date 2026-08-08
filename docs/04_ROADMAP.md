@@ -125,8 +125,8 @@ MS-009.7 - Dyrygent/Konduktor First Implementation Scope Foundation
 **Type**
 Product Milestone
 
-**Status**
-Published
+**Publication Status**
+PUBLISHED
 
 **Purpose**
 Define the first controlled Dyrygent/Konduktor implementation milestone scope so the next implementation step can begin only inside the published MS-009 contract boundary and without displacing Workflow Engine, Project Brain, or SSOT authority.
