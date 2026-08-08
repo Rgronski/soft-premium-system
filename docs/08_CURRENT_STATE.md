@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-009.10 - Dyrygent/Konduktor Boundary Validation Consumption Contract Foundation
+MS-009.11 - Dyrygent/Konduktor Boundary Validation Consumer Implementation Authorization Foundation
 
 **Next Milestone**
 NONE
+
+MS-009.11 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Dyrygent/Konduktor Boundary Validation Consumer Implementation Authorization Foundation; the repository now records authorization for the minimal controlled implementation of the consumer seam defined by MS-009.10, keeps the authorization docs-only, and preserves Workflow Engine, Project Brain, SSOT, UI, automation, scheduling, recovery, and executor boundaries while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-009.10 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Dyrygent/Konduktor Boundary Validation Consumption Contract Foundation; the repository now records the next controlled consumption boundary for the conductor validator, keeps the contract docs-only, and preserves Workflow Engine, Project Brain, SSOT, UI, automation, scheduling, recovery, and executor boundaries while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
@@ -1386,7 +1388,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-009.10 - Dyrygent/Konduktor Boundary Validation Consumption Contract Foundation`
+* `Latest Completed Product Milestone` is `MS-009.11 - Dyrygent/Konduktor Boundary Validation Consumer Implementation Authorization Foundation`
 * `Next Product Milestone` is `NONE`
 * `MS-008.32` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Codex Handoff Jump Feedback Foundation; the repository now shows a local `Codex handoff opened locally.` status after the Codex handoff link is used while keeping the task handoff section visible and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.31` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Completion Handoff Restore Feedback Foundation; the repository now shows a local `Completion handoff restored locally.` status after updated result notes restore a copied completion handoff while keeping the completion summary and handoff output visible after the restoration and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

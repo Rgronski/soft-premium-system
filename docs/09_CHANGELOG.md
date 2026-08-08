@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 065 - MS-009.11 controlled authorization SSOT sync
+
+### Date
+
+2026-08-08
+
+### Completed
+
+* Published `MS-009.11 - Dyrygent/Konduktor Boundary Validation Consumer Implementation Authorization Foundation` as the docs-only SSOT authorization milestone for the minimal controlled implementation of the consumer seam defined by `MS-009.10`.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-009.11` as the latest completed product milestone while keeping `Current Product Milestone` at `NONE`.
+* Recorded the published authorization milestone in the official history and kept Workflow Engine, Project Brain, and SSOT ownership unchanged.
+* Recorded the Session 065 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No runtime product code changed.
+* No UI, automation, scheduling, recovery, or command-executor ownership changed.
+
 ## Session 065 - MS-009.10 controlled contract SSOT sync
 
 ### Date
