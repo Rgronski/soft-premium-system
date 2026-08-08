@@ -236,5 +236,5 @@ Latest Verified Commit: d97fd57
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open Session 064 from the fresh package, attach `sps-session.zip`, and paste the START prompt for MS-009.0.
+Next Safe Step: Open a new chat titled `064 SPS OS - MS-009.0 - Dyrygent/Konduktor Foundation`, attach `sps-session.zip`, and paste the START prompt.
 Next Session Plan: Begin Session 064 with `064 SPS OS - MS-009.0 - Dyrygent/Konduktor Foundation` and continue the orchestration-layer discovery.
