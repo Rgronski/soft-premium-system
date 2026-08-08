@@ -215,20 +215,20 @@ SPS OS Session State
 
 Date: 2026-08-08
 Current Session ID: 064
-Current Chat Title: 064 SPS OS - MS-009.5 - Dyrygent/Konduktor Failure Boundary Foundation
+Current Chat Title: 064 SPS OS - MS-009.6 - Dyrygent/Konduktor Readiness Gate Foundation
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
-Active Capability: MS-009.5 - Dyrygent/Konduktor Failure Boundary Foundation
-Active Work Item: Publish the MS-009.5 failure boundary contract
+Active Capability: MS-009.6 - Dyrygent/Konduktor Readiness Gate Foundation
+Active Work Item: Publish the MS-009.6 readiness gate contract
 Current Mode: OPEN
-Completed Capability Items: Session 064 published MS-009.0; Session 064 published MS-009.1; Session 064 published MS-009.2; Session 064 published MS-009.3; Session 064 published MS-009.4; Session 064 started MS-009.5 publication
+Completed Capability Items: Session 064 published MS-009.0; Session 064 published MS-009.1; Session 064 published MS-009.2; Session 064 published MS-009.3; Session 064 published MS-009.4; Session 064 published MS-009.5; Session 064 started MS-009.6 publication
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-009.5 - Dyrygent/Konduktor Failure Boundary Foundation
+Latest Completed Product Milestone: MS-009.6 - Dyrygent/Konduktor Readiness Gate Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 064 published MS-009.5 failure boundary
+Latest Completed Capability Item: Session 064 published MS-009.6 readiness gate
 Current Sprint: NONE
-Platform Priority: Continue Session 064 with the MS-009 failure boundary.
+Platform Priority: Continue Session 064 with the MS-009 readiness gate.
 Repository Branch: main
 Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
@@ -236,5 +236,5 @@ Latest Verified Commit: ae24783
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Review the MS-009.5 failure boundary publication patch.
-Next Session Plan: Continue Session 064 with the failure boundary review and keep the session open.
+Next Safe Step: Review the MS-009.6 readiness gate publication patch.
+Next Session Plan: Continue Session 064 with the readiness gate review and keep the session open.

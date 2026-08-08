@@ -111,11 +111,68 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-009.5 - Dyrygent/Konduktor Failure Boundary Foundation
+MS-009.6 - Dyrygent/Konduktor Readiness Gate Foundation
 
 ## Next
 
 * `NONE`
+
+## MS-009.6 - Dyrygent/Konduktor Readiness Gate Foundation
+
+**Milestone**
+MS-009.6 - Dyrygent/Konduktor Readiness Gate Foundation
+
+**Type**
+Product Milestone
+
+**Status**
+Published
+
+**Purpose**
+Define the readiness gate that decides whether the repository is allowed to start the first controlled Dyrygent/Konduktor implementation milestone without losing the published authority split, SSOT discipline, or Workflow Engine ownership.
+
+**Required Satisfied Contracts**
+* `MS-009.0` published the orchestration foundation and preserved Workflow Engine as rules/interpretation owner.
+* `MS-009.1` published the responsibility map for Workflow Engine, Dyrygent, Konduktor, Project Brain, and SSOT.
+* `MS-009.2` published the interaction contract for allowed signals, status flow, and user-facing guidance boundaries.
+* `MS-009.3` published the bounded state model and its ownership rules.
+* `MS-009.4` published the command boundary and the allowed / forbidden command classes.
+* `MS-009.5` published the failure boundary and the stop / clarification rules.
+
+**Implementation Ready Conditions**
+* all six MS-009 contracts are published and mutually consistent in SSOT
+* Workflow Engine remains the rules/interpretation owner
+* Project Brain remains the canonical project fact source
+* SSOT docs remain the canonical milestone and session history source
+* the first implementation milestone is limited to controlled implementation of the published contracts, not new product behavior
+
+**Implementation Blockers**
+* any missing or contradictory MS-009.0 through MS-009.5 contract
+* any attempt to move canonical truth out of Project Brain or SSOT docs
+* any attempt to change Workflow Engine into an implementation agent
+* any attempt to introduce UI, automation logic, runtime state machines, recovery engines, or command executors
+* any attempt to reopen MS-008 or replace the published MS-009 boundary sequence
+
+**Readiness Outcome**
+* ready for the first controlled implementation milestone only when the implementation-ready conditions remain satisfied and a separate Product Owner decision authorizes that milestone
+
+**Out of Scope**
+* application code
+* UI changes
+* automation logic
+* runtime state machine implementation
+* command executor implementation
+* recovery engine implementation
+* refactors
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+**Next Milestone**
+NONE
 
 ## MS-009.5 - Dyrygent/Konduktor Failure Boundary Foundation
 

@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 064 - MS-009.6 Dyrygent/Konduktor Readiness Gate Foundation publication
+
+### Date
+
+2026-08-08
+
+### Completed
+
+* Published `MS-009.6 - Dyrygent/Konduktor Readiness Gate Foundation` as the docs-only readiness gate for the first controlled Dyrygent/Konduktor implementation milestone.
+* Required the published MS-009.0 through MS-009.5 contracts to remain satisfied and mutually consistent before implementation can begin.
+* Defined the implementation-ready conditions and the implementation blockers while preserving Workflow Engine, Project Brain, and SSOT authority boundaries.
+* Synced `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to reflect the new published milestone.
+
+### Notes
+
+* No `src` changes, UI changes, scheduling automation, tests, or product implementation were introduced.
+
 ## Session 064 - MS-009.5 Dyrygent/Konduktor Failure Boundary Foundation publication
 
 ### Date
