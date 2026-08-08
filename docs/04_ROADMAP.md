@@ -111,11 +111,61 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-009.7 - Dyrygent/Konduktor First Implementation Scope Foundation
+MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation
 
 ## Next
 
 * `NONE`
+
+## MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation
+
+**Milestone**
+MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation
+
+**Type**
+Product Milestone
+
+**Product Owner Decision**
+APPROVED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / PUSHED
+
+**Purpose**
+Publish the first controlled Dyrygent/Konduktor implementation seam so the repository can validate the published MS-009 contract boundary without displacing Workflow Engine, Project Brain, or SSOT authority.
+
+**Product Outcome**
+The repository contains one minimal orchestration validation seam that consumes the published MS-009.0 through MS-009.6 contracts as read-only input, preserves `getConductorState()` compatibility, and keeps UI, automation, scheduling, recovery, runtime state-machine, and command-executor ownership out of scope.
+
+**Dependencies**
+* closed `MS-009.7 - Dyrygent/Konduktor First Implementation Scope Foundation`
+* published `MS-009.0 - Dyrygent/Konduktor Foundation`
+* published `MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation`
+* published `MS-009.2 - Dyrygent/Konduktor Interaction Contract Foundation`
+* published `MS-009.3 - Dyrygent/Konduktor State Model Foundation`
+* published `MS-009.4 - Dyrygent/Konduktor Command Boundary Foundation`
+* published `MS-009.5 - Dyrygent/Konduktor Failure Boundary Foundation`
+* published `MS-009.6 - Dyrygent/Konduktor Readiness Gate Foundation`
+
+**Implementation Evidence**
+* `src/lib/conductor/types.ts` exports the boundary snapshot and validation result types
+* `src/lib/conductor/conductor.ts` exports the pure controlled boundary validation helper and keeps `getConductorState()` compatible
+* `src/lib/conductor/conductor.test.ts` covers a valid boundary snapshot and a rejected snapshot
+* `npm.cmd test -- src/lib/conductor/conductor.test.ts` passed with `2 / 2` tests
+* `git diff --check` passed with line-ending warnings only
+* implementation commit `1ba5f7f0584eef9c5de1643b8996d4060c4b48d8` was pushed to `origin/main`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+Keep `Current Product Milestone` at `NONE` until a separate Product Owner decision defines the next milestone.
 
 ## MS-009.7 - Dyrygent/Konduktor First Implementation Scope Foundation
 

@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 065 - MS-009.8 controlled implementation SSOT sync
+
+### Date
+
+2026-08-08
+
+### Completed
+
+* Published `MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation` as the first controlled implementation milestone for the read-only Dyrygent/Konduktor boundary validation seam.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-009.8` as the latest completed product milestone while keeping `Current Product Milestone` at `NONE`.
+* Recorded the pushed implementation commit `1ba5f7f0584eef9c5de1643b8996d4060c4b48d8` and the focused `src/lib/conductor/conductor.test.ts` verification result in the roadmap evidence.
+* Recorded the Session 065 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No additional `src` changes, UI changes, scheduling work, or workflow ownership changes were introduced by the SSOT sync.
+
 ## Session 064 - close protocol and handoff for MS-009.7
 
 ### Date

@@ -214,27 +214,27 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-08
-Current Session ID: 064
-Current Chat Title: 064 SPS OS - MS-009.7 - Dyrygent/Konduktor First Implementation Scope Foundation
-Next Session ID: 065
-Suggested Next Chat Title: 065 SPS OS - MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation
+Current Session ID: 065
+Current Chat Title: 065 SPS OS - MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation
+Next Session ID: UNKNOWN
+Suggested Next Chat Title: UNKNOWN
 Active Capability: NONE
-Active Work Item: Session 064 close protocol
-Current Mode: CLOSED
-Completed Capability Items: Session 064 published MS-009.0; Session 064 published MS-009.1; Session 064 published MS-009.2; Session 064 published MS-009.3; Session 064 published MS-009.4; Session 064 published MS-009.5; Session 064 published MS-009.6; Session 064 published MS-009.7; Session 064 completed close protocol; Session 064 prepared Session 065 handoff; Session 064 recorded session usage entry
+Active Work Item: MS-009.8 SSOT publication sync
+Current Mode: ACTIVE
+Completed Capability Items: Session 065 published MS-009.8; Session 065 recorded usage entry
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-009.7 - Dyrygent/Konduktor First Implementation Scope Foundation
+Latest Completed Product Milestone: MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 064 completed close protocol
+Latest Completed Capability Item: Session 065 completed MS-009.8 publication sync
 Current Sprint: NONE
-Platform Priority: Open Session 065 from the fresh package and begin the first controlled implementation milestone after MS-009.7.
+Platform Priority: Keep Session 065 SSOT synchronized with the pushed MS-009.8 implementation commit.
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 300bf37
+Latest Verified Commit: 1ba5f7f0584eef9c5de1643b8996d4060c4b48d8
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `065 SPS OS - MS-009.8 - Dyrygent/Konduktor First Controlled Implementation Foundation`, attach `sps-session.zip`, and paste the START prompt.
-Next Session Plan: Open Session 065 from a fresh generated package and begin the first controlled implementation milestone after MS-009.7 only after a separate Product Owner decision authorizes it.
+Next Safe Step: Review the MS-009.8 publication sync report and decide whether the docs update should be committed.
+Next Session Plan: Keep Session 065 open for SSOT publication follow-up and do not activate a new milestone.
