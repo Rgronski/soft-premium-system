@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-009.3 - Dyrygent/Konduktor State Model Foundation
+MS-009.4 - Dyrygent/Konduktor Command Boundary Foundation
 
 **Next Milestone**
 NONE
+
+MS-009.4 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Dyrygent/Konduktor Command Boundary Foundation; the repository now defines the allowed command categories, forbidden commands, and authority boundaries while keeping Workflow Engine as the rules/interpretation owner and keeping Project Brain and SSOT docs as canonical truth.
 
 MS-009.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Dyrygent/Konduktor State Model Foundation; the repository now defines the minimal orchestration state model, the allowed signal mapping, and the forbidden state mutations while keeping Workflow Engine as the rules/interpretation owner and keeping Project Brain and SSOT docs as canonical truth.
 

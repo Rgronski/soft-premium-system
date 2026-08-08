@@ -111,11 +111,80 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-009.3 - Dyrygent/Konduktor State Model Foundation
+MS-009.4 - Dyrygent/Konduktor Command Boundary Foundation
 
 ## Next
 
 * `NONE`
+
+## MS-009.4 - Dyrygent/Konduktor Command Boundary Foundation
+
+**Milestone**
+MS-009.4 - Dyrygent/Konduktor Command Boundary Foundation
+
+**Type**
+Product Milestone
+
+**Status**
+Published
+
+**Purpose**
+Define the bounded command boundary for Dyrygent and Konduktor so they can request, present, or block orchestration actions without gaining execution authority over canonical project state.
+
+**Command Categories**
+* `request-guidance` - ask for the next approved user-facing orchestration direction.
+* `present-guidance` - surface approved guidance to the user.
+* `request-clarification` - pause the cycle when the contract needs more detail.
+* `block-command` - refuse a command that violates authority or canonical boundaries.
+* `acknowledge-state` - confirm the current orchestration state after a valid handoff.
+
+**Allowed Commands**
+* Dyrygent may request guidance, request clarification, and acknowledge state.
+* Konduktor may present guidance, acknowledge state, and block invalid presentation requests.
+* Dyrygent may block commands that would bypass Workflow Engine, Project Brain, or SSOT.
+* Konduktor may block commands that would change canonical truth or automate execution.
+
+**Forbidden Commands**
+* neither side may execute product code, automation, or scheduling logic
+* neither side may mutate Project Brain facts
+* neither side may rewrite SSOT history
+* neither side may override Workflow Engine interpretation
+* neither side may act as a command executor for runtime state changes
+
+**Command-to-Signal Mapping**
+* `request-guidance` maps to `next-step` or `ready` from MS-009.2.
+* `present-guidance` maps to `guidance-ready` and then `guidance-delivered` from MS-009.3.
+* `request-clarification` maps to `needs-clarification` from MS-009.2 and `clarification-needed` from MS-009.3.
+* `block-command` maps to `blocked` and `cannot-continue`.
+* `acknowledge-state` maps to `guidance-acknowledged` and `idle`.
+
+**Authority Boundaries**
+* Workflow Engine remains the rules/interpretation owner.
+* Project Brain remains the canonical project fact source.
+* SSOT docs remain the canonical milestone and session history source.
+* Dyrygent coordinates command intent but does not execute canonical changes.
+* Konduktor presents or blocks user-facing guidance but does not execute canonical changes.
+
+**State Boundary**
+* command requests may move the orchestration state between `idle`, `interpreting`, `guidance-ready`, `guidance-delivered`, `clarification-needed`, and `blocked`
+* no command may create a state outside the MS-009.3 model
+* no command may mutate canonical truth outside Project Brain or SSOT
+
+**Out of Scope**
+* application code
+* UI changes
+* command executor implementation
+* automation logic
+* refactors
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+**Next Milestone**
+NONE
 
 ## MS-009.3 - Dyrygent/Konduktor State Model Foundation
 

@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 064 - MS-009.4 Dyrygent/Konduktor Command Boundary Foundation publication
+
+### Date
+
+2026-08-08
+
+### Completed
+
+* Published `MS-009.4 - Dyrygent/Konduktor Command Boundary Foundation` as the docs-only command boundary contract for Dyrygent and Konduktor.
+* Defined the allowed command categories, forbidden commands, and authority boundaries.
+* Mapped the command boundary to the `MS-009.2` signals and `MS-009.3` states where useful.
+* Synced `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to reflect the new published milestone.
+
+### Notes
+
+* No `src` changes, UI changes, scheduling automation, tests, or product implementation were introduced.
+
 ## Session 064 - MS-009.3 Dyrygent/Konduktor State Model Foundation publication
 
 ### Date

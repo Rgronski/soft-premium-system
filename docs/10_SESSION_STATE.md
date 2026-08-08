@@ -215,20 +215,20 @@ SPS OS Session State
 
 Date: 2026-08-08
 Current Session ID: 064
-Current Chat Title: 064 SPS OS - MS-009.3 - Dyrygent/Konduktor State Model Foundation
+Current Chat Title: 064 SPS OS - MS-009.4 - Dyrygent/Konduktor Command Boundary Foundation
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
-Active Capability: MS-009.3 - Dyrygent/Konduktor State Model Foundation
-Active Work Item: Publish the MS-009.3 state model contract
+Active Capability: MS-009.4 - Dyrygent/Konduktor Command Boundary Foundation
+Active Work Item: Publish the MS-009.4 command boundary contract
 Current Mode: OPEN
-Completed Capability Items: Session 064 published MS-009.0; Session 064 published MS-009.1; Session 064 published MS-009.2; Session 064 started MS-009.3 publication; Session 064 synchronized SSOT boundaries for the state model
+Completed Capability Items: Session 064 published MS-009.0; Session 064 published MS-009.1; Session 064 published MS-009.2; Session 064 published MS-009.3; Session 064 started MS-009.4 publication; Session 064 synchronized SSOT boundaries for the command boundary
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-009.3 - Dyrygent/Konduktor State Model Foundation
+Latest Completed Product Milestone: MS-009.4 - Dyrygent/Konduktor Command Boundary Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 064 started MS-009.3 publication
+Latest Completed Capability Item: Session 064 started MS-009.4 publication
 Current Sprint: NONE
-Platform Priority: Continue Session 064 with the MS-009 state model.
+Platform Priority: Continue Session 064 with the MS-009 command boundary.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
@@ -236,5 +236,5 @@ Latest Verified Commit: 44227e0
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Review the MS-009.3 state model publication patch.
-Next Session Plan: Continue Session 064 with the state model review and keep the session open.
+Next Safe Step: Review the MS-009.4 command boundary publication patch.
+Next Session Plan: Continue Session 064 with the command boundary review and keep the session open.
