@@ -111,11 +111,73 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-009.2 - Dyrygent/Konduktor Interaction Contract Foundation
+MS-009.3 - Dyrygent/Konduktor State Model Foundation
 
 ## Next
 
 * `NONE`
+
+## MS-009.3 - Dyrygent/Konduktor State Model Foundation
+
+**Milestone**
+MS-009.3 - Dyrygent/Konduktor State Model Foundation
+
+**Type**
+Product Milestone
+
+**Status**
+Published
+
+**Purpose**
+Define the minimal orchestration state model for Dyrygent and Konduktor so the interaction contract can be represented as bounded state without introducing runtime automation.
+
+**State Model**
+* `idle` - no orchestration handoff is active.
+* `interpreting` - Workflow Engine output is being translated into an orchestration decision boundary.
+* `guidance-ready` - Konduktor can present the approved user-facing guidance.
+* `guidance-delivered` - guidance has been surfaced to the user.
+* `clarification-needed` - the handoff needs more information before continuing.
+* `blocked` - the orchestration cannot continue safely.
+
+**Allowed Signal Mapping**
+* `ready` maps to `guidance-ready`.
+* `next-step` maps to `guidance-ready`.
+* `guidance-ready` maps to `guidance-delivered`.
+* `guidance-acknowledged` maps to `idle`.
+* `needs-clarification` maps to `clarification-needed`.
+* `warning` maps to `interpreting` or `guidance-ready` depending on whether user-facing guidance can still be shown safely.
+* `blocked` maps to `blocked`.
+* `cannot-continue` maps to `blocked`.
+
+**State Ownership**
+* Dyrygent owns orchestration state transitions.
+* Konduktor owns presentation of guidance state to the user.
+* Workflow Engine owns interpretation inputs only.
+* Project Brain owns canonical project facts.
+* SSOT docs own published milestone order and contract history.
+
+**Forbidden State Mutations**
+* Dyrygent must not mutate Project Brain facts.
+* Konduktor must not mutate canonical milestone history.
+* Konduktor must not change workflow interpretation results.
+* Workflow Engine must not mutate orchestration presentation state.
+* SSOT docs must not behave as a runtime state machine.
+
+**Out of Scope**
+* runtime automation
+* UI changes
+* product code
+* refactors
+* scheduling logic
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+**Next Milestone**
+NONE
 
 ## MS-009.2 - Dyrygent/Konduktor Interaction Contract Foundation
 

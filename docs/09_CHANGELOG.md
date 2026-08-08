@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 064 - MS-009.3 Dyrygent/Konduktor State Model Foundation publication
+
+### Date
+
+2026-08-08
+
+### Completed
+
+* Published `MS-009.3 - Dyrygent/Konduktor State Model Foundation` as the docs-only minimal orchestration state model for Dyrygent and Konduktor.
+* Mapped the bounded orchestration states to the allowed signals from `MS-009.2`.
+* Defined ownership of orchestration state and the forbidden state mutations.
+* Synced `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to reflect the new published milestone.
+
+### Notes
+
+* No `src` changes, UI changes, scheduling automation, tests, or product implementation were introduced.
+
 ## Session 064 - MS-009.2 Dyrygent/Konduktor Interaction Contract Foundation publication
 
 ### Date
