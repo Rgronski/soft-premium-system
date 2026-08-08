@@ -128,6 +128,9 @@ Product Milestone
 **Publication Status**
 PUBLISHED
 
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
 **Purpose**
 Define the first controlled Dyrygent/Konduktor implementation milestone scope so the next implementation step can begin only inside the published MS-009 contract boundary and without displacing Workflow Engine, Project Brain, or SSOT authority.
 
