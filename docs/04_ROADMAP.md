@@ -125,6 +125,15 @@ MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
 **Type**
 Product Milestone
 
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
 **Contract Status**
 COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
