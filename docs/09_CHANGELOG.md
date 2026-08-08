@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 064 - MS-009.0 Dyrygent/Konduktor Foundation publication
+
+### Date
+
+2026-08-08
+
+### Completed
+
+* Published `MS-009.0 - Dyrygent/Konduktor Foundation` as the docs-only orchestration contract boundary for the next milestone sequence.
+* Kept `Workflow Engine` as the rules/interpretation owner and `Conductor` as the presentation/operational guide.
+* Preserved canonical truth in Project Brain and SSOT docs while keeping `Current Product Milestone` controlled by existing roadmap/session-state rules.
+* Updated `docs/04_ROADMAP.md` to record the published contract boundary.
+
+### Notes
+
+* No `src` changes, UI changes, scheduling work, tests, or product implementation were introduced.
+
 ## Session 063 - close protocol for MS-008.36 and handoff to MS-009.0
 
 ### Date

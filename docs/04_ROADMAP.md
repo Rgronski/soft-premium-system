@@ -117,6 +117,49 @@ MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
 
 * `MS-009.0` - Dyrygent/Konduktor Foundation
 
+## MS-009.0 - Dyrygent/Konduktor Foundation
+
+**Milestone**
+MS-009.0 - Dyrygent/Konduktor Foundation
+
+**Type**
+Product Milestone
+
+**Status**
+Published
+
+**Purpose**
+Define the orchestration foundation boundary for the Dyrygent/Konduktor layer without changing application behavior.
+
+**Business Goal**
+Establish the orchestration contract boundary while keeping the Workflow Engine as the rules/interpretation owner and the Conductor as the presentation/operational guide.
+
+**Scope**
+* orchestration foundation contract
+* workflow interpretation vs presentation boundary
+* SSOT alignment for roadmap and session continuity references
+
+**Out of Scope**
+* application code
+* UI changes
+* scheduling work
+* workflow rule ownership changes
+* new canonical truth outside Project Brain or SSOT documents
+* refactors
+
+**Constraints**
+* Workflow Engine remains the rules/interpretation owner.
+* Conductor remains the presentation/operational guide.
+* Canonical truth stays in Project Brain and SSOT docs.
+* Current Product Milestone remains controlled by existing roadmap/session-state rules.
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/09_CHANGELOG.md`
+
+**Next Milestone**
+NONE
+
 ## MS-008.36 - Task Workspace Repository Open Feedback Persistence Foundation
 
 **Milestone**
