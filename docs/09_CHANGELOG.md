@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 064 - MS-009.2 Dyrygent/Konduktor Interaction Contract Foundation publication
+
+### Date
+
+2026-08-08
+
+### Completed
+
+* Published `MS-009.2 - Dyrygent/Konduktor Interaction Contract Foundation` as the docs-only interaction contract for the Dyrygent/Konduktor exchange.
+* Defined the allowed signals, status flow, decision handoff, and user-facing guidance boundary.
+* Preserved Workflow Engine as the rules/interpretation owner and kept Project Brain plus SSOT docs as canonical truth.
+* Synced `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` to reflect the new published milestone.
+
+### Notes
+
+* No `src` changes, UI changes, scheduling automation, tests, or product implementation were introduced.
+
 ## Session 064 - MS-009.1 Dyrygent/Konduktor Responsibility Map Foundation publication
 
 ### Date

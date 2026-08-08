@@ -111,11 +111,80 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation
+MS-009.2 - Dyrygent/Konduktor Interaction Contract Foundation
 
 ## Next
 
 * `NONE`
+
+## MS-009.2 - Dyrygent/Konduktor Interaction Contract Foundation
+
+**Milestone**
+MS-009.2 - Dyrygent/Konduktor Interaction Contract Foundation
+
+**Type**
+Product Milestone
+
+**Status**
+Published
+
+**Purpose**
+Define how Dyrygent and Konduktor exchange operational state and guidance without taking over canonical authority.
+
+**Interaction Contract**
+* Dyrygent receives workflow interpretation, blocker state, confidence, and next-step recommendation from the published SSOT and Workflow Engine boundary.
+* Dyrygent emits an orchestration decision handoff that identifies the next safe guidance boundary.
+* Konduktor receives that handoff and renders user-facing operational guidance only.
+* Konduktor may return acknowledgment, clarification request, or surfaced-state feedback for the same interaction cycle.
+* Project Brain remains the source of canonical project facts and runtime inputs.
+* SSOT docs remain the source of published milestone order, contract history, and session continuity.
+
+**Allowed Signals**
+* `ready`
+* `warning`
+* `blocked`
+* `next-step`
+* `guidance-ready`
+* `guidance-acknowledged`
+* `needs-clarification`
+* `cannot-continue`
+
+**Status Flow**
+* Workflow Engine interprets project state.
+* Dyrygent converts the interpretation into a bounded orchestration decision.
+* Konduktor presents the decision as operational guidance.
+* The user receives the guidance and may continue or stop.
+* Any canonical project update stays outside the Dyrygent/Konduktor exchange.
+
+**Decision Handoff**
+* Dyrygent owns the orchestration decision boundary.
+* Konduktor owns the user-facing guidance boundary.
+* No signal from Konduktor may override Workflow Engine interpretation.
+* No signal from Dyrygent may rewrite Project Brain facts or SSOT history.
+
+**Forbidden Transfers**
+* Dyrygent must not become the canonical source of project truth.
+* Konduktor must not define workflow rules or milestone order.
+* Konduktor must not bypass Workflow Engine when describing project state.
+* Dyrygent must not bypass Project Brain or SSOT when identifying canonical inputs.
+* Neither side may introduce UI, automation, or scheduling logic in this contract.
+
+**Out of Scope**
+* application code
+* UI changes
+* automation implementation
+* scheduling logic
+* workflow rule changes
+* refactors
+
+**Documentation Updates**
+* `docs/04_ROADMAP.md`
+* `docs/08_CURRENT_STATE.md`
+* `docs/09_CHANGELOG.md`
+* `docs/10_SESSION_STATE.md`
+
+**Next Milestone**
+NONE
 
 ## MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation
 

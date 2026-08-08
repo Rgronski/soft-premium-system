@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation
+MS-009.2 - Dyrygent/Konduktor Interaction Contract Foundation
 
 **Next Milestone**
 NONE
+
+MS-009.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Dyrygent/Konduktor Interaction Contract Foundation; the repository now defines the allowed signal flow, decision handoff, and user-facing guidance boundary while keeping Workflow Engine as the rules/interpretation owner and keeping Project Brain and SSOT docs as canonical truth.
 
 MS-009.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Dyrygent/Konduktor Responsibility Map Foundation; the repository now records the responsibility split between Workflow Engine, Dyrygent, Konduktor, Project Brain, and SSOT docs while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 

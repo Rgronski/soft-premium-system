@@ -215,20 +215,20 @@ SPS OS Session State
 
 Date: 2026-08-08
 Current Session ID: 064
-Current Chat Title: 064 SPS OS - MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation
+Current Chat Title: 064 SPS OS - MS-009.2 - Dyrygent/Konduktor Interaction Contract Foundation
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
-Active Capability: MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation
-Active Work Item: Publish the MS-009.1 responsibility map
+Active Capability: MS-009.2 - Dyrygent/Konduktor Interaction Contract Foundation
+Active Work Item: Publish the MS-009.2 interaction contract
 Current Mode: OPEN
-Completed Capability Items: Session 064 published MS-009.0; Session 064 started MS-009.1 publication; Session 064 synchronized SSOT boundaries for the responsibility map
+Completed Capability Items: Session 064 published MS-009.0; Session 064 published MS-009.1; Session 064 started MS-009.2 publication; Session 064 synchronized SSOT boundaries for the interaction contract
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-009.1 - Dyrygent/Konduktor Responsibility Map Foundation
+Latest Completed Product Milestone: MS-009.2 - Dyrygent/Konduktor Interaction Contract Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 064 published MS-009.1
+Latest Completed Capability Item: Session 064 started MS-009.2 publication
 Current Sprint: NONE
-Platform Priority: Continue Session 064 with the MS-009 responsibility map.
+Platform Priority: Continue Session 064 with the MS-009 interaction contract.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
@@ -236,5 +236,5 @@ Latest Verified Commit: 44227e0
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Review the MS-009.1 responsibility map publication patch.
-Next Session Plan: Continue Session 064 with the responsibility map review and keep the session open.
+Next Safe Step: Review the MS-009.2 interaction contract publication patch.
+Next Session Plan: Continue Session 064 with the interaction contract review and keep the session open.
