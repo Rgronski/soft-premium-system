@@ -111,11 +111,11 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-011.1 - Existing Project Intake First Controlled Flow Foundation
+MS-012.0 - Parallel Project Work Track Foundation
 
 ## Next
 
-* `MS-012.0 - Parallel Project Work Track Foundation`
+* `MS-012.1 - Parallel Project Work Track First Controlled Scope Foundation`
 
 ## MS-011.0 - Existing Project Intake Foundation
 
@@ -314,6 +314,66 @@ COMPLETED / VERIFIED / PUBLISHED / CLOSED
 * `docs/09_CHANGELOG.md` now records the `MS-012.0` publication sync
 * `docs/10_SESSION_STATE.md` now records the Session 069 operational snapshot for `MS-012.0`
 * `docs/06_BACKLOG.md` no longer parks `MS-012.0` as future work
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+None.
+
+## MS-012.1 - Parallel Project Work Track First Controlled Scope Foundation
+
+**Milestone**
+MS-012.1 - Parallel Project Work Track First Controlled Scope Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the first controlled scope for parallel project work track behavior after `MS-012.0` without implementing broad multi-project orchestration or cross-project switching.
+
+**Product Outcome**
+The repository now records `MS-012.1` as the next controlled continuation after `MS-012.0`, keeps `MS-011.0`, `MS-011.1`, and `MS-012.0` immutable, and limits the parallel work track to the existing project, task list, and task workspace continuity boundary.
+
+**Dependencies**
+* closed `MS-012.0 - Parallel Project Work Track Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `docs/04_ROADMAP.md` now records `MS-012.1` as the next controlled continuation after `MS-012.0`
+* `docs/08_CURRENT_STATE.md` now keeps the current state aligned with `MS-012.1`
+* `docs/09_CHANGELOG.md` now records the `MS-012.1` publication sync
+* `docs/10_SESSION_STATE.md` now records the Session 069 operational snapshot for `MS-012.1`
+* no product code patch was required because the existing project, task list, and task workspace surfaces already expose the narrow continuity boundary
 
 **Blockers**
 NONE
