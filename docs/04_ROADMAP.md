@@ -115,7 +115,60 @@ MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation
 
 ## Next
 
-* `NONE`
+* `MS-011.0 - Existing Project Intake Foundation`
+
+## MS-011.0 - Existing Project Intake Foundation
+
+**Milestone**
+MS-011.0 - Existing Project Intake Foundation
+
+**Type**
+Product Milestone
+
+**Product Owner Decision**
+APPROVED
+
+**Implementation Status**
+NOT STARTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+APPROVED / PUBLISHED
+
+**Purpose**
+Define the smallest controlled intake contract for an existing project so the repository can record the next milestone boundary without designing GitHub repository import or parallel project work track mechanics yet.
+
+**Product Outcome**
+The repository records the next existing-project intake boundary, keeps MS-010.4 as the latest completed milestone, and leaves GitHub repository import plus parallel project work track follow-up parked for later milestone design.
+
+**Dependencies**
+* `MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation`
+
+**Allowed Implementation Scope**
+* docs-only contract publication
+* SSOT synchronization
+* backlog parking for future directions
+
+**Forbidden Scope**
+* product code changes
+* GitHub repository import design or implementation
+* parallel project work track design or implementation
+* broad refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the MS-011.0 contract
+* `docs/08_CURRENT_STATE.md` and `docs/09_CHANGELOG.md` own the synchronized publication snapshot
+* `docs/06_BACKLOG.md` owns the parked future directions
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* `rg "MS-011.0|MS-011.1|MS-012.0" docs`
+
+**Rollback / Safety Expectations**
+* If this contract needs revision, update only the SSOT docs that define the milestone boundary and keep the future directions parked until a separate Product Owner decision is recorded.
 
 ## MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation
 

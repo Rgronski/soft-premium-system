@@ -48,9 +48,11 @@ NONE
 MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation
 
 **Next Milestone**
-NONE
+MS-011.0 - Existing Project Intake Foundation
 
 MS-010.4 is PUBLISHED / CLOSED in the current local workspace as the SPS OS First Usable Flow Post-Copy Guidance Foundation; the repository now shows `Next action: Copy handoff.` and the copied handoff now tells the user it can be pasted into the next session, consolidating the earlier MS-010.2 save-review guidance and MS-010.3 post-completion copy guidance refinements while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-011.0 is now the next published product milestone contract for the existing project intake foundation; the repository records the next intake boundary while keeping GitHub repository import and parallel project work track directions parked for later milestone design.
 
 MS-010.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS OS First Usable Flow Guided Navigation Foundation; the repository now records the guided-navigation boundary for the usable SPS OS flow, clarifies the path across Home, Project, Task List, Task Detail, and Task Workspace, and keeps product code unchanged while Current Product Milestone remains NONE until a separate Product Owner decision is recorded.
 
@@ -1395,7 +1397,7 @@ Next:
 
 * `Current Product Milestone` is `NONE`
 * `Latest Completed Product Milestone` is `MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation`
-* `Next Product Milestone` is `NONE`
+* `Next Product Milestone` is `MS-011.0 - Existing Project Intake Foundation`
 * `MS-008.32` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Codex Handoff Jump Feedback Foundation; the repository now shows a local `Codex handoff opened locally.` status after the Codex handoff link is used while keeping the task handoff section visible and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.31` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Completion Handoff Restore Feedback Foundation; the repository now shows a local `Completion handoff restored locally.` status after updated result notes restore a copied completion handoff while keeping the completion summary and handoff output visible after the restoration and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.30` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Completion Handoff Reset Feedback Foundation; the repository now shows a local `Completion handoff reset locally.` status after edited result notes clear a copied completion handoff while keeping the completion summary and handoff output visible until the edit clears it and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

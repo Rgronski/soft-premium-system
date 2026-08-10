@@ -376,6 +376,48 @@ Proposed
 
 ---
 
+## Milestone Parking
+
+### MS-011.1 - GitHub Repository Import Foundation
+
+**Description**
+
+Park the future GitHub repository import direction without defining import mechanics yet.
+
+**Business Value**
+
+Reserves the intake follow-up for later SSOT work.
+
+**Priority**
+
+High
+
+**Status**
+
+Proposed
+
+---
+
+### MS-012.0 - Parallel Project Work Track Foundation
+
+**Description**
+
+Park the future parallel project work track direction without defining track mechanics yet.
+
+**Business Value**
+
+Reserves the parallel work follow-up for later SSOT work.
+
+**Priority**
+
+Medium
+
+**Status**
+
+Proposed
+
+---
+
 # Backlog Management Rules
 
 An item should enter the backlog only when:

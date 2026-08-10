@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 068 - MS-011.0 existing project intake SSOT sync
+
+### Date
+
+2026-08-10
+
+### Completed
+
+* Published `MS-011.0 - Existing Project Intake Foundation` as the next product milestone contract for the existing project intake boundary.
+* Kept `MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation` as the latest completed product milestone.
+* Parked `MS-011.1 - GitHub Repository Import Foundation` and `MS-012.0 - Parallel Project Work Track Foundation` in `docs/06_BACKLOG.md` without designing either follow-up yet.
+* Synchronized `docs/04_ROADMAP.md` and `docs/08_CURRENT_STATE.md` so the SSOT reflects the new next milestone contract.
+
+### Notes
+
+* No product code changed.
+
 ## Session 067 - Smoke harness backlog parking close sync
 
 ### Date
