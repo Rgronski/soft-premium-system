@@ -7,17 +7,18 @@ import type { Project } from "./types";
 type ProjectRow = {
   id: string;
   name: string;
+  repository_url: string | null;
   created_at: string | Date;
 };
 
-const SELECT_PROJECT_BY_ID = `SELECT id, name, created_at
+const SELECT_PROJECT_BY_ID = `SELECT id, name, repository_url, created_at
 FROM public.projects
 WHERE id = $1
 LIMIT 1`;
 
-const INSERT_PROJECT = `INSERT INTO public.projects (id, name, created_at)
-VALUES ($1, $2, $3)
-RETURNING id, name, created_at`;
+const INSERT_PROJECT = `INSERT INTO public.projects (id, name, repository_url, created_at)
+VALUES ($1, $2, $3, $4)
+RETURNING id, name, repository_url, created_at`;
 
 const DELETE_PROJECT_BY_ID = `DELETE FROM public.projects
 WHERE id = $1`;
@@ -38,6 +39,7 @@ function mapProjectRow(row: ProjectRow): Project {
   return {
     id: row.id,
     name: row.name,
+    ...(row.repository_url ? { repositoryUrl: row.repository_url } : {}),
     createdAt: new Date(row.created_at).toISOString(),
   };
 }
@@ -94,9 +96,11 @@ export async function getServerProjectById(
 export async function createServerProject(input: {
   id: string;
   name: string;
+  repositoryUrl?: string;
 }): Promise<Project> {
   const normalizedId = input.id.trim();
   const normalizedName = input.name.trim();
+  const normalizedRepositoryUrl = input.repositoryUrl?.trim();
 
   if (!normalizedId) {
     throw new Error("Project server repository requires a non-empty id.");
@@ -110,6 +114,7 @@ export async function createServerProject(input: {
   const fallbackProject: Project = {
     id: normalizedId,
     name: normalizedName,
+    ...(normalizedRepositoryUrl ? { repositoryUrl: normalizedRepositoryUrl } : {}),
     createdAt,
   };
 
@@ -118,6 +123,7 @@ export async function createServerProject(input: {
     const rows = (await sql.query(INSERT_PROJECT, [
       normalizedId,
       normalizedName,
+      normalizedRepositoryUrl ?? null,
       createdAt,
     ])) as ProjectRow[];
     const row = rows[0];

@@ -19,11 +19,13 @@ function isProject(value: unknown): value is Project {
 export default function ProjectsPage() {
   const router = useRouter();
   const [projectName, setProjectName] = useState("");
+  const [repositoryUrl, setRepositoryUrl] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   async function handleCreateProject() {
     const trimmedProjectName = projectName.trim();
+    const trimmedRepositoryUrl = repositoryUrl.trim();
 
     if (!trimmedProjectName || isSubmitting) {
       return;
@@ -43,6 +45,11 @@ export default function ProjectsPage() {
           },
           body: JSON.stringify({
             name: trimmedProjectName,
+            ...(trimmedRepositoryUrl
+              ? {
+                  repositoryUrl: trimmedRepositoryUrl,
+                }
+              : {}),
           }),
         },
       );
@@ -57,8 +64,13 @@ export default function ProjectsPage() {
         throw new Error("Project create response is invalid.");
       }
 
-      createProject(createdProject.name, createdProject.id);
+      createProject(
+        createdProject.name,
+        createdProject.id,
+        createdProject.repositoryUrl,
+      );
       setProjectName("");
+      setRepositoryUrl("");
       router.push(`/projects/${createdProject.id}`);
     } catch {
       setErrorMessage("Nie udało się utworzyć projektu. Spróbuj ponownie.");
@@ -99,6 +111,20 @@ export default function ProjectsPage() {
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
               placeholder="My First Project"
+              className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 outline-none focus:border-zinc-500"
+            />
+          </label>
+
+          <label className="mt-4 block">
+            <span className="mb-2 block text-sm text-zinc-400">
+              Repository URL
+            </span>
+
+            <input
+              type="url"
+              value={repositoryUrl}
+              onChange={(e) => setRepositoryUrl(e.target.value)}
+              placeholder="https://github.com/example/project"
               className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 outline-none focus:border-zinc-500"
             />
           </label>

@@ -24,6 +24,7 @@ describe("ProjectsPage", () => {
         JSON.stringify({
           id: "project-uuid",
           name: "Alpha",
+          repositoryUrl: "https://github.com/example/project",
           createdAt: "2026-08-03T20:00:00.000Z",
         }),
         {
@@ -55,6 +56,11 @@ describe("ProjectsPage", () => {
         value: "Alpha",
       },
     });
+    fireEvent.change(screen.getByPlaceholderText("https://github.com/example/project"), {
+      target: {
+        value: "  https://github.com/example/project  ",
+      },
+    });
     fireEvent.click(screen.getByRole("button", { name: "Create Project" }));
 
     await waitFor(() => {
@@ -68,6 +74,7 @@ describe("ProjectsPage", () => {
       },
       body: JSON.stringify({
         name: "Alpha",
+        repositoryUrl: "https://github.com/example/project",
       }),
     });
 
@@ -77,6 +84,7 @@ describe("ProjectsPage", () => {
       expect.objectContaining({
         id: "project-uuid",
         name: "Alpha",
+        repositoryUrl: "https://github.com/example/project",
       }),
     ]);
 

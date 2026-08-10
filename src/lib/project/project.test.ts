@@ -44,6 +44,22 @@ describe("createProject", () => {
     expect(savedProjects[0].name).toBe("Alpha");
   });
 
+  test("creates and stores an optional repositoryUrl when provided", () => {
+    const project = createProject(
+      "Alpha",
+      "project-uuid",
+      "  https://github.com/example/project  ",
+    );
+    const savedProjects = JSON.parse(
+      storage.getItem("soft-premium-system.projects") ?? "[]",
+    );
+
+    expect(project.repositoryUrl).toBe("https://github.com/example/project");
+    expect(savedProjects[0].repositoryUrl).toBe(
+      "https://github.com/example/project",
+    );
+  });
+
   test("deletes a project from the stored project list", () => {
     storage.setItem(
       "soft-premium-system.projects",

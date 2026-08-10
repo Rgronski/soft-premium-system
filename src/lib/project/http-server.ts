@@ -23,6 +23,7 @@ type TransportErrorResponse =
 
 type TransportProjectCreateBody = {
   name: string;
+  repositoryUrl?: string;
 };
 
 function isPlainObject(
@@ -56,13 +57,19 @@ async function readTransportCreateBody(
     };
   }
 
-  if (!isPlainObject(body) || typeof body.name !== "string") {
+  if (
+    !isPlainObject(body) ||
+    typeof body.name !== "string" ||
+    (body.repositoryUrl !== undefined && typeof body.repositoryUrl !== "string")
+  ) {
     return {
       ok: false,
     };
   }
 
   const name = body.name.trim();
+  const repositoryUrl =
+    typeof body.repositoryUrl === "string" ? body.repositoryUrl.trim() : "";
 
   if (!name) {
     return {
@@ -74,6 +81,7 @@ async function readTransportCreateBody(
     ok: true,
     body: {
       name,
+      ...(repositoryUrl ? { repositoryUrl } : {}),
     },
   };
 }
@@ -136,6 +144,7 @@ export function createPostProjectRoute(deps: {
       const project = await deps.createServerProject({
         id,
         name: transportBody.body.name,
+        repositoryUrl: transportBody.body.repositoryUrl,
       });
 
       return Response.json(project satisfies Project, {

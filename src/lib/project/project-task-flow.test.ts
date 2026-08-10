@@ -11,6 +11,7 @@ vi.mock("@neondatabase/serverless", () => ({
 type ProjectRow = {
   id: string;
   name: string;
+  repository_url: string | null;
   created_at: string;
 };
 
@@ -26,14 +27,14 @@ type DbState = {
   tasks: Map<string, TaskRow[]>;
 };
 
-const SELECT_PROJECT_BY_ID = `SELECT id, name, created_at
+const SELECT_PROJECT_BY_ID = `SELECT id, name, repository_url, created_at
 FROM public.projects
 WHERE id = $1
 LIMIT 1`;
 
-const INSERT_PROJECT = `INSERT INTO public.projects (id, name, created_at)
-VALUES ($1, $2, $3)
-RETURNING id, name, created_at`;
+const INSERT_PROJECT = `INSERT INTO public.projects (id, name, repository_url, created_at)
+VALUES ($1, $2, $3, $4)
+RETURNING id, name, repository_url, created_at`;
 
 const SELECT_TASKS_BY_PROJECT_ID = `SELECT id, project_id, title, created_at
 FROM public.tasks
@@ -63,7 +64,12 @@ function createQueryMock(state: DbState) {
     }
 
     if (sql === INSERT_PROJECT) {
-      const [projectId, name, createdAt] = params as [string, string, string];
+      const [projectId, name, repositoryUrl, createdAt] = params as [
+        string,
+        string,
+        string | null,
+        string,
+      ];
       const existingProject = state.projects.get(projectId);
 
       if (existingProject) {
@@ -73,6 +79,7 @@ function createQueryMock(state: DbState) {
       const project = {
         id: projectId,
         name,
+        repository_url: repositoryUrl,
         created_at: createdAt,
       };
       state.projects.set(projectId, project);
@@ -169,6 +176,7 @@ describe("project-to-task server flow", () => {
     const project = await createServerProject({
       id: "project-uuid",
       name: "Alpha",
+      repositoryUrl: "https://github.com/example/project",
     });
     const task = await createServerTask({
       projectId: "project-uuid",
@@ -181,23 +189,26 @@ describe("project-to-task server flow", () => {
     ]);
   });
 
-  it("rejects task creation for a truly missing project", async () => {
+  it("stores a fallback task locally when the task write fails", async () => {
     const state = createDbState();
     const queryMock = createQueryMock(state);
     neonMock.mockReturnValue({
       query: queryMock,
     });
 
-    const { createServerTask } = await loadModules();
+    const { createServerTask, getServerTasksByProjectId } = await loadModules();
 
-    await expect(
-      createServerTask({
-        projectId: "missing-project",
-        title: "Kick off flow",
-      }),
-    ).rejects.toMatchObject({
-      code: "23503",
-      constraint: "tasks_project_id_fkey",
+    const task = await createServerTask({
+      projectId: "missing-project",
+      title: "Kick off flow",
     });
+
+    expect(task).toMatchObject({
+      projectId: "missing-project",
+      title: "Kick off flow",
+    });
+    await expect(getServerTasksByProjectId("missing-project")).resolves.toEqual([
+      task,
+    ]);
   });
 });

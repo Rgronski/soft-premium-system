@@ -176,9 +176,66 @@ describe("createPostProjectRoute", () => {
     expect(createServerProjectMock).toHaveBeenCalledWith({
       id: "route-project-id",
       name: "Route Project",
+      repositoryUrl: undefined,
     });
     expect(response.status).toBe(201);
     await expect(response.json()).resolves.toEqual(project);
+  });
+
+  it("passes repositoryUrl through for a valid request", async () => {
+    const { createPostProjectRoute } = await loadProjectHttpServerModule();
+    const project = createProject({
+      id: "route-project-id",
+      name: "Route Project",
+      repositoryUrl: "https://github.com/example/project",
+    });
+    createServerProjectMock.mockResolvedValueOnce(project);
+    const handler = createPostProjectRoute({
+      createServerProject: createServerProjectMock,
+    });
+
+    const response = await handler(
+      createPostRequest({
+        name: "Route Project",
+        repositoryUrl: "https://github.com/example/project",
+      }),
+      createContext("route-project-id"),
+    );
+
+    expect(createServerProjectMock).toHaveBeenCalledTimes(1);
+    expect(createServerProjectMock).toHaveBeenCalledWith({
+      id: "route-project-id",
+      name: "Route Project",
+      repositoryUrl: "https://github.com/example/project",
+    });
+    expect(response.status).toBe(201);
+    await expect(response.json()).resolves.toEqual(project);
+  });
+
+  it("treats blank repositoryUrl as undefined", async () => {
+    const { createPostProjectRoute } = await loadProjectHttpServerModule();
+    const project = createProject({
+      id: "route-project-id",
+      name: "Route Project",
+    });
+    createServerProjectMock.mockResolvedValueOnce(project);
+    const handler = createPostProjectRoute({
+      createServerProject: createServerProjectMock,
+    });
+
+    await handler(
+      createPostRequest({
+        name: "Route Project",
+        repositoryUrl: "   ",
+      }),
+      createContext("route-project-id"),
+    );
+
+    expect(createServerProjectMock).toHaveBeenCalledWith({
+      id: "route-project-id",
+      name: "Route Project",
+      repositoryUrl: undefined,
+    });
   });
 
   it("returns 400 for malformed JSON without calling the repository", async () => {

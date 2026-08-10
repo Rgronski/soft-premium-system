@@ -34,6 +34,7 @@ describe("getServerProjectById", () => {
       {
         id: "project-1",
         name: "Alpha",
+        repository_url: null,
         created_at: "2026-07-23T10:11:12.000Z",
       },
     ]);
@@ -49,7 +50,7 @@ describe("getServerProjectById", () => {
     expect(neonMock).toHaveBeenCalledWith("postgresql://pooled-runtime-url");
     expect(queryMock).toHaveBeenCalledTimes(1);
     expect(queryMock).toHaveBeenCalledWith(
-      `SELECT id, name, created_at
+      `SELECT id, name, repository_url, created_at
 FROM public.projects
 WHERE id = $1
 LIMIT 1`,
@@ -58,6 +59,33 @@ LIMIT 1`,
     expect(result).toEqual({
       id: "project-1",
       name: "Alpha",
+      createdAt: "2026-07-23T10:11:12.000Z",
+    });
+  });
+
+  it("uses repository_url when the row includes it", async () => {
+    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
+
+    const queryMock = vi.fn().mockResolvedValue([
+      {
+        id: "project-1",
+        name: "Alpha",
+        repository_url: "https://github.com/example/project",
+        created_at: "2026-07-23T10:11:12.000Z",
+      },
+    ]);
+
+    neonMock.mockReturnValue({
+      query: queryMock,
+    });
+
+    const { getServerProjectById } = await loadServerModule();
+    const result = await getServerProjectById("project-1");
+
+    expect(result).toEqual({
+      id: "project-1",
+      name: "Alpha",
+      repositoryUrl: "https://github.com/example/project",
       createdAt: "2026-07-23T10:11:12.000Z",
     });
   });
@@ -76,7 +104,7 @@ LIMIT 1`,
     await expect(getServerProjectById("missing-project")).resolves.toBeNull();
     expect(neonMock).toHaveBeenCalledWith("postgresql://pooled-runtime-url");
     expect(queryMock).toHaveBeenCalledWith(
-      `SELECT id, name, created_at
+      `SELECT id, name, repository_url, created_at
 FROM public.projects
 WHERE id = $1
 LIMIT 1`,
@@ -108,6 +136,51 @@ WHERE id = $1`,
   });
 });
 
+describe("createServerProject", () => {
+  it("uses DATABASE_URL, persists repository_url, and maps the created row", async () => {
+    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
+
+    const queryMock = vi.fn().mockResolvedValue([
+      {
+        id: "project-1",
+        name: "Alpha",
+        repository_url: "https://github.com/example/project",
+        created_at: "2026-07-24T10:11:12.000Z",
+      },
+    ]);
+
+    neonMock.mockReturnValue({
+      query: queryMock,
+    });
+
+    const { createServerProject } = await loadServerModule();
+    const result = await createServerProject({
+      id: "project-1",
+      name: "Alpha",
+      repositoryUrl: "https://github.com/example/project",
+    });
+
+    expect(neonMock).toHaveBeenCalledWith("postgresql://pooled-runtime-url");
+    expect(queryMock).toHaveBeenCalledWith(
+      `INSERT INTO public.projects (id, name, repository_url, created_at)
+VALUES ($1, $2, $3, $4)
+RETURNING id, name, repository_url, created_at`,
+      [
+        "project-1",
+        "Alpha",
+        "https://github.com/example/project",
+        expect.any(String),
+      ],
+    );
+    expect(result).toEqual({
+      id: "project-1",
+      name: "Alpha",
+      repositoryUrl: "https://github.com/example/project",
+      createdAt: "2026-07-24T10:11:12.000Z",
+    });
+  });
+});
+
 describe("project server local fallback", () => {
   it("stores, loads, and deletes projects locally when the database query fails", async () => {
     process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
@@ -126,11 +199,13 @@ describe("project server local fallback", () => {
     const createdProject = await createServerProject({
       id: "project-1",
       name: "Alpha",
+      repositoryUrl: "https://github.com/example/project",
     });
 
     expect(createdProject).toMatchObject({
       id: "project-1",
       name: "Alpha",
+      repositoryUrl: "https://github.com/example/project",
     });
     expect(createdProject.createdAt).toEqual(expect.any(String));
     expect(await getServerProjectById("project-1")).toEqual(createdProject);

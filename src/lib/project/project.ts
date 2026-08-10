@@ -17,10 +17,16 @@ export function getProjectById(id: string): Project | null {
   return projects.find((project) => project.id === id) ?? null;
 }
 
-export function createProject(name: string, id = crypto.randomUUID()): Project {
+export function createProject(
+  name: string,
+  id = crypto.randomUUID(),
+  repositoryUrl?: string,
+): Project {
+  const normalizedRepositoryUrl = repositoryUrl?.trim();
   const newProject: Project = {
     id,
     name,
+    ...(normalizedRepositoryUrl ? { repositoryUrl: normalizedRepositoryUrl } : {}),
     createdAt: new Date().toISOString(),
   };
 
