@@ -70,7 +70,7 @@ MS-012.5 is now the completed controlled execution contract foundation; the repo
 
 MS-012.6 is now the completed verification contract foundation; the repository records the verification boundary before the readiness gate.
 
-MS-012.7 is now the completed readiness gate foundation; the repository records the readiness boundary for the next controlled continuation.
+MS-012.7 is PUBLISHED / CLOSED in the current local workspace as the Parallel Project Work Track First Readiness Gate Foundation; the repository now records the readiness boundary for the parallel work track while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-010.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS OS First Usable Flow Guided Navigation Foundation; the repository now records the guided-navigation boundary for the usable SPS OS flow, clarifies the path across Home, Project, Task List, Task Detail, and Task Workspace, and keeps product code unchanged while Current Product Milestone remains NONE until a separate Product Owner decision is recorded.
 
