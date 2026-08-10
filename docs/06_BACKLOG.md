@@ -356,6 +356,26 @@ Planned for `MS-004.0 - External Integrations Foundation`
 
 ---
 
+### Smoke Harness / Browser Smoke Fixture
+
+**Description**
+
+Provide a durable, repeatable browser smoke entrypoint that seeds or reuses a persistent fixture through the API-backed project and task stores before running the guided task flow.
+
+**Business Value**
+
+Makes smoke verification stable, repeatable, and aligned with durable product data instead of ad hoc manual seeds.
+
+**Priority**
+
+Medium
+
+**Status**
+
+Proposed
+
+---
+
 # Backlog Management Rules
 
 An item should enter the backlog only when:

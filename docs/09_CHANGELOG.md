@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 067 - Smoke harness backlog parking close sync
+
+### Date
+
+2026-08-10
+
+### Completed
+
+* Parked the future durable smoke fixture/browser smoke harness requirement in `docs/06_BACKLOG.md` under `## Platform` as a proposed backlog item.
+* Kept the roadmap and current-state SSOT unchanged so the smoke harness remains backlog-only until a later approval.
+* Recorded the Session 067 usage entry in `.usage/session.jsonl` and prepared the Session 067 close handoff.
+
+### Notes
+
+* No product code changed.
+
 ## Session 067 - MS-010.4 post-copy guidance SSOT sync
 
 ### Date

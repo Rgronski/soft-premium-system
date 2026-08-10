@@ -214,27 +214,27 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-10
-Current Session ID: 066
-Current Chat Title: 066 SPS OS - Session Close Protocol
-Next Session ID: 067
-Suggested Next Chat Title: 067 SPS OS - Post MS-010.1 Integrity Check
+Current Session ID: 067
+Current Chat Title: 067 SPS OS - Session Close Protocol
+Next Session ID: 068
+Suggested Next Chat Title: 068 SPS OS - Post Session 067 Integrity Check
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: CLOSED
-Completed Capability Items: Session 066 published MS-010.1 SSOT sync; Session 066 verified MS-010.1 SSOT sync; Session 066 recorded usage entry; Session 066 completed the Session Close Protocol
+Completed Capability Items: Session 067 published MS-010.2, MS-010.3, and MS-010.4; Session 067 parked the Smoke Harness / Browser Smoke Fixture backlog item; Session 067 recorded usage entry; Session 067 completed the Session Close Protocol
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-010.1 - SPS OS First Usable Flow Guided Navigation Foundation
+Latest Completed Product Milestone: MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation
 Next Product Milestone: NONE
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 066 completed the Session Close Protocol
+Latest Completed Capability Item: Session 067 completed the Session Close Protocol
 Current Sprint: NONE
-Platform Priority: Keep Session 066 closed and preserve MS-010.1 as the latest completed milestone.
+Platform Priority: Keep Session 067 closed and preserve MS-010.4 as the latest completed milestone.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: e90defe
+Latest Verified Commit: 66a86bd2b3c8fd5ab26848597e453aaaeba6224e
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Start Session 067 with the fresh session package and perform the post-MS-010.1 integrity check.
-Next Session Plan: Start Session 067 with the fresh session package and perform the post-MS-010.1 integrity check.
+Next Safe Step: Start Session 068 with the fresh session package and perform the post-session 067 integrity check.
+Next Session Plan: Start Session 068 with the fresh session package and perform the post-session 067 integrity check.
