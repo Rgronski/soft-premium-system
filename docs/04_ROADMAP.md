@@ -111,11 +111,11 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-012.6 - Parallel Project Work Track First Verification Contract Foundation
+MS-012.7 - Parallel Project Work Track First Readiness Gate Foundation
 
 ## Next
 
-* `MS-012.7 - Parallel Project Work Track First Readiness Gate Foundation`
+NONE / Product Owner decision required
 
 ## MS-012.7 - Parallel Project Work Track First Readiness Gate Foundation
 

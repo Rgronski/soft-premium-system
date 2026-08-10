@@ -256,8 +256,8 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-012.2 - Parallel Project Work Track First Usability Review Foundation
-Next Product Milestone: MS-012.3 - Parallel Project Work Track First Continuation Contract Foundation
+Latest Completed Product Milestone: MS-012.7 - Parallel Project Work Track First Readiness Gate Foundation
+Next Product Milestone: NONE / Product Owner decision required
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
 Active Capability: NONE
@@ -1414,9 +1414,9 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-012.6 - Parallel Project Work Track First Verification Contract Foundation`
-* `Next Product Milestone` is `MS-012.7 - Parallel Project Work Track First Readiness Gate Foundation`
-* `MS-012.6` follow-up decision: the readiness gate now sits in `MS-012.7` while future SPS-owned working copies still live under `C:\SPS_OS_WORK\<project-slug>` and existing project metadata may still point to the source or `repositoryUrl`.
+* `Latest Completed Product Milestone` is `MS-012.7 - Parallel Project Work Track First Readiness Gate Foundation`
+* `Next Product Milestone` is `NONE / Product Owner decision required`
+* `MS-012.7` close decision: the next milestone now requires Product Owner direction while future SPS-owned working copies still live under `C:\SPS_OS_WORK\<project-slug>` and existing project metadata may still point to the source or `repositoryUrl`.
 * `MS-008.32` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Codex Handoff Jump Feedback Foundation; the repository now shows a local `Codex handoff opened locally.` status after the Codex handoff link is used while keeping the task handoff section visible and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.31` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Completion Handoff Restore Feedback Foundation; the repository now shows a local `Completion handoff restored locally.` status after updated result notes restore a copied completion handoff while keeping the completion summary and handoff output visible after the restoration and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.30` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Completion Handoff Reset Feedback Foundation; the repository now shows a local `Completion handoff reset locally.` status after edited result notes clear a copied completion handoff while keeping the completion summary and handoff output visible until the edit clears it and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
@@ -1533,7 +1533,7 @@ Next:
 
 Next session priorities:
 
-* Keep `Next Product Milestone` aligned with `MS-012.6 - Parallel Project Work Track First Verification Contract Foundation`.
+* Keep `Next Product Milestone` aligned with `NONE / Product Owner decision required`.
 * Semantic consistency repair is completed and published in `c6a1946`.
 * Current-state finalization is completed and published in `40f457e`.
 * Session 035 close synchronization is completed and published in `e9a64c0`.
@@ -1564,7 +1564,7 @@ Keep workflow governance and project state documentation aligned.
 
 Priority 3
 
-Next controlled lifecycle step: `MS-012.6 - Parallel Project Work Track First Verification Contract Foundation`.
+Next controlled lifecycle step: await Product Owner decision for the next milestone.
 
 ---
 
