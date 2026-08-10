@@ -106,6 +106,24 @@ Each release entry should contain:
 * No product code changed.
 * `MS-011.0`, `MS-011.1`, and `MS-012.0` remain completed, verified, published, and closed.
 
+## Session 069 - MS-012.2 parallel project work track first usability review SSOT sync
+
+### Date
+
+2026-08-10
+
+### Completed
+
+* Published `MS-012.2 - Parallel Project Work Track First Usability Review Foundation` as the next controlled continuation after `MS-012.1`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-012.2` as the next controlled milestone and keeps `MS-012.1` immutable.
+* Documented that the existing project, task list, and task workspace surfaces already satisfy the narrow usability review boundary, so no product code patch was required.
+* Recorded the Session 069 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No product code changed.
+* `MS-011.0`, `MS-011.1`, `MS-012.0`, and `MS-012.1` remain completed, verified, published, and closed.
+
 ## Session 068 - MS-011.0 existing project intake SSOT sync
 
 ### Date

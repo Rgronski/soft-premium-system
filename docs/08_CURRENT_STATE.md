@@ -45,18 +45,20 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-012.0 - Parallel Project Work Track Foundation
+MS-012.1 - Parallel Project Work Track First Controlled Scope Foundation
 
 **Next Milestone**
-MS-012.1 - Parallel Project Work Track First Controlled Scope Foundation
+MS-012.2 - Parallel Project Work Track First Usability Review Foundation
 
 MS-010.4 is PUBLISHED / CLOSED in the current local workspace as the SPS OS First Usable Flow Post-Copy Guidance Foundation; the repository now shows `Next action: Copy handoff.` and the copied handoff now tells the user it can be pasted into the next session, consolidating the earlier MS-010.2 save-review guidance and MS-010.3 post-completion copy guidance refinements while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
-MS-011.0 is now COMPLETED / VERIFIED / PUBLISHED / CLOSED as the existing project intake foundation; the repository records the completed intake boundary for accepting an already existing project into the current SPS project model and workspace through the existing project create/open flow, while keeping the controlled `MS-011.1` continuation published and reserving the parallel work track follow-up for `MS-012.1`.
+MS-011.0 is now COMPLETED / VERIFIED / PUBLISHED / CLOSED as the existing project intake foundation; the repository records the completed intake boundary for accepting an already existing project into the current SPS project model and workspace through the existing project create/open flow, while keeping the controlled `MS-011.1` continuation published and reserving the parallel work track follow-up for `MS-012.2`.
 
 MS-011.1 is now the completed controlled continuation for existing project intake; the repository records the first controlled flow after `MS-011.0` without broad implementation, refactor, or parallel work track activation.
 
 MS-012.0 is now the completed parallel project work track foundation; the repository records the first controlled parallel-track continuation without broad multi-project orchestration.
+
+MS-012.1 is now the completed first controlled scope foundation; the repository records the narrow continuation boundary across the existing project, task list, and task workspace surfaces.
 
 MS-010.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS OS First Usable Flow Guided Navigation Foundation; the repository now records the guided-navigation boundary for the usable SPS OS flow, clarifies the path across Home, Project, Task List, Task Detail, and Task Workspace, and keeps product code unchanged while Current Product Milestone remains NONE until a separate Product Owner decision is recorded.
 
@@ -1400,9 +1402,9 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-012.0 - Parallel Project Work Track Foundation`
-* `Next Product Milestone` is `MS-012.1 - Parallel Project Work Track First Controlled Scope Foundation`
-* `MS-012.0` follow-up decision: the first controlled scope now sits in `MS-012.1` while future SPS-owned working copies still live under `C:\SPS_OS_WORK\<project-slug>` and existing project metadata may still point to the source or `repositoryUrl`.
+* `Latest Completed Product Milestone` is `MS-012.1 - Parallel Project Work Track First Controlled Scope Foundation`
+* `Next Product Milestone` is `MS-012.2 - Parallel Project Work Track First Usability Review Foundation`
+* `MS-012.1` follow-up decision: the first usability review now sits in `MS-012.2` while future SPS-owned working copies still live under `C:\SPS_OS_WORK\<project-slug>` and existing project metadata may still point to the source or `repositoryUrl`.
 * `MS-008.32` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Codex Handoff Jump Feedback Foundation; the repository now shows a local `Codex handoff opened locally.` status after the Codex handoff link is used while keeping the task handoff section visible and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.31` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Completion Handoff Restore Feedback Foundation; the repository now shows a local `Completion handoff restored locally.` status after updated result notes restore a copied completion handoff while keeping the completion summary and handoff output visible after the restoration and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.30` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Completion Handoff Reset Feedback Foundation; the repository now shows a local `Completion handoff reset locally.` status after edited result notes clear a copied completion handoff while keeping the completion summary and handoff output visible until the edit clears it and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
@@ -1519,7 +1521,7 @@ Next:
 
 Next session priorities:
 
-* Keep `Next Product Milestone` aligned with `MS-012.1 - Parallel Project Work Track First Controlled Scope Foundation`.
+* Keep `Next Product Milestone` aligned with `MS-012.2 - Parallel Project Work Track First Usability Review Foundation`.
 * Semantic consistency repair is completed and published in `c6a1946`.
 * Current-state finalization is completed and published in `40f457e`.
 * Session 035 close synchronization is completed and published in `e9a64c0`.
@@ -1550,7 +1552,7 @@ Keep workflow governance and project state documentation aligned.
 
 Priority 3
 
-Next controlled lifecycle step: `MS-012.1 - Parallel Project Work Track First Controlled Scope Foundation`.
+Next controlled lifecycle step: `MS-012.2 - Parallel Project Work Track First Usability Review Foundation`.
 
 ---
 
