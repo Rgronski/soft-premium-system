@@ -111,11 +111,70 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-009.11 - Dyrygent/Konduktor Boundary Validation Consumer Implementation Authorization Foundation
+MS-010.0 - SPS OS First End-to-End Usable Flow Discovery Foundation
 
 ## Next
 
 * `NONE`
+
+## MS-010.0 - SPS OS First End-to-End Usable Flow Discovery Foundation
+
+**Milestone**
+MS-010.0 - SPS OS First End-to-End Usable Flow Discovery Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Define and verify the shortest practical SPS OS user journey from app entry to completing one task in the workspace, with explicit coverage of navigation clarity, manual handoffs, recovery behavior, and unclear UI steps, without adding product code yet.
+
+**Product Outcome**
+The repository now records the first end-to-end usable flow discovery boundary, so later work can improve the user journey without adding product code in this milestone.
+
+**Allowed Discovery Scope**
+* identify the smallest real end-to-end usable flow currently present
+* identify gaps where the user still needs manual prompts, ZIP handling, SSOT interpretation, or unclear UI steps
+* document the discovery contract for the usable flow
+
+**Forbidden Scope**
+* product code edits
+* refactors
+* dependency changes
+* any MS-010.1+ scope
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the MS-010.0 discovery contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `.usage/session.jsonl` own the synchronized SSOT snapshot for this docs-only milestone
+* product code remains unchanged in this milestone
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* confirm no product code files changed
+
+**Rollback / Safety Expectations**
+* if the discovery contract needs revision, update only the SSOT docs that define the milestone boundary and keep `Current Product Milestone` at `NONE` until a separate Product Owner decision is recorded
 
 ## MS-009.11 - Dyrygent/Konduktor Boundary Validation Consumer Implementation Authorization Foundation
 

@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 066 - MS-010.0 usable flow discovery SSOT sync
+
+### Date
+
+2026-08-10
+
+### Completed
+
+* Published `MS-010.0 - SPS OS First End-to-End Usable Flow Discovery Foundation` as the docs-only discovery milestone for the shortest practical SPS OS user journey from app entry to task completion.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-010.0` as the latest completed product milestone while keeping `Current Product Milestone` at `NONE`.
+* Preserved the product-code boundary and kept navigation clarity, manual handoffs, recovery behavior, and unclear UI steps in the documentation-only discovery scope.
+* Recorded the Session 066 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No product code changed.
+* No dependency or refactor work was introduced.
+
 ## Session 065 - MS-009.11 controlled implementation execution SSOT sync
 
 ### Date
