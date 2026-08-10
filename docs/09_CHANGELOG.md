@@ -77,14 +77,14 @@ Each release entry should contain:
 
 ### Completed
 
-* Published `MS-011.0 - Existing Project Intake Foundation` as the next product milestone contract for the existing project intake boundary.
-* Kept `MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation` as the latest completed product milestone.
-* Parked `MS-011.1 - GitHub Repository Import Foundation` and `MS-012.0 - Parallel Project Work Track Foundation` in `docs/06_BACKLOG.md` without designing either follow-up yet.
-* Synchronized `docs/04_ROADMAP.md` and `docs/08_CURRENT_STATE.md` so the SSOT reflects the new next milestone contract.
+* Completed `MS-011.0 - Existing Project Intake Foundation` by threading optional `repositoryUrl` through the existing project create path end to end.
+* Updated `scripts/projects.sql` and the focused create-path tests so durable project creation now accepts and persists `repositoryUrl` when provided.
+* Synchronized `docs/04_ROADMAP.md` and `docs/08_CURRENT_STATE.md` so the SSOT now records `MS-011.0` as the latest completed product milestone and keeps `Current Product Milestone` at `NONE`.
+* Preserved the parked `MS-011.1 - GitHub Repository Import Foundation` and `MS-012.0 - Parallel Project Work Track Foundation` directions in `docs/06_BACKLOG.md`.
 
 ### Notes
 
-* No product code changed.
+* No GitHub import, cloning, repository sync, or parallel work track mechanics were introduced.
 
 ## Session 067 - Smoke harness backlog parking close sync
 

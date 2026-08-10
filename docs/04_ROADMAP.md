@@ -111,11 +111,11 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation
+MS-011.0 - Existing Project Intake Foundation
 
 ## Next
 
-* `MS-011.0 - Existing Project Intake Foundation`
+* `NONE`
 
 ## MS-011.0 - Existing Project Intake Foundation
 
@@ -126,22 +126,25 @@ MS-011.0 - Existing Project Intake Foundation
 Product Milestone
 
 **Product Owner Decision**
-APPROVED
+ACCEPT
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Implementation Status**
-NOT STARTED
+COMPLETED / VERIFIED
 
 **Publication Status**
 PUBLISHED
 
 **Milestone Status**
-APPROVED / PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Purpose**
 Define the smallest controlled intake contract for an existing project so the repository can record the next milestone boundary without designing GitHub repository import or parallel project work track mechanics yet.
 
 **Product Outcome**
-The repository records the next existing-project intake boundary, keeps MS-010.4 as the latest completed milestone, and leaves GitHub repository import plus parallel project work track follow-up parked for later milestone design.
+The repository now records the existing-project intake boundary, threads optional `repositoryUrl` through the existing project create path, and leaves GitHub repository import plus parallel project work track follow-up parked for later milestone design.
 
 **Definition**
 Existing Project Intake means accepting an already existing project into the current SPS project model and workspace through the existing project create/open flow, using the existing project model fields as the likely future implementation boundary.
@@ -174,6 +177,12 @@ Existing Project Intake means accepting an already existing project into the cur
 * the existing `/projects` create flow
 * the existing project model fields such as `id`, `name`, `createdAt`, and optional `repositoryUrl`
 * related validation and persistence wording for intake, if a later implementation milestone is approved
+
+**Implementation Evidence**
+* optional `repositoryUrl` is threaded end to end through the existing project create flow
+* durable project storage now includes `repository_url`
+* focused create-path tests passed with `21 / 21`
+* implementation commit `98241f7184b440500a79154000b03d9e66cebf5d` was pushed to `origin/main`
 
 **Ownership Boundaries**
 * `docs/04_ROADMAP.md` owns the MS-011.0 contract
