@@ -17,6 +17,17 @@ import { getTasks } from "@/lib/task/task";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
+const projectJourneySteps = [
+  "Project",
+  "Task List",
+  "Task Detail",
+  "Task Workspace",
+  "Save Result",
+  "Acknowledge Review",
+  "Complete Task",
+  "Copy Handoff",
+];
+
 type Client = {
   id: string;
 };
@@ -225,6 +236,32 @@ export default function ProjectWorkspacePage() {
     <WorkspaceLayout>
       {!dashboard.isLoaded ? null : dashboard.workspaceEntry ? (
         <WorkspaceContent>
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              Guided Flow
+            </p>
+            <p className="mt-2 text-sm text-zinc-400">
+              Start here: choose a task from the list below, then move through
+              the workspace in order.
+            </p>
+            <ol className="mt-4 flex flex-wrap gap-2">
+              {projectJourneySteps.map((step, index) => (
+                <li
+                  key={step}
+                  className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm ${
+                    index === 0
+                      ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-100"
+                      : "border-zinc-800 bg-zinc-900 text-zinc-300"
+                  }`}
+                >
+                  <span className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                    {index + 1}
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
           <div className="flex justify-end">
             <button
               type="button"

@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 066 - MS-010.1 guided navigation SSOT sync
+
+### Date
+
+2026-08-10
+
+### Completed
+
+* Published `MS-010.1 - SPS OS First Usable Flow Guided Navigation Foundation` as the docs-only guided-navigation milestone for the usable SPS OS flow.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-010.1` as the latest completed product milestone while keeping `Current Product Milestone` at `NONE`.
+* Preserved the product-code boundary and kept the guided flow intent limited to clearer navigation at the transition points already identified in MS-010.0.
+* Recorded the Session 066 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No product code changed.
+* No dependency or refactor work was introduced.
+
 ## Session 066 - MS-010.0 usable flow discovery SSOT sync
 
 ### Date

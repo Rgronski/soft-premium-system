@@ -81,7 +81,8 @@ describe("ProjectTaskDetailPage", () => {
 
     expect(getTasksFromServerMock).toHaveBeenCalledTimes(1);
     expect(getTasksFromServerMock).toHaveBeenCalledWith("project-1");
-    expect(screen.getByText("Task Workspace")).toBeTruthy();
+    expect(screen.getByText("Journey Checkpoint")).toBeTruthy();
+    expect(screen.getByText("You are at Task Detail. Next open the task workspace, then follow the result sequence in order.")).toBeTruthy();
     expect(screen.getByText("Start task workspace")).toBeTruthy();
     expect(screen.getByText("Open task workspace")).toBeTruthy();
     expect(

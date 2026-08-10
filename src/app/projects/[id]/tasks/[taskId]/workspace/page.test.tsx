@@ -171,7 +171,12 @@ describe("ProjectTaskWorkspacePage", () => {
     }) as HTMLButtonElement;
     expect(initialCompleteButton.disabled).toBe(true);
     expect(getTasksFromServerMock).toHaveBeenCalledWith("project-1");
-    expect(screen.getByText("Task Workspace")).toBeTruthy();
+    expect(screen.getByText("Journey Checkpoint")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "You are at Task Workspace. Follow the remaining actions in order: save the result, acknowledge review, complete the task, then copy the handoff.",
+      ),
+    ).toBeTruthy();
     expect(screen.getByText("Task workspace start")).toBeTruthy();
     expect(
       screen.getByText(

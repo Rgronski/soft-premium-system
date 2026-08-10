@@ -112,6 +112,15 @@ function readSavedTaskRepositoryOpenState(
     : "idle";
 }
 
+const taskWorkspaceJourneySteps = [
+  "Task Detail",
+  "Task Workspace",
+  "Save Result",
+  "Acknowledge Review",
+  "Complete Task",
+  "Copy Handoff",
+];
+
 export default function ProjectTaskWorkspacePage() {
   const params = useParams<{ id: string; taskId: string }>();
   const [state, setState] = useState<TaskWorkspaceState>({
@@ -389,6 +398,36 @@ export default function ProjectTaskWorkspacePage() {
           <p className="text-sm text-zinc-400">
             Start the task workspace for the current project task.
           </p>
+        </div>
+
+        <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+            Journey Checkpoint
+          </p>
+          <p className="mt-2 text-sm text-zinc-400">
+            You are at Task Workspace. Follow the remaining actions in order:
+            save the result, acknowledge review, complete the task, then copy
+            the handoff.
+          </p>
+          <ol className="mt-4 flex flex-wrap gap-2">
+            {taskWorkspaceJourneySteps.map((step, index) => (
+              <li
+                key={step}
+                className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm ${
+                  index === 1
+                    ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-100"
+                    : index >= 2
+                      ? "border-cyan-500/40 bg-cyan-500/10 text-cyan-100"
+                      : "border-zinc-800 bg-zinc-900 text-zinc-300"
+                }`}
+              >
+                <span className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                  {index + 1}
+                </span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
         </div>
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">

@@ -8,6 +8,16 @@ import type { Task } from "@/lib/task/types";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
+const taskDetailJourneySteps = [
+  "Task List",
+  "Task Detail",
+  "Task Workspace",
+  "Save Result",
+  "Acknowledge Review",
+  "Complete Task",
+  "Copy Handoff",
+];
+
 function getTaskDetailErrorMessage(error: unknown): string {
   if (error instanceof TaskServerError) {
     switch (error.code) {
@@ -149,6 +159,35 @@ export default function ProjectTaskDetailPage() {
           <p className="text-sm text-zinc-400">
             Open the task workspace start surface for the current project task.
           </p>
+        </div>
+
+        <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+            Journey Checkpoint
+          </p>
+          <p className="mt-2 text-sm text-zinc-400">
+            You are at Task Detail. Next open the task workspace, then follow
+            the result sequence in order.
+          </p>
+          <ol className="mt-4 flex flex-wrap gap-2">
+            {taskDetailJourneySteps.map((step, index) => (
+              <li
+                key={step}
+                className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm ${
+                  index === 1
+                    ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-100"
+                    : index === 2
+                      ? "border-cyan-500/40 bg-cyan-500/10 text-cyan-100"
+                      : "border-zinc-800 bg-zinc-900 text-zinc-300"
+                }`}
+              >
+                <span className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                  {index + 1}
+                </span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
         </div>
 
         {state.recoveryMessage ? (

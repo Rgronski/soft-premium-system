@@ -111,11 +111,70 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-010.0 - SPS OS First End-to-End Usable Flow Discovery Foundation
+MS-010.1 - SPS OS First Usable Flow Guided Navigation Foundation
 
 ## Next
 
 * `NONE`
+
+## MS-010.1 - SPS OS First Usable Flow Guided Navigation Foundation
+
+**Milestone**
+MS-010.1 - SPS OS First Usable Flow Guided Navigation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Purpose**
+Make the already usable SPS OS flow clearly guided at key transition points, without changing lifecycle logic, persistence, routes, task actions, or data flow.
+
+**Product Outcome**
+The repository now records the guided-navigation boundary for the usable SPS OS flow, so the next implementation step can improve clarity without changing the underlying product behavior.
+
+**Allowed Discovery Scope**
+* clarify the path from Home to Project to Task List to Task Detail to Task Workspace
+* clarify the result-saving and completion sequence in the task workspace
+* improve the current navigation guidance without changing lifecycle logic, persistence, routes, task actions, or data flow
+
+**Forbidden Scope**
+* product code edits
+* refactors
+* dependency changes
+* any MS-010.2+ scope
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the MS-010.1 guided-navigation contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `.usage/session.jsonl` own the synchronized SSOT snapshot for this docs-only milestone
+* product code remains unchanged in this milestone
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* confirm no product code files changed
+
+**Rollback / Safety Expectations**
+* if the guided-navigation contract needs revision, update only the SSOT docs that define the milestone boundary and keep `Current Product Milestone` at `NONE` until a separate Product Owner decision is recorded
 
 ## MS-010.0 - SPS OS First End-to-End Usable Flow Discovery Foundation
 

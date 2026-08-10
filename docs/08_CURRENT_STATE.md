@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-010.0 - SPS OS First End-to-End Usable Flow Discovery Foundation
+MS-010.1 - SPS OS First Usable Flow Guided Navigation Foundation
 
 **Next Milestone**
 NONE
+
+MS-010.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS OS First Usable Flow Guided Navigation Foundation; the repository now records the guided-navigation boundary for the usable SPS OS flow, clarifies the path across Home, Project, Task List, Task Detail, and Task Workspace, and keeps product code unchanged while Current Product Milestone remains NONE until a separate Product Owner decision is recorded.
 
 MS-010.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS OS First End-to-End Usable Flow Discovery Foundation; the repository now records the shortest practical SPS OS user journey from app entry to completing one task in the workspace, identifies the remaining manual handoffs and unclear UI steps, and keeps product code unchanged while Current Product Milestone remains NONE until a separate Product Owner decision is recorded.
 
