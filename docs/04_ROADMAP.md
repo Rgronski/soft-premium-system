@@ -143,6 +143,16 @@ Define the smallest controlled intake contract for an existing project so the re
 **Product Outcome**
 The repository records the next existing-project intake boundary, keeps MS-010.4 as the latest completed milestone, and leaves GitHub repository import plus parallel project work track follow-up parked for later milestone design.
 
+**Definition**
+Existing Project Intake means accepting an already existing project into the current SPS project model and workspace through the existing project create/open flow, using the existing project model fields as the likely future implementation boundary.
+
+**Non-Goals**
+* GitHub repository import
+* cloning an external repository
+* repository synchronization
+* parallel project work track mechanics
+* product code changes
+
 **Dependencies**
 * `MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation`
 
@@ -150,12 +160,20 @@ The repository records the next existing-project intake boundary, keeps MS-010.4
 * docs-only contract publication
 * SSOT synchronization
 * backlog parking for future directions
+* future implementation boundary wording for the existing project create flow and project model fields
 
 **Forbidden Scope**
 * product code changes
 * GitHub repository import design or implementation
+* cloning
+* repository synchronization
 * parallel project work track design or implementation
 * broad refactors
+
+**Likely Future Implementation Boundary**
+* the existing `/projects` create flow
+* the existing project model fields such as `id`, `name`, `createdAt`, and optional `repositoryUrl`
+* related validation and persistence wording for intake, if a later implementation milestone is approved
 
 **Ownership Boundaries**
 * `docs/04_ROADMAP.md` owns the MS-011.0 contract
