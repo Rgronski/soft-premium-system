@@ -78,6 +78,7 @@ Each release entry should contain:
 ### Completed
 
 * Published `MS-011.1 - Existing Project Intake First Controlled Flow Foundation` as the next controlled continuation after `MS-011.0`.
+* Verified that the existing project intake surface already satisfies the controlled MS-011.1 boundary through the `/projects` create flow, optional `repositoryUrl` transport, and server-side project persistence, so no product code patch was required.
 * Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-011.1` as the next controlled milestone and keeps `MS-011.0` immutable.
 * Removed the parked `MS-011.1` GitHub import label from `docs/06_BACKLOG.md` so the backlog no longer conflicts with the published milestone contract.
 * Recorded the Session 069 usage entry in `.usage/session.jsonl`.
