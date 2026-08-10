@@ -149,6 +149,9 @@ The repository now records the existing-project intake boundary, threads optiona
 **Definition**
 Existing Project Intake means accepting an already existing project into the current SPS project model and workspace through the existing project create/open flow, using the existing project model fields as the likely future implementation boundary.
 
+**Workspace Root Decision**
+Future SPS-owned working copies for accepted existing projects live under `C:\SPS_OS_WORK\<project-slug>`. Existing project metadata may still point to the source or `repositoryUrl`, but the local working copy location is separate from that source reference.
+
 **Non-Goals**
 * GitHub repository import
 * cloning an external repository
@@ -176,6 +179,7 @@ Existing Project Intake means accepting an already existing project into the cur
 **Likely Future Implementation Boundary**
 * the existing `/projects` create flow
 * the existing project model fields such as `id`, `name`, `createdAt`, and optional `repositoryUrl`
+* the default local working copy root `C:\SPS_OS_WORK\<project-slug>`
 * related validation and persistence wording for intake, if a later implementation milestone is approved
 
 **Implementation Evidence**
