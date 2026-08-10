@@ -111,11 +111,11 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-011.0 - Existing Project Intake Foundation
+MS-011.1 - Existing Project Intake First Controlled Flow Foundation
 
 ## Next
 
-* `MS-011.1 - Existing Project Intake First Controlled Flow Foundation`
+* `MS-012.0 - Parallel Project Work Track Foundation`
 
 ## MS-011.0 - Existing Project Intake Foundation
 
@@ -144,7 +144,7 @@ COMPLETED / VERIFIED / PUBLISHED / CLOSED
 Define the smallest controlled intake contract for an existing project so the repository can record the next milestone boundary without designing GitHub repository import or parallel project work track mechanics yet.
 
 **Product Outcome**
-The repository now records the existing-project intake boundary, threads optional `repositoryUrl` through the existing project create path, and positions `MS-011.1 - Existing Project Intake First Controlled Flow Foundation` as the next controlled continuation while `MS-012.0` remains parked for later milestone design.
+The repository now records the existing-project intake boundary, threads optional `repositoryUrl` through the existing project create path, and positions `MS-011.1 - Existing Project Intake First Controlled Flow Foundation` as the next controlled continuation while reserving parallel project work track mechanics for later implementation.
 
 **Definition**
 Existing Project Intake means accepting an already existing project into the current SPS project model and workspace through the existing project create/open flow, using the existing project model fields as the likely future implementation boundary.
@@ -231,7 +231,7 @@ Codex
 Define the first controlled flow after `MS-011.0` for existing project intake without broad implementation, refactor, or starting `MS-012.0`.
 
 **Product Outcome**
-The repository now records the next controlled continuation for existing project intake, keeps `MS-011.0` immutable, and preserves `MS-012.0` as parked future work.
+The repository now records the next controlled continuation for existing project intake, keeps `MS-011.0` immutable, and positions `MS-012.0` as the next controlled continuation.
 
 **Dependencies**
 * closed `MS-011.0 - Existing Project Intake Foundation`
@@ -254,6 +254,66 @@ COMPLETED / VERIFIED / PUBLISHED / CLOSED
 * `docs/09_CHANGELOG.md` now records the `MS-011.1` publication sync
 * `docs/10_SESSION_STATE.md` now records the Session 069 operational snapshot
 * `docs/06_BACKLOG.md` no longer parks the old `MS-011.1` GitHub import label
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+None.
+
+## MS-012.0 - Parallel Project Work Track Foundation
+
+**Milestone**
+MS-012.0 - Parallel Project Work Track Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the first controlled foundation for a parallel project work track after existing project intake without implementing broad multi-project orchestration yet.
+
+**Product Outcome**
+The repository now records `MS-012.0` as the next controlled continuation after `MS-011.1`, keeps `MS-011.0` and `MS-011.1` immutable, and reserves parallel-work-track mechanics for later implementation.
+
+**Dependencies**
+* closed `MS-011.1 - Existing Project Intake First Controlled Flow Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `docs/04_ROADMAP.md` now records `MS-012.0` as the next controlled continuation after `MS-011.1`
+* `docs/08_CURRENT_STATE.md` now keeps the current state aligned with `MS-012.0`
+* `docs/09_CHANGELOG.md` now records the `MS-012.0` publication sync
+* `docs/10_SESSION_STATE.md` now records the Session 069 operational snapshot for `MS-012.0`
+* `docs/06_BACKLOG.md` no longer parks `MS-012.0` as future work
 
 **Blockers**
 NONE

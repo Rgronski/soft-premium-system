@@ -88,6 +88,24 @@ Each release entry should contain:
 * No product code changed.
 * `MS-012.0` remains parked.
 
+## Session 069 - MS-012.0 parallel project work track foundation SSOT sync
+
+### Date
+
+2026-08-10
+
+### Completed
+
+* Published `MS-012.0 - Parallel Project Work Track Foundation` as the next controlled continuation after `MS-011.1`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-012.0` as the next controlled milestone and keeps `MS-011.1` immutable.
+* Removed the parked `MS-012.0` milestone block from `docs/06_BACKLOG.md` so the backlog no longer conflicts with the published milestone contract.
+* Recorded the Session 069 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No product code changed.
+* `MS-011.0` and `MS-011.1` remain completed, verified, published, and closed.
+
 ## Session 068 - MS-011.0 existing project intake SSOT sync
 
 ### Date
