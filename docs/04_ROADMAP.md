@@ -111,11 +111,73 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-010.1 - SPS OS First Usable Flow Guided Navigation Foundation
+MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation
 
 ## Next
 
 * `NONE`
+
+## MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation
+
+**Milestone**
+MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Purpose**
+Make it clear that the copied task handoff is ready to paste into the next session, while keeping the task workspace completion flow local and unchanged.
+
+**Product Outcome**
+The task workspace now shows a short post-copy guidance line after `Copied locally`, and this milestone consolidates the earlier MS-010.2 save-review guidance and MS-010.3 post-completion copy guidance refinements into the final visible handoff cue.
+
+**Allowed Implementation Scope**
+* one short visible post-copy guidance line after copied state
+* focused task workspace test coverage
+* SSOT verification and publication metadata
+
+**Forbidden Scope**
+* route changes
+* persistence changes
+* lifecycle changes
+* task detail changes
+* dependency changes
+* refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the MS-010.4 contract
+* `docs/08_CURRENT_STATE.md` and `docs/09_CHANGELOG.md` own the synchronized publication snapshot
+* product code remains limited to the task workspace completion guidance surface
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* `npm.cmd test -- 'src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx'`
+
+**Rollback / Safety Expectations**
+* if the guidance needs revision, update only the task workspace copy and its directly related test
+* keep the milestone minimal and local to the completion/copy boundary
 
 ## MS-010.1 - SPS OS First Usable Flow Guided Navigation Foundation
 

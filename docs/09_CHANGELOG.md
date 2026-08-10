@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 067 - MS-010.4 post-copy guidance SSOT sync
+
+### Date
+
+2026-08-10
+
+### Completed
+
+* Published `MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation` as the final visible guidance step in the first usable task flow.
+* Consolidated the earlier MS-010.2 save-review guidance and MS-010.3 post-completion copy guidance refinements into the published MS-010.4 handoff-ready state.
+* Synchronized `docs/04_ROADMAP.md` and `docs/08_CURRENT_STATE.md` so the SSOT now records `MS-010.4` as the latest completed product milestone while keeping `Current Product Milestone` at `NONE`.
+* Added the post-copy guidance line to the task workspace completion state and kept the flow local and unchanged otherwise.
+
+### Notes
+
+* No route, persistence, lifecycle, dependency, or Task Detail changes were introduced.
+
 ## Session 066 - MS-010.1 guided navigation SSOT sync
 
 ### Date

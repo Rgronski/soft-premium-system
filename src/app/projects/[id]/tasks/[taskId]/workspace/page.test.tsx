@@ -152,7 +152,7 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("Awaiting result evidence.")).toBeTruthy();
     expect(
       screen.getByText(
-        "Sequence: save the result, acknowledge the review, then complete the task.",
+        "Sequence: save the result, then acknowledge review before completing the task.",
       ),
     ).toBeTruthy();
     const initialAcknowledgeReviewButton = screen.getByRole("button", {
@@ -199,12 +199,13 @@ describe("ProjectTaskWorkspacePage", () => {
     fireEvent.click(saveButton);
 
     expect(screen.getByText("Result saved locally.")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Acknowledge review now" })).toBeTruthy();
     expect(
       screen.getByRole("button", { name: "Saved locally" }),
     ).toBeTruthy();
     expect(screen.getByText("Repository open reset locally.")).toBeTruthy();
     expect(screen.queryByText("Repository opened locally.")).toBeNull();
-    expect(screen.getByText("Result evidence saved locally.")).toBeTruthy();
+    expect(screen.getByText("Result saved locally. Next action: acknowledge review.")).toBeTruthy();
     fireEvent.change(screen.getByLabelText("Result notes"), {
       target: { value: "Finished the task locally again." },
     });
@@ -216,7 +217,7 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("Repository open restored locally.")).toBeTruthy();
     expect(screen.queryByText("Repository open reset locally.")).toBeNull();
     const acknowledgeReviewButton = screen.getByRole("button", {
-      name: "Acknowledge review",
+      name: "Acknowledge review now",
     }) as HTMLButtonElement;
     expect(acknowledgeReviewButton.disabled).toBe(false);
 
@@ -266,6 +267,11 @@ describe("ProjectTaskWorkspacePage", () => {
 
     expect(screen.getByText("Completion handoff copied.")).toBeTruthy();
     expect(
+      screen.getByText(
+        "Handoff copied. You can now paste it into the next session.",
+      ),
+    ).toBeTruthy();
+    expect(
       screen.getByRole("button", { name: "Copied locally" }),
     ).toBeTruthy();
 
@@ -305,9 +311,9 @@ describe("ProjectTaskWorkspacePage", () => {
         "soft-premium-system.projects.project-1.tasks.task-1.workspace.evidence-review",
       ),
     ).toBeNull();
-    expect(screen.getByText("Result evidence saved locally.")).toBeTruthy();
+    expect(screen.getByText("Result saved locally. Next action: acknowledge review.")).toBeTruthy();
     expect(
-      (screen.getByRole("button", { name: "Acknowledge review" }) as HTMLButtonElement)
+      (screen.getByRole("button", { name: "Acknowledge review now" }) as HTMLButtonElement)
         .disabled,
     ).toBe(false);
     expect(
@@ -348,7 +354,7 @@ describe("ProjectTaskWorkspacePage", () => {
     });
 
     fireEvent.click(screen.getByRole("button", { name: "Save result" }));
-    fireEvent.click(screen.getByRole("button", { name: "Acknowledge review" }));
+    fireEvent.click(screen.getByRole("button", { name: "Acknowledge review now" }));
     fireEvent.click(screen.getByRole("button", { name: "Complete task" }));
 
     expect(

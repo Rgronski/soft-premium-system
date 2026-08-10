@@ -179,7 +179,7 @@ export default function ProjectTaskWorkspacePage() {
       : taskCompletionState === "completed"
       ? "Result evidence reviewed locally."
       : resultSaveState === "saved"
-        ? "Result evidence saved locally."
+        ? "Result saved locally. Next action: acknowledge review."
         : "Awaiting result evidence.";
 
   const canAcknowledgeEvidenceReview = resultSaveState === "saved";
@@ -538,7 +538,7 @@ export default function ProjectTaskWorkspacePage() {
                 Review source: local result notes and completion state.
               </p>
               <p className="mt-2 text-sm text-zinc-300">
-                Sequence: save the result, acknowledge the review, then complete the task.
+                Sequence: save the result, then acknowledge review before completing the task.
               </p>
               <button
                 type="button"
@@ -548,7 +548,9 @@ export default function ProjectTaskWorkspacePage() {
               >
                 {taskEvidenceReviewState === "acknowledged"
                   ? "Acknowledged locally"
-                  : "Acknowledge review"}
+                  : resultSaveState === "saved"
+                    ? "Acknowledge review now"
+                    : "Acknowledge review"}
               </button>
             </div>
             <label
@@ -656,6 +658,9 @@ export default function ProjectTaskWorkspacePage() {
                     Evidence review acknowledged locally.
                   </p>
                 ) : null}
+                <p className="mt-2 text-sm text-zinc-300">
+                  Next action: Copy handoff.
+                </p>
                 <div className="mt-3 rounded-xl border border-zinc-800 bg-zinc-900 p-4">
                   <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
                     Task completion handoff
@@ -677,9 +682,14 @@ Saved result notes: ${resultNotes}${taskEvidenceReviewState === "acknowledged" ?
                       : "Copy handoff"}
                   </button>
                   {taskCompletionReportCopyState === "copied" ? (
-                    <p className="text-sm text-zinc-400" aria-live="polite">
-                      Completion handoff copied.
-                    </p>
+                    <div className="space-y-1" aria-live="polite">
+                      <p className="text-sm text-zinc-400">
+                        Completion handoff copied.
+                      </p>
+                      <p className="text-sm text-zinc-300">
+                        Handoff copied. You can now paste it into the next session.
+                      </p>
+                    </div>
                   ) : null}
                 </div>
               </div>
