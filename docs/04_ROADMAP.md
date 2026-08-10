@@ -111,11 +111,11 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-012.1 - Parallel Project Work Track First Controlled Scope Foundation
+MS-012.2 - Parallel Project Work Track First Usability Review Foundation
 
 ## Next
 
-* `MS-012.2 - Parallel Project Work Track First Usability Review Foundation`
+* `MS-012.3 - Parallel Project Work Track First Continuation Contract Foundation`
 
 ## MS-011.0 - Existing Project Intake Foundation
 
@@ -434,6 +434,66 @@ COMPLETED / VERIFIED / PUBLISHED / CLOSED
 * `docs/09_CHANGELOG.md` now records the `MS-012.2` publication sync
 * `docs/10_SESSION_STATE.md` now records the Session 069 operational snapshot for `MS-012.2`
 * no product code patch was required because the existing project, task list, and task workspace surfaces already expose the narrow usability review boundary
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+None.
+
+## MS-012.3 - Parallel Project Work Track First Continuation Contract Foundation
+
+**Milestone**
+MS-012.3 - Parallel Project Work Track First Continuation Contract Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the first continuation contract after the usability review boundary for continuing work across an existing project, its task list, and a task workspace without broad orchestration.
+
+**Product Outcome**
+The repository now records `MS-012.3` as the next controlled continuation after `MS-012.2`, keeps `MS-011.0`, `MS-011.1`, `MS-012.0`, `MS-012.1`, and `MS-012.2` immutable, and keeps the parallel work track limited to the existing project, task list, and task workspace continuity path.
+
+**Dependencies**
+* closed `MS-012.2 - Parallel Project Work Track First Usability Review Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `docs/04_ROADMAP.md` now records `MS-012.3` as the next controlled continuation after `MS-012.2`
+* `docs/08_CURRENT_STATE.md` now keeps the current state aligned with `MS-012.3`
+* `docs/09_CHANGELOG.md` now records the `MS-012.3` publication sync
+* `docs/10_SESSION_STATE.md` now records the Session 069 operational snapshot for `MS-012.3`
+* no product code patch was required because the existing project, task list, and task workspace surfaces already expose the continuation contract boundary
 
 **Blockers**
 NONE
