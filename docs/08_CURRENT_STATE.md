@@ -238,7 +238,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-010.4 - SPS OS First Usable Flow Post-Copy Guidance Foundation
+Latest Completed Product Milestone: MS-011.0 - Existing Project Intake Foundation
 Next Product Milestone: NONE
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
