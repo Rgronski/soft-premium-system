@@ -4,6 +4,15 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import type { WorkflowNextStep } from "@/lib/workflow/types";
 
+function isExternalRepositoryUrl(repositoryUrl: string) {
+  try {
+    const parsedUrl = new URL(repositoryUrl);
+    return parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 type WorkspaceHeaderProps = {
   projectName: string;
   repositoryUrl?: string;
@@ -96,14 +105,20 @@ export function WorkspaceHeader({
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
             Repository
           </p>
-          <a
-            href={repositoryUrl}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="mt-2 inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
-          >
-            Open repository
-          </a>
+          {isExternalRepositoryUrl(repositoryUrl) ? (
+            <a
+              href={repositoryUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="mt-2 inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+            >
+              Open repository
+            </a>
+          ) : (
+            <p className="mt-2 break-all text-sm text-zinc-400">
+              {repositoryUrl}
+            </p>
+          )}
         </div>
       ) : null}
 

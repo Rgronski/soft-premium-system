@@ -166,6 +166,58 @@ describe("ProjectWorkspacePage", () => {
     expect(screen.getByRole("button", { name: "Usuń projekt" })).toBeTruthy();
   });
 
+  test("renders local repository sources as metadata instead of navigable links", () => {
+    getProjectWorkspaceEntryMock.mockReturnValue({
+      projectId: "project-1",
+      workspace: {
+        overview: {
+          project: {
+            id: "project-1",
+            name: "Alpha Workspace",
+            repositoryUrl: "source: C:/SPS_OS_WORK/Test-MS-011",
+          },
+          counts: {
+            tasks: 1,
+            knowledgeEntries: 1,
+          },
+          workflow: {
+            health: "ready",
+            confidence: 0.5,
+            nextStep: {
+              id: "continue-active-work",
+              label: "Continue active work",
+              description:
+                "Continue the active workflow item before starting new work.",
+            },
+            warnings: 0,
+            blockers: 0,
+          },
+        },
+        tasks: [
+          {
+            id: "task-1",
+            title: "Task A",
+          },
+        ],
+        knowledgeEntries: [
+          {
+            id: "knowledge-1",
+            title: "Knowledge note",
+          },
+        ],
+      },
+    });
+
+    render(<ProjectWorkspacePage />);
+
+    expect(
+      screen.queryByRole("link", { name: "Open repository" }),
+    ).toBeNull();
+    expect(
+      screen.getByText("source: C:/SPS_OS_WORK/Test-MS-011"),
+    ).toBeTruthy();
+  });
+
   test("surfaces the Project Brain start-next-work readiness boundary when no active work exists", () => {
     getProjectWorkspaceEntryMock.mockReturnValue({
       projectId: "project-1",
