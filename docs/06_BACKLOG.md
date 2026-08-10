@@ -378,26 +378,6 @@ Proposed
 
 ## Milestone Parking
 
-### MS-011.1 - GitHub Repository Import Foundation
-
-**Description**
-
-Park the future GitHub repository import direction without defining import mechanics yet.
-
-**Business Value**
-
-Reserves the intake follow-up for later SSOT work.
-
-**Priority**
-
-High
-
-**Status**
-
-Proposed
-
----
-
 ### MS-012.0 - Parallel Project Work Track Foundation
 
 **Description**
