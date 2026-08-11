@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-013.5 - Task Intake Project Access Boundary Alignment Foundation
+MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation
 
 ## Next
 
