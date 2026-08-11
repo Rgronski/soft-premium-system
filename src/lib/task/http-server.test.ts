@@ -11,12 +11,7 @@ import type { Task } from "./types";
 
 vi.mock("server-only", () => ({}));
 
-const getServerProjectByIdMock = vi.fn();
 const getServerTasksByProjectIdMock = vi.fn();
-
-vi.mock("../project/server", () => ({
-  getServerProjectById: getServerProjectByIdMock,
-}));
 
 vi.mock("./server", async () => {
   const actual = await vi.importActual<typeof import("./server")>("./server");
@@ -65,13 +60,7 @@ function createGetRequest(): Request {
 }
 
 beforeEach(() => {
-  getServerProjectByIdMock.mockReset();
   getServerTasksByProjectIdMock.mockReset();
-  getServerProjectByIdMock.mockResolvedValue({
-    id: "project-123",
-    name: "Alpha",
-    createdAt: "2026-07-23T09:00:00.000Z",
-  });
 });
 
 afterEach(() => {
@@ -96,14 +85,8 @@ describe("createGetTasksRoute", () => {
         createdAt: "2026-07-23T10:05:00.000Z",
       },
     ];
-    getServerProjectByIdMock.mockResolvedValueOnce({
-      id: "route-project-id",
-      name: "Alpha",
-      createdAt: "2026-07-23T09:00:00.000Z",
-    });
     getServerTasksByProjectIdMock.mockResolvedValueOnce(tasks);
     const handler = createGetTasksRoute({
-      getServerProjectById: getServerProjectByIdMock,
       getServerTasksByProjectId: getServerTasksByProjectIdMock,
     });
 
@@ -112,25 +95,17 @@ describe("createGetTasksRoute", () => {
       createContext("route-project-id"),
     );
 
-    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
-    expect(getServerProjectByIdMock).toHaveBeenCalledWith("route-project-id");
     expect(getServerTasksByProjectIdMock).toHaveBeenCalledTimes(1);
     expect(getServerTasksByProjectIdMock).toHaveBeenCalledWith("route-project-id");
     expect(response.status).toBe(200);
     await expect(response.json()).resolves.toEqual(tasks);
   });
 
-  it("returns 200 with an empty array for an existing project without tasks", async () => {
+  it("returns 200 with an empty array when no tasks exist for the route project", async () => {
     const { createGetTasksRoute } =
       await loadTaskHttpServerModule();
-    getServerProjectByIdMock.mockResolvedValueOnce({
-      id: "project-123",
-      name: "Alpha",
-      createdAt: "2026-07-23T09:00:00.000Z",
-    });
     getServerTasksByProjectIdMock.mockResolvedValueOnce([]);
     const handler = createGetTasksRoute({
-      getServerProjectById: getServerProjectByIdMock,
       getServerTasksByProjectId: getServerTasksByProjectIdMock,
     });
 
@@ -143,12 +118,11 @@ describe("createGetTasksRoute", () => {
     await expect(response.json()).resolves.toEqual([]);
   });
 
-  it("returns 404 for a missing project without calling the task reader", async () => {
+  it("returns 200 for a missing project boundary and still reads tasks", async () => {
     const { createGetTasksRoute } =
       await loadTaskHttpServerModule();
-    getServerProjectByIdMock.mockResolvedValueOnce(null);
+    getServerTasksByProjectIdMock.mockResolvedValueOnce([]);
     const handler = createGetTasksRoute({
-      getServerProjectById: getServerProjectByIdMock,
       getServerTasksByProjectId: getServerTasksByProjectIdMock,
     });
 
@@ -157,52 +131,19 @@ describe("createGetTasksRoute", () => {
       createContext("missing-project"),
     );
 
-    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
-    expect(getServerProjectByIdMock).toHaveBeenCalledWith("missing-project");
-    expect(getServerTasksByProjectIdMock).not.toHaveBeenCalled();
-    expect(response.status).toBe(404);
-    await expect(response.json()).resolves.toEqual({
-      status: "project-not-found",
-    });
+    expect(getServerTasksByProjectIdMock).toHaveBeenCalledTimes(1);
+    expect(getServerTasksByProjectIdMock).toHaveBeenCalledWith("missing-project");
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toEqual([]);
   });
 
-  it("returns 503 when the project repository throws without calling the task reader", async () => {
+  it("returns 503 when the task repository throws", async () => {
     const { createGetTasksRoute } =
       await loadTaskHttpServerModule();
-    getServerProjectByIdMock.mockRejectedValueOnce(
-      new Error("project repository failure"),
-    );
-    const handler = createGetTasksRoute({
-      getServerProjectById: getServerProjectByIdMock,
-      getServerTasksByProjectId: getServerTasksByProjectIdMock,
-    });
-
-    const response = await handler(
-      createGetRequest(),
-      createContext("project-123"),
-    );
-
-    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
-    expect(getServerTasksByProjectIdMock).not.toHaveBeenCalled();
-    expect(response.status).toBe(503);
-    await expect(response.json()).resolves.toEqual({
-      status: "context-unavailable",
-    });
-  });
-
-  it("returns 503 when the task repository throws for an existing project", async () => {
-    const { createGetTasksRoute } =
-      await loadTaskHttpServerModule();
-    getServerProjectByIdMock.mockResolvedValueOnce({
-      id: "project-123",
-      name: "Alpha",
-      createdAt: "2026-07-23T09:00:00.000Z",
-    });
     getServerTasksByProjectIdMock.mockRejectedValueOnce(
       new Error("task repository failure"),
     );
     const handler = createGetTasksRoute({
-      getServerProjectById: getServerProjectByIdMock,
       getServerTasksByProjectId: getServerTasksByProjectIdMock,
     });
 
@@ -211,7 +152,6 @@ describe("createGetTasksRoute", () => {
       createContext("project-123"),
     );
 
-    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
     expect(getServerTasksByProjectIdMock).toHaveBeenCalledTimes(1);
     expect(getServerTasksByProjectIdMock).toHaveBeenCalledWith("project-123");
     expect(response.status).toBe(503);
@@ -235,7 +175,6 @@ describe("createPostTaskRoute", () => {
       .fn<(_: { projectId: string; title: string }) => Promise<Task>>()
       .mockResolvedValue(createdTask);
     const handler = createPostTaskRoute({
-      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -247,8 +186,6 @@ describe("createPostTaskRoute", () => {
       createContext("route-project-id"),
     );
 
-    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
-    expect(getServerProjectByIdMock).toHaveBeenCalledWith("route-project-id");
     expect(createServerTask).toHaveBeenCalledTimes(1);
     expect(createServerTask).toHaveBeenCalledWith({
       projectId: "route-project-id",
@@ -263,7 +200,6 @@ describe("createPostTaskRoute", () => {
       await loadTaskHttpServerModule();
     const createServerTask = vi.fn();
     const handler = createPostTaskRoute({
-      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -284,7 +220,6 @@ describe("createPostTaskRoute", () => {
       await loadTaskHttpServerModule();
     const createServerTask = vi.fn();
     const handler = createPostTaskRoute({
-      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -305,7 +240,6 @@ describe("createPostTaskRoute", () => {
       await loadTaskHttpServerModule();
     const createServerTask = vi.fn();
     const handler = createPostTaskRoute({
-      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -328,7 +262,6 @@ describe("createPostTaskRoute", () => {
       await loadTaskHttpServerModule();
     const createServerTask = vi.fn();
     const handler = createPostTaskRoute({
-      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -355,7 +288,6 @@ describe("createPostTaskRoute", () => {
       message: "ignored",
     });
     const handler = createPostTaskRoute({
-      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -385,7 +317,6 @@ describe("createPostTaskRoute", () => {
       message: "syntax error",
     });
     const handler = createPostTaskRoute({
-      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -410,7 +341,6 @@ describe("createPostTaskRoute", () => {
       new Error("DATABASE_URL is not configured."),
     );
     const handler = createPostTaskRoute({
-      getServerProjectById: getServerProjectByIdMock,
       createServerTask,
     });
 
@@ -425,31 +355,6 @@ describe("createPostTaskRoute", () => {
     expect(response.status).toBe(503);
     await expect(response.json()).resolves.toEqual({
       status: "context-unavailable",
-    });
-  });
-
-  it("returns 404 and skips create when the project lookup is missing", async () => {
-    const { createPostTaskRoute } =
-      await loadTaskHttpServerModule();
-    getServerProjectByIdMock.mockResolvedValueOnce(null);
-    const createServerTask = vi.fn();
-    const handler = createPostTaskRoute({
-      getServerProjectById: getServerProjectByIdMock,
-      createServerTask,
-    });
-
-    const response = await handler(
-      createJsonRequest({
-        title: "Ship route boundary",
-      }),
-      createContext("missing-project"),
-    );
-
-    expect(getServerProjectByIdMock).toHaveBeenCalledTimes(1);
-    expect(createServerTask).not.toHaveBeenCalled();
-    expect(response.status).toBe(404);
-    await expect(response.json()).resolves.toEqual({
-      status: "project-not-found",
     });
   });
 });

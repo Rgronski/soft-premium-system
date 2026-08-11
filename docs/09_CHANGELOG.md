@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 071 - MS-013.5 task intake project access boundary alignment SSOT sync
+
+### Date
+
+2026-08-11
+
+### Completed
+
+* Implemented `MS-013.5 - Task Intake Project Access Boundary Alignment Foundation` on `main`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-013.5` as the latest completed milestone while keeping `Current Product Milestone` at `NONE`.
+* Kept AI Workspace behavior, Project Brain readiness logic, and project creation behavior unchanged while aligning the task API with the same existing-project boundary.
+* Recorded the Session 071 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* Task GET and POST now operate without the server-side project lookup gate for a locally resolvable project boundary.
+* The known unrelated lint issue in `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx:324` remains unchanged.
+
 ## Session 071 - MS-013.4 AI workspace project access boundary alignment SSOT sync
 
 ### Date

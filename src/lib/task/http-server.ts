@@ -1,6 +1,5 @@
 import "server-only";
 
-import { getServerProjectById } from "../project/server";
 import { getServerTasksByProjectId } from "./server";
 import { createServerTask } from "./server";
 import type { Task } from "./types";
@@ -109,7 +108,6 @@ function createTransportErrorResponse(
 }
 
 export function createGetTasksRoute(deps: {
-  getServerProjectById: typeof getServerProjectById;
   getServerTasksByProjectId: typeof getServerTasksByProjectId;
 }): GetTasksHttpHandler {
   return async function getTasksRoute(
@@ -117,19 +115,6 @@ export function createGetTasksRoute(deps: {
     context: RouteContext<"/api/projects/[id]/tasks">,
   ): Promise<Response> {
     const { id } = await context.params;
-
-    try {
-      const project = await deps.getServerProjectById(id);
-
-      if (!project) {
-        return createTransportErrorResponse("project-not-found", 404);
-      }
-    } catch {
-      return createTransportErrorResponse(
-        "context-unavailable",
-        503,
-      );
-    }
 
     try {
       const tasks = await deps.getServerTasksByProjectId(id);
@@ -168,7 +153,6 @@ function isProjectForeignKeyViolation(error: unknown): boolean {
 }
 
 export function createPostTaskRoute(deps: {
-  getServerProjectById: typeof getServerProjectById;
   createServerTask: typeof createServerTask;
 }): PostTaskHttpHandler {
   return async function postTaskRoute(
@@ -184,12 +168,6 @@ export function createPostTaskRoute(deps: {
     const { id } = await context.params;
 
     try {
-      const project = await deps.getServerProjectById(id);
-
-      if (!project) {
-        return createTransportErrorResponse("project-not-found", 404);
-      }
-
       const task = await deps.createServerTask({
         projectId: id,
         title: transportBody.body.title,
@@ -212,11 +190,9 @@ export function createPostTaskRoute(deps: {
 }
 
 export const postTaskRoute = createPostTaskRoute({
-  getServerProjectById,
   createServerTask,
 });
 
 export const getTasksRoute = createGetTasksRoute({
-  getServerProjectById,
   getServerTasksByProjectId,
 });
