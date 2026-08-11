@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-016.0 - Project Brain Activation Foundation
+MS-016.1 - Project Brain Existing Project Status Repair Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-016.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain Existing Project Status Repair Foundation; the repository now repairs eligible legacy projects from `pending` to `available` when they already have a persisted working directory and project record, while preserving `pending` / warning behavior when the data is missing or corrupted.
 
 MS-016.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain Activation Foundation; the repository now marks newly created projects with persisted baseline workspace data as `projectBrainStatus: "available"` while preserving the pending warning state when the activation condition is not met.
 

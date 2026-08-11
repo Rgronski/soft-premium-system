@@ -4,6 +4,7 @@ import {
   buildDefaultWorkingDirectory,
   createProject,
   deleteProject,
+  getProjectById,
 } from "./project";
 
 class MemoryStorage {
@@ -79,6 +80,61 @@ describe("createProject", () => {
       "C:\\SPS_OS_WORK\\alpha-project",
     );
     expect(savedProjects[0].projectBrainStatus).toBe("available");
+  });
+
+  test("repairs a pending existing project with a persisted working directory when it is loaded", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+          projectBrainStatus: "pending",
+          createdAt: "2026-08-03T10:00:00.000Z",
+        },
+      ]),
+    );
+
+    const project = getProjectById("project-1");
+    const savedProjects = JSON.parse(
+      storage.getItem("soft-premium-system.projects") ?? "[]",
+    );
+
+    expect(project).toEqual(
+      expect.objectContaining({
+        id: "project-1",
+        projectBrainStatus: "available",
+      }),
+    );
+    expect(savedProjects[0].projectBrainStatus).toBe("available");
+  });
+
+  test("keeps a pending project pending when the working directory is missing", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          projectBrainStatus: "pending",
+          createdAt: "2026-08-03T10:00:00.000Z",
+        },
+      ]),
+    );
+
+    const project = getProjectById("project-1");
+    const savedProjects = JSON.parse(
+      storage.getItem("soft-premium-system.projects") ?? "[]",
+    );
+
+    expect(project).toEqual(
+      expect.objectContaining({
+        id: "project-1",
+        projectBrainStatus: "pending",
+      }),
+    );
+    expect(savedProjects[0].projectBrainStatus).toBe("pending");
   });
 
   test("deletes a project from the stored project list", () => {
