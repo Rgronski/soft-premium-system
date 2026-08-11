@@ -45,14 +45,14 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-012.6 - Parallel Project Work Track First Verification Contract Foundation
+MS-012.9 - Parallel Project Work Track First Guided Next Action Foundation
 
 **Next Milestone**
-MS-012.7 - Parallel Project Work Track First Readiness Gate Foundation
+NONE / Product Owner decision required
 
 MS-010.4 is PUBLISHED / CLOSED in the current local workspace as the SPS OS First Usable Flow Post-Copy Guidance Foundation; the repository now shows `Next action: Copy handoff.` and the copied handoff now tells the user it can be pasted into the next session, consolidating the earlier MS-010.2 save-review guidance and MS-010.3 post-completion copy guidance refinements while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
-MS-011.0 is now COMPLETED / VERIFIED / PUBLISHED / CLOSED as the existing project intake foundation; the repository records the completed intake boundary for accepting an already existing project into the current SPS project model and workspace through the existing project create/open flow, while keeping the controlled `MS-011.1` continuation published and reserving the parallel work track follow-up for `MS-012.7`.
+MS-011.0 is now COMPLETED / VERIFIED / PUBLISHED / CLOSED as the existing project intake foundation; the repository records the completed intake boundary for accepting an already existing project into the current SPS project model and workspace through the existing project create/open flow, while keeping the controlled `MS-011.1` continuation published and reserving the parallel work track follow-up for `MS-012.10`.
 
 MS-011.1 is now the completed controlled continuation for existing project intake; the repository records the first controlled flow after `MS-011.0` without broad implementation, refactor, or parallel work track activation.
 
@@ -71,6 +71,12 @@ MS-012.5 is now the completed controlled execution contract foundation; the repo
 MS-012.6 is now the completed verification contract foundation; the repository records the verification boundary before the readiness gate.
 
 MS-012.7 is PUBLISHED / CLOSED in the current local workspace as the Parallel Project Work Track First Readiness Gate Foundation; the repository now records the readiness boundary for the parallel work track while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-012.8 is PUBLISHED / CLOSED in the current local workspace as the Parallel Project Work Track First Functional Handoff Foundation; the repository now records the visible handoff boundary across the existing project, task list, task detail, and task workspace surfaces while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-012.9 is PUBLISHED / CLOSED in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+
+MS-012.10 is PUBLISHED / CLOSED in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-010.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS OS First Usable Flow Guided Navigation Foundation; the repository now records the guided-navigation boundary for the usable SPS OS flow, clarifies the path across Home, Project, Task List, Task Detail, and Task Workspace, and keeps product code unchanged while Current Product Milestone remains NONE until a separate Product Owner decision is recorded.
 
@@ -256,7 +262,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-012.7 - Parallel Project Work Track First Readiness Gate Foundation
+Latest Completed Product Milestone: MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation
 Next Product Milestone: NONE / Product Owner decision required
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
@@ -1414,8 +1420,11 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-012.7 - Parallel Project Work Track First Readiness Gate Foundation`
+* `Latest Completed Product Milestone` is `MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
+* `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
+* `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
+* `MS-012.8` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Functional Handoff Foundation; the repository now records the visible handoff boundary across the existing project, task list, task detail, and task workspace surfaces while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.7` close decision: the next milestone now requires Product Owner direction while future SPS-owned working copies still live under `C:\SPS_OS_WORK\<project-slug>` and existing project metadata may still point to the source or `repositoryUrl`.
 * `MS-008.32` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Codex Handoff Jump Feedback Foundation; the repository now shows a local `Codex handoff opened locally.` status after the Codex handoff link is used while keeping the task handoff section visible and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-008.31` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the Task Workspace Completion Handoff Restore Feedback Foundation; the repository now shows a local `Completion handoff restored locally.` status after updated result notes restore a copied completion handoff while keeping the completion summary and handoff output visible after the restoration and keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

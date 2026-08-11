@@ -69,6 +69,79 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 070 - Session close synchronization and handoff
+
+### Date
+
+2026-08-11
+
+### Completed
+
+* Synchronized `docs/10_SESSION_STATE.md` for the Session 070 close state after `MS-012.10`.
+* Created `docs/session-handoffs/2026-08-11_070_SESSION_HANDOFF.md` for Session 071 bootstrap continuity.
+* Recorded the Session 070 close usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* `MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation` remains completed, verified, published, and closed.
+* No product code changed during the close synchronization.
+
+## Session 070 - MS-012.10 parallel project work track workspace continuation verification SSOT sync
+
+### Date
+
+2026-08-11
+
+### Completed
+
+* Published `MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation` as the next controlled continuation after `MS-012.9`.
+* Verified that `Return to task list` already points to the task list route in the workspace continuation path, so no product code patch was required.
+* Confirmed the focused workspace test already verifies the link label and target.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-012.10` as the latest completed product milestone while keeping `Current Product Milestone` at `NONE`.
+* Recorded the Session 070 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No product code changed.
+* `MS-012.9` remains completed, verified, published, and closed.
+
+## Session 070 - MS-012.9 parallel project work track first guided next action SSOT sync
+
+### Date
+
+2026-08-11
+
+### Completed
+
+* Published `MS-012.9 - Parallel Project Work Track First Guided Next Action Foundation` as the next controlled continuation after `MS-012.8`.
+* Added one visible `Return to task list` cue in `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` while preserving the existing handoff and result-notes flow.
+* Added focused coverage in `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` for the new task-list return cue.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-012.9` as the latest completed product milestone while keeping `Current Product Milestone` at `NONE`.
+* Recorded the Session 070 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* `MS-012.8` remains completed, verified, published, and closed.
+* Product behavior changed: yes.
+
+## Session 070 - MS-012.8 parallel project work track first functional handoff SSOT sync
+
+### Date
+
+2026-08-11
+
+### Completed
+
+* Published `MS-012.8 - Parallel Project Work Track First Functional Handoff Foundation` as the next controlled continuation after `MS-012.7`.
+* Verified that the existing project, task list, task detail, and task workspace surfaces already expose the controlled handoff boundary, so no product code patch was required.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-012.8` as the latest completed product milestone while keeping `Current Product Milestone` at `NONE`.
+* Recorded the Session 070 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No product code changed.
+* `MS-012.7` remains completed, verified, published, and closed.
+
 ## Session 069 - Session close synchronization and handoff
 
 ### Date

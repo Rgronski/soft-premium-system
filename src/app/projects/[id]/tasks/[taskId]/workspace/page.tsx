@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   getProjectWorkspaceEntry,
   type ProjectWorkspaceEntry,
@@ -454,6 +455,13 @@ export default function ProjectTaskWorkspacePage() {
                 >
                   Continue to result notes
                 </button>
+
+                <Link
+                  href={`/projects/${projectId}/tasks`}
+                  className="inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+                >
+                  Return to task list
+                </Link>
               </div>
             </div>
           ) : null}

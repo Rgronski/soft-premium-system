@@ -136,6 +136,9 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(continueToResultNotesButton).toBeTruthy();
     fireEvent.click(continueToResultNotesButton);
     expect(document.activeElement).toBe(screen.getByLabelText("Result notes"));
+    expect(
+      screen.getByRole("link", { name: "Return to task list" }).getAttribute("href"),
+    ).toBe("/projects/project-1/tasks");
     expect(screen.getByText("Repository Context")).toBeTruthy();
     expect(screen.getByText("Open repository")).toBeTruthy();
     fireEvent.click(screen.getByRole("link", { name: "Open repository" }));

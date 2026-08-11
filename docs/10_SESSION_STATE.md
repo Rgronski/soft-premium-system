@@ -213,28 +213,28 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-08-10
-Current Session ID: 069
-Current Chat Title: 069 SPS OS - Session Close Protocol
-Next Session ID: 070
-Suggested Next Chat Title: 070 SPS OS - Post Session 069 Integrity Check
+Date: 2026-08-11
+Current Session ID: 070
+Current Chat Title: 070 SPS OS - MS-012.10 Workspace Continuation Verification Foundation
+Next Session ID: 071
+Suggested Next Chat Title: 071 SPS OS - Post Session 070 Integrity Check
 Active Capability: NONE
 Active Work Item: NONE
 Current Mode: CLOSED
-Completed Capability Items: Session 069 published the MS-011.1 SSOT contract; Session 069 verified that the existing project intake surface already satisfies the controlled MS-011.1 boundary; Session 069 published the MS-012.0 SSOT contract; Session 069 published the MS-012.1 SSOT contract; Session 069 published the MS-012.2 SSOT contract; Session 069 published the MS-012.3 SSOT contract; Session 069 published the MS-012.4 SSOT contract; Session 069 published the MS-012.5 SSOT contract; Session 069 published the MS-012.6 SSOT contract; Session 069 published the MS-012.7 SSOT contract; Session 069 closed the Session 069 operational snapshot; Session 069 completed the Session Close Protocol; Session 069 recorded close usage entry
+Completed Capability Items: Session 070 published the MS-012.8 SSOT contract; Session 070 verified that the existing project, task list, task detail, and task workspace surfaces already expose the controlled functional handoff boundary; Session 070 published the MS-012.9 SSOT contract; Session 070 verified the task workspace return-to-task-list cue; Session 070 published the MS-012.10 SSOT contract; Session 070 verified the workspace return path back to the task list; Session 070 recorded the Session 070 usage entry; Session 070 completed the Session Close Protocol
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-012.7 - Parallel Project Work Track First Readiness Gate Foundation
+Latest Completed Product Milestone: MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 069 completed the Session Close Protocol
+Latest Completed Capability Item: Session 070 completed the Session Close Protocol
 Current Sprint: NONE
-Platform Priority: Keep MS-011.0 immutable and preserve MS-012.7 as the completed parallel-track readiness gate while the next milestone remains a Product Owner decision.
+Platform Priority: Keep MS-011.0 immutable and preserve MS-012.10 as the completed parallel-track workspace continuation verification while Session 071 begins from the fresh package.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 4aa58b8c893be6d1b614a48303f3aac90f727a0b
+Latest Verified Commit: e9651d7802656d3cf705292cd2c2b8eb751fb80a
 Verification Status: PASS
 Blockers: NONE
 Open Risks: Physical C:\SPS_OS_WORK folder creation remains a future milestone.
-Next Safe Step: Start Session 070 with the fresh session package and perform the post-session 069 integrity check.
-Next Session Plan: Start Session 070 with the fresh session package and perform the post-session 069 integrity check.
+Next Safe Step: Start Session 071 with the fresh session package and perform the post-session 070 integrity check.
+Next Session Plan: Start Session 071 with the fresh session package and perform the post-session 070 integrity check.

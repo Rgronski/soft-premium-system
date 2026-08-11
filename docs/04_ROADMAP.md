@@ -111,11 +111,190 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-012.7 - Parallel Project Work Track First Readiness Gate Foundation
+MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation
+
+**Milestone**
+MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Verify the controlled continuation after MS-012.9 from task workspace back to the task list by confirming the return path remains coherent without changing the existing handoff flow.
+
+**Product Outcome**
+The repository now records `MS-012.10` as the next controlled continuation after `MS-012.9`, keeps `MS-011.0` through `MS-012.9` immutable, and confirms the workspace return path already points the user back to the task list without a product code patch.
+
+**Dependencies**
+* closed `MS-012.9 - Parallel Project Work Track First Guided Next Action Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` already renders `Return to task list` with the task list route target
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` already verifies the link label and `href`
+* the existing `Continue to result notes` and `Copy handoff` flow remains unchanged
+* no product code patch was required because the continuation path was already correct
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+None.
+
+## MS-012.9 - Parallel Project Work Track First Guided Next Action Foundation
+
+**Milestone**
+MS-012.9 - Parallel Project Work Track First Guided Next Action Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the first guided next action after MS-012.8 for continuing parallel project work from the task workspace back toward the task list without broad orchestration.
+
+**Product Outcome**
+The repository now records `MS-012.9` as the next controlled continuation after `MS-012.8`, keeps `MS-011.0` through `MS-012.8` immutable, and adds one visible workspace cue that returns the user to the task list while preserving the existing task workspace handoff path.
+
+**Dependencies**
+* closed `MS-012.8 - Parallel Project Work Track First Functional Handoff Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` now includes a visible `Return to task list` cue alongside the existing next-step action block
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.test.tsx` now verifies the task list return cue
+* the existing `Continue to result notes` and `Copy handoff` flow remains unchanged
+* no broader project, task list, or task detail changes were required
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+None.
+
+## MS-012.8 - Parallel Project Work Track First Functional Handoff Foundation
+
+**Milestone**
+MS-012.8 - Parallel Project Work Track First Functional Handoff Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the first visible, controlled functional handoff after MS-012.7 for continuing parallel project work across an existing project, its task list, a task detail view, and a task workspace without broad orchestration.
+
+**Product Outcome**
+The repository now records `MS-012.8` as the next controlled continuation after `MS-012.7`, keeps `MS-011.0` through `MS-012.7` immutable, and confirms the existing project, task list, task detail, and task workspace surfaces already expose the controlled handoff boundary without a product code patch.
+
+**Dependencies**
+* closed `MS-012.7 - Parallel Project Work Track First Readiness Gate Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/app/projects/[id]/page.tsx` already exposes `Open tasks` and the task list continuation entry points from the project surface
+* `src/app/projects/[id]/tasks/page.tsx` already lists tasks as the continuation surface into task work
+* `src/app/projects/[id]/tasks/[taskId]/page.tsx` already exposes `Open task workspace`
+* `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx` already exposes the visible next-step action and the `Copy handoff` completion boundary
+* targeted route tests already cover the existing project, task list, task detail, and task workspace continuation surfaces
+* no product code patch was required because the functional handoff boundary already exists in the repository
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+None.
 
 ## MS-012.7 - Parallel Project Work Track First Readiness Gate Foundation
 
