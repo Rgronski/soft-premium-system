@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-013.5 - Task Intake Project Access Boundary Alignment Foundation
+MS-014.0 - Application Metadata and Locale Stabilization Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-014.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Application Metadata and Locale Stabilization Foundation; the repository now serves product-aligned metadata from the root layout and uses `pl` as the document language while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-010.4 is PUBLISHED / CLOSED in the current local workspace as the SPS OS First Usable Flow Post-Copy Guidance Foundation; the repository now shows `Next action: Copy handoff.` and the copied handoff now tells the user it can be pasted into the next session, consolidating the earlier MS-010.2 save-review guidance and MS-010.3 post-completion copy guidance refinements while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
@@ -272,7 +274,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation
+Latest Completed Product Milestone: MS-014.0 - Application Metadata and Locale Stabilization Foundation
 Next Product Milestone: NONE / Product Owner decision required
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
@@ -1430,7 +1432,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation`
+* `Latest Completed Product Milestone` is `MS-014.0 - Application Metadata and Locale Stabilization Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
