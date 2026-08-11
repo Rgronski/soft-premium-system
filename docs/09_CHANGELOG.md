@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 071 - MS-013.3 project readiness / workflow health alignment SSOT sync
+
+### Date
+
+2026-08-11
+
+### Completed
+
+* Implemented `MS-013.3 - Project Readiness / Workflow Health Status Alignment Foundation` on `main`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-013.3` as the latest completed milestone while keeping `Current Product Milestone` at `NONE`.
+* Kept task creation and task storage usable while aligning workflow-health display with explicit project readiness.
+* Recorded the Session 071 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* The project dashboard now avoids showing a misleading ready state when Project Brain is pending.
+* The known unrelated lint issue in `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx:324` remains unchanged.
+
 ## Session 071 - MS-013.2 project creation readiness gate SSOT sync
 
 ### Date

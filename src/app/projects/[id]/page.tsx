@@ -105,6 +105,21 @@ function createLocalRecoveryWorkspaceEntry(
   }
 }
 
+function deriveWorkflowHealth(
+  projectBrainStatus: string | undefined,
+  workflowHealth: ProjectWorkspaceEntry["workspace"]["overview"]["workflow"]["health"],
+): ProjectWorkspaceEntry["workspace"]["overview"]["workflow"]["health"] {
+  if (projectBrainStatus === "available") {
+    return workflowHealth;
+  }
+
+  if (projectBrainStatus === "failed") {
+    return "blocked";
+  }
+
+  return "warning";
+}
+
 export default function ProjectWorkspacePage() {
   const params = useParams<{ id: string }>();
   const router = useRouter();
@@ -209,6 +224,12 @@ export default function ProjectWorkspacePage() {
       ? canonicalTasks
       : localWorkspaceTasks;
   const workspaceTaskCount = workspaceTasks.length;
+  const workflowHealth = dashboard.workspaceEntry
+    ? deriveWorkflowHealth(
+        projectBrainStatus,
+        dashboard.workspaceEntry.workspace.overview.workflow.health,
+      )
+    : "warning";
 
   async function handleDeleteProject() {
     if (!dashboard.workspaceEntry) {
@@ -293,7 +314,7 @@ export default function ProjectWorkspacePage() {
             knowledgeCount={
               dashboard.workspaceEntry.workspace.overview.counts.knowledgeEntries
             }
-            workflowHealth={dashboard.workspaceEntry.workspace.overview.workflow.health}
+            workflowHealth={workflowHealth}
             workflowConfidence={
               dashboard.workspaceEntry.workspace.overview.workflow.confidence
             }
