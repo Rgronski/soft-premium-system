@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-013.3 - Project Readiness / Workflow Health Status Alignment Foundation
+MS-013.4 - AI Workspace Project Access Boundary Alignment Foundation
 
 ## Next
 
@@ -11807,6 +11807,94 @@ COMPLETED / VERIFIED / PUBLISHED / CLOSED
 * `git branch --show-current`
 * `git status -sb`
 * `npm.cmd test -- src/app/projects/[id]/page.test.tsx src/lib/project/project.test.ts`
+* `npm.cmd test`
+* `npm.cmd run lint`
+* `npm.cmd run build`
+* `git diff --check`
+* `git diff --stat`
+* `git status -sb`
+
+**Rollback / Safety Expectations**
+* if the contract needs revision, update only the SSOT docs that define the milestone boundary and keep `Current Product Milestone` at `NONE` until a separate Product Owner decision is recorded
+
+## MS-013.4 - AI Workspace Project Access Boundary Alignment Foundation
+
+**Milestone**
+MS-013.4 - AI Workspace Project Access Boundary Alignment Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Align the AI Workspace project access boundary with Overview and Tasks so the AI route resolves the same existing project that the user can already open elsewhere in the product.
+
+**Product Outcome**
+The AI Workspace now falls back to the local project boundary when the server-backed project lookup misses, so a real project that exists in Overview and Tasks is no longer misreported as not found on the AI route.
+
+**Dependencies**
+* closed `MS-013.3 - Project Readiness / Workflow Health Status Alignment Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/project-brain/browser.ts` now falls back to the local AI project boundary when the server-backed project lookup returns `project-not-found`
+* `src/lib/project-brain/browser.test.ts` now verifies the local boundary fallback when the server project is missing
+* the AI route page itself did not need a route-specific access rewrite because the shared browser helper now aligns the boundary
+* `npm.cmd test -- src/lib/project-brain/browser.test.ts` passed
+* `npm.cmd test` passed with `30 / 30` files and `383 / 383` tests
+* `npm.cmd run build` passed
+* `npm.cmd run lint` still reports the known unrelated `react-hooks/set-state-in-effect` issue in `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx:324`
+
+**Allowed Implementation Scope**
+* AI Workspace project access boundary alignment
+* shared browser project context resolution
+* focused tests
+* SSOT synchronization
+
+**Forbidden Scope**
+* task flow changes
+* Project Brain readiness changes
+* project creation changes
+* broad task workspace refactor
+* unrelated lint fixes
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `.usage/session.jsonl` own the synchronized SSOT snapshot for this milestone
+* any future AI Workspace redesign must wait for a separate Product Owner-approved milestone
+
+**Verification Plan**
+* `git branch --show-current`
+* `git status -sb`
+* `npm.cmd test -- src/lib/project-brain/browser.test.ts`
 * `npm.cmd test`
 * `npm.cmd run lint`
 * `npm.cmd run build`

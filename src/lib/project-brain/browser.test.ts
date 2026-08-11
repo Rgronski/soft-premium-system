@@ -1,8 +1,24 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const getProjectFromServerMock = vi.fn();
 const getTasksFromServerMock = vi.fn();
 const getKnowledgeEntriesFromServerMock = vi.fn();
+
+class MemoryStorage {
+  private store = new Map<string, string>();
+
+  clear() {
+    this.store.clear();
+  }
+
+  getItem(key: string) {
+    return this.store.get(key) ?? null;
+  }
+
+  setItem(key: string, value: string) {
+    this.store.set(key, value);
+  }
+}
 
 vi.mock("../project/browser-server", () => ({
   getProjectFromServer: getProjectFromServerMock,
@@ -22,10 +38,19 @@ async function loadBrowserProjectBrainModule() {
 }
 
 describe("createGetBrowserAiProjectContext", () => {
+  const storage = new MemoryStorage();
+
   beforeEach(() => {
     getProjectFromServerMock.mockReset();
     getTasksFromServerMock.mockReset();
     getKnowledgeEntriesFromServerMock.mockReset();
+    storage.clear();
+    vi.stubGlobal("window", {});
+    vi.stubGlobal("localStorage", storage);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
   it("returns available for an existing project with empty tasks and knowledge", async () => {
@@ -110,6 +135,69 @@ describe("createGetBrowserAiProjectContext", () => {
 
     await expect(getBrowserAiProjectContext("project-1")).resolves.toEqual({
       status: "project-not-found",
+    });
+    expect(getTasksByProjectId).not.toHaveBeenCalled();
+    expect(getKnowledgeEntriesByProjectId).not.toHaveBeenCalled();
+  });
+
+  it("falls back to the local project boundary when the server project is missing", async () => {
+    const { createGetBrowserAiProjectContext } =
+      await loadBrowserProjectBrainModule();
+    const getTasksByProjectId = vi.fn();
+    const getKnowledgeEntriesByProjectId = vi.fn();
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-24T10:00:00.000Z",
+        },
+      ]),
+    );
+    storage.setItem(
+      "soft-premium-system.projects.project-1.tasks",
+      JSON.stringify([
+        {
+          id: "task-1",
+          projectId: "project-1",
+          title: "First task",
+          createdAt: "2026-07-24T10:05:00.000Z",
+        },
+      ]),
+    );
+    storage.setItem(
+      "soft-premium-system.projects.project-1.knowledge",
+      JSON.stringify([
+        {
+          id: "knowledge-1",
+          projectId: "project-1",
+          title: "Architecture note",
+          content: "Body",
+          createdAt: "2026-07-24T10:10:00.000Z",
+        },
+      ]),
+    );
+    const getBrowserAiProjectContext = createGetBrowserAiProjectContext({
+      getProjectById: vi.fn().mockResolvedValue(null),
+      getTasksByProjectId,
+      getKnowledgeEntriesByProjectId,
+    });
+
+    await expect(getBrowserAiProjectContext("project-1")).resolves.toEqual({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [{ id: "task-1", title: "First task" }],
+        knowledgeEntries: [
+          {
+            id: "knowledge-1",
+            title: "Architecture note",
+            content: "Body",
+          },
+        ],
+      },
     });
     expect(getTasksByProjectId).not.toHaveBeenCalled();
     expect(getKnowledgeEntriesByProjectId).not.toHaveBeenCalled();

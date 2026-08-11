@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-013.3 - Project Readiness / Workflow Health Status Alignment Foundation
+MS-013.4 - AI Workspace Project Access Boundary Alignment Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
@@ -75,6 +75,8 @@ MS-013.1 is PUBLISHED / CLOSED in the current local workspace as the Project Wor
 MS-013.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Creation Readiness Gate Foundation; the repository now creates the selected or default local working directory during new project creation, keeps `projectBrainStatus` explicit, shows the pending readiness state when Project Brain is unavailable, and does not present a false-ready project when the runtime context is missing.
 
 MS-013.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Readiness / Workflow Health Status Alignment Foundation; the repository now keeps the dashboard workflow health aligned with explicit project readiness so a pending Project Brain state does not look fully ready while tasks remain usable.
+
+MS-013.4 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Workspace Project Access Boundary Alignment Foundation; the repository now makes the AI Workspace resolve the same existing project boundary as Overview and Tasks by falling back to the local project context when the server-backed project lookup misses.
 
 MS-013.0 is PUBLISHED / CLOSED in the current local workspace as the Project Working Directory Creation Prompt Foundation; the repository now records the pre-implementation contract boundary for the working-directory decision and keeps the default local workspace root `C:\SPS_OS_WORK\<project-slug>` reserved for the future implementation boundary.
 
