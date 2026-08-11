@@ -61,6 +61,9 @@ describe("ProjectsPage", () => {
         value: "  https://github.com/example/project  ",
       },
     });
+    await waitFor(() => {
+      expect(screen.getByDisplayValue("C:\\SPS_OS_WORK\\alpha")).toBeTruthy();
+    });
     fireEvent.click(screen.getByRole("button", { name: "Create Project" }));
 
     await waitFor(() => {
@@ -75,6 +78,7 @@ describe("ProjectsPage", () => {
       body: JSON.stringify({
         name: "Alpha",
         repositoryUrl: "https://github.com/example/project",
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha",
       }),
     });
 
@@ -85,6 +89,7 @@ describe("ProjectsPage", () => {
         id: "project-uuid",
         name: "Alpha",
         repositoryUrl: "https://github.com/example/project",
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha",
       }),
     ]);
 

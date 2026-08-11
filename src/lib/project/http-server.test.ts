@@ -177,6 +177,7 @@ describe("createPostProjectRoute", () => {
       id: "route-project-id",
       name: "Route Project",
       repositoryUrl: undefined,
+      workingDirectory: undefined,
     });
     expect(response.status).toBe(201);
     await expect(response.json()).resolves.toEqual(project);
@@ -207,9 +208,65 @@ describe("createPostProjectRoute", () => {
       id: "route-project-id",
       name: "Route Project",
       repositoryUrl: "https://github.com/example/project",
+      workingDirectory: undefined,
     });
     expect(response.status).toBe(201);
     await expect(response.json()).resolves.toEqual(project);
+  });
+
+  it("passes workingDirectory through for a valid request", async () => {
+    const { createPostProjectRoute } = await loadProjectHttpServerModule();
+    const project = createProject({
+      id: "route-project-id",
+      name: "Route Project",
+      workingDirectory: "C:\\SPS_OS_WORK\\route-project",
+    });
+    createServerProjectMock.mockResolvedValueOnce(project);
+    const handler = createPostProjectRoute({
+      createServerProject: createServerProjectMock,
+    });
+
+    const response = await handler(
+      createPostRequest({
+        name: "Route Project",
+        workingDirectory: "C:\\SPS_OS_WORK\\route-project",
+      }),
+      createContext("route-project-id"),
+    );
+
+    expect(createServerProjectMock).toHaveBeenCalledWith({
+      id: "route-project-id",
+      name: "Route Project",
+      repositoryUrl: undefined,
+      workingDirectory: "C:\\SPS_OS_WORK\\route-project",
+    });
+    expect(response.status).toBe(201);
+    await expect(response.json()).resolves.toEqual(project);
+  });
+
+  it("returns 500 when working directory creation fails", async () => {
+    const { createPostProjectRoute } = await loadProjectHttpServerModule();
+    createServerProjectMock.mockRejectedValueOnce(
+      Object.assign(new Error("working directory failure"), {
+        code: "working-directory-create-failed",
+      }),
+    );
+    const handler = createPostProjectRoute({
+      createServerProject: createServerProjectMock,
+    });
+
+    const response = await handler(
+      createPostRequest({
+        name: "Route Project",
+        workingDirectory: "C:\\SPS_OS_WORK\\route-project",
+      }),
+      createContext("project-123"),
+    );
+
+    expect(response.status).toBe(500);
+    await expect(response.json()).resolves.toEqual({
+      status: "working-directory-create-failed",
+    });
   });
 
   it("treats blank repositoryUrl as undefined", async () => {

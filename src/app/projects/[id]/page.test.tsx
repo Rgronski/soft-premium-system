@@ -255,6 +255,24 @@ describe("ProjectWorkspacePage", () => {
     expect(screen.getAllByText("Start next work")).toHaveLength(2);
   });
 
+  test("shows a readiness banner when the local project Brain status is pending", () => {
+    getProjectByIdMock.mockReturnValue({
+      id: "project-1",
+      name: "Alpha Workspace",
+      createdAt: "2026-08-03T10:00:00.000Z",
+      workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+      projectBrainStatus: "pending",
+    });
+
+    render(<ProjectWorkspacePage />);
+
+    expect(
+      screen.getByText(
+        "Project Brain is pending. This project is not ready for production use yet.",
+      ),
+    ).toBeTruthy();
+  });
+
   test("confirms delete, removes the project, and redirects home", async () => {
     render(<ProjectWorkspacePage />);
 

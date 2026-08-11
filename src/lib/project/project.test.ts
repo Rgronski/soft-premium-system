@@ -1,6 +1,10 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
-import { createProject, deleteProject } from "./project";
+import {
+  buildDefaultWorkingDirectory,
+  createProject,
+  deleteProject,
+} from "./project";
 
 class MemoryStorage {
   private store = new Map<string, string>();
@@ -58,6 +62,23 @@ describe("createProject", () => {
     expect(savedProjects[0].repositoryUrl).toBe(
       "https://github.com/example/project",
     );
+  });
+
+  test("stores the default working directory when none is provided", () => {
+    const project = createProject("Alpha Project", "project-uuid");
+    const savedProjects = JSON.parse(
+      storage.getItem("soft-premium-system.projects") ?? "[]",
+    );
+
+    expect(buildDefaultWorkingDirectory("Alpha Project")).toBe(
+      "C:\\SPS_OS_WORK\\alpha-project",
+    );
+    expect(project.workingDirectory).toBe("C:\\SPS_OS_WORK\\alpha-project");
+    expect(project.projectBrainStatus).toBe("pending");
+    expect(savedProjects[0].workingDirectory).toBe(
+      "C:\\SPS_OS_WORK\\alpha-project",
+    );
+    expect(savedProjects[0].projectBrainStatus).toBe("pending");
   });
 
   test("deletes a project from the stored project list", () => {

@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation
+MS-013.2 - Project Creation Readiness Gate Foundation
 
 ## Next
 
@@ -11474,6 +11474,260 @@ NONE
 
 **Next Safe Step**
 None.
+
+## MS-013.0 - Project Working Directory Creation Prompt Foundation
+
+**Milestone**
+MS-013.0 - Project Working Directory Creation Prompt Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the first controlled boundary for project working-directory creation during new project intake so the repository can require an explicit local working-directory decision before project setup is considered complete.
+
+**Product Outcome**
+The repository now records the working-directory decision boundary for new project creation, supports the default local workspace root `C:\SPS_OS_WORK\<project-slug>` as the SPS-owned local working copy path, and keeps `repositoryUrl` and other source metadata separate from the local working copy location without implementing directory creation yet.
+
+**Dependencies**
+* closed `MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `docs/04_ROADMAP.md` now records the MS-013.0 working-directory decision boundary
+* `docs/08_CURRENT_STATE.md` now records MS-013.0 as the next controlled milestone
+* `docs/09_CHANGELOG.md` now records the MS-013.0 publication sync
+* `docs/10_SESSION_STATE.md` now records the Session 071 operational snapshot
+* `.usage/session.jsonl` now records the Session 071 contract publication usage entry
+* no product code changed
+
+**Allowed Implementation Scope**
+* docs-only contract publication
+* SSOT synchronization
+* publication metadata
+* history recording for the completed contract milestone
+
+**Forbidden Scope**
+* `src` changes
+* working-directory creation implementation
+* UI changes
+* route changes
+* product code changes
+* broad refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `.usage/session.jsonl` own the synchronized SSOT snapshot for this docs-only milestone
+* any future implementation must stay inside the approved working-directory creation boundary and outside product code until a separate Product Owner-approved implementation milestone exists
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* `git diff -- docs/04_ROADMAP.md docs/08_CURRENT_STATE.md docs/09_CHANGELOG.md docs/10_SESSION_STATE.md .usage/session.jsonl`
+* confirm no product code files changed
+
+**Rollback / Safety Expectations**
+* if the contract needs revision, update only the SSOT docs that define the milestone boundary and keep `Current Product Milestone` at `NONE` until a separate Product Owner decision is recorded
+
+## MS-013.1 - Project Working Directory Creation Prompt Implementation Foundation
+
+**Milestone**
+MS-013.1 - Project Working Directory Creation Prompt Implementation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Implement the first controlled project working-directory decision prompt in the new project creation flow so setup cannot complete without an intended local working-directory value.
+
+**Product Outcome**
+The new project flow now records an explicit working-directory decision, shows the default intended local workspace root `C:\SPS_OS_WORK\<project-slug>`, and stores that intended local working copy path separately from `repositoryUrl` or other source metadata without creating the physical folder yet.
+
+**Dependencies**
+* closed `MS-013.0 - Project Working Directory Creation Prompt Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/app/projects/page.tsx` now asks for an intended working directory and sends it with the project create request
+* `src/lib/project/project.ts` now stores the intended working directory in the local project record and falls back to the default `C:\SPS_OS_WORK\<project-slug>` path
+* `src/app/projects/page.test.tsx` now verifies the default local workspace path and the create-request payload
+* `src/lib/project/project.test.ts` now verifies the default working-directory storage behavior
+* no physical folder creation was added in this milestone
+
+**Allowed Implementation Scope**
+* docs-only contract publication
+* SSOT synchronization
+* local project record persistence for the intended working directory
+* project creation prompt behavior
+
+**Forbidden Scope**
+* physical filesystem folder creation
+* unrelated UI redesign
+* unrelated project/task/workspace behavior changes
+* broad refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `.usage/session.jsonl` own the synchronized SSOT snapshot for this milestone
+* any future physical folder creation work must wait for a separate Product Owner-approved implementation milestone
+
+**Verification Plan**
+* `git status -sb`
+* `npm.cmd test -- src/lib/project/project.test.ts src/app/projects/page.test.tsx`
+* `npm.cmd test -- --runInBand`
+* `npm.cmd run lint`
+* `npm.cmd run build`
+* `git diff --check`
+* `git diff --stat`
+* `git status -sb`
+
+**Rollback / Safety Expectations**
+* if the contract needs revision, update only the SSOT docs that define the milestone boundary and keep `Current Product Milestone` at `NONE` until a separate Product Owner decision is recorded
+
+## MS-013.2 - Project Creation Readiness Gate Foundation
+
+**Milestone**
+MS-013.2 - Project Creation Readiness Gate Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Add the minimum controlled readiness gate for project creation so SPS OS does not treat a project as ready unless the project metadata, local working directory, and Project Brain status are explicit.
+
+**Product Outcome**
+New project creation now creates the selected or default working directory, records an explicit `projectBrainStatus` state, and surfaces the non-ready state when Project Brain is unavailable instead of silently presenting a false-ready project.
+
+**Dependencies**
+* closed `MS-013.1 - Project Working Directory Creation Prompt Implementation Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/project/server.ts` now creates the selected or default local working directory before persisting a new project record and raises a clear error when directory creation fails
+* `src/lib/project/http-server.ts` and `src/app/projects/page.tsx` now surface the working-directory failure path back to the project create flow
+* `src/lib/project/project.ts` and `src/app/projects/[id]/page.tsx` now keep `projectBrainStatus` explicit and show the pending readiness state when Project Brain is unavailable
+* `src/lib/project/project-task-flow.test.ts`, `src/lib/project/server.test.ts`, `src/lib/project/http-server.test.ts`, `src/lib/project/project.test.ts`, `src/app/projects/page.test.tsx`, and `src/app/projects/[id]/page.test.tsx` now cover the readiness-gate flow, failure path, and pending banner behavior
+* task storage fallback behavior was left explicit and deferred to a later milestone rather than being redesigned here
+
+**Allowed Implementation Scope**
+* project creation readiness gate
+* working directory physical creation
+* explicit Project Brain availability status
+* focused tests
+* SSOT synchronization
+
+**Forbidden Scope**
+* broad refactors
+* full Project Brain redesign
+* Git clone/init behavior
+* unrelated task workspace changes
+* unrelated lint/build fixes
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `.usage/session.jsonl` own the synchronized SSOT snapshot for this milestone
+* any future Project Brain initialization or task fallback redesign must wait for a separate Product Owner-approved milestone
+
+**Verification Plan**
+* `git branch --show-current`
+* `git status -sb`
+* `npm.cmd test -- src/lib/project/project.test.ts src/lib/project/server.test.ts src/lib/project/http-server.test.ts src/app/projects/page.test.tsx src/app/projects/[id]/page.test.tsx`
+* `npm.cmd test`
+* `npm.cmd run lint`
+* `npm.cmd run build`
+* `git diff --check`
+* `git diff --stat`
+* `git status -sb`
+
+**Rollback / Safety Expectations**
+* if the contract needs revision, update only the SSOT docs that define the milestone boundary and keep `Current Product Milestone` at `NONE` until a separate Product Owner decision is recorded
 
 ---
 

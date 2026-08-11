@@ -2,6 +2,16 @@ import type { Project } from "./types";
 
 const PROJECTS_STORAGE_KEY = "soft-premium-system.projects";
 
+export function buildDefaultWorkingDirectory(projectName: string): string {
+  const slug = projectName
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return `C:\\SPS_OS_WORK\\${slug || "project"}`;
+}
+
 export function getProjects(): Project[] {
   if (typeof window === "undefined") {
     return [];
@@ -21,12 +31,17 @@ export function createProject(
   name: string,
   id = crypto.randomUUID(),
   repositoryUrl?: string,
+  workingDirectory?: string,
 ): Project {
   const normalizedRepositoryUrl = repositoryUrl?.trim();
+  const normalizedWorkingDirectory =
+    workingDirectory?.trim() || buildDefaultWorkingDirectory(name);
   const newProject: Project = {
     id,
     name,
     ...(normalizedRepositoryUrl ? { repositoryUrl: normalizedRepositoryUrl } : {}),
+    workingDirectory: normalizedWorkingDirectory,
+    projectBrainStatus: "pending",
     createdAt: new Date().toISOString(),
   };
 

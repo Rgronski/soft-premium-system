@@ -2,7 +2,12 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
+const mkdirMock = vi.fn();
 const neonMock = vi.fn();
+
+vi.mock("node:fs/promises", () => ({
+  mkdir: mkdirMock,
+}));
 
 vi.mock("@neondatabase/serverless", () => ({
   neon: neonMock,
@@ -23,6 +28,7 @@ afterEach(() => {
   }
 
   neonMock.mockReset();
+  mkdirMock.mockReset();
   vi.restoreAllMocks();
 });
 
@@ -140,6 +146,7 @@ describe("createServerProject", () => {
   it("uses DATABASE_URL, persists repository_url, and maps the created row", async () => {
     process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
 
+    mkdirMock.mockResolvedValueOnce(undefined);
     const queryMock = vi.fn().mockResolvedValue([
       {
         id: "project-1",
@@ -161,6 +168,9 @@ describe("createServerProject", () => {
     });
 
     expect(neonMock).toHaveBeenCalledWith("postgresql://pooled-runtime-url");
+    expect(mkdirMock).toHaveBeenCalledWith("C:\\SPS_OS_WORK\\alpha", {
+      recursive: true,
+    });
     expect(queryMock).toHaveBeenCalledWith(
       `INSERT INTO public.projects (id, name, repository_url, created_at)
 VALUES ($1, $2, $3, $4)
@@ -176,6 +186,8 @@ RETURNING id, name, repository_url, created_at`,
       id: "project-1",
       name: "Alpha",
       repositoryUrl: "https://github.com/example/project",
+      workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+      projectBrainStatus: "pending",
       createdAt: "2026-07-24T10:11:12.000Z",
     });
   });
@@ -185,6 +197,7 @@ describe("project server local fallback", () => {
   it("stores, loads, and deletes projects locally when the database query fails", async () => {
     process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
 
+    mkdirMock.mockResolvedValueOnce(undefined);
     const queryMock = vi.fn().mockRejectedValue(
       new Error("repository failure"),
     );
@@ -206,6 +219,8 @@ describe("project server local fallback", () => {
       id: "project-1",
       name: "Alpha",
       repositoryUrl: "https://github.com/example/project",
+      workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+      projectBrainStatus: "pending",
     });
     expect(createdProject.createdAt).toEqual(expect.any(String));
     expect(await getServerProjectById("project-1")).toEqual(createdProject);
@@ -214,5 +229,29 @@ describe("project server local fallback", () => {
 
     await expect(getServerProjectById("project-1")).resolves.toBeNull();
     expect(queryMock).toHaveBeenCalledTimes(3);
+  });
+
+  it("throws a clear error when the working directory cannot be created", async () => {
+    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
+
+    mkdirMock.mockRejectedValueOnce(new Error("permission denied"));
+    const queryMock = vi.fn();
+
+    neonMock.mockReturnValue({
+      query: queryMock,
+    });
+
+    const { createServerProject } = await loadServerModule();
+
+    await expect(
+      createServerProject({
+        id: "project-1",
+        name: "Alpha",
+      }),
+    ).rejects.toMatchObject({
+      code: "working-directory-create-failed",
+    });
+
+    expect(queryMock).not.toHaveBeenCalled();
   });
 });

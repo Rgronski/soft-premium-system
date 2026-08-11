@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation
+MS-013.2 - Project Creation Readiness Gate Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
@@ -70,7 +70,11 @@ MS-012.5 is now the completed controlled execution contract foundation; the repo
 
 MS-012.6 is now the completed verification contract foundation; the repository records the verification boundary before the readiness gate.
 
-MS-012.7 is PUBLISHED / CLOSED in the current local workspace as the Parallel Project Work Track First Readiness Gate Foundation; the repository now records the readiness boundary for the parallel work track while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+MS-013.1 is PUBLISHED / CLOSED in the current local workspace as the Project Working Directory Creation Prompt Implementation Foundation; the repository now asks for and stores an intended working-directory value before new project creation completes, supports the default local workspace root `C:\SPS_OS_WORK\<project-slug>`, and keeps `repositoryUrl` and other source metadata separate from the local working copy path while physical folder creation remains pending.
+
+MS-013.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Creation Readiness Gate Foundation; the repository now creates the selected or default local working directory during new project creation, keeps `projectBrainStatus` explicit, shows the pending readiness state when Project Brain is unavailable, and does not present a false-ready project when the runtime context is missing.
+
+MS-013.0 is PUBLISHED / CLOSED in the current local workspace as the Project Working Directory Creation Prompt Foundation; the repository now records the pre-implementation contract boundary for the working-directory decision and keeps the default local workspace root `C:\SPS_OS_WORK\<project-slug>` reserved for the future implementation boundary.
 
 MS-012.8 is PUBLISHED / CLOSED in the current local workspace as the Parallel Project Work Track First Functional Handoff Foundation; the repository now records the visible handoff boundary across the existing project, task list, task detail, and task workspace surfaces while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 

@@ -1,7 +1,10 @@
 "use client";
 
 import { SectionCard } from "@/components/ui/SectionCard";
-import { createProject } from "@/lib/project/project";
+import {
+  buildDefaultWorkingDirectory,
+  createProject,
+} from "@/lib/project/project";
 import type { Project } from "@/lib/project/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -16,18 +19,41 @@ function isProject(value: unknown): value is Project {
   );
 }
 
+function getCreateProjectErrorMessage(
+  responseStatus: number,
+  errorBody: unknown,
+): string {
+  if (
+    typeof errorBody === "object" &&
+    errorBody !== null &&
+    "status" in errorBody &&
+    (errorBody as { status?: unknown }).status ===
+      "working-directory-create-failed"
+  ) {
+    return "Nie udało się utworzyć katalogu roboczego projektu. Sprawdź uprawnienia i spróbuj ponownie.";
+  }
+
+  return `Project create request failed with ${responseStatus}`;
+}
+
 export default function ProjectsPage() {
   const router = useRouter();
   const [projectName, setProjectName] = useState("");
   const [repositoryUrl, setRepositoryUrl] = useState("");
+  const [workingDirectory, setWorkingDirectory] = useState(
+    () => buildDefaultWorkingDirectory(""),
+  );
+  const [workingDirectoryManuallyEdited, setWorkingDirectoryManuallyEdited] =
+    useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   async function handleCreateProject() {
     const trimmedProjectName = projectName.trim();
     const trimmedRepositoryUrl = repositoryUrl.trim();
+    const trimmedWorkingDirectory = workingDirectory.trim();
 
-    if (!trimmedProjectName || isSubmitting) {
+    if (!trimmedProjectName || !trimmedWorkingDirectory || isSubmitting) {
       return;
     }
 
@@ -50,12 +76,23 @@ export default function ProjectsPage() {
                   repositoryUrl: trimmedRepositoryUrl,
                 }
               : {}),
+            workingDirectory: trimmedWorkingDirectory,
           }),
         },
       );
 
       if (!response.ok) {
-        throw new Error(`Project create request failed with ${response.status}`);
+        let errorBody: unknown = null;
+
+        try {
+          errorBody = await response.json();
+        } catch {
+          errorBody = null;
+        }
+
+        throw new Error(
+          getCreateProjectErrorMessage(response.status, errorBody),
+        );
       }
 
       const createdProject = await response.json();
@@ -68,9 +105,12 @@ export default function ProjectsPage() {
         createdProject.name,
         createdProject.id,
         createdProject.repositoryUrl,
+        trimmedWorkingDirectory,
       );
       setProjectName("");
       setRepositoryUrl("");
+      setWorkingDirectory(buildDefaultWorkingDirectory(""));
+      setWorkingDirectoryManuallyEdited(false);
       router.push(`/projects/${createdProject.id}`);
     } catch {
       setErrorMessage("Nie udało się utworzyć projektu. Spróbuj ponownie.");
@@ -109,7 +149,16 @@ export default function ProjectsPage() {
             <input
               type="text"
               value={projectName}
-              onChange={(e) => setProjectName(e.target.value)}
+              onChange={(e) => {
+                const nextProjectName = e.target.value;
+                setProjectName(nextProjectName);
+
+                if (!workingDirectoryManuallyEdited) {
+                  setWorkingDirectory(
+                    buildDefaultWorkingDirectory(nextProjectName),
+                  );
+                }
+              }}
               placeholder="My First Project"
               className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 outline-none focus:border-zinc-500"
             />
@@ -127,6 +176,27 @@ export default function ProjectsPage() {
               placeholder="https://github.com/example/project"
               className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 outline-none focus:border-zinc-500"
             />
+          </label>
+
+          <label className="mt-4 block">
+            <span className="mb-2 block text-sm text-zinc-400">
+              Working Directory
+            </span>
+
+            <input
+              type="text"
+              value={workingDirectory}
+              onChange={(e) => {
+                setWorkingDirectoryManuallyEdited(true);
+                setWorkingDirectory(e.target.value);
+              }}
+              placeholder="C:\\SPS_OS_WORK\\my-project"
+              className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 outline-none focus:border-zinc-500"
+            />
+
+            <p className="mt-2 text-xs text-zinc-500">
+              SPS-owned local path. Repository metadata stays separate.
+            </p>
           </label>
 
           <button

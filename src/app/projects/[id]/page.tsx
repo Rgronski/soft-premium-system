@@ -111,6 +111,8 @@ export default function ProjectWorkspacePage() {
   const [canonicalTasks, setCanonicalTasks] = useState<
     ProjectWorkspaceEntry["workspace"]["tasks"] | null
   >(null);
+  const localProject = getProjectById(params.id);
+  const projectBrainStatus = localProject?.projectBrainStatus ?? "pending";
   const dashboard = useMemo<DashboardSnapshot>(() => {
     if (typeof window === "undefined") {
       return {
@@ -236,6 +238,17 @@ export default function ProjectWorkspacePage() {
     <WorkspaceLayout>
       {!dashboard.isLoaded ? null : dashboard.workspaceEntry ? (
         <WorkspaceContent>
+          {projectBrainStatus !== "available" ? (
+            <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 text-amber-100">
+              <p className="text-xs uppercase tracking-[0.2em] text-amber-200/80">
+                Project Readiness
+              </p>
+              <p className="mt-2 text-sm">
+                Project Brain is {projectBrainStatus}. This project is not ready
+                for production use yet.
+              </p>
+            </div>
+          ) : null}
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
               Guided Flow

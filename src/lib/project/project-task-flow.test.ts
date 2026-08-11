@@ -2,7 +2,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
+const mkdirMock = vi.fn();
 const neonMock = vi.fn();
+
+vi.mock("node:fs/promises", () => ({
+  mkdir: mkdirMock,
+}));
 
 vi.mock("@neondatabase/serverless", () => ({
   neon: neonMock,
@@ -136,6 +141,7 @@ async function loadModules() {
 beforeEach(() => {
   process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
   neonMock.mockReset();
+  mkdirMock.mockReset();
   vi.useFakeTimers();
   vi.setSystemTime(new Date("2026-08-03T20:00:00.000Z"));
   vi.stubGlobal("crypto", {
@@ -165,6 +171,7 @@ describe("project-to-task server flow", () => {
     neonMock.mockReturnValue({
       query: queryMock,
     });
+    mkdirMock.mockResolvedValueOnce(undefined);
 
     const {
       createServerProject,

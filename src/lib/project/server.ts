@@ -1,8 +1,26 @@
 import "server-only";
 
+import { mkdir } from "node:fs/promises";
 import { neon } from "@neondatabase/serverless";
 
+import { buildDefaultWorkingDirectory } from "./project";
 import type { Project } from "./types";
+
+type ProjectCreationErrorCode = "working-directory-create-failed";
+
+type ProjectCreationError = Error & {
+  code: ProjectCreationErrorCode;
+};
+
+function isProjectCreationError(
+  value: unknown,
+): value is ProjectCreationError {
+  return (
+    value instanceof Error &&
+    "code" in value &&
+    (value as { code?: string }).code === "working-directory-create-failed"
+  );
+}
 
 type ProjectRow = {
   id: string;
@@ -46,6 +64,29 @@ function mapProjectRow(row: ProjectRow): Project {
 
 function normalizeProjectId(id: string): string {
   return id.trim();
+}
+
+function normalizeProjectWorkingDirectory(
+  workingDirectory: string | undefined,
+  projectName: string,
+): string {
+  const normalizedWorkingDirectory = workingDirectory?.trim();
+
+  return normalizedWorkingDirectory || buildDefaultWorkingDirectory(projectName);
+}
+
+async function ensureProjectWorkingDirectory(
+  workingDirectory: string,
+): Promise<void> {
+  try {
+    await mkdir(workingDirectory, { recursive: true });
+  } catch {
+    const error = new Error(
+      "Project server repository could not create the working directory.",
+    ) as ProjectCreationError;
+    error.code = "working-directory-create-failed";
+    throw error;
+  }
 }
 
 function getLocalProjectById(id: string): Project | null {
@@ -97,10 +138,15 @@ export async function createServerProject(input: {
   id: string;
   name: string;
   repositoryUrl?: string;
+  workingDirectory?: string;
 }): Promise<Project> {
   const normalizedId = input.id.trim();
   const normalizedName = input.name.trim();
   const normalizedRepositoryUrl = input.repositoryUrl?.trim();
+  const normalizedWorkingDirectory = normalizeProjectWorkingDirectory(
+    input.workingDirectory,
+    normalizedName,
+  );
 
   if (!normalizedId) {
     throw new Error("Project server repository requires a non-empty id.");
@@ -115,10 +161,14 @@ export async function createServerProject(input: {
     id: normalizedId,
     name: normalizedName,
     ...(normalizedRepositoryUrl ? { repositoryUrl: normalizedRepositoryUrl } : {}),
+    workingDirectory: normalizedWorkingDirectory,
+    projectBrainStatus: "pending",
     createdAt,
   };
 
   try {
+    await ensureProjectWorkingDirectory(normalizedWorkingDirectory);
+
     const sql = neon(getDatabaseUrl());
     const rows = (await sql.query(INSERT_PROJECT, [
       normalizedId,
@@ -132,8 +182,16 @@ export async function createServerProject(input: {
       return storeLocalProject(fallbackProject);
     }
 
-    return storeLocalProject(mapProjectRow(row));
-  } catch {
+    return storeLocalProject({
+      ...mapProjectRow(row),
+      workingDirectory: normalizedWorkingDirectory,
+      projectBrainStatus: "pending",
+    });
+  } catch (error) {
+    if (isProjectCreationError(error)) {
+      throw error;
+    }
+
     return storeLocalProject(fallbackProject);
   }
 }
