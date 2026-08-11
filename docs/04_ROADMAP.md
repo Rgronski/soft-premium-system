@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-013.4 - AI Workspace Project Access Boundary Alignment Foundation
+MS-013.5 - Task Intake Project Access Boundary Alignment Foundation
 
 ## Next
 
@@ -11895,6 +11895,93 @@ COMPLETED / VERIFIED / PUBLISHED / CLOSED
 * `git branch --show-current`
 * `git status -sb`
 * `npm.cmd test -- src/lib/project-brain/browser.test.ts`
+* `npm.cmd test`
+* `npm.cmd run lint`
+* `npm.cmd run build`
+* `git diff --check`
+* `git diff --stat`
+* `git status -sb`
+
+**Rollback / Safety Expectations**
+* if the contract needs revision, update only the SSOT docs that define the milestone boundary and keep `Current Product Milestone` at `NONE` until a separate Product Owner decision is recorded
+
+## MS-013.5 - Task Intake Project Access Boundary Alignment Foundation
+
+**Milestone**
+MS-013.5 - Task Intake Project Access Boundary Alignment Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Align the task API/project access boundary with Overview and AI Workspace so task list and task creation recognize the same existing project boundary.
+
+**Product Outcome**
+The task API now operates on task storage for the route project id instead of blocking on a server-side project lookup, so a real project that Overview and AI can resolve is no longer rejected as missing by the task API.
+
+**Dependencies**
+* closed `MS-013.4 - AI Workspace Project Access Boundary Alignment Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/task/http-server.ts` now serves task GET and POST directly from the task storage boundary instead of returning `project-not-found` when the server-side project lookup misses
+* `src/lib/task/http-server.test.ts` now verifies that task GET continues for a missing project boundary and task POST no longer depends on the project lookup
+* `src/lib/project-brain/browser.ts` and `src/app/projects/[id]/ai/page.tsx` remain unchanged by this milestone
+* `npm.cmd test -- src/lib/task/http-server.test.ts` passed
+* `npm.cmd test` passed with `30 / 30` files and `381 / 381` tests
+* `npm.cmd run build` passed
+* `npm.cmd run lint` still reports the known unrelated `react-hooks/set-state-in-effect` issue in `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx:324`
+
+**Allowed Implementation Scope**
+* task API route/project lookup boundary
+* task storage access boundary
+* focused tests
+* SSOT synchronization
+
+**Forbidden Scope**
+* changing AI Workspace behavior
+* changing Project Brain readiness logic
+* broad task workspace refactor
+* unrelated lint fixes
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `.usage/session.jsonl` own the synchronized SSOT snapshot for this milestone
+* any future task workspace redesign must wait for a separate Product Owner-approved milestone
+
+**Verification Plan**
+* `git branch --show-current`
+* `git status -sb`
+* `npm.cmd test -- src/lib/task/http-server.test.ts`
 * `npm.cmd test`
 * `npm.cmd run lint`
 * `npm.cmd run build`

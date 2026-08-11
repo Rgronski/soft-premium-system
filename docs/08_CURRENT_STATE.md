@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-013.4 - AI Workspace Project Access Boundary Alignment Foundation
+MS-013.5 - Task Intake Project Access Boundary Alignment Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
@@ -77,6 +77,8 @@ MS-013.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 MS-013.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Readiness / Workflow Health Status Alignment Foundation; the repository now keeps the dashboard workflow health aligned with explicit project readiness so a pending Project Brain state does not look fully ready while tasks remain usable.
 
 MS-013.4 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Workspace Project Access Boundary Alignment Foundation; the repository now makes the AI Workspace resolve the same existing project boundary as Overview and Tasks by falling back to the local project context when the server-backed project lookup misses.
+
+MS-013.5 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Task Intake Project Access Boundary Alignment Foundation; the repository now lets task GET and POST operate directly on task storage for the route project id instead of returning `project-not-found` when the server-side project lookup misses.
 
 MS-013.0 is PUBLISHED / CLOSED in the current local workspace as the Project Working Directory Creation Prompt Foundation; the repository now records the pre-implementation contract boundary for the working-directory decision and keeps the default local workspace root `C:\SPS_OS_WORK\<project-slug>` reserved for the future implementation boundary.
 
