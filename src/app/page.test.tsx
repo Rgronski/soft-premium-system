@@ -97,6 +97,10 @@ describe("Home", () => {
   test("empty state CTA points to project creation with a matching label", () => {
     render(<Home />);
 
+    expect(screen.getByText("Create your first project")).toBeTruthy();
+    expect(
+      screen.getByText("Create the first project to begin the primary flow."),
+    ).toBeTruthy();
     expect(
       screen.getByRole("link", { name: "Create Project" }).getAttribute("href"),
     ).toBe("/projects");

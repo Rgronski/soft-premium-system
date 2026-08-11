@@ -128,7 +128,7 @@ describe("ProjectTasksPage", () => {
     render(<ProjectTasksPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("No tasks yet")).toBeTruthy();
+      expect(screen.getByText("This project has no tasks yet. Create the first task to continue.")).toBeTruthy();
     });
   });
 
@@ -194,11 +194,11 @@ describe("ProjectTasksPage", () => {
     render(<ProjectTasksPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("No tasks yet")).toBeTruthy();
+      expect(screen.getByText("This project has no tasks yet. Create the first task to continue.")).toBeTruthy();
     });
 
     const input = screen.getByPlaceholderText("Task title") as HTMLInputElement;
-    const button = screen.getByRole("button", { name: "Add" });
+    const button = screen.getByRole("button", { name: "Add task" });
 
     fireEvent.change(input, {
       target: { value: "  First task  " },
@@ -242,11 +242,11 @@ describe("ProjectTasksPage", () => {
     render(<ProjectTasksPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("No tasks yet")).toBeTruthy();
+      expect(screen.getByText("This project has no tasks yet. Create the first task to continue.")).toBeTruthy();
     });
 
     const input = screen.getByPlaceholderText("Task title") as HTMLInputElement;
-    const button = screen.getByRole("button", { name: "Add" });
+    const button = screen.getByRole("button", { name: "Add task" });
 
     fireEvent.change(input, {
       target: { value: "   " },
@@ -268,11 +268,11 @@ describe("ProjectTasksPage", () => {
     render(<ProjectTasksPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("No tasks yet")).toBeTruthy();
+      expect(screen.getByText("This project has no tasks yet. Create the first task to continue.")).toBeTruthy();
     });
 
     const input = screen.getByPlaceholderText("Task title") as HTMLInputElement;
-    const button = screen.getByRole("button", { name: "Add" });
+    const button = screen.getByRole("button", { name: "Add task" });
 
     fireEvent.change(input, { target: { value: "First task" } });
     fireEvent.click(button);
@@ -296,13 +296,13 @@ describe("ProjectTasksPage", () => {
     render(<ProjectTasksPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("No tasks yet")).toBeTruthy();
+      expect(screen.getByText("This project has no tasks yet. Create the first task to continue.")).toBeTruthy();
     });
 
     fireEvent.change(screen.getByPlaceholderText("Task title"), {
       target: { value: "First task" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Add" }));
+    fireEvent.click(screen.getByRole("button", { name: "Add task" }));
 
     await waitFor(() => {
       expect(screen.getByText("Projekt nie istnieje.")).toBeTruthy();
@@ -317,13 +317,13 @@ describe("ProjectTasksPage", () => {
     const { rerender } = render(<ProjectTasksPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("No tasks yet")).toBeTruthy();
+      expect(screen.getByText("This project has no tasks yet. Create the first task to continue.")).toBeTruthy();
     });
 
     fireEvent.change(screen.getByPlaceholderText("Task title"), {
       target: { value: "First task" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Add" }));
+    fireEvent.click(screen.getByRole("button", { name: "Add task" }));
 
     await waitFor(() => {
       expect(createTaskOnServerMock).toHaveBeenCalledTimes(1);
@@ -339,7 +339,7 @@ describe("ProjectTasksPage", () => {
     expect(getTasksFromServerMock.mock.calls[1]?.[0]).toBe("project-2");
 
     await waitFor(() => {
-      expect(screen.getByText("No tasks yet")).toBeTruthy();
+      expect(screen.getByText("This project has no tasks yet. Create the first task to continue.")).toBeTruthy();
     });
 
     fireEvent.change(screen.getByPlaceholderText("Task title"), {
@@ -348,7 +348,7 @@ describe("ProjectTasksPage", () => {
 
     await waitFor(() => {
       expect(
-        (screen.getByRole("button", { name: "Add" }) as HTMLButtonElement)
+        (screen.getByRole("button", { name: "Add task" }) as HTMLButtonElement)
           .disabled,
       ).toBe(false);
     });

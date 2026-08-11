@@ -9,10 +9,17 @@ import { useState } from "react";
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>(() => getProjects());
   const latestProject = projects[projects.length - 1] ?? null;
+  const hasProjects = projects.length > 0;
   const continueHref = latestProject
     ? `/projects/${latestProject.id}`
     : "/projects";
   const continueLabel = latestProject ? "Continue" : "Create Project";
+  const primarySectionTitle = hasProjects
+    ? "Continue working"
+    : "Create your first project";
+  const primarySectionDescription = hasProjects
+    ? "Resume the active foundation sprint."
+    : "Create the first project to begin the primary flow.";
 
   async function handleDeleteProject(project: Project) {
     const confirmed = window.confirm(
@@ -55,9 +62,9 @@ export default function Home() {
         <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
           <div className="mb-6 flex items-start justify-between gap-4">
             <div>
-              <h2 className="text-lg font-semibold">Continue working</h2>
+              <h2 className="text-lg font-semibold">{primarySectionTitle}</h2>
               <p className="mt-1 text-sm text-zinc-400">
-                Resume the active foundation sprint.
+                {primarySectionDescription}
               </p>
             </div>
 
