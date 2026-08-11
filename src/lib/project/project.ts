@@ -41,6 +41,7 @@ export function createProject(
     name,
     ...(normalizedRepositoryUrl ? { repositoryUrl: normalizedRepositoryUrl } : {}),
     workingDirectory: normalizedWorkingDirectory,
+    projectBrainStatus: "pending",
     createdAt: new Date().toISOString(),
   };
 

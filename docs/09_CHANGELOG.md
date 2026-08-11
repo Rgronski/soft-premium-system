@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 071 - MS-013.2 project creation readiness gate SSOT sync
+
+### Date
+
+2026-08-11
+
+### Completed
+
+* Implemented `MS-013.2 - Project Creation Readiness Gate Foundation` on `main`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-013.2` as the latest completed milestone while keeping `Current Product Milestone` at `NONE`.
+* Kept `repositoryUrl` separate from the SPS-owned local working-directory path and preserved the default `C:\SPS_OS_WORK\<project-slug>` workspace root.
+* Recorded the Session 071 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* The readiness gate now blocks false-ready project completion when the working directory is missing or Project Brain is still pending.
+* Task fallback behavior was left explicit and deferred to a later milestone.
+
 ## Session 071 - MS-013.1 project working directory creation prompt implementation SSOT sync
 
 ### Date

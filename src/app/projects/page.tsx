@@ -19,6 +19,23 @@ function isProject(value: unknown): value is Project {
   );
 }
 
+function getCreateProjectErrorMessage(
+  responseStatus: number,
+  errorBody: unknown,
+): string {
+  if (
+    typeof errorBody === "object" &&
+    errorBody !== null &&
+    "status" in errorBody &&
+    (errorBody as { status?: unknown }).status ===
+      "working-directory-create-failed"
+  ) {
+    return "Nie udało się utworzyć katalogu roboczego projektu. Sprawdź uprawnienia i spróbuj ponownie.";
+  }
+
+  return `Project create request failed with ${responseStatus}`;
+}
+
 export default function ProjectsPage() {
   const router = useRouter();
   const [projectName, setProjectName] = useState("");
@@ -65,7 +82,17 @@ export default function ProjectsPage() {
       );
 
       if (!response.ok) {
-        throw new Error(`Project create request failed with ${response.status}`);
+        let errorBody: unknown = null;
+
+        try {
+          errorBody = await response.json();
+        } catch {
+          errorBody = null;
+        }
+
+        throw new Error(
+          getCreateProjectErrorMessage(response.status, errorBody),
+        );
       }
 
       const createdProject = await response.json();

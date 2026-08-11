@@ -15,15 +15,22 @@ type PostProjectHttpHandler = (
 
 type TransportErrorResponse =
   | {
+      status: "invalid-request";
+    }
+  | {
       status: "project-not-found";
     }
   | {
       status: "context-unavailable";
+    }
+  | {
+      status: "working-directory-create-failed";
     };
 
 type TransportProjectCreateBody = {
   name: string;
   repositoryUrl?: string;
+  workingDirectory?: string;
 };
 
 function isPlainObject(
@@ -60,7 +67,9 @@ async function readTransportCreateBody(
   if (
     !isPlainObject(body) ||
     typeof body.name !== "string" ||
-    (body.repositoryUrl !== undefined && typeof body.repositoryUrl !== "string")
+    (body.repositoryUrl !== undefined && typeof body.repositoryUrl !== "string") ||
+    (body.workingDirectory !== undefined &&
+      typeof body.workingDirectory !== "string")
   ) {
     return {
       ok: false,
@@ -70,6 +79,10 @@ async function readTransportCreateBody(
   const name = body.name.trim();
   const repositoryUrl =
     typeof body.repositoryUrl === "string" ? body.repositoryUrl.trim() : "";
+  const workingDirectory =
+    typeof body.workingDirectory === "string"
+      ? body.workingDirectory.trim()
+      : "";
 
   if (!name) {
     return {
@@ -82,6 +95,7 @@ async function readTransportCreateBody(
     body: {
       name,
       ...(repositoryUrl ? { repositoryUrl } : {}),
+      ...(workingDirectory ? { workingDirectory } : {}),
     },
   };
 }
@@ -145,12 +159,25 @@ export function createPostProjectRoute(deps: {
         id,
         name: transportBody.body.name,
         repositoryUrl: transportBody.body.repositoryUrl,
+        workingDirectory: transportBody.body.workingDirectory,
       });
 
       return Response.json(project satisfies Project, {
         status: 201,
       });
-    } catch {
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        "code" in error &&
+        (error as { code?: string }).code ===
+          "working-directory-create-failed"
+      ) {
+        return createTransportErrorResponse(
+          "working-directory-create-failed",
+          500,
+        );
+      }
+
       return createTransportErrorResponse("context-unavailable", 503);
     }
   };

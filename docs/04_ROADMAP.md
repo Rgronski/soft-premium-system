@@ -111,11 +111,11 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation
+MS-013.2 - Project Creation Readiness Gate Foundation
 
 ## Next
 
-MS-013.1 - Project Working Directory Creation Prompt Implementation Foundation
+NONE / Product Owner decision required
 
 ## MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation
 
@@ -11633,6 +11633,93 @@ COMPLETED / VERIFIED / PUBLISHED / CLOSED
 * `git status -sb`
 * `npm.cmd test -- src/lib/project/project.test.ts src/app/projects/page.test.tsx`
 * `npm.cmd test -- --runInBand`
+* `npm.cmd run lint`
+* `npm.cmd run build`
+* `git diff --check`
+* `git diff --stat`
+* `git status -sb`
+
+**Rollback / Safety Expectations**
+* if the contract needs revision, update only the SSOT docs that define the milestone boundary and keep `Current Product Milestone` at `NONE` until a separate Product Owner decision is recorded
+
+## MS-013.2 - Project Creation Readiness Gate Foundation
+
+**Milestone**
+MS-013.2 - Project Creation Readiness Gate Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Add the minimum controlled readiness gate for project creation so SPS OS does not treat a project as ready unless the project metadata, local working directory, and Project Brain status are explicit.
+
+**Product Outcome**
+New project creation now creates the selected or default working directory, records an explicit `projectBrainStatus` state, and surfaces the non-ready state when Project Brain is unavailable instead of silently presenting a false-ready project.
+
+**Dependencies**
+* closed `MS-013.1 - Project Working Directory Creation Prompt Implementation Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/lib/project/server.ts` now creates the selected or default local working directory before persisting a new project record and raises a clear error when directory creation fails
+* `src/lib/project/http-server.ts` and `src/app/projects/page.tsx` now surface the working-directory failure path back to the project create flow
+* `src/lib/project/project.ts` and `src/app/projects/[id]/page.tsx` now keep `projectBrainStatus` explicit and show the pending readiness state when Project Brain is unavailable
+* `src/lib/project/project-task-flow.test.ts`, `src/lib/project/server.test.ts`, `src/lib/project/http-server.test.ts`, `src/lib/project/project.test.ts`, `src/app/projects/page.test.tsx`, and `src/app/projects/[id]/page.test.tsx` now cover the readiness-gate flow, failure path, and pending banner behavior
+* task storage fallback behavior was left explicit and deferred to a later milestone rather than being redesigned here
+
+**Allowed Implementation Scope**
+* project creation readiness gate
+* working directory physical creation
+* explicit Project Brain availability status
+* focused tests
+* SSOT synchronization
+
+**Forbidden Scope**
+* broad refactors
+* full Project Brain redesign
+* Git clone/init behavior
+* unrelated task workspace changes
+* unrelated lint/build fixes
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `.usage/session.jsonl` own the synchronized SSOT snapshot for this milestone
+* any future Project Brain initialization or task fallback redesign must wait for a separate Product Owner-approved milestone
+
+**Verification Plan**
+* `git branch --show-current`
+* `git status -sb`
+* `npm.cmd test -- src/lib/project/project.test.ts src/lib/project/server.test.ts src/lib/project/http-server.test.ts src/app/projects/page.test.tsx src/app/projects/[id]/page.test.tsx`
+* `npm.cmd test`
 * `npm.cmd run lint`
 * `npm.cmd run build`
 * `git diff --check`

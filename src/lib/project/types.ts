@@ -3,5 +3,6 @@ export type Project = {
   name: string;
   repositoryUrl?: string;
   workingDirectory?: string;
+  projectBrainStatus?: "available" | "pending" | "failed";
   createdAt: string;
 };
