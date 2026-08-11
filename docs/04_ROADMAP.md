@@ -117,6 +117,64 @@ MS-015.0 - First Real User Flow Polish Foundation
 
 NONE / Product Owner decision required
 
+## MS-015.0 - First Real User Flow Polish Foundation
+
+**Milestone**
+MS-015.0 - First Real User Flow Polish Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Make the first real SPS user journey feel coherent end to end using the existing application surfaces and mechanics.
+
+**Product Outcome**
+The primary happy path now reads coherently across Home, Create Project, Open Project, Task List, Task Detail, Task Workspace, Save Result, Acknowledge Review, Complete Task, and Copy Handoff without adding new routes or storage changes.
+
+**Dependencies**
+* closed `MS-014.0 - Application Metadata and Locale Stabilization Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/app/page.tsx`
+* `src/app/projects/[id]/tasks/page.tsx`
+* `src/app/projects/[id]/tasks/[taskId]/page.tsx`
+
+**Blockers**
+NONE
+
+**Next Safe Step**
+None.
+
 ## MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation
 
 **Milestone**
