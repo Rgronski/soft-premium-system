@@ -115,7 +115,7 @@ MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foun
 
 ## Next
 
-NONE / Product Owner decision required
+MS-013.0 - Project Working Directory Creation Prompt Foundation
 
 ## MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation
 
@@ -11474,6 +11474,89 @@ NONE
 
 **Next Safe Step**
 None.
+
+## MS-013.0 - Project Working Directory Creation Prompt Foundation
+
+**Milestone**
+MS-013.0 - Project Working Directory Creation Prompt Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the first controlled boundary for project working-directory creation during new project intake so the repository can require an explicit local working-directory decision before project setup is considered complete.
+
+**Product Outcome**
+The repository now records the working-directory decision boundary for new project creation, supports the default local workspace root `C:\SPS_OS_WORK\<project-slug>` as the SPS-owned local working copy path, and keeps `repositoryUrl` and other source metadata separate from the local working copy location without implementing directory creation yet.
+
+**Dependencies**
+* closed `MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `docs/04_ROADMAP.md` now records the MS-013.0 working-directory decision boundary
+* `docs/08_CURRENT_STATE.md` now records MS-013.0 as the next controlled milestone
+* `docs/09_CHANGELOG.md` now records the MS-013.0 publication sync
+* `docs/10_SESSION_STATE.md` now records the Session 071 operational snapshot
+* `.usage/session.jsonl` now records the Session 071 contract publication usage entry
+* no product code changed
+
+**Allowed Implementation Scope**
+* docs-only contract publication
+* SSOT synchronization
+* publication metadata
+* history recording for the completed contract milestone
+
+**Forbidden Scope**
+* `src` changes
+* working-directory creation implementation
+* UI changes
+* route changes
+* product code changes
+* broad refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `.usage/session.jsonl` own the synchronized SSOT snapshot for this docs-only milestone
+* any future implementation must stay inside the approved working-directory creation boundary and outside product code until a separate Product Owner-approved implementation milestone exists
+
+**Verification Plan**
+* `git status -sb`
+* `git diff --check`
+* `git diff -- docs/04_ROADMAP.md docs/08_CURRENT_STATE.md docs/09_CHANGELOG.md docs/10_SESSION_STATE.md .usage/session.jsonl`
+* confirm no product code files changed
+
+**Rollback / Safety Expectations**
+* if the contract needs revision, update only the SSOT docs that define the milestone boundary and keep `Current Product Milestone` at `NONE` until a separate Product Owner decision is recorded
 
 ---
 

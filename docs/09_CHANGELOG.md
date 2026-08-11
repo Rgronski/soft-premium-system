@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 071 - MS-013.0 project working directory creation prompt SSOT sync
+
+### Date
+
+2026-08-11
+
+### Completed
+
+* Published `MS-013.0 - Project Working Directory Creation Prompt Foundation` as the next controlled continuation after `MS-012.10`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-013.0` as the next controlled milestone while keeping `Current Product Milestone` at `NONE`.
+* Recorded the Session 071 usage entry in `.usage/session.jsonl`.
+
+### Notes
+
+* No product code changed during the SSOT publication.
+* The working-directory creation implementation remains pending.
+
 ## Session 070 - Session close synchronization and handoff
 
 ### Date
