@@ -74,11 +74,11 @@ describe("createProject", () => {
       "C:\\SPS_OS_WORK\\alpha-project",
     );
     expect(project.workingDirectory).toBe("C:\\SPS_OS_WORK\\alpha-project");
-    expect(project.projectBrainStatus).toBe("pending");
+    expect(project.projectBrainStatus).toBe("available");
     expect(savedProjects[0].workingDirectory).toBe(
       "C:\\SPS_OS_WORK\\alpha-project",
     );
-    expect(savedProjects[0].projectBrainStatus).toBe("pending");
+    expect(savedProjects[0].projectBrainStatus).toBe("available");
   });
 
   test("deletes a project from the stored project list", () => {

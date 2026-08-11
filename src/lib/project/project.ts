@@ -12,6 +12,10 @@ export function buildDefaultWorkingDirectory(projectName: string): string {
   return `C:\\SPS_OS_WORK\\${slug || "project"}`;
 }
 
+function determineProjectBrainStatus(workingDirectory: string): "available" | "pending" {
+  return workingDirectory.trim().length > 0 ? "available" : "pending";
+}
+
 export function getProjects(): Project[] {
   if (typeof window === "undefined") {
     return [];
@@ -41,7 +45,7 @@ export function createProject(
     name,
     ...(normalizedRepositoryUrl ? { repositoryUrl: normalizedRepositoryUrl } : {}),
     workingDirectory: normalizedWorkingDirectory,
-    projectBrainStatus: "pending",
+    projectBrainStatus: determineProjectBrainStatus(normalizedWorkingDirectory),
     createdAt: new Date().toISOString(),
   };
 
