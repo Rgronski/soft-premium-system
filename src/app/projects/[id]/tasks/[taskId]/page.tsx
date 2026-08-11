@@ -151,13 +151,13 @@ export default function ProjectTaskDetailPage() {
       <div className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-            Task Workspace
+            Task Detail
           </p>
           <h2 className="text-2xl font-semibold text-zinc-50">
-            Start task workspace
+            Current task review
           </h2>
           <p className="text-sm text-zinc-400">
-            Open the task workspace start surface for the current project task.
+            Review the current task before moving into the workspace.
           </p>
         </div>
 
@@ -202,7 +202,7 @@ export default function ProjectTaskDetailPage() {
               href={`/projects/${projectId}/tasks/${taskId}/workspace`}
               className="inline-flex items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
             >
-              Open task workspace
+              Start task workspace
             </Link>
           </div>
 

@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-013.5 - Task Intake Project Access Boundary Alignment Foundation
+MS-015.0 - First Real User Flow Polish Foundation
 
 ## Next
 
@@ -3371,7 +3371,7 @@ The repository now records the next smallest application-state discovery boundar
 
 **Implementation Evidence**
 * `docs/04_ROADMAP.md` now records the MS-008.6 discovery contract while preserving the MS-008.5 latest completed milestone baseline.
-* `docs/08_CURRENT_STATE.md` keeps `Latest Completed Product Milestone` at `MS-008.21 - Task Workspace Next Product Step Foundation`.
+ * `docs/08_CURRENT_STATE.md` keeps `Latest Completed Product Milestone` at `MS-014.0 - Application Metadata and Locale Stabilization Foundation`.
 * `docs/09_CHANGELOG.md` now records the published discovery milestone in the official history.
 * no application code, UI, route, persistence, or product behavior changed.
 
@@ -11986,6 +11986,88 @@ COMPLETED / VERIFIED / PUBLISHED / CLOSED
 * `npm.cmd run lint`
 * `npm.cmd run build`
 * `git diff --check`
+
+---
+
+## MS-014.0 - Application Metadata and Locale Stabilization Foundation
+
+**Milestone**
+MS-014.0 - Application Metadata and Locale Stabilization Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Replace the template-default app metadata and align the root document language with the Polish-heavy UI without changing product flows.
+
+**Product Outcome**
+The app root layout now publishes product-aligned metadata and uses `pl` as the document language, removing the default Next template title and description from the root response while leaving product flows unchanged.
+
+**Dependencies**
+* closed `MS-013.5 - Task Intake Project Access Boundary Alignment Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/app/layout.tsx` now sets the root metadata title to `Soft Premium System` and the description to `SPS OS workspace for project and task operations.`
+* `src/app/layout.tsx` now sets the document language to `pl`
+* `npm.cmd run test -- src/app/page.test.tsx src/app/projects/page.test.tsx` passed
+* `npm.cmd run test` passed
+* the live root response no longer exposed `Create Next App` metadata and returned `<html lang="pl">`
+* `git diff --check` passed
+
+**Allowed Implementation Scope**
+* root layout metadata
+* root document language
+* focused tests
+* SSOT synchronization
+
+**Forbidden Scope**
+* product-flow changes
+* route behavior changes
+* broad refactor
+* unrelated file edits
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/10_SESSION_STATE.md`, and `.usage/session.jsonl` own the synchronized SSOT snapshot for this milestone
+* any future product-flow change must wait for a separate Product Owner-approved milestone
+
+**Verification Plan**
+* `git branch --show-current`
+* `git status -sb`
+* `npm.cmd run test -- src/app/page.test.tsx src/app/projects/page.test.tsx`
+* `npm.cmd run test`
+* `git diff --check`
+* live root response check
 * `git diff --stat`
 * `git status -sb`
 

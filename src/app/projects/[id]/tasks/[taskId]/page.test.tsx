@@ -83,10 +83,11 @@ describe("ProjectTaskDetailPage", () => {
     expect(getTasksFromServerMock).toHaveBeenCalledWith("project-1");
     expect(screen.getByText("Journey Checkpoint")).toBeTruthy();
     expect(screen.getByText("You are at Task Detail. Next open the task workspace, then follow the result sequence in order.")).toBeTruthy();
+    expect(screen.getByText("Task Detail", { selector: "p" })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Current task review" })).toBeTruthy();
     expect(screen.getByText("Start task workspace")).toBeTruthy();
-    expect(screen.getByText("Open task workspace")).toBeTruthy();
     expect(
-      screen.getByRole("link", { name: "Open task workspace" }).getAttribute("href"),
+      screen.getByRole("link", { name: "Start task workspace" }).getAttribute("href"),
     ).toBe("/projects/project-1/tasks/task-1/workspace");
     expect(screen.getByText("task-1")).toBeTruthy();
     expect(screen.getByText("project-1")).toBeTruthy();

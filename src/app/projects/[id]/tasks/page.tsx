@@ -238,7 +238,7 @@ export default function ProjectTasksPage() {
               disabled={isSubmitting || isLoading}
               className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-200 transition-colors hover:border-zinc-700 hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isSubmitting ? "Zapisywanie..." : "Add"}
+              {isSubmitting ? "Zapisywanie..." : "Add task"}
             </button>
           </form>
         </div>
@@ -249,7 +249,9 @@ export default function ProjectTasksPage() {
           ) : errorMessage ? (
             <p className="text-sm text-zinc-400">{errorMessage}</p>
           ) : tasks.length === 0 ? (
-            <p className="text-sm text-zinc-400">No tasks yet</p>
+            <p className="text-sm text-zinc-400">
+              This project has no tasks yet. Create the first task to continue.
+            </p>
           ) : (
             <div className="space-y-3">
               {tasks.map((task) => (
