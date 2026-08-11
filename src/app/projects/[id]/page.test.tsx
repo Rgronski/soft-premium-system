@@ -271,6 +271,7 @@ describe("ProjectWorkspacePage", () => {
         "Project Brain is pending. This project is not ready for production use yet.",
       ),
     ).toBeTruthy();
+    expect(screen.getByText("warning")).toBeTruthy();
   });
 
   test("confirms delete, removes the project, and redirects home", async () => {

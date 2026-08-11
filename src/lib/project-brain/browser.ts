@@ -6,6 +6,7 @@ import { getTasksFromServer } from "../task/browser-server";
 import type { Task } from "../task/types";
 
 import {
+  getAiProjectContext,
   aiProjectContextFromSnapshot,
   composeProjectBrainSnapshot,
 } from "./engine";
@@ -48,8 +49,14 @@ export function createGetBrowserAiProjectContext(
     }
 
     if (!project) {
+      const localContext = getAiProjectContext(projectId);
+
+      if (localContext.status === "available") {
+        return localContext;
+      }
+
       return {
-        status: "project-not-found",
+        status: localContext.status,
       };
     }
 
