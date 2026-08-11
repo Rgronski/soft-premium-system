@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 073 - MS-015.0 primary flow copy polish SSOT sync
+
+### Date
+
+2026-08-11
+
+### Completed
+
+* Implemented `MS-015.0 - First Real User Flow Polish Foundation` on `main`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-015.0` as the latest completed milestone while keeping `Current Product Milestone` at `NONE`.
+* Kept the primary happy path limited to copy and label polish across Home, Task List, Task Detail, and Task Workspace.
+* Recorded the Session 073 verification as `PASS` and the push of commit `74b5427c563b79890a1ba50e01af2ffa41591105`.
+
+### Notes
+
+* No blocker was found in the final primary happy-path verification.
+* `Next Product Milestone` remains `NONE / Product Owner decision required`.
+
 ## Session 071 - MS-013.5 task intake project access boundary alignment SSOT sync
 
 ### Date

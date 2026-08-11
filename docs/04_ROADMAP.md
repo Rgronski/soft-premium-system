@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-014.0 - Application Metadata and Locale Stabilization Foundation
+MS-015.0 - First Real User Flow Polish Foundation
 
 ## Next
 

@@ -45,12 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-014.0 - Application Metadata and Locale Stabilization Foundation
+MS-015.0 - First Real User Flow Polish Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-014.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Application Metadata and Locale Stabilization Foundation; the repository now serves product-aligned metadata from the root layout and uses `pl` as the document language while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
+MS-015.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the First Real User Flow Polish Foundation; the repository now records the primary happy-path copy and label polish across Home, Task List, Task Detail, and Task Workspace while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 
 MS-010.4 is PUBLISHED / CLOSED in the current local workspace as the SPS OS First Usable Flow Post-Copy Guidance Foundation; the repository now shows `Next action: Copy handoff.` and the copied handoff now tells the user it can be pasted into the next session, consolidating the earlier MS-010.2 save-review guidance and MS-010.3 post-completion copy guidance refinements while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 

@@ -214,27 +214,27 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-11
-Current Session ID: 072
-Current Chat Title: 072 SPS OS - Session 072 continuation
-Next Session ID: 073
-Suggested Next Chat Title: 073 SPS OS - Post Session 072 Integrity Check
-Active Capability: NONE
-Active Work Item: NONE
-Current Mode: CLOSED
-Completed Capability Items: Session 072 implemented the MS-014.0 metadata and locale stabilization fix in src/app/layout.tsx; Session 072 synchronized the roadmap, current state, session state, handoff, and usage log for MS-014.0; Session 072 recorded the Session 072 usage entry; Session 072 committed and pushed the stabilization fix; Session 072 generated the fresh session package; Session 072 completed the Session 072 close protocol; Session 072 created the Session 072 handoff
+Current Session ID: 073
+Current Chat Title: 073 SPS OS - MS-015.0 SSOT completion sync
+Next Session ID: UNKNOWN
+Suggested Next Chat Title: UNKNOWN
+Active Capability: SSOT synchronization
+Active Work Item: Mark MS-015.0 completed in SSOT
+Current Mode: ACTIVE
+Completed Capability Items: Session 073 verified the primary happy path as PASS; Session 073 committed and pushed the MS-015.0 primary flow copy polish patch; Session 073 synchronized the SSOT for MS-015.0 completion
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-014.0 - Application Metadata and Locale Stabilization Foundation
+Latest Completed Product Milestone: MS-015.0 - First Real User Flow Polish Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 072 completed the Session 072 close protocol
+Latest Completed Capability Item: Session 073 synchronized the SSOT for MS-015.0 completion
 Current Sprint: NONE
-Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, and MS-014.0 immutable while finalizing the Session 072 close on main without adding product-flow changes.
+Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, and MS-015.0 immutable while keeping Session 073 focused on SSOT completion sync only.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 31e797a
+Latest Verified Commit: 74b5427c563b79890a1ba50e01af2ffa41591105
 Verification Status: PASS
 Blockers: NONE
-Open Risks: Project Brain initialization and task fallback redesign remain future milestones.
-Next Safe Step: Start Session 073 with the fresh session package and perform the post-session 072 integrity check.
-Next Session Plan: Start Session 073 with the fresh session package, verify package consistency, and perform the post-session 072 integrity check before any new milestone is discussed.
+Open Risks: Product Owner still needs to decide the next milestone after MS-015.0.
+Next Safe Step: Commit the SSOT sync if the working tree remains clean after verification.
+Next Session Plan: Await Product Owner decision for the next milestone after MS-015.0.
