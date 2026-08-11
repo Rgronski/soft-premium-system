@@ -115,7 +115,7 @@ MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foun
 
 ## Next
 
-MS-013.0 - Project Working Directory Creation Prompt Foundation
+MS-013.1 - Project Working Directory Creation Prompt Implementation Foundation
 
 ## MS-012.10 - Parallel Project Work Track Workspace Continuation Verification Foundation
 
@@ -11554,6 +11554,90 @@ COMPLETED / VERIFIED / PUBLISHED / CLOSED
 * `git diff --check`
 * `git diff -- docs/04_ROADMAP.md docs/08_CURRENT_STATE.md docs/09_CHANGELOG.md docs/10_SESSION_STATE.md .usage/session.jsonl`
 * confirm no product code files changed
+
+**Rollback / Safety Expectations**
+* if the contract needs revision, update only the SSOT docs that define the milestone boundary and keep `Current Product Milestone` at `NONE` until a separate Product Owner decision is recorded
+
+## MS-013.1 - Project Working Directory Creation Prompt Implementation Foundation
+
+**Milestone**
+MS-013.1 - Project Working Directory Creation Prompt Implementation Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Implement the first controlled project working-directory decision prompt in the new project creation flow so setup cannot complete without an intended local working-directory value.
+
+**Product Outcome**
+The new project flow now records an explicit working-directory decision, shows the default intended local workspace root `C:\SPS_OS_WORK\<project-slug>`, and stores that intended local working copy path separately from `repositoryUrl` or other source metadata without creating the physical folder yet.
+
+**Dependencies**
+* closed `MS-013.0 - Project Working Directory Creation Prompt Foundation`
+
+**Product Owner Decision**
+ACCEPT
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Implementation Evidence**
+* `src/app/projects/page.tsx` now asks for an intended working directory and sends it with the project create request
+* `src/lib/project/project.ts` now stores the intended working directory in the local project record and falls back to the default `C:\SPS_OS_WORK\<project-slug>` path
+* `src/app/projects/page.test.tsx` now verifies the default local workspace path and the create-request payload
+* `src/lib/project/project.test.ts` now verifies the default working-directory storage behavior
+* no physical folder creation was added in this milestone
+
+**Allowed Implementation Scope**
+* docs-only contract publication
+* SSOT synchronization
+* local project record persistence for the intended working directory
+* project creation prompt behavior
+
+**Forbidden Scope**
+* physical filesystem folder creation
+* unrelated UI redesign
+* unrelated project/task/workspace behavior changes
+* broad refactors
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, `docs/10_SESSION_STATE.md`, and `.usage/session.jsonl` own the synchronized SSOT snapshot for this milestone
+* any future physical folder creation work must wait for a separate Product Owner-approved implementation milestone
+
+**Verification Plan**
+* `git status -sb`
+* `npm.cmd test -- src/lib/project/project.test.ts src/app/projects/page.test.tsx`
+* `npm.cmd test -- --runInBand`
+* `npm.cmd run lint`
+* `npm.cmd run build`
+* `git diff --check`
+* `git diff --stat`
+* `git status -sb`
 
 **Rollback / Safety Expectations**
 * if the contract needs revision, update only the SSOT docs that define the milestone boundary and keep `Current Product Milestone` at `NONE` until a separate Product Owner decision is recorded

@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 071 - MS-013.0 project working directory creation prompt SSOT sync
+## Session 071 - MS-013.1 project working directory creation prompt implementation SSOT sync
 
 ### Date
 
@@ -77,14 +77,15 @@ Each release entry should contain:
 
 ### Completed
 
-* Published `MS-013.0 - Project Working Directory Creation Prompt Foundation` as the next controlled continuation after `MS-012.10`.
-* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-013.0` as the next controlled milestone while keeping `Current Product Milestone` at `NONE`.
+* Implemented `MS-013.1 - Project Working Directory Creation Prompt Implementation Foundation` on `main`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-013.1` as the latest completed milestone while keeping `Current Product Milestone` at `NONE`.
+* Preserved `MS-013.0 - Project Working Directory Creation Prompt Foundation` as the pre-implementation contract boundary.
 * Recorded the Session 071 usage entry in `.usage/session.jsonl`.
 
 ### Notes
 
-* No product code changed during the SSOT publication.
-* The working-directory creation implementation remains pending.
+* No physical folder creation was added in this milestone.
+* The working-directory decision prompt is limited to the intended path and local project record.
 
 ## Session 070 - Session close synchronization and handoff
 
