@@ -236,5 +236,5 @@ Latest Verified Commit: a9cd53b
 Verification Status: PASS
 Blockers: NONE
 Open Risks: Product Owner still needs to decide the next milestone after MS-015.0.
-Next Safe Step: Start Session 074 with the fresh sps-session.zip package on the live verification branch and await Product Owner decision for the next milestone.
+Next Safe Step: Start Session 074 with the fresh session package on the live verification branch and await Product Owner decision for the next milestone.
 Next Session Plan: Await Product Owner decision for the next milestone after MS-015.0.
