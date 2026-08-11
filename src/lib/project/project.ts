@@ -16,6 +16,37 @@ function determineProjectBrainStatus(workingDirectory: string): "available" | "p
   return workingDirectory.trim().length > 0 ? "available" : "pending";
 }
 
+function canRepairProjectBrainStatus(project: Project): boolean {
+  return (
+    project.projectBrainStatus === "pending" &&
+    typeof project.workingDirectory === "string" &&
+    project.workingDirectory.trim().length > 0
+  );
+}
+
+function persistProjects(projects: Project[]): void {
+  localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(projects));
+}
+
+function repairProjectBrainStatus(project: Project): Project {
+  if (!canRepairProjectBrainStatus(project)) {
+    return project;
+  }
+
+  const repairedProject: Project = {
+    ...project,
+    projectBrainStatus: "available",
+  };
+  const projects = getProjects();
+  const updatedProjects = projects.map((savedProject) =>
+    savedProject.id === project.id ? repairedProject : savedProject,
+  );
+
+  persistProjects(updatedProjects);
+
+  return repairedProject;
+}
+
 export function getProjects(): Project[] {
   if (typeof window === "undefined") {
     return [];
@@ -27,8 +58,9 @@ export function getProjects(): Project[] {
 
 export function getProjectById(id: string): Project | null {
   const projects = getProjects();
+  const project = projects.find((savedProject) => savedProject.id === id) ?? null;
 
-  return projects.find((project) => project.id === id) ?? null;
+  return project ? repairProjectBrainStatus(project) : null;
 }
 
 export function createProject(
