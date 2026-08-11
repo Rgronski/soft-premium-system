@@ -94,6 +94,14 @@ describe("Home", () => {
     ).toBe("/projects/project-2");
   });
 
+  test("empty state CTA points to project creation with a matching label", () => {
+    render(<Home />);
+
+    expect(
+      screen.getByRole("link", { name: "Create Project" }).getAttribute("href"),
+    ).toBe("/projects");
+  });
+
   test("keeps the project when deletion is cancelled", () => {
     confirmSpy.mockReturnValue(false);
     localStorage.setItem(
