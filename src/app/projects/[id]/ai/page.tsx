@@ -1,6 +1,7 @@
 "use client";
 
 import { getBrowserAiProjectContext } from "@/lib/project-brain/browser";
+import { createKnowledgeEntry } from "@/lib/knowledge/knowledge";
 import {
   buildGenerationInstruction,
   type ContextUiState,
@@ -383,6 +384,53 @@ export default function ProjectAiWorkspacePage() {
 
         response = await postKnowledge();
         result = (await response.json()) as KnowledgeSaveResponse;
+      }
+
+      if (
+        response.status === 404 &&
+        "status" in result &&
+        result.status === "project-not-found"
+      ) {
+        const localKnowledgeEntry = createKnowledgeEntry(
+          projectId,
+          title,
+          generatedContent,
+        );
+
+        if (localKnowledgeEntry) {
+          if (currentProjectIdRef.current !== projectId) {
+            return;
+          }
+
+          setSaveUiState(
+            deriveSaveSuccessState(projectId, latestExchange, title),
+          );
+          try {
+            const contextResult = await getBrowserAiProjectContext(projectId);
+
+            if (currentProjectIdRef.current !== projectId) {
+              return;
+            }
+
+            if (contextResult.status === "available") {
+              setContextState(deriveContextLoadState(projectId, contextResult));
+              return;
+            }
+
+            setSaveUiState(
+              deriveSaveRefreshWarningState(projectId, latestExchange, title),
+            );
+          } catch {
+            if (currentProjectIdRef.current !== projectId) {
+              return;
+            }
+
+            setSaveUiState(
+              deriveSaveRefreshWarningState(projectId, latestExchange, title),
+            );
+          }
+          return;
+        }
       }
 
       if (response.status === 201 && isSavedKnowledgeEntry(result)) {

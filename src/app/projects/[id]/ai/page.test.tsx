@@ -11,6 +11,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 const useParamsMock = vi.fn(() => ({ id: "project-1" }));
 const getBrowserAiProjectContextMock = vi.fn();
+const createKnowledgeEntryMock = vi.fn();
 const fetchMock = vi.fn<typeof fetch>();
 const clipboardWriteTextMock = vi.fn<(text: string) => Promise<void>>();
 
@@ -21,6 +22,11 @@ vi.mock("next/navigation", () => ({
 vi.mock("@/lib/project-brain/browser", () => ({
   getBrowserAiProjectContext: (projectId: string) =>
     getBrowserAiProjectContextMock(projectId),
+}));
+
+vi.mock("@/lib/knowledge/knowledge", () => ({
+  createKnowledgeEntry: (...args: unknown[]) =>
+    createKnowledgeEntryMock(...args),
 }));
 
 import ProjectAiWorkspacePage from "./page";
@@ -45,6 +51,7 @@ describe("ProjectAiWorkspacePage", () => {
   beforeEach(() => {
     useParamsMock.mockReturnValue({ id: "project-1" });
     getBrowserAiProjectContextMock.mockReset();
+    createKnowledgeEntryMock.mockReset();
     fetchMock.mockReset();
     clipboardWriteTextMock.mockReset();
     vi.stubGlobal("fetch", fetchMock);
@@ -1957,15 +1964,38 @@ describe("ProjectAiWorkspacePage", () => {
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
-  test("renders a controlled save error for project-not-found and a network error for rejected save requests", async () => {
-    getBrowserAiProjectContextMock.mockResolvedValue({
-      status: "available",
-      context: {
-        projectId: "project-1",
-        projectName: "Alpha",
-        tasks: [],
-        knowledgeEntries: [],
-      },
+  test("falls back to local knowledge storage when save retry still returns project-not-found", async () => {
+    getBrowserAiProjectContextMock
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [],
+        },
+      })
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [
+            {
+              id: "knowledge-1",
+              title: "Architecture note",
+              content: "Generated response",
+            },
+          ],
+        },
+      });
+    createKnowledgeEntryMock.mockReturnValue({
+      id: "knowledge-local-1",
+      projectId: "project-1",
+      title: "Architecture note",
+      content: "Generated response",
+      createdAt: "2026-08-12T10:00:00.000Z",
     });
     fetchMock
       .mockResolvedValueOnce(
@@ -1995,7 +2025,27 @@ describe("ProjectAiWorkspacePage", () => {
           },
         ),
       )
-      .mockRejectedValueOnce(new Error("network failed"));
+      .mockResolvedValueOnce(
+        new Response("{}", {
+          status: 201,
+          headers: {
+            "content-type": "application/json",
+          },
+        }),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "project-not-found",
+          }),
+          {
+            status: 404,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      );
 
     render(<ProjectAiWorkspacePage />);
 
@@ -2017,14 +2067,18 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
 
     await waitFor(() => {
-      expect(screen.getByText("Project not found.")).toBeTruthy();
+      expect(createKnowledgeEntryMock).toHaveBeenCalledWith(
+        "project-1",
+        "Architecture note",
+        "Generated response",
+      );
+      expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
+      expect(screen.getByText("Architecture note")).toBeTruthy();
     });
 
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
-
-    await waitFor(() => {
-      expect(screen.getByText("Knowledge save unavailable.")).toBeTruthy();
-    });
+    expect(screen.queryByText("Project not found.")).toBeNull();
+    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(2);
+    expect(fetchMock).toHaveBeenCalledTimes(4);
   });
 
   test("resets save state after a new generation and does not auto-save", async () => {
