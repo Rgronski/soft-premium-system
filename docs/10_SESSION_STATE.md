@@ -217,24 +217,24 @@ Date: 2026-08-12
 Current Session ID: 075
 Current Chat Title: 075 SPS OS - MS-017.2 Project Brain Knowledge Read Recovery Boundary Foundation
 Next Session ID: 076
-Suggested Next Chat Title: 076 SPS OS - MS-017.2 Knowledge Read Recovery Verification
-Active Capability: Project Brain knowledge read recovery boundary foundation
-Active Work Item: Diagnose the Knowledge page read path and publish the smallest safe recovery contract
+Suggested Next Chat Title: 076 SPS OS - Product Owner Decision
+Active Capability: NONE
+Active Work Item: NONE
 Current Mode: UNKNOWN
-Completed Capability Items: Session 075 published the MS-017.0 Project Brain knowledge intake contract; Session 075 published the MS-017.1 controlled write boundary contract; Session 075 confirmed the existing canonical knowledge write path is already present; Session 075 published the MS-017.2 read/recovery contract; Session 075 synchronized the roadmap, current state, changelog, and session state for MS-017.2
-Current Product Milestone: MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
-Latest Completed Product Milestone: MS-017.1 - Project Brain Knowledge Intake Controlled Write Boundary Foundation
+Completed Capability Items: Session 075 published the MS-017.0 Project Brain knowledge intake contract; Session 075 published the MS-017.1 controlled write boundary contract; Session 075 confirmed the existing canonical knowledge write path is already present; Session 075 published the MS-017.2 read/recovery contract; Session 075 completed the clean-browser live verification; Session 075 synchronized the roadmap, current state, changelog, session state, and handoff for close publication
+Current Product Milestone: NONE
+Latest Completed Product Milestone: MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 075 confirmed the existing Knowledge page fallback remains an explicit recovery path
+Latest Completed Capability Item: Session 075 completed MS-017.2 live verification and session close synchronization
 Current Sprint: NONE
-Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, and MS-017.2 immutable while keeping Session 075 focused on the smallest safe read/recovery diagnosis.
-Repository Branch: product-intake-beauty-client-pro
-Repository Working Tree State: DIRTY
+Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, and MS-017.2 immutable while keeping Session 075 ready for the next Product Owner decision.
+Repository Branch: main
+Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 3ec5087b172819d2733ffde93b23b298bc88f72d
+Latest Verified Commit: 959e356 fix: include local knowledge in browser context
 Verification Status: PASS
 Blockers: NONE
-Open Risks: The fallback remains intentionally available as a recovery path and should only be narrowed with an explicit Product Owner decision.
-Next Safe Step: Keep MS-017.2 published and only open a follow-up implementation pass if Product Owner later approves a narrow read/recovery patch.
-Next Session Plan: Keep MS-017.2 published and only open a follow-up implementation pass if Product Owner later approves a narrow read/recovery patch.
+Open Risks: NONE
+Next Safe Step: Start Session 076 with the fresh session package and await Product Owner decision for the next milestone.
+Next Session Plan: Start Session 076 with the fresh session package and await Product Owner decision for the next milestone.

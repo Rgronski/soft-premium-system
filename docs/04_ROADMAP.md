@@ -107,11 +107,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
+NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-017.1 - Project Brain Knowledge Intake Controlled Write Boundary Foundation
+MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
 
 ## Next
 
@@ -13919,10 +13919,13 @@ MS-017.1 - Project Brain Knowledge Intake Controlled Write Boundary Foundation
 Product Milestone
 
 **Contract Status**
-APPROVED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
-YES
+NO
+
+**Runtime Status**
+CLOSED
 
 **Owner**
 Product Owner

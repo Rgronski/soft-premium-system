@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 075 - Session close and MS-017.2 handoff synchronization
+
+### Date
+
+2026-08-12
+
+### Completed
+
+* Closed Session 075 after the MS-017.2 live verification passed on `main` at commit `959e356`.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-017.2` as the latest completed milestone and `Current Product Milestone` as `NONE`.
+* Restored the known EOL artefact in `src/app/projects/[id]/tasks/[taskId]/page.test.tsx` to keep the close tree clean without committing product work.
+* Appended the Session 075 close usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* No new product work was introduced during the close sync.
+* The next session remains pending Product Owner decision.
+
 ## Session 075 - MS-017.2 project brain knowledge read recovery contract SSOT sync
 
 ### Date

@@ -42,15 +42,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
+NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-017.1 - Project Brain Knowledge Intake Controlled Write Boundary Foundation
+MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-017.2 is the active controlled read/recovery boundary milestone for Project Brain knowledge visibility after save; the repository keeps the boundary narrow, explicitly allows the existing local fallback as a recovery path, and defers any runtime changes until a concrete read/recovery inconsistency is proven.
+MS-017.2 is the completed controlled read/recovery boundary milestone for Project Brain knowledge visibility after save; the repository kept the boundary narrow, explicitly allowed the existing local fallback as a recovery path, and now records the milestone as completed without adding new runtime changes.
 
 MS-017.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain Knowledge Intake Controlled Write Boundary Foundation; the repository now confirms the existing canonical knowledge save path already exists, keeps the write boundary narrow, and did not require a source patch during diagnosis.
 
@@ -286,7 +286,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-017.0 - Project Brain Knowledge Intake Foundation
+Latest Completed Product Milestone: MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
 Next Product Milestone: NONE / Product Owner decision required
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
@@ -1444,7 +1444,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-015.0 - First Real User Flow Polish Foundation`
+* `Latest Completed Product Milestone` is `MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
