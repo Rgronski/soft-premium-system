@@ -1682,6 +1682,149 @@ describe("ProjectAiWorkspacePage", () => {
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
+  test("recovers a missing server project before retrying the knowledge save once", async () => {
+    getBrowserAiProjectContextMock
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [],
+        },
+      })
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [
+            {
+              id: "knowledge-1",
+              title: "Architecture note",
+              content: "Generated response",
+            },
+          ],
+        },
+      });
+    fetchMock
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "generated",
+            content: "Generated response",
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            status: "project-not-found",
+          }),
+          {
+            status: 404,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            id: "project-1",
+            name: "Alpha",
+          }),
+          {
+            status: 201,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            id: "knowledge-1",
+            projectId: "project-1",
+            title: "Architecture note",
+            content: "Generated response",
+            createdAt: "2026-07-25T09:00:00.000Z",
+          }),
+          {
+            status: 201,
+            headers: {
+              "content-type": "application/json",
+            },
+          },
+        ),
+      );
+
+    render(<ProjectAiWorkspacePage />);
+
+    const instructionField = await screen.findByRole("textbox", {
+      name: "Instruction",
+    });
+    fireEvent.change(instructionField, {
+      target: { value: "Summarize project" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Generated response")).toBeTruthy();
+    });
+
+    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+      target: { value: "Architecture note" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
+      expect(screen.getByText("Architecture note")).toBeTruthy();
+    });
+
+    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(2);
+    expect(fetchMock).toHaveBeenCalledTimes(4);
+    expect(fetchMock).toHaveBeenNthCalledWith(2, "/api/projects/project-1/knowledge", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        title: "Architecture note",
+        content: "Generated response",
+      }),
+    });
+    expect(fetchMock).toHaveBeenNthCalledWith(3, "/api/projects/project-1", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "Alpha",
+      }),
+    });
+    expect(fetchMock).toHaveBeenNthCalledWith(4, "/api/projects/project-1/knowledge", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        title: "Architecture note",
+        content: "Generated response",
+      }),
+    });
+  });
+
   test("stale knowledge refresh from the previous project does not overwrite the current project", async () => {
     const refreshDeferred = createDeferred<{
       status: "available";

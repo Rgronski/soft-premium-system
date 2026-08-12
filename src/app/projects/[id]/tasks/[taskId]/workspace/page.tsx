@@ -7,6 +7,8 @@ import {
 } from "@/lib/project-brain/engine";
 import { getProjectFromServer } from "@/lib/project/browser-server";
 import { getTasksFromServer, TaskServerError } from "@/lib/task/browser-server";
+import { getProjectById } from "@/lib/project/project";
+import { getTask } from "@/lib/task/task";
 import type { Task } from "@/lib/task/types";
 import type { WorkflowNextStep } from "@/lib/workflow/types";
 import { useParams } from "next/navigation";
@@ -35,7 +37,33 @@ type TaskWorkspaceState = {
   task: Task | null;
   isLoading: boolean;
   errorMessage: string | null;
+  recoveryMessage: string | null;
 };
+
+function createLocalRecoveryTask(
+  projectId: string,
+  taskId: string,
+): { task: Task; recoveryMessage: string } | null {
+  try {
+    if (!getProjectById(projectId)) {
+      return null;
+    }
+
+    const localTask = getTask(projectId, taskId);
+
+    if (!localTask) {
+      return null;
+    }
+
+    return {
+      task: localTask,
+      recoveryMessage:
+        "Project Brain context is unavailable, so showing locally saved task workspace details for this project.",
+    };
+  } catch {
+    return null;
+  }
+}
 
 type TaskResultSaveState = "idle" | "saved";
 type TaskCompletionState = "idle" | "completed";
@@ -128,6 +156,7 @@ export default function ProjectTaskWorkspacePage() {
     task: null,
     isLoading: true,
     errorMessage: null,
+    recoveryMessage: null,
   });
   const [resultNotes, setResultNotes] = useState("");
   const [resultSaveState, setResultSaveState] =
@@ -282,11 +311,12 @@ export default function ProjectTaskWorkspacePage() {
     let ignore = false;
 
     async function loadTask() {
-      setState({
-        task: null,
-        isLoading: true,
-        errorMessage: null,
-      });
+        setState({
+          task: null,
+          isLoading: true,
+          errorMessage: null,
+          recoveryMessage: null,
+        });
 
       try {
         const loadedTasks = await getTasksFromServer(projectId);
@@ -299,9 +329,27 @@ export default function ProjectTaskWorkspacePage() {
           task: loadedTasks.find((task) => task.id === taskId) ?? null,
           isLoading: false,
           errorMessage: null,
+          recoveryMessage: null,
         });
       } catch (error) {
         if (ignore) {
+          return;
+        }
+
+        const errorCode = error instanceof TaskServerError ? error.code : null;
+        const recoveryTask =
+          errorCode === "project-not-found" ||
+          errorCode === "context-unavailable"
+            ? createLocalRecoveryTask(projectId, taskId)
+            : null;
+
+        if (recoveryTask) {
+          setState({
+            task: recoveryTask.task,
+            isLoading: false,
+            errorMessage: null,
+            recoveryMessage: recoveryTask.recoveryMessage,
+          });
           return;
         }
 
@@ -309,6 +357,7 @@ export default function ProjectTaskWorkspacePage() {
           task: null,
           isLoading: false,
           errorMessage: getTaskWorkspaceErrorMessage(error),
+          recoveryMessage: null,
         });
       }
     }
@@ -432,6 +481,12 @@ export default function ProjectTaskWorkspacePage() {
         </div>
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+          {state.recoveryMessage ? (
+            <div className="mb-4 rounded-xl border border-amber-900/50 bg-amber-950/30 p-4">
+              <p className="text-sm text-amber-200">{state.recoveryMessage}</p>
+            </div>
+          ) : null}
+
           {taskWorkspaceNextStep ? (
             <div className="mb-4 rounded-xl border border-zinc-800 bg-zinc-900 p-4">
               <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">

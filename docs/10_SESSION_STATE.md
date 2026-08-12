@@ -213,28 +213,28 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-08-11
-Current Session ID: 074
-Current Chat Title: 074 SPS OS - MS-016.2 Project Brain Status Verification UX Foundation
-Next Session ID: 075
-Suggested Next Chat Title: 075 SPS OS - Product Owner Decision
-Active Capability: Project Brain status verification UX foundation
-Active Work Item: Close the MS-016.2 SSOT and package alignment
-Current Mode: CLOSED
-Completed Capability Items: Session 074 confirmed available Project Brain state hides the pending warning; Session 074 confirmed pending and corrupt states still warn; Session 074 synchronized the roadmap, current state, session state, handoff, and usage log for MS-016.2; Session 074 merged main into product-intake-beauty-client-pro and pushed the merge commit; Session 074 recorded the Session 074 usage entry; Session 074 completed the Session 074 close protocol; Session 074 created the Session 074 handoff
-Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-015.0 - First Real User Flow Polish Foundation
+Date: 2026-08-12
+Current Session ID: 075
+Current Chat Title: 075 SPS OS - MS-017.2 Project Brain Knowledge Read Recovery Boundary Foundation
+Next Session ID: 076
+Suggested Next Chat Title: 076 SPS OS - MS-017.2 Knowledge Read Recovery Verification
+Active Capability: Project Brain knowledge read recovery boundary foundation
+Active Work Item: Diagnose the Knowledge page read path and publish the smallest safe recovery contract
+Current Mode: UNKNOWN
+Completed Capability Items: Session 075 published the MS-017.0 Project Brain knowledge intake contract; Session 075 published the MS-017.1 controlled write boundary contract; Session 075 confirmed the existing canonical knowledge write path is already present; Session 075 published the MS-017.2 read/recovery contract; Session 075 synchronized the roadmap, current state, changelog, and session state for MS-017.2
+Current Product Milestone: MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
+Latest Completed Product Milestone: MS-017.1 - Project Brain Knowledge Intake Controlled Write Boundary Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 074 confirmed the Project Brain status verification UX boundary
+Latest Completed Capability Item: Session 075 confirmed the existing Knowledge page fallback remains an explicit recovery path
 Current Sprint: NONE
-Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, and MS-016.2 immutable while keeping Session 074 focused on close-state verification only.
+Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, and MS-017.2 immutable while keeping Session 075 focused on the smallest safe read/recovery diagnosis.
 Repository Branch: product-intake-beauty-client-pro
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: cd2a977f094add5bdcd39a4a73e7a04bdb890969
+Latest Verified Commit: 3ec5087b172819d2733ffde93b23b298bc88f72d
 Verification Status: PASS
 Blockers: NONE
-Open Risks: Product Owner still needs to decide the next milestone after MS-016.x.
-Next Safe Step: Start Session 075 with the fresh session package and await Product Owner decision for the next milestone.
-Next Session Plan: Start Session 075 with the fresh session package and await Product Owner decision for the next milestone.
+Open Risks: The fallback remains intentionally available as a recovery path and should only be narrowed with an explicit Product Owner decision.
+Next Safe Step: Keep MS-017.2 published and only open a follow-up implementation pass if Product Owner later approves a narrow read/recovery patch.
+Next Session Plan: Keep MS-017.2 published and only open a follow-up implementation pass if Product Owner later approves a narrow read/recovery patch.

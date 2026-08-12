@@ -42,13 +42,19 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE
+MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
 
 **Latest Completed Milestone**
-MS-016.2 - Project Brain Status Verification UX Foundation
+MS-017.1 - Project Brain Knowledge Intake Controlled Write Boundary Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-017.2 is the active controlled read/recovery boundary milestone for Project Brain knowledge visibility after save; the repository keeps the boundary narrow, explicitly allows the existing local fallback as a recovery path, and defers any runtime changes until a concrete read/recovery inconsistency is proven.
+
+MS-017.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain Knowledge Intake Controlled Write Boundary Foundation; the repository now confirms the existing canonical knowledge save path already exists, keeps the write boundary narrow, and did not require a source patch during diagnosis.
+
+MS-017.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain Knowledge Intake Foundation; the repository now records the smallest controlled Project Brain knowledge intake contract boundary as a docs-only publication, keeps knowledge intake read-only in this milestone, and does not add new runtime behavior.
 
 MS-016.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain Existing Project Status Repair Foundation; the repository now repairs eligible legacy projects from `pending` to `available` when they already have a persisted working directory and project record, while preserving `pending` / warning behavior when the data is missing or corrupted.
 
@@ -280,7 +286,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-015.0 - First Real User Flow Polish Foundation
+Latest Completed Product Milestone: MS-017.0 - Project Brain Knowledge Intake Foundation
 Next Product Milestone: NONE / Product Owner decision required
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE

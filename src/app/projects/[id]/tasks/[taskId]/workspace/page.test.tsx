@@ -8,12 +8,25 @@ import {
   waitFor,
 } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
+import { createProject } from "@/lib/project/project";
 
 const useParamsMock = vi.fn(() => ({ id: "project-1", taskId: "task-1" }));
 const getProjectWorkspaceEntryMock = vi.fn();
 const getProjectFromServerMock = vi.fn();
 const getTasksFromServerMock = vi.fn();
 const writeTextMock = vi.fn();
+const { TaskServerErrorMock } = vi.hoisted(() => ({
+  TaskServerErrorMock: class TaskServerErrorMock extends Error {
+    readonly code: string;
+    readonly status?: number;
+
+    constructor(code: string, status?: number) {
+      super(code);
+      this.code = code;
+      this.status = status;
+    }
+  },
+}));
 
 vi.mock("next/navigation", () => ({
   useParams: () => useParamsMock(),
@@ -30,16 +43,7 @@ vi.mock("@/lib/project/browser-server", () => ({
 }));
 
 vi.mock("@/lib/task/browser-server", () => ({
-  TaskServerError: class TaskServerError extends Error {
-    readonly code: string;
-    readonly status?: number;
-
-    constructor(code: string, status?: number) {
-      super(code);
-      this.code = code;
-      this.status = status;
-    }
-  },
+  TaskServerError: TaskServerErrorMock,
   getTasksFromServer: (projectId: string) =>
     getTasksFromServerMock(projectId),
 }));
@@ -382,11 +386,11 @@ describe("ProjectTaskWorkspacePage", () => {
     const detailRender = render(<ProjectTaskDetailPage />);
 
     await waitFor(() => {
-      expect(screen.getByRole("link", { name: "Open task workspace" })).toBeTruthy();
+      expect(screen.getByRole("link", { name: "Start task workspace" })).toBeTruthy();
     });
 
     expect(
-      screen.getByRole("link", { name: "Open task workspace" }).getAttribute("href"),
+      screen.getByRole("link", { name: "Start task workspace" }).getAttribute("href"),
     ).toBe("/projects/project-1/tasks/task-1/workspace");
 
     detailRender.unmount();
@@ -483,5 +487,40 @@ describe("ProjectTaskWorkspacePage", () => {
         "Continue the active workflow item before starting new work.",
       ),
     ).toBeTruthy();
+  });
+
+  test("recovers the task workspace from local task state when the canonical server project is missing", async () => {
+    createProject("Project Alpha", "project-1");
+    localStorage.setItem(
+      "soft-premium-system.projects.project-1.tasks",
+      JSON.stringify([
+        {
+          id: "task-1",
+          projectId: "project-1",
+          title: "First task",
+          createdAt: "2026-07-23T10:00:00.000Z",
+        },
+      ]),
+    );
+    getProjectWorkspaceEntryMock.mockReturnValueOnce(null);
+    getProjectFromServerMock.mockResolvedValueOnce(null);
+    getTasksFromServerMock.mockRejectedValueOnce(
+      new TaskServerErrorMock("project-not-found"),
+    );
+
+    render(<ProjectTaskWorkspacePage />);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(
+          "Project Brain context is unavailable, so showing locally saved task workspace details for this project.",
+        ),
+      ).toBeTruthy();
+    });
+
+    expect(screen.getByText("First task")).toBeTruthy();
+    expect(screen.getByText("task-1")).toBeTruthy();
+    expect(screen.getByText("project-1")).toBeTruthy();
+    expect(screen.queryByText("Projekt nie istnieje.")).toBeNull();
   });
 });

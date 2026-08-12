@@ -69,6 +69,44 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 075 - MS-017.2 project brain knowledge read recovery contract SSOT sync
+
+### Date
+
+2026-08-12
+
+### Completed
+
+* Published `MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation` as a docs-only Project Brain knowledge read/recovery contract milestone.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-017.2` as current while keeping `Latest Completed Product Milestone` at `MS-017.1`.
+* Appended the Session 075 usage entry to `.usage/session.jsonl`.
+* Kept Project Brain runtime behavior, knowledge storage, routes, and UI unchanged.
+* Confirmed the existing Knowledge page fallback remains an explicit recovery path, so no `src` change was required for this contract step.
+
+### Notes
+
+* The milestone remains a contract-only publication boundary.
+* The fallback is still allowed as a recovery path unless a separate Product Owner decision narrows it.
+
+## Session 075 - MS-017.0 project brain knowledge intake contract SSOT sync
+
+### Date
+
+2026-08-12
+
+### Completed
+
+* Published `MS-017.0 - Project Brain Knowledge Intake Foundation` as a docs-only Project Brain knowledge intake contract milestone.
+* Updated `docs/04_ROADMAP.md` and `docs/08_CURRENT_STATE.md` so the SSOT now records `MS-017.0` as the latest completed milestone while keeping `Current Product Milestone` at `NONE`.
+* Appended the Session 075 usage entry to `.usage/session.jsonl`.
+* Kept Project Brain runtime behavior, knowledge storage, routes, and UI unchanged.
+* Published `MS-017.1 - Project Brain Knowledge Intake Controlled Write Boundary Foundation` as the approved next controlled write boundary milestone and confirmed the existing canonical knowledge write path already exists, so no `src` changes were required for the contract step.
+
+### Notes
+
+* The milestone remains a contract-only publication boundary.
+* `Next Product Milestone` remains `NONE / Product Owner decision required`.
+
 ## Session 073 - MS-015.0 primary flow copy polish SSOT sync
 
 ### Date

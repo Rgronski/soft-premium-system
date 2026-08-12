@@ -107,11 +107,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE
+MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
 
 ## Latest Completed Product Milestone
 
-MS-015.0 - First Real User Flow Polish Foundation
+MS-017.1 - Project Brain Knowledge Intake Controlled Write Boundary Foundation
 
 ## Next
 
@@ -13844,6 +13844,191 @@ SPS OS 1.0 release progression requires:
 No milestone should be considered complete without contract closure and documentation synchronization.
 
 ---
+
+# MS-017.0 - Project Brain Knowledge Intake Foundation
+
+**Milestone**
+MS-017.0 - Project Brain Knowledge Intake Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Chief Architect
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the smallest controlled Project Brain knowledge intake boundary as a docs-only milestone without changing knowledge storage, knowledge creation, UI behavior, routes, or any existing Project Brain read/write mechanics.
+
+**Product Outcome**
+The repository now records one minimal Project Brain knowledge intake contract that keeps knowledge intake scope narrow, read-only for this milestone, and free of runtime behavior changes.
+
+**Dependencies**
+* closed `MS-016.2 - Project Brain Status Verification UX Foundation`
+
+**Allowed Implementation Scope**
+* docs-only product contract creation
+* SSOT synchronization
+* publication metadata
+* history recording for the completed contract milestone
+
+**Forbidden Scope**
+* `src` changes
+* UI changes
+* new routes
+* knowledge writes
+* Project Brain write-path changes
+* storage or persistence changes
+* broad refactors
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this docs-only milestone
+* `src/lib/project-brain` and the knowledge routes remain unchanged in this milestone
+* any future implementation must stay inside a separate Product Owner-approved milestone
+
+**Verification Plan**
+* `git status -sb`
+* `git branch --show-current`
+* `git log -1 --oneline`
+* `rg -n "MS-017.0|Project Brain|Knowledge Intake|knowledge intake" docs src`
+* `git diff --check`
+* confirm `Current Product Milestone`, `Latest Completed Product Milestone`, and `Next Product Milestone` agree across changed SSOT docs
+
+## MS-017.1 - Project Brain Knowledge Intake Controlled Write Boundary Foundation
+
+**Milestone**
+MS-017.1 - Project Brain Knowledge Intake Controlled Write Boundary Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+YES
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the smallest controlled write boundary for Project Brain knowledge intake on the existing canonical save flow, without adding new routes, UI redesign, dependency changes, or broad refactors.
+
+**Product Outcome**
+The repository now has one approved controlled write boundary contract for the existing AI Workspace save-to-Knowledge flow that keeps the existing `POST /api/projects/[id]/knowledge` path, the Project Brain read boundary, and the canonical knowledge write path aligned.
+
+**Dependencies**
+* closed `MS-017.0 - Project Brain Knowledge Intake Foundation`
+
+**Allowed Implementation Scope**
+* docs-only contract publication
+* diagnostic confirmation of the existing controlled write path
+* minimal write-path implementation only if the diagnosis proves a single safe boundary
+* focused tests for the directly touched path
+
+**Forbidden Scope**
+* new routes
+* UI redesign
+* dependency changes
+* broad refactors
+* bypassing Project Brain
+* introducing a second knowledge write boundary
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md` and `docs/09_CHANGELOG.md` own the milestone publication snapshot
+* `src/lib/knowledge/server.ts`, `src/lib/knowledge/knowledge.ts`, `src/lib/project-brain/engine.ts`, `src/lib/project-brain/server.ts`, and `src/lib/project-brain/browser.ts` are the only allowed implementation boundaries after diagnosis
+* any future expansion must stay outside new routes, UI redesign, dependency changes, and broad refactors
+
+**Verification Plan**
+* `git status -sb`
+* `rg -n "MS-017.1|knowledge intake|controlled write|POST /api/projects/.*/knowledge" docs src`
+* confirm the existing knowledge write path already uses the canonical save endpoint and Project Brain boundary
+* if implementation is needed, keep it inside the allowed implementation files only
+
+## MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
+
+**Milestone**
+MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+YES
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the smallest safe read/recovery boundary for Knowledge visibility after a canonical save, while keeping the existing local fallback explicitly allowed as a recovery path when Project Brain context is temporarily unavailable.
+
+**Product Outcome**
+The repository now records one minimal read/recovery contract for Knowledge visibility after save, keeps the canonical Project Brain read boundary intact, and does not change the POST/write path.
+
+**Dependencies**
+* closed `MS-017.1 - Project Brain Knowledge Intake Controlled Write Boundary Foundation`
+
+**Allowed Implementation Scope**
+* docs-only contract publication
+* diagnosis of the current Knowledge page read path
+* diagnosis of the local fallback in `src/lib/knowledge/knowledge.ts`
+* explicit allowance or narrowing of the fallback as a recovery path
+* minimal `src` patch only if diagnosis proves one concrete read/recovery inconsistency
+* focused tests for the directly touched path
+
+**Forbidden Scope**
+* `POST` / write-path changes
+* new routes
+* UI redesign
+* dependency changes
+* broad Project Brain refactors
+* removing the fallback without a confirmed Product Owner decision
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this docs-only milestone
+* `src/app/projects/[id]/knowledge/page.tsx` and `src/lib/knowledge/knowledge.ts` are the only allowed implementation boundaries if a future patch is approved
+* the existing canonical knowledge write boundary remains unchanged
+
+**Verification Plan**
+* `git status -sb`
+* `rg -n "MS-017.2|knowledge read recovery|local fallback|Knowledge page" docs src`
+* confirm the Knowledge page still shows saved knowledge after a successful save
+* confirm the fallback behavior is explicitly documented as allowed recovery, or narrowed only by an approved future decision
 
 # Future Expansion
 

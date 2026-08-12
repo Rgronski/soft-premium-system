@@ -38,6 +38,49 @@ import {
 import { useParams } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
+type KnowledgeSaveResponse =
+  | {
+      id: string;
+      projectId: string;
+      title: string;
+      content: string;
+      createdAt: string;
+    }
+  | { status: string };
+
+function isSavedKnowledgeEntry(
+  value: KnowledgeSaveResponse,
+): value is Extract<KnowledgeSaveResponse, { id: string }> {
+  return (
+    "id" in value &&
+    "projectId" in value &&
+    "title" in value &&
+    "content" in value &&
+    "createdAt" in value
+  );
+}
+
+async function recoverProjectForKnowledgeSave(
+  projectId: string,
+  projectName: string,
+): Promise<boolean> {
+  try {
+    const response = await fetch(`/api/projects/${projectId}`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name: projectName,
+      }),
+    });
+
+    return response.status === 201;
+  } catch {
+    return false;
+  }
+}
+
 export default function ProjectAiWorkspacePage() {
   const params = useParams<{ id: string }>();
   const currentProjectIdRef = useRef(params.id);
@@ -313,35 +356,40 @@ export default function ProjectAiWorkspacePage() {
     setSaveUiState(deriveSaveSavingState(projectId, latestExchange, title));
 
     try {
-      const response = await fetch(`/api/projects/${projectId}/knowledge`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          title,
-          content: generatedContent,
-        }),
-      });
+      const postKnowledge = async () =>
+        fetch(`/api/projects/${projectId}/knowledge`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            content: generatedContent,
+          }),
+        });
 
-      const result = (await response.json()) as
-        | {
-            id: string;
-            projectId: string;
-            title: string;
-            content: string;
-            createdAt: string;
-          }
-        | { status: string };
+      let response = await postKnowledge();
+      let result = (await response.json()) as KnowledgeSaveResponse;
 
       if (
-        response.status === 201 &&
-        "id" in result &&
-        "projectId" in result &&
-        "title" in result &&
-        "content" in result &&
-        "createdAt" in result
+        response.status === 404 &&
+        "status" in result &&
+        result.status === "project-not-found" &&
+        (await recoverProjectForKnowledgeSave(projectId, context.projectName))
       ) {
+        if (currentProjectIdRef.current !== projectId) {
+          return;
+        }
+
+        response = await postKnowledge();
+        result = (await response.json()) as KnowledgeSaveResponse;
+      }
+
+      if (response.status === 201 && isSavedKnowledgeEntry(result)) {
+        if (currentProjectIdRef.current !== projectId) {
+          return;
+        }
+
         setSaveUiState(deriveSaveSuccessState(projectId, latestExchange, title));
         try {
           const contextResult = await getBrowserAiProjectContext(projectId);
