@@ -42,13 +42,19 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE / Product Owner decision required
+MS-018.3 - Create Task From Retrieved Memory Foundation
 
 **Latest Completed Milestone**
-MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
+MS-018.3 - Create Task From Retrieved Memory Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-018.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Create Task From Retrieved Memory Foundation; the repository now records the user-initiated task creation flow from retrieved memory on AI Workspace, and the live browser verification accepted by the Product Owner shows the created task remains visible on AI Workspace, Overview, and `/tasks`.
+
+MS-018.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain Memory Retrieval UX First Surface Foundation; the repository now records the retrieved-memory surface on AI Workspace, keeps the existing browser read path unchanged, and remains the prior completed foundation beneath MS-018.3.
+
+MS-018.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain First Useful Memory Retrieval Foundation; the repository now records the smallest controlled Project Brain memory retrieval contract boundary for returning useful project context after a save or revisit, keeps the existing browser read and recovery surfaces unchanged, and does not add new runtime behavior.
 
 MS-017.2 is PUBLISHED / CLOSED in the current local workspace as the Project Brain Knowledge Read Recovery Boundary Foundation; the repository now records the smallest controlled Project Brain knowledge read/recovery contract boundary as a docs-only publication, keeps the existing local fallback allowed as a recovery path, and does not add new runtime behavior.
 
@@ -285,8 +291,8 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
+Current Product Milestone: MS-018.3 - Create Task From Retrieved Memory Foundation
+Latest Completed Product Milestone: MS-018.3 - Create Task From Retrieved Memory Foundation
 Next Product Milestone: NONE / Product Owner decision required
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
@@ -1443,8 +1449,8 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `NONE`
-* `Latest Completed Product Milestone` is `MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation`
+* `Current Product Milestone` is `MS-018.3 - Create Task From Retrieved Memory Foundation`
+* `Latest Completed Product Milestone` is `MS-018.3 - Create Task From Retrieved Memory Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
@@ -1566,6 +1572,7 @@ Next:
 
 Next session priorities:
 
+* Keep `Current Product Milestone` aligned with `MS-018.3 - Create Task From Retrieved Memory Foundation`.
 * Keep `Next Product Milestone` aligned with `NONE / Product Owner decision required`.
 * Semantic consistency repair is completed and published in `c6a1946`.
 * Current-state finalization is completed and published in `40f457e`.

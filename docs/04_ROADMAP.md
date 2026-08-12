@@ -107,15 +107,202 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE / Product Owner decision required
+MS-018.3 - Create Task From Retrieved Memory Foundation
 
 ## Latest Completed Product Milestone
 
-MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
+MS-018.3 - Create Task From Retrieved Memory Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-018.3 - Create Task From Retrieved Memory Foundation
+
+**Milestone**
+MS-018.3 - Create Task From Retrieved Memory Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Add the smallest user-initiated task creation path from the retrieved memory panel using the existing task browser/server helpers, without implying automatic recovery of the missing original task.
+
+**Product Outcome**
+The repository now exposes one explicit `Create task from memory` action on the AI Workspace retrieved-memory panel, creates a new task with a conservative memory-derived title through the existing task storage path, and leaves the Knowledge and Project Brain read paths unchanged.
+The milestone is live verified in the current workspace and the persisted task remains visible on AI Workspace, Overview, and `/tasks`.
+
+**Dependencies**
+* closed `MS-018.1 - Project Brain Memory Retrieval UX First Surface Foundation`
+
+**Allowed Implementation Scope**
+* one explicit user-initiated action on the existing AI Workspace retrieved-memory panel
+* existing task browser/server create helper
+* focused tests for the touched surface
+* SSOT synchronization if product behavior changes
+
+**Forbidden Scope**
+* automatic task restoration
+* claims that the original missing task was found
+* storage architecture change
+* migration system
+* AI provider changes
+* route restructuring
+* broad AI Workspace redesign
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+* `src/app/projects/[id]/ai/page.tsx` and `src/app/projects/[id]/ai/page.test.tsx` are the only touched implementation surfaces in this milestone
+
+**Verification Plan**
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
+* `git diff --check`
+* `git status -sb`
+* confirm task creation uses `soft-premium-system.projects.${projectId}.tasks`
+* confirm Knowledge storage remains untouched
+* confirm `MS-018.3` remains published and closed as the latest completed milestone
+* confirm `MS-018.1` remains preserved as the prior completed milestone
+
+## MS-018.1 - Project Brain Memory Retrieval UX First Surface Foundation
+
+**Milestone**
+MS-018.1 - Project Brain Memory Retrieval UX First Surface Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Active**
+YES
+
+**Runtime Status**
+OPEN
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Implement the smallest useful Project Brain memory retrieval UX surface using the existing saved Knowledge and Project Brain browser read paths.
+
+**Product Outcome**
+The repository now exposes a small retrieved-memory area on the existing AI Workspace surface so the user can see recently retrieved project knowledge context without changing storage architecture or AI provider behavior.
+
+**Dependencies**
+* closed `MS-018.0 - Project Brain First Useful Memory Retrieval Foundation`
+
+**Allowed Implementation Scope**
+* one small UI/read-path improvement on an existing route
+* existing project-scoped AI Workspace surface
+* focused tests for the touched surface
+* SSOT synchronization if product behavior changes
+
+**Forbidden Scope**
+* storage architecture change
+* new AI provider logic
+* large AI Workspace redesign
+* Konduktor redesign
+* new module system
+* route restructuring
+* broad CSS redesign
+* opportunistic cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+* `src/app/projects/[id]/ai/page.tsx` and `src/app/projects/[id]/ai/page.test.tsx` are the only touched implementation surfaces in this milestone
+
+**Verification Plan**
+* `npm.cmd test -- src/app/projects/[id]/ai/page.test.tsx`
+* `git diff --check`
+* `git status -sb`
+* confirm `MS-018.0` remains published and closed as the latest completed milestone
+* confirm `MS-018.3` is the only new active product milestone
+
+**Milestone**
+MS-018.0 - Project Brain First Useful Memory Retrieval Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the smallest controlled Project Brain memory retrieval boundary for returning useful project context after a save or revisit without changing runtime behavior in this milestone.
+
+**Product Outcome**
+The repository now records a docs-only contract for the first useful Project Brain memory retrieval path and confirms the existing browser read and recovery surfaces remain the supported boundary for this step.
+
+**Dependencies**
+* closed `MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation`
+
+**Allowed Implementation Scope**
+* docs-only contract publication
+* diagnostic confirmation of existing Project Brain read and recovery surfaces
+* SSOT synchronization for milestone publication
+* no source code changes in this milestone
+
+**Forbidden Scope**
+* UI changes
+* storage or persistence changes
+* new routes
+* new AI provider logic
+* broad Project Brain refactors
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this docs-only milestone
+* `src/lib/project-brain/browser.ts`, `src/lib/project-brain/types.ts`, `src/lib/knowledge/browser-server.ts`, `src/app/projects/[id]/knowledge/page.tsx`, and `src/app/projects/[id]/ai/page.tsx` remain unchanged in this milestone
+
+**Verification Plan**
+* `git status -sb`
+* `rg -n "MS-018.0|Project Brain|knowledge|fallback" docs src`
+* confirm the existing browser and Knowledge read and recovery surfaces already satisfy the smallest useful retrieval boundary
+* confirm no `src` change was required for this contract step
 
 ## MS-015.0 - First Real User Flow Polish Foundation
 
@@ -5148,7 +5335,7 @@ MS-002.s - Task Completion Handoff Text Foundation
 Product Milestone
 
 **Contract Status**
-APPROVED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
 NO

@@ -3,6 +3,10 @@
 import { getBrowserAiProjectContext } from "@/lib/project-brain/browser";
 import { createKnowledgeEntry } from "@/lib/knowledge/knowledge";
 import {
+  createTaskOnServer,
+  getTasksFromServer,
+} from "@/lib/task/browser-server";
+import {
   buildGenerationInstruction,
   type ContextUiState,
   deriveActiveGenerationState,
@@ -36,6 +40,7 @@ import {
   type InstructionUiState,
   type SaveUiState,
 } from "@/lib/ai-workspace-engine/engine";
+import type { AiProjectContext } from "@/lib/project-brain/types";
 import { useParams } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
@@ -48,6 +53,39 @@ type KnowledgeSaveResponse =
       createdAt: string;
     }
   | { status: string };
+
+type MemoryTaskFeedbackState =
+  | {
+      type: "success";
+      message: string;
+    }
+  | {
+      type: "error";
+      message: string;
+    }
+  | null;
+
+function buildTaskFromMemoryTitle(
+  projectName: string,
+  knowledgeEntry: {
+    title: string;
+    content: string;
+  },
+): string {
+  const trimmedTitle = knowledgeEntry.title.trim();
+
+  if (trimmedTitle) {
+    return `Memory follow-up: ${trimmedTitle}`;
+  }
+
+  const trimmedExcerpt = knowledgeEntry.content.trim().replace(/\s+/g, " ");
+
+  if (trimmedExcerpt) {
+    return `Memory follow-up: ${trimmedExcerpt.slice(0, 60).trimEnd()}`;
+  }
+
+  return `Memory follow-up: ${projectName}`;
+}
 
 function isSavedKnowledgeEntry(
   value: KnowledgeSaveResponse,
@@ -116,6 +154,14 @@ export default function ProjectAiWorkspacePage() {
     errorMessage: null,
     refreshErrorMessage: null,
   });
+  const [memoryTaskFeedback, setMemoryTaskFeedback] =
+    useState<MemoryTaskFeedbackState>(null);
+  const [isCreatingTaskFromMemory, setIsCreatingTaskFromMemory] =
+    useState(false);
+  const [projectTasks, setProjectTasks] = useState<AiProjectContext["tasks"]>(
+    [],
+  );
+  const [isProjectTasksLoading, setIsProjectTasksLoading] = useState(true);
 
   useEffect(() => {
     let ignore = false;
@@ -125,8 +171,50 @@ export default function ProjectAiWorkspacePage() {
         return;
       }
 
+      if (result.status === "available") {
+        setContextState(deriveContextLoadState(params.id, result));
+        return;
+      }
+
       setContextState(deriveContextLoadState(params.id, result));
     });
+
+    return () => {
+      ignore = true;
+    };
+  }, [params.id]);
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadProjectTasks() {
+      setIsProjectTasksLoading(true);
+
+      try {
+        const loadedTasks = await getTasksFromServer(params.id);
+
+        if (ignore) {
+          return;
+        }
+
+        setProjectTasks(
+          loadedTasks.map((task) => ({
+            id: task.id,
+            title: task.title,
+          })),
+        );
+      } catch {
+        if (!ignore) {
+          setProjectTasks([]);
+        }
+      } finally {
+        if (!ignore) {
+          setIsProjectTasksLoading(false);
+        }
+      }
+    }
+
+    void loadProjectTasks();
 
     return () => {
       ignore = true;
@@ -221,6 +309,8 @@ export default function ProjectAiWorkspacePage() {
   }
 
   const context = contextState.context;
+  const latestKnowledgeEntry =
+    context.knowledgeEntries[context.knowledgeEntries.length - 1] ?? null;
 
   function setInstructionValue(value: string, promptId: string | null) {
     setInstructionState(
@@ -488,6 +578,82 @@ export default function ProjectAiWorkspacePage() {
     }
   }
 
+  async function handleCreateTaskFromMemory() {
+    if (!latestKnowledgeEntry || isCreatingTaskFromMemory) {
+      return;
+    }
+
+    const projectId = params.id;
+    const taskTitle = buildTaskFromMemoryTitle(
+      context.projectName,
+      latestKnowledgeEntry,
+    );
+
+    setIsCreatingTaskFromMemory(true);
+    setMemoryTaskFeedback(null);
+
+    try {
+      const createdTask = await createTaskOnServer({
+        projectId,
+        title: taskTitle,
+      });
+
+      if (currentProjectIdRef.current === projectId) {
+        setProjectTasks((currentTasks) =>
+          currentTasks.some((task) => task.id === createdTask.id)
+            ? currentTasks
+            : [
+                ...currentTasks,
+                {
+                  id: createdTask.id,
+                  title: createdTask.title,
+                },
+              ],
+        );
+      }
+
+      setMemoryTaskFeedback({
+        type: "success",
+        message: `Created task from memory: ${taskTitle}`,
+      });
+
+      const refreshedTasks = await getTasksFromServer(projectId);
+
+      if (currentProjectIdRef.current !== projectId) {
+        return;
+      }
+
+      setProjectTasks((currentTasks) =>
+        refreshedTasks.reduce<AiProjectContext["tasks"]>(
+          (mergedTasks, task) =>
+            mergedTasks.some((currentTask) => currentTask.id === task.id)
+              ? mergedTasks
+              : [
+                  ...mergedTasks,
+                  {
+                    id: task.id,
+                    title: task.title,
+                  },
+                ],
+          currentTasks,
+        ),
+      );
+    } catch {
+      if (currentProjectIdRef.current !== projectId) {
+        return;
+      }
+
+      setMemoryTaskFeedback({
+        type: "error",
+        message: "Task creation from memory failed.",
+      });
+    } finally {
+      if (currentProjectIdRef.current === projectId) {
+        setIsCreatingTaskFromMemory(false);
+      }
+    }
+  }
+
   async function handleCopyResponse(response: string) {
     const copyResponseIntentState = deriveCopyResponseIntentState(
       params.id,
@@ -509,16 +675,65 @@ export default function ProjectAiWorkspacePage() {
           </h2>
         </div>
 
+        <div className="rounded-xl border border-emerald-900/40 bg-emerald-950/30 p-4">
+          <p className="text-sm uppercase tracking-[0.2em] text-emerald-200">
+            Latest retrieved memory
+          </p>
+          {latestKnowledgeEntry ? (
+            <div className="mt-3 space-y-2">
+              <p className="text-base font-medium text-zinc-50">
+                {`Latest memory: ${latestKnowledgeEntry.title}`}
+              </p>
+              <p className="whitespace-pre-wrap text-sm text-zinc-200">
+                {`Context excerpt: ${
+                  latestKnowledgeEntry.content.length > 160
+                    ? `${latestKnowledgeEntry.content.slice(0, 160).trimEnd()}...`
+                    : latestKnowledgeEntry.content
+                }`}
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  void handleCreateTaskFromMemory();
+                }}
+                disabled={isCreatingTaskFromMemory}
+                className="rounded-xl border border-emerald-400/40 bg-emerald-500/10 px-3 py-2 text-sm font-medium text-emerald-50 transition hover:border-emerald-300 hover:bg-emerald-500/20 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {isCreatingTaskFromMemory
+                  ? "Creating task..."
+                  : "Create task from memory"}
+              </button>
+              {memoryTaskFeedback ? (
+                <p
+                  className={`text-sm ${
+                    memoryTaskFeedback.type === "error"
+                      ? "text-red-200"
+                      : "text-emerald-100/80"
+                  }`}
+                >
+                  {memoryTaskFeedback.message}
+                </p>
+              ) : null}
+            </div>
+          ) : (
+            <p className="mt-3 text-sm text-emerald-100/80">
+              No retrieved memory available yet.
+            </p>
+          )}
+        </div>
+
         <div className="grid gap-4 xl:grid-cols-2">
           <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
               Tasks
             </p>
-            {context.tasks.length === 0 ? (
+            {isProjectTasksLoading ? (
+              <p className="mt-4 text-sm text-zinc-500">Loading tasks...</p>
+            ) : projectTasks.length === 0 ? (
               <p className="mt-4 text-sm text-zinc-500">No tasks available.</p>
             ) : (
               <ul className="mt-4 space-y-3">
-                {context.tasks.map((task) => (
+                {projectTasks.map((task) => (
                   <li
                     key={task.id}
                     className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-100"

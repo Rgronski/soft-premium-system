@@ -69,6 +69,80 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 076 - MS-018.3 live verification SSOT sync
+
+### Date
+
+2026-08-12
+
+### Completed
+
+* Recorded the Product Owner accepted live PASS for `MS-018.3 - Create Task From Retrieved Memory Foundation`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-018.3` as the current and latest completed milestone.
+* Confirmed `MS-018.0` and `MS-018.1` remain preserved as earlier accepted milestones.
+* Appended the Session 076 usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* No new product milestone was introduced.
+* The live verified AI Workspace task flow remains aligned with the canonical task source.
+
+## Session 076 - MS-018.3 create task from retrieved memory SSOT sync
+
+### Date
+
+2026-08-12
+
+### Completed
+
+* Implemented `MS-018.3 - Create Task From Retrieved Memory Foundation` as a small user-initiated action on the existing AI Workspace retrieved-memory panel.
+* Added one `Create task from memory` action that creates a new task with a conservative memory-derived title through the existing task browser/server helper and keeps Knowledge storage unchanged.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-018.3` as current and keeps `MS-018.1` as the latest completed milestone.
+* Appended the Session 076 usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* `MS-018.0` remains published and closed.
+* `MS-018.1` remains published and closed.
+* The original missing task was not auto-restored.
+
+## Session 076 - MS-018.1 project brain memory retrieval UX surface SSOT sync
+
+### Date
+
+2026-08-12
+
+### Completed
+
+* Implemented `MS-018.1 - Project Brain Memory Retrieval UX First Surface Foundation` as a small AI Workspace memory retrieval surface using the existing browser Project Brain context.
+* Added one retrieved-memory summary area to the existing AI Workspace page so the user can see the latest known knowledge context without changing storage architecture or AI provider behavior.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-018.1` as current and keeps `MS-018.0` as the latest completed milestone.
+* Appended the Session 076 usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* `MS-018.0` remains published and closed.
+* The implementation stayed on the existing AI Workspace surface and used the current browser read path.
+
+## Session 076 - MS-018.0 project brain first useful memory retrieval contract SSOT sync
+
+### Date
+
+2026-08-12
+
+### Completed
+
+* Opened `MS-018.0 - Project Brain First Useful Memory Retrieval Foundation` as a docs-only Project Brain memory retrieval contract milestone.
+* Updated `docs/04_ROADMAP.md` and `docs/08_CURRENT_STATE.md` so the SSOT now records `MS-018.0` as the current milestone while keeping `MS-017.2` as the latest completed milestone.
+* Updated `docs/10_SESSION_STATE.md` to reflect the Session 076 snapshot for the approved MS-018.0 contract boundary.
+* Appended the Session 076 usage entry to `.usage/session.jsonl`.
+* Confirmed the existing browser read and recovery surfaces already provide the smallest useful retrieval boundary, so no `src` changes were required.
+
+### Notes
+
+* No product code changed.
+* `MS-017.2` remains the latest completed product milestone.
+
 ## Session 075 - Session close and MS-017.2 handoff synchronization
 
 ### Date

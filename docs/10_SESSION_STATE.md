@@ -214,27 +214,27 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-12
-Current Session ID: 075
-Current Chat Title: 075 SPS OS - MS-017.2 Project Brain Knowledge Read Recovery Boundary Foundation
-Next Session ID: 076
-Suggested Next Chat Title: 076 SPS OS - Product Owner Decision
-Active Capability: NONE
-Active Work Item: NONE
-Current Mode: CLOSED
-Completed Capability Items: Session 075 published the MS-017.0 Project Brain knowledge intake contract; Session 075 published the MS-017.1 controlled write boundary contract; Session 075 confirmed the existing canonical knowledge write path is already present; Session 075 published the MS-017.2 read/recovery contract; Session 075 completed the clean-browser live verification; Session 075 synchronized the roadmap, current state, changelog, session state, and handoff for close publication
-Current Product Milestone: NONE
-Latest Completed Product Milestone: MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
+Current Session ID: 076
+Current Chat Title: 076 SPS OS - MS-018.3 SSOT sync after live PASS
+Next Session ID: UNKNOWN
+Suggested Next Chat Title: UNKNOWN
+Active Capability: Project Brain task creation from retrieved memory
+Active Work Item: MS-018.3 SSOT/control docs sync
+Current Mode: ACTIVE
+Completed Capability Items: Session 076 diagnosed the existing Project Brain read and recovery surfaces; Session 076 published the MS-018.0 docs-only contract boundary; Session 076 implemented the MS-018.1 retrieved-memory surface on AI Workspace; Session 076 diagnosed source-data absence for the missing task; Session 076 implemented the MS-018.3 create-task-from-memory action on AI Workspace; Session 076 live verified MS-018.3 with the Product Owner; Session 076 synchronized the roadmap, current state, changelog, session state, and usage log
+Current Product Milestone: MS-018.3 - Create Task From Retrieved Memory Foundation
+Latest Completed Product Milestone: MS-018.3 - Create Task From Retrieved Memory Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 075 completed MS-017.2 live verification and session close synchronization
+Latest Completed Capability Item: Session 076 live verified MS-018.3 and synchronized SSOT/control docs without changing scope
 Current Sprint: NONE
-Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, and MS-017.2 immutable while keeping Session 075 ready for the next Product Owner decision.
+Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, and MS-018.3 immutable while preserving the live-verified first user-initiated task creation flow from retrieved memory.
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 959e356700c726924d21fcb368a323599480957d
+Latest Verified Commit: 464efb8916177b25a0df7fb1a96d717454722f78
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Start Session 076 with the fresh session package and await Product Owner decision for the next milestone.
-Next Session Plan: Start Session 076 with the fresh session package and await Product Owner decision for the next milestone.
+Next Safe Step: Await Product Owner decision before any further implementation work beyond `MS-018.3 - Create Task From Retrieved Memory Foundation`.
+Next Session Plan: Await Product Owner decision before any further implementation work beyond `MS-018.3 - Create Task From Retrieved Memory Foundation`.

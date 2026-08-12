@@ -11,7 +11,9 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 const useParamsMock = vi.fn(() => ({ id: "project-1" }));
 const getBrowserAiProjectContextMock = vi.fn();
+const getTasksFromServerMock = vi.fn();
 const createKnowledgeEntryMock = vi.fn();
+const createTaskOnServerMock = vi.fn();
 const fetchMock = vi.fn<typeof fetch>();
 const clipboardWriteTextMock = vi.fn<(text: string) => Promise<void>>();
 
@@ -22,6 +24,13 @@ vi.mock("next/navigation", () => ({
 vi.mock("@/lib/project-brain/browser", () => ({
   getBrowserAiProjectContext: (projectId: string) =>
     getBrowserAiProjectContextMock(projectId),
+}));
+
+vi.mock("@/lib/task/browser-server", () => ({
+  createTaskOnServer: (input: { projectId: string; title: string }) =>
+    createTaskOnServerMock(input),
+  getTasksFromServer: (projectId: string) =>
+    getTasksFromServerMock(projectId),
 }));
 
 vi.mock("@/lib/knowledge/knowledge", () => ({
@@ -51,7 +60,9 @@ describe("ProjectAiWorkspacePage", () => {
   beforeEach(() => {
     useParamsMock.mockReturnValue({ id: "project-1" });
     getBrowserAiProjectContextMock.mockReset();
+    getTasksFromServerMock.mockReset();
     createKnowledgeEntryMock.mockReset();
+    createTaskOnServerMock.mockReset();
     fetchMock.mockReset();
     clipboardWriteTextMock.mockReset();
     vi.stubGlobal("fetch", fetchMock);
@@ -84,6 +95,20 @@ describe("ProjectAiWorkspacePage", () => {
         ],
       },
     });
+    getTasksFromServerMock.mockResolvedValue([
+      {
+        id: "task-1",
+        projectId: "project-1",
+        title: "First task",
+        createdAt: "2026-08-12T15:00:00.000Z",
+      },
+      {
+        id: "task-2",
+        projectId: "project-1",
+        title: "Second task",
+        createdAt: "2026-08-12T15:05:00.000Z",
+      },
+    ]);
 
     render(<ProjectAiWorkspacePage />);
 
@@ -93,12 +118,134 @@ describe("ProjectAiWorkspacePage", () => {
       expect(getBrowserAiProjectContextMock).toHaveBeenCalledWith("project-1");
       expect(screen.getByText("Alpha")).toBeTruthy();
     });
+    expect(getTasksFromServerMock).toHaveBeenCalledWith("project-1");
     expect(screen.getByText("First task")).toBeTruthy();
     expect(screen.getByText("Second task")).toBeTruthy();
+    expect(screen.getByText("Latest retrieved memory")).toBeTruthy();
+    expect(screen.getByText("Latest memory: Guide")).toBeTruthy();
     expect(screen.getByText("Note")).toBeTruthy();
-    expect(screen.getByText("Guide")).toBeTruthy();
     expect(screen.getByText("Body")).toBeTruthy();
-    expect(screen.getByText("Longer content")).toBeTruthy();
+    expect(screen.getByText("Context excerpt: Longer content")).toBeTruthy();
+    expect(
+      screen.getByRole("button", { name: "Create task from memory" }),
+    ).toBeTruthy();
+  });
+
+  test("hydrates persisted tasks on initial AI Workspace load", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [
+          {
+            id: "knowledge-1",
+            title: "Architecture note",
+            content: "Remember this follow-up.",
+          },
+        ],
+      },
+    });
+    getTasksFromServerMock.mockResolvedValue([
+      {
+        id: "task-1",
+        title: "Persisted task",
+        projectId: "project-1",
+        createdAt: "2026-08-12T15:10:00.000Z",
+      },
+    ]);
+
+    render(<ProjectAiWorkspacePage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Alpha")).toBeTruthy();
+    });
+    expect(screen.getByText("Persisted task")).toBeTruthy();
+    expect(screen.queryByText("No tasks available.")).toBeNull();
+  });
+
+  test("creates a task from the latest retrieved memory and keeps it through refresh", async () => {
+    getBrowserAiProjectContextMock
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [
+            {
+              id: "knowledge-1",
+              title: "Architecture note",
+              content: "Remember this follow-up.",
+            },
+          ],
+        },
+      })
+      .mockResolvedValueOnce({
+        status: "available",
+        context: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          tasks: [],
+          knowledgeEntries: [
+            {
+              id: "knowledge-1",
+              title: "Architecture note",
+              content: "Remember this follow-up.",
+            },
+          ],
+        },
+      });
+    getTasksFromServerMock
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce([]);
+    createTaskOnServerMock.mockResolvedValue({
+      id: "task-1",
+      projectId: "project-1",
+      title: "Memory follow-up: Architecture note",
+      createdAt: "2026-08-12T15:30:00.000Z",
+    });
+
+    render(<ProjectAiWorkspacePage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Alpha")).toBeTruthy();
+    });
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Create task from memory" }),
+    );
+
+    await waitFor(() => {
+      expect(createTaskOnServerMock).toHaveBeenCalledTimes(1);
+    });
+    expect(createTaskOnServerMock).toHaveBeenCalledWith({
+      projectId: "project-1",
+      title: "Memory follow-up: Architecture note",
+    });
+    expect(
+      screen.getByText(
+        "Created task from memory: Memory follow-up: Architecture note",
+      ),
+    ).toBeTruthy();
+    expect(screen.getByText("Memory follow-up: Architecture note")).toBeTruthy();
+
+    await waitFor(() => {
+      expect(getTasksFromServerMock).toHaveBeenCalledTimes(2);
+    });
+    expect(
+      screen.getByText("Memory follow-up: Architecture note"),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Created task from memory: Memory follow-up: Architecture note",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Context excerpt: Remember this follow-up."),
+    ).toBeTruthy();
+    expect(screen.getByText("Alpha")).toBeTruthy();
   });
 
   test("renders explicit empty states for tasks and knowledge entries", async () => {
