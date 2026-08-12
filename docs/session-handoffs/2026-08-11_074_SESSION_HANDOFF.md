@@ -25,7 +25,7 @@ Push Status: synchronized 0 / 0 after Session 074 close publication
 
 Milestone State:
 Current Product Milestone: NONE
-Latest Completed Milestone: MS-016.2 - Project Brain Status Verification UX Foundation
+Latest Completed Milestone: MS-015.0 - First Real User Flow Polish Foundation
 
 Verification:
 Verification Status: PASS
