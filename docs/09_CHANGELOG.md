@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 076 - MS-019.0 live verification and branch sync
+
+### Date
+
+2026-08-12
+
+### Completed
+
+* Introduced the canonical application version `0.000.0` in `src/lib/app-version.ts`.
+* Rendered a small visible `APP v0.000.0` badge from the root app shell so the current version is visible after refresh.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-019.0` as completed and captures the versioning rule.
+* Accepted the live browser PASS for the version badge and the home page version label.
+
+### Notes
+
+* `MS-019.0` is the latest completed milestone.
+* Accepted milestone commits and accepted live-test patches must update the controlled app version source before the synchronized branch state is published or promoted.
+
 ## Session 076 - MS-018.3 live verification SSOT sync
 
 ### Date

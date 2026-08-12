@@ -3,6 +3,7 @@
 import { deleteProjectFromServer } from "@/lib/project/browser-server";
 import { deleteProject, getProjects } from "@/lib/project/project";
 import type { Project } from "@/lib/project/types";
+import { APP_VERSION } from "@/lib/app-version";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -55,7 +56,7 @@ export default function Home() {
             <h1 className="text-4xl font-semibold tracking-tight">
               Welcome back, Radek
             </h1>
-            <p className="text-sm text-zinc-400">Workspace v0.1</p>
+            <p className="text-sm text-zinc-400">Workspace v{APP_VERSION}</p>
           </div>
         </section>
 

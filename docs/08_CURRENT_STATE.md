@@ -42,15 +42,21 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-018.3 - Create Task From Retrieved Memory Foundation
+NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-018.3 - Create Task From Retrieved Memory Foundation
+MS-019.0 - Application Version Visibility Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
 MS-018.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Create Task From Retrieved Memory Foundation; the repository now records the user-initiated task creation flow from retrieved memory on AI Workspace, and the live browser verification accepted by the Product Owner shows the created task remains visible on AI Workspace, Overview, and `/tasks`.
+
+MS-019.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Application Version Visibility Foundation; the repository now records the canonical application version `0.000.0` in `src/lib/app-version.ts` and exposes it as a small visible badge in the app shell after refresh. The live browser verification accepted by the Product Owner shows `Workspace v0.000.0` near the home heading and `APP v0.000.0` in the lower-right shell badge.
+
+Versioning rule: accepted milestone commits and accepted live-test patches must update the controlled app version source before the synchronized branch state is published or promoted.
+
+Branch sync rule: `product-intake-soft-premium-system` stays synchronized to `main` through event-based fast-forward updates after accepted milestone commits or accepted live-test patches.
 
 MS-018.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain Memory Retrieval UX First Surface Foundation; the repository now records the retrieved-memory surface on AI Workspace, keeps the existing browser read path unchanged, and remains the prior completed foundation beneath MS-018.3.
 

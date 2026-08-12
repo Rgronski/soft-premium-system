@@ -107,15 +107,74 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-018.3 - Create Task From Retrieved Memory Foundation
+NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-018.3 - Create Task From Retrieved Memory Foundation
+MS-019.0 - Application Version Visibility Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-019.0 - Application Version Visibility Foundation
+
+**Milestone**
+MS-019.0 - Application Version Visibility Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+YES
+
+**Runtime Status**
+OPEN
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Introduce the smallest visible application version contract so the SPS OS shell clearly exposes the current app version after refresh while keeping the canonical version source controlled and simple.
+
+**Product Outcome**
+The repository now uses the canonical app version `0.000.0` from `src/lib/app-version.ts` and shows it in a small unobtrusive badge in the app shell. The version is visible on refresh and remains aligned with the accepted live PASS.
+
+**Dependencies**
+* closed `MS-018.3 - Create Task From Retrieved Memory Foundation`
+
+**Allowed Implementation Scope**
+* one canonical app version source
+* one small visible version badge in the existing app shell
+* focused tests for the visible version surface
+* SSOT synchronization for versioning rules
+
+**Forbidden Scope**
+* broad layout redesign
+* versioning automation
+* package-manager churn
+* unrelated UI polish
+
+**Ownership Boundaries**
+* `src/lib/app-version.ts` owns the canonical app version string
+* `src/app/layout.tsx` owns the visible shell badge
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `npm.cmd test -- src/components/app-version-badge.test.tsx`
+* `git diff --check`
+* `git status -sb`
+* confirm the visible badge shows `APP v0.000.0`
+* confirm `MS-019.0` is the latest completed milestone
 
 ## MS-018.3 - Create Task From Retrieved Memory Foundation
 

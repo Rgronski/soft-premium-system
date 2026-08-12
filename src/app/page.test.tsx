@@ -3,6 +3,8 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
+import { APP_VERSION } from "@/lib/app-version";
+
 const deleteProjectFromServerMock = vi.fn();
 let confirmSpy: ReturnType<typeof vi.spyOn>;
 
@@ -101,6 +103,7 @@ describe("Home", () => {
     expect(
       screen.getByText("Create the first project to begin the primary flow."),
     ).toBeTruthy();
+    expect(screen.getByText(`Workspace v${APP_VERSION}`)).toBeTruthy();
     expect(
       screen.getByRole("link", { name: "Create Project" }).getAttribute("href"),
     ).toBe("/projects");
