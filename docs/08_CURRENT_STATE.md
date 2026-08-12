@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE
 
 **Latest Completed Milestone**
-MS-016.1 - Project Brain Existing Project Status Repair Foundation
+MS-016.2 - Project Brain Status Verification UX Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
@@ -53,6 +53,8 @@ NONE / Product Owner decision required
 MS-016.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain Existing Project Status Repair Foundation; the repository now repairs eligible legacy projects from `pending` to `available` when they already have a persisted working directory and project record, while preserving `pending` / warning behavior when the data is missing or corrupted.
 
 MS-016.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain Activation Foundation; the repository now marks newly created projects with persisted baseline workspace data as `projectBrainStatus: "available"` while preserving the pending warning state when the activation condition is not met.
+
+MS-016.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain Status Verification UX Foundation; the project dashboard now suppresses the readiness warning when Project Brain is `available` and keeps the warning visible for pending, unavailable, or corrupt project states.
 
 MS-015.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the First Real User Flow Polish Foundation; the repository now records the primary happy-path copy and label polish across Home, Task List, Task Detail, and Task Workspace while keeping Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 

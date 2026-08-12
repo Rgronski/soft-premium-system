@@ -111,7 +111,7 @@ NONE
 
 ## Latest Completed Product Milestone
 
-MS-015.0 - First Real User Flow Polish Foundation
+MS-016.2 - Project Brain Status Verification UX Foundation
 
 ## Next
 
