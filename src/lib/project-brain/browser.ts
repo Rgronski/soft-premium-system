@@ -1,3 +1,4 @@
+import { getKnowledge } from "../knowledge/knowledge";
 import { getKnowledgeEntriesFromServer } from "../knowledge/browser-server";
 import type { KnowledgeEntry } from "../knowledge/types";
 import { getProjectFromServer } from "../project/browser-server";
@@ -35,6 +36,23 @@ export type BrowserProjectContextReader = {
 export function createGetBrowserAiProjectContext(
   reader: BrowserProjectContextReader,
 ) {
+  function mergeKnowledgeEntries(
+    projectId: string,
+    canonicalKnowledgeEntries: KnowledgeEntry[],
+  ): KnowledgeEntry[] {
+    const mergedKnowledgeEntries = new Map<string, KnowledgeEntry>();
+
+    for (const knowledgeEntry of canonicalKnowledgeEntries) {
+      mergedKnowledgeEntries.set(knowledgeEntry.id, knowledgeEntry);
+    }
+
+    for (const localKnowledgeEntry of getKnowledge(projectId)) {
+      mergedKnowledgeEntries.set(localKnowledgeEntry.id, localKnowledgeEntry);
+    }
+
+    return [...mergedKnowledgeEntries.values()];
+  }
+
   return async function getBrowserAiProjectContext(
     projectId: string,
   ): Promise<BrowserAiProjectContextResult> {
@@ -76,7 +94,7 @@ export function createGetBrowserAiProjectContext(
       const snapshot = composeProjectBrainSnapshot({
         project,
         tasks,
-        knowledgeEntries,
+        knowledgeEntries: mergeKnowledgeEntries(projectId, knowledgeEntries),
         projectId,
       });
 
