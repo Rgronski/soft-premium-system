@@ -150,18 +150,18 @@ describe("ProjectWorkspacePage", () => {
     expect(screen.getByText("Task A")).toBeTruthy();
     expect(screen.getByText("Knowledge note")).toBeTruthy();
     expect(
-      screen.getByRole("link", { name: "Open repository" }).getAttribute("href"),
+      screen.getByRole("link", { name: "Otwórz repozytorium" }).getAttribute("href"),
     ).toBe("https://example.com/repos/alpha-workspace");
     expect(screen.getAllByText("Continue active work")).toHaveLength(2);
     expect(
-      screen.getByRole("link", { name: "Open tasks" }).getAttribute("href"),
+      screen.getByRole("link", { name: "Otwórz zadania" }).getAttribute("href"),
     ).toBe("/projects/project-1/tasks");
-    expect(screen.getByRole("link", { name: "Add Task" })).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Dodaj zadanie" })).toBeTruthy();
     expect(
-      screen.getByRole("link", { name: "View all tasks" }).getAttribute("href"),
+      screen.getByRole("link", { name: "Zobacz wszystkie zadania" }).getAttribute("href"),
     ).toBe("/projects/project-1/tasks");
     expect(
-      screen.getByRole("link", { name: "View all knowledge" }).getAttribute("href"),
+      screen.getByRole("link", { name: "Zobacz całą wiedzę" }).getAttribute("href"),
     ).toBe("/projects/project-1/knowledge");
     expect(screen.getByRole("button", { name: "Usuń projekt" })).toBeTruthy();
   });
@@ -211,7 +211,7 @@ describe("ProjectWorkspacePage", () => {
     render(<ProjectWorkspacePage />);
 
     expect(
-      screen.queryByRole("link", { name: "Open repository" }),
+      screen.queryByRole("link", { name: "Otwórz repozytorium" }),
     ).toBeNull();
     expect(
       screen.getByText("source: C:/SPS_OS_WORK/Test-MS-011"),
@@ -268,7 +268,7 @@ describe("ProjectWorkspacePage", () => {
 
     expect(
       screen.getByText(
-        "Project Brain is pending. This project is not ready for production use yet.",
+        "Project Brain ma status pending. Ten projekt nie jest jeszcze gotowy do użycia produkcyjnego.",
       ),
     ).toBeTruthy();
     expect(screen.getByText("warning")).toBeTruthy();

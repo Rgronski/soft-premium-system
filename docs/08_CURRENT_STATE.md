@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-019.0 - Application Version Visibility Foundation
+MS-020.0 - Polish UI Language Overlay Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
@@ -54,7 +54,9 @@ MS-018.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 
 MS-019.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Application Version Visibility Foundation; the repository now records the canonical application version `0.000.0` in `src/lib/app-version.ts` and exposes it as a small visible badge in the app shell after refresh. The live browser verification accepted by the Product Owner shows `Workspace v0.000.0` near the home heading and `APP v0.000.0` in the lower-right shell badge.
 
-Versioning rule: accepted milestone commits and accepted live-test patches must update the controlled app version source before the synchronized branch state is published or promoted.
+MS-020.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Polish UI Language Overlay Foundation; the repository now applies the smallest Polish copy overlay to the existing visible home, project, overview, task, and AI Workspace surfaces while keeping the canonical version badge, task storage behavior, and Knowledge behavior unchanged. The canonical app version is now `0.020.0`.
+
+Versioning rule: accepted app/platform `.0` milestones bump the controlled app version source to `0.XXX.0`. Patch and live-fix handling remains deferred until needed, and non-MS categories such as WF remain deferred until needed.
 
 Branch sync rule: `product-intake-soft-premium-system` stays synchronized to `main` through event-based fast-forward updates after accepted milestone commits or accepted live-test patches.
 
@@ -297,8 +299,8 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: MS-018.3 - Create Task From Retrieved Memory Foundation
-Latest Completed Product Milestone: MS-018.3 - Create Task From Retrieved Memory Foundation
+Current Product Milestone: NONE / Product Owner decision required
+Latest Completed Product Milestone: MS-020.0 - Polish UI Language Overlay Foundation
 Next Product Milestone: NONE / Product Owner decision required
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
@@ -1455,8 +1457,8 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `MS-018.3 - Create Task From Retrieved Memory Foundation`
-* `Latest Completed Product Milestone` is `MS-018.3 - Create Task From Retrieved Memory Foundation`
+* `Current Product Milestone` is `NONE / Product Owner decision required`
+* `Latest Completed Product Milestone` is `MS-020.0 - Polish UI Language Overlay Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
@@ -1578,7 +1580,7 @@ Next:
 
 Next session priorities:
 
-* Keep `Current Product Milestone` aligned with `MS-018.3 - Create Task From Retrieved Memory Foundation`.
+* Keep `Current Product Milestone` aligned with `NONE / Product Owner decision required`.
 * Keep `Next Product Milestone` aligned with `NONE / Product Owner decision required`.
 * Semantic consistency repair is completed and published in `c6a1946`.
 * Current-state finalization is completed and published in `40f457e`.

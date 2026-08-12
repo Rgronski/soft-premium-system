@@ -267,7 +267,7 @@ export default function ProjectAiWorkspacePage() {
             AI Workspace
           </p>
           <h2 className="text-2xl font-semibold text-zinc-50">
-            Loading AI project context...
+            Ładowanie kontekstu AI projektu...
           </h2>
         </div>
       </section>
@@ -282,7 +282,7 @@ export default function ProjectAiWorkspacePage() {
             AI Workspace
           </p>
           <h2 className="text-2xl font-semibold text-zinc-50">
-            Project not found.
+            Projekt nie został znaleziony.
           </h2>
         </div>
       </section>
@@ -297,7 +297,7 @@ export default function ProjectAiWorkspacePage() {
             AI Workspace
           </p>
           <h2 className="text-2xl font-semibold text-zinc-50">
-            AI project context unavailable.
+            Kontekst AI projektu jest niedostępny.
           </h2>
         </div>
       </section>
@@ -677,15 +677,15 @@ export default function ProjectAiWorkspacePage() {
 
         <div className="rounded-xl border border-emerald-900/40 bg-emerald-950/30 p-4">
           <p className="text-sm uppercase tracking-[0.2em] text-emerald-200">
-            Latest retrieved memory
+            Ostatnio odzyskana pamięć
           </p>
           {latestKnowledgeEntry ? (
             <div className="mt-3 space-y-2">
               <p className="text-base font-medium text-zinc-50">
-                {`Latest memory: ${latestKnowledgeEntry.title}`}
+                {`Ostatnia pamięć: ${latestKnowledgeEntry.title}`}
               </p>
               <p className="whitespace-pre-wrap text-sm text-zinc-200">
-                {`Context excerpt: ${
+                {`Fragment kontekstu: ${
                   latestKnowledgeEntry.content.length > 160
                     ? `${latestKnowledgeEntry.content.slice(0, 160).trimEnd()}...`
                     : latestKnowledgeEntry.content
@@ -700,8 +700,8 @@ export default function ProjectAiWorkspacePage() {
                 className="rounded-xl border border-emerald-400/40 bg-emerald-500/10 px-3 py-2 text-sm font-medium text-emerald-50 transition hover:border-emerald-300 hover:bg-emerald-500/20 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isCreatingTaskFromMemory
-                  ? "Creating task..."
-                  : "Create task from memory"}
+                  ? "Tworzenie zadania..."
+                  : "Utwórz zadanie z pamięci"}
               </button>
               {memoryTaskFeedback ? (
                 <p
@@ -717,7 +717,7 @@ export default function ProjectAiWorkspacePage() {
             </div>
           ) : (
             <p className="mt-3 text-sm text-emerald-100/80">
-              No retrieved memory available yet.
+              Brak jeszcze odzyskanej pamięci.
             </p>
           )}
         </div>
@@ -725,12 +725,12 @@ export default function ProjectAiWorkspacePage() {
         <div className="grid gap-4 xl:grid-cols-2">
           <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-              Tasks
+              Zadania
             </p>
             {isProjectTasksLoading ? (
-              <p className="mt-4 text-sm text-zinc-500">Loading tasks...</p>
+              <p className="mt-4 text-sm text-zinc-500">Ładowanie zadań...</p>
             ) : projectTasks.length === 0 ? (
-              <p className="mt-4 text-sm text-zinc-500">No tasks available.</p>
+              <p className="mt-4 text-sm text-zinc-500">Brak zadań.</p>
             ) : (
               <ul className="mt-4 space-y-3">
                 {projectTasks.map((task) => (
@@ -747,11 +747,11 @@ export default function ProjectAiWorkspacePage() {
 
           <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-              Knowledge Entries
+              Wiedza
             </p>
             {context.knowledgeEntries.length === 0 ? (
               <p className="mt-4 text-sm text-zinc-500">
-                No knowledge entries available.
+                Brak wpisów wiedzy.
               </p>
             ) : (
               <div className="mt-4 space-y-3">

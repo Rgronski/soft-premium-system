@@ -42,7 +42,7 @@ function createLocalRecoveryState(
     return {
       tasks: getTasks(projectId),
       recoveryMessage:
-        "Project Brain context is unavailable, so showing locally saved tasks for this project.",
+        "Kontekst Project Brain jest chwilowo niedostępny, więc pokazuję lokalnie zapisane zadania dla tego projektu.",
     };
   } catch {
     return null;
@@ -201,13 +201,13 @@ export default function ProjectTasksPage() {
       <div className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-            Task Intake
+            Wprowadzanie zadań
           </p>
           <h2 className="text-2xl font-semibold text-zinc-50">
-            Capture the next task
+            Dodaj kolejne zadanie
           </h2>
           <p className="text-sm text-zinc-400">
-            Capture the next task for the current project workspace.
+            Dodaj kolejne zadanie dla bieżącej przestrzeni pracy projektu.
           </p>
         </div>
 
@@ -229,7 +229,7 @@ export default function ProjectTasksPage() {
               type="text"
               value={taskTitle}
               onChange={(event) => setTaskTitle(event.target.value)}
-              placeholder="Task title"
+              placeholder="Tytuł zadania"
               className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-100 outline-none focus:border-zinc-500"
             />
 
@@ -238,19 +238,19 @@ export default function ProjectTasksPage() {
               disabled={isSubmitting || isLoading}
               className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-200 transition-colors hover:border-zinc-700 hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isSubmitting ? "Zapisywanie..." : "Add task"}
+              {isSubmitting ? "Zapisywanie..." : "Dodaj zadanie"}
             </button>
           </form>
         </div>
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
           {isLoading ? (
-            <p className="text-sm text-zinc-400">Loading tasks...</p>
+            <p className="text-sm text-zinc-400">Ładowanie zadań...</p>
           ) : errorMessage ? (
             <p className="text-sm text-zinc-400">{errorMessage}</p>
           ) : tasks.length === 0 ? (
             <p className="text-sm text-zinc-400">
-              This project has no tasks yet. Create the first task to continue.
+              Ten projekt nie ma jeszcze zadań. Utwórz pierwsze zadanie, aby kontynuować.
             </p>
           ) : (
             <div className="space-y-3">

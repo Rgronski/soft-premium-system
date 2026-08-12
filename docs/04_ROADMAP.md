@@ -111,11 +111,76 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-019.0 - Application Version Visibility Foundation
+MS-020.0 - Polish UI Language Overlay Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-020.0 - Polish UI Language Overlay Foundation
+
+**Milestone**
+MS-020.0 - Polish UI Language Overlay Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Apply the smallest safe Polish UI language overlay to existing visible SPS OS surfaces without introducing a new i18n system or changing storage, routing, or product behavior.
+
+**Product Outcome**
+The repository now presents a first Polish UI overlay across the existing home, project, overview, task, and AI Workspace surfaces while keeping the canonical app version badge and existing task and knowledge flows intact. MS-020.0 also bumps the canonical app version to `0.020.0`.
+
+**Dependencies**
+* closed `MS-019.0 - Application Version Visibility Foundation`
+
+**Allowed Implementation Scope**
+* replace visible English labels with Polish copy on existing surfaces
+* keep canonical version strings unchanged
+* focused tests for the touched surfaces
+* SSOT synchronization for the overlay milestone
+
+**Forbidden Scope**
+* new i18n framework
+* route restructuring
+* storage architecture changes
+* AI provider changes
+* broad redesign
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/page.tsx`
+* `src/app/projects/page.tsx`
+* `src/app/projects/[id]/page.tsx`
+* `src/app/projects/[id]/tasks/page.tsx`
+* `src/app/projects/[id]/ai/page.tsx`
+* shared workspace UI components used by those surfaces
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `npm.cmd test -- src/app/page.test.tsx src/app/projects/page.test.tsx src/app/projects/[id]/page.test.tsx src/app/projects/[id]/tasks/page.test.tsx src/app/projects/[id]/ai/page.test.tsx`
+* `git diff --check`
+* `git status -sb`
+* confirm the visible copy is Polish on the touched surfaces
+* confirm `MS-020.0` is the latest completed milestone
 
 ## MS-019.0 - Application Version Visibility Foundation
 
@@ -156,6 +221,7 @@ The repository now uses the canonical app version `0.000.0` from `src/lib/app-ve
 * one canonical app version source
 * one small visible version badge in the existing app shell
 * focused tests for the visible version surface
+* milestone version bumps for `.0` app/platform milestones use `0.XXX.0`
 * SSOT synchronization for versioning rules
 
 **Forbidden Scope**
@@ -163,6 +229,7 @@ The repository now uses the canonical app version `0.000.0` from `src/lib/app-ve
 * versioning automation
 * package-manager churn
 * unrelated UI polish
+* patch/live-fix version policy expansion
 
 **Ownership Boundaries**
 * `src/lib/app-version.ts` owns the canonical app version string

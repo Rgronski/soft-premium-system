@@ -112,7 +112,7 @@ describe("ProjectAiWorkspacePage", () => {
 
     render(<ProjectAiWorkspacePage />);
 
-    expect(screen.getByText("Loading AI project context...")).toBeTruthy();
+    expect(screen.getByText("Ładowanie kontekstu AI projektu...")).toBeTruthy();
     await waitFor(() => {
       expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(1);
       expect(getBrowserAiProjectContextMock).toHaveBeenCalledWith("project-1");
@@ -121,13 +121,13 @@ describe("ProjectAiWorkspacePage", () => {
     expect(getTasksFromServerMock).toHaveBeenCalledWith("project-1");
     expect(screen.getByText("First task")).toBeTruthy();
     expect(screen.getByText("Second task")).toBeTruthy();
-    expect(screen.getByText("Latest retrieved memory")).toBeTruthy();
-    expect(screen.getByText("Latest memory: Guide")).toBeTruthy();
+    expect(screen.getByText("Ostatnio odzyskana pamięć")).toBeTruthy();
+    expect(screen.getByText("Ostatnia pamięć: Guide")).toBeTruthy();
     expect(screen.getByText("Note")).toBeTruthy();
     expect(screen.getByText("Body")).toBeTruthy();
-    expect(screen.getByText("Context excerpt: Longer content")).toBeTruthy();
+    expect(screen.getByText("Fragment kontekstu: Longer content")).toBeTruthy();
     expect(
-      screen.getByRole("button", { name: "Create task from memory" }),
+      screen.getByRole("button", { name: "Utwórz zadanie z pamięci" }),
     ).toBeTruthy();
   });
 
@@ -162,7 +162,7 @@ describe("ProjectAiWorkspacePage", () => {
       expect(screen.getByText("Alpha")).toBeTruthy();
     });
     expect(screen.getByText("Persisted task")).toBeTruthy();
-    expect(screen.queryByText("No tasks available.")).toBeNull();
+    expect(screen.queryByText("Brak zadań.")).toBeNull();
   });
 
   test("creates a task from the latest retrieved memory and keeps it through refresh", async () => {
@@ -214,7 +214,7 @@ describe("ProjectAiWorkspacePage", () => {
     });
 
     fireEvent.click(
-      screen.getByRole("button", { name: "Create task from memory" }),
+      screen.getByRole("button", { name: "Utwórz zadanie z pamięci" }),
     );
 
     await waitFor(() => {
@@ -243,7 +243,7 @@ describe("ProjectAiWorkspacePage", () => {
       ),
     ).toBeTruthy();
     expect(
-      screen.getByText("Context excerpt: Remember this follow-up."),
+      screen.getByText("Fragment kontekstu: Remember this follow-up."),
     ).toBeTruthy();
     expect(screen.getByText("Alpha")).toBeTruthy();
   });
@@ -262,8 +262,8 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     await waitFor(() => {
-      expect(screen.getByText("No tasks available.")).toBeTruthy();
-      expect(screen.getByText("No knowledge entries available.")).toBeTruthy();
+      expect(screen.getByText("Brak zadań.")).toBeTruthy();
+      expect(screen.getByText("Brak wpisów wiedzy.")).toBeTruthy();
     });
   });
 
@@ -275,9 +275,9 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     await waitFor(() => {
-      expect(screen.getByText("Project not found.")).toBeTruthy();
+      expect(screen.getByText("Projekt nie został znaleziony.")).toBeTruthy();
       expect(
-        screen.queryByText("AI project context unavailable."),
+        screen.queryByText("Kontekst AI projektu jest niedostępny."),
       ).toBeNull();
     });
   });
@@ -290,8 +290,8 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     await waitFor(() => {
-      expect(screen.getByText("AI project context unavailable.")).toBeTruthy();
-      expect(screen.queryByText("Project not found.")).toBeNull();
+      expect(screen.getByText("Kontekst AI projektu jest niedostępny.")).toBeTruthy();
+      expect(screen.queryByText("Projekt nie został znaleziony.")).toBeNull();
     });
   });
 
@@ -322,8 +322,8 @@ describe("ProjectAiWorkspacePage", () => {
     expect(
       screen.getByText("Next Generate will use no local conversation context."),
     ).toBeTruthy();
-    expect(screen.getByText("No tasks available.")).toBeTruthy();
-    expect(screen.getByText("No knowledge entries available.")).toBeTruthy();
+    expect(screen.getByText("Brak zadań.")).toBeTruthy();
+    expect(screen.getByText("Brak wpisów wiedzy.")).toBeTruthy();
   });
 
   test("selecting a starter prompt fills and replaces the instruction field without submitting", async () => {
@@ -2223,7 +2223,7 @@ describe("ProjectAiWorkspacePage", () => {
       expect(screen.getByText("Architecture note")).toBeTruthy();
     });
 
-    expect(screen.queryByText("Project not found.")).toBeNull();
+    expect(screen.queryByText("Projekt nie został znaleziony.")).toBeNull();
     expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(2);
     expect(fetchMock).toHaveBeenCalledTimes(4);
   });
@@ -2783,7 +2783,7 @@ describe("ProjectAiWorkspacePage", () => {
 
     const { rerender } = render(<ProjectAiWorkspacePage />);
 
-    expect(screen.getByText("Loading AI project context...")).toBeTruthy();
+    expect(screen.getByText("Ładowanie kontekstu AI projektu...")).toBeTruthy();
 
     useParamsMock.mockReturnValue({ id: "project-2" });
     rerender(<ProjectAiWorkspacePage />);

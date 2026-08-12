@@ -51,7 +51,7 @@ describe("ProjectsPage", () => {
   test("creates a project through the server boundary and stores the same id locally", async () => {
     render(<ProjectsPage />);
 
-    fireEvent.change(screen.getByPlaceholderText("My First Project"), {
+    fireEvent.change(screen.getByPlaceholderText("Mój pierwszy projekt"), {
       target: {
         value: "Alpha",
       },
@@ -64,7 +64,7 @@ describe("ProjectsPage", () => {
     await waitFor(() => {
       expect(screen.getByDisplayValue("C:\\SPS_OS_WORK\\alpha")).toBeTruthy();
     });
-    fireEvent.click(screen.getByRole("button", { name: "Create Project" }));
+    fireEvent.click(screen.getByRole("button", { name: "Utwórz projekt" }));
 
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalledTimes(1);

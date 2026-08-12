@@ -18,19 +18,19 @@ export function WorkspacePanels({
 }: WorkspacePanelsProps) {
   const kpiCards = [
     {
-      label: "Clients",
+      label: "Klienci",
       value: clientsCount,
     },
     {
-      label: "Services",
+      label: "Usługi",
       value: servicesCount,
     },
     {
-      label: "Visits",
+      label: "Wizyty",
       value: visitsCount,
     },
     {
-      label: "Upcoming Visits",
+      label: "Nadchodzące wizyty",
       value: upcomingVisitsCount,
     },
   ];
@@ -38,23 +38,23 @@ export function WorkspacePanels({
   const quickActions = [
     {
       href: `/projects/${projectId}/tasks`,
-      label: "Add Task",
+      label: "Dodaj zadanie",
     },
     {
       href: `/projects/${projectId}/clients/new`,
-      label: "Add Client",
+      label: "Dodaj klienta",
     },
     {
       href: `/projects/${projectId}/services/new`,
-      label: "Add Service",
+      label: "Dodaj usługę",
     },
     {
       href: `/projects/${projectId}/visits/new`,
-      label: "Schedule Visit",
+      label: "Zaplanuj wizytę",
     },
     {
       href: `/projects/${projectId}/calendar`,
-      label: "Open Calendar",
+      label: "Otwórz kalendarz",
     },
   ];
 
@@ -80,7 +80,7 @@ export function WorkspacePanels({
 
       <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
         <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-          Quick Actions
+          Szybkie akcje
         </p>
         <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
           {quickActions.map((quickAction) => (

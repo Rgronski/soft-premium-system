@@ -92,20 +92,20 @@ describe("Home", () => {
     render(<Home />);
 
     expect(
-      screen.getByRole("link", { name: "Continue" }).getAttribute("href"),
+      screen.getByRole("link", { name: "Kontynuuj" }).getAttribute("href"),
     ).toBe("/projects/project-2");
   });
 
   test("empty state CTA points to project creation with a matching label", () => {
     render(<Home />);
 
-    expect(screen.getByText("Create your first project")).toBeTruthy();
+    expect(screen.getByText("Utwórz pierwszy projekt")).toBeTruthy();
     expect(
-      screen.getByText("Create the first project to begin the primary flow."),
+      screen.getByText("Utwórz pierwszy projekt, aby rozpocząć główny przepływ."),
     ).toBeTruthy();
     expect(screen.getByText(`Workspace v${APP_VERSION}`)).toBeTruthy();
     expect(
-      screen.getByRole("link", { name: "Create Project" }).getAttribute("href"),
+      screen.getByRole("link", { name: "Utwórz projekt" }).getAttribute("href"),
     ).toBe("/projects");
   });
 

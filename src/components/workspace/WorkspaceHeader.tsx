@@ -40,35 +40,35 @@ export function WorkspaceHeader({
   const projectId = params.id;
   const overviewItems = [
     {
-      label: "Project Name",
+      label: "Nazwa projektu",
       value: projectName,
     },
     {
-      label: "Task Count",
+      label: "Liczba zadań",
       value: taskCount,
     },
     {
-      label: "Knowledge Count",
+      label: "Liczba wpisów wiedzy",
       value: knowledgeCount,
     },
     {
-      label: "Workflow Health",
+      label: "Stan przepływu pracy",
       value: workflowHealth,
     },
     {
-      label: "Workflow Confidence",
+      label: "Pewność przepływu",
       value: workflowConfidence,
     },
     {
-      label: "Next Step",
+      label: "Następny krok",
       value: workflowNextStep.label,
     },
     {
-      label: "Warnings",
+      label: "Ostrzeżenia",
       value: warningCount,
     },
     {
-      label: "Blockers",
+      label: "Blokady",
       value: blockerCount,
     },
   ];
@@ -77,10 +77,10 @@ export function WorkspaceHeader({
     <div className="space-y-4">
       <div className="space-y-2">
         <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-          Project Overview
+          Przegląd projektu
         </p>
         <h2 className="text-2xl font-semibold text-zinc-50">
-          Workspace Dashboard
+          Pulpit przestrzeni pracy
         </h2>
       </div>
 
@@ -103,7 +103,7 @@ export function WorkspaceHeader({
       {repositoryUrl ? (
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Repository
+            Repozytorium
           </p>
           {isExternalRepositoryUrl(repositoryUrl) ? (
             <a
@@ -112,7 +112,7 @@ export function WorkspaceHeader({
               rel="noreferrer noopener"
               className="mt-2 inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
             >
-              Open repository
+              Otwórz repozytorium
             </a>
           ) : (
             <p className="mt-2 break-all text-sm text-zinc-400">
@@ -124,7 +124,7 @@ export function WorkspaceHeader({
 
       <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
         <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-          Next Step Action
+          Następny krok
         </p>
         <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
@@ -140,7 +140,7 @@ export function WorkspaceHeader({
             href={`/projects/${projectId}/tasks`}
             className="inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
           >
-            Open tasks
+            Otwórz zadania
           </Link>
         </div>
       </div>

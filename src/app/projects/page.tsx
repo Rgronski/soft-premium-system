@@ -124,26 +124,24 @@ export default function ProjectsPage() {
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-8">
         <header>
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-            Project Creator
+            Tworzenie projektu
           </p>
 
-          <h1 className="text-4xl font-semibold">
-            New Project
-          </h1>
+          <h1 className="text-4xl font-semibold">Nowy projekt</h1>
 
           <p className="mt-2 text-zinc-400">
-            Start by entering the project name.
+            Zacznij od podania nazwy projektu.
           </p>
 
           <p className="text-zinc-400">
-            This is the first step of the project creation workflow.
+            To pierwszy krok w przepływie tworzenia projektu.
           </p>
         </header>
 
         <SectionCard>
           <label className="block">
             <span className="mb-2 block text-sm text-zinc-400">
-              Project Name
+              Nazwa projektu
             </span>
 
             <input
@@ -159,14 +157,14 @@ export default function ProjectsPage() {
                   );
                 }
               }}
-              placeholder="My First Project"
+              placeholder="Mój pierwszy projekt"
               className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 outline-none focus:border-zinc-500"
             />
           </label>
 
           <label className="mt-4 block">
             <span className="mb-2 block text-sm text-zinc-400">
-              Repository URL
+              Adres repozytorium
             </span>
 
             <input
@@ -180,7 +178,7 @@ export default function ProjectsPage() {
 
           <label className="mt-4 block">
             <span className="mb-2 block text-sm text-zinc-400">
-              Working Directory
+              Katalog roboczy
             </span>
 
             <input
@@ -195,7 +193,7 @@ export default function ProjectsPage() {
             />
 
             <p className="mt-2 text-xs text-zinc-500">
-              SPS-owned local path. Repository metadata stays separate.
+              Lokalna ścieżka należąca do SPS. Metadane repozytorium pozostają osobno.
             </p>
           </label>
 
@@ -205,7 +203,7 @@ export default function ProjectsPage() {
             disabled={isSubmitting}
             className="mt-6 rounded-full bg-white px-5 py-2 text-sm font-medium text-zinc-950"
           >
-            {isSubmitting ? "Creating..." : "Create Project"}
+            {isSubmitting ? "Tworzenie..." : "Utwórz projekt"}
           </button>
 
           {errorMessage ? (

@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 076 - MS-020.0 Polish UI Language Overlay Foundation
+
+### Date
+
+2026-08-12
+
+### Completed
+
+* Applied the smallest Polish UI copy overlay to the existing visible home, project, overview, task, and AI Workspace surfaces.
+* Kept the canonical app version badge, task storage behavior, and Knowledge behavior unchanged.
+* Bumped the canonical app version to `0.020.0` for `MS-020.0`.
+* Updated the focused route tests so they verify the Polish overlay on the touched surfaces.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-020.0` as the current product milestone.
+
+### Notes
+
+* `MS-019.0` remains the latest completed milestone.
+* App/platform `.0` milestones now use `0.XXX.0` as the temporary versioning rule.
+* No i18n framework or routing change was introduced.
+
 ## Session 076 - MS-019.0 live verification and branch sync
 
 ### Date

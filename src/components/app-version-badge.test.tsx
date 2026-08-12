@@ -16,6 +16,6 @@ describe("AppVersionBadge", () => {
     render(<AppVersionBadge />);
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("0.000.0");
+    expect(APP_VERSION).toBe("0.020.0");
   });
 });

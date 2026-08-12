@@ -265,18 +265,18 @@ export default function ProjectWorkspacePage() {
                 Project Readiness
               </p>
               <p className="mt-2 text-sm">
-                Project Brain is {projectBrainStatus}. This project is not ready
-                for production use yet.
+                Project Brain ma status {projectBrainStatus}. Ten projekt nie
+                jest jeszcze gotowy do użycia produkcyjnego.
               </p>
             </div>
           ) : null}
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-              Guided Flow
+              Przewodnik przepływu
             </p>
             <p className="mt-2 text-sm text-zinc-400">
-              Start here: choose a task from the list below, then move through
-              the workspace in order.
+              Zacznij tutaj: wybierz zadanie z listy poniżej, a potem przechodź
+              przez przestrzeń pracy po kolei.
             </p>
             <ol className="mt-4 flex flex-wrap gap-2">
               {projectJourneySteps.map((step, index) => (

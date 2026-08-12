@@ -81,7 +81,7 @@ describe("ProjectTasksPage", () => {
   test("initial load calls getTasksFromServer with route projectId and shows loading state", async () => {
     render(<ProjectTasksPage />);
 
-    expect(screen.getByText("Loading tasks...")).toBeTruthy();
+    expect(screen.getByText("Ładowanie zadań...")).toBeTruthy();
 
     await waitFor(() => {
       expect(getTasksFromServerMock).toHaveBeenCalledTimes(1);
@@ -93,12 +93,12 @@ describe("ProjectTasksPage", () => {
     render(<ProjectTasksPage />);
 
     await waitFor(() => {
-      expect(screen.getByPlaceholderText("Task title")).toBeTruthy();
+      expect(screen.getByPlaceholderText("Tytuł zadania")).toBeTruthy();
     });
 
-    expect(screen.getByText("Task Intake")).toBeTruthy();
-    expect(screen.getByText("Capture the next task")).toBeTruthy();
-    expect(document.activeElement).toBe(screen.getByPlaceholderText("Task title"));
+    expect(screen.getByText("Wprowadzanie zadań")).toBeTruthy();
+    expect(screen.getByText("Dodaj kolejne zadanie")).toBeTruthy();
+    expect(document.activeElement).toBe(screen.getByPlaceholderText("Tytuł zadania"));
   });
 
   test("renders canonical tasks after initial load success", async () => {
@@ -128,7 +128,7 @@ describe("ProjectTasksPage", () => {
     render(<ProjectTasksPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("This project has no tasks yet. Create the first task to continue.")).toBeTruthy();
+      expect(screen.getByText("Ten projekt nie ma jeszcze zadań. Utwórz pierwsze zadanie, aby kontynuować.")).toBeTruthy();
     });
   });
 
@@ -169,7 +169,7 @@ describe("ProjectTasksPage", () => {
     await waitFor(() => {
       expect(
         screen.getByText(
-          "Project Brain context is unavailable, so showing locally saved tasks for this project.",
+        "Kontekst Project Brain jest chwilowo niedostępny, więc pokazuję lokalnie zapisane zadania dla tego projektu.",
         ),
       ).toBeTruthy();
     });
@@ -194,11 +194,11 @@ describe("ProjectTasksPage", () => {
     render(<ProjectTasksPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("This project has no tasks yet. Create the first task to continue.")).toBeTruthy();
+      expect(screen.getByText("Ten projekt nie ma jeszcze zadań. Utwórz pierwsze zadanie, aby kontynuować.")).toBeTruthy();
     });
 
-    const input = screen.getByPlaceholderText("Task title") as HTMLInputElement;
-    const button = screen.getByRole("button", { name: "Add task" });
+    const input = screen.getByPlaceholderText("Tytuł zadania") as HTMLInputElement;
+    const button = screen.getByRole("button", { name: "Dodaj zadanie" });
 
     fireEvent.change(input, {
       target: { value: "  First task  " },
@@ -242,11 +242,11 @@ describe("ProjectTasksPage", () => {
     render(<ProjectTasksPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("This project has no tasks yet. Create the first task to continue.")).toBeTruthy();
+      expect(screen.getByText("Ten projekt nie ma jeszcze zadań. Utwórz pierwsze zadanie, aby kontynuować.")).toBeTruthy();
     });
 
-    const input = screen.getByPlaceholderText("Task title") as HTMLInputElement;
-    const button = screen.getByRole("button", { name: "Add task" });
+    const input = screen.getByPlaceholderText("Tytuł zadania") as HTMLInputElement;
+    const button = screen.getByRole("button", { name: "Dodaj zadanie" });
 
     fireEvent.change(input, {
       target: { value: "   " },
@@ -268,11 +268,11 @@ describe("ProjectTasksPage", () => {
     render(<ProjectTasksPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("This project has no tasks yet. Create the first task to continue.")).toBeTruthy();
+      expect(screen.getByText("Ten projekt nie ma jeszcze zadań. Utwórz pierwsze zadanie, aby kontynuować.")).toBeTruthy();
     });
 
-    const input = screen.getByPlaceholderText("Task title") as HTMLInputElement;
-    const button = screen.getByRole("button", { name: "Add task" });
+    const input = screen.getByPlaceholderText("Tytuł zadania") as HTMLInputElement;
+    const button = screen.getByRole("button", { name: "Dodaj zadanie" });
 
     fireEvent.change(input, { target: { value: "First task" } });
     fireEvent.click(button);
@@ -296,13 +296,13 @@ describe("ProjectTasksPage", () => {
     render(<ProjectTasksPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("This project has no tasks yet. Create the first task to continue.")).toBeTruthy();
+      expect(screen.getByText("Ten projekt nie ma jeszcze zadań. Utwórz pierwsze zadanie, aby kontynuować.")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByPlaceholderText("Task title"), {
+    fireEvent.change(screen.getByPlaceholderText("Tytuł zadania"), {
       target: { value: "First task" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Add task" }));
+    fireEvent.click(screen.getByRole("button", { name: "Dodaj zadanie" }));
 
     await waitFor(() => {
       expect(screen.getByText("Projekt nie istnieje.")).toBeTruthy();
@@ -317,13 +317,13 @@ describe("ProjectTasksPage", () => {
     const { rerender } = render(<ProjectTasksPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("This project has no tasks yet. Create the first task to continue.")).toBeTruthy();
+      expect(screen.getByText("Ten projekt nie ma jeszcze zadań. Utwórz pierwsze zadanie, aby kontynuować.")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByPlaceholderText("Task title"), {
+    fireEvent.change(screen.getByPlaceholderText("Tytuł zadania"), {
       target: { value: "First task" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Add task" }));
+    fireEvent.click(screen.getByRole("button", { name: "Dodaj zadanie" }));
 
     await waitFor(() => {
       expect(createTaskOnServerMock).toHaveBeenCalledTimes(1);
@@ -339,16 +339,16 @@ describe("ProjectTasksPage", () => {
     expect(getTasksFromServerMock.mock.calls[1]?.[0]).toBe("project-2");
 
     await waitFor(() => {
-      expect(screen.getByText("This project has no tasks yet. Create the first task to continue.")).toBeTruthy();
+      expect(screen.getByText("Ten projekt nie ma jeszcze zadań. Utwórz pierwsze zadanie, aby kontynuować.")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByPlaceholderText("Task title"), {
+    fireEvent.change(screen.getByPlaceholderText("Tytuł zadania"), {
       target: { value: "Second task" },
     });
 
     await waitFor(() => {
       expect(
-        (screen.getByRole("button", { name: "Add task" }) as HTMLButtonElement)
+        (screen.getByRole("button", { name: "Dodaj zadanie" }) as HTMLButtonElement)
           .disabled,
       ).toBe(false);
     });
@@ -362,7 +362,7 @@ describe("ProjectTasksPage", () => {
 
     await waitFor(() => {
       expect(
-        (screen.getByPlaceholderText("Task title") as HTMLInputElement).value,
+        (screen.getByPlaceholderText("Tytuł zadania") as HTMLInputElement).value,
       ).toBe("Second task");
     });
     expect(screen.queryByText("First task")).toBeNull();
