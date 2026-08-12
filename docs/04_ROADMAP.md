@@ -13981,10 +13981,13 @@ MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
 Product Milestone
 
 **Contract Status**
-APPROVED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
-YES
+NO
+
+**Runtime Status**
+CLOSED
 
 **Owner**
 Product Owner
@@ -14000,6 +14003,12 @@ Define the smallest safe read/recovery boundary for Knowledge visibility after a
 
 **Product Outcome**
 The repository now records one minimal read/recovery contract for Knowledge visibility after save, keeps the canonical Project Brain read boundary intact, and does not change the POST/write path.
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Dependencies**
 * closed `MS-017.1 - Project Brain Knowledge Intake Controlled Write Boundary Foundation`
