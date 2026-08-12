@@ -50,7 +50,7 @@ MS-017.2 - Project Brain Knowledge Read Recovery Boundary Foundation
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-017.2 is the completed controlled read/recovery boundary milestone for Project Brain knowledge visibility after save; the repository kept the boundary narrow, explicitly allowed the existing local fallback as a recovery path, and now records the milestone as completed without adding new runtime changes.
+MS-017.2 is PUBLISHED / CLOSED in the current local workspace as the Project Brain Knowledge Read Recovery Boundary Foundation; the repository now records the smallest controlled Project Brain knowledge read/recovery contract boundary as a docs-only publication, keeps the existing local fallback allowed as a recovery path, and does not add new runtime behavior.
 
 MS-017.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain Knowledge Intake Controlled Write Boundary Foundation; the repository now confirms the existing canonical knowledge save path already exists, keeps the write boundary narrow, and did not require a source patch during diagnosis.
 
