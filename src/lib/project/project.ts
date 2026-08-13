@@ -91,6 +91,19 @@ export function createProject(
   return newProject;
 }
 
+export function upsertProject(project: Project): Project {
+  const projects = getProjects();
+  const updatedProjects = projects.some((savedProject) => savedProject.id === project.id)
+    ? projects.map((savedProject) =>
+        savedProject.id === project.id ? project : savedProject,
+      )
+    : [...projects, project];
+
+  localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(updatedProjects));
+
+  return project;
+}
+
 export function deleteProject(id: string): void {
   const projects = getProjects();
   const updatedProjects = projects.filter((project) => project.id !== id);

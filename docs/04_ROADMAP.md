@@ -109,15 +109,87 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 078 synchronized the accepted `MS-021.7` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 078 synchronized the accepted `MS-021.8` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.7 - Local Project Discovery Open Existing Project Foundation
+MS-021.8 - Local Project Discovery Attach Existing Project Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.8 - Local Project Discovery Attach Existing Project Foundation
+
+**Milestone**
+MS-021.8 - Local Project Discovery Attach Existing Project Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Runtime Status**
+PUBLISHED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Expose the smallest safe attach action for filesystem-discovered projects by saving the discovered project into the existing browser local-state project flow before preserving the discovered list boundary.
+
+**Product Outcome**
+The repository now shows a `Przypnij` action for filesystem-discovered projects, writes the discovered project into browser/localStorage through the existing local project state flow, preserves `id`, `name`, `repositoryUrl`, `workingDirectory`, and filesystem status, and keeps the discovered list separate until explicit user action. The attach path also deduplicates by project id so an already-known local project is replaced instead of duplicated.
+
+**Dependencies**
+* closed `MS-021.7 - Local Project Discovery Open Existing Project Foundation`
+
+**Allowed Implementation Scope**
+* explicit attach action on discovered projects
+* minimal browser-state seeding for attach
+* anti-duplication handling for the existing local project state helper
+* focused page/UI and helper tests for the touched boundary
+* preserve the future database-backed registry/sync path
+
+**Forbidden Scope**
+* full Attach/sync/register-to-database flow
+* automatic merge into browser/localStorage project state
+* manifest format changes
+* new storage providers
+* UI redesign
+* route restructuring beyond the minimal attach action
+
+**Ownership Boundaries**
+* `src/app/projects/page.tsx` and `src/app/projects/page.test.tsx` own the attach-existing-project UI contract
+* `src/lib/project/project.ts` and `src/lib/project/project.test.ts` own the local-state attach helper contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `npm.cmd test -- src/app/projects/page.test.tsx`
+* `npm.cmd test -- src/lib/project/project.test.ts`
+* `git diff --check`
+* `git status -sb`
+* confirm discovered projects can be attached into the existing local project state
+* confirm duplicate local entries are not created for the same discovered project id
 
 ## MS-021.7 - Local Project Discovery Open Existing Project Foundation
 

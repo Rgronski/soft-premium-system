@@ -118,6 +118,48 @@ describe("ProjectsPage", () => {
     ]);
   });
 
+  test("attaches a filesystem-discovered project without duplicating its local id", async () => {
+    localStorage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "filesystem-project",
+          name: "Old Filesystem Project",
+          createdAt: "2026-08-01T10:00:00.000Z",
+        },
+        {
+          id: "local-project",
+          name: "Local Project",
+          createdAt: "2026-08-01T11:00:00.000Z",
+        },
+      ]),
+    );
+
+    render(<ProjectsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Filesystem Project")).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Przypnij" }));
+
+    expect(
+      JSON.parse(localStorage.getItem("soft-premium-system.projects") ?? "[]"),
+    ).toEqual([
+      expect.objectContaining({
+        id: "filesystem-project",
+        name: "Filesystem Project",
+        workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project",
+        projectFilesystemStatus: "manifest-present",
+      }),
+      {
+        id: "local-project",
+        name: "Local Project",
+        createdAt: "2026-08-01T11:00:00.000Z",
+      },
+    ]);
+  });
+
   test("creates a project through the server boundary and stores the same id locally", async () => {
     render(<ProjectsPage />);
 

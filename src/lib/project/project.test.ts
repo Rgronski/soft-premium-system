@@ -5,6 +5,7 @@ import {
   createProject,
   deleteProject,
   getProjectById,
+  upsertProject,
 } from "./project";
 
 class MemoryStorage {
@@ -96,6 +97,50 @@ describe("createProject", () => {
       "C:\\SPS_OS_WORK\\alpha-project",
     );
     expect(savedProjects[0].projectBrainStatus).toBe("available");
+  });
+
+  test("upserts a project into the stored project list without duplicating the id", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Old Alpha",
+          createdAt: "2026-07-24T10:00:00.000Z",
+        },
+        {
+          id: "project-2",
+          name: "Beta",
+          createdAt: "2026-07-24T11:00:00.000Z",
+        },
+      ]),
+    );
+
+    const project = upsertProject({
+      id: "project-1",
+      name: "Alpha",
+      workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+      projectFilesystemStatus: "manifest-present",
+      createdAt: "2026-08-13T10:00:00.000Z",
+    });
+
+    expect(project.name).toBe("Alpha");
+    expect(
+      JSON.parse(storage.getItem("soft-premium-system.projects") ?? "[]"),
+    ).toEqual([
+      {
+        id: "project-1",
+        name: "Alpha",
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+        projectFilesystemStatus: "manifest-present",
+        createdAt: "2026-08-13T10:00:00.000Z",
+      },
+      {
+        id: "project-2",
+        name: "Beta",
+        createdAt: "2026-07-24T11:00:00.000Z",
+      },
+    ]);
   });
 
   test("repairs a pending existing project with a persisted working directory when it is loaded", () => {
