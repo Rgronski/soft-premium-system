@@ -109,15 +109,85 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 077 completed the Session Close Protocol after synchronizing the accepted `MS-021.6` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 078 synchronized the accepted `MS-021.7` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.6 - Local Project Discovery UI Read-Only Foundation
+MS-021.7 - Local Project Discovery Open Existing Project Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.7 - Local Project Discovery Open Existing Project Foundation
+
+**Milestone**
+MS-021.7 - Local Project Discovery Open Existing Project Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Runtime Status**
+PUBLISHED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Expose the smallest safe open action for filesystem-discovered projects by seeding the discovered project into the existing browser local-state create flow before navigating to the existing project detail route.
+
+**Product Outcome**
+The repository now shows an `Otwórz` action for filesystem-discovered projects, writes the discovered project into local browser state through the existing `createProject(...)` flow, preserves `id`, `name`, `repositoryUrl`, `workingDirectory`, and filesystem status, and navigates to `/projects/[id]`. Discovered projects remain separate from browser/localStorage project state until explicitly opened.
+
+**Dependencies**
+* closed `MS-021.6 - Local Project Discovery UI Read-Only Foundation`
+
+**Allowed Implementation Scope**
+* minimal Open action on discovered projects
+* minimal browser-state seeding before navigation
+* focused page/UI tests for the touched boundary
+* SSOT synchronization for the open-existing-project milestone
+* preserve the future database-backed registry/sync path
+
+**Forbidden Scope**
+* full Attach/sync/register-to-database flow
+* automatic merge into browser/localStorage project state
+* manifest format changes
+* new storage providers
+* UI redesign
+* route restructuring beyond the minimal open action
+
+**Ownership Boundaries**
+* `src/app/projects/page.tsx` and `src/app/projects/page.test.tsx` own the open-existing-project UI contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `npm.cmd test -- src/app/projects/page.test.tsx`
+* `git diff --check`
+* `git status -sb`
+* confirm discovered projects can be opened through the existing project detail route
+* confirm the future database-backed registry/sync path remains unimplemented
 
 ## MS-021.6 - Local Project Discovery UI Read-Only Foundation
 

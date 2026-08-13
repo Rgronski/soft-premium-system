@@ -89,7 +89,33 @@ describe("ProjectsPage", () => {
     });
 
     expect(screen.getByText("Projekty wykryte na dysku")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Otwórz" })).toBeTruthy();
     expect(localStorage.getItem("soft-premium-system.projects")).toBeNull();
+  });
+
+  test("opens a filesystem-discovered project by seeding local browser state first", async () => {
+    render(<ProjectsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Filesystem Project")).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Otwórz" }));
+
+    await waitFor(() => {
+      expect(pushMock).toHaveBeenCalledWith("/projects/filesystem-project");
+    });
+
+    expect(
+      JSON.parse(localStorage.getItem("soft-premium-system.projects") ?? "[]"),
+    ).toEqual([
+      expect.objectContaining({
+        id: "filesystem-project",
+        name: "Filesystem Project",
+        workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project",
+        projectFilesystemStatus: "manifest-present",
+      }),
+    ]);
   });
 
   test("creates a project through the server boundary and stores the same id locally", async () => {

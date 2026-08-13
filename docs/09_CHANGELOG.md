@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 078 - MS-021.7 local project discovery open existing project control-files sync
+
+### Date
+
+2026-08-13
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-021.7 - Local Project Discovery Open Existing Project Foundation` as the latest completed product milestone.
+* Confirmed no app version bump was required because `MS-021.7` is not a `.0` milestone.
+* Appended exactly one Session 078 usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* No product code changed in this control-files sync step.
+* `Current Product Milestone` and `Next Product Milestone` remain `NONE / Product Owner decision required`.
+
 ## Session 077 - Session close and handoff synchronization
 
 ### Date
