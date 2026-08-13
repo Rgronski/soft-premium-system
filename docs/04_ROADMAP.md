@@ -136,6 +136,15 @@ NO
 **Runtime Status**
 CLOSED
 
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
 **Owner**
 Product Owner
 
