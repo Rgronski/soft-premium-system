@@ -113,7 +113,7 @@ Session 077 completed the Session Close Protocol after synchronizing the accepte
 
 ## Latest Completed Product Milestone
 
-MS-020.0 - Polish UI Language Overlay Foundation
+MS-021.6 - Local Project Discovery UI Read-Only Foundation
 
 ## Next
 
