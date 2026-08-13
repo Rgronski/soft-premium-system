@@ -223,7 +223,7 @@ Active Work Item: Session close protocol
 Current Mode: CLOSED
 Completed Capability Items: Session 077 synchronized the MS-021.6 control files after accepted implementation; Session 077 appended the MS-021.6 usage entry; Session 077 created the Session 077 handoff; Session 077 appended the Session 077 close usage entry; Session 077 generated the fresh session package; Session 077 completed the Session Close Protocol
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-021.6 - Local Project Discovery UI Read-Only Foundation
+Latest Completed Product Milestone: MS-020.0 - Polish UI Language Overlay Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
 Latest Completed Capability Item: Session 077 completed the Session Close Protocol

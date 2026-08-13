@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-021.6 - Local Project Discovery UI Read-Only Foundation
+MS-020.0 - Polish UI Language Overlay Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required

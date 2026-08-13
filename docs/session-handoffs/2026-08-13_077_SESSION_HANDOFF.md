@@ -25,7 +25,7 @@ Push Status: synchronized 0 / 0 after Session 077 close publication
 
 Milestone State:
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Milestone: MS-021.6 - Local Project Discovery UI Read-Only Foundation
+Latest Completed Milestone: MS-020.0 - Polish UI Language Overlay Foundation
 
 Verification:
 Verification Status: PASS
