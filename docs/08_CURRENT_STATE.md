@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-021.3 - Local Project Directory Reopen Discovery Foundation
+MS-021.4 - Local Project Directory Discovery Contract Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
@@ -56,7 +56,7 @@ MS-019.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 
 MS-020.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Polish UI Language Overlay Foundation; the repository now applies the smallest Polish copy overlay to the existing visible home, project, overview, task, and AI Workspace surfaces while keeping the canonical version badge, task storage behavior, and Knowledge behavior unchanged. The canonical app version is now `0.020.0`.
 
-Session 077 is now synchronizing the accepted `MS-021.3` control files in the current local workspace, and the repository remains aligned with `origin/main` at `0 / 0` from the last verified commit `3408130`.
+Session 077 is now synchronizing the accepted `MS-021.4` control files in the current local workspace, and the repository remains aligned with `origin/main` at `0 / 0` from the last verified commit `3408130`.
 
 MS-021.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Filesystem Authority Foundation; the repository now writes a minimal `sps-project.json` manifest into the project working directory during project creation so project identity is physically anchored on disk while the existing database insert path remains intact. The local filesystem manifest is now the first authority anchor, and the future database-backed registry or sync path remains preserved for a later milestone.
 
@@ -65,6 +65,8 @@ MS-021.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 MS-021.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Directory Initialization Contents Foundation; the repository now writes a deterministic `README.md` into newly created local project directories so they are no longer an effectively empty filesystem artifact, while keeping `sps-project.json` unchanged as the canonical manifest and preserving the future database-backed registry or sync path. The canonical app version is now `0.021.2`.
 
 MS-021.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Directory Reopen Discovery Foundation; the repository now exposes a minimal server helper that reads and validates `sps-project.json` from a known local project directory so a project can be reopened from filesystem authority without a broader import or scanner flow. The helper returns `manifest-present` for valid manifests and `null` for missing or invalid manifests. The canonical app version is now `0.021.3`.
+
+MS-021.4 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Directory Discovery Contract Foundation; the repository now exposes a minimal server discovery helper that inspects immediate child directories of `C:\SPS_OS_WORK`, reuses the known-directory reopen helper, and returns only valid manifest-backed projects while ignoring missing or invalid manifests safely. The canonical app version is now `0.021.4`.
 
 Versioning rule: accepted app/platform `.0` milestones bump the controlled app version source to `0.XXX.0`. Patch and live-fix handling remains deferred until needed, and non-MS categories such as WF remain deferred until needed.
 

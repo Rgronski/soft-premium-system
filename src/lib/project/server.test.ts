@@ -4,12 +4,14 @@ vi.mock("server-only", () => ({}));
 
 const mkdirMock = vi.fn();
 const readFileMock = vi.fn();
+const readdirMock = vi.fn();
 const writeFileMock = vi.fn();
 const neonMock = vi.fn();
 
 vi.mock("node:fs/promises", () => ({
   mkdir: mkdirMock,
   readFile: readFileMock,
+  readdir: readdirMock,
   writeFile: writeFileMock,
 }));
 
@@ -34,8 +36,76 @@ afterEach(() => {
   neonMock.mockReset();
   mkdirMock.mockReset();
   readFileMock.mockReset();
+  readdirMock.mockReset();
   writeFileMock.mockReset();
   vi.restoreAllMocks();
+});
+
+describe("discoverServerProjectsFromWorkingRoot", () => {
+  it("returns only valid manifest-backed projects from immediate child directories", async () => {
+    readdirMock.mockResolvedValueOnce([
+      { name: "alpha", isDirectory: () => true },
+      { name: "notes.txt", isDirectory: () => false },
+      { name: "bravo", isDirectory: () => true },
+    ]);
+
+    readFileMock.mockImplementation(async (path: string) => {
+      if (path === "C:\\SPS_OS_WORK\\alpha\\sps-project.json") {
+        return JSON.stringify({
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-24T10:11:12.000Z",
+        });
+      }
+
+      if (path === "C:\\SPS_OS_WORK\\bravo\\sps-project.json") {
+        return JSON.stringify({
+          id: "project-2",
+          name: "Bravo",
+          repositoryUrl: "https://github.com/example/bravo",
+          createdAt: "2026-07-24T10:11:13.000Z",
+        });
+      }
+
+      throw new Error("ENOENT");
+    });
+
+    const { discoverServerProjectsFromWorkingRoot } = await loadServerModule();
+    const result = await discoverServerProjectsFromWorkingRoot(
+      "C:\\SPS_OS_WORK",
+    );
+
+    expect(readdirMock).toHaveBeenCalledWith("C:\\SPS_OS_WORK", {
+      withFileTypes: true,
+    });
+    expect(result).toEqual([
+      {
+        id: "project-1",
+        name: "Alpha",
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+        projectFilesystemStatus: "manifest-present",
+        createdAt: "2026-07-24T10:11:12.000Z",
+      },
+      {
+        id: "project-2",
+        name: "Bravo",
+        repositoryUrl: "https://github.com/example/bravo",
+        workingDirectory: "C:\\SPS_OS_WORK\\bravo",
+        projectFilesystemStatus: "manifest-present",
+        createdAt: "2026-07-24T10:11:13.000Z",
+      },
+    ]);
+  });
+
+  it("returns an empty list when the root cannot be read", async () => {
+    readdirMock.mockRejectedValueOnce(new Error("permission denied"));
+
+    const { discoverServerProjectsFromWorkingRoot } = await loadServerModule();
+
+    await expect(
+      discoverServerProjectsFromWorkingRoot("C:\\SPS_OS_WORK"),
+    ).resolves.toEqual([]);
+  });
 });
 
 describe("getServerProjectByWorkingDirectory", () => {

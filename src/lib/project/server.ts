@@ -1,6 +1,6 @@
 import "server-only";
 
-import { access, mkdir, readFile, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { neon } from "@neondatabase/serverless";
 
@@ -184,6 +184,41 @@ export async function getServerProjectByWorkingDirectory(
     };
   } catch {
     return null;
+  }
+}
+
+export async function discoverServerProjectsFromWorkingRoot(
+  workingRoot: string,
+): Promise<Project[]> {
+  const normalizedWorkingRoot = workingRoot.trim();
+
+  if (!normalizedWorkingRoot) {
+    return [];
+  }
+
+  try {
+    const entries = await readdir(normalizedWorkingRoot, {
+      withFileTypes: true,
+    });
+    const discoveredProjects: Project[] = [];
+
+    for (const entry of entries) {
+      if (!entry.isDirectory()) {
+        continue;
+      }
+
+      const project = await getServerProjectByWorkingDirectory(
+        join(normalizedWorkingRoot, entry.name),
+      );
+
+      if (project) {
+        discoveredProjects.push(project);
+      }
+    }
+
+    return discoveredProjects;
+  } catch {
+    return [];
   }
 }
 

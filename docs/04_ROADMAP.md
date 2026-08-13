@@ -109,15 +109,87 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 077 is synchronizing the accepted `MS-021.3` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 077 is synchronizing the accepted `MS-021.4` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.3 - Local Project Directory Reopen Discovery Foundation
+MS-021.4 - Local Project Directory Discovery Contract Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.4 - Local Project Directory Discovery Contract Foundation
+
+**Milestone**
+MS-021.4 - Local Project Directory Discovery Contract Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the smallest conservative discovery boundary for local project directories under `C:\SPS_OS_WORK` so the server can enumerate immediate child directories and reopen only valid manifest-backed projects without introducing a UI scanner, import flow, or storage migration.
+
+**Product Outcome**
+The repository now exposes `discoverServerProjectsFromWorkingRoot(workingRoot)` so the server can inspect immediate child directories of a known work root, reuse `getServerProjectByWorkingDirectory(...)`, and return only valid manifest-backed projects while ignoring missing or invalid manifests safely. The canonical app version is now `0.021.4`.
+
+**Dependencies**
+* closed `MS-021.3 - Local Project Directory Reopen Discovery Foundation`
+
+**Allowed Implementation Scope**
+* minimal server-side discovery helper
+* immediate child directory enumeration under the configured SPS work root
+* focused tests for the touched project server helper
+* SSOT synchronization for the discovery contract milestone
+* preserve the future database-backed registry/sync path
+
+**Forbidden Scope**
+* UI scanner
+* import workflow
+* database registry/sync
+* localStorage migration
+* task/knowledge/history disk loading
+* Project Brain rewrite
+* route restructuring
+* broad refactor
+
+**Ownership Boundaries**
+* `src/lib/project/server.ts` and `src/lib/project/server.test.ts` own the discovery contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `npm.cmd test -- --run src/components/app-version-badge.test.tsx`
+* `git diff --check`
+* `git status -sb`
+* confirm the discovery helper reuses known-directory reopen logic and filters invalid entries safely
+* confirm the future database-backed registry/sync path remains unimplemented
 
 ## MS-021.3 - Local Project Directory Reopen Discovery Foundation
 
