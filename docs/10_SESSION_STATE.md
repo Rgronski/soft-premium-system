@@ -236,5 +236,5 @@ Latest Verified Commit: 3408130
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open a new chat titled `077 SPS OS - Product Owner Decision` and attach `sps-session.zip`.
+Next Safe Step: Start Session 077 with the fresh session package and await Product Owner decision for the next milestone.
 Next Session Plan: Start Session 077 from the fresh session package and await Product Owner decision for the next milestone.
