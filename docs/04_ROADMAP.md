@@ -109,15 +109,87 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 077 is synchronizing the accepted `MS-021.4` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 077 is synchronizing the accepted `MS-021.5` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.4 - Local Project Directory Discovery Contract Foundation
+MS-021.5 - Local Project Discovery API Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.5 - Local Project Discovery API Foundation
+
+**Milestone**
+MS-021.5 - Local Project Discovery API Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Expose the conservative local project discovery boundary through the smallest safe API surface so the server can return discovered manifest-backed projects from `C:\SPS_OS_WORK` without introducing UI discovery, import orchestration, or storage migration.
+
+**Product Outcome**
+The repository now serves `GET /api/projects`, which returns `{ projects: [...] }` from `discoverServerProjectsFromWorkingRoot("C:\\SPS_OS_WORK")` and only exposes valid manifest-backed local projects. The canonical app version is now `0.021.5`.
+
+**Dependencies**
+* closed `MS-021.4 - Local Project Directory Discovery Contract Foundation`
+
+**Allowed Implementation Scope**
+* minimal server-only discovery API
+* conservative response shape for discovered local projects
+* focused route/server tests for the touched API boundary
+* SSOT synchronization for the discovery API milestone
+* preserve the future database-backed registry/sync path
+
+**Forbidden Scope**
+* UI scanner
+* import workflow
+* automatic localStorage merge
+* database sync
+* storage migration
+* task/knowledge/history disk loading
+* Project Brain rewrite
+* route restructuring beyond the minimal API route
+
+**Ownership Boundaries**
+* `src/app/api/projects/route.ts` and `src/app/api/projects/route.test.ts` own the API discovery contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `npm.cmd test -- --run src/app/api/projects/route.test.ts`
+* `git diff --check`
+* `git status -sb`
+* confirm the API returns only manifest-backed discovered projects
+* confirm the future database-backed registry/sync path remains unimplemented
 
 ## MS-021.4 - Local Project Directory Discovery Contract Foundation
 
