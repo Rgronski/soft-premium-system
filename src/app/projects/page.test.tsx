@@ -166,6 +166,24 @@ describe("ProjectsPage", () => {
   });
 
   test("shows a source conflict warning when the attached local project differs from discovery", async () => {
+    fetchMock.mockImplementationOnce(async () =>
+      createJsonResponse(
+        {
+          projects: [
+            {
+              id: "filesystem-project",
+              name: "Filesystem Project",
+              workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project",
+              repositoryUrl: "https://github.com/example/discovered-project",
+              projectFilesystemStatus: "manifest-present",
+              createdAt: "2026-08-03T20:00:00.000Z",
+            },
+          ],
+        },
+        200,
+      ),
+    );
+
     localStorage.setItem(
       "soft-premium-system.projects",
       JSON.stringify([
@@ -191,6 +209,36 @@ describe("ProjectsPage", () => {
     expect(screen.getByText("Z C:\\SPS_OS_WORK")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Przypnij" }).disabled).toBe(true);
     expect(screen.getByRole("button", { name: "Otwórz" })).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "Zobacz różnice" }));
+
+    expect(screen.getByRole("button", { name: "Ukryj różnice" })).toBeTruthy();
+    expect(screen.getByText("Różnice")).toBeTruthy();
+    expect(screen.getByText("Nazwa")).toBeTruthy();
+    expect(
+      screen.getByText("Lokalny wpis: Filesystem Project - Local"),
+    ).toBeTruthy();
+    expect(screen.getByText("Wykryty wpis: Filesystem Project")).toBeTruthy();
+    expect(screen.getAllByText("Katalog roboczy")).toHaveLength(2);
+    expect(
+      screen.getByText(
+        "Lokalny wpis: C:\\SPS_OS_WORK\\filesystem-project-local",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Wykryty wpis: C:\\SPS_OS_WORK\\filesystem-project"),
+    ).toBeTruthy();
+    expect(screen.getByText("Repozytorium")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Lokalny wpis: https://github.com/example/local-project",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Wykryty wpis: https://github.com/example/discovered-project",
+      ),
+    ).toBeTruthy();
   });
 
   test("keeps attached status visible after revisiting the projects list", async () => {

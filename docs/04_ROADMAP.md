@@ -109,15 +109,84 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 078 synchronized the accepted `MS-021.12` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 078 synchronized the accepted `MS-021.13` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.12 - Local Project Discovery Source Conflict Visibility Foundation
+MS-021.13 - Local Project Discovery Source Conflict Action Contract Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.13 - Local Project Discovery Source Conflict Action Contract Foundation
+
+**Milestone**
+MS-021.13 - Local Project Discovery Source Conflict Action Contract Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Runtime Status**
+PUBLISHED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Expose the smallest safe read-only source-conflict action boundary for filesystem-discovered projects when the attached local browser-state entry differs from the discovered metadata.
+
+**Product Outcome**
+The repository now shows `Zobacz różnice` for discovered projects with detected source conflicts and reveals a minimal inline read-only comparison block with only the fields that actually differ: `Nazwa`, `Katalog roboczy`, and `Repozytorium` when both sides have it and it differs. The existing conflict status, `Przypięty lokalnie`, the source label derived from `workingDirectory`, `Otwórz`, and disabled `Przypnij` are preserved.
+
+**Dependencies**
+* closed `MS-021.12 - Local Project Discovery Source Conflict Visibility Foundation`
+
+**Allowed Implementation Scope**
+* restrained source-conflict action for attached discovered projects
+* minimal inline read-only comparison of existing local/discovered project fields
+* focused page/UI test coverage for conflict details visibility
+* preserve the existing attach/open/localStorage boundary
+
+**Forbidden Scope**
+* resolve / update-local / overwrite / merge actions
+* automatic upsert or overwrite of local project state
+* backend registry changes
+* API or discovery helper changes
+* manifest format changes
+* storage helper refactor
+* UI redesign
+* new routes
+
+**Ownership Boundaries**
+* `src/app/projects/page.tsx` and `src/app/projects/page.test.tsx` own the source-conflict action contract UI
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `git diff --check`
+* `git status -sb`
+* confirm `Zobacz różnice` reveals only the conflicting fields and preserves the existing conflict status and button states
 
 ## MS-021.12 - Local Project Discovery Source Conflict Visibility Foundation
 

@@ -38,6 +38,49 @@ function getCreateProjectErrorMessage(
   return `Project create request failed with ${responseStatus}`;
 }
 
+type ProjectConflictField = {
+  label: string;
+  localValue: string;
+  discoveredValue: string;
+};
+
+function getProjectConflictFields(
+  localProject: Project,
+  discoveredProject: Project,
+): ProjectConflictField[] {
+  const conflictFields: ProjectConflictField[] = [];
+
+  if (localProject.name !== discoveredProject.name) {
+    conflictFields.push({
+      label: "Nazwa",
+      localValue: localProject.name,
+      discoveredValue: discoveredProject.name,
+    });
+  }
+
+  if (localProject.workingDirectory !== discoveredProject.workingDirectory) {
+    conflictFields.push({
+      label: "Katalog roboczy",
+      localValue: localProject.workingDirectory,
+      discoveredValue: discoveredProject.workingDirectory,
+    });
+  }
+
+  if (
+    localProject.repositoryUrl &&
+    discoveredProject.repositoryUrl &&
+    localProject.repositoryUrl !== discoveredProject.repositoryUrl
+  ) {
+    conflictFields.push({
+      label: "Repozytorium",
+      localValue: localProject.repositoryUrl,
+      discoveredValue: discoveredProject.repositoryUrl,
+    });
+  }
+
+  return conflictFields;
+}
+
 export default function ProjectsPage() {
   const router = useRouter();
   const [projectName, setProjectName] = useState("");
@@ -51,6 +94,9 @@ export default function ProjectsPage() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [discoveredProjects, setDiscoveredProjects] = useState<Project[]>([]);
   const [localProjects, setLocalProjects] = useState<Project[]>([]);
+  const [expandedConflictProjectId, setExpandedConflictProjectId] = useState<
+    string | null
+  >(null);
   const [discoveryErrorMessage, setDiscoveryErrorMessage] = useState<
     string | null
   >(null);
@@ -322,16 +368,10 @@ export default function ProjectsPage() {
                     (entry) => entry.id === project.id,
                   );
                   const isLocallyAttached = Boolean(localProject);
-                  const hasSourceConflict = Boolean(
-                    localProject &&
-                      (localProject.name !== project.name ||
-                        localProject.workingDirectory !==
-                          project.workingDirectory ||
-                        (localProject.repositoryUrl &&
-                          project.repositoryUrl &&
-                          localProject.repositoryUrl !==
-                            project.repositoryUrl)),
-                  );
+                  const conflictFields = localProject
+                    ? getProjectConflictFields(localProject, project)
+                    : [];
+                  const hasSourceConflict = conflictFields.length > 0;
                   const sourceLabel = project.workingDirectory.startsWith(
                     "C:\\SPS_OS_WORK",
                   )
@@ -385,9 +425,59 @@ export default function ProjectsPage() {
                               </span>
 
                               {hasSourceConflict ? (
-                                <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-amber-100">
-                                  Konflikt źródła
-                                </span>
+                                <>
+                                  <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-amber-100">
+                                    Konflikt źródła
+                                  </span>
+
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      setExpandedConflictProjectId(
+                                        (current) =>
+                                          current === project.id
+                                            ? null
+                                            : project.id,
+                                      )
+                                    }
+                                    className="rounded-full border border-amber-500/40 px-4 py-2 text-sm font-medium text-amber-100 transition-colors hover:border-amber-400 hover:bg-amber-500/10"
+                                  >
+                                    {expandedConflictProjectId === project.id
+                                      ? "Ukryj różnice"
+                                      : "Zobacz różnice"}
+                                  </button>
+
+                                  {expandedConflictProjectId === project.id ? (
+                                    <div className="w-full max-w-sm rounded-xl border border-amber-500/20 bg-amber-500/5 p-3 text-left">
+                                      <p className="text-xs uppercase tracking-[0.2em] text-amber-100">
+                                        Różnice
+                                      </p>
+
+                                      <div className="mt-3 space-y-3">
+                                        {conflictFields.map((field) => (
+                                          <div
+                                            key={field.label}
+                                            className="space-y-1"
+                                          >
+                                            <p className="text-sm font-medium text-zinc-100">
+                                              {field.label}
+                                            </p>
+                                            <div className="grid gap-1 text-sm text-zinc-300">
+                                              <span>
+                                                Lokalny wpis:{" "}
+                                                {field.localValue}
+                                              </span>
+                                              <span>
+                                                Wykryty wpis:{" "}
+                                                {field.discoveredValue}
+                                              </span>
+                                            </div>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  ) : null}
+                                </>
                               ) : null}
 
                               <span className="rounded-full border border-zinc-700 bg-zinc-900/60 px-3 py-1 text-xs uppercase tracking-[0.2em] text-zinc-300">

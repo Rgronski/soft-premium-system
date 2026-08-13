@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 078 - MS-021.13 local project discovery source conflict action contract control-files sync
+
+### Date
+
+2026-08-13
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-021.13 - Local Project Discovery Source Conflict Action Contract Foundation` as the latest completed product milestone.
+* Confirmed no app version bump was required because `MS-021.13` is not a `.0` milestone.
+* Appended exactly one Session 078 usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* No product code changed in this control-files sync step.
+* `Current Product Milestone` and `Next Product Milestone` remain `NONE / Product Owner decision required`.
+
 ## Session 078 - MS-021.12 local project discovery source conflict visibility control-files sync
 
 ### Date

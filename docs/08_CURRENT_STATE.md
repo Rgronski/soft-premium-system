@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-021.12 - Local Project Discovery Source Conflict Visibility Foundation
+MS-021.13 - Local Project Discovery Source Conflict Action Contract Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
@@ -56,9 +56,11 @@ MS-019.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 
 MS-020.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Polish UI Language Overlay Foundation; the repository now applies the smallest Polish copy overlay to the existing visible home, project, overview, task, and AI Workspace surfaces while keeping the canonical version badge, task storage behavior, and Knowledge behavior unchanged. The canonical app version is now `0.020.0`.
 
+MS-021.13 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Source Conflict Action Contract Foundation; the repository now shows `Zobacz różnice` for discovered projects with detected source conflicts and reveals a minimal inline read-only comparison block with only the fields that actually differ: `Nazwa`, `Katalog roboczy`, and `Repozytorium` when both sides have it and it differs. The repository preserves the existing conflict status, `Przypięty lokalnie`, the source label derived from `workingDirectory`, `Otwórz`, and disabled `Przypnij`. The canonical app version remains `0.021.6`.
+
 MS-021.12 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Source Conflict Visibility Foundation; the repository now shows a restrained read-only conflict status for attached filesystem-discovered projects when discovered metadata differs from the local browser-state entry, compares `name`, `workingDirectory`, and `repositoryUrl` when present on both sides, and preserves `Przypięty lokalnie`, the source label derived from `workingDirectory`, `Otwórz`, and disabled `Przypnij`. The canonical app version remains `0.021.6`.
 
-Session 078 synchronized the accepted `MS-021.12` control files in the current local workspace, and the repository remains aligned with `origin/main` at `0 / 0` from the last verified commit `9c3a07e`.
+Session 078 synchronized the accepted `MS-021.13` control files in the current local workspace, and the repository remains aligned with `origin/main` at `0 / 0` from the last verified commit `7ba1124`.
 
 MS-021.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Filesystem Authority Foundation; the repository now writes a minimal `sps-project.json` manifest into the project working directory during project creation so project identity is physically anchored on disk while the existing database insert path remains intact. The local filesystem manifest is now the first authority anchor, and the future database-backed registry or sync path remains preserved for a later milestone.
 
@@ -343,7 +345,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-021.11 - Local Project Discovery Attached Source Visibility Foundation
+Latest Completed Product Milestone: MS-021.13 - Local Project Discovery Source Conflict Action Contract Foundation
 Next Product Milestone: NONE / Product Owner decision required
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
@@ -1501,7 +1503,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-021.11 - Local Project Discovery Attached Source Visibility Foundation`
+* `Latest Completed Product Milestone` is `MS-021.13 - Local Project Discovery Source Conflict Action Contract Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
