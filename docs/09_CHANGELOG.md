@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 077 - MS-021.6 local project discovery UI read-only control-files sync
+
+### Date
+
+2026-08-13
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-021.6 - Local Project Discovery UI Read-Only Foundation` as the latest completed product milestone.
+* Recorded the canonical app version `0.021.6` alongside the local project discovery UI read-only foundation in the control files.
+* Appended exactly one Session 077 usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* No product code changed in this control-files sync step.
+* The existing API discovery boundary and the future database-backed registry or sync path remain preserved.
+
 ## Session 077 - MS-021.5 local project discovery API control-files sync
 
 ### Date

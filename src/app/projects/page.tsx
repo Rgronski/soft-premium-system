@@ -7,7 +7,7 @@ import {
 } from "@/lib/project/project";
 import type { Project } from "@/lib/project/types";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function isProject(value: unknown): value is Project {
   return (
@@ -47,6 +47,52 @@ export default function ProjectsPage() {
     useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [discoveredProjects, setDiscoveredProjects] = useState<Project[]>([]);
+  const [discoveryErrorMessage, setDiscoveryErrorMessage] = useState<
+    string | null
+  >(null);
+  const [isDiscoveryLoading, setIsDiscoveryLoading] = useState(true);
+
+  useEffect(() => {
+    let isActive = true;
+
+    async function loadDiscoveredProjects() {
+      try {
+        const response = await fetch("/api/projects");
+
+        if (!response.ok) {
+          throw new Error("Project discovery request failed.");
+        }
+
+        const payload = (await response.json()) as { projects?: unknown };
+
+        if (!Array.isArray(payload.projects)) {
+          throw new Error("Project discovery response is invalid.");
+        }
+
+        const nextProjects = payload.projects.filter(isProject);
+
+        if (isActive) {
+          setDiscoveredProjects(nextProjects);
+          setDiscoveryErrorMessage(null);
+        }
+      } catch {
+        if (isActive) {
+          setDiscoveryErrorMessage("Nie udało się wczytać projektów z dysku.");
+        }
+      } finally {
+        if (isActive) {
+          setIsDiscoveryLoading(false);
+        }
+      }
+    }
+
+    void loadDiscoveredProjects();
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
 
   async function handleCreateProject() {
     const trimmedProjectName = projectName.trim();
@@ -211,6 +257,59 @@ export default function ProjectsPage() {
             <p className="mt-4 text-sm text-red-300" aria-live="polite">
               {errorMessage}
             </p>
+          ) : null}
+        </SectionCard>
+
+        <SectionCard>
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
+                Projekty wykryte na dysku
+              </p>
+
+              <h2 className="mt-2 text-2xl font-semibold">
+                Tylko odczyt z `C:\SPS_OS_WORK`
+              </h2>
+
+              <p className="mt-2 text-zinc-400">
+                To są projekty znalezione przez serwer na podstawie
+                `sps-project.json`. Nie są jeszcze scalone z lokalną listą
+                przeglądarki.
+              </p>
+            </div>
+
+            <span className="rounded-full border border-zinc-700 px-3 py-1 text-xs uppercase tracking-[0.2em] text-zinc-400">
+              {isDiscoveryLoading ? "Wczytywanie..." : "Odczyt"}
+            </span>
+          </div>
+
+          {discoveryErrorMessage ? (
+            <p className="mt-4 text-sm text-red-300" aria-live="polite">
+              {discoveryErrorMessage}
+            </p>
+          ) : null}
+
+          {!isDiscoveryLoading && !discoveryErrorMessage ? (
+            discoveredProjects.length > 0 ? (
+              <ul className="mt-4 space-y-3">
+                {discoveredProjects.map((project) => (
+                  <li
+                    key={project.id}
+                    className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
+                  >
+                    <p className="font-medium text-zinc-50">{project.name}</p>
+                    <p className="mt-1 text-sm text-zinc-400">{project.id}</p>
+                    <p className="mt-1 text-sm text-zinc-500">
+                      {project.workingDirectory}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-4 text-sm text-zinc-500">
+                Nie wykryto lokalnych projektów z poprawnym manifestem.
+              </p>
+            )
           ) : null}
         </SectionCard>
       </div>

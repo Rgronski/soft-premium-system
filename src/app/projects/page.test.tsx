@@ -14,28 +14,60 @@ vi.mock("next/navigation", () => ({
 
 import ProjectsPage from "./page";
 
+function createJsonResponse(body: unknown, status: number) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+}
+
 describe("ProjectsPage", () => {
   beforeEach(() => {
     localStorage.clear();
     pushMock.mockReset();
     fetchMock.mockReset();
-    fetchMock.mockResolvedValue(
-      new Response(
-        JSON.stringify({
-          id: "project-uuid",
-          name: "Alpha",
-          repositoryUrl: "https://github.com/example/project",
-          projectFilesystemStatus: "manifest-present",
-          createdAt: "2026-08-03T20:00:00.000Z",
-        }),
-        {
-          status: 201,
-          headers: {
-            "content-type": "application/json",
+    fetchMock.mockImplementation(async (input, init) => {
+      const requestUrl = String(input);
+      const requestMethod = init?.method ?? "GET";
+
+      if (requestUrl === "/api/projects" && requestMethod === "GET") {
+        return createJsonResponse(
+          {
+            projects: [
+              {
+                id: "filesystem-project",
+                name: "Filesystem Project",
+                workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project",
+                projectFilesystemStatus: "manifest-present",
+                createdAt: "2026-08-03T20:00:00.000Z",
+              },
+            ],
           },
-        },
-      ),
-    );
+          200,
+        );
+      }
+
+      if (
+        requestUrl === "/api/projects/project-uuid" &&
+        requestMethod === "POST"
+      ) {
+        return createJsonResponse(
+          {
+            id: "project-uuid",
+            name: "Alpha",
+            repositoryUrl: "https://github.com/example/project",
+            workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+            projectFilesystemStatus: "manifest-present",
+            createdAt: "2026-08-03T20:00:00.000Z",
+          },
+          201,
+        );
+      }
+
+      return createJsonResponse({}, 404);
+    });
     vi.stubGlobal("fetch", fetchMock);
     vi.stubGlobal("crypto", {
       randomUUID: vi.fn(() => "project-uuid"),
@@ -49,8 +81,23 @@ describe("ProjectsPage", () => {
     localStorage.clear();
   });
 
+  test("shows filesystem-discovered projects and keeps them separate from local browser state", async () => {
+    render(<ProjectsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Filesystem Project")).toBeTruthy();
+    });
+
+    expect(screen.getByText("Projekty wykryte na dysku")).toBeTruthy();
+    expect(localStorage.getItem("soft-premium-system.projects")).toBeNull();
+  });
+
   test("creates a project through the server boundary and stores the same id locally", async () => {
     render(<ProjectsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Filesystem Project")).toBeTruthy();
+    });
 
     fireEvent.change(screen.getByPlaceholderText("Mój pierwszy projekt"), {
       target: {
@@ -68,10 +115,11 @@ describe("ProjectsPage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Utwórz projekt" }));
 
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledTimes(1);
+      expect(fetchMock).toHaveBeenCalledTimes(2);
     });
 
-    expect(fetchMock).toHaveBeenCalledWith("/api/projects/project-uuid", {
+    expect(fetchMock).toHaveBeenNthCalledWith(1, "/api/projects");
+    expect(fetchMock).toHaveBeenNthCalledWith(2, "/api/projects/project-uuid", {
       method: "POST",
       headers: {
         "content-type": "application/json",

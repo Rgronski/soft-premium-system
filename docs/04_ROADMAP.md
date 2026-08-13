@@ -109,15 +109,86 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 077 is synchronizing the accepted `MS-021.5` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 077 is synchronizing the accepted `MS-021.6` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.5 - Local Project Discovery API Foundation
+MS-021.6 - Local Project Discovery UI Read-Only Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.6 - Local Project Discovery UI Read-Only Foundation
+
+**Milestone**
+MS-021.6 - Local Project Discovery UI Read-Only Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Expose the conservative local project discovery boundary through the smallest safe read-only UI surface so the project list page can present filesystem-discovered projects from `GET /api/projects` without importing, merging, or migrating them into browser state.
+
+**Product Outcome**
+The repository now fetches `GET /api/projects` on the project list page, renders a separate read-only filesystem-discovered projects section, keeps discovered projects separate from browser/localStorage project state, and preserves the existing browser create flow. The canonical app version is now `0.021.6`.
+
+**Dependencies**
+* closed `MS-021.5 - Local Project Discovery API Foundation`
+
+**Allowed Implementation Scope**
+* minimal read-only UI discovery section on the project list page
+* conservative rendering of filesystem-discovered local projects
+* focused page/UI tests for the touched UI boundary
+* SSOT synchronization for the read-only discovery milestone
+* preserve the future database-backed registry/sync path
+
+**Forbidden Scope**
+* import workflow
+* automatic localStorage merge
+* database sync
+* storage migration
+* task/knowledge/history disk loading
+* Project Brain rewrite
+* route restructuring beyond the minimal UI change
+
+**Ownership Boundaries**
+* `src/app/projects/page.tsx` and `src/app/projects/page.test.tsx` own the read-only UI discovery contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `npm.cmd test -- --run src/app/projects/page.test.tsx`
+* `git diff --check`
+* `git status -sb`
+* confirm the page renders filesystem-discovered projects as read-only UI
+* confirm the future database-backed registry/sync path remains unimplemented
 
 ## MS-021.5 - Local Project Discovery API Foundation
 
