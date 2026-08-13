@@ -56,7 +56,7 @@ MS-019.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 
 MS-020.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Polish UI Language Overlay Foundation; the repository now applies the smallest Polish copy overlay to the existing visible home, project, overview, task, and AI Workspace surfaces while keeping the canonical version badge, task storage behavior, and Knowledge behavior unchanged. The canonical app version is now `0.020.0`.
 
-Session 077 is now synchronizing the accepted `MS-021.6` control files in the current local workspace, and the repository remains aligned with `origin/main` at `0 / 0` from the last verified commit `4fb7d97`.
+Session 077 completed the Session Close Protocol after synchronizing the accepted `MS-021.6` control files in the current local workspace, and the repository remains aligned with `origin/main` at `0 / 0` from the last verified commit `44e8de9`.
 
 MS-021.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Filesystem Authority Foundation; the repository now writes a minimal `sps-project.json` manifest into the project working directory during project creation so project identity is physically anchored on disk while the existing database insert path remains intact. The local filesystem manifest is now the first authority anchor, and the future database-backed registry or sync path remains preserved for a later milestone.
 

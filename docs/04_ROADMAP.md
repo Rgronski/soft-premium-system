@@ -109,7 +109,7 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 077 is synchronizing the accepted `MS-021.6` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 077 completed the Session Close Protocol after synchronizing the accepted `MS-021.6` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 

@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 077 - Session close and handoff synchronization
+
+### Date
+
+2026-08-13
+
+### Completed
+
+* Finalized the Session 077 close state after the accepted `MS-021.6` publication on `main`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT records the final closed Session 077 state.
+* Created the Session 077 handoff for Session 078 continuity.
+* Appended the Session 077 close usage entry to `.usage/session.jsonl`.
+* Confirmed the repository remains synchronized on `main` at `0 / 0` after commit `44e8de9`.
+
+### Notes
+
+* No product code changed during the close protocol.
+* The next session remains pending Product Owner decision.
+
 ## Session 077 - MS-021.6 local project discovery UI read-only control-files sync
 
 ### Date
