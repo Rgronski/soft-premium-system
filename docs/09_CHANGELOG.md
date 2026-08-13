@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 077 - MS-021.2 local project directory initialization contents control-files sync
+## Session 077 - MS-021.3 local project directory reopen discovery control-files sync
 
 ### Date
 
@@ -77,8 +77,8 @@ Each release entry should contain:
 
 ### Completed
 
-* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-021.2 - Local Project Directory Initialization Contents Foundation` as the latest completed product milestone.
-* Recorded the canonical app version `0.021.2` alongside the local project directory initialization contents foundation in the control files.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-021.3 - Local Project Directory Reopen Discovery Foundation` as the latest completed product milestone.
+* Recorded the canonical app version `0.021.3` alongside the local project directory reopen discovery foundation in the control files.
 * Appended exactly one Session 077 usage entry to `.usage/session.jsonl`.
 
 ### Notes

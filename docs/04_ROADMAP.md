@@ -109,15 +109,86 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 077 is synchronizing the accepted `MS-021.2` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 077 is synchronizing the accepted `MS-021.3` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.2 - Local Project Directory Initialization Contents Foundation
+MS-021.3 - Local Project Directory Reopen Discovery Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.3 - Local Project Directory Reopen Discovery Foundation
+
+**Milestone**
+MS-021.3 - Local Project Directory Reopen Discovery Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Establish the smallest safe server-side boundary for reopening a known local project directory from `sps-project.json`, without introducing a full import, scanner UI, database sync, or storage migration.
+
+**Product Outcome**
+The repository now exposes `getServerProjectByWorkingDirectory(workingDirectory)` so a known local project directory can be reopened from disk authority by reading and validating `sps-project.json`. The helper returns a `Project` with `projectFilesystemStatus: "manifest-present"` for valid manifests and `null` for missing or invalid manifests. The canonical app version is now `0.021.3`.
+
+**Dependencies**
+* closed `MS-021.2 - Local Project Directory Initialization Contents Foundation`
+
+**Allowed Implementation Scope**
+* minimal server helper for reading and validating `sps-project.json`
+* focused tests for the touched project server helper
+* SSOT synchronization for the reopen-discovery milestone
+* preserve the future database-backed registry/sync path
+
+**Forbidden Scope**
+* full project import UI
+* recursive filesystem scanner UI
+* database registry/sync
+* localStorage migration
+* task/knowledge/history disk loading
+* Project Brain rewrite
+* route restructuring
+* broad refactor
+
+**Ownership Boundaries**
+* `src/lib/project/server.ts` and `src/lib/project/server.test.ts` own the reopen-discovery contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `npm.cmd test -- --run src/lib/project/server.test.ts`
+* `git diff --check`
+* `git status -sb`
+* confirm the helper reopens valid manifests and rejects missing or invalid ones
+* confirm the future database-backed registry/sync path remains unimplemented
 
 ## MS-021.2 - Local Project Directory Initialization Contents Foundation
 

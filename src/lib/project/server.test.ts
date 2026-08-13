@@ -3,11 +3,13 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 
 const mkdirMock = vi.fn();
+const readFileMock = vi.fn();
 const writeFileMock = vi.fn();
 const neonMock = vi.fn();
 
 vi.mock("node:fs/promises", () => ({
   mkdir: mkdirMock,
+  readFile: readFileMock,
   writeFile: writeFileMock,
 }));
 
@@ -31,8 +33,62 @@ afterEach(() => {
 
   neonMock.mockReset();
   mkdirMock.mockReset();
+  readFileMock.mockReset();
   writeFileMock.mockReset();
   vi.restoreAllMocks();
+});
+
+describe("getServerProjectByWorkingDirectory", () => {
+  it("reads and validates a manifest from the working directory", async () => {
+    readFileMock.mockResolvedValueOnce(
+      JSON.stringify({
+        id: "project-1",
+        name: "Alpha",
+        repositoryUrl: "https://github.com/example/project",
+        createdAt: "2026-07-24T10:11:12.000Z",
+      }),
+    );
+
+    const { getServerProjectByWorkingDirectory } = await loadServerModule();
+    const result = await getServerProjectByWorkingDirectory(
+      "C:\\SPS_OS_WORK\\alpha",
+    );
+
+    expect(readFileMock).toHaveBeenCalledWith(
+      "C:\\SPS_OS_WORK\\alpha\\sps-project.json",
+      "utf8",
+    );
+    expect(result).toEqual({
+      id: "project-1",
+      name: "Alpha",
+      repositoryUrl: "https://github.com/example/project",
+      workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+      projectFilesystemStatus: "manifest-present",
+      createdAt: "2026-07-24T10:11:12.000Z",
+    });
+  });
+
+  it("returns null when the manifest is missing or invalid", async () => {
+    readFileMock.mockRejectedValueOnce(new Error("ENOENT"));
+
+    const { getServerProjectByWorkingDirectory } = await loadServerModule();
+
+    await expect(
+      getServerProjectByWorkingDirectory("C:\\SPS_OS_WORK\\alpha"),
+    ).resolves.toBeNull();
+
+    readFileMock.mockResolvedValueOnce(
+      JSON.stringify({
+        id: "",
+        name: "Alpha",
+        createdAt: "2026-07-24T10:11:12.000Z",
+      }),
+    );
+
+    await expect(
+      getServerProjectByWorkingDirectory("C:\\SPS_OS_WORK\\alpha"),
+    ).resolves.toBeNull();
+  });
 });
 
 describe("getServerProjectById", () => {

@@ -1,6 +1,6 @@
 import "server-only";
 
-import { access, mkdir, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { neon } from "@neondatabase/serverless";
 
@@ -126,6 +126,65 @@ function buildProjectManifest(project: Project): {
     ...(project.repositoryUrl ? { repositoryUrl: project.repositoryUrl } : {}),
     createdAt: project.createdAt,
   };
+}
+
+type ProjectManifestRecord = {
+  id: string;
+  name: string;
+  repositoryUrl?: string;
+  createdAt: string;
+};
+
+function isProjectManifestRecord(
+  value: unknown,
+): value is ProjectManifestRecord {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+
+  const record = value as Partial<ProjectManifestRecord>;
+
+  return (
+    typeof record.id === "string" &&
+    record.id.trim().length > 0 &&
+    typeof record.name === "string" &&
+    record.name.trim().length > 0 &&
+    typeof record.createdAt === "string" &&
+    record.createdAt.trim().length > 0 &&
+    (record.repositoryUrl === undefined ||
+      typeof record.repositoryUrl === "string")
+  );
+}
+
+export async function getServerProjectByWorkingDirectory(
+  workingDirectory: string,
+): Promise<Project | null> {
+  const normalizedWorkingDirectory = workingDirectory.trim();
+
+  if (!normalizedWorkingDirectory) {
+    return null;
+  }
+
+  try {
+    const manifest = JSON.parse(
+      await readFile(buildProjectManifestPath(normalizedWorkingDirectory), "utf8"),
+    ) as unknown;
+
+    if (!isProjectManifestRecord(manifest)) {
+      return null;
+    }
+
+    return {
+      id: manifest.id,
+      name: manifest.name,
+      ...(manifest.repositoryUrl ? { repositoryUrl: manifest.repositoryUrl } : {}),
+      workingDirectory: normalizedWorkingDirectory,
+      projectFilesystemStatus: "manifest-present",
+      createdAt: manifest.createdAt,
+    };
+  } catch {
+    return null;
+  }
 }
 
 function buildProjectReadme(project: Project): string {
