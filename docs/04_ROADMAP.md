@@ -109,15 +109,88 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 077 is synchronizing the accepted `MS-021.0` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 077 is synchronizing the accepted `MS-021.1` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.0 - Local Project Filesystem Authority Foundation
+MS-021.1 - Local Project Filesystem Status Visibility Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.1 - Local Project Filesystem Status Visibility Foundation
+
+**Milestone**
+MS-021.1 - Local Project Filesystem Status Visibility Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Expose the physical filesystem project authority signal in the smallest safe way so project views can distinguish a project with a manifest from a browser/local-only or incomplete project state, while preserving the future database-backed registry or sync path for a later milestone.
+
+**Product Outcome**
+The repository now distinguishes `manifest-present`, `manifest-missing`, and `unknown` project filesystem status values when the working directory is known, shows a restrained filesystem status indicator on the existing project detail surface, and keeps the future database-backed registry or sync path preserved for a later milestone. The canonical app version is now `0.021.1`.
+
+**Dependencies**
+* closed `MS-021.0 - Local Project Filesystem Authority Foundation`
+
+**Allowed Implementation Scope**
+* project filesystem status detection from the existing project read path
+* restrained filesystem status visibility on existing project surfaces
+* focused tests for the touched project helper and UI path
+* SSOT synchronization for the status visibility milestone
+* preserve the future database-backed registry/sync path
+
+**Forbidden Scope**
+* full localStorage replacement
+* database sync
+* registry implementation
+* Project Brain rewrite
+* task/knowledge/history migration
+* broad UI redesign
+* route restructuring
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/lib/project/` owns the filesystem status helpers and read path contract
+* `src/app/projects/` owns the restrained project detail visibility surface
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `npm.cmd test -- --run src/lib/project/server.test.ts src/lib/project/project-task-flow.test.ts src/lib/project/project.test.ts src/app/projects/page.test.tsx src/app/projects/[id]/page.filesystem-status.test.tsx`
+* `git diff --check`
+* `git status -sb`
+* confirm the project detail surface distinguishes manifest-present, manifest-missing, and unknown states
+* confirm the future database-backed registry/sync path remains unimplemented
 
 ## MS-021.0 - Local Project Filesystem Authority Foundation
 

@@ -68,6 +68,7 @@ export function createProject(
   id = crypto.randomUUID(),
   repositoryUrl?: string,
   workingDirectory?: string,
+  projectFilesystemStatus?: Project["projectFilesystemStatus"],
 ): Project {
   const normalizedRepositoryUrl = repositoryUrl?.trim();
   const normalizedWorkingDirectory =
@@ -78,6 +79,7 @@ export function createProject(
     ...(normalizedRepositoryUrl ? { repositoryUrl: normalizedRepositoryUrl } : {}),
     workingDirectory: normalizedWorkingDirectory,
     projectBrainStatus: determineProjectBrainStatus(normalizedWorkingDirectory),
+    projectFilesystemStatus: projectFilesystemStatus ?? "unknown",
     createdAt: new Date().toISOString(),
   };
 

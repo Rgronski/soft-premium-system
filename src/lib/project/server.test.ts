@@ -69,6 +69,7 @@ LIMIT 1`,
       id: "project-1",
       name: "Alpha",
       createdAt: "2026-07-23T10:11:12.000Z",
+      projectFilesystemStatus: "unknown",
     });
   });
 
@@ -96,6 +97,7 @@ LIMIT 1`,
       name: "Alpha",
       repositoryUrl: "https://github.com/example/project",
       createdAt: "2026-07-23T10:11:12.000Z",
+      projectFilesystemStatus: "unknown",
     });
   });
 
@@ -204,6 +206,7 @@ RETURNING id, name, repository_url, created_at`,
       repositoryUrl: "https://github.com/example/project",
       workingDirectory: "C:\\SPS_OS_WORK\\alpha",
       projectBrainStatus: "pending",
+      projectFilesystemStatus: "manifest-present",
       createdAt: "2026-07-24T10:11:12.000Z",
     });
   });
@@ -262,6 +265,7 @@ describe("project server local fallback", () => {
       repositoryUrl: "https://github.com/example/project",
       workingDirectory: "C:\\SPS_OS_WORK\\alpha",
       projectBrainStatus: "pending",
+      projectFilesystemStatus: "manifest-present",
     });
     expect(createdProject.createdAt).toEqual(expect.any(String));
     expect(await getServerProjectById("project-1")).toEqual(createdProject);

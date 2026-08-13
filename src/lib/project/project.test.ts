@@ -65,6 +65,22 @@ describe("createProject", () => {
     );
   });
 
+  test("stores the filesystem status when provided by the server create flow", () => {
+    const project = createProject(
+      "Alpha",
+      "project-uuid",
+      "https://github.com/example/project",
+      "C:\\SPS_OS_WORK\\alpha",
+      "manifest-present",
+    );
+    const savedProjects = JSON.parse(
+      storage.getItem("soft-premium-system.projects") ?? "[]",
+    );
+
+    expect(project.projectFilesystemStatus).toBe("manifest-present");
+    expect(savedProjects[0].projectFilesystemStatus).toBe("manifest-present");
+  });
+
   test("stores the default working directory when none is provided", () => {
     const project = createProject("Alpha Project", "project-uuid");
     const savedProjects = JSON.parse(

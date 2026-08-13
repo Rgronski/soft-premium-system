@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-021.0 - Local Project Filesystem Authority Foundation
+MS-021.1 - Local Project Filesystem Status Visibility Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
@@ -56,9 +56,11 @@ MS-019.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 
 MS-020.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Polish UI Language Overlay Foundation; the repository now applies the smallest Polish copy overlay to the existing visible home, project, overview, task, and AI Workspace surfaces while keeping the canonical version badge, task storage behavior, and Knowledge behavior unchanged. The canonical app version is now `0.020.0`.
 
-Session 077 is now synchronizing the accepted `MS-021.0` control files in the current local workspace, and the repository remains aligned with `origin/main` at `0 / 0` from the last verified commit `3408130`.
+Session 077 is now synchronizing the accepted `MS-021.1` control files in the current local workspace, and the repository remains aligned with `origin/main` at `0 / 0` from the last verified commit `3408130`.
 
 MS-021.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Filesystem Authority Foundation; the repository now writes a minimal `sps-project.json` manifest into the project working directory during project creation so project identity is physically anchored on disk while the existing database insert path remains intact. The local filesystem manifest is now the first authority anchor, and the future database-backed registry or sync path remains preserved for a later milestone.
+
+MS-021.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Filesystem Status Visibility Foundation; the repository now distinguishes `manifest-present`, `manifest-missing`, and `unknown` filesystem status values on project reads when a working directory is available, shows a restrained status indicator on the project detail surface, and keeps the future database-backed registry or sync path preserved for a later milestone. The canonical app version is now `0.021.1`.
 
 Versioning rule: accepted app/platform `.0` milestones bump the controlled app version source to `0.XXX.0`. Patch and live-fix handling remains deferred until needed, and non-MS categories such as WF remain deferred until needed.
 

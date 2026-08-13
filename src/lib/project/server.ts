@@ -1,11 +1,11 @@
 import "server-only";
 
-import { mkdir, writeFile } from "node:fs/promises";
+import { access, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { neon } from "@neondatabase/serverless";
 
 import { buildDefaultWorkingDirectory } from "./project";
-import type { Project } from "./types";
+import type { Project, ProjectFilesystemStatus } from "./types";
 
 type ProjectCreationErrorCode = "working-directory-create-failed";
 
@@ -80,6 +80,36 @@ function buildProjectManifestPath(workingDirectory: string): string {
   return join(workingDirectory, "sps-project.json");
 }
 
+async function detectProjectFilesystemStatus(
+  workingDirectory?: string,
+): Promise<ProjectFilesystemStatus> {
+  if (!workingDirectory) {
+    return "unknown";
+  }
+
+  try {
+    await access(buildProjectManifestPath(workingDirectory));
+    return "manifest-present";
+  } catch {
+    return "manifest-missing";
+  }
+}
+
+async function attachProjectFilesystemStatus(
+  project: Project,
+): Promise<Project> {
+  if (project.projectFilesystemStatus && project.projectFilesystemStatus !== "unknown") {
+    return project;
+  }
+
+  return {
+    ...project,
+    projectFilesystemStatus: await detectProjectFilesystemStatus(
+      project.workingDirectory,
+    ),
+  };
+}
+
 function buildProjectManifest(project: Project): {
   id: string;
   name: string;
@@ -110,10 +140,6 @@ async function ensureProjectWorkingDirectory(
 
 async function ensureProjectManifest(project: Project): Promise<void> {
   try {
-    if (typeof writeFile !== "function") {
-      return;
-    }
-
     await writeFile(
       buildProjectManifestPath(project.workingDirectory ?? ""),
       `${JSON.stringify(buildProjectManifest(project), null, 2)}\n`,
@@ -153,7 +179,7 @@ export async function getServerProjectById(
   const localProject = getLocalProjectById(normalizedId);
 
   if (localProject) {
-    return localProject;
+    return attachProjectFilesystemStatus(localProject);
   }
 
   try {
@@ -167,9 +193,13 @@ export async function getServerProjectById(
       return null;
     }
 
-    return storeLocalProject(mapProjectRow(row));
+    return attachProjectFilesystemStatus(storeLocalProject(mapProjectRow(row)));
   } catch {
-    return getLocalProjectById(normalizedId);
+    const fallbackProject = getLocalProjectById(normalizedId);
+
+    return fallbackProject
+      ? attachProjectFilesystemStatus(fallbackProject)
+      : null;
   }
 }
 
@@ -219,20 +249,27 @@ export async function createServerProject(input: {
     const row = rows[0];
 
     if (!row) {
-      return storeLocalProject(fallbackProject);
+      return storeLocalProject({
+        ...fallbackProject,
+        projectFilesystemStatus: "manifest-present",
+      });
     }
 
     return storeLocalProject({
       ...mapProjectRow(row),
       workingDirectory: normalizedWorkingDirectory,
       projectBrainStatus: "pending",
+      projectFilesystemStatus: "manifest-present",
     });
   } catch (error) {
     if (isProjectCreationError(error)) {
       throw error;
     }
 
-    return storeLocalProject(fallbackProject);
+    return storeLocalProject({
+      ...fallbackProject,
+      projectFilesystemStatus: "manifest-present",
+    });
   }
 }
 

@@ -106,6 +106,7 @@ export default function ProjectsPage() {
         createdProject.id,
         createdProject.repositoryUrl,
         trimmedWorkingDirectory,
+        createdProject.projectFilesystemStatus,
       );
       setProjectName("");
       setRepositoryUrl("");

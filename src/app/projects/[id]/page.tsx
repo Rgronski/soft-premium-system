@@ -128,6 +128,8 @@ export default function ProjectWorkspacePage() {
   >(null);
   const localProject = getProjectById(params.id);
   const projectBrainStatus = localProject?.projectBrainStatus ?? "pending";
+  const projectFilesystemStatus =
+    localProject?.projectFilesystemStatus ?? "unknown";
   const dashboard = useMemo<DashboardSnapshot>(() => {
     if (typeof window === "undefined") {
       return {
@@ -270,6 +272,18 @@ export default function ProjectWorkspacePage() {
               </p>
             </div>
           ) : null}
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              Filesystem status
+            </p>
+            <p className="mt-2 text-sm text-zinc-300">
+              {projectFilesystemStatus === "manifest-present"
+                ? "manifest-present"
+                : projectFilesystemStatus === "manifest-missing"
+                  ? "manifest-missing"
+                  : "unknown"}
+            </p>
+          </div>
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
               Przewodnik przepływu

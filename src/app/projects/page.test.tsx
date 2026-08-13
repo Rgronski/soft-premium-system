@@ -25,6 +25,7 @@ describe("ProjectsPage", () => {
           id: "project-uuid",
           name: "Alpha",
           repositoryUrl: "https://github.com/example/project",
+          projectFilesystemStatus: "manifest-present",
           createdAt: "2026-08-03T20:00:00.000Z",
         }),
         {
@@ -90,6 +91,7 @@ describe("ProjectsPage", () => {
         name: "Alpha",
         repositoryUrl: "https://github.com/example/project",
         workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+        projectFilesystemStatus: "manifest-present",
       }),
     ]);
 
