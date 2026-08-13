@@ -160,6 +160,7 @@ describe("ProjectsPage", () => {
     });
 
     expect(screen.getByText("Przypięty lokalnie")).toBeTruthy();
+    expect(screen.getByText("Z C:\\SPS_OS_WORK")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Przypnij" }).disabled).toBe(true);
     expect(screen.getByRole("button", { name: "Otwórz" })).toBeTruthy();
   });
@@ -193,6 +194,7 @@ describe("ProjectsPage", () => {
     });
 
     expect(screen.getByText("Przypięty lokalnie")).toBeTruthy();
+    expect(screen.getByText("Z C:\\SPS_OS_WORK")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Przypnij" }).disabled).toBe(true);
     expect(screen.getByRole("button", { name: "Otwórz" })).toBeTruthy();
   });

@@ -321,6 +321,11 @@ export default function ProjectsPage() {
                   const isLocallyAttached = localProjects.some(
                     (localProject) => localProject.id === project.id,
                   );
+                  const sourceLabel = project.workingDirectory.startsWith(
+                    "C:\\SPS_OS_WORK",
+                  )
+                    ? "Z C:\\SPS_OS_WORK"
+                    : `Z ${project.workingDirectory}`;
 
                   return (
                     <li
@@ -363,9 +368,15 @@ export default function ProjectsPage() {
                           </div>
 
                           {isLocallyAttached ? (
-                            <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-emerald-100">
-                              Przypięty lokalnie
-                            </span>
+                            <div className="flex flex-col items-end gap-2">
+                              <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-emerald-100">
+                                Przypięty lokalnie
+                              </span>
+
+                              <span className="rounded-full border border-zinc-700 bg-zinc-900/60 px-3 py-1 text-xs uppercase tracking-[0.2em] text-zinc-300">
+                                {sourceLabel}
+                              </span>
+                            </div>
                           ) : null}
                         </div>
                       </div>

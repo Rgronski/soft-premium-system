@@ -109,15 +109,83 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 078 synchronized the accepted `MS-021.10` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 078 synchronized the accepted `MS-021.11` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.10 - Local Project Discovery Attached Project Revisit Foundation
+MS-021.11 - Local Project Discovery Attached Source Visibility Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.11 - Local Project Discovery Attached Source Visibility Foundation
+
+**Milestone**
+MS-021.11 - Local Project Discovery Attached Source Visibility Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Runtime Status**
+PUBLISHED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Expose the smallest safe source-visibility boundary for filesystem-discovered projects after attachment by showing a restrained read-only source label for projects that already have a local working directory.
+
+**Product Outcome**
+The repository now shows a restrained read-only source label for attached filesystem-discovered projects in the local projects list, derives the label from `workingDirectory`, keeps `Przypięty lokalnie` visible, keeps `Otwórz` available, and keeps `Przypnij` disabled for already attached discovered projects.
+
+**Dependencies**
+* closed `MS-021.10 - Local Project Discovery Attached Project Revisit Foundation`
+
+**Allowed Implementation Scope**
+* restrained source label rendering for attached discovered projects
+* read-only UI copy derived from existing project fields
+* focused page/UI test coverage for attached source visibility
+* preserve the existing attach/open/localStorage boundary
+
+**Forbidden Scope**
+* backend registry changes
+* API or discovery helper changes
+* manifest format changes
+* storage helper refactor
+* UI redesign
+* new routes
+
+**Ownership Boundaries**
+* `src/app/projects/page.tsx` and `src/app/projects/page.test.tsx` own the attached source-visibility UI contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `npm.cmd test -- src/app/projects/page.test.tsx`
+* `git diff --check`
+* `git status -sb`
+* confirm attached discovered projects display `Z C:\SPS_OS_WORK` while preserving `Przypięty lokalnie`, disabled `Przypnij`, and available `Otwórz`
 
 ## MS-021.10 - Local Project Discovery Attached Project Revisit Foundation
 
