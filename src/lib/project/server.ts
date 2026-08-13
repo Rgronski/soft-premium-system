@@ -80,6 +80,10 @@ function buildProjectManifestPath(workingDirectory: string): string {
   return join(workingDirectory, "sps-project.json");
 }
 
+function buildProjectReadmePath(workingDirectory: string): string {
+  return join(workingDirectory, "README.md");
+}
+
 async function detectProjectFilesystemStatus(
   workingDirectory?: string,
 ): Promise<ProjectFilesystemStatus> {
@@ -124,6 +128,17 @@ function buildProjectManifest(project: Project): {
   };
 }
 
+function buildProjectReadme(project: Project): string {
+  return `# ${project.name}
+
+Project ID: ${project.id}
+
+This directory is managed by SPS OS.
+
+The canonical project manifest is stored in \`sps-project.json\`.
+`;
+}
+
 async function ensureProjectWorkingDirectory(
   workingDirectory: string,
 ): Promise<void> {
@@ -148,6 +163,22 @@ async function ensureProjectManifest(project: Project): Promise<void> {
   } catch {
     const error = new Error(
       "Project server repository could not create the project manifest.",
+    ) as ProjectCreationError;
+    error.code = "working-directory-create-failed";
+    throw error;
+  }
+}
+
+async function ensureProjectReadme(project: Project): Promise<void> {
+  try {
+    await writeFile(
+      buildProjectReadmePath(project.workingDirectory ?? ""),
+      buildProjectReadme(project),
+      "utf8",
+    );
+  } catch {
+    const error = new Error(
+      "Project server repository could not create the project readme.",
     ) as ProjectCreationError;
     error.code = "working-directory-create-failed";
     throw error;
@@ -238,6 +269,7 @@ export async function createServerProject(input: {
   try {
     await ensureProjectWorkingDirectory(normalizedWorkingDirectory);
     await ensureProjectManifest(fallbackProject);
+    await ensureProjectReadme(fallbackProject);
 
     const sql = neon(getDatabaseUrl());
     const rows = (await sql.query(INSERT_PROJECT, [

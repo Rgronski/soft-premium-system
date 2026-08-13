@@ -177,7 +177,7 @@ describe("createServerProject", () => {
     expect(mkdirMock).toHaveBeenCalledWith("C:\\SPS_OS_WORK\\alpha", {
       recursive: true,
     });
-    expect(writeFileMock).toHaveBeenCalledTimes(1);
+    expect(writeFileMock).toHaveBeenCalledTimes(2);
     expect(writeFileMock).toHaveBeenCalledWith(
       "C:\\SPS_OS_WORK\\alpha\\sps-project.json",
       expect.any(String),
@@ -189,6 +189,15 @@ describe("createServerProject", () => {
       repositoryUrl: "https://github.com/example/project",
       createdAt: expect.any(String),
     });
+    expect(writeFileMock).toHaveBeenCalledWith(
+      "C:\\SPS_OS_WORK\\alpha\\README.md",
+      expect.stringContaining("# Alpha"),
+      "utf8",
+    );
+    expect(writeFileMock.mock.calls[1][1]).toContain("Project ID: project-1");
+    expect(writeFileMock.mock.calls[1][1]).toContain(
+      "sps-project.json",
+    );
     expect(queryMock).toHaveBeenCalledWith(
       `INSERT INTO public.projects (id, name, repository_url, created_at)
 VALUES ($1, $2, $3, $4)
@@ -215,6 +224,32 @@ RETURNING id, name, repository_url, created_at`,
     process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
 
     mkdirMock.mockResolvedValueOnce(undefined);
+    writeFileMock.mockRejectedValueOnce(new Error("permission denied"));
+    const queryMock = vi.fn();
+
+    neonMock.mockReturnValue({
+      query: queryMock,
+    });
+
+    const { createServerProject } = await loadServerModule();
+
+    await expect(
+      createServerProject({
+        id: "project-1",
+        name: "Alpha",
+      }),
+    ).rejects.toMatchObject({
+      code: "working-directory-create-failed",
+    });
+
+    expect(queryMock).not.toHaveBeenCalled();
+  });
+
+  it("fails project creation when the readme cannot be written", async () => {
+    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
+
+    mkdirMock.mockResolvedValueOnce(undefined);
+    writeFileMock.mockResolvedValueOnce(undefined);
     writeFileMock.mockRejectedValueOnce(new Error("permission denied"));
     const queryMock = vi.fn();
 

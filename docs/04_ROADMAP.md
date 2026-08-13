@@ -109,15 +109,87 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 077 is synchronizing the accepted `MS-021.1` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 077 is synchronizing the accepted `MS-021.2` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.1 - Local Project Filesystem Status Visibility Foundation
+MS-021.2 - Local Project Directory Initialization Contents Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.2 - Local Project Directory Initialization Contents Foundation
+
+**Milestone**
+MS-021.2 - Local Project Directory Initialization Contents Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Give newly created local project directories a deterministic starter presence so they are no longer an effectively empty filesystem artifact after creation, while preserving the `sps-project.json` manifest contract, the filesystem status contract, and the future database-backed registry/sync path.
+
+**Product Outcome**
+The repository now writes a minimal `README.md` into newly created local project directories so the directory identifies the project name and id, states that SPS OS owns the directory, and explains that `sps-project.json` is the canonical manifest. The canonical app version is now `0.021.2`.
+
+**Dependencies**
+* closed `MS-021.1 - Local Project Filesystem Status Visibility Foundation`
+
+**Allowed Implementation Scope**
+* minimal starter content in the existing project creation flow
+* deterministic project-local `README.md`
+* focused tests for the touched server path
+* SSOT synchronization for the initialization contents milestone
+* preserve the future database-backed registry/sync path
+
+**Forbidden Scope**
+* task/knowledge/history migration
+* database sync
+* registry implementation
+* project template system
+* Git initialization inside project directory
+* broad folder architecture
+* UI redesign
+* route restructuring
+
+**Ownership Boundaries**
+* `src/lib/project/server.ts` and `src/lib/project/server.test.ts` own the initialization contents contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `npm.cmd test -- --run src/lib/project/server.test.ts src/lib/project/project.test.ts src/lib/project/project-task-flow.test.ts`
+* `git diff --check`
+* `git status -sb`
+* confirm the created directory now contains a deterministic `README.md`
+* confirm the future database-backed registry/sync path remains unimplemented
 
 ## MS-021.1 - Local Project Filesystem Status Visibility Foundation
 
