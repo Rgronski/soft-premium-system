@@ -56,7 +56,7 @@ MS-019.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 
 MS-020.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Polish UI Language Overlay Foundation; the repository now applies the smallest Polish copy overlay to the existing visible home, project, overview, task, and AI Workspace surfaces while keeping the canonical version badge, task storage behavior, and Knowledge behavior unchanged. The canonical app version is now `0.020.0`.
 
-Session 078 synchronized the accepted `MS-021.9` control files in the current local workspace, and the repository remains aligned with `origin/main` at `0 / 0` from the last verified commit `44e8de9`.
+Session 078 synchronized the accepted `MS-021.10` control files in the current local workspace, and the repository remains aligned with `origin/main` at `0 / 0` from the last verified commit `44e8de9`.
 
 MS-021.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Filesystem Authority Foundation; the repository now writes a minimal `sps-project.json` manifest into the project working directory during project creation so project identity is physically anchored on disk while the existing database insert path remains intact. The local filesystem manifest is now the first authority anchor, and the future database-backed registry or sync path remains preserved for a later milestone.
 
@@ -72,12 +72,31 @@ MS-021.5 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 
 MS-021.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery UI Read-Only Foundation; the repository now fetches `GET /api/projects` on mount from the project list page, renders a separate read-only filesystem-discovered projects section, keeps discovered projects separate from browser/localStorage project state, and preserves the existing browser create flow. The canonical app version is now `0.021.6`.
 
-MS-021.7 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Open Existing Project Foundation; the repository now shows an `Otwórz` action for filesystem-discovered projects, seeds the discovered project into browser/localStorage through the existing `createProject(...)` flow before navigation, keeps the discovered list separate from browser state until explicit open, and navigates to the existing project detail route. The canonical app version remains `0.021.6`.
+MS-021.7 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Open Existing Project Foundation; the repository now shows an `OtwĂłrz` action for filesystem-discovered projects, seeds the discovered project into browser/localStorage through the existing `createProject(...)` flow before navigation, keeps the discovered list separate from browser state until explicit open, and navigates to the existing project detail route. The canonical app version remains `0.021.6`.
+
+MS-021.10 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Attached Project Revisit Foundation; the repository now confirms the existing page behavior already satisfies revisit requirements, and after attaching a discovered project the revisited projects list still shows the project in local browser state, `PrzypiĂ„â„˘ty lokalnie`, disabled `Przypnij`, and available `OtwÄ‚Ĺ‚rz`. The canonical app version remains `0.021.6`.
+
+MS-021.10 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Attached Project Revisit Foundation; the repository now confirms the existing page behavior already satisfies revisit requirements, and after attaching a discovered project the revisited projects list still shows the project in local browser state, `PrzypiĂ„â„˘ty lokalnie`, disabled `Przypnij`, and available `OtwÄ‚Ĺ‚rz`. The canonical app version remains `0.021.6`.
+
+MS-021.10 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Attached Project Revisit Foundation; the repository now confirms the existing page behavior already satisfies revisit requirements, and after attaching a discovered project the revisited projects list still shows the project in local browser state, `PrzypiĂ„â„˘ty lokalnie`, disabled `Przypnij`, and available `OtwÄ‚Ĺ‚rz`. The canonical app version remains `0.021.6`.
 
 MS-021.8 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Attach Existing Project Foundation; the repository now shows a `Przypnij` action for filesystem-discovered projects, saves the discovered project into browser/localStorage through the existing local project state flow, keeps the discovered list separate until explicit attach, and prevents duplicate local entries for the same discovered project id. The canonical app version remains `0.021.6`.
 
-MS-021.9 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Attached Status Visibility Foundation; the repository now shows `Przypięty lokalnie` for discovered projects that already exist in local browser state, disables `Przypnij` for those projects, keeps `Otwórz` available, and keeps not-yet-attached discovered projects attachable. The canonical app version remains `0.021.6`.
+MS-021.10 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Attached Project Revisit Foundation; the repository now confirms the existing page behavior already satisfies revisit requirements, and after attaching a discovered project the revisited projects list still shows the project in local browser state, `PrzypiĂ„â„˘ty lokalnie`, disabled `Przypnij`, and available `OtwÄ‚Ĺ‚rz`. The canonical app version remains `0.021.6`.
 
+MS-021.10 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Attached Project Revisit Foundation; the repository now confirms the existing page behavior already satisfies revisit requirements, and after attaching a discovered project the revisited projects list still shows the project in local browser state, `PrzypiĂ„â„˘ty lokalnie`, disabled `Przypnij`, and available `OtwÄ‚Ĺ‚rz`. The canonical app version remains `0.021.6`.
+
+MS-021.10 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Attached Project Revisit Foundation; the repository now confirms the existing page behavior already satisfies revisit requirements, and after attaching a discovered project the revisited projects list still shows the project in local browser state, `PrzypiĂ„â„˘ty lokalnie`, disabled `Przypnij`, and available `OtwÄ‚Ĺ‚rz`. The canonical app version remains `0.021.6`.
+
+MS-021.9 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Attached Status Visibility Foundation; the repository now shows `PrzypiÄ™ty lokalnie` for discovered projects that already exist in local browser state, disables `Przypnij` for those projects, keeps `OtwĂłrz` available, and keeps not-yet-attached discovered projects attachable. The canonical app version remains `0.021.6`.
+
+MS-021.10 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Attached Project Revisit Foundation; the repository now confirms the existing page behavior already satisfies revisit requirements, and after attaching a discovered project the revisited projects list still shows the project in local browser state, `PrzypiĂ„â„˘ty lokalnie`, disabled `Przypnij`, and available `OtwÄ‚Ĺ‚rz`. The canonical app version remains `0.021.6`.
+
+MS-021.10 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Attached Project Revisit Foundation; the repository now confirms the existing page behavior already satisfies revisit requirements, and after attaching a discovered project the revisited projects list still shows the project in local browser state, `PrzypiĂ„â„˘ty lokalnie`, disabled `Przypnij`, and available `OtwÄ‚Ĺ‚rz`. The canonical app version remains `0.021.6`.
+
+MS-021.10 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Attached Project Revisit Foundation; the repository now confirms the existing page behavior already satisfies revisit requirements, and after attaching a discovered project the revisited projects list still shows the project in local browser state, `PrzypiĂ„â„˘ty lokalnie`, disabled `Przypnij`, and available `OtwÄ‚Ĺ‚rz`. The canonical app version remains `0.021.6`.
+
+MS-021.10 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Attached Project Revisit Foundation; the repository now confirms the existing page behavior already satisfies revisit requirements, and after attaching a discovered project the revisited projects list still shows the project in local browser state, `PrzypiÄ™ty lokalnie`, disabled `Przypnij`, and available `OtwĂłrz`. The canonical app version remains `0.021.6`.
 Versioning rule: accepted app/platform `.0` milestones bump the controlled app version source to `0.XXX.0`. Patch and live-fix handling remains deferred until needed, and non-MS categories such as WF remain deferred until needed.
 
 Branch sync rule: `product-intake-soft-premium-system` stays synchronized to `main` through event-based fast-forward updates after accepted milestone commits or accepted live-test patches.
@@ -315,14 +334,14 @@ SPDM-007 completed and accepted with one-command startup rules that block memory
 CAP-003.1 completed and accepted with `docs/13_PROJECT_CAPABILITY.md` created as the Project Capability domain contract.
 CAP-003.2 completed and accepted with Project Domain Model added to `docs/13_PROJECT_CAPABILITY.md`.
 MS-001.4 release readiness evidence checklist is defined with status vocabulary and decision boundary in `docs/04_ROADMAP.md`.
-MS-001.4 readiness evidence was updated after successful `SPS OS — START`: Bootstrap/runtime startup is `PASS`, Git/repository state is `PASS`, and Session package generation remains `PARTIAL`.
+MS-001.4 readiness evidence was updated after successful `SPS OS â€” START`: Bootstrap/runtime startup is `PASS`, Git/repository state is `PASS`, and Session package generation remains `PARTIAL`.
 MS-001.5 release candidate milestone is completed.
 MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-021.6 - Local Project Discovery UI Read-Only Foundation
+Latest Completed Product Milestone: MS-021.10 - Local Project Discovery Attached Project Revisit Foundation
 Next Product Milestone: NONE / Product Owner decision required
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
@@ -1480,7 +1499,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-021.9 - Local Project Discovery Attached Status Visibility Foundation`
+* `Latest Completed Product Milestone` is `MS-021.10 - Local Project Discovery Attached Project Revisit Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

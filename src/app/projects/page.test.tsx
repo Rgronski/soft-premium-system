@@ -164,6 +164,39 @@ describe("ProjectsPage", () => {
     expect(screen.getByRole("button", { name: "Otwórz" })).toBeTruthy();
   });
 
+  test("keeps attached status visible after revisiting the projects list", async () => {
+    const firstRender = render(<ProjectsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Filesystem Project")).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Przypnij" }));
+
+    expect(
+      JSON.parse(localStorage.getItem("soft-premium-system.projects") ?? "[]"),
+    ).toEqual([
+      expect.objectContaining({
+        id: "filesystem-project",
+        name: "Filesystem Project",
+        workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project",
+        projectFilesystemStatus: "manifest-present",
+      }),
+    ]);
+
+    firstRender.unmount();
+
+    render(<ProjectsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Filesystem Project")).toBeTruthy();
+    });
+
+    expect(screen.getByText("Przypięty lokalnie")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Przypnij" }).disabled).toBe(true);
+    expect(screen.getByRole("button", { name: "Otwórz" })).toBeTruthy();
+  });
+
   test("creates a project through the server boundary and stores the same id locally", async () => {
     render(<ProjectsPage />);
 

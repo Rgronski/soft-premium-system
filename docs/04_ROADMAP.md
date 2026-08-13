@@ -109,15 +109,82 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 078 synchronized the accepted `MS-021.9` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 078 synchronized the accepted `MS-021.10` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.9 - Local Project Discovery Attached Status Visibility Foundation
+MS-021.10 - Local Project Discovery Attached Project Revisit Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.10 - Local Project Discovery Attached Project Revisit Foundation
+
+**Milestone**
+MS-021.10 - Local Project Discovery Attached Project Revisit Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Runtime Status**
+PUBLISHED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Expose the smallest safe revisit boundary for filesystem-discovered projects after attachment by confirming the attached-status UI remains visible across unmount and remount of the projects list.
+
+**Product Outcome**
+The repository now confirms the existing page behavior already satisfies revisit requirements: after attaching a discovered project, revisiting the projects list still shows the project in local browser state, the discovered card status remains `Przypięty lokalnie`, `Przypnij` remains disabled, and `Otwórz` remains available.
+
+**Dependencies**
+* closed `MS-021.9 - Local Project Discovery Attached Status Visibility Foundation`
+
+**Allowed Implementation Scope**
+* focused revisit/re-render test coverage
+* confirmation of the localStorage-backed attached state boundary
+* preserve the existing page behavior unchanged when it already satisfies the contract
+
+**Forbidden Scope**
+* storage helper refactor
+* backend registry changes
+* API or discovery helper changes
+* manifest format changes
+* UI redesign
+* new routes
+
+**Ownership Boundaries**
+* `src/app/projects/page.test.tsx` owns the revisit verification coverage
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `npm.cmd test -- src/app/projects/page.test.tsx`
+* `git diff --check`
+* `git status -sb`
+* confirm revisit preserves `Przypięty lokalnie`, disabled `Przypnij`, and available `Otwórz`
 
 ## MS-021.9 - Local Project Discovery Attached Status Visibility Foundation
 
