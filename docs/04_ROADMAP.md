@@ -109,6 +109,8 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
+Session 076 is closed on `main` at commit `3408130`, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+
 ## Latest Completed Product Milestone
 
 MS-020.0 - Polish UI Language Overlay Foundation

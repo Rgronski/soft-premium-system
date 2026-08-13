@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 076 - Session close and handoff synchronization
+
+### Date
+
+2026-08-12
+
+### Completed
+
+* Finalized the Session 076 close state after the accepted `MS-020.0` publication on `main`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT records the final closed Session 076 state.
+* Created the Session 076 handoff for Session 077 continuity.
+* Appended the Session 076 close usage entry to `.usage/session.jsonl`.
+* Confirmed the repository remains synchronized on `main` and `product-intake-soft-premium-system`.
+
+### Notes
+
+* No new product milestone was introduced.
+* The final Session 076 package was generated only after the final close push.
+
 ## Session 076 - MS-020.0 Polish UI Language Overlay Foundation
 
 ### Date
