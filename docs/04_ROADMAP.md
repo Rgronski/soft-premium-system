@@ -109,15 +109,83 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 078 synchronized the accepted `MS-021.8` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 078 synchronized the accepted `MS-021.9` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.8 - Local Project Discovery Attach Existing Project Foundation
+MS-021.9 - Local Project Discovery Attached Status Visibility Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.9 - Local Project Discovery Attached Status Visibility Foundation
+
+**Milestone**
+MS-021.9 - Local Project Discovery Attached Status Visibility Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Runtime Status**
+PUBLISHED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Expose the smallest safe attached-status visibility boundary for filesystem-discovered projects by surfacing whether an already discovered project is already present in the existing local browser project list.
+
+**Product Outcome**
+The repository now loads the current local browser project list with `getProjects()`, checks each discovered project id against local state, shows `Przypięty lokalnie` for already attached discovered projects, disables `Przypnij` for those projects, and keeps `Otwórz` available. Not-yet-attached discovered projects keep `Przypnij` enabled and `Otwórz` available.
+
+**Dependencies**
+* closed `MS-021.8 - Local Project Discovery Attach Existing Project Foundation`
+
+**Allowed Implementation Scope**
+* local UI status detection from existing browser project list state
+* restrained attached-status label and button state change
+* focused page/UI test coverage for already-attached status
+* preserve the future database-backed registry/sync path
+
+**Forbidden Scope**
+* backend registry changes
+* API or discovery helper changes
+* manifest format changes
+* storage helper refactor
+* UI redesign
+* new routes
+
+**Ownership Boundaries**
+* `src/app/projects/page.tsx` and `src/app/projects/page.test.tsx` own the attached-status visibility UI contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `git diff --check`
+* `git status -sb`
+* confirm discovered projects display `Przypięty lokalnie` when already present in local browser state
+* confirm `Przypnij` is disabled only for already attached discovered projects
 
 ## MS-021.8 - Local Project Discovery Attach Existing Project Foundation
 

@@ -215,20 +215,20 @@ SPS OS Session State
 
 Date: 2026-08-13
 Current Session ID: 078
-Current Chat Title: 078 SPS OS - MS-021.8 Control Files Sync
+Current Chat Title: 078 SPS OS - MS-021.9 Control Files Sync
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
 Active Capability: Control Files Sync
-Active Work Item: MS-021.8 control-files sync
+Active Work Item: MS-021.9 control-files sync
 Current Mode: ACTIVE
-Completed Capability Items: Session 078 synchronized the MS-021.8 control files; Session 078 appended the Session 078 control-sync usage entry; Session 078 updated the SSOT snapshot for MS-021.8
+Completed Capability Items: Session 078 synchronized the MS-021.9 control files; Session 078 appended the Session 078 control-sync usage entry; Session 078 updated the SSOT snapshot for MS-021.9
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-021.8 - Local Project Discovery Attach Existing Project Foundation
+Latest Completed Product Milestone: MS-021.9 - Local Project Discovery Attached Status Visibility Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 078 completed the MS-021.8 control-files sync
+Latest Completed Capability Item: Session 078 completed the MS-021.9 control-files sync
 Current Sprint: NONE
-Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, and MS-021.8 immutable while awaiting Product Owner decision for the next milestone.
+Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, and MS-021.9 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
 Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
@@ -236,5 +236,5 @@ Latest Verified Commit: 44e8de9
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Chief Architect review the synchronized MS-021.8 control files.
+Next Safe Step: Chief Architect review the synchronized MS-021.9 control files.
 Next Session Plan: Await publication decision after Chief Architect review.

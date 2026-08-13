@@ -4,6 +4,7 @@ import { SectionCard } from "@/components/ui/SectionCard";
 import {
   buildDefaultWorkingDirectory,
   createProject,
+  getProjects,
   upsertProject,
 } from "@/lib/project/project";
 import type { Project } from "@/lib/project/types";
@@ -49,6 +50,7 @@ export default function ProjectsPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [discoveredProjects, setDiscoveredProjects] = useState<Project[]>([]);
+  const [localProjects, setLocalProjects] = useState<Project[]>([]);
   const [discoveryErrorMessage, setDiscoveryErrorMessage] = useState<
     string | null
   >(null);
@@ -93,6 +95,10 @@ export default function ProjectsPage() {
     return () => {
       isActive = false;
     };
+  }, []);
+
+  useEffect(() => {
+    setLocalProjects(getProjects());
   }, []);
 
   async function handleCreateProject() {
@@ -155,6 +161,7 @@ export default function ProjectsPage() {
         trimmedWorkingDirectory,
         createdProject.projectFilesystemStatus,
       );
+      setLocalProjects(getProjects());
       setProjectName("");
       setRepositoryUrl("");
       setWorkingDirectory(buildDefaultWorkingDirectory(""));
@@ -175,11 +182,13 @@ export default function ProjectsPage() {
       project.workingDirectory,
       project.projectFilesystemStatus,
     );
+    setLocalProjects(getProjects());
     router.push(`/projects/${project.id}`);
   }
 
   function handleAttachDiscoveredProject(project: Project) {
     upsertProject(project);
+    setLocalProjects(getProjects());
   }
 
   return (
@@ -308,42 +317,61 @@ export default function ProjectsPage() {
           {!isDiscoveryLoading && !discoveryErrorMessage ? (
             discoveredProjects.length > 0 ? (
               <ul className="mt-4 space-y-3">
-                {discoveredProjects.map((project) => (
-                  <li
-                    key={project.id}
-                    className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <p className="font-medium text-zinc-50">
-                          {project.name}
-                        </p>
-                        <p className="mt-1 text-sm text-zinc-400">
-                          {project.id}
-                        </p>
-                        <p className="mt-1 text-sm text-zinc-500">
-                          {project.workingDirectory}
-                        </p>
+                {discoveredProjects.map((project) => {
+                  const isLocallyAttached = localProjects.some(
+                    (localProject) => localProject.id === project.id,
+                  );
+
+                  return (
+                    <li
+                      key={project.id}
+                      className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <p className="font-medium text-zinc-50">
+                            {project.name}
+                          </p>
+                          <p className="mt-1 text-sm text-zinc-400">
+                            {project.id}
+                          </p>
+                          <p className="mt-1 text-sm text-zinc-500">
+                            {project.workingDirectory}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-col items-end gap-2">
+                          <div className="flex items-center gap-3">
+                            <button
+                              type="button"
+                              onClick={() => handleOpenDiscoveredProject(project)}
+                              className="rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-900"
+                            >
+                              Otwórz
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleAttachDiscoveredProject(project)
+                              }
+                              disabled={isLocallyAttached}
+                              className="rounded-full border border-emerald-500/40 px-4 py-2 text-sm font-medium text-emerald-100 transition-colors hover:border-emerald-400 hover:bg-emerald-500/10 disabled:cursor-not-allowed disabled:opacity-50"
+                            >
+                              Przypnij
+                            </button>
+                          </div>
+
+                          {isLocallyAttached ? (
+                            <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-emerald-100">
+                              Przypięty lokalnie
+                            </span>
+                          ) : null}
+                        </div>
                       </div>
-
-                      <button
-                        type="button"
-                        onClick={() => handleOpenDiscoveredProject(project)}
-                        className="rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-900"
-                      >
-                        Otwórz
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => handleAttachDiscoveredProject(project)}
-                        className="rounded-full border border-emerald-500/40 px-4 py-2 text-sm font-medium text-emerald-100 transition-colors hover:border-emerald-400 hover:bg-emerald-500/10"
-                      >
-                        Przypnij
-                      </button>
-                    </div>
-                  </li>
-                ))}
+                    </li>
+                  );
+                })}
               </ul>
             ) : (
               <p className="mt-4 text-sm text-zinc-500">

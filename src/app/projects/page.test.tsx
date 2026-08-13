@@ -118,23 +118,7 @@ describe("ProjectsPage", () => {
     ]);
   });
 
-  test("attaches a filesystem-discovered project without duplicating its local id", async () => {
-    localStorage.setItem(
-      "soft-premium-system.projects",
-      JSON.stringify([
-        {
-          id: "filesystem-project",
-          name: "Old Filesystem Project",
-          createdAt: "2026-08-01T10:00:00.000Z",
-        },
-        {
-          id: "local-project",
-          name: "Local Project",
-          createdAt: "2026-08-01T11:00:00.000Z",
-        },
-      ]),
-    );
-
+  test("attaches a filesystem-discovered project into local browser state", async () => {
     render(<ProjectsPage />);
 
     await waitFor(() => {
@@ -152,12 +136,32 @@ describe("ProjectsPage", () => {
         workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project",
         projectFilesystemStatus: "manifest-present",
       }),
-      {
-        id: "local-project",
-        name: "Local Project",
-        createdAt: "2026-08-01T11:00:00.000Z",
-      },
     ]);
+  });
+
+  test("shows already attached discovered projects as pinned locally and disables attach", async () => {
+    localStorage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "filesystem-project",
+          name: "Filesystem Project",
+          workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project",
+          projectFilesystemStatus: "manifest-present",
+          createdAt: "2026-08-01T10:00:00.000Z",
+        },
+      ]),
+    );
+
+    render(<ProjectsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Filesystem Project")).toBeTruthy();
+    });
+
+    expect(screen.getByText("Przypięty lokalnie")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Przypnij" }).disabled).toBe(true);
+    expect(screen.getByRole("button", { name: "Otwórz" })).toBeTruthy();
   });
 
   test("creates a project through the server boundary and stores the same id locally", async () => {
