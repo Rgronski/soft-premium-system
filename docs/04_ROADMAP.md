@@ -109,15 +109,88 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 076 is closed on `main` at commit `3408130`, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 077 is synchronizing the accepted `MS-021.0` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-020.0 - Polish UI Language Overlay Foundation
+MS-021.0 - Local Project Filesystem Authority Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.0 - Local Project Filesystem Authority Foundation
+
+**Milestone**
+MS-021.0 - Local Project Filesystem Authority Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Anchor project identity physically on disk with the smallest safe manifest written into the project working directory, without replacing the existing database insert path or introducing a broader storage migration.
+
+**Product Outcome**
+The repository now writes a minimal `sps-project.json` manifest into the project working directory during project creation so project identity is physically anchored on disk while the existing database insert path remains intact. The local filesystem manifest is now the first authority anchor, and the future database-backed registry or sync path remains preserved for a later milestone.
+
+**Dependencies**
+* closed `MS-020.0 - Polish UI Language Overlay Foundation`
+
+**Allowed Implementation Scope**
+* minimal project manifest write in the existing project creation helper
+* focused tests for the touched project helper and task-flow path
+* SSOT synchronization for the new milestone
+* preserve the future database registry/sync path
+
+**Forbidden Scope**
+* full storage migration
+* full localStorage replacement
+* database sync
+* Project Brain rewrite
+* task/knowledge/history migration
+* broad UI redesign
+* route restructuring
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/lib/project/server.ts`
+* `src/lib/project/server.test.ts`
+* `src/lib/project/project-task-flow.test.ts`
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `npm.cmd test -- --run src/lib/project/server.test.ts src/lib/project/project-task-flow.test.ts`
+* `git diff --check`
+* `git status -sb`
+* confirm `sps-project.json` is written inside the project working directory
+* confirm the future database registry/sync path remains unimplemented
 
 ## MS-020.0 - Polish UI Language Overlay Foundation
 

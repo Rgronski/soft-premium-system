@@ -3,10 +3,12 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 
 const mkdirMock = vi.fn();
+const writeFileMock = vi.fn();
 const neonMock = vi.fn();
 
 vi.mock("node:fs/promises", () => ({
   mkdir: mkdirMock,
+  writeFile: writeFileMock,
 }));
 
 vi.mock("@neondatabase/serverless", () => ({
@@ -29,6 +31,7 @@ afterEach(() => {
 
   neonMock.mockReset();
   mkdirMock.mockReset();
+  writeFileMock.mockReset();
   vi.restoreAllMocks();
 });
 
@@ -147,6 +150,7 @@ describe("createServerProject", () => {
     process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
 
     mkdirMock.mockResolvedValueOnce(undefined);
+    writeFileMock.mockResolvedValueOnce(undefined);
     const queryMock = vi.fn().mockResolvedValue([
       {
         id: "project-1",
@@ -171,6 +175,18 @@ describe("createServerProject", () => {
     expect(mkdirMock).toHaveBeenCalledWith("C:\\SPS_OS_WORK\\alpha", {
       recursive: true,
     });
+    expect(writeFileMock).toHaveBeenCalledTimes(1);
+    expect(writeFileMock).toHaveBeenCalledWith(
+      "C:\\SPS_OS_WORK\\alpha\\sps-project.json",
+      expect.any(String),
+      "utf8",
+    );
+    expect(JSON.parse(writeFileMock.mock.calls[0][1] as string)).toEqual({
+      id: "project-1",
+      name: "Alpha",
+      repositoryUrl: "https://github.com/example/project",
+      createdAt: expect.any(String),
+    });
     expect(queryMock).toHaveBeenCalledWith(
       `INSERT INTO public.projects (id, name, repository_url, created_at)
 VALUES ($1, $2, $3, $4)
@@ -190,6 +206,31 @@ RETURNING id, name, repository_url, created_at`,
       projectBrainStatus: "pending",
       createdAt: "2026-07-24T10:11:12.000Z",
     });
+  });
+
+  it("fails project creation when the manifest cannot be written", async () => {
+    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
+
+    mkdirMock.mockResolvedValueOnce(undefined);
+    writeFileMock.mockRejectedValueOnce(new Error("permission denied"));
+    const queryMock = vi.fn();
+
+    neonMock.mockReturnValue({
+      query: queryMock,
+    });
+
+    const { createServerProject } = await loadServerModule();
+
+    await expect(
+      createServerProject({
+        id: "project-1",
+        name: "Alpha",
+      }),
+    ).rejects.toMatchObject({
+      code: "working-directory-create-failed",
+    });
+
+    expect(queryMock).not.toHaveBeenCalled();
   });
 });
 

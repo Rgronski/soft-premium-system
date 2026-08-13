@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 077 - MS-021.0 local project filesystem authority control-files sync
+
+### Date
+
+2026-08-13
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-021.0 - Local Project Filesystem Authority Foundation` as the latest completed product milestone.
+* Recorded the minimal `sps-project.json` manifest foundation as the new local filesystem authority anchor for project identity in the control files.
+* Appended exactly one Session 077 usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* No product code changed in this control-files sync step.
+* The future database-backed registry or sync path remains preserved for a later milestone.
+
 ## Session 076 - Session close and handoff synchronization
 
 ### Date

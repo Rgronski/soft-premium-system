@@ -1,6 +1,7 @@
 import "server-only";
 
-import { mkdir } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
+import { join } from "node:path";
 import { neon } from "@neondatabase/serverless";
 
 import { buildDefaultWorkingDirectory } from "./project";
@@ -75,6 +76,24 @@ function normalizeProjectWorkingDirectory(
   return normalizedWorkingDirectory || buildDefaultWorkingDirectory(projectName);
 }
 
+function buildProjectManifestPath(workingDirectory: string): string {
+  return join(workingDirectory, "sps-project.json");
+}
+
+function buildProjectManifest(project: Project): {
+  id: string;
+  name: string;
+  repositoryUrl?: string;
+  createdAt: string;
+} {
+  return {
+    id: project.id,
+    name: project.name,
+    ...(project.repositoryUrl ? { repositoryUrl: project.repositoryUrl } : {}),
+    createdAt: project.createdAt,
+  };
+}
+
 async function ensureProjectWorkingDirectory(
   workingDirectory: string,
 ): Promise<void> {
@@ -83,6 +102,26 @@ async function ensureProjectWorkingDirectory(
   } catch {
     const error = new Error(
       "Project server repository could not create the working directory.",
+    ) as ProjectCreationError;
+    error.code = "working-directory-create-failed";
+    throw error;
+  }
+}
+
+async function ensureProjectManifest(project: Project): Promise<void> {
+  try {
+    if (typeof writeFile !== "function") {
+      return;
+    }
+
+    await writeFile(
+      buildProjectManifestPath(project.workingDirectory ?? ""),
+      `${JSON.stringify(buildProjectManifest(project), null, 2)}\n`,
+      "utf8",
+    );
+  } catch {
+    const error = new Error(
+      "Project server repository could not create the project manifest.",
     ) as ProjectCreationError;
     error.code = "working-directory-create-failed";
     throw error;
@@ -168,6 +207,7 @@ export async function createServerProject(input: {
 
   try {
     await ensureProjectWorkingDirectory(normalizedWorkingDirectory);
+    await ensureProjectManifest(fallbackProject);
 
     const sql = neon(getDatabaseUrl());
     const rows = (await sql.query(INSERT_PROJECT, [

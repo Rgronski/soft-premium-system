@@ -3,10 +3,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 
 const mkdirMock = vi.fn();
+const writeFileMock = vi.fn();
 const neonMock = vi.fn();
 
 vi.mock("node:fs/promises", () => ({
   mkdir: mkdirMock,
+  writeFile: writeFileMock,
 }));
 
 vi.mock("@neondatabase/serverless", () => ({
@@ -142,6 +144,7 @@ beforeEach(() => {
   process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
   neonMock.mockReset();
   mkdirMock.mockReset();
+  writeFileMock.mockReset();
   vi.useFakeTimers();
   vi.setSystemTime(new Date("2026-08-03T20:00:00.000Z"));
   vi.stubGlobal("crypto", {

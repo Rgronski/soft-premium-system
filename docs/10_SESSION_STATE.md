@@ -213,28 +213,28 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-08-12
-Current Session ID: 076
-Current Chat Title: 076 SPS OS - Session Close Protocol
-Next Session ID: 077
-Suggested Next Chat Title: 077 SPS OS - Product Owner Decision
-Active Capability: Session Close Protocol
-Active Work Item: NONE
-Current Mode: CLOSED
-Completed Capability Items: Session 076 diagnosed the existing Project Brain read and recovery surfaces; Session 076 published the MS-018.0 docs-only contract boundary; Session 076 implemented the MS-018.1 retrieved-memory surface on AI Workspace; Session 076 diagnosed source-data absence for the missing task; Session 076 implemented the MS-018.3 create-task-from-memory action on AI Workspace; Session 076 live verified MS-018.3 with the Product Owner; Session 076 synchronized the roadmap, current state, changelog, session state, and usage log; Session 076 introduced the canonical app version source; Session 076 rendered the visible app version badge; Session 076 accepted the live MS-019.0 PASS; Session 076 applied the MS-020.0 Polish UI language overlay across the touched visible surfaces; Session 076 bumped the canonical app version to 0.020.0; Session 076 completed the Session Close Protocol; Session 076 created the Session 076 handoff; Session 076 generated the fresh session package
+Date: 2026-08-13
+Current Session ID: 077
+Current Chat Title: 077 SPS OS - Control Files Sync
+Next Session ID: 078
+Suggested Next Chat Title: 078 SPS OS - Product Owner Decision
+Active Capability: Control Files Sync
+Active Work Item: SSOT/control file synchronization
+Current Mode: OPEN
+Completed Capability Items: Session 077 synchronized the MS-021.0 control files after accepted implementation; Session 077 appended the MS-021.0 usage entry
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-020.0 - Polish UI Language Overlay Foundation
+Latest Completed Product Milestone: MS-021.0 - Local Project Filesystem Authority Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 076 completed the Session Close Protocol, generated the fresh session package, and synchronized the final closed state without changing scope
+Latest Completed Capability Item: Session 077 synchronized the SSOT control files and recorded the missing usage entry without changing product code
 Current Sprint: NONE
-Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, and MS-020.0 immutable while awaiting Product Owner decision for the next milestone.
+Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, and MS-021.0 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: 3408130
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Start Session 077 with the fresh session package and await Product Owner decision for the next milestone.
-Next Session Plan: Start Session 077 from the fresh session package and await Product Owner decision for the next milestone.
+Next Safe Step: Await Product Owner decision for the next milestone.
+Next Session Plan: Start Session 078 from the fresh control-files snapshot and await Product Owner decision for the next milestone.
