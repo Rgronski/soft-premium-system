@@ -109,15 +109,85 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 078 synchronized the accepted `MS-021.11` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 078 synchronized the accepted `MS-021.12` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.11 - Local Project Discovery Attached Source Visibility Foundation
+MS-021.12 - Local Project Discovery Source Conflict Visibility Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.12 - Local Project Discovery Source Conflict Visibility Foundation
+
+**Milestone**
+MS-021.12 - Local Project Discovery Source Conflict Visibility Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Runtime Status**
+PUBLISHED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Expose the smallest safe read-only source-conflict visibility boundary for filesystem-discovered projects when the attached local browser-state entry differs from the discovered metadata.
+
+**Product Outcome**
+The repository now shows a restrained read-only conflict status for discovered projects when the same project id is already attached locally but the discovered metadata differs from the local browser-state entry. Conflict detection compares `name`, `workingDirectory`, and `repositoryUrl` when present on both sides, while preserving `Przypięty lokalnie`, the source label derived from `workingDirectory`, `Otwórz`, and disabled `Przypnij`.
+
+**Dependencies**
+* closed `MS-021.11 - Local Project Discovery Attached Source Visibility Foundation`
+
+**Allowed Implementation Scope**
+* restrained source-conflict label rendering for attached discovered projects
+* read-only comparison of existing local/discovered project fields
+* focused page/UI test coverage for conflict visibility
+* preserve the existing attach/open/localStorage boundary
+
+**Forbidden Scope**
+* automatic conflict resolution
+* overwrite or merge of local project state
+* backend registry changes
+* API or discovery helper changes
+* manifest format changes
+* storage helper refactor
+* UI redesign
+* new routes
+
+**Ownership Boundaries**
+* `src/app/projects/page.tsx` and `src/app/projects/page.test.tsx` own the source-conflict visibility UI contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `npm.cmd test -- src/app/projects/page.test.tsx`
+* `git diff --check`
+* `git status -sb`
+* confirm attached discovered projects show a restrained conflict status when their discovered metadata differs from the local browser-state entry
 
 ## MS-021.11 - Local Project Discovery Attached Source Visibility Foundation
 

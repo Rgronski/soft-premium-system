@@ -318,8 +318,19 @@ export default function ProjectsPage() {
             discoveredProjects.length > 0 ? (
               <ul className="mt-4 space-y-3">
                 {discoveredProjects.map((project) => {
-                  const isLocallyAttached = localProjects.some(
-                    (localProject) => localProject.id === project.id,
+                  const localProject = localProjects.find(
+                    (entry) => entry.id === project.id,
+                  );
+                  const isLocallyAttached = Boolean(localProject);
+                  const hasSourceConflict = Boolean(
+                    localProject &&
+                      (localProject.name !== project.name ||
+                        localProject.workingDirectory !==
+                          project.workingDirectory ||
+                        (localProject.repositoryUrl &&
+                          project.repositoryUrl &&
+                          localProject.repositoryUrl !==
+                            project.repositoryUrl)),
                   );
                   const sourceLabel = project.workingDirectory.startsWith(
                     "C:\\SPS_OS_WORK",
@@ -372,6 +383,12 @@ export default function ProjectsPage() {
                               <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-emerald-100">
                                 Przypięty lokalnie
                               </span>
+
+                              {hasSourceConflict ? (
+                                <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-amber-100">
+                                  Konflikt źródła
+                                </span>
+                              ) : null}
 
                               <span className="rounded-full border border-zinc-700 bg-zinc-900/60 px-3 py-1 text-xs uppercase tracking-[0.2em] text-zinc-300">
                                 {sourceLabel}

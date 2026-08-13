@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-021.11 - Local Project Discovery Attached Source Visibility Foundation
+MS-021.12 - Local Project Discovery Source Conflict Visibility Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
@@ -56,9 +56,9 @@ MS-019.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local works
 
 MS-020.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Polish UI Language Overlay Foundation; the repository now applies the smallest Polish copy overlay to the existing visible home, project, overview, task, and AI Workspace surfaces while keeping the canonical version badge, task storage behavior, and Knowledge behavior unchanged. The canonical app version is now `0.020.0`.
 
-MS-021.11 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Attached Source Visibility Foundation; the repository now shows a restrained read-only source label for attached filesystem-discovered projects in the local projects list, derives the label from `workingDirectory`, keeps `Przypięty lokalnie` visible, keeps `Otwórz` available, and keeps `Przypnij` disabled for already attached discovered projects. The canonical app version remains `0.021.6`.
+MS-021.12 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Local Project Discovery Source Conflict Visibility Foundation; the repository now shows a restrained read-only conflict status for attached filesystem-discovered projects when discovered metadata differs from the local browser-state entry, compares `name`, `workingDirectory`, and `repositoryUrl` when present on both sides, and preserves `Przypięty lokalnie`, the source label derived from `workingDirectory`, `Otwórz`, and disabled `Przypnij`. The canonical app version remains `0.021.6`.
 
-Session 078 synchronized the accepted `MS-021.11` control files in the current local workspace, and the repository remains aligned with `origin/main` at `0 / 0` from the last verified commit `9c3a07e`.
+Session 078 synchronized the accepted `MS-021.12` control files in the current local workspace, and the repository remains aligned with `origin/main` at `0 / 0` from the last verified commit `9c3a07e`.
 
 MS-021.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Filesystem Authority Foundation; the repository now writes a minimal `sps-project.json` manifest into the project working directory during project creation so project identity is physically anchored on disk while the existing database insert path remains intact. The local filesystem manifest is now the first authority anchor, and the future database-backed registry or sync path remains preserved for a later milestone.
 

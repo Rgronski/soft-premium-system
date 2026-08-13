@@ -165,6 +165,34 @@ describe("ProjectsPage", () => {
     expect(screen.getByRole("button", { name: "Otwórz" })).toBeTruthy();
   });
 
+  test("shows a source conflict warning when the attached local project differs from discovery", async () => {
+    localStorage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "filesystem-project",
+          name: "Filesystem Project - Local",
+          workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project-local",
+          repositoryUrl: "https://github.com/example/local-project",
+          projectFilesystemStatus: "manifest-present",
+          createdAt: "2026-08-01T10:00:00.000Z",
+        },
+      ]),
+    );
+
+    render(<ProjectsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Filesystem Project")).toBeTruthy();
+    });
+
+    expect(screen.getByText("Przypięty lokalnie")).toBeTruthy();
+    expect(screen.getByText("Konflikt źródła")).toBeTruthy();
+    expect(screen.getByText("Z C:\\SPS_OS_WORK")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Przypnij" }).disabled).toBe(true);
+    expect(screen.getByRole("button", { name: "Otwórz" })).toBeTruthy();
+  });
+
   test("keeps attached status visible after revisiting the projects list", async () => {
     const firstRender = render(<ProjectsPage />);
 
