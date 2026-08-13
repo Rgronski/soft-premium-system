@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 078 - MS-021.13 session close protocol and handoff preparation
+
+### Date
+
+2026-08-13
+
+### Completed
+
+* Synchronized `docs/08_CURRENT_STATE.md` and `docs/10_SESSION_STATE.md` for the Session 078 close snapshot.
+* Created `docs/session-handoffs/2026-08-13_078_SESSION_HANDOFF.md` as the current Session 078 handoff for Session 079.
+* Updated the Session 078 close summary fields to keep `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* No product code changed in this close-preparation step.
+* Session 078 remains ready for final package generation after the close commit is published.
+
 ## Session 078 - MS-021.13 local project discovery source conflict action contract control-files sync
 
 ### Date
