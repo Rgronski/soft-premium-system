@@ -345,9 +345,11 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-021.16 - Local Project Discovery Conflict Decision State Persistence Foundation
+Latest Completed Product Milestone: MS-021.17 - Local Project Discovery Conflict Decision Reset Foundation
 Next Product Milestone: NONE / Product Owner decision required
-Session 079 synchronized the accepted `MS-021.16` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 079 synchronized the accepted `MS-021.17` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
+
+MS-021.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Reset Foundation; the repository now exposes a local `Cofnij decyzję` action for resolved source-conflict decisions so the browser-state resolved flag can be cleared for that `project.id`. Reset does not mutate the local project, and if the discovered project still differs after reset, the conflict can appear again as unresolved. The MS-021.16 persistence behavior and MS-021.15 feedback remain preserved, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
 MS-021.16 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision State Persistence Foundation; the repository now stores resolved conflict decisions per `project.id` in browser state so the same discovered project no longer reappears as unresolved during the current session after either `Zachowaj lokalnÄ… wersjÄ™` or `Zaakceptuj wykryty projekt`. The MS-021.15 feedback remains visible, the MS-021.14 mutation rules remain intact, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
@@ -1511,7 +1513,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-021.15 - Local Project Discovery Conflict Decision Feedback Foundation`
+* `Latest Completed Product Milestone` is `MS-021.17 - Local Project Discovery Conflict Decision Reset Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

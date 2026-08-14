@@ -343,6 +343,18 @@ export default function ProjectsPage() {
     setExpandedConflictProjectId(null);
   }
 
+  function handleResetConflictDecision(projectId: string) {
+    setExpandedConflictProjectId(null);
+    setResolvedConflictProjectIds((current) => {
+      const nextResolvedConflictProjectIds = { ...current };
+
+      delete nextResolvedConflictProjectIds[projectId];
+      writeResolvedConflictProjectIds(nextResolvedConflictProjectIds);
+
+      return nextResolvedConflictProjectIds;
+    });
+  }
+
   return (
     <main className="min-h-screen bg-zinc-950 px-6 py-10 text-zinc-50">
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-8">
@@ -624,6 +636,18 @@ export default function ProjectsPage() {
                                 >
                                   {conflictFeedbackMessages[project.id]}
                                 </p>
+                              ) : null}
+
+                              {isConflictDecisionResolved ? (
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    handleResetConflictDecision(project.id)
+                                  }
+                                  className="rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-900"
+                                >
+                                  Cofnij decyzję
+                                </button>
                               ) : null}
 
                               <span className="rounded-full border border-zinc-700 bg-zinc-900/60 px-3 py-1 text-xs uppercase tracking-[0.2em] text-zinc-300">

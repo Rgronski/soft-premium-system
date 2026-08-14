@@ -320,6 +320,69 @@ describe("ProjectsPage", () => {
       screen.queryByRole("button", { name: "Zobacz r\u00F3\u017Cnice" }),
     ).toBeNull();
   });
+
+  test("resets a resolved conflict decision back to unresolved local browser state", async () => {
+    fetchMock.mockImplementationOnce(async () =>
+      createJsonResponse(
+        {
+          projects: [
+            {
+              id: "filesystem-project",
+              name: "Filesystem Project",
+              workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project",
+              repositoryUrl: "https://github.com/example/discovered-project",
+              projectFilesystemStatus: "manifest-present",
+              createdAt: "2026-08-03T20:00:00.000Z",
+            },
+          ],
+        },
+        200,
+      ),
+    );
+
+    localStorage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "filesystem-project",
+          name: "Filesystem Project - Local",
+          workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project-local",
+          repositoryUrl: "https://github.com/example/local-project",
+          projectFilesystemStatus: "manifest-present",
+          createdAt: "2026-08-01T10:00:00.000Z",
+        },
+      ]),
+    );
+
+    render(<ProjectsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Filesystem Project")).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Zobacz r\u00F3\u017Cnice" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "Zachowaj lokaln\u0105 wersj\u0119" }),
+    );
+
+    expect(
+      screen.getByRole("button", { name: "Cofnij decyzję" }),
+    ).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "Cofnij decyzję" }));
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Zobacz r\u00F3\u017Cnice" })).toBeTruthy();
+    });
+
+    expect(
+      JSON.parse(
+        localStorage.getItem("soft-premium-system.project-conflict-decisions") ??
+          "[]",
+      ),
+    ).toEqual([]);
+  });
+
   test("accepts the discovered version into local browser state when resolving a conflict", async () => {
     fetchMock.mockImplementationOnce(async () =>
       createJsonResponse(
