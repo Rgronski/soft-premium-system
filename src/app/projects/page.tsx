@@ -112,6 +112,9 @@ export default function ProjectsPage() {
   const [expandedConflictProjectId, setExpandedConflictProjectId] = useState<
     string | null
   >(null);
+  const [conflictFeedbackMessages, setConflictFeedbackMessages] = useState<
+    Record<string, string>
+  >({});
   const [discoveryErrorMessage, setDiscoveryErrorMessage] = useState<
     string | null
   >(null);
@@ -252,8 +255,12 @@ export default function ProjectsPage() {
     setLocalProjects(getProjects());
   }
 
-  function handleKeepLocalProject() {
+  function handleKeepLocalProject(projectId: string) {
     setExpandedConflictProjectId(null);
+    setConflictFeedbackMessages((current) => ({
+      ...current,
+      [projectId]: "Zachowano lokalną wersję projektu",
+    }));
   }
 
   function handleAcceptDiscoveredProject(
@@ -264,6 +271,10 @@ export default function ProjectsPage() {
       resolveDiscoveredProjectConflict(localProject, discoveredProject),
     );
     setLocalProjects(getProjects());
+    setConflictFeedbackMessages((current) => ({
+      ...current,
+      [localProject.id]: "Zaakceptowano dane z wykrytego projektu",
+    }));
     setExpandedConflictProjectId(null);
   }
 
@@ -509,7 +520,9 @@ export default function ProjectsPage() {
                                       <div className="mt-4 flex flex-wrap gap-2">
                                         <button
                                           type="button"
-                                          onClick={handleKeepLocalProject}
+                                          onClick={() =>
+                                            handleKeepLocalProject(project.id)
+                                          }
                                           className="rounded-full border border-zinc-700 px-3 py-2 text-xs font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-900"
                                         >
                                           Zachowaj lokalną wersję
@@ -530,7 +543,17 @@ export default function ProjectsPage() {
                                       </div>
                                     </div>
                                   ) : null}
+
                                 </>
+                              ) : null}
+
+                              {conflictFeedbackMessages[project.id] ? (
+                                <p
+                                  className="mt-3 text-sm text-emerald-100"
+                                  aria-live="polite"
+                                >
+                                  {conflictFeedbackMessages[project.id]}
+                                </p>
                               ) : null}
 
                               <span className="rounded-full border border-zinc-700 bg-zinc-900/60 px-3 py-1 text-xs uppercase tracking-[0.2em] text-zinc-300">

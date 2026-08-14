@@ -293,6 +293,9 @@ describe("ProjectsPage", () => {
 
     expect(screen.queryByRole("button", { name: "Ukryj r\u00F3\u017Cnice" })).toBeNull();
     expect(
+      screen.getByText("Zachowano lokaln\u0105 wersj\u0119 projektu"),
+    ).toBeTruthy();
+    expect(
       JSON.parse(localStorage.getItem("soft-premium-system.projects") ?? "[]"),
     ).toEqual([
       expect.objectContaining({
@@ -349,6 +352,9 @@ describe("ProjectsPage", () => {
     await waitFor(() => {
       expect(screen.queryByText("Konflikt źródła")).toBeNull();
     });
+    expect(
+      screen.getByText("Zaakceptowano dane z wykrytego projektu"),
+    ).toBeTruthy();
 
     expect(
       JSON.parse(localStorage.getItem("soft-premium-system.projects") ?? "[]"),

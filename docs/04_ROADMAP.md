@@ -109,15 +109,83 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 079 synchronized the accepted `MS-021.14` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 079 synchronized the accepted `MS-021.15` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.14 - Local Project Discovery Source Conflict Resolution Decision Foundation
+MS-021.15 - Local Project Discovery Conflict Decision Feedback Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.15 - Local Project Discovery Conflict Decision Feedback Foundation
+
+**Milestone**
+MS-021.15 - Local Project Discovery Conflict Decision Feedback Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Runtime Status**
+PUBLISHED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Provide the smallest local feedback boundary after a filesystem-discovered project source-conflict decision is made.
+
+**Product Outcome**
+The repository now shows local browser-state feedback after both conflict decisions: `Zachowano lokalną wersję projektu` after `Zachowaj lokalną wersję` and `Zaakceptowano dane z wykrytego projektu` after `Zaakceptuj wykryty projekt`. The feedback is local/browser-state UI only and preserves the MS-021.14 conflict decision behavior without introducing backend, API, discovery, scanner, registry, or routing changes.
+
+**Dependencies**
+* closed `MS-021.14 - Local Project Discovery Source Conflict Resolution Decision Foundation`
+
+**Allowed Implementation Scope**
+* local browser-state feedback after conflict decisions
+* preserve existing conflict details, `Zobacz różnice`, `Przypięty lokalnie`, `Otwórz`, and disabled `Przypnij`
+* focused page/UI test coverage for feedback visibility
+* preserve browser-state-only project identity updates
+
+**Forbidden Scope**
+* backend registry changes
+* API or discovery helper changes
+* scanner changes
+* routing changes
+* app version bump
+* UI redesign
+
+**Ownership Boundaries**
+* `src/app/projects/page.tsx` and `src/app/projects/page.test.tsx` own the feedback UI
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `git diff --check`
+* `npx.cmd tsc --noEmit`
+* `npm.cmd test -- src/app/projects/page.test.tsx`
+* confirm both conflict decisions leave the intended local feedback visible
 
 ## MS-021.14 - Local Project Discovery Source Conflict Resolution Decision Foundation
 
