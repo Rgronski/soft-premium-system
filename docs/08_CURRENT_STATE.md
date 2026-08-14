@@ -347,7 +347,7 @@ SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
 Latest Completed Product Milestone: MS-021.17 - Local Project Discovery Conflict Decision Reset Foundation
 Next Product Milestone: NONE / Product Owner decision required
-Session 079 synchronized the accepted `MS-021.17` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 079 completed the close protocol in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 MS-021.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Reset Foundation; the repository now exposes a local `Cofnij decyzję` action for resolved source-conflict decisions so the browser-state resolved flag can be cleared for that `project.id`. Reset does not mutate the local project, and if the discovered project still differs after reset, the conflict can appear again as unresolved. The MS-021.16 persistence behavior and MS-021.15 feedback remain preserved, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
