@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-021.13 - Local Project Discovery Source Conflict Action Contract Foundation
+MS-022.0 - Project Brain Next Useful Context Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-022.0 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Project Brain Next Useful Context Foundation. The repository already exposes the retrievable Project Brain workspace projection in `src/lib/project-brain/engine.ts`, the project page already passes `workflowNextStep`, and `WorkspaceHeader` already renders counts, `Następny krok`, and the step description, so no product code patch was required. Session 080 synchronized the accepted `MS-022.0` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 MS-018.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Create Task From Retrieved Memory Foundation; the repository now records the user-initiated task creation flow from retrieved memory on AI Workspace, and the live browser verification accepted by the Product Owner shows the created task remains visible on AI Workspace, Overview, and `/tasks`.
 

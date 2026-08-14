@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 080 - MS-022.0 Project Brain next useful context control-files sync
+
+### Date
+
+2026-08-14
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-022.0 - Project Brain Next Useful Context Foundation` as the latest completed product milestone.
+* Confirmed the milestone was already satisfied by the existing Project Brain workspace projection, route, and workspace header behavior, so no product code patch was required.
+* Appended exactly one Session 080 usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* `Current Product Milestone` and `Next Product Milestone` remain `NONE / Product Owner decision required`.
+* The canonical app version remains unchanged because no product source changed.
+
 ## Session 079 - Session close protocol and handoff preparation
 
 ### Date

@@ -113,7 +113,69 @@ Session 079 synchronized the accepted `MS-021.17` control files in the current l
 
 ## Latest Completed Product Milestone
 
-MS-021.17 - Local Project Discovery Conflict Decision Reset Foundation
+MS-022.0 - Project Brain Next Useful Context Foundation
+
+## MS-022.0 - Project Brain Next Useful Context Foundation
+
+**Milestone**
+MS-022.0 - Project Brain Next Useful Context Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the smallest visible or retrievable "what Project Brain knows / next useful context" signal after opening an existing or current project.
+
+**Product Outcome**
+The repository already exposes the Project Brain workspace projection in `src/lib/project-brain/engine.ts`, the project page already passes `workflowNextStep`, and `WorkspaceHeader` already renders the counts, `Następny krok`, and the step description. No product code patch was required for this milestone, and the canonical app version remains unchanged.
+
+**Dependencies**
+* closed `MS-021.17 - Local Project Discovery Conflict Decision Reset Foundation`
+
+**Allowed Implementation Scope**
+* docs-only publication of the already satisfied Project Brain context boundary
+* control-file synchronization
+* focused verification of the existing route and header projection
+
+**Forbidden Scope**
+* new AI provider logic
+* memory engine expansion
+* backend registry changes
+* scanner changes
+* database or storage redesign
+* broad dashboard redesign
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+* `src/lib/project-brain/engine.ts`, `src/app/projects/[id]/page.tsx`, and `src/components/workspace/WorkspaceHeader.tsx` remain the existing implementation surfaces that already satisfy the contract
+
+**Verification Plan**
+* `git diff --check`
+* `npx.cmd tsc --noEmit`
+* `npm.cmd test -- 'src/app/projects/[id]/page.test.tsx'`
+* confirm no product source changes were required
+
+Session 080 synchronized the accepted `MS-022.0` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## MS-021.17 - Local Project Discovery Conflict Decision Reset Foundation
 
