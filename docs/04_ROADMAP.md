@@ -109,11 +109,81 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 079 synchronized the accepted `MS-021.15` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 079 synchronized the accepted `MS-021.16` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.15 - Local Project Discovery Conflict Decision Feedback Foundation
+MS-021.16 - Local Project Discovery Conflict Decision State Persistence Foundation
+
+## MS-021.16 - Local Project Discovery Conflict Decision State Persistence Foundation
+
+**Milestone**
+MS-021.16 - Local Project Discovery Conflict Decision State Persistence Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Runtime Status**
+PUBLISHED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Preserve the smallest local persistence boundary for resolved filesystem-discovered project source-conflict decisions per `project.id`.
+
+**Product Outcome**
+The repository now stores each resolved conflict decision in browser state so the same discovered project no longer reappears as an unresolved conflict in the current session after `Zachowaj lokalnÄ… wersjÄ™` or `Zaakceptuj wykryty projekt`. The MS-021.15 feedback remains visible, the MS-021.14 mutation rules remain intact, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
+
+**Dependencies**
+* closed `MS-021.15 - Local Project Discovery Conflict Decision Feedback Foundation`
+
+**Allowed Implementation Scope**
+* local browser-state persistence for resolved conflict decisions per `project.id`
+* preserve the MS-021.15 feedback messages
+* preserve MS-021.14 local mutation rules and compared-field updates
+* focused page/UI test coverage for the persistence boundary
+
+**Forbidden Scope**
+* backend registry changes
+* API or discovery helper changes
+* scanner changes
+* routing changes
+* app version bump
+* UI redesign
+
+**Ownership Boundaries**
+* `src/app/projects/page.tsx` and `src/app/projects/page.test.tsx` own the persistence behavior
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `git diff --check`
+* `npx.cmd tsc --noEmit`
+* `npm.cmd test -- src/app/projects/page.test.tsx`
+* confirm the same project no longer reappears as unresolved after either conflict decision in the current browser-state session
+
+## MS-021.15 - Local Project Discovery Conflict Decision Feedback Foundation
 
 ## Next
 

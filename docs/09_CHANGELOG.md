@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 079 - MS-021.16 local project discovery conflict decision state persistence control-files sync
+
+### Date
+
+2026-08-14
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-021.16 - Local Project Discovery Conflict Decision State Persistence Foundation` as the latest completed product milestone.
+* Confirmed no app version bump was required because `MS-021.16` is not a `.0` milestone.
+* Appended exactly one Session 079 usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* No product code changed in this control-files sync step.
+* `Current Product Milestone` and `Next Product Milestone` remain `NONE / Product Owner decision required`.
+
 ## Session 079 - MS-021.15 local project discovery conflict decision feedback control-files sync
 
 ### Date

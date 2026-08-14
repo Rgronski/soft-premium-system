@@ -345,9 +345,11 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-021.15 - Local Project Discovery Conflict Decision Feedback Foundation
+Latest Completed Product Milestone: MS-021.16 - Local Project Discovery Conflict Decision State Persistence Foundation
 Next Product Milestone: NONE / Product Owner decision required
-Session 079 synchronized the accepted `MS-021.15` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 079 synchronized the accepted `MS-021.16` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
+
+MS-021.16 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision State Persistence Foundation; the repository now stores resolved conflict decisions per `project.id` in browser state so the same discovered project no longer reappears as unresolved during the current session after either `Zachowaj lokalnÄ… wersjÄ™` or `Zaakceptuj wykryty projekt`. The MS-021.15 feedback remains visible, the MS-021.14 mutation rules remain intact, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
 MS-021.15 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Feedback Foundation; the repository now shows `Zachowano lokalną wersję projektu` after `Zachowaj lokalną wersję` and `Zaakceptowano dane z wykrytego projektu` after `Zaakceptuj wykryty projekt`. The feedback is local/browser-state UI only and preserves the MS-021.14 conflict decision behavior without introducing backend, API, discovery, scanner, registry, or routing changes.
 

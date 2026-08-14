@@ -82,7 +82,7 @@ describe("ProjectsPage", () => {
   });
 
   test("shows filesystem-discovered projects and keeps them separate from local browser state", async () => {
-    render(<ProjectsPage />);
+    const firstRender = render(<ProjectsPage />);
 
     await waitFor(() => {
       expect(screen.getByText("Filesystem Project")).toBeTruthy();
@@ -153,7 +153,7 @@ describe("ProjectsPage", () => {
       ]),
     );
 
-    render(<ProjectsPage />);
+    const firstRender = render(<ProjectsPage />);
 
     await waitFor(() => {
       expect(screen.getByText("Filesystem Project")).toBeTruthy();
@@ -306,6 +306,19 @@ describe("ProjectsPage", () => {
         projectFilesystemStatus: "manifest-present",
       }),
     ]);
+
+    cleanup();
+
+    render(<ProjectsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Filesystem Project")).toBeTruthy();
+    });
+
+    expect(screen.queryByText("Konflikt \u017A\u00F3r\u00F3d\u0142a")).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: "Zobacz r\u00F3\u017Cnice" }),
+    ).toBeNull();
   });
   test("accepts the discovered version into local browser state when resolving a conflict", async () => {
     fetchMock.mockImplementationOnce(async () =>
@@ -367,6 +380,37 @@ describe("ProjectsPage", () => {
         projectFilesystemStatus: "manifest-present",
       }),
     ]);
+
+    cleanup();
+
+    fetchMock.mockImplementationOnce(async () =>
+      createJsonResponse(
+        {
+          projects: [
+            {
+              id: "filesystem-project",
+              name: "Filesystem Project v2",
+              workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project-v2",
+              repositoryUrl: "https://github.com/example/discovered-project-v2",
+              projectFilesystemStatus: "manifest-present",
+              createdAt: "2026-08-04T20:00:00.000Z",
+            },
+          ],
+        },
+        200,
+      ),
+    );
+
+    render(<ProjectsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Filesystem Project v2")).toBeTruthy();
+    });
+
+    expect(screen.queryByText("Konflikt \u017A\u00F3r\u00F3d\u0142a")).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: "Zobacz r\u00F3\u017Cnice" }),
+    ).toBeNull();
   });
 
   test("keeps attached status visible after revisiting the projects list", async () => {

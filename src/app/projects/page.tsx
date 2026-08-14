@@ -96,6 +96,48 @@ function resolveDiscoveredProjectConflict(
   };
 }
 
+const conflictDecisionStorageKey =
+  "soft-premium-system.project-conflict-decisions";
+
+function readResolvedConflictProjectIds(): Record<string, boolean> {
+  try {
+    const storedValue = localStorage.getItem(conflictDecisionStorageKey);
+
+    if (!storedValue) {
+      return {};
+    }
+
+    const parsedValue = JSON.parse(storedValue) as unknown;
+
+    if (!Array.isArray(parsedValue)) {
+      return {};
+    }
+
+    return parsedValue.reduce<Record<string, boolean>>((accumulator, value) => {
+      if (typeof value === "string") {
+        accumulator[value] = true;
+      }
+
+      return accumulator;
+    }, {});
+  } catch {
+    return {};
+  }
+}
+
+function writeResolvedConflictProjectIds(
+  resolvedConflictProjectIds: Record<string, boolean>,
+) {
+  try {
+    localStorage.setItem(
+      conflictDecisionStorageKey,
+      JSON.stringify(Object.keys(resolvedConflictProjectIds)),
+    );
+  } catch {
+    // Ignore storage failures and keep the in-memory state usable.
+  }
+}
+
 export default function ProjectsPage() {
   const router = useRouter();
   const [projectName, setProjectName] = useState("");
@@ -115,6 +157,9 @@ export default function ProjectsPage() {
   const [conflictFeedbackMessages, setConflictFeedbackMessages] = useState<
     Record<string, string>
   >({});
+  const [resolvedConflictProjectIds, setResolvedConflictProjectIds] = useState<
+    Record<string, boolean>
+  >(() => readResolvedConflictProjectIds());
   const [discoveryErrorMessage, setDiscoveryErrorMessage] = useState<
     string | null
   >(null);
@@ -257,6 +302,16 @@ export default function ProjectsPage() {
 
   function handleKeepLocalProject(projectId: string) {
     setExpandedConflictProjectId(null);
+    setResolvedConflictProjectIds((current) => {
+      const nextResolvedConflictProjectIds = {
+        ...current,
+        [projectId]: true,
+      };
+
+      writeResolvedConflictProjectIds(nextResolvedConflictProjectIds);
+
+      return nextResolvedConflictProjectIds;
+    });
     setConflictFeedbackMessages((current) => ({
       ...current,
       [projectId]: "Zachowano lokalną wersję projektu",
@@ -271,6 +326,16 @@ export default function ProjectsPage() {
       resolveDiscoveredProjectConflict(localProject, discoveredProject),
     );
     setLocalProjects(getProjects());
+    setResolvedConflictProjectIds((current) => {
+      const nextResolvedConflictProjectIds = {
+        ...current,
+        [localProject.id]: true,
+      };
+
+      writeResolvedConflictProjectIds(nextResolvedConflictProjectIds);
+
+      return nextResolvedConflictProjectIds;
+    });
     setConflictFeedbackMessages((current) => ({
       ...current,
       [localProject.id]: "Zaakceptowano dane z wykrytego projektu",
@@ -409,10 +474,15 @@ export default function ProjectsPage() {
                     (entry) => entry.id === project.id,
                   );
                   const isLocallyAttached = Boolean(localProject);
+                  const isConflictDecisionResolved = Boolean(
+                    resolvedConflictProjectIds[project.id],
+                  );
                   const conflictFields = localProject
                     ? getProjectConflictFields(localProject, project)
                     : [];
                   const hasSourceConflict = conflictFields.length > 0;
+                  const shouldShowConflictPrompt =
+                    hasSourceConflict && !isConflictDecisionResolved;
                   const sourceLabel = project.workingDirectory?.startsWith(
                     "C:\\SPS_OS_WORK",
                   )
@@ -465,7 +535,7 @@ export default function ProjectsPage() {
                                 {"Przypi" + "\u0119" + "ty lokalnie"}
                               </span>
 
-                              {hasSourceConflict ? (
+                              {shouldShowConflictPrompt ? (
                                 <>
                                   <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-amber-100">
                                     {"Konflikt " + "\u017A" + "\u00F3" + "r\u00F3d\u0142a"}
