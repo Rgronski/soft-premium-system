@@ -213,28 +213,28 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-08-13
-Current Session ID: 078
-Current Chat Title: 078 SPS OS - Session Close Protocol
-Next Session ID: 079
-Suggested Next Chat Title: 079 SPS OS - Product Owner Decision
-Active Capability: Session Close Protocol
-Active Work Item: Session 078 close
-Current Mode: CLOSURE PENDING
-Completed Capability Items: Session 078 synchronized the close control files; Session 078 prepared the Session 078 handoff; Session 078 appended the Session 078 close usage entry
+Date: 2026-08-14
+Current Session ID: 079
+Current Chat Title: 079 SPS OS - Control Files Sync
+Next Session ID: UNKNOWN
+Suggested Next Chat Title: UNKNOWN
+Active Capability: Control Files Sync
+Active Work Item: Session 079 control files sync
+Current Mode: CONTROL FILES SYNC
+Completed Capability Items: Session 079 synchronized the MS-021.14 control files; Session 079 appended the Session 079 control-files sync usage entry
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-021.13 - Local Project Discovery Source Conflict Action Contract Foundation
+Latest Completed Product Milestone: MS-021.14 - Local Project Discovery Source Conflict Resolution Decision Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 078 synchronized the close control files
+Latest Completed Capability Item: Session 079 synchronized the MS-021.14 control files
 Current Sprint: NONE
-Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, and MS-021.13 immutable while awaiting Product Owner decision for the next milestone.
+Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, and MS-021.14 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: 37634f1
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Start Session 079 with the fresh session package and await Product Owner decision for the next milestone.
-Next Session Plan: Open Session 079 with the fresh session package and await Product Owner decision for the next milestone.
+Next Safe Step: Run the required control-files verification commands for the MS-021.14 sync and confirm the SSOT fields are aligned.
+Next Session Plan: Open the next session only after the MS-021.14 control-files sync is recorded and verified.

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { SectionCard } from "@/components/ui/SectionCard";
 import {
@@ -32,7 +32,7 @@ function getCreateProjectErrorMessage(
     (errorBody as { status?: unknown }).status ===
       "working-directory-create-failed"
   ) {
-    return "Nie udało się utworzyć katalogu roboczego projektu. Sprawdź uprawnienia i spróbuj ponownie.";
+    return "Nie udaĹ‚o siÄ™ utworzyÄ‡ katalogu roboczego projektu. SprawdĹş uprawnienia i sprĂłbuj ponownie.";
   }
 
   return `Project create request failed with ${responseStatus}`;
@@ -61,8 +61,8 @@ function getProjectConflictFields(
   if (localProject.workingDirectory !== discoveredProject.workingDirectory) {
     conflictFields.push({
       label: "Katalog roboczy",
-      localValue: localProject.workingDirectory,
-      discoveredValue: discoveredProject.workingDirectory,
+      localValue: localProject.workingDirectory ?? "",
+      discoveredValue: discoveredProject.workingDirectory ?? "",
     });
   }
 
@@ -79,6 +79,21 @@ function getProjectConflictFields(
   }
 
   return conflictFields;
+}
+
+function resolveDiscoveredProjectConflict(
+  localProject: Project,
+  discoveredProject: Project,
+): Project {
+  return {
+    ...localProject,
+    name: discoveredProject.name,
+    workingDirectory:
+      discoveredProject.workingDirectory ?? localProject.workingDirectory ?? "",
+    ...(discoveredProject.repositoryUrl
+      ? { repositoryUrl: discoveredProject.repositoryUrl }
+      : {}),
+  };
 }
 
 export default function ProjectsPage() {
@@ -127,7 +142,7 @@ export default function ProjectsPage() {
         }
       } catch {
         if (isActive) {
-          setDiscoveryErrorMessage("Nie udało się wczytać projektów z dysku.");
+          setDiscoveryErrorMessage("Nie udaĹ‚o siÄ™ wczytaÄ‡ projektĂłw z dysku.");
         }
       } finally {
         if (isActive) {
@@ -214,7 +229,7 @@ export default function ProjectsPage() {
       setWorkingDirectoryManuallyEdited(false);
       router.push(`/projects/${createdProject.id}`);
     } catch {
-      setErrorMessage("Nie udało się utworzyć projektu. Spróbuj ponownie.");
+      setErrorMessage("Nie udaĹ‚o siÄ™ utworzyÄ‡ projektu. SprĂłbuj ponownie.");
     } finally {
       setIsSubmitting(false);
     }
@@ -237,6 +252,21 @@ export default function ProjectsPage() {
     setLocalProjects(getProjects());
   }
 
+  function handleKeepLocalProject() {
+    setExpandedConflictProjectId(null);
+  }
+
+  function handleAcceptDiscoveredProject(
+    localProject: Project,
+    discoveredProject: Project,
+  ) {
+    upsertProject(
+      resolveDiscoveredProjectConflict(localProject, discoveredProject),
+    );
+    setLocalProjects(getProjects());
+    setExpandedConflictProjectId(null);
+  }
+
   return (
     <main className="min-h-screen bg-zinc-950 px-6 py-10 text-zinc-50">
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-8">
@@ -252,7 +282,7 @@ export default function ProjectsPage() {
           </p>
 
           <p className="text-zinc-400">
-            To pierwszy krok w przepływie tworzenia projektu.
+            To pierwszy krok w przepĹ‚ywie tworzenia projektu.
           </p>
         </header>
 
@@ -275,7 +305,7 @@ export default function ProjectsPage() {
                   );
                 }
               }}
-              placeholder="Mój pierwszy projekt"
+              placeholder={"M" + "\u00F3" + "j pierwszy projekt"}
               className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 outline-none focus:border-zinc-500"
             />
           </label>
@@ -311,7 +341,7 @@ export default function ProjectsPage() {
             />
 
             <p className="mt-2 text-xs text-zinc-500">
-              Lokalna ścieżka należąca do SPS. Metadane repozytorium pozostają osobno.
+              Lokalna Ĺ›cieĹĽka naleĹĽÄ…ca do SPS. Metadane repozytorium pozostajÄ… osobno.
             </p>
           </label>
 
@@ -321,7 +351,7 @@ export default function ProjectsPage() {
             disabled={isSubmitting}
             className="mt-6 rounded-full bg-white px-5 py-2 text-sm font-medium text-zinc-950"
           >
-            {isSubmitting ? "Tworzenie..." : "Utwórz projekt"}
+            {isSubmitting ? "Tworzenie..." : "Utw\u00F3rz projekt"}
           </button>
 
           {errorMessage ? (
@@ -343,9 +373,9 @@ export default function ProjectsPage() {
               </h2>
 
               <p className="mt-2 text-zinc-400">
-                To są projekty znalezione przez serwer na podstawie
-                `sps-project.json`. Nie są jeszcze scalone z lokalną listą
-                przeglądarki.
+                To sÄ… projekty znalezione przez serwer na podstawie
+                `sps-project.json`. Nie sÄ… jeszcze scalone z lokalnÄ… listÄ…
+                przeglÄ…darki.
               </p>
             </div>
 
@@ -372,11 +402,11 @@ export default function ProjectsPage() {
                     ? getProjectConflictFields(localProject, project)
                     : [];
                   const hasSourceConflict = conflictFields.length > 0;
-                  const sourceLabel = project.workingDirectory.startsWith(
+                  const sourceLabel = project.workingDirectory?.startsWith(
                     "C:\\SPS_OS_WORK",
                   )
                     ? "Z C:\\SPS_OS_WORK"
-                    : `Z ${project.workingDirectory}`;
+                    : `Z ${project.workingDirectory ?? ""}`;
 
                   return (
                     <li
@@ -403,7 +433,7 @@ export default function ProjectsPage() {
                               onClick={() => handleOpenDiscoveredProject(project)}
                               className="rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-900"
                             >
-                              Otwórz
+                              {"Otw" + "\u00F3" + "rz"}
                             </button>
 
                             <button
@@ -421,13 +451,13 @@ export default function ProjectsPage() {
                           {isLocallyAttached ? (
                             <div className="flex flex-col items-end gap-2">
                               <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-emerald-100">
-                                Przypięty lokalnie
+                                {"Przypi" + "\u0119" + "ty lokalnie"}
                               </span>
 
                               {hasSourceConflict ? (
                                 <>
                                   <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-amber-100">
-                                    Konflikt źródła
+                                    {"Konflikt " + "\u017A" + "\u00F3" + "r\u00F3d\u0142a"}
                                   </span>
 
                                   <button
@@ -443,14 +473,14 @@ export default function ProjectsPage() {
                                     className="rounded-full border border-amber-500/40 px-4 py-2 text-sm font-medium text-amber-100 transition-colors hover:border-amber-400 hover:bg-amber-500/10"
                                   >
                                     {expandedConflictProjectId === project.id
-                                      ? "Ukryj różnice"
-                                      : "Zobacz różnice"}
+                                      ? "Ukryj " + "r\u00F3" + "\u017C" + "nice"
+                                      : "Zobacz " + "r\u00F3" + "\u017C" + "nice"}
                                   </button>
 
                                   {expandedConflictProjectId === project.id ? (
                                     <div className="w-full max-w-sm rounded-xl border border-amber-500/20 bg-amber-500/5 p-3 text-left">
                                       <p className="text-xs uppercase tracking-[0.2em] text-amber-100">
-                                        Różnice
+                                        {"R\u00F3" + "\u017C" + "nice"}
                                       </p>
 
                                       <div className="mt-3 space-y-3">
@@ -475,6 +505,29 @@ export default function ProjectsPage() {
                                           </div>
                                         ))}
                                       </div>
+
+                                      <div className="mt-4 flex flex-wrap gap-2">
+                                        <button
+                                          type="button"
+                                          onClick={handleKeepLocalProject}
+                                          className="rounded-full border border-zinc-700 px-3 py-2 text-xs font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-900"
+                                        >
+                                          Zachowaj lokalną wersję
+                                        </button>
+
+                                        <button
+                                          type="button"
+                                          onClick={() =>
+                                        handleAcceptDiscoveredProject(
+                                              localProject!,
+                                              project,
+                                            )
+                                          }
+                                          className="rounded-full border border-amber-500/40 px-3 py-2 text-xs font-medium text-amber-100 transition-colors hover:border-amber-400 hover:bg-amber-500/10"
+                                        >
+                                          Zaakceptuj wykryty projekt
+                                        </button>
+                                      </div>
                                     </div>
                                   ) : null}
                                 </>
@@ -493,7 +546,7 @@ export default function ProjectsPage() {
               </ul>
             ) : (
               <p className="mt-4 text-sm text-zinc-500">
-                Nie wykryto lokalnych projektów z poprawnym manifestem.
+                Nie wykryto lokalnych projektĂłw z poprawnym manifestem.
               </p>
             )
           ) : null}

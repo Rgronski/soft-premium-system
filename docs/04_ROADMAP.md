@@ -109,15 +109,84 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 
-Session 078 synchronized the accepted `MS-021.13` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 079 synchronized the accepted `MS-021.14` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-021.13 - Local Project Discovery Source Conflict Action Contract Foundation
+MS-021.14 - Local Project Discovery Source Conflict Resolution Decision Foundation
 
 ## Next
 
 NONE / Product Owner decision required
+
+## MS-021.14 - Local Project Discovery Source Conflict Resolution Decision Foundation
+
+**Milestone**
+MS-021.14 - Local Project Discovery Source Conflict Resolution Decision Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Runtime Status**
+PUBLISHED
+
+**Implementation Status**
+COMPLETED / VERIFIED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the smallest safe local decision boundary for filesystem-discovered project source conflicts when a discovered project collides with a locally attached browser-state project.
+
+**Product Outcome**
+The repository now offers explicit conflict decision actions for attached discovered projects: `Zachowaj lokalną wersję` closes the conflict decision without mutating the local project, and `Zaakceptuj wykryty projekt` updates only the compared local fields (`name`, `workingDirectory`, and `repositoryUrl` when present). The behavior remains local/browser-state only and does not add backend, API, discovery, scanner, registry, or routing changes.
+
+**Dependencies**
+* closed `MS-021.13 - Local Project Discovery Source Conflict Action Contract Foundation`
+
+**Allowed Implementation Scope**
+* explicit local decision boundary for filesystem-discovered project source conflicts
+* preserve existing conflict details, `Zobacz różnice`, `Przypięty lokalnie`, `Otwórz`, and disabled `Przypnij`
+* focused page/UI test coverage for decision actions
+* preserve browser-state-only project identity updates
+
+**Forbidden Scope**
+* automatic sync or broader registry behavior
+* backend registry changes
+* API or discovery helper changes
+* scanner changes
+* routing changes
+* app version bump
+* UI redesign
+
+**Ownership Boundaries**
+* `src/app/projects/page.tsx` and `src/app/projects/page.test.tsx` own the decision action UI
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `git diff --check`
+* `npx.cmd tsc --noEmit`
+* `npm.cmd test -- src/app/projects/page.test.tsx`
+* confirm `Zachowaj lokalną wersję` leaves the local project unchanged and `Zaakceptuj wykryty projekt` updates only the compared fields
 
 ## MS-021.13 - Local Project Discovery Source Conflict Action Contract Foundation
 

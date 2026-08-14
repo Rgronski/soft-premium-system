@@ -345,8 +345,12 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-021.13 - Local Project Discovery Source Conflict Action Contract Foundation
+Latest Completed Product Milestone: MS-021.14 - Local Project Discovery Source Conflict Resolution Decision Foundation
 Next Product Milestone: NONE / Product Owner decision required
+Session 079 synchronized the accepted `MS-021.14` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
+
+MS-021.14 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Source Conflict Resolution Decision Foundation; the repository now offers explicit conflict decision actions for attached filesystem-discovered projects, keeps `Zobacz różnice`, `Przypięty lokalnie`, `Otwórz`, and disabled `Przypnij`, and lets `Zachowaj lokalną wersję` close the conflict decision without mutating the local project while `Zaakceptuj wykryty projekt` updates only `name`, `workingDirectory`, and `repositoryUrl` when present. The behavior remains local/browser-state only and does not introduce backend, API, discovery, scanner, registry, or routing changes.
+
 MS-008.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Next Usable SPS App State Discovery Foundation; the repository keeps Current Product Milestone at NONE until a separate Product Owner decision is recorded.
 Active Sprint: NONE
 Active Capability: NONE
@@ -1503,7 +1507,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-021.13 - Local Project Discovery Source Conflict Action Contract Foundation`
+* `Latest Completed Product Milestone` is `MS-021.14 - Local Project Discovery Source Conflict Resolution Decision Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

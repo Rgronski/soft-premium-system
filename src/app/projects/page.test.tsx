@@ -1,4 +1,4 @@
-// @vitest-environment jsdom
+﻿// @vitest-environment jsdom
 
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
@@ -89,7 +89,7 @@ describe("ProjectsPage", () => {
     });
 
     expect(screen.getByText("Projekty wykryte na dysku")).toBeTruthy();
-    expect(screen.getByRole("button", { name: "Otwórz" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Otw\u00F3rz" })).toBeTruthy();
     expect(localStorage.getItem("soft-premium-system.projects")).toBeNull();
   });
 
@@ -100,7 +100,7 @@ describe("ProjectsPage", () => {
       expect(screen.getByText("Filesystem Project")).toBeTruthy();
     });
 
-    fireEvent.click(screen.getByRole("button", { name: "Otwórz" }));
+    fireEvent.click(screen.getByRole("button", { name: "Otw\u00F3rz" }));
 
     await waitFor(() => {
       expect(pushMock).toHaveBeenCalledWith("/projects/filesystem-project");
@@ -159,10 +159,13 @@ describe("ProjectsPage", () => {
       expect(screen.getByText("Filesystem Project")).toBeTruthy();
     });
 
-    expect(screen.getByText("Przypięty lokalnie")).toBeTruthy();
+    expect(screen.getByText("Przypi\u0119ty lokalnie")).toBeTruthy();
     expect(screen.getByText("Z C:\\SPS_OS_WORK")).toBeTruthy();
-    expect(screen.getByRole("button", { name: "Przypnij" }).disabled).toBe(true);
-    expect(screen.getByRole("button", { name: "Otwórz" })).toBeTruthy();
+    expect(
+      (screen.getByRole("button", { name: "Przypnij" }) as HTMLButtonElement)
+        .disabled,
+    ).toBe(true);
+    expect(screen.getByRole("button", { name: "Otw\u00F3rz" })).toBeTruthy();
   });
 
   test("shows a source conflict warning when the attached local project differs from discovery", async () => {
@@ -204,16 +207,19 @@ describe("ProjectsPage", () => {
       expect(screen.getByText("Filesystem Project")).toBeTruthy();
     });
 
-    expect(screen.getByText("Przypięty lokalnie")).toBeTruthy();
-    expect(screen.getByText("Konflikt źródła")).toBeTruthy();
+    expect(screen.getByText("Przypi\u0119ty lokalnie")).toBeTruthy();
+    expect(screen.getByText("Konflikt \u017A\u00F3r\u00F3d\u0142a")).toBeTruthy();
     expect(screen.getByText("Z C:\\SPS_OS_WORK")).toBeTruthy();
-    expect(screen.getByRole("button", { name: "Przypnij" }).disabled).toBe(true);
-    expect(screen.getByRole("button", { name: "Otwórz" })).toBeTruthy();
+    expect(
+      (screen.getByRole("button", { name: "Przypnij" }) as HTMLButtonElement)
+        .disabled,
+    ).toBe(true);
+    expect(screen.getByRole("button", { name: "Otw\u00F3rz" })).toBeTruthy();
 
-    fireEvent.click(screen.getByRole("button", { name: "Zobacz różnice" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zobacz r\u00F3\u017Cnice" }));
 
-    expect(screen.getByRole("button", { name: "Ukryj różnice" })).toBeTruthy();
-    expect(screen.getByText("Różnice")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Ukryj r\u00F3\u017Cnice" })).toBeTruthy();
+    expect(screen.getByText("R\u00F3\u017Cnice")).toBeTruthy();
     expect(screen.getByText("Nazwa")).toBeTruthy();
     expect(
       screen.getByText("Lokalny wpis: Filesystem Project - Local"),
@@ -239,6 +245,122 @@ describe("ProjectsPage", () => {
         "Wykryty wpis: https://github.com/example/discovered-project",
       ),
     ).toBeTruthy();
+  });
+
+  test("keeps the local version without mutating browser state when resolving a conflict", async () => {
+    fetchMock.mockImplementationOnce(async () =>
+      createJsonResponse(
+        {
+          projects: [
+            {
+              id: "filesystem-project",
+              name: "Filesystem Project",
+              workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project",
+              repositoryUrl: "https://github.com/example/discovered-project",
+              projectFilesystemStatus: "manifest-present",
+              createdAt: "2026-08-03T20:00:00.000Z",
+            },
+          ],
+        },
+        200,
+      ),
+    );
+
+    localStorage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "filesystem-project",
+          name: "Filesystem Project - Local",
+          workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project-local",
+          repositoryUrl: "https://github.com/example/local-project",
+          projectFilesystemStatus: "manifest-present",
+          createdAt: "2026-08-01T10:00:00.000Z",
+        },
+      ]),
+    );
+
+    render(<ProjectsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Filesystem Project")).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Zobacz r\u00F3\u017Cnice" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "Zachowaj lokaln\u0105 wersj\u0119" }),
+    );
+
+    expect(screen.queryByRole("button", { name: "Ukryj r\u00F3\u017Cnice" })).toBeNull();
+    expect(
+      JSON.parse(localStorage.getItem("soft-premium-system.projects") ?? "[]"),
+    ).toEqual([
+      expect.objectContaining({
+        id: "filesystem-project",
+        name: "Filesystem Project - Local",
+        workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project-local",
+        repositoryUrl: "https://github.com/example/local-project",
+        projectFilesystemStatus: "manifest-present",
+      }),
+    ]);
+  });
+  test("accepts the discovered version into local browser state when resolving a conflict", async () => {
+    fetchMock.mockImplementationOnce(async () =>
+      createJsonResponse(
+        {
+          projects: [
+            {
+              id: "filesystem-project",
+              name: "Filesystem Project",
+              workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project",
+              repositoryUrl: "https://github.com/example/discovered-project",
+              projectFilesystemStatus: "manifest-present",
+              createdAt: "2026-08-03T20:00:00.000Z",
+            },
+          ],
+        },
+        200,
+      ),
+    );
+
+    localStorage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "filesystem-project",
+          name: "Filesystem Project - Local",
+          workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project-local",
+          repositoryUrl: "https://github.com/example/local-project",
+          projectFilesystemStatus: "manifest-present",
+          createdAt: "2026-08-01T10:00:00.000Z",
+        },
+      ]),
+    );
+
+    render(<ProjectsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Filesystem Project")).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Zobacz r\u00F3\u017Cnice" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zaakceptuj wykryty projekt" }));
+
+    await waitFor(() => {
+      expect(screen.queryByText("Konflikt źródła")).toBeNull();
+    });
+
+    expect(
+      JSON.parse(localStorage.getItem("soft-premium-system.projects") ?? "[]"),
+    ).toEqual([
+      expect.objectContaining({
+        id: "filesystem-project",
+        name: "Filesystem Project",
+        workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project",
+        repositoryUrl: "https://github.com/example/discovered-project",
+        projectFilesystemStatus: "manifest-present",
+      }),
+    ]);
   });
 
   test("keeps attached status visible after revisiting the projects list", async () => {
@@ -269,10 +391,13 @@ describe("ProjectsPage", () => {
       expect(screen.getByText("Filesystem Project")).toBeTruthy();
     });
 
-    expect(screen.getByText("Przypięty lokalnie")).toBeTruthy();
+    expect(screen.getByText("Przypi\u0119ty lokalnie")).toBeTruthy();
     expect(screen.getByText("Z C:\\SPS_OS_WORK")).toBeTruthy();
-    expect(screen.getByRole("button", { name: "Przypnij" }).disabled).toBe(true);
-    expect(screen.getByRole("button", { name: "Otwórz" })).toBeTruthy();
+    expect(
+      (screen.getByRole("button", { name: "Przypnij" }) as HTMLButtonElement)
+        .disabled,
+    ).toBe(true);
+    expect(screen.getByRole("button", { name: "Otw\u00F3rz" })).toBeTruthy();
   });
 
   test("creates a project through the server boundary and stores the same id locally", async () => {
@@ -282,7 +407,7 @@ describe("ProjectsPage", () => {
       expect(screen.getByText("Filesystem Project")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByPlaceholderText("Mój pierwszy projekt"), {
+    fireEvent.change(screen.getByPlaceholderText("M\u00F3j pierwszy projekt"), {
       target: {
         value: "Alpha",
       },
@@ -295,7 +420,7 @@ describe("ProjectsPage", () => {
     await waitFor(() => {
       expect(screen.getByDisplayValue("C:\\SPS_OS_WORK\\alpha")).toBeTruthy();
     });
-    fireEvent.click(screen.getByRole("button", { name: "Utwórz projekt" }));
+    fireEvent.click(screen.getByRole("button", { name: "Utw\u00F3rz projekt" }));
 
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalledTimes(2);
