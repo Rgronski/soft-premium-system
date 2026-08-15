@@ -45,12 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-022.0 - Project Brain Next Useful Context Foundation
+MS-022.1 - Project Brain Context Visibility Refinement Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-022.0 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Project Brain Next Useful Context Foundation. The repository already exposes the retrievable Project Brain workspace projection in `src/lib/project-brain/engine.ts`, the project page already passes `workflowNextStep`, and `WorkspaceHeader` already renders counts, `Następny krok`, and the step description, so no product code patch was required. Session 080 synchronized the accepted `MS-022.0` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
+MS-022.1 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Project Brain Context Visibility Refinement Foundation. The repository now gives the existing `Następny krok` / `workflowNextStep` block a stronger visual accent and a small visible `Project Brain` label while preserving the same data, the same conditional rendering, and the same `workflowNextStep` mechanics. The canonical app version remains `0.021.6` because the SSOT version rule only bumps accepted app/platform `.0` milestones, and MS-022.1 is a visibility refinement milestone rather than a `.0` milestone. Session 080 synchronized the accepted `MS-022.1` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 MS-018.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Create Task From Retrieved Memory Foundation; the repository now records the user-initiated task creation flow from retrieved memory on AI Workspace, and the live browser verification accepted by the Product Owner shows the created task remains visible on AI Workspace, Overview, and `/tasks`.
 

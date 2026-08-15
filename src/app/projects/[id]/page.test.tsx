@@ -163,6 +163,7 @@ describe("ProjectWorkspacePage", () => {
     expect(
       screen.getByRole("link", { name: "Zobacz całą wiedzę" }).getAttribute("href"),
     ).toBe("/projects/project-1/knowledge");
+    expect(screen.getByText("Project Brain")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Usuń projekt" })).toBeTruthy();
   });
 
