@@ -14,10 +14,26 @@ const actionReadinessLabels = {
   "informational-only": "Informational only",
 } as const;
 
+const actionReadinessSignals = {
+  "ready-to-act-on": {
+    label: "Ready",
+    className: "border-emerald-500/30 bg-emerald-500/10 text-emerald-100",
+  },
+  "requires-product-owner-decision": {
+    label: "Caution: Product Owner decision required",
+    className: "border-amber-500/30 bg-amber-500/10 text-amber-100",
+  },
+  "informational-only": {
+    label: "Informational",
+    className: "border-zinc-700 bg-zinc-900/70 text-zinc-300",
+  },
+} as const;
+
 export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
   const conductor = getConductorState();
   const guidance = deriveConductorProjectBrainGuidance(workflowNextStep);
   const readinessLabel = actionReadinessLabels[guidance.actionReadiness];
+  const readinessSignal = actionReadinessSignals[guidance.actionReadiness];
 
   return (
     <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
@@ -93,8 +109,13 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
         <p className="mt-1 text-xs uppercase tracking-[0.2em] text-zinc-500">
           {readinessLabel}
         </p>
+        <div
+          className={`mt-3 inline-flex rounded-full border px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] ${readinessSignal.className}`}
+        >
+          {readinessSignal.label}
+        </div>
         <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
-          Source: Project Brain · read-only · current state
+          Source: Project Brain Â· read-only Â· current state
         </p>
         <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
           {guidance.hasRecommendation
