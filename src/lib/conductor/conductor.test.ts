@@ -108,6 +108,8 @@ describe("deriveConductorProjectBrainGuidance", () => {
     ).toEqual({
       headline: "Konduktor podpowiada: Continue active work",
       description: "Continue the active workflow item before starting new work.",
+      reason:
+        "The workflow next step is specific enough to act on without asking for a new decision.",
       hasRecommendation: true,
       actionReadiness: "ready-to-act-on",
     });
@@ -124,6 +126,8 @@ describe("deriveConductorProjectBrainGuidance", () => {
       headline: "Konduktor czeka na decyzję Product Ownera",
       description:
         "Konduktor pozostaje read-only. Rekomendacja nie jest wykonywalna i wymaga osobnej decyzji Product Ownera.",
+      reason:
+        "The current signal is the generic start-next-work placeholder, so Product Owner decision is still required.",
       hasRecommendation: false,
       actionReadiness: "requires-product-owner-decision",
     });
@@ -141,6 +145,8 @@ describe("deriveConductorProjectBrainGuidance", () => {
       headline: "Brak silniejszej rekomendacji",
       description:
         "Konduktor pozostaje przy istniejącym read-only sygnale Project Brain i nie dodaje własnej decyzji.",
+      reason:
+        "The current Project Brain signal is informational only, so Konduktor stays read-only and non-executable.",
       hasRecommendation: false,
       actionReadiness: "informational-only",
     });

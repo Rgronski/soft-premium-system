@@ -82,6 +82,12 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
           {guidance.description}
         </p>
         <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
+          Reason
+        </p>
+        <p className="mt-1 text-sm leading-6 text-zinc-300">
+          {guidance.reason}
+        </p>
+        <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
           Action readiness
         </p>
         <p className="mt-1 text-xs uppercase tracking-[0.2em] text-zinc-500">

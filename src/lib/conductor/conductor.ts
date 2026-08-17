@@ -8,6 +8,7 @@ import type { WorkflowNextStep } from "../workflow/types";
 export type ConductorProjectBrainGuidance = {
   headline: string;
   description: string;
+  reason: string;
   hasRecommendation: boolean;
   actionReadiness:
     | "ready-to-act-on"
@@ -31,6 +32,25 @@ function getConductorRecommendationActionReadiness(
   }
 
   return "ready-to-act-on";
+}
+
+function getConductorRecommendationReason(
+  workflowNextStep?: WorkflowNextStep | null,
+  actionReadiness?: ConductorProjectBrainGuidance["actionReadiness"],
+) {
+  if (actionReadiness === "requires-product-owner-decision") {
+    return "The current signal is the generic start-next-work placeholder, so Product Owner decision is still required.";
+  }
+
+  if (actionReadiness === "informational-only") {
+    if (!workflowNextStep) {
+      return "No actionable recommendation is available from the current Project Brain signal.";
+    }
+
+    return "The current Project Brain signal is informational only, so Konduktor stays read-only and non-executable.";
+  }
+
+  return "The workflow next step is specific enough to act on without asking for a new decision.";
 }
 
 export function getConductorState(): ConductorState {
@@ -140,12 +160,17 @@ export function deriveConductorProjectBrainGuidance(
 ): ConductorProjectBrainGuidance {
   const actionReadiness =
     getConductorRecommendationActionReadiness(workflowNextStep);
+  const reason = getConductorRecommendationReason(
+    workflowNextStep,
+    actionReadiness,
+  );
 
   if (actionReadiness === "requires-product-owner-decision") {
     return {
       headline: "Konduktor czeka na decyzję Product Ownera",
       description:
         "Konduktor pozostaje read-only. Rekomendacja nie jest wykonywalna i wymaga osobnej decyzji Product Ownera.",
+      reason,
       hasRecommendation: false,
       actionReadiness,
     };
@@ -156,6 +181,7 @@ export function deriveConductorProjectBrainGuidance(
       headline: "Brak silniejszej rekomendacji",
       description:
         "Konduktor pozostaje przy istniejącym read-only sygnale Project Brain i nie dodaje własnej decyzji.",
+      reason,
       hasRecommendation: false,
       actionReadiness,
     };
@@ -164,6 +190,7 @@ export function deriveConductorProjectBrainGuidance(
   return {
     headline: `Konduktor podpowiada: ${workflowNextStep?.label ?? ""}`,
     description: workflowNextStep?.description ?? "",
+    reason,
     hasRecommendation: true,
     actionReadiness,
   };
