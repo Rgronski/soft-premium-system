@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 081 - MS-023.3 Konduktor recommendation user trust copy publication
+
+### Date
+
+2026-08-17
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-023.3 - Konduktor Recommendation User Trust Copy Foundation` as the latest completed product milestone.
+* Confirmed the existing read-only Konduktor guidance seam now uses calmer trust-building copy without changing the underlying recommendation path.
+* Recorded the app version decision in SSOT: no bump is required, and the canonical app version remains `0.021.6`.
+* Appended exactly one Session 081 usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* `Current Product Milestone` and `Next Product Milestone` remain `NONE / Product Owner decision required`.
+* No additional product scope was introduced in the publication sync.
+
 ## Session 081 - MS-023.2 Konduktor recommendation source transparency publication
 
 ### Date

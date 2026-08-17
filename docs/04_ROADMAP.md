@@ -110,16 +110,81 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-023.0` - Konduktor Project Brain Guidance Foundation
 * `MS-023.1` - Konduktor Recommendation Empty/Weak State Clarity Foundation
 * `MS-023.2` - Konduktor Recommendation Source Transparency Foundation
+* `MS-023.3` - Konduktor Recommendation User Trust Copy Foundation
 
 ## Current
 
 NONE / Product Owner decision required
 
-Session 081 synchronized the accepted `MS-023.2` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 081 synchronized the accepted `MS-023.3` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-023.2 - Konduktor Recommendation Source Transparency Foundation
+MS-023.3 - Konduktor Recommendation User Trust Copy Foundation
+
+## MS-023.3 - Konduktor Recommendation User Trust Copy Foundation
+
+**Milestone**
+MS-023.3 - Konduktor Recommendation User Trust Copy Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Let Konduktor explain its recommendation in calm trust-building copy without implying command, execution, automation, or ownership.
+
+**Product Outcome**
+The repository now presents a calm read-only recommendation with explicit trust copy so users can understand that the guidance comes from Project Brain, remains limited, and is not a new system decision.
+
+**Version Decision**
+No app version bump is required. The repository rule recorded in SSOT says accepted app/platform `.0` milestones bump the controlled app version source to `0.XXX.0`, and `MS-023.3` is a Konduktor guidance copy refinement rather than an app/platform version milestone. The canonical app version therefore remains `0.021.6`.
+
+**Dependencies**
+* closed `MS-023.2 - Konduktor Recommendation Source Transparency Foundation`
+
+**Allowed Implementation Scope**
+* docs-only publication of the existing read-only Konduktor guidance seam
+* SSOT synchronization for milestone publication
+* confirmation of the existing Project Brain `workflowNextStep` read path
+
+**Forbidden Scope**
+* Project Brain engine changes
+* Workflow Engine rule changes
+* storage, API, provider, automation, scheduling, or execution changes
+* app version source changes
+* broad refactors or unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/projects/[id]/page.tsx` owns the existing Project Brain data handoff
+* `src/components/workspace/WorkspacePanels.tsx` owns the host-path prop seam
+* `src/components/conductor/ConductorPanel.tsx` owns the read-only guidance presentation
+* `src/lib/conductor/conductor.ts` owns the small pure mapping helper
+* `src/lib/conductor/conductor.test.ts` and `src/app/projects/[id]/page.test.tsx` own the focused verification
+* `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized publication snapshot
 
 ## MS-023.2 - Konduktor Recommendation Source Transparency Foundation
 
