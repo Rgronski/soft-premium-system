@@ -9,13 +9,28 @@ export type ConductorProjectBrainGuidance = {
   headline: string;
   description: string;
   hasRecommendation: boolean;
+  actionReadiness:
+    | "ready-to-act-on"
+    | "requires-product-owner-decision"
+    | "informational-only";
 };
 
-function isWeakWorkflowNextStepId(workflowNextStepId: string) {
-  return (
-    workflowNextStepId === "start-next-work" ||
-    workflowNextStepId === "local-project-recovery"
-  );
+function getConductorRecommendationActionReadiness(
+  workflowNextStep?: WorkflowNextStep | null,
+): ConductorProjectBrainGuidance["actionReadiness"] {
+  if (!workflowNextStep) {
+    return "informational-only";
+  }
+
+  if (workflowNextStep.id === "start-next-work") {
+    return "requires-product-owner-decision";
+  }
+
+  if (workflowNextStep.id === "local-project-recovery") {
+    return "informational-only";
+  }
+
+  return "ready-to-act-on";
 }
 
 export function getConductorState(): ConductorState {
@@ -123,18 +138,33 @@ export function deriveConductorBoundaryConsumerState(
 export function deriveConductorProjectBrainGuidance(
   workflowNextStep?: WorkflowNextStep | null,
 ): ConductorProjectBrainGuidance {
-  if (!workflowNextStep || isWeakWorkflowNextStepId(workflowNextStep.id)) {
+  const actionReadiness =
+    getConductorRecommendationActionReadiness(workflowNextStep);
+
+  if (actionReadiness === "requires-product-owner-decision") {
+    return {
+      headline: "Konduktor czeka na decyzję Product Ownera",
+      description:
+        "Konduktor pozostaje read-only. Rekomendacja nie jest wykonywalna i wymaga osobnej decyzji Product Ownera.",
+      hasRecommendation: false,
+      actionReadiness,
+    };
+  }
+
+  if (actionReadiness === "informational-only") {
     return {
       headline: "Brak silniejszej rekomendacji",
       description:
         "Konduktor pozostaje przy istniejącym read-only sygnale Project Brain i nie dodaje własnej decyzji.",
       hasRecommendation: false,
+      actionReadiness,
     };
   }
 
   return {
-    headline: `Konduktor podpowiada: ${workflowNextStep.label}`,
-    description: workflowNextStep.description,
+    headline: `Konduktor podpowiada: ${workflowNextStep?.label ?? ""}`,
+    description: workflowNextStep?.description ?? "",
     hasRecommendation: true,
+    actionReadiness,
   };
 }

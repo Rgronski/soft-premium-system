@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 082 - MS-024.0 Konduktor recommendation action readiness publication
+
+### Date
+
+2026-08-17
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-024.0 - Konduktor Recommendation Action Readiness Foundation` as the latest completed product milestone.
+* Confirmed the existing read-only Konduktor guidance seam now presents action-readiness derived from existing `workflowNextStep.id` values without changing the underlying recommendation path.
+* Recorded the app version decision in SSOT: no bump is required, and the canonical app version remains `0.021.6`.
+* Appended exactly one Session 082 usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* `Current Product Milestone` and `Next Product Milestone` remain `NONE / Product Owner decision required`.
+* No Project Brain, Workflow Engine, automation, scheduling, execution, API, storage, or command behavior changed.
+
 ## Session 081 - MS-023.3 Konduktor recommendation user trust copy publication
 
 ### Date

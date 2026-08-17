@@ -357,9 +357,9 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-023.3 - Konduktor Recommendation User Trust Copy Foundation
+Latest Completed Product Milestone: MS-024.0 - Konduktor Recommendation Action Readiness Foundation
 Next Product Milestone: NONE / Product Owner decision required
-Session 079 completed the close protocol in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 082 synchronized the accepted `MS-024.0` control files in the current local workspace. The repository now presents a read-only action-readiness view derived from existing `workflowNextStep.id` values, keeps the recommendation non-executable, and keeps `NONE / Product Owner decision required` for the next milestone. The canonical app version remains `0.021.6`.
 
 MS-021.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Reset Foundation; the repository now exposes a local `Cofnij decyzję` action for resolved source-conflict decisions so the browser-state resolved flag can be cleared for that `project.id`. Reset does not mutate the local project, and if the discovered project still differs after reset, the conflict can appear again as unresolved. The MS-021.16 persistence behavior and MS-021.15 feedback remain preserved, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
@@ -1525,7 +1525,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-023.0 - Konduktor Project Brain Guidance Foundation`
+* `Latest Completed Product Milestone` is `MS-024.0 - Konduktor Recommendation Action Readiness Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

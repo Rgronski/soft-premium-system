@@ -214,30 +214,30 @@ The generator must not invent missing state.
 SPS OS Session State
 
 Date: 2026-08-17
-Current Session ID: 081
-Current Chat Title: 081 SPS OS - MS-023.3 Publication
-Next Session ID: 082
-Suggested Next Chat Title: 082 SPS OS - Product Owner Decision
-Active Capability: MS-023.3 Publication Sync
-Active Work Item: Session 081 publication
+Current Session ID: 082
+Current Chat Title: 082 SPS OS - MS-024.0 Control Files Sync
+Next Session ID: 083
+Suggested Next Chat Title: 083 SPS OS - Product Owner Decision
+Active Capability: MS-024.0 Control Files Sync
+Active Work Item: Session 082 docs sync
 Current Mode: PUBLICATION SYNC
-Completed Capability Items: Session 081 verified the MS-023.3 implementation baseline; Session 081 synchronized the publication docs; Session 081 appended the Session 081 usage entry
+Completed Capability Items: Session 082 verified the MS-024.0 control-file update; Session 082 synchronized the publication docs; Session 082 appended the Session 082 usage entry
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-023.3 - Konduktor Recommendation User Trust Copy Foundation
+Latest Completed Product Milestone: MS-024.0 - Konduktor Recommendation Action Readiness Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 081 synchronized the publication docs
+Latest Completed Capability Item: Session 082 synchronized the publication docs
 Current Sprint: NONE
-Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, MS-022.3, and MS-023.0 immutable while awaiting Product Owner decision for the next milestone.
+Platform Priority: Keep MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, MS-022.3, and MS-023.0 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 6a800b7
+Latest Verified Commit: 925b93a
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
 Next Safe Step: Await Product Owner decision for the next milestone.
-Next Session Plan: Open Session 082 with the fresh session package and await Product Owner decision for the next milestone.
+Next Session Plan: Open Session 083 with the fresh session package and await Product Owner decision for the next milestone.
 
 SPS OS Session State
 

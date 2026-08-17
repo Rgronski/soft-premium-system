@@ -1,16 +1,23 @@
-import { getConductorState, deriveConductorProjectBrainGuidance } from "@/lib/conductor/conductor";
+import {
+  deriveConductorProjectBrainGuidance,
+  getConductorState,
+} from "@/lib/conductor/conductor";
 import type { WorkflowNextStep } from "@/lib/workflow/types";
 
 type ConductorPanelProps = {
   workflowNextStep?: WorkflowNextStep;
 };
 
+const actionReadinessLabels = {
+  "ready-to-act-on": "Ready to act on",
+  "requires-product-owner-decision": "Requires Product Owner decision",
+  "informational-only": "Informational only",
+} as const;
+
 export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
   const conductor = getConductorState();
   const guidance = deriveConductorProjectBrainGuidance(workflowNextStep);
-  const guidanceDescription = guidance.hasRecommendation
-    ? guidance.description
-    : "Konduktor only reflects the current Project Brain signal. It is read-only, limited, and not a command or new decision.";
+  const readinessLabel = actionReadinessLabels[guidance.actionReadiness];
 
   return (
     <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
@@ -72,7 +79,13 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
           {guidance.headline}
         </p>
         <p className="mt-1 text-sm leading-6 text-zinc-300">
-          {guidanceDescription}
+          {guidance.description}
+        </p>
+        <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
+          Action readiness
+        </p>
+        <p className="mt-1 text-xs uppercase tracking-[0.2em] text-zinc-500">
+          {readinessLabel}
         </p>
         <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
           Source: Project Brain · read-only · current state
@@ -80,13 +93,10 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
         <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
           {guidance.hasRecommendation
             ? "Read-only recommendation from Project Brain."
-            : "Limited read-only guidance from Project Brain."}
+            : guidance.actionReadiness === "requires-product-owner-decision"
+              ? "Read-only guidance pending Product Owner decision."
+              : "Limited read-only guidance from Project Brain."}
         </p>
-        {!guidance.hasRecommendation ? (
-          <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Limited read-only guidance
-          </p>
-        ) : null}
       </div>
     </div>
   );

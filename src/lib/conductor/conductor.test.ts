@@ -109,10 +109,11 @@ describe("deriveConductorProjectBrainGuidance", () => {
       headline: "Konduktor podpowiada: Continue active work",
       description: "Continue the active workflow item before starting new work.",
       hasRecommendation: true,
+      actionReadiness: "ready-to-act-on",
     });
   });
 
-  test("falls back to a gentle read-only state for generic guidance", () => {
+  test("marks the default start-next-work signal as requiring Product Owner decision", () => {
     expect(
       deriveConductorProjectBrainGuidance({
         id: "start-next-work",
@@ -120,10 +121,11 @@ describe("deriveConductorProjectBrainGuidance", () => {
         description: "Start the next safe workflow item.",
       }),
     ).toEqual({
-      headline: "Brak silniejszej rekomendacji",
+      headline: "Konduktor czeka na decyzję Product Ownera",
       description:
-        "Konduktor pozostaje przy istniejącym read-only sygnale Project Brain i nie dodaje własnej decyzji.",
+        "Konduktor pozostaje read-only. Rekomendacja nie jest wykonywalna i wymaga osobnej decyzji Product Ownera.",
       hasRecommendation: false,
+      actionReadiness: "requires-product-owner-decision",
     });
   });
 
@@ -140,6 +142,7 @@ describe("deriveConductorProjectBrainGuidance", () => {
       description:
         "Konduktor pozostaje przy istniejącym read-only sygnale Project Brain i nie dodaje własnej decyzji.",
       hasRecommendation: false,
+      actionReadiness: "informational-only",
     });
   });
 });
