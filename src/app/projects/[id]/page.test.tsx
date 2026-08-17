@@ -168,6 +168,9 @@ describe("ProjectWorkspacePage", () => {
     expect(
       screen.getByText("Konduktor podpowiada: Continue active work"),
     ).toBeTruthy();
+    expect(
+      screen.getByText("Source: Project Brain · read-only · current state"),
+    ).toBeTruthy();
     expect(screen.getByRole("button", { name: "Usuń projekt" })).toBeTruthy();
   });
 
@@ -308,6 +311,9 @@ describe("ProjectWorkspacePage", () => {
       screen.getByText(
         "Konduktor only reflects the current Project Brain signal. It is read-only, limited, and not a command or new decision.",
       ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Source: Project Brain · read-only · current state"),
     ).toBeTruthy();
     expect(
       screen.getByRole("link", { name: /Przejd/i }),

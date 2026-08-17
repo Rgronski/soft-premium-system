@@ -215,15 +215,15 @@ SPS OS Session State
 
 Date: 2026-08-17
 Current Session ID: 081
-Current Chat Title: 081 SPS OS - MS-023.1 Publication
+Current Chat Title: 081 SPS OS - MS-023.2 Publication
 Next Session ID: 082
 Suggested Next Chat Title: 082 SPS OS - Product Owner Decision
-Active Capability: MS-023.1 Publication Sync
+Active Capability: MS-023.2 Publication Sync
 Active Work Item: Session 081 publication
 Current Mode: PUBLICATION SYNC
-Completed Capability Items: Session 081 verified the MS-023.1 implementation baseline; Session 081 synchronized the publication docs; Session 081 appended the Session 081 usage entry
+Completed Capability Items: Session 081 verified the MS-023.2 implementation baseline; Session 081 synchronized the publication docs; Session 081 appended the Session 081 usage entry
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-023.1 - Konduktor Recommendation Empty/Weak State Clarity Foundation
+Latest Completed Product Milestone: MS-023.2 - Konduktor Recommendation Source Transparency Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
 Latest Completed Capability Item: Session 081 synchronized the publication docs

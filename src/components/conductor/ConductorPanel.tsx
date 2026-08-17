@@ -74,6 +74,9 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
         <p className="mt-1 text-sm leading-6 text-zinc-300">
           {guidanceDescription}
         </p>
+        <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
+          Source: Project Brain · read-only · current state
+        </p>
         {!guidance.hasRecommendation ? (
           <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
             Limited read-only guidance
