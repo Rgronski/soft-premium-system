@@ -45,12 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-024.2 - Konduktor Recommendation Caution Signal Foundation
+MS-024.3 - Konduktor Recommendation Card Hierarchy Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-024.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Konduktor Recommendation Caution Signal Foundation. The repository now adds a subtle visible caution/status signal to the existing Konduktor recommendation card using only existing `actionReadiness` and readiness data, keeps the readiness and reason behavior unchanged, and preserves the read-only, non-executable guidance path. The canonical app version remains `0.021.6` because this publication records a Konduktor guidance presentation refinement and does not change the controlled app version source. Session 082 synchronized the accepted `MS-024.2` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
+MS-024.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Konduktor Recommendation Card Hierarchy Foundation. The repository now presents the existing Konduktor recommendation card with a clearer reading hierarchy for recommendation, action readiness, reason, and source/trust copy while keeping readiness, reason, caution signal, source transparency, and trust-copy semantics unchanged. The canonical app version remains `0.021.6` because this publication records a Konduktor guidance presentation refinement and does not change the controlled app version source. Session 082 synchronized the accepted `MS-024.3` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 MS-023.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Konduktor Recommendation Source Transparency Foundation. The repository now shows a compact source label on Konduktor guidance so users can see that the recommendation comes from Project Brain, stays read-only, and reflects the current Project Brain state. The canonical app version remains `0.021.6` because this publication records a Konduktor guidance transparency refinement and does not change the controlled app version source. Session 081 synchronized the accepted `MS-023.2` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 

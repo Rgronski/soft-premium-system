@@ -91,39 +91,51 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
         <p className="text-xs uppercase tracking-[0.2em] text-emerald-300/80">
           Project Brain Guidance
         </p>
-        <p className="mt-2 text-sm font-medium text-zinc-100">
+        <p className="mt-2 text-base font-semibold leading-6 text-zinc-50">
           {guidance.headline}
         </p>
         <p className="mt-1 text-sm leading-6 text-zinc-300">
           {guidance.description}
         </p>
-        <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
-          Reason
-        </p>
-        <p className="mt-1 text-sm leading-6 text-zinc-300">
-          {guidance.reason}
-        </p>
-        <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
-          Action readiness
-        </p>
-        <p className="mt-1 text-xs uppercase tracking-[0.2em] text-zinc-500">
-          {readinessLabel}
-        </p>
-        <div
-          className={`mt-3 inline-flex rounded-full border px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] ${readinessSignal.className}`}
-        >
-          {readinessSignal.label}
+
+        <div className="mt-3">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+            Action readiness
+          </p>
+          <p className="mt-1 text-sm font-medium uppercase tracking-[0.2em] text-zinc-200">
+            {readinessLabel}
+          </p>
+          <div
+            className={`mt-2 inline-flex rounded-full border px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] ${readinessSignal.className}`}
+          >
+            {readinessSignal.label}
+          </div>
         </div>
-        <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
-          Source: Project Brain Â· read-only Â· current state
-        </p>
-        <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
-          {guidance.hasRecommendation
-            ? "Read-only recommendation from Project Brain."
-            : guidance.actionReadiness === "requires-product-owner-decision"
-              ? "Read-only guidance pending Product Owner decision."
-              : "Limited read-only guidance from Project Brain."}
-        </p>
+
+        <div className="mt-4">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+            Reason
+          </p>
+          <p className="mt-1 text-sm leading-6 text-zinc-300">
+            {guidance.reason}
+          </p>
+        </div>
+
+        <div className="mt-4 border-t border-emerald-500/10 pt-3">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+            Source
+          </p>
+          <p className="mt-1 text-xs uppercase tracking-[0.2em] text-zinc-400">
+            Project Brain - read-only - current state
+          </p>
+          <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
+            {guidance.hasRecommendation
+              ? "Read-only recommendation from Project Brain."
+              : guidance.actionReadiness === "requires-product-owner-decision"
+                ? "Read-only guidance pending Product Owner decision."
+                : "Limited read-only guidance from Project Brain."}
+          </p>
+        </div>
       </div>
     </div>
   );

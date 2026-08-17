@@ -114,21 +114,22 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-024.0` - Konduktor Recommendation Action Readiness Foundation
 * `MS-024.1` - Konduktor Recommendation Reason Clarity Foundation
 * `MS-024.2` - Konduktor Recommendation Caution Signal Foundation
+* `MS-024.3` - Konduktor Recommendation Card Hierarchy Foundation
 
 ## Current
 
 NONE / Product Owner decision required
 
-Session 082 synchronized the accepted `MS-024.2` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 082 synchronized the accepted `MS-024.3` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-024.2 - Konduktor Recommendation Caution Signal Foundation
+MS-024.3 - Konduktor Recommendation Card Hierarchy Foundation
 
-## MS-024.2 - Konduktor Recommendation Caution Signal Foundation
+## MS-024.3 - Konduktor Recommendation Card Hierarchy Foundation
 
 **Milestone**
-MS-024.2 - Konduktor Recommendation Caution Signal Foundation
+MS-024.3 - Konduktor Recommendation Card Hierarchy Foundation
 
 **Type**
 Product Milestone
@@ -158,22 +159,22 @@ Chief Architect
 Codex
 
 **Purpose**
-Let Konduktor show a subtle, readable caution/status signal for its recommendation while staying read-only.
+Let Konduktor present its recommendation card with a clearer reading hierarchy for recommendation, action readiness, reason, and source/trust copy while staying read-only.
 
 **Product Outcome**
-The repository now adds a subtle visible caution/status signal to the existing Konduktor recommendation card, derived only from existing `actionReadiness` and readiness data, while keeping readiness and reason logic unchanged and preserving read-only, non-executable guidance.
+The repository now improves the existing Konduktor recommendation card hierarchy so the recommendation, action readiness, reason, and source/trust copy read more clearly while keeping readiness, reason, caution signal, source transparency, and trust-copy semantics unchanged and preserving read-only, non-executable guidance.
 
 **Version Decision**
-No app version bump is required. The repository rule recorded in SSOT says accepted app/platform `.0` milestones bump the controlled app version source to `0.XXX.0`, and `MS-024.2` is a Konduktor read-only guidance presentation refinement rather than an app/platform version milestone. The canonical app version therefore remains `0.021.6`.
+No app version bump is required. The repository rule recorded in SSOT says accepted app/platform `.0` milestones bump the controlled app version source to `0.XXX.0`, and `MS-024.3` is a Konduktor read-only guidance presentation refinement rather than an app/platform version milestone. The canonical app version therefore remains `0.021.6`.
 
 **Dependencies**
-* closed `MS-024.1 - Konduktor Recommendation Reason Clarity Foundation`
+* closed `MS-024.2 - Konduktor Recommendation Caution Signal Foundation`
 
 **Allowed Implementation Scope**
 * docs-only publication of the existing read-only Konduktor guidance seam
 * SSOT synchronization for milestone publication
 * confirmation of the existing `actionReadiness` / readiness read path
-* subtle status-signal presentation refinement derived from existing readiness data
+* card hierarchy refinement derived from existing recommendation, readiness, reason, and source/trust copy data
 
 **Forbidden Scope**
 * Project Brain engine changes
@@ -189,8 +190,6 @@ No app version bump is required. The repository rule recorded in SSOT says accep
 * `src/lib/conductor/conductor.ts` owns the small pure mapping helper
 * `src/lib/conductor/conductor.test.ts` and `src/app/projects/[id]/page.test.tsx` own the focused verification
 * `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized publication snapshot
-
-## MS-024.1 - Konduktor Recommendation Reason Clarity Foundation
 
 **Milestone**
 MS-024.1 - Konduktor Recommendation Reason Clarity Foundation
