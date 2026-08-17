@@ -1,4 +1,5 @@
 import { ConductorPanel } from "@/components/conductor/ConductorPanel";
+import type { WorkflowNextStep } from "@/lib/workflow/types";
 import Link from "next/link";
 
 type WorkspacePanelsProps = {
@@ -7,6 +8,7 @@ type WorkspacePanelsProps = {
   visitsCount: number;
   upcomingVisitsCount: number;
   projectId: string;
+  workflowNextStep: WorkflowNextStep;
 };
 
 export function WorkspacePanels({
@@ -15,6 +17,7 @@ export function WorkspacePanels({
   visitsCount,
   upcomingVisitsCount,
   projectId,
+  workflowNextStep,
 }: WorkspacePanelsProps) {
   const kpiCards = [
     {
@@ -76,7 +79,7 @@ export function WorkspacePanels({
         ))}
       </div>
 
-      <ConductorPanel />
+      <ConductorPanel workflowNextStep={workflowNextStep} />
 
       <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
         <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">

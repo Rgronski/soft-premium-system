@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 081 - MS-023.0 Konduktor Project Brain guidance publication
+
+### Date
+
+2026-08-17
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-023.0 - Konduktor Project Brain Guidance Foundation` as the latest completed product milestone.
+* Confirmed the existing read-only Konduktor guidance seam is implemented and covered by `src/lib/conductor/conductor.test.ts` and `src/app/projects/[id]/page.test.tsx`.
+* Recorded the app version decision in SSOT: no bump is required, and the canonical app version remains `0.021.6`.
+* Appended exactly one Session 081 usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* `Current Product Milestone` and `Next Product Milestone` remain `NONE / Product Owner decision required`.
+* No additional product scope was introduced in the publication sync.
+
 ## Session 080 - Session close protocol and handoff preparation
 
 ### Date

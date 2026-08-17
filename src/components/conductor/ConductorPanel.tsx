@@ -1,7 +1,13 @@
-import { getConductorState } from "@/lib/conductor/conductor";
+import { getConductorState, deriveConductorProjectBrainGuidance } from "@/lib/conductor/conductor";
+import type { WorkflowNextStep } from "@/lib/workflow/types";
 
-export function ConductorPanel() {
+type ConductorPanelProps = {
+  workflowNextStep?: WorkflowNextStep;
+};
+
+export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
   const conductor = getConductorState();
+  const guidance = deriveConductorProjectBrainGuidance(workflowNextStep);
 
   return (
     <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
@@ -53,6 +59,23 @@ export function ConductorPanel() {
             {conductor.projectHealth}
           </p>
         </div>
+      </div>
+
+      <div className="mt-4 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4">
+        <p className="text-xs uppercase tracking-[0.2em] text-emerald-300/80">
+          Project Brain Guidance
+        </p>
+        <p className="mt-2 text-sm font-medium text-zinc-100">
+          {guidance.headline}
+        </p>
+        <p className="mt-1 text-sm leading-6 text-zinc-300">
+          {guidance.description}
+        </p>
+        {!guidance.hasRecommendation ? (
+          <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
+            Read-only fallback
+          </p>
+        ) : null}
       </div>
     </div>
   );

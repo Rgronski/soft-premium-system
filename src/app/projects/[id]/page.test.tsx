@@ -165,6 +165,9 @@ describe("ProjectWorkspacePage", () => {
     ).toBe("/projects/project-1/knowledge");
     expect(screen.getByText("Project Brain")).toBeTruthy();
     expect(screen.getByRole("link", { name: "Przejdź do zadań" })).toBeTruthy();
+    expect(
+      screen.getByText("Konduktor podpowiada: Continue active work"),
+    ).toBeTruthy();
     expect(screen.getByRole("button", { name: "Usuń projekt" })).toBeTruthy();
   });
 
@@ -297,6 +300,9 @@ describe("ProjectWorkspacePage", () => {
     ).toHaveLength(2);
     expect(
       screen.getByText(/Project Brain nie ma jeszcze.*pierwszego kroku/i),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Brak silniejszej rekomendacji"),
     ).toBeTruthy();
     expect(
       screen.getByRole("link", { name: /Przejd/i }),

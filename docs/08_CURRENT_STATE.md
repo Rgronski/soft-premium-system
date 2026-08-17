@@ -45,12 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-022.3 - Project Brain Context Empty State Clarity Foundation
+MS-023.0 - Konduktor Project Brain Guidance Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-022.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain Context Empty State Clarity Foundation. The repository now shows a calm empty-state message for the generic `start-next-work` Project Brain signal, keeps the same `workflowNextStep` mechanics, and preserves the existing CTA to `/projects/:id/tasks`. The canonical app version remains `0.021.6` because the SSOT version rule only bumps accepted app/platform `.0` milestones, and MS-022.3 is an empty-state clarity refinement milestone rather than a `.0` milestone. Session 080 synchronized the accepted `MS-022.3` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
+MS-023.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Konduktor Project Brain Guidance Foundation. The repository now lets Konduktor present one calm read-only recommendation derived from existing Project Brain workflowNextStep data while keeping weak or generic guidance gentle and non-executable. The canonical app version remains `0.021.6` because this publication records a Konduktor guidance foundation and does not change the controlled app version source. Session 081 synchronized the accepted `MS-023.0` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 MS-022.2 is COMPLETED / VERIFIED / PUBLISHED in the current local workspace as the Project Brain Context Action Clarity Foundation. The repository now changes the Project Brain action CTA from `Otwórz zadania` to `Przejdź do zadań` while preserving the same data, the same conditional rendering, and the same `workflowNextStep` mechanics. The canonical app version remains `0.021.6` because the SSOT version rule only bumps accepted app/platform `.0` milestones, and MS-022.2 is an action-clarity refinement milestone rather than a `.0` milestone. Session 080 synchronized the accepted `MS-022.2` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
@@ -1519,7 +1519,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-022.3 - Project Brain Context Empty State Clarity Foundation`
+* `Latest Completed Product Milestone` is `MS-023.0 - Konduktor Project Brain Guidance Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

@@ -3,6 +3,20 @@ import type {
   ConductorBoundaryValidationResult,
   ConductorState,
 } from "./types";
+import type { WorkflowNextStep } from "../workflow/types";
+
+export type ConductorProjectBrainGuidance = {
+  headline: string;
+  description: string;
+  hasRecommendation: boolean;
+};
+
+function isWeakWorkflowNextStepId(workflowNextStepId: string) {
+  return (
+    workflowNextStepId === "start-next-work" ||
+    workflowNextStepId === "local-project-recovery"
+  );
+}
 
 export function getConductorState(): ConductorState {
   return {
@@ -103,5 +117,24 @@ export function deriveConductorBoundaryConsumerState(
       ? `Resolve ${firstViolation.code} before consuming the validator output.`
       : "Resolve conductor boundary validation violations before consuming the validator output.",
     projectHealth: "blocked",
+  };
+}
+
+export function deriveConductorProjectBrainGuidance(
+  workflowNextStep?: WorkflowNextStep | null,
+): ConductorProjectBrainGuidance {
+  if (!workflowNextStep || isWeakWorkflowNextStepId(workflowNextStep.id)) {
+    return {
+      headline: "Brak silniejszej rekomendacji",
+      description:
+        "Konduktor pozostaje przy istniejącym read-only sygnale Project Brain i nie dodaje własnej decyzji.",
+      hasRecommendation: false,
+    };
+  }
+
+  return {
+    headline: `Konduktor podpowiada: ${workflowNextStep.label}`,
+    description: workflowNextStep.description,
+    hasRecommendation: true,
   };
 }

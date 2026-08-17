@@ -349,6 +349,9 @@ export default function ProjectWorkspacePage() {
             visitsCount={dashboard.visitsCount}
             upcomingVisitsCount={dashboard.upcomingVisitsCount}
             projectId={dashboard.workspaceEntry.projectId}
+            workflowNextStep={
+              dashboard.workspaceEntry.workspace.overview.workflow.nextStep
+            }
           />
         </WorkspaceContent>
       ) : (

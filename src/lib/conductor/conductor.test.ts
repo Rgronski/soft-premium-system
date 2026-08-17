@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 
 import {
   deriveConductorBoundaryConsumerState,
+  deriveConductorProjectBrainGuidance,
   getConductorState,
   validateConductorBoundarySnapshot,
 } from "./conductor";
@@ -92,6 +93,53 @@ describe("getConductorState", () => {
       currentTask: "Create minimal Conductor panel",
       nextAction: "Verify dashboard integration and update documentation",
       projectHealth: "ready",
+    });
+  });
+});
+
+describe("deriveConductorProjectBrainGuidance", () => {
+  test("maps a concrete workflow next step to a calm read-only recommendation", () => {
+    expect(
+      deriveConductorProjectBrainGuidance({
+        id: "continue-active-work",
+        label: "Continue active work",
+        description: "Continue the active workflow item before starting new work.",
+      }),
+    ).toEqual({
+      headline: "Konduktor podpowiada: Continue active work",
+      description: "Continue the active workflow item before starting new work.",
+      hasRecommendation: true,
+    });
+  });
+
+  test("falls back to a gentle read-only state for generic guidance", () => {
+    expect(
+      deriveConductorProjectBrainGuidance({
+        id: "start-next-work",
+        label: "Start next work",
+        description: "Start the next safe workflow item.",
+      }),
+    ).toEqual({
+      headline: "Brak silniejszej rekomendacji",
+      description:
+        "Konduktor pozostaje przy istniejącym read-only sygnale Project Brain i nie dodaje własnej decyzji.",
+      hasRecommendation: false,
+    });
+  });
+
+  test("falls back to a gentle read-only state for local recovery guidance", () => {
+    expect(
+      deriveConductorProjectBrainGuidance({
+        id: "local-project-recovery",
+        label: "Continue local project state",
+        description:
+          "Project Brain context is unavailable, but the local project workspace is still available.",
+      }),
+    ).toEqual({
+      headline: "Brak silniejszej rekomendacji",
+      description:
+        "Konduktor pozostaje przy istniejącym read-only sygnale Project Brain i nie dodaje własnej decyzji.",
+      hasRecommendation: false,
     });
   });
 });
