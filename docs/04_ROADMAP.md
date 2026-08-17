@@ -129,6 +129,12 @@ Product Milestone
 **Contract Status**
 COMPLETED / VERIFIED / PUBLISHED
 
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
 **Active**
 NO
 
