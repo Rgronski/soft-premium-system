@@ -305,6 +305,11 @@ describe("ProjectWorkspacePage", () => {
       screen.getByText("Brak silniejszej rekomendacji"),
     ).toBeTruthy();
     expect(
+      screen.getByText(
+        "Konduktor only reflects the current Project Brain signal. It is read-only, limited, and not a command or new decision.",
+      ),
+    ).toBeTruthy();
+    expect(
       screen.getByRole("link", { name: /Przejd/i }),
     ).toBeTruthy();
   });

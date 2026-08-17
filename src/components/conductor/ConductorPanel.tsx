@@ -8,6 +8,9 @@ type ConductorPanelProps = {
 export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
   const conductor = getConductorState();
   const guidance = deriveConductorProjectBrainGuidance(workflowNextStep);
+  const guidanceDescription = guidance.hasRecommendation
+    ? guidance.description
+    : "Konduktor only reflects the current Project Brain signal. It is read-only, limited, and not a command or new decision.";
 
   return (
     <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
@@ -69,11 +72,11 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
           {guidance.headline}
         </p>
         <p className="mt-1 text-sm leading-6 text-zinc-300">
-          {guidance.description}
+          {guidanceDescription}
         </p>
         {!guidance.hasRecommendation ? (
           <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Read-only fallback
+            Limited read-only guidance
           </p>
         ) : null}
       </div>
