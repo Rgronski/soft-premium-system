@@ -213,28 +213,28 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-08-14
+Date: 2026-08-17
 Current Session ID: 080
-Current Chat Title: UNKNOWN
-Next Session ID: UNKNOWN
-Suggested Next Chat Title: UNKNOWN
-Active Capability: MS-022.3 Control Files Sync
-Active Work Item: MS-022.3 control files sync
-Current Mode: CONTROL FILES SYNC
-Completed Capability Items: Session 080 synchronized the MS-022.3 control files; Session 080 appended the Session 080 usage entry
+Current Chat Title: 080 SPS OS - Session Close Protocol
+Next Session ID: 081
+Suggested Next Chat Title: 081 SPS OS - Product Owner Decision
+Active Capability: Session Close Protocol
+Active Work Item: Session 080 close
+Current Mode: SESSION CLOSE PROTOCOL
+Completed Capability Items: Session 080 audited the close state; Session 080 synchronized the close control files; Session 080 prepared the Session 080 handoff; Session 080 appended the Session 080 close usage entry
 Current Product Milestone: NONE / Product Owner decision required
 Latest Completed Product Milestone: MS-022.3 - Project Brain Context Empty State Clarity Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 080 synchronized the MS-022.3 control files
+Latest Completed Capability Item: Session 080 prepared the Session 080 handoff
 Current Sprint: NONE
 Platform Priority: Keep MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, and MS-022.3 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
-Repository Working Tree State: DIRTY
+Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 0173ac6
+Latest Verified Commit: 9299ae0
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Await Product Owner decision for the next milestone.
-Next Session Plan: Open the next session with the fresh session package and await Product Owner decision for the next milestone.
+Next Safe Step: Start Session 081 with the fresh session package and await Product Owner decision for the next milestone.
+Next Session Plan: Open Session 081 with the fresh session package and await Product Owner decision for the next milestone.

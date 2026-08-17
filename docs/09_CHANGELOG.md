@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 080 - Session close protocol and handoff preparation
+
+### Date
+
+2026-08-17
+
+### Completed
+
+* Synchronized `docs/10_SESSION_STATE.md` and `docs/session-handoffs/2026-08-17_080_SESSION_HANDOFF.md` for the Session 080 close snapshot.
+* Confirmed the latest completed product milestone remains `MS-022.3 - Project Brain Context Empty State Clarity Foundation`.
+* Appended exactly one Session 080 close usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* No product code changed in this close-preparation step.
+* `Current Product Milestone` and `Next Product Milestone` remain `NONE / Product Owner decision required`.
+* Session 080 remains ready for final package generation after the close commit is published.
+
 ## Session 080 - MS-022.3 Project Brain context empty-state clarity control-files sync
 
 ### Date
