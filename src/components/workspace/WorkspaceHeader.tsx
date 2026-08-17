@@ -38,6 +38,8 @@ export function WorkspaceHeader({
 }: WorkspaceHeaderProps) {
   const params = useParams<{ id: string }>();
   const projectId = params.id;
+  const isEmptyProjectBrainContext =
+    workflowNextStep.id === "start-next-work";
   const overviewItems = [
     {
       label: "Nazwa projektu",
@@ -61,7 +63,9 @@ export function WorkspaceHeader({
     },
     {
       label: "Następny krok",
-      value: workflowNextStep.label,
+      value: isEmptyProjectBrainContext
+        ? "Brak dodatkowego kontekstu Project Brain"
+        : workflowNextStep.label,
     },
     {
       label: "Ostrzeżenia",
@@ -141,12 +145,26 @@ export function WorkspaceHeader({
           </Link>
         </div>
         <div className="mt-4 space-y-1">
-          <p className="text-base font-semibold text-zinc-50">
-            {workflowNextStep.label}
-          </p>
-          <p className="text-sm leading-6 text-zinc-300">
-            {workflowNextStep.description}
-          </p>
+          {isEmptyProjectBrainContext ? (
+            <>
+              <p className="text-base font-semibold text-zinc-50">
+                Brak dodatkowego kontekstu Project Brain
+              </p>
+              <p className="text-sm leading-6 text-zinc-300">
+                Project Brain nie ma jeszcze wyraĹşniejszej wskazĂłwki. PrzejdĹş
+                do zadaĹ„, aby zaczÄ…Ä‡ od pierwszego kroku.
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="text-base font-semibold text-zinc-50">
+                {workflowNextStep.label}
+              </p>
+              <p className="text-sm leading-6 text-zinc-300">
+                {workflowNextStep.description}
+              </p>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -254,7 +254,53 @@ describe("ProjectWorkspacePage", () => {
 
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledTimes(1);
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledWith("project-1");
-    expect(screen.getAllByText("Start next work")).toHaveLength(2);
+    expect(screen.getByText("Project Brain")).toBeTruthy();
+    expect(
+      screen.getByRole("link", { name: /Przejd/i }),
+    ).toBeTruthy();
+  });
+
+  test("shows a calm empty state when Project Brain has no clearer next context yet", () => {
+    getProjectWorkspaceEntryMock.mockReturnValue({
+      projectId: "project-1",
+      workspace: {
+        overview: {
+          project: {
+            id: "project-1",
+            name: "Alpha Workspace",
+          },
+          counts: {
+            tasks: 0,
+            knowledgeEntries: 0,
+          },
+          workflow: {
+            health: "ready",
+            confidence: 0.5,
+            nextStep: {
+              id: "start-next-work",
+              label: "Start next work",
+              description: "Start the next safe workflow item.",
+            },
+            warnings: 0,
+            blockers: 0,
+          },
+        },
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+
+    render(<ProjectWorkspacePage />);
+
+    expect(
+      screen.getAllByText("Brak dodatkowego kontekstu Project Brain"),
+    ).toHaveLength(2);
+    expect(
+      screen.getByText(/Project Brain nie ma jeszcze.*pierwszego kroku/i),
+    ).toBeTruthy();
+    expect(
+      screen.getByRole("link", { name: /Przejd/i }),
+    ).toBeTruthy();
   });
 
   test("shows a readiness banner when the local project Brain status is pending", () => {
