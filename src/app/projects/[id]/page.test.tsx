@@ -154,7 +154,7 @@ describe("ProjectWorkspacePage", () => {
     ).toBe("https://example.com/repos/alpha-workspace");
     expect(screen.getAllByText("Continue active work")).toHaveLength(2);
     expect(
-      screen.getByRole("link", { name: "Otwórz zadania" }).getAttribute("href"),
+      screen.getByRole("link", { name: "Przejdź do zadań" }).getAttribute("href"),
     ).toBe("/projects/project-1/tasks");
     expect(screen.getByRole("link", { name: "Dodaj zadanie" })).toBeTruthy();
     expect(
@@ -164,6 +164,7 @@ describe("ProjectWorkspacePage", () => {
       screen.getByRole("link", { name: "Zobacz całą wiedzę" }).getAttribute("href"),
     ).toBe("/projects/project-1/knowledge");
     expect(screen.getByText("Project Brain")).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Przejdź do zadań" })).toBeTruthy();
     expect(screen.getByRole("button", { name: "Usuń projekt" })).toBeTruthy();
   });
 

@@ -105,6 +105,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-001.8` - Project Brain Engine Foundation
 * `MS-001.9` - Project Brain Workflow Evaluation Bridge
 * `MS-022.1` - Project Brain Context Visibility Refinement Foundation
+* `MS-022.2` - Project Brain Context Action Clarity Foundation
 
 ## Current
 
@@ -114,7 +115,72 @@ Session 079 synchronized the accepted `MS-021.17` control files in the current l
 
 ## Latest Completed Product Milestone
 
-MS-022.1 - Project Brain Context Visibility Refinement Foundation
+MS-022.2 - Project Brain Context Action Clarity Foundation
+
+## MS-022.2 - Project Brain Context Action Clarity Foundation
+
+**Milestone**
+MS-022.2 - Project Brain Context Action Clarity Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Make the existing Project Brain `Następny krok` / `workflowNextStep` context signal lead the user to a clearer next action on the project screen without changing Project Brain mechanics.
+
+**Product Outcome**
+The Project Brain action CTA now reads `Przejdź do zadań` instead of `Otwórz zadania` while preserving the same data, the same conditional rendering, and the same `workflowNextStep` mechanics. The existing implementation remains the source of truth for the visible context signal.
+
+**Version Decision**
+No app version bump is required. The repository rule recorded in SSOT says accepted app/platform `.0` milestones bump the controlled app version source to `0.XXX.0`, and `MS-022.2` is an action-clarity refinement milestone rather than a `.0` milestone. The canonical app version therefore remains `0.021.6`.
+
+**Dependencies**
+* closed `MS-022.1 - Project Brain Context Visibility Refinement Foundation`
+
+**Allowed Implementation Scope**
+* small UI/content clarity refinement on the existing project screen
+* targeted test coverage for the existing project page/header behavior
+* SSOT synchronization
+* version decision recording
+
+**Forbidden Scope**
+* Project Brain engine changes
+* backend, registry, scanner, or AI provider changes
+* local project discovery changes
+* dashboard redesign
+* broad component refactor
+* app version bump
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `src/components/workspace/WorkspaceHeader.tsx` owns the visible next-step presentation
+* `src/app/projects/[id]/page.test.tsx` owns the targeted behavior test
+* `src/lib/app-version.ts` remains unchanged for this milestone
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized SSOT snapshot for this milestone
+
+**Verification Plan**
+* `git diff --check`
+* `npm.cmd test -- 'src/app/projects/[id]/page.test.tsx'`
+* `npx.cmd tsc --noEmit`
+* confirm the app version remains `0.021.6`
 
 ## MS-022.1 - Project Brain Context Visibility Refinement Foundation
 
@@ -181,7 +247,7 @@ No app version bump is required. The repository rule recorded in SSOT says accep
 * `npx.cmd tsc --noEmit`
 * confirm the app version remains `0.021.6`
 
-Session 080 synchronized the accepted `MS-022.1` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 080 synchronized the accepted `MS-022.2` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## MS-022.0 - Project Brain Next Useful Context Foundation
 

@@ -137,7 +137,7 @@ export function WorkspaceHeader({
             href={`/projects/${projectId}/tasks`}
             className="inline-flex w-fit items-center rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-sm font-medium text-emerald-50 transition-colors hover:border-emerald-300/50 hover:bg-emerald-400/20"
           >
-            Otwórz zadania
+            Przejdź do zadań
           </Link>
         </div>
         <div className="mt-4 space-y-1">
