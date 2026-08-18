@@ -167,9 +167,9 @@ export function deriveConductorProjectBrainGuidance(
 
   if (actionReadiness === "requires-product-owner-decision") {
     return {
-      headline: "Konduktor czeka na decyzję Product Ownera",
+      headline: "Konduktor podpowiada kierunek: kolejny priorytet platformy",
       description:
-        "Konduktor pozostaje read-only. Rekomendacja nie jest wykonywalna i wymaga osobnej decyzji Product Ownera.",
+        "Spokojna rekomendacja: wybierz następny milestone z listy priorytetów platformy. Konduktor pozostaje read-only i wymaga osobnej decyzji Product Ownera.",
       reason,
       hasRecommendation: false,
       actionReadiness,
