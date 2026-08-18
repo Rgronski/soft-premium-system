@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 082 - Session close protocol and handoff preparation
+
+### Date
+
+2026-08-17
+
+### Completed
+
+* Updated `docs/10_SESSION_STATE.md` to the Session 082 close snapshot with `Current Session ID` 082, `Next Session ID` 083, and `Suggested Next Chat Title` `083 SPS OS - Product Owner Decision`.
+* Created `docs/session-handoffs/2026-08-17_082_SESSION_HANDOFF.md` as the current Session 082 handoff.
+* Confirmed the branch is `main`, the working tree is clean, and the latest known pushed commit is `f51d4ec`.
+* Appended exactly one Session 082 close usage entry to `.usage/session.jsonl`.
+
+### Notes
+
+* `Current Product Milestone` and `Next Product Milestone` remain `NONE / Product Owner decision required`.
+* No product code, app version, API, storage, command behavior, or workflow behavior changed.
+
 ## Session 082 - MS-024.3 Konduktor recommendation card hierarchy publication
 
 ### Date
