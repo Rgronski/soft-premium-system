@@ -123,6 +123,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-027.2` - Real Project Duplicate Detection Foundation
 * `MS-027.3` - Real Project Source Binding Status Foundation
 * `MS-027.4` - GitHub Repository Import / Bind Decision Foundation
+* `MS-027.5` - Project Scoped Data Rebinding Guard Foundation
 
 ## Current
 
@@ -132,7 +133,69 @@ Session 083 synchronized the accepted `MS-026.0` control files in the current lo
 
 ## Latest Completed Product Milestone
 
-MS-027.4 - GitHub Repository Import / Bind Decision Foundation
+MS-027.5 - Project Scoped Data Rebinding Guard Foundation
+
+## MS-027.5 - Project Scoped Data Rebinding Guard Foundation
+
+**Milestone**
+MS-027.5 - Project Scoped Data Rebinding Guard Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Provide a future/legacy-safe guard that preserves existing project-scoped task and knowledge collections when a duplicate project id is merged away during dedupe or upsert.
+
+**Product Outcome**
+The repository now keeps scoped task and knowledge collections intact when they already exist under a merge-away project id, rewrites the stored `projectId` values to the canonical project, and avoids creating fake data when no scoped collections are present. This guard is explicitly not a recovery of the previously lost live BCP-MS-001 task.
+
+**Dependencies**
+* closed `MS-027.4 - GitHub Repository Import / Bind Decision Foundation`
+* closed `MS-027.3 - Real Project Source Binding Status Foundation`
+* closed `MS-027.2 - Real Project Duplicate Detection Foundation`
+
+**Allowed Implementation Scope**
+* docs-only contract publication
+* legacy-safe project-scoped task and knowledge rebinding guard
+* preserving canonical project-scoped data during dedupe/upsert
+* focused tests for the directly touched path
+
+**Forbidden Scope**
+* manual task recreation
+* automatic clone/import
+* GitHub API integration
+* Beauty Client PRO code changes
+* broad refactors
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized publication snapshot
+* `src/lib/project/project.ts` and `src/lib/project/project.test.ts` own the minimal rebinding guard surface
 
 ## MS-027.4 - GitHub Repository Import / Bind Decision Foundation
 

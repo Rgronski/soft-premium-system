@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-026.1c - Polish UI product terms verification
+MS-027.5 - Project Scoped Data Rebinding Guard Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-027.5 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Scoped Data Rebinding Guard Foundation. The repository now preserves existing task and knowledge collections when a duplicate project id is merged away during dedupe or upsert, rewrites their stored `projectId` values to the canonical project, and avoids creating fake scoped data when none exists. This is a future/legacy-safe guard and does not recover the previously lost live BCP-MS-001 task. Product Owner manually recreated BCP-MS-001 after the live browser storage proved unrecoverable. The repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 MS-027.4 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Repository Import / Bind Decision Foundation. The repository now gives manifest-only real projects a controlled Product Owner decision path for source binding, keeps clone/import as future work, and preserves the MS-027.2 duplicate-detection and MS-027.3 source-status behavior. Session 084 also fixed the Home hydration regression by moving localStorage-dependent project loading behind mount so the first server and client render match, while still showing Beauty Client PRO once the client state loads. No Beauty Client PRO code changed, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 

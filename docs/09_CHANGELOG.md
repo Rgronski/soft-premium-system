@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 084 - MS-027.5 project scoped data rebinding guard publication
+
+### Date
+
+2026-08-18
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-027.5 - Project Scoped Data Rebinding Guard Foundation` as completed / verified / published / closed.
+* Recorded that the guard is future/legacy-safe protection for preserving existing project-scoped task and knowledge collections during dedupe or upsert, not a recovery of the previously lost live BCP-MS-001 task.
+* Recorded that Product Owner manually recreated BCP-MS-001 after live storage inspection proved the live data was unrecoverable.
+* Appended the Session 084 usage record for the MS-027.5 publication.
+
+### Notes
+
+* No Beauty Client PRO code changed.
+* Clone/import, GitHub API integration, manual task recreation, and push remain out of scope.
+
 ## Session 084 - MS-027 controlled real-project intake publication batch
 
 ### Date

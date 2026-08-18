@@ -6,9 +6,11 @@ import {
   deleteProject,
   getProjectById,
   getProjectBindingDecisionSummary,
+  getProjects,
   getProjectSourceBindingSummary,
   upsertProject,
 } from "./project";
+import { getProjectWorkspaceEntry } from "../project-brain/engine";
 
 class MemoryStorage {
   private store = new Map<string, string>();
@@ -23,6 +25,10 @@ class MemoryStorage {
 
   setItem(key: string, value: string) {
     this.store.set(key, value);
+  }
+
+  removeItem(key: string) {
+    this.store.delete(key);
   }
 }
 
@@ -263,6 +269,166 @@ describe("createProject", () => {
         createdAt: "2026-07-24T11:00:00.000Z",
       },
     ]);
+  });
+
+  test("rebinds task and knowledge ownership to the canonical project when repository metadata updates a merged project", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Beauty Client PRO",
+          workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+          projectFilesystemStatus: "manifest-present",
+          createdAt: "2026-08-03T10:00:00.000Z",
+        },
+        {
+          id: "project-duplicate",
+          name: "Beauty Client PRO",
+          workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+          projectFilesystemStatus: "manifest-present",
+          createdAt: "2026-08-03T11:00:00.000Z",
+        },
+      ]),
+    );
+    storage.setItem(
+      "soft-premium-system.projects.project-duplicate.tasks",
+      JSON.stringify([
+        {
+          id: "task-1",
+          projectId: "project-duplicate",
+          title: "BCP-MS-001",
+          createdAt: "2026-08-03T12:00:00.000Z",
+        },
+      ]),
+    );
+    storage.setItem(
+      "soft-premium-system.projects.project-duplicate.knowledge",
+      JSON.stringify([
+        {
+          id: "knowledge-1",
+          projectId: "project-duplicate",
+          title: "BCP note",
+          content: "Recovered project continuity.",
+          createdAt: "2026-08-03T13:00:00.000Z",
+        },
+      ]),
+    );
+
+    const project = upsertProject({
+      id: "project-1",
+      name: "Beauty Client PRO",
+      repositoryUrl: "https://github.com/example/beauty-client-pro",
+      workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+      projectFilesystemStatus: "manifest-present",
+      createdAt: "2026-08-03T14:00:00.000Z",
+    });
+
+    const savedTasks = JSON.parse(
+      storage.getItem("soft-premium-system.projects.project-1.tasks") ?? "[]",
+    ) as Array<{ id: string; projectId: string }>;
+    const savedKnowledge = JSON.parse(
+      storage.getItem("soft-premium-system.projects.project-1.knowledge") ??
+        "[]",
+    ) as Array<{ id: string; projectId: string }>;
+    const workspace = getProjectWorkspaceEntry("project-1");
+
+    expect(project.id).toBe("project-1");
+    expect(project.repositoryUrl).toBe(
+      "https://github.com/example/beauty-client-pro",
+    );
+    expect(savedTasks).toEqual([
+      {
+        id: "task-1",
+        projectId: "project-1",
+        title: "BCP-MS-001",
+        createdAt: "2026-08-03T12:00:00.000Z",
+      },
+    ]);
+    expect(savedKnowledge).toEqual([
+      {
+        id: "knowledge-1",
+        projectId: "project-1",
+        title: "BCP note",
+        content: "Recovered project continuity.",
+        createdAt: "2026-08-03T13:00:00.000Z",
+      },
+    ]);
+    expect(workspace.workspace.overview.counts.tasks).toBe(1);
+    expect(workspace.workspace.overview.counts.knowledgeEntries).toBe(1);
+    expect(
+      storage.getItem("soft-premium-system.projects.project-duplicate.tasks"),
+    ).toBeNull();
+    expect(
+      storage.getItem("soft-premium-system.projects.project-duplicate.knowledge"),
+    ).toBeNull();
+
+    const secondPassProjects = getProjects();
+    const secondPassTasks = JSON.parse(
+      storage.getItem("soft-premium-system.projects.project-1.tasks") ?? "[]",
+    ) as Array<{ id: string; projectId: string }>;
+    const secondPassKnowledge = JSON.parse(
+      storage.getItem("soft-premium-system.projects.project-1.knowledge") ??
+        "[]",
+    ) as Array<{ id: string; projectId: string }>;
+
+    expect(secondPassProjects).toEqual([
+      {
+        id: "project-1",
+        name: "Beauty Client PRO",
+        workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+        projectFilesystemStatus: "manifest-present",
+        createdAt: "2026-08-03T10:00:00.000Z",
+        repositoryUrl: "https://github.com/example/beauty-client-pro",
+      },
+    ]);
+    expect(secondPassTasks).toEqual(savedTasks);
+    expect(secondPassKnowledge).toEqual(savedKnowledge);
+  });
+
+  test("does not create project-scoped task or knowledge collections when no scoped data exists", () => {
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Beauty Client PRO",
+          workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+          projectFilesystemStatus: "manifest-present",
+          createdAt: "2026-08-03T10:00:00.000Z",
+        },
+        {
+          id: "project-duplicate",
+          name: "Beauty Client PRO",
+          workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+          projectFilesystemStatus: "manifest-present",
+          createdAt: "2026-08-03T11:00:00.000Z",
+        },
+      ]),
+    );
+
+    const project = upsertProject({
+      id: "project-1",
+      name: "Beauty Client PRO",
+      repositoryUrl: "https://github.com/example/beauty-client-pro",
+      workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+      projectFilesystemStatus: "manifest-present",
+      createdAt: "2026-08-03T14:00:00.000Z",
+    });
+
+    expect(project.id).toBe("project-1");
+    expect(
+      storage.getItem("soft-premium-system.projects.project-1.tasks"),
+    ).toBeNull();
+    expect(
+      storage.getItem("soft-premium-system.projects.project-1.knowledge"),
+    ).toBeNull();
+    expect(
+      storage.getItem("soft-premium-system.projects.project-duplicate.tasks"),
+    ).toBeNull();
+    expect(
+      storage.getItem("soft-premium-system.projects.project-duplicate.knowledge"),
+    ).toBeNull();
   });
 
   test("derives a github-url-known binding decision when only the GitHub URL metadata is known", () => {

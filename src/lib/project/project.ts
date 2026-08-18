@@ -1,6 +1,7 @@
 import type { Project } from "./types";
 
 const PROJECTS_STORAGE_KEY = "soft-premium-system.projects";
+const PROJECT_SCOPED_STORAGE_SUFFIXES = ["tasks", "knowledge"] as const;
 
 function normalizeProjectId(projectId: string): string {
   return projectId.trim();
@@ -231,6 +232,98 @@ function persistProjects(projects: Project[]): void {
   localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(projects));
 }
 
+function readStoredCollection<T>(storageKey: string): T[] {
+  const savedCollection = localStorage.getItem(storageKey);
+
+  if (!savedCollection) {
+    return [];
+  }
+
+  try {
+    const parsedCollection = JSON.parse(savedCollection) as unknown;
+
+    return Array.isArray(parsedCollection) ? (parsedCollection as T[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function mergeStoredCollections<T extends { id: string }>(
+  targetCollection: T[],
+  sourceCollection: T[],
+): T[] {
+  const mergedCollection = [...targetCollection];
+  const mergedItemIds = new Set(targetCollection.map((item) => item.id));
+
+  for (const sourceItem of sourceCollection) {
+    if (mergedItemIds.has(sourceItem.id)) {
+      continue;
+    }
+
+    mergedItemIds.add(sourceItem.id);
+    mergedCollection.push(sourceItem);
+  }
+
+  return mergedCollection;
+}
+
+function rebindStoredCollectionProjectId<
+  T extends { id: string; projectId: string },
+>(collection: T[], targetProjectId: string): T[] {
+  return collection.map((item) =>
+    item.projectId === targetProjectId
+      ? item
+      : ({
+          ...item,
+          projectId: targetProjectId,
+        } as T),
+  );
+}
+
+type ProjectRebinding = {
+  sourceProjectId: string;
+  targetProjectId: string;
+};
+
+function rebindProjectScopedCollections(
+  sourceProjectId: string,
+  targetProjectId: string,
+): void {
+  const normalizedSourceProjectId = normalizeProjectId(sourceProjectId);
+  const normalizedTargetProjectId = normalizeProjectId(targetProjectId);
+
+  if (!normalizedSourceProjectId || normalizedSourceProjectId === normalizedTargetProjectId) {
+    return;
+  }
+
+  for (const suffix of PROJECT_SCOPED_STORAGE_SUFFIXES) {
+    const sourceStorageKey = `soft-premium-system.projects.${normalizedSourceProjectId}.${suffix}`;
+    const targetStorageKey = `soft-premium-system.projects.${normalizedTargetProjectId}.${suffix}`;
+    const sourceStorageValue = localStorage.getItem(sourceStorageKey);
+    const targetStorageValue = localStorage.getItem(targetStorageKey);
+
+    if (sourceStorageValue === null && targetStorageValue === null) {
+      continue;
+    }
+
+    const sourceCollection = rebindStoredCollectionProjectId(
+      readStoredCollection<{ id: string; projectId: string }>(sourceStorageKey),
+      normalizedTargetProjectId,
+    );
+    const targetCollection = rebindStoredCollectionProjectId(
+      readStoredCollection<{ id: string; projectId: string }>(targetStorageKey),
+      normalizedTargetProjectId,
+    );
+    const mergedCollection = mergeStoredCollections(
+      targetCollection,
+      sourceCollection,
+    );
+
+    localStorage.setItem(targetStorageKey, JSON.stringify(mergedCollection));
+    localStorage.removeItem(sourceStorageKey);
+  }
+}
+
 function mergeProjectRecords(
   existingProject: Project,
   incomingProject: Project,
@@ -253,8 +346,14 @@ function mergeProjectRecords(
   };
 }
 
-function normalizeProjectList(projects: Project[]): Project[] {
+type NormalizedProjectList = {
+  projects: Project[];
+  projectRebindings: ProjectRebinding[];
+};
+
+function normalizeProjectList(projects: Project[]): NormalizedProjectList {
   const normalizedProjects: Project[] = [];
+  const projectRebindings: ProjectRebinding[] = [];
 
   for (const project of projects) {
     const matchIndex = normalizedProjects.findIndex((savedProject) =>
@@ -270,10 +369,19 @@ function normalizeProjectList(projects: Project[]): Project[] {
       normalizedProjects[matchIndex],
       project,
     );
+    if (mergedProject.id !== project.id) {
+      projectRebindings.push({
+        sourceProjectId: project.id,
+        targetProjectId: mergedProject.id,
+      });
+    }
     normalizedProjects[matchIndex] = mergedProject;
   }
 
-  return normalizedProjects;
+  return {
+    projects: normalizedProjects,
+    projectRebindings,
+  };
 }
 
 function repairProjectBrainStatus(project: Project): Project {
@@ -306,8 +414,16 @@ export function getProjects(): Project[] {
   }
 
   const parsedProjects = JSON.parse(savedProjects) as Project[];
-  const normalizedProjects = normalizeProjectList(parsedProjects);
+  const { projects: normalizedProjects, projectRebindings } =
+    normalizeProjectList(parsedProjects);
   const normalizedSerializedProjects = JSON.stringify(normalizedProjects);
+
+  for (const rebinding of projectRebindings) {
+    rebindProjectScopedCollections(
+      rebinding.sourceProjectId,
+      rebinding.targetProjectId,
+    );
+  }
 
   if (normalizedSerializedProjects !== savedProjects) {
     persistProjects(normalizedProjects);
@@ -330,6 +446,7 @@ export function createProject(
   workingDirectory?: string,
   projectFilesystemStatus?: Project["projectFilesystemStatus"],
 ): Project {
+  const existingProjects = getProjects();
   const normalizedRepositoryUrl = repositoryUrl?.trim();
   const normalizedWorkingDirectory =
     workingDirectory?.trim() || buildDefaultWorkingDirectory(name);
@@ -343,27 +460,46 @@ export function createProject(
     createdAt: new Date().toISOString(),
   };
 
-  const updatedProjects = normalizeProjectList([...getProjects(), newProject]);
-
-  persistProjects(updatedProjects);
-
-  return (
+  const {
+    projects: updatedProjects,
+    projectRebindings,
+  } = normalizeProjectList([...existingProjects, newProject]);
+  const canonicalProject =
     findMatchingProject(updatedProjects, newProject) ??
     updatedProjects[updatedProjects.length - 1] ??
-    newProject
-  );
+    newProject;
+
+  persistProjects(updatedProjects);
+  for (const rebinding of projectRebindings) {
+    rebindProjectScopedCollections(
+      rebinding.sourceProjectId,
+      rebinding.targetProjectId,
+    );
+  }
+
+  return canonicalProject;
 }
 
 export function upsertProject(project: Project): Project {
-  const updatedProjects = normalizeProjectList([...getProjects(), project]);
-
-  persistProjects(updatedProjects);
-
-  return (
+  const existingProjects = getProjects();
+  const {
+    projects: updatedProjects,
+    projectRebindings,
+  } = normalizeProjectList([...existingProjects, project]);
+  const canonicalProject =
     findMatchingProject(updatedProjects, project) ??
     updatedProjects[updatedProjects.length - 1] ??
-    project
-  );
+    project;
+
+  persistProjects(updatedProjects);
+  for (const rebinding of projectRebindings) {
+    rebindProjectScopedCollections(
+      rebinding.sourceProjectId,
+      rebinding.targetProjectId,
+    );
+  }
+
+  return canonicalProject;
 }
 
 export function deleteProject(id: string): void {

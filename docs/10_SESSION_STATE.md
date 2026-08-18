@@ -222,14 +222,14 @@ Audit Session 084: PASS
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
 Active Capability: MS-027 controlled real-project intake publication
-Active Work Item: Publish the verified MS-027.2 / MS-027.3 / MS-027.4 SSOT batch and Home hydration hotfix
+Active Work Item: Publish the verified MS-027.5 SSOT guard follow-up
 Current Mode: OPEN
-Completed Capability Items: Session 084 published the MS-027.2 duplicate detection foundation; Session 084 published the MS-027.3 source binding status foundation; Session 084 published the MS-027.4 binding decision foundation; Session 084 verified the Home hydration hotfix; Session 084 appended the required usage records
+Completed Capability Items: Session 084 published the MS-027.2 duplicate detection foundation; Session 084 published the MS-027.3 source binding status foundation; Session 084 published the MS-027.4 binding decision foundation; Session 084 verified the Home hydration hotfix; Session 084 published the MS-027.5 project scoped data rebinding guard foundation; Session 084 appended the required usage records
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-027.4 - GitHub Repository Import / Bind Decision Foundation
+Latest Completed Product Milestone: MS-027.5 - Project Scoped Data Rebinding Guard Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Home hydration regression hotfix verified
+Latest Completed Capability Item: MS-027.5 project scoped data rebinding guard verified
 Current Sprint: NONE
 Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, MS-022.3, MS-023.0, MS-027.2, MS-027.3, and MS-027.4 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
