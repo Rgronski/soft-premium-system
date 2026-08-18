@@ -216,28 +216,28 @@ SPS OS Session State
 Date: 2026-08-18
 Current Session ID: 084
 Current Chat Title: 084 SPS OS - MS-027 Publication Batch
-Session Sync Protocol: PASS
-Session runtime: OPEN
+Session Close Protocol: PASS
+Session runtime: CLOSED
 Audit Session 084: PASS
-Next Session ID: UNKNOWN
-Suggested Next Chat Title: UNKNOWN
-Active Capability: MS-027 controlled real-project intake publication
-Active Work Item: Publish the verified MS-027.5 SSOT guard follow-up
-Current Mode: OPEN
-Completed Capability Items: Session 084 published the MS-027.2 duplicate detection foundation; Session 084 published the MS-027.3 source binding status foundation; Session 084 published the MS-027.4 binding decision foundation; Session 084 verified the Home hydration hotfix; Session 084 published the MS-027.5 project scoped data rebinding guard foundation; Session 084 appended the required usage records
+Next Session ID: 085
+Suggested Next Chat Title: 085 SPS OS - Product Owner Decision
+Active Capability: Session Close Protocol
+Active Work Item: Session 084 close
+Current Mode: CLOSED
+Completed Capability Items: Session 084 published the MS-027.2 duplicate detection foundation; Session 084 published the MS-027.3 source binding status foundation; Session 084 published the MS-027.4 binding decision foundation; Session 084 verified the Home hydration hotfix; Session 084 published the MS-027.5 project scoped data rebinding guard foundation; Session 084 updated the Session 084 session state; Session 084 created the Session 084 handoff; Session 084 appended the Session 084 close usage entry
 Current Product Milestone: NONE / Product Owner decision required
 Latest Completed Product Milestone: MS-027.5 - Project Scoped Data Rebinding Guard Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: MS-027.5 project scoped data rebinding guard verified
+Latest Completed Capability Item: Session 084 close protocol
 Current Sprint: NONE
 Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, MS-022.3, MS-023.0, MS-027.2, MS-027.3, and MS-027.4 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
-Repository Working Tree State: DIRTY
+Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 8c24679
+Latest Verified Commit: 1bf7189
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Commit the verified MS-027 publication batch locally.
-Next Session Plan: Await Product Owner decision for push and any follow-up milestone.
+Next Safe Step: Run the repository-defined session package generator from docs/16_SESSION_PACKAGE_GENERATOR.md.
+Next Session Plan: Open Session 085 with the fresh session package and await Product Owner decision for the next milestone.

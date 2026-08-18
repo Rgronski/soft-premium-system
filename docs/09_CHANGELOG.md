@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 084 - Session close protocol and handoff publication
+
+### Date
+
+2026-08-18
+
+### Completed
+
+* Synchronized `docs/10_SESSION_STATE.md` and created `docs/session-handoffs/2026-08-18_084_SESSION_HANDOFF.md` so the SSOT now records Session 084 as closed with Session 085 queued for the next Product Owner decision chat.
+* Recorded that Session 084 closes with `MS-027.5 - Project Scoped Data Rebinding Guard Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Appended the Session 084 close usage record.
+
+### Notes
+
+* No new product logic or Beauty Client PRO code changed.
+* Package generation remains the next operational step after the close commit and push.
+
 ## Session 084 - MS-027.5 project scoped data rebinding guard publication
 
 ### Date
