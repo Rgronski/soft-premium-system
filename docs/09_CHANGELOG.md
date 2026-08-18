@@ -77,6 +77,10 @@ Each release entry should contain:
 
 ### Completed
 
+* Synchronized `docs/10_SESSION_STATE.md` and `docs/session-handoffs/2026-08-18_083_SESSION_HANDOFF.md` so the SSOT now records Session 083 as closed with `Next Session ID` 084 and the suggested next chat title `084 SPS OS - Beauty Client PRO Real Project Controlled Launch`.
+* Recorded that Session 083 completed the Session Close Protocol, prepared the Session 083 handoff, and preserved the MS-026.1-series product state unchanged at `NONE / Product Owner decision required`.
+* Appended the Session 083 close usage record.
+
 * Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-026.1c - Polish UI product terms verification` as completed / verified / published and keeps `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
 * Recorded that the accepted MS-026.1-series live UI overlay cleanup leaves the program backbone, identifiers, routes, engine states, contracts, and internal logic in English while the verified user-facing product terms render in Polish in the tested shell, workspace, AI workspace, and workflow paths.
 * Recorded that `1.026.0` remains the visible live-test branch/build marker.
