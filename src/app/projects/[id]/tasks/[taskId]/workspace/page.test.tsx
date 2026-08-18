@@ -12,6 +12,7 @@ import { createProject } from "@/lib/project/project";
 
 const useParamsMock = vi.fn(() => ({ id: "project-1", taskId: "task-1" }));
 const getProjectWorkspaceEntryMock = vi.fn();
+const getProjectByIdMock = vi.fn();
 const getProjectFromServerMock = vi.fn();
 const getTasksFromServerMock = vi.fn();
 const writeTextMock = vi.fn();
@@ -36,6 +37,17 @@ vi.mock("@/lib/project-brain/engine", () => ({
   getProjectWorkspaceEntry: (projectId: string) =>
     getProjectWorkspaceEntryMock(projectId),
 }));
+
+vi.mock("@/lib/project/project", async () => {
+  const actual = await vi.importActual<typeof import("@/lib/project/project")>(
+    "@/lib/project/project",
+  );
+
+  return {
+    ...actual,
+    getProjectById: (projectId: string) => getProjectByIdMock(projectId),
+  };
+});
 
 vi.mock("@/lib/project/browser-server", () => ({
   getProjectFromServer: (projectId: string) =>
@@ -109,6 +121,14 @@ describe("ProjectTaskWorkspacePage", () => {
         createdAt: "2026-07-23T10:00:00.000Z",
       },
     ]);
+    getProjectByIdMock.mockReturnValue({
+      id: "project-1",
+      name: "Project Alpha",
+      repositoryUrl: "https://example.com/repos/project-alpha",
+      workingDirectory: "C:\\SPS_OS_WORK\\project-alpha",
+      projectFilesystemStatus: "manifest-present",
+      createdAt: "2026-08-03T10:00:00.000Z",
+    });
   });
 
   afterEach(() => {
@@ -522,5 +542,63 @@ describe("ProjectTaskWorkspacePage", () => {
     expect(screen.getByText("task-1")).toBeTruthy();
     expect(screen.getByText("project-1")).toBeTruthy();
     expect(screen.queryByText("Projekt nie istnieje.")).toBeNull();
+  });
+
+  test("explains the missing repository context when only a manifest-backed source is available", async () => {
+    getProjectWorkspaceEntryMock.mockReturnValue({
+      projectId: "project-1",
+      workspace: {
+        overview: {
+          project: {
+            id: "project-1",
+            name: "Project Alpha",
+          },
+          counts: {
+            tasks: 1,
+            knowledgeEntries: 0,
+          },
+          workflow: {
+            health: "ready",
+            confidence: 0.5,
+            nextStep: {
+              id: "start-next-work",
+              label: "Start next work",
+              description: "Ready to start the next work item.",
+            },
+            warnings: 0,
+            blockers: 0,
+          },
+        },
+        tasks: [
+          {
+            id: "task-1",
+            title: "First task",
+          },
+        ],
+        knowledgeEntries: [],
+      },
+    });
+    getProjectByIdMock.mockReturnValue({
+      id: "project-1",
+      name: "Project Alpha",
+      workingDirectory: "C:\\SPS_OS_WORK\\project-alpha",
+      projectFilesystemStatus: "manifest-present",
+      createdAt: "2026-08-03T10:00:00.000Z",
+    });
+
+    render(<ProjectTaskWorkspacePage />);
+
+    await waitFor(() => {
+      expect(getTasksFromServerMock).toHaveBeenCalledTimes(1);
+    });
+
+    expect(screen.getByText("Tryb źródła: tylko manifest")).toBeTruthy();
+    expect(screen.getByText("Adres GitHub: nie podano")).toBeTruthy();
+    expect(screen.getByText("Lokalne repo Git: niedostępne")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Kontekst repozytorium niedostępny: projekt ma manifest SPS, ale nie ma lokalnego repo Git.",
+      ),
+    ).toBeTruthy();
   });
 });

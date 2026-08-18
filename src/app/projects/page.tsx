@@ -3,7 +3,9 @@
 import { SectionCard } from "@/components/ui/SectionCard";
 import {
   buildDefaultWorkingDirectory,
+  areProjectsSameIdentity,
   createProject,
+  findMatchingProject,
   getProjects,
   upsertProject,
 } from "@/lib/project/project";
@@ -183,9 +185,13 @@ export default function ProjectsPage() {
         }
 
         const nextProjects = payload.projects.filter(isProject);
+        const existingProjects = getProjects();
+        const reconciledProjects = nextProjects.map((project) =>
+          findMatchingProject(existingProjects, project) ?? project,
+        );
 
         if (isActive) {
-          setDiscoveredProjects(nextProjects);
+          setDiscoveredProjects(reconciledProjects);
           setDiscoveryErrorMessage(null);
         }
       } catch {
@@ -263,7 +269,7 @@ export default function ProjectsPage() {
         throw new Error("Project create response is invalid.");
       }
 
-      createProject(
+      const canonicalProject = createProject(
         createdProject.name,
         createdProject.id,
         createdProject.repositoryUrl,
@@ -271,11 +277,18 @@ export default function ProjectsPage() {
         createdProject.projectFilesystemStatus,
       );
       setLocalProjects(getProjects());
+      setDiscoveredProjects((currentProjects) =>
+        currentProjects.map((project) =>
+          areProjectsSameIdentity(project, canonicalProject)
+            ? canonicalProject
+            : project,
+        ),
+      );
       setProjectName("");
       setRepositoryUrl("");
       setWorkingDirectory(buildDefaultWorkingDirectory(""));
       setWorkingDirectoryManuallyEdited(false);
-      router.push(`/projects/${createdProject.id}`);
+      router.push(`/projects/${canonicalProject.id}`);
     } catch {
       setErrorMessage("Nie udaĹ‚o siÄ™ utworzyÄ‡ projektu. SprĂłbuj ponownie.");
     } finally {
@@ -284,7 +297,7 @@ export default function ProjectsPage() {
   }
 
   function handleOpenDiscoveredProject(project: Project) {
-    createProject(
+    const canonicalProject = createProject(
       project.name,
       project.id,
       project.repositoryUrl,
@@ -292,12 +305,22 @@ export default function ProjectsPage() {
       project.projectFilesystemStatus,
     );
     setLocalProjects(getProjects());
-    router.push(`/projects/${project.id}`);
+    setDiscoveredProjects((currentProjects) =>
+      currentProjects.map((entry) =>
+        areProjectsSameIdentity(entry, project) ? canonicalProject : entry,
+      ),
+    );
+    router.push(`/projects/${canonicalProject.id}`);
   }
 
   function handleAttachDiscoveredProject(project: Project) {
-    upsertProject(project);
+    const canonicalProject = upsertProject(project);
     setLocalProjects(getProjects());
+    setDiscoveredProjects((currentProjects) =>
+      currentProjects.map((entry) =>
+        areProjectsSameIdentity(entry, project) ? canonicalProject : entry,
+      ),
+    );
   }
 
   function handleKeepLocalProject(projectId: string) {
@@ -322,10 +345,17 @@ export default function ProjectsPage() {
     localProject: Project,
     discoveredProject: Project,
   ) {
-    upsertProject(
+    const canonicalProject = upsertProject(
       resolveDiscoveredProjectConflict(localProject, discoveredProject),
     );
     setLocalProjects(getProjects());
+    setDiscoveredProjects((currentProjects) =>
+      currentProjects.map((entry) =>
+        areProjectsSameIdentity(entry, discoveredProject)
+          ? canonicalProject
+          : entry,
+      ),
+    );
     setResolvedConflictProjectIds((current) => {
       const nextResolvedConflictProjectIds = {
         ...current,

@@ -7,7 +7,10 @@ import {
 } from "@/lib/project-brain/engine";
 import { getProjectFromServer } from "@/lib/project/browser-server";
 import { getTasksFromServer, TaskServerError } from "@/lib/task/browser-server";
-import { getProjectById } from "@/lib/project/project";
+import {
+  getProjectById,
+  getProjectBindingDecisionSummary,
+} from "@/lib/project/project";
 import { getTask } from "@/lib/task/task";
 import type { Task } from "@/lib/task/types";
 import type { WorkflowNextStep } from "@/lib/workflow/types";
@@ -185,6 +188,8 @@ export default function ProjectTaskWorkspacePage() {
 
   const projectId = params.id;
   const taskId = params.taskId;
+  const localProject = getProjectById(projectId);
+  const sourceBindingSummary = getProjectBindingDecisionSummary(localProject);
 
   const workspaceEntry = useMemo<ProjectWorkspaceEntry | null>(() => {
     if (typeof window === "undefined") {
@@ -537,9 +542,21 @@ export default function ProjectTaskWorkspacePage() {
               </a>
             ) : (
               <p className="mt-2 text-sm text-zinc-400">
-                Kontekst repozytorium niedostępny.
+                {sourceBindingSummary.repositoryContextMessage}
               </p>
             )}
+            <p className="mt-2 text-sm text-zinc-300">
+              Tryb źródła: {sourceBindingSummary.statusLabel}
+            </p>
+            <p className="mt-2 text-sm text-zinc-400">
+              {sourceBindingSummary.githubUrlLabel}
+            </p>
+            <p className="mt-2 text-sm text-zinc-400">
+              {sourceBindingSummary.localRepositoryLabel}
+            </p>
+            <p className="mt-2 text-sm text-zinc-300">
+              {sourceBindingSummary.nextStepLabel}
+            </p>
             {taskRepositoryOpenState === "opened" ? (
               <p className="mt-2 text-sm text-zinc-400" aria-live="polite">
                 Repozytorium otwarte lokalnie.

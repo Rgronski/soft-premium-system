@@ -5,10 +5,15 @@ import { deleteProject, getProjects } from "@/lib/project/project";
 import type { Project } from "@/lib/project/types";
 import { APP_VERSION } from "@/lib/app-version";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [projects, setProjects] = useState<Project[]>(() => getProjects());
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    setProjects(getProjects());
+  }, []);
+
   const latestProject = projects[projects.length - 1] ?? null;
   const hasProjects = projects.length > 0;
   const continueHref = latestProject

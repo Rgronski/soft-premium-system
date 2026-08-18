@@ -1,6 +1,12 @@
 // @vitest-environment jsdom
 
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 import { APP_VERSION } from "@/lib/app-version";
@@ -50,7 +56,9 @@ describe("Home", () => {
 
     render(<Home />);
 
-    expect(screen.getByText("Alpha")).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText("Alpha")).toBeTruthy();
+    });
     expect(screen.getByText("Beta")).toBeTruthy();
 
     fireEvent.click(screen.getAllByRole("button", { name: "Usuń" })[0]!);
@@ -72,7 +80,7 @@ describe("Home", () => {
     ]);
   });
 
-  test("continue working opens the latest project instead of the empty workspace route", () => {
+  test("continue working opens the latest project instead of the empty workspace route", async () => {
     localStorage.setItem(
       "soft-premium-system.projects",
       JSON.stringify([
@@ -91,9 +99,11 @@ describe("Home", () => {
 
     render(<Home />);
 
-    expect(
-      screen.getByRole("link", { name: "Kontynuuj" }).getAttribute("href"),
-    ).toBe("/projects/project-2");
+    await waitFor(() => {
+      expect(
+        screen.getByRole("link", { name: "Kontynuuj" }).getAttribute("href"),
+      ).toBe("/projects/project-2");
+    });
   });
 
   test("empty state CTA points to project creation with a matching label", () => {
@@ -109,7 +119,7 @@ describe("Home", () => {
     ).toBe("/projects");
   });
 
-  test("keeps the project when deletion is cancelled", () => {
+  test("keeps the project when deletion is cancelled", async () => {
     confirmSpy.mockReturnValue(false);
     localStorage.setItem(
       "soft-premium-system.projects",
@@ -123,6 +133,10 @@ describe("Home", () => {
     );
 
     render(<Home />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Alpha")).toBeTruthy();
+    });
 
     fireEvent.click(screen.getByRole("button", { name: "Usuń" }));
 

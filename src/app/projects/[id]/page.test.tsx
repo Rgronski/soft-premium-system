@@ -35,10 +35,17 @@ vi.mock("@/lib/project-brain/engine", () => ({
     getProjectWorkspaceEntryMock(projectId),
 }));
 
-vi.mock("@/lib/project/project", () => ({
-  deleteProject: (projectId: string) => deleteProjectMock(projectId),
-  getProjectById: (projectId: string) => getProjectByIdMock(projectId),
-}));
+vi.mock("@/lib/project/project", async () => {
+  const actual = await vi.importActual<typeof import("@/lib/project/project")>(
+    "@/lib/project/project",
+  );
+
+  return {
+    ...actual,
+    deleteProject: (projectId: string) => deleteProjectMock(projectId),
+    getProjectById: (projectId: string) => getProjectByIdMock(projectId),
+  };
+});
 
 vi.mock("@/lib/task/browser-server", () => ({
   getTasksFromServer: (projectId: string) => getTasksFromServerMock(projectId),

@@ -12,7 +12,11 @@ import {
   type ProjectWorkspaceEntry,
 } from "@/lib/project-brain/engine";
 import { getKnowledge } from "@/lib/knowledge/knowledge";
-import { deleteProject, getProjectById } from "@/lib/project/project";
+import {
+  deleteProject,
+  getProjectById,
+  getProjectBindingDecisionSummary,
+} from "@/lib/project/project";
 import { getTasks } from "@/lib/task/task";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -127,6 +131,7 @@ export default function ProjectWorkspacePage() {
     ProjectWorkspaceEntry["workspace"]["tasks"] | null
   >(null);
   const localProject = getProjectById(params.id);
+  const sourceBindingSummary = getProjectBindingDecisionSummary(localProject);
   const projectBrainStatus = localProject?.projectBrainStatus ?? "pending";
   const projectFilesystemStatus =
     localProject?.projectFilesystemStatus ?? "unknown";
@@ -282,6 +287,26 @@ export default function ProjectWorkspacePage() {
                 : projectFilesystemStatus === "manifest-missing"
                   ? "manifest brak"
                   : "nieznany"}
+            </p>
+          </div>
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              Tryb źródła
+            </p>
+            <p className="mt-2 text-sm text-zinc-300">
+              {sourceBindingSummary.statusLabel}
+            </p>
+            <p className="mt-2 text-sm text-zinc-400">
+              {sourceBindingSummary.githubUrlLabel}
+            </p>
+            <p className="mt-2 text-sm text-zinc-300">
+              {sourceBindingSummary.localRepositoryLabel}
+            </p>
+            <p className="mt-2 text-sm text-zinc-300">
+              {sourceBindingSummary.nextStepLabel}
+            </p>
+            <p className="mt-2 text-sm text-zinc-300">
+              {sourceBindingSummary.repositoryContextMessage}
             </p>
           </div>
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">

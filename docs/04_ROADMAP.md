@@ -120,6 +120,9 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-025.2` - Konduktor Product Owner Decision Prompt Clarity Foundation
 * `MS-025.3` - Konduktor Decision Boundary Trust Copy Foundation
 * `MS-026.0` - Polish UI Language Consistency Live Readiness Foundation
+* `MS-027.2` - Real Project Duplicate Detection Foundation
+* `MS-027.3` - Real Project Source Binding Status Foundation
+* `MS-027.4` - GitHub Repository Import / Bind Decision Foundation
 
 ## Current
 
@@ -129,6 +132,186 @@ Session 083 synchronized the accepted `MS-026.0` control files in the current lo
 
 ## Latest Completed Product Milestone
 
+MS-027.4 - GitHub Repository Import / Bind Decision Foundation
+
+## MS-027.4 - GitHub Repository Import / Bind Decision Foundation
+
+**Milestone**
+MS-027.4 - GitHub Repository Import / Bind Decision Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Give manifest-only real projects a controlled Product Owner decision path for source binding without adding automatic clone/import behavior.
+
+**Product Outcome**
+The repository now lets a manifest-only project surface a controlled next-step decision for keeping the project manifest-only, binding an existing local repo, or attaching a GitHub URL while keeping clone/import as future work. The binding decision remains metadata-only and does not create duplicate project records or mutate the Beauty Client PRO source.
+
+**Dependencies**
+* closed `MS-027.3 - Real Project Source Binding Status Foundation`
+* closed `MS-027.2 - Real Project Duplicate Detection Foundation`
+
+**Allowed Implementation Scope**
+* docs-only contract publication
+* controlled binding decision metadata and UI guidance for manifest-only projects
+* preserving the existing dedupe and source-status behavior
+* focused tests for the directly touched path
+
+**Forbidden Scope**
+* automatic clone/import
+* GitHub API integration
+* Beauty Client PRO code changes
+* broad refactors
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized publication snapshot
+* `src/lib/project/project.ts`, `src/app/projects/page.tsx`, `src/app/projects/[id]/page.tsx`, `src/app/projects/[id]/settings/page.tsx`, and related tests own the minimal binding decision surface
+
+## MS-027.3 - Real Project Source Binding Status Foundation
+
+**Milestone**
+MS-027.3 - Real Project Source Binding Status Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Surface a clear source and repository binding status for real projects so Product Owner can see whether a project is manifest-only, local-source only, git-repo backed, or unknown.
+
+**Product Outcome**
+The repository now derives a read-only source binding status for real projects and shows why repository context is unavailable when no local Git metadata exists. The status remains diagnostic and does not change source binding behavior.
+
+**Dependencies**
+* closed `MS-027.2 - Real Project Duplicate Detection Foundation`
+
+**Allowed Implementation Scope**
+* docs-only contract publication
+* read-only source binding status derivation
+* UI guidance for missing repository context
+* focused tests for the directly touched path
+
+**Forbidden Scope**
+* automatic clone/import
+* GitHub API integration
+* Beauty Client PRO code changes
+* broad refactors
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized publication snapshot
+* `src/lib/project/project.ts`, `src/app/projects/[id]/page.tsx`, `src/app/projects/[id]/tasks/[taskId]/workspace/page.tsx`, and related tests own the minimal source-status surface
+
+## MS-027.2 - Real Project Duplicate Detection Foundation
+
+**Milestone**
+MS-027.2 - Real Project Duplicate Detection Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Prevent duplicate local project records when the same real project/source is created, pinned, or reopened more than once.
+
+**Product Outcome**
+The repository now canonicalizes the real-project intake identity path so the same source path, manifest identity, or normalized project identity reuses the existing record instead of creating a duplicate local project entry. Beauty Client PRO remains a single canonical project record.
+
+**Allowed Implementation Scope**
+* docs-only contract publication
+* canonical project identity comparison and deduplication
+* keeping existing task data attached to the canonical project id
+* focused tests for the directly touched path
+
+**Forbidden Scope**
+* automatic clone/import
+* GitHub API integration
+* Beauty Client PRO code changes
+* broad refactors
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized publication snapshot
+* `src/lib/project/project.ts`, `src/app/projects/page.tsx`, and related tests own the minimal intake dedupe surface
+
+## MS-026.1c - Polish UI product terms verification
+
+**Milestone**
 MS-026.1c - Polish UI product terms verification
 
 ## MS-026.1c - Polish UI product terms verification

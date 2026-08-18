@@ -5,6 +5,8 @@ import {
   createProject,
   deleteProject,
   getProjectById,
+  getProjectBindingDecisionSummary,
+  getProjectSourceBindingSummary,
   upsertProject,
 } from "./project";
 
@@ -99,6 +101,41 @@ describe("createProject", () => {
     expect(savedProjects[0].projectBrainStatus).toBe("available");
   });
 
+  test("derives a manifest-only source binding when the project has a manifest but no repository URL", () => {
+    expect(
+      getProjectSourceBindingSummary({
+        id: "project-1",
+        name: "Alpha",
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+        projectFilesystemStatus: "manifest-present",
+        createdAt: "2026-08-03T10:00:00.000Z",
+      }),
+    ).toEqual({
+      status: "manifest-only",
+      statusLabel: "tylko manifest",
+      gitLabel: ".git: brak",
+      repositoryContextMessage:
+        "Kontekst repozytorium niedostępny: projekt ma manifest SPS, ale nie ma lokalnego repo Git.",
+    });
+  });
+
+  test("derives a git-repo source binding when repository metadata is present", () => {
+    expect(
+      getProjectSourceBindingSummary({
+        id: "project-1",
+        name: "Alpha",
+        repositoryUrl: "https://github.com/example/project",
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+        createdAt: "2026-08-03T10:00:00.000Z",
+      }),
+    ).toEqual({
+      status: "git-repo",
+      statusLabel: "repozytorium Git",
+      gitLabel: ".git: obecny",
+      repositoryContextMessage: "Kontekst repozytorium: dostępny",
+    });
+  });
+
   test("upserts a project into the stored project list without duplicating the id", () => {
     storage.setItem(
       "soft-premium-system.projects",
@@ -133,7 +170,7 @@ describe("createProject", () => {
         name: "Alpha",
         workingDirectory: "C:\\SPS_OS_WORK\\alpha",
         projectFilesystemStatus: "manifest-present",
-        createdAt: "2026-08-13T10:00:00.000Z",
+        createdAt: "2026-07-24T10:00:00.000Z",
       },
       {
         id: "project-2",
@@ -226,5 +263,48 @@ describe("createProject", () => {
         createdAt: "2026-07-24T11:00:00.000Z",
       },
     ]);
+  });
+
+  test("derives a github-url-known binding decision when only the GitHub URL metadata is known", () => {
+    expect(
+      getProjectBindingDecisionSummary({
+        id: "project-1",
+        name: "Alpha",
+        repositoryUrl: "https://github.com/example/project",
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+        projectFilesystemStatus: "manifest-present",
+        createdAt: "2026-08-03T10:00:00.000Z",
+      }),
+    ).toEqual({
+      status: "github-url-known",
+      statusLabel: "adres GitHub podany",
+      githubUrlLabel: "Adres GitHub: podany",
+      localRepositoryLabel: "Lokalne repo Git: nadal niedostępne",
+      nextStepLabel:
+        "Import/clone wymaga osobnego zatwierdzenia. Możesz też wskazać istniejący lokalny katalog repo.",
+      repositoryContextMessage:
+        "Kontekst repozytorium niedostępny: adres GitHub jest zapisany, ale lokalne repo Git nadal nie jest dostępne.",
+    });
+  });
+
+  test("derives a manifest-only binding decision when no GitHub URL is present", () => {
+    expect(
+      getProjectBindingDecisionSummary({
+        id: "project-1",
+        name: "Alpha",
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+        projectFilesystemStatus: "manifest-present",
+        createdAt: "2026-08-03T10:00:00.000Z",
+      }),
+    ).toEqual({
+      status: "manifest-only",
+      statusLabel: "tylko manifest",
+      githubUrlLabel: "Adres GitHub: nie podano",
+      localRepositoryLabel: "Lokalne repo Git: niedostępne",
+      nextStepLabel:
+        "Następny krok: podaj adres GitHub lub wskaż istniejący katalog repo.",
+      repositoryContextMessage:
+        "Kontekst repozytorium niedostępny: projekt ma manifest SPS, ale nie ma lokalnego repo Git.",
+    });
   });
 });

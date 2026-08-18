@@ -24,10 +24,17 @@ vi.mock("@/lib/project-brain/engine", () => ({
     getProjectWorkspaceEntryMock(projectId),
 }));
 
-vi.mock("@/lib/project/project", () => ({
-  deleteProject: (projectId: string) => deleteProjectMock(projectId),
-  getProjectById: (projectId: string) => getProjectByIdMock(projectId),
-}));
+vi.mock("@/lib/project/project", async () => {
+  const actual = await vi.importActual<typeof import("@/lib/project/project")>(
+    "@/lib/project/project",
+  );
+
+  return {
+    ...actual,
+    deleteProject: (projectId: string) => deleteProjectMock(projectId),
+    getProjectById: (projectId: string) => getProjectByIdMock(projectId),
+  };
+});
 
 vi.mock("@/lib/task/browser-server", () => ({
   getTasksFromServer: (projectId: string) => getTasksFromServerMock(projectId),
@@ -96,7 +103,8 @@ describe("ProjectWorkspacePage filesystem status", () => {
       id: "project-1",
       name: "Alpha Workspace",
       createdAt: "2026-08-03T10:00:00.000Z",
-      projectFilesystemStatus: "manifest obecny",
+      workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+      projectFilesystemStatus: "manifest-present",
     });
     getTasksMock.mockReturnValue([]);
     getTasksFromServerMock.mockResolvedValue([]);
@@ -112,6 +120,19 @@ describe("ProjectWorkspacePage filesystem status", () => {
     render(<ProjectWorkspacePage />);
 
     expect(screen.getByText("Stan systemu plików")).toBeTruthy();
-    expect(screen.getByText("nieznany")).toBeTruthy();
+    expect(screen.getByText("Tryb źródła")).toBeTruthy();
+    expect(screen.getByText("tylko manifest")).toBeTruthy();
+    expect(screen.getByText("Adres GitHub: nie podano")).toBeTruthy();
+    expect(screen.getByText("Lokalne repo Git: niedostępne")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Następny krok: podaj adres GitHub lub wskaż istniejący katalog repo.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Kontekst repozytorium niedostępny: projekt ma manifest SPS, ale nie ma lokalnego repo Git.",
+      ),
+    ).toBeTruthy();
   });
 });

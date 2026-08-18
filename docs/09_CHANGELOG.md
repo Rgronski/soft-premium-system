@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 084 - MS-027 controlled real-project intake publication batch
+
+### Date
+
+2026-08-18
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-027.2 - Real Project Duplicate Detection Foundation`, `MS-027.3 - Real Project Source Binding Status Foundation`, and `MS-027.4 - GitHub Repository Import / Bind Decision Foundation` as completed / verified / published / closed.
+* Recorded that real-project intake now reuses the canonical project record for duplicate source identities, shows clear source-binding status when Git context is unavailable, and exposes a controlled manifest-only binding decision path without automatic clone/import.
+* Recorded that the Home hydration regression hotfix moved project loading behind mount so the first server and client render agree, while the recent project list still appears after hydration.
+* Appended the Session 084 usage records for the MS-027.2, MS-027.3, MS-027.4, and Home hydration hotfix tasks.
+
+### Notes
+
+* Beauty Client PRO remains an external project and no Beauty Client PRO code changed.
+* Clone/import, GitHub API integration, and push remain future work or separately approved work.
+
 ## Session 083 - MS-026.0 control files sync
 
 ### Date
