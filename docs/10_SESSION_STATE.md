@@ -239,5 +239,5 @@ Latest Verified Commit: 1bf7189
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Run the repository-defined session package generator from docs/16_SESSION_PACKAGE_GENERATOR.md.
+Next Safe Step: Run the repository-defined session package generator from docs/16_SESSION_PACKAGE_GENERATOR.md after the close commit and push.
 Next Session Plan: Open Session 085 with the fresh session package and await Product Owner decision for the next milestone.
