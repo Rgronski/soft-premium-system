@@ -363,7 +363,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-026.1c - Polish UI product terms verification
+Latest Completed Product Milestone: MS-027.5 - Project Scoped Data Rebinding Guard Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Session 083 synchronized the accepted `MS-026.1 / MS-026.1b / MS-026.1c` control files in the current local workspace. The repository now confirms the accepted MS-026.1-series Polish UI overlay cleanup for the live-test shell, workspace, AI workspace, and workflow paths. The remaining visible product terms render in Polish for the user-facing labels verified in this session, while the program backbone, identifiers, routes, engine states, contracts, and internal logic remain English. `src/lib/app-version.ts` still exposes `1.026.0` as the Product Owner-approved live-test branch/build marker. No routing, data-flow, API, storage, Project Brain logic, Workflow Engine logic, Konduktor logic, automation, or scheduling changed.
 
