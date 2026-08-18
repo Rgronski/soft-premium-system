@@ -213,21 +213,20 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-08-17
 Date: 2026-08-18
 Current Session ID: 083
-Current Chat Title: 083 SPS OS - MS-025.0 Control Files Sync
+Current Chat Title: 083 SPS OS - MS-025.1 Control Files Sync
 Session Sync Protocol: PASS
 Session runtime: ACTIVE
 Audit Session 083: PASS
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
 Active Capability: SSOT/control files sync
-Active Work Item: MS-025.0 control files sync
+Active Work Item: MS-025.1 control files sync
 Current Mode: ACTIVE
-Completed Capability Items: Session 083 synchronized the accepted MS-025.0 control files; Session 083 appended the Session 083 usage entry
+Completed Capability Items: Session 083 synchronized the accepted MS-025.1 control files; Session 083 appended the Session 083 usage entry
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-025.0 - Konduktor Next Milestone Selection Guidance Foundation
+Latest Completed Product Milestone: MS-025.1 - Konduktor Next Milestone Reason Specificity Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
 Latest Completed Capability Item: Session 083 appended the Session 083 usage entry

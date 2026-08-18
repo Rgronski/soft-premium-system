@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 083 - MS-025.1 control files sync
+
+### Date
+
+2026-08-18
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-025.1 - Konduktor Next Milestone Reason Specificity Foundation` as completed / verified / published and keeps `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Recorded that the existing Konduktor `start-next-work` / `requires-product-owner-decision` reason copy now explains more specifically why Konduktor points Product Owner toward choosing the next platform priority after the published MS-025.0 guidance milestone.
+* Appended the Session 083 usage record.
+
+### Notes
+
+* No runtime data source, workflow rule, Project Brain logic, UI panel, API, storage, automation, scheduling, or app version source changed.
+
 ## Session 083 - MS-025.0 control files sync
 
 ### Date

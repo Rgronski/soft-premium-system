@@ -116,16 +116,79 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-024.2` - Konduktor Recommendation Caution Signal Foundation
 * `MS-024.3` - Konduktor Recommendation Card Hierarchy Foundation
 * `MS-025.0` - Konduktor Next Milestone Selection Guidance Foundation
+* `MS-025.1` - Konduktor Next Milestone Reason Specificity Foundation
 
 ## Current
 
 NONE / Product Owner decision required
 
-Session 083 synchronized the accepted `MS-025.0` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 083 synchronized the accepted `MS-025.1` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-025.0 - Konduktor Next Milestone Selection Guidance Foundation
+MS-025.1 - Konduktor Next Milestone Reason Specificity Foundation
+
+## MS-025.1 - Konduktor Next Milestone Reason Specificity Foundation
+
+**Milestone**
+MS-025.1 - Konduktor Next Milestone Reason Specificity Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Let Konduktor explain more specifically why the published MS-025.0 guidance now points Product Owner toward choosing the next platform priority, while still requiring Product Owner decision and staying read-only.
+
+**Product Outcome**
+The repository now refines the existing Konduktor `start-next-work` / `requires-product-owner-decision` reason copy so it explains more specifically why Konduktor points Product Owner toward choosing the next platform priority after the published MS-025.0 guidance milestone, while remaining read-only, non-executable, and still requiring Product Owner decision. No runtime data source, workflow rule, Project Brain logic, UI panel, API, storage, automation, scheduling, or app version source changed.
+
+**Version Decision**
+No app version bump is required. The repository rule recorded in SSOT says accepted app/platform `.0` milestones bump the controlled app version source to `0.XXX.0`, and `MS-025.1` is a read-only guidance publication rather than an app/platform version milestone. The canonical app version therefore remains `0.021.6`.
+
+**Dependencies**
+* closed `MS-025.0 - Konduktor Next Milestone Selection Guidance Foundation`
+
+**Allowed Implementation Scope**
+* docs-only publication of the existing read-only Konduktor guidance seam
+* SSOT synchronization for milestone publication
+* confirmation of the existing `workflowNextStep` read path
+* reason-specific copy refinement derived from existing `start-next-work` / `requires-product-owner-decision` data
+
+**Forbidden Scope**
+* Project Brain engine changes
+* Workflow Engine rule changes
+* storage, API, provider, automation, scheduling, or execution changes
+* app version source changes
+* broad refactors or unrelated cleanup
+
+**Ownership Boundaries**
+* `src/components/conductor/ConductorPanel.tsx` owns the read-only guidance presentation
+* `src/lib/conductor/conductor.ts` owns the small pure mapping helper
+* `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized publication snapshot
 
 ## MS-025.0 - Konduktor Next Milestone Selection Guidance Foundation
 

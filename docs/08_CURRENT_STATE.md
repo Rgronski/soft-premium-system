@@ -45,12 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-025.0 - Konduktor Next Milestone Selection Guidance Foundation
+MS-025.1 - Konduktor Next Milestone Reason Specificity Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-025.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Konduktor Next Milestone Selection Guidance Foundation. The repository now improves the existing Konduktor `start-next-work` / `requires-product-owner-decision` guidance copy so it gives a calm next-direction signal, `kolejny priorytet platformy`, while staying read-only, non-executable, and still requiring Product Owner decision. No runtime data source, workflow rule, Project Brain logic, UI panel, API, storage, automation, scheduling, or app version source changed. The canonical app version remains `0.021.6`. Session 083 synchronized the accepted `MS-025.0` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
+MS-025.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Konduktor Next Milestone Reason Specificity Foundation. The repository now refines the existing Konduktor `start-next-work` / `requires-product-owner-decision` reason copy so it explains more specifically why Konduktor points Product Owner toward choosing the next platform priority after the published MS-025.0 guidance milestone, while staying read-only, non-executable, and still requiring Product Owner decision. No runtime data source, workflow rule, Project Brain logic, UI panel, API, storage, automation, scheduling, or app version source changed. The canonical app version remains `0.021.6`. Session 083 synchronized the accepted `MS-025.1` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 MS-024.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Konduktor Recommendation Card Hierarchy Foundation. The repository now presents the existing Konduktor recommendation card with a clearer reading hierarchy for recommendation, action readiness, reason, and source/trust copy while keeping readiness, reason, caution signal, source transparency, and trust-copy semantics unchanged. The canonical app version remains `0.021.6` because this publication records a Konduktor guidance presentation refinement and does not change the controlled app version source. Session 082 synchronized the accepted `MS-024.3` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
@@ -359,9 +359,9 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-025.0 - Konduktor Next Milestone Selection Guidance Foundation
+Latest Completed Product Milestone: MS-025.1 - Konduktor Next Milestone Reason Specificity Foundation
 Next Product Milestone: NONE / Product Owner decision required
-Session 083 synchronized the accepted `MS-025.0` control files in the current local workspace. The repository now improves the existing Konduktor `start-next-work` / `requires-product-owner-decision` guidance copy so it gives a calm next-direction signal, `kolejny priorytet platformy`, while staying read-only, non-executable, and still requiring Product Owner decision. No runtime data source, workflow rule, Project Brain logic, UI panel, API, storage, automation, scheduling, or app version source changed. The canonical app version remains `0.021.6`.
+Session 083 synchronized the accepted `MS-025.1` control files in the current local workspace. The repository now refines the existing Konduktor `start-next-work` / `requires-product-owner-decision` reason copy so it explains more specifically why Konduktor points Product Owner toward choosing the next platform priority after the published MS-025.0 guidance milestone, while staying read-only, non-executable, and still requiring Product Owner decision. No runtime data source, workflow rule, Project Brain logic, UI panel, API, storage, automation, scheduling, or app version source changed. The canonical app version remains `0.021.6`.
 
 MS-021.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Reset Foundation; the repository now exposes a local `Cofnij decyzję` action for resolved source-conflict decisions so the browser-state resolved flag can be cleared for that `project.id`. Reset does not mutate the local project, and if the discovered project still differs after reset, the conflict can appear again as unresolved. The MS-021.16 persistence behavior and MS-021.15 feedback remain preserved, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
