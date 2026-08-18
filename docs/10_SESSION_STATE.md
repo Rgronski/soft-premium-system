@@ -254,7 +254,7 @@ Active Work Item: Session 081 close
 Current Mode: CLOSED
 Completed Capability Items: Session 081 audited the close state; Session 081 synchronized the close control files; Session 081 prepared the Session 081 handoff; Session 081 appended the Session 081 close usage entry
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-023.3 - Konduktor Recommendation User Trust Copy Foundation
+Latest Completed Product Milestone: MS-024.3 - Konduktor Recommendation Card Hierarchy Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
 Latest Completed Capability Item: Session 081 appended the Session 081 close usage entry

@@ -357,9 +357,9 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-024.0 - Konduktor Recommendation Action Readiness Foundation
+Latest Completed Product Milestone: MS-024.3 - Konduktor Recommendation Card Hierarchy Foundation
 Next Product Milestone: NONE / Product Owner decision required
-Session 082 synchronized the accepted `MS-024.0` control files in the current local workspace. The repository now presents a read-only action-readiness view derived from existing `workflowNextStep.id` values, keeps the recommendation non-executable, and keeps `NONE / Product Owner decision required` for the next milestone. The canonical app version remains `0.021.6`.
+Session 082 synchronized the accepted `MS-024.3` control files in the current local workspace. The repository now presents the existing Konduktor recommendation card with a clearer reading hierarchy for recommendation, action readiness, reason, and source/trust copy while keeping readiness, reason, caution signal, source transparency, and trust-copy semantics unchanged. The canonical app version remains `0.021.6`.
 
 MS-021.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Reset Foundation; the repository now exposes a local `Cofnij decyzję` action for resolved source-conflict decisions so the browser-state resolved flag can be cleared for that `project.id`. Reset does not mutate the local project, and if the discovered project still differs after reset, the conflict can appear again as unresolved. The MS-021.16 persistence behavior and MS-021.15 feedback remain preserved, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
