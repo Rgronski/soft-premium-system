@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 083 - MS-025.2 control files sync
+
+### Date
+
+2026-08-18
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-025.2 - Konduktor Product Owner Decision Prompt Clarity Foundation` as completed / verified / published and keeps `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Recorded that the existing Konduktor `start-next-work` / `requires-product-owner-decision` prompt copy now explicitly asks Product Owner to choose the next priority or milestone direction after the published MS-025.1 guidance milestone.
+* Appended the Session 083 usage record.
+
+### Notes
+
+* No runtime data source, workflow rule, Project Brain logic, UI panel, API, storage, automation, scheduling, or app version source changed.
+
 ## Session 083 - MS-025.1 control files sync
 
 ### Date

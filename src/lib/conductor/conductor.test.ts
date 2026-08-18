@@ -123,11 +123,11 @@ describe("deriveConductorProjectBrainGuidance", () => {
         description: "Start the next safe workflow item.",
       }),
     ).toEqual({
-      headline: "Konduktor podpowiada kierunek: kolejny priorytet platformy",
+      headline: "Konduktor potrzebuje decyzji Product Ownera",
       description:
-        "Spokojna rekomendacja: wybierz nastÄ™pny milestone z listy priorytetĂłw platformy. Konduktor pozostaje read-only i wymaga osobnej decyzji Product Ownera.",
+        "Wybierz następną priorytetową ścieżkę albo kierunek kolejnego milestone’a. Konduktor nie zatwierdza tej decyzji i pozostaje read-only.",
       reason:
-        "MS-025.0 is already published, so Konduktor now points to the next platform priority choice instead of repeating the generic start-next-work placeholder; Product Owner decision is still required.",
+        "MS-025.0 already published the calm next-direction guidance, so Product Owner now needs to choose the next priority or milestone direction instead of treating the placeholder as executable work.",
       hasRecommendation: false,
       actionReadiness: "requires-product-owner-decision",
     });
@@ -144,7 +144,7 @@ describe("deriveConductorProjectBrainGuidance", () => {
     ).toEqual({
       headline: "Brak silniejszej rekomendacji",
       description:
-        "Konduktor pozostaje przy istniejÄ…cym read-only sygnale Project Brain i nie dodaje wĹ‚asnej decyzji.",
+        "Konduktor pozostaje przy istniejącym read-only sygnale Project Brain i nie dodaje własnej decyzji.",
       reason:
         "The current Project Brain signal is informational only, so Konduktor stays read-only and non-executable.",
       hasRecommendation: false,
