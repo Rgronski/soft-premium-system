@@ -24,7 +24,7 @@ export default function Home() {
 
   async function handleDeleteProject(project: Project) {
     const confirmed = window.confirm(
-      `Delete "${project.name}"? This cannot be undone.`,
+      `Usunąć "${project.name}"? Tego nie można cofnąć.`,
     );
 
     if (!confirmed) {
@@ -40,7 +40,7 @@ export default function Home() {
         ),
       );
     } catch {
-      window.alert("Project deletion failed.");
+      window.alert("Nie udało się usunąć projektu.");
     }
   }
 
@@ -56,7 +56,9 @@ export default function Home() {
             <h1 className="text-4xl font-semibold tracking-tight">
               Witaj ponownie, Radek
             </h1>
-            <p className="text-sm text-zinc-400">Workspace v{APP_VERSION}</p>
+            <p className="text-sm text-zinc-400">
+              Przestrzeń robocza v{APP_VERSION}
+            </p>
           </div>
         </section>
 

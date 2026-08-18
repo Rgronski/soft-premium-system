@@ -45,12 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-025.3 - Konduktor Decision Boundary Trust Copy Foundation
+MS-026.0 - Polish UI Language Consistency Live Readiness Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-025.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Konduktor Decision Boundary Trust Copy Foundation. The repository now refines the existing Konduktor `start-next-work` / `requires-product-owner-decision` copy so the decision boundary is explicit: Konduktor advises the next direction, but Product Owner approves the milestone and decides when work starts. Konduktor still does not approve a next milestone, start work, or execute any action. No runtime data source, workflow rule, Project Brain logic, UI panel, API, storage, automation, scheduling, or app version source changed. The canonical app version remains `0.021.6`. Session 083 synchronized the accepted `MS-025.3` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
+MS-026.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Polish UI Language Consistency Live Readiness Foundation. The repository now improves Polish UI language consistency for the live-test shell by fixing visible home, workspace, sidebar, and navigation labels and cleaning obvious mojibake/encoding artifacts in the edited visible UI shell files. `src/lib/app-version.ts` now exposes `1.026.0` as the Product Owner-approved live-test branch/build marker. No routing, data-flow, API, storage, Project Brain logic, Workflow Engine logic, Konduktor logic, automation, or scheduling changed. Session 083 synchronized the accepted `MS-026.0` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 MS-024.3 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Konduktor Recommendation Card Hierarchy Foundation. The repository now presents the existing Konduktor recommendation card with a clearer reading hierarchy for recommendation, action readiness, reason, and source/trust copy while keeping readiness, reason, caution signal, source transparency, and trust-copy semantics unchanged. The canonical app version remains `0.021.6` because this publication records a Konduktor guidance presentation refinement and does not change the controlled app version source. Session 082 synchronized the accepted `MS-024.3` control files in the current local workspace, and the repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 

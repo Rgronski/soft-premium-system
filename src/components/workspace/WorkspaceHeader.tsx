@@ -151,8 +151,8 @@ export function WorkspaceHeader({
                 Brak dodatkowego kontekstu Project Brain
               </p>
               <p className="text-sm leading-6 text-zinc-300">
-                Project Brain nie ma jeszcze wyraĹşniejszej wskazĂłwki. PrzejdĹş
-                do zadaĹ„, aby zaczÄ…Ä‡ od pierwszego kroku.
+                Project Brain nie ma jeszcze wyraźniejszej wskazówki. Przejdź
+                do zadań, aby zacząć od pierwszego kroku.
               </p>
             </>
           ) : (

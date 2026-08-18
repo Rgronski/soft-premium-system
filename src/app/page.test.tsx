@@ -103,7 +103,7 @@ describe("Home", () => {
     expect(
       screen.getByText("Utwórz pierwszy projekt, aby rozpocząć główny przepływ."),
     ).toBeTruthy();
-    expect(screen.getByText(`Workspace v${APP_VERSION}`)).toBeTruthy();
+    expect(screen.getByText(`Przestrzeń robocza v${APP_VERSION}`)).toBeTruthy();
     expect(
       screen.getByRole("link", { name: "Utwórz projekt" }).getAttribute("href"),
     ).toBe("/projects");

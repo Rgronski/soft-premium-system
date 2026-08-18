@@ -119,16 +119,78 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-025.1` - Konduktor Next Milestone Reason Specificity Foundation
 * `MS-025.2` - Konduktor Product Owner Decision Prompt Clarity Foundation
 * `MS-025.3` - Konduktor Decision Boundary Trust Copy Foundation
+* `MS-026.0` - Polish UI Language Consistency Live Readiness Foundation
 
 ## Current
 
 NONE / Product Owner decision required
 
-Session 083 synchronized the accepted `MS-025.3` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 083 synchronized the accepted `MS-026.0` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-025.3 - Konduktor Decision Boundary Trust Copy Foundation
+MS-026.0 - Polish UI Language Consistency Live Readiness Foundation
+
+## MS-026.0 - Polish UI Language Consistency Live Readiness Foundation
+
+**Milestone**
+MS-026.0 - Polish UI Language Consistency Live Readiness Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Improve Polish UI language consistency for the live-test shell, especially home, workspace, sidebar, and navigation labels, and clean obvious mojibake artifacts in the edited visible UI shell files while keeping the app structure and live readiness intact.
+
+**Product Outcome**
+The repository now improves Polish UI language consistency for the live-test shell by fixing visible home, workspace, sidebar, and navigation labels and cleaning obvious mojibake/encoding artifacts in the edited UI shell files. `src/lib/app-version.ts` now exposes `1.026.0` as the Product Owner-approved live-test branch/build marker. No routing, data-flow, API, storage, Project Brain logic, Workflow Engine logic, Konduktor logic, automation, or scheduling changed.
+
+**Version Decision**
+The app version decision for this Product Owner-approved live-readiness `.0` milestone is intentional: the canonical app version now exposes `1.026.0` as the visible live-test branch/build marker.
+
+**Dependencies**
+* closed `MS-025.3 - Konduktor Decision Boundary Trust Copy Foundation`
+
+**Allowed Implementation Scope**
+* docs-only publication of the existing live-readiness UI language and version-marker seam
+* SSOT synchronization for milestone publication
+* confirmation of the existing visible shell copy and version-marker read path
+* Polish UI and mojibake cleanup derived from existing visible UI strings
+
+**Forbidden Scope**
+* Project Brain engine changes
+* Workflow Engine rule changes
+* storage, API, provider, automation, scheduling, or execution changes
+* broad refactors or unrelated cleanup
+
+**Ownership Boundaries**
+* `src/app/page.tsx`, `src/app/workspace/page.tsx`, `src/app/projects/[id]/layout.tsx`, and `src/components/workspace/WorkspaceHeader.tsx` own the visible UI shell copy
+* `src/lib/app-version.ts` owns the visible app version/build marker
+* `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized publication snapshot
 
 ## MS-025.3 - Konduktor Decision Boundary Trust Copy Foundation
 

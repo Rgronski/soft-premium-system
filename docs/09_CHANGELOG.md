@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 083 - MS-026.0 control files sync
+
+### Date
+
+2026-08-18
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-026.0 - Polish UI Language Consistency Live Readiness Foundation` as completed / verified / published and keeps `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Recorded that MS-026.0 improved the Polish UI language consistency of the live-test shell, especially home, workspace, sidebar, and navigation labels, and cleaned obvious mojibake/encoding artifacts in the edited visible UI shell files.
+* Recorded that `src/lib/app-version.ts` now exposes `1.026.0` as the Product Owner-approved live-test branch/build marker.
+* Appended the Session 083 usage record.
+
+### Notes
+
+* No routing, data-flow, API, storage, Project Brain, Workflow Engine, Konduktor logic, automation, or scheduling changed.
+
 ## Session 083 - MS-025.3 control files sync
 
 ### Date

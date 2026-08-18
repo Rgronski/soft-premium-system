@@ -16,13 +16,13 @@ export default async function ProjectLayout({
         <header className="flex flex-col gap-4 rounded-2xl border border-zinc-800 bg-zinc-900 p-6 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-3">
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-              Project Workspace
+              Przestrzeń robocza projektu
             </p>
 
-            <h1 className="text-4xl font-semibold">Workspace</h1>
+            <h1 className="text-4xl font-semibold">Przestrzeń robocza</h1>
 
             <p className="text-zinc-400">
-              Navigate between project sections.
+              Przejdź między sekcjami projektu.
             </p>
           </div>
 
@@ -31,7 +31,7 @@ export default async function ProjectLayout({
               href="/"
               className="rounded-full border border-zinc-700 px-5 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
             >
-              Back to Home
+              Powrót do strony głównej
             </Link>
           </div>
         </header>
@@ -40,70 +40,70 @@ export default async function ProjectLayout({
           <aside className="rounded-2xl border border-zinc-800 bg-zinc-900 p-4">
             <nav className="space-y-2">
               <p className="px-3 pb-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
-                Workspace
+                Sekcje
               </p>
 
               <Link
                 href={`/projects/${id}`}
                 className="block rounded-xl px-3 py-2 text-sm text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
               >
-                Overview
+                Przegląd
               </Link>
 
               <Link
                 href={`/projects/${id}/ai`}
                 className="block rounded-xl px-3 py-2 text-sm text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
               >
-                AI Workspace
+                Przestrzeń AI
               </Link>
 
               <Link
                 href={`/projects/${id}/tasks`}
                 className="block rounded-xl px-3 py-2 text-sm text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
               >
-                Tasks
+                Zadania
               </Link>
 
               <Link
                 href={`/projects/${id}/clients`}
                 className="block rounded-xl px-3 py-2 text-sm text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
               >
-                Clients
+                Klienci
               </Link>
 
               <Link
                 href={`/projects/${id}/calendar`}
                 className="block rounded-xl px-3 py-2 text-sm text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
               >
-                Calendar
+                Kalendarz
               </Link>
 
               <Link
                 href={`/projects/${id}/services`}
                 className="block rounded-xl px-3 py-2 text-sm text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
               >
-                Services
+                Usługi
               </Link>
 
               <Link
                 href={`/projects/${id}/visits`}
                 className="block rounded-xl px-3 py-2 text-sm text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
               >
-                Visits
+                Wizyty
               </Link>
 
               <Link
                 href={`/projects/${id}/invoices`}
                 className="block rounded-xl px-3 py-2 text-sm text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
               >
-                Invoices
+                Faktury
               </Link>
 
               <Link
                 href={`/projects/${id}/settings`}
                 className="block rounded-xl px-3 py-2 text-sm text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
               >
-                Settings
+                Ustawienia
               </Link>
             </nav>
           </aside>
