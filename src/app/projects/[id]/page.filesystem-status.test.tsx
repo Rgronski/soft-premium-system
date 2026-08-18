@@ -70,7 +70,7 @@ describe("ProjectWorkspacePage filesystem status", () => {
             confidence: 0.5,
             nextStep: {
               id: "continue-active-work",
-              label: "Continue active work",
+              label: "Kontynuuj aktywną pracę",
               description:
                 "Continue the active workflow item before starting new work.",
             },
@@ -96,7 +96,7 @@ describe("ProjectWorkspacePage filesystem status", () => {
       id: "project-1",
       name: "Alpha Workspace",
       createdAt: "2026-08-03T10:00:00.000Z",
-      projectFilesystemStatus: "manifest-present",
+      projectFilesystemStatus: "manifest obecny",
     });
     getTasksMock.mockReturnValue([]);
     getTasksFromServerMock.mockResolvedValue([]);
@@ -111,7 +111,7 @@ describe("ProjectWorkspacePage filesystem status", () => {
   test("shows the filesystem manifest status on the project surface", () => {
     render(<ProjectWorkspacePage />);
 
-    expect(screen.getByText("Filesystem status")).toBeTruthy();
-    expect(screen.getByText("manifest-present")).toBeTruthy();
+    expect(screen.getByText("Stan systemu plików")).toBeTruthy();
+    expect(screen.getByText("nieznany")).toBeTruthy();
   });
 });

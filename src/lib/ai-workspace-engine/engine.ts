@@ -55,33 +55,33 @@ export type StarterPromptUiState = {
 export const STARTER_PROMPTS: StarterPromptUiState[] = [
   {
     id: "summarize-project-state",
-    label: "Summarize Project State",
+    label: "Podsumuj stan projektu",
     instruction:
-      "Produce a concise summary of the current project state based only on the provided canonical project context.",
+      "Przygotuj zwięzłe podsumowanie bieżącego stanu projektu wyłącznie na podstawie dostarczonego kanonicznego kontekstu projektu.",
   },
   {
     id: "identify-project-risks",
-    label: "Identify Project Risks",
+    label: "Zidentyfikuj ryzyka projektu",
     instruction:
-      "Identify the most important current project risks based only on the provided canonical project context.",
+      "Zidentyfikuj najważniejsze bieżące ryzyka projektu wyłącznie na podstawie dostarczonego kanonicznego kontekstu projektu.",
   },
   {
     id: "review-backlog",
-    label: "Review Backlog",
+    label: "Przejrzyj backlog",
     instruction:
-      "Review the current backlog and identify the most relevant unresolved work based only on the provided canonical project context.",
+      "Przejrzyj bieżący backlog i wskaż najbardziej istotną nierozwiązaną pracę wyłącznie na podstawie dostarczonego kanonicznego kontekstu projektu.",
   },
   {
     id: "recommend-next-safe-step",
-    label: "Recommend Next Safe Step",
+    label: "Zaproponuj następny bezpieczny krok",
     instruction:
-      "Recommend exactly one smallest safe next step based only on the provided canonical project context.",
+      "Zaproponuj dokładnie jeden najmniejszy bezpieczny następny krok wyłącznie na podstawie dostarczonego kanonicznego kontekstu projektu.",
   },
   {
     id: "review-decisions",
-    label: "Review Decisions",
+    label: "Przejrzyj decyzje",
     instruction:
-      "Summarize the most relevant existing project decisions and identify any visible unresolved decision gap based only on the provided canonical project context.",
+      "Podsumuj najistotniejsze istniejące decyzje projektu i wskaż każdą widoczną nierozwiązaną lukę decyzyjną wyłącznie na podstawie dostarczonego kanonicznego kontekstu projektu.",
   },
 ];
 
@@ -103,17 +103,17 @@ export type SaveUiState = {
 };
 
 export type SaveActionPresentation = {
-  label: "Save to Knowledge" | "Saving..." | "Saved";
+  label: "Zapisz do wiedzy" | "Zapisywanie..." | "Zapisano";
   disabled: boolean;
 };
 
 export type GenerateActionPresentation = {
-  label: "Generate" | "Generating...";
+  label: "Generuj" | "Generowanie...";
   disabled: boolean;
 };
 
 export type ResetActionPresentation = {
-  label: "Reset Conversation";
+  label: "Zresetuj rozmowę";
   disabled: boolean;
   visible: boolean;
 };
@@ -275,10 +275,14 @@ export function getConversationContextStatusMessage(
   const count = getConversationContextExchangeCount(exchanges);
 
   if (count === 0) {
-    return "Next Generate will use no local conversation context.";
+    return "Następna generacja nie użyje lokalnego kontekstu rozmowy.";
   }
 
-  return `Next Generate will use the last ${count} local exchange${count === 1 ? "" : "s"}.`;
+  if (count === 1) {
+    return "Następna generacja użyje ostatniej lokalnej wymiany.";
+  }
+
+  return `Następna generacja użyje ostatnich ${count} lokalnych wymian.`;
 }
 
 export function buildGenerationInstruction(
@@ -408,7 +412,7 @@ export function deriveGenerateActionPresentation(
   }
 
   return {
-    label: "Generate",
+    label: "Generuj",
     disabled: false,
   };
 }
@@ -418,7 +422,7 @@ export function deriveResetActionPresentation(
   exchanges: ConversationExchange[],
 ): ResetActionPresentation {
   return {
-    label: "Reset Conversation",
+    label: "Zresetuj rozmowę",
     disabled: generationState === "generating",
     visible: exchanges.length > 0,
   };
@@ -588,7 +592,7 @@ export function deriveSaveActionPresentation(
   }
 
   return {
-    label: "Save to Knowledge",
+    label: "Zapisz do wiedzy",
     disabled: false,
   };
 }

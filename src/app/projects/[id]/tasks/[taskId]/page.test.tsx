@@ -81,13 +81,13 @@ describe("ProjectTaskDetailPage", () => {
 
     expect(getTasksFromServerMock).toHaveBeenCalledTimes(1);
     expect(getTasksFromServerMock).toHaveBeenCalledWith("project-1");
-    expect(screen.getByText("Journey Checkpoint")).toBeTruthy();
-    expect(screen.getByText("You are at Task Detail. Next open the task workspace, then follow the result sequence in order.")).toBeTruthy();
-    expect(screen.getByText("Task Detail", { selector: "p" })).toBeTruthy();
-    expect(screen.getByRole("heading", { name: "Current task review" })).toBeTruthy();
-    expect(screen.getByText("Start task workspace")).toBeTruthy();
+    expect(screen.getByText("Punkt kontrolny ścieżki")).toBeTruthy();
+    expect(screen.getByText("Jesteś w szczegółach zadania. Następnie otwórz przestrzeń zadania i wykonuj sekwencję wyniku po kolei.")).toBeTruthy();
+    expect(screen.getByText("Szczegóły zadania", { selector: "p" })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Bieżący przegląd zadania" })).toBeTruthy();
+    expect(screen.getByText("Uruchom przestrzeń zadania")).toBeTruthy();
     expect(
-      screen.getByRole("link", { name: "Start task workspace" }).getAttribute("href"),
+      screen.getByRole("link", { name: "Uruchom przestrzeń zadania" }).getAttribute("href"),
     ).toBe("/projects/project-1/tasks/task-1/workspace");
     expect(screen.getByText("task-1")).toBeTruthy();
     expect(screen.getByText("project-1")).toBeTruthy();
@@ -100,7 +100,7 @@ describe("ProjectTaskDetailPage", () => {
     render(<ProjectTaskDetailPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("Task not found")).toBeTruthy();
+      expect(screen.getByText("Nie znaleziono zadania")).toBeTruthy();
     });
   });
 
@@ -125,12 +125,12 @@ describe("ProjectTaskDetailPage", () => {
     await waitFor(() => {
       expect(
         screen.getByText(
-          "Project Brain context is unavailable, so showing locally saved task details for this project.",
+        "Kontekst Project Brain jest niedostępny, więc pokazuję lokalnie zapisane szczegóły zadania dla tego projektu.",
         ),
       ).toBeTruthy();
     });
 
     expect(screen.getByText("Recovered task")).toBeTruthy();
-    expect(screen.queryByText("Task not found")).toBeNull();
+    expect(screen.queryByText("Nie znaleziono zadania")).toBeNull();
   });
 });

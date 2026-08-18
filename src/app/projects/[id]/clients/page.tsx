@@ -31,9 +31,9 @@ export default function ProjectClientsPage() {
       <div className="space-y-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-2">
-            <h2 className="text-2xl font-semibold text-zinc-50">Clients</h2>
+            <h2 className="text-2xl font-semibold text-zinc-50">Klienci</h2>
             <p className="text-zinc-400">
-              {isLoaded && clients.length === 0 ? "No clients yet." : null}
+              {isLoaded && clients.length === 0 ? "Brak klientów jeszcze." : null}
             </p>
           </div>
 
@@ -41,7 +41,7 @@ export default function ProjectClientsPage() {
             href={`/projects/${params.id}/clients/new`}
             className="rounded-full border border-zinc-700 px-5 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
           >
-            Add Client
+            Dodaj klienta
           </Link>
         </div>
 

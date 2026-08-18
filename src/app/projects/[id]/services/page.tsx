@@ -31,9 +31,9 @@ export default function ProjectServicesPage() {
       <div className="space-y-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-2">
-            <h2 className="text-2xl font-semibold text-zinc-50">Services</h2>
+            <h2 className="text-2xl font-semibold text-zinc-50">Usługi</h2>
             <p className="text-zinc-400">
-              {isLoaded && services.length === 0 ? "No services yet." : null}
+              {isLoaded && services.length === 0 ? "Brak usług jeszcze." : null}
             </p>
           </div>
 
@@ -41,7 +41,7 @@ export default function ProjectServicesPage() {
             href={`/projects/${params.id}/services/new`}
             className="rounded-full border border-zinc-700 px-5 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
           >
-            Add Service
+            Dodaj usługę
           </Link>
         </div>
 

@@ -4,8 +4,8 @@ export default function ProjectSettingsPage() {
   return (
     <SectionCard>
       <div className="space-y-2">
-        <h2 className="text-2xl font-semibold text-zinc-50">Settings</h2>
-        <p className="text-zinc-400">Coming soon</p>
+        <h2 className="text-2xl font-semibold text-zinc-50">Ustawienia</h2>
+        <p className="text-zinc-400">Wkrótce</p>
       </div>
     </SectionCard>
   );

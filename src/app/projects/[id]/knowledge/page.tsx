@@ -27,7 +27,7 @@ function createLocalRecoveryKnowledgeSnapshot(projectId: string) {
     return {
       knowledgeEntries,
       recoveryMessage:
-        "Project Brain context is unavailable, so showing locally saved knowledge entries for this project.",
+        "Kontekst Project Brain jest niedostępny, więc pokazuję lokalnie zapisane wpisy wiedzy dla tego projektu.",
     };
   } catch {
     return null;
@@ -80,11 +80,11 @@ export default function ProjectKnowledgePage() {
       <div className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-            Project Knowledge
+            Wiedza projektu
           </p>
-          <h2 className="text-2xl font-semibold text-zinc-50">Knowledge</h2>
+          <h2 className="text-2xl font-semibold text-zinc-50">Wiedza</h2>
           <p className="text-sm text-zinc-400">
-            Read-only knowledge entries for the current project workspace.
+            Wpisy wiedzy tylko do odczytu dla bieżącej przestrzeni projektu.
           </p>
         </div>
 
@@ -98,7 +98,7 @@ export default function ProjectKnowledgePage() {
           <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
             {dashboard.knowledgeEntries?.length === 0 ? (
               <p className="text-sm text-zinc-400">
-                No knowledge entries available.
+                Brak dostępnych wpisów wiedzy.
               </p>
             ) : (
               <div className="space-y-3">
@@ -116,10 +116,10 @@ export default function ProjectKnowledgePage() {
             )}
           </div>
         ) : (
-          <p className="text-sm text-zinc-400">
-            {dashboard.errorCode === "project-not-found"
-              ? "Project not found"
-              : "Project knowledge unavailable"}
+            <p className="text-sm text-zinc-400">
+              {dashboard.errorCode === "project-not-found"
+              ? "Projekt nie został znaleziony"
+              : "Wiedza projektu niedostępna"}
           </p>
         )}
       </div>

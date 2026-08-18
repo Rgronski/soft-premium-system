@@ -264,7 +264,7 @@ export default function ProjectAiWorkspacePage() {
       <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-            AI Workspace
+            Przestrzeń AI
           </p>
           <h2 className="text-2xl font-semibold text-zinc-50">
             Ładowanie kontekstu AI projektu...
@@ -279,7 +279,7 @@ export default function ProjectAiWorkspacePage() {
       <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-            AI Workspace
+            Przestrzeń AI
           </p>
           <h2 className="text-2xl font-semibold text-zinc-50">
             Projekt nie został znaleziony.
@@ -294,7 +294,7 @@ export default function ProjectAiWorkspacePage() {
       <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-            AI Workspace
+            Przestrzeń AI
           </p>
           <h2 className="text-2xl font-semibold text-zinc-50">
             Kontekst AI projektu jest niedostępny.
@@ -668,7 +668,7 @@ export default function ProjectAiWorkspacePage() {
       <div className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-            AI Workspace
+            Przestrzeń AI
           </p>
           <h2 className="text-2xl font-semibold text-zinc-50">
             {context.projectName}
@@ -776,10 +776,10 @@ export default function ProjectAiWorkspacePage() {
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
           <div className="space-y-2">
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-              Generation
+              Generowanie
             </p>
             <p className="text-sm text-zinc-400">
-              Enter one instruction to add the next local AI exchange.
+              Wpisz jedną instrukcję, aby dodać następną lokalną wymianę AI.
             </p>
             <p className="text-sm text-zinc-500">
               {conversationContextState.statusMessage}
@@ -788,7 +788,7 @@ export default function ProjectAiWorkspacePage() {
 
           <form className="mt-4 space-y-4" onSubmit={handleGenerate}>
             <div className="space-y-3">
-              <p className="text-sm font-medium text-zinc-100">Starter Prompts</p>
+              <p className="text-sm font-medium text-zinc-100">Propozycje startowe</p>
               <div className="space-y-3">
                 {STARTER_PROMPTS.map((prompt) => (
                   <button
@@ -818,7 +818,7 @@ export default function ProjectAiWorkspacePage() {
 
             <label className="block space-y-2">
               <span className="text-sm font-medium text-zinc-100">
-                Instruction
+                Instrukcja
               </span>
               <textarea
                 value={instruction}
@@ -842,8 +842,8 @@ export default function ProjectAiWorkspacePage() {
           {resetActionPresentation.visible ? (
             <div className="mt-4 space-y-4">
               <div className="flex items-center justify-between gap-3">
-                <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-                  Conversation
+                  <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
+                  Rozmowa
                 </p>
                 <button
                   type="button"
@@ -864,7 +864,7 @@ export default function ProjectAiWorkspacePage() {
                     className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3"
                   >
                     <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-                      Instruction
+                      Instrukcja
                     </p>
                     <p className="mt-3 whitespace-pre-wrap text-sm text-zinc-100">
                       {exchange.instruction}
@@ -872,7 +872,7 @@ export default function ProjectAiWorkspacePage() {
 
                     <div className="mt-4 flex items-center justify-between gap-3">
                       <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-                        Result
+                        Wynik
                       </p>
                       <button
                         type="button"
@@ -881,7 +881,7 @@ export default function ProjectAiWorkspacePage() {
                         }}
                         className="rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-sm font-medium text-zinc-100"
                       >
-                        Copy
+                        Kopiuj
                       </button>
                     </div>
                     <p className="mt-3 whitespace-pre-wrap text-sm text-zinc-100">
@@ -896,7 +896,7 @@ export default function ProjectAiWorkspacePage() {
                         >
                           <label className="block space-y-2">
                             <span className="text-sm font-medium text-zinc-100">
-                              Title
+                              Tytuł
                             </span>
                             <input
                               type="text"

@@ -129,12 +129,12 @@ Session 083 synchronized the accepted `MS-026.0` control files in the current lo
 
 ## Latest Completed Product Milestone
 
-MS-026.0 - Polish UI Language Consistency Live Readiness Foundation
+MS-026.1c - Polish UI product terms verification
 
-## MS-026.0 - Polish UI Language Consistency Live Readiness Foundation
+## MS-026.1c - Polish UI product terms verification
 
 **Milestone**
-MS-026.0 - Polish UI Language Consistency Live Readiness Foundation
+MS-026.1c - Polish UI product terms verification
 
 **Type**
 Product Milestone
@@ -167,10 +167,10 @@ Codex
 Improve Polish UI language consistency for the live-test shell, especially home, workspace, sidebar, and navigation labels, and clean obvious mojibake artifacts in the edited visible UI shell files while keeping the app structure and live readiness intact.
 
 **Product Outcome**
-The repository now improves Polish UI language consistency for the live-test shell by fixing visible home, workspace, sidebar, and navigation labels and cleaning obvious mojibake/encoding artifacts in the edited UI shell files. `src/lib/app-version.ts` now exposes `1.026.0` as the Product Owner-approved live-test branch/build marker. No routing, data-flow, API, storage, Project Brain logic, Workflow Engine logic, Konduktor logic, automation, or scheduling changed.
+The repository now confirms the accepted MS-026.1-series Polish UI overlay cleanup for the live-test shell, workspace, AI workspace, and workflow paths. The remaining visible product terms render in Polish for the user-facing labels that were verified in this session, while the program backbone, identifiers, routes, engine states, contracts, and internal logic remain English. `src/lib/app-version.ts` still exposes `1.026.0` as the Product Owner-approved live-test branch/build marker. No routing, data-flow, API, storage, Project Brain logic, Workflow Engine logic, Konduktor logic, automation, or scheduling changed.
 
 **Version Decision**
-The app version decision for this Product Owner-approved live-readiness `.0` milestone is intentional: the canonical app version now exposes `1.026.0` as the visible live-test branch/build marker.
+The app version decision for this Product Owner-approved live-readiness `.0` milestone remains intentional and unchanged: the canonical app version continues to expose `1.026.0` as the visible live-test branch/build marker.
 
 **Dependencies**
 * closed `MS-025.3 - Konduktor Decision Boundary Trust Copy Foundation`

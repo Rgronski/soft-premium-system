@@ -9,13 +9,13 @@ import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 const taskDetailJourneySteps = [
-  "Task List",
-  "Task Detail",
-  "Task Workspace",
-  "Save Result",
-  "Acknowledge Review",
-  "Complete Task",
-  "Copy Handoff",
+  "Lista zadań",
+  "Szczegóły zadania",
+  "Przestrzeń zadania",
+  "Zapisz wynik",
+  "Potwierdź przegląd",
+  "Zakończ zadanie",
+  "Skopiuj przekazanie",
 ];
 
 function getTaskDetailErrorMessage(error: unknown): string {
@@ -55,7 +55,7 @@ function createLocalRecoveryTask(
     return {
       task: localTask,
       recoveryMessage:
-        "Project Brain context is unavailable, so showing locally saved task details for this project.",
+        "Kontekst Project Brain jest niedostępny, więc pokazuję lokalnie zapisane szczegóły zadania dla tego projektu.",
     };
   } catch {
     return null;
@@ -151,23 +151,23 @@ export default function ProjectTaskDetailPage() {
       <div className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-            Task Detail
+            Szczegóły zadania
           </p>
           <h2 className="text-2xl font-semibold text-zinc-50">
-            Current task review
+            Bieżący przegląd zadania
           </h2>
           <p className="text-sm text-zinc-400">
-            Review the current task before moving into the workspace.
+            Przejrzyj bieżące zadanie przed przejściem do przestrzeni roboczej.
           </p>
         </div>
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Journey Checkpoint
+            Punkt kontrolny ścieżki
           </p>
           <p className="mt-2 text-sm text-zinc-400">
-            You are at Task Detail. Next open the task workspace, then follow
-            the result sequence in order.
+            Jesteś w szczegółach zadania. Następnie otwórz przestrzeń zadania i
+            wykonuj sekwencję wyniku po kolei.
           </p>
           <ol className="mt-4 flex flex-wrap gap-2">
             {taskDetailJourneySteps.map((step, index) => (
@@ -202,19 +202,19 @@ export default function ProjectTaskDetailPage() {
               href={`/projects/${projectId}/tasks/${taskId}/workspace`}
               className="inline-flex items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
             >
-              Start task workspace
+              Uruchom przestrzeń zadania
             </Link>
           </div>
 
           {state.isLoading ? (
-            <p className="text-sm text-zinc-400">Loading task...</p>
+            <p className="text-sm text-zinc-400">Ładowanie zadania...</p>
           ) : state.errorMessage ? (
             <p className="text-sm text-zinc-400">{state.errorMessage}</p>
           ) : taskDetail ? (
             <div className="grid gap-4 md:grid-cols-2">
               <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                  Title
+                  Tytuł
                 </p>
                 <p className="mt-2 text-base font-medium text-zinc-50">
                   {taskDetail.title}
@@ -223,7 +223,7 @@ export default function ProjectTaskDetailPage() {
 
               <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                  Task ID
+                  ID zadania
                 </p>
                 <p className="mt-2 text-base font-medium text-zinc-50">
                   {taskDetail.id}
@@ -232,7 +232,7 @@ export default function ProjectTaskDetailPage() {
 
               <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                  Project ID
+                  ID projektu
                 </p>
                 <p className="mt-2 text-base font-medium text-zinc-50">
                   {taskDetail.projectId}
@@ -241,7 +241,7 @@ export default function ProjectTaskDetailPage() {
 
               <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                  Created At
+                  Utworzono
                 </p>
                 <p className="mt-2 text-base font-medium text-zinc-50">
                   {new Date(taskDetail.createdAt).toLocaleDateString()}
@@ -249,7 +249,7 @@ export default function ProjectTaskDetailPage() {
               </div>
             </div>
           ) : (
-            <p className="text-sm text-zinc-400">Task not found</p>
+            <p className="text-sm text-zinc-400">Nie znaleziono zadania</p>
           )}
         </div>
       </div>

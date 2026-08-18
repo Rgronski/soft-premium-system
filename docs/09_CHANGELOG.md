@@ -77,6 +77,11 @@ Each release entry should contain:
 
 ### Completed
 
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-026.1c - Polish UI product terms verification` as completed / verified / published and keeps `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Recorded that the accepted MS-026.1-series live UI overlay cleanup leaves the program backbone, identifiers, routes, engine states, contracts, and internal logic in English while the verified user-facing product terms render in Polish in the tested shell, workspace, AI workspace, and workflow paths.
+* Recorded that `1.026.0` remains the visible live-test branch/build marker.
+* Appended the Session 083 usage record.
+
 * Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-026.0 - Polish UI Language Consistency Live Readiness Foundation` as completed / verified / published and keeps `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
 * Recorded that MS-026.0 improved the Polish UI language consistency of the live-test shell, especially home, workspace, sidebar, and navigation labels, and cleaned obvious mojibake/encoding artifacts in the edited visible UI shell files.
 * Recorded that `src/lib/app-version.ts` now exposes `1.026.0` as the Product Owner-approved live-test branch/build marker.

@@ -311,16 +311,16 @@ describe("ProjectAiWorkspacePage", () => {
     await waitFor(() => {
       expect(screen.getByText("Alpha")).toBeTruthy();
     });
-    expect(screen.getByText("Starter Prompts")).toBeTruthy();
-    expect(screen.getByRole("button", { name: /Summarize Project State/i })).toBeTruthy();
-    expect(screen.getByRole("button", { name: /Identify Project Risks/i })).toBeTruthy();
-    expect(screen.getByRole("button", { name: /Review Backlog/i })).toBeTruthy();
-    expect(screen.getByRole("button", { name: /Recommend Next Safe Step/i })).toBeTruthy();
-    expect(screen.getByRole("button", { name: /Review Decisions/i })).toBeTruthy();
-    expect(screen.getByRole("textbox", { name: "Instruction" })).toBeTruthy();
-    expect(screen.getByRole("button", { name: "Generate" })).toBeTruthy();
+    expect(screen.getByText("Propozycje startowe")).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Podsumuj stan projektu/i })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Zidentyfikuj ryzyka projektu/i })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Przejrzyj backlog/i })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Zaproponuj następny bezpieczny krok/i })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Przejrzyj decyzje/i })).toBeTruthy();
+    expect(screen.getByRole("textbox", { name: "Instrukcja" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Generuj" })).toBeTruthy();
     expect(
-      screen.getByText("Next Generate will use no local conversation context."),
+      screen.getByText("Następna generacja nie użyje lokalnego kontekstu rozmowy."),
     ).toBeTruthy();
     expect(screen.getByText("Brak zadań.")).toBeTruthy();
     expect(screen.getByText("Brak wpisów wiedzy.")).toBeTruthy();
@@ -340,28 +340,28 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
 
     fireEvent.change(instructionField, {
       target: { value: "Custom draft" },
     });
     fireEvent.click(
-      screen.getByRole("button", { name: /Summarize Project State/i }),
+      screen.getByRole("button", { name: /Podsumuj stan projektu/i }),
     );
 
     expect(fetchMock).not.toHaveBeenCalled();
     expect(instructionField).toHaveProperty(
       "value",
-      "Produce a concise summary of the current project state based only on the provided canonical project context.",
+      "Przygotuj zwięzłe podsumowanie bieżącego stanu projektu wyłącznie na podstawie dostarczonego kanonicznego kontekstu projektu.",
     );
 
-    fireEvent.click(screen.getByRole("button", { name: /Review Decisions/i }));
+    fireEvent.click(screen.getByRole("button", { name: /Przejrzyj decyzje/i }));
 
     expect(fetchMock).not.toHaveBeenCalled();
     expect(instructionField).toHaveProperty(
       "value",
-      "Summarize the most relevant existing project decisions and identify any visible unresolved decision gap based only on the provided canonical project context.",
+      "Podsumuj najistotniejsze istniejące decyzje projektu i wskaż każdą widoczną nierozwiązaną lukę decyzyjną wyłącznie na podstawie dostarczonego kanonicznego kontekstu projektu.",
     );
   });
 
@@ -379,10 +379,10 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     const starterPromptButton = screen.getByRole("button", {
-      name: /Recommend Next Safe Step/i,
+      name: /Zaproponuj następny bezpieczny krok/i,
     });
 
     fireEvent.click(starterPromptButton);
@@ -418,9 +418,9 @@ describe("ProjectAiWorkspacePage", () => {
       expect(screen.getByText("Alpha")).toBeTruthy();
     });
 
-    expect(screen.queryByRole("textbox", { name: "Title" })).toBeNull();
+    expect(screen.queryByRole("textbox", { name: "Tytuł" })).toBeNull();
     expect(
-      screen.queryByRole("button", { name: "Save to Knowledge" }),
+      screen.queryByRole("button", { name: "Zapisz do wiedzy" }),
     ).toBeNull();
   });
 
@@ -452,12 +452,12 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -503,54 +503,54 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Generated response")).toBeTruthy();
-      expect(screen.getByRole("button", { name: "Copy" })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Kopiuj" })).toBeTruthy();
     });
 
     expect(
-      (screen.getByRole("textbox", { name: "Instruction" }) as HTMLInputElement)
+      (screen.getByRole("textbox", { name: "Instrukcja" }) as HTMLInputElement)
         .value,
     ).toBe("Summarize project");
     expect(
-      (screen.getByRole("textbox", { name: "Title" }) as HTMLInputElement).value,
+      (screen.getByRole("textbox", { name: "Tytuł" }) as HTMLInputElement).value,
     ).toBe("");
-    expect(screen.getByRole("button", { name: "Generate" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Generuj" })).toBeTruthy();
     expect(
-      screen.getByRole("button", { name: "Reset Conversation" }),
+      screen.getByRole("button", { name: "Zresetuj rozmowę" }),
     ).toBeTruthy();
     expect(
-      screen.getByText("Next Generate will use the last 1 local exchange."),
+      screen.getByText("Następna generacja użyje ostatniej lokalnej wymiany."),
     ).toBeTruthy();
 
-    fireEvent.click(screen.getByRole("button", { name: "Copy" }));
+    fireEvent.click(screen.getByRole("button", { name: "Kopiuj" }));
 
     await waitFor(() => {
       expect(clipboardWriteTextMock).toHaveBeenCalledTimes(1);
       expect(clipboardWriteTextMock).toHaveBeenCalledWith("Generated response");
     });
     expect(screen.getByText("Generated response")).toBeTruthy();
-    expect(screen.getByRole("button", { name: "Copy" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Kopiuj" })).toBeTruthy();
     expect(
-      (screen.getByRole("textbox", { name: "Instruction" }) as HTMLInputElement)
+      (screen.getByRole("textbox", { name: "Instrukcja" }) as HTMLInputElement)
         .value,
     ).toBe("Summarize project");
     expect(
-      (screen.getByRole("textbox", { name: "Title" }) as HTMLInputElement).value,
+      (screen.getByRole("textbox", { name: "Tytuł" }) as HTMLInputElement).value,
     ).toBe("");
-    expect(screen.getByRole("button", { name: "Generate" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Generuj" })).toBeTruthy();
     expect(
-      screen.getByRole("button", { name: "Reset Conversation" }),
+      screen.getByRole("button", { name: "Zresetuj rozmowę" }),
     ).toBeTruthy();
     expect(
-      screen.getByText("Next Generate will use the last 1 local exchange."),
+      screen.getByText("Następna generacja użyje ostatniej lokalnej wymiany."),
     ).toBeTruthy();
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
@@ -598,13 +598,13 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
 
     fireEvent.change(instructionField, {
       target: { value: "First instruction" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("First response")).toBeTruthy();
@@ -613,13 +613,13 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.change(instructionField, {
       target: { value: "Second instruction" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Second response")).toBeTruthy();
     });
 
-    expect(screen.getAllByText("Instruction").length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByText("Instrukcja").length).toBeGreaterThanOrEqual(2);
     expect(screen.getByText("First instruction")).toBeTruthy();
     expect(screen.getAllByText("Second instruction").length).toBeGreaterThan(0);
     expect(screen.getByText("First response")).toBeTruthy();
@@ -651,7 +651,7 @@ describe("ProjectAiWorkspacePage", () => {
     expect(secondGenerateBody.instruction).toContain("First response");
     expect(secondGenerateBody.instruction).toContain("Second instruction");
     expect(
-      screen.getByText("Next Generate will use the last 2 local exchanges."),
+      screen.getByText("Następna generacja użyje ostatnich 2 lokalnych wymian."),
     ).toBeTruthy();
   });
 
@@ -683,12 +683,12 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Generated response")).toBeTruthy();
@@ -760,13 +760,13 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
 
     fireEvent.change(instructionField, {
       target: { value: "First instruction" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("First response")).toBeTruthy();
@@ -775,28 +775,28 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.change(instructionField, {
       target: { value: "Second instruction" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Second response")).toBeTruthy();
     });
 
-    fireEvent.click(screen.getByRole("button", { name: "Reset Conversation" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zresetuj rozmowę" }));
 
     expect(screen.queryByText("First response")).toBeNull();
     expect(screen.queryByText("Second response")).toBeNull();
-    expect(screen.queryByRole("textbox", { name: "Title" })).toBeNull();
+    expect(screen.queryByRole("textbox", { name: "Tytuł" })).toBeNull();
     expect(
-      screen.getByText("Next Generate will use no local conversation context."),
+      screen.getByText("Następna generacja nie użyje lokalnego kontekstu rozmowy."),
     ).toBeTruthy();
     expect(
-      screen.queryByRole("button", { name: "Reset Conversation" }),
+      screen.queryByRole("button", { name: "Zresetuj rozmowę" }),
     ).toBeNull();
 
     fireEvent.change(instructionField, {
       target: { value: "Third instruction" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Third response")).toBeTruthy();
@@ -868,24 +868,24 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
 
     fireEvent.change(instructionField, {
       target: { value: "First instruction" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("First response")).toBeTruthy();
     });
 
-    fireEvent.click(screen.getByRole("button", { name: "Reset Conversation" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zresetuj rozmowę" }));
 
     fireEvent.change(instructionField, {
       target: { value: "Second instruction" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Second response")).toBeTruthy();
@@ -894,7 +894,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.change(instructionField, {
       target: { value: "Third instruction" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Third response")).toBeTruthy();
@@ -996,13 +996,13 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
 
     fireEvent.change(instructionField, {
       target: { value: "Instruction 1" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Response 1")).toBeTruthy();
@@ -1011,7 +1011,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.change(instructionField, {
       target: { value: "Instruction 2" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Response 2")).toBeTruthy();
@@ -1020,7 +1020,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.change(instructionField, {
       target: { value: "Instruction 3" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Response 3")).toBeTruthy();
@@ -1029,7 +1029,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.change(instructionField, {
       target: { value: "Instruction 4" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Response 4")).toBeTruthy();
@@ -1038,7 +1038,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.change(instructionField, {
       target: { value: "Instruction 5" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Response 5")).toBeTruthy();
@@ -1058,7 +1058,7 @@ describe("ProjectAiWorkspacePage", () => {
     expect(fifthGenerateBody.instruction).not.toContain("Instruction 1");
     expect(fifthGenerateBody.instruction).not.toContain("Response 1");
     expect(
-      screen.getByText("Next Generate will use the last 3 local exchanges."),
+      screen.getByText("Następna generacja użyje ostatnich 3 lokalnych wymian."),
     ).toBeTruthy();
   });
 
@@ -1133,23 +1133,23 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Generated response")).toBeTruthy();
     });
     expect(fetchMock).toHaveBeenCalledTimes(1);
 
-    const titleField = screen.getByRole("textbox", { name: "Title" });
+    const titleField = screen.getByRole("textbox", { name: "Tytuł" });
     fireEvent.change(titleField, {
       target: { value: "Architecture note" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
@@ -1260,13 +1260,13 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
 
     fireEvent.change(instructionField, {
       target: { value: "First instruction" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("First response")).toBeTruthy();
@@ -1275,16 +1275,16 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.change(instructionField, {
       target: { value: "Second instruction" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Second response")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+    fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
       target: { value: "Latest note" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
@@ -1328,13 +1328,13 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
 
-    const button = screen.getByRole("button", { name: "Generate" });
+    const button = screen.getByRole("button", { name: "Generuj" });
     fireEvent.click(button);
 
     await waitFor(() => {
@@ -1380,12 +1380,12 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "   " },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     expect(fetchMock).not.toHaveBeenCalled();
     expect(
@@ -1422,21 +1422,21 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Generated response")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+    fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
       target: { value: "   " },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(screen.queryByRole("button", { name: "Saving..." })).toBeNull();
@@ -1470,12 +1470,12 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("AI provider unavailable.")).toBeTruthy();
@@ -1538,21 +1538,21 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Generated response")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+    fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
       target: { value: "Architecture note" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Saving..." })).toHaveProperty(
@@ -1653,28 +1653,28 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Generated response")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+    fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
       target: { value: "Architecture note" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
       expect(screen.getByText("Knowledge save unavailable.")).toBeTruthy();
     });
 
     expect(screen.getByText("Generated response")).toBeTruthy();
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
@@ -1724,21 +1724,21 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Generated response")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+    fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
       target: { value: "Architecture note" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
       expect(screen.getByText("Knowledge save unavailable.")).toBeTruthy();
@@ -1805,21 +1805,21 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Generated response")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+    fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
       target: { value: "Architecture note" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
@@ -1925,21 +1925,21 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Generated response")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+    fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
       target: { value: "Architecture note" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
@@ -2050,21 +2050,21 @@ describe("ProjectAiWorkspacePage", () => {
     const { rerender } = render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Generated response")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+    fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
       target: { value: "Architecture note" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
@@ -2197,21 +2197,21 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Generated response")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+    fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
       target: { value: "Architecture note" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
       expect(createKnowledgeEntryMock).toHaveBeenCalledWith(
@@ -2288,38 +2288,38 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "First prompt" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("First generated response")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+    fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
       target: { value: "Architecture note" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Instruction" }), {
+    fireEvent.change(screen.getByRole("textbox", { name: "Instrukcja" }), {
       target: { value: "Second prompt" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Second generated response")).toBeTruthy();
       expect(screen.getByText("First generated response")).toBeTruthy();
-      expect(screen.getByRole("button", { name: "Save to Knowledge" })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Zapisz do wiedzy" })).toBeTruthy();
     });
 
-    expect(screen.getByRole("textbox", { name: "Title" })).toHaveProperty(
+    expect(screen.getByRole("textbox", { name: "Tytuł" })).toHaveProperty(
       "value",
       "",
     );
@@ -2372,21 +2372,21 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "First prompt" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("result A")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+    fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
       target: { value: "Title for result A" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Saving..." })).toBeTruthy();
@@ -2403,10 +2403,10 @@ describe("ProjectAiWorkspacePage", () => {
       }),
     });
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Instruction" }), {
+    fireEvent.change(screen.getByRole("textbox", { name: "Instrukcja" }), {
       target: { value: "Second prompt" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("result B")).toBeTruthy();
@@ -2414,11 +2414,11 @@ describe("ProjectAiWorkspacePage", () => {
 
     expect(screen.getByText("result A")).toBeTruthy();
     expect(screen.queryByRole("button", { name: "Saved" })).toBeNull();
-    expect(screen.getByRole("textbox", { name: "Title" })).toHaveProperty(
+    expect(screen.getByRole("textbox", { name: "Tytuł" })).toHaveProperty(
       "value",
       "",
     );
-    expect(screen.getByRole("button", { name: "Save to Knowledge" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Zapisz do wiedzy" })).toBeTruthy();
     expect(fetchMock).toHaveBeenCalledTimes(3);
 
     saveDeferred.resolve(
@@ -2444,11 +2444,11 @@ describe("ProjectAiWorkspacePage", () => {
     });
 
     expect(screen.queryByRole("button", { name: "Saved" })).toBeNull();
-    expect(screen.getByRole("textbox", { name: "Title" })).toHaveProperty(
+    expect(screen.getByRole("textbox", { name: "Tytuł" })).toHaveProperty(
       "value",
       "",
     );
-    expect(screen.getByRole("button", { name: "Save to Knowledge" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Zapisz do wiedzy" })).toBeTruthy();
     expect(fetchMock).toHaveBeenCalledTimes(3);
   });
 
@@ -2532,21 +2532,21 @@ describe("ProjectAiWorkspacePage", () => {
     const { rerender } = render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByText("Generated response")).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByRole("textbox", { name: "Title" }), {
+    fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
       target: { value: "Architecture note" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save to Knowledge" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Saving..." })).toBeTruthy();
@@ -2560,7 +2560,7 @@ describe("ProjectAiWorkspacePage", () => {
     });
 
     expect(screen.queryByText("Generated response")).toBeNull();
-    expect(screen.queryByRole("textbox", { name: "Title" })).toBeNull();
+    expect(screen.queryByRole("textbox", { name: "Tytuł" })).toBeNull();
     expect(screen.queryByRole("button", { name: "Saved" })).toBeNull();
 
     saveDeferred.resolve(
@@ -2586,18 +2586,18 @@ describe("ProjectAiWorkspacePage", () => {
     });
 
     expect(
-      (screen.getByRole("textbox", { name: "Instruction" }) as HTMLInputElement)
+      (screen.getByRole("textbox", { name: "Instrukcja" }) as HTMLInputElement)
         .value,
     ).toBe("");
     expect(screen.queryByText("Generated response")).toBeNull();
-    expect(screen.queryByRole("textbox", { name: "Title" })).toBeNull();
+    expect(screen.queryByRole("textbox", { name: "Tytuł" })).toBeNull();
     expect(
-      screen.queryByRole("button", { name: "Save to Knowledge" }),
+      screen.queryByRole("button", { name: "Zapisz do wiedzy" }),
     ).toBeNull();
-    expect(screen.queryByRole("button", { name: "Reset Conversation" })).toBeNull();
-    expect(screen.getByRole("button", { name: "Generate" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Zresetuj rozmowę" })).toBeNull();
+    expect(screen.getByRole("button", { name: "Generuj" })).toBeTruthy();
     expect(
-      screen.getByText("Next Generate will use no local conversation context."),
+      screen.getByText("Następna generacja nie użyje lokalnego kontekstu rozmowy."),
     ).toBeTruthy();
     expect(screen.queryByRole("button", { name: "Saved" })).toBeNull();
     expect(screen.queryByText("Generated response")).toBeNull();
@@ -2630,12 +2630,12 @@ describe("ProjectAiWorkspacePage", () => {
     const { rerender } = render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Generating..." })).toBeTruthy();
@@ -2668,9 +2668,9 @@ describe("ProjectAiWorkspacePage", () => {
     });
 
     expect(screen.queryByText("Generated response")).toBeNull();
-    expect(screen.queryByRole("textbox", { name: "Title" })).toBeNull();
+    expect(screen.queryByRole("textbox", { name: "Tytuł" })).toBeNull();
     expect(
-      screen.queryByRole("button", { name: "Save to Knowledge" }),
+      screen.queryByRole("button", { name: "Zapisz do wiedzy" }),
     ).toBeNull();
     expect(screen.queryByText("Unexpected generation error.")).toBeNull();
     expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -2703,12 +2703,12 @@ describe("ProjectAiWorkspacePage", () => {
     const { rerender } = render(<ProjectAiWorkspacePage />);
 
     const instructionField = await screen.findByRole("textbox", {
-      name: "Instruction",
+      name: "Instrukcja",
     });
     fireEvent.change(instructionField, {
       target: { value: "Summarize project" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Generate" }));
+    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Generating..." })).toBeTruthy();
@@ -2730,9 +2730,9 @@ describe("ProjectAiWorkspacePage", () => {
 
     expect(screen.queryByText("Unexpected generation error.")).toBeNull();
     expect(screen.queryByText("Generated response")).toBeNull();
-    expect(screen.queryByRole("textbox", { name: "Title" })).toBeNull();
+    expect(screen.queryByRole("textbox", { name: "Tytuł" })).toBeNull();
     expect(
-      screen.queryByRole("button", { name: "Save to Knowledge" }),
+      screen.queryByRole("button", { name: "Zapisz do wiedzy" }),
     ).toBeNull();
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });

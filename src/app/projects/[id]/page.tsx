@@ -18,14 +18,14 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 const projectJourneySteps = [
-  "Project",
-  "Task List",
-  "Task Detail",
-  "Task Workspace",
-  "Save Result",
-  "Acknowledge Review",
-  "Complete Task",
-  "Copy Handoff",
+  "Projekt",
+  "Lista zadań",
+  "Szczegóły zadania",
+  "Przestrzeń zadania",
+  "Zapisz wynik",
+  "Potwierdź przegląd",
+  "Zakończ zadanie",
+  "Skopiuj przekazanie",
 ];
 
 type Client = {
@@ -82,9 +82,9 @@ function createLocalRecoveryWorkspaceEntry(
             confidence: 0,
             nextStep: {
               id: "local-project-recovery",
-              label: "Continue local project state",
+              label: "Kontynuuj lokalny stan projektu",
               description:
-                "Project Brain context is unavailable, but the local project workspace is still available.",
+                "Kontekst Project Brain jest niedostępny, ale lokalna przestrzeń projektu nadal jest dostępna.",
             },
             warnings: 0,
             blockers: 0,
@@ -264,7 +264,7 @@ export default function ProjectWorkspacePage() {
           {projectBrainStatus !== "available" ? (
             <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 text-amber-100">
               <p className="text-xs uppercase tracking-[0.2em] text-amber-200/80">
-                Project Readiness
+                Gotowość projektu
               </p>
               <p className="mt-2 text-sm">
                 Project Brain ma status {projectBrainStatus}. Ten projekt nie
@@ -274,14 +274,14 @@ export default function ProjectWorkspacePage() {
           ) : null}
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-              Filesystem status
+              Stan systemu plików
             </p>
             <p className="mt-2 text-sm text-zinc-300">
               {projectFilesystemStatus === "manifest-present"
-                ? "manifest-present"
+                ? "manifest obecny"
                 : projectFilesystemStatus === "manifest-missing"
-                  ? "manifest-missing"
-                  : "unknown"}
+                  ? "manifest brak"
+                  : "nieznany"}
             </p>
           </div>
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
@@ -357,8 +357,8 @@ export default function ProjectWorkspacePage() {
       ) : (
         <p className="text-sm text-zinc-400">
           {dashboard.errorCode === "project-not-found"
-            ? "Project not found"
-            : "Project overview unavailable"}
+            ? "Projekt nie został znaleziony"
+            : "Przegląd projektu niedostępny"}
         </p>
       )}
     </WorkspaceLayout>

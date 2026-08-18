@@ -32,9 +32,9 @@ export default function ProjectVisitsPage() {
       <div className="space-y-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-2">
-            <h2 className="text-2xl font-semibold text-zinc-50">Visits</h2>
+            <h2 className="text-2xl font-semibold text-zinc-50">Wizyty</h2>
             <p className="text-zinc-400">
-              {isLoaded && visits.length === 0 ? "No visits yet." : null}
+              {isLoaded && visits.length === 0 ? "Brak wizyt jeszcze." : null}
             </p>
           </div>
 
@@ -42,7 +42,7 @@ export default function ProjectVisitsPage() {
             href={`/projects/${params.id}/visits/new`}
             className="rounded-full border border-zinc-700 px-5 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
           >
-            Add Visit
+            Dodaj wizytę
           </Link>
         </div>
 

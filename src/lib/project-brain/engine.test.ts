@@ -1378,8 +1378,8 @@ describe("Project Brain engine", () => {
     expect(result.workflow.confidence).toBe(0.5);
     expect(result.workflow.nextStep).toEqual({
       id: "continue-active-work",
-      label: "Continue active work",
-      description: "Continue the active workflow item before starting new work.",
+      label: "Kontynuuj aktywną pracę",
+      description: "Kontynuuj aktywny element przepływu przed rozpoczęciem nowej pracy.",
     });
   });
 

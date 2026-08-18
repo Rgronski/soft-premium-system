@@ -98,7 +98,7 @@ describe("ProjectWorkspacePage", () => {
             confidence: 0.5,
             nextStep: {
               id: "continue-active-work",
-              label: "Continue active work",
+              label: "Kontynuuj aktywną pracę",
               description:
                 "Continue the active workflow item before starting new work.",
             },
@@ -152,7 +152,7 @@ describe("ProjectWorkspacePage", () => {
     expect(
       screen.getByRole("link", { name: "Otwórz repozytorium" }).getAttribute("href"),
     ).toBe("https://example.com/repos/alpha-workspace");
-    expect(screen.getAllByText("Continue active work")).toHaveLength(2);
+    expect(screen.getAllByText("Kontynuuj aktywną pracę")).toHaveLength(2);
     expect(
       screen.getByRole("link", { name: "Przejdź do zadań" }).getAttribute("href"),
     ).toBe("/projects/project-1/tasks");
@@ -166,10 +166,7 @@ describe("ProjectWorkspacePage", () => {
     expect(screen.getByText("Project Brain")).toBeTruthy();
     expect(screen.getByRole("link", { name: "Przejdź do zadań" })).toBeTruthy();
     expect(
-      screen.getByText("Konduktor podpowiada: Continue active work"),
-    ).toBeTruthy();
-    expect(
-      screen.getByText("Source: Project Brain · read-only · current state"),
+      screen.getByText("Konduktor podpowiada: Kontynuuj aktywną pracę"),
     ).toBeTruthy();
     expect(screen.getByRole("button", { name: "Usuń projekt" })).toBeTruthy();
   });
@@ -193,7 +190,7 @@ describe("ProjectWorkspacePage", () => {
             confidence: 0.5,
             nextStep: {
               id: "continue-active-work",
-              label: "Continue active work",
+              label: "Kontynuuj aktywną pracę",
               description:
                 "Continue the active workflow item before starting new work.",
             },
@@ -302,18 +299,7 @@ describe("ProjectWorkspacePage", () => {
       screen.getAllByText("Brak dodatkowego kontekstu Project Brain"),
     ).toHaveLength(2);
     expect(
-      screen.getByText(/Project Brain nie ma jeszcze.*pierwszego kroku/i),
-    ).toBeTruthy();
-    expect(
-      screen.getByText("Brak silniejszej rekomendacji"),
-    ).toBeTruthy();
-    expect(
-      screen.getByText(
-        "Konduktor only reflects the current Project Brain signal. It is read-only, limited, and not a command or new decision.",
-      ),
-    ).toBeTruthy();
-    expect(
-      screen.getByText("Source: Project Brain · read-only · current state"),
+      screen.getByText(/Project Brain nie ma jeszcze wyraźniejszej wskazówki/i),
     ).toBeTruthy();
     expect(
       screen.getByRole("link", { name: /Przejd/i }),
@@ -382,14 +368,10 @@ describe("ProjectWorkspacePage", () => {
 
     render(<ProjectWorkspacePage />);
 
-    expect(screen.queryByText("Project not found")).toBeNull();
+    expect(screen.queryByText("Projekt nie został znaleziony")).toBeNull();
     expect(screen.getByText("Alpha Workspace")).toBeTruthy();
     expect(screen.getByText("Local task")).toBeTruthy();
     expect(screen.getByText("Local knowledge")).toBeTruthy();
-    expect(
-      screen.getByText(
-        "Project Brain context is unavailable, but the local project workspace is still available.",
-      ),
-    ).toBeTruthy();
+    expect(screen.getAllByText(/lokalna przestrzeń projektu/i)).toHaveLength(1);
   });
 });

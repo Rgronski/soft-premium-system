@@ -9,22 +9,22 @@ type ConductorPanelProps = {
 };
 
 const actionReadinessLabels = {
-  "ready-to-act-on": "Ready to act on",
-  "requires-product-owner-decision": "Requires Product Owner decision",
-  "informational-only": "Informational only",
+  "ready-to-act-on": "Gotowe do działania",
+  "requires-product-owner-decision": "Wymaga decyzji Product Ownera",
+  "informational-only": "Tylko informacyjnie",
 } as const;
 
 const actionReadinessSignals = {
   "ready-to-act-on": {
-    label: "Ready",
+    label: "Gotowy",
     className: "border-emerald-500/30 bg-emerald-500/10 text-emerald-100",
   },
   "requires-product-owner-decision": {
-    label: "Caution: Product Owner decision required",
+    label: "Uwaga: wymagana decyzja Product Ownera",
     className: "border-amber-500/30 bg-amber-500/10 text-amber-100",
   },
   "informational-only": {
-    label: "Informational",
+    label: "Informacyjnie",
     className: "border-zinc-700 bg-zinc-900/70 text-zinc-300",
   },
 } as const;
@@ -38,12 +38,12 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
   return (
     <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
       <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-        The Conductor
+        Konduktor
       </p>
       <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Current Milestone
+            Bieżący kamień milowy
           </p>
           <p className="mt-2 text-sm font-medium text-zinc-100">
             {conductor.currentMilestone}
@@ -52,7 +52,7 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Current Phase
+            Bieżąca faza
           </p>
           <p className="mt-2 text-sm font-medium text-zinc-100">
             {conductor.currentPhase}
@@ -61,7 +61,7 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Current Task
+            Bieżące zadanie
           </p>
           <p className="mt-2 text-sm font-medium text-zinc-100">
             {conductor.currentTask}
@@ -70,7 +70,7 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Next Action
+            Następna akcja
           </p>
           <p className="mt-2 text-sm font-medium text-zinc-100">
             {conductor.nextAction}
@@ -79,7 +79,7 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Project Health
+            Stan projektu
           </p>
           <p className="mt-2 text-sm font-medium capitalize text-zinc-100">
             {conductor.projectHealth}
@@ -100,7 +100,7 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
 
         <div className="mt-3">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Action readiness
+            Gotowość do działania
           </p>
           <p className="mt-1 text-sm font-medium uppercase tracking-[0.2em] text-zinc-200">
             {readinessLabel}
@@ -114,7 +114,7 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
 
         <div className="mt-4">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Reason
+            Powód
           </p>
           <p className="mt-1 text-sm leading-6 text-zinc-300">
             {guidance.reason}
@@ -123,17 +123,17 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
 
         <div className="mt-4 border-t border-emerald-500/10 pt-3">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Source
+            Źródło
           </p>
           <p className="mt-1 text-xs uppercase tracking-[0.2em] text-zinc-400">
-            Project Brain - read-only - current state
+            Project Brain - tylko do odczytu - bieżący stan
           </p>
           <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
             {guidance.hasRecommendation
-              ? "Read-only recommendation from Project Brain."
+              ? "Rekomendacja tylko do odczytu z Project Brain."
               : guidance.actionReadiness === "requires-product-owner-decision"
-                ? "Read-only guidance pending Product Owner decision."
-                : "Limited read-only guidance from Project Brain."}
+                ? "Wskazówka tylko do odczytu oczekująca decyzji Product Ownera."
+                : "Ograniczona wskazówka tylko do odczytu z Project Brain."}
           </p>
         </div>
       </div>

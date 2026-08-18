@@ -224,9 +224,9 @@ Suggested Next Chat Title: UNKNOWN
 Active Capability: SSOT/control files sync
 Active Work Item: MS-026.0 control files sync
 Current Mode: ACTIVE
-Completed Capability Items: Session 083 synchronized the accepted MS-026.0 control files; Session 083 appended the Session 083 usage entry
+Completed Capability Items: Session 083 synchronized the accepted MS-026.1 / MS-026.1b / MS-026.1c control files; Session 083 appended the Session 083 usage entry
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-026.0 - Polish UI Language Consistency Live Readiness Foundation
+Latest Completed Product Milestone: MS-026.1c - Polish UI product terms verification
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
 Latest Completed Capability Item: Session 083 appended the Session 083 usage entry

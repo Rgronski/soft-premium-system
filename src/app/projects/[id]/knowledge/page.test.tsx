@@ -63,7 +63,7 @@ describe("ProjectKnowledgePage", () => {
             confidence: 0.5,
             nextStep: {
               id: "continue-active-work",
-              label: "Continue active work",
+              label: "Kontynuuj aktywną pracę",
               description:
                 "Continue the active workflow item before starting new work.",
             },
@@ -92,9 +92,9 @@ describe("ProjectKnowledgePage", () => {
 
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledTimes(1);
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledWith("project-1");
-    expect(screen.getByText("Knowledge")).toBeTruthy();
+    expect(screen.getByText("Wiedza")).toBeTruthy();
     expect(
-      screen.getByText("Read-only knowledge entries for the current project workspace."),
+      screen.getByText("Wpisy wiedzy tylko do odczytu dla bieżącej przestrzeni projektu."),
     ).toBeTruthy();
     expect(screen.getByText("Knowledge note")).toBeTruthy();
   });
@@ -117,7 +117,7 @@ describe("ProjectKnowledgePage", () => {
             confidence: 0.5,
             nextStep: {
               id: "continue-active-work",
-              label: "Continue active work",
+              label: "Kontynuuj aktywną pracę",
               description:
                 "Continue the active workflow item before starting new work.",
             },
@@ -132,7 +132,7 @@ describe("ProjectKnowledgePage", () => {
 
     render(<ProjectKnowledgePage />);
 
-    expect(screen.getByText("No knowledge entries available.")).toBeTruthy();
+    expect(screen.getByText("Brak dostępnych wpisów wiedzy.")).toBeTruthy();
   });
 
   test("recovers from stale project context with local knowledge entries", async () => {
@@ -159,7 +159,7 @@ describe("ProjectKnowledgePage", () => {
     await waitFor(() => {
       expect(
         screen.getByText(
-          "Project Brain context is unavailable, so showing locally saved knowledge entries for this project.",
+          "Kontekst Project Brain jest niedostępny, więc pokazuję lokalnie zapisane wpisy wiedzy dla tego projektu.",
         ),
       ).toBeTruthy();
     });
@@ -167,6 +167,6 @@ describe("ProjectKnowledgePage", () => {
     expect(getProjectByIdMock).toHaveBeenCalledWith("project-1");
     expect(getKnowledgeMock).toHaveBeenCalledWith("project-1");
     expect(screen.getByText("Recovered knowledge")).toBeTruthy();
-    expect(screen.queryByText("Project not found")).toBeNull();
+    expect(screen.queryByText("Projekt nie został znaleziony")).toBeNull();
   });
 });

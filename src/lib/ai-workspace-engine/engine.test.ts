@@ -95,8 +95,8 @@ function createStarterPromptUiState(
 ): StarterPromptUiState {
   return {
     id: "summarize-project-state",
-    label: "Summarize Project State",
-    instruction: "Produce a concise summary.",
+    label: "Podsumuj stan projektu",
+    instruction: "Przygotuj zwięzłe podsumowanie.",
     ...overrides,
   };
 }
@@ -131,7 +131,7 @@ describe("ai workspace engine", () => {
       ),
     ).toEqual({
       projectId: "project-2",
-      value: "Produce a concise summary.",
+      value: "Przygotuj zwięzłe podsumowanie.",
       selectedPromptId: "summarize-project-state",
     });
   });
@@ -146,10 +146,10 @@ describe("ai workspace engine", () => {
       "review-decisions",
     ]);
     expect(STARTER_PROMPTS[0]).toMatchObject({
-      label: "Summarize Project State",
+      label: "Podsumuj stan projektu",
     });
     expect(STARTER_PROMPTS[4]).toMatchObject({
-      label: "Review Decisions",
+      label: "Przejrzyj decyzje",
     });
   });
 
@@ -224,7 +224,8 @@ describe("ai workspace engine", () => {
           createExchange(1, "Instruction 1", "Response 1"),
           createExchange(2, "Instruction 2", "Response 2"),
         ],
-        statusMessage: "Next Generate will use the last 2 local exchanges.",
+        statusMessage:
+          "Następna generacja użyje ostatnich 2 lokalnych wymian.",
       },
     );
   });
@@ -244,7 +245,7 @@ describe("ai workspace engine", () => {
         projectId: "project-1",
         exchanges: [],
         statusMessage:
-          "Next Generate will use no local conversation context.",
+          "Następna generacja nie użyje lokalnego kontekstu rozmowy.",
       },
     );
   });
@@ -297,7 +298,7 @@ describe("ai workspace engine", () => {
   test("reports zero local context when no exchanges exist", () => {
     expect(getConversationContextExchangeCount([])).toBe(0);
     expect(getConversationContextStatusMessage([])).toBe(
-      "Next Generate will use no local conversation context.",
+      "Następna generacja nie użyje lokalnego kontekstu rozmowy.",
     );
   });
 
@@ -306,7 +307,7 @@ describe("ai workspace engine", () => {
 
     expect(getConversationContextExchangeCount(exchanges)).toBe(1);
     expect(getConversationContextStatusMessage(exchanges)).toBe(
-      "Next Generate will use the last 1 local exchange.",
+      "Następna generacja użyje ostatniej lokalnej wymiany.",
     );
   });
 
@@ -320,7 +321,7 @@ describe("ai workspace engine", () => {
 
     expect(getConversationContextExchangeCount(exchanges)).toBe(3);
     expect(getConversationContextStatusMessage(exchanges)).toBe(
-      "Next Generate will use the last 3 local exchanges.",
+      "Następna generacja użyje ostatnich 3 lokalnych wymian.",
     );
   });
 
@@ -400,7 +401,7 @@ describe("ai workspace engine", () => {
         projectId: "project-2",
         exchanges: [],
         statusMessage:
-          "Next Generate will use no local conversation context.",
+          "Następna generacja nie użyje lokalnego kontekstu rozmowy.",
       },
     });
   });
@@ -529,15 +530,15 @@ describe("ai workspace engine", () => {
 
   test("derives the default generate action presentation outside active generation", () => {
     expect(deriveGenerateActionPresentation("idle")).toEqual({
-      label: "Generate",
+      label: "Generuj",
       disabled: false,
     });
     expect(deriveGenerateActionPresentation("generated")).toEqual({
-      label: "Generate",
+      label: "Generuj",
       disabled: false,
     });
     expect(deriveGenerateActionPresentation("error")).toEqual({
-      label: "Generate",
+      label: "Generuj",
       disabled: false,
     });
   });
@@ -551,7 +552,7 @@ describe("ai workspace engine", () => {
 
   test("derives a hidden reset action presentation when no exchanges exist", () => {
     expect(deriveResetActionPresentation("idle", [])).toEqual({
-      label: "Reset Conversation",
+      label: "Zresetuj rozmowę",
       disabled: false,
       visible: false,
     });
@@ -561,12 +562,12 @@ describe("ai workspace engine", () => {
     const exchanges = [createExchange(1, "Instruction 1", "Response 1")];
 
     expect(deriveResetActionPresentation("generated", exchanges)).toEqual({
-      label: "Reset Conversation",
+      label: "Zresetuj rozmowę",
       disabled: false,
       visible: true,
     });
     expect(deriveResetActionPresentation("generating", exchanges)).toEqual({
-      label: "Reset Conversation",
+      label: "Zresetuj rozmowę",
       disabled: true,
       visible: true,
     });
@@ -803,15 +804,15 @@ describe("ai workspace engine", () => {
 
   test("derives the default save action presentation for editable save states", () => {
     expect(deriveSaveActionPresentation("idle")).toEqual({
-      label: "Save to Knowledge",
+      label: "Zapisz do wiedzy",
       disabled: false,
     });
     expect(deriveSaveActionPresentation("ready-to-save")).toEqual({
-      label: "Save to Knowledge",
+      label: "Zapisz do wiedzy",
       disabled: false,
     });
     expect(deriveSaveActionPresentation("save-error")).toEqual({
-      label: "Save to Knowledge",
+      label: "Zapisz do wiedzy",
       disabled: false,
     });
   });

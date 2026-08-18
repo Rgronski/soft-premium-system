@@ -198,8 +198,8 @@ export default function ProjectCalendarPage() {
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
       <div className="space-y-6">
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold text-zinc-50">Calendar</h2>
-          <p className="text-zinc-400">Project Scheduling Workspace</p>
+          <h2 className="text-2xl font-semibold text-zinc-50">Kalendarz</h2>
+          <p className="text-zinc-400">Przestrzeń planowania projektu</p>
         </div>
 
         <div className="flex flex-col gap-3 rounded-xl border border-zinc-800 bg-zinc-950/60 p-4 lg:flex-row lg:items-center lg:justify-between">
@@ -216,7 +216,7 @@ export default function ProjectCalendarPage() {
               onClick={handleToday}
               className="rounded-full border border-zinc-700 px-5 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
             >
-              Today
+              Dziś
             </button>
             <button
               type="button"
@@ -232,19 +232,19 @@ export default function ProjectCalendarPage() {
               type="button"
               className="rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:border-zinc-500 hover:bg-zinc-800 hover:text-zinc-100"
             >
-              Day
+              Dzień
             </button>
             <button
               type="button"
               className="rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:border-zinc-500 hover:bg-zinc-800 hover:text-zinc-100"
             >
-              Week
+              Tydzień
             </button>
             <button
               type="button"
               className="rounded-full bg-white px-4 py-2 text-sm font-medium text-zinc-950"
             >
-              Month
+              Miesiąc
             </button>
           </div>
         </div>
@@ -253,9 +253,9 @@ export default function ProjectCalendarPage() {
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
-                Workspace
+                Przestrzeń robocza
               </p>
-              <h3 className="text-xl font-semibold text-zinc-50">Month View</h3>
+              <h3 className="text-xl font-semibold text-zinc-50">Widok miesiąca</h3>
               <p className="text-zinc-400">{monthLabel}</p>
             </div>
 
@@ -302,8 +302,8 @@ export default function ProjectCalendarPage() {
 
                       {day.visitCount > 0 ? (
                         <div className="self-start rounded-full border border-zinc-700 px-3 py-1 text-xs font-medium text-zinc-200">
-                          ● {day.visitCount}{" "}
-                          {day.visitCount === 1 ? "visit" : "visits"}
+                          • {day.visitCount}{" "}
+                          {day.visitCount === 1 ? "wizyta" : "wizyty"}
                         </div>
                       ) : null}
                     </div>
@@ -317,7 +317,7 @@ export default function ProjectCalendarPage() {
                 <div className="space-y-4">
                   <div className="space-y-1">
                     <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
-                      Day Details
+                      Szczegóły dnia
                     </p>
                     <h4 className="text-lg font-semibold text-zinc-50">
                       {selectedDayLabel}
@@ -325,7 +325,7 @@ export default function ProjectCalendarPage() {
                     <p className="text-sm text-zinc-400">{selectedDayWeekday}</p>
                     <p className="text-sm text-zinc-400">
                       {selectedDayVisits.length}{" "}
-                      {selectedDayVisits.length === 1 ? "visit" : "visits"}
+                      {selectedDayVisits.length === 1 ? "wizyta" : "wizyty"}
                     </p>
                   </div>
 
@@ -355,11 +355,11 @@ export default function ProjectCalendarPage() {
             ) : null}
 
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
-              Scheduling items
+            Elementy harmonogramu
             </p>
             <p className="text-sm text-zinc-500">
               {isLoaded
-                ? `${visits.length} scheduling items available in this project.`
+                ? `${visits.length} elementów harmonogramu dostępnych w tym projekcie.`
                 : null}
             </p>
           </div>

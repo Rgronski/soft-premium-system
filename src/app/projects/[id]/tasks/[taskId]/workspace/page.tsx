@@ -58,7 +58,7 @@ function createLocalRecoveryTask(
     return {
       task: localTask,
       recoveryMessage:
-        "Project Brain context is unavailable, so showing locally saved task workspace details for this project.",
+        "Kontekst Project Brain jest niedostępny, więc pokazuję lokalnie zapisane szczegóły przestrzeni zadania dla tego projektu.",
     };
   } catch {
     return null;
@@ -142,12 +142,12 @@ function readSavedTaskRepositoryOpenState(
 }
 
 const taskWorkspaceJourneySteps = [
-  "Task Detail",
-  "Task Workspace",
-  "Save Result",
-  "Acknowledge Review",
-  "Complete Task",
-  "Copy Handoff",
+  "Szczegóły zadania",
+  "Przestrzeń zadania",
+  "Zapisz wynik",
+  "Potwierdź przegląd",
+  "Zakończ zadanie",
+  "Skopiuj przekazanie",
 ];
 
 export default function ProjectTaskWorkspacePage() {
@@ -205,12 +205,12 @@ export default function ProjectTaskWorkspacePage() {
   const isResultNotesEmpty = resultNotes.trim().length === 0;
   const evidenceReviewStatus =
     taskEvidenceReviewState === "acknowledged"
-      ? "Evidence review acknowledged locally."
+      ? "Przegląd dowodów potwierdzono lokalnie."
       : taskCompletionState === "completed"
-      ? "Result evidence reviewed locally."
+      ? "Dowody wyniku przejrzano lokalnie."
       : resultSaveState === "saved"
-        ? "Result saved locally. Next action: acknowledge review."
-        : "Awaiting result evidence.";
+        ? "Wynik zapisano lokalnie. Następna akcja: potwierdź przegląd."
+        : "Oczekiwanie na dowody wyniku.";
 
   const canAcknowledgeEvidenceReview = resultSaveState === "saved";
 
@@ -282,9 +282,9 @@ export default function ProjectTaskWorkspacePage() {
 
   async function handleCopyCompletionReport() {
     const completionReport = [
-      "Task completion handoff",
-      "Task completed locally.",
-      `Saved result notes: ${resultNotes}`,
+      "Przekazanie ukończenia zadania",
+      "Zadanie zakończono lokalnie.",
+      `Zapisane notatki wyniku: ${resultNotes}`,
     ].join("\n");
 
     try {
@@ -410,7 +410,7 @@ export default function ProjectTaskWorkspacePage() {
           tasks.length > 0
             ? {
                 id: "continue-active-work",
-                label: "Continue active work",
+                label: "Kontynuuj aktywną pracę",
                 description:
                   "Continue the active workflow item before starting new work.",
               }
@@ -440,24 +440,24 @@ export default function ProjectTaskWorkspacePage() {
       <div className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-            Task Workspace
+            Przestrzeń zadania
           </p>
           <h2 className="text-2xl font-semibold text-zinc-50">
-            Task workspace start
+            Start przestrzeni zadania
           </h2>
           <p className="text-sm text-zinc-400">
-            Start the task workspace for the current project task.
+            Uruchom przestrzeń zadania dla bieżącego zadania projektu.
           </p>
         </div>
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Journey Checkpoint
+            Punkt kontrolny ścieżki
           </p>
           <p className="mt-2 text-sm text-zinc-400">
-            You are at Task Workspace. Follow the remaining actions in order:
-            save the result, acknowledge review, complete the task, then copy
-            the handoff.
+            Jesteś w przestrzeni zadania. Wykonaj pozostałe akcje po kolei:
+            zapisz wynik, potwierdź przegląd, zakończ zadanie, a potem skopiuj
+            przekazanie.
           </p>
           <ol className="mt-4 flex flex-wrap gap-2">
             {taskWorkspaceJourneySteps.map((step, index) => (
@@ -490,7 +490,7 @@ export default function ProjectTaskWorkspacePage() {
           {taskWorkspaceNextStep ? (
             <div className="mb-4 rounded-xl border border-zinc-800 bg-zinc-900 p-4">
               <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                Next Step Action
+                Akcja następnego kroku
               </p>
               <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="space-y-1">
@@ -508,14 +508,14 @@ export default function ProjectTaskWorkspacePage() {
                   aria-controls="task-result-notes"
                   onClick={handleNextStepAction}
                 >
-                  Continue to result notes
+                  Przejdź do notatek wyniku
                 </button>
 
                 <Link
                   href={`/projects/${projectId}/tasks`}
                   className="inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
                 >
-                  Return to task list
+                  Wróć do listy zadań
                 </Link>
               </div>
             </div>
@@ -523,7 +523,7 @@ export default function ProjectTaskWorkspacePage() {
 
           <div className="mb-4 rounded-xl border border-zinc-800 bg-zinc-900 p-4">
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-              Repository Context
+              Kontekst repozytorium
             </p>
             {repositoryUrl ? (
               <a
@@ -533,24 +533,24 @@ export default function ProjectTaskWorkspacePage() {
                 onClick={handleRepositoryOpen}
                 className="mt-2 inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
               >
-                Open repository
+                Otwórz repozytorium
               </a>
             ) : (
               <p className="mt-2 text-sm text-zinc-400">
-                Repository context unavailable.
+                Kontekst repozytorium niedostępny.
               </p>
             )}
             {taskRepositoryOpenState === "opened" ? (
               <p className="mt-2 text-sm text-zinc-400" aria-live="polite">
-                Repository opened locally.
+                Repozytorium otwarte lokalnie.
               </p>
             ) : taskRepositoryOpenState === "reset" ? (
               <p className="mt-2 text-sm text-zinc-400" aria-live="polite">
-                Repository open reset locally.
+                Reset otwarcia repozytorium lokalnie.
               </p>
             ) : taskRepositoryOpenState === "restored" ? (
               <p className="mt-2 text-sm text-zinc-400" aria-live="polite">
-                Repository open restored locally.
+                Przywrócono otwarcie repozytorium lokalnie.
               </p>
             ) : null}
           </div>
@@ -560,22 +560,22 @@ export default function ProjectTaskWorkspacePage() {
             className="mb-4 rounded-xl border border-zinc-800 bg-zinc-900 p-4"
           >
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-              Task Handoff
+              Przekazanie zadania
             </p>
             <p className="mt-2 text-sm text-zinc-400">
-              Prepare this task for Codex review with the current workspace and
-              repository context.
+              Przygotuj to zadanie do przeglądu przez Codex z bieżącą
+              przestrzenią roboczą i kontekstem repozytorium.
             </p>
             <a
               href="#codex-handoff"
               onClick={handleCodexHandoffJump}
               className="mt-3 inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
             >
-              Handoff to Codex
+              Przekaż do Codex
             </a>
             {taskCodexHandoffJumpState === "jumped" ? (
               <p className="mt-2 text-sm text-zinc-400" aria-live="polite">
-                Codex handoff opened locally.
+                Przekazanie do Codex otwarte lokalnie.
               </p>
             ) : null}
           </div>
@@ -585,23 +585,23 @@ export default function ProjectTaskWorkspacePage() {
             className="mb-4 rounded-xl border border-zinc-800 bg-zinc-900 p-4"
           >
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-              Task Result
+              Wynik zadania
             </p>
             <p className="mt-2 text-sm text-zinc-400">
-              Capture the current task result locally for now.
+              Zapisz bieżący wynik zadania lokalnie na teraz.
             </p>
             <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-950 p-4">
               <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                Evidence Review
+                Przegląd dowodów
               </p>
               <p className="mt-2 text-sm text-zinc-400" aria-live="polite">
                 {evidenceReviewStatus}
               </p>
               <p className="mt-2 text-sm text-zinc-300">
-                Review source: local result notes and completion state.
+                Źródło przeglądu: lokalne notatki wyniku i stan ukończenia.
               </p>
               <p className="mt-2 text-sm text-zinc-300">
-                Sequence: save the result, then acknowledge review before completing the task.
+                Sekwencja: zapisz wynik, potem potwierdź przegląd przed zakończeniem zadania.
               </p>
               <button
                 type="button"
@@ -610,23 +610,23 @@ export default function ProjectTaskWorkspacePage() {
                 onClick={handleAcknowledgeEvidenceReview}
               >
                 {taskEvidenceReviewState === "acknowledged"
-                  ? "Acknowledged locally"
+                    ? "Potwierdzono lokalnie"
                   : resultSaveState === "saved"
-                    ? "Acknowledge review now"
-                    : "Acknowledge review"}
+                    ? "Potwierdź przegląd teraz"
+                    : "Potwierdź przegląd"}
               </button>
             </div>
             <label
               className="mt-3 block text-sm text-zinc-300"
               htmlFor="task-result-notes"
             >
-              Result notes
+              Notatki wyniku
             </label>
             <textarea
               ref={taskResultNotesRef}
               id="task-result-notes"
               className="mt-2 min-h-28 w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-sm text-zinc-50 outline-none transition-colors placeholder:text-zinc-600 focus:border-zinc-500"
-              placeholder="Summarize the result of this task."
+              placeholder="Podsumuj wynik tego zadania."
               value={resultNotes}
               onChange={(event) => {
                 const hadCompletedFlow =
@@ -663,23 +663,23 @@ export default function ProjectTaskWorkspacePage() {
                 onClick={handleSaveResult}
               >
                 {taskCompletionRestoreState === "restored"
-                  ? "Restored locally"
+                  ? "Przywrócono lokalnie"
                   : resultSaveState === "saved"
-                    ? "Saved locally"
-                    : "Save result"}
+                    ? "Zapisano lokalnie"
+                    : "Zapisz wynik"}
               </button>
               {taskCompletionRestoreState === "restored" ? (
                 <p className="text-sm text-zinc-400" aria-live="polite">
-                  Completion restored locally.
+                  Ukończenie przywrócone lokalnie.
                 </p>
               ) : resultSaveState === "saved" ? (
                 <p className="text-sm text-zinc-400" aria-live="polite">
-                  Result saved locally.
+                  Wynik zapisano lokalnie.
                 </p>
               ) : null}
               {taskCompletionReportCopyRestoreState === "restored" ? (
                 <p className="text-sm text-zinc-400" aria-live="polite">
-                  Completion handoff restored locally.
+                  Przekazanie ukończenia przywrócone lokalnie.
                 </p>
               ) : null}
             </div>
@@ -691,47 +691,47 @@ export default function ProjectTaskWorkspacePage() {
                 onClick={handleCompleteTask}
               >
                 {taskCompletionState === "completed"
-                  ? "Completed locally"
-                  : "Complete task"}
+                  ? "Zakończono lokalnie"
+                  : "Zakończ zadanie"}
               </button>
             </div>
             {taskCompletionResetState === "reset" ? (
               <p className="mt-3 text-sm text-zinc-400" aria-live="polite">
-                Completion reset locally.
+                Ukończenie zresetowane lokalnie.
               </p>
             ) : null}
             {taskCompletionReportCopyResetState === "reset" ? (
               <p className="mt-2 text-sm text-zinc-400" aria-live="polite">
-                Completion handoff reset locally.
+                Reset przekazania ukończenia lokalnie.
               </p>
             ) : null}
             {taskCompletionState === "completed" ? (
               <div className="mt-3 rounded-xl border border-zinc-800 bg-zinc-950 p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                  Completion Summary
+                  Podsumowanie ukończenia
                 </p>
                 <p className="mt-2 text-sm text-zinc-400">
-                  Task completed locally.
+                  Zadanie zakończono lokalnie.
                 </p>
                 <p className="mt-2 text-sm text-zinc-300">
-                  Saved result notes: {resultNotes}
+                  Zapisane notatki wyniku: {resultNotes}
                 </p>
                 {taskEvidenceReviewState === "acknowledged" ? (
                   <p className="mt-2 text-sm text-zinc-300">
-                    Evidence review acknowledged locally.
+                    Przegląd dowodów potwierdzono lokalnie.
                   </p>
                 ) : null}
                 <p className="mt-2 text-sm text-zinc-300">
-                  Next action: Copy handoff.
+                  Następna akcja: skopiuj przekazanie.
                 </p>
                 <div className="mt-3 rounded-xl border border-zinc-800 bg-zinc-900 p-4">
                   <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                    Task completion handoff
+                    Przekazanie ukończenia zadania
                   </p>
                   <p className="mt-2 whitespace-pre-wrap rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-300">
-                    {`Task completion handoff
-Task completed locally.
-Saved result notes: ${resultNotes}${taskEvidenceReviewState === "acknowledged" ? "\nEvidence review acknowledged locally." : ""}`}
+                    {`Przekazanie ukończenia zadania
+Zadanie zakończono lokalnie.
+Zapisane notatki wyniku: ${resultNotes}${taskEvidenceReviewState === "acknowledged" ? "\nPrzegląd dowodów potwierdzono lokalnie." : ""}`}
                   </p>
                 </div>
                 <div className="mt-3 flex items-center gap-3">
@@ -741,16 +741,16 @@ Saved result notes: ${resultNotes}${taskEvidenceReviewState === "acknowledged" ?
                     onClick={handleCopyCompletionReport}
                   >
                     {taskCompletionReportCopyState === "copied"
-                      ? "Copied locally"
-                      : "Copy handoff"}
+                      ? "Skopiowano lokalnie"
+                      : "Skopiuj przekazanie"}
                   </button>
                   {taskCompletionReportCopyState === "copied" ? (
                     <div className="space-y-1" aria-live="polite">
                       <p className="text-sm text-zinc-400">
-                        Completion handoff copied.
+                        Przekazanie ukończenia skopiowane.
                       </p>
                       <p className="text-sm text-zinc-300">
-                        Handoff copied. You can now paste it into the next session.
+                        Przekazanie skopiowane. Możesz teraz wkleić je do następnej sesji.
                       </p>
                     </div>
                   ) : null}
@@ -760,14 +760,14 @@ Saved result notes: ${resultNotes}${taskEvidenceReviewState === "acknowledged" ?
           </div>
 
           {state.isLoading ? (
-            <p className="text-sm text-zinc-400">Loading task workspace...</p>
+            <p className="text-sm text-zinc-400">Ładowanie przestrzeni zadania...</p>
           ) : state.errorMessage ? (
             <p className="text-sm text-zinc-400">{state.errorMessage}</p>
           ) : taskWorkspace ? (
             <div className="space-y-4">
               <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                  Workspace Task
+                  Zadanie w przestrzeni
                 </p>
                 <p className="mt-2 text-base font-medium text-zinc-50">
                   {taskWorkspace.title}
@@ -777,7 +777,7 @@ Saved result notes: ${resultNotes}${taskEvidenceReviewState === "acknowledged" ?
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
                   <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                    Task ID
+                    ID zadania
                   </p>
                   <p className="mt-2 text-base font-medium text-zinc-50">
                     {taskWorkspace.id}
@@ -786,7 +786,7 @@ Saved result notes: ${resultNotes}${taskEvidenceReviewState === "acknowledged" ?
 
                 <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
                   <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                    Project ID
+                    ID projektu
                   </p>
                   <p className="mt-2 text-base font-medium text-zinc-50">
                     {taskWorkspace.projectId}
@@ -795,7 +795,7 @@ Saved result notes: ${resultNotes}${taskEvidenceReviewState === "acknowledged" ?
               </div>
             </div>
           ) : (
-            <p className="text-sm text-zinc-400">Task not found</p>
+            <p className="text-sm text-zinc-400">Nie znaleziono zadania</p>
           )}
         </div>
       </div>
