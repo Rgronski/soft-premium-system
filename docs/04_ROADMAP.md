@@ -118,16 +118,79 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-025.0` - Konduktor Next Milestone Selection Guidance Foundation
 * `MS-025.1` - Konduktor Next Milestone Reason Specificity Foundation
 * `MS-025.2` - Konduktor Product Owner Decision Prompt Clarity Foundation
+* `MS-025.3` - Konduktor Decision Boundary Trust Copy Foundation
 
 ## Current
 
 NONE / Product Owner decision required
 
-Session 083 synchronized the accepted `MS-025.2` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 083 synchronized the accepted `MS-025.3` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-025.2 - Konduktor Product Owner Decision Prompt Clarity Foundation
+MS-025.3 - Konduktor Decision Boundary Trust Copy Foundation
+
+## MS-025.3 - Konduktor Decision Boundary Trust Copy Foundation
+
+**Milestone**
+MS-025.3 - Konduktor Decision Boundary Trust Copy Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Let Konduktor state the trust boundary more clearly so it advises the next direction while Product Owner still approves the milestone and decides when work starts, while staying read-only and non-executable.
+
+**Product Outcome**
+The repository now refines the existing Konduktor `start-next-work` / `requires-product-owner-decision` copy so the decision boundary is explicit: Konduktor advises the next direction, but Product Owner approves the milestone and decides when work starts. Konduktor still does not approve a next milestone, start work, or execute any action. No runtime data source, workflow rule, Project Brain logic, UI panel, API, storage, automation, scheduling, or app version source changed.
+
+**Version Decision**
+No app version bump is required. The repository rule recorded in SSOT says accepted app/platform `.0` milestones bump the controlled app version source to `0.XXX.0`, and `MS-025.3` is a read-only guidance publication rather than an app/platform version milestone. The canonical app version therefore remains `0.021.6`.
+
+**Dependencies**
+* closed `MS-025.2 - Konduktor Product Owner Decision Prompt Clarity Foundation`
+
+**Allowed Implementation Scope**
+* docs-only publication of the existing read-only Konduktor decision boundary seam
+* SSOT synchronization for milestone publication
+* confirmation of the existing `start-next-work` / `requires-product-owner-decision` read path
+* trust/boundary copy refinement derived from existing decision-required data
+
+**Forbidden Scope**
+* Project Brain engine changes
+* Workflow Engine rule changes
+* storage, API, provider, automation, scheduling, or execution changes
+* app version source changes
+* broad refactors or unrelated cleanup
+
+**Ownership Boundaries**
+* `src/components/conductor/ConductorPanel.tsx` owns the read-only guidance presentation
+* `src/lib/conductor/conductor.ts` owns the small pure mapping helper
+* `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized publication snapshot
 
 ## MS-025.2 - Konduktor Product Owner Decision Prompt Clarity Foundation
 

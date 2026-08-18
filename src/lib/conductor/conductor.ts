@@ -39,7 +39,7 @@ function getConductorRecommendationReason(
   actionReadiness?: ConductorProjectBrainGuidance["actionReadiness"],
 ) {
   if (actionReadiness === "requires-product-owner-decision") {
-    return "MS-025.0 already published the calm next-direction guidance, so Product Owner now needs to choose the next priority or milestone direction instead of treating the placeholder as executable work.";
+    return "MS-025.3 refined the decision prompt, so Konduktor can advise the next direction while Product Owner still approves the milestone and decides when any work may start.";
   }
 
   if (actionReadiness === "informational-only") {
@@ -169,7 +169,7 @@ export function deriveConductorProjectBrainGuidance(
     return {
       headline: "Konduktor potrzebuje decyzji Product Ownera",
       description:
-        "Wybierz następną priorytetową ścieżkę albo kierunek kolejnego milestone’a. Konduktor nie zatwierdza tej decyzji i pozostaje read-only.",
+        "Konduktor wskazuje nastepny kierunek, ale nie zatwierdza milestone i nie startuje pracy automatycznie. Product Owner pozostaje wlascicielem decyzji.",
       reason,
       hasRecommendation: false,
       actionReadiness,
@@ -180,7 +180,7 @@ export function deriveConductorProjectBrainGuidance(
     return {
       headline: "Brak silniejszej rekomendacji",
       description:
-        "Konduktor pozostaje przy istniejącym read-only sygnale Project Brain i nie dodaje własnej decyzji.",
+        "Konduktor pozostaje przy istniejacym read-only sygnale Project Brain i nie dodaje wlasnej decyzji.",
       reason,
       hasRecommendation: false,
       actionReadiness,

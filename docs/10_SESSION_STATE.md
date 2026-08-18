@@ -215,18 +215,18 @@ SPS OS Session State
 
 Date: 2026-08-18
 Current Session ID: 083
-Current Chat Title: 083 SPS OS - MS-025.2 Control Files Sync
+Current Chat Title: 083 SPS OS - MS-025.3 Control Files Sync
 Session Sync Protocol: PASS
 Session runtime: ACTIVE
 Audit Session 083: PASS
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
 Active Capability: SSOT/control files sync
-Active Work Item: MS-025.2 control files sync
+Active Work Item: MS-025.3 control files sync
 Current Mode: ACTIVE
-Completed Capability Items: Session 083 synchronized the accepted MS-025.2 control files; Session 083 appended the Session 083 usage entry
+Completed Capability Items: Session 083 synchronized the accepted MS-025.3 control files; Session 083 appended the Session 083 usage entry
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-025.2 - Konduktor Product Owner Decision Prompt Clarity Foundation
+Latest Completed Product Milestone: MS-025.3 - Konduktor Decision Boundary Trust Copy Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
 Latest Completed Capability Item: Session 083 appended the Session 083 usage entry
