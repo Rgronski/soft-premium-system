@@ -239,5 +239,5 @@ Latest Verified Commit: 8c24679
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Open Session 084 with the fresh session package and await Product Owner decision for the next milestone.
+Next Safe Step: Run the repository-defined session package generator from docs/16_SESSION_PACKAGE_GENERATOR.md after the close commit and push.
 Next Session Plan: Open Session 084 with the fresh session package and await Product Owner decision for the next milestone.
