@@ -55,10 +55,10 @@ function getConductorRecommendationReason(
 
 export function getConductorState(): ConductorState {
   return {
-    currentMilestone: "MS-000.5 - The Conductor",
-    currentPhase: "Implementation",
-    currentTask: "Create minimal Conductor panel",
-    nextAction: "Verify dashboard integration and update documentation",
+    currentMilestone: "MS-000.5 - Konduktor",
+    currentPhase: "Implementacja",
+    currentTask: "Utwórz minimalny panel Konduktora",
+    nextAction: "Sprawdź integrację pulpitu i zaktualizuj dokumentację",
     projectHealth: "ready",
   };
 }
@@ -169,7 +169,7 @@ export function deriveConductorProjectBrainGuidance(
     return {
       headline: "Konduktor potrzebuje decyzji Product Ownera",
       description:
-        "Konduktor wskazuje nastepny kierunek, ale nie zatwierdza milestone i nie startuje pracy automatycznie. Product Owner pozostaje wlascicielem decyzji.",
+        "Konduktor wskazuje następny kierunek, ale nie zatwierdza kamienia milowego i nie uruchamia pracy automatycznie. Product Owner pozostaje właścicielem decyzji.",
       reason,
       hasRecommendation: false,
       actionReadiness,
@@ -180,7 +180,7 @@ export function deriveConductorProjectBrainGuidance(
     return {
       headline: "Brak silniejszej rekomendacji",
       description:
-        "Konduktor pozostaje przy istniejacym read-only sygnale Project Brain i nie dodaje wlasnej decyzji.",
+        "Konduktor pozostaje przy istniejącym sygnale Project Brain tylko do odczytu i nie dodaje własnej decyzji.",
       reason,
       hasRecommendation: false,
       actionReadiness,

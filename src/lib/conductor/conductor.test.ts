@@ -88,10 +88,10 @@ describe("deriveConductorBoundaryConsumerState", () => {
 describe("getConductorState", () => {
   test("preserves the legacy conductor state contract", () => {
     expect(getConductorState()).toEqual({
-      currentMilestone: "MS-000.5 - The Conductor",
-      currentPhase: "Implementation",
-      currentTask: "Create minimal Conductor panel",
-      nextAction: "Verify dashboard integration and update documentation",
+      currentMilestone: "MS-000.5 - Konduktor",
+      currentPhase: "Implementacja",
+      currentTask: "Utwórz minimalny panel Konduktora",
+      nextAction: "Sprawdź integrację pulpitu i zaktualizuj dokumentację",
       projectHealth: "ready",
     });
   });
@@ -102,12 +102,12 @@ describe("deriveConductorProjectBrainGuidance", () => {
     expect(
       deriveConductorProjectBrainGuidance({
         id: "continue-active-work",
-        label: "Continue active work",
-        description: "Continue the active workflow item before starting new work.",
+        label: "Kontynuuj aktywną pracę",
+        description: "Kontynuuj aktywny element przepływu przed rozpoczęciem nowej pracy.",
       }),
     ).toEqual({
-      headline: "Konduktor podpowiada: Continue active work",
-      description: "Continue the active workflow item before starting new work.",
+      headline: "Konduktor podpowiada: Kontynuuj aktywną pracę",
+      description: "Kontynuuj aktywny element przepływu przed rozpoczęciem nowej pracy.",
       reason:
         "The workflow next step is specific enough to act on without asking for a new decision.",
       hasRecommendation: true,
@@ -125,7 +125,7 @@ describe("deriveConductorProjectBrainGuidance", () => {
     ).toEqual({
       headline: "Konduktor potrzebuje decyzji Product Ownera",
       description:
-        "Konduktor wskazuje nastepny kierunek, ale nie zatwierdza milestone i nie startuje pracy automatycznie. Product Owner pozostaje wlascicielem decyzji.",
+        "Konduktor wskazuje następny kierunek, ale nie zatwierdza kamienia milowego i nie uruchamia pracy automatycznie. Product Owner pozostaje właścicielem decyzji.",
       reason:
         "MS-025.3 refined the decision prompt, so Konduktor can advise the next direction while Product Owner still approves the milestone and decides when any work may start.",
       hasRecommendation: false,
@@ -137,14 +137,14 @@ describe("deriveConductorProjectBrainGuidance", () => {
     expect(
       deriveConductorProjectBrainGuidance({
         id: "local-project-recovery",
-        label: "Continue local project state",
+        label: "Kontynuuj lokalny stan projektu",
         description:
-          "Project Brain context is unavailable, but the local project workspace is still available.",
+          "Kontekst Project Brain jest niedostępny, ale lokalna przestrzeń projektu nadal jest dostępna.",
       }),
     ).toEqual({
       headline: "Brak silniejszej rekomendacji",
       description:
-        "Konduktor pozostaje przy istniejacym read-only sygnale Project Brain i nie dodaje wlasnej decyzji.",
+        "Konduktor pozostaje przy istniejącym sygnale Project Brain tylko do odczytu i nie dodaje własnej decyzji.",
       reason:
         "The current Project Brain signal is informational only, so Konduktor stays read-only and non-executable.",
       hasRecommendation: false,

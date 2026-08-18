@@ -56,8 +56,9 @@ export function evaluateWorkflow(projectState: ProjectState): WorkflowResult {
     return {
       nextStep: {
         id: "continue-active-work",
-        label: "Continue active work",
-        description: "Continue the active workflow item before starting new work.",
+        label: "Kontynuuj aktywną pracę",
+        description:
+          "Kontynuuj aktywny element przepływu przed rozpoczęciem nowej pracy.",
       },
       health: "ready",
       warnings: projectState.warnings,
