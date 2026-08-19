@@ -94,6 +94,22 @@ function buildBranchWorkModeSummary(
   };
 }
 
+function buildGitHubConnectionReadinessSummary(
+  hasRepositoryUrl: boolean,
+): string[] | null {
+  if (!hasRepositoryUrl) {
+    return null;
+  }
+
+  return [
+    "Adres repozytorium GitHub wykryty.",
+    "Połączenie GitHub nie jest jeszcze potwierdzone ani zweryfikowane.",
+    "Uwierzytelnienie i konfiguracja połączenia pozostają przyszłą pracą.",
+    "Lokalny klon i prawdziwy workflow Git nie są jeszcze skonfigurowane.",
+    "Przygotowanie gałęzi roboczej już istnieje, ale prawdziwe wykonanie Git jeszcze nie startuje.",
+  ];
+}
+
 function readProjectWorkingBranchName(projectId: string): string {
   if (typeof window === "undefined") {
     return "";
@@ -182,6 +198,8 @@ export default function ProjectSettingsPage() {
     branchWorkMode,
     workingBranchName,
   );
+  const githubConnectionReadinessSummary =
+    buildGitHubConnectionReadinessSummary(Boolean(project.repositoryUrl?.trim()));
 
   function handleSaveGithubUrl() {
     const trimmedGithubUrl = githubUrlInput.trim();
@@ -418,6 +436,24 @@ export default function ProjectSettingsPage() {
                   ? "Utwórz i użyj gałęzi roboczej"
                   : "nie wybrano"}
             </p>
+          </div>
+        ) : null}
+
+        {githubConnectionReadinessSummary ? (
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              Gotowość połączenia GitHub
+            </p>
+            <p className="mt-2 text-sm text-zinc-300">
+              GitHub wykryty, ale połączenie nie jest jeszcze gotowe.
+            </p>
+            <div className="mt-3 space-y-2">
+              {githubConnectionReadinessSummary.map((line) => (
+                <p key={line} className="text-sm text-zinc-400">
+                  {line}
+                </p>
+              ))}
+            </div>
           </div>
         ) : null}
 

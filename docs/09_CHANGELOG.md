@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 085 - MS-028.3 control files sync
+
+### Date
+
+2026-08-19
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.3 - GitHub Repository Connection Readiness Foundation` as completed / verified / published / closed.
+* Recorded that project settings now show a compact GitHub connection readiness/status block once a GitHub repository URL exists.
+* Recorded that the block says the repository URL is detected, GitHub connection is not connected / not verified yet, authentication and connection setup remain future work, local clone and real Git workflow are not configured yet, and branch workflow preparation exists while real Git execution still does not happen.
+* Recorded that the block is derived UI/status only and does not introduce persistent connection state.
+* Appended the Session 085 usage record.
+
+### Notes
+
+* No product code changed in this control-files sync.
+* No GitHub OAuth, access tokens, GitHub API integration, or real Git workflow behavior was introduced.
+
 ## Session 085 - MS-028.2 control files sync
 
 ### Date

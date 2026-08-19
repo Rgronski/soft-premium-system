@@ -44,6 +44,7 @@ describe("ProjectSettingsPage", () => {
     ).toBeTruthy();
     expect(screen.getByText(/Pozostaw jako manifest-only/)).toBeTruthy();
     expect(screen.queryByText(/Decyzja pracy z ga/)).toBeNull();
+    expect(screen.queryByText(/Gotowość połączenia GitHub/)).toBeNull();
   });
 
   test("stores a GitHub URL as metadata without creating a duplicate project", async () => {
@@ -77,6 +78,42 @@ describe("ProjectSettingsPage", () => {
     expect(savedProjects[0].repositoryUrl).toBe(
       "https://github.com/example/beauty-client-pro",
     );
+  });
+
+  test("shows a GitHub connection readiness block after the repository URL is saved", async () => {
+    render(<ProjectSettingsPage />);
+
+    fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
+      target: { value: "https://github.com/example/beauty-client-pro" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /Zapisz adres GitHub/ }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Gotowość połączenia GitHub/)).toBeTruthy();
+    });
+
+    expect(
+      screen.getByText(/GitHub wykryty, ale połączenie nie jest jeszcze gotowe\./),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Adres repozytorium GitHub wykryty\./),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        /Połączenie GitHub nie jest jeszcze potwierdzone ani zweryfikowane\./,
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Uwierzytelnienie i konfiguracja połączenia pozostają przyszłą pracą\./),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Lokalny klon i prawdziwy workflow Git nie są jeszcze skonfigurowane\./),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        /Przygotowanie gałęzi roboczej już istnieje, ale prawdziwe wykonanie Git jeszcze nie startuje\./,
+      ),
+    ).toBeTruthy();
   });
 
   test("shows a main-mode summary after the Product Owner chooses main", async () => {

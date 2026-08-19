@@ -127,16 +127,67 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.0` - GitHub Repository Branch Work Mode Decision Foundation
 * `MS-028.1` - GitHub Repository Working Branch Name Foundation
 * `MS-028.2` - GitHub Repository Branch Work Mode Summary Foundation
+* `MS-028.3` - GitHub Repository Connection Readiness Foundation
 
 ## Current
 
 NONE / Product Owner decision required
 
-Session 085 synchronized the accepted `MS-028.2` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 085 synchronized the accepted `MS-028.3` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
+MS-028.3 - GitHub Repository Connection Readiness Foundation
+
+## MS-028.3 - GitHub Repository Connection Readiness Foundation
+
+**Milestone**
+MS-028.3 - GitHub Repository Connection Readiness Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Present a compact GitHub connection readiness/status layer for future connection work after a repository URL is present, without introducing any real Git workflow execution in this milestone.
+
+**Product Outcome**
+After a GitHub repository URL exists in project settings, the repository now shows a compact GitHub connection readiness/status block that records the repository URL as detected, marks GitHub connection as not connected / not verified yet, keeps authentication and connection setup as future work, notes that local clone and real Git workflow are not configured yet, and states that branch workflow preparation exists while real Git execution still does not happen.
+
+**Dependencies**
 MS-028.2 - GitHub Repository Branch Work Mode Summary Foundation
+
+**Implementation Scope**
+Project settings GitHub connection readiness/status UI and derived local state only.
+
+**Allowed Scope**
+Docs publication, settings UI/test foundation, and derived readiness messaging for the existing repository URL signal.
+
+**Forbidden Scope**
+GitHub OAuth, access tokens, GitHub API integration, real Git operations, repository clone/check/fetch, branch creation on disk or remote, checkout, merge, pull request, sync-to-main, backend persistence, and unrelated UI or domain changes.
 
 ## MS-028.2 - GitHub Repository Branch Work Mode Summary Foundation
 
