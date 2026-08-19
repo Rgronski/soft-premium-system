@@ -35,10 +35,10 @@ describe("ProjectSettingsPage", () => {
     render(<ProjectSettingsPage />);
 
     expect(
-      screen.getByText(
+      screen.getAllByText(
         "Projekt ma tylko manifest SPS. Możesz zostawić go jako manifest, podpiąć istniejący katalog repo albo dodać adres GitHub.",
       ),
-    ).toBeTruthy();
+    ).toHaveLength(1);
     expect(screen.getAllByText("Adres GitHub: nie podano")).toHaveLength(2);
     expect(screen.getAllByText("Lokalne repo Git: niedostępne")).toHaveLength(1);
     expect(
@@ -63,12 +63,13 @@ describe("ProjectSettingsPage", () => {
     });
 
     expect(
-      screen.getByText(
+      screen.getAllByText(
         "Kontekst repozytorium niedostępny: adres GitHub jest zapisany, ale lokalne repo Git nadal nie jest dostępne.",
       ),
-    ).toBeTruthy();
+    ).toHaveLength(1);
     expect(screen.getByText("Decyzja pracy z gałęzią")).toBeTruthy();
     expect(screen.getByText("Wybrany tryb pracy: nie wybrano")).toBeTruthy();
+    expect(screen.queryByLabelText("Nazwa gałęzi roboczej")).toBeNull();
 
     const savedProjects = JSON.parse(
       localStorage.getItem("soft-premium-system.projects") ?? "[]",
@@ -81,7 +82,7 @@ describe("ProjectSettingsPage", () => {
     );
   });
 
-  test("stores the branch work mode decision in browser state after the GitHub URL is present", async () => {
+  test("shows a proposed branch name when the working branch mode is selected", async () => {
     render(<ProjectSettingsPage />);
 
     fireEvent.change(screen.getByLabelText("Podaj adres GitHub"), {
@@ -95,16 +96,52 @@ describe("ProjectSettingsPage", () => {
 
     fireEvent.click(screen.getAllByRole("radio")[1]);
 
-    expect(screen.getByText("Wybrany tryb pracy: Utwórz i użyj gałęzi roboczej")).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText("Proponowana gałąź robocza")).toBeTruthy();
+    });
+
+    expect(
+      (screen.getByLabelText("Nazwa gałęzi roboczej") as HTMLInputElement).value,
+    ).toBe("work/beauty-client-pro");
+  });
+
+  test("stores the edited branch name and restores it after remount", async () => {
+    render(<ProjectSettingsPage />);
+
+    fireEvent.change(screen.getByLabelText("Podaj adres GitHub"), {
+      target: { value: "https://github.com/example/beauty-client-pro" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz adres GitHub" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Decyzja pracy z gałęzią")).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getAllByRole("radio")[1]);
+
+    await waitFor(() => {
+      expect(screen.getByLabelText("Nazwa gałęzi roboczej")).toBeTruthy();
+    });
+
+    fireEvent.change(screen.getByLabelText("Nazwa gałęzi roboczej"), {
+      target: { value: "work/beauty-client-pro-hotfix" },
+    });
+
     expect(
       localStorage.getItem(
-        "soft-premium-system.projects.project-1.branch-work-mode",
+        "soft-premium-system.projects.project-1.working-branch-name",
       ),
-    ).toBe("working-branch");
+    ).toBe("work/beauty-client-pro-hotfix");
+
+    cleanup();
+    render(<ProjectSettingsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Proponowana gałąź robocza")).toBeTruthy();
+    });
+
     expect(
-      screen.getByText(
-        "Wybrano użycie gałęzi roboczej jako decyzję Product Ownera.",
-      ),
-    ).toBeTruthy();
+      (screen.getByLabelText("Nazwa gałęzi roboczej") as HTMLInputElement).value,
+    ).toBe("work/beauty-client-pro-hotfix");
   });
 });

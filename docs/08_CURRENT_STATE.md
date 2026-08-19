@@ -365,9 +365,9 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.0 - GitHub Repository Branch Work Mode Decision Foundation
+Latest Completed Product Milestone: MS-028.1 - GitHub Repository Working Branch Name Foundation
 Next Product Milestone: NONE / Product Owner decision required
-Session 085 synchronized the accepted `MS-028.0` control files in the current local workspace. The repository now shows a controlled Product Owner branch work mode decision after a GitHub repository URL exists in project settings, persists the selected mode in local browser state per project, and states that syncing approved changes back to `main` is future work. No Git branch creation, GitHub API integration, sync-to-main behavior, or backend persistence was introduced.
+Session 085 synchronized the accepted `MS-028.1` control files in the current local workspace. The repository now shows a project-local working branch name input after a GitHub repository URL exists and the branch work mode is set to the working-branch option, suggests a simple default such as `work/<project-slug>`, and persists the value in local browser state per project through `soft-premium-system.projects.<id>.working-branch-name`. Real Git branch creation, checkout, merge, pull request, sync-to-main behavior, and backend persistence remain future work.
 
 MS-021.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Reset Foundation; the repository now exposes a local `Cofnij decyzję` action for resolved source-conflict decisions so the browser-state resolved flag can be cleared for that `project.id`. Reset does not mutate the local project, and if the discovered project still differs after reset, the conflict can appear again as unresolved. The MS-021.16 persistence behavior and MS-021.15 feedback remain preserved, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
@@ -1533,7 +1533,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-028.0 - GitHub Repository Branch Work Mode Decision Foundation`
+* `Latest Completed Product Milestone` is `MS-028.1 - GitHub Repository Working Branch Name Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

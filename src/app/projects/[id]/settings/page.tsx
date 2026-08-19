@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 type ProjectBranchWorkMode = "main" | "working-branch";
 
 const PROJECT_BRANCH_WORK_MODE_STORAGE_SUFFIX = "branch-work-mode";
+const PROJECT_WORKING_BRANCH_NAME_STORAGE_SUFFIX = "working-branch-name";
 
 function saveProjectBinding(project: Project, updates: Partial<Project>): Project {
   return upsertProject({
@@ -51,6 +52,38 @@ function saveProjectBranchWorkMode(
   );
 }
 
+function getProjectWorkingBranchNameStorageKey(projectId: string): string {
+  return `soft-premium-system.projects.${projectId}.${PROJECT_WORKING_BRANCH_NAME_STORAGE_SUFFIX}`;
+}
+
+function buildWorkingBranchName(projectName: string): string {
+  const slug = projectName
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return `work/${slug || "project"}`;
+}
+
+function readProjectWorkingBranchName(projectId: string): string {
+  if (typeof window === "undefined") {
+    return "";
+  }
+
+  return localStorage.getItem(getProjectWorkingBranchNameStorageKey(projectId)) ?? "";
+}
+
+function saveProjectWorkingBranchName(
+  projectId: string,
+  workingBranchName: string,
+): void {
+  localStorage.setItem(
+    getProjectWorkingBranchNameStorageKey(projectId),
+    workingBranchName,
+  );
+}
+
 export default function ProjectSettingsPage() {
   const params = useParams<{ id: string }>();
   const [project, setProject] = useState<Project | null>(() =>
@@ -66,15 +99,39 @@ export default function ProjectSettingsPage() {
     useState<ProjectBranchWorkMode | null>(() =>
       readProjectBranchWorkMode(params.id),
     );
+  const [workingBranchName, setWorkingBranchName] = useState<string>(() => {
+    const nextProject = getProjectById(params.id);
+    const nextBranchWorkMode = readProjectBranchWorkMode(params.id);
+    const storedWorkingBranchName = readProjectWorkingBranchName(params.id);
+
+    if (storedWorkingBranchName) {
+      return storedWorkingBranchName;
+    }
+
+    if (nextProject?.repositoryUrl?.trim() && nextBranchWorkMode === "working-branch") {
+      return buildWorkingBranchName(nextProject.name);
+    }
+
+    return "";
+  });
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const nextProject = getProjectById(params.id);
+    const nextBranchWorkMode = readProjectBranchWorkMode(params.id);
+    const storedWorkingBranchName = readProjectWorkingBranchName(params.id);
 
     setProject(nextProject);
     setGithubUrlInput(nextProject?.repositoryUrl ?? "");
     setWorkingDirectoryInput(nextProject?.workingDirectory ?? "");
-    setBranchWorkMode(readProjectBranchWorkMode(params.id));
+    setBranchWorkMode(nextBranchWorkMode);
+    setWorkingBranchName(
+      storedWorkingBranchName ||
+        (nextProject?.repositoryUrl?.trim() &&
+        nextBranchWorkMode === "working-branch"
+          ? buildWorkingBranchName(nextProject.name)
+          : ""),
+    );
     setFeedbackMessage(null);
   }, [params.id]);
 
@@ -129,11 +186,33 @@ export default function ProjectSettingsPage() {
   ) {
     saveProjectBranchWorkMode(params.id, nextBranchWorkMode);
     setBranchWorkMode(nextBranchWorkMode);
+    if (nextBranchWorkMode === "working-branch") {
+      const nextWorkingBranchName =
+        readProjectWorkingBranchName(params.id) ||
+        buildWorkingBranchName(project.name);
+
+      setWorkingBranchName(nextWorkingBranchName);
+      saveProjectWorkingBranchName(params.id, nextWorkingBranchName);
+    }
     setFeedbackMessage(
       nextBranchWorkMode === "main"
         ? "Wybrano pracę bezpośrednio na main jako decyzję Product Ownera."
         : "Wybrano użycie gałęzi roboczej jako decyzję Product Ownera.",
     );
+  }
+
+  function handleWorkingBranchNameChange(nextWorkingBranchName: string) {
+    setWorkingBranchName(nextWorkingBranchName);
+    const trimmedWorkingBranchName = nextWorkingBranchName.trim();
+
+    if (!trimmedWorkingBranchName) {
+      localStorage.removeItem(
+        getProjectWorkingBranchNameStorageKey(params.id),
+      );
+      return;
+    }
+
+    saveProjectWorkingBranchName(params.id, trimmedWorkingBranchName);
   }
 
   return (
@@ -291,6 +370,35 @@ export default function ProjectSettingsPage() {
                 : branchWorkMode === "working-branch"
                   ? "Utwórz i użyj gałęzi roboczej"
                   : "nie wybrano"}
+            </p>
+          </div>
+        ) : null}
+
+        {project.repositoryUrl?.trim() && branchWorkMode === "working-branch" ? (
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              Proponowana gałąź robocza
+            </p>
+            <p className="mt-2 text-sm text-zinc-300">
+              To tylko przygotowana nazwa gałęzi roboczej dla przyszłego
+              workflow Git. Nie tworzy gałęzi ani nie synchronizuje zmian.
+            </p>
+            <label className="mt-4 block">
+              <span className="mb-2 block text-sm text-zinc-400">
+                Nazwa gałęzi roboczej
+              </span>
+              <input
+                type="text"
+                value={workingBranchName}
+                onChange={(event) =>
+                  handleWorkingBranchNameChange(event.target.value)
+                }
+                placeholder={buildWorkingBranchName(project.name)}
+                className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 outline-none focus:border-zinc-500"
+              />
+            </label>
+            <p className="mt-2 text-sm text-zinc-400">
+              Ta nazwa jest zapisywana lokalnie dla tego projektu.
             </p>
           </div>
         ) : null}

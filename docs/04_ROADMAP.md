@@ -125,16 +125,66 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-027.4` - GitHub Repository Import / Bind Decision Foundation
 * `MS-027.5` - Project Scoped Data Rebinding Guard Foundation
 * `MS-028.0` - GitHub Repository Branch Work Mode Decision Foundation
+* `MS-028.1` - GitHub Repository Working Branch Name Foundation
 
 ## Current
 
 NONE / Product Owner decision required
 
-Session 085 synchronized the accepted `MS-028.0` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 085 synchronized the accepted `MS-028.1` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
+MS-028.1 - GitHub Repository Working Branch Name Foundation
+
+## MS-028.1 - GitHub Repository Working Branch Name Foundation
+
+**Milestone**
+MS-028.1 - GitHub Repository Working Branch Name Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Product Outcome**
+After a GitHub repository URL exists and the Product Owner chooses `Utwórz i użyj gałęzi roboczej`, project settings show a local working branch name input with a simple suggested value such as `work/<project-slug>`. The value is editable and persists per project in local browser state using `soft-premium-system.projects.<id>.working-branch-name`. Real Git branch creation, checkout, merge, pull request, and sync-to-main remain future work.
+
+**Dependencies**
 MS-028.0 - GitHub Repository Branch Work Mode Decision Foundation
+
+**Implementation Scope**
+Project settings branch work mode and working branch name UI/state contract only.
+
+**Allowed Scope**
+Docs publication, settings UI/test foundation, and local browser-state persistence for the proposed working branch name.
+
+**Forbidden Scope**
+Real Git operations, GitHub API integration, branch creation on disk or remote, checkout, merge, pull request, sync-to-main, backend persistence, and unrelated UI or domain changes.
+
+## MS-028.0 - GitHub Repository Branch Work Mode Decision Foundation
 
 ## MS-028.0 - GitHub Repository Branch Work Mode Decision Foundation
 

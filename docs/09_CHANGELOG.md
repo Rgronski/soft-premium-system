@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 085 - MS-028.1 control files sync
+
+### Date
+
+2026-08-19
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.1 - GitHub Repository Working Branch Name Foundation` as completed / verified / published / closed.
+* Recorded that project settings now surface a project-local working branch name input only after a GitHub repository URL exists and the branch work mode is set to the working-branch option.
+* Recorded that the working branch name is suggested as a simple safe default such as `work/<project-slug>`, can be edited, and persists in local browser state per project using `soft-premium-system.projects.<id>.working-branch-name`.
+* Recorded that real Git branch creation, checkout, merge, pull request, and sync-to-main remain future work.
+* Appended the Session 085 usage record.
+
+### Notes
+
+* No product code changed in this control-files sync.
+* No Git operations, GitHub API integration, or sync-to-main behavior was introduced.
+
 ## Session 085 - MS-028.0 control files sync
 
 ### Date
