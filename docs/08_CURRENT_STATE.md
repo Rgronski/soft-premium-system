@@ -365,9 +365,9 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.4 - GitHub Repository Local Clone Readiness Foundation
+Latest Completed Product Milestone: MS-028.5 - GitHub Repository Real Execution Contract Foundation
 Next Product Milestone: NONE / Product Owner decision required
-Session 085 synchronized the accepted `MS-028.4` control files in the current local workspace. The repository now shows a compact local clone/workspace readiness status block after a GitHub repository URL exists, records that the local clone/workspace is not configured or not verified yet, keeps real clone, fetch, checkout, and filesystem validation as future work, treats branch choice and branch name as metadata only, and states that no files are copied and no repository is cloned in this milestone.
+Session 085 synchronized the accepted `MS-028.5` control files in the current local workspace. The repository now records the real Git/GitHub execution contract only: real execution may start only after the repository URL exists, GitHub connection/authentication is explicitly available or approved, the local clone/workspace location is configured or approved, the Product Owner has selected main or working branch mode, the working branch name is present and confirmed when needed, and the Product Owner explicitly confirms the specific real operation before execution. The repository also records that no silent work on main occurs, branch creation needs Product Owner confirmation, clone/fetch/checkout/push/merge/PR/sync need explicit Product Owner confirmation, sync back to main remains separate, and execution must stop with a blocker when the repository state is dirty, ambiguous, unauthenticated, or missing local clone context.
 
 MS-021.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Reset Foundation; the repository now exposes a local `Cofnij decyzjÄ™` action for resolved source-conflict decisions so the browser-state resolved flag can be cleared for that `project.id`. Reset does not mutate the local project, and if the discovered project still differs after reset, the conflict can appear again as unresolved. The MS-021.16 persistence behavior and MS-021.15 feedback remain preserved, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
@@ -1533,7 +1533,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-028.4 - GitHub Repository Local Clone Readiness Foundation`
+* `Latest Completed Product Milestone` is `MS-028.5 - GitHub Repository Real Execution Contract Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 085 - MS-028.4 control files sync
+## Session 085 - MS-028.5 control files sync
 
 ### Date
 
@@ -77,16 +77,16 @@ Each release entry should contain:
 
 ### Completed
 
-* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.4 - GitHub Repository Local Clone Readiness Foundation` as completed / verified / published / closed.
-* Recorded that project settings now show a compact local clone/workspace readiness status block once a GitHub repository URL exists.
-* Recorded that the block says the local clone/workspace is not configured or not verified yet, real clone/fetch/checkout/filesystem validation remain future work, branch choice and branch name remain metadata only, and no files are copied or cloned in this milestone.
-* Recorded that the block is derived UI/status only and does not introduce persistent clone state.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.5 - GitHub Repository Real Execution Contract Foundation` as completed / verified / published / closed.
+* Recorded that the SSOT now defines the contract and safety boundary for the first real Git/GitHub execution work only.
+* Recorded that real execution may start only after the repository URL exists, GitHub connection/authentication is explicitly available or approved, the local clone/workspace location is configured or approved, the Product Owner selected main or working branch mode, the working branch name is present and confirmed when needed, and the Product Owner explicitly confirms the specific real operation before execution.
+* Recorded that no silent work on main occurs, no branch creation happens without Product Owner confirmation, clone/fetch/checkout/push/merge/PR/sync require explicit Product Owner confirmation, sync back to main remains separate, and execution must stop with a blocker when the repository state is dirty, ambiguous, unauthenticated, or missing local clone context.
 * Appended the Session 085 usage record.
 
 ### Notes
 
 * No product code changed in this control-files sync.
-* No GitHub OAuth, access tokens, GitHub API integration, filesystem checks, folder creation, or real Git workflow behavior was introduced.
+* No GitHub OAuth, access tokens, GitHub API integration, real Git workflow behavior, filesystem checks, or folder creation was introduced.
 
 ## Session 085 - MS-028.2 control files sync
 

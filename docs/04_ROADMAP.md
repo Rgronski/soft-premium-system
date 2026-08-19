@@ -129,21 +129,22 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.2` - GitHub Repository Branch Work Mode Summary Foundation
 * `MS-028.3` - GitHub Repository Connection Readiness Foundation
 * `MS-028.4` - GitHub Repository Local Clone Readiness Foundation
+* `MS-028.5` - GitHub Repository Real Execution Contract Foundation
 
 ## Current
 
 NONE / Product Owner decision required
 
-Session 085 synchronized the accepted `MS-028.4` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 085 synchronized the accepted `MS-028.5` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-028.4 - GitHub Repository Local Clone Readiness Foundation
+MS-028.5 - GitHub Repository Real Execution Contract Foundation
 
-## MS-028.4 - GitHub Repository Local Clone Readiness Foundation
+## MS-028.5 - GitHub Repository Real Execution Contract Foundation
 
 **Milestone**
-MS-028.4 - GitHub Repository Local Clone Readiness Foundation
+MS-028.5 - GitHub Repository Real Execution Contract Foundation
 
 **Type**
 Product Milestone
@@ -173,24 +174,30 @@ Chief Architect
 Codex
 
 **Purpose**
-Present a compact local clone/workspace readiness layer for future clone and workspace work after a repository URL is present, without introducing any real clone workflow execution in this milestone.
+Define the contract and safety boundary for the first real Git/GitHub execution work without implementing any real execution in this milestone.
 
 **Product Outcome**
-After a GitHub repository URL exists in project settings, the repository now shows a compact local clone/workspace readiness status block that records the local clone/workspace as not configured or not verified yet, keeps real clone, fetch, checkout, and filesystem validation as future work, treats branch choice and branch name as metadata only, and states that no files are copied and no repository is cloned in this milestone.
+After readiness UI/status foundations are complete through MS-028.4, this milestone defines the execution contract only. Real Git/GitHub execution may start only after the repository URL exists, GitHub connection/authentication is explicitly available or approved, the local clone/workspace location is configured or approved, the Product Owner has selected main or working branch mode, the working branch name is present and confirmed when working branch mode is selected, and the Product Owner explicitly confirms the specific real operation before execution. The contract requires that no silent work on main occurs, no branch is created without Product Owner confirmation, no clone/fetch/checkout/push/merge/PR/sync occurs without explicit Product Owner confirmation, sync back to main stays a separate future milestone, and execution must stop with a blocker when the repository state is dirty, ambiguous, unauthenticated, or missing local clone context.
 
 **Dependencies**
-MS-028.3 - GitHub Repository Connection Readiness Foundation
+MS-028.4 - GitHub Repository Local Clone Readiness Foundation
 
 **Implementation Scope**
-Project settings local clone/workspace readiness UI and derived local state only.
+Docs-only real execution contract and safety boundary for future Git/GitHub execution.
 
 **Allowed Scope**
-Docs publication, settings UI/test foundation, and derived readiness messaging for the existing repository URL and branch-preparation signals.
+Docs publication, sequencing guidance, execution safety rules, and blocker conditions for the future first real operation.
 
 **Forbidden Scope**
-Real Git operations, clone/fetch/checkout, branch creation on disk or remote, merge, pull request, sync-to-main, filesystem checks, folder creation, path picker, backend persistence, GitHub API integration, GitHub OAuth, access tokens, new secrets, env vars, and unrelated UI or domain changes.
+GitHub OAuth, access tokens, GitHub API integration, real Git operations, clone/fetch/checkout, branch creation on disk or remote, push, merge, pull request, sync-to-main, backend persistence, filesystem checks, and unrelated UI or domain changes.
 
-## MS-028.3 - GitHub Repository Connection Readiness Foundation
+**Sequencing**
+1. Readiness UI/status foundations are complete through MS-028.4.
+2. MS-028.5 defines the execution contract only.
+3. A future milestone may implement the first real readiness check or clone/setup action only after Product Owner approval.
+4. Future sync, merge, and PR to main remains later and separate.
+
+## MS-028.4 - GitHub Repository Local Clone Readiness Foundation
 
 **Milestone**
 MS-028.2 - GitHub Repository Branch Work Mode Summary Foundation
