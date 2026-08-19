@@ -110,6 +110,31 @@ function buildGitHubConnectionReadinessSummary(
   ];
 }
 
+function buildLocalCloneReadinessSummary(
+  hasRepositoryUrl: boolean,
+  branchWorkMode: ProjectBranchWorkMode | null,
+  workingBranchName: string,
+  projectName: string,
+): string[] | null {
+  if (!hasRepositoryUrl) {
+    return null;
+  }
+
+  const preparedWorkingBranchName =
+    workingBranchName.trim() || buildWorkingBranchName(projectName);
+
+  return [
+    "Lokalny klon / workspace nie jest jeszcze skonfigurowany ani zweryfikowany.",
+    "Prawdziwe clone, fetch, checkout i walidacja filesystemu to przyszĹ‚a praca.",
+    branchWorkMode === "working-branch"
+      ? `Przygotowana nazwa gaĹ‚Ä™zi roboczej to \`${preparedWorkingBranchName}\`, ale nadal jest tylko metadanymi przygotowania.`
+      : branchWorkMode === "main"
+        ? "Wybrano pracÄ™ na `main`, ale to nadal tylko metadane przygotowania lokalnego workspace."
+        : "WybĂłr gaĹ‚Ä™zi roboczej pozostaje tylko metadanymi przygotowania lokalnego workspace.",
+    "W tym kroku nie kopiujemy plikĂłw i nie klonujemy repozytorium.",
+  ];
+}
+
 function readProjectWorkingBranchName(projectId: string): string {
   if (typeof window === "undefined") {
     return "";
@@ -200,6 +225,12 @@ export default function ProjectSettingsPage() {
   );
   const githubConnectionReadinessSummary =
     buildGitHubConnectionReadinessSummary(Boolean(project.repositoryUrl?.trim()));
+  const localCloneReadinessSummary = buildLocalCloneReadinessSummary(
+    Boolean(project.repositoryUrl?.trim()),
+    branchWorkMode,
+    workingBranchName,
+    project.name,
+  );
 
   function handleSaveGithubUrl() {
     const trimmedGithubUrl = githubUrlInput.trim();
@@ -449,6 +480,24 @@ export default function ProjectSettingsPage() {
             </p>
             <div className="mt-3 space-y-2">
               {githubConnectionReadinessSummary.map((line) => (
+                <p key={line} className="text-sm text-zinc-400">
+                  {line}
+                </p>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        {localCloneReadinessSummary ? (
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              Gotowość lokalnego klonu
+            </p>
+            <p className="mt-2 text-sm text-zinc-300">
+              GitHub wykryty, ale lokalny klon/workspace nie jest jeszcze gotowy.
+            </p>
+            <div className="mt-3 space-y-2">
+              {localCloneReadinessSummary.map((line) => (
                 <p key={line} className="text-sm text-zinc-400">
                   {line}
                 </p>

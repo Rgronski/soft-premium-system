@@ -116,6 +116,41 @@ describe("ProjectSettingsPage", () => {
     ).toBeTruthy();
   });
 
+  test("shows a local clone readiness block with branch metadata after branch preparation is selected", async () => {
+    render(<ProjectSettingsPage />);
+
+    fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
+      target: { value: "https://github.com/example/beauty-client-pro" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /Zapisz adres GitHub/ }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Decyzja pracy z ga/)).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getAllByRole("radio")[1]);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(/Lokalny klon \/ workspace nie jest jeszcze skonfigurowany ani zweryfikowany/),
+      ).toBeTruthy();
+    });
+
+    expect(screen.getByText(/GitHub wykryty, ale lokalny klon\/workspace nie jest jeszcze gotowy\./)).toBeTruthy();
+    expect(
+      screen.getByText(/Lokalny klon \/ workspace nie jest jeszcze skonfigurowany ani zweryfikowany\./),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Prawdziwe clone, fetch, checkout i walidacja filesystemu to przysz/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Przygotowana nazwa ga.*roboczej to `work\/beauty-client-pro`, ale nadal jest tylko metadanymi przygotowania\./),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/W tym kroku nie kopiujemy plik.* i nie klonujemy repozytorium\./),
+    ).toBeTruthy();
+  });
+
   test("shows a main-mode summary after the Product Owner chooses main", async () => {
     render(<ProjectSettingsPage />);
 

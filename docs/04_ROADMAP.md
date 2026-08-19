@@ -128,21 +128,22 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.1` - GitHub Repository Working Branch Name Foundation
 * `MS-028.2` - GitHub Repository Branch Work Mode Summary Foundation
 * `MS-028.3` - GitHub Repository Connection Readiness Foundation
+* `MS-028.4` - GitHub Repository Local Clone Readiness Foundation
 
 ## Current
 
 NONE / Product Owner decision required
 
-Session 085 synchronized the accepted `MS-028.3` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 085 synchronized the accepted `MS-028.4` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-028.3 - GitHub Repository Connection Readiness Foundation
+MS-028.4 - GitHub Repository Local Clone Readiness Foundation
 
-## MS-028.3 - GitHub Repository Connection Readiness Foundation
+## MS-028.4 - GitHub Repository Local Clone Readiness Foundation
 
 **Milestone**
-MS-028.3 - GitHub Repository Connection Readiness Foundation
+MS-028.4 - GitHub Repository Local Clone Readiness Foundation
 
 **Type**
 Product Milestone
@@ -172,24 +173,24 @@ Chief Architect
 Codex
 
 **Purpose**
-Present a compact GitHub connection readiness/status layer for future connection work after a repository URL is present, without introducing any real Git workflow execution in this milestone.
+Present a compact local clone/workspace readiness layer for future clone and workspace work after a repository URL is present, without introducing any real clone workflow execution in this milestone.
 
 **Product Outcome**
-After a GitHub repository URL exists in project settings, the repository now shows a compact GitHub connection readiness/status block that records the repository URL as detected, marks GitHub connection as not connected / not verified yet, keeps authentication and connection setup as future work, notes that local clone and real Git workflow are not configured yet, and states that branch workflow preparation exists while real Git execution still does not happen.
+After a GitHub repository URL exists in project settings, the repository now shows a compact local clone/workspace readiness status block that records the local clone/workspace as not configured or not verified yet, keeps real clone, fetch, checkout, and filesystem validation as future work, treats branch choice and branch name as metadata only, and states that no files are copied and no repository is cloned in this milestone.
 
 **Dependencies**
-MS-028.2 - GitHub Repository Branch Work Mode Summary Foundation
+MS-028.3 - GitHub Repository Connection Readiness Foundation
 
 **Implementation Scope**
-Project settings GitHub connection readiness/status UI and derived local state only.
+Project settings local clone/workspace readiness UI and derived local state only.
 
 **Allowed Scope**
-Docs publication, settings UI/test foundation, and derived readiness messaging for the existing repository URL signal.
+Docs publication, settings UI/test foundation, and derived readiness messaging for the existing repository URL and branch-preparation signals.
 
 **Forbidden Scope**
-GitHub OAuth, access tokens, GitHub API integration, real Git operations, repository clone/check/fetch, branch creation on disk or remote, checkout, merge, pull request, sync-to-main, backend persistence, and unrelated UI or domain changes.
+Real Git operations, clone/fetch/checkout, branch creation on disk or remote, merge, pull request, sync-to-main, filesystem checks, folder creation, path picker, backend persistence, GitHub API integration, GitHub OAuth, access tokens, new secrets, env vars, and unrelated UI or domain changes.
 
-## MS-028.2 - GitHub Repository Branch Work Mode Summary Foundation
+## MS-028.3 - GitHub Repository Connection Readiness Foundation
 
 **Milestone**
 MS-028.2 - GitHub Repository Branch Work Mode Summary Foundation
