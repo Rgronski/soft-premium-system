@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-027.5 - Project Scoped Data Rebinding Guard Foundation
+MS-028.0 - GitHub Repository Branch Work Mode Decision Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-028.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Repository Branch Work Mode Decision Foundation. After a GitHub repository URL exists in project settings, the repository now shows a controlled Product Owner branch work mode decision instead of silently assuming work on `main`. The available choices are `Pracuj na main` and `Utwórz i użyj gałęzi roboczej`. The decision is persisted in local browser state per project using `soft-premium-system.projects.<id>.branch-work-mode`, and the UI explicitly states that synchronizing approved changes back to `main` is future work that is not implemented in this milestone. The repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 MS-027.5 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Scoped Data Rebinding Guard Foundation. The repository now preserves existing task and knowledge collections when a duplicate project id is merged away during dedupe or upsert, rewrites their stored `projectId` values to the canonical project, and avoids creating fake scoped data when none exists. This is a future/legacy-safe guard and does not recover the previously lost live BCP-MS-001 task. Product Owner manually recreated BCP-MS-001 after the live browser storage proved unrecoverable. The repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
@@ -363,9 +365,9 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-027.5 - Project Scoped Data Rebinding Guard Foundation
+Latest Completed Product Milestone: MS-028.0 - GitHub Repository Branch Work Mode Decision Foundation
 Next Product Milestone: NONE / Product Owner decision required
-Session 083 synchronized the accepted `MS-026.1 / MS-026.1b / MS-026.1c` control files in the current local workspace. The repository now confirms the accepted MS-026.1-series Polish UI overlay cleanup for the live-test shell, workspace, AI workspace, and workflow paths. The remaining visible product terms render in Polish for the user-facing labels verified in this session, while the program backbone, identifiers, routes, engine states, contracts, and internal logic remain English. `src/lib/app-version.ts` still exposes `1.026.0` as the Product Owner-approved live-test branch/build marker. No routing, data-flow, API, storage, Project Brain logic, Workflow Engine logic, Konduktor logic, automation, or scheduling changed.
+Session 085 synchronized the accepted `MS-028.0` control files in the current local workspace. The repository now shows a controlled Product Owner branch work mode decision after a GitHub repository URL exists in project settings, persists the selected mode in local browser state per project, and states that syncing approved changes back to `main` is future work. No Git branch creation, GitHub API integration, sync-to-main behavior, or backend persistence was introduced.
 
 MS-021.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Reset Foundation; the repository now exposes a local `Cofnij decyzję` action for resolved source-conflict decisions so the browser-state resolved flag can be cleared for that `project.id`. Reset does not mutate the local project, and if the discovered project still differs after reset, the conflict can appear again as unresolved. The MS-021.16 persistence behavior and MS-021.15 feedback remain preserved, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
@@ -1531,7 +1533,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-024.1 - Konduktor Recommendation Reason Clarity Foundation`
+* `Latest Completed Product Milestone` is `MS-028.0 - GitHub Repository Branch Work Mode Decision Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

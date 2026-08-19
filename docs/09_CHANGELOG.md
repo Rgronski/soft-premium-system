@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 085 - MS-028.0 control files sync
+
+### Date
+
+2026-08-19
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.0 - GitHub Repository Branch Work Mode Decision Foundation` as completed / verified / published / closed.
+* Recorded that project settings now surface a controlled Product Owner decision between `Pracuj na main` and `Utwórz i użyj gałęzi roboczej` once a GitHub repository URL exists.
+* Recorded that the decision is persisted in local browser state per project using `soft-premium-system.projects.<id>.branch-work-mode` and that syncing approved changes back to `main` remains future work.
+* Appended the Session 085 usage record.
+
+### Notes
+
+* No product code changed in this control-files sync.
+* No Git operations, GitHub API integration, or sync-to-main behavior was introduced.
+
 ## Session 084 - Session close protocol and handoff publication
 
 ### Date

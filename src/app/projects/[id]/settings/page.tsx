@@ -10,11 +10,45 @@ import type { Project } from "@/lib/project/types";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
+type ProjectBranchWorkMode = "main" | "working-branch";
+
+const PROJECT_BRANCH_WORK_MODE_STORAGE_SUFFIX = "branch-work-mode";
+
 function saveProjectBinding(project: Project, updates: Partial<Project>): Project {
   return upsertProject({
     ...project,
     ...updates,
   });
+}
+
+function getProjectBranchWorkModeStorageKey(projectId: string): string {
+  return `soft-premium-system.projects.${projectId}.${PROJECT_BRANCH_WORK_MODE_STORAGE_SUFFIX}`;
+}
+
+function readProjectBranchWorkMode(
+  projectId: string,
+): ProjectBranchWorkMode | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  const storedValue = localStorage.getItem(
+    getProjectBranchWorkModeStorageKey(projectId),
+  );
+
+  return storedValue === "main" || storedValue === "working-branch"
+    ? storedValue
+    : null;
+}
+
+function saveProjectBranchWorkMode(
+  projectId: string,
+  branchWorkMode: ProjectBranchWorkMode,
+): void {
+  localStorage.setItem(
+    getProjectBranchWorkModeStorageKey(projectId),
+    branchWorkMode,
+  );
 }
 
 export default function ProjectSettingsPage() {
@@ -28,6 +62,10 @@ export default function ProjectSettingsPage() {
   const [workingDirectoryInput, setWorkingDirectoryInput] = useState(
     () => getProjectById(params.id)?.workingDirectory ?? "",
   );
+  const [branchWorkMode, setBranchWorkMode] =
+    useState<ProjectBranchWorkMode | null>(() =>
+      readProjectBranchWorkMode(params.id),
+    );
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -36,6 +74,7 @@ export default function ProjectSettingsPage() {
     setProject(nextProject);
     setGithubUrlInput(nextProject?.repositoryUrl ?? "");
     setWorkingDirectoryInput(nextProject?.workingDirectory ?? "");
+    setBranchWorkMode(readProjectBranchWorkMode(params.id));
     setFeedbackMessage(null);
   }, [params.id]);
 
@@ -43,7 +82,9 @@ export default function ProjectSettingsPage() {
     return (
       <SectionCard>
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold text-zinc-50">Ustawienia źródła</h2>
+          <h2 className="text-2xl font-semibold text-zinc-50">
+            Ustawienia źródła
+          </h2>
           <p className="text-zinc-400">Projekt nie został znaleziony.</p>
         </div>
       </SectionCard>
@@ -80,8 +121,18 @@ export default function ProjectSettingsPage() {
     });
 
     setProject(nextProject);
+    setFeedbackMessage("Istniejący katalog repo zapisano jako metadane projektu.");
+  }
+
+  function handleBranchWorkModeChange(
+    nextBranchWorkMode: ProjectBranchWorkMode,
+  ) {
+    saveProjectBranchWorkMode(params.id, nextBranchWorkMode);
+    setBranchWorkMode(nextBranchWorkMode);
     setFeedbackMessage(
-      "Istniejący katalog repo zapisano jako metadane projektu.",
+      nextBranchWorkMode === "main"
+        ? "Wybrano pracę bezpośrednio na main jako decyzję Product Ownera."
+        : "Wybrano użycie gałęzi roboczej jako decyzję Product Ownera.",
     );
   }
 
@@ -179,6 +230,70 @@ export default function ProjectSettingsPage() {
             </button>
           </div>
         </div>
+
+        {project.repositoryUrl?.trim() ? (
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              Decyzja pracy z gałęzią
+            </p>
+            <p className="mt-2 text-sm text-zinc-300">
+              Po podaniu adresu GitHub wybierz, czy projekt ma pracować
+              bezpośrednio na `main`, czy na gałęzi roboczej.
+            </p>
+            <p className="mt-2 text-sm text-zinc-400">
+              Synchronizacja zatwierdzonych zmian z powrotem do `main` jest
+              przyszłą pracą, która nie jest jeszcze zaimplementowana.
+            </p>
+
+            <div className="mt-4 space-y-3">
+              <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-zinc-800 bg-zinc-950/80 p-3">
+                <input
+                  type="radio"
+                  name="branch-work-mode"
+                  checked={branchWorkMode === "main"}
+                  onChange={() => handleBranchWorkModeChange("main")}
+                  className="mt-1"
+                />
+                <span>
+                  <span className="block text-sm font-medium text-zinc-100">
+                    Pracuj na `main`
+                  </span>
+                  <span className="block text-sm text-zinc-400">
+                    Najprostszy tryb, bez tworzenia osobnej gałęzi roboczej.
+                  </span>
+                </span>
+              </label>
+
+              <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-zinc-800 bg-zinc-950/80 p-3">
+                <input
+                  type="radio"
+                  name="branch-work-mode"
+                  checked={branchWorkMode === "working-branch"}
+                  onChange={() => handleBranchWorkModeChange("working-branch")}
+                  className="mt-1"
+                />
+                <span>
+                  <span className="block text-sm font-medium text-zinc-100">
+                    Utwórz i użyj gałęzi roboczej
+                  </span>
+                  <span className="block text-sm text-zinc-400">
+                    Gałąź robocza ma pozostać lokalną decyzją pracy, a
+                    synchronizacja do `main` zostaje na później.
+                  </span>
+                </span>
+              </label>
+            </div>
+
+            <p className="mt-4 text-sm text-zinc-400" aria-live="polite">
+              Wybrany tryb pracy:{" "}
+              {branchWorkMode === "main"
+                ? "Pracuj na `main`"
+                : branchWorkMode === "working-branch"
+                  ? "Utwórz i użyj gałęzi roboczej"
+                  : "nie wybrano"}
+            </p>
+          </div>
+        ) : null}
 
         <div className="rounded-2xl border border-dashed border-zinc-800 bg-zinc-950/40 p-4">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">

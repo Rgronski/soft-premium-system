@@ -124,16 +124,79 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-027.3` - Real Project Source Binding Status Foundation
 * `MS-027.4` - GitHub Repository Import / Bind Decision Foundation
 * `MS-027.5` - Project Scoped Data Rebinding Guard Foundation
+* `MS-028.0` - GitHub Repository Branch Work Mode Decision Foundation
 
 ## Current
 
 NONE / Product Owner decision required
 
-Session 083 synchronized the accepted `MS-026.0` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 085 synchronized the accepted `MS-028.0` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
-MS-027.5 - Project Scoped Data Rebinding Guard Foundation
+MS-028.0 - GitHub Repository Branch Work Mode Decision Foundation
+
+## MS-028.0 - GitHub Repository Branch Work Mode Decision Foundation
+
+**Milestone**
+MS-028.0 - GitHub Repository Branch Work Mode Decision Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Capture the controlled Product Owner decision for GitHub-backed projects to work on `main` or on a working branch, without adding Git operations or sync-to-main behavior in this milestone.
+
+**Product Outcome**
+After a GitHub repository URL exists in project settings, the repository now shows a controlled Product Owner branch work mode decision instead of silently assuming work on `main`. The available choices are `Pracuj na main` and `Utwórz i użyj gałęzi roboczej`. The decision is persisted in local browser state per project using `soft-premium-system.projects.<id>.branch-work-mode`, and the UI explicitly states that synchronizing approved changes back to `main` is future work that is not implemented in this milestone.
+
+**Dependencies**
+* closed `MS-027.5 - Project Scoped Data Rebinding Guard Foundation`
+
+**Allowed Implementation Scope**
+* docs-only contract publication
+* controlled branch work mode decision UI and browser-state persistence
+* clear future-work guidance for sync back to `main`
+* focused tests for the directly touched path
+
+**Forbidden Scope**
+* real Git branch creation
+* GitHub API integration
+* sync/merge/PR to `main`
+* backend persistence
+* broad refactors
+* unrelated cleanup
+
+**Ownership Boundaries**
+* `docs/04_ROADMAP.md` owns the milestone contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` own the synchronized publication snapshot
+* `src/app/projects/[id]/settings/page.tsx` and `src/app/projects/[id]/settings/page.test.tsx` own the minimal UI/state contract for the decision foundation
+
+## MS-027.5 - Project Scoped Data Rebinding Guard Foundation
 
 ## MS-027.5 - Project Scoped Data Rebinding Guard Foundation
 

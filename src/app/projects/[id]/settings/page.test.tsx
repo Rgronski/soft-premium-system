@@ -35,7 +35,9 @@ describe("ProjectSettingsPage", () => {
     render(<ProjectSettingsPage />);
 
     expect(
-      screen.getByText("Projekt ma tylko manifest SPS. Możesz zostawić go jako manifest, podpiąć istniejący katalog repo albo dodać adres GitHub."),
+      screen.getByText(
+        "Projekt ma tylko manifest SPS. Możesz zostawić go jako manifest, podpiąć istniejący katalog repo albo dodać adres GitHub.",
+      ),
     ).toBeTruthy();
     expect(screen.getAllByText("Adres GitHub: nie podano")).toHaveLength(2);
     expect(screen.getAllByText("Lokalne repo Git: niedostępne")).toHaveLength(1);
@@ -45,6 +47,7 @@ describe("ProjectSettingsPage", () => {
       ),
     ).toBeTruthy();
     expect(screen.getByText("Pozostaw jako manifest-only")).toBeTruthy();
+    expect(screen.queryByText("Decyzja pracy z gałęzią")).toBeNull();
   });
 
   test("stores a GitHub URL as metadata without creating a duplicate project", async () => {
@@ -64,6 +67,8 @@ describe("ProjectSettingsPage", () => {
         "Kontekst repozytorium niedostępny: adres GitHub jest zapisany, ale lokalne repo Git nadal nie jest dostępne.",
       ),
     ).toBeTruthy();
+    expect(screen.getByText("Decyzja pracy z gałęzią")).toBeTruthy();
+    expect(screen.getByText("Wybrany tryb pracy: nie wybrano")).toBeTruthy();
 
     const savedProjects = JSON.parse(
       localStorage.getItem("soft-premium-system.projects") ?? "[]",
@@ -74,5 +79,32 @@ describe("ProjectSettingsPage", () => {
     expect(savedProjects[0].repositoryUrl).toBe(
       "https://github.com/example/beauty-client-pro",
     );
+  });
+
+  test("stores the branch work mode decision in browser state after the GitHub URL is present", async () => {
+    render(<ProjectSettingsPage />);
+
+    fireEvent.change(screen.getByLabelText("Podaj adres GitHub"), {
+      target: { value: "https://github.com/example/beauty-client-pro" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz adres GitHub" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Decyzja pracy z gałęzią")).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getAllByRole("radio")[1]);
+
+    expect(screen.getByText("Wybrany tryb pracy: Utwórz i użyj gałęzi roboczej")).toBeTruthy();
+    expect(
+      localStorage.getItem(
+        "soft-premium-system.projects.project-1.branch-work-mode",
+      ),
+    ).toBe("working-branch");
+    expect(
+      screen.getByText(
+        "Wybrano użycie gałęzi roboczej jako decyzję Product Ownera.",
+      ),
+    ).toBeTruthy();
   });
 });
