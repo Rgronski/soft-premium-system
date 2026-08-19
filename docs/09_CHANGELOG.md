@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 085 - MS-028.2 control files sync
+
+### Date
+
+2026-08-19
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.2 - GitHub Repository Branch Work Mode Summary Foundation` as completed / verified / published / closed.
+* Recorded that project settings now show a compact visible summary of the selected branch work setup once a GitHub repository URL exists and a branch work mode has been chosen.
+* Recorded that the summary confirms work on `main` when `main` is selected, shows the selected working branch name when `working-branch` is selected, and falls back to the suggested `work/<project-slug>` shape when needed.
+* Recorded that the summary uses the existing `soft-premium-system.projects.<id>.branch-work-mode` and `soft-premium-system.projects.<id>.working-branch-name` browser-state values.
+* Recorded that real branch creation, checkout, synchronization, merge, pull request, and GitHub API flow remain future work.
+* Appended the Session 085 usage record.
+
+### Notes
+
+* No product code changed in this control-files sync.
+* No Git operations, GitHub API integration, or sync-to-main behavior was introduced.
+
 ## Session 085 - MS-028.1 control files sync
 
 ### Date

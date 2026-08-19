@@ -126,16 +126,69 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-027.5` - Project Scoped Data Rebinding Guard Foundation
 * `MS-028.0` - GitHub Repository Branch Work Mode Decision Foundation
 * `MS-028.1` - GitHub Repository Working Branch Name Foundation
+* `MS-028.2` - GitHub Repository Branch Work Mode Summary Foundation
 
 ## Current
 
 NONE / Product Owner decision required
 
-Session 085 synchronized the accepted `MS-028.1` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 085 synchronized the accepted `MS-028.2` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
+MS-028.2 - GitHub Repository Branch Work Mode Summary Foundation
+
+## MS-028.2 - GitHub Repository Branch Work Mode Summary Foundation
+
+**Milestone**
+MS-028.2 - GitHub Repository Branch Work Mode Summary Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Capture a compact visible confirmation of the selected GitHub repository branch work setup after the Product Owner chooses a branch work mode, without adding Git workflow execution in this milestone.
+
+**Product Outcome**
+After a GitHub repository URL exists and the Product Owner chooses a branch work mode, project settings now show a compact summary of the current branch work setup. The summary says the project is prepared to work on `main` when `main` is selected, or shows the selected working branch name when `working-branch` is selected. When needed, the summary falls back to the suggested `work/<project-slug>` shape. The summary uses the existing local browser-state values `soft-premium-system.projects.<id>.branch-work-mode` and `soft-premium-system.projects.<id>.working-branch-name`. Real branch creation, checkout, synchronization, merge, pull request, and GitHub API flow remain future work.
+
+**Dependencies**
 MS-028.1 - GitHub Repository Working Branch Name Foundation
+
+**Implementation Scope**
+Project settings branch work mode summary and confirmation UI/state contract only.
+
+**Allowed Scope**
+Docs publication, settings UI/test foundation, and local browser-state summary for the selected branch work setup.
+
+**Forbidden Scope**
+Real Git operations, GitHub API integration, branch creation on disk or remote, checkout, merge, pull request, sync-to-main, backend persistence, and unrelated UI or domain changes.
+
+## MS-028.1 - GitHub Repository Working Branch Name Foundation
 
 ## MS-028.1 - GitHub Repository Working Branch Name Foundation
 

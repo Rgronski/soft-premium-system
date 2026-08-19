@@ -66,6 +66,34 @@ function buildWorkingBranchName(projectName: string): string {
   return `work/${slug || "project"}`;
 }
 
+function buildBranchWorkModeSummary(
+  projectName: string,
+  branchWorkMode: ProjectBranchWorkMode | null,
+  workingBranchName: string,
+): { summary: string; note: string } | null {
+  if (!branchWorkMode) {
+    return null;
+  }
+
+  const futureWorkNote =
+    "Prawdziwe tworzenie gałęzi, checkout, synchronizacja, merge i PR to przyszła praca i nie jest jeszcze wykonywane.";
+
+  if (branchWorkMode === "main") {
+    return {
+      summary: "Projekt jest przygotowany do pracy na `main`.",
+      note: futureWorkNote,
+    };
+  }
+
+  const selectedWorkingBranchName =
+    workingBranchName.trim() || buildWorkingBranchName(projectName);
+
+  return {
+    summary: `Projekt jest przygotowany do pracy na gałęzi roboczej \`${selectedWorkingBranchName}\`.`,
+    note: futureWorkNote,
+  };
+}
+
 function readProjectWorkingBranchName(projectId: string): string {
   if (typeof window === "undefined") {
     return "";
@@ -149,6 +177,11 @@ export default function ProjectSettingsPage() {
   }
 
   const summary = getProjectBindingDecisionSummary(project);
+  const branchWorkModeSummary = buildBranchWorkModeSummary(
+    project.name,
+    branchWorkMode,
+    workingBranchName,
+  );
 
   function handleSaveGithubUrl() {
     const trimmedGithubUrl = githubUrlInput.trim();
@@ -362,6 +395,20 @@ export default function ProjectSettingsPage() {
                 </span>
               </label>
             </div>
+
+            {branchWorkModeSummary ? (
+              <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-950/80 p-3">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                  Podsumowanie konfiguracji
+                </p>
+                <p className="mt-2 text-sm text-zinc-300">
+                  {branchWorkModeSummary.summary}
+                </p>
+                <p className="mt-2 text-sm text-zinc-400">
+                  {branchWorkModeSummary.note}
+                </p>
+              </div>
+            ) : null}
 
             <p className="mt-4 text-sm text-zinc-400" aria-live="polite">
               Wybrany tryb pracy:{" "}

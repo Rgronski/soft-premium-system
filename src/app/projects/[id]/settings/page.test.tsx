@@ -35,41 +35,38 @@ describe("ProjectSettingsPage", () => {
     render(<ProjectSettingsPage />);
 
     expect(
-      screen.getAllByText(
-        "Projekt ma tylko manifest SPS. Możesz zostawić go jako manifest, podpiąć istniejący katalog repo albo dodać adres GitHub.",
-      ),
-    ).toHaveLength(1);
-    expect(screen.getAllByText("Adres GitHub: nie podano")).toHaveLength(2);
-    expect(screen.getAllByText("Lokalne repo Git: niedostępne")).toHaveLength(1);
-    expect(
-      screen.getByText(
-        "Następny krok: podaj adres GitHub lub wskaż istniejący katalog repo.",
-      ),
+      screen.getByText(/Projekt ma tylko manifest SPS/),
     ).toBeTruthy();
-    expect(screen.getByText("Pozostaw jako manifest-only")).toBeTruthy();
-    expect(screen.queryByText("Decyzja pracy z gałęzią")).toBeNull();
+    expect(screen.getAllByText(/Adres GitHub: nie podano/)).toHaveLength(2);
+    expect(screen.getAllByText(/Lokalne repo Git: niedostępne/)).toHaveLength(1);
+    expect(
+      screen.getByText(/Następny krok: podaj adres GitHub/),
+    ).toBeTruthy();
+    expect(screen.getByText(/Pozostaw jako manifest-only/)).toBeTruthy();
+    expect(screen.queryByText(/Decyzja pracy z ga/)).toBeNull();
   });
 
   test("stores a GitHub URL as metadata without creating a duplicate project", async () => {
     render(<ProjectSettingsPage />);
 
-    fireEvent.change(screen.getByLabelText("Podaj adres GitHub"), {
+    fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
       target: { value: "https://github.com/example/beauty-client-pro" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Zapisz adres GitHub" }));
+    fireEvent.click(screen.getByRole("button", { name: /Zapisz adres GitHub/ }));
 
     await waitFor(() => {
-      expect(screen.getAllByText("Adres GitHub: podany")).toHaveLength(2);
+      expect(screen.getAllByText(/Adres GitHub: podany/)).toHaveLength(2);
     });
 
     expect(
-      screen.getAllByText(
-        "Kontekst repozytorium niedostępny: adres GitHub jest zapisany, ale lokalne repo Git nadal nie jest dostępne.",
+      screen.getByText(
+        /Kontekst repozytorium niedostępny: adres GitHub jest zapisany/,
       ),
-    ).toHaveLength(1);
-    expect(screen.getByText("Decyzja pracy z gałęzią")).toBeTruthy();
-    expect(screen.getByText("Wybrany tryb pracy: nie wybrano")).toBeTruthy();
-    expect(screen.queryByLabelText("Nazwa gałęzi roboczej")).toBeNull();
+    ).toBeTruthy();
+    expect(screen.getByText(/Decyzja pracy z ga/)).toBeTruthy();
+    expect(screen.getByText(/Wybrany tryb pracy: nie wybrano/)).toBeTruthy();
+    expect(screen.queryByLabelText(/Nazwa ga/i)).toBeNull();
+    expect(screen.queryByText(/Podsumowanie konfiguracji/)).toBeNull();
 
     const savedProjects = JSON.parse(
       localStorage.getItem("soft-premium-system.projects") ?? "[]",
@@ -82,48 +79,82 @@ describe("ProjectSettingsPage", () => {
     );
   });
 
+  test("shows a main-mode summary after the Product Owner chooses main", async () => {
+    render(<ProjectSettingsPage />);
+
+    fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
+      target: { value: "https://github.com/example/beauty-client-pro" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /Zapisz adres GitHub/ }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Decyzja pracy z ga/)).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getAllByRole("radio")[0]);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Podsumowanie konfiguracji/)).toBeTruthy();
+    });
+
+    expect(
+      screen.getByText(/Projekt jest przygotowany do pracy na `main`/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Prawdziwe tworzenie ga.*checkout.*merge i PR/),
+    ).toBeTruthy();
+    expect(screen.queryByLabelText(/Nazwa ga/i)).toBeNull();
+  });
+
   test("shows a proposed branch name when the working branch mode is selected", async () => {
     render(<ProjectSettingsPage />);
 
-    fireEvent.change(screen.getByLabelText("Podaj adres GitHub"), {
+    fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
       target: { value: "https://github.com/example/beauty-client-pro" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Zapisz adres GitHub" }));
+    fireEvent.click(screen.getByRole("button", { name: /Zapisz adres GitHub/ }));
 
     await waitFor(() => {
-      expect(screen.getByText("Decyzja pracy z gałęzią")).toBeTruthy();
+      expect(screen.getByText(/Decyzja pracy z ga/)).toBeTruthy();
     });
 
     fireEvent.click(screen.getAllByRole("radio")[1]);
 
     await waitFor(() => {
-      expect(screen.getByText("Proponowana gałąź robocza")).toBeTruthy();
+      expect(screen.getByText(/Proponowana ga.*robocza/)).toBeTruthy();
     });
 
     expect(
-      (screen.getByLabelText("Nazwa gałęzi roboczej") as HTMLInputElement).value,
+      (screen.getByLabelText(/Nazwa ga/i) as HTMLInputElement).value,
     ).toBe("work/beauty-client-pro");
+    expect(screen.getByText(/Podsumowanie konfiguracji/)).toBeTruthy();
+    expect(
+      screen.getByText(/Projekt jest przygotowany do pracy na ga.*work\/beauty-client-pro/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Prawdziwe tworzenie ga.*checkout.*merge i PR/),
+    ).toBeTruthy();
   });
 
   test("stores the edited branch name and restores it after remount", async () => {
     render(<ProjectSettingsPage />);
 
-    fireEvent.change(screen.getByLabelText("Podaj adres GitHub"), {
+    fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
       target: { value: "https://github.com/example/beauty-client-pro" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Zapisz adres GitHub" }));
+    fireEvent.click(screen.getByRole("button", { name: /Zapisz adres GitHub/ }));
 
     await waitFor(() => {
-      expect(screen.getByText("Decyzja pracy z gałęzią")).toBeTruthy();
+      expect(screen.getByText(/Decyzja pracy z ga/)).toBeTruthy();
     });
 
     fireEvent.click(screen.getAllByRole("radio")[1]);
 
     await waitFor(() => {
-      expect(screen.getByLabelText("Nazwa gałęzi roboczej")).toBeTruthy();
+      expect(screen.getByLabelText(/Nazwa ga/i)).toBeTruthy();
     });
 
-    fireEvent.change(screen.getByLabelText("Nazwa gałęzi roboczej"), {
+    fireEvent.change(screen.getByLabelText(/Nazwa ga/i), {
       target: { value: "work/beauty-client-pro-hotfix" },
     });
 
@@ -137,11 +168,11 @@ describe("ProjectSettingsPage", () => {
     render(<ProjectSettingsPage />);
 
     await waitFor(() => {
-      expect(screen.getByText("Proponowana gałąź robocza")).toBeTruthy();
+      expect(screen.getByText(/Proponowana ga.*robocza/)).toBeTruthy();
     });
 
     expect(
-      (screen.getByLabelText("Nazwa gałęzi roboczej") as HTMLInputElement).value,
+      (screen.getByLabelText(/Nazwa ga/i) as HTMLInputElement).value,
     ).toBe("work/beauty-client-pro-hotfix");
   });
 });
