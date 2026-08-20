@@ -42,17 +42,19 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE / Product Owner decision required
+MS-028.7 - GitHub Real Readiness Action Foundation
 
 **Latest Completed Milestone**
-MS-028.2 - GitHub Repository Branch Work Mode Summary Foundation
+MS-028.6 - GitHub Real Connection Readiness Check Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-028.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Repository Branch Work Mode Summary Foundation. After a GitHub repository URL exists in project settings and a branch work mode has been chosen, the repository now shows a compact visible summary of the branch work setup instead of leaving the choice implicit. The summary confirms work on `main` when `main` is selected, shows the selected working branch name when `working-branch` is selected, and falls back to the suggested `work/<project-slug>` shape when needed. The summary uses the existing local browser-state values `soft-premium-system.projects.<id>.branch-work-mode` and `soft-premium-system.projects.<id>.working-branch-name`, and real branch creation, checkout, synchronization, merge, pull request, and GitHub API flow remain future work. The repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
+MS-028.7 is APPROVED as the GitHub Real Readiness Action Foundation contract/design milestone in the current local workspace. The repository now defines a readiness/action decision layer derived from local UI/browser state only, expressing `ready`, `blocked`, and `requires confirmation` states while keeping explicit Product Owner confirmation required before any real Git/GitHub operation. Real Git/GitHub execution remains blocked, and the milestone is not implementation complete.
 
 MS-028.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Real Connection Readiness Check Foundation. After a GitHub repository URL exists in project settings, the repository now shows a compact derived real-readiness checklist for future GitHub execution that reports repository URL ready, branch work mode ready or missing, working branch name ready, missing, or not required, GitHub connection/authentication missing or required, local clone/workspace missing or required, and real Git execution blocked until explicit Product Owner confirmation. The gate derives from local UI/browser state only and does not perform execution. The repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
+
+MS-028.2 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Repository Branch Work Mode Summary Foundation. After a GitHub repository URL exists in project settings and a branch work mode has been chosen, the repository now shows a compact visible summary of the branch work setup instead of leaving the choice implicit. The summary confirms work on `main` when `main` is selected, shows the selected working branch name when `working-branch` is selected, and falls back to the suggested `work/<project-slug>` shape when needed. The summary uses the existing local browser-state values `soft-premium-system.projects.<id>.branch-work-mode` and `soft-premium-system.projects.<id>.working-branch-name`, and real branch creation, checkout, synchronization, merge, pull request, and GitHub API flow remain future work. The repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 MS-027.5 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Scoped Data Rebinding Guard Foundation. The repository now preserves existing task and knowledge collections when a duplicate project id is merged away during dedupe or upsert, rewrites their stored `projectId` values to the canonical project, and avoids creating fake scoped data when none exists. This is a future/legacy-safe guard and does not recover the previously lost live BCP-MS-001 task. Product Owner manually recreated BCP-MS-001 after the live browser storage proved unrecoverable. The repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 

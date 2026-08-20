@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 086 - MS-028.7 docs-only contract publication
+
+### Date
+
+2026-08-20
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.7 - GitHub Real Readiness Action Foundation` as the approved current contract/design milestone.
+* Recorded that `MS-028.7` is a docs-only readiness/action decision layer derived from local UI/browser state only and expressing `ready`, `blocked`, and `requires confirmation` states.
+* Recorded that explicit Product Owner confirmation remains required before any real Git/GitHub operation and that real Git/GitHub execution stays blocked.
+* Preserved `MS-028.6 - GitHub Real Connection Readiness Check Foundation` as the latest completed product milestone.
+* Recorded the Session 086 SSOT contract publication.
+
+### Notes
+
+* No product code or UI behavior changed in this contract publication.
+* No GitHub OAuth, tokens, GitHub API integration, real Git workflow behavior, filesystem writes, or remote synchronization was introduced.
+
 ## Session 085 - Session Close Protocol
 
 ### Date
