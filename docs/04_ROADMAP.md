@@ -134,13 +134,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-028.7 - GitHub Real Readiness Action Foundation
-
-Session 086 publishes the approved `MS-028.7` contract/design milestone in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.6 - GitHub Real Connection Readiness Check Foundation
+MS-028.7 - GitHub Real Readiness Action Foundation
 
 ## MS-028.6 - GitHub Real Connection Readiness Check Foundation
 
@@ -207,19 +205,19 @@ MS-028.7 - GitHub Real Readiness Action Foundation
 Product Milestone
 
 **Contract Status**
-APPROVED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Publication Status**
 PUBLISHED
 
 **Milestone Status**
-CONTRACT / DESIGN / NOT IMPLEMENTED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
-YES
+NO
 
 **Runtime Status**
-ACTIVE
+CLOSED
 
 **Owner**
 Product Owner
@@ -234,16 +232,16 @@ Codex
 Define the readiness/action decision layer for future GitHub real operations using only local UI/browser state and preserving a strict execution block.
 
 **Product Outcome**
-After MS-028.6 establishes the derived readiness checklist, this milestone defines the next contract layer that translates local UI/browser state into `ready`, `blocked`, and `requires confirmation` decision states. The action layer keeps explicit Product Owner confirmation required before any real Git/GitHub operation and keeps real Git/GitHub execution blocked until a later approved implementation milestone.
+After MS-028.6 establishes the derived readiness checklist, this milestone adds the compact local readiness-action UI layer on the project settings page that translates local UI/browser state into `ready`, `blocked`, and `requires confirmation` decision states. The ready state means ready for Product Owner confirmation only, and the action layer keeps explicit Product Owner confirmation required before any real Git/GitHub operation while real Git/GitHub execution remains blocked until a later approved implementation milestone.
 
 **Dependencies**
 MS-028.6 - GitHub Real Connection Readiness Check Foundation
 
 **Implementation Scope**
-Docs-only readiness/action contract publication for the GitHub real-readiness boundary.
+Readiness/action UI implementation and SSOT publication for the GitHub real-readiness boundary.
 
 **Allowed Scope**
-Docs publication, sequencing guidance, readiness-action wording, derived-state terminology, and blocker conditions for future Git/GitHub execution.
+UI implementation, docs publication, sequencing guidance, readiness-action wording, derived-state terminology, test coverage for local decision states, and blocker conditions for future Git/GitHub execution.
 
 **Forbidden Scope**
 GitHub OAuth, access tokens, GitHub API integration, real Git operations, clone/fetch/checkout, branch creation on disk or remote, push, merge, pull request, sync-to-main, backend persistence, filesystem writes for clone/workspace setup, automatic work on main, remote synchronization, UI implementation, source code changes, and unrelated UI or domain changes.

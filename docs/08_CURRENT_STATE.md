@@ -42,15 +42,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-028.7 - GitHub Real Readiness Action Foundation
+NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.6 - GitHub Real Connection Readiness Check Foundation
+MS-028.7 - GitHub Real Readiness Action Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-028.7 is APPROVED as the GitHub Real Readiness Action Foundation contract/design milestone in the current local workspace. The repository now defines a readiness/action decision layer derived from local UI/browser state only, expressing `ready`, `blocked`, and `requires confirmation` states while keeping explicit Product Owner confirmation required before any real Git/GitHub operation. Real Git/GitHub execution remains blocked, and the milestone is not implementation complete.
+MS-028.7 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Real Readiness Action Foundation. The project settings page now exposes a compact readiness-action layer derived from local UI/browser state only, expressing `ready`, `blocked`, and `requires confirmation` states. The `ready` state means ready for Product Owner confirmation only, and real Git/GitHub execution remains blocked until later explicit approval. The milestone was verified by the targeted settings page test file with 10 tests passing.
 
 MS-028.6 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Real Connection Readiness Check Foundation. After a GitHub repository URL exists in project settings, the repository now shows a compact derived real-readiness checklist for future GitHub execution that reports repository URL ready, branch work mode ready or missing, working branch name ready, missing, or not required, GitHub connection/authentication missing or required, local clone/workspace missing or required, and real Git execution blocked until explicit Product Owner confirmation. The gate derives from local UI/browser state only and does not perform execution. The repository remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
@@ -1537,9 +1537,9 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-028.6 - GitHub Real Connection Readiness Check Foundation`
+* `Latest Completed Product Milestone` is `MS-028.7 - GitHub Real Readiness Action Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
-* `MS-012.10` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track Workspace Continuation Verification Foundation; the repository now confirms the workspace return path back to the task list while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
+* `MS-028.7` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Real Readiness Action Foundation; the repository now records the compact readiness-action layer on the project settings page with `blocked`, `requires confirmation`, and `ready` states derived from local UI/browser state only, keeps `ready` as ready for Product Owner confirmation only, and keeps real Git/GitHub execution blocked until explicit approval.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.8` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Functional Handoff Foundation; the repository now records the visible handoff boundary across the existing project, task list, task detail, and task workspace surfaces while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.7` close decision: the next milestone now requires Product Owner direction while future SPS-owned working copies still live under `C:\SPS_OS_WORK\<project-slug>` and existing project metadata may still point to the source or `repositoryUrl`.

@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 086 - MS-028.7 docs-only contract publication
+## Session 086 - MS-028.7 readiness action UI publication
 
 ### Date
 
@@ -77,11 +77,12 @@ Each release entry should contain:
 
 ### Completed
 
-* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.7 - GitHub Real Readiness Action Foundation` as the approved current contract/design milestone.
-* Recorded that `MS-028.7` is a docs-only readiness/action decision layer derived from local UI/browser state only and expressing `ready`, `blocked`, and `requires confirmation` states.
-* Recorded that explicit Product Owner confirmation remains required before any real Git/GitHub operation and that real Git/GitHub execution stays blocked.
-* Preserved `MS-028.6 - GitHub Real Connection Readiness Check Foundation` as the latest completed product milestone.
-* Recorded the Session 086 SSOT contract publication.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.7 - GitHub Real Readiness Action Foundation` as `COMPLETED / VERIFIED / PUBLISHED / CLOSED`.
+* Recorded that the project settings page now exposes the compact local readiness-action UI with `blocked`, `requires confirmation`, and `ready` states derived from local UI/browser state only.
+* Recorded that `ready` means ready for Product Owner confirmation only, explicit Product Owner approval remains required before any real Git/GitHub operation, and real Git/GitHub execution stays blocked.
+* Recorded that the targeted settings page test file passed with 10 tests.
+* Preserved `MS-028.6 - GitHub Real Connection Readiness Check Foundation` as completed / verified / published / closed.
+* Recorded the Session 086 SSOT publication.
 
 ### Notes
 
