@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 086 - Session Close Protocol
+
+### Date
+
+2026-08-20
+
+### Completed
+
+* Synchronized `docs/08_CURRENT_STATE.md`, `docs/10_SESSION_STATE.md`, and `docs/session-handoffs/2026-08-20_086_SESSION_HANDOFF.md` so the SSOT now records Session 086 as closed with Session 087 queued for the next Product Owner decision chat.
+* Recorded that Session 086 closes with `MS-028.10 - GitHub Selected Operation Readiness Detail Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Appended the Session 086 close usage record.
+
+### Notes
+
+* No new product code changed in this close protocol.
+
 ## Session 086 - MS-028.10 selected operation readiness detail control files sync publication
 
 ### Date

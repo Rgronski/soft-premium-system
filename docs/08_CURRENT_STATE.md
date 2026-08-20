@@ -42,10 +42,10 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
+NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.9 - GitHub First Real Operation Selection Foundation
+MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
@@ -375,9 +375,9 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.9 - GitHub First Real Operation Selection Foundation
+Latest Completed Product Milestone: MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
 Next Product Milestone: NONE / Product Owner decision required
-Session 086 synchronized the accepted `MS-028.9` control files in the current local workspace. The repository now records the completed first real operation selection boundary after the confirmation gate: the local operation-selection block appears only for `requires confirmation` and `ready`, hides for `blocked`, keeps selection local useState only with no persistence, limits candidate labels to `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked. The flow preserves the distinction between selected as candidate and authorized to execute and was verified by the targeted settings page test file with 12 tests passing.
+Session 086 synchronized the accepted `MS-028.10` control files in the current local workspace. The repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked. The milestone was verified by the targeted settings page test file with 12 tests passing.
 
 MS-021.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Reset Foundation; the repository now exposes a local `Cofnij decyzjÄ™` action for resolved source-conflict decisions so the browser-state resolved flag can be cleared for that `project.id`. Reset does not mutate the local project, and if the discovered project still differs after reset, the conflict can appear again as unresolved. The MS-021.16 persistence behavior and MS-021.15 feedback remain preserved, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
