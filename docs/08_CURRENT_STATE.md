@@ -42,13 +42,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE / Product Owner decision required
+MS-028.8 - GitHub Real Execution Confirmation Gate Foundation
 
 **Latest Completed Milestone**
 MS-028.7 - GitHub Real Readiness Action Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-028.8 is APPROVED as the GitHub Real Execution Confirmation Gate Foundation docs-only contract/design milestone in the current local workspace. The repository now defines the explicit confirmation gate that follows the MS-028.7 ready-for-confirmation state, remains based only on local UI/browser state, preserves the distinction between ready for Product Owner confirmation and ready to execute, and keeps real Git/GitHub execution blocked until explicit Product Owner approval for a later implementation milestone.
 
 MS-028.7 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Real Readiness Action Foundation. The project settings page now exposes a compact readiness-action layer derived from local UI/browser state only, expressing `ready`, `blocked`, and `requires confirmation` states. The `ready` state means ready for Product Owner confirmation only, and real Git/GitHub execution remains blocked until later explicit approval. The milestone was verified by the targeted settings page test file with 10 tests passing.
 
@@ -1536,10 +1538,10 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `NONE / Product Owner decision required`
+* `Current Product Milestone` is `MS-028.8 - GitHub Real Execution Confirmation Gate Foundation`
 * `Latest Completed Product Milestone` is `MS-028.7 - GitHub Real Readiness Action Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
-* `MS-028.7` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Real Readiness Action Foundation; the repository now records the compact readiness-action layer on the project settings page with `blocked`, `requires confirmation`, and `ready` states derived from local UI/browser state only, keeps `ready` as ready for Product Owner confirmation only, and keeps real Git/GitHub execution blocked until explicit approval.
+* `MS-028.8` is `APPROVED` as the docs-only confirmation-gate contract that follows MS-028.7, stays based only on local UI/browser state, preserves ready-for-confirmation versus ready-to-execute, and keeps real Git/GitHub execution blocked.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.8` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Functional Handoff Foundation; the repository now records the visible handoff boundary across the existing project, task list, task detail, and task workspace surfaces while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.7` close decision: the next milestone now requires Product Owner direction while future SPS-owned working copies still live under `C:\SPS_OS_WORK\<project-slug>` and existing project metadata may still point to the source or `repositoryUrl`.

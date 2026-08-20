@@ -134,7 +134,7 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE / Product Owner decision required
+MS-028.8 - GitHub Real Execution Confirmation Gate Foundation
 
 ## Latest Completed Product Milestone
 
@@ -249,6 +249,62 @@ GitHub OAuth, access tokens, GitHub API integration, real Git operations, clone/
 **Sequencing**
 1. MS-028.6 defines the derived readiness checklist using local UI/browser state only.
 2. MS-028.7 defines the readiness/action decision layer only.
+3. Any real Git/GitHub execution remains blocked until a later explicit Product Owner-approved implementation milestone.
+4. Sync, merge, and PR to main remain later and separate.
+
+## MS-028.8 - GitHub Real Execution Confirmation Gate Foundation
+
+**Milestone**
+MS-028.8 - GitHub Real Execution Confirmation Gate Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+CONTRACT / DESIGN / NOT IMPLEMENTED
+
+**Active**
+YES
+
+**Runtime Status**
+ACTIVE
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the explicit confirmation gate that follows the local ready-for-confirmation state and preserves the non-execution boundary before any real Git/GitHub operation.
+
+**Product Outcome**
+After MS-028.7 provides the local `ready`, `blocked`, and `requires confirmation` decision layer, this milestone defines the confirmation gate that remains based only on local UI/browser state, keeps `ready` limited to Product Owner confirmation only, and requires explicit Product Owner approval before any real Git/GitHub operation. Real Git/GitHub execution remains blocked.
+
+**Dependencies**
+MS-028.7 - GitHub Real Readiness Action Foundation
+
+**Implementation Scope**
+Docs-only confirmation-gate contract publication for the GitHub real-execution boundary.
+
+**Allowed Scope**
+Docs publication, sequencing guidance, confirmation-gate wording, preservation of the ready-for-confirmation versus ready-to-execute distinction, and blocker conditions for future Git/GitHub execution.
+
+**Forbidden Scope**
+GitHub OAuth, access tokens, GitHub API integration, real Git operations, clone/fetch/checkout, branch creation on disk or remote, push, merge, pull request, sync-to-main, backend persistence, filesystem writes for clone/workspace setup, automatic work on main, remote synchronization, UI implementation, source code changes, and unrelated UI or domain changes.
+
+**Sequencing**
+1. MS-028.7 defines the ready-for-confirmation layer only.
+2. MS-028.8 defines the confirmation gate only.
 3. Any real Git/GitHub execution remains blocked until a later explicit Product Owner-approved implementation milestone.
 4. Sync, merge, and PR to main remain later and separate.
 

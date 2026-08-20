@@ -215,20 +215,20 @@ SPS OS Session State
 
 Date: 2026-08-20
 Current Session ID: 086
-Current Chat Title: 086 SPS OS - MS-028.7 Readiness Action Publication
+Current Chat Title: 086 SPS OS - MS-028.8 Confirmation Gate Publication
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
 Active Capability: SSOT Control Files Sync
-Active Work Item: Session 086 MS-028.7 control files sync
+Active Work Item: Session 086 MS-028.8 control files sync
 Current Mode: ACTIVE
-Completed Capability Items: Session 086 published the MS-028.7 readiness action UI implementation; Session 086 synchronized the MS-028.7 SSOT state
-Current Product Milestone: NONE / Product Owner decision required
+Completed Capability Items: Session 086 prepared the MS-028.8 docs-only confirmation-gate contract patch; Session 086 synchronized the MS-028.8 SSOT state
+Current Product Milestone: MS-028.8 - GitHub Real Execution Confirmation Gate Foundation
 Latest Completed Product Milestone: MS-028.7 - GitHub Real Readiness Action Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 086 MS-028.7 control files sync
+Latest Completed Capability Item: Session 086 MS-028.8 control files sync
 Current Sprint: NONE
-Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, MS-022.3, MS-023.0, MS-027.2, MS-027.3, MS-027.4, MS-027.5, MS-028.0, MS-028.1, MS-028.2, MS-028.3, MS-028.4, MS-028.5, MS-028.6, and MS-028.7 immutable while awaiting Product Owner decision for the next milestone.
+Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, MS-022.3, MS-023.0, MS-027.2, MS-027.3, MS-027.4, MS-027.5, MS-028.0, MS-028.1, MS-028.2, MS-028.3, MS-028.4, MS-028.5, MS-028.6, MS-028.7, and MS-028.8 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
@@ -236,5 +236,5 @@ Latest Verified Commit: 75b60f6
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Review the published MS-028.7 readiness action state and keep real Git/GitHub execution blocked until a later approved implementation milestone.
-Next Session Plan: Continue reviewing the published MS-028.7 readiness action state and keep real Git/GitHub execution blocked until a later approved implementation milestone.
+Next Safe Step: Review the published MS-028.8 confirmation gate contract and keep real Git/GitHub execution blocked until a later approved implementation milestone.
+Next Session Plan: Continue reviewing the published MS-028.8 confirmation gate contract and keep real Git/GitHub execution blocked until a later approved implementation milestone.
