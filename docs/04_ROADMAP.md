@@ -134,11 +134,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
+NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.9 - GitHub First Real Operation Selection Foundation
+MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
 
 ## MS-028.6 - GitHub Real Connection Readiness Check Foundation
 
@@ -149,19 +149,19 @@ MS-028.6 - GitHub Real Connection Readiness Check Foundation
 Product Milestone
 
 **Contract Status**
-APPROVED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Publication Status**
 PUBLISHED
 
 **Milestone Status**
-CONTRACT / DESIGN / NOT IMPLEMENTED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
-YES
+NO
 
 **Runtime Status**
-ACTIVE
+CLOSED
 
 **Owner**
 Product Owner

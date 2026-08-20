@@ -221,9 +221,9 @@ Suggested Next Chat Title: UNKNOWN
 Active Capability: SSOT Control Files Sync
 Active Work Item: Session 086 MS-028.10 control files sync
 Current Mode: ACTIVE
-Completed Capability Items: Session 086 prepared the MS-028.10 docs-first selected-operation readiness-detail contract patch; Session 086 synchronized the MS-028.10 control files
-Current Product Milestone: MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
-Latest Completed Product Milestone: MS-028.9 - GitHub First Real Operation Selection Foundation
+Completed Capability Items: Session 086 prepared the MS-028.10 docs-first selected-operation readiness-detail contract patch; Session 086 synchronized the MS-028.10 control files; Session 086 published the MS-028.10 selected-operation readiness-detail implementation
+Current Product Milestone: NONE / Product Owner decision required
+Latest Completed Product Milestone: MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
 Latest Completed Capability Item: Session 086 MS-028.10 control files sync
@@ -232,9 +232,9 @@ Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-01
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 61614ee
+Latest Verified Commit: 78b7a81
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Review the prepared MS-028.10 control files sync and keep real Git/GitHub execution blocked until a later approved implementation milestone.
-Next Session Plan: Continue reviewing the prepared MS-028.10 control files sync and keep real Git/GitHub execution blocked until a later approved implementation milestone.
+Next Safe Step: Review the published MS-028.10 control files sync and keep real Git/GitHub execution blocked until a later approved implementation milestone.
+Next Session Plan: Continue reviewing the published MS-028.10 control files sync and keep real Git/GitHub execution blocked until a later approved implementation milestone.
