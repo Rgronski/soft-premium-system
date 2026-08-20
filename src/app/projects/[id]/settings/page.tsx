@@ -181,6 +181,52 @@ function buildGitHubReadinessChecklist(
   ];
 }
 
+type GitHubRealReadinessActionState =
+  | "blocked"
+  | "requires confirmation"
+  | "ready";
+
+type GitHubRealReadinessActionSummary = {
+  state: GitHubRealReadinessActionState;
+  note: string;
+};
+
+function buildGitHubRealReadinessActionSummary(
+  hasRepositoryUrl: boolean,
+  branchWorkMode: ProjectBranchWorkMode | null,
+  workingBranchName: string,
+): GitHubRealReadinessActionSummary {
+  if (!hasRepositoryUrl || !branchWorkMode) {
+    return {
+      state: "blocked",
+      note:
+        "Brakuje wymaganych lokalnych metadanych. Realne wykonanie Git/GitHub pozostaje zablokowane.",
+    };
+  }
+
+  if (branchWorkMode === "main") {
+    return {
+      state: "requires confirmation",
+      note:
+        "Tryb pracy na `main` jest przygotowany lokalnie, ale realne wykonanie nadal wymaga jawnej zgody Product Ownera i pozostaje zablokowane.",
+    };
+  }
+
+  if (!workingBranchName.trim()) {
+    return {
+      state: "blocked",
+      note:
+        "Brakuje nazwy gałęzi roboczej wymaganej przez lokalny tryb pracy. Realne wykonanie Git/GitHub pozostaje zablokowane.",
+    };
+  }
+
+  return {
+    state: "ready",
+    note:
+      "Lokalny kontekst gałęzi roboczej jest kompletny i gotowy do potwierdzenia, ale realne wykonanie nadal wymaga jawnej zgody Product Ownera i pozostaje zablokowane.",
+  };
+}
+
 function readProjectWorkingBranchName(projectId: string): string {
   if (typeof window === "undefined") {
     return "";
@@ -282,6 +328,11 @@ export default function ProjectSettingsPage() {
     branchWorkMode,
     workingBranchName,
     project.name,
+  );
+  const githubRealReadinessActionSummary = buildGitHubRealReadinessActionSummary(
+    Boolean(project.repositoryUrl?.trim()),
+    branchWorkMode,
+    workingBranchName,
   );
 
   function handleSaveGithubUrl() {
@@ -579,6 +630,18 @@ export default function ProjectSettingsPage() {
             </ul>
           </div>
         ) : null}
+
+        <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+            Stan gotowości akcji GitHub
+          </p>
+          <p className="mt-2 text-sm text-zinc-300">
+            Stan akcji GitHub: {githubRealReadinessActionSummary.state}
+          </p>
+          <p className="mt-2 text-sm text-zinc-400">
+            {githubRealReadinessActionSummary.note}
+          </p>
+        </div>
 
         {project.repositoryUrl?.trim() && branchWorkMode === "working-branch" ? (
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">

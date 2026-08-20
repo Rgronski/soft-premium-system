@@ -47,6 +47,17 @@ describe("ProjectSettingsPage", () => {
     expect(screen.queryByText(/Gotowość połączenia GitHub/)).toBeNull();
   });
 
+  test("shows a blocked GitHub readiness action state until the repository URL exists", () => {
+    render(<ProjectSettingsPage />);
+
+    expect(screen.getByText(/Stan akcji GitHub: blocked/)).toBeTruthy();
+    expect(
+      screen.getByText(
+        /Brakuje wymaganych lokalnych metadanych\. Realne wykonanie Git\/GitHub pozostaje zablokowane\./,
+      ),
+    ).toBeTruthy();
+  });
+
   test("stores a GitHub URL as metadata without creating a duplicate project", async () => {
     render(<ProjectSettingsPage />);
 
@@ -151,6 +162,43 @@ describe("ProjectSettingsPage", () => {
     ).toBeTruthy();
   });
 
+  test("shows requires confirmation for main and ready for working branch after local metadata is present", async () => {
+    render(<ProjectSettingsPage />);
+
+    fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
+      target: { value: "https://github.com/example/beauty-client-pro" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /Zapisz adres GitHub/ }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Stan akcji GitHub: blocked/)).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getAllByRole("radio")[0]);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(/Stan akcji GitHub: requires confirmation/),
+      ).toBeTruthy();
+    });
+    expect(
+      screen.getByText(
+        /Tryb pracy na `main` jest przygotowany lokalnie, ale realne wykonanie nadal wymaga jawnej zgody Product Ownera i pozostaje zablokowane\./,
+      ),
+    ).toBeTruthy();
+
+    fireEvent.click(screen.getAllByRole("radio")[1]);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Stan akcji GitHub: ready/)).toBeTruthy();
+    });
+    expect(
+      screen.getByText(
+        /Lokalny kontekst gałęzi roboczej jest kompletny i gotowy do potwierdzenia, ale realne wykonanie nadal wymaga jawnej zgody Product Ownera i pozostaje zablokowane\./,
+      ),
+    ).toBeTruthy();
+  });
+
   test("shows a real readiness checklist that updates from missing branch decision to ready branch metadata", async () => {
     render(<ProjectSettingsPage />);
 
@@ -177,7 +225,8 @@ describe("ProjectSettingsPage", () => {
       screen.getByText(/^Lokalny klon \/ workspace$/).closest("li")?.textContent,
     ).toContain("brak / wymagane");
     expect(
-      screen.getByText(/Realne wykonanie Git/).closest("li")?.textContent,
+      screen.getByText(/^Realne wykonanie Git$/, { selector: ".text-zinc-300" }).closest("li")
+        ?.textContent,
     ).toContain("zablokowane do jawnej zgody Product Ownera");
 
     fireEvent.click(screen.getAllByRole("radio")[1]);
