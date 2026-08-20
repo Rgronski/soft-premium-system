@@ -56,6 +56,54 @@ describe("ProjectSettingsPage", () => {
         /Brakuje wymaganych lokalnych metadanych\. Realne wykonanie Git\/GitHub pozostaje zablokowane\./,
       ),
     ).toBeTruthy();
+    expect(
+      screen.queryByText(/Bramka potwierdzenia wykonania GitHub/),
+    ).toBeNull();
+  });
+
+  test("shows the confirmation gate after local metadata is present", async () => {
+    render(<ProjectSettingsPage />);
+
+    fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
+      target: { value: "https://github.com/example/beauty-client-pro" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /Zapisz adres GitHub/ }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Stan akcji GitHub: blocked/)).toBeTruthy();
+      expect(
+        screen.queryByText(/Bramka potwierdzenia wykonania GitHub/),
+      ).toBeNull();
+    });
+
+    fireEvent.click(screen.getAllByRole("radio")[0]);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(/Stan akcji GitHub: requires confirmation/),
+      ).toBeTruthy();
+    });
+    expect(screen.getByText(/Bramka potwierdzenia wykonania GitHub/)).toBeTruthy();
+    expect(
+      screen.getByText(/Gotowe do potwierdzenia przez Product Ownera/),
+    ).toBeTruthy();
+    expect(screen.getByText(/To nie jest gotowość do wykonania\./)).toBeTruthy();
+    expect(
+      screen.getByText(
+        /Tryb pracy na `main` jest przygotowany lokalnie, ale realne wykonanie nadal wymaga jawnej zgody Product Ownera i pozostaje zablokowane\./,
+      ),
+    ).toBeTruthy();
+
+    fireEvent.click(screen.getAllByRole("radio")[1]);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Stan akcji GitHub: ready/)).toBeTruthy();
+    });
+    expect(screen.getByText(/Bramka potwierdzenia wykonania GitHub/)).toBeTruthy();
+    expect(
+      screen.getByText(/Gotowe do potwierdzenia przez Product Ownera/),
+    ).toBeTruthy();
+    expect(screen.getByText(/To nie jest gotowość do wykonania\./)).toBeTruthy();
   });
 
   test("stores a GitHub URL as metadata without creating a duplicate project", async () => {
@@ -181,6 +229,11 @@ describe("ProjectSettingsPage", () => {
         screen.getByText(/Stan akcji GitHub: requires confirmation/),
       ).toBeTruthy();
     });
+    expect(screen.getByText(/Bramka potwierdzenia wykonania GitHub/)).toBeTruthy();
+    expect(
+      screen.getByText(/Gotowe do potwierdzenia przez Product Ownera/),
+    ).toBeTruthy();
+    expect(screen.getByText(/To nie jest gotowość do wykonania\./)).toBeTruthy();
     expect(
       screen.getByText(
         /Tryb pracy na `main` jest przygotowany lokalnie, ale realne wykonanie nadal wymaga jawnej zgody Product Ownera i pozostaje zablokowane\./,

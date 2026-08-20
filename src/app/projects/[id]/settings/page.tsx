@@ -191,6 +191,12 @@ type GitHubRealReadinessActionSummary = {
   note: string;
 };
 
+type GitHubRealExecutionConfirmationGateSummary = {
+  title: string;
+  note: string;
+  disclosure: string;
+};
+
 function buildGitHubRealReadinessActionSummary(
   hasRepositoryUrl: boolean,
   branchWorkMode: ProjectBranchWorkMode | null,
@@ -224,6 +230,30 @@ function buildGitHubRealReadinessActionSummary(
     state: "ready",
     note:
       "Lokalny kontekst gałęzi roboczej jest kompletny i gotowy do potwierdzenia, ale realne wykonanie nadal wymaga jawnej zgody Product Ownera i pozostaje zablokowane.",
+  };
+}
+
+function buildGitHubRealExecutionConfirmationGateSummary(
+  readinessActionState: GitHubRealReadinessActionState,
+): GitHubRealExecutionConfirmationGateSummary | null {
+  if (readinessActionState === "blocked") {
+    return null;
+  }
+
+  if (readinessActionState === "requires confirmation") {
+    return {
+      title: "Gotowe do potwierdzenia przez Product Ownera",
+      note:
+        "Lokalne warunki są wystarczające, żeby poprosić Product Ownera o jawne potwierdzenie. Realne wykonanie Git/GitHub pozostaje zablokowane.",
+      disclosure: "To nie jest gotowość do wykonania.",
+    };
+  }
+
+  return {
+    title: "Gotowe do potwierdzenia przez Product Ownera",
+    note:
+      "Lokalny kontekst jest kompletny i gotowy do potwierdzenia przez Product Ownera, ale to nie jest gotowość do wykonania. Realne wykonanie Git/GitHub pozostaje zablokowane.",
+    disclosure: "To nie jest gotowość do wykonania.",
   };
 }
 
@@ -334,6 +364,10 @@ export default function ProjectSettingsPage() {
     branchWorkMode,
     workingBranchName,
   );
+  const githubRealExecutionConfirmationGateSummary =
+    buildGitHubRealExecutionConfirmationGateSummary(
+      githubRealReadinessActionSummary.state,
+    );
 
   function handleSaveGithubUrl() {
     const trimmedGithubUrl = githubUrlInput.trim();
@@ -642,6 +676,23 @@ export default function ProjectSettingsPage() {
             {githubRealReadinessActionSummary.note}
           </p>
         </div>
+
+        {githubRealExecutionConfirmationGateSummary ? (
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              Bramka potwierdzenia wykonania GitHub
+            </p>
+            <p className="mt-2 text-sm text-zinc-300">
+              {githubRealExecutionConfirmationGateSummary.title}
+            </p>
+            <p className="mt-2 text-sm text-zinc-400">
+              {githubRealExecutionConfirmationGateSummary.note}
+            </p>
+            <p className="mt-2 text-sm text-zinc-400">
+              {githubRealExecutionConfirmationGateSummary.disclosure}
+            </p>
+          </div>
+        ) : null}
 
         {project.repositoryUrl?.trim() && branchWorkMode === "working-branch" ? (
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
