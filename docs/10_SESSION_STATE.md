@@ -215,18 +215,18 @@ SPS OS Session State
 
 Date: 2026-08-19
 Current Session ID: 085
-Current Chat Title: 085 SPS OS - Control Files Sync for MS-028.5
+Current Chat Title: 085 SPS OS - Control Files Sync for MS-028.6
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
 Active Capability: Session 085 control-files sync
-Active Work Item: MS-028.5 control files sync
+Active Work Item: MS-028.6 control files sync
 Current Mode: ACTIVE
-Completed Capability Items: Session 085 synchronized the MS-028.5 control files; Session 085 appended the Session 085 usage entry
+Completed Capability Items: Session 085 synchronized the MS-028.6 control files; Session 085 appended the Session 085 usage entry
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.5 - GitHub Repository Real Execution Contract Foundation
+Latest Completed Product Milestone: MS-028.6 - GitHub Real Connection Readiness Check Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 085 MS-028.5 control-files sync
+Latest Completed Capability Item: Session 085 MS-028.6 control-files sync
 Current Sprint: NONE
 Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, MS-022.3, MS-023.0, MS-027.2, MS-027.3, MS-027.4, MS-027.5, MS-028.0, MS-028.1, MS-028.2, MS-028.3, MS-028.4, and MS-028.5 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
@@ -236,5 +236,5 @@ Latest Verified Commit: 1131570
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Await Product Owner review of the MS-028.5 control-file sync.
+Next Safe Step: Await Product Owner review of the MS-028.6 control-file sync.
 Next Session Plan: Continue Session 085 control-file sync work and await Product Owner decision for the next milestone.

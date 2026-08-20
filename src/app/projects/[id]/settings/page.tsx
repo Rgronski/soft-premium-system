@@ -135,6 +135,52 @@ function buildLocalCloneReadinessSummary(
   ];
 }
 
+type GitHubReadinessChecklistItem = {
+  label: string;
+  status: string;
+};
+
+function buildGitHubReadinessChecklist(
+  hasRepositoryUrl: boolean,
+  branchWorkMode: ProjectBranchWorkMode | null,
+  workingBranchName: string,
+  projectName: string,
+): GitHubReadinessChecklistItem[] | null {
+  if (!hasRepositoryUrl) {
+    return null;
+  }
+
+  const hasWorkingBranchName = Boolean(
+    workingBranchName.trim() || buildWorkingBranchName(projectName),
+  );
+
+  return [
+    { label: "Adres repozytorium GitHub", status: "gotowy" },
+    {
+      label: "Decyzja trybu pracy gałęzi",
+      status: branchWorkMode ? "gotowa" : "brak",
+    },
+    {
+      label: "Nazwa gałęzi roboczej",
+      status:
+        branchWorkMode === "working-branch"
+          ? hasWorkingBranchName
+            ? "gotowa"
+            : "brak"
+          : "nie wymagana",
+    },
+    {
+      label: "Połączenie GitHub / uwierzytelnienie",
+      status: "brak / wymagane",
+    },
+    { label: "Lokalny klon / workspace", status: "brak / wymagane" },
+    {
+      label: "Realne wykonanie Git",
+      status: "zablokowane do jawnej zgody Product Ownera",
+    },
+  ];
+}
+
 function readProjectWorkingBranchName(projectId: string): string {
   if (typeof window === "undefined") {
     return "";
@@ -226,6 +272,12 @@ export default function ProjectSettingsPage() {
   const githubConnectionReadinessSummary =
     buildGitHubConnectionReadinessSummary(Boolean(project.repositoryUrl?.trim()));
   const localCloneReadinessSummary = buildLocalCloneReadinessSummary(
+    Boolean(project.repositoryUrl?.trim()),
+    branchWorkMode,
+    workingBranchName,
+    project.name,
+  );
+  const githubReadinessChecklist = buildGitHubReadinessChecklist(
     Boolean(project.repositoryUrl?.trim()),
     branchWorkMode,
     workingBranchName,
@@ -503,6 +555,28 @@ export default function ProjectSettingsPage() {
                 </p>
               ))}
             </div>
+          </div>
+        ) : null}
+
+        {githubReadinessChecklist ? (
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              GotowoĹ›Ä‡ do realnego wykonania Git
+            </p>
+            <p className="mt-2 text-sm text-zinc-300">
+              To jest tylko bramka gotowoĹ›ci, nie wykonanie.
+            </p>
+            <ul className="mt-3 space-y-2">
+              {githubReadinessChecklist.map((item) => (
+                <li
+                  key={item.label}
+                  className="flex items-start justify-between gap-4 rounded-lg border border-zinc-800 bg-zinc-950/80 px-3 py-2"
+                >
+                  <span className="text-sm text-zinc-300">{item.label}</span>
+                  <span className="text-sm text-zinc-400">{item.status}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         ) : null}
 

@@ -151,6 +151,55 @@ describe("ProjectSettingsPage", () => {
     ).toBeTruthy();
   });
 
+  test("shows a real readiness checklist that updates from missing branch decision to ready branch metadata", async () => {
+    render(<ProjectSettingsPage />);
+
+    fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
+      target: { value: "https://github.com/example/beauty-client-pro" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /Zapisz adres GitHub/ }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/realnego wykonania Git/)).toBeTruthy();
+    });
+
+    expect(
+      screen.getByText(/Decyzja trybu pracy ga/).closest("li")?.textContent,
+    ).toContain("brak");
+    expect(
+      screen.getByText(/^Nazwa gałęzi roboczej$/, { selector: ".text-zinc-300" }).closest("li")
+        ?.textContent,
+    ).toContain("nie wymagana");
+    expect(
+      screen.getByText(/Po.*czenie GitHub \/ uwierzytelnienie/).closest("li")?.textContent,
+    ).toContain("brak / wymagane");
+    expect(
+      screen.getByText(/^Lokalny klon \/ workspace$/).closest("li")?.textContent,
+    ).toContain("brak / wymagane");
+    expect(
+      screen.getByText(/Realne wykonanie Git/).closest("li")?.textContent,
+    ).toContain("zablokowane do jawnej zgody Product Ownera");
+
+    fireEvent.click(screen.getAllByRole("radio")[1]);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(/Decyzja trybu pracy ga/).closest("li")?.textContent,
+      ).toContain("gotowa");
+    });
+
+    expect(
+      screen.getByText(/^Nazwa gałęzi roboczej$/, { selector: ".text-zinc-300" }).closest("li")
+        ?.textContent,
+    ).toContain("gotowa");
+    expect(
+      screen.getByText(/Po.*czenie GitHub \/ uwierzytelnienie/).closest("li")?.textContent,
+    ).toContain("brak / wymagane");
+    expect(
+      screen.getByText(/^Lokalny klon \/ workspace$/).closest("li")?.textContent,
+    ).toContain("brak / wymagane");
+  });
+
   test("shows a main-mode summary after the Product Owner chooses main", async () => {
     render(<ProjectSettingsPage />);
 

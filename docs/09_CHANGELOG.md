@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 085 - MS-028.6 control files sync
+
+### Date
+
+2026-08-19
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.6 - GitHub Real Connection Readiness Check Foundation` as completed / verified / published / closed.
+* Recorded that project settings now show a compact derived real-readiness checklist for future GitHub execution once a GitHub repository URL exists.
+* Recorded that the checklist reports repository URL ready, branch work mode ready or missing, working branch name ready, missing, or not required, GitHub connection/authentication missing or required, local clone/workspace missing or required, and real Git execution blocked until explicit Product Owner confirmation.
+* Recorded that the readiness gate derives from local UI/browser state only and does not perform execution.
+* Appended the Session 085 usage record.
+
+### Notes
+
+* No product code changed in this control-files sync.
+* No GitHub OAuth, tokens, GitHub API integration, real Git workflow behavior, filesystem checks, or folder creation was introduced.
+
 ## Session 085 - MS-028.5 control files sync
 
 ### Date

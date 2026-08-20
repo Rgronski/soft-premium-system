@@ -130,16 +130,75 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.3` - GitHub Repository Connection Readiness Foundation
 * `MS-028.4` - GitHub Repository Local Clone Readiness Foundation
 * `MS-028.5` - GitHub Repository Real Execution Contract Foundation
+* `MS-028.6` - GitHub Real Connection Readiness Check Foundation
 
 ## Current
 
 NONE / Product Owner decision required
 
-Session 085 synchronized the accepted `MS-028.5` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
+Session 085 synchronized the accepted `MS-028.6` control files in the current local workspace, and the roadmap remains aligned with `NONE / Product Owner decision required` for the next milestone.
 
 ## Latest Completed Product Milestone
 
+MS-028.6 - GitHub Real Connection Readiness Check Foundation
+
+## MS-028.6 - GitHub Real Connection Readiness Check Foundation
+
+**Milestone**
+MS-028.6 - GitHub Real Connection Readiness Check Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Provide a first real-readiness gate for future GitHub execution using existing local UI/browser state only, without implementing any execution.
+
+**Product Outcome**
+After GitHub repository URL, branch work mode, branch name when needed, GitHub connection readiness, and local clone readiness foundations are in place through MS-028.5, this milestone adds a derived readiness checklist that shows what is already ready and what is still blocking real GitHub/Git execution. The checklist reports repository URL ready, branch work mode ready or missing, working branch name ready, missing, or not required, GitHub connection/authentication missing or required, local clone/workspace missing or required, and real Git execution blocked until explicit Product Owner confirmation. The gate derives from local UI/browser state only and does not perform execution.
+
+**Dependencies**
 MS-028.5 - GitHub Repository Real Execution Contract Foundation
+
+**Implementation Scope**
+Docs-only readiness-gate publication for the first real Git/GitHub execution readiness check.
+
+**Allowed Scope**
+Docs publication, sequencing guidance, readiness-check wording, and blocker conditions for future Git/GitHub execution.
+
+**Forbidden Scope**
+GitHub OAuth, access tokens, GitHub API integration, real Git operations, clone/fetch/checkout, branch creation on disk or remote, push, merge, pull request, sync-to-main, backend persistence, filesystem checks, and unrelated UI or domain changes.
+
+**Sequencing**
+1. Readiness UI/status foundations are complete through MS-028.5.
+2. MS-028.6 defines the first real-readiness gate only.
+3. A future milestone may implement the first real readiness check or clone/setup action only after Product Owner approval.
+4. Future sync, merge, and PR to main remains later and separate.
+
+## MS-028.5 - GitHub Repository Real Execution Contract Foundation
 
 ## MS-028.5 - GitHub Repository Real Execution Contract Foundation
 
