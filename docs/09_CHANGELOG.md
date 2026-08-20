@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 086 - MS-028.10 selected operation readiness detail docs-first contract patch
+
+### Date
+
+2026-08-20
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.10 - GitHub Selected Operation Readiness Detail Foundation` as the approved docs-first contract/design milestone and keeps `MS-028.9 - GitHub First Real Operation Selection Foundation` as the latest completed milestone.
+* Recorded that the repository now adds the readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate.
+* Recorded that the detail is informational and confirmatory only, preserves selected-as-candidate versus authorized-to-execute, preserves readiness-detail versus real-execution, names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
+* Preserved `MS-028.9 - GitHub First Real Operation Selection Foundation` as completed / verified / published / closed.
+* Recorded the Session 086 SSOT contract patch preparation.
+
+### Notes
+
+* No GitHub OAuth, tokens, GitHub API integration, real Git operations, filesystem writes, remote synchronization, automatic work on main, real execution behavior, UI implementation, authorizing execution, or unrelated refactor was introduced.
+
 ## Session 086 - MS-028.9 operation selection control files sync publication
 
 ### Date

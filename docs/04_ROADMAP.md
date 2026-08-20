@@ -134,7 +134,7 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE / Product Owner decision required
+MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
 
 ## Latest Completed Product Milestone
 
@@ -149,19 +149,19 @@ MS-028.6 - GitHub Real Connection Readiness Check Foundation
 Product Milestone
 
 **Contract Status**
-COMPLETED / VERIFIED / PUBLISHED / CLOSED
+APPROVED
 
 **Publication Status**
 PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / PUBLISHED / CLOSED
+CONTRACT / DESIGN / NOT IMPLEMENTED
 
 **Active**
-NO
+YES
 
 **Runtime Status**
-CLOSED
+ACTIVE
 
 **Owner**
 Product Owner
@@ -364,7 +364,61 @@ GitHub OAuth, access tokens, GitHub API integration, real Git operations, clone/
 3. Any real Git/GitHub execution remains blocked until a later explicit Product Owner-approved implementation milestone.
 4. Sync, merge, and PR to main remain later and separate.
 
-## MS-028.5 - GitHub Repository Real Execution Contract Foundation
+## MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
+
+**Milestone**
+MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+CONTRACT / DESIGN / NOT IMPLEMENTED
+
+**Active**
+YES
+
+**Runtime Status**
+ACTIVE
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the selected-operation readiness detail layer for the currently selected operation candidate without authorizing execution.
+
+**Product Outcome**
+After MS-028.9 selects the first real operation candidate, this milestone shows candidate readiness detail derived from local UI/browser state and the already selected candidate only. The detail is informational and confirmatory, keeps selected as candidate distinct from authorized to execute, keeps readiness detail distinct from real execution, names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked until a later separate milestone.
+
+**Dependencies**
+MS-028.9 - GitHub First Real Operation Selection Foundation
+
+**Implementation Scope**
+Docs-first selected-operation readiness-detail contract publication for the GitHub real-execution boundary.
+
+**Allowed Scope**
+Docs publication, sequencing guidance, readiness-detail wording, candidate-detail terminology, preservation of selected-as-candidate versus authorized-to-execute distinction, preservation of readiness-detail versus real-execution distinction, and blocker conditions for future Git/GitHub execution.
+
+**Forbidden Scope**
+GitHub OAuth, access tokens, GitHub API integration, real Git operations, clone/fetch/checkout, branch creation on disk or remote, push, merge, pull request, sync-to-main, backend persistence, filesystem writes for clone/workspace setup, automatic work on main, remote synchronization, UI implementation, source code changes, authorizing execution, selecting an operation for the Product Owner, and unrelated UI or domain changes.
+
+**Sequencing**
+1. MS-028.9 defines the first real operation selection boundary only.
+2. MS-028.10 defines the selected-operation readiness detail layer only.
+3. Any real Git/GitHub execution remains blocked until a later explicit Product Owner-approved implementation milestone.
+4. Sync, merge, and PR to main remain later and separate.
 
 ## MS-028.5 - GitHub Repository Real Execution Contract Foundation
 
