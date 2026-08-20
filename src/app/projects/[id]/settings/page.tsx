@@ -197,6 +197,26 @@ type GitHubRealExecutionConfirmationGateSummary = {
   disclosure: string;
 };
 
+type GitHubRealOperationSelection =
+  | "connection check"
+  | "local clone/workspace check"
+  | "clone preparation"
+  | "branch check";
+
+type GitHubRealOperationSelectionSummary = {
+  label: GitHubRealOperationSelection;
+  copy: string;
+};
+
+const GITHUB_REAL_OPERATION_SELECTION_OPTIONS: Array<{
+  label: GitHubRealOperationSelection;
+}> = [
+  { label: "connection check" },
+  { label: "local clone/workspace check" },
+  { label: "clone preparation" },
+  { label: "branch check" },
+];
+
 function buildGitHubRealReadinessActionSummary(
   hasRepositoryUrl: boolean,
   branchWorkMode: ProjectBranchWorkMode | null,
@@ -257,6 +277,19 @@ function buildGitHubRealExecutionConfirmationGateSummary(
   };
 }
 
+function buildGitHubRealOperationSelectionSummary(
+  selection: GitHubRealOperationSelection | null,
+): GitHubRealOperationSelectionSummary | null {
+  if (!selection) {
+    return null;
+  }
+
+  return {
+    label: selection,
+    copy: `Wybrano jako kandydat: ${selection}. To nie jest autoryzacja do wykonania. Realne wykonanie Git/GitHub pozostaje zablokowane.`,
+  };
+}
+
 function readProjectWorkingBranchName(projectId: string): string {
   if (typeof window === "undefined") {
     return "";
@@ -306,6 +339,8 @@ export default function ProjectSettingsPage() {
     return "";
   });
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
+  const [githubRealOperationSelection, setGithubRealOperationSelection] =
+    useState<GitHubRealOperationSelection | null>(null);
 
   useEffect(() => {
     const nextProject = getProjectById(params.id);
@@ -368,6 +403,8 @@ export default function ProjectSettingsPage() {
     buildGitHubRealExecutionConfirmationGateSummary(
       githubRealReadinessActionSummary.state,
     );
+  const githubRealOperationSelectionSummary =
+    buildGitHubRealOperationSelectionSummary(githubRealOperationSelection);
 
   function handleSaveGithubUrl() {
     const trimmedGithubUrl = githubUrlInput.trim();
@@ -691,6 +728,40 @@ export default function ProjectSettingsPage() {
             <p className="mt-2 text-sm text-zinc-400">
               {githubRealExecutionConfirmationGateSummary.disclosure}
             </p>
+
+            <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-950/80 p-3">
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                Wybór pierwszej realnej operacji
+              </p>
+              <p className="mt-2 text-sm text-zinc-300">
+                Wybierz tylko lokalny kandydat. To nie jest autoryzacja do
+                wykonania. Realne wykonanie Git/GitHub pozostaje zablokowane.
+              </p>
+              <div className="mt-3 space-y-2">
+                {GITHUB_REAL_OPERATION_SELECTION_OPTIONS.map((option) => (
+                  <label
+                    key={option.label}
+                    className="flex cursor-pointer items-start gap-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2"
+                  >
+                    <input
+                      type="radio"
+                      name="github-real-operation-selection"
+                      checked={githubRealOperationSelection === option.label}
+                      onChange={() =>
+                        setGithubRealOperationSelection(option.label)
+                      }
+                      className="mt-1"
+                    />
+                    <span className="text-sm text-zinc-300">{option.label}</span>
+                  </label>
+                ))}
+              </div>
+              <p className="mt-3 text-sm text-zinc-400" aria-live="polite">
+                {githubRealOperationSelectionSummary
+                  ? githubRealOperationSelectionSummary.copy
+                  : "Jeszcze nie wybrano kandydata. To nie jest autoryzacja do wykonania. Realne wykonanie Git/GitHub pozostaje zablokowane."}
+              </p>
+            </div>
           </div>
         ) : null}
 
