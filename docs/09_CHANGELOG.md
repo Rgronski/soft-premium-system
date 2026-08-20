@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 085 - Session Close Protocol
+
+### Date
+
+2026-08-20
+
+### Completed
+
+* Synchronized `docs/10_SESSION_STATE.md` and created `docs/session-handoffs/2026-08-20_085_SESSION_HANDOFF.md` so the SSOT now records Session 085 as closed with Session 086 queued for the next Product Owner decision chat.
+* Recorded that Session 085 closes with `MS-028.6 - GitHub Real Connection Readiness Check Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Appended the Session 085 close usage record.
+
+### Notes
+
+* No new product logic changed in this close protocol.
+* Package generation remains the next operational step after the close commit and push.
+
 ## Session 085 - MS-028.6 control files sync
 
 ### Date
