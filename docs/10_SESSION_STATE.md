@@ -215,15 +215,15 @@ SPS OS Session State
 
 Date: 2026-08-20
 Current Session ID: 086
-Current Chat Title: 086 SPS OS - MS-028.9 Operation Selection Sync
+Current Chat Title: 086 SPS OS - MS-028.9 Control Files Sync
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
 Active Capability: SSOT Control Files Sync
 Active Work Item: Session 086 MS-028.9 control files sync
 Current Mode: ACTIVE
-Completed Capability Items: Session 086 prepared the MS-028.9 docs-first operation selection contract patch; Session 086 synchronized the MS-028.9 SSOT state
-Current Product Milestone: MS-028.9 - GitHub First Real Operation Selection Foundation
-Latest Completed Product Milestone: MS-028.8 - GitHub Real Execution Confirmation Gate Foundation
+Completed Capability Items: Session 086 prepared the MS-028.9 docs-first operation selection contract patch; Session 086 synchronized the MS-028.9 control files
+Current Product Milestone: NONE / Product Owner decision required
+Latest Completed Product Milestone: MS-028.9 - GitHub First Real Operation Selection Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
 Latest Completed Capability Item: Session 086 MS-028.9 control files sync
@@ -232,9 +232,9 @@ Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-01
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: a2ccf4d
+Latest Verified Commit: 61614ee
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Review the published MS-028.9 operation selection contract and keep real Git/GitHub execution blocked until a later approved implementation milestone.
-Next Session Plan: Continue reviewing the published MS-028.9 operation selection contract and keep real Git/GitHub execution blocked until a later approved implementation milestone.
+Next Safe Step: Review the published MS-028.9 control files sync and keep real Git/GitHub execution blocked until a later approved implementation milestone.
+Next Session Plan: Continue reviewing the published MS-028.9 control files sync and keep real Git/GitHub execution blocked until a later approved implementation milestone.

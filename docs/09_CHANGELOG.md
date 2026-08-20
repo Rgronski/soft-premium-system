@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 086 - MS-028.9 operation selection control files sync publication
+
+### Date
+
+2026-08-20
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.9 - GitHub First Real Operation Selection Foundation` as `COMPLETED / VERIFIED / PUBLISHED / CLOSED`.
+* Recorded that the repository now adds the local operation-selection block inside the GitHub execution confirmation gate, shows selection only for `requires confirmation` and `ready`, hides selection for `blocked`, and keeps selection local `useState` only with no persistence.
+* Recorded that the selection limits candidate labels to `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, preserves selected-as-candidate versus authorized-to-execute, and keeps real Git/GitHub execution blocked.
+* Preserved `MS-028.8 - GitHub Real Execution Confirmation Gate Foundation` as completed / verified / published / closed.
+* Recorded the Session 086 SSOT publication.
+
+### Notes
+
+* No GitHub OAuth, tokens, GitHub API integration, real Git operations, filesystem writes, remote synchronization, automatic work on main, real execution behavior, UI redesign, or unrelated refactor was introduced.
+
 ## Session 086 - MS-028.9 operation selection docs-first publication
 
 ### Date

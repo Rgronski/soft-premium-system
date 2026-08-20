@@ -134,11 +134,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-028.9 - GitHub First Real Operation Selection Foundation
+NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.8 - GitHub Real Execution Confirmation Gate Foundation
+MS-028.9 - GitHub First Real Operation Selection Foundation
 
 ## MS-028.6 - GitHub Real Connection Readiness Check Foundation
 
@@ -317,19 +317,19 @@ MS-028.9 - GitHub First Real Operation Selection Foundation
 Product Milestone
 
 **Contract Status**
-APPROVED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Publication Status**
 PUBLISHED
 
 **Milestone Status**
-CONTRACT / DESIGN / NOT IMPLEMENTED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
-YES
+NO
 
 **Runtime Status**
-ACTIVE
+CLOSED
 
 **Owner**
 Product Owner
@@ -341,7 +341,7 @@ Chief Architect
 Codex
 
 **Purpose**
-Define the bounded selection boundary for the first real Git/GitHub operation type after the confirmation gate, without authorizing execution.
+Record the completed bounded selection boundary for the first real Git/GitHub operation type after the confirmation gate, without authorizing execution.
 
 **Product Outcome**
 After MS-028.8 provides the confirmation gate, this milestone lets Product Owner select the first real operation type as a candidate only, based on local readiness context and explicit Product Owner choice. The selection remains distinct from authorization to execute, names only bounded candidate labels such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked until a later separate milestone.
