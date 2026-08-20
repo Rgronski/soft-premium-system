@@ -42,13 +42,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE / Product Owner decision required
+MS-028.9 - GitHub First Real Operation Selection Foundation
 
 **Latest Completed Milestone**
 MS-028.8 - GitHub Real Execution Confirmation Gate Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-028.9 is APPROVED as the GitHub First Real Operation Selection Foundation docs-first contract/design milestone in the current local workspace. The repository now defines the bounded first real operation type selection boundary after the confirmation gate, based only on local readiness context and explicit Product Owner choice, while preserving the distinction between selected as candidate and authorized to execute. The selection names only bounded labels such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked until a later separate milestone.
 
 MS-028.8 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Real Execution Confirmation Gate Foundation. The project settings page now adds a compact local confirmation gate next to the GitHub readiness action state, derives the gate from the existing readiness action summary, hides the gate for blocked, and shows confirmation-only disclosure for requires confirmation and ready. The gate preserves the distinction between ready for Product Owner confirmation and ready to execute, keeps real Git/GitHub execution blocked, and was verified by the targeted settings page test file with 11 tests passing.
 
@@ -1538,10 +1540,10 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `NONE / Product Owner decision required`
+* `Current Product Milestone` is `MS-028.9 - GitHub First Real Operation Selection Foundation`
 * `Latest Completed Product Milestone` is `MS-028.8 - GitHub Real Execution Confirmation Gate Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
-* `MS-028.8` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Real Execution Confirmation Gate Foundation; the repository now adds a compact local confirmation gate next to the GitHub readiness action state, derives the gate from the existing readiness action summary, hides the gate for blocked, and shows confirmation-only disclosure for requires confirmation and ready while keeping real Git/GitHub execution blocked.
+* `MS-028.9` is `APPROVED` as the docs-first first real operation selection contract that follows MS-028.8, stays based only on local readiness context and explicit Product Owner choice, preserves selected-as-candidate versus authorized-to-execute, and keeps real Git/GitHub execution blocked.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.8` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Functional Handoff Foundation; the repository now records the visible handoff boundary across the existing project, task list, task detail, and task workspace surfaces while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.7` close decision: the next milestone now requires Product Owner direction while future SPS-owned working copies still live under `C:\SPS_OS_WORK\<project-slug>` and existing project metadata may still point to the source or `repositoryUrl`.

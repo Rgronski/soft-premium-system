@@ -134,7 +134,7 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE / Product Owner decision required
+MS-028.9 - GitHub First Real Operation Selection Foundation
 
 ## Latest Completed Product Milestone
 
@@ -305,6 +305,62 @@ GitHub OAuth, access tokens, GitHub API integration, real Git operations, clone/
 **Sequencing**
 1. MS-028.7 defines the ready-for-confirmation layer only.
 2. MS-028.8 defines the confirmation gate only.
+3. Any real Git/GitHub execution remains blocked until a later explicit Product Owner-approved implementation milestone.
+4. Sync, merge, and PR to main remain later and separate.
+
+## MS-028.9 - GitHub First Real Operation Selection Foundation
+
+**Milestone**
+MS-028.9 - GitHub First Real Operation Selection Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+CONTRACT / DESIGN / NOT IMPLEMENTED
+
+**Active**
+YES
+
+**Runtime Status**
+ACTIVE
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the bounded selection boundary for the first real Git/GitHub operation type after the confirmation gate, without authorizing execution.
+
+**Product Outcome**
+After MS-028.8 provides the confirmation gate, this milestone lets Product Owner select the first real operation type as a candidate only, based on local readiness context and explicit Product Owner choice. The selection remains distinct from authorization to execute, names only bounded candidate labels such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked until a later separate milestone.
+
+**Dependencies**
+MS-028.8 - GitHub Real Execution Confirmation Gate Foundation
+
+**Implementation Scope**
+Docs-first operation-selection contract publication for the GitHub real-execution boundary.
+
+**Allowed Scope**
+Docs publication, sequencing guidance, operation-selection wording, candidate-label terminology, preservation of the selected-as-candidate versus authorized-to-execute distinction, and blocker conditions for future Git/GitHub execution.
+
+**Forbidden Scope**
+GitHub OAuth, access tokens, GitHub API integration, real Git operations, clone/fetch/checkout, branch creation on disk or remote, push, merge, pull request, sync-to-main, backend persistence, filesystem writes for clone/workspace setup, automatic work on main, remote synchronization, UI implementation, source code changes, and unrelated UI or domain changes.
+
+**Sequencing**
+1. MS-028.8 defines the confirmation gate only.
+2. MS-028.9 defines the first real operation selection boundary only.
 3. Any real Git/GitHub execution remains blocked until a later explicit Product Owner-approved implementation milestone.
 4. Sync, merge, and PR to main remain later and separate.
 

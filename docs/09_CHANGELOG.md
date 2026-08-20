@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 086 - MS-028.8 confirmation gate UI publication
+## Session 086 - MS-028.9 operation selection docs-first publication
 
 ### Date
 
@@ -77,10 +77,10 @@ Each release entry should contain:
 
 ### Completed
 
-* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.8 - GitHub Real Execution Confirmation Gate Foundation` as `COMPLETED / VERIFIED / PUBLISHED / CLOSED`.
-* Recorded that the project settings page now adds a compact local confirmation gate next to the GitHub readiness action state, derives the gate from the existing readiness action summary, hides the gate for blocked, and shows confirmation-only disclosure for requires confirmation and ready.
-* Recorded that the gate preserves the distinction between ready for Product Owner confirmation and ready to execute, keeps real Git/GitHub execution blocked, and was verified by the targeted settings page test file with 11 tests passing.
-* Preserved `MS-028.7 - GitHub Real Readiness Action Foundation` as completed / verified / published / closed.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.9 - GitHub First Real Operation Selection Foundation` as the approved current docs-first contract/design milestone.
+* Recorded that the repository now defines the bounded first real operation type selection boundary after the confirmation gate, based only on local readiness context and explicit Product Owner choice.
+* Recorded that the selection preserves the distinction between selected as candidate and authorized to execute, names only bounded labels such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
+* Preserved `MS-028.8 - GitHub Real Execution Confirmation Gate Foundation` as completed / verified / published / closed.
 * Recorded the Session 086 SSOT publication.
 
 ### Notes
