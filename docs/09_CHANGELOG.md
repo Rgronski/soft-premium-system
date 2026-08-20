@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 086 - MS-028.8 confirmation gate docs-only publication
+## Session 086 - MS-028.8 confirmation gate UI publication
 
 ### Date
 
@@ -77,16 +77,15 @@ Each release entry should contain:
 
 ### Completed
 
-* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.8 - GitHub Real Execution Confirmation Gate Foundation` as the approved current docs-only contract/design milestone.
-* Recorded that the confirmation gate follows the MS-028.7 ready-for-confirmation state, is based only on local UI/browser state, and preserves the distinction between ready for Product Owner confirmation and ready to execute.
-* Recorded that explicit Product Owner approval remains required before any real Git/GitHub operation and that real Git/GitHub execution stays blocked.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.8 - GitHub Real Execution Confirmation Gate Foundation` as `COMPLETED / VERIFIED / PUBLISHED / CLOSED`.
+* Recorded that the project settings page now adds a compact local confirmation gate next to the GitHub readiness action state, derives the gate from the existing readiness action summary, hides the gate for blocked, and shows confirmation-only disclosure for requires confirmation and ready.
+* Recorded that the gate preserves the distinction between ready for Product Owner confirmation and ready to execute, keeps real Git/GitHub execution blocked, and was verified by the targeted settings page test file with 11 tests passing.
 * Preserved `MS-028.7 - GitHub Real Readiness Action Foundation` as completed / verified / published / closed.
 * Recorded the Session 086 SSOT publication.
 
 ### Notes
 
-* No product code or UI behavior changed in this contract publication.
-* No GitHub OAuth, tokens, GitHub API integration, real Git workflow behavior, filesystem writes, or remote synchronization was introduced.
+* No GitHub OAuth, tokens, GitHub API integration, real Git workflow behavior, filesystem writes, remote synchronization, automatic work on main, or unrelated refactor was introduced.
 
 ## Session 085 - Session Close Protocol
 

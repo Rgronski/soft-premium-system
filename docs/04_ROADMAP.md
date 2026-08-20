@@ -134,11 +134,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-028.8 - GitHub Real Execution Confirmation Gate Foundation
+NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.7 - GitHub Real Readiness Action Foundation
+MS-028.8 - GitHub Real Execution Confirmation Gate Foundation
 
 ## MS-028.6 - GitHub Real Connection Readiness Check Foundation
 
@@ -261,19 +261,19 @@ MS-028.8 - GitHub Real Execution Confirmation Gate Foundation
 Product Milestone
 
 **Contract Status**
-APPROVED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Publication Status**
 PUBLISHED
 
 **Milestone Status**
-CONTRACT / DESIGN / NOT IMPLEMENTED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
-YES
+NO
 
 **Runtime Status**
-ACTIVE
+CLOSED
 
 **Owner**
 Product Owner
@@ -294,10 +294,10 @@ After MS-028.7 provides the local `ready`, `blocked`, and `requires confirmation
 MS-028.7 - GitHub Real Readiness Action Foundation
 
 **Implementation Scope**
-Docs-only confirmation-gate contract publication for the GitHub real-execution boundary.
+Docs-only confirmation-gate publication and UI implementation boundary for the GitHub real-execution boundary.
 
 **Allowed Scope**
-Docs publication, sequencing guidance, confirmation-gate wording, preservation of the ready-for-confirmation versus ready-to-execute distinction, and blocker conditions for future Git/GitHub execution.
+Docs publication, sequencing guidance, confirmation-gate wording, preservation of the ready-for-confirmation versus ready-to-execute distinction, UI confirmation disclosure wording, targeted test coverage, and blocker conditions for future Git/GitHub execution.
 
 **Forbidden Scope**
 GitHub OAuth, access tokens, GitHub API integration, real Git operations, clone/fetch/checkout, branch creation on disk or remote, push, merge, pull request, sync-to-main, backend persistence, filesystem writes for clone/workspace setup, automatic work on main, remote synchronization, UI implementation, source code changes, and unrelated UI or domain changes.
