@@ -112,7 +112,7 @@ describe("ProjectSettingsPage", () => {
     expect(screen.getByText(/To nie jest gotowość do wykonania\./)).toBeTruthy();
   });
 
-  test("shows selected-as-candidate copy after choosing a candidate operation", async () => {
+  test("shows selected-as-candidate copy and readiness detail after choosing a candidate operation", async () => {
     render(<ProjectSettingsPage />);
 
     fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
@@ -131,6 +131,9 @@ describe("ProjectSettingsPage", () => {
         screen.getByText(/Bramka potwierdzenia wykonania GitHub/),
       ).toBeTruthy();
     });
+    expect(
+      screen.queryByText("readiness detail", { selector: ".text-xs" }),
+    ).toBeNull();
 
     fireEvent.click(screen.getByLabelText("connection check"));
 
@@ -138,11 +141,19 @@ describe("ProjectSettingsPage", () => {
       screen.getByText(/Wybrano jako kandydat: connection check\./),
     ).toBeTruthy();
     expect(
+      screen.getByText("readiness detail", { selector: ".text-xs" }),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        /Informational only\. Selected as candidate: connection check\./,
+      ),
+    ).toBeTruthy();
+    expect(
       screen.getAllByText(/To nie jest autoryzacja do wykonania\./),
-    ).toHaveLength(2);
+    ).toHaveLength(3);
     expect(
       screen.getAllByText(/Realne wykonanie Git\/GitHub pozostaje zablokowane\./),
-    ).toHaveLength(3);
+    ).toHaveLength(4);
 
     fireEvent.click(screen.getAllByRole("radio")[1]);
 

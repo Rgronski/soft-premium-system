@@ -208,6 +208,12 @@ type GitHubRealOperationSelectionSummary = {
   copy: string;
 };
 
+type GitHubRealOperationReadinessDetailSummary = {
+  title: string;
+  note: string;
+  disclosure: string;
+};
+
 const GITHUB_REAL_OPERATION_SELECTION_OPTIONS: Array<{
   label: GitHubRealOperationSelection;
 }> = [
@@ -287,6 +293,43 @@ function buildGitHubRealOperationSelectionSummary(
   return {
     label: selection,
     copy: `Wybrano jako kandydat: ${selection}. To nie jest autoryzacja do wykonania. Realne wykonanie Git/GitHub pozostaje zablokowane.`,
+  };
+}
+
+function buildGitHubRealOperationReadinessDetailSummary(
+  selection: GitHubRealOperationSelection | null,
+): GitHubRealOperationReadinessDetailSummary | null {
+  if (!selection) {
+    return null;
+  }
+
+  const detailBySelection: Record<
+    GitHubRealOperationSelection,
+    Pick<GitHubRealOperationReadinessDetailSummary, "note">
+  > = {
+    "connection check": {
+      note:
+        "Ten kandydat opisuje tylko lokalny kontekst sprawdzania połączenia, bez łączenia się z GitHub.",
+    },
+    "local clone/workspace check": {
+      note:
+        "Ten kandydat opisuje tylko lokalny kontekst klonu/workspace, bez klonowania, synchronizacji ani zmian na dysku.",
+    },
+    "clone preparation": {
+      note:
+        "Ten kandydat opisuje tylko przygotowanie klonu, bez tworzenia repozytorium, checkoutu ani push.",
+    },
+    "branch check": {
+      note:
+        "Ten kandydat opisuje tylko lokalną weryfikację gałęzi, bez przełączania gałęzi i bez realnego wykonania Git/GitHub.",
+    },
+  };
+
+  return {
+    title: "Readiness detail",
+    note: `Informational only. Selected as candidate: ${selection}. ${detailBySelection[selection].note}`,
+    disclosure:
+      "To nie jest autoryzacja do wykonania. Realne wykonanie Git/GitHub pozostaje zablokowane.",
   };
 }
 
@@ -405,6 +448,10 @@ export default function ProjectSettingsPage() {
     );
   const githubRealOperationSelectionSummary =
     buildGitHubRealOperationSelectionSummary(githubRealOperationSelection);
+  const githubRealOperationReadinessDetailSummary =
+    buildGitHubRealOperationReadinessDetailSummary(
+      githubRealOperationSelection,
+    );
 
   function handleSaveGithubUrl() {
     const trimmedGithubUrl = githubUrlInput.trim();
@@ -761,6 +808,22 @@ export default function ProjectSettingsPage() {
                   ? githubRealOperationSelectionSummary.copy
                   : "Jeszcze nie wybrano kandydata. To nie jest autoryzacja do wykonania. Realne wykonanie Git/GitHub pozostaje zablokowane."}
               </p>
+              {githubRealOperationReadinessDetailSummary ? (
+                <div className="mt-3 rounded-xl border border-zinc-800 bg-zinc-950/80 p-3">
+                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                    readiness detail
+                  </p>
+                  <p className="mt-2 text-sm text-zinc-300">
+                    {githubRealOperationReadinessDetailSummary.title}
+                  </p>
+                  <p className="mt-2 text-sm text-zinc-400">
+                    {githubRealOperationReadinessDetailSummary.note}
+                  </p>
+                  <p className="mt-2 text-sm text-zinc-400">
+                    {githubRealOperationReadinessDetailSummary.disclosure}
+                  </p>
+                </div>
+              ) : null}
             </div>
           </div>
         ) : null}
