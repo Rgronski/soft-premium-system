@@ -138,11 +138,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-028.17 - GitHub Local Setup Success Copy Correction
+NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation
+MS-028.17 - GitHub Local Setup Success Copy Correction
 
 ## MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
 
@@ -303,19 +303,19 @@ Product Milestone
 This milestone corrects the success copy after local Git setup so the UI says `local clone/branch setup: completed`, while commit/push/merge/PR remain blocked or out of scope.
 
 **Contract Status**
-DRAFT / READY FOR PUBLICATION
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Publication Status**
-NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-PLANNED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
-YES
+NO
 
 **Runtime Status**
-OPEN
+CLOSED
 
 **Owner**
 Product Owner
@@ -331,6 +331,8 @@ Define the docs-first contract for correcting the success copy after the first l
 
 **Product Outcome**
 After the local clone and working branch setup succeeds, the UI should say that local clone/branch setup is completed. The UI should still state that commit, push, merge, and PR are blocked or out of scope. This milestone does not change Git logic and does not introduce any new execution.
+
+The success-copy correction is published and closed, and it does not change the local clone/branch execution path itself.
 
 **Dependencies**
 MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation

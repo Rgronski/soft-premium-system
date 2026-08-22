@@ -1438,7 +1438,7 @@ export default function ProjectSettingsPage() {
                         To osobny krok SPS OS oparty na zapisanych ustawieniach projektu: adresie GitHub, local workspace path i nazwie gałęzi roboczej. Sama nazwa gałęzi nie tworzy gałęzi.
                       </p>
                       <p className="mt-2 text-sm text-zinc-400">
-                        Realne clone/checkout/branch/commit/push/merge/PR pozostają zablokowane.
+                        local clone/branch setup: completed. Commit/push/merge/PR pozostają poza zakresem.
                       </p>
                       <p className="mt-3 text-sm text-zinc-300" aria-live="polite">
                         Stan akcji: {githubLocalWorkingBranchCreationActionState}

@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 087 - MS-028.17 control files sync publication
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` as `NONE / Product Owner decision required` and `Latest Completed Product Milestone` as `MS-028.17 - GitHub Local Setup Success Copy Correction`.
+* Recorded that `MS-028.17 - GitHub Local Setup Success Copy Correction` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED`, corrects the local setup success copy, and keeps commit, push, merge, and PR outside the milestone.
+* Preserved `MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation` as the previous latest completed milestone.
+* Recorded that Git logic and API behavior were unchanged.
+
+### Notes
+
+* No live clone/checkout/branch execution was introduced in this sync step.
+
 ## Session 087 - MS-028.17 docs-first local setup success copy correction contract patch
 
 ### Date

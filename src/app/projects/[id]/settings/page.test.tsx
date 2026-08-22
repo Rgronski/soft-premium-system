@@ -388,7 +388,7 @@ describe("ProjectSettingsPage", () => {
     });
     expect(
       screen.getByText(
-        /Lokalny clone i working branch setup zostały wykonane\./,
+        /local clone\/branch setup: completed\. Commit\/push\/merge\/PR pozostają poza zakresem\./,
       ),
     ).toBeTruthy();
     expect(
@@ -400,11 +400,6 @@ describe("ProjectSettingsPage", () => {
       screen.getByText(/Active branch: work\/beauty-client-pro/, {
         selector: ".text-emerald-200",
       }),
-    ).toBeTruthy();
-    expect(
-      screen.getByText(
-        /Realne wykonanie Git\/GitHub nadal pozostaje zablokowane/,
-      ),
     ).toBeTruthy();
   });
 

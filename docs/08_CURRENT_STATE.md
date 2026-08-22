@@ -42,15 +42,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-028.17 - GitHub Local Setup Success Copy Correction
+NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation
+MS-028.17 - GitHub Local Setup Success Copy Correction
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-028.17 is the current docs-first milestone in the local workspace as the GitHub Local Setup Success Copy Correction. The repository already completed the local clone and working branch setup path, and this milestone corrects the success copy so it says `local clone/branch setup: completed` while commit, push, merge, and PR remain blocked or out of scope. The milestone does not change Git logic and does not add new execution.
+MS-028.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Local Setup Success Copy Correction. The repository already completed the local clone and working branch setup path, and this milestone corrects the success copy so it says `local clone/branch setup: completed` while commit, push, merge, and PR remain blocked or out of scope. The milestone does not change Git logic and does not add new execution.
+
+MS-028.17 does not change the local clone/branch execution path itself.
 
 MS-028.15 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Local Clone And Working Branch Execution Foundation. The repository now defines the docs-first contract and safety boundary for the first SPS OS-controlled local clone and working branch execution step after MS-028.14, and the implementation now includes the SPS OS-controlled route plus the settings-page action and tests for local clone and working branch setup. The implementation validates the GitHub URL, local workspace path, and working branch name, prefers `C:\SPS_OS_WORK`, and stops on blockers when the target already exists as a conflicting git repository or remote. The live manual action against Beauty Client PRO remains a separate verification step after publication. The milestone does not create commit, push, merge, or PR artifacts.
 
