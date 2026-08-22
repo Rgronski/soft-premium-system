@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 087 - MS-028.15 control files sync publication
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` as `NONE / Product Owner decision required` and `Latest Completed Product Milestone` as `MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation`.
+* Recorded that `MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED`, includes the SPS OS-controlled clone/fetch/switch/branch setup route plus the settings-page action and tests, and keeps commit/push/merge/PR out of scope.
+* Preserved `MS-028.14 - GitHub Local Working Branch Creation Action Foundation` as completed history only.
+* Recorded the Session 087 MS-028.15 control files sync publication.
+
+### Notes
+
+* The targeted settings page and route tests passed with 21 tests passing.
+* The live manual action against Beauty Client PRO remains a separate verification step after publication.
+
 ## Session 087 - MS-028.15 contract publication
 
 ### Date

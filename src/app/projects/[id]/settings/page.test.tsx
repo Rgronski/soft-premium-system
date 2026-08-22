@@ -6,6 +6,21 @@ import { createProject } from "@/lib/project/project";
 
 const useParamsMock = vi.fn(() => ({ id: "project-1" }));
 
+function createDeferred<T>() {
+  let resolve!: (value: T | PromiseLike<T>) => void;
+  let reject!: (reason?: unknown) => void;
+  const promise = new Promise<T>((promiseResolve, promiseReject) => {
+    resolve = promiseResolve;
+    reject = promiseReject;
+  });
+
+  return {
+    promise,
+    resolve,
+    reject,
+  };
+}
+
 vi.mock("next/navigation", () => ({
   useParams: () => useParamsMock(),
 }));
@@ -28,6 +43,7 @@ describe("ProjectSettingsPage", () => {
   afterEach(() => {
     cleanup();
     vi.restoreAllMocks();
+    vi.unstubAllGlobals();
     localStorage.clear();
   });
 
@@ -245,6 +261,10 @@ describe("ProjectSettingsPage", () => {
   });
 
   test("shows the SPS OS local working branch creation action after authorized preflight and records a local success state", async () => {
+    const fetchDeferred = createDeferred<Response>();
+    const fetchMock = vi.fn(() => fetchDeferred.promise);
+    vi.stubGlobal("fetch", fetchMock);
+
     render(<ProjectSettingsPage />);
 
     fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
@@ -259,9 +279,7 @@ describe("ProjectSettingsPage", () => {
     fireEvent.click(screen.getAllByRole("radio")[1]);
 
     await waitFor(() => {
-      expect(
-        screen.getByText(/Proponowana ga/),
-      ).toBeTruthy();
+      expect(screen.getByText(/Proponowana ga/)).toBeTruthy();
     });
 
     fireEvent.click(screen.getByLabelText("branch check"));
@@ -283,14 +301,10 @@ describe("ProjectSettingsPage", () => {
     );
 
     await waitFor(() => {
-      expect(
-        screen.getByText(/Akcja lokalnego klonu i ga/i),
-      ).toBeTruthy();
+      expect(screen.getByText(/Akcja lokalnego klonu i ga/i)).toBeTruthy();
     });
     expect(screen.getByText(/Stan akcji: ready/)).toBeTruthy();
-    expect(
-      screen.getByText(/Sama nazwa ga/i),
-    ).toBeTruthy();
+    expect(screen.getByText(/Sama nazwa ga/i)).toBeTruthy();
     expect(
       screen.getByRole("button", {
         name: /Utw.*lokalny klon/i,
@@ -303,14 +317,151 @@ describe("ProjectSettingsPage", () => {
       }),
     );
 
+    expect(screen.getByText(/Stan akcji: running/)).toBeTruthy();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/api/projects/project-1/working-branch/setup",
+      expect.objectContaining({
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+      }),
+    );
+    expect(
+      JSON.parse(fetchMock.mock.calls[0][1]?.body as string),
+    ).toEqual({
+      projectId: "project-1",
+      repositoryUrl: "https://github.com/example/beauty-client-pro",
+      workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+      branchWorkMode: "working-branch",
+      workingBranchName: "work/beauty-client-pro",
+      candidateDecision: "approved for further preparation",
+      authorization: "authorized to execute",
+    });
+
+    fetchDeferred.resolve(
+      new Response(
+        JSON.stringify({
+          status: "success",
+          message:
+            "Lokalny clone i working branch setup zostały wykonane. Commit/push/merge/PR pozostają poza zakresem.",
+          workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+          activeBranch: "work/beauty-client-pro",
+        }),
+        {
+          status: 200,
+          headers: {
+            "content-type": "application/json",
+          },
+        },
+      ),
+    );
+
     await waitFor(() => {
       expect(screen.getByText(/Stan akcji: success/)).toBeTruthy();
     });
     expect(
-      screen.getByText(/Lokalna .*uruchomiona/),
+      screen.getByText(
+        /Lokalny clone i working branch setup zostały wykonane\./,
+      ),
     ).toBeTruthy();
     expect(
-      screen.getByText(/Realne wykonanie Git\/GitHub nadal pozostaje zablokowane/),
+      screen.getByText(/Local workspace path: C:\\SPS_OS_WORK\\beauty-client-pro/, {
+        selector: ".text-emerald-200",
+      }),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Active branch: work\/beauty-client-pro/, {
+        selector: ".text-emerald-200",
+      }),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        /Realne wykonanie Git\/GitHub nadal pozostaje zablokowane/,
+      ),
+    ).toBeTruthy();
+  });
+
+  test("shows blocked and error states when the action API blocks or fails", async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+
+    render(<ProjectSettingsPage />);
+
+    fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
+      target: { value: "https://github.com/example/beauty-client-pro" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /Zapisz adres GitHub/ }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Decyzja pracy z ga/)).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getAllByRole("radio")[1]);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Proponowana ga/)).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByLabelText("branch check"));
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: /Zatwierd/i,
+      }),
+    );
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: /Oznacz jako authorized to execute/,
+      }),
+    );
+
+    fetchMock.mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({
+          status: "blocked",
+          message:
+            "Remote origin nie pasuje do skonfigurowanego adresu GitHub.",
+        }),
+        {
+          status: 409,
+          headers: {
+            "content-type": "application/json",
+          },
+        },
+      ),
+    );
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: /Utw.*lokalny klon/i,
+      }),
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(/Stan akcji: blocked/)).toBeTruthy();
+    });
+    expect(
+      screen.getByText(
+        /Remote origin nie pasuje do skonfigurowanego adresu GitHub\./,
+      ),
+    ).toBeTruthy();
+
+    fetchMock.mockRejectedValueOnce(new Error("network failure"));
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: /Utw.*lokalny klon/i,
+      }),
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(/Stan akcji: error/)).toBeTruthy();
+    });
+    expect(
+      screen.getByText(
+        /Akcja lokalnego klonu i gałęzi roboczej napotkała błąd komunikacji z API\./,
+      ),
     ).toBeTruthy();
   });
 

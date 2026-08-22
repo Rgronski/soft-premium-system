@@ -251,8 +251,25 @@ type GitHubRealOperationReadinessDetailSummary = {
 type GitHubLocalWorkingBranchCreationOutcome =
   | "idle"
   | "blocked"
+  | "running"
   | "error"
   | "success";
+
+type GitHubLocalWorkingBranchSetupResponse =
+  | {
+      status: "success";
+      message: string;
+      workingDirectory: string;
+      activeBranch: string;
+    }
+  | {
+      status: "blocked";
+      message: string;
+    }
+  | {
+      status: "error";
+      message: string;
+    };
 
 const GITHUB_REAL_OPERATION_SELECTION_OPTIONS: Array<{
   label: GitHubRealOperationSelection;
@@ -729,11 +746,15 @@ export default function ProjectSettingsPage() {
   const githubLocalWorkingBranchCreationActionState =
     githubLocalWorkingBranchCreationOutcome === "success"
       ? "success"
-      : githubLocalWorkingBranchCreationOutcome === "error"
-        ? "error"
-        : githubLocalWorkingBranchCreationActionCanRun
-          ? "ready"
-          : "blocked";
+      : githubLocalWorkingBranchCreationOutcome === "running"
+        ? "running"
+        : githubLocalWorkingBranchCreationOutcome === "blocked"
+          ? "blocked"
+        : githubLocalWorkingBranchCreationOutcome === "error"
+          ? "error"
+          : githubLocalWorkingBranchCreationActionCanRun
+            ? "ready"
+            : "blocked";
 
   function handleSaveGithubUrl() {
     const trimmedGithubUrl = githubUrlInput.trim();
@@ -834,7 +855,7 @@ export default function ProjectSettingsPage() {
     );
   }
 
-  function handleCreateLocalWorkingBranchAction() {
+  async function handleCreateLocalWorkingBranchAction() {
     const savedWorkingDirectory = project.workingDirectory?.trim() ?? "";
     const savedWorkingBranchName = workingBranchName.trim();
 
@@ -862,10 +883,58 @@ export default function ProjectSettingsPage() {
       return;
     }
 
-    setGithubLocalWorkingBranchCreationOutcome("success");
+    setGithubLocalWorkingBranchCreationOutcome("running");
     setFeedbackMessage(
-      `SPS OS uruchomił lokalną ścieżkę przygotowania klonu i gałęzi roboczej dla ${savedWorkingDirectory}. Sama nazwa gałęzi nie tworzy gałęzi, a realne clone/checkout/branch/commit/push/merge/PR pozostają zablokowane.`,
+      "SPS OS uruchamia lokalny clone i working branch setup. Commit/push/merge/PR nadal pozostają poza zakresem.",
     );
+
+    try {
+      const response = await fetch(
+        `/api/projects/${params.id}/working-branch/setup`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            projectId: params.id,
+            repositoryUrl: project.repositoryUrl?.trim() ?? "",
+            workingDirectory: savedWorkingDirectory,
+            branchWorkMode,
+            workingBranchName: savedWorkingBranchName,
+            candidateDecision: githubRealOperationCandidateDecision,
+            authorization: githubRealOperationAuthorization,
+          }),
+        },
+      );
+      const payload =
+        (await response.json()) as GitHubLocalWorkingBranchSetupResponse;
+
+      if (response.ok && payload.status === "success") {
+        setGithubLocalWorkingBranchCreationOutcome("success");
+        setFeedbackMessage(
+          `${payload.message} Local workspace path: ${payload.workingDirectory}. Active branch: ${payload.activeBranch}.`,
+        );
+        return;
+      }
+
+      if (response.status === 409 && payload.status === "blocked") {
+        setGithubLocalWorkingBranchCreationOutcome("blocked");
+        setFeedbackMessage(payload.message);
+        return;
+      }
+
+      setGithubLocalWorkingBranchCreationOutcome("error");
+      setFeedbackMessage(
+        payload.message ||
+          "Akcja lokalnego klonu i gałęzi roboczej napotkała błąd.",
+      );
+    } catch {
+      setGithubLocalWorkingBranchCreationOutcome("error");
+      setFeedbackMessage(
+        "Akcja lokalnego klonu i gałęzi roboczej napotkała błąd komunikacji z API.",
+      );
+    }
   }
 
   function handleWorkingBranchNameChange(nextWorkingBranchName: string) {
@@ -1297,12 +1366,17 @@ export default function ProjectSettingsPage() {
                       </button>
                       <p className="mt-3 text-sm text-zinc-400">
                         {githubLocalWorkingBranchCreationActionState === "success"
-                          ? "Lokalna ścieżka SPS OS została uruchomiona. Realne wykonanie Git/GitHub nadal pozostaje zablokowane."
-                          : githubLocalWorkingBranchCreationActionState === "error"
-                            ? "Akcja nie mogła przejść dalej. To nadal tylko lokalna ścieżka aplikacji."
-                            : githubLocalWorkingBranchCreationActionCanRun
-                              ? "Ustawienia są gotowe do wykonania osobnego kroku SPS OS."
-                              : "Akcja jest zablokowana do czasu zapisania lokalnego workspace path."}
+                          ? "SPS OS zakończył lokalne wykonanie. Realne wykonanie Git/GitHub nadal pozostaje zablokowane."
+                          : githubLocalWorkingBranchCreationActionState === "running"
+                            ? "Akcja jest uruchomiona i czeka na odpowiedź API."
+                            : githubLocalWorkingBranchCreationActionState ===
+                                "blocked"
+                              ? "Akcja została zablokowana. Sprawdź komunikat powyżej."
+                            : githubLocalWorkingBranchCreationActionState === "error"
+                              ? "Akcja nie mogła przejść dalej. To nadal tylko lokalna ścieżka aplikacji."
+                              : githubLocalWorkingBranchCreationActionCanRun
+                                ? "Ustawienia są gotowe do wykonania osobnego kroku SPS OS."
+                                : "Akcja jest zablokowana do czasu zapisania lokalnego workspace path."}
                       </p>
                     </div>
                   ) : null}

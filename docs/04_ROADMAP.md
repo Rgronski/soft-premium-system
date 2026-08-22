@@ -136,11 +136,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
+NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.14 - GitHub Local Working Branch Creation Action Foundation
+MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
 
 ## MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
 
@@ -150,22 +150,22 @@ MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
 **Type**
 Product Milestone
 
-This is an SPS OS-controlled execution foundation only. Real clone/checkout/working-branch execution was not added in this milestone.
+This milestone now has an SPS OS-controlled execution route and settings action for local clone/checkout/working-branch setup. Commit/push/merge/PR remain out of scope.
 
 **Contract Status**
-PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Publication Status**
 PUBLISHED
 
 **Milestone Status**
-PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
-YES
+NO
 
 **Runtime Status**
-OPEN
+CLOSED
 
 **Owner**
 Product Owner
@@ -181,6 +181,9 @@ Define the docs-first contract for the first SPS OS-controlled local clone and w
 
 **Product Outcome**
 After the project settings store the GitHub URL, local workspace path, branch work mode, and working branch name, this milestone defines the controlled local execution step that SPS OS will eventually run. The contract requires validation of the GitHub URL, the workspace path, and the working branch name; keeps the workspace outside the SPS OS repo root; prefers `C:\SPS_OS_WORK`; and stops on blockers if the destination already exists as a conflicting git repository or remote. The contract keeps the action inside SPS OS settings and action flow rather than a manual Codex bypass. The milestone does not create commit, push, merge, or PR artifacts and does not perform sync-to-main.
+
+**Implementation Note**
+The SPS OS-controlled route, settings action, and targeted tests for local clone and working branch setup were implemented and verified after publication. Live action against Beauty Client PRO remains a separate manual verification step after publication, and commit/push/merge/PR remain out of scope.
 
 **Dependencies**
 * MS-028.14 - GitHub Local Working Branch Creation Action Foundation

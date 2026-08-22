@@ -42,15 +42,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
+NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.14 - GitHub Local Working Branch Creation Action Foundation
+MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-028.15 is PUBLISHED in the current local workspace as the GitHub Local Clone And Working Branch Execution Foundation. The repository now defines the docs-first contract and safety boundary for the first SPS OS-controlled local clone and working branch execution step after MS-028.14, validates the GitHub URL, local workspace path, and working branch name, prefers `C:\SPS_OS_WORK`, and stops on blockers when the target already exists as a conflicting git repository or remote. The contract keeps the action inside SPS OS settings and action flow rather than a manual Codex bypass. The milestone is an execution foundation contract only and does not create clone, checkout, branch, commit, push, merge, or PR artifacts.
+MS-028.15 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Local Clone And Working Branch Execution Foundation. The repository now defines the docs-first contract and safety boundary for the first SPS OS-controlled local clone and working branch execution step after MS-028.14, and the implementation now includes the SPS OS-controlled route plus the settings-page action and tests for local clone and working branch setup. The implementation validates the GitHub URL, local workspace path, and working branch name, prefers `C:\SPS_OS_WORK`, and stops on blockers when the target already exists as a conflicting git repository or remote. The live manual action against Beauty Client PRO remains a separate verification step after publication. The milestone does not create commit, push, merge, or PR artifacts.
 
 MS-028.14 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Local Working Branch Creation Action Foundation. The repository now defines the docs-first contract and UI/test action foundation for the first SPS OS-controlled local working branch creation action after MS-028.13, distinguishes saved settings from preflight readiness, future local clone creation, future local branch creation, and future sync-to-main, and states that the working branch name alone does not create a branch. The contract keeps the action inside SPS OS settings and action flow rather than a manual Codex bypass. The milestone is an action foundation only and does not create clone, checkout, branch, commit, push, merge, or PR artifacts.
 
