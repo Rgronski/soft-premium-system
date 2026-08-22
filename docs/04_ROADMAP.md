@@ -133,10 +133,11 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.6` - GitHub Real Connection Readiness Check Foundation
 * `MS-028.11` - GitHub First Operation Candidate Decision Foundation
 * `MS-028.13` - GitHub First Authorized Operation Preflight Foundation
+* `MS-028.16` - GitHub Repo Checkout Folder Derivation Foundation
 
 ## Current
 
-NONE / Product Owner decision required
+MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation
 
 ## Latest Completed Product Milestone
 
@@ -217,6 +218,77 @@ Docs-first contract publication for the local clone and working branch execution
 1. MS-028.14 defines the SPS OS-controlled local working branch creation action foundation.
 2. MS-028.15 defines the SPS OS-controlled local clone and working branch execution foundation after the saved settings and action foundation are ready.
 3. Real commit/push/merge/PR and sync-to-main remain blocked until later explicit Product Owner-approved milestones.
+
+## MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation
+
+**Milestone**
+MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation
+
+**Type**
+Product Milestone
+
+This milestone defines the derivation rule that separates the project workspace folder from the Git repo checkout folder. The workspace root holds the manifest-only project folder, and the repo checkout lives one level deeper in a dedicated `repo` subfolder.
+
+**Contract Status**
+DRAFT / READY FOR PUBLICATION
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+PLANNED
+
+**Active**
+YES
+
+**Runtime Status**
+OPEN
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the docs-first contract for deriving a safe checkout folder when SPS OS prepares the first Git clone / working-branch flow for a manifest-only project workspace.
+
+**Product Outcome**
+If the project workspace folder already exists and contains `sps-project.json`, SPS OS must treat that folder as the project workspace folder, not the Git repo checkout folder. When the user chooses the Git clone / working-branch flow and a saved GitHub URL exists, the derived checkout folder should default to `C:\SPS_OS_WORK\<project-slug>\repo`. A manually chosen repo folder may still be respected, but it must not conflict with the manifest-only workspace folder. The milestone keeps real clone/checkout/branch execution out of scope in this docs-first step.
+
+**Dependencies**
+MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
+
+**Implementation Scope**
+Docs-first contract publication for repository checkout folder derivation.
+
+**Allowed Scope**
+* project workspace folder versus repo checkout folder wording
+* `sps-project.json` manifest-only folder distinction
+* checkout-folder derivation guidance
+* manual repo-folder conflict guidance
+* future-work guidance for the first real clone/setup implementation step
+
+**Forbidden Scope**
+* GitHub OAuth
+* access tokens
+* GitHub API integration
+* secret storage
+* real clone/checkout/working-branch execution
+* commit
+* push
+* merge
+* pull request
+* unrelated UI or domain changes
+
+**Sequencing**
+1. MS-028.15 defines the first SPS OS-controlled local clone and working branch execution foundation.
+2. MS-028.16 defines the safe derivation rule that keeps the manifest-only workspace folder separate from the Git repo checkout folder.
+3. Real clone/setup work can then target the derived checkout folder rather than the manifest-only workspace folder.
+4. Real commit/push/merge/PR remain blocked until later explicit Product Owner-approved milestones.
 
 ## MS-028.14 - GitHub Local Working Branch Creation Action Foundation
 

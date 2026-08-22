@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 087 - MS-028.16 docs-first repo checkout folder derivation contract patch
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Defined the docs-first contract for `MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation` in `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Separated the manifest-only project workspace folder from the derived Git repo checkout folder so that `sps-project.json` stays in the workspace root while the checkout lives in `C:\SPS_OS_WORK\<project-slug>\repo`.
+* Preserved `MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation` as the latest completed milestone.
+* Recorded the Session 087 MS-028.16 docs-first contract patch.
+
+### Notes
+
+* No real clone/checkout/branch execution or unrelated UI/domain changes were introduced.
+
 ## Session 087 - MS-028.15 control files sync publication
 
 ### Date
