@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 087 - MS-028.13 UI and test implementation
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Implemented the local preflight block for `MS-028.13 - GitHub First Authorized Operation Preflight Foundation` in `src/app/projects/[id]/settings/page.tsx` and `src/app/projects/[id]/settings/page.test.tsx`.
+* Kept the behavior limited to local UI/browser state and preserved the block on real Git/GitHub execution.
+* Verified the targeted settings page test file with 13 tests passing.
+* Recorded the Session 087 MS-028.13 implementation milestone work.
+
+### Notes
+
+* No GitHub OAuth, tokens, GitHub API integration, real Git operations, filesystem writes, remote synchronization, automatic work on main, real execution behavior, UI redesign, refactor, or unrelated source code change was introduced.
+
 ## Session 087 - MS-028.13 control files sync publication
 
 ### Date
@@ -77,8 +94,8 @@ Each release entry should contain:
 
 ### Completed
 
-* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` as `MS-028.13 - GitHub First Authorized Operation Preflight Foundation` and `Latest Completed Product Milestone` as `MS-028.12 - GitHub First Operation Authorization Boundary Foundation`.
-* Recorded that `MS-028.13 - GitHub First Authorized Operation Preflight Foundation` is `PUBLISHED / CLOSED` and defines the local preflight for the first authorized GitHub operation after `MS-028.12`, showing what is ready and what still blocks real execution while keeping real Git/GitHub execution blocked.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` as `NONE / Product Owner decision required` and `Latest Completed Product Milestone` as `MS-028.13 - GitHub First Authorized Operation Preflight Foundation`.
+* Recorded that `MS-028.13 - GitHub First Authorized Operation Preflight Foundation` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` and defines the local preflight for the first authorized GitHub operation after `MS-028.12`, showing what is ready and what still blocks real execution while keeping real Git/GitHub execution blocked.
 * Recorded that the milestone does not create OAuth, tokens, clone, fetch, checkout, branch, commit, push, or PR artifacts and stays limited to known local UI/browser state.
 * Recorded the Session 087 MS-028.13 control files sync publication.
 

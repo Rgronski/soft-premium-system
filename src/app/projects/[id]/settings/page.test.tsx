@@ -196,6 +196,9 @@ describe("ProjectSettingsPage", () => {
         name: /Oznacz jako authorized to execute/,
       }),
     ).toBeTruthy();
+    expect(
+      screen.queryByText(/Preflight pierwszej autoryzowanej operacji/),
+    ).toBeNull();
 
     fireEvent.click(
       screen.getByRole("button", {
@@ -204,8 +207,8 @@ describe("ProjectSettingsPage", () => {
     );
 
     expect(
-      screen.getByText(/authorization: authorized to execute/),
-    ).toBeTruthy();
+      screen.getAllByText(/authorization: authorized to execute/),
+    ).not.toHaveLength(0);
     expect(
       screen.getByText(
         /authorization required: fulfilled\. authorized to execute: connection check\. real execution remains blocked\./,
@@ -214,6 +217,22 @@ describe("ProjectSettingsPage", () => {
     expect(
       screen.getByText(
         /To nadal lokalny stan decyzji\. Realne wykonanie Git\/GitHub pozostaje zablokowane w aplikacji na tym etapie\./,
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Preflight pierwszej autoryzowanej operacji/),
+    ).toBeTruthy();
+    expect(screen.getByText(/Gotowe lokalnie/)).toBeTruthy();
+    expect(screen.getByText(/Wciąż blokuje/)).toBeTruthy();
+    expect(
+      screen.getAllByText(/selected candidate: connection check/),
+    ).not.toHaveLength(0);
+    expect(
+      screen.getAllByText(/authorization: authorized to execute/),
+    ).not.toHaveLength(0);
+    expect(
+      screen.getByText(
+        /Realne wykonanie Git\/GitHub pozostaje zablokowane\. To nadal lokalny preflight oparty wyłącznie na UI\/browser state\./,
       ),
     ).toBeTruthy();
 

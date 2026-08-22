@@ -230,6 +230,18 @@ type GitHubRealOperationAuthorizationSummary = {
   actionLabel: string;
 };
 
+type GitHubRealOperationPreflightCheck = {
+  label: string;
+  status: string;
+};
+
+type GitHubRealOperationPreflightSummary = {
+  title: string;
+  readyChecks: GitHubRealOperationPreflightCheck[];
+  blockerChecks: GitHubRealOperationPreflightCheck[];
+  disclosure: string;
+};
+
 type GitHubRealOperationReadinessDetailSummary = {
   title: string;
   note: string;
@@ -315,6 +327,74 @@ function buildGitHubRealOperationSelectionSummary(
   return {
     label: selection,
     copy: `Wybrano jako kandydat: ${selection}. To nie jest autoryzacja do wykonania. Realne wykonanie Git/GitHub pozostaje zablokowane.`,
+  };
+}
+
+function buildGitHubRealOperationPreflightSummary(
+  projectName: string,
+  hasRepositoryUrl: boolean,
+  branchWorkMode: ProjectBranchWorkMode | null,
+  workingBranchName: string,
+  selection: GitHubRealOperationSelection | null,
+  candidateDecision: GitHubRealOperationCandidateDecision,
+  authorization: GitHubRealOperationAuthorizationState,
+): GitHubRealOperationPreflightSummary | null {
+  if (
+    !selection ||
+    candidateDecision !== "approved for further preparation" ||
+    authorization !== "authorized to execute"
+  ) {
+    return null;
+  }
+
+  const readyChecks: GitHubRealOperationPreflightCheck[] = [
+    { label: "selected candidate", status: selection },
+    { label: "decision", status: "approved for further preparation" },
+    { label: "authorization", status: "authorized to execute" },
+  ];
+  const blockerChecks: GitHubRealOperationPreflightCheck[] = [
+    { label: "real execution", status: "blocked" },
+    {
+      label: "Git/GitHub actions",
+      status: "clone/fetch/checkout/branch/commit/push/PR not added",
+    },
+  ];
+
+  if (hasRepositoryUrl) {
+    readyChecks.push({ label: "Adres GitHub", status: "gotowy" });
+  } else {
+    blockerChecks.push({ label: "Adres GitHub", status: "brak" });
+  }
+
+  if (branchWorkMode === "main") {
+    readyChecks.push({ label: "Tryb pracy gałęzi", status: "main" });
+  } else if (branchWorkMode === "working-branch") {
+    const preparedWorkingBranchName =
+      workingBranchName.trim() || buildWorkingBranchName(projectName);
+
+    readyChecks.push({ label: "Tryb pracy gałęzi", status: "working-branch" });
+
+    if (workingBranchName.trim()) {
+      readyChecks.push({
+        label: "Nazwa gałęzi roboczej",
+        status: preparedWorkingBranchName,
+      });
+    } else {
+      blockerChecks.push({
+        label: "Nazwa gałęzi roboczej",
+        status: `brak, oczekiwano ${preparedWorkingBranchName}`,
+      });
+    }
+  } else {
+    blockerChecks.push({ label: "Tryb pracy gałęzi", status: "brak" });
+  }
+
+  return {
+    title: "Lokalny preflight jest gotowy do oceny stanu i blokad.",
+    readyChecks,
+    blockerChecks,
+    disclosure:
+      "Realne wykonanie Git/GitHub pozostaje zablokowane. To nadal lokalny preflight oparty wyłącznie na UI/browser state.",
   };
 }
 
@@ -602,6 +682,16 @@ export default function ProjectSettingsPage() {
     );
   const githubRealOperationAuthorizationSummary =
     buildGitHubRealOperationAuthorizationSummary(
+      githubRealOperationSelection,
+      githubRealOperationCandidateDecision,
+      githubRealOperationAuthorization,
+    );
+  const githubRealOperationPreflightSummary =
+    buildGitHubRealOperationPreflightSummary(
+      project.name,
+      Boolean(project.repositoryUrl?.trim()),
+      branchWorkMode,
+      workingBranchName,
       githubRealOperationSelection,
       githubRealOperationCandidateDecision,
       githubRealOperationAuthorization,
@@ -1066,6 +1156,49 @@ export default function ProjectSettingsPage() {
                   <p className="mt-2 text-sm text-zinc-400">
                     {githubRealOperationAuthorizationSummary.disclosure}
                   </p>
+                </div>
+              ) : null}
+              {githubRealOperationPreflightSummary ? (
+                <div className="mt-3 rounded-xl border border-zinc-800 bg-zinc-950/80 p-3">
+                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                    Preflight pierwszej autoryzowanej operacji
+                  </p>
+                  <p className="mt-2 text-sm text-zinc-300">
+                    {githubRealOperationPreflightSummary.title}
+                  </p>
+                  <p className="mt-2 text-sm text-zinc-400">
+                    {githubRealOperationPreflightSummary.disclosure}
+                  </p>
+                  <div className="mt-4 grid gap-3 lg:grid-cols-2">
+                    <div className="rounded-xl border border-zinc-800 bg-zinc-950 px-3 py-2">
+                      <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                        Gotowe lokalnie
+                      </p>
+                      <ul className="mt-3 space-y-2">
+                        {githubRealOperationPreflightSummary.readyChecks.map(
+                          (check) => (
+                            <li key={check.label} className="text-sm text-zinc-300">
+                              {check.label}: {check.status}
+                            </li>
+                          ),
+                        )}
+                      </ul>
+                    </div>
+                    <div className="rounded-xl border border-zinc-800 bg-zinc-950 px-3 py-2">
+                      <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                        Wciąż blokuje
+                      </p>
+                      <ul className="mt-3 space-y-2">
+                        {githubRealOperationPreflightSummary.blockerChecks.map(
+                          (check) => (
+                            <li key={check.label} className="text-sm text-zinc-300">
+                              {check.label}: {check.status}
+                            </li>
+                          ),
+                        )}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               ) : null}
               {githubRealOperationReadinessDetailSummary ? (
