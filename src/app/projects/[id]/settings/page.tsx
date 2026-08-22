@@ -1257,6 +1257,9 @@ export default function ProjectSettingsPage() {
             <p className="text-xs uppercase tracking-[0.2em] text-emerald-300">
               Post-clone source status
             </p>
+            <p className="mt-2 text-xs uppercase tracking-[0.2em] text-emerald-200">
+              Status repo zweryfikowany z filesystemu
+            </p>
             <p className="mt-2 text-sm text-emerald-100">
               Local git repo present
             </p>

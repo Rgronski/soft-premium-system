@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.21 control files sync publication
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` and `Next Product Milestone` as `NONE / Product Owner decision required` and `Latest Completed Product Milestone` as `MS-028.21 - Git Checkout Status Revalidation UX Foundation`.
+* Recorded that `MS-028.21 - Git Checkout Status Revalidation UX Foundation` adds the minimal Polish UX copy confirming filesystem-backed repo status verification in the settings-page source-status panel.
+* Appended the Session 088 `MS-028.21` usage record.
+
+### Notes
+
+* No new product code changed in this sync step; the accepted UX copy remains limited to the existing source-status panel.
+
 ## Session 087 - Session Close Protocol
 
 ### Date

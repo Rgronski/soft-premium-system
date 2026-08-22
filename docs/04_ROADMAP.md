@@ -138,6 +138,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.18` - GitHub Multi-Account Auth Guidance Foundation
 * `MS-028.19` - GitHub Post-Clone Source Status Reconciliation Foundation
 * `MS-028.20` - GitHub Checkout Status Revalidation Foundation
+* `MS-028.21` - Git Checkout Status Revalidation UX Foundation
 
 ## Current
 
@@ -145,7 +146,80 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.21 - Git Checkout Status Revalidation UX Foundation
+
+## MS-028.21 - Git Checkout Status Revalidation UX Foundation
+
+**Milestone**
+MS-028.21 - Git Checkout Status Revalidation UX Foundation
+
+**Type**
+Product Milestone
+
+This milestone adds the minimal settings-page UX copy that explicitly confirms the repo status was verified from filesystem-backed state after checkout revalidation, while keeping commit/push/merge/PR and any broader refresh flow out of scope.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Confirm filesystem-backed checkout verification in the settings UX so the status panel explicitly says the repo status was verified from filesystem-derived state.
+
+**Product Outcome**
+The settings page now shows a minimal Polish copy cue that the repo status was verified from filesystem-backed revalidation, while the derived checkout status, repository context, and real Git/GitHub execution boundaries remain unchanged.
+
+**Implementation Note**
+The accepted settings-page copy makes the verification source visible without adding refresh actions, commit readiness, or new Git/GitHub execution paths.
+
+**Dependencies**
 MS-028.20 - GitHub Checkout Status Revalidation Foundation
+
+**Implementation Scope**
+UX copy publication for checkout-status revalidation feedback.
+
+**Allowed Scope**
+* minimal filesystem-backed verification copy
+* existing settings-page source-status presentation
+* targeted wording and test coverage
+* future guidance for the already revalidated checkout status
+
+**Forbidden Scope**
+* GitHub OAuth
+* access tokens
+* GitHub API integration
+* secret storage
+* real clone/checkout/working-branch execution
+* commit
+* push
+* merge
+* pull request
+* refresh/status button flow
+* unrelated UI or domain changes
+
+**Sequencing**
+1. MS-028.20 establishes filesystem-backed checkout-status revalidation.
+2. MS-028.21 adds the minimal UX confirmation that this status was verified from filesystem state.
+3. Real Git/GitHub execution remains outside the milestone.
 
 ## MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
 

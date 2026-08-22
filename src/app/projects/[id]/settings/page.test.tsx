@@ -148,6 +148,9 @@ describe("ProjectSettingsPage", () => {
       expect(screen.getByText(/Post-clone source status/)).toBeTruthy();
     });
 
+    expect(
+      screen.getByText(/Status repo zweryfikowany z filesystemu/),
+    ).toBeTruthy();
     expect(screen.getByText(/Local git repo present/)).toBeTruthy();
     expect(
       screen.getByText(/Project workspace folder: C:\\SPS_OS_WORK\\beauty-client-pro/),
