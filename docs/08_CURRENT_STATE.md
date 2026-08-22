@@ -42,7 +42,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE / Product Owner decision required
+MS-028.20 - GitHub Checkout Status Revalidation Foundation
 
 **Latest Completed Milestone**
 MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation
@@ -50,11 +50,11 @@ MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation
 **Next Milestone**
 NONE / Product Owner decision required
 
-Required follow-up: MS-028.20 - GitHub Checkout Status Revalidation Foundation.
+MS-028.20 is the current docs-first contract milestone for checkout status revalidation. The repository should re-check the filesystem-backed repo checkout instead of trusting stale browser-state or localStorage data, so a saved manifest-only workspace path does not hide a valid repo checkout at the derived folder. The milestone keeps the manifest-only workspace folder, the repo checkout folder, the local git repo presence, the GitHub remote URL, the active working branch, and the working tree state distinct when available, and it treats missing checkout folders, missing `.git`, remote mismatches, branch mismatches, and stale workspace-state mismatches as blockers or unknowns.
 
 MS-028.19 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Post-Clone Source Status Reconciliation Foundation. The repository now distinguishes the manifest-only project workspace folder from the repo checkout folder and records the local git repo presence, GitHub remote URL, active working branch, and clean/dirty workspace state when available. This correction makes the project stop looking manifest-only once the valid repo checkout exists after a successful clone/setup flow. The milestone does not implement UI/API behavior and does not perform clone, checkout, branch, commit, push, merge, or PR actions.
 
-Session 087 recorded the required follow-up `MS-028.20 - GitHub Checkout Status Revalidation Foundation` because browser-state source reconciliation can become stale if the checkout changes outside SPS OS.
+Session 087 started the `MS-028.20 - GitHub Checkout Status Revalidation Foundation` contract work because browser-state source reconciliation can become stale if the checkout changes outside SPS OS.
 
 MS-028.18 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Multi-Account Auth Guidance Foundation. The repository now documents how to separate the auth context for the SPS OS repo from the auth context for client/project repos, records the known `Repository not found` and `403 Permission denied` failure modes, and recommends HTTPS + Git Credential Manager + path-based credentials with `git config --global credential.https://github.com.useHttpPath true` as the practical default. GitHub CLI account switching and SSH host aliases remain documented alternatives. The milestone does not add OAuth/token storage, does not install `gh`, does not create SSH keys, and does not change Git logic.
 
@@ -1566,10 +1566,10 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `NONE / Product Owner decision required`
+* `Current Product Milestone` is `MS-028.20 - GitHub Checkout Status Revalidation Foundation`
 * `Latest Completed Product Milestone` is `MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
-* `Session 087` recorded the required follow-up `MS-028.20 - GitHub Checkout Status Revalidation Foundation` because browser-state source reconciliation can become stale if the checkout changes outside SPS OS.
+* `Session 087` started the `MS-028.20 - GitHub Checkout Status Revalidation Foundation` contract work because browser-state source reconciliation can become stale if the checkout changes outside SPS OS.
 * `MS-028.10` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation; the repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
 * `MS-028.11` is `PUBLISHED / CLOSED` in the current local workspace as the GitHub First Operation Candidate Decision Foundation; the repository now records the Product Owner decision for the locally selected first operation candidate after `MS-028.9` and `MS-028.10`, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

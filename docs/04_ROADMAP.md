@@ -140,7 +140,7 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE / Product Owner decision required
+MS-028.20 - GitHub Checkout Status Revalidation Foundation
 
 ## Latest Completed Product Milestone
 
@@ -471,6 +471,77 @@ MS-028.18 - GitHub Multi-Account Auth Guidance Foundation
 
 **Implementation Scope**
 Docs-first source-status reconciliation contract only.
+
+## MS-028.20 - GitHub Checkout Status Revalidation Foundation
+
+**Milestone**
+MS-028.20 - GitHub Checkout Status Revalidation Foundation
+
+**Type**
+Product Milestone
+
+This milestone captures the docs-first contract for revalidating checkout status after a successful local clone and working branch setup. The repository should re-check the filesystem-backed repo checkout instead of trusting stale browser-state or localStorage data, and it should treat the saved manifest-only workspace folder and the derived repo checkout folder as distinct paths.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PENDING
+
+**Milestone Status**
+NOT STARTED
+
+**Active**
+YES
+
+**Runtime Status**
+ACTIVE
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Revalidate checkout status from filesystem-backed repository state so the UI does not keep showing a manifest-only project when a valid repo checkout already exists.
+
+**Product Outcome**
+The repository documents the revalidation boundary for repo checkout availability, local git repo presence, GitHub remote URL, active working branch, and working tree state when available. If the saved repo path still points to the manifest-only workspace folder but the derived repo checkout folder exists and is a valid Git repo, the project should show the checkout as available. The milestone keeps missing checkout folders, missing `.git`, remote mismatches, branch mismatches, and stale workspace-state mismatches as blockers or unknowns.
+
+**Dependencies**
+MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation
+
+**Implementation Scope**
+Docs-first checkout-status revalidation contract only.
+
+**Allowed Scope**
+* docs publication
+* revalidation wording for filesystem-backed checkout status
+* manifest-only workspace versus repo checkout distinction
+* remote URL, active branch, and working tree state wording
+* blocker and unknown-state guidance for stale checkout data
+
+**Forbidden Scope**
+* GitHub OAuth
+* access tokens
+* GitHub API integration
+* secret storage
+* real clone/checkout/working-branch execution
+* commit
+* push
+* merge
+* pull request
+* sync-to-main
+* unrelated UI or domain changes
+
+**Sequencing**
+1. The repository records the docs-first contract for checkout-status revalidation.
+2. The repository keeps filesystem-backed checkout status distinct from stale browser-state or localStorage values.
+3. Real Git/GitHub execution remains outside the milestone.
 
 ## MS-028.14 - GitHub Local Working Branch Creation Action Foundation
 

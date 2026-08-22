@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 087 - MS-028.20 docs-first checkout status revalidation contract patch
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` as `MS-028.20 - GitHub Checkout Status Revalidation Foundation` and `Latest Completed Product Milestone` as `MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation`.
+* Recorded that `MS-028.20 - GitHub Checkout Status Revalidation Foundation` is the docs-first contract for revalidating checkout status from filesystem-backed repository state instead of trusting stale browser-state or localStorage values.
+* Documented the distinction between the manifest-only workspace folder, the repo checkout folder, the local git repo presence, the GitHub remote URL, the active working branch, and working tree state when available.
+* Preserved `MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation` as the previous latest completed milestone.
+
+### Notes
+
+* No UI/API implementation or real clone/checkout/branch execution was introduced in this docs-first step.
+
 ## Session 087 - Session close protocol and Session 088 handoff preparation
 
 ### Date
