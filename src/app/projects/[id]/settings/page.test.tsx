@@ -373,6 +373,10 @@ describe("ProjectSettingsPage", () => {
             "Lokalny clone i working branch setup zostały wykonane. Commit/push/merge/PR pozostają poza zakresem.",
           workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
           activeBranch: "work/beauty-client-pro",
+          repoCheckoutPath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+          remoteUrl: "https://github.com/example/beauty-client-pro",
+          workingTreeState: "clean",
+          sourceStatus: "git-repo",
         }),
         {
           status: 200,
@@ -389,6 +393,9 @@ describe("ProjectSettingsPage", () => {
     expect(
       screen.getByText(
         /local clone\/branch setup: completed\. Commit\/push\/merge\/PR pozostają poza zakresem\./,
+        {
+          selector: ".text-zinc-300",
+        },
       ),
     ).toBeTruthy();
     expect(
@@ -401,6 +408,18 @@ describe("ProjectSettingsPage", () => {
         selector: ".text-emerald-200",
       }),
     ).toBeTruthy();
+    expect(
+      screen.getByText(/GitHub remote URL: https:\/\/github.com\/example\/beauty-client-pro/),
+    ).toBeTruthy();
+    expect(screen.getAllByText(/Working tree state: clean/)).not.toHaveLength(0);
+    expect(screen.getByText(/Post-clone source status/)).toBeTruthy();
+    expect(screen.getByText(/Local git repo present/)).toBeTruthy();
+    expect(screen.getByText(/Project workspace folder: C:\\SPS_OS_WORK\\beauty-client-pro/)).toBeTruthy();
+    expect(screen.getByText(/Repo checkout folder: C:\\SPS_OS_WORK\\beauty-client-pro\\repo/)).toBeTruthy();
+    expect(screen.queryByText(/Pozostaw jako manifest-only/)).toBeNull();
+    expect(
+      screen.queryByText(/Folder projektu SPS OS to manifest-only/),
+    ).toBeNull();
   });
 
   test("shows blocked and error states when the action API blocks or fails", async () => {

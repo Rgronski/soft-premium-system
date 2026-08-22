@@ -108,6 +108,16 @@ describe("POST /api/projects/[id]/working-branch/setup", () => {
         ]);
         return [null, "", ""];
       },
+      (command, args) => {
+        expect(command).toBe("git");
+        expect(args).toEqual([
+          "-C",
+          "C:\\SPS_OS_WORK\\beauty-client-pro",
+          "status",
+          "--porcelain",
+        ]);
+        return [null, "", ""];
+      },
     ]);
 
     const { POST } = await loadRouteModule();
@@ -123,6 +133,10 @@ describe("POST /api/projects/[id]/working-branch/setup", () => {
         "Lokalny clone i working branch setup zostały wykonane. Commit/push/merge/PR pozostają poza zakresem.",
       workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
       activeBranch: "work/beauty-client-pro",
+      repoCheckoutPath: "C:\\SPS_OS_WORK\\beauty-client-pro",
+      remoteUrl: "https://github.com/example/beauty-client-pro",
+      workingTreeState: "clean",
+      sourceStatus: "git-repo",
     });
     expect(mkdirMock).toHaveBeenCalledWith("C:\\SPS_OS_WORK", {
       recursive: true,

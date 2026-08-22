@@ -105,6 +105,25 @@ Each release entry should contain:
 * No UI/API implementation was added.
 * No clone, checkout, or branch execution was performed in this docs-first step.
 
+## Session 087 - MS-028.19 post-clone source status reconciliation control files sync
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized the accepted MS-028.19 implementation control files so the SSOT now records `Current Product Milestone` as `NONE / Product Owner decision required` and `Latest Completed Product Milestone` as `MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation`.
+* Recorded that `MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED`, adds post-clone source status reconciliation, and replaces the manifest-only presentation locally after successful checkout setup.
+* Documented the browser-state/localStorage-backed source status that distinguishes the manifest-only workspace folder, the repo checkout folder, the local git repo presence, the GitHub remote URL, the active working branch, and clean/dirty workspace state when available.
+* Preserved `MS-028.18 - GitHub Multi-Account Auth Guidance Foundation` as the previous latest completed milestone.
+* Kept real clone/checkout/branch execution, commit/push/merge/PR, OAuth/token storage, and unrelated UI changes outside the milestone.
+
+### Notes
+
+* No Git execution logic beyond source-status reconciliation after success was changed.
+* Future revalidation may be needed if the repo checkout folder is manually removed.
+
 ## Session 087 - MS-028.18 control files sync publication
 
 ### Date

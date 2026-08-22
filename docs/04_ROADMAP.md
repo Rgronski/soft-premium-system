@@ -140,11 +140,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation
+NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.18 - GitHub Multi-Account Auth Guidance Foundation
+MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation
 
 ## MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
 

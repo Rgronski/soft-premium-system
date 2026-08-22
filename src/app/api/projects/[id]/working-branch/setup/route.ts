@@ -12,11 +12,17 @@ type LocalWorkingBranchSetupRequestBody = {
   authorization: "authorized to execute";
 };
 
+type WorkingTreeState = "clean" | "dirty" | "unknown";
+
 type LocalWorkingBranchSetupSuccessResponse = {
   status: "success";
   message: string;
   workingDirectory: string;
   activeBranch: string;
+  repoCheckoutPath: string;
+  remoteUrl: string;
+  workingTreeState: WorkingTreeState;
+  sourceStatus: "git-repo";
 };
 
 type LocalWorkingBranchSetupBlockedResponse = {
@@ -254,16 +260,18 @@ async function getGitRemoteOriginUrl(
   }
 }
 
-async function isWorkingTreeClean(targetPath: string): Promise<boolean> {
+async function getWorkingTreeState(
+  targetPath: string,
+): Promise<WorkingTreeState> {
   try {
     const result = await execGitCommand(
       ["-C", targetPath, "status", "--porcelain"],
       process.cwd(),
     );
 
-    return result.stdout.trim().length === 0;
+    return result.stdout.trim().length === 0 ? "clean" : "dirty";
   } catch {
-    return false;
+    return "unknown";
   }
 }
 
@@ -431,7 +439,9 @@ async function runLocalWorkingBranchSetup(
       );
     }
 
-    if (!(await isWorkingTreeClean(normalizedWorkingDirectory))) {
+    const workingTreeState = await getWorkingTreeState(normalizedWorkingDirectory);
+
+    if (workingTreeState !== "clean") {
       return createJsonResponse(
         {
           status: "blocked",
@@ -496,6 +506,10 @@ async function runLocalWorkingBranchSetup(
           "Lokalny clone i working branch setup zostały wykonane. Commit/push/merge/PR pozostają poza zakresem.",
         workingDirectory: normalizedWorkingDirectory,
         activeBranch: normalizedWorkingBranchName,
+        repoCheckoutPath: normalizedWorkingDirectory,
+        remoteUrl: remoteOriginUrl ?? normalizedRepositoryUrl,
+        workingTreeState,
+        sourceStatus: "git-repo",
       },
       200,
     );
@@ -548,6 +562,10 @@ async function runLocalWorkingBranchSetup(
         "Lokalny clone i working branch setup zostały wykonane. Commit/push/merge/PR pozostają poza zakresem.",
       workingDirectory: normalizedWorkingDirectory,
       activeBranch: normalizedWorkingBranchName,
+      repoCheckoutPath: normalizedWorkingDirectory,
+      remoteUrl: normalizedRepositoryUrl,
+      workingTreeState: await getWorkingTreeState(normalizedWorkingDirectory),
+      sourceStatus: "git-repo",
     },
     200,
   );

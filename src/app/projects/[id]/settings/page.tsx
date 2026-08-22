@@ -14,6 +14,17 @@ type ProjectBranchWorkMode = "main" | "working-branch";
 
 const PROJECT_BRANCH_WORK_MODE_STORAGE_SUFFIX = "branch-work-mode";
 const PROJECT_WORKING_BRANCH_NAME_STORAGE_SUFFIX = "working-branch-name";
+const PROJECT_SOURCE_STATUS_STORAGE_SUFFIX = "source-status";
+
+type ProjectSourceWorkingTreeState = "clean" | "dirty" | "unknown";
+
+type ProjectSourceReconciliationStatus = {
+  sourceStatus: "git-repo";
+  repoCheckoutPath: string;
+  remoteUrl: string;
+  activeBranch: string;
+  workingTreeState: ProjectSourceWorkingTreeState;
+};
 
 function saveProjectBinding(project: Project, updates: Partial<Project>): Project {
   return upsertProject({
@@ -54,6 +65,68 @@ function saveProjectBranchWorkMode(
 
 function getProjectWorkingBranchNameStorageKey(projectId: string): string {
   return `soft-premium-system.projects.${projectId}.${PROJECT_WORKING_BRANCH_NAME_STORAGE_SUFFIX}`;
+}
+
+function getProjectSourceStatusStorageKey(projectId: string): string {
+  return `soft-premium-system.projects.${projectId}.${PROJECT_SOURCE_STATUS_STORAGE_SUFFIX}`;
+}
+
+function readProjectSourceStatus(
+  projectId: string,
+): ProjectSourceReconciliationStatus | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  const storedValue = localStorage.getItem(
+    getProjectSourceStatusStorageKey(projectId),
+  );
+
+  if (!storedValue) {
+    return null;
+  }
+
+  try {
+    const parsedValue = JSON.parse(
+      storedValue,
+    ) as Partial<ProjectSourceReconciliationStatus>;
+
+    if (
+      parsedValue?.sourceStatus === "git-repo" &&
+      typeof parsedValue.repoCheckoutPath === "string" &&
+      typeof parsedValue.remoteUrl === "string" &&
+      typeof parsedValue.activeBranch === "string" &&
+      (parsedValue.workingTreeState === "clean" ||
+        parsedValue.workingTreeState === "dirty" ||
+        parsedValue.workingTreeState === "unknown")
+    ) {
+      return {
+        sourceStatus: "git-repo",
+        repoCheckoutPath: parsedValue.repoCheckoutPath,
+        remoteUrl: parsedValue.remoteUrl,
+        activeBranch: parsedValue.activeBranch,
+        workingTreeState: parsedValue.workingTreeState,
+      };
+    }
+  } catch {
+    return null;
+  }
+
+  return null;
+}
+
+function saveProjectSourceStatus(
+  projectId: string,
+  sourceStatus: ProjectSourceReconciliationStatus,
+): void {
+  localStorage.setItem(
+    getProjectSourceStatusStorageKey(projectId),
+    JSON.stringify(sourceStatus),
+  );
+}
+
+function clearProjectSourceStatus(projectId: string): void {
+  localStorage.removeItem(getProjectSourceStatusStorageKey(projectId));
 }
 
 function buildWorkingBranchName(projectName: string): string {
@@ -275,6 +348,116 @@ function buildGitHubReadinessChecklist(
   ];
 }
 
+function buildGitHubConnectionReadinessSummaryWithSourceStatus(
+  hasRepositoryUrl: boolean,
+  sourceStatus: ProjectSourceReconciliationStatus | null,
+): string[] | null {
+  if (!hasRepositoryUrl) {
+    return null;
+  }
+
+  if (sourceStatus) {
+    return [
+      "Adres repozytorium GitHub wykryty.",
+      "Repo checkout został zrekonsyliowany jako osobny folder.",
+      `Repo checkout path: ${sourceStatus.repoCheckoutPath}`,
+      `Remote URL: ${sourceStatus.remoteUrl}`,
+      `Active working branch: ${sourceStatus.activeBranch}`,
+      `Working tree state: ${sourceStatus.workingTreeState}`,
+    ];
+  }
+
+  return [
+    "Adres repozytorium GitHub wykryty.",
+    "Połączenie GitHub nie jest jeszcze potwierdzone ani zweryfikowane.",
+    "Uwierzytelnienie i konfiguracja połączenia pozostają przyszłą pracą.",
+    "Lokalny klon i prawdziwy workflow Git nie są jeszcze skonfigurowane.",
+    "Przygotowanie gałęzi roboczej już istnieje, ale prawdziwe wykonanie Git jeszcze nie startuje.",
+  ];
+}
+
+function buildLocalCloneReadinessSummaryWithSourceStatus(
+  hasRepositoryUrl: boolean,
+  branchWorkMode: ProjectBranchWorkMode | null,
+  workingBranchName: string,
+  projectName: string,
+  sourceStatus: ProjectSourceReconciliationStatus | null,
+): string[] | null {
+  if (!hasRepositoryUrl) {
+    return null;
+  }
+
+  if (sourceStatus) {
+    return [
+      "Lokalny repo checkout jest już zrekonsyliowany.",
+      `Repo checkout path: ${sourceStatus.repoCheckoutPath}`,
+      `Remote URL: ${sourceStatus.remoteUrl}`,
+      `Active working branch: ${sourceStatus.activeBranch}`,
+      `Working tree state: ${sourceStatus.workingTreeState}`,
+      "Manifest-only workspace folder pozostaje osobnym folderem projektu SPS OS.",
+    ];
+  }
+
+  const preparedWorkingBranchName =
+    workingBranchName.trim() || buildWorkingBranchName(projectName);
+
+  return [
+    "Lokalny klon / workspace nie jest jeszcze skonfigurowany ani zweryfikowany.",
+    "Prawdziwe clone, fetch, checkout i walidacja filesystemu to przyszła praca.",
+    branchWorkMode === "working-branch"
+      ? `Przygotowana nazwa gałęzi roboczej to \`${preparedWorkingBranchName}\`, ale nadal jest tylko metadanymi przygotowania.`
+      : branchWorkMode === "main"
+        ? "Wybrano pracę na `main`, ale to nadal tylko metadane przygotowania lokalnego workspace."
+        : "Wybór gałęzi roboczej pozostaje tylko metadanymi przygotowania lokalnego workspace.",
+    "W tym kroku nie kopiujemy plików i nie klonujemy repozytorium.",
+  ];
+}
+
+function buildGitHubReadinessChecklistWithSourceStatus(
+  hasRepositoryUrl: boolean,
+  branchWorkMode: ProjectBranchWorkMode | null,
+  workingBranchName: string,
+  projectName: string,
+  sourceStatus: ProjectSourceReconciliationStatus | null,
+): GitHubReadinessChecklistItem[] | null {
+  if (!hasRepositoryUrl) {
+    return null;
+  }
+
+  const hasWorkingBranchName = Boolean(
+    workingBranchName.trim() || buildWorkingBranchName(projectName),
+  );
+
+  return [
+    { label: "Adres repozytorium GitHub", status: "gotowy" },
+    {
+      label: "Decyzja trybu pracy gałęzi",
+      status: branchWorkMode ? "gotowa" : "brak",
+    },
+    {
+      label: "Nazwa gałęzi roboczej",
+      status:
+        branchWorkMode === "working-branch"
+          ? hasWorkingBranchName
+            ? "gotowa"
+            : "brak"
+          : "nie wymagana",
+    },
+    {
+      label: "Połączenie GitHub / uwierzytelnienie",
+      status: sourceStatus ? "zrekonsyliowane" : "brak / wymagane",
+    },
+    {
+      label: "Lokalny klon / workspace",
+      status: sourceStatus ? "gotowy" : "brak / wymagane",
+    },
+    {
+      label: "Realne wykonanie Git",
+      status: "zablokowane do jawnej zgody Product Ownera",
+    },
+  ];
+}
+
 type GitHubRealReadinessActionState =
   | "blocked"
   | "requires confirmation"
@@ -355,6 +538,10 @@ type GitHubLocalWorkingBranchSetupResponse =
       message: string;
       workingDirectory: string;
       activeBranch: string;
+      repoCheckoutPath: string;
+      remoteUrl: string;
+      workingTreeState: ProjectSourceWorkingTreeState;
+      sourceStatus: "git-repo";
     }
   | {
       status: "blocked";
@@ -727,6 +914,10 @@ export default function ProjectSettingsPage() {
     useState<GitHubRealOperationAuthorizationState>("authorization required");
   const [githubLocalWorkingBranchCreationOutcome, setGithubLocalWorkingBranchCreationOutcome] =
     useState<GitHubLocalWorkingBranchCreationOutcome>("idle");
+  const [projectSourceStatus, setProjectSourceStatus] =
+    useState<ProjectSourceReconciliationStatus | null>(() =>
+      readProjectSourceStatus(params.id),
+    );
 
   useEffect(() => {
     const nextProject = getProjectById(params.id);
@@ -748,6 +939,7 @@ export default function ProjectSettingsPage() {
     setGithubRealOperationCandidateDecision("pending");
     setGithubRealOperationAuthorization("authorization required");
     setGithubLocalWorkingBranchCreationOutcome("idle");
+    setProjectSourceStatus(readProjectSourceStatus(params.id));
     setFeedbackMessage(null);
   }, [params.id]);
 
@@ -776,30 +968,51 @@ export default function ProjectSettingsPage() {
     );
   }
 
-  const summary = getProjectBindingDecisionSummary(project);
+  const reconciledSourceStatus =
+    projectSourceStatus?.sourceStatus === "git-repo"
+      ? projectSourceStatus
+      : null;
+  const summary = reconciledSourceStatus
+    ? {
+        status: "local-source" as const,
+        statusLabel: "repo checkout potwierdzony",
+        githubUrlLabel: `Adres GitHub: ${project.repositoryUrl?.trim() ? "podany" : "nie podano"}`,
+        localRepositoryLabel: "Lokalne repo Git: obecne",
+        nextStepLabel:
+          "local clone/branch setup: completed. Commit/push/merge/PR pozostają poza zakresem.",
+        repositoryContextMessage: `Kontekst repozytorium: repo checkout folder ${reconciledSourceStatus.repoCheckoutPath}; manifest-only workspace folder pozostaje osobnym folderem projektu SPS OS.`,
+      }
+    : getProjectBindingDecisionSummary(project);
   const branchWorkModeSummary = buildBranchWorkModeSummary(
     project.name,
     branchWorkMode,
     workingBranchName,
   );
   const githubConnectionReadinessSummary =
-    buildGitHubConnectionReadinessSummary(Boolean(project.repositoryUrl?.trim()));
+    buildGitHubConnectionReadinessSummaryWithSourceStatus(
+      Boolean(project.repositoryUrl?.trim()),
+      reconciledSourceStatus,
+    );
   const githubMultiAccountAuthGuidanceSummary =
     buildGitHubMultiAccountAuthGuidanceSummary(
       Boolean(project.repositoryUrl?.trim()),
     );
-  const localCloneReadinessSummary = buildLocalCloneReadinessSummary(
-    Boolean(project.repositoryUrl?.trim()),
-    branchWorkMode,
-    workingBranchName,
-    project.name,
-  );
-  const githubReadinessChecklist = buildGitHubReadinessChecklist(
-    Boolean(project.repositoryUrl?.trim()),
-    branchWorkMode,
-    workingBranchName,
-    project.name,
-  );
+  const localCloneReadinessSummary =
+    buildLocalCloneReadinessSummaryWithSourceStatus(
+      Boolean(project.repositoryUrl?.trim()),
+      branchWorkMode,
+      workingBranchName,
+      project.name,
+      reconciledSourceStatus,
+    );
+  const githubReadinessChecklist =
+    buildGitHubReadinessChecklistWithSourceStatus(
+      Boolean(project.repositoryUrl?.trim()),
+      branchWorkMode,
+      workingBranchName,
+      project.name,
+      reconciledSourceStatus,
+    );
   const githubRealReadinessActionSummary = buildGitHubRealReadinessActionSummary(
     Boolean(project.repositoryUrl?.trim()),
     branchWorkMode,
@@ -867,6 +1080,8 @@ export default function ProjectSettingsPage() {
     });
 
     setProject(nextProject);
+    clearProjectSourceStatus(params.id);
+    setProjectSourceStatus(null);
     setFeedbackMessage(
       trimmedGithubUrl
         ? "Adres GitHub zapisano jako metadane projektu."
@@ -896,6 +1111,8 @@ export default function ProjectSettingsPage() {
     });
 
     setProject(nextProject);
+    clearProjectSourceStatus(params.id);
+    setProjectSourceStatus(null);
     setFeedbackMessage("Istniejący katalog repo zapisano jako metadane projektu.");
   }
 
@@ -1024,8 +1241,22 @@ export default function ProjectSettingsPage() {
 
       if (response.ok && payload.status === "success") {
         setGithubLocalWorkingBranchCreationOutcome("success");
+        saveProjectSourceStatus(params.id, {
+          sourceStatus: "git-repo",
+          repoCheckoutPath: payload.repoCheckoutPath,
+          remoteUrl: payload.remoteUrl,
+          activeBranch: payload.activeBranch,
+          workingTreeState: payload.workingTreeState,
+        });
+        setProjectSourceStatus({
+          sourceStatus: "git-repo",
+          repoCheckoutPath: payload.repoCheckoutPath,
+          remoteUrl: payload.remoteUrl,
+          activeBranch: payload.activeBranch,
+          workingTreeState: payload.workingTreeState,
+        });
         setFeedbackMessage(
-          `${payload.message} Repo checkout path: ${payload.workingDirectory}. Active branch: ${payload.activeBranch}.`,
+          `${payload.message} Repo checkout path: ${payload.repoCheckoutPath}. Remote URL: ${payload.remoteUrl}. Active branch: ${payload.activeBranch}. Working tree state: ${payload.workingTreeState}.`,
         );
         return;
       }
@@ -1074,8 +1305,9 @@ export default function ProjectSettingsPage() {
             Decyzja bindująca dla projektu
           </h2>
           <p className="text-zinc-400">
-            Projekt ma tylko manifest SPS. Możesz zostawić go jako manifest,
-            podpiąć istniejący katalog repo albo dodać adres GitHub.
+            {reconciledSourceStatus
+              ? "Projekt ma workspace SPS i zrekonsyliowane repo checkout. Folder projektu SPS OS z sps-project.json nadal istnieje, ale repo checkout jest osobnym folderem."
+              : "Projekt ma tylko manifest SPS. Możesz zostawić go jako manifest, podpiąć istniejący katalog repo albo dodać adres GitHub."}
           </p>
         </div>
 
@@ -1093,6 +1325,36 @@ export default function ProjectSettingsPage() {
             {summary.repositoryContextMessage}
           </p>
         </div>
+
+        {reconciledSourceStatus ? (
+          <div className="rounded-2xl border border-emerald-800 bg-emerald-950/30 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-emerald-300">
+              Post-clone source status
+            </p>
+            <p className="mt-2 text-sm text-emerald-100">
+              Local git repo present
+            </p>
+            <div className="mt-3 space-y-1 text-sm text-emerald-200">
+              <p>
+                Project workspace folder: {project.workingDirectory ?? "brak"}
+              </p>
+              <p>
+                Repo checkout folder: {reconciledSourceStatus.repoCheckoutPath}
+              </p>
+              <p>GitHub remote URL: {reconciledSourceStatus.remoteUrl}</p>
+              <p>
+                Active working branch: {reconciledSourceStatus.activeBranch}
+              </p>
+              <p>
+                Working tree state: {reconciledSourceStatus.workingTreeState}
+              </p>
+            </div>
+            <p className="mt-3 text-sm text-emerald-200">
+              Manifest-only workspace folder pozostaje osobnym folderem projektu
+              SPS OS, ale repo checkout jest już rozpoznane osobno.
+            </p>
+          </div>
+        ) : null}
 
         <div className="grid gap-4 lg:grid-cols-2">
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
@@ -1148,14 +1410,15 @@ export default function ProjectSettingsPage() {
                 className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 outline-none focus:border-zinc-500"
               />
             </label>
-            {repoCheckoutDirectoryHint ? (
+            {!reconciledSourceStatus && repoCheckoutDirectoryHint ? (
               <p className="mt-2 text-sm text-zinc-400">
                 Folder projektu SPS OS to manifest-only. Sugerowany katalog repo checkout to{" "}
                 <span className="text-zinc-200">{repoCheckoutDirectoryHint}</span>.
                 Samo ustawienie katalogu repo nie wykonuje jeszcze clone.
               </p>
             ) : null}
-            {isManifestOnlyWorkspaceDirectory(project, workingDirectoryInput) ? (
+            {!reconciledSourceStatus &&
+            isManifestOnlyWorkspaceDirectory(project, workingDirectoryInput) ? (
               <p className="mt-2 text-sm text-amber-200">
                 Ten katalog wskazuje folder manifest-only. Użyj{" "}
                 <span className="text-amber-100">
@@ -1515,7 +1778,7 @@ export default function ProjectSettingsPage() {
                       </button>
                       <p className="mt-3 text-sm text-zinc-400">
                         {githubLocalWorkingBranchCreationActionState === "success"
-                          ? "SPS OS zakończył lokalne wykonanie. Realne wykonanie Git/GitHub nadal pozostaje zablokowane."
+                          ? "Lokalne clone/branch setup zakończone. Commit/push/merge/PR pozostają poza zakresem."
                           : githubLocalWorkingBranchCreationActionState === "running"
                             ? "Akcja jest uruchomiona i czeka na odpowiedź API."
                             : githubLocalWorkingBranchCreationActionState ===
@@ -1580,15 +1843,17 @@ export default function ProjectSettingsPage() {
           </div>
         ) : null}
 
-        <div className="rounded-2xl border border-dashed border-zinc-800 bg-zinc-950/40 p-4">
-          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Pozostaw jako manifest-only
-          </p>
-          <p className="mt-2 text-sm text-zinc-400">
-            Jeśli nie zapiszesz żadnych nowych metadanych, projekt pozostanie
-            w trybie manifest-only.
-          </p>
-        </div>
+        {!reconciledSourceStatus ? (
+          <div className="rounded-2xl border border-dashed border-zinc-800 bg-zinc-950/40 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              Pozostaw jako manifest-only
+            </p>
+            <p className="mt-2 text-sm text-zinc-400">
+              Jeśli nie zapiszesz żadnych nowych metadanych, projekt pozostanie
+              w trybie manifest-only.
+            </p>
+          </div>
+        ) : null}
 
         {feedbackMessage ? (
           <p className="text-sm text-emerald-200" aria-live="polite">
