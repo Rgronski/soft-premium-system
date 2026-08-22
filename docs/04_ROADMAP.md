@@ -136,10 +136,11 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.16` - GitHub Repo Checkout Folder Derivation Foundation
 * `MS-028.17` - GitHub Local Setup Success Copy Correction
 * `MS-028.18` - GitHub Multi-Account Auth Guidance Foundation
+* `MS-028.19` - GitHub Post-Clone Source Status Reconciliation Foundation
 
 ## Current
 
-NONE / Product Owner decision required
+MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation
 
 ## Latest Completed Product Milestone
 
@@ -424,6 +425,52 @@ Docs-first guidance publication for multi-account GitHub auth.
 1. The repository records the guidance for SPS OS and client/project auth contexts.
 2. The repository keeps the practical default and alternatives visible for future setup decisions.
 3. Real Git/GitHub execution remains outside the milestone.
+
+## MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation
+
+**Milestone**
+MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation
+
+**Type**
+Product Milestone
+
+This milestone captures the docs-first contract for reconciling source status after a successful local clone and working branch setup. The repository should stop looking manifest-only when a valid repo checkout exists, and it should distinguish the manifest-only workspace folder, the repo checkout folder, the local git repo presence, the GitHub remote URL, the active working branch, and clean/dirty workspace state if available.
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Reconcile source status after clone/setup so the workspace and repo checkout are represented correctly.
+
+**Product Outcome**
+The repository now documents the post-clone source-status boundary and keeps real clone/checkout/branch execution, commit/push/merge/PR, and any UI/API implementation out of scope.
+
+**Dependencies**
+MS-028.18 - GitHub Multi-Account Auth Guidance Foundation
+
+**Implementation Scope**
+Docs-first source-status reconciliation contract only.
 
 ## MS-028.14 - GitHub Local Working Branch Creation Action Foundation
 

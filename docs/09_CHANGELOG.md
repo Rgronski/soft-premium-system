@@ -86,6 +86,25 @@ Each release entry should contain:
 
 * No live clone/checkout/branch execution was introduced in this sync step.
 
+## Session 087 - MS-028.19 docs-first post-clone source status reconciliation contract patch
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` as `MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation` and `Latest Completed Product Milestone` as `MS-028.18 - GitHub Multi-Account Auth Guidance Foundation`.
+* Recorded that `MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED`, clarifies the post-clone source status boundary, and keeps UI/API implementation out of scope.
+* Documented the distinction between the manifest-only workspace folder, the repo checkout folder, the local git repo presence, the GitHub remote URL, the active working branch, and clean/dirty workspace state when available.
+* Preserved `MS-028.18 - GitHub Multi-Account Auth Guidance Foundation` as the previous latest completed milestone.
+* Kept real clone/checkout/branch execution, commit/push/merge/PR, and unrelated UI changes outside the milestone.
+
+### Notes
+
+* No UI/API implementation was added.
+* No clone, checkout, or branch execution was performed in this docs-first step.
+
 ## Session 087 - MS-028.18 control files sync publication
 
 ### Date

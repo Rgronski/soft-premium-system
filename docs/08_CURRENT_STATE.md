@@ -42,13 +42,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE / Product Owner decision required
+MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation
 
 **Latest Completed Milestone**
 MS-028.18 - GitHub Multi-Account Auth Guidance Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-028.19 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Post-Clone Source Status Reconciliation Foundation. The repository now distinguishes the manifest-only project workspace folder from the repo checkout folder and records the local git repo presence, GitHub remote URL, active working branch, and clean/dirty workspace state when available. This correction makes the project stop looking manifest-only once the valid repo checkout exists after a successful clone/setup flow. The milestone does not implement UI/API behavior and does not perform clone, checkout, branch, commit, push, merge, or PR actions.
 
 MS-028.18 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Multi-Account Auth Guidance Foundation. The repository now documents how to separate the auth context for the SPS OS repo from the auth context for client/project repos, records the known `Repository not found` and `403 Permission denied` failure modes, and recommends HTTPS + Git Credential Manager + path-based credentials with `git config --global credential.https://github.com.useHttpPath true` as the practical default. GitHub CLI account switching and SSH host aliases remain documented alternatives. The milestone does not add OAuth/token storage, does not install `gh`, does not create SSH keys, and does not change Git logic.
 
