@@ -42,13 +42,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE / Product Owner decision required
+MS-028.12 - GitHub First Operation Authorization Boundary Foundation
 
 **Latest Completed Milestone**
 MS-028.11 - GitHub First Operation Candidate Decision Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-028.12 is PUBLISHED / CLOSED in the current local workspace as the GitHub First Operation Authorization Boundary Foundation. The repository now defines the separate local authorization boundary for the first selected GitHub operation candidate after MS-028.11, distinguishes the selected candidate from the state approved for further preparation, from the state requiring authorization, and from the state authorized to execute, and keeps real Git/GitHub execution blocked. The milestone does not create OAuth, tokens, clone, fetch, checkout, branch, commit, push, or PR artifacts.
 
 MS-028.10 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation. The repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked. The milestone was verified by the targeted settings page test file with 12 tests passing.
 

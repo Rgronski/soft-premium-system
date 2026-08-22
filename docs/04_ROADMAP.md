@@ -135,11 +135,80 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE / Product Owner decision required
+MS-028.12 - GitHub First Operation Authorization Boundary Foundation
 
 ## Latest Completed Product Milestone
 
 MS-028.11 - GitHub First Operation Candidate Decision Foundation
+
+## MS-028.12 - GitHub First Operation Authorization Boundary Foundation
+
+**Milestone**
+MS-028.12 - GitHub First Operation Authorization Boundary Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+PUBLISHED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the authorization boundary for the first locally selected GitHub operation candidate after MS-028.11 without enabling real execution.
+
+**Product Outcome**
+After MS-028.11 records the Product Owner decision for the locally selected first operation candidate, this milestone defines the separate local authorization boundary for that same candidate. The boundary distinguishes the selected candidate from the state approved for further preparation, from the state requiring authorization, and from the state authorized to execute, while keeping real Git/GitHub execution blocked. The milestone does not create OAuth, tokens, clone, fetch, checkout, branch, commit, push, or PR artifacts.
+
+**Dependencies**
+* MS-028.11 - GitHub First Operation Candidate Decision Foundation
+
+**Implementation Scope**
+Docs-first authorization-boundary contract publication for the GitHub real-execution boundary.
+
+**Allowed Scope**
+* docs publication
+* authorization-boundary wording
+* bounded decision-state terminology for selected candidate, approved for further preparation, authorization required, and authorized to execute
+* future-work guidance for the next real Git/GitHub implementation step
+
+**Forbidden Scope**
+* GitHub OAuth
+* access tokens
+* GitHub API integration
+* real Git operations
+* clone/fetch/checkout
+* branch creation on disk or remote
+* push
+* merge
+* pull request
+* sync-to-main
+* backend persistence
+* unrelated UI or domain changes
+
+**Sequencing**
+1. MS-028.11 records the Product Owner decision for the first locally selected GitHub operation candidate.
+2. MS-028.12 defines the separate authorization boundary for that same candidate.
+3. Real Git/GitHub execution remains blocked until a later explicit Product Owner-approved implementation milestone.
 
 ## MS-028.11 - GitHub First Operation Candidate Decision Foundation
 
