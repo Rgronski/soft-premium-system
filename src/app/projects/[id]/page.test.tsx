@@ -23,6 +23,44 @@ const deleteProjectMock = vi.fn((projectId: string) => {
 const deleteProjectFromServerMock = vi.fn();
 let confirmSpy: ReturnType<typeof vi.spyOn>;
 
+function createBlockedSourceRevalidationResponse(): Response {
+  return new Response(
+    JSON.stringify({
+      status: "blocked",
+      message:
+        "Lokalny repo checkout nadal niedostępny lub nie jest poprawnym repozytorium Git.",
+    }),
+    {
+      status: 409,
+      headers: {
+        "content-type": "application/json",
+      },
+    },
+  );
+}
+
+function createSuccessfulSourceRevalidationResponse(): Response {
+  return new Response(
+    JSON.stringify({
+      status: "success",
+      message:
+        "Checkout status został zrewalidowany. Commit/push/merge/PR pozostają poza zakresem.",
+      workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+      activeBranch: "work/beauty-client-pro",
+      repoCheckoutPath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+      remoteUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+      workingTreeState: "clean",
+      sourceStatus: "git-repo",
+    }),
+    {
+      status: 200,
+      headers: {
+        "content-type": "application/json",
+      },
+    },
+  );
+}
+
 vi.mock("next/navigation", () => ({
   useParams: () => useParamsMock(),
   useRouter: () => ({
@@ -80,6 +118,7 @@ describe("ProjectWorkspacePage", () => {
     getTasksFromServerMock.mockReset();
     getTasksFromServerMock.mockResolvedValue([]);
     getKnowledgeMock.mockReset();
+    vi.stubGlobal("fetch", vi.fn(() => Promise.resolve(createBlockedSourceRevalidationResponse())));
     getProjectByIdMock.mockReturnValue({
       id: "project-1",
       name: "Alpha Workspace",
@@ -145,6 +184,7 @@ describe("ProjectWorkspacePage", () => {
   afterEach(() => {
     cleanup();
     vi.restoreAllMocks();
+    vi.unstubAllGlobals();
     localStorage.clear();
   });
 
@@ -228,6 +268,41 @@ describe("ProjectWorkspacePage", () => {
     expect(
       screen.getByText("source: C:/SPS_OS_WORK/Test-MS-011"),
     ).toBeTruthy();
+  });
+
+  test("revalidates a derived checkout and shows the local git repo details in the overview", async () => {
+    getProjectByIdMock.mockReturnValue({
+      id: "project-1",
+      name: "Alpha Workspace",
+      createdAt: "2026-08-03T10:00:00.000Z",
+      workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+      repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+      projectFilesystemStatus: "manifest-present",
+    });
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => Promise.resolve(createSuccessfulSourceRevalidationResponse())),
+    );
+
+    render(<ProjectWorkspacePage />);
+
+    await waitFor(() => {
+      expect(screen.getByText(/repo checkout potwierdzony/)).toBeTruthy();
+    });
+
+    expect(screen.getByText(/Local git repo present/)).toBeTruthy();
+    expect(
+      screen.getByText(/Project workspace folder: C:\\SPS_OS_WORK\\beauty-client-pro/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Repo checkout folder: C:\\SPS_OS_WORK\\beauty-client-pro\\repo/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/GitHub remote URL: https:\/\/github.com\/Beautyclient\/BeautyClientPro.git/),
+    ).toBeTruthy();
+    expect(screen.getByText(/Active working branch: work\/beauty-client-pro/)).toBeTruthy();
+    expect(screen.getByText(/Working tree state: clean/)).toBeTruthy();
+    expect(screen.queryByText(/Lokalne repo Git: nadal niedostępne/)).toBeNull();
   });
 
   test("surfaces the Project Brain start-next-work readiness boundary when no active work exists", () => {

@@ -26,6 +26,18 @@ function createRequest(body: unknown): Request {
   );
 }
 
+function createGetRequest(
+  searchParams: Record<string, string>,
+): Request {
+  const url = new URL("http://localhost/api/projects/project-1/working-branch/setup");
+
+  for (const [key, value] of Object.entries(searchParams)) {
+    url.searchParams.set(key, value);
+  }
+
+  return new Request(url);
+}
+
 function createContext(id: string) {
   return {
     params: Promise.resolve({ id }),
@@ -300,6 +312,231 @@ describe("POST /api/projects/[id]/working-branch/setup", () => {
       status: "blocked",
       message:
         "Remote origin nie pasuje do skonfigurowanego adresu GitHub.",
+    });
+  });
+});
+
+describe("GET /api/projects/[id]/working-branch/setup", () => {
+  it("revalidates a manifest-only workspace by switching to the derived repo checkout folder", async () => {
+    const workspaceDirectory = "C:\\SPS_OS_WORK\\beauty-client-pro";
+    const repoCheckoutDirectory = "C:\\SPS_OS_WORK\\beauty-client-pro\\repo";
+
+    statMock.mockImplementation(async (targetPath: string) => {
+      if (targetPath === workspaceDirectory || targetPath === repoCheckoutDirectory) {
+        return {
+          isDirectory: () => true,
+        } as Awaited<ReturnType<typeof statMock>>;
+      }
+
+      if (targetPath === `${workspaceDirectory}\\sps-project.json`) {
+        return {
+          isDirectory: () => false,
+        } as Awaited<ReturnType<typeof statMock>>;
+      }
+
+      if (targetPath === `${workspaceDirectory}\\.git`) {
+        throw new Error("ENOENT");
+      }
+
+      if (targetPath === `${repoCheckoutDirectory}\\sps-project.json`) {
+        throw new Error("ENOENT");
+      }
+
+      throw new Error(`unexpected stat target: ${targetPath}`);
+    });
+
+    mockExecFileSequence([
+      (_command, args) => {
+        expect(args).toEqual([
+          "-C",
+          repoCheckoutDirectory,
+          "rev-parse",
+          "--is-inside-work-tree",
+        ]);
+        return [null, "true", ""];
+      },
+      (_command, args) => {
+        expect(args).toEqual([
+          "-C",
+          repoCheckoutDirectory,
+          "remote",
+          "get-url",
+          "origin",
+        ]);
+        return [null, "https://github.com/Beautyclient/BeautyClientPro.git", ""];
+      },
+      (_command, args) => {
+        expect(args).toEqual([
+          "-C",
+          repoCheckoutDirectory,
+          "rev-parse",
+          "--abbrev-ref",
+          "HEAD",
+        ]);
+        return [null, "work/beauty-client-pro", ""];
+      },
+      (_command, args) => {
+        expect(args).toEqual([
+          "-C",
+          repoCheckoutDirectory,
+          "status",
+          "--porcelain",
+        ]);
+        return [null, "", ""];
+      },
+    ]);
+
+    const { GET } = await loadRouteModule();
+    const response = await GET(
+      createGetRequest({
+        projectId: "project-1",
+        repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+        workingDirectory: workspaceDirectory,
+        branchWorkMode: "working-branch",
+        workingBranchName: "work/beauty-client-pro",
+      }),
+      createContext("project-1"),
+    );
+
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toEqual({
+      status: "success",
+      message:
+        "Checkout status został zrewalidowany. Commit/push/merge/PR pozostają poza zakresem.",
+      workingDirectory: workspaceDirectory,
+      activeBranch: "work/beauty-client-pro",
+      repoCheckoutPath: repoCheckoutDirectory,
+      remoteUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+      workingTreeState: "clean",
+      sourceStatus: "git-repo",
+    });
+  });
+
+  it("blocks revalidation when the repo checkout remote does not match the saved GitHub URL", async () => {
+    const repoCheckoutDirectory = "C:\\SPS_OS_WORK\\beauty-client-pro\\repo";
+
+    statMock.mockImplementation(async (targetPath: string) => {
+      if (targetPath === repoCheckoutDirectory) {
+        return {
+          isDirectory: () => true,
+        } as Awaited<ReturnType<typeof statMock>>;
+      }
+
+      if (targetPath === `${repoCheckoutDirectory}\\sps-project.json`) {
+        throw new Error("ENOENT");
+      }
+
+      throw new Error(`unexpected stat target: ${targetPath}`);
+    });
+
+    mockExecFileSequence([
+      (_command, args) => {
+        expect(args).toEqual([
+          "-C",
+          repoCheckoutDirectory,
+          "rev-parse",
+          "--is-inside-work-tree",
+        ]);
+        return [null, "true", ""];
+      },
+      (_command, args) => {
+        expect(args).toEqual([
+          "-C",
+          repoCheckoutDirectory,
+          "remote",
+          "get-url",
+          "origin",
+        ]);
+        return [null, "https://github.com/example/another-repo", ""];
+      },
+    ]);
+
+    const { GET } = await loadRouteModule();
+    const response = await GET(
+      createGetRequest({
+        projectId: "project-1",
+        repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+        workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+        branchWorkMode: "working-branch",
+        workingBranchName: "work/beauty-client-pro",
+      }),
+      createContext("project-1"),
+    );
+
+    expect(response.status).toBe(409);
+    await expect(response.json()).resolves.toEqual({
+      status: "blocked",
+      message:
+        "Remote origin nie pasuje do zapisanego adresu GitHub. Rewalidacja pozostaje zablokowana.",
+    });
+  });
+
+  it("blocks revalidation when the active branch does not match the saved working branch", async () => {
+    const repoCheckoutDirectory = "C:\\SPS_OS_WORK\\beauty-client-pro\\repo";
+
+    statMock.mockImplementation(async (targetPath: string) => {
+      if (targetPath === repoCheckoutDirectory) {
+        return {
+          isDirectory: () => true,
+        } as Awaited<ReturnType<typeof statMock>>;
+      }
+
+      if (targetPath === `${repoCheckoutDirectory}\\sps-project.json`) {
+        throw new Error("ENOENT");
+      }
+
+      throw new Error(`unexpected stat target: ${targetPath}`);
+    });
+
+    mockExecFileSequence([
+      (_command, args) => {
+        expect(args).toEqual([
+          "-C",
+          repoCheckoutDirectory,
+          "rev-parse",
+          "--is-inside-work-tree",
+        ]);
+        return [null, "true", ""];
+      },
+      (_command, args) => {
+        expect(args).toEqual([
+          "-C",
+          repoCheckoutDirectory,
+          "remote",
+          "get-url",
+          "origin",
+        ]);
+        return [null, "https://github.com/Beautyclient/BeautyClientPro.git", ""];
+      },
+      (_command, args) => {
+        expect(args).toEqual([
+          "-C",
+          repoCheckoutDirectory,
+          "rev-parse",
+          "--abbrev-ref",
+          "HEAD",
+        ]);
+        return [null, "work/beauty-client-pro", ""];
+      },
+    ]);
+
+    const { GET } = await loadRouteModule();
+    const response = await GET(
+      createGetRequest({
+        projectId: "project-1",
+        repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+        workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+        branchWorkMode: "working-branch",
+        workingBranchName: "work/beauty-client-pro-hotfix",
+      }),
+      createContext("project-1"),
+    );
+
+    expect(response.status).toBe(409);
+    await expect(response.json()).resolves.toEqual({
+      status: "blocked",
+      message:
+        "Aktywna gałąź nie zgadza się z zapisaną gałęzią roboczą. Rewalidacja pozostaje zablokowana.",
     });
   });
 });

@@ -21,6 +21,46 @@ function createDeferred<T>() {
   };
 }
 
+function createBlockedSourceRevalidationResponse(
+  message =
+    "Lokalny repo checkout nadal niedostępny lub nie jest poprawnym repozytorium Git.",
+): Response {
+  return new Response(
+    JSON.stringify({
+      status: "blocked",
+      message,
+    }),
+    {
+      status: 409,
+      headers: {
+        "content-type": "application/json",
+      },
+    },
+  );
+}
+
+function createSuccessfulSourceRevalidationResponse(): Response {
+  return new Response(
+    JSON.stringify({
+      status: "success",
+      message:
+        "Checkout status został zrewalidowany. Commit/push/merge/PR pozostają poza zakresem.",
+      workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+      activeBranch: "work/beauty-client-pro",
+      repoCheckoutPath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+      remoteUrl: "https://github.com/example/beauty-client-pro",
+      workingTreeState: "clean",
+      sourceStatus: "git-repo",
+    }),
+    {
+      status: 200,
+      headers: {
+        "content-type": "application/json",
+      },
+    },
+  );
+}
+
 vi.mock("next/navigation", () => ({
   useParams: () => useParamsMock(),
 }));
@@ -31,6 +71,7 @@ describe("ProjectSettingsPage", () => {
   beforeEach(() => {
     localStorage.clear();
     useParamsMock.mockReturnValue({ id: "project-1" });
+    vi.stubGlobal("fetch", vi.fn(() => Promise.resolve(createBlockedSourceRevalidationResponse())));
     createProject(
       "Beauty Client PRO",
       "project-1",
@@ -86,6 +127,43 @@ describe("ProjectSettingsPage", () => {
         selector: ".text-emerald-200",
       }),
     ).toBeTruthy();
+  });
+
+  test("revalidates a derived repo checkout and hides the manifest-only source copy", async () => {
+    createProject(
+      "Beauty Client PRO",
+      "project-1",
+      "https://github.com/example/beauty-client-pro",
+      "C:\\SPS_OS_WORK\\beauty-client-pro",
+      "manifest-present",
+    );
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => Promise.resolve(createSuccessfulSourceRevalidationResponse())),
+    );
+
+    render(<ProjectSettingsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Post-clone source status/)).toBeTruthy();
+    });
+
+    expect(screen.getByText(/Local git repo present/)).toBeTruthy();
+    expect(
+      screen.getByText(/Project workspace folder: C:\\SPS_OS_WORK\\beauty-client-pro/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Repo checkout folder: C:\\SPS_OS_WORK\\beauty-client-pro\\repo/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/GitHub remote URL: https:\/\/github.com\/example\/beauty-client-pro/),
+    ).toBeTruthy();
+    expect(
+      screen.getAllByText(/Active working branch: work\/beauty-client-pro/),
+    ).not.toHaveLength(0);
+    expect(screen.getAllByText(/Working tree state: clean/)).not.toHaveLength(0);
+    expect(screen.queryByText(/Pozostaw jako manifest-only/)).toBeNull();
+    expect(screen.getByText(/Lokalne repo Git: obecne/)).toBeTruthy();
   });
 
   test("shows a blocked GitHub readiness action state until the repository URL exists", () => {
@@ -287,7 +365,13 @@ describe("ProjectSettingsPage", () => {
 
   test("shows the SPS OS local working branch creation action after authorized preflight and records a local success state", async () => {
     const fetchDeferred = createDeferred<Response>();
-    const fetchMock = vi.fn(() => fetchDeferred.promise);
+    const fetchMock = vi.fn((_, init?: RequestInit) => {
+      if (init?.method === "POST") {
+        return fetchDeferred.promise;
+      }
+
+      return Promise.resolve(createBlockedSourceRevalidationResponse());
+    });
     vi.stubGlobal("fetch", fetchMock);
 
     render(<ProjectSettingsPage />);
@@ -343,19 +427,11 @@ describe("ProjectSettingsPage", () => {
     );
 
     expect(screen.getByText(/Stan akcji: running/)).toBeTruthy();
-    expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(fetchMock).toHaveBeenCalledWith(
-      "/api/projects/project-1/working-branch/setup",
-      expect.objectContaining({
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-      }),
-    );
-    expect(
-      JSON.parse(fetchMock.mock.calls[0][1]?.body as string),
-    ).toEqual({
+    const postCall = fetchMock.mock.calls.find(([, init]) => init?.method === "POST");
+    expect(postCall).toBeTruthy();
+    const postRequestInit = postCall?.[1];
+    expect(postRequestInit).toBeTruthy();
+    expect(JSON.parse(postRequestInit?.body as string)).toEqual({
       projectId: "project-1",
       repositoryUrl: "https://github.com/example/beauty-client-pro",
       workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
@@ -423,7 +499,34 @@ describe("ProjectSettingsPage", () => {
   });
 
   test("shows blocked and error states when the action API blocks or fails", async () => {
-    const fetchMock = vi.fn();
+    let postCallCount = 0;
+    const fetchMock = vi.fn((_, init?: RequestInit) => {
+      if (init?.method !== "POST") {
+        return Promise.resolve(createBlockedSourceRevalidationResponse());
+      }
+
+      postCallCount += 1;
+
+      if (postCallCount === 1) {
+        return Promise.resolve(
+          new Response(
+            JSON.stringify({
+              status: "blocked",
+              message:
+                "Remote origin nie pasuje do skonfigurowanego adresu GitHub.",
+            }),
+            {
+              status: 409,
+              headers: {
+                "content-type": "application/json",
+              },
+            },
+          ),
+        );
+      }
+
+      return Promise.reject(new Error("network failure"));
+    });
     vi.stubGlobal("fetch", fetchMock);
 
     render(<ProjectSettingsPage />);
@@ -455,22 +558,6 @@ describe("ProjectSettingsPage", () => {
       }),
     );
 
-    fetchMock.mockResolvedValueOnce(
-      new Response(
-        JSON.stringify({
-          status: "blocked",
-          message:
-            "Remote origin nie pasuje do skonfigurowanego adresu GitHub.",
-        }),
-        {
-          status: 409,
-          headers: {
-            "content-type": "application/json",
-          },
-        },
-      ),
-    );
-
     fireEvent.click(
       screen.getByRole("button", {
         name: /Utw.*lokalny klon/i,
@@ -485,8 +572,6 @@ describe("ProjectSettingsPage", () => {
         /Remote origin nie pasuje do skonfigurowanego adresu GitHub\./,
       ),
     ).toBeTruthy();
-
-    fetchMock.mockRejectedValueOnce(new Error("network failure"));
 
     fireEvent.click(
       screen.getByRole("button", {

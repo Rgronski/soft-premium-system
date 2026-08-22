@@ -1,4 +1,5 @@
 import type { Project } from "./types";
+import type { ProjectSourceReconciliationStatus } from "./source-status";
 
 const PROJECTS_STORAGE_KEY = "soft-premium-system.projects";
 const PROJECT_SCOPED_STORAGE_SUFFIXES = ["tasks", "knowledge"] as const;
@@ -92,10 +93,23 @@ export type ProjectBindingDecisionSummary = {
 
 export function getProjectBindingDecisionSummary(
   project: Project | null | undefined,
+  sourceStatus: ProjectSourceReconciliationStatus | null = null,
 ): ProjectBindingDecisionSummary {
   const hasRepositoryUrl = Boolean(project?.repositoryUrl?.trim());
   const hasWorkingDirectory = Boolean(project?.workingDirectory?.trim());
   const filesystemStatus = project?.projectFilesystemStatus ?? "unknown";
+
+  if (sourceStatus) {
+    return {
+      status: "local-source",
+      statusLabel: "repo checkout potwierdzony",
+      githubUrlLabel: `Adres GitHub: ${hasRepositoryUrl ? "podany" : "nie podano"}`,
+      localRepositoryLabel: "Lokalne repo Git: obecne",
+      nextStepLabel:
+        "local clone/branch setup: completed. Commit/push/merge/PR pozostają poza zakresem.",
+      repositoryContextMessage: `Kontekst repozytorium: repo checkout folder ${sourceStatus.repoCheckoutPath}; manifest-only workspace folder pozostaje osobnym folderem projektu SPS OS.`,
+    };
+  }
 
   if (hasRepositoryUrl) {
     return {

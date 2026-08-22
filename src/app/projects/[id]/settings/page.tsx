@@ -7,24 +7,24 @@ import {
   upsertProject,
 } from "@/lib/project/project";
 import type { Project } from "@/lib/project/types";
+import {
+  buildRepoCheckoutDirectory,
+  buildRepoCheckoutDirectoryHint,
+  buildWorkingBranchName,
+  clearProjectSourceStatus,
+  getProjectWorkingBranchNameStorageKey,
+  isManifestOnlyWorkspaceDirectory,
+  readProjectBranchWorkMode,
+  readProjectWorkingBranchName,
+  resolveRepoCheckoutDirectory,
+  saveProjectBranchWorkMode,
+  saveProjectSourceStatus,
+  saveProjectWorkingBranchName,
+  type ProjectBranchWorkMode,
+  type ProjectSourceReconciliationStatus,
+} from "@/lib/project/source-status";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-
-type ProjectBranchWorkMode = "main" | "working-branch";
-
-const PROJECT_BRANCH_WORK_MODE_STORAGE_SUFFIX = "branch-work-mode";
-const PROJECT_WORKING_BRANCH_NAME_STORAGE_SUFFIX = "working-branch-name";
-const PROJECT_SOURCE_STATUS_STORAGE_SUFFIX = "source-status";
-
-type ProjectSourceWorkingTreeState = "clean" | "dirty" | "unknown";
-
-type ProjectSourceReconciliationStatus = {
-  sourceStatus: "git-repo";
-  repoCheckoutPath: string;
-  remoteUrl: string;
-  activeBranch: string;
-  workingTreeState: ProjectSourceWorkingTreeState;
-};
 
 function saveProjectBinding(project: Project, updates: Partial<Project>): Project {
   return upsertProject({
@@ -33,110 +33,48 @@ function saveProjectBinding(project: Project, updates: Partial<Project>): Projec
   });
 }
 
-function getProjectBranchWorkModeStorageKey(projectId: string): string {
-  return `soft-premium-system.projects.${projectId}.${PROJECT_BRANCH_WORK_MODE_STORAGE_SUFFIX}`;
-}
+type ProjectSourceRevalidationSuccessResponse = {
+  status: "success";
+  message: string;
+  workingDirectory: string;
+  activeBranch: string;
+  repoCheckoutPath: string;
+  remoteUrl: string;
+  workingTreeState: ProjectSourceWorkingTreeState;
+  sourceStatus: "git-repo";
+};
 
-function readProjectBranchWorkMode(
+type ProjectSourceRevalidationBlockedResponse = {
+  status: "blocked";
+  message: string;
+};
+
+type ProjectSourceRevalidationErrorResponse = {
+  status: "error";
+  message: string;
+};
+
+type ProjectSourceRevalidationResponse =
+  | ProjectSourceRevalidationSuccessResponse
+  | ProjectSourceRevalidationBlockedResponse
+  | ProjectSourceRevalidationErrorResponse;
+
+function buildProjectSourceRevalidationRequestUrl(
   projectId: string,
-): ProjectBranchWorkMode | null {
-  if (typeof window === "undefined") {
-    return null;
-  }
+  repositoryUrl: string,
+  workingDirectory: string,
+  branchWorkMode: ProjectBranchWorkMode | null,
+  workingBranchName: string,
+): string {
+  const searchParams = new URLSearchParams({
+    projectId,
+    repositoryUrl,
+    workingDirectory,
+    branchWorkMode: branchWorkMode ?? "main",
+    workingBranchName,
+  });
 
-  const storedValue = localStorage.getItem(
-    getProjectBranchWorkModeStorageKey(projectId),
-  );
-
-  return storedValue === "main" || storedValue === "working-branch"
-    ? storedValue
-    : null;
-}
-
-function saveProjectBranchWorkMode(
-  projectId: string,
-  branchWorkMode: ProjectBranchWorkMode,
-): void {
-  localStorage.setItem(
-    getProjectBranchWorkModeStorageKey(projectId),
-    branchWorkMode,
-  );
-}
-
-function getProjectWorkingBranchNameStorageKey(projectId: string): string {
-  return `soft-premium-system.projects.${projectId}.${PROJECT_WORKING_BRANCH_NAME_STORAGE_SUFFIX}`;
-}
-
-function getProjectSourceStatusStorageKey(projectId: string): string {
-  return `soft-premium-system.projects.${projectId}.${PROJECT_SOURCE_STATUS_STORAGE_SUFFIX}`;
-}
-
-function readProjectSourceStatus(
-  projectId: string,
-): ProjectSourceReconciliationStatus | null {
-  if (typeof window === "undefined") {
-    return null;
-  }
-
-  const storedValue = localStorage.getItem(
-    getProjectSourceStatusStorageKey(projectId),
-  );
-
-  if (!storedValue) {
-    return null;
-  }
-
-  try {
-    const parsedValue = JSON.parse(
-      storedValue,
-    ) as Partial<ProjectSourceReconciliationStatus>;
-
-    if (
-      parsedValue?.sourceStatus === "git-repo" &&
-      typeof parsedValue.repoCheckoutPath === "string" &&
-      typeof parsedValue.remoteUrl === "string" &&
-      typeof parsedValue.activeBranch === "string" &&
-      (parsedValue.workingTreeState === "clean" ||
-        parsedValue.workingTreeState === "dirty" ||
-        parsedValue.workingTreeState === "unknown")
-    ) {
-      return {
-        sourceStatus: "git-repo",
-        repoCheckoutPath: parsedValue.repoCheckoutPath,
-        remoteUrl: parsedValue.remoteUrl,
-        activeBranch: parsedValue.activeBranch,
-        workingTreeState: parsedValue.workingTreeState,
-      };
-    }
-  } catch {
-    return null;
-  }
-
-  return null;
-}
-
-function saveProjectSourceStatus(
-  projectId: string,
-  sourceStatus: ProjectSourceReconciliationStatus,
-): void {
-  localStorage.setItem(
-    getProjectSourceStatusStorageKey(projectId),
-    JSON.stringify(sourceStatus),
-  );
-}
-
-function clearProjectSourceStatus(projectId: string): void {
-  localStorage.removeItem(getProjectSourceStatusStorageKey(projectId));
-}
-
-function buildWorkingBranchName(projectName: string): string {
-  const slug = projectName
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-
-  return `work/${slug || "project"}`;
+  return `/api/projects/${projectId}/working-branch/setup?${searchParams.toString()}`;
 }
 
 function buildBranchWorkModeSummary(
@@ -237,69 +175,6 @@ function buildLocalCloneReadinessSummary(
         : "WybĂłr gaĹ‚Ä™zi roboczej pozostaje tylko metadanymi przygotowania lokalnego workspace.",
     "W tym kroku nie kopiujemy plikĂłw i nie klonujemy repozytorium.",
   ];
-}
-
-function normalizeWindowsPath(value: string): string {
-  return value.trim().replace(/[\\/]+$/u, "");
-}
-
-function buildRepoCheckoutDirectory(workspaceDirectory: string): string {
-  const normalizedWorkspaceDirectory = normalizeWindowsPath(workspaceDirectory);
-
-  return normalizedWorkspaceDirectory.endsWith("\\repo")
-    ? normalizedWorkspaceDirectory
-    : `${normalizedWorkspaceDirectory}\\repo`;
-}
-
-function isManifestOnlyWorkspaceDirectory(
-  project: Project,
-  candidateDirectory: string,
-): boolean {
-  if (project.projectFilesystemStatus !== "manifest-present") {
-    return false;
-  }
-
-  const normalizedCandidateDirectory = normalizeWindowsPath(candidateDirectory);
-  const normalizedWorkspaceDirectory = normalizeWindowsPath(
-    project.workingDirectory ?? "",
-  );
-
-  return Boolean(
-    normalizedCandidateDirectory &&
-      normalizedWorkspaceDirectory &&
-      normalizedCandidateDirectory === normalizedWorkspaceDirectory,
-  );
-}
-
-function resolveRepoCheckoutDirectory(
-  project: Project,
-  candidateDirectory: string,
-): string {
-  const trimmedCandidateDirectory = candidateDirectory.trim();
-
-  if (!trimmedCandidateDirectory) {
-    return project.projectFilesystemStatus === "manifest-present" &&
-      project.workingDirectory?.trim()
-      ? buildRepoCheckoutDirectory(project.workingDirectory)
-      : "";
-  }
-
-  if (isManifestOnlyWorkspaceDirectory(project, trimmedCandidateDirectory)) {
-    return buildRepoCheckoutDirectory(project.workingDirectory ?? "");
-  }
-
-  return trimmedCandidateDirectory;
-}
-
-function buildRepoCheckoutDirectoryHint(project: Project): string | null {
-  if (
-    project.projectFilesystemStatus !== "manifest-present" ||
-    !project.workingDirectory?.trim()
-  ) {
-    return null;
-  }
-
-  return buildRepoCheckoutDirectory(project.workingDirectory);
 }
 
 type GitHubReadinessChecklistItem = {
@@ -857,24 +732,6 @@ function buildGitHubRealOperationReadinessDetailSummary(
   };
 }
 
-function readProjectWorkingBranchName(projectId: string): string {
-  if (typeof window === "undefined") {
-    return "";
-  }
-
-  return localStorage.getItem(getProjectWorkingBranchNameStorageKey(projectId)) ?? "";
-}
-
-function saveProjectWorkingBranchName(
-  projectId: string,
-  workingBranchName: string,
-): void {
-  localStorage.setItem(
-    getProjectWorkingBranchNameStorageKey(projectId),
-    workingBranchName,
-  );
-}
-
 export default function ProjectSettingsPage() {
   const params = useParams<{ id: string }>();
   const [project, setProject] = useState<Project | null>(() =>
@@ -893,7 +750,8 @@ export default function ProjectSettingsPage() {
   const [workingBranchName, setWorkingBranchName] = useState<string>(() => {
     const nextProject = getProjectById(params.id);
     const nextBranchWorkMode = readProjectBranchWorkMode(params.id);
-    const storedWorkingBranchName = readProjectWorkingBranchName(params.id);
+    const storedWorkingBranchName =
+      readProjectWorkingBranchName(params.id) ?? "";
 
     if (storedWorkingBranchName) {
       return storedWorkingBranchName;
@@ -915,14 +773,13 @@ export default function ProjectSettingsPage() {
   const [githubLocalWorkingBranchCreationOutcome, setGithubLocalWorkingBranchCreationOutcome] =
     useState<GitHubLocalWorkingBranchCreationOutcome>("idle");
   const [projectSourceStatus, setProjectSourceStatus] =
-    useState<ProjectSourceReconciliationStatus | null>(() =>
-      readProjectSourceStatus(params.id),
-    );
+    useState<ProjectSourceReconciliationStatus | null>(null);
 
   useEffect(() => {
     const nextProject = getProjectById(params.id);
     const nextBranchWorkMode = readProjectBranchWorkMode(params.id);
-    const storedWorkingBranchName = readProjectWorkingBranchName(params.id);
+    const storedWorkingBranchName =
+      readProjectWorkingBranchName(params.id) ?? "";
 
     setProject(nextProject);
     setGithubUrlInput(nextProject?.repositoryUrl ?? "");
@@ -939,15 +796,84 @@ export default function ProjectSettingsPage() {
     setGithubRealOperationCandidateDecision("pending");
     setGithubRealOperationAuthorization("authorization required");
     setGithubLocalWorkingBranchCreationOutcome("idle");
-    setProjectSourceStatus(readProjectSourceStatus(params.id));
+    setProjectSourceStatus(null);
     setFeedbackMessage(null);
   }, [params.id]);
 
   useEffect(() => {
+    let ignore = false;
+
+    async function loadRevalidatedSourceStatus() {
+      const repositoryUrl = project?.repositoryUrl?.trim() ?? "";
+      const workingDirectory = project?.workingDirectory?.trim() ?? "";
+
+      if (!repositoryUrl || !workingDirectory) {
+        clearProjectSourceStatus(params.id);
+        if (!ignore) {
+          setProjectSourceStatus(null);
+        }
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          buildProjectSourceRevalidationRequestUrl(
+            params.id,
+            repositoryUrl,
+            workingDirectory,
+            branchWorkMode,
+            workingBranchName.trim(),
+          ),
+        );
+        const payload =
+          (await response.json()) as ProjectSourceRevalidationResponse;
+
+        if (ignore) {
+          return;
+        }
+
+        if (response.ok && payload.status === "success") {
+          const nextSourceStatus: ProjectSourceReconciliationStatus = {
+            sourceStatus: "git-repo",
+            repoCheckoutPath: payload.repoCheckoutPath,
+            remoteUrl: payload.remoteUrl,
+            activeBranch: payload.activeBranch,
+            workingTreeState: payload.workingTreeState,
+          };
+
+          saveProjectSourceStatus(params.id, nextSourceStatus);
+          setProjectSourceStatus(nextSourceStatus);
+          return;
+        }
+
+        clearProjectSourceStatus(params.id);
+        setProjectSourceStatus(null);
+      } catch {
+        if (!ignore) {
+          clearProjectSourceStatus(params.id);
+          setProjectSourceStatus(null);
+        }
+      }
+    }
+
+    void loadRevalidatedSourceStatus();
+
+    return () => {
+      ignore = true;
+    };
+  }, [
+    branchWorkMode,
+    params.id,
+    project?.repositoryUrl,
+    project?.workingDirectory,
+    workingBranchName,
+  ]);
+
+  useEffect(() => {
     setGithubLocalWorkingBranchCreationOutcome("idle");
   }, [
-    project.repositoryUrl,
-    project.workingDirectory,
+    project?.repositoryUrl,
+    project?.workingDirectory,
     branchWorkMode,
     workingBranchName,
     githubRealOperationSelection,

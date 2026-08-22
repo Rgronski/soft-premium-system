@@ -137,14 +137,15 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.17` - GitHub Local Setup Success Copy Correction
 * `MS-028.18` - GitHub Multi-Account Auth Guidance Foundation
 * `MS-028.19` - GitHub Post-Clone Source Status Reconciliation Foundation
+* `MS-028.20` - GitHub Checkout Status Revalidation Foundation
 
 ## Current
 
-MS-028.20 - GitHub Checkout Status Revalidation Foundation
+NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation
+MS-028.20 - GitHub Checkout Status Revalidation Foundation
 
 ## MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
 
@@ -486,16 +487,16 @@ This milestone captures the docs-first contract for revalidating checkout status
 APPROVED
 
 **Publication Status**
-PENDING
+PUBLISHED
 
 **Milestone Status**
-NOT STARTED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
-YES
+NO
 
 **Runtime Status**
-ACTIVE
+CLOSED
 
 **Owner**
 Product Owner
@@ -511,6 +512,9 @@ Revalidate checkout status from filesystem-backed repository state so the UI doe
 
 **Product Outcome**
 The repository documents the revalidation boundary for repo checkout availability, local git repo presence, GitHub remote URL, active working branch, and working tree state when available. If the saved repo path still points to the manifest-only workspace folder but the derived repo checkout folder exists and is a valid Git repo, the project should show the checkout as available. The milestone keeps missing checkout folders, missing `.git`, remote mismatches, branch mismatches, and stale workspace-state mismatches as blockers or unknowns.
+
+**Implementation Note**
+Checkout status revalidation is now backed by filesystem-derived repo state rather than stale browser-state or localStorage alone. The shared source-status helper/model is used by overview and settings, valid checkout at the repo checkout folder reconciles the UI to `git-repo`, and missing checkout folder, missing `.git`, remote mismatch, active branch mismatch, and working tree dirty/clean/unknown remain explicit blocker or unknown cases. OAuth/token storage was not added and no real clone/checkout/branch was executed in this sync step.
 
 **Dependencies**
 MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation

@@ -1,6 +1,10 @@
 import { execFile } from "node:child_process";
 import { mkdir, stat } from "node:fs/promises";
 import path from "node:path";
+import {
+  buildRepoCheckoutDirectory,
+  type ProjectSourceWorkingTreeState,
+} from "@/lib/project/source-status";
 
 type LocalWorkingBranchSetupRequestBody = {
   projectId: string;
@@ -12,8 +16,6 @@ type LocalWorkingBranchSetupRequestBody = {
   authorization: "authorized to execute";
 };
 
-type WorkingTreeState = "clean" | "dirty" | "unknown";
-
 type LocalWorkingBranchSetupSuccessResponse = {
   status: "success";
   message: string;
@@ -21,7 +23,7 @@ type LocalWorkingBranchSetupSuccessResponse = {
   activeBranch: string;
   repoCheckoutPath: string;
   remoteUrl: string;
-  workingTreeState: WorkingTreeState;
+  workingTreeState: ProjectSourceWorkingTreeState;
   sourceStatus: "git-repo";
 };
 
@@ -262,7 +264,7 @@ async function getGitRemoteOriginUrl(
 
 async function getWorkingTreeState(
   targetPath: string,
-): Promise<WorkingTreeState> {
+): Promise<ProjectSourceWorkingTreeState> {
   try {
     const result = await execGitCommand(
       ["-C", targetPath, "status", "--porcelain"],
@@ -272,6 +274,23 @@ async function getWorkingTreeState(
     return result.stdout.trim().length === 0 ? "clean" : "dirty";
   } catch {
     return "unknown";
+  }
+}
+
+async function getActiveBranchName(
+  targetPath: string,
+): Promise<string | null> {
+  try {
+    const result = await execGitCommand(
+      ["-C", targetPath, "rev-parse", "--abbrev-ref", "HEAD"],
+      process.cwd(),
+    );
+
+    const branchName = result.stdout.trim();
+
+    return branchName && branchName !== "HEAD" ? branchName : null;
+  } catch {
+    return null;
   }
 }
 
@@ -289,6 +308,155 @@ async function hasLocalBranch(
   } catch {
     return false;
   }
+}
+
+type LocalWorkingBranchSourceRevalidationResponse = {
+  status: "success";
+  message: string;
+  workingDirectory: string;
+  activeBranch: string;
+  repoCheckoutPath: string;
+  remoteUrl: string;
+  workingTreeState: ProjectSourceWorkingTreeState;
+  sourceStatus: "git-repo";
+};
+
+function createSourceRevalidationSuccessResponse(
+  body: LocalWorkingBranchSourceRevalidationResponse,
+): Response {
+  return Response.json(body, { status: 200 });
+}
+
+async function probeLocalWorkingBranchSourceStatus(
+  requestBody: Pick<
+    LocalWorkingBranchSetupRequestBody,
+    "repositoryUrl" | "workingDirectory" | "branchWorkMode" | "workingBranchName"
+  >,
+): Promise<Response> {
+  const normalizedRepositoryUrl = validateGitHubRepositoryUrl(
+    requestBody.repositoryUrl,
+  );
+  const normalizedWorkingDirectory = normalizeWindowsPath(
+    requestBody.workingDirectory,
+  );
+  const normalizedWorkingBranchName =
+    requestBody.branchWorkMode === "working-branch"
+      ? validateWorkingBranchName(requestBody.workingBranchName)
+      : null;
+
+  if (!normalizedRepositoryUrl) {
+    return createJsonResponse(
+      {
+        status: "blocked",
+        message:
+          "Nieprawidłowy adres GitHub. Rewalidacja pozostaje zablokowana.",
+      },
+      409,
+    );
+  }
+
+  if (!normalizedWorkingDirectory) {
+    return createJsonResponse(
+      {
+        status: "blocked",
+        message:
+          "Ścieżka workspace musi być absolutna. Rewalidacja pozostaje zablokowana.",
+      },
+      409,
+    );
+  }
+
+  const checkoutCandidates = [
+    normalizedWorkingDirectory,
+    buildRepoCheckoutDirectory(normalizedWorkingDirectory),
+  ].filter((candidate, index, list) => list.indexOf(candidate) === index);
+
+  let repoCheckoutPath = "";
+
+  for (const candidatePath of checkoutCandidates) {
+    if (!(await pathExists(candidatePath))) {
+      continue;
+    }
+
+    const candidateStat = await stat(candidatePath);
+    if (!candidateStat.isDirectory()) {
+      continue;
+    }
+
+    if (await isManifestOnlyWorkspaceFolder(candidatePath)) {
+      continue;
+    }
+
+    if (await isGitRepository(candidatePath)) {
+      repoCheckoutPath = candidatePath;
+      break;
+    }
+  }
+
+  if (!repoCheckoutPath) {
+    return createJsonResponse(
+      {
+        status: "blocked",
+        message:
+          "Lokalny repo checkout nadal niedostępny lub nie jest poprawnym repozytorium Git.",
+      },
+      409,
+    );
+  }
+
+  const remoteOriginUrl = await getGitRemoteOriginUrl(repoCheckoutPath);
+  const normalizedRemoteOriginUrl = remoteOriginUrl
+    ? normalizeGitHubRepositoryReference(remoteOriginUrl)
+    : null;
+  const normalizedRequestedRepository = normalizeGitHubRepositoryReference(
+    normalizedRepositoryUrl,
+  );
+
+  if (
+    !normalizedRemoteOriginUrl ||
+    !normalizedRequestedRepository ||
+    normalizedRemoteOriginUrl !== normalizedRequestedRepository
+  ) {
+    return createJsonResponse(
+      {
+        status: "blocked",
+        message:
+          "Remote origin nie pasuje do zapisanego adresu GitHub. Rewalidacja pozostaje zablokowana.",
+      },
+      409,
+    );
+  }
+
+  const activeBranch = await getActiveBranchName(repoCheckoutPath);
+
+  if (
+    normalizedWorkingBranchName &&
+    activeBranch &&
+    activeBranch !== normalizedWorkingBranchName
+  ) {
+    return createJsonResponse(
+      {
+        status: "blocked",
+        message:
+          "Aktywna gałąź nie zgadza się z zapisaną gałęzią roboczą. Rewalidacja pozostaje zablokowana.",
+      },
+      409,
+    );
+  }
+
+  const workingTreeState = await getWorkingTreeState(repoCheckoutPath);
+
+  return createSourceRevalidationSuccessResponse({
+    status: "success",
+    message:
+      "Checkout status został zrewalidowany. Commit/push/merge/PR pozostają poza zakresem.",
+    workingDirectory: normalizedWorkingDirectory,
+    activeBranch: activeBranch ?? normalizedWorkingBranchName ?? "unknown",
+    repoCheckoutPath,
+    remoteUrl: remoteOriginUrl ?? normalizedRepositoryUrl,
+    workingTreeState,
+    sourceStatus: "git-repo",
+  });
 }
 
 async function runLocalWorkingBranchSetup(
@@ -569,6 +737,39 @@ async function runLocalWorkingBranchSetup(
     },
     200,
   );
+}
+
+export async function GET(
+  request: Request,
+  context: RouteContext<"/api/projects/[id]/working-branch/setup">,
+): Promise<Response> {
+  const { id } = await context.params;
+  const url = new URL(request.url);
+  const projectId = url.searchParams.get("projectId")?.trim();
+  const repositoryUrl = url.searchParams.get("repositoryUrl") ?? "";
+  const workingDirectory = url.searchParams.get("workingDirectory") ?? "";
+  const branchWorkMode =
+    url.searchParams.get("branchWorkMode") === "working-branch"
+      ? "working-branch"
+      : "main";
+  const workingBranchName = url.searchParams.get("workingBranchName") ?? "";
+
+  if (projectId && projectId !== id) {
+    return createJsonResponse(
+      {
+        status: "error",
+        message: "Nieprawidłowy identyfikator projektu.",
+      },
+      400,
+    );
+  }
+
+  return probeLocalWorkingBranchSourceStatus({
+    repositoryUrl,
+    workingDirectory,
+    branchWorkMode,
+    workingBranchName,
+  });
 }
 
 export async function POST(

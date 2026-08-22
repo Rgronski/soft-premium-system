@@ -42,19 +42,19 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-028.20 - GitHub Checkout Status Revalidation Foundation
+NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation
+MS-028.20 - GitHub Checkout Status Revalidation Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-028.20 is the current docs-first contract milestone for checkout status revalidation. The repository should re-check the filesystem-backed repo checkout instead of trusting stale browser-state or localStorage data, so a saved manifest-only workspace path does not hide a valid repo checkout at the derived folder. The milestone keeps the manifest-only workspace folder, the repo checkout folder, the local git repo presence, the GitHub remote URL, the active working branch, and the working tree state distinct when available, and it treats missing checkout folders, missing `.git`, remote mismatches, branch mismatches, and stale workspace-state mismatches as blockers or unknowns.
+MS-028.20 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Checkout Status Revalidation Foundation. The repository now re-checks the filesystem-backed repo checkout instead of trusting stale browser-state or localStorage data alone, so a saved manifest-only workspace path does not hide a valid repo checkout at the derived folder. The milestone keeps the manifest-only workspace folder, the repo checkout folder, the local git repo presence, the GitHub remote URL, the active working branch, and the working tree state distinct when available, and it treats missing checkout folders, missing `.git`, remote mismatches, branch mismatches, and stale workspace-state mismatches as blockers or unknowns. Overview and settings use the shared source-status helper/model, valid checkout at the repo checkout folder reconciles the UI to `git-repo`, and commit/push/merge/PR remain out of scope.
 
 MS-028.19 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Post-Clone Source Status Reconciliation Foundation. The repository now distinguishes the manifest-only project workspace folder from the repo checkout folder and records the local git repo presence, GitHub remote URL, active working branch, and clean/dirty workspace state when available. This correction makes the project stop looking manifest-only once the valid repo checkout exists after a successful clone/setup flow. The milestone does not implement UI/API behavior and does not perform clone, checkout, branch, commit, push, merge, or PR actions.
 
-Session 087 started the `MS-028.20 - GitHub Checkout Status Revalidation Foundation` contract work because browser-state source reconciliation can become stale if the checkout changes outside SPS OS.
+Session 087 synchronized the `MS-028.20 - GitHub Checkout Status Revalidation Foundation` control files after implementation and final state correction because browser-state source reconciliation can become stale if the checkout changes outside SPS OS.
 
 MS-028.18 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Multi-Account Auth Guidance Foundation. The repository now documents how to separate the auth context for the SPS OS repo from the auth context for client/project repos, records the known `Repository not found` and `403 Permission denied` failure modes, and recommends HTTPS + Git Credential Manager + path-based credentials with `git config --global credential.https://github.com.useHttpPath true` as the practical default. GitHub CLI account switching and SSH host aliases remain documented alternatives. The milestone does not add OAuth/token storage, does not install `gh`, does not create SSH keys, and does not change Git logic.
 

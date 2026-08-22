@@ -17,6 +17,15 @@ import {
   getProjectById,
   getProjectBindingDecisionSummary,
 } from "@/lib/project/project";
+import {
+  buildRepoCheckoutDirectoryHint,
+  clearProjectSourceStatus,
+  readProjectBranchWorkMode,
+  readProjectWorkingBranchName,
+  saveProjectSourceStatus,
+  type ProjectSourceReconciliationStatus,
+  type ProjectSourceWorkingTreeState,
+} from "@/lib/project/source-status";
 import { getTasks } from "@/lib/task/task";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -55,6 +64,50 @@ type DashboardSnapshot = {
   isLoaded: boolean;
   errorCode: string | null;
 };
+
+type ProjectSourceRevalidationSuccessResponse = {
+  status: "success";
+  message: string;
+  workingDirectory: string;
+  activeBranch: string;
+  repoCheckoutPath: string;
+  remoteUrl: string;
+  workingTreeState: ProjectSourceWorkingTreeState;
+  sourceStatus: "git-repo";
+};
+
+type ProjectSourceRevalidationBlockedResponse = {
+  status: "blocked";
+  message: string;
+};
+
+type ProjectSourceRevalidationErrorResponse = {
+  status: "error";
+  message: string;
+};
+
+type ProjectSourceRevalidationResponse =
+  | ProjectSourceRevalidationSuccessResponse
+  | ProjectSourceRevalidationBlockedResponse
+  | ProjectSourceRevalidationErrorResponse;
+
+function buildProjectSourceRevalidationRequestUrl(
+  projectId: string,
+  repositoryUrl: string,
+  workingDirectory: string,
+  branchWorkMode: "main" | "working-branch" | null,
+  workingBranchName: string,
+): string {
+  const searchParams = new URLSearchParams({
+    projectId,
+    repositoryUrl,
+    workingDirectory,
+    branchWorkMode: branchWorkMode ?? "main",
+    workingBranchName,
+  });
+
+  return `/api/projects/${projectId}/working-branch/setup?${searchParams.toString()}`;
+}
 
 function createLocalRecoveryWorkspaceEntry(
   projectId: string,
@@ -130,11 +183,19 @@ export default function ProjectWorkspacePage() {
   const [canonicalTasks, setCanonicalTasks] = useState<
     ProjectWorkspaceEntry["workspace"]["tasks"] | null
   >(null);
+  const [revalidatedSourceStatus, setRevalidatedSourceStatus] =
+    useState<ProjectSourceReconciliationStatus | null>(null);
   const localProject = getProjectById(params.id);
-  const sourceBindingSummary = getProjectBindingDecisionSummary(localProject);
+  const sourceBindingSummary = getProjectBindingDecisionSummary(
+    localProject,
+    revalidatedSourceStatus,
+  );
   const projectBrainStatus = localProject?.projectBrainStatus ?? "pending";
   const projectFilesystemStatus =
     localProject?.projectFilesystemStatus ?? "unknown";
+  const repoCheckoutDirectoryHint = localProject
+    ? buildRepoCheckoutDirectoryHint(localProject)
+    : null;
   const dashboard = useMemo<DashboardSnapshot>(() => {
     if (typeof window === "undefined") {
       return {
@@ -225,6 +286,74 @@ export default function ProjectWorkspacePage() {
     };
   }, [params.id]);
 
+  useEffect(() => {
+    let ignore = false;
+    const repositoryUrl = localProject?.repositoryUrl?.trim() ?? "";
+    const workingDirectory = localProject?.workingDirectory?.trim() ?? "";
+    const branchWorkMode = readProjectBranchWorkMode(params.id);
+    const workingBranchName = readProjectWorkingBranchName(params.id) ?? "";
+
+    async function loadRevalidatedSourceStatus() {
+      if (!repositoryUrl || !workingDirectory) {
+        clearProjectSourceStatus(params.id);
+        if (!ignore) {
+          setRevalidatedSourceStatus(null);
+        }
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          buildProjectSourceRevalidationRequestUrl(
+            params.id,
+            repositoryUrl,
+            workingDirectory,
+            branchWorkMode,
+            workingBranchName,
+          ),
+        );
+        const payload =
+          (await response.json()) as ProjectSourceRevalidationResponse;
+
+        if (ignore) {
+          return;
+        }
+
+        if (response.ok && payload.status === "success") {
+          const nextSourceStatus: ProjectSourceReconciliationStatus = {
+            sourceStatus: "git-repo",
+            repoCheckoutPath: payload.repoCheckoutPath,
+            remoteUrl: payload.remoteUrl,
+            activeBranch: payload.activeBranch,
+            workingTreeState: payload.workingTreeState,
+          };
+
+          saveProjectSourceStatus(params.id, nextSourceStatus);
+          setRevalidatedSourceStatus(nextSourceStatus);
+          return;
+        }
+
+        clearProjectSourceStatus(params.id);
+        setRevalidatedSourceStatus(null);
+      } catch {
+        if (!ignore) {
+          clearProjectSourceStatus(params.id);
+          setRevalidatedSourceStatus(null);
+        }
+      }
+    }
+
+    void loadRevalidatedSourceStatus();
+
+    return () => {
+      ignore = true;
+    };
+  }, [
+    localProject?.repositoryUrl,
+    localProject?.workingDirectory,
+    params.id,
+  ]);
+
   const localWorkspaceTasks = dashboard.workspaceEntry?.workspace.tasks ?? [];
   const workspaceTasks =
     canonicalTasks && canonicalTasks.length > 0
@@ -308,6 +437,52 @@ export default function ProjectWorkspacePage() {
             <p className="mt-2 text-sm text-zinc-300">
               {sourceBindingSummary.repositoryContextMessage}
             </p>
+          </div>
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              Post-clone source status
+            </p>
+            {revalidatedSourceStatus ? (
+              <div className="mt-2 space-y-2">
+                <p className="text-sm text-emerald-200">
+                  Local git repo present
+                </p>
+                <p className="text-sm text-zinc-300">
+                  Project workspace folder: {localProject?.workingDirectory ?? "brak"}
+                </p>
+                <p className="text-sm text-zinc-300">
+                  Repo checkout folder: {revalidatedSourceStatus.repoCheckoutPath}
+                </p>
+                <p className="text-sm text-zinc-300">
+                  GitHub remote URL: {revalidatedSourceStatus.remoteUrl}
+                </p>
+                <p className="text-sm text-zinc-300">
+                  Active working branch: {revalidatedSourceStatus.activeBranch}
+                </p>
+                <p className="text-sm text-zinc-300">
+                  Working tree state: {revalidatedSourceStatus.workingTreeState}
+                </p>
+                <p className="text-sm text-zinc-400">
+                  Manifest-only workspace folder remains a separate project folder.
+                </p>
+              </div>
+            ) : (
+              <div className="mt-2 space-y-2">
+                <p className="text-sm text-zinc-300">manifest obecny</p>
+                <p className="text-sm text-zinc-300">
+                  Lokalne repo Git: nadal niedostępne
+                </p>
+                <p className="text-sm text-zinc-300">
+                  Project workspace folder: {localProject?.workingDirectory ?? "brak"}
+                </p>
+                <p className="text-sm text-zinc-400">
+                  Repo checkout folder: {repoCheckoutDirectoryHint ?? "brak"}
+                </p>
+                <p className="text-sm text-zinc-400">
+                  Manifest-only workspace folder remains a separate project folder.
+                </p>
+              </div>
+            )}
           </div>
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
