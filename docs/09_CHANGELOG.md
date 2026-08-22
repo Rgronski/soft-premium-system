@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 087 - Session close protocol and Session 088 handoff preparation
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized `docs/08_CURRENT_STATE.md` and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` as `NONE / Product Owner decision required` and `Latest Completed Product Milestone` as `MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation`.
+* Recorded the required follow-up `MS-028.20 - GitHub Checkout Status Revalidation Foundation` for post-clone source-status revalidation after browser-state reconciliation.
+* Prepared the Session 087 handoff for Session 088 with the finalized milestone continuity, next-session identity, and next-safe-step guidance.
+* Kept `MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation` as the latest completed milestone and preserved the post-clone source-status boundary.
+
+### Notes
+
+* No new implementation work was introduced in this close step.
+
 ## Session 087 - MS-028.17 control files sync publication
 
 ### Date
