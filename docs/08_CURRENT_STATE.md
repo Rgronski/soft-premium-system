@@ -42,13 +42,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE / Product Owner decision required
+MS-028.13 - GitHub First Authorized Operation Preflight Foundation
 
 **Latest Completed Milestone**
 MS-028.12 - GitHub First Operation Authorization Boundary Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-028.13 is PUBLISHED / CLOSED in the current local workspace as the GitHub First Authorized Operation Preflight Foundation. The repository now defines the local preflight for the first authorized GitHub operation after MS-028.12, shows what is ready and what still blocks real execution, uses only known local UI/browser state, and keeps real Git/GitHub execution blocked. The milestone does not create OAuth, tokens, clone, fetch, checkout, branch, commit, push, or PR artifacts.
 
 MS-028.12 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub First Operation Authorization Boundary Foundation. The repository now defines the separate local authorization boundary for the first selected GitHub operation candidate after MS-028.11, distinguishes the selected candidate from the state approved for further preparation, from the state requiring authorization, and from the state authorized to execute, keeps real Git/GitHub execution blocked, and was verified by the targeted settings page test file with 13 tests passing. The milestone does not create OAuth, tokens, clone, fetch, checkout, branch, commit, push, or PR artifacts.
 

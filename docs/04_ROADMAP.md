@@ -135,11 +135,80 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE / Product Owner decision required
+MS-028.13 - GitHub First Authorized Operation Preflight Foundation
 
 ## Latest Completed Product Milestone
 
 MS-028.12 - GitHub First Operation Authorization Boundary Foundation
+
+## MS-028.13 - GitHub First Authorized Operation Preflight Foundation
+
+**Milestone**
+MS-028.13 - GitHub First Authorized Operation Preflight Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+PUBLISHED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the local preflight for the first authorized GitHub operation after MS-028.12 without enabling real execution.
+
+**Product Outcome**
+After MS-028.12 marks the first operation as authorized to execute in local UI/browser state, this milestone defines a local preflight that shows what is ready and what still blocks real execution. The preflight uses only known local SPS OS UI/browser state, keeps real Git/GitHub execution blocked, and does not create OAuth, tokens, clone, fetch, checkout, branch, commit, push, or PR artifacts.
+
+**Dependencies**
+* MS-028.12 - GitHub First Operation Authorization Boundary Foundation
+
+**Implementation Scope**
+Docs-first preflight contract publication for the first authorized GitHub operation.
+
+**Allowed Scope**
+* docs publication
+* preflight wording
+* local readiness/blocker framing for authorized operation
+* future-work guidance for the next real Git/GitHub implementation step
+
+**Forbidden Scope**
+* GitHub OAuth
+* access tokens
+* GitHub API integration
+* real Git operations
+* clone/fetch/checkout
+* branch creation on disk or remote
+* push
+* merge
+* pull request
+* sync-to-main
+* backend persistence
+* unrelated UI or domain changes
+
+**Sequencing**
+1. MS-028.12 defines the local authorization boundary for the first candidate.
+2. MS-028.13 defines the local preflight for the first authorized operation.
+3. Real Git/GitHub execution remains blocked until a later explicit Product Owner-approved implementation milestone.
 
 ## MS-028.12 - GitHub First Operation Authorization Boundary Foundation
 
