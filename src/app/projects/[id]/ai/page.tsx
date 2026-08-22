@@ -357,6 +357,7 @@ export default function ProjectAiWorkspacePage() {
         },
         body: JSON.stringify({
           instruction: generationInstruction,
+          projectContext: context,
         }),
       });
 

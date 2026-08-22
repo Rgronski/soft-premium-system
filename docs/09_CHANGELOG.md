@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.22 control files sync publication
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` and `Next Product Milestone` as `NONE / Product Owner decision required` and `Latest Completed Product Milestone` as `MS-028.22 - AI Workspace Project Lookup Fix Foundation`.
+* Recorded that `MS-028.22 - AI Workspace Project Lookup Fix Foundation` keeps AI Workspace generation bound to the canonical project context already rendered on the page, preventing `Project not found.` during generation for Beauty Client PRO.
+* Appended the Session 088 `MS-028.22` usage record.
+
+### Notes
+
+* No new product code changed in this sync step; the accepted bugfix remains limited to the existing AI Workspace generate path and its focused test.
+
 ## Session 088 - MS-028.21 control files sync publication
 
 ### Date

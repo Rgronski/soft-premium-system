@@ -45,12 +45,14 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.21 - Git Checkout Status Revalidation UX Foundation
+MS-028.22 - AI Workspace Project Lookup Fix Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
 MS-028.21 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Git Checkout Status Revalidation UX Foundation. The settings page now shows a minimal Polish copy cue that the repo status was verified from filesystem-backed revalidation, so the checkout status explanation is explicit without adding a refresh action or changing commit/push/merge/PR boundaries.
+
+MS-028.22 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Workspace Project Lookup Fix Foundation. The AI Workspace generate flow now uses the canonical project context already assembled by the page, so the rendered Beauty Client PRO project no longer fails with `Project not found.` during generation. The prompt remains bound to canonical project data, and provider/model configuration stays unchanged.
 
 MS-028.20 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Checkout Status Revalidation Foundation. The repository now re-checks the filesystem-backed repo checkout instead of trusting stale browser-state or localStorage data alone, so a saved manifest-only workspace path does not hide a valid repo checkout at the derived folder. The milestone keeps the manifest-only workspace folder, the repo checkout folder, the local git repo presence, the GitHub remote URL, the active working branch, and the working tree state distinct when available, and it treats missing checkout folders, missing `.git`, remote mismatches, branch mismatches, and stale workspace-state mismatches as blockers or unknowns. Overview and settings use the shared source-status helper/model, valid checkout at the repo checkout folder reconciles the UI to `git-repo`, and commit/push/merge/PR remain out of scope.
 

@@ -16,6 +16,12 @@ const createKnowledgeEntryMock = vi.fn();
 const createTaskOnServerMock = vi.fn();
 const fetchMock = vi.fn<typeof fetch>();
 const clipboardWriteTextMock = vi.fn<(text: string) => Promise<void>>();
+const canonicalProjectContext = {
+  projectId: "project-1",
+  projectName: "Alpha",
+  tasks: [],
+  knowledgeEntries: [],
+} as const;
 
 vi.mock("next/navigation", () => ({
   useParams: () => useParamsMock(),
@@ -470,6 +476,7 @@ describe("ProjectAiWorkspacePage", () => {
       },
       body: JSON.stringify({
         instruction: "Summarize project",
+        projectContext: canonicalProjectContext,
       }),
     });
   });
@@ -631,12 +638,13 @@ describe("ProjectAiWorkspacePage", () => {
       },
       body: JSON.stringify({
         instruction: "First instruction",
+        projectContext: canonicalProjectContext,
       }),
     });
     const secondGenerateRequest = fetchMock.mock.calls[2 - 1];
     const secondGenerateBody = JSON.parse(
       String(secondGenerateRequest?.[1]?.body),
-    ) as Record<string, string>;
+    ) as Record<string, unknown>;
 
     expect(secondGenerateRequest?.[0]).toBe("/api/projects/project-1/ai/generate");
     expect(secondGenerateRequest?.[1]).toMatchObject({
@@ -647,6 +655,7 @@ describe("ProjectAiWorkspacePage", () => {
     });
     expect(secondGenerateBody).not.toHaveProperty("history");
     expect(secondGenerateBody).not.toHaveProperty("conversation");
+    expect(secondGenerateBody.projectContext).toEqual(canonicalProjectContext);
     expect(secondGenerateBody.instruction).toContain("First instruction");
     expect(secondGenerateBody.instruction).toContain("First response");
     expect(secondGenerateBody.instruction).toContain("Second instruction");
@@ -696,10 +705,11 @@ describe("ProjectAiWorkspacePage", () => {
 
     const firstGenerateBody = JSON.parse(
       String(fetchMock.mock.calls[0]?.[1]?.body),
-    ) as Record<string, string>;
+    ) as Record<string, unknown>;
 
     expect(firstGenerateBody).toEqual({
       instruction: "Summarize project",
+      projectContext: canonicalProjectContext,
     });
   });
 
@@ -804,10 +814,11 @@ describe("ProjectAiWorkspacePage", () => {
 
     const thirdGenerateBody = JSON.parse(
       String(fetchMock.mock.calls[2]?.[1]?.body),
-    ) as Record<string, string>;
+    ) as Record<string, unknown>;
 
     expect(thirdGenerateBody).toEqual({
       instruction: "Third instruction",
+      projectContext: canonicalProjectContext,
     });
   });
 

@@ -139,6 +139,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.19` - GitHub Post-Clone Source Status Reconciliation Foundation
 * `MS-028.20` - GitHub Checkout Status Revalidation Foundation
 * `MS-028.21` - Git Checkout Status Revalidation UX Foundation
+* `MS-028.22` - AI Workspace Project Lookup Fix Foundation
 
 ## Current
 
@@ -146,7 +147,76 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.22 - AI Workspace Project Lookup Fix Foundation
+
+## MS-028.22 - AI Workspace Project Lookup Fix Foundation
+
+**Milestone**
+MS-028.22 - AI Workspace Project Lookup Fix Foundation
+
+**Type**
+Product Milestone
+
+This milestone fixes the AI Workspace generate flow so the route prefers the canonical project context already assembled by the page and only falls back to server lookup when needed, preventing a rendered Beauty Client PRO workspace from failing with `Project not found.` during generation.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Keep AI Workspace generation bound to the same canonical project context that renders the page so project lookup errors do not break prompt generation for an already visible project.
+
+**Product Outcome**
+The AI Workspace page now sends the canonical `AiProjectContext` in the generate request body, and the generate route uses that canonical context before falling back to server lookup. The user-facing prompt generation remains limited to the canonical project context, while model/provider configuration and Project Brain architecture remain unchanged.
+
+**Implementation Note**
+This bugfix removes the `Project not found.` failure for the rendered AI Workspace project without introducing new AI features, persistent memory, or Git/GitHub flow changes.
+
+**Dependencies**
 MS-028.21 - Git Checkout Status Revalidation UX Foundation
+
+**Implementation Scope**
+AI Workspace project lookup fix publication.
+
+**Allowed Scope**
+* canonical AI Workspace project lookup
+* request-body project context reuse
+* focused test coverage for existing project generation
+* existing AI Workspace prompt generation contract
+
+**Forbidden Scope**
+* model provider changes
+* OpenAI configuration changes
+* persistent conversation memory
+* Project Brain redesign
+* Git/GitHub flow changes
+* New Project Git intake flow
+* unrelated UI or domain changes
+
+**Sequencing**
+1. MS-028.21 publishes the checkout revalidation UX confirmation.
+2. MS-028.22 fixes AI Workspace generation lookup so the rendered project and generation path share the same canonical context.
+3. Real AI feature expansion remains outside the milestone.
 
 ## MS-028.21 - Git Checkout Status Revalidation UX Foundation
 
