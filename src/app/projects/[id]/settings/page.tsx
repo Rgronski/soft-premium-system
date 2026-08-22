@@ -110,6 +110,37 @@ function buildGitHubConnectionReadinessSummary(
   ];
 }
 
+type GitHubMultiAccountAuthGuidanceSummary = {
+  title: string;
+  intro: string;
+  bullets: string[];
+  disclosure: string;
+};
+
+function buildGitHubMultiAccountAuthGuidanceSummary(
+  hasRepositoryUrl: boolean,
+): GitHubMultiAccountAuthGuidanceSummary | null {
+  if (!hasRepositoryUrl) {
+    return null;
+  }
+
+  return {
+    title: "GitHub multi-account auth guidance",
+    intro:
+      "Przy wielu kontach GitHub przeglądarka może mieć poprawny dostęp, ale Git może używać złego credential.",
+    bullets: [
+      "SPS OS repo auth context i client/project repo auth context to dwa osobne konteksty.",
+      "`Repository not found` dla prywatnego repo może oznaczać brak właściwego konta w Git, nie brak repo.",
+      "`403 Permission denied` przy push może oznaczać zły account context albo brak uprawnień do zapisu.",
+      "Praktyczny default dla Windows i Git Credential Manager to path-based credentials.",
+      "`git config --global credential.https://github.com.useHttpPath true`",
+      "Alternatywy: GitHub CLI account switching, jeśli gh jest zainstalowane, albo SSH host aliases z osobnymi keys.",
+    ],
+    disclosure:
+      "To jest tylko guidance w UI. SPS OS nie przełącza credentiali automatycznie.",
+  };
+}
+
 function buildLocalCloneReadinessSummary(
   hasRepositoryUrl: boolean,
   branchWorkMode: ProjectBranchWorkMode | null,
@@ -753,6 +784,10 @@ export default function ProjectSettingsPage() {
   );
   const githubConnectionReadinessSummary =
     buildGitHubConnectionReadinessSummary(Boolean(project.repositoryUrl?.trim()));
+  const githubMultiAccountAuthGuidanceSummary =
+    buildGitHubMultiAccountAuthGuidanceSummary(
+      Boolean(project.repositoryUrl?.trim()),
+    );
   const localCloneReadinessSummary = buildLocalCloneReadinessSummary(
     Boolean(project.repositoryUrl?.trim()),
     branchWorkMode,
@@ -1232,6 +1267,27 @@ export default function ProjectSettingsPage() {
                 </p>
               ))}
             </div>
+          </div>
+        ) : null}
+
+        {githubMultiAccountAuthGuidanceSummary ? (
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              GitHub multi-account auth guidance
+            </p>
+            <p className="mt-2 text-sm text-zinc-300">
+              {githubMultiAccountAuthGuidanceSummary.intro}
+            </p>
+            <ul className="mt-3 space-y-2">
+              {githubMultiAccountAuthGuidanceSummary.bullets.map((line) => (
+                <li key={line} className="text-sm text-zinc-400">
+                  {line}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 text-sm text-zinc-400">
+              {githubMultiAccountAuthGuidanceSummary.disclosure}
+            </p>
           </div>
         ) : null}
 

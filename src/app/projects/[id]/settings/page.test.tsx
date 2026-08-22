@@ -547,7 +547,7 @@ describe("ProjectSettingsPage", () => {
     );
   });
 
-  test("shows a GitHub connection readiness block after the repository URL is saved", async () => {
+  test("shows GitHub connection readiness and multi-account auth guidance after the repository URL is saved", async () => {
     render(<ProjectSettingsPage />);
 
     fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
@@ -581,6 +581,34 @@ describe("ProjectSettingsPage", () => {
         /Przygotowanie gałęzi roboczej już istnieje, ale prawdziwe wykonanie Git jeszcze nie startuje\./,
       ),
     ).toBeTruthy();
+    expect(
+      screen.getByText(/GitHub multi-account auth guidance/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        /Przy wielu kontach GitHub przeglądarka może mieć poprawny dostęp, ale Git może używać złego credential\./,
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        /SPS OS repo auth context i client\/project repo auth context to dwa osobne konteksty\./,
+      ),
+    ).toBeTruthy();
+    expect(screen.getByText(/Repository not found/)).toBeTruthy();
+    expect(screen.getByText(/403 Permission denied/)).toBeTruthy();
+    expect(screen.getByText(/Git Credential Manager/)).toBeTruthy();
+    expect(
+      screen.getByText(/credential\.https:\/\/github\.com\.useHttpPath true/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/GitHub CLI account switching, jeśli gh jest zainstalowane/),
+    ).toBeTruthy();
+    expect(screen.getByText(/SSH host aliases z osobnymi keys/)).toBeTruthy();
+    expect(
+      screen.getByText(/SPS OS nie przełącza credentiali automatycznie\./),
+    ).toBeTruthy();
+    expect(screen.queryByText(/OAuth/i)).toBeNull();
+    expect(screen.queryByText(/token storage/i)).toBeNull();
   });
 
   test("shows a local clone readiness block with branch metadata after branch preparation is selected", async () => {

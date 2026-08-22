@@ -42,10 +42,10 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-028.18 - GitHub Multi-Account Auth Guidance Foundation
+NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.17 - GitHub Local Setup Success Copy Correction
+MS-028.18 - GitHub Multi-Account Auth Guidance Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
@@ -392,10 +392,10 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: MS-028.11 - GitHub First Operation Candidate Decision Foundation
-Latest Completed Product Milestone: MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
+Current Product Milestone: NONE / Product Owner decision required
+Latest Completed Product Milestone: MS-028.18 - GitHub Multi-Account Auth Guidance Foundation
 Next Product Milestone: NONE / Product Owner decision required
-Session 087 synchronized the accepted `MS-028.11` control files in the current local workspace. The repository now records the Product Owner decision for the locally selected first operation candidate after MS-028.9 and MS-028.10, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked. The milestone does not create OAuth, tokens, clone, checkout, branch, commit, push, or PR artifacts.
+Session 087 synchronized the accepted `MS-028.18` control files in the current local workspace. The repository now records GitHub multi-account auth guidance for SPS OS and client/project repos, keeps the guidance informational only, and keeps OAuth/token storage and Git execution logic changes out of scope.
 
 MS-021.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Reset Foundation; the repository now exposes a local `Cofnij decyzjÄ™` action for resolved source-conflict decisions so the browser-state resolved flag can be cleared for that `project.id`. Reset does not mutate the local project, and if the discovered project still differs after reset, the conflict can appear again as unresolved. The MS-021.16 persistence behavior and MS-021.15 feedback remain preserved, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
