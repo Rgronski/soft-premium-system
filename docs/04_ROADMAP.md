@@ -136,11 +136,84 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE / Product Owner decision required
+MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
 
 ## Latest Completed Product Milestone
 
 MS-028.14 - GitHub Local Working Branch Creation Action Foundation
+
+## MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
+
+**Milestone**
+MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
+
+**Type**
+Product Milestone
+
+This is an SPS OS-controlled execution foundation only. Real clone/checkout/working-branch execution was not added in this milestone.
+
+**Contract Status**
+PUBLISHED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+PUBLISHED
+
+**Active**
+YES
+
+**Runtime Status**
+OPEN
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the docs-first contract for the first SPS OS-controlled local clone and working branch execution step after the local working branch action foundation.
+
+**Product Outcome**
+After the project settings store the GitHub URL, local workspace path, branch work mode, and working branch name, this milestone defines the controlled local execution step that SPS OS will eventually run. The contract requires validation of the GitHub URL, the workspace path, and the working branch name; keeps the workspace outside the SPS OS repo root; prefers `C:\SPS_OS_WORK`; and stops on blockers if the destination already exists as a conflicting git repository or remote. The contract keeps the action inside SPS OS settings and action flow rather than a manual Codex bypass. The milestone does not create commit, push, merge, or PR artifacts and does not perform sync-to-main.
+
+**Dependencies**
+* MS-028.14 - GitHub Local Working Branch Creation Action Foundation
+
+**Implementation Scope**
+Docs-first contract publication for the local clone and working branch execution foundation.
+
+**Allowed Scope**
+* docs publication
+* GitHub URL validation wording
+* local workspace path validation wording
+* working branch name validation wording
+* clone and checkout safety rules
+* existing-repository and remote-conflict blocker guidance
+* future-work guidance for the next real Git/GitHub implementation step
+
+**Forbidden Scope**
+* GitHub OAuth
+* access tokens
+* GitHub API integration
+* secret storage
+* real clone/checkout/working-branch execution
+* commit
+* push
+* merge
+* pull request
+* sync-to-main
+* unrelated UI or domain changes
+
+**Sequencing**
+1. MS-028.14 defines the SPS OS-controlled local working branch creation action foundation.
+2. MS-028.15 defines the SPS OS-controlled local clone and working branch execution foundation after the saved settings and action foundation are ready.
+3. Real commit/push/merge/PR and sync-to-main remain blocked until later explicit Product Owner-approved milestones.
 
 ## MS-028.14 - GitHub Local Working Branch Creation Action Foundation
 

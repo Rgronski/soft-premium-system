@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 087 - MS-028.15 contract publication
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Defined the docs-first contract for `MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation` in `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Clarified the first SPS OS-controlled local clone and working branch execution step, including the `C:\SPS_OS_WORK` preference, GitHub URL validation, local workspace path validation, working branch validation, and blocker behavior for conflicting existing repositories or remotes.
+* Preserved `MS-028.14 - GitHub Local Working Branch Creation Action Foundation` as the latest completed milestone.
+* Recorded the Session 087 MS-028.15 contract publication.
+
+### Notes
+
+* No real clone/checkout/branch execution or unrelated UI/domain changes were introduced.
+
 ## Session 087 - MS-028.14 UI and test implementation
 
 ### Date
