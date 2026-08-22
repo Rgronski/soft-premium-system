@@ -236,5 +236,5 @@ Latest Verified Commit: 9294069
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Product Owner starts Session 088 from the fresh `sps-session.zip` package and selects the next milestone.
-Next Session Plan: Product Owner starts Session 088 from the fresh `sps-session.zip` package and selects the next milestone.
+Next Safe Step: Product Owner starts Session 088 from the fresh `sps-session.zip` and selects the next milestone.
+Next Session Plan: Product Owner starts Session 088 from the fresh `sps-session.zip` and selects the next milestone.
