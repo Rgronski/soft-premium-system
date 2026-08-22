@@ -134,11 +134,82 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE / Product Owner decision required
+MS-028.11 - GitHub First Operation Candidate Decision Foundation
 
 ## Latest Completed Product Milestone
 
 MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
+
+## MS-028.11 - GitHub First Operation Candidate Decision Foundation
+
+**Milestone**
+MS-028.11 - GitHub First Operation Candidate Decision Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+PUBLISHED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Record the Product Owner decision for the first locally selected GitHub operation candidate after MS-028.9 and MS-028.10 without authorizing real execution.
+
+**Product Outcome**
+After MS-028.9 selects the first real operation candidate and MS-028.10 records the readiness detail for that candidate, this milestone records the Product Owner decision for that already selected local candidate only. The decision distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked. The milestone does not create OAuth, tokens, clone, checkout, branch, commit, push, or PR artifacts.
+
+**Dependencies**
+* MS-028.9 - GitHub First Real Operation Selection Foundation
+* MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
+
+**Implementation Scope**
+Docs-first candidate-decision contract publication for the GitHub real-execution boundary.
+
+**Allowed Scope**
+* docs publication
+* local candidate-decision wording
+* bounded decision-state terminology for selected candidate, approved for further preparation, and real execution blocked
+* future-work guidance for the next real Git/GitHub implementation step
+
+**Forbidden Scope**
+* GitHub OAuth
+* access tokens
+* GitHub API integration
+* real Git operations
+* clone/fetch/checkout
+* branch creation on disk or remote
+* push
+* merge
+* pull request
+* sync-to-main
+* backend persistence
+* unrelated UI or domain changes
+
+**Sequencing**
+1. MS-028.9 selects the first real operation candidate.
+2. MS-028.10 records readiness detail for the selected candidate.
+3. MS-028.11 records the Product Owner decision for that already selected candidate only.
+4. Real Git/GitHub execution remains blocked until a later explicit Product Owner-approved implementation milestone.
 
 ## MS-028.6 - GitHub Real Connection Readiness Check Foundation
 

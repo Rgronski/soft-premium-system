@@ -42,7 +42,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE / Product Owner decision required
+MS-028.11 - GitHub First Operation Candidate Decision Foundation
 
 **Latest Completed Milestone**
 MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
@@ -51,6 +51,8 @@ MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
 NONE / Product Owner decision required
 
 MS-028.10 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation. The repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked. The milestone was verified by the targeted settings page test file with 12 tests passing.
+
+MS-028.11 is PUBLISHED / CLOSED in the current local workspace as the GitHub First Operation Candidate Decision Foundation. The repository now records the Product Owner decision for the locally selected first operation candidate after MS-028.9 and MS-028.10, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked. The milestone does not create OAuth, tokens, clone, checkout, branch, commit, push, or PR artifacts.
 
 MS-028.9 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub First Real Operation Selection Foundation. The repository records the completed first real operation selection boundary after the confirmation gate, with the local operation-selection block shown only for `requires confirmation` and `ready`, hidden for `blocked`, selection kept local `useState` only with no persistence, candidate labels limited to `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and real Git/GitHub execution blocked. The flow preserves the distinction between selected as candidate and authorized to execute and was verified by the targeted settings page test file with 12 tests passing.
 
@@ -374,10 +376,10 @@ MS-001.6 Final Release Acceptance Review is completed.
 Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
-Current Product Milestone: NONE / Product Owner decision required
+Current Product Milestone: MS-028.11 - GitHub First Operation Candidate Decision Foundation
 Latest Completed Product Milestone: MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
 Next Product Milestone: NONE / Product Owner decision required
-Session 086 synchronized the accepted `MS-028.10` control files in the current local workspace. The repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked. The milestone was verified by the targeted settings page test file with 12 tests passing.
+Session 087 synchronized the accepted `MS-028.11` control files in the current local workspace. The repository now records the Product Owner decision for the locally selected first operation candidate after MS-028.9 and MS-028.10, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked. The milestone does not create OAuth, tokens, clone, checkout, branch, commit, push, or PR artifacts.
 
 MS-021.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Reset Foundation; the repository now exposes a local `Cofnij decyzjÄ™` action for resolved source-conflict decisions so the browser-state resolved flag can be cleared for that `project.id`. Reset does not mutate the local project, and if the discovered project still differs after reset, the conflict can appear again as unresolved. The MS-021.16 persistence behavior and MS-021.15 feedback remain preserved, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
@@ -1542,10 +1544,11 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `NONE / Product Owner decision required`
+* `Current Product Milestone` is `MS-028.11 - GitHub First Operation Candidate Decision Foundation`
 * `Latest Completed Product Milestone` is `MS-028.10 - GitHub Selected Operation Readiness Detail Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `MS-028.10` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation; the repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
+* `MS-028.11` is `PUBLISHED / CLOSED` in the current local workspace as the GitHub First Operation Candidate Decision Foundation; the repository now records the Product Owner decision for the locally selected first operation candidate after `MS-028.9` and `MS-028.10`, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.8` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Functional Handoff Foundation; the repository now records the visible handoff boundary across the existing project, task list, task detail, and task workspace surfaces while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
 * `MS-012.7` close decision: the next milestone now requires Product Owner direction while future SPS-owned working copies still live under `C:\SPS_OS_WORK\<project-slug>` and existing project metadata may still point to the source or `repositoryUrl`.

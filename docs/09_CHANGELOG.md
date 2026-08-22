@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 087 - MS-028.11 control files sync publication
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.11 - GitHub First Operation Candidate Decision Foundation` as the current product milestone while keeping `MS-028.10 - GitHub Selected Operation Readiness Detail Foundation` as the latest completed product milestone.
+* Recorded that the repository now captures the Product Owner decision for the locally selected first operation candidate after `MS-028.9` and `MS-028.10`, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked.
+* Recorded that the milestone does not create OAuth, tokens, clone, checkout, branch, commit, push, or PR artifacts.
+* Recorded the Session 087 SSOT control files sync publication.
+
+### Notes
+
+* No GitHub OAuth, tokens, GitHub API integration, real Git operations, filesystem writes, remote synchronization, automatic work on main, real execution behavior, UI redesign, refactor, or unrelated source code change was introduced.
+
 ## Session 086 - Session Close Protocol
 
 ### Date
