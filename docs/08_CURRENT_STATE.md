@@ -42,17 +42,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-028.11 - GitHub First Operation Candidate Decision Foundation
+NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
+MS-028.11 - GitHub First Operation Candidate Decision Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
 MS-028.10 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation. The repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked. The milestone was verified by the targeted settings page test file with 12 tests passing.
 
-MS-028.11 is PUBLISHED / CLOSED in the current local workspace as the GitHub First Operation Candidate Decision Foundation. The repository now records the Product Owner decision for the locally selected first operation candidate after MS-028.9 and MS-028.10, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked. The milestone does not create OAuth, tokens, clone, checkout, branch, commit, push, or PR artifacts.
+MS-028.11 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub First Operation Candidate Decision Foundation. The repository now records the Product Owner decision for the locally selected first operation candidate after MS-028.9 and MS-028.10, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, keeps real Git/GitHub execution blocked, and was verified by the targeted settings page test file with 13 tests passing. The milestone does not create OAuth, tokens, clone, checkout, branch, commit, push, or PR artifacts.
 
 MS-028.9 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub First Real Operation Selection Foundation. The repository records the completed first real operation selection boundary after the confirmation gate, with the local operation-selection block shown only for `requires confirmation` and `ready`, hidden for `blocked`, selection kept local `useState` only with no persistence, candidate labels limited to `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and real Git/GitHub execution blocked. The flow preserves the distinction between selected as candidate and authorized to execute and was verified by the targeted settings page test file with 12 tests passing.
 

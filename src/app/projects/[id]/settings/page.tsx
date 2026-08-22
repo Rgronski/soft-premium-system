@@ -208,6 +208,17 @@ type GitHubRealOperationSelectionSummary = {
   copy: string;
 };
 
+type GitHubRealOperationCandidateDecision =
+  | "pending"
+  | "approved for further preparation";
+
+type GitHubRealOperationCandidateDecisionSummary = {
+  status: GitHubRealOperationCandidateDecision;
+  copy: string;
+  disclosure: string;
+  actionLabel: string;
+};
+
 type GitHubRealOperationReadinessDetailSummary = {
   title: string;
   note: string;
@@ -293,6 +304,65 @@ function buildGitHubRealOperationSelectionSummary(
   return {
     label: selection,
     copy: `Wybrano jako kandydat: ${selection}. To nie jest autoryzacja do wykonania. Realne wykonanie Git/GitHub pozostaje zablokowane.`,
+  };
+}
+
+const GITHUB_REAL_OPERATION_CANDIDATE_DECISION_STORAGE_SUFFIX =
+  "github-real-operation-candidate-decision";
+
+function getGitHubRealOperationCandidateDecisionStorageKey(
+  projectId: string,
+  selection: GitHubRealOperationSelection,
+): string {
+  return `soft-premium-system.projects.${projectId}.${GITHUB_REAL_OPERATION_CANDIDATE_DECISION_STORAGE_SUFFIX}.${selection}`;
+}
+
+function readGitHubRealOperationCandidateDecision(
+  projectId: string,
+  selection: GitHubRealOperationSelection | null,
+): GitHubRealOperationCandidateDecision {
+  if (typeof window === "undefined" || !selection) {
+    return "pending";
+  }
+
+  const storedValue = localStorage.getItem(
+    getGitHubRealOperationCandidateDecisionStorageKey(projectId, selection),
+  );
+
+  return storedValue === "approved for further preparation"
+    ? storedValue
+    : "pending";
+}
+
+function saveGitHubRealOperationCandidateDecision(
+  projectId: string,
+  selection: GitHubRealOperationSelection,
+  decision: GitHubRealOperationCandidateDecision,
+): void {
+  localStorage.setItem(
+    getGitHubRealOperationCandidateDecisionStorageKey(projectId, selection),
+    decision,
+  );
+}
+
+function buildGitHubRealOperationCandidateDecisionSummary(
+  selection: GitHubRealOperationSelection | null,
+  decision: GitHubRealOperationCandidateDecision,
+): GitHubRealOperationCandidateDecisionSummary | null {
+  if (!selection) {
+    return null;
+  }
+
+  const isApproved = decision === "approved for further preparation";
+
+  return {
+    status: decision,
+    copy: isApproved
+      ? `Wybrany kandydat jest approved for further preparation. selected candidate: ${selection}. authorized to execute: blocked.`
+      : `Wybrany kandydat czeka na decyzję. selected candidate: ${selection}. authorized to execute: blocked.`,
+    disclosure:
+      "To nie jest autoryzacja do wykonania. Realne wykonanie Git/GitHub pozostaje zablokowane.",
+    actionLabel: "Zatwierdź do dalszego przygotowania",
   };
 }
 
@@ -384,6 +454,8 @@ export default function ProjectSettingsPage() {
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
   const [githubRealOperationSelection, setGithubRealOperationSelection] =
     useState<GitHubRealOperationSelection | null>(null);
+  const [githubRealOperationCandidateDecision, setGithubRealOperationCandidateDecision] =
+    useState<GitHubRealOperationCandidateDecision>("pending");
 
   useEffect(() => {
     const nextProject = getProjectById(params.id);
@@ -401,6 +473,8 @@ export default function ProjectSettingsPage() {
           ? buildWorkingBranchName(nextProject.name)
           : ""),
     );
+    setGithubRealOperationSelection(null);
+    setGithubRealOperationCandidateDecision("pending");
     setFeedbackMessage(null);
   }, [params.id]);
 
@@ -448,6 +522,11 @@ export default function ProjectSettingsPage() {
     );
   const githubRealOperationSelectionSummary =
     buildGitHubRealOperationSelectionSummary(githubRealOperationSelection);
+  const githubRealOperationCandidateDecisionSummary =
+    buildGitHubRealOperationCandidateDecisionSummary(
+      githubRealOperationSelection,
+      githubRealOperationCandidateDecision,
+    );
   const githubRealOperationReadinessDetailSummary =
     buildGitHubRealOperationReadinessDetailSummary(
       githubRealOperationSelection,
@@ -501,6 +580,31 @@ export default function ProjectSettingsPage() {
       nextBranchWorkMode === "main"
         ? "Wybrano pracę bezpośrednio na main jako decyzję Product Ownera."
         : "Wybrano użycie gałęzi roboczej jako decyzję Product Ownera.",
+    );
+  }
+
+  function handleGitHubRealOperationSelectionChange(
+    nextSelection: GitHubRealOperationSelection,
+  ) {
+    setGithubRealOperationSelection(nextSelection);
+    setGithubRealOperationCandidateDecision(
+      readGitHubRealOperationCandidateDecision(params.id, nextSelection),
+    );
+  }
+
+  function handleApproveGitHubRealOperationCandidate() {
+    if (!githubRealOperationSelection) {
+      return;
+    }
+
+    saveGitHubRealOperationCandidateDecision(
+      params.id,
+      githubRealOperationSelection,
+      "approved for further preparation",
+    );
+    setGithubRealOperationCandidateDecision("approved for further preparation");
+    setFeedbackMessage(
+      "Kandydat zatwierdzono do dalszego przygotowania. To nie jest autoryzacja do wykonania.",
     );
   }
 
@@ -795,7 +899,7 @@ export default function ProjectSettingsPage() {
                       name="github-real-operation-selection"
                       checked={githubRealOperationSelection === option.label}
                       onChange={() =>
-                        setGithubRealOperationSelection(option.label)
+                        handleGitHubRealOperationSelectionChange(option.label)
                       }
                       className="mt-1"
                     />
@@ -808,6 +912,33 @@ export default function ProjectSettingsPage() {
                   ? githubRealOperationSelectionSummary.copy
                   : "Jeszcze nie wybrano kandydata. To nie jest autoryzacja do wykonania. Realne wykonanie Git/GitHub pozostaje zablokowane."}
               </p>
+              {githubRealOperationCandidateDecisionSummary ? (
+                <div className="mt-3 rounded-xl border border-zinc-800 bg-zinc-950/80 p-3">
+                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                    Decyzja Product Ownera
+                  </p>
+                  <p className="mt-2 text-sm text-zinc-300">
+                    selected candidate: {githubRealOperationSelection}
+                  </p>
+                  <p className="mt-1 text-sm text-zinc-300">
+                    decision:{" "}
+                    {githubRealOperationCandidateDecisionSummary.status}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleApproveGitHubRealOperationCandidate}
+                    className="mt-3 rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 transition hover:border-zinc-500"
+                  >
+                    {githubRealOperationCandidateDecisionSummary.actionLabel}
+                  </button>
+                  <p className="mt-3 text-sm text-zinc-400">
+                    {githubRealOperationCandidateDecisionSummary.copy}
+                  </p>
+                  <p className="mt-2 text-sm text-zinc-400">
+                    {githubRealOperationCandidateDecisionSummary.disclosure}
+                  </p>
+                </div>
+              ) : null}
               {githubRealOperationReadinessDetailSummary ? (
                 <div className="mt-3 rounded-xl border border-zinc-800 bg-zinc-950/80 p-3">
                   <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">

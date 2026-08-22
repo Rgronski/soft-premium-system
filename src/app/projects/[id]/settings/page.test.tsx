@@ -134,11 +134,27 @@ describe("ProjectSettingsPage", () => {
     expect(
       screen.queryByText("readiness detail", { selector: ".text-xs" }),
     ).toBeNull();
+    expect(
+      screen.queryByRole("button", {
+        name: /Zatwierdź do dalszego przygotowania/,
+      }),
+    ).toBeNull();
 
     fireEvent.click(screen.getByLabelText("connection check"));
 
     expect(
       screen.getByText(/Wybrano jako kandydat: connection check\./),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Decyzja Product Ownera/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/decision: pending/),
+    ).toBeTruthy();
+    expect(
+      screen.getByRole("button", {
+        name: /Zatwierdź do dalszego przygotowania/,
+      }),
     ).toBeTruthy();
     expect(
       screen.getByText("readiness detail", { selector: ".text-xs" }),
@@ -150,10 +166,26 @@ describe("ProjectSettingsPage", () => {
     ).toBeTruthy();
     expect(
       screen.getAllByText(/To nie jest autoryzacja do wykonania\./),
-    ).toHaveLength(3);
+    ).toHaveLength(4);
     expect(
       screen.getAllByText(/Realne wykonanie Git\/GitHub pozostaje zablokowane\./),
-    ).toHaveLength(4);
+    ).toHaveLength(5);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /Zatwierdź do dalszego przygotowania/ }),
+    );
+
+    expect(screen.getByText(/decision: approved for further preparation/)).toBeTruthy();
+    expect(
+      screen.getByText(
+        /Wybrany kandydat jest approved for further preparation\. selected candidate: connection check\. authorized to execute: blocked\./,
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getAllByText(
+        /To nie jest autoryzacja do wykonania\. Realne wykonanie Git\/GitHub pozostaje zablokowane\./,
+      ),
+    ).not.toHaveLength(0);
 
     fireEvent.click(screen.getAllByRole("radio")[1]);
 
@@ -161,6 +193,35 @@ describe("ProjectSettingsPage", () => {
       expect(screen.getByText(/Stan akcji GitHub: ready/)).toBeTruthy();
     });
     expect(screen.getByLabelText("connection check")).toBeTruthy();
+  });
+
+  test("hides the candidate decision block until a real operation candidate is selected", async () => {
+    render(<ProjectSettingsPage />);
+
+    fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
+      target: { value: "https://github.com/example/beauty-client-pro" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /Zapisz adres GitHub/ }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Stan akcji GitHub: blocked/)).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getAllByRole("radio")[0]);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(/Bramka potwierdzenia wykonania GitHub/),
+      ).toBeTruthy();
+    });
+    expect(
+      screen.queryByText(/Decyzja Product Ownera/),
+    ).toBeNull();
+    expect(
+      screen.queryByRole("button", {
+        name: /Zatwierdź do dalszego przygotowania/,
+      }),
+    ).toBeNull();
   });
 
   test("stores a GitHub URL as metadata without creating a duplicate project", async () => {

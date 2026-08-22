@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 087 - MS-028.11 UI and test implementation
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Added a local GitHub candidate decision block to the project settings page so the first selected operation candidate can be marked `approved for further preparation` without authorizing real Git/GitHub execution.
+* Preserved the distinction between the selected candidate, the approved-for-preparation state, and the execute-authorized state while keeping real Git/GitHub execution blocked.
+* Verified the settings page behavior with the targeted test file, which passed with 13 tests.
+
+### Notes
+
+* No GitHub OAuth, tokens, GitHub API integration, real Git operations, clone, checkout, branch, push, pull request, or unrelated UI refactor was introduced.
+
 ## Session 087 - MS-028.11 control files sync publication
 
 ### Date

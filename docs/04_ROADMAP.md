@@ -131,14 +131,15 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.4` - GitHub Repository Local Clone Readiness Foundation
 * `MS-028.5` - GitHub Repository Real Execution Contract Foundation
 * `MS-028.6` - GitHub Real Connection Readiness Check Foundation
+* `MS-028.11` - GitHub First Operation Candidate Decision Foundation
 
 ## Current
 
-MS-028.11 - GitHub First Operation Candidate Decision Foundation
+NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.10 - GitHub Selected Operation Readiness Detail Foundation
+MS-028.11 - GitHub First Operation Candidate Decision Foundation
 
 ## MS-028.11 - GitHub First Operation Candidate Decision Foundation
 
@@ -149,13 +150,13 @@ MS-028.11 - GitHub First Operation Candidate Decision Foundation
 Product Milestone
 
 **Contract Status**
-PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Publication Status**
 PUBLISHED
 
 **Milestone Status**
-PUBLISHED / CLOSED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
 NO
@@ -176,7 +177,7 @@ Codex
 Record the Product Owner decision for the first locally selected GitHub operation candidate after MS-028.9 and MS-028.10 without authorizing real execution.
 
 **Product Outcome**
-After MS-028.9 selects the first real operation candidate and MS-028.10 records the readiness detail for that candidate, this milestone records the Product Owner decision for that already selected local candidate only. The decision distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked. The milestone does not create OAuth, tokens, clone, checkout, branch, commit, push, or PR artifacts.
+After MS-028.9 selects the first real operation candidate and MS-028.10 records the readiness detail for that candidate, this milestone records the Product Owner decision for that already selected local candidate only. The decision distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked. The milestone was verified by the targeted settings page test file with 13 tests passing. The milestone does not create OAuth, tokens, clone, checkout, branch, commit, push, or PR artifacts.
 
 **Dependencies**
 * MS-028.9 - GitHub First Real Operation Selection Foundation
