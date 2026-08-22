@@ -399,7 +399,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation
+Latest Completed Product Milestone: MS-028.20 - GitHub Checkout Status Revalidation Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Session 087 synchronized the accepted `MS-028.19` control files in the current local workspace. The repository now records post-clone source status reconciliation for SPS OS and client/project repos, keeps the reconciliation local/browser-state based in this foundation, and keeps OAuth/token storage and commit/push/merge/PR out of scope.
 
@@ -1567,7 +1567,7 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `MS-028.20 - GitHub Checkout Status Revalidation Foundation`
-* `Latest Completed Product Milestone` is `MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation`
+* `Latest Completed Product Milestone` is `MS-028.20 - GitHub Checkout Status Revalidation Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
 * `Session 087` started the `MS-028.20 - GitHub Checkout Status Revalidation Foundation` contract work because browser-state source reconciliation can become stale if the checkout changes outside SPS OS.
 * `MS-028.10` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation; the repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
