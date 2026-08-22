@@ -215,26 +215,26 @@ SPS OS Session State
 
 Date: 2026-08-22
 Current Session ID: 087
-Current Chat Title: 087 SPS OS - GitHub Checkout Status Revalidation
+Current Chat Title: 087 SPS OS - Session Close Protocol
 Next Session ID: 088
 Suggested Next Chat Title: 088 SPS OS - Product Owner Decision
-Active Capability: NONE
-Active Work Item: NONE / Product Owner decision required
-Current Mode: ACTIVE
-Completed Capability Items: Session 087 prepared the MS-028.11 docs-first operation candidate decision contract patch; Session 087 synchronized the MS-028.11 control files after implementation; Session 087 synchronized the MS-028.11 milestone close state; Session 087 prepared the MS-028.12 docs-first authorization boundary contract patch; Session 087 appended the Session 087 usage record; Session 087 synchronized the MS-028.12 milestone close state; Session 087 prepared the MS-028.13 docs-first preflight contract patch; Session 087 appended the Session 087 MS-028.13 usage record; Session 087 synchronized the MS-028.13 control files after implementation; Session 087 prepared the MS-028.14 docs-first local working branch creation contract patch; Session 087 appended the Session 087 MS-028.14 usage record; Session 087 synchronized the MS-028.14 control files after implementation and final state correction; Session 087 prepared the MS-028.15 docs-first local clone and working branch execution contract patch; Session 087 synchronized the MS-028.15 control files after implementation; Session 087 prepared the MS-028.16 docs-first repo checkout folder derivation contract patch; Session 087 synchronized the MS-028.16 control files after implementation; Session 087 prepared the MS-028.17 docs-first local setup success copy correction contract patch; Session 087 synchronized the MS-028.17 control files after implementation; Session 087 prepared the MS-028.18 docs-first multi-account auth guidance contract patch; Session 087 synchronized the MS-028.18 control files after implementation and final state correction; Session 087 prepared the MS-028.19 docs-first post-clone source status reconciliation contract patch; Session 087 synchronized the MS-028.19 control files after implementation; Session 087 prepared the Session 087 close protocol and Session 088 handoff; Session 087 started the MS-028.20 docs-first checkout status revalidation contract patch; Session 087 synchronized the MS-028.20 control files after implementation and final state correction
+Active Capability: Session Close Protocol
+Active Work Item: Session 087 close
+Current Mode: CLOSED
+Completed Capability Items: Session 087 prepared the MS-028.11 docs-first operation candidate decision contract patch; Session 087 synchronized the MS-028.11 control files after implementation; Session 087 synchronized the MS-028.11 milestone close state; Session 087 prepared the MS-028.12 docs-first authorization boundary contract patch; Session 087 appended the Session 087 usage record; Session 087 synchronized the MS-028.12 milestone close state; Session 087 prepared the MS-028.13 docs-first preflight contract patch; Session 087 appended the Session 087 MS-028.13 usage record; Session 087 synchronized the MS-028.13 control files after implementation; Session 087 prepared the MS-028.14 docs-first local working branch creation contract patch; Session 087 appended the Session 087 MS-028.14 usage record; Session 087 synchronized the MS-028.14 control files after implementation and final state correction; Session 087 prepared the MS-028.15 docs-first local clone and working branch execution contract patch; Session 087 synchronized the MS-028.15 control files after implementation; Session 087 prepared the MS-028.16 docs-first repo checkout folder derivation contract patch; Session 087 synchronized the MS-028.16 control files after implementation; Session 087 prepared the MS-028.17 docs-first local setup success copy correction contract patch; Session 087 synchronized the MS-028.17 control files after implementation; Session 087 prepared the MS-028.18 docs-first multi-account auth guidance contract patch; Session 087 synchronized the MS-028.18 control files after implementation and final state correction; Session 087 prepared the MS-028.19 docs-first post-clone source status reconciliation contract patch; Session 087 synchronized the MS-028.19 control files after implementation; Session 087 prepared the Session 087 close protocol and Session 088 handoff; Session 087 started the MS-028.20 docs-first checkout status revalidation contract patch; Session 087 synchronized the MS-028.20 control files after implementation and final state correction; Session 087 synchronized the Session 087 close protocol handoff; Session 087 appended the Session 087 close usage record; Session 087 completed the Session Close Protocol
 Current Product Milestone: NONE / Product Owner decision required
 Latest Completed Product Milestone: MS-028.20 - GitHub Checkout Status Revalidation Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 087 synchronized the MS-028.20 control files after implementation and final state correction
+Latest Completed Capability Item: Session 087 completed the Session Close Protocol
 Current Sprint: NONE
 Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, MS-022.3, MS-023.0, MS-027.2, MS-027.3, MS-027.4, MS-027.5, MS-028.0, MS-028.1, MS-028.2, MS-028.3, MS-028.4, MS-028.5, MS-028.6, MS-028.7, MS-028.8, MS-028.9, MS-028.10, MS-028.11, MS-028.12, MS-028.13, MS-028.14, MS-028.15, and MS-028.16 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 9294069
+Latest Verified Commit: 08843ac
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Await Product Owner decision for the next milestone and keep SSOT aligned.
-Next Session Plan: Product Owner reviews the MS-028.20 sync state and selects the next milestone.
+Next Safe Step: Product Owner starts Session 088 from the fresh `sps-session.zip` and selects the next milestone.
+Next Session Plan: Product Owner reviews the fresh Session 087 close package and selects the next milestone.

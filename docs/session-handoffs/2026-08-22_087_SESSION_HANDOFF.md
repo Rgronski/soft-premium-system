@@ -7,25 +7,28 @@ Product Owner: Product Owner
 Session Status: CLOSED
 Current Session ID: 087
 Current Chat Title: 087 SPS OS - Session Close Protocol
+Session Close Protocol: PASS
+Session runtime: CLOSED
+Audit Session 087: PASS
 Next Session ID: 088
 Suggested Next Chat Title: 088 SPS OS - Product Owner Decision
 
 Capability: Session Close Protocol
 Capability Status: PASS
 Active Work Item: Session 087 close
-Completed Work Items: Session 087 synchronized the MS-028.19 control files after implementation; Session 087 recorded the required follow-up MS-028.20; Session 087 prepared the Session 088 handoff
+Completed Work Items: Session 087 synchronized the MS-028.20 control files after implementation and final state correction; Session 087 appended the MS-028.20 SSOT sync usage record; Session 087 synchronized the Session 087 close protocol handoff; Session 087 appended the Session 087 close usage record; Session 087 completed the Session Close Protocol
 Next Work Item: Product Owner starts Session 088 from the fresh `sps-session.zip` and chooses the next milestone
 
 Repository State:
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 9294069
+Latest Verified Commit: 08843ac
 Push Status: synchronized 0 / 0 after Session 087 close publication
 
 Milestone State:
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Milestone: MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation
+Latest Completed Milestone: MS-028.20 - GitHub Checkout Status Revalidation Foundation
 
 Verification:
 Verification Status: PASS
@@ -34,7 +37,7 @@ Open Risks: NONE
 
 Recommendation: Open a new chat titled `088 SPS OS - Product Owner Decision` and attach `sps-session.zip`.
 Next Safe Step: Product Owner starts Session 088 from the fresh `sps-session.zip` and selects the next milestone.
-Next Chat Prompt: SPS OS - START. Project: C:\Users\p700\soft-premium-system. Attach C:\Users\p700\soft-premium-system\sps-session.zip to the new chat before bootstrap; the local path alone does not give the next chat access to the ZIP. Run the full bootstrap, confirm package Git Context and SSOT consistency, keep Current Product Milestone as `NONE / Product Owner decision required`, keep Next Product Milestone as `NONE / Product Owner decision required`, preserve `MS-028.19 - GitHub Post-Clone Source Status Reconciliation Foundation` as `COMPLETED / VERIFIED / PUBLISHED / CLOSED`, and start Session 088 only after the Product Owner selects the next milestone.
+Next Chat Prompt: SPS OS - START. Project: C:\Users\p700\soft-premium-system. Attach C:\Users\p700\soft-premium-system\sps-session.zip to the new chat before bootstrap; the local path alone does not give the next chat access to the ZIP. Run the full bootstrap, confirm package Git Context and SSOT consistency, keep Current Product Milestone as `NONE / Product Owner decision required`, keep Next Product Milestone as `NONE / Product Owner decision required`, preserve `MS-028.20 - GitHub Checkout Status Revalidation Foundation` as `COMPLETED / VERIFIED / PUBLISHED / CLOSED`, and start Session 088 only after the Product Owner selects the next milestone.
 
 ## Stałe zasady pracy
 

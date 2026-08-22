@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 087 - Session Close Protocol
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized `docs/10_SESSION_STATE.md` and `docs/session-handoffs/2026-08-22_087_SESSION_HANDOFF.md` so the SSOT now records Session 087 as closed with Session 088 queued for the next Product Owner decision chat.
+* Recorded that Session 087 closes with `MS-028.20 - GitHub Checkout Status Revalidation Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Appended the Session 087 close usage record.
+
+### Notes
+
+* No new product code changed in this close protocol.
+* The session package generator remains the next operational step after the close commit and push.
+
 ## Session 087 - MS-028.20 control files sync publication
 
 ### Date
