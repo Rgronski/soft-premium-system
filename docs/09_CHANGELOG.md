@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 087 - MS-028.16 control files sync publication
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` as `NONE / Product Owner decision required` and `Latest Completed Product Milestone` as `MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation`.
+* Recorded that `MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED`, derives the repo checkout folder as `C:\SPS_OS_WORK\<project-slug>\repo`, and blocks manifest-only workspace folders with `sps-project.json` from being treated as Git checkouts.
+* Preserved `MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation` as the previous latest completed milestone.
+* Recorded that no live clone/checkout/branch execution was performed during the milestone.
+
+### Notes
+
+* No commit, push, merge, or PR artifacts were introduced.
+
 ## Session 087 - MS-028.16 docs-first repo checkout folder derivation contract patch
 
 ### Date

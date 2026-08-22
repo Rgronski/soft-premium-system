@@ -209,6 +209,23 @@ async function pathExists(targetPath: string): Promise<boolean> {
   }
 }
 
+async function isManifestOnlyWorkspaceFolder(
+  targetPath: string,
+): Promise<boolean> {
+  try {
+    await stat(path.win32.join(targetPath, "sps-project.json"));
+  } catch {
+    return false;
+  }
+
+  try {
+    await stat(path.win32.join(targetPath, ".git"));
+    return false;
+  } catch {
+    return true;
+  }
+}
+
 async function isGitRepository(targetPath: string): Promise<boolean> {
   try {
     const result = await execGitCommand(
@@ -359,6 +376,20 @@ async function runLocalWorkingBranchSetup(
           status: "blocked",
           message:
             "Istniejąca ścieżka workspace nie jest katalogiem.",
+        },
+        409,
+      );
+    }
+
+    if (await isManifestOnlyWorkspaceFolder(normalizedWorkingDirectory)) {
+      return createJsonResponse(
+        {
+          status: "blocked",
+          message:
+            `Ten katalog jest folderem manifest-only. Użyj ${path.win32.join(
+              normalizedWorkingDirectory,
+              "repo",
+            )} jako repo checkout.`,
         },
         409,
       );

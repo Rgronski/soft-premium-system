@@ -59,8 +59,33 @@ describe("ProjectSettingsPage", () => {
       screen.getByText(/Następny krok: podaj adres GitHub/),
     ).toBeTruthy();
     expect(screen.getByText(/Pozostaw jako manifest-only/)).toBeTruthy();
+    expect(
+      screen.getByText(/C:\\SPS_OS_WORK\\beauty-client-pro\\repo/, {
+        selector: ".text-zinc-200",
+      }),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Samo ustawienie katalogu repo nie wykonuje jeszcze clone\./),
+    ).toBeTruthy();
     expect(screen.queryByText(/Decyzja pracy z ga/)).toBeNull();
     expect(screen.queryByText(/Gotowość połączenia GitHub/)).toBeNull();
+  });
+
+  test("blocks saving the manifest-only folder as a repo checkout and points to the derived repo folder", () => {
+    render(<ProjectSettingsPage />);
+
+    fireEvent.click(screen.getByRole("button", { name: /Zapisz katalog repo/ }));
+
+    expect(
+      screen.getByText(/Ten katalog wskazuje folder manifest-only/, {
+        selector: ".text-emerald-200",
+      }),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/C:\\SPS_OS_WORK\\beauty-client-pro\\repo jako repo checkout\./, {
+        selector: ".text-emerald-200",
+      }),
+    ).toBeTruthy();
   });
 
   test("shows a blocked GitHub readiness action state until the repository URL exists", () => {
@@ -333,7 +358,7 @@ describe("ProjectSettingsPage", () => {
     ).toEqual({
       projectId: "project-1",
       repositoryUrl: "https://github.com/example/beauty-client-pro",
-      workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+      workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
       branchWorkMode: "working-branch",
       workingBranchName: "work/beauty-client-pro",
       candidateDecision: "approved for further preparation",
@@ -346,7 +371,7 @@ describe("ProjectSettingsPage", () => {
           status: "success",
           message:
             "Lokalny clone i working branch setup zostały wykonane. Commit/push/merge/PR pozostają poza zakresem.",
-          workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+          workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
           activeBranch: "work/beauty-client-pro",
         }),
         {
@@ -367,7 +392,7 @@ describe("ProjectSettingsPage", () => {
       ),
     ).toBeTruthy();
     expect(
-      screen.getByText(/Local workspace path: C:\\SPS_OS_WORK\\beauty-client-pro/, {
+      screen.getByText(/Repo checkout path: C:\\SPS_OS_WORK\\beauty-client-pro\\repo/, {
         selector: ".text-emerald-200",
       }),
     ).toBeTruthy();

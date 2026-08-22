@@ -135,6 +135,69 @@ function buildLocalCloneReadinessSummary(
   ];
 }
 
+function normalizeWindowsPath(value: string): string {
+  return value.trim().replace(/[\\/]+$/u, "");
+}
+
+function buildRepoCheckoutDirectory(workspaceDirectory: string): string {
+  const normalizedWorkspaceDirectory = normalizeWindowsPath(workspaceDirectory);
+
+  return normalizedWorkspaceDirectory.endsWith("\\repo")
+    ? normalizedWorkspaceDirectory
+    : `${normalizedWorkspaceDirectory}\\repo`;
+}
+
+function isManifestOnlyWorkspaceDirectory(
+  project: Project,
+  candidateDirectory: string,
+): boolean {
+  if (project.projectFilesystemStatus !== "manifest-present") {
+    return false;
+  }
+
+  const normalizedCandidateDirectory = normalizeWindowsPath(candidateDirectory);
+  const normalizedWorkspaceDirectory = normalizeWindowsPath(
+    project.workingDirectory ?? "",
+  );
+
+  return Boolean(
+    normalizedCandidateDirectory &&
+      normalizedWorkspaceDirectory &&
+      normalizedCandidateDirectory === normalizedWorkspaceDirectory,
+  );
+}
+
+function resolveRepoCheckoutDirectory(
+  project: Project,
+  candidateDirectory: string,
+): string {
+  const trimmedCandidateDirectory = candidateDirectory.trim();
+
+  if (!trimmedCandidateDirectory) {
+    return project.projectFilesystemStatus === "manifest-present" &&
+      project.workingDirectory?.trim()
+      ? buildRepoCheckoutDirectory(project.workingDirectory)
+      : "";
+  }
+
+  if (isManifestOnlyWorkspaceDirectory(project, trimmedCandidateDirectory)) {
+    return buildRepoCheckoutDirectory(project.workingDirectory ?? "");
+  }
+
+  return trimmedCandidateDirectory;
+}
+
+function buildRepoCheckoutDirectoryHint(project: Project): string | null {
+  if (
+    project.projectFilesystemStatus !== "manifest-present" ||
+    !project.workingDirectory?.trim()
+  ) {
+    return null;
+  }
+
+  return buildRepoCheckoutDirectory(project.workingDirectory);
+}
+
 type GitHubReadinessChecklistItem = {
   label: string;
   status: string;
@@ -738,10 +801,15 @@ export default function ProjectSettingsPage() {
     buildGitHubRealOperationReadinessDetailSummary(
       githubRealOperationSelection,
     );
+  const repoCheckoutDirectoryHint = buildRepoCheckoutDirectoryHint(project);
+  const resolvedRepoCheckoutDirectory = resolveRepoCheckoutDirectory(
+    project,
+    workingDirectoryInput,
+  );
   const githubLocalWorkingBranchCreationActionCanRun =
     Boolean(githubRealOperationPreflightSummary) &&
     branchWorkMode === "working-branch" &&
-    Boolean(project.workingDirectory?.trim()) &&
+    Boolean(resolvedRepoCheckoutDirectory) &&
     Boolean(workingBranchName.trim());
   const githubLocalWorkingBranchCreationActionState =
     githubLocalWorkingBranchCreationOutcome === "success"
@@ -776,6 +844,15 @@ export default function ProjectSettingsPage() {
 
     if (!trimmedWorkingDirectory) {
       setFeedbackMessage("Podaj istniejący katalog repo, aby go zapisać.");
+      return;
+    }
+
+    if (isManifestOnlyWorkspaceDirectory(project, trimmedWorkingDirectory)) {
+      setFeedbackMessage(
+        `Ten katalog wskazuje folder manifest-only. Użyj ${buildRepoCheckoutDirectory(
+          project.workingDirectory ?? trimmedWorkingDirectory,
+        )} jako repo checkout.`,
+      );
       return;
     }
 
@@ -856,7 +933,7 @@ export default function ProjectSettingsPage() {
   }
 
   async function handleCreateLocalWorkingBranchAction() {
-    const savedWorkingDirectory = project.workingDirectory?.trim() ?? "";
+    const savedWorkingDirectory = resolvedRepoCheckoutDirectory;
     const savedWorkingBranchName = workingBranchName.trim();
 
     if (!githubRealOperationPreflightSummary) {
@@ -913,7 +990,7 @@ export default function ProjectSettingsPage() {
       if (response.ok && payload.status === "success") {
         setGithubLocalWorkingBranchCreationOutcome("success");
         setFeedbackMessage(
-          `${payload.message} Local workspace path: ${payload.workingDirectory}. Active branch: ${payload.activeBranch}.`,
+          `${payload.message} Repo checkout path: ${payload.workingDirectory}. Active branch: ${payload.activeBranch}.`,
         );
         return;
       }
@@ -1036,6 +1113,22 @@ export default function ProjectSettingsPage() {
                 className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 outline-none focus:border-zinc-500"
               />
             </label>
+            {repoCheckoutDirectoryHint ? (
+              <p className="mt-2 text-sm text-zinc-400">
+                Folder projektu SPS OS to manifest-only. Sugerowany katalog repo checkout to{" "}
+                <span className="text-zinc-200">{repoCheckoutDirectoryHint}</span>.
+                Samo ustawienie katalogu repo nie wykonuje jeszcze clone.
+              </p>
+            ) : null}
+            {isManifestOnlyWorkspaceDirectory(project, workingDirectoryInput) ? (
+              <p className="mt-2 text-sm text-amber-200">
+                Ten katalog wskazuje folder manifest-only. Użyj{" "}
+                <span className="text-amber-100">
+                  {buildRepoCheckoutDirectory(project.workingDirectory ?? workingDirectoryInput)}
+                </span>{" "}
+                jako repo checkout.
+              </p>
+            ) : null}
             <button
               type="button"
               onClick={handleSaveWorkingDirectory}
@@ -1351,8 +1444,8 @@ export default function ProjectSettingsPage() {
                         Stan akcji: {githubLocalWorkingBranchCreationActionState}
                       </p>
                       <p className="mt-1 text-sm text-zinc-400">
-                        Local workspace path:{" "}
-                        {project.workingDirectory?.trim() || "brak"}
+                        Repo checkout path:{" "}
+                        {resolvedRepoCheckoutDirectory || "brak"}
                         . working branch name:{" "}
                         {workingBranchName.trim() || "brak"}
                       </p>

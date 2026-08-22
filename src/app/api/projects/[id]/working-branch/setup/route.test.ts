@@ -168,6 +168,34 @@ describe("POST /api/projects/[id]/working-branch/setup", () => {
     expect(execFileMock).not.toHaveBeenCalled();
   });
 
+  it("blocks a manifest-only workspace folder and suggests the derived repo checkout path", async () => {
+    statMock.mockResolvedValueOnce({
+      isDirectory: () => true,
+    });
+    statMock.mockResolvedValueOnce({
+      isDirectory: () => true,
+    });
+    statMock.mockResolvedValueOnce({
+      isDirectory: () => true,
+    });
+    statMock.mockRejectedValueOnce(new Error("ENOENT"));
+
+    const { POST } = await loadRouteModule();
+    const response = await POST(
+      createRequest(createValidBody()),
+      createContext("project-1"),
+    );
+
+    expect(response.status).toBe(409);
+    await expect(response.json()).resolves.toMatchObject({
+      status: "blocked",
+      message: expect.stringContaining(
+        "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+      ),
+    });
+    expect(execFileMock).not.toHaveBeenCalled();
+  });
+
   it("blocks an unsafe branch name before any filesystem work", async () => {
     const { POST } = await loadRouteModule();
     const response = await POST(

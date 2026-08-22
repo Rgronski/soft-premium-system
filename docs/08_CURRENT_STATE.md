@@ -42,15 +42,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation
+NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
+MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-028.16 is the current docs-first milestone in the local workspace as the GitHub Repo Checkout Folder Derivation Foundation. The repository now distinguishes the project workspace folder from the Git repo checkout folder so that a manifest-only folder containing `sps-project.json` is not treated as the clone destination. The derived repo checkout folder should default to `C:\SPS_OS_WORK\<project-slug>\repo` when the user chooses the Git clone / working-branch flow and a GitHub URL is already saved. A manually chosen repo folder may still be respected, but it must not conflict with the manifest-only workspace folder. The milestone remains docs-first and does not perform real clone, checkout, or branch execution.
+MS-028.16 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Repo Checkout Folder Derivation Foundation. The repository now distinguishes the project workspace folder from the Git repo checkout folder so that a manifest-only folder containing `sps-project.json` is not treated as the clone destination. The derived repo checkout folder defaults to `C:\SPS_OS_WORK\<project-slug>\repo` when the user chooses the Git clone / working-branch flow and a GitHub URL is already saved. A manually chosen repo folder may still be respected, but it must not conflict with the manifest-only workspace folder. The milestone is closed and does not perform real clone, checkout, or branch execution.
 
 MS-028.15 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Local Clone And Working Branch Execution Foundation. The repository now defines the docs-first contract and safety boundary for the first SPS OS-controlled local clone and working branch execution step after MS-028.14, and the implementation now includes the SPS OS-controlled route plus the settings-page action and tests for local clone and working branch setup. The implementation validates the GitHub URL, local workspace path, and working branch name, prefers `C:\SPS_OS_WORK`, and stops on blockers when the target already exists as a conflicting git repository or remote. The live manual action against Beauty Client PRO remains a separate verification step after publication. The milestone does not create commit, push, merge, or PR artifacts.
 

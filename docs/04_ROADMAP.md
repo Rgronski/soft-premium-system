@@ -230,19 +230,19 @@ Product Milestone
 This milestone defines the derivation rule that separates the project workspace folder from the Git repo checkout folder. The workspace root holds the manifest-only project folder, and the repo checkout lives one level deeper in a dedicated `repo` subfolder.
 
 **Contract Status**
-DRAFT / READY FOR PUBLICATION
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Publication Status**
-NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-PLANNED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
-YES
+NO
 
 **Runtime Status**
-OPEN
+CLOSED
 
 **Owner**
 Product Owner
@@ -258,6 +258,8 @@ Define the docs-first contract for deriving a safe checkout folder when SPS OS p
 
 **Product Outcome**
 If the project workspace folder already exists and contains `sps-project.json`, SPS OS must treat that folder as the project workspace folder, not the Git repo checkout folder. When the user chooses the Git clone / working-branch flow and a saved GitHub URL exists, the derived checkout folder should default to `C:\SPS_OS_WORK\<project-slug>\repo`. A manually chosen repo folder may still be respected, but it must not conflict with the manifest-only workspace folder. The milestone keeps real clone/checkout/branch execution out of scope in this docs-first step.
+
+The milestone is now published and closed; no live clone/checkout/branch execution was performed in this milestone.
 
 **Dependencies**
 MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
