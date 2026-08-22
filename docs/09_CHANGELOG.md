@@ -86,6 +86,24 @@ Each release entry should contain:
 
 * No live clone/checkout/branch execution was introduced in this sync step.
 
+## Session 087 - MS-028.18 docs-first multi-account auth guidance contract patch
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` as `MS-028.18 - GitHub Multi-Account Auth Guidance Foundation` and `Latest Completed Product Milestone` as `MS-028.17 - GitHub Local Setup Success Copy Correction`.
+* Recorded that `MS-028.18 - GitHub Multi-Account Auth Guidance Foundation` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED`, captures GitHub multi-account auth guidance, and keeps OAuth/token storage, `gh` installation, SSH key creation, and Git logic changes out of scope.
+* Documented the practical default of HTTPS + Git Credential Manager + path-based credentials with `git config --global credential.https://github.com.useHttpPath true`, plus GitHub CLI switching and SSH host alias alternatives.
+* Captured the known `Repository not found` and `403 Permission denied` failure modes for mismatched Git auth accounts.
+* Preserved `MS-028.17 - GitHub Local Setup Success Copy Correction` as the previous latest completed milestone.
+
+### Notes
+
+* No OAuth/token storage or SSH key generation was introduced in this docs-first guidance step.
+
 ## Session 087 - MS-028.17 docs-first local setup success copy correction contract patch
 
 ### Date

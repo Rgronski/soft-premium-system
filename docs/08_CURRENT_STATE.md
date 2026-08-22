@@ -42,13 +42,17 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-NONE / Product Owner decision required
+MS-028.18 - GitHub Multi-Account Auth Guidance Foundation
 
 **Latest Completed Milestone**
 MS-028.17 - GitHub Local Setup Success Copy Correction
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-028.18 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Multi-Account Auth Guidance Foundation. The repository now documents how to separate the auth context for the SPS OS repo from the auth context for client/project repos, records the known `Repository not found` and `403 Permission denied` failure modes, and recommends HTTPS + Git Credential Manager + path-based credentials with `git config --global credential.https://github.com.useHttpPath true` as the practical default. GitHub CLI account switching and SSH host aliases remain documented alternatives. The milestone does not add OAuth/token storage, does not install `gh`, does not create SSH keys, and does not change Git logic.
+
+MS-028.18 is guidance only and does not change the Git execution path itself.
 
 MS-028.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Local Setup Success Copy Correction. The repository already completed the local clone and working branch setup path, and this milestone corrects the success copy so it says `local clone/branch setup: completed` while commit, push, merge, and PR remain blocked or out of scope. The milestone does not change Git logic and does not add new execution.
 

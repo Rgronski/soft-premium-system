@@ -135,10 +135,11 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.13` - GitHub First Authorized Operation Preflight Foundation
 * `MS-028.16` - GitHub Repo Checkout Folder Derivation Foundation
 * `MS-028.17` - GitHub Local Setup Success Copy Correction
+* `MS-028.18` - GitHub Multi-Account Auth Guidance Foundation
 
 ## Current
 
-NONE / Product Owner decision required
+MS-028.18 - GitHub Multi-Account Auth Guidance Foundation
 
 ## Latest Completed Product Milestone
 
@@ -358,6 +359,71 @@ Docs-first contract publication for local setup success copy correction.
 * pull request
 * unrelated UI or domain changes
 4. Real commit/push/merge/PR remain blocked until later explicit Product Owner-approved milestones.
+
+## MS-028.18 - GitHub Multi-Account Auth Guidance Foundation
+
+**Milestone**
+MS-028.18 - GitHub Multi-Account Auth Guidance Foundation
+
+**Type**
+Product Milestone
+
+This milestone captures GitHub multi-account auth guidance for SPS OS and client/project repos. The practical default is HTTPS + Git Credential Manager + path-based credentials via `git config --global credential.https://github.com.useHttpPath true`, with GitHub CLI account switching and SSH host aliases as alternatives.
+
+**Contract Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Capture the guidance for separating the auth context of the SPS OS repo from the auth context of client/project repos.
+
+**Product Outcome**
+The repository now documents the known failure modes where GitHub returns `Repository not found` when the current Git auth account lacks access and `403 Permission denied` when the current Git auth account lacks write permission. The guidance keeps OAuth/token storage out of scope, does not install `gh`, does not create SSH keys, and does not change Git logic.
+
+**Dependencies**
+MS-028.17 - GitHub Local Setup Success Copy Correction
+
+**Implementation Scope**
+Docs-first guidance publication for multi-account GitHub auth.
+
+**Allowed Scope**
+* docs publication
+* GitHub multi-account auth guidance wording
+* practical HTTPS + Git Credential Manager guidance
+* GitHub CLI switching and SSH host alias alternatives
+* failure-mode wording for `Repository not found` and `403 Permission denied`
+
+**Forbidden Scope**
+* OAuth/token storage
+* installing `gh`
+* creating SSH keys
+* real clone/push execution
+* unrelated UI or domain changes
+
+**Sequencing**
+1. The repository records the guidance for SPS OS and client/project auth contexts.
+2. The repository keeps the practical default and alternatives visible for future setup decisions.
+3. Real Git/GitHub execution remains outside the milestone.
 
 ## MS-028.14 - GitHub Local Working Branch Creation Action Foundation
 
