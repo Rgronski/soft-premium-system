@@ -25,7 +25,6 @@ import {
   deriveSaveActionPresentation,
   deriveSaveErrorState,
   deriveSaveReadyState,
-  deriveSaveRefreshWarningState,
   deriveSaveSavingState,
   deriveSaveSuccessState,
   deriveSaveTitleChangeState,
@@ -97,6 +96,29 @@ function isSavedKnowledgeEntry(
     "content" in value &&
     "createdAt" in value
   );
+}
+
+function mergeSavedKnowledgeEntryIntoContext(
+  context: AiProjectContext,
+  savedKnowledgeEntry: {
+    id: string;
+    title: string;
+    content: string;
+  },
+): AiProjectContext {
+  return {
+    ...context,
+    knowledgeEntries: [
+      ...context.knowledgeEntries.filter(
+        (entry) => entry.id !== savedKnowledgeEntry.id,
+      ),
+      {
+        id: savedKnowledgeEntry.id,
+        title: savedKnowledgeEntry.title,
+        content: savedKnowledgeEntry.content,
+      },
+    ],
+  };
 }
 
 async function recoverProjectForKnowledgeSave(
@@ -496,30 +518,23 @@ export default function ProjectAiWorkspacePage() {
           setSaveUiState(
             deriveSaveSuccessState(projectId, latestExchange, title),
           );
-          try {
-            const contextResult = await getBrowserAiProjectContext(projectId);
-
-            if (currentProjectIdRef.current !== projectId) {
-              return;
+          setContextState((currentState) => {
+            if (
+              currentState.projectId !== projectId ||
+              currentState.status !== "available"
+            ) {
+              return currentState;
             }
 
-            if (contextResult.status === "available") {
-              setContextState(deriveContextLoadState(projectId, contextResult));
-              return;
-            }
-
-            setSaveUiState(
-              deriveSaveRefreshWarningState(projectId, latestExchange, title),
-            );
-          } catch {
-            if (currentProjectIdRef.current !== projectId) {
-              return;
-            }
-
-            setSaveUiState(
-              deriveSaveRefreshWarningState(projectId, latestExchange, title),
-            );
-          }
+            return {
+              projectId,
+              status: "available",
+              context: mergeSavedKnowledgeEntryIntoContext(
+                currentState.context,
+                localKnowledgeEntry,
+              ),
+            };
+          });
           return;
         }
       }
@@ -530,30 +545,23 @@ export default function ProjectAiWorkspacePage() {
         }
 
         setSaveUiState(deriveSaveSuccessState(projectId, latestExchange, title));
-        try {
-          const contextResult = await getBrowserAiProjectContext(projectId);
-
-          if (currentProjectIdRef.current !== projectId) {
-            return;
+        setContextState((currentState) => {
+          if (
+            currentState.projectId !== projectId ||
+            currentState.status !== "available"
+          ) {
+            return currentState;
           }
 
-          if (contextResult.status === "available") {
-            setContextState(deriveContextLoadState(projectId, contextResult));
-            return;
-          }
-
-          setSaveUiState(
-            deriveSaveRefreshWarningState(projectId, latestExchange, title),
-          );
-        } catch {
-          if (currentProjectIdRef.current !== projectId) {
-            return;
-          }
-
-          setSaveUiState(
-            deriveSaveRefreshWarningState(projectId, latestExchange, title),
-          );
-        }
+          return {
+            projectId,
+            status: "available",
+            context: mergeSavedKnowledgeEntryIntoContext(
+              currentState.context,
+              result,
+            ),
+          };
+        });
         return;
       }
 
@@ -781,6 +789,10 @@ export default function ProjectAiWorkspacePage() {
             </p>
             <p className="text-sm text-zinc-400">
               Wpisz jedną instrukcję, aby dodać następną lokalną wymianę AI.
+            </p>
+            <p className="text-sm text-zinc-500">
+              AI Workspace korzysta z Project Brain. Przypięte repo nie
+              przekazuje jeszcze plików repo do promptu AI.
             </p>
             <p className="text-sm text-zinc-500">
               {conversationContextState.statusMessage}

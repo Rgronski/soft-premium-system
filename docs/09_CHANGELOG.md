@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.23 control files sync publication
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` and `Next Product Milestone` as `NONE / Product Owner decision required` and `Latest Completed Product Milestone` as `MS-028.23 - AI Workspace Repo Context Boundary and Knowledge Refresh Foundation`.
+* Recorded that `MS-028.23 - AI Workspace Repo Context Boundary and Knowledge Refresh Foundation` clarifies the AI Workspace boundary between Project Brain context and repo/filesystem context, explicitly states that a pinned repository does not yet forward repository files into the AI prompt, and keeps the visible knowledge context synchronized locally after a successful save without showing a false refresh warning.
+* Appended the Session 088 `MS-028.23` usage record.
+
+### Notes
+
+* No new product code changed in this sync step; the accepted patch remains limited to the existing AI Workspace page, its focused test, and the session usage record.
+
 ## Session 088 - MS-028.22 control files sync publication
 
 ### Date

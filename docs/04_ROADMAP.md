@@ -140,6 +140,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.20` - GitHub Checkout Status Revalidation Foundation
 * `MS-028.21` - Git Checkout Status Revalidation UX Foundation
 * `MS-028.22` - AI Workspace Project Lookup Fix Foundation
+* `MS-028.23` - AI Workspace Repo Context Boundary and Knowledge Refresh Foundation
 
 ## Current
 
@@ -147,7 +148,78 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.23 - AI Workspace Repo Context Boundary and Knowledge Refresh Foundation
+
+## MS-028.23 - AI Workspace Repo Context Boundary and Knowledge Refresh Foundation
+
+**Milestone**
+MS-028.23 - AI Workspace Repo Context Boundary and Knowledge Refresh Foundation
+
+**Type**
+Product Milestone
+
+This milestone clarifies the current AI Workspace boundary between Project Brain context and repo/filesystem context, makes it explicit in the AI Workspace UI that a pinned repository does not yet forward repository files into the AI prompt, and removes the false post-save refresh warning by keeping the visible knowledge context synchronized locally after a successful save.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+State the current AI Workspace boundary honestly so users understand that Project Brain context is available, while repository file analysis is not yet part of the AI prompt contract.
+
+**Product Outcome**
+The AI Workspace now shows a short Polish boundary note that it uses Project Brain context and that a pinned repository does not yet provide repository files to the prompt, and the save flow keeps the visible knowledge context aligned locally without showing a false refresh warning.
+
+**Implementation Note**
+This milestone does not add repository analysis, repository summaries, filesystem file scanning, new AI features, persistent memory, or Git/GitHub flow changes.
+
+**Dependencies**
 MS-028.22 - AI Workspace Project Lookup Fix Foundation
+
+**Implementation Scope**
+AI Workspace repo context boundary and knowledge refresh publication.
+
+**Allowed Scope**
+* Project Brain versus repo/filesystem boundary copy
+* local visible context synchronization after knowledge save
+* focused test coverage for the existing AI Workspace page
+* existing AI Workspace prompt generation contract
+
+**Forbidden Scope**
+* repository analysis engine
+* repository file summaries or filesystem scans
+* model provider changes
+* OpenAI configuration changes
+* persistent conversation memory
+* Project Brain redesign
+* Git/GitHub flow changes
+* New Project Git intake flow
+* unrelated UI or domain changes
+
+**Sequencing**
+1. MS-028.22 fixes AI Workspace generation lookup so the rendered project and generation path share the same canonical context.
+2. MS-028.23 clarifies the Project Brain boundary and removes the false save-refresh warning without adding repo analysis.
+3. Real repository analysis remains outside the milestone.
 
 ## MS-028.22 - AI Workspace Project Lookup Fix Foundation
 
@@ -216,7 +288,8 @@ AI Workspace project lookup fix publication.
 **Sequencing**
 1. MS-028.21 publishes the checkout revalidation UX confirmation.
 2. MS-028.22 fixes AI Workspace generation lookup so the rendered project and generation path share the same canonical context.
-3. Real AI feature expansion remains outside the milestone.
+3. MS-028.23 clarifies the Project Brain boundary and visible knowledge refresh behavior without adding repo analysis.
+4. Real AI feature expansion remains outside the milestone.
 
 ## MS-028.21 - Git Checkout Status Revalidation UX Foundation
 

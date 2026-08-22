@@ -326,6 +326,11 @@ describe("ProjectAiWorkspacePage", () => {
     expect(screen.getByRole("textbox", { name: "Instrukcja" })).toBeTruthy();
     expect(screen.getByRole("button", { name: "Generuj" })).toBeTruthy();
     expect(
+      screen.getByText(
+        "AI Workspace korzysta z Project Brain. Przypięte repo nie przekazuje jeszcze plików repo do promptu AI.",
+      ),
+    ).toBeTruthy();
+    expect(
       screen.getByText("Następna generacja nie użyje lokalnego kontekstu rozmowy."),
     ).toBeTruthy();
     expect(screen.getByText("Brak zadań.")).toBeTruthy();
@@ -1167,8 +1172,7 @@ describe("ProjectAiWorkspacePage", () => {
       expect(screen.getByText("Architecture note")).toBeTruthy();
     });
 
-    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(2);
-    expect(getBrowserAiProjectContextMock).toHaveBeenNthCalledWith(2, "project-1");
+    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(1);
     expect(fetchMock).toHaveBeenNthCalledWith(2, "/api/projects/project-1/knowledge", {
       method: "POST",
       headers: {
@@ -1600,7 +1604,7 @@ describe("ProjectAiWorkspacePage", () => {
       );
     });
 
-    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(2);
+    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(1);
     fireEvent.click(screen.getByRole("button", { name: "Saved" }));
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
@@ -1759,7 +1763,7 @@ describe("ProjectAiWorkspacePage", () => {
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
-  test("shows a separate refresh error after a successful save and keeps generated result and save success", async () => {
+  test("saves to knowledge and merges the saved entry into the visible context without a refresh warning", async () => {
     getBrowserAiProjectContextMock
       .mockResolvedValueOnce({
         status: "available",
@@ -1834,16 +1838,17 @@ describe("ProjectAiWorkspacePage", () => {
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
-      expect(
-        screen.getByText(
-          "Saved to Knowledge, but AI project context could not be refreshed.",
-        ),
-      ).toBeTruthy();
+      expect(screen.getByText("Architecture note")).toBeTruthy();
     });
 
-    expect(screen.getByText("Generated response")).toBeTruthy();
+    expect(screen.getAllByText("Generated response").length).toBeGreaterThan(0);
     expect(screen.queryByText("Knowledge save unavailable.")).toBeNull();
-    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(2);
+    expect(
+      screen.queryByText(
+        "Saved to Knowledge, but AI project context could not be refreshed.",
+      ),
+    ).toBeNull();
+    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(1);
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
@@ -1957,7 +1962,12 @@ describe("ProjectAiWorkspacePage", () => {
       expect(screen.getByText("Architecture note")).toBeTruthy();
     });
 
-    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(2);
+    expect(
+      screen.queryByText(
+        "Saved to Knowledge, but AI project context could not be refreshed.",
+      ),
+    ).toBeNull();
+    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(1);
     expect(fetchMock).toHaveBeenCalledTimes(4);
     expect(fetchMock).toHaveBeenNthCalledWith(2, "/api/projects/project-1/knowledge", {
       method: "POST",
@@ -1990,7 +2000,7 @@ describe("ProjectAiWorkspacePage", () => {
     });
   });
 
-  test("stale knowledge refresh from the previous project does not overwrite the current project", async () => {
+  test("stale project load from the previous project does not overwrite the current project", async () => {
     const refreshDeferred = createDeferred<{
       status: "available";
       context: {
@@ -2006,15 +2016,6 @@ describe("ProjectAiWorkspacePage", () => {
     }>();
 
     getBrowserAiProjectContextMock
-      .mockResolvedValueOnce({
-        status: "available",
-        context: {
-          projectId: "project-1",
-          projectName: "Alpha",
-          tasks: [],
-          knowledgeEntries: [],
-        },
-      })
       .mockReturnValueOnce(refreshDeferred.promise)
       .mockResolvedValueOnce({
         status: "available",
@@ -2055,30 +2056,13 @@ describe("ProjectAiWorkspacePage", () => {
               "content-type": "application/json",
             },
           },
-        ),
-      );
+      ),
+    );
 
     const { rerender } = render(<ProjectAiWorkspacePage />);
 
-    const instructionField = await screen.findByRole("textbox", {
-      name: "Instrukcja",
-    });
-    fireEvent.change(instructionField, {
-      target: { value: "Summarize project" },
-    });
-    fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
-
     await waitFor(() => {
-      expect(screen.getByText("Generated response")).toBeTruthy();
-    });
-
-    fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
-      target: { value: "Architecture note" },
-    });
-    fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
-
-    await waitFor(() => {
-      expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
+      expect(screen.getByText("Ładowanie kontekstu AI projektu...")).toBeTruthy();
     });
 
     useParamsMock.mockReturnValue({ id: "project-2" });
@@ -2115,11 +2099,10 @@ describe("ProjectAiWorkspacePage", () => {
         "Saved to Knowledge, but AI project context could not be refreshed.",
       ),
     ).toBeNull();
-    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(3);
+    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(2);
     expect(getBrowserAiProjectContextMock).toHaveBeenNthCalledWith(1, "project-1");
-    expect(getBrowserAiProjectContextMock).toHaveBeenNthCalledWith(2, "project-1");
-    expect(getBrowserAiProjectContextMock).toHaveBeenNthCalledWith(3, "project-2");
-    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(getBrowserAiProjectContextMock).toHaveBeenNthCalledWith(2, "project-2");
+    expect(fetchMock).toHaveBeenCalledTimes(0);
   });
 
   test("falls back to local knowledge storage when save retry still returns project-not-found", async () => {
@@ -2216,7 +2199,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
-      expect(screen.getByText("Generated response")).toBeTruthy();
+    expect(screen.getAllByText("Generated response").length).toBeGreaterThan(0);
     });
 
     fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
@@ -2235,7 +2218,7 @@ describe("ProjectAiWorkspacePage", () => {
     });
 
     expect(screen.queryByText("Projekt nie został znaleziony.")).toBeNull();
-    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(2);
+    expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(1);
     expect(fetchMock).toHaveBeenCalledTimes(4);
   });
 
@@ -2307,7 +2290,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
-      expect(screen.getByText("First generated response")).toBeTruthy();
+    expect(screen.getAllByText("First generated response").length).toBeGreaterThan(0);
     });
 
     fireEvent.change(screen.getByRole("textbox", { name: "Tytuł" }), {
@@ -2326,7 +2309,7 @@ describe("ProjectAiWorkspacePage", () => {
 
     await waitFor(() => {
       expect(screen.getByText("Second generated response")).toBeTruthy();
-      expect(screen.getByText("First generated response")).toBeTruthy();
+      expect(screen.getAllByText("First generated response").length).toBeGreaterThan(0);
       expect(screen.getByRole("button", { name: "Zapisz do wiedzy" })).toBeTruthy();
     });
 
