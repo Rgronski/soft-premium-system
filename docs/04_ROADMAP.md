@@ -135,11 +135,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-028.12 - GitHub First Operation Authorization Boundary Foundation
+NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.11 - GitHub First Operation Candidate Decision Foundation
+MS-028.12 - GitHub First Operation Authorization Boundary Foundation
 
 ## MS-028.12 - GitHub First Operation Authorization Boundary Foundation
 
@@ -150,13 +150,13 @@ MS-028.12 - GitHub First Operation Authorization Boundary Foundation
 Product Milestone
 
 **Contract Status**
-PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Publication Status**
 PUBLISHED
 
 **Milestone Status**
-PUBLISHED / CLOSED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
 NO

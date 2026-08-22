@@ -170,6 +170,7 @@ describe("ProjectSettingsPage", () => {
     expect(
       screen.getAllByText(/Realne wykonanie Git\/GitHub pozostaje zablokowane\./),
     ).toHaveLength(5);
+    expect(screen.queryByText(/Bramka autoryzacji/)).toBeNull();
 
     fireEvent.click(
       screen.getByRole("button", { name: /Zatwierdź do dalszego przygotowania/ }),
@@ -186,6 +187,35 @@ describe("ProjectSettingsPage", () => {
         /To nie jest autoryzacja do wykonania\. Realne wykonanie Git\/GitHub pozostaje zablokowane\./,
       ),
     ).not.toHaveLength(0);
+    expect(screen.getByText(/Bramka autoryzacji/)).toBeTruthy();
+    expect(
+      screen.getByText(/authorization: authorization required/),
+    ).toBeTruthy();
+    expect(
+      screen.getByRole("button", {
+        name: /Oznacz jako authorized to execute/,
+      }),
+    ).toBeTruthy();
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: /Oznacz jako authorized to execute/,
+      }),
+    );
+
+    expect(
+      screen.getByText(/authorization: authorized to execute/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        /authorization required: fulfilled\. authorized to execute: connection check\. real execution remains blocked\./,
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        /To nadal lokalny stan decyzji\. Realne wykonanie Git\/GitHub pozostaje zablokowane w aplikacji na tym etapie\./,
+      ),
+    ).toBeTruthy();
 
     fireEvent.click(screen.getAllByRole("radio")[1]);
 

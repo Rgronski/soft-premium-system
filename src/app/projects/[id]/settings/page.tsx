@@ -219,6 +219,17 @@ type GitHubRealOperationCandidateDecisionSummary = {
   actionLabel: string;
 };
 
+type GitHubRealOperationAuthorizationState =
+  | "authorization required"
+  | "authorized to execute";
+
+type GitHubRealOperationAuthorizationSummary = {
+  status: GitHubRealOperationAuthorizationState;
+  copy: string;
+  disclosure: string;
+  actionLabel: string;
+};
+
 type GitHubRealOperationReadinessDetailSummary = {
   title: string;
   note: string;
@@ -309,6 +320,8 @@ function buildGitHubRealOperationSelectionSummary(
 
 const GITHUB_REAL_OPERATION_CANDIDATE_DECISION_STORAGE_SUFFIX =
   "github-real-operation-candidate-decision";
+const GITHUB_REAL_OPERATION_AUTHORIZATION_STORAGE_SUFFIX =
+  "github-real-operation-authorization";
 
 function getGitHubRealOperationCandidateDecisionStorageKey(
   projectId: string,
@@ -345,6 +358,41 @@ function saveGitHubRealOperationCandidateDecision(
   );
 }
 
+function getGitHubRealOperationAuthorizationStorageKey(
+  projectId: string,
+  selection: GitHubRealOperationSelection,
+): string {
+  return `soft-premium-system.projects.${projectId}.${GITHUB_REAL_OPERATION_AUTHORIZATION_STORAGE_SUFFIX}.${selection}`;
+}
+
+function readGitHubRealOperationAuthorization(
+  projectId: string,
+  selection: GitHubRealOperationSelection | null,
+): GitHubRealOperationAuthorizationState {
+  if (typeof window === "undefined" || !selection) {
+    return "authorization required";
+  }
+
+  const storedValue = localStorage.getItem(
+    getGitHubRealOperationAuthorizationStorageKey(projectId, selection),
+  );
+
+  return storedValue === "authorized to execute"
+    ? storedValue
+    : "authorization required";
+}
+
+function saveGitHubRealOperationAuthorization(
+  projectId: string,
+  selection: GitHubRealOperationSelection,
+  authorization: GitHubRealOperationAuthorizationState,
+): void {
+  localStorage.setItem(
+    getGitHubRealOperationAuthorizationStorageKey(projectId, selection),
+    authorization,
+  );
+}
+
 function buildGitHubRealOperationCandidateDecisionSummary(
   selection: GitHubRealOperationSelection | null,
   decision: GitHubRealOperationCandidateDecision,
@@ -363,6 +411,28 @@ function buildGitHubRealOperationCandidateDecisionSummary(
     disclosure:
       "To nie jest autoryzacja do wykonania. Realne wykonanie Git/GitHub pozostaje zablokowane.",
     actionLabel: "Zatwierdź do dalszego przygotowania",
+  };
+}
+
+function buildGitHubRealOperationAuthorizationSummary(
+  selection: GitHubRealOperationSelection | null,
+  candidateDecision: GitHubRealOperationCandidateDecision,
+  authorization: GitHubRealOperationAuthorizationState,
+): GitHubRealOperationAuthorizationSummary | null {
+  if (!selection || candidateDecision !== "approved for further preparation") {
+    return null;
+  }
+
+  const isAuthorized = authorization === "authorized to execute";
+
+  return {
+    status: authorization,
+    copy: isAuthorized
+      ? `authorization required: fulfilled. authorized to execute: ${selection}. real execution remains blocked.`
+      : `authorization required: pending. selected candidate: ${selection}. real execution remains blocked.`,
+    disclosure:
+      "To nadal lokalny stan decyzji. Realne wykonanie Git/GitHub pozostaje zablokowane w aplikacji na tym etapie.",
+    actionLabel: "Oznacz jako authorized to execute",
   };
 }
 
@@ -456,6 +526,8 @@ export default function ProjectSettingsPage() {
     useState<GitHubRealOperationSelection | null>(null);
   const [githubRealOperationCandidateDecision, setGithubRealOperationCandidateDecision] =
     useState<GitHubRealOperationCandidateDecision>("pending");
+  const [githubRealOperationAuthorization, setGithubRealOperationAuthorization] =
+    useState<GitHubRealOperationAuthorizationState>("authorization required");
 
   useEffect(() => {
     const nextProject = getProjectById(params.id);
@@ -475,6 +547,7 @@ export default function ProjectSettingsPage() {
     );
     setGithubRealOperationSelection(null);
     setGithubRealOperationCandidateDecision("pending");
+    setGithubRealOperationAuthorization("authorization required");
     setFeedbackMessage(null);
   }, [params.id]);
 
@@ -526,6 +599,12 @@ export default function ProjectSettingsPage() {
     buildGitHubRealOperationCandidateDecisionSummary(
       githubRealOperationSelection,
       githubRealOperationCandidateDecision,
+    );
+  const githubRealOperationAuthorizationSummary =
+    buildGitHubRealOperationAuthorizationSummary(
+      githubRealOperationSelection,
+      githubRealOperationCandidateDecision,
+      githubRealOperationAuthorization,
     );
   const githubRealOperationReadinessDetailSummary =
     buildGitHubRealOperationReadinessDetailSummary(
@@ -590,6 +669,9 @@ export default function ProjectSettingsPage() {
     setGithubRealOperationCandidateDecision(
       readGitHubRealOperationCandidateDecision(params.id, nextSelection),
     );
+    setGithubRealOperationAuthorization(
+      readGitHubRealOperationAuthorization(params.id, nextSelection),
+    );
   }
 
   function handleApproveGitHubRealOperationCandidate() {
@@ -605,6 +687,26 @@ export default function ProjectSettingsPage() {
     setGithubRealOperationCandidateDecision("approved for further preparation");
     setFeedbackMessage(
       "Kandydat zatwierdzono do dalszego przygotowania. To nie jest autoryzacja do wykonania.",
+    );
+  }
+
+  function handleAuthorizeGitHubRealOperationCandidate() {
+    if (
+      !githubRealOperationSelection ||
+      githubRealOperationCandidateDecision !==
+        "approved for further preparation"
+    ) {
+      return;
+    }
+
+    saveGitHubRealOperationAuthorization(
+      params.id,
+      githubRealOperationSelection,
+      "authorized to execute",
+    );
+    setGithubRealOperationAuthorization("authorized to execute");
+    setFeedbackMessage(
+      "Lokalny stan ustawiono na authorized to execute. Realne wykonanie nadal pozostaje zablokowane.",
     );
   }
 
@@ -936,6 +1038,33 @@ export default function ProjectSettingsPage() {
                   </p>
                   <p className="mt-2 text-sm text-zinc-400">
                     {githubRealOperationCandidateDecisionSummary.disclosure}
+                  </p>
+                </div>
+              ) : null}
+              {githubRealOperationAuthorizationSummary ? (
+                <div className="mt-3 rounded-xl border border-zinc-800 bg-zinc-950/80 p-3">
+                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                    Bramka autoryzacji
+                  </p>
+                  <p className="mt-2 text-sm text-zinc-300">
+                    selected candidate: {githubRealOperationSelection}
+                  </p>
+                  <p className="mt-1 text-sm text-zinc-300">
+                    authorization:{" "}
+                    {githubRealOperationAuthorizationSummary.status}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleAuthorizeGitHubRealOperationCandidate}
+                    className="mt-3 rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 transition hover:border-zinc-500"
+                  >
+                    {githubRealOperationAuthorizationSummary.actionLabel}
+                  </button>
+                  <p className="mt-3 text-sm text-zinc-400">
+                    {githubRealOperationAuthorizationSummary.copy}
+                  </p>
+                  <p className="mt-2 text-sm text-zinc-400">
+                    {githubRealOperationAuthorizationSummary.disclosure}
                   </p>
                 </div>
               ) : null}

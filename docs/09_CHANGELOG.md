@@ -77,9 +77,9 @@ Each release entry should contain:
 
 ### Completed
 
-* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.12 - GitHub First Operation Authorization Boundary Foundation` as the current product milestone while keeping `MS-028.11 - GitHub First Operation Candidate Decision Foundation` as the latest completed product milestone.
-* Recorded that the repository now defines a separate local authorization boundary for the first selected GitHub operation candidate after `MS-028.11`, distinguishing selected candidate, approved for further preparation, authorization required, and authorized to execute, while keeping real Git/GitHub execution blocked.
-* Recorded that the milestone does not create OAuth, tokens, clone, fetch, checkout, branch, commit, push, or PR artifacts.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` as `NONE / Product Owner decision required` and `Latest Completed Product Milestone` as `MS-028.12 - GitHub First Operation Authorization Boundary Foundation`.
+* Recorded that `MS-028.12 - GitHub First Operation Authorization Boundary Foundation` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` and that the repository now defines a separate local authorization boundary for the first selected GitHub operation candidate after `MS-028.11`, distinguishing selected candidate, approved for further preparation, authorization required, and authorized to execute, while keeping real Git/GitHub execution blocked.
+* Recorded that the milestone does not create OAuth, tokens, clone, fetch, checkout, branch, commit, push, or PR artifacts and that the targeted settings page test file passed with 13 tests.
 * Recorded the Session 087 MS-028.12 control files sync publication.
 
 ### Notes
