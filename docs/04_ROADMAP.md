@@ -136,11 +136,11 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-MS-028.14 - GitHub Local Working Branch Creation Action Foundation
+NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.13 - GitHub First Authorized Operation Preflight Foundation
+MS-028.14 - GitHub Local Working Branch Creation Action Foundation
 
 ## MS-028.14 - GitHub Local Working Branch Creation Action Foundation
 
@@ -150,20 +150,22 @@ MS-028.14 - GitHub Local Working Branch Creation Action Foundation
 **Type**
 Product Milestone
 
+This is an SPS OS-controlled action foundation only. Real clone/checkout/branch execution was not added in this milestone.
+
 **Contract Status**
-PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Publication Status**
 PUBLISHED
 
 **Milestone Status**
-PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
-YES
+NO
 
 **Runtime Status**
-OPEN
+CLOSED
 
 **Owner**
 Product Owner

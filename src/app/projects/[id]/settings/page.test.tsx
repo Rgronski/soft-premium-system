@@ -244,6 +244,76 @@ describe("ProjectSettingsPage", () => {
     expect(screen.getByLabelText("connection check")).toBeTruthy();
   });
 
+  test("shows the SPS OS local working branch creation action after authorized preflight and records a local success state", async () => {
+    render(<ProjectSettingsPage />);
+
+    fireEvent.change(screen.getByLabelText(/Podaj adres GitHub/), {
+      target: { value: "https://github.com/example/beauty-client-pro" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /Zapisz adres GitHub/ }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Decyzja pracy z ga/)).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getAllByRole("radio")[1]);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(/Proponowana ga/),
+      ).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByLabelText("branch check"));
+
+    expect(
+      screen.getByText(/Wybrano jako kandydat: branch check\./),
+    ).toBeTruthy();
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: /Zatwierd/i,
+      }),
+    );
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: /Oznacz jako authorized to execute/,
+      }),
+    );
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(/Akcja lokalnego klonu i ga/i),
+      ).toBeTruthy();
+    });
+    expect(screen.getByText(/Stan akcji: ready/)).toBeTruthy();
+    expect(
+      screen.getByText(/Sama nazwa ga/i),
+    ).toBeTruthy();
+    expect(
+      screen.getByRole("button", {
+        name: /Utw.*lokalny klon/i,
+      }),
+    ).toBeTruthy();
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: /Utw.*lokalny klon/i,
+      }),
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(/Stan akcji: success/)).toBeTruthy();
+    });
+    expect(
+      screen.getByText(/Lokalna .*uruchomiona/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Realne wykonanie Git\/GitHub nadal pozostaje zablokowane/),
+    ).toBeTruthy();
+  });
+
   test("hides the candidate decision block until a real operation candidate is selected", async () => {
     render(<ProjectSettingsPage />);
 

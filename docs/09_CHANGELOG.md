@@ -69,6 +69,40 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 087 - MS-028.14 UI and test implementation
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Implemented the SPS OS-controlled local working branch creation action foundation in `src/app/projects/[id]/settings/page.tsx` and `src/app/projects/[id]/settings/page.test.tsx`.
+* Kept the action limited to local UI/browser state, saved settings, and local feedback states.
+* Verified the targeted settings page test file with 14 tests passing.
+* Recorded that the milestone is an action foundation only and does not perform real clone/checkout/branch execution.
+
+### Notes
+
+* No GitHub OAuth, tokens, GitHub API integration, real Git operations, filesystem writes, remote synchronization, commit, push, merge, PR, or unrelated UI/domain changes were introduced.
+
+## Session 087 - MS-028.14 control files sync publication
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` as `NONE / Product Owner decision required` and `Latest Completed Product Milestone` as `MS-028.14 - GitHub Local Working Branch Creation Action Foundation`.
+* Recorded that `MS-028.14 - GitHub Local Working Branch Creation Action Foundation` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED`, is an action foundation only, and does not perform real clone/checkout/branch execution.
+* Recorded that the milestone does not create OAuth, tokens, clone, fetch, checkout, branch, commit, push, or PR artifacts and stays limited to known local UI/browser state.
+* Recorded the Session 087 MS-028.14 control files sync publication.
+
+### Notes
+
+* No GitHub OAuth, tokens, GitHub API integration, real Git operations, filesystem writes, remote synchronization, automatic work on main, real execution behavior, UI redesign, refactor, or unrelated source code change was introduced.
+
 ## Session 087 - MS-028.14 contract publication
 
 ### Date

@@ -42,15 +42,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 # Current Milestone
 
-MS-028.14 - GitHub Local Working Branch Creation Action Foundation
+NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.13 - GitHub First Authorized Operation Preflight Foundation
+MS-028.14 - GitHub Local Working Branch Creation Action Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-028.14 is PUBLISHED in the current local workspace as the GitHub Local Working Branch Creation Action Foundation. The repository now defines the docs-first contract for the first SPS OS-controlled local working branch creation action after MS-028.13, distinguishes saved settings from preflight readiness, future local clone creation, future local branch creation, and future sync-to-main, and states that the working branch name alone does not create a branch. The contract keeps the action inside SPS OS settings and action flow rather than a manual Codex bypass. The milestone does not create clone, checkout, branch, commit, push, merge, or PR artifacts.
+MS-028.14 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Local Working Branch Creation Action Foundation. The repository now defines the docs-first contract and UI/test action foundation for the first SPS OS-controlled local working branch creation action after MS-028.13, distinguishes saved settings from preflight readiness, future local clone creation, future local branch creation, and future sync-to-main, and states that the working branch name alone does not create a branch. The contract keeps the action inside SPS OS settings and action flow rather than a manual Codex bypass. The milestone is an action foundation only and does not create clone, checkout, branch, commit, push, merge, or PR artifacts.
 
 MS-028.13 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub First Authorized Operation Preflight Foundation. The repository now defines the local preflight for the first authorized GitHub operation after MS-028.12, shows what is ready and what still blocks real execution, uses only known local UI/browser state, and keeps real Git/GitHub execution blocked. The milestone does not create OAuth, tokens, clone, fetch, checkout, branch, commit, push, or PR artifacts. It was verified by the targeted settings page test file with 13 tests passing.
 
