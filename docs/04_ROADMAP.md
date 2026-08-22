@@ -136,11 +136,81 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE / Product Owner decision required
+MS-028.14 - GitHub Local Working Branch Creation Action Foundation
 
 ## Latest Completed Product Milestone
 
 MS-028.13 - GitHub First Authorized Operation Preflight Foundation
+
+## MS-028.14 - GitHub Local Working Branch Creation Action Foundation
+
+**Milestone**
+MS-028.14 - GitHub Local Working Branch Creation Action Foundation
+
+**Type**
+Product Milestone
+
+**Contract Status**
+PUBLISHED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+PUBLISHED
+
+**Active**
+YES
+
+**Runtime Status**
+OPEN
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the docs-first contract for the first SPS OS-controlled local working branch creation action driven by saved GitHub settings.
+
+**Product Outcome**
+After the project settings store the GitHub URL, local workspace path, branch work mode, and working branch name, this milestone defines the controlled local working-branch creation action that SPS OS will eventually execute. The contract keeps saved settings separate from preflight readiness, separates the future local clone action from the future local branch creation action, and leaves future sync-to-main work outside the milestone. Setting the branch name alone does not create a branch, and the action must be initiated by SPS OS settings/action flow rather than by a manual Codex workaround. The milestone does not yet create clone, checkout, branch, commit, push, merge, or PR artifacts.
+
+**Dependencies**
+* MS-028.13 - GitHub First Authorized Operation Preflight Foundation
+
+**Implementation Scope**
+Docs-first contract publication for the local working branch creation action.
+
+**Allowed Scope**
+* docs publication
+* local working branch creation wording
+* branch work mode and working branch name contract rules
+* local workspace path and GitHub URL contract rules
+* future-work guidance for the next real Git/GitHub implementation step
+
+**Forbidden Scope**
+* GitHub OAuth
+* access tokens
+* GitHub API integration
+* real Git operations
+* clone/fetch/checkout
+* branch creation on disk or remote
+* push
+* merge
+* pull request
+* sync-to-main
+* backend persistence
+* unrelated UI or domain changes
+
+**Sequencing**
+1. MS-028.13 defines the local preflight for the first authorized operation.
+2. MS-028.14 defines the SPS OS-controlled local working branch creation action after the saved settings and branch name are ready.
+3. Real clone/checkout/branch execution remains blocked until a later explicit Product Owner-approved implementation milestone.
 
 ## MS-028.13 - GitHub First Authorized Operation Preflight Foundation
 

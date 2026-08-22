@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 087 - MS-028.14 contract publication
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Defined the docs-first contract for `MS-028.14 - GitHub Local Working Branch Creation Action Foundation` in `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Clarified that saved settings, preflight readiness, local clone creation, local branch creation, and future sync-to-main remain distinct.
+* Clarified that the working branch name alone does not create a branch and that the action must be initiated by SPS OS settings/action flow rather than a manual Codex bypass.
+* Preserved `MS-028.13 - GitHub First Authorized Operation Preflight Foundation` as the latest completed milestone.
+* Recorded the Session 087 MS-028.14 contract publication.
+
+### Notes
+
+* No real clone/checkout/branch/commit/push/merge/PR execution or unrelated UI/domain changes were introduced.
+
 ## Session 087 - MS-028.13 UI and test implementation
 
 ### Date
