@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 087 - MS-028.17 docs-first local setup success copy correction contract patch
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Defined the docs-first contract for `MS-028.17 - GitHub Local Setup Success Copy Correction` in `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Corrected the success-copy boundary so the UI can say local clone/branch setup is completed while commit, push, merge, and PR remain blocked or out of scope.
+* Preserved `MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation` as the latest completed milestone.
+* Recorded the Session 087 MS-028.17 docs-first contract patch.
+
+### Notes
+
+* No Git logic changed and no live execution was introduced in this docs-first step.
+
 ## Session 087 - MS-028.16 control files sync publication
 
 ### Date

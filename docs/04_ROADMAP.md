@@ -134,14 +134,15 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.11` - GitHub First Operation Candidate Decision Foundation
 * `MS-028.13` - GitHub First Authorized Operation Preflight Foundation
 * `MS-028.16` - GitHub Repo Checkout Folder Derivation Foundation
+* `MS-028.17` - GitHub Local Setup Success Copy Correction
 
 ## Current
 
-MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation
+MS-028.17 - GitHub Local Setup Success Copy Correction
 
 ## Latest Completed Product Milestone
 
-MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
+MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation
 
 ## MS-028.15 - GitHub Local Clone And Working Branch Execution Foundation
 
@@ -290,6 +291,70 @@ Docs-first contract publication for repository checkout folder derivation.
 1. MS-028.15 defines the first SPS OS-controlled local clone and working branch execution foundation.
 2. MS-028.16 defines the safe derivation rule that keeps the manifest-only workspace folder separate from the Git repo checkout folder.
 3. Real clone/setup work can then target the derived checkout folder rather than the manifest-only workspace folder.
+
+## MS-028.17 - GitHub Local Setup Success Copy Correction
+
+**Milestone**
+MS-028.17 - GitHub Local Setup Success Copy Correction
+
+**Type**
+Product Milestone
+
+This milestone corrects the success copy after local Git setup so the UI says `local clone/branch setup: completed`, while commit/push/merge/PR remain blocked or out of scope.
+
+**Contract Status**
+DRAFT / READY FOR PUBLICATION
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+PLANNED
+
+**Active**
+YES
+
+**Runtime Status**
+OPEN
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the docs-first contract for correcting the success copy after the first live local Git setup so it no longer says real Git/GitHub execution remains blocked when the local setup has already completed.
+
+**Product Outcome**
+After the local clone and working branch setup succeeds, the UI should say that local clone/branch setup is completed. The UI should still state that commit, push, merge, and PR are blocked or out of scope. This milestone does not change Git logic and does not introduce any new execution.
+
+**Dependencies**
+MS-028.16 - GitHub Repo Checkout Folder Derivation Foundation
+
+**Implementation Scope**
+Docs-first contract publication for local setup success copy correction.
+
+**Allowed Scope**
+* local clone/branch setup completed wording
+* commit/push/merge/PR blocked or out-of-scope wording
+* success-copy correction guidance
+* future-work guidance for the already completed local Git setup path
+
+**Forbidden Scope**
+* GitHub OAuth
+* access tokens
+* GitHub API integration
+* secret storage
+* real clone/checkout/working-branch execution
+* commit
+* push
+* merge
+* pull request
+* unrelated UI or domain changes
 4. Real commit/push/merge/PR remain blocked until later explicit Product Owner-approved milestones.
 
 ## MS-028.14 - GitHub Local Working Branch Creation Action Foundation
