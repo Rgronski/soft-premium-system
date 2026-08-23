@@ -145,6 +145,8 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.25` - Project Brain Filesystem Metadata Root Foundation
 * `MS-028.27` - SPS Core Doctrine Knowledge Store Foundation
 * `MS-028.28` - Project Knowledge Promotion Candidate Foundation
+* `MS-028.29a` - App Version Marker 1.028.29 Publication
+* `MS-028.30` - Core Doctrine UI Visibility Foundation
 
 ## Current
 
@@ -152,17 +154,17 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.29a - App Version Marker 1.028.29 Publication
+MS-028.30 - Core Doctrine UI Visibility Foundation
 
-## MS-028.28 - Project Knowledge Promotion Candidate Foundation
+## MS-028.30 - Core Doctrine UI Visibility Foundation
 
 **Milestone**
-MS-028.28 - Project Knowledge Promotion Candidate Foundation
+MS-028.30 - Core Doctrine UI Visibility Foundation
 
 **Type**
 Product Milestone
 
-This milestone adds a project-scoped candidate store at `C:\\SPS_OS_WORK\\.sps-meta\\<project-slug>--<shortProjectId>\\knowledge\\core-candidates.jsonl`, stores candidate records with source knowledge references and snapshots, and keeps the Core Doctrine store untouched until Product Owner approval.
+This milestone adds a minimal Home page visibility block for the SPS OS core doctrine store, calls `getCoreDoctrineBootstrapStatus()`, and shows that the doctrine is global SPS OS knowledge rather than project-specific knowledge.
 
 **Contract Status**
 APPROVED
@@ -189,40 +191,108 @@ Chief Architect
 Codex
 
 **Purpose**
-Allow project knowledge to be proposed as a candidate for future core doctrine review without automatically writing anything to the global doctrine store.
+Make the global Core Doctrine visible in the app without connecting it to AI Workspace or project-specific knowledge flows.
 
 **Product Outcome**
-The repository now records candidate doctrine proposals as auditable JSONL alongside project knowledge, preserving the source entry reference, snapshot content, and rationale for later Product Owner review.
+The Home page now shows the SPS OS global knowledge state, the Core Doctrine store path, and the current entry count in Polish copy, while keeping the existing client-side Home content split into a dedicated component.
 
 **Implementation Note**
-This milestone does not add UI for promotion, does not approve or transfer candidates into core doctrine, and does not change the Core Doctrine store.
+This milestone keeps Core Doctrine separate from project knowledge and does not add promotion, AI context loading, or workflow changes.
 
 **Dependencies**
-MS-028.27 - SPS Core Doctrine Knowledge Store Foundation
-
-**Implementation Scope**
-Project Knowledge Promotion Candidate foundation.
-
-**Next Product Milestone**
 MS-028.29 - Core Doctrine Bootstrap Visibility Foundation
 
+**Implementation Scope**
+Core Doctrine UI visibility foundation.
+
+**Next Product Milestone**
+MS-028.31 - Decisions and Conductor State Store Foundation
+
 **Allowed Scope**
-* define the project-scoped candidate store outside the client repo
-* use `C:\\SPS_OS_WORK\\.sps-meta\\<project-slug>--<shortProjectId>\\knowledge\\core-candidates.jsonl`
-* persist candidate status, source reference, snapshot, and rationale as JSONL
-* keep the Core Doctrine store untouched
-* leave AI Workspace context loading untouched
+* show Core Doctrine availability on Home
+* call `getCoreDoctrineBootstrapStatus()`
+* display the global store path and entry count
+* keep the UI explicitly separate from project knowledge
+* keep AI Workspace disconnected from Core Doctrine
 
 **Forbidden Scope**
 * promotion approval flow
-* automatic transfer to Core Doctrine
-* UI action work
+* AI Workspace context loader changes
 * decisions store wiring
 * conductor store wiring
+* project knowledge store changes
+* task store changes
+* delete/re-import flows
+* Codex panel work
+
+## MS-028.30 - Core Doctrine UI Visibility Foundation
+
+**Milestone**
+MS-028.30 - Core Doctrine UI Visibility Foundation
+
+**Type**
+Product Milestone
+
+This milestone adds the first visible Core Doctrine status block on the Home page, using the bootstrap helper to show availability, store path, and entry count for the global SPS OS doctrine store.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Make the SPS OS global doctrine visible in the app without mixing it into project-scoped knowledge or AI Workspace context.
+
+**Product Outcome**
+The Home page now explicitly shows that Core Doctrine is global SPS OS knowledge, not project knowledge, and exposes the store path and current entry count.
+
+**Implementation Note**
+The UI change keeps AI Workspace disconnected from Core Doctrine and preserves the existing client-side Home content in a separate component split.
+
+**Dependencies**
+MS-028.29a - App Version Marker 1.028.29 Publication
+
+**Implementation Scope**
+Core Doctrine UI visibility foundation.
+
+**Next Product Milestone**
+MS-028.31 - Decisions and Conductor State Store Foundation
+
+**Allowed Scope**
+* show Core Doctrine availability on Home
+* call `getCoreDoctrineBootstrapStatus()`
+* display the global store path and entry count
+* keep the UI explicitly separate from project knowledge
+* keep AI Workspace disconnected from Core Doctrine
+
+**Forbidden Scope**
+* promotion approval flow
 * AI Workspace context loader changes
-* repository analysis engine
-* repository file summaries or filesystem scans
-* model provider changes
+* decisions store wiring
+* conductor store wiring
+* project knowledge store changes
+* task store changes
+* delete/re-import flows
+* Codex panel work
 * OpenAI configuration changes
 * persistent conversation memory
 * Git/GitHub flow changes

@@ -12,11 +12,16 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { APP_VERSION } from "@/lib/app-version";
 
 const deleteProjectFromServerMock = vi.fn();
+const getCoreDoctrineBootstrapStatusMock = vi.fn();
 let confirmSpy: ReturnType<typeof vi.spyOn>;
 
 vi.mock("@/lib/project/browser-server", () => ({
   deleteProjectFromServer: (projectId: string) =>
     deleteProjectFromServerMock(projectId),
+}));
+
+vi.mock("@/lib/knowledge/core-doctrine", () => ({
+  getCoreDoctrineBootstrapStatus: () => getCoreDoctrineBootstrapStatusMock(),
 }));
 
 import Home from "./page";
@@ -26,6 +31,12 @@ describe("Home", () => {
     localStorage.clear();
     deleteProjectFromServerMock.mockReset();
     deleteProjectFromServerMock.mockResolvedValue(undefined);
+    getCoreDoctrineBootstrapStatusMock.mockReset();
+    getCoreDoctrineBootstrapStatusMock.mockResolvedValue({
+      status: "available",
+      storePath: "C:\\SPS_OS_WORK\\.sps-meta\\core\\doctrine.jsonl",
+      entryCount: 8,
+    });
     confirmSpy = vi.spyOn(window, "confirm");
     confirmSpy.mockReturnValue(true);
     vi.spyOn(window, "alert").mockImplementation(() => {});
@@ -54,14 +65,14 @@ describe("Home", () => {
       ]),
     );
 
-    render(<Home />);
+    render(await Home());
 
     await waitFor(() => {
       expect(screen.getByText("Alpha")).toBeTruthy();
     });
     expect(screen.getByText("Beta")).toBeTruthy();
 
-    fireEvent.click(screen.getAllByRole("button", { name: "Usuń" })[0]!);
+    fireEvent.click(screen.getAllByRole("button", { name: "UsuĹ„" })[0]!);
 
     await waitFor(() => {
       expect(deleteProjectFromServerMock).toHaveBeenCalledWith("project-1");
@@ -97,7 +108,7 @@ describe("Home", () => {
       ]),
     );
 
-    render(<Home />);
+    render(await Home());
 
     await waitFor(() => {
       expect(
@@ -106,16 +117,24 @@ describe("Home", () => {
     });
   });
 
-  test("empty state CTA points to project creation with a matching label", () => {
-    render(<Home />);
+  test("empty state CTA points to project creation with a matching label", async () => {
+    render(await Home());
 
-    expect(screen.getByText("Utwórz pierwszy projekt")).toBeTruthy();
+    expect(screen.getByText("UtwĂłrz pierwszy projekt")).toBeTruthy();
     expect(
-      screen.getByText("Utwórz pierwszy projekt, aby rozpocząć główny przepływ."),
+      screen.getByText("UtwĂłrz pierwszy projekt, aby rozpoczÄ…Ä‡ gĹ‚Ăłwny przepĹ‚yw."),
     ).toBeTruthy();
-    expect(screen.getByText(`Przestrzeń robocza v${APP_VERSION}`)).toBeTruthy();
+    expect(screen.getByText(`PrzestrzeĹ„ robocza v${APP_VERSION}`)).toBeTruthy();
+    expect(screen.getByText("Wiedza główna SPS OS")).toBeTruthy();
     expect(
-      screen.getByRole("link", { name: "Utwórz projekt" }).getAttribute("href"),
+      screen.getByText("To nie jest wiedza konkretnego projektu"),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("C:\\SPS_OS_WORK\\.sps-meta\\core\\doctrine.jsonl"),
+    ).toBeTruthy();
+    expect(screen.getByText("8")).toBeTruthy();
+    expect(
+      screen.getByRole("link", { name: "UtwĂłrz projekt" }).getAttribute("href"),
     ).toBe("/projects");
   });
 
@@ -132,13 +151,13 @@ describe("Home", () => {
       ]),
     );
 
-    render(<Home />);
+    render(await Home());
 
     await waitFor(() => {
       expect(screen.getByText("Alpha")).toBeTruthy();
     });
 
-    fireEvent.click(screen.getByRole("button", { name: "Usuń" }));
+    fireEvent.click(screen.getByRole("button", { name: "UsuĹ„" }));
 
     expect(deleteProjectFromServerMock).not.toHaveBeenCalled();
     expect(screen.getByText("Alpha")).toBeTruthy();
