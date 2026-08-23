@@ -147,6 +147,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.28` - Project Knowledge Promotion Candidate Foundation
 * `MS-028.29a` - App Version Marker 1.028.29 Publication
 * `MS-028.30` - Core Doctrine UI Visibility Foundation
+* `MS-028.31` - Decisions and Conductor State Store Foundation
 
 ## Current
 
@@ -154,17 +155,17 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.30 - Core Doctrine UI Visibility Foundation
+MS-028.31 - Decisions and Conductor State Store Foundation
 
-## MS-028.30 - Core Doctrine UI Visibility Foundation
+## MS-028.31 - Decisions and Conductor State Store Foundation
 
 **Milestone**
-MS-028.30 - Core Doctrine UI Visibility Foundation
+MS-028.31 - Decisions and Conductor State Store Foundation
 
 **Type**
 Product Milestone
 
-This milestone adds a minimal Home page visibility block for the SPS OS core doctrine store, calls `getCoreDoctrineBootstrapStatus()`, and shows that the doctrine is global SPS OS knowledge rather than project-specific knowledge.
+This milestone adds project-scoped filesystem-backed decisions and conductor state stores on the SPS-owned metadata root, keeps decisions auditable in JSONL, keeps conductor state in JSON, and returns an honest empty/decision state when no project-specific conductor state exists.
 
 **Contract Status**
 APPROVED
@@ -197,29 +198,29 @@ Make the global Core Doctrine visible in the app without connecting it to AI Wor
 The Home page now shows the SPS OS global knowledge state, the Core Doctrine store path, and the current entry count in Polish copy, while keeping the existing client-side Home content split into a dedicated component.
 
 **Implementation Note**
-This milestone keeps Core Doctrine separate from project knowledge and does not add promotion, AI context loading, or workflow changes.
+This milestone keeps the new project-scoped stores separate from Core Doctrine and project knowledge, does not add UI wiring, and does not refactor Workflow Engine or remove the legacy global fallback.
 
 **Dependencies**
-MS-028.29 - Core Doctrine Bootstrap Visibility Foundation
+MS-028.30 - Core Doctrine UI Visibility Foundation
 
 **Implementation Scope**
-Core Doctrine UI visibility foundation.
+Decisions and conductor state store foundation.
 
 **Next Product Milestone**
-MS-028.31 - Decisions and Conductor State Store Foundation
+MS-028.32 - Conductor State UI Wiring Foundation
 
 **Allowed Scope**
-* show Core Doctrine availability on Home
-* call `getCoreDoctrineBootstrapStatus()`
-* display the global store path and entry count
-* keep the UI explicitly separate from project knowledge
-* keep AI Workspace disconnected from Core Doctrine
+* add project-scoped decisions storage
+* add project-scoped conductor state storage
+* use the shared metadata root strategy from tasks and knowledge
+* keep decisions in JSONL and conductor state in JSON
+* return an honest empty/decision state when conductor state is missing
 
 **Forbidden Scope**
-* promotion approval flow
-* AI Workspace context loader changes
-* decisions store wiring
-* conductor store wiring
+* UI wiring
+* Workflow Engine refactor
+* AI Workspace changes
+* Core Doctrine changes
 * project knowledge store changes
 * task store changes
 * delete/re-import flows

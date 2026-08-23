@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 088 - MS-028.30 core doctrine UI visibility publication
+## Session 088 - MS-028.31 decisions and conductor state store publication
 
 ### Date
 
@@ -80,11 +80,12 @@ Each release entry should contain:
 * Added a minimal Home page Core Doctrine visibility block that shows the global SPS OS doctrine as separate from project knowledge.
 * Used `getCoreDoctrineBootstrapStatus()` to display the doctrine availability, store path, and current entry count.
 * Kept the existing Home client content in a dedicated component split without connecting Core Doctrine to AI Workspace.
-* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.30 - Core Doctrine UI Visibility Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` advances to `MS-028.31 - Decisions and Conductor State Store Foundation`.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.31 - Decisions and Conductor State Store Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` advances to `MS-028.32 - Conductor State UI Wiring Foundation`.
+* Recorded that `MS-028.31 - Decisions and Conductor State Store Foundation` adds project-scoped filesystem-backed decisions and conductor state stores on the shared SPS-owned metadata root, keeps decisions in JSONL, keeps conductor state in JSON, and returns an honest empty/decision state when no project-specific conductor state exists.
 
 ### Notes
 
-* The publication keeps Core Doctrine global and visible, but still separate from project-scoped knowledge and AI Workspace context.
+* The publication keeps the new project-scoped decisions and conductor state stores separate from Core Doctrine, project knowledge, AI Workspace context loading, and Workflow Engine refactors.
 
 ## Session 088 - MS-028.29a app version marker publication
 
