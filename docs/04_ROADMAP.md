@@ -142,6 +142,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.22` - AI Workspace Project Lookup Fix Foundation
 * `MS-028.23` - AI Workspace Repo Context Boundary and Knowledge Refresh Foundation
 * `MS-028.24` - Project Conductor Context Rebinding Foundation
+* `MS-028.25` - Project Brain Filesystem Metadata Root Foundation
 
 ## Current
 
@@ -149,7 +150,88 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.25 - Project Brain Filesystem Metadata Root Foundation
+
+## MS-028.25 - Project Brain Filesystem Metadata Root Foundation
+
+**Milestone**
+MS-028.25 - Project Brain Filesystem Metadata Root Foundation
+
+**Type**
+Product Milestone
+
+This milestone defines the SPS-owned sidecar metadata root outside the client repo, uses the stable `<working-directory-slug>--<shortProjectId>` folder strategy, and introduces the first filesystem-backed Project Brain task store module at `tasks/open.jsonl` while keeping knowledge, decisions, conductor, AI context, and delete/re-import flows out of scope.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the SPS-owned metadata root and the first durable task-store module for Project Brain without changing client-repo contents.
+
+**Product Outcome**
+The repository now writes project task state into an SPS-owned sidecar metadata root on disk instead of keeping it only in browser/UI context, and the first module is the auditable JSONL task store at `tasks/open.jsonl`.
+
+**Implementation Note**
+This milestone does not wire knowledge, decisions, conductor, or AI context, and it does not implement delete/re-import flows.
+
+**Dependencies**
 MS-028.24 - Project Conductor Context Rebinding Foundation
+
+**Implementation Scope**
+Project Brain filesystem metadata root foundation.
+
+**Next Product Milestone**
+NONE / Product Owner decision required
+
+**Allowed Scope**
+* define the SPS-owned metadata root outside the client repo
+* use `<working-directory-slug>--<shortProjectId>` for the project metadata folder
+* persist tasks to `tasks/open.jsonl` as JSONL
+* keep the task store auditable and project-scoped
+* leave knowledge, decisions, conductor, and AI context untouched
+
+**Forbidden Scope**
+* full knowledge store wiring
+* decisions store wiring
+* conductor store wiring
+* AI context rebinding
+* delete/re-import flows
+* repository analysis engine
+* repository file summaries or filesystem scans
+* model provider changes
+* OpenAI configuration changes
+* persistent conversation memory
+* Git/GitHub flow changes
+* New Project Git intake flow
+* unrelated UI or domain changes
+
+**Sequencing**
+1. MS-028.24 removed the legacy conductor fallback from the project-facing panel without adding a full conductor engine.
+2. MS-028.25 establishes the SPS-owned filesystem metadata root and the first task-store module.
+3. Future Project Brain storage milestones can extend knowledge, decisions, and other contexts only after Product Owner decision.
+
+## MS-028.24 - Project Conductor Context Rebinding Foundation
 
 ## MS-028.24 - Project Conductor Context Rebinding Foundation
 

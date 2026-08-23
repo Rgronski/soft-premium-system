@@ -1,252 +1,150 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  test,
+  vi,
+} from "vitest";
+
+import type { Task } from "./types";
 
 vi.mock("server-only", () => ({}));
 
-const neonMock = vi.fn();
+const projectId = "0d3e28cb-6dff-442a-b94c-007a5d6b5779";
+const projectWorkingDirectory = "C:\\SPS_OS_WORK\\beauty-client-pro";
+const metadataRootSegment = "beauty-client-pro--0d3e28cb";
+const taskStoreDirectory = `C:\\SPS_OS_WORK\\.sps-meta\\${metadataRootSegment}\\tasks`;
+const taskStorePath = `${taskStoreDirectory}\\open.jsonl`;
 
-vi.mock("@neondatabase/serverless", () => ({
-  neon: neonMock,
+const mkdirMock = vi.fn();
+const readFileMock = vi.fn();
+const writeFileMock = vi.fn();
+const getServerProjectByIdMock = vi.fn();
+
+vi.mock("node:fs/promises", () => ({
+  mkdir: mkdirMock,
+  readFile: readFileMock,
+  writeFile: writeFileMock,
 }));
 
-const originalDatabaseUrl = process.env.DATABASE_URL;
+vi.mock("../project/server", async () => {
+  const actual = await vi.importActual<typeof import("../project/server")>(
+    "../project/server",
+  );
+
+  return {
+    ...actual,
+    getServerProjectById: getServerProjectByIdMock,
+  };
+});
+
+const fileStore = new Map<string, string>();
 
 async function loadServerModule() {
   vi.resetModules();
   return import("./server");
 }
 
-afterEach(() => {
-  if (typeof originalDatabaseUrl === "string") {
-    process.env.DATABASE_URL = originalDatabaseUrl;
-  } else {
-    delete process.env.DATABASE_URL;
-  }
+beforeEach(() => {
+  fileStore.clear();
+  mkdirMock.mockReset();
+  readFileMock.mockReset();
+  writeFileMock.mockReset();
+  getServerProjectByIdMock.mockReset();
 
-  neonMock.mockReset();
+  mkdirMock.mockResolvedValue(undefined);
+  getServerProjectByIdMock.mockResolvedValue({
+    id: projectId,
+    name: "Beauty Client PRO",
+    workingDirectory: projectWorkingDirectory,
+    createdAt: "2026-08-22T10:00:00.000Z",
+  });
+  readFileMock.mockImplementation(async (path: string) => {
+    const storedValue = fileStore.get(path);
+
+    if (typeof storedValue !== "string") {
+      const error = new Error("ENOENT") as Error & { code: string };
+      error.code = "ENOENT";
+      throw error;
+    }
+
+    return storedValue;
+  });
+  writeFileMock.mockImplementation(async (path: string, data: string) => {
+    fileStore.set(path, data);
+  });
+  vi.useFakeTimers();
+  vi.setSystemTime(new Date("2026-08-23T02:10:00.000Z"));
+  vi.stubGlobal("crypto", {
+    randomUUID: vi.fn(() => "generated-task-id"),
+  });
+});
+
+afterEach(() => {
   vi.useRealTimers();
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
 
 describe("getServerTasksByProjectId", () => {
-  it("uses DATABASE_URL, queries by projectId, and maps rows in SQL order", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-
-    const queryMock = vi.fn().mockResolvedValue([
+  test("reads tasks from the SPS-owned JSONL store", async () => {
+    const tasks: Task[] = [
+      {
+        id: "task-1",
+        projectId,
+        title: "First task",
+        createdAt: "2026-08-23T10:00:00.000Z",
+      },
       {
         id: "task-2",
-        project_id: "project-1",
-        title: "Second",
-        created_at: "2026-07-23T10:11:13.000Z",
+        projectId,
+        title: "Second task",
+        createdAt: "2026-08-23T10:05:00.000Z",
       },
-      {
-        id: "task-3",
-        project_id: "project-1",
-        title: "Third",
-        created_at: "2026-07-23T10:11:13.000Z",
-      },
-    ]);
+    ];
 
-    neonMock.mockReturnValue({
-      query: queryMock,
-    });
-
-    const { getServerTasksByProjectId } = await loadServerModule();
-    const result = await getServerTasksByProjectId("project-1");
-
-    expect(neonMock).toHaveBeenCalledWith("postgresql://pooled-runtime-url");
-    expect(queryMock).toHaveBeenCalledWith(
-      `SELECT id, project_id, title, created_at
-FROM public.tasks
-WHERE project_id = $1
-ORDER BY created_at ASC, id ASC`,
-      ["project-1"],
-    );
-    expect(result).toEqual([
-      {
-        id: "task-2",
-        projectId: "project-1",
-        title: "Second",
-        createdAt: "2026-07-23T10:11:13.000Z",
-      },
-      {
-        id: "task-3",
-        projectId: "project-1",
-        title: "Third",
-        createdAt: "2026-07-23T10:11:13.000Z",
-      },
-    ]);
-  });
-
-  it("returns an empty array when the query returns no rows", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-
-    const queryMock = vi.fn().mockResolvedValue([]);
-
-    neonMock.mockReturnValue({
-      query: queryMock,
-    });
-
-    const { getServerTasksByProjectId } = await loadServerModule();
-
-    await expect(getServerTasksByProjectId("project-1")).resolves.toEqual([]);
-  });
-
-  it("falls back locally when the database query fails during read", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-
-    const queryMock = vi.fn().mockRejectedValue(new Error("SQL failed"));
-
-    neonMock.mockReturnValue({
-      query: queryMock,
-    });
-
-    const { getServerTasksByProjectId } = await loadServerModule();
-
-    await expect(getServerTasksByProjectId("project-1")).resolves.toEqual([]);
-    expect(queryMock).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe("task server local fallback", () => {
-  it("stores and loads tasks locally when the database query fails", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date("2026-07-23T10:11:12.000Z"));
-    vi.stubGlobal("crypto", {
-      randomUUID: vi.fn(() => "generated-task-id"),
-    });
-
-    const queryMock = vi.fn().mockRejectedValue(
-      new Error("repository failure"),
+    fileStore.set(
+      taskStorePath,
+      `${tasks.map((task) => JSON.stringify(task)).join("\n")}\n`,
     );
 
-    neonMock.mockReturnValue({
-      query: queryMock,
-    });
+    const { getServerTasksByProjectId } = await loadServerModule();
+    const result = await getServerTasksByProjectId(projectId);
 
-    const { createServerTask, getServerTasksByProjectId } =
-      await loadServerModule();
-    const createdTask = await createServerTask({
-      projectId: "project-1",
-      title: "Alpha task",
-    });
-
-    expect(createdTask).toEqual({
-      id: "generated-task-id",
-      projectId: "project-1",
-      title: "Alpha task",
-      createdAt: "2026-07-23T10:11:12.000Z",
-    });
-    await expect(getServerTasksByProjectId("project-1")).resolves.toEqual([
-      createdTask,
-    ]);
-    expect(queryMock).toHaveBeenCalledTimes(1);
+    expect(getServerProjectByIdMock).toHaveBeenCalledWith(projectId);
+    expect(readFileMock).toHaveBeenCalledWith(taskStorePath, "utf8");
+    expect(result).toEqual(tasks);
   });
 });
 
 describe("createServerTask", () => {
-  it("trims input, generates id and timestamp, inserts once, and returns a Task", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date("2026-07-23T10:11:12.000Z"));
-    vi.stubGlobal("crypto", {
-      randomUUID: vi.fn(() => "generated-task-id"),
+  test("writes tasks to the SPS-owned JSONL store and restores them after reload", async () => {
+    const { createServerTask, getServerTasksByProjectId } =
+      await loadServerModule();
+
+    const createdTask = await createServerTask({
+      projectId,
+      title: "Alpha task",
     });
 
-    const queryMock = vi.fn().mockResolvedValue([
-      {
-        id: "generated-task-id",
-        project_id: "project-1",
-        title: "Alpha task",
-        created_at: "2026-07-23T10:11:12.000Z",
-      },
+    expect(getServerProjectByIdMock).toHaveBeenCalledWith(projectId);
+    expect(mkdirMock).toHaveBeenCalledWith(taskStoreDirectory, {
+      recursive: true,
+    });
+    expect(writeFileMock).toHaveBeenCalledWith(
+      taskStorePath,
+      `${JSON.stringify(createdTask)}\n`,
+      "utf8",
+    );
+    await expect(getServerTasksByProjectId(projectId)).resolves.toEqual([
+      createdTask,
     ]);
 
-    neonMock.mockReturnValue({
-      query: queryMock,
-    });
-
-    const { createServerTask } = await loadServerModule();
-    const result = await createServerTask({
-      projectId: "  project-1  ",
-      title: "  Alpha task  ",
-    });
-
-    expect(queryMock).toHaveBeenCalledWith(
-      `INSERT INTO public.tasks (id, project_id, title, created_at)
-VALUES ($1, $2, $3, $4)
-RETURNING id, project_id, title, created_at`,
-      [
-        "generated-task-id",
-        "project-1",
-        "Alpha task",
-        "2026-07-23T10:11:12.000Z",
-      ],
-    );
-    expect(result).toEqual({
-      id: "generated-task-id",
-      projectId: "project-1",
-      title: "Alpha task",
-      createdAt: "2026-07-23T10:11:12.000Z",
-    });
-  });
-
-  it("rejects an empty projectId", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-
-    const { createServerTask } = await loadServerModule();
+    const reloadedModule = await loadServerModule();
 
     await expect(
-      createServerTask({
-        projectId: "   ",
-        title: "Task",
-      }),
-    ).rejects.toThrow("Task server repository requires a non-empty projectId.");
-  });
-
-  it("rejects an empty title", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-
-    const { createServerTask } = await loadServerModule();
-
-    await expect(
-      createServerTask({
-        projectId: "project-1",
-        title: "   ",
-      }),
-    ).rejects.toThrow("Task server repository requires a non-empty title.");
-  });
-
-  it("falls back locally when the database insert fails", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date("2026-07-23T10:11:12.000Z"));
-    vi.stubGlobal("crypto", {
-      randomUUID: vi.fn(() => "generated-task-id"),
-    });
-
-    const queryMock = vi.fn().mockRejectedValue(
-      new Error("insert or update on table \"tasks\" violates foreign key constraint"),
-    );
-
-    neonMock.mockReturnValue({
-      query: queryMock,
-    });
-
-    const { createServerTask } = await loadServerModule();
-
-    await expect(
-      createServerTask({
-        projectId: "project-1",
-        title: "Task",
-      }),
-    ).resolves.toEqual({
-      id: "generated-task-id",
-      projectId: "project-1",
-      title: "Task",
-      createdAt: "2026-07-23T10:11:12.000Z",
-    });
-    expect(queryMock).toHaveBeenCalledTimes(1);
+      reloadedModule.getServerTasksByProjectId(projectId),
+    ).resolves.toEqual([createdTask]);
   });
 });
