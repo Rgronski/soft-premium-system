@@ -41,6 +41,35 @@ const projectJourneySteps = [
   "Skopiuj przekazanie",
 ];
 
+const PROJECT_DELETE_ACTIONS = [
+  {
+    value: "detach-from-sps",
+    label: "Odpinanie z SPS OS",
+    description:
+      "Usuwa wpis projektu z SPS OS i z lokalnego widoku projektu. Nie kasuje dysku.",
+  },
+  {
+    value: "detach-browser-cleanup",
+    label: "Odpinanie + browser/localStorage",
+    description:
+      "Czyści też lokalny stan projektu w przeglądarce. Nadal nie kasuje dysku.",
+  },
+  {
+    value: "delete-metadata-root",
+    label: "Usuń Project Brain metadata root",
+    description:
+      "Wymaga osobnej decyzji Product Ownera. Na tym etapie tylko potwierdzenie.",
+  },
+  {
+    value: "delete-workspace-checkout",
+    label: "Usuń katalog roboczy i checkout",
+    description:
+      "Wymaga osobnej decyzji Product Ownera. Na tym etapie tylko potwierdzenie.",
+  },
+] as const;
+
+type ProjectDeleteAction = (typeof PROJECT_DELETE_ACTIONS)[number]["value"];
+
 type Client = {
   id: string;
 };
@@ -177,6 +206,18 @@ function deriveWorkflowHealth(
   return "warning";
 }
 
+function clearProjectScopedDeleteBrowserState(projectId: string): void {
+  localStorage.removeItem(`soft-premium-system.projects.${projectId}.tasks`);
+  localStorage.removeItem(`soft-premium-system.projects.${projectId}.knowledge`);
+  localStorage.removeItem(
+    `soft-premium-system.projects.${projectId}.branch-work-mode`,
+  );
+  localStorage.removeItem(
+    `soft-premium-system.projects.${projectId}.working-branch-name`,
+  );
+  clearProjectSourceStatus(projectId);
+}
+
 export default function ProjectWorkspacePage() {
   const params = useParams<{ id: string }>();
   const router = useRouter();
@@ -185,6 +226,11 @@ export default function ProjectWorkspacePage() {
   >(null);
   const [revalidatedSourceStatus, setRevalidatedSourceStatus] =
     useState<ProjectSourceReconciliationStatus | null>(null);
+  const [deleteGateOpen, setDeleteGateOpen] = useState(false);
+  const [deleteAction, setDeleteAction] = useState<ProjectDeleteAction>(
+    "detach-from-sps",
+  );
+  const [deleteProjectNameInput, setDeleteProjectNameInput] = useState("");
   const localProject = getProjectById(params.id);
   const sourceBindingSummary = getProjectBindingDecisionSummary(
     localProject,
@@ -261,6 +307,14 @@ export default function ProjectWorkspacePage() {
       };
     }
   }, [params.id]);
+
+  const deleteProjectName =
+    dashboard.workspaceEntry?.workspace.overview.project.name.trim() ?? "";
+  const deleteProjectNameConfirmed =
+    deleteProjectNameInput.trim() === deleteProjectName && deleteProjectName !== "";
+  const selectedDeleteAction =
+    PROJECT_DELETE_ACTIONS.find((action) => action.value === deleteAction) ??
+    PROJECT_DELETE_ACTIONS[0];
 
   useEffect(() => {
     let ignore = false;
@@ -372,17 +426,28 @@ export default function ProjectWorkspacePage() {
       return;
     }
 
-    const projectName =
-      dashboard.workspaceEntry.workspace.overview.project.name;
-    const confirmed = window.confirm(
-      `Delete "${projectName}"? This cannot be undone.`,
-    );
-
-    if (!confirmed) {
+    if (!deleteProjectNameConfirmed) {
+      window.alert(
+        `Wpisz dokładną nazwę projektu: ${deleteProjectName}, aby potwierdzić.`,
+      );
       return;
     }
 
     try {
+      if (
+        deleteAction === "delete-metadata-root" ||
+        deleteAction === "delete-workspace-checkout"
+      ) {
+        window.alert(
+          "Ten wariant wymaga osobnej decyzji Product Ownera i nie zostanie wykonany w tej turze.",
+        );
+        return;
+      }
+
+      if (deleteAction === "detach-browser-cleanup") {
+        clearProjectScopedDeleteBrowserState(params.id);
+      }
+
       await deleteProjectFromServer(params.id);
       deleteProject(params.id);
       router.push("/");
@@ -510,14 +575,106 @@ export default function ProjectWorkspacePage() {
               ))}
             </ol>
           </div>
-          <div className="flex justify-end">
-            <button
-              type="button"
-              onClick={() => void handleDeleteProject()}
-              className="rounded-full border border-red-500/40 px-5 py-2 text-sm font-medium text-red-200 transition-colors hover:border-red-400 hover:bg-red-500/10"
-            >
-              Usuń projekt
-            </button>
+          <div className="rounded-2xl border border-red-500/30 bg-red-500/5 p-4">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-red-200/80">
+                  Potwierdzenie usuwania
+                </p>
+                <p className="mt-2 text-sm text-red-100">
+                  Domyślny wariant jest bezpieczny: odpięcie z SPS OS bez
+                  kasowania dysku.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setDeleteGateOpen((current) => !current)}
+                className="rounded-full border border-red-500/40 px-5 py-2 text-sm font-medium text-red-200 transition-colors hover:border-red-400 hover:bg-red-500/10"
+              >
+                {deleteGateOpen ? "Ukryj potwierdzenie" : "Usuń projekt"}
+              </button>
+            </div>
+            {deleteGateOpen ? (
+              <div className="mt-4 space-y-4">
+                <div className="grid gap-3">
+                  {PROJECT_DELETE_ACTIONS.map((action) => (
+                    <label
+                      key={action.value}
+                      className={`rounded-xl border px-4 py-3 text-sm transition-colors ${
+                        action.value === selectedDeleteAction.value
+                          ? "border-red-400/60 bg-red-500/10 text-red-50"
+                          : "border-red-500/20 bg-zinc-950/50 text-red-100"
+                      }`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <input
+                          type="radio"
+                          name="project-delete-action"
+                          value={action.value}
+                          checked={action.value === deleteAction}
+                          onChange={() =>
+                            setDeleteAction(action.value as ProjectDeleteAction)
+                          }
+                          className="mt-1 accent-red-400"
+                        />
+                        <div className="space-y-1">
+                          <p className="font-medium">{action.label}</p>
+                          <p className="text-sm text-red-100/80">
+                            {action.description}
+                          </p>
+                        </div>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+                <label className="block">
+                  <span className="mb-2 block text-sm text-red-100">
+                    Wpisz dokładną nazwę projektu, aby potwierdzić
+                  </span>
+                  <input
+                    type="text"
+                    value={deleteProjectNameInput}
+                    onChange={(event) =>
+                      setDeleteProjectNameInput(event.target.value)
+                    }
+                    placeholder={deleteProjectName || "nazwa projektu"}
+                    className="w-full rounded-lg border border-red-500/30 bg-zinc-950 px-4 py-3 text-red-50 outline-none focus:border-red-300"
+                  />
+                </label>
+                <p className="text-sm text-red-100/80">
+                  Wymagane: {deleteProjectName || "brak nazwy projektu"}.
+                  Destrukcyjne warianty pozostają zablokowane i wymagają
+                  osobnej decyzji Product Ownera.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    disabled={!deleteProjectNameConfirmed}
+                    onClick={() => void handleDeleteProject()}
+                    className="rounded-full border border-red-400/50 px-5 py-2 text-sm font-medium text-red-100 transition-colors hover:border-red-300 hover:bg-red-500/10 disabled:cursor-not-allowed disabled:border-red-500/20 disabled:text-red-200/50"
+                  >
+                    Potwierdź
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setDeleteGateOpen(false);
+                      setDeleteProjectNameInput("");
+                      setDeleteAction("detach-from-sps");
+                    }}
+                    className="rounded-full border border-zinc-700 px-5 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-900"
+                  >
+                    Anuluj
+                  </button>
+                </div>
+                <p className="text-sm text-red-100/80">
+                  Bezpieczny domyślny wariant usuwa tylko wpis projektu z SPS OS
+                  i lokalnej listy projektu. Browser/localStorage cleanup jest
+                  osobnym wariantem. Usunięcie metadata root lub katalogu
+                  roboczego nie jest jeszcze wykonywane.
+                </p>
+              </div>
+            ) : null}
           </div>
           <WorkspaceHeader
             projectName={dashboard.workspaceEntry.workspace.overview.project.name}

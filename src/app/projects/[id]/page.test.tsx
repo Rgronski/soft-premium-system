@@ -22,7 +22,6 @@ const deleteProjectMock = vi.fn((projectId: string) => {
   );
 });
 const deleteProjectFromServerMock = vi.fn();
-let confirmSpy: ReturnType<typeof vi.spyOn>;
 
 function createBlockedSourceRevalidationResponse(): Response {
   return new Response(
@@ -143,6 +142,40 @@ describe("ProjectWorkspacePage", () => {
     });
     getTasksMock.mockReturnValue([]);
     getKnowledgeMock.mockReturnValue([]);
+    localStorage.setItem(
+      "soft-premium-system.projects.project-1.tasks",
+      JSON.stringify([{ id: "task-1", projectId: "project-1", title: "Task A" }]),
+    );
+    localStorage.setItem(
+      "soft-premium-system.projects.project-1.knowledge",
+      JSON.stringify([
+        {
+          id: "knowledge-1",
+          projectId: "project-1",
+          title: "Knowledge note",
+          content: "Knowledge content",
+          createdAt: "2026-08-03T13:00:00.000Z",
+        },
+      ]),
+    );
+    localStorage.setItem(
+      "soft-premium-system.projects.project-1.branch-work-mode",
+      "working-branch",
+    );
+    localStorage.setItem(
+      "soft-premium-system.projects.project-1.working-branch-name",
+      "work/alpha-workspace",
+    );
+    localStorage.setItem(
+      "soft-premium-system.projects.project-1.source-status",
+      JSON.stringify({
+        sourceStatus: "git-repo",
+        repoCheckoutPath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
+        remoteUrl: "https://example.com/repos/alpha-workspace",
+        activeBranch: "work/alpha-workspace",
+        workingTreeState: "clean",
+      }),
+    );
     getProjectWorkspaceEntryMock.mockReturnValue({
       projectId: "project-1",
       workspace: {
@@ -183,8 +216,6 @@ describe("ProjectWorkspacePage", () => {
         ],
       },
     });
-    confirmSpy = vi.spyOn(window, "confirm");
-    confirmSpy.mockReturnValue(true);
     vi.spyOn(window, "alert").mockImplementation(() => {});
     localStorage.setItem(
       "soft-premium-system.projects",
@@ -465,19 +496,98 @@ describe("ProjectWorkspacePage", () => {
     expect(screen.getAllByText("warning")).toHaveLength(2);
   });
 
-  test("confirms delete, removes the project, and redirects home", async () => {
+  test("confirms the safe detach variant, removes the project, and redirects home", async () => {
     render(<ProjectWorkspacePage />);
 
     fireEvent.click(screen.getByRole("button", { name: "Usuń projekt" }));
 
     await waitFor(() => {
+      expect(
+        screen.getByText(
+          "Domyślny wariant jest bezpieczny: odpięcie z SPS OS bez kasowania dysku.",
+        ),
+      ).toBeTruthy();
+    });
+
+    fireEvent.change(
+      screen.getByLabelText(/Wpisz dokładną nazwę projektu/i),
+      {
+        target: { value: "Alpha Workspace" },
+      },
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Potwierdź" }));
+
+    await waitFor(() => {
       expect(deleteProjectFromServerMock).toHaveBeenCalledWith("project-1");
     });
 
+    expect(deleteProjectMock).toHaveBeenCalledWith("project-1");
     expect(pushMock).toHaveBeenCalledWith("/");
     expect(
       JSON.parse(localStorage.getItem("soft-premium-system.projects") ?? "[]"),
     ).toEqual([]);
+  });
+
+  test("clears project-scoped browser state when browser cleanup is selected", async () => {
+    render(<ProjectWorkspacePage />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Usuń projekt" }));
+    fireEvent.click(
+      screen.getByRole("radio", { name: /Odpinanie \+ browser\/localStorage/i }),
+    );
+    fireEvent.change(
+      screen.getByLabelText(/Wpisz dokładną nazwę projektu/i),
+      {
+        target: { value: "Alpha Workspace" },
+      },
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Potwierdź" }));
+
+    await waitFor(() => {
+      expect(
+        localStorage.getItem("soft-premium-system.projects.project-1.tasks"),
+      ).toBeNull();
+    });
+
+    expect(
+      localStorage.getItem("soft-premium-system.projects.project-1.knowledge"),
+    ).toBeNull();
+    expect(
+      localStorage.getItem("soft-premium-system.projects.project-1.branch-work-mode"),
+    ).toBeNull();
+    expect(
+      localStorage.getItem(
+        "soft-premium-system.projects.project-1.working-branch-name",
+      ),
+    ).toBeNull();
+    expect(
+      localStorage.getItem("soft-premium-system.projects.project-1.source-status"),
+    ).toBeNull();
+    expect(deleteProjectFromServerMock).toHaveBeenCalledWith("project-1");
+    expect(deleteProjectMock).toHaveBeenCalledWith("project-1");
+  });
+
+  test("blocks destructive delete variants until the Product Owner makes a separate decision", async () => {
+    render(<ProjectWorkspacePage />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Usuń projekt" }));
+    fireEvent.click(
+      screen.getByRole("radio", { name: /Usuń Project Brain metadata root/i }),
+    );
+    fireEvent.change(
+      screen.getByLabelText(/Wpisz dokładną nazwę projektu/i),
+      {
+        target: { value: "Alpha Workspace" },
+      },
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Potwierdź" }));
+
+    expect(deleteProjectFromServerMock).not.toHaveBeenCalled();
+    expect(deleteProjectMock).not.toHaveBeenCalled();
+    expect(pushMock).not.toHaveBeenCalled();
+    expect(window.alert).toHaveBeenCalledWith(
+      "Ten wariant wymaga osobnej decyzji Product Ownera i nie zostanie wykonany w tej turze.",
+    );
   });
 
   test("recovers from a stale Project Brain miss using local project state", () => {

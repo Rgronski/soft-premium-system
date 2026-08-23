@@ -45,12 +45,14 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.34 - Delete/Re-import Project Validation Foundation
-
-**Next Milestone**
 MS-028.35 - Project Delete Execution Confirmation Foundation
 
+**Next Milestone**
+MS-028.36 - Project Delete Disk Execution Foundation
+
 MS-028.34 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Delete/Re-import Project Validation Foundation. The repository now shows a read-only `Bezpieczny kontrakt usuwania` preview on the settings page, splits the delete boundary into separate project, SPS OS removal, browser/localStorage, Project Brain metadata root, working directory, and repo checkout resources, and keeps destructive delete and re-import out of scope until the Product Owner decides otherwise.
+
+MS-028.35 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Delete Execution Confirmation Foundation. The repository now adds a confirmation gate to the project page delete flow, keeps `Odpinanie z SPS OS` as the safe default, requires the exact project name before confirming, shows browser/localStorage cleanup as an optional non-destructive variant, and exposes destructive disk variants only as blocked choices that still require a separate Product Owner decision. The milestone does not perform destructive delete or re-import.
 
 MS-028.33 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Workspace Metadata Context Loader Foundation. The repository now wires the AI Workspace generate route to the controlled metadata context loader, keeps repository files explicitly out of the prompt boundary, and reports the available Project Brain modules plus the global Core Doctrine status without adding repository file analysis.
 
@@ -423,9 +425,9 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.33 - AI Workspace Metadata Context Loader Foundation
-Next Product Milestone: MS-028.34 - Delete/Re-import Project Validation Foundation
-Session 088 synchronized the `MS-028.33 - AI Workspace Metadata Context Loader Foundation` control files in the current local workspace. The repository now wires the AI Workspace generate route to the controlled metadata context loader, keeps repository files explicitly out of the prompt boundary, and reports the available Project Brain modules plus the global Core Doctrine status without adding repository file analysis.
+Latest Completed Product Milestone: MS-028.35 - Project Delete Execution Confirmation Foundation
+Next Product Milestone: MS-028.36 - Project Delete Disk Execution Foundation
+Session 088 synchronized the `MS-028.35 - Project Delete Execution Confirmation Foundation` control files in the current local workspace. The repository now adds a confirmation gate to the project page delete flow, keeps `Odpinanie z SPS OS` as the safe default, requires the exact project name before confirming, shows browser/localStorage cleanup as an optional non-destructive variant, and exposes destructive disk variants only as blocked choices that still require a separate Product Owner decision.
 
 MS-021.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Reset Foundation; the repository now exposes a local `Cofnij decyzjÄ™` action for resolved source-conflict decisions so the browser-state resolved flag can be cleared for that `project.id`. Reset does not mutate the local project, and if the discovered project still differs after reset, the conflict can appear again as unresolved. The MS-021.16 persistence behavior and MS-021.15 feedback remain preserved, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
@@ -1591,9 +1593,9 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-028.34 - Delete/Re-import Project Validation Foundation`
-* `Next Product Milestone` is `MS-028.35 - Project Delete Execution Confirmation Foundation`
-* `Session 088` synchronized the `MS-028.34 - Delete/Re-import Project Validation Foundation` control files because the settings page now shows a read-only delete/re-import validation preview that splits the delete boundary into separate resources while destructive delete and re-import remain out of scope.
+* `Latest Completed Product Milestone` is `MS-028.35 - Project Delete Execution Confirmation Foundation`
+* `Next Product Milestone` is `MS-028.36 - Project Delete Disk Execution Foundation`
+* `Session 088` synchronized the `MS-028.35 - Project Delete Execution Confirmation Foundation` control files because the settings page now adds a confirmation gate for delete execution, keeps `Odpinanie z SPS OS` as the safe default, and leaves destructive disk deletion out of scope until the Product Owner gives a separate decision.
 * `MS-028.10` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation; the repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
 * `MS-028.11` is `PUBLISHED / CLOSED` in the current local workspace as the GitHub First Operation Candidate Decision Foundation; the repository now records the Product Owner decision for the locally selected first operation candidate after `MS-028.9` and `MS-028.10`, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

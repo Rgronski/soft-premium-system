@@ -150,6 +150,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.31` - Decisions and Conductor State Store Foundation
 * `MS-028.32` - Conductor State UI Wiring Foundation
 * `MS-028.34` - Delete/Re-import Project Validation Foundation
+* `MS-028.35` - Project Delete Execution Confirmation Foundation
 
 ## Current
 
@@ -157,7 +158,7 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.34 - Delete/Re-import Project Validation Foundation
+MS-028.35 - Project Delete Execution Confirmation Foundation
 
 ## MS-028.33 - AI Workspace Metadata Context Loader Foundation
 
@@ -209,7 +210,7 @@ MS-028.32 - Conductor State UI Wiring Foundation
 AI Workspace Metadata Context Loader Foundation.
 
 **Next Product Milestone**
-MS-028.34 - Delete/Re-import Project Validation Foundation
+MS-028.36 - Project Delete Disk Execution Foundation
 
 **Allowed Scope**
 * add controlled AI Workspace metadata context loader
