@@ -441,9 +441,9 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.35 - Project Delete Execution Confirmation Foundation
-Next Product Milestone: MS-028.36 - Project Delete Disk Execution Foundation
-Session 088 synchronized the `MS-028.35 - Project Delete Execution Confirmation Foundation` control files in the current local workspace. The repository now adds a confirmation gate to the project page delete flow, keeps `Odpinanie z SPS OS` as the safe default, requires the exact project name before confirming, shows browser/localStorage cleanup as an optional non-destructive variant, and exposes destructive disk variants only as blocked choices that still require a separate Product Owner decision.
+Latest Completed Product Milestone: MS-028.42a - App Version Marker 1.028.42 Publication
+Next Product Milestone: NONE / Product Owner decision required
+Session 088 synchronized the `MS-028.42a - App Version Marker 1.028.42 Publication` control files in the current local workspace. The repository now exposes `1.028.42` from `src/lib/app-version.ts`, keeps the visible app-version badge/test aligned with the accepted marker, and leaves AI Workspace, Project Brain storage, Core Doctrine storage, and delete/re-import behavior unchanged.
 
 MS-021.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Reset Foundation; the repository now exposes a local `Cofnij decyzjÄ™` action for resolved source-conflict decisions so the browser-state resolved flag can be cleared for that `project.id`. Reset does not mutate the local project, and if the discovered project still differs after reset, the conflict can appear again as unresolved. The MS-021.16 persistence behavior and MS-021.15 feedback remain preserved, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
