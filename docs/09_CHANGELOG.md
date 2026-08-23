@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.24 control files sync publication
+
+### Date
+
+2026-08-22
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` and `Next Product Milestone` as `NONE / Product Owner decision required` and `Latest Completed Product Milestone` as `MS-028.24 - Project Conductor Context Rebinding Foundation`.
+* Recorded the Product Owner-selected next milestone as `MS-028.25 - Project Brain Filesystem Task Store Foundation` in the SSOT state documents.
+* Recorded that `MS-028.24 - Project Conductor Context Rebinding Foundation` removes the legacy `MS-000.5 - Konduktor` fallback from the project-facing Conductor panel, shows a Polish project-facing empty/decision state when no project-specific conductor state exists, and keeps the existing workflow hint visible without building a full project-specific conductor engine.
+* Appended the Session 088 `MS-028.24` usage record.
+
+### Notes
+
+* No new product code changed in this sync step; the accepted patch remains limited to the existing project page, its focused test, and the session usage record.
+
 ## Session 088 - MS-028.23 control files sync publication
 
 ### Date

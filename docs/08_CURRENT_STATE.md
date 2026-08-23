@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.23 - AI Workspace Repo Context Boundary and Knowledge Refresh Foundation
+MS-028.24 - Project Conductor Context Rebinding Foundation
 
 **Next Milestone**
-NONE / Product Owner decision required
+MS-028.25 - Project Brain Filesystem Task Store Foundation
+
+MS-028.24 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Conductor Context Rebinding Foundation. The project-facing Conductor panel no longer shows the legacy `MS-000.5 - Konduktor` fallback. When a project does not have its own conductor state, the panel now shows an honest Polish decision/empty state and keeps the existing workflow hint visible without implying a full project-specific conductor engine. The milestone does not refactor Workflow Engine.
 
 MS-028.21 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Git Checkout Status Revalidation UX Foundation. The settings page now shows a minimal Polish copy cue that the repo status was verified from filesystem-backed revalidation, so the checkout status explanation is explicit without adding a refresh action or changing commit/push/merge/PR boundaries.
 

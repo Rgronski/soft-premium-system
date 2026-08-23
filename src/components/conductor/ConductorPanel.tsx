@@ -1,6 +1,5 @@
 import {
   deriveConductorProjectBrainGuidance,
-  getConductorState,
 } from "@/lib/conductor/conductor";
 import type { WorkflowNextStep } from "@/lib/workflow/types";
 
@@ -29,9 +28,22 @@ const actionReadinessSignals = {
   },
 } as const;
 
+const projectFacingConductorState = {
+  currentMilestone: "Konduktor projektu czeka na decyzję Product Ownera",
+  currentPhase: "Brak stanu dla projektu",
+  currentTask: "Projekt nie ma jeszcze własnego stanu Konduktora",
+  nextAction:
+    "Konduktor może wskazać następny krok dopiero po zapisaniu stanu projektu albo decyzji Product Ownera.",
+  projectHealth: "warning",
+} as const;
+
 export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
-  const conductor = getConductorState();
+  const conductor = projectFacingConductorState;
   const guidance = deriveConductorProjectBrainGuidance(workflowNextStep);
+  const guidanceReason =
+    guidance.actionReadiness === "requires-product-owner-decision"
+      ? "Konduktor projektu czeka na decyzję Product Ownera i nie ma jeszcze własnego stanu dla tego projektu."
+      : guidance.reason;
   const readinessLabel = actionReadinessLabels[guidance.actionReadiness];
   const readinessSignal = actionReadinessSignals[guidance.actionReadiness];
 
@@ -117,7 +129,7 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
             Powód
           </p>
           <p className="mt-1 text-sm leading-6 text-zinc-300">
-            {guidance.reason}
+            {guidanceReason}
           </p>
         </div>
 

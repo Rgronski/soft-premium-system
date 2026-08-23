@@ -340,6 +340,19 @@ describe("ProjectWorkspacePage", () => {
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledTimes(1);
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledWith("project-1");
     expect(screen.getByText("Project Brain")).toBeTruthy();
+    expect(screen.queryByText("MS-000.5 - Konduktor")).toBeNull();
+    expect(
+      screen.getByText("Konduktor projektu czeka na decyzję Product Ownera"),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Projekt nie ma jeszcze własnego stanu Konduktora"),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Konduktor projektu czeka na decyzję Product Ownera i nie ma jeszcze własnego stanu dla tego projektu.",
+      ),
+    ).toBeTruthy();
+    expect(screen.queryByText(/MS-025\.3 refined the decision prompt/i)).toBeNull();
     expect(
       screen.getByRole("link", { name: /Przejd/i }),
     ).toBeTruthy();
@@ -404,7 +417,7 @@ describe("ProjectWorkspacePage", () => {
         "Project Brain ma status pending. Ten projekt nie jest jeszcze gotowy do użycia produkcyjnego.",
       ),
     ).toBeTruthy();
-    expect(screen.getByText("warning")).toBeTruthy();
+    expect(screen.getAllByText("warning")).toHaveLength(2);
   });
 
   test("confirms delete, removes the project, and redirects home", async () => {
