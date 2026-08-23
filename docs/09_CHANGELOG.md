@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.34 delete/re-import project validation control files sync
+
+### Date
+
+2026-08-23
+
+### Completed
+
+* Added a read-only delete/re-import validation preview and the supporting project helper for the settings page.
+* Showed separate delete resources for the project, SPS OS removal, browser/localStorage, Project Brain metadata root, working directory, and repo checkout.
+* Kept destructive delete and re-import out of scope and did not execute any destructive filesystem action.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.34 - Delete/Re-import Project Validation Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` advances to `MS-028.35 - Project Delete Execution Confirmation Foundation`.
+
+### Notes
+
+* The publication keeps the delete/re-import boundary read-only and separate from the real delete action.
+
 ## Session 088 - MS-028.33 AI workspace metadata context loader publication
 
 ### Date

@@ -1,3 +1,6 @@
+import { basename, join } from "node:path";
+
+import { buildRepoCheckoutDirectory } from "./source-status";
 import type { Project } from "./types";
 import type { ProjectSourceReconciliationStatus } from "./source-status";
 
@@ -228,6 +231,72 @@ export function buildDefaultWorkingDirectory(projectName: string): string {
     .replace(/^-+|-+$/g, "");
 
   return `C:\\SPS_OS_WORK\\${slug || "project"}`;
+}
+
+function slugifyMetadataRootSegment(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function getShortProjectId(projectId: string): string {
+  return projectId.replace(/[^a-z0-9]/gi, "").slice(0, 8).toLowerCase();
+}
+
+function buildProjectMetadataRootPath(project: Project): string {
+  const workingDirectorySlug = basename(project.workingDirectory ?? "").trim();
+  const readableRootSegment = slugifyMetadataRootSegment(
+    workingDirectorySlug || project.name,
+  );
+  const shortProjectId = getShortProjectId(project.id);
+
+  if (!shortProjectId) {
+    return join("C:\\SPS_OS_WORK\\.sps-meta", readableRootSegment || project.id);
+  }
+
+  return join(
+    "C:\\SPS_OS_WORK\\.sps-meta",
+    `${readableRootSegment || "project"}--${shortProjectId}`,
+  );
+}
+
+export type ProjectDeleteValidationSummary = {
+  projectName: string;
+  projectWorkspacePath: string;
+  projectCheckoutPath: string;
+  projectMetadataRootPath: string;
+  registryRemovalNote: string;
+  browserStateRemovalNote: string;
+  destructiveDeleteConfirmation: string;
+  notes: string[];
+};
+
+export function getProjectDeleteValidationSummary(
+  project: Project,
+): ProjectDeleteValidationSummary {
+  const projectWorkspacePath =
+    project.workingDirectory?.trim() || buildDefaultWorkingDirectory(project.name);
+  const projectCheckoutPath = buildRepoCheckoutDirectory(projectWorkspacePath);
+  const projectMetadataRootPath = buildProjectMetadataRootPath(project);
+
+  return {
+    projectName: project.name.trim(),
+    projectWorkspacePath,
+    projectCheckoutPath,
+    projectMetadataRootPath,
+    registryRemovalNote:
+      "Odpięcie projektu usuwa wpis projektu z lokalnego rejestru SPS OS oraz z serwera projektu.",
+    browserStateRemovalNote:
+      "Stan przeglądarki i localStorage pozostaje osobnym zasobem i wymaga osobnego czyszczenia.",
+    destructiveDeleteConfirmation: `Aby wykonać destrukcyjne usunięcie dyskowe, trzeba potwierdzić dokładną nazwę projektu: ${project.name.trim()}.`,
+    notes: [
+      "Project Brain metadata root jest osobnym zasobem i nie jest częścią repo klienta.",
+      "Katalog roboczy / repo checkout jest osobnym zasobem filesystemowym.",
+      "Usunięcie klienta i usunięcie katalogu dyskowego to dwa różne kroki.",
+    ],
+  };
 }
 
 function determineProjectBrainStatus(workingDirectory: string): "available" | "pending" {

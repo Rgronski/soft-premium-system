@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.33 - AI Workspace Metadata Context Loader Foundation
+MS-028.34 - Delete/Re-import Project Validation Foundation
 
 **Next Milestone**
-MS-028.34 - Delete/Re-import Project Validation Foundation
+MS-028.35 - Project Delete Execution Confirmation Foundation
+
+MS-028.34 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Delete/Re-import Project Validation Foundation. The repository now shows a read-only `Bezpieczny kontrakt usuwania` preview on the settings page, splits the delete boundary into separate project, SPS OS removal, browser/localStorage, Project Brain metadata root, working directory, and repo checkout resources, and keeps destructive delete and re-import out of scope until the Product Owner decides otherwise.
 
 MS-028.33 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Workspace Metadata Context Loader Foundation. The repository now wires the AI Workspace generate route to the controlled metadata context loader, keeps repository files explicitly out of the prompt boundary, and reports the available Project Brain modules plus the global Core Doctrine status without adding repository file analysis.
 
@@ -70,7 +72,7 @@ MS-028.22 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local work
 
 MS-028.23 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Workspace Repo Context Boundary and Knowledge Refresh Foundation. The AI Workspace now states that it uses Project Brain context, makes it explicit that a pinned repository does not yet forward repository files into the AI prompt, and keeps the visible knowledge context synchronized locally after a successful save without showing a false refresh warning. The milestone does not add repository analysis, repository summaries, or filesystem file scanning.
 
-MS-028.34 is parked as the next Product Owner-selected milestone for the Delete/Re-import Project Validation Foundation, while the later Project Workspace Codex panel, AI Workspace context loader follow-up, and promotion approval flow remain parked until the Product Owner selects them. The separate global Core Doctrine store now lives in the SPS-owned `C:\\SPS_OS_WORK\\.sps-meta\\core\\doctrine.jsonl` path and stays distinct from project knowledge.
+MS-028.35 is parked as the next Product Owner-selected milestone for the Project Delete Execution Confirmation Foundation, while the later Project Workspace Codex panel, AI Workspace context loader follow-up, promotion approval flow, and re-import validation remain parked until the Product Owner selects them. The separate global Core Doctrine store now lives in the SPS-owned `C:\\SPS_OS_WORK\\.sps-meta\\core\\doctrine.jsonl` path and stays distinct from project knowledge.
 
 MS-028.20 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Checkout Status Revalidation Foundation. The repository now re-checks the filesystem-backed repo checkout instead of trusting stale browser-state or localStorage data alone, so a saved manifest-only workspace path does not hide a valid repo checkout at the derived folder. The milestone keeps the manifest-only workspace folder, the repo checkout folder, the local git repo presence, the GitHub remote URL, the active working branch, and the working tree state distinct when available, and it treats missing checkout folders, missing `.git`, remote mismatches, branch mismatches, and stale workspace-state mismatches as blockers or unknowns. Overview and settings use the shared source-status helper/model, valid checkout at the repo checkout folder reconciles the UI to `git-repo`, and commit/push/merge/PR remain out of scope.
 
@@ -1589,9 +1591,9 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-028.32 - Conductor State UI Wiring Foundation`
-* `Next Product Milestone` is `MS-028.33 - AI Workspace Metadata Context Loader Foundation`
-* `Session 088` synchronized the `MS-028.32 - Conductor State UI Wiring Foundation` control files because the project-facing Conductor panel now reads project-specific conductor state through the browser-accessible route while UI editing remains out of scope.
+* `Latest Completed Product Milestone` is `MS-028.34 - Delete/Re-import Project Validation Foundation`
+* `Next Product Milestone` is `MS-028.35 - Project Delete Execution Confirmation Foundation`
+* `Session 088` synchronized the `MS-028.34 - Delete/Re-import Project Validation Foundation` control files because the settings page now shows a read-only delete/re-import validation preview that splits the delete boundary into separate resources while destructive delete and re-import remain out of scope.
 * `MS-028.10` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation; the repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
 * `MS-028.11` is `PUBLISHED / CLOSED` in the current local workspace as the GitHub First Operation Candidate Decision Foundation; the repository now records the Product Owner decision for the locally selected first operation candidate after `MS-028.9` and `MS-028.10`, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

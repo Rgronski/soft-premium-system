@@ -149,6 +149,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.30` - Core Doctrine UI Visibility Foundation
 * `MS-028.31` - Decisions and Conductor State Store Foundation
 * `MS-028.32` - Conductor State UI Wiring Foundation
+* `MS-028.34` - Delete/Re-import Project Validation Foundation
 
 ## Current
 
@@ -156,7 +157,7 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.33 - AI Workspace Metadata Context Loader Foundation
+MS-028.34 - Delete/Re-import Project Validation Foundation
 
 ## MS-028.33 - AI Workspace Metadata Context Loader Foundation
 
@@ -228,6 +229,75 @@ MS-028.34 - Delete/Re-import Project Validation Foundation
 * project knowledge store changes
 * task store changes
 * delete/re-import flows
+* Codex panel work
+
+## MS-028.34 - Delete/Re-import Project Validation Foundation
+
+**Milestone**
+MS-028.34 - Delete/Re-import Project Validation Foundation
+
+**Type**
+Product Milestone
+
+This milestone adds a read-only, non-destructive delete/re-import validation preview that separates project data, SPS OS removal, browser/localStorage state, Project Brain metadata root, working directory, and repo checkout. It makes clear that destructive disk deletion and re-import are separate Product Owner decisions.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Provide a safe, read-only validation preview for delete/re-import boundaries without performing any destructive filesystem action.
+
+**Product Outcome**
+The project settings page now shows a `Bezpieczny kontrakt usuwania` preview that clearly splits the delete contract into separate resources and keeps destructive delete and re-import out of scope until the Product Owner makes a separate decision.
+
+**Implementation Note**
+This milestone keeps the preview separate from real delete execution, does not add re-import, and does not change the project page beyond the validation contract surface.
+
+**Dependencies**
+MS-028.33 - AI Workspace Metadata Context Loader Foundation
+
+**Implementation Scope**
+Delete/Re-import Project Validation Foundation.
+
+**Next Product Milestone**
+MS-028.35 - Project Delete Execution Confirmation Foundation
+
+**Allowed Scope**
+* add read-only non-destructive delete/re-import validation preview
+* distinguish project, SPS OS removal, browser/localStorage, Project Brain metadata root, working directory, and repo checkout
+* show metadata root as a separate resource
+* require explicit Product Owner decision before any disk deletion
+
+**Forbidden Scope**
+* destructive delete
+* re-import flow
+* real delete button execution
+* project page changes
+* AI Workspace changes
+* Workflow Engine refactor
+* project knowledge store changes
+* task store changes
 * Codex panel work
 
 ## MS-028.31 - Decisions and Conductor State Store Foundation

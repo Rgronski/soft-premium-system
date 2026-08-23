@@ -4,6 +4,7 @@ import { SectionCard } from "@/components/ui/SectionCard";
 import {
   getProjectBindingDecisionSummary,
   getProjectById,
+  getProjectDeleteValidationSummary,
   upsertProject,
 } from "@/lib/project/project";
 import type { Project } from "@/lib/project/types";
@@ -909,6 +910,7 @@ export default function ProjectSettingsPage() {
         repositoryContextMessage: `Kontekst repozytorium: repo checkout folder ${reconciledSourceStatus.repoCheckoutPath}; manifest-only workspace folder pozostaje osobnym folderem projektu SPS OS.`,
       }
     : getProjectBindingDecisionSummary(project);
+  const deleteValidationSummary = getProjectDeleteValidationSummary(project);
   const branchWorkModeSummary = buildBranchWorkModeSummary(
     project.name,
     branchWorkMode,
@@ -1250,6 +1252,44 @@ export default function ProjectSettingsPage() {
           <p className="mt-2 text-sm text-zinc-400">
             {summary.repositoryContextMessage}
           </p>
+        </div>
+
+        <div className="rounded-2xl border border-dashed border-amber-500/30 bg-amber-500/5 p-4">
+          <p className="text-xs uppercase tracking-[0.2em] text-amber-200/80">
+            Bezpieczny kontrakt usuwania
+          </p>
+          <p className="mt-2 text-sm text-amber-50">
+            To jest tylko podgląd. Destrukcyjne usunięcie będzie możliwe
+            dopiero po osobnej decyzji Product Ownera.
+          </p>
+          <div className="mt-3 space-y-2 text-sm text-amber-100">
+            <p>Projekt: {deleteValidationSummary.projectName}</p>
+            <p>
+              Odpięcie z SPS OS: {deleteValidationSummary.registryRemovalNote}
+            </p>
+            <p>
+              Browser/localStorage:{" "}
+              {deleteValidationSummary.browserStateRemovalNote}
+            </p>
+            <p>
+              Project Brain metadata root:{" "}
+              {deleteValidationSummary.projectMetadataRootPath}
+            </p>
+            <p>
+              Katalog roboczy: {deleteValidationSummary.projectWorkspacePath}
+            </p>
+            <p>Repo checkout: {deleteValidationSummary.projectCheckoutPath}</p>
+          </div>
+          <p className="mt-3 text-sm text-amber-100">
+            {deleteValidationSummary.destructiveDeleteConfirmation}
+          </p>
+          <ul className="mt-3 space-y-2">
+            {deleteValidationSummary.notes.map((note) => (
+              <li key={note} className="text-sm text-amber-100">
+                {note}
+              </li>
+            ))}
+          </ul>
         </div>
 
         {reconciledSourceStatus ? (
