@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 088 - MS-028.32 conductor state UI wiring publication
+## Session 088 - MS-028.33 AI workspace metadata context loader publication
 
 ### Date
 
@@ -77,10 +77,10 @@ Each release entry should contain:
 
 ### Completed
 
-* Added a browser-accessible conductor state route and browser helper for the project-facing Conductor panel.
-* Wired `ConductorPanel` through the client path so it shows project-specific filesystem-backed conductor state when present and keeps the honest empty/decision state when missing.
-* Kept the legacy global fallback helper intact and did not add conductor editing, Workflow Engine refactors, or AI Workspace wiring.
-* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.32 - Conductor State UI Wiring Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` advances to `MS-028.33 - AI Workspace Metadata Context Loader Foundation`.
+* Added a controlled AI Workspace metadata context loader and the supporting project-brain metadata helper for the generation route.
+* Wired the generate route to include metadata summaries for tasks, knowledge, decisions, conductor, and Core Doctrine while explicitly marking repository files as not included.
+* Kept the AI Workspace page unchanged and did not add repo file analysis, repository summaries, or promotion flow.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.33 - AI Workspace Metadata Context Loader Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` advances to `MS-028.34 - Delete/Re-import Project Validation Foundation`.
 
 ### Notes
 

@@ -156,17 +156,17 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.32 - Conductor State UI Wiring Foundation
+MS-028.33 - AI Workspace Metadata Context Loader Foundation
 
-## MS-028.32 - Conductor State UI Wiring Foundation
+## MS-028.33 - AI Workspace Metadata Context Loader Foundation
 
 **Milestone**
-MS-028.32 - Conductor State UI Wiring Foundation
+MS-028.33 - AI Workspace Metadata Context Loader Foundation
 
 **Type**
 Product Milestone
 
-This milestone adds a browser-accessible conductor state route and client-side wiring for the project-facing Conductor panel, so the panel can show project-specific filesystem-backed conductor state when it exists and keep the honest empty/decision state when it does not.
+This milestone adds a controlled AI Workspace metadata context loader that summarizes the available project metadata modules and clearly marks repository files as not included.
 
 **Contract Status**
 APPROVED
@@ -193,34 +193,37 @@ Chief Architect
 Codex
 
 **Purpose**
-Wire the project-facing Conductor panel to the project-specific conductor state store without adding editing UI.
+Provide a controlled AI Workspace metadata summary without analyzing repo files or pretending to expose repository contents.
 
 **Product Outcome**
-The Conductor panel now shows project-specific filesystem-backed conductor state when it exists and keeps the honest empty/decision state when it does not.
+The AI Workspace generation route now receives a compact metadata context summary that reports the available Project Brain modules, the global Core Doctrine status, and the explicit `repoFilesIncluded: false` boundary.
 
 **Implementation Note**
-This milestone keeps the browser-accessible conductor state wiring separate from Core Doctrine and project knowledge, does not add conductor editing, and does not refactor Workflow Engine or remove the legacy global fallback.
+This milestone keeps the metadata summary separate from repo analysis, does not broaden the AI Workspace into file ingestion, and does not change the project page.
 
 **Dependencies**
-MS-028.31 - Decisions and Conductor State Store Foundation
+MS-028.32 - Conductor State UI Wiring Foundation
 
 **Implementation Scope**
-Conductor State UI Wiring Foundation.
+AI Workspace Metadata Context Loader Foundation.
 
 **Next Product Milestone**
-MS-028.33 - AI Workspace Metadata Context Loader Foundation
+MS-028.34 - Delete/Re-import Project Validation Foundation
 
 **Allowed Scope**
-* add browser-accessible conductor state route/helper
-* wire project-facing Conductor panel to filesystem-backed conductor state
-* keep missing conductor state on the honest empty/decision path
-* show existing project conductor state when available
-* keep AI Workspace disconnected from the conductor state store
+* add controlled AI Workspace metadata context loader
+* summarize available Project Brain metadata modules
+* include Core Doctrine status as a separate global summary
+* mark repo files as not included
+* pass metadata summary into AI generation without repo file analysis
 
 **Forbidden Scope**
-* conductor state editing
+* repo file analysis
+* full context ingestion
+* promotion approval flow
+* project page changes
+* AI Workspace repo summary claims
 * Workflow Engine refactor
-* AI Workspace changes
 * Core Doctrine changes
 * project knowledge store changes
 * task store changes

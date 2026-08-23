@@ -1,5 +1,9 @@
 import { createProductionGenerateAiProjectResponse } from "@/lib/ai-model/server";
 import type { GenerateAiProjectResponseResult } from "@/lib/ai-model/types";
+import {
+  buildAiWorkspaceMetadataContextSummary,
+  getServerAiWorkspaceMetadataContext,
+} from "@/lib/project-brain/metadata";
 import { getServerAiProjectContext } from "@/lib/project-brain/server";
 import type { AiProjectContext } from "@/lib/project-brain/types";
 
@@ -121,6 +125,9 @@ export async function POST(
 
   const { id } = await context.params;
   const projectContext = transportBody.body.projectContext;
+  const metadataContext = await getServerAiWorkspaceMetadataContext(id);
+  const metadataContextSummary =
+    buildAiWorkspaceMetadataContextSummary(metadataContext);
   const generateAiProjectResponse =
     createProductionGenerateAiProjectResponse({
       env: process.env,
@@ -139,7 +146,10 @@ export async function POST(
   try {
     const result = await generateAiProjectResponse({
       projectId: id,
-      instruction: transportBody.body.instruction,
+      instruction: [
+        metadataContextSummary,
+        transportBody.body.instruction,
+      ].join("\n\n"),
     });
 
     return Response.json(result, {
