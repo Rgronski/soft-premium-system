@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.27 control files sync publication
+
+### Date
+
+2026-08-23
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Latest Completed Product Milestone` as `MS-028.27 - SPS Core Doctrine Knowledge Store Foundation`, `Current Product Milestone` as `NONE / Product Owner decision required`, and `Next Product Milestone` as `MS-028.28 - Project Knowledge Promotion Candidate Foundation`.
+* Recorded that `MS-028.27 - SPS Core Doctrine Knowledge Store Foundation` adds a separate SPS-owned global Core Doctrine store at `C:\\SPS_OS_WORK\\.sps-meta\\core\\doctrine.jsonl`, seeds a minimal auditable set of SPS OS principles, and keeps core doctrine separate from project knowledge.
+* Recorded that the Session 088 `MS-028.27` usage record is present.
+
+### Notes
+
+* No new product code changed in this sync step; the accepted patch remains limited to the existing core doctrine store implementation and the previously appended session usage record.
+
 ## Session 088 - MS-028.26 control files sync publication
 
 ### Date

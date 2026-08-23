@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.26 - Project Brain Filesystem Knowledge Store Foundation
+MS-028.27 - SPS Core Doctrine Knowledge Store Foundation
 
 **Next Milestone**
-MS-028.27 - SPS Core Doctrine Knowledge Store Foundation
+MS-028.28 - Project Knowledge Promotion Candidate Foundation
+
+MS-028.27 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS Core Doctrine Knowledge Store Foundation. The repository now writes a separate SPS-owned global Core Doctrine store into `C:\\SPS_OS_WORK\\.sps-meta\\core\\doctrine.jsonl`, seeds a minimal auditable set of SPS OS principles, and keeps that doctrine separate from project knowledge so the two stores do not mix. The milestone does not add project knowledge promotion, decisions, conductor, or AI context rebinding.
 
 MS-028.26 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Brain Filesystem Knowledge Store Foundation. The repository now writes project knowledge into the same SPS-owned metadata root used by MS-028.25, stores entries in `knowledge/entries.jsonl`, and keeps the existing browser/server Project Brain path visible on the Knowledge page so entries survive refresh and new sessions. The milestone does not introduce Core Doctrine storage, project knowledge promotion, decisions, conductor, or AI context rebinding.
 
@@ -62,7 +64,7 @@ MS-028.22 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local work
 
 MS-028.23 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Workspace Repo Context Boundary and Knowledge Refresh Foundation. The AI Workspace now states that it uses Project Brain context, makes it explicit that a pinned repository does not yet forward repository files into the AI prompt, and keeps the visible knowledge context synchronized locally after a successful save without showing a false refresh warning. The milestone does not add repository analysis, repository summaries, or filesystem file scanning.
 
-MS-028.27 is parked as the next Product Owner-selected milestone for the SPS Core Doctrine Knowledge Store Foundation, while the later Project Knowledge Promotion Candidate Foundation, decisions / conductor state store, AI Workspace context loader, and delete/re-import validation remain parked until the Product Owner selects them.
+MS-028.28 is parked as the next Product Owner-selected milestone for the Project Knowledge Promotion Candidate Foundation, while the later decisions / conductor state store, AI Workspace context loader, and delete/re-import validation remain parked until the Product Owner selects them. The separate global Core Doctrine store now lives in the SPS-owned `C:\\SPS_OS_WORK\\.sps-meta\\core\\doctrine.jsonl` path and stays distinct from project knowledge.
 
 MS-028.20 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Checkout Status Revalidation Foundation. The repository now re-checks the filesystem-backed repo checkout instead of trusting stale browser-state or localStorage data alone, so a saved manifest-only workspace path does not hide a valid repo checkout at the derived folder. The milestone keeps the manifest-only workspace folder, the repo checkout folder, the local git repo presence, the GitHub remote URL, the active working branch, and the working tree state distinct when available, and it treats missing checkout folders, missing `.git`, remote mismatches, branch mismatches, and stale workspace-state mismatches as blockers or unknowns. Overview and settings use the shared source-status helper/model, valid checkout at the repo checkout folder reconciles the UI to `git-repo`, and commit/push/merge/PR remain out of scope.
 

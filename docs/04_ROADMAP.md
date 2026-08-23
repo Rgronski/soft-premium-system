@@ -143,6 +143,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.23` - AI Workspace Repo Context Boundary and Knowledge Refresh Foundation
 * `MS-028.24` - Project Conductor Context Rebinding Foundation
 * `MS-028.25` - Project Brain Filesystem Metadata Root Foundation
+* `MS-028.27` - SPS Core Doctrine Knowledge Store Foundation
 
 ## Current
 
@@ -150,7 +151,85 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.27 - SPS Core Doctrine Knowledge Store Foundation
+
+## MS-028.27 - SPS Core Doctrine Knowledge Store Foundation
+
+**Milestone**
+MS-028.27 - SPS Core Doctrine Knowledge Store Foundation
+
+**Type**
+Product Milestone
+
+This milestone adds an SPS-owned global Core Doctrine store outside the client repo at `C:\\SPS_OS_WORK\\.sps-meta\\core\\doctrine.jsonl`, seeds a minimal auditable set of SPS OS principles, and keeps it separate from project knowledge so Project Brain project data and global doctrine do not mix.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define a durable SPS OS Core Doctrine store that preserves the system's foundation principles in a filesystem-backed, auditable runtime location without copying the full documentation set.
+
+**Product Outcome**
+The repository now writes a separate global doctrine store on disk and can seed the core principles that govern SPS OS execution while leaving project knowledge unchanged.
+
+**Implementation Note**
+This milestone does not add project knowledge promotion, decisions/conductor storage, AI Workspace context loading, or delete/re-import flows.
+
+**Dependencies**
 MS-028.25 - Project Brain Filesystem Metadata Root Foundation
+
+**Implementation Scope**
+SPS Core Doctrine knowledge store foundation.
+
+**Next Product Milestone**
+MS-028.28 - Project Knowledge Promotion Candidate Foundation
+
+**Allowed Scope**
+* define the SPS-owned global Core Doctrine store outside the client repo
+* use `C:\\SPS_OS_WORK\\.sps-meta\\core\\doctrine.jsonl`
+* seed a minimal auditable set of SPS OS principles
+* keep core doctrine separate from project knowledge
+* leave AI Workspace context loading untouched
+
+**Forbidden Scope**
+* project knowledge promotion flow
+* decisions store wiring
+* conductor store wiring
+* AI Workspace context loader changes
+* repository analysis engine
+* repository file summaries or filesystem scans
+* model provider changes
+* OpenAI configuration changes
+* persistent conversation memory
+* Git/GitHub flow changes
+* New Project Git intake flow
+* unrelated UI or domain changes
+
+**Sequencing**
+1. MS-028.25 established the SPS-owned filesystem metadata root for project-scoped stores.
+2. MS-028.26 added the project-scoped filesystem knowledge store.
+3. MS-028.27 adds the separate global Core Doctrine store without mixing it into project knowledge.
 
 ## MS-028.25 - Project Brain Filesystem Metadata Root Foundation
 
