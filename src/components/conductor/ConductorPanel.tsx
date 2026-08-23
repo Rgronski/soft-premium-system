@@ -1,9 +1,17 @@
+"use client";
+
+import {
+  getConductorStateFromServer,
+  type ProjectConductorStateSnapshot,
+} from "@/lib/conductor/browser-server";
 import {
   deriveConductorProjectBrainGuidance,
 } from "@/lib/conductor/conductor";
 import type { WorkflowNextStep } from "@/lib/workflow/types";
+import { useEffect, useState } from "react";
 
 type ConductorPanelProps = {
+  projectId: string;
   workflowNextStep?: WorkflowNextStep;
 };
 
@@ -37,8 +45,45 @@ const projectFacingConductorState = {
   projectHealth: "warning",
 } as const;
 
-export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
-  const conductor = projectFacingConductorState;
+function mapProjectConductorStatusToProjectHealth(
+  status: ProjectConductorStateSnapshot["status"],
+): "ready" | "warning" | "blocked" {
+  if (status === "ready") {
+    return "ready";
+  }
+
+  if (status === "blocked") {
+    return "blocked";
+  }
+
+  return "warning";
+}
+
+function deriveProjectFacingConductorState(
+  projectConductorState: ProjectConductorStateSnapshot | null,
+) {
+  if (!projectConductorState) {
+    return projectFacingConductorState;
+  }
+
+  return {
+    currentMilestone: projectConductorState.currentMilestone,
+    currentPhase: projectConductorState.currentPhase,
+    currentTask: projectConductorState.reason,
+    nextAction: projectConductorState.nextAction,
+    projectHealth: mapProjectConductorStatusToProjectHealth(
+      projectConductorState.status,
+    ),
+  } as const;
+}
+
+export function ConductorPanel({
+  projectId,
+  workflowNextStep,
+}: ConductorPanelProps) {
+  const [projectConductorState, setProjectConductorState] =
+    useState<ProjectConductorStateSnapshot | null>(null);
+  const conductor = deriveProjectFacingConductorState(projectConductorState);
   const guidance = deriveConductorProjectBrainGuidance(workflowNextStep);
   const guidanceReason =
     guidance.actionReadiness === "requires-product-owner-decision"
@@ -46,6 +91,32 @@ export function ConductorPanel({ workflowNextStep }: ConductorPanelProps) {
       : guidance.reason;
   const readinessLabel = actionReadinessLabels[guidance.actionReadiness];
   const readinessSignal = actionReadinessSignals[guidance.actionReadiness];
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadProjectConductorState() {
+      try {
+        const nextProjectConductorState = await getConductorStateFromServer(
+          projectId,
+        );
+
+        if (!ignore) {
+          setProjectConductorState(nextProjectConductorState);
+        }
+      } catch {
+        if (!ignore) {
+          setProjectConductorState(null);
+        }
+      }
+    }
+
+    void loadProjectConductorState();
+
+    return () => {
+      ignore = true;
+    };
+  }, [projectId]);
 
   return (
     <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">

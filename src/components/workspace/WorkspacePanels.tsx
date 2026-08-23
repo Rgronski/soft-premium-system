@@ -79,7 +79,10 @@ export function WorkspacePanels({
         ))}
       </div>
 
-      <ConductorPanel workflowNextStep={workflowNextStep} />
+      <ConductorPanel
+        projectId={projectId}
+        workflowNextStep={workflowNextStep}
+      />
 
       <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
         <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">

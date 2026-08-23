@@ -7,6 +7,7 @@ const useParamsMock = vi.fn(() => ({ id: "project-1" }));
 const pushMock = vi.fn();
 const getProjectWorkspaceEntryMock = vi.fn();
 const getProjectByIdMock = vi.fn();
+const getConductorStateFromServerMock = vi.fn();
 const getTasksMock = vi.fn();
 const getTasksFromServerMock = vi.fn();
 const getKnowledgeMock = vi.fn();
@@ -73,6 +74,11 @@ vi.mock("@/lib/project-brain/engine", () => ({
     getProjectWorkspaceEntryMock(projectId),
 }));
 
+vi.mock("@/lib/conductor/browser-server", () => ({
+  getConductorStateFromServer: (projectId: string) =>
+    getConductorStateFromServerMock(projectId),
+}));
+
 vi.mock("@/lib/project/project", async () => {
   const actual = await vi.importActual<typeof import("@/lib/project/project")>(
     "@/lib/project/project",
@@ -114,10 +120,21 @@ describe("ProjectWorkspacePage", () => {
     deleteProjectFromServerMock.mockResolvedValue(undefined);
     getProjectWorkspaceEntryMock.mockReset();
     getProjectByIdMock.mockReset();
+    getConductorStateFromServerMock.mockReset();
     getTasksMock.mockReset();
     getTasksFromServerMock.mockReset();
     getTasksFromServerMock.mockResolvedValue([]);
     getKnowledgeMock.mockReset();
+    getConductorStateFromServerMock.mockResolvedValue({
+      projectId: "project-1",
+      status: "decision-required",
+      currentMilestone: "Konduktor projektu czeka na decyzję Product Ownera",
+      currentPhase: "Brak stanu dla projektu",
+      nextAction:
+        "Konduktor może wskazać następny krok dopiero po zapisaniu stanu projektu albo decyzji Product Ownera.",
+      reason: "Projekt nie ma jeszcze własnego trwałego stanu Konduktora.",
+      updatedAt: "2026-08-23T04:00:00.000Z",
+    });
     vi.stubGlobal("fetch", vi.fn(() => Promise.resolve(createBlockedSourceRevalidationResponse())));
     getProjectByIdMock.mockReturnValue({
       id: "project-1",
@@ -356,6 +373,34 @@ describe("ProjectWorkspacePage", () => {
     expect(
       screen.getByRole("link", { name: /Przejd/i }),
     ).toBeTruthy();
+  });
+
+  test("renders a project-specific conductor state when the filesystem-backed store already has one", async () => {
+    getConductorStateFromServerMock.mockResolvedValue({
+      projectId: "project-1",
+      status: "ready",
+      currentMilestone: "MS-028.31 - Decisions and Conductor State Store Foundation",
+      currentPhase: "Stan zapisany",
+      nextAction: "Przejdź do kolejnej decyzji.",
+      reason: "Konduktor projektu ma już zapisany stan.",
+      updatedAt: "2026-08-23T04:05:00.000Z",
+    });
+
+    render(<ProjectWorkspacePage />);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(
+          "MS-028.31 - Decisions and Conductor State Store Foundation",
+        ),
+      ).toBeTruthy();
+    });
+
+    expect(screen.getByText("Stan zapisany")).toBeTruthy();
+    expect(screen.getByText("Konduktor projektu ma już zapisany stan.")).toBeTruthy();
+    expect(screen.getByText("Przejdź do kolejnej decyzji.")).toBeTruthy();
+    expect(screen.getByText("ready")).toBeTruthy();
+    expect(screen.queryByText("MS-000.5 - Konduktor")).toBeNull();
   });
 
   test("shows a calm empty state when Project Brain has no clearer next context yet", () => {

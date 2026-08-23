@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.32 conductor state UI wiring publication
+
+### Date
+
+2026-08-23
+
+### Completed
+
+* Added a browser-accessible conductor state route and browser helper for the project-facing Conductor panel.
+* Wired `ConductorPanel` through the client path so it shows project-specific filesystem-backed conductor state when present and keeps the honest empty/decision state when missing.
+* Kept the legacy global fallback helper intact and did not add conductor editing, Workflow Engine refactors, or AI Workspace wiring.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.32 - Conductor State UI Wiring Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` advances to `MS-028.33 - AI Workspace Metadata Context Loader Foundation`.
+
+### Notes
+
+* The publication keeps the browser-accessible conductor state path separate from Core Doctrine, project knowledge, and task storage.
+
 ## Session 088 - MS-028.31 decisions and conductor state store publication
 
 ### Date

@@ -148,6 +148,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.29a` - App Version Marker 1.028.29 Publication
 * `MS-028.30` - Core Doctrine UI Visibility Foundation
 * `MS-028.31` - Decisions and Conductor State Store Foundation
+* `MS-028.32` - Conductor State UI Wiring Foundation
 
 ## Current
 
@@ -155,7 +156,76 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.32 - Conductor State UI Wiring Foundation
+
+## MS-028.32 - Conductor State UI Wiring Foundation
+
+**Milestone**
+MS-028.32 - Conductor State UI Wiring Foundation
+
+**Type**
+Product Milestone
+
+This milestone adds a browser-accessible conductor state route and client-side wiring for the project-facing Conductor panel, so the panel can show project-specific filesystem-backed conductor state when it exists and keep the honest empty/decision state when it does not.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Wire the project-facing Conductor panel to the project-specific conductor state store without adding editing UI.
+
+**Product Outcome**
+The Conductor panel now shows project-specific filesystem-backed conductor state when it exists and keeps the honest empty/decision state when it does not.
+
+**Implementation Note**
+This milestone keeps the browser-accessible conductor state wiring separate from Core Doctrine and project knowledge, does not add conductor editing, and does not refactor Workflow Engine or remove the legacy global fallback.
+
+**Dependencies**
 MS-028.31 - Decisions and Conductor State Store Foundation
+
+**Implementation Scope**
+Conductor State UI Wiring Foundation.
+
+**Next Product Milestone**
+MS-028.33 - AI Workspace Metadata Context Loader Foundation
+
+**Allowed Scope**
+* add browser-accessible conductor state route/helper
+* wire project-facing Conductor panel to filesystem-backed conductor state
+* keep missing conductor state on the honest empty/decision path
+* show existing project conductor state when available
+* keep AI Workspace disconnected from the conductor state store
+
+**Forbidden Scope**
+* conductor state editing
+* Workflow Engine refactor
+* AI Workspace changes
+* Core Doctrine changes
+* project knowledge store changes
+* task store changes
+* delete/re-import flows
+* Codex panel work
 
 ## MS-028.31 - Decisions and Conductor State Store Foundation
 
@@ -192,10 +262,10 @@ Chief Architect
 Codex
 
 **Purpose**
-Make the global Core Doctrine visible in the app without connecting it to AI Workspace or project-specific knowledge flows.
+Persist project-scoped decisions and conductor state without wiring the UI yet.
 
 **Product Outcome**
-The Home page now shows the SPS OS global knowledge state, the Core Doctrine store path, and the current entry count in Polish copy, while keeping the existing client-side Home content split into a dedicated component.
+The repository now stores project-scoped decisions and conductor state on the shared SPS-owned metadata root and keeps the honest empty/decision fallback when no conductor state exists.
 
 **Implementation Note**
 This milestone keeps the new project-scoped stores separate from Core Doctrine and project knowledge, does not add UI wiring, and does not refactor Workflow Engine or remove the legacy global fallback.

@@ -421,9 +421,9 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.31 - Decisions and Conductor State Store Foundation
-Next Product Milestone: MS-028.32 - Conductor State UI Wiring Foundation
-Session 088 synchronized the `MS-028.31 - Decisions and Conductor State Store Foundation` control files in the current local workspace. The repository now records project-scoped decisions and conductor state on the SPS-owned metadata root, keeps decisions auditable in JSONL and conductor state in JSON, and returns an honest empty/decision state when no project-specific conductor state exists. The milestone does not wire UI, does not refactor Workflow Engine, and keeps the legacy global fallback helper intact.
+Latest Completed Product Milestone: MS-028.32 - Conductor State UI Wiring Foundation
+Next Product Milestone: MS-028.33 - AI Workspace Metadata Context Loader Foundation
+Session 088 synchronized the `MS-028.32 - Conductor State UI Wiring Foundation` control files in the current local workspace. The repository now wires the project-facing Conductor panel to the filesystem-backed conductor state route, keeps the honest empty/decision state when no project-specific conductor state exists, shows existing project conductor state when available, and keeps the legacy global fallback helper intact.
 
 MS-021.17 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Local Project Discovery Conflict Decision Reset Foundation; the repository now exposes a local `Cofnij decyzjÄ™` action for resolved source-conflict decisions so the browser-state resolved flag can be cleared for that `project.id`. Reset does not mutate the local project, and if the discovered project still differs after reset, the conflict can appear again as unresolved. The MS-021.16 persistence behavior and MS-021.15 feedback remain preserved, and the behavior stays local/browser-state only without backend, API, discovery, scanner, registry, or routing changes.
 
@@ -1589,9 +1589,9 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-028.31 - Decisions and Conductor State Store Foundation`
-* `Next Product Milestone` is `MS-028.32 - Conductor State UI Wiring Foundation`
-* `Session 088` synchronized the `MS-028.31 - Decisions and Conductor State Store Foundation` control files because project-scoped decisions and conductor state now persist on the shared SPS-owned metadata root while UI wiring remains out of scope.
+* `Latest Completed Product Milestone` is `MS-028.32 - Conductor State UI Wiring Foundation`
+* `Next Product Milestone` is `MS-028.33 - AI Workspace Metadata Context Loader Foundation`
+* `Session 088` synchronized the `MS-028.32 - Conductor State UI Wiring Foundation` control files because the project-facing Conductor panel now reads project-specific conductor state through the browser-accessible route while UI editing remains out of scope.
 * `MS-028.10` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation; the repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
 * `MS-028.11` is `PUBLISHED / CLOSED` in the current local workspace as the GitHub First Operation Candidate Decision Foundation; the repository now records the Product Owner decision for the locally selected first operation candidate after `MS-028.9` and `MS-028.10`, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
