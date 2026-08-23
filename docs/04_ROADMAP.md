@@ -144,6 +144,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.24` - Project Conductor Context Rebinding Foundation
 * `MS-028.25` - Project Brain Filesystem Metadata Root Foundation
 * `MS-028.27` - SPS Core Doctrine Knowledge Store Foundation
+* `MS-028.28` - Project Knowledge Promotion Candidate Foundation
 
 ## Current
 
@@ -151,7 +152,87 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.28 - Project Knowledge Promotion Candidate Foundation
+
+## MS-028.28 - Project Knowledge Promotion Candidate Foundation
+
+**Milestone**
+MS-028.28 - Project Knowledge Promotion Candidate Foundation
+
+**Type**
+Product Milestone
+
+This milestone adds a project-scoped candidate store at `C:\\SPS_OS_WORK\\.sps-meta\\<project-slug>--<shortProjectId>\\knowledge\\core-candidates.jsonl`, stores candidate records with source knowledge references and snapshots, and keeps the Core Doctrine store untouched until Product Owner approval.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Allow project knowledge to be proposed as a candidate for future core doctrine review without automatically writing anything to the global doctrine store.
+
+**Product Outcome**
+The repository now records candidate doctrine proposals as auditable JSONL alongside project knowledge, preserving the source entry reference, snapshot content, and rationale for later Product Owner review.
+
+**Implementation Note**
+This milestone does not add UI for promotion, does not approve or transfer candidates into core doctrine, and does not change the Core Doctrine store.
+
+**Dependencies**
 MS-028.27 - SPS Core Doctrine Knowledge Store Foundation
+
+**Implementation Scope**
+Project Knowledge Promotion Candidate foundation.
+
+**Next Product Milestone**
+MS-028.29 - Core Doctrine Bootstrap Visibility Foundation
+
+**Allowed Scope**
+* define the project-scoped candidate store outside the client repo
+* use `C:\\SPS_OS_WORK\\.sps-meta\\<project-slug>--<shortProjectId>\\knowledge\\core-candidates.jsonl`
+* persist candidate status, source reference, snapshot, and rationale as JSONL
+* keep the Core Doctrine store untouched
+* leave AI Workspace context loading untouched
+
+**Forbidden Scope**
+* promotion approval flow
+* automatic transfer to Core Doctrine
+* UI action work
+* decisions store wiring
+* conductor store wiring
+* AI Workspace context loader changes
+* repository analysis engine
+* repository file summaries or filesystem scans
+* model provider changes
+* OpenAI configuration changes
+* persistent conversation memory
+* Git/GitHub flow changes
+* New Project Git intake flow
+* unrelated UI or domain changes
+
+**Sequencing**
+1. MS-028.27 added the separate global Core Doctrine store.
+2. MS-028.28 adds the project-scoped candidate bridge without promotion.
+3. MS-028.29 can describe bootstrap visibility for the core doctrine path.
 
 ## MS-028.27 - SPS Core Doctrine Knowledge Store Foundation
 
