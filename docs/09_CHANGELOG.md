@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.39 project re-import reopen action sync
+
+### Date
+
+2026-08-23
+
+### Completed
+
+* Added a visible `Wykryj projekty z dysku` refresh action on the projects page so the existing filesystem discovery flow can be rerun after a project is detached or its local browser entry disappears.
+* Kept the existing `Otwórz` and `Przypnij` actions intact so a rediscovered project can still be opened or pinned locally.
+* Confirmed the new focused test covers empty discovery, refresh-driven rediscovery, and opening the discovered project again.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.39 - Project Re-import/Re-open Action Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` advances to `MS-028.40 - Delete/Re-import Live Project Trial Decision Foundation`.
+
+### Notes
+
+* The publication keeps the discovery API and project server helpers unchanged and does not add a full import wizard.
+
 ## Session 088 - MS-028.38 delete/re-import manual validation sync
 
 ### Date

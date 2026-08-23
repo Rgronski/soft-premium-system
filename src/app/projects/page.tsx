@@ -166,6 +166,7 @@ export default function ProjectsPage() {
     string | null
   >(null);
   const [isDiscoveryLoading, setIsDiscoveryLoading] = useState(true);
+  const [discoveryRefreshToken, setDiscoveryRefreshToken] = useState(0);
 
   useEffect(() => {
     let isActive = true;
@@ -210,7 +211,7 @@ export default function ProjectsPage() {
     return () => {
       isActive = false;
     };
-  }, []);
+  }, [discoveryRefreshToken]);
 
   useEffect(() => {
     setLocalProjects(getProjects());
@@ -500,6 +501,23 @@ export default function ProjectsPage() {
             <span className="rounded-full border border-zinc-700 px-3 py-1 text-xs uppercase tracking-[0.2em] text-zinc-400">
               {isDiscoveryLoading ? "Wczytywanie..." : "Odczyt"}
             </span>
+          </div>
+
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={() =>
+                setDiscoveryRefreshToken((current) => current + 1)
+              }
+              disabled={isDiscoveryLoading}
+              className="rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-900 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Wykryj projekty z dysku
+            </button>
+            <p className="text-sm text-zinc-500">
+              Jeśli projekt został odpięty albo lokalny wpis zniknął, uruchom
+              ponowne wykrywanie i potem otwórz projekt ponownie.
+            </p>
           </div>
 
           {discoveryErrorMessage ? (

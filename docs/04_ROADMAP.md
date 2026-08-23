@@ -154,6 +154,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.36` - Project Delete Disk Execution Foundation
 * `MS-028.37` - Project Delete UI Execution Wiring Foundation
 * `MS-028.38` - Delete/Re-import Manual Validation Run Foundation
+* `MS-028.39` - Project Re-import/Re-open Action Foundation
 
 ## Current
 
@@ -161,7 +162,7 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.38 - Delete/Re-import Manual Validation Run Foundation
+MS-028.39 - Project Re-import/Re-open Action Foundation
 
 ## MS-028.38 - Delete/Re-import Manual Validation Run Foundation
 
@@ -221,6 +222,76 @@ MS-028.39 - Project Re-import/Re-open Action Foundation
 * validate metadata root delete on a fixture
 * validate working directory / checkout delete on a fixture
 * validate delete -> recreate/re-open -> rediscovery on a fixture
+
+## MS-028.39 - Project Re-import/Re-open Action Foundation
+
+**Milestone**
+MS-028.39 - Project Re-import/Re-open Action Foundation
+
+**Type**
+Product Milestone
+
+This milestone adds the smallest product-facing re-import / re-open action after a project has been detached or its local browser entry has disappeared. The projects page gets a visible `Wykryj projekty z dysku` refresh action that reruns the existing filesystem discovery flow, lets the user see the discovered project again, and keeps the existing `Otwórz` and `Przypnij` actions intact.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Provide a minimal discover-and-reopen path for filesystem projects without introducing a full import wizard or changing the discovery API surface.
+
+**Product Outcome**
+The projects page can rerun existing discovery, reveal a project that was previously detached or whose local browser entry disappeared, and open or pin the discovered project again.
+
+**Implementation Note**
+This milestone keeps the discovery API and server project helper unchanged, does not add destructive delete, and does not add a full re-import wizard or Codex panel.
+
+**Dependencies**
+MS-028.38 - Delete/Re-import Manual Validation Run Foundation
+
+**Implementation Scope**
+Project Re-import/Re-open Action Foundation.
+
+**Next Product Milestone**
+MS-028.40 - Delete/Re-import Live Project Trial Decision Foundation
+
+**Allowed Scope**
+* add a visible `Wykryj projekty z dysku` discovery refresh action on the projects page
+* rerun the existing `GET /api/projects` discovery flow
+* keep `Otwórz` seeding local browser state and opening the discovered project
+* keep `Przypnij` attaching the discovered project locally
+
+**Forbidden Scope**
+* new import wizard
+* API route changes
+* server project helper changes
+* destructive delete
+* Codex panel work
+* AI Workspace changes
+* Core Doctrine changes
+* task store changes
+* knowledge store changes
+* conductor store changes
 
 **Forbidden Scope**
 * real delete of Beauty Client PRO

@@ -23,6 +23,10 @@ function createJsonResponse(body: unknown, status: number) {
   });
 }
 
+function createEmptyProjectsResponse() {
+  return createJsonResponse({ projects: [] }, 200);
+}
+
 describe("ProjectsPage", () => {
   beforeEach(() => {
     localStorage.clear();
@@ -91,6 +95,46 @@ describe("ProjectsPage", () => {
     expect(screen.getByText("Projekty wykryte na dysku")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Otw\u00F3rz" })).toBeTruthy();
     expect(localStorage.getItem("soft-premium-system.projects")).toBeNull();
+  });
+
+  test("refreshes discovery so an odpięty project can be shown and opened again", async () => {
+    fetchMock.mockImplementationOnce(async () => createEmptyProjectsResponse());
+    fetchMock.mockImplementationOnce(async () =>
+      createJsonResponse(
+        {
+          projects: [
+            {
+              id: "filesystem-project",
+              name: "Filesystem Project",
+              workingDirectory: "C:\\SPS_OS_WORK\\filesystem-project",
+              projectFilesystemStatus: "manifest-present",
+              createdAt: "2026-08-03T20:00:00.000Z",
+            },
+          ],
+        },
+        200,
+      ),
+    );
+
+    render(<ProjectsPage />);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(/Nie wykryto lokalnych projekt/),
+      ).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Wykryj projekty z dysku" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Filesystem Project")).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Otw\u00F3rz" }));
+
+    await waitFor(() => {
+      expect(pushMock).toHaveBeenCalledWith("/projects/filesystem-project");
+    });
   });
 
   test("opens a filesystem-discovered project by seeding local browser state first", async () => {

@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.38 - Delete/Re-import Manual Validation Run Foundation
+MS-028.39 - Project Re-import/Re-open Action Foundation
 
 **Next Milestone**
-MS-028.39 - Project Re-import/Re-open Action Foundation
+MS-028.40 - Delete/Re-import Live Project Trial Decision Foundation
+
+MS-028.39 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Re-import/Re-open Action Foundation. The repository now provides a visible `Wykryj projekty z dysku` refresh action on the projects page that reruns the existing filesystem discovery flow, lets a detached or locally missing project appear again, and keeps the existing `Otwórz` and `Przypnij` actions intact. The milestone does not add a new import wizard, does not change the discovery API or project server helpers, and does not touch the real Beauty Client PRO data.
 
 MS-028.38 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Delete/Re-import Manual Validation Run Foundation. The repository now confirms the fixture-backed manual validation of the delete/re-open path without introducing a full product re-import wizard. Safe detach remains nondestructive, browser/localStorage cleanup remains nondestructive, metadata root delete works on a temp fixture, working directory / checkout delete works on a temp fixture, and the delete -> recreate/re-open -> rediscovery path works on the fixture. The milestone keeps the real Beauty Client PRO data untouched and does not add UI, API, or Codex panel changes.
 
