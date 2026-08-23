@@ -120,6 +120,16 @@ type ProjectSourceRevalidationResponse =
   | ProjectSourceRevalidationBlockedResponse
   | ProjectSourceRevalidationErrorResponse;
 
+type ProjectDeleteExecutionResult = {
+  status: "blocked" | "dry-run" | "deleted" | "partial";
+  deletedPaths: string[];
+  blockedReasons: string[];
+  requestedActions: string[];
+  projectMetadataRootPath: string;
+  projectWorkingDirectoryPath: string;
+  projectCheckoutPath: string;
+};
+
 function buildProjectSourceRevalidationRequestUrl(
   projectId: string,
   repositoryUrl: string,
@@ -218,6 +228,10 @@ function clearProjectScopedDeleteBrowserState(projectId: string): void {
   clearProjectSourceStatus(projectId);
 }
 
+function buildProjectDeleteExecutionRequestUrl(projectId: string): string {
+  return `/api/projects/${encodeURIComponent(projectId)}/delete-execution`;
+}
+
 export default function ProjectWorkspacePage() {
   const params = useParams<{ id: string }>();
   const router = useRouter();
@@ -231,6 +245,10 @@ export default function ProjectWorkspacePage() {
     "detach-from-sps",
   );
   const [deleteProjectNameInput, setDeleteProjectNameInput] = useState("");
+  const [deleteProductOwnerApproval, setDeleteProductOwnerApproval] =
+    useState(false);
+  const [deleteExecutionResult, setDeleteExecutionResult] =
+    useState<ProjectDeleteExecutionResult | null>(null);
   const localProject = getProjectById(params.id);
   const sourceBindingSummary = getProjectBindingDecisionSummary(
     localProject,
@@ -434,20 +452,43 @@ export default function ProjectWorkspacePage() {
     }
 
     try {
-      if (
-        deleteAction === "delete-metadata-root" ||
-        deleteAction === "delete-workspace-checkout"
-      ) {
-        window.alert(
-          "Ten wariant wymaga osobnej decyzji Product Ownera i nie zostanie wykonany w tej turze.",
-        );
-        return;
-      }
-
       if (deleteAction === "detach-browser-cleanup") {
         clearProjectScopedDeleteBrowserState(params.id);
       }
 
+      if (deleteAction === "delete-metadata-root" || deleteAction === "delete-workspace-checkout") {
+        const response = await fetch(
+          buildProjectDeleteExecutionRequestUrl(params.id),
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              projectId: params.id,
+              projectName: deleteProjectName,
+              typedConfirmation: deleteProjectNameInput,
+              deleteMetadataRoot: deleteAction === "delete-metadata-root",
+              deleteWorkingDirectory:
+                deleteAction === "delete-workspace-checkout",
+              explicitProductOwnerApproval: deleteProductOwnerApproval,
+              dryRun: false,
+            }),
+          },
+        );
+        const result =
+          (await response.json()) as ProjectDeleteExecutionResult;
+        setDeleteExecutionResult(result);
+
+        if (result.status === "deleted") {
+          await deleteProjectFromServer(params.id);
+          deleteProject(params.id);
+        }
+
+        return;
+      }
+
+      setDeleteExecutionResult(null);
       await deleteProjectFromServer(params.id);
       deleteProject(params.id);
       router.push("/");
@@ -673,6 +714,51 @@ export default function ProjectWorkspacePage() {
                   osobnym wariantem. Usunięcie metadata root lub katalogu
                   roboczego nie jest jeszcze wykonywane.
                 </p>
+                <label className="flex items-start gap-3 rounded-xl border border-red-500/20 bg-zinc-950/70 px-4 py-3 text-sm text-red-50">
+                  <input
+                    type="checkbox"
+                    checked={deleteProductOwnerApproval}
+                    onChange={(event) =>
+                      setDeleteProductOwnerApproval(event.target.checked)
+                    }
+                    className="mt-1 accent-red-400"
+                  />
+                  <span>
+                    Mam osobna zgode Product Ownera na destrukcyjne usuniecie
+                    dysku. Bez tej zgody helper serverowy zablokuje wykonanie.
+                  </span>
+                </label>
+                {deleteExecutionResult ? (
+                  <div className="rounded-xl border border-red-500/20 bg-zinc-950/80 p-4 text-sm text-red-50">
+                    <p className="text-xs uppercase tracking-[0.2em] text-red-200/70">
+                      Wynik wykonania
+                    </p>
+                    <p className="mt-2">
+                      status:{" "}
+                      <span className="font-medium">
+                        {deleteExecutionResult.status}
+                      </span>
+                    </p>
+                    <p className="mt-2 text-red-100/90">
+                      requestedActions:{" "}
+                      {deleteExecutionResult.requestedActions.length > 0
+                        ? deleteExecutionResult.requestedActions.join(", ")
+                        : "brak"}
+                    </p>
+                    <p className="mt-2 text-red-100/90">
+                      deletedPaths:{" "}
+                      {deleteExecutionResult.deletedPaths.length > 0
+                        ? deleteExecutionResult.deletedPaths.join(" | ")
+                        : "brak"}
+                    </p>
+                    <p className="mt-2 text-red-100/90">
+                      blockedReasons:{" "}
+                      {deleteExecutionResult.blockedReasons.length > 0
+                        ? deleteExecutionResult.blockedReasons.join(" | ")
+                        : "brak"}
+                    </p>
+                  </div>
+                ) : null}
               </div>
             ) : null}
           </div>

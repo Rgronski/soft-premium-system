@@ -152,6 +152,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.34` - Delete/Re-import Project Validation Foundation
 * `MS-028.35` - Project Delete Execution Confirmation Foundation
 * `MS-028.36` - Project Delete Disk Execution Foundation
+* `MS-028.37` - Project Delete UI Execution Wiring Foundation
 
 ## Current
 
@@ -159,7 +160,65 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.37 - Project Delete UI Execution Wiring Foundation
+
+## MS-028.37 - Project Delete UI Execution Wiring Foundation
+
+**Milestone**
+MS-028.37 - Project Delete UI Execution Wiring Foundation
+
+**Type**
+Product Milestone
+
+This milestone wires the existing project delete gate to the browser-accessible delete execution route for destructive variants only. The UI keeps `Odpinanie z SPS OS` as the safe default, requires the exact project name plus an explicit Product Owner approval checkbox for destructive variants, and surfaces the returned result status together with `deletedPaths` and `blockedReasons`. The milestone keeps real Beauty Client PRO data untouched and does not add re-import or Codex panel behavior.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Provide the narrowest safe browser/UI wiring for destructive delete execution without enabling accidental disk removal.
+
+**Product Outcome**
+The project page can route destructive delete choices to the server-side execution helper and render the execution result for blocked, dry-run, deleted, or partial outcomes.
+
+**Implementation Note**
+This milestone keeps safe detach unchanged, uses the existing guarded delete helper, and does not introduce re-import or Codex panel work.
+
+**Dependencies**
 MS-028.36 - Project Delete Disk Execution Foundation
+
+**Implementation Scope**
+Project Delete UI Execution Wiring Foundation.
+
+**Next Product Milestone**
+MS-028.38 - Delete/Re-import Manual Validation Run Foundation
+
+**Allowed Scope**
+* add browser-accessible route for destructive delete execution
+* wire the project page delete gate to the route only for destructive variants
+* require exact project name and explicit Product Owner approval for destructive variants
+* surface blocked / dry-run / deleted / partial results with deleted paths and blocked reasons
 
 ## MS-028.36 - Project Delete Disk Execution Foundation
 

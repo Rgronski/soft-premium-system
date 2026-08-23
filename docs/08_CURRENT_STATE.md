@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.36 - Project Delete Disk Execution Foundation
+MS-028.37 - Project Delete UI Execution Wiring Foundation
 
 **Next Milestone**
-MS-028.37 - Project Delete UI Execution Wiring Foundation
+MS-028.38 - Delete/Re-import Manual Validation Run Foundation
+
+MS-028.37 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Delete UI Execution Wiring Foundation. The repository now wires the existing project page delete gate to the server-side delete execution route for destructive variants only, keeps `Odpinanie z SPS OS` as the safe default, requires the exact project name and an explicit Product Owner approval checkbox, and surfaces the result status with `deletedPaths` and `blockedReasons`. The milestone keeps real Beauty Client PRO data untouched, does not add re-import, and does not introduce Codex panel behavior.
 
 MS-028.34 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Delete/Re-import Project Validation Foundation. The repository now shows a read-only `Bezpieczny kontrakt usuwania` preview on the settings page, splits the delete boundary into separate project, SPS OS removal, browser/localStorage, Project Brain metadata root, working directory, and repo checkout resources, and keeps destructive delete and re-import out of scope until the Product Owner decides otherwise.
 
@@ -1595,10 +1597,11 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-028.36 - Project Delete Disk Execution Foundation`
-* `Next Product Milestone` is `MS-028.37 - Project Delete UI Execution Wiring Foundation`
+* `Latest Completed Product Milestone` is `MS-028.37 - Project Delete UI Execution Wiring Foundation`
+* `Next Product Milestone` is `MS-028.38 - Delete/Re-import Manual Validation Run Foundation`
 * `Session 088` synchronized the `MS-028.35 - Project Delete Execution Confirmation Foundation` control files because the settings page now adds a confirmation gate for delete execution, keeps `Odpinanie z SPS OS` as the safe default, and leaves destructive disk deletion out of scope until the Product Owner gives a separate decision.
 * `Session 088` synchronized the `MS-028.36 - Project Delete Disk Execution Foundation` control files because the repository now exposes a guarded server-side delete execution helper, validates exact confirmation plus Product Owner approval, supports only metadata-root and working-directory / repo-checkout deletion, and keeps real Beauty Client PRO data untouched.
+* `Session 088` synchronized the `MS-028.37 - Project Delete UI Execution Wiring Foundation` control files because the project page now routes destructive delete variants through the browser-accessible execution endpoint, keeps `Odpinanie z SPS OS` as the safe default, and surfaces blocked, dry-run, deleted, or partial results without touching the real Beauty Client PRO data.
 * `MS-028.10` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation; the repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
 * `MS-028.11` is `PUBLISHED / CLOSED` in the current local workspace as the GitHub First Operation Candidate Decision Foundation; the repository now records the Product Owner decision for the locally selected first operation candidate after `MS-028.9` and `MS-028.10`, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.

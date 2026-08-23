@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.37 project delete ui execution sync
+
+### Date
+
+2026-08-23
+
+### Completed
+
+* Added a browser-accessible delete execution route for destructive variants only and kept the safe detach path unchanged.
+* Wired the project page delete gate to the server-side delete execution helper so destructive choices now surface blocked, dry-run, deleted, or partial results with `deletedPaths` and `blockedReasons`.
+* Kept exact project name confirmation and explicit Product Owner approval as required guard rails, while leaving real Beauty Client PRO data untouched.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.37 - Project Delete UI Execution Wiring Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` advances to `MS-028.38 - Delete/Re-import Manual Validation Run Foundation`.
+
+### Notes
+
+* The publication keeps re-import, Codex panel, AI Workspace, and store architecture out of scope.
+
 ## Session 088 - MS-028.36 project delete disk execution sync
 
 ### Date

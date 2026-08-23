@@ -61,6 +61,83 @@ function createSuccessfulSourceRevalidationResponse(): Response {
   );
 }
 
+function createBlockedDeleteExecutionResponse(): Response {
+  return new Response(
+    JSON.stringify({
+      status: "blocked",
+      deletedPaths: [],
+      blockedReasons: [
+        "explicitProductOwnerApproval musi mieć wartość true przed wykonaniem destrukcyjnego delete.",
+      ],
+      requestedActions: ["metadata-root"],
+      projectMetadataRootPath: "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project-1",
+      projectWorkingDirectoryPath: "C:\\SPS_OS_WORK\\alpha-workspace",
+      projectCheckoutPath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
+    }),
+    {
+      status: 409,
+      headers: {
+        "content-type": "application/json",
+      },
+    },
+  );
+}
+
+function createDeletedDeleteExecutionResponse(): Response {
+  return new Response(
+    JSON.stringify({
+      status: "deleted",
+      deletedPaths: [
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project-1",
+        "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
+        "C:\\SPS_OS_WORK\\alpha-workspace",
+      ],
+      blockedReasons: [],
+      requestedActions: [
+        "metadata-root",
+        "working-directory-repo-checkout",
+      ],
+      projectMetadataRootPath: "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project-1",
+      projectWorkingDirectoryPath: "C:\\SPS_OS_WORK\\alpha-workspace",
+      projectCheckoutPath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
+    }),
+    {
+      status: 200,
+      headers: {
+        "content-type": "application/json",
+      },
+    },
+  );
+}
+
+function installProjectDeleteFetchMock() {
+  const fetchMock = vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
+    const url = typeof input === "string" ? input : input.toString();
+
+    if (url.includes("/delete-execution")) {
+      const body =
+        typeof init?.body === "string" ? JSON.parse(init.body) : ({} as Record<string, unknown>);
+      const typedConfirmation =
+        typeof body.typedConfirmation === "string" ? body.typedConfirmation : "";
+      const projectName =
+        typeof body.projectName === "string" ? body.projectName : "";
+      const hasApproval = body.explicitProductOwnerApproval === true;
+
+      if (!hasApproval || typedConfirmation !== projectName || !projectName) {
+        return createBlockedDeleteExecutionResponse();
+      }
+
+      return createDeletedDeleteExecutionResponse();
+    }
+
+    return createBlockedSourceRevalidationResponse();
+  });
+
+  vi.stubGlobal("fetch", fetchMock);
+
+  return fetchMock;
+}
+
 vi.mock("next/navigation", () => ({
   useParams: () => useParamsMock(),
   useRouter: () => ({
@@ -134,7 +211,7 @@ describe("ProjectWorkspacePage", () => {
       reason: "Projekt nie ma jeszcze własnego trwałego stanu Konduktora.",
       updatedAt: "2026-08-23T04:00:00.000Z",
     });
-    vi.stubGlobal("fetch", vi.fn(() => Promise.resolve(createBlockedSourceRevalidationResponse())));
+    installProjectDeleteFetchMock();
     getProjectByIdMock.mockReturnValue({
       id: "project-1",
       name: "Alpha Workspace",
@@ -567,7 +644,7 @@ describe("ProjectWorkspacePage", () => {
     expect(deleteProjectMock).toHaveBeenCalledWith("project-1");
   });
 
-  test("blocks destructive delete variants until the Product Owner makes a separate decision", async () => {
+  test("shows the blocked route result for destructive delete variants without Product Owner approval", async () => {
     render(<ProjectWorkspacePage />);
 
     fireEvent.click(screen.getByRole("button", { name: "Usuń projekt" }));
@@ -582,12 +659,52 @@ describe("ProjectWorkspacePage", () => {
     );
     fireEvent.click(screen.getByRole("button", { name: "Potwierdź" }));
 
+    await waitFor(() => {
+      expect(screen.getByText("status:")).toBeTruthy();
+      expect(screen.getByText("blocked")).toBeTruthy();
+    });
+
+    expect(
+      screen.getByText(/explicitProductOwnerApproval musi mieć wartość true/i),
+    ).toBeTruthy();
     expect(deleteProjectFromServerMock).not.toHaveBeenCalled();
     expect(deleteProjectMock).not.toHaveBeenCalled();
     expect(pushMock).not.toHaveBeenCalled();
-    expect(window.alert).toHaveBeenCalledWith(
-      "Ten wariant wymaga osobnej decyzji Product Ownera i nie zostanie wykonany w tej turze.",
+  });
+
+  test("shows the deleted route result for destructive delete variants with Product Owner approval", async () => {
+    render(<ProjectWorkspacePage />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Usuń projekt" }));
+    fireEvent.click(
+      screen.getByRole("radio", { name: /Usuń Project Brain metadata root/i }),
     );
+    fireEvent.click(
+      screen.getByRole("checkbox", {
+        name: /Mam osobna zgode Product Ownera na destrukcyjne usuniecie dysku/i,
+      }),
+    );
+    fireEvent.change(
+      screen.getByLabelText(/Wpisz dokładną nazwę projektu/i),
+      {
+        target: { value: "Alpha Workspace" },
+      },
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Potwierdź" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("status:")).toBeTruthy();
+      expect(screen.getByText("deleted")).toBeTruthy();
+    });
+
+    expect(
+      screen.getByText(
+        /C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project-1/,
+      ),
+    ).toBeTruthy();
+    expect(deleteProjectFromServerMock).toHaveBeenCalledWith("project-1");
+    expect(deleteProjectMock).toHaveBeenCalledWith("project-1");
+    expect(pushMock).not.toHaveBeenCalled();
   });
 
   test("recovers from a stale Project Brain miss using local project state", () => {
