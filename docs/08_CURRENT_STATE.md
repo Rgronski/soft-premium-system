@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.28 - Project Knowledge Promotion Candidate Foundation
+MS-028.29a - App Version Marker 1.028.29 Publication
 
 **Next Milestone**
-MS-028.29 - Core Doctrine Bootstrap Visibility Foundation
+MS-028.30 - Core Doctrine UI Visibility Foundation
+
+MS-028.29a is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the App Version Marker 1.028.29 Publication. The repository now exposes `1.028.29` from `src/lib/app-version.ts` and keeps the visible app-version badge/test aligned with the accepted marker without changing AI Workspace, Project Brain storage, Core Doctrine storage, or the roadmap's next milestone.
 
 MS-028.28 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Knowledge Promotion Candidate Foundation. The repository now writes project-scoped candidate records to `knowledge/core-candidates.jsonl`, keeps the source knowledge entry reference and snapshot content together with a rationale and `candidate` status, and leaves the global Core Doctrine store untouched. The milestone does not add UI, approval, or automatic promotion into core doctrine.
 
@@ -66,7 +68,7 @@ MS-028.22 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local work
 
 MS-028.23 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Workspace Repo Context Boundary and Knowledge Refresh Foundation. The AI Workspace now states that it uses Project Brain context, makes it explicit that a pinned repository does not yet forward repository files into the AI prompt, and keeps the visible knowledge context synchronized locally after a successful save without showing a false refresh warning. The milestone does not add repository analysis, repository summaries, or filesystem file scanning.
 
-MS-028.29 is parked as the next Product Owner-selected milestone for the Core Doctrine Bootstrap Visibility Foundation, while the later UI action for `Zaproponuj do wiedzy głównej`, promotion approval flow, decisions / conductor state store, AI Workspace context loader, and delete/re-import validation remain parked until the Product Owner selects them. The separate global Core Doctrine store now lives in the SPS-owned `C:\\SPS_OS_WORK\\.sps-meta\\core\\doctrine.jsonl` path and stays distinct from project knowledge.
+MS-028.30 is parked as the next Product Owner-selected milestone for the Core Doctrine UI Visibility Foundation, while the later UI action for `Zaproponuj do wiedzy głównej`, promotion approval flow, decisions / conductor state store, AI Workspace context loader, and delete/re-import validation remain parked until the Product Owner selects them. The separate global Core Doctrine store now lives in the SPS-owned `C:\\SPS_OS_WORK\\.sps-meta\\core\\doctrine.jsonl` path and stays distinct from project knowledge.
 
 MS-028.20 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the GitHub Checkout Status Revalidation Foundation. The repository now re-checks the filesystem-backed repo checkout instead of trusting stale browser-state or localStorage data alone, so a saved manifest-only workspace path does not hide a valid repo checkout at the derived folder. The milestone keeps the manifest-only workspace folder, the repo checkout folder, the local git repo presence, the GitHub remote URL, the active working branch, and the working tree state distinct when available, and it treats missing checkout folders, missing `.git`, remote mismatches, branch mismatches, and stale workspace-state mismatches as blockers or unknowns. Overview and settings use the shared source-status helper/model, valid checkout at the repo checkout folder reconciles the UI to `git-repo`, and commit/push/merge/PR remain out of scope.
 

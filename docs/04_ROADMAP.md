@@ -152,7 +152,7 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.28 - Project Knowledge Promotion Candidate Foundation
+MS-028.29a - App Version Marker 1.028.29 Publication
 
 ## MS-028.28 - Project Knowledge Promotion Candidate Foundation
 

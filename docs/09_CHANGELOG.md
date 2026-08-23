@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.29a app version marker publication
+
+### Date
+
+2026-08-23
+
+### Completed
+
+* Updated `src/lib/app-version.ts` so the canonical app version marker now reads `1.028.29`.
+* Updated the focused app-version badge test so it verifies the new canonical marker.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.29a - App Version Marker 1.028.29 Publication`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `MS-028.30 - Core Doctrine UI Visibility Foundation`.
+
+### Notes
+
+* The publication changes only the visible app version marker and the corresponding SSOT records; it does not start MS-028.30 or change Core Doctrine, Project Brain storage, or AI Workspace flows.
+
 ## Session 088 - MS-028.29 control files sync publication
 
 ### Date
