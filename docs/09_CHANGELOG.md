@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.36 project delete disk execution sync
+
+### Date
+
+2026-08-23
+
+### Completed
+
+* Added the server-side destructive delete execution helper `executeProjectDiskDelete(...)` that validates `projectId`, `projectName`, exact typed confirmation, and `explicitProductOwnerApproval === true` before any destructive execution is allowed.
+* Kept the helper limited to `Project Brain` metadata root and the working directory / repo checkout, with dry-run as the default validation path.
+* Confirmed the execution path uses test-only path overrides for temp-fixture coverage so real Beauty Client PRO data stays untouched.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.36 - Project Delete Disk Execution Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` advances to `MS-028.37 - Project Delete UI Execution Wiring Foundation`.
+
+### Notes
+
+* The publication keeps UI wiring, re-import, and Codex panel work out of scope.
+
 ## Session 088 - MS-028.35 project delete execution confirmation sync
 
 ### Date

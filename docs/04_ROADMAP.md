@@ -151,6 +151,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.32` - Conductor State UI Wiring Foundation
 * `MS-028.34` - Delete/Re-import Project Validation Foundation
 * `MS-028.35` - Project Delete Execution Confirmation Foundation
+* `MS-028.36` - Project Delete Disk Execution Foundation
 
 ## Current
 
@@ -158,7 +159,78 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.36 - Project Delete Disk Execution Foundation
+
+## MS-028.36 - Project Delete Disk Execution Foundation
+
+**Milestone**
+MS-028.36 - Project Delete Disk Execution Foundation
+
+**Type**
+Product Milestone
+
+This milestone adds the smallest safe server-side foundation for destructive project disk deletion. The helper validates `projectId`, `projectName`, exact `typedConfirmation`, and `explicitProductOwnerApproval === true` before any destructive execution is allowed. The helper stays limited to the Project Brain metadata root and the working directory / repo checkout, defaults to dry-run or validation behavior, and keeps real Beauty Client PRO data untouched.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Provide a guarded server-side foundation for disk deletion without enabling accidental removal of live SPS OS data.
+
+**Product Outcome**
+The delete execution helper can validate destructive requests, produce dry-run or blocked summaries, and execute only on temp fixtures when explicit approval and exact confirmation are supplied.
+
+**Implementation Note**
+This milestone keeps the execution path separate from UI wiring, re-import, and Codex panel work. It uses test-only path overrides for safe fixture coverage and does not touch the real Beauty Client PRO directories.
+
+**Dependencies**
 MS-028.35 - Project Delete Execution Confirmation Foundation
+
+**Implementation Scope**
+Project Delete Disk Execution Foundation.
+
+**Next Product Milestone**
+MS-028.37 - Project Delete UI Execution Wiring Foundation
+
+**Allowed Scope**
+* add server-side destructive delete execution helper
+* validate projectId, projectName, exact typed confirmation, and Product Owner approval
+* support Project Brain metadata root and working directory / repo checkout deletion
+* prefer dry-run / validation summaries before execution
+* support test-only fixture path overrides
+
+**Forbidden Scope**
+* real delete of Beauty Client PRO
+* real delete of any live project without explicit Product Owner approval
+* re-import flows
+* UI wiring
+* Codex panel work
+* Workflow Engine refactor
+* AI Workspace changes
+* Core Doctrine changes
+* project knowledge store changes
+* task store changes
 
 ## MS-028.33 - AI Workspace Metadata Context Loader Foundation
 

@@ -1,10 +1,13 @@
 import "server-only";
 
-import { access, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { neon } from "@neondatabase/serverless";
 
-import { buildDefaultWorkingDirectory } from "./project";
+import {
+  buildDefaultWorkingDirectory,
+  getProjectDeleteValidationSummary,
+} from "./project";
 import type { Project, ProjectFilesystemStatus } from "./types";
 
 type ProjectCreationErrorCode = "working-directory-create-failed";
@@ -411,4 +414,313 @@ export async function deleteServerProjectById(id: string): Promise<void> {
   } catch {
     return;
   }
+}
+
+export type ProjectDiskDeleteRequestedAction =
+  | "metadata-root"
+  | "working-directory-repo-checkout";
+
+export type ProjectDiskDeleteExecutionStatus =
+  | "blocked"
+  | "dry-run"
+  | "deleted"
+  | "partial";
+
+export type ProjectDiskDeleteExecutionRequest = {
+  projectId: string;
+  projectName: string;
+  typedConfirmation: string;
+  deleteMetadataRoot: boolean;
+  deleteWorkingDirectory: boolean;
+  explicitProductOwnerApproval: boolean;
+  dryRun?: boolean;
+  pathOverrides?: {
+    projectMetadataRootPath?: string;
+    projectWorkingDirectoryPath?: string;
+    projectCheckoutPath?: string;
+  };
+};
+
+export type ProjectDiskDeleteExecutionResult = {
+  status: ProjectDiskDeleteExecutionStatus;
+  deletedPaths: string[];
+  blockedReasons: string[];
+  requestedActions: ProjectDiskDeleteRequestedAction[];
+  projectMetadataRootPath: string;
+  projectWorkingDirectoryPath: string;
+  projectCheckoutPath: string;
+};
+
+function normalizeProjectDeleteProjectName(value: string): string {
+  return value.trim();
+}
+
+function normalizeProjectDeleteTypedConfirmation(value: string): string {
+  return value;
+}
+
+function buildRequestedProjectDeleteActions(
+  request: ProjectDiskDeleteExecutionRequest,
+): ProjectDiskDeleteRequestedAction[] {
+  const requestedActions: ProjectDiskDeleteRequestedAction[] = [];
+
+  if (request.deleteMetadataRoot) {
+    requestedActions.push("metadata-root");
+  }
+
+  if (request.deleteWorkingDirectory) {
+    requestedActions.push("working-directory-repo-checkout");
+  }
+
+  return requestedActions;
+}
+
+function buildProjectDiskDeleteBlockedResult(
+  summary: ProjectDeleteValidationSummary,
+  requestedActions: ProjectDiskDeleteRequestedAction[],
+  blockedReasons: string[],
+): ProjectDiskDeleteExecutionResult {
+  return {
+    status: "blocked",
+    deletedPaths: [],
+    blockedReasons,
+    requestedActions,
+    projectMetadataRootPath: summary.projectMetadataRootPath,
+    projectWorkingDirectoryPath: summary.projectWorkspacePath,
+    projectCheckoutPath: summary.projectCheckoutPath,
+  };
+}
+
+function buildProjectDiskDeleteDryRunResult(
+  summary: ProjectDeleteValidationSummary,
+  requestedActions: ProjectDiskDeleteRequestedAction[],
+): ProjectDiskDeleteExecutionResult {
+  return {
+    status: "dry-run",
+    deletedPaths: [],
+    blockedReasons: [],
+    requestedActions,
+    projectMetadataRootPath: summary.projectMetadataRootPath,
+    projectWorkingDirectoryPath: summary.projectWorkspacePath,
+    projectCheckoutPath: summary.projectCheckoutPath,
+  };
+}
+
+function resolveProjectDeleteExecutionSummary(
+  summary: ProjectDeleteValidationSummary,
+  request: ProjectDiskDeleteExecutionRequest,
+): ProjectDeleteValidationSummary {
+  return {
+    ...summary,
+    projectMetadataRootPath:
+      request.pathOverrides?.projectMetadataRootPath ??
+      summary.projectMetadataRootPath,
+    projectWorkspacePath:
+      request.pathOverrides?.projectWorkingDirectoryPath ??
+      summary.projectWorkspacePath,
+    projectCheckoutPath:
+      request.pathOverrides?.projectCheckoutPath ?? summary.projectCheckoutPath,
+  };
+}
+
+async function removeProjectDiskPath(
+  path: string,
+  deletedPaths: string[],
+  blockedReasons: string[],
+): Promise<void> {
+  try {
+    await rm(path, {
+      recursive: true,
+      force: true,
+    });
+    deletedPaths.push(path);
+  } catch (error) {
+    blockedReasons.push(
+      `Nie udało się usunąć ${path}: ${
+        error instanceof Error ? error.message : "unknown error"
+      }`,
+    );
+  }
+}
+
+export async function executeProjectDiskDelete(
+  request: ProjectDiskDeleteExecutionRequest,
+): Promise<ProjectDiskDeleteExecutionResult> {
+  const normalizedProjectId = normalizeProjectId(request.projectId);
+  const normalizedProjectName = normalizeProjectDeleteProjectName(
+    request.projectName,
+  );
+  const normalizedTypedConfirmation = normalizeProjectDeleteTypedConfirmation(
+    request.typedConfirmation,
+  );
+  const requestedActions = buildRequestedProjectDeleteActions(request);
+
+  if (!normalizedProjectId) {
+    return buildProjectDiskDeleteBlockedResult(
+      {
+        projectName: normalizedProjectName,
+        projectWorkspacePath: "",
+        projectCheckoutPath: "",
+        projectMetadataRootPath: "",
+        registryRemovalNote: "",
+        browserStateRemovalNote: "",
+        destructiveDeleteConfirmation: "",
+        notes: [],
+      },
+      requestedActions,
+      ["Brak projectId."],
+    );
+  }
+
+  if (!normalizedProjectName) {
+    return buildProjectDiskDeleteBlockedResult(
+      {
+        projectName: "",
+        projectWorkspacePath: "",
+        projectCheckoutPath: "",
+        projectMetadataRootPath: "",
+        registryRemovalNote: "",
+        browserStateRemovalNote: "",
+        destructiveDeleteConfirmation: "",
+        notes: [],
+      },
+      requestedActions,
+      ["Brak projectName."],
+    );
+  }
+
+  if (!normalizedTypedConfirmation) {
+    return buildProjectDiskDeleteBlockedResult(
+      {
+        projectName: normalizedProjectName,
+        projectWorkspacePath: "",
+        projectCheckoutPath: "",
+        projectMetadataRootPath: "",
+        registryRemovalNote: "",
+        browserStateRemovalNote: "",
+        destructiveDeleteConfirmation: "",
+        notes: [],
+      },
+      requestedActions,
+      ["Brak typedConfirmation."],
+    );
+  }
+
+  const project = await getServerProjectById(normalizedProjectId);
+
+  if (!project) {
+    return buildProjectDiskDeleteBlockedResult(
+      {
+        projectName: normalizedProjectName,
+        projectWorkspacePath: "",
+        projectCheckoutPath: "",
+        projectMetadataRootPath: "",
+        registryRemovalNote: "",
+        browserStateRemovalNote: "",
+        destructiveDeleteConfirmation: "",
+        notes: [],
+      },
+      requestedActions,
+      ["Nie znaleziono projektu dla podanego projectId."],
+    );
+  }
+
+  const canonicalProjectName = project.name.trim();
+
+  if (canonicalProjectName !== normalizedProjectName) {
+    return buildProjectDiskDeleteBlockedResult(
+      getProjectDeleteValidationSummary(project),
+      requestedActions,
+      [
+        `projectName nie zgadza się z kanoniczną nazwą projektu: ${canonicalProjectName}.`,
+      ],
+    );
+  }
+
+  if (normalizedTypedConfirmation !== canonicalProjectName) {
+    return buildProjectDiskDeleteBlockedResult(
+      getProjectDeleteValidationSummary(project),
+      requestedActions,
+      [
+        `typedConfirmation musi być dokładnie równe nazwie projektu: ${canonicalProjectName}.`,
+      ],
+    );
+  }
+
+  if (!project.workingDirectory?.trim()) {
+    return buildProjectDiskDeleteBlockedResult(
+      getProjectDeleteValidationSummary(project),
+      requestedActions,
+      [
+        "Brak workingDirectory projektu; destrukcyjne kasowanie dyskowe pozostaje zablokowane.",
+      ],
+    );
+  }
+
+  const summary = getProjectDeleteValidationSummary(project);
+  const executionSummary = resolveProjectDeleteExecutionSummary(summary, request);
+
+  if (requestedActions.length === 0 || request.dryRun !== false) {
+    return buildProjectDiskDeleteDryRunResult(executionSummary, requestedActions);
+  }
+
+  if (!request.explicitProductOwnerApproval) {
+    return buildProjectDiskDeleteBlockedResult(executionSummary, requestedActions, [
+      "explicitProductOwnerApproval musi mieć wartość true przed wykonaniem destrukcyjnego delete.",
+    ]);
+  }
+
+  const deletedPaths: string[] = [];
+  const blockedReasons: string[] = [];
+
+  if (request.deleteMetadataRoot) {
+    await removeProjectDiskPath(
+      executionSummary.projectMetadataRootPath,
+      deletedPaths,
+      blockedReasons,
+    );
+  }
+
+  if (request.deleteWorkingDirectory) {
+    await removeProjectDiskPath(
+      executionSummary.projectCheckoutPath,
+      deletedPaths,
+      blockedReasons,
+    );
+    await removeProjectDiskPath(
+      executionSummary.projectWorkspacePath,
+      deletedPaths,
+      blockedReasons,
+    );
+  }
+
+  if (blockedReasons.length > 0 && deletedPaths.length > 0) {
+    return {
+      status: "partial",
+      deletedPaths,
+      blockedReasons,
+      requestedActions,
+      projectMetadataRootPath: executionSummary.projectMetadataRootPath,
+      projectWorkingDirectoryPath: executionSummary.projectWorkspacePath,
+      projectCheckoutPath: executionSummary.projectCheckoutPath,
+    };
+  }
+
+  if (blockedReasons.length > 0) {
+    return buildProjectDiskDeleteBlockedResult(
+      executionSummary,
+      requestedActions,
+      blockedReasons,
+    );
+  }
+
+  return {
+    status: "deleted",
+    deletedPaths,
+    blockedReasons: [],
+    requestedActions,
+    projectMetadataRootPath: executionSummary.projectMetadataRootPath,
+    projectWorkingDirectoryPath: executionSummary.projectWorkspacePath,
+    projectCheckoutPath: executionSummary.projectCheckoutPath,
+  };
 }

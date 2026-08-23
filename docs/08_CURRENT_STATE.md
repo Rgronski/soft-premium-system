@@ -45,14 +45,16 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.35 - Project Delete Execution Confirmation Foundation
+MS-028.36 - Project Delete Disk Execution Foundation
 
 **Next Milestone**
-MS-028.36 - Project Delete Disk Execution Foundation
+MS-028.37 - Project Delete UI Execution Wiring Foundation
 
 MS-028.34 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Delete/Re-import Project Validation Foundation. The repository now shows a read-only `Bezpieczny kontrakt usuwania` preview on the settings page, splits the delete boundary into separate project, SPS OS removal, browser/localStorage, Project Brain metadata root, working directory, and repo checkout resources, and keeps destructive delete and re-import out of scope until the Product Owner decides otherwise.
 
 MS-028.35 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Delete Execution Confirmation Foundation. The repository now adds a confirmation gate to the project page delete flow, keeps `Odpinanie z SPS OS` as the safe default, requires the exact project name before confirming, shows browser/localStorage cleanup as an optional non-destructive variant, and exposes destructive disk variants only as blocked choices that still require a separate Product Owner decision. The milestone does not perform destructive delete or re-import.
+
+MS-028.36 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Delete Disk Execution Foundation. The repository now adds a guarded server-side delete execution helper that can validate or delete only the Project Brain metadata root and the working directory / repo checkout, requires projectId, projectName, exact typed confirmation, and explicit Product Owner approval before destructive execution, defaults to dry-run or validation behavior, and keeps the real Beauty Client PRO directories untouched. The milestone uses test-only path overrides for temp-fixture coverage, keeps UI wiring out of scope, and does not introduce re-import or Codex panel behavior.
 
 MS-028.33 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Workspace Metadata Context Loader Foundation. The repository now wires the AI Workspace generate route to the controlled metadata context loader, keeps repository files explicitly out of the prompt boundary, and reports the available Project Brain modules plus the global Core Doctrine status without adding repository file analysis.
 
@@ -1593,9 +1595,10 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-028.35 - Project Delete Execution Confirmation Foundation`
-* `Next Product Milestone` is `MS-028.36 - Project Delete Disk Execution Foundation`
+* `Latest Completed Product Milestone` is `MS-028.36 - Project Delete Disk Execution Foundation`
+* `Next Product Milestone` is `MS-028.37 - Project Delete UI Execution Wiring Foundation`
 * `Session 088` synchronized the `MS-028.35 - Project Delete Execution Confirmation Foundation` control files because the settings page now adds a confirmation gate for delete execution, keeps `Odpinanie z SPS OS` as the safe default, and leaves destructive disk deletion out of scope until the Product Owner gives a separate decision.
+* `Session 088` synchronized the `MS-028.36 - Project Delete Disk Execution Foundation` control files because the repository now exposes a guarded server-side delete execution helper, validates exact confirmation plus Product Owner approval, supports only metadata-root and working-directory / repo-checkout deletion, and keeps real Beauty Client PRO data untouched.
 * `MS-028.10` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation; the repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
 * `MS-028.11` is `PUBLISHED / CLOSED` in the current local workspace as the GitHub First Operation Candidate Decision Foundation; the repository now records the Product Owner decision for the locally selected first operation candidate after `MS-028.9` and `MS-028.10`, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked.
 * `MS-012.9` is `PUBLISHED / CLOSED` in the current local workspace as the Parallel Project Work Track First Guided Next Action Foundation; the repository now records the guided next-action cue on the task workspace surface while keeping Current Product Milestone at `NONE` until a separate Product Owner decision is recorded.
