@@ -1292,6 +1292,46 @@ export default function ProjectSettingsPage() {
           </ul>
         </div>
 
+        <div className="rounded-2xl border border-sky-500/30 bg-sky-500/5 p-4">
+          <p className="text-xs uppercase tracking-[0.2em] text-sky-200/80">
+            Kontrakt decyzji live trial
+          </p>
+          <p className="mt-2 text-sm text-sky-50">
+            To jest decyzja przed pierwszą live próbą delete/re-import, a nie
+            wykonanie. Product Owner ma potwierdzić zakres, kolejność kroków i
+            plan odzyskania przed jakimkolwiek destructive delete.
+          </p>
+          <div className="mt-3 space-y-2 text-sm text-sky-100">
+            <p>Project selected for live trial: {deleteValidationSummary.projectName}</p>
+            <p>
+              Allowed delete scope: Odpinanie z SPS OS, browser/localStorage
+              cleanup, Project Brain metadata root, working directory / repo
+              checkout
+            </p>
+            <p>
+              Explicitly forbidden until next approval: deleting Beauty Client
+              PRO without typed confirmation, deleting the remote GitHub repo,
+              push, merge, PR
+            </p>
+            <p>
+              Abort conditions: unexpected path, missing project name,
+              discovery mismatch, re-open fails, git/source status ambiguous
+            </p>
+            <p>
+              Success conditions: project disappears only from the approved
+              scope, discovery refresh can find the project again if the
+              working directory remains, re-open leads to the same project
+              identity or a documented new identity, Project Brain metadata
+              behavior is understood
+            </p>
+            <p>
+              Rollback / odzyskanie: rerun discovery refresh, reopen from the
+              filesystem path, or restore from backup before any future live
+              execution
+            </p>
+          </div>
+        </div>
+
         {reconciledSourceStatus ? (
           <div className="rounded-2xl border border-emerald-800 bg-emerald-950/30 p-4">
             <p className="text-xs uppercase tracking-[0.2em] text-emerald-300">

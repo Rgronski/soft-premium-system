@@ -155,6 +155,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.37` - Project Delete UI Execution Wiring Foundation
 * `MS-028.38` - Delete/Re-import Manual Validation Run Foundation
 * `MS-028.39` - Project Re-import/Re-open Action Foundation
+* `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 
 ## Current
 
@@ -162,7 +163,7 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.39 - Project Re-import/Re-open Action Foundation
+MS-028.40 - Delete/Re-import Live Project Trial Decision Foundation
 
 ## MS-028.38 - Delete/Re-import Manual Validation Run Foundation
 
@@ -289,6 +290,75 @@ MS-028.40 - Delete/Re-import Live Project Trial Decision Foundation
 * Codex panel work
 * AI Workspace changes
 * Core Doctrine changes
+* task store changes
+* knowledge store changes
+* conductor store changes
+
+## MS-028.40 - Delete/Re-import Live Project Trial Decision Foundation
+
+**Milestone**
+MS-028.40 - Delete/Re-import Live Project Trial Decision Foundation
+
+**Type**
+Product Milestone
+
+This milestone records the decision contract for the first live delete/re-import trial and keeps it read-only. The settings page now includes a `Kontrakt decyzji live trial` panel that explains the approved scope, forbidden scope, abort conditions, success conditions, and rollback / odzyskanie path before any live destructive execution is attempted.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Provide a project-facing decision foundation for the first live delete/re-import trial without performing destructive execution.
+
+**Product Outcome**
+The project settings page now exposes the live-trial decision contract next to the existing safe delete contract, so the Product Owner can confirm scope and rollback expectations before any future live destructive step.
+
+**Implementation Note**
+This milestone keeps destructive delete out of scope, does not add a live execution route, and does not change the project discovery or re-open actions.
+
+**Dependencies**
+MS-028.39 - Project Re-import/Re-open Action Foundation
+
+**Implementation Scope**
+Delete/Re-import Live Project Trial Decision Foundation.
+
+**Next Product Milestone**
+MS-028.41 - Delete/Re-import Live Trial Execution Foundation
+
+**Allowed Scope**
+* add a read-only live trial decision contract panel on the project settings page
+* state the allowed delete scope, forbidden scope, abort conditions, success conditions, and rollback / odzyskanie path
+* keep the panel adjacent to the existing safe delete contract
+
+**Forbidden Scope**
+* destructive delete execution
+* live trial on Beauty Client PRO
+* full re-import wizard
+* API route changes
+* project server helper changes
+* AI Workspace changes
+* Workflow Engine changes
 * task store changes
 * knowledge store changes
 * conductor store changes

@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.40 live trial decision contract sync
+
+### Date
+
+2026-08-23
+
+### Completed
+
+* Added a read-only `Kontrakt decyzji live trial` panel on the project settings page next to the existing safe delete contract.
+* Documented the allowed delete scope, forbidden scope, abort conditions, success conditions, and rollback / odzyskanie path for the first live delete/re-import trial.
+* Kept destructive delete out of scope and did not execute any live delete on Beauty Client PRO.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.40 - Delete/Re-import Live Project Trial Decision Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` advances to `MS-028.41 - Delete/Re-import Live Trial Execution Foundation`.
+
+### Notes
+
+* The publication remains decision-only and does not add a live execution route or a full re-import wizard.
+
 ## Session 088 - MS-028.39 project re-import reopen action sync
 
 ### Date

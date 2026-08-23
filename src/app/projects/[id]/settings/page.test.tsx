@@ -129,6 +129,27 @@ describe("ProjectSettingsPage", () => {
     ).toBeTruthy();
   });
 
+  test("shows the live trial decision contract before any destructive execution", () => {
+    render(<ProjectSettingsPage />);
+
+    expect(screen.getByText(/Kontrakt decyzji live trial/)).toBeTruthy();
+    expect(
+      screen.getByText(/Project selected for live trial: Beauty Client PRO/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Allowed delete scope: Odpinanie z SPS OS, browser\/localStorage cleanup/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Explicitly forbidden until next approval: deleting Beauty Client PRO/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Abort conditions: unexpected path, missing project name/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Rollback \/ odzyskanie: rerun discovery refresh, reopen from the filesystem path/),
+    ).toBeTruthy();
+  });
+
   test("revalidates a derived repo checkout and hides the manifest-only source copy", async () => {
     createProject(
       "Beauty Client PRO",

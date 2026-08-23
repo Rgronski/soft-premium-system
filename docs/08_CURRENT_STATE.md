@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.39 - Project Re-import/Re-open Action Foundation
+MS-028.40 - Delete/Re-import Live Project Trial Decision Foundation
 
 **Next Milestone**
-MS-028.40 - Delete/Re-import Live Project Trial Decision Foundation
+MS-028.41 - Delete/Re-import Live Trial Execution Foundation
+
+MS-028.40 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Delete/Re-import Live Project Trial Decision Foundation. The repository now exposes a read-only `Kontrakt decyzji live trial` panel on the project settings page next to the existing safe delete contract, so the Product Owner can see the allowed delete scope, forbidden scope, abort conditions, success conditions, and rollback / odzyskanie path before any live destructive execution. The milestone does not execute any delete, does not touch the real Beauty Client PRO data, and does not add a live execution route or re-import wizard.
 
 MS-028.39 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Re-import/Re-open Action Foundation. The repository now provides a visible `Wykryj projekty z dysku` refresh action on the projects page that reruns the existing filesystem discovery flow, lets a detached or locally missing project appear again, and keeps the existing `Otwórz` and `Przypnij` actions intact. The milestone does not add a new import wizard, does not change the discovery API or project server helpers, and does not touch the real Beauty Client PRO data.
 
