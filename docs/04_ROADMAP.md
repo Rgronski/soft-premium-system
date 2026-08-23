@@ -166,7 +166,75 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.42a - App Version Marker 1.028.42 Publication
+
+## MS-028.42a - App Version Marker 1.028.42 Publication
+
+**Milestone**
+MS-028.42a - App Version Marker 1.028.42 Publication
+
+**Type**
+Product Milestone
+
+This milestone publishes the controlled app version marker `1.028.42` after the delete/re-import block closes. It keeps the app version source aligned with the accepted milestone boundary and does not change AI Workspace, Project Brain, Core Doctrine, or delete/re-import behavior.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Publish the visible app version marker `1.028.42` after the delete/re-import block has been closed by the Product Owner.
+
+**Product Outcome**
+The repository now exposes `1.028.42` as the canonical app version marker and keeps the visible badge/test aligned with that value.
+
+**Implementation Note**
+This milestone only updates the app version marker and the corresponding SSOT records.
+
+**Dependencies**
 MS-028.42 - Delete/Re-import Live Trial Product Owner Execution Decision
+
+**Implementation Scope**
+App Version Marker 1.028.42 Publication.
+
+**Next Product Milestone**
+NONE / Product Owner decision required
+
+**Allowed Scope**
+* update the controlled app version source to `1.028.42`
+* keep the visible version badge/test aligned with the controlled version source
+* synchronize the SSOT records for the version publication
+
+**Forbidden Scope**
+* AI Workspace changes
+* Project Brain changes
+* Core Doctrine changes
+* delete/re-import behavior changes
+* Workflow Engine changes
+* task store changes
+* knowledge store changes
+* conductor store changes
+* Codex panel work
 
 ## MS-028.38 - Delete/Re-import Manual Validation Run Foundation
 

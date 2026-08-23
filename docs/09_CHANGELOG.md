@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.42a app version marker publication
+
+### Date
+
+2026-08-23
+
+### Completed
+
+* Updated `src/lib/app-version.ts` so the canonical app version marker now reads `1.028.42`.
+* Updated the focused app-version badge test so it verifies the new canonical marker.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.42a - App Version Marker 1.028.42 Publication`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+
+### Notes
+
+* The publication changes only the visible app version marker and the corresponding SSOT records; it does not start a new product direction.
+
 ## Session 088 - MS-028.42 live trial decision follow-up
 
 ### Date

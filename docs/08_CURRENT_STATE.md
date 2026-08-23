@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.42 - Delete/Re-import Live Trial Product Owner Execution Decision
+MS-028.42a - App Version Marker 1.028.42 Publication
 
 **Next Milestone**
-MS-028.42a - App Version Marker 1.028.42 Publication
+NONE / Product Owner decision required
+
+MS-028.42a is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the App Version Marker 1.028.42 Publication. The repository now exposes `1.028.42` from `src/lib/app-version.ts` and keeps the visible app-version badge/test aligned with the accepted marker without changing AI Workspace, Project Brain storage, Core Doctrine storage, or delete/re-import behavior.
 
 MS-028.42 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Delete/Re-import Live Trial Product Owner Execution Decision. The repository now records the Product Owner decision to postpone any real destructive delete of Beauty Client PRO. The previously validated live-trial blocked run remains the latest execution evidence, but no destructive execution is performed in this milestone. Beauty Client PRO remains intact, `C:\SPS_OS_WORK\beauty-client-pro` remains present, and `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb` remains present.
 
