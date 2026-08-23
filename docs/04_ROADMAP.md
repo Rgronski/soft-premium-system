@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.42a` - App Version Marker 1.028.42 Publication
 
 ## Current
 
@@ -165,7 +166,7 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.41 - Delete/Re-import Live Trial Execution Foundation
+MS-028.42 - Delete/Re-import Live Trial Product Owner Execution Decision
 
 ## MS-028.38 - Delete/Re-import Manual Validation Run Foundation
 
@@ -375,15 +376,15 @@ MS-028.41 - Delete/Re-import Live Trial Execution Foundation
 * Workflow Engine refactor
 * store architecture changes
 
-## MS-028.41 - Delete/Re-import Live Trial Execution Foundation
+## MS-028.42 - Delete/Re-import Live Trial Product Owner Execution Decision
 
 **Milestone**
-MS-028.41 - Delete/Re-import Live Trial Execution Foundation
+MS-028.42 - Delete/Re-import Live Trial Product Owner Execution Decision
 
 **Type**
 Product Milestone
 
-This milestone records a live-trial simulation / blocked run only on the real Beauty Client PRO context. The helper `src/lib/project/server.ts::executeProjectDiskDelete(...)` was exercised through the existing delete execution contract with `explicitProductOwnerApproval: false`, so the result was blocked before any destructive execution could occur.
+This milestone records the Product Owner decision to keep the real destructive delete postponed. The previously validated live-trial blocked run on the real Beauty Client PRO context remains the latest execution evidence, but no destructive execution is performed in this milestone.
 
 **Contract Status**
 APPROVED
@@ -416,7 +417,7 @@ Validate the live trial execution gate on the real project context without perfo
 The live trial request for Beauty Client PRO was blocked and returned `requestedActions` for metadata-root and working-directory / repo-checkout deletion, but no `deletedPaths` because `explicitProductOwnerApproval` was false.
 
 **Implementation Note**
-The simulation used the real project identity (`0d3e28cb-6dff-442a-b94c-007a5d6b5779` / `Beauty Client PRO`) and confirmed that `C:\SPS_OS_WORK\beauty-client-pro` and `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb` remain present. No destructive delete was executed.
+The live delete remains deferred. Beauty Client PRO stays intact, `C:\SPS_OS_WORK\beauty-client-pro` remains present, and `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb` remains present.
 
 **Dependencies**
 MS-028.40 - Delete/Re-import Live Project Trial Decision Foundation
@@ -425,11 +426,11 @@ MS-028.40 - Delete/Re-import Live Project Trial Decision Foundation
 Delete/Re-import Live Trial Execution Foundation.
 
 **Next Product Milestone**
-MS-028.42 - Delete/Re-import Live Trial Product Owner Execution Decision
+MS-028.42a - App Version Marker 1.028.42 Publication
 
 **Allowed Scope**
-* run the live trial execution contract in blocked / validation-only mode on the real project context
-* surface `requestedActions`, `blockedReasons`, and `deletedPaths` without enabling destructive execution
+* record the Product Owner decision that live destructive delete is postponed
+* keep the latest blocked live-trial evidence as the last execution reference
 * keep real Beauty Client PRO data untouched
 
 **Forbidden Scope**

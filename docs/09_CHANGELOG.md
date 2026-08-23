@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.42 live trial decision follow-up
+
+### Date
+
+2026-08-23
+
+### Completed
+
+* Recorded the Product Owner decision to postpone any real destructive delete of Beauty Client PRO.
+* Kept the previously validated live-trial blocked run as the latest execution evidence and did not execute any additional destructive action.
+* Confirmed that Beauty Client PRO remains intact and that `C:\SPS_OS_WORK\beauty-client-pro` plus `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb` were not deleted.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.42 - Delete/Re-import Live Trial Product Owner Execution Decision`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` advances to `MS-028.42a - App Version Marker 1.028.42 Publication`.
+
+### Notes
+
+* The live destructive delete remains deferred for a later Product Owner decision.
+
 ## Session 088 - MS-028.41 live trial execution blocked run sync
 
 ### Date

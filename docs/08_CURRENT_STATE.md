@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.41 - Delete/Re-import Live Trial Execution Foundation
+MS-028.42 - Delete/Re-import Live Trial Product Owner Execution Decision
 
 **Next Milestone**
-MS-028.42 - Delete/Re-import Live Trial Product Owner Execution Decision
+MS-028.42a - App Version Marker 1.028.42 Publication
+
+MS-028.42 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Delete/Re-import Live Trial Product Owner Execution Decision. The repository now records the Product Owner decision to postpone any real destructive delete of Beauty Client PRO. The previously validated live-trial blocked run remains the latest execution evidence, but no destructive execution is performed in this milestone. Beauty Client PRO remains intact, `C:\SPS_OS_WORK\beauty-client-pro` remains present, and `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb` remains present.
 
 MS-028.41 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Delete/Re-import Live Trial Execution Foundation. The repository now confirms a live-trial simulation / blocked run only on the real Beauty Client PRO context. The helper `src/lib/project/server.ts::executeProjectDiskDelete(...)` was exercised with `explicitProductOwnerApproval: false`, so the requested metadata-root and working-directory / repo-checkout actions were blocked before any destructive execution could occur. The milestone keeps the real Beauty Client PRO data untouched and does not add a live execution route or re-import wizard.
 
