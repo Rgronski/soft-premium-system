@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.40 - Delete/Re-import Live Project Trial Decision Foundation
+MS-028.41 - Delete/Re-import Live Trial Execution Foundation
 
 **Next Milestone**
-MS-028.41 - Delete/Re-import Live Trial Execution Foundation
+MS-028.42 - Delete/Re-import Live Trial Product Owner Execution Decision
+
+MS-028.41 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Delete/Re-import Live Trial Execution Foundation. The repository now confirms a live-trial simulation / blocked run only on the real Beauty Client PRO context. The helper `src/lib/project/server.ts::executeProjectDiskDelete(...)` was exercised with `explicitProductOwnerApproval: false`, so the requested metadata-root and working-directory / repo-checkout actions were blocked before any destructive execution could occur. The milestone keeps the real Beauty Client PRO data untouched and does not add a live execution route or re-import wizard.
 
 MS-028.40 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Delete/Re-import Live Project Trial Decision Foundation. The repository now exposes a read-only `Kontrakt decyzji live trial` panel on the project settings page next to the existing safe delete contract, so the Product Owner can see the allowed delete scope, forbidden scope, abort conditions, success conditions, and rollback / odzyskanie path before any live destructive execution. The milestone does not execute any delete, does not touch the real Beauty Client PRO data, and does not add a live execution route or re-import wizard.
 

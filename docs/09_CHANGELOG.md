@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.41 live trial execution blocked run sync
+
+### Date
+
+2026-08-23
+
+### Completed
+
+* Ran the live trial execution path on the real Beauty Client PRO project context in simulation / blocked-run-only mode and kept the execution blocked before any destructive delete.
+* Used the helper `src/lib/project/server.ts::executeProjectDiskDelete(...)` with `explicitProductOwnerApproval: false`, while still requesting metadata-root and working-directory / repo-checkout deletion.
+* Confirmed that the helper returned `status: blocked`, `deletedPaths: []`, and the expected blocked reason about missing Product Owner approval.
+* Verified that `C:\SPS_OS_WORK\beauty-client-pro` and `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb` still exist and were not deleted.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.41 - Delete/Re-import Live Trial Execution Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` advances to `MS-028.42 - Delete/Re-import Live Trial Product Owner Execution Decision`.
+
+### Notes
+
+* The live-trial execution milestone remains blocked until the Product Owner explicitly approves destructive execution.
+
 ## Session 088 - MS-028.40 live trial decision contract sync
 
 ### Date
