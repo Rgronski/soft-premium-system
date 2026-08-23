@@ -2,9 +2,9 @@
 
 import { getProjectById } from "@/lib/project/project";
 import { getKnowledge } from "@/lib/knowledge/knowledge";
-import { getProjectWorkspaceEntry } from "@/lib/project-brain/engine";
+import { getBrowserAiProjectContext } from "@/lib/project-brain/browser";
 import { useParams } from "next/navigation";
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 
 type DashboardSnapshot = {
   knowledgeEntries: Array<{
@@ -36,43 +36,68 @@ function createLocalRecoveryKnowledgeSnapshot(projectId: string) {
 
 export default function ProjectKnowledgePage() {
   const params = useParams<{ id: string }>();
-  const dashboard = useMemo<DashboardSnapshot>(() => {
-    if (typeof window === "undefined") {
-      return {
-        knowledgeEntries: null,
-        isLoaded: false,
-        errorCode: null,
-        recoveryMessage: null,
-      };
+  const [dashboard, setDashboard] = useState<DashboardSnapshot>({
+    knowledgeEntries: null,
+    isLoaded: false,
+    errorCode: null,
+    recoveryMessage: null,
+  });
+
+  useEffect(() => {
+    let isActive = true;
+
+    async function loadKnowledgeEntries() {
+      try {
+        const browserContext = await getBrowserAiProjectContext(params.id);
+
+        if (!isActive) {
+          return;
+        }
+
+        if (browserContext.status === "available") {
+          setDashboard({
+            knowledgeEntries: browserContext.context.knowledgeEntries,
+            isLoaded: true,
+            errorCode: null,
+            recoveryMessage: null,
+          });
+          return;
+        }
+
+        const errorCode = browserContext.status;
+        const recoveryKnowledge =
+          errorCode === "project-not-found" ||
+          errorCode === "unavailable"
+            ? createLocalRecoveryKnowledgeSnapshot(params.id)
+            : null;
+
+        setDashboard({
+          knowledgeEntries: recoveryKnowledge?.knowledgeEntries ?? null,
+          isLoaded: true,
+          errorCode: recoveryKnowledge ? null : errorCode,
+          recoveryMessage: recoveryKnowledge?.recoveryMessage ?? null,
+        });
+      } catch {
+        if (!isActive) {
+          return;
+        }
+
+        const recoveryKnowledge = createLocalRecoveryKnowledgeSnapshot(params.id);
+
+        setDashboard({
+          knowledgeEntries: recoveryKnowledge?.knowledgeEntries ?? null,
+          isLoaded: true,
+          errorCode: recoveryKnowledge ? null : "source-read-failed",
+          recoveryMessage: recoveryKnowledge?.recoveryMessage ?? null,
+        });
+      }
     }
 
-    try {
-      const workspaceEntry = getProjectWorkspaceEntry(params.id);
+    void loadKnowledgeEntries();
 
-      return {
-        knowledgeEntries: workspaceEntry.workspace.knowledgeEntries,
-        isLoaded: true,
-        errorCode: null,
-        recoveryMessage: null,
-      };
-    } catch (error) {
-      const errorCode =
-        error instanceof Error && "code" in error && typeof error.code === "string"
-          ? error.code
-          : "source-read-failed";
-      const recoveryKnowledge =
-        errorCode === "project-not-found" ||
-        errorCode === "context-unavailable"
-          ? createLocalRecoveryKnowledgeSnapshot(params.id)
-          : null;
-
-      return {
-        knowledgeEntries: recoveryKnowledge?.knowledgeEntries ?? null,
-        isLoaded: true,
-        errorCode: recoveryKnowledge ? null : errorCode,
-        recoveryMessage: recoveryKnowledge?.recoveryMessage ?? null,
-      };
-    }
+    return () => {
+      isActive = false;
+    };
   }, [params.id]);
 
   return (

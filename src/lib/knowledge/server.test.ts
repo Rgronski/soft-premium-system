@@ -1,252 +1,217 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  test,
+  vi,
+} from "vitest";
+
+import type { KnowledgeEntry } from "./types";
 
 vi.mock("server-only", () => ({}));
 
-const neonMock = vi.fn();
+const projectId = "0d3e28cb-6dff-442a-b94c-007a5d6b5779";
+const projectWorkingDirectory = "C:\\SPS_OS_WORK\\beauty-client-pro";
+const metadataRootSegment = "beauty-client-pro--0d3e28cb";
+const knowledgeStoreDirectory = `C:\\SPS_OS_WORK\\.sps-meta\\${metadataRootSegment}\\knowledge`;
+const knowledgeStorePath = `${knowledgeStoreDirectory}\\entries.jsonl`;
 
-vi.mock("@neondatabase/serverless", () => ({
-  neon: neonMock,
+const mkdirMock = vi.fn();
+const readFileMock = vi.fn();
+const writeFileMock = vi.fn();
+const getServerProjectByIdMock = vi.fn();
+
+vi.mock("node:fs/promises", () => ({
+  mkdir: mkdirMock,
+  readFile: readFileMock,
+  writeFile: writeFileMock,
 }));
 
-const originalDatabaseUrl = process.env.DATABASE_URL;
+vi.mock("../project/server", async () => {
+  const actual = await vi.importActual<typeof import("../project/server")>(
+    "../project/server",
+  );
+
+  return {
+    ...actual,
+    getServerProjectById: getServerProjectByIdMock,
+  };
+});
+
+const fileStore = new Map<string, string>();
 
 async function loadServerModule() {
   vi.resetModules();
   return import("./server");
 }
 
-afterEach(() => {
-  if (typeof originalDatabaseUrl === "string") {
-    process.env.DATABASE_URL = originalDatabaseUrl;
-  } else {
-    delete process.env.DATABASE_URL;
-  }
+beforeEach(() => {
+  fileStore.clear();
+  mkdirMock.mockReset();
+  readFileMock.mockReset();
+  writeFileMock.mockReset();
+  getServerProjectByIdMock.mockReset();
 
-  neonMock.mockReset();
+  mkdirMock.mockResolvedValue(undefined);
+  getServerProjectByIdMock.mockResolvedValue({
+    id: projectId,
+    name: "Beauty Client PRO",
+    workingDirectory: projectWorkingDirectory,
+    createdAt: "2026-08-22T10:00:00.000Z",
+  });
+  readFileMock.mockImplementation(async (path: string) => {
+    const storedValue = fileStore.get(path);
+
+    if (typeof storedValue !== "string") {
+      const error = new Error("ENOENT") as Error & { code: string };
+      error.code = "ENOENT";
+      throw error;
+    }
+
+    return storedValue;
+  });
+  writeFileMock.mockImplementation(async (path: string, data: string) => {
+    fileStore.set(path, data);
+  });
+  vi.useFakeTimers();
+  vi.setSystemTime(new Date("2026-08-23T02:10:00.000Z"));
+  vi.stubGlobal("crypto", {
+    randomUUID: vi.fn(() => "generated-knowledge-id"),
+  });
+});
+
+afterEach(() => {
   vi.useRealTimers();
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
 
 describe("getServerKnowledgeEntriesByProjectId", () => {
-  it("uses DATABASE_URL, queries by projectId, and maps rows", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-
-    const queryMock = vi.fn().mockResolvedValue([
+  test("reads knowledge entries from the SPS-owned JSONL store", async () => {
+    const entries: KnowledgeEntry[] = [
       {
         id: "knowledge-1",
-        project_id: "project-1",
-        title: "Alpha",
-        content: "Body",
-        created_at: "2026-07-23T10:11:12.000Z",
+        projectId,
+        title: "First note",
+        content: "First body",
+        createdAt: "2026-08-23T10:00:00.000Z",
       },
       {
         id: "knowledge-2",
-        project_id: "project-1",
-        title: "Beta",
-        content: "Body 2",
-        created_at: "2026-07-23T10:11:13.000Z",
+        projectId,
+        title: "Second note",
+        content: "Second body",
+        createdAt: "2026-08-23T10:05:00.000Z",
       },
-    ]);
+    ];
 
-    neonMock.mockReturnValue({
-      query: queryMock,
-    });
-
-    const { getServerKnowledgeEntriesByProjectId } = await loadServerModule();
-    const result = await getServerKnowledgeEntriesByProjectId("project-1");
-
-    expect(queryMock).toHaveBeenCalledWith(
-      `SELECT id, project_id, title, content, created_at
-FROM public.knowledge_entries
-WHERE project_id = $1
-ORDER BY created_at ASC, id ASC`,
-      ["project-1"],
+    fileStore.set(
+      knowledgeStorePath,
+      `${entries.map((entry) => JSON.stringify(entry)).join("\n")}\n`,
     );
-    expect(result).toEqual([
-      {
-        id: "knowledge-1",
-        projectId: "project-1",
-        title: "Alpha",
-        content: "Body",
-        createdAt: "2026-07-23T10:11:12.000Z",
-      },
-      {
-        id: "knowledge-2",
-        projectId: "project-1",
-        title: "Beta",
-        content: "Body 2",
-        createdAt: "2026-07-23T10:11:13.000Z",
-      },
-    ]);
+
+    const { getServerKnowledgeEntriesByProjectId } = await loadServerModule();
+    const result = await getServerKnowledgeEntriesByProjectId(projectId);
+
+    expect(getServerProjectByIdMock).toHaveBeenCalledWith(projectId);
+    expect(readFileMock).toHaveBeenCalledWith(knowledgeStorePath, "utf8");
+    expect(result).toEqual(entries);
   });
 
-  it("returns an empty array when the query returns no rows", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-
-    const queryMock = vi.fn().mockResolvedValue([]);
-
-    neonMock.mockReturnValue({
-      query: queryMock,
-    });
-
+  test("returns an empty array when the knowledge store file does not exist", async () => {
     const { getServerKnowledgeEntriesByProjectId } = await loadServerModule();
 
     await expect(
-      getServerKnowledgeEntriesByProjectId("project-1"),
+      getServerKnowledgeEntriesByProjectId(projectId),
     ).resolves.toEqual([]);
-  });
-
-  it("throws when DATABASE_URL is missing", async () => {
-    delete process.env.DATABASE_URL;
-
-    const { getServerKnowledgeEntriesByProjectId } = await loadServerModule();
-
-    await expect(
-      getServerKnowledgeEntriesByProjectId("project-1"),
-    ).rejects.toThrow("DATABASE_URL is not configured.");
-  });
-
-  it("propagates SQL errors", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-
-    const queryMock = vi.fn().mockRejectedValue(new Error("SQL failed"));
-
-    neonMock.mockReturnValue({
-      query: queryMock,
-    });
-
-    const { getServerKnowledgeEntriesByProjectId } = await loadServerModule();
-
-    await expect(
-      getServerKnowledgeEntriesByProjectId("project-1"),
-    ).rejects.toThrow("SQL failed");
   });
 });
 
 describe("createServerKnowledgeEntry", () => {
-  it("trims input, generates id and timestamp, inserts once, and returns a KnowledgeEntry", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date("2026-07-23T10:11:12.000Z"));
-    vi.stubGlobal("crypto", {
-      randomUUID: vi.fn(() => "generated-knowledge-id"),
+  test("writes knowledge entries to the SPS-owned JSONL store and restores them after reload", async () => {
+    const { createServerKnowledgeEntry, getServerKnowledgeEntriesByProjectId } =
+      await loadServerModule();
+
+    const createdEntry = await createServerKnowledgeEntry({
+      projectId,
+      title: "Architecture note",
+      content: "Persistent project knowledge.",
     });
 
-    const queryMock = vi.fn().mockResolvedValue([
-      {
-        id: "generated-knowledge-id",
-        project_id: "project-1",
-        title: "Alpha",
-        content: "Body",
-        created_at: "2026-07-23T10:11:12.000Z",
-      },
-    ]);
-
-    neonMock.mockReturnValue({
-      query: queryMock,
+    expect(getServerProjectByIdMock).toHaveBeenCalledWith(projectId);
+    expect(mkdirMock).toHaveBeenCalledWith(knowledgeStoreDirectory, {
+      recursive: true,
     });
-
-    const { createServerKnowledgeEntry } = await loadServerModule();
-    const result = await createServerKnowledgeEntry({
-      projectId: "  project-1  ",
-      title: "  Alpha  ",
-      content: "  Body  ",
-    });
-
-    expect(queryMock).toHaveBeenCalledWith(
-      `INSERT INTO public.knowledge_entries (id, project_id, title, content, created_at)
-VALUES ($1, $2, $3, $4, $5)
-RETURNING id, project_id, title, content, created_at`,
-      [
-        "generated-knowledge-id",
-        "project-1",
-        "Alpha",
-        "Body",
-        "2026-07-23T10:11:12.000Z",
-      ],
+    expect(writeFileMock).toHaveBeenCalledWith(
+      knowledgeStorePath,
+      `${JSON.stringify(createdEntry)}\n`,
+      "utf8",
     );
-    expect(result).toEqual({
-      id: "generated-knowledge-id",
-      projectId: "project-1",
-      title: "Alpha",
-      content: "Body",
-      createdAt: "2026-07-23T10:11:12.000Z",
-    });
+
+    const reloadedModule = await loadServerModule();
+
+    await expect(
+      reloadedModule.getServerKnowledgeEntriesByProjectId(projectId),
+    ).resolves.toEqual([createdEntry]);
   });
 
-  it("rejects an empty projectId", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-
+  test("rejects an empty projectId", async () => {
     const { createServerKnowledgeEntry } = await loadServerModule();
 
     await expect(
       createServerKnowledgeEntry({
         projectId: "   ",
-        title: "Alpha",
-        content: "Body",
+        title: "Architecture note",
+        content: "Persistent project knowledge.",
       }),
     ).rejects.toThrow(
-      "Knowledge server repository requires a non-empty projectId.",
+      "Knowledge repository requires a non-empty projectId.",
     );
   });
 
-  it("rejects an empty title", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-
+  test("rejects an empty title", async () => {
     const { createServerKnowledgeEntry } = await loadServerModule();
 
     await expect(
       createServerKnowledgeEntry({
-        projectId: "project-1",
+        projectId,
         title: "   ",
-        content: "Body",
+        content: "Persistent project knowledge.",
       }),
     ).rejects.toThrow(
-      "Knowledge server repository requires a non-empty title.",
+      "Knowledge repository requires a non-empty title.",
     );
   });
 
-  it("rejects empty content", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-
+  test("rejects empty content", async () => {
     const { createServerKnowledgeEntry } = await loadServerModule();
 
     await expect(
       createServerKnowledgeEntry({
-        projectId: "project-1",
-        title: "Alpha",
+        projectId,
+        title: "Architecture note",
         content: "   ",
       }),
     ).rejects.toThrow(
-      "Knowledge server repository requires non-empty content.",
+      "Knowledge repository requires non-empty content.",
     );
   });
 
-  it("propagates SQL or foreign key errors", async () => {
-    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date("2026-07-23T10:11:12.000Z"));
-    vi.stubGlobal("crypto", {
-      randomUUID: vi.fn(() => "generated-knowledge-id"),
-    });
-
-    const queryMock = vi.fn().mockRejectedValue(
-      new Error("insert or update on table \"knowledge_entries\" violates foreign key constraint"),
-    );
-
-    neonMock.mockReturnValue({
-      query: queryMock,
-    });
+  test("maps a missing project to the transport foreign-key shape", async () => {
+    getServerProjectByIdMock.mockResolvedValueOnce(null);
 
     const { createServerKnowledgeEntry } = await loadServerModule();
 
     await expect(
       createServerKnowledgeEntry({
-        projectId: "project-1",
-        title: "Alpha",
-        content: "Body",
+        projectId,
+        title: "Architecture note",
+        content: "Persistent project knowledge.",
       }),
-    ).rejects.toThrow("violates foreign key constraint");
+    ).rejects.toMatchObject({
+      code: "23503",
+      constraint: "knowledge_entries_project_id_fkey",
+    });
   });
 });

@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.26 control files sync publication
+
+### Date
+
+2026-08-23
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Current Product Milestone` and `Next Product Milestone` as `NONE / Product Owner decision required` and `Latest Completed Product Milestone` as `MS-028.26 - Project Brain Filesystem Knowledge Store Foundation`.
+* Recorded that `MS-028.26 - Project Brain Filesystem Knowledge Store Foundation` adds the filesystem-backed project knowledge store on the same SPS-owned metadata root used by MS-028.25, writes knowledge to `knowledge/entries.jsonl`, and keeps the existing browser/server Project Brain path visible on the Knowledge page.
+* Recorded that the Session 088 `MS-028.26` usage record is present.
+
+### Notes
+
+* No new product code changed in this sync step; the accepted patch remains limited to the existing Knowledge implementation and the previously appended session usage record.
+
 ## Session 088 - MS-028.25 control files sync publication
 
 ### Date

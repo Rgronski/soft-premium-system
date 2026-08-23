@@ -4,28 +4,17 @@ import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 const useParamsMock = vi.fn(() => ({ id: "project-1" }));
-const getProjectWorkspaceEntryMock = vi.fn();
+const getBrowserAiProjectContextMock = vi.fn();
 const getProjectByIdMock = vi.fn();
 const getKnowledgeMock = vi.fn();
-
-const { ProjectBrainErrorMock } = vi.hoisted(() => ({
-  ProjectBrainErrorMock: class ProjectBrainErrorMock extends Error {
-    readonly code: string;
-
-    constructor(code: string) {
-      super(code);
-      this.code = code;
-    }
-  },
-}));
 
 vi.mock("next/navigation", () => ({
   useParams: () => useParamsMock(),
 }));
 
-vi.mock("@/lib/project-brain/engine", () => ({
-  getProjectWorkspaceEntry: (projectId: string) =>
-    getProjectWorkspaceEntryMock(projectId),
+vi.mock("@/lib/project-brain/browser", () => ({
+  getBrowserAiProjectContext: (projectId: string) =>
+    getBrowserAiProjectContextMock(projectId),
 }));
 
 vi.mock("@/lib/project/project", () => ({
@@ -41,41 +30,22 @@ import ProjectKnowledgePage from "./page";
 describe("ProjectKnowledgePage", () => {
   beforeEach(() => {
     useParamsMock.mockReturnValue({ id: "project-1" });
-    getProjectWorkspaceEntryMock.mockReset();
+    getBrowserAiProjectContextMock.mockReset();
     getProjectByIdMock.mockReset();
     getKnowledgeMock.mockReset();
     getProjectByIdMock.mockReturnValue(null);
     getKnowledgeMock.mockReturnValue([]);
-    getProjectWorkspaceEntryMock.mockReturnValue({
-      projectId: "project-1",
-      workspace: {
-        overview: {
-          project: {
-            id: "project-1",
-            name: "Alpha Workspace",
-          },
-          counts: {
-            tasks: 0,
-            knowledgeEntries: 1,
-          },
-          workflow: {
-            health: "ready",
-            confidence: 0.5,
-            nextStep: {
-              id: "continue-active-work",
-              label: "Kontynuuj aktywną pracę",
-              description:
-                "Continue the active workflow item before starting new work.",
-            },
-            warnings: 0,
-            blockers: 0,
-          },
-        },
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha Workspace",
         tasks: [],
         knowledgeEntries: [
           {
             id: "knowledge-1",
             title: "Knowledge note",
+            content: "Server-backed context.",
           },
         ],
       },
@@ -87,11 +57,14 @@ describe("ProjectKnowledgePage", () => {
     vi.restoreAllMocks();
   });
 
-  test("renders the workspace knowledge collection for the route project id", () => {
+  test("renders the workspace knowledge collection for the route project id", async () => {
     render(<ProjectKnowledgePage />);
 
-    expect(getProjectWorkspaceEntryMock).toHaveBeenCalledTimes(1);
-    expect(getProjectWorkspaceEntryMock).toHaveBeenCalledWith("project-1");
+    await waitFor(() => {
+      expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(1);
+      expect(getBrowserAiProjectContextMock).toHaveBeenCalledWith("project-1");
+    });
+
     expect(screen.getByText("Wiedza")).toBeTruthy();
     expect(
       screen.getByText("Wpisy wiedzy tylko do odczytu dla bieżącej przestrzeni projektu."),
@@ -99,32 +72,12 @@ describe("ProjectKnowledgePage", () => {
     expect(screen.getByText("Knowledge note")).toBeTruthy();
   });
 
-  test("renders the empty state when the knowledge collection is empty", () => {
-    getProjectWorkspaceEntryMock.mockReturnValueOnce({
-      projectId: "project-1",
-      workspace: {
-        overview: {
-          project: {
-            id: "project-1",
-            name: "Alpha Workspace",
-          },
-          counts: {
-            tasks: 0,
-            knowledgeEntries: 0,
-          },
-          workflow: {
-            health: "ready",
-            confidence: 0.5,
-            nextStep: {
-              id: "continue-active-work",
-              label: "Kontynuuj aktywną pracę",
-              description:
-                "Continue the active workflow item before starting new work.",
-            },
-            warnings: 0,
-            blockers: 0,
-          },
-        },
+  test("renders the empty state when the knowledge collection is empty", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValueOnce({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha Workspace",
         tasks: [],
         knowledgeEntries: [],
       },
@@ -132,12 +85,14 @@ describe("ProjectKnowledgePage", () => {
 
     render(<ProjectKnowledgePage />);
 
-    expect(screen.getByText("Brak dostępnych wpisów wiedzy.")).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText("Brak dostępnych wpisów wiedzy.")).toBeTruthy();
+    });
   });
 
   test("recovers from stale project context with local knowledge entries", async () => {
-    getProjectWorkspaceEntryMock.mockImplementation(() => {
-      throw new ProjectBrainErrorMock("project-not-found");
+    getBrowserAiProjectContextMock.mockResolvedValueOnce({
+      status: "project-not-found",
     });
     getProjectByIdMock.mockReturnValue({
       id: "project-1",
@@ -164,6 +119,7 @@ describe("ProjectKnowledgePage", () => {
       ).toBeTruthy();
     });
 
+    expect(getBrowserAiProjectContextMock).toHaveBeenCalledWith("project-1");
     expect(getProjectByIdMock).toHaveBeenCalledWith("project-1");
     expect(getKnowledgeMock).toHaveBeenCalledWith("project-1");
     expect(screen.getByText("Recovered knowledge")).toBeTruthy();
