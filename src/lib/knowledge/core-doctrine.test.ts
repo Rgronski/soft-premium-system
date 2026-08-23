@@ -118,12 +118,23 @@ describe("core doctrine store", () => {
     await expect(getCoreDoctrineEntries()).resolves.toEqual([createdEntry]);
   });
 
-  test("seeds the doctrine store when it is empty", async () => {
-    const { CORE_DOCTRINE_SEED, ensureCoreDoctrineSeeded, getCoreDoctrineEntries } =
-      await loadCoreDoctrineModule();
-
-    await expect(ensureCoreDoctrineSeeded()).resolves.toEqual(
+  test("bootstraps the doctrine store when it is empty and keeps seeding idempotent", async () => {
+    const {
       CORE_DOCTRINE_SEED,
+      getCoreDoctrineBootstrapStatus,
+      getCoreDoctrineEntries,
+    } = await loadCoreDoctrineModule();
+
+    await expect(getCoreDoctrineBootstrapStatus()).resolves.toEqual({
+      status: "available",
+      storePath: coreDoctrineStorePath,
+      entryCount: CORE_DOCTRINE_SEED.length,
+    });
+    expect(mkdirMock).toHaveBeenCalledWith(
+      "C:\\SPS_OS_WORK\\.sps-meta\\core",
+      {
+        recursive: true,
+      },
     );
     expect(writeFileMock).toHaveBeenCalledWith(
       coreDoctrineStorePath,
@@ -131,5 +142,6 @@ describe("core doctrine store", () => {
       "utf8",
     );
     await expect(getCoreDoctrineEntries()).resolves.toEqual(CORE_DOCTRINE_SEED);
+    expect(writeFileMock).toHaveBeenCalledTimes(1);
   });
 });

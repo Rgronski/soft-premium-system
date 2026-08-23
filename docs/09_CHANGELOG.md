@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.29 control files sync publication
+
+### Date
+
+2026-08-23
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `Latest Completed Product Milestone` as `MS-028.29 - Core Doctrine Bootstrap Visibility Foundation`, `Current Product Milestone` as `NONE / Product Owner decision required`, and `Next Product Milestone` as `MS-028.30 - Core Doctrine UI Visibility Foundation`.
+* Recorded that `MS-028.29 - Core Doctrine Bootstrap Visibility Foundation` bootstraps Core Doctrine through the helper read/status path, exposes `getCoreDoctrineBootstrapStatus()`, and keeps seeding idempotent without adding UI visibility or AI Workspace wiring.
+* Recorded that the Session 088 `MS-028.29` usage record is present.
+
+### Notes
+
+* No new product code changed in this sync step; the accepted patch remains limited to the existing Core Doctrine helper bootstrap implementation and the previously appended session usage record.
+
 ## Session 088 - MS-028.28 control files sync publication
 
 ### Date

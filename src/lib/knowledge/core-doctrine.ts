@@ -238,7 +238,23 @@ async function writeFilesystemCoreDoctrineEntries(
 }
 
 export async function getCoreDoctrineEntries(): Promise<CoreDoctrineEntry[]> {
-  return readFilesystemCoreDoctrineEntries();
+  return ensureCoreDoctrineSeeded();
+}
+
+export type CoreDoctrineBootstrapStatus = {
+  status: "available";
+  storePath: string;
+  entryCount: number;
+};
+
+export async function getCoreDoctrineBootstrapStatus(): Promise<CoreDoctrineBootstrapStatus> {
+  const entries = await ensureCoreDoctrineSeeded();
+
+  return {
+    status: "available",
+    storePath: getCoreDoctrineStorePath(),
+    entryCount: entries.length,
+  };
 }
 
 export async function createCoreDoctrineEntry(input: {
