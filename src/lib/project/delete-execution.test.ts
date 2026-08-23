@@ -199,4 +199,56 @@ describe("executeProjectDiskDelete", () => {
     await removePath(fixtureRoot);
     await removePath(metadataRoot);
   });
+
+  it("allows rediscovery after deleting and recreating the fixture project", async () => {
+    const { project, workingDirectory, metadataRoot, fixtureRoot, server } =
+      await createFixtureProject();
+
+    const deleteResult = await server.executeProjectDiskDelete({
+      projectId: project.id,
+      projectName: project.name,
+      typedConfirmation: project.name,
+      deleteMetadataRoot: true,
+      deleteWorkingDirectory: true,
+      explicitProductOwnerApproval: true,
+      dryRun: false,
+      pathOverrides: {
+        projectMetadataRootPath: metadataRoot,
+        projectWorkingDirectoryPath: workingDirectory,
+        projectCheckoutPath: join(workingDirectory, "repo"),
+      },
+    });
+
+    expect(deleteResult.status).toBe("deleted");
+    expect(await fileExists(workingDirectory)).toBe(false);
+    expect(await fileExists(metadataRoot)).toBe(false);
+
+    const reopenedProject = await server.createServerProject({
+      id: project.id,
+      name: project.name,
+      workingDirectory,
+    });
+
+    expect(reopenedProject.id).toBe(project.id);
+    expect(reopenedProject.name).toBe(project.name);
+    expect(await fileExists(workingDirectory)).toBe(true);
+    expect(await fileExists(join(workingDirectory, "sps-project.json"))).toBe(true);
+    expect(await fileExists(join(workingDirectory, "README.md"))).toBe(true);
+
+    const rediscoveredProjects = await server.discoverServerProjectsFromWorkingRoot(
+      fixtureRoot,
+    );
+
+    expect(rediscoveredProjects).toEqual([
+      expect.objectContaining({
+        id: project.id,
+        name: project.name,
+        workingDirectory,
+        projectFilesystemStatus: "manifest-present",
+      }),
+    ]);
+
+    await removePath(fixtureRoot);
+    await removePath(metadataRoot);
+  });
 });

@@ -153,6 +153,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.35` - Project Delete Execution Confirmation Foundation
 * `MS-028.36` - Project Delete Disk Execution Foundation
 * `MS-028.37` - Project Delete UI Execution Wiring Foundation
+* `MS-028.38` - Delete/Re-import Manual Validation Run Foundation
 
 ## Current
 
@@ -160,7 +161,76 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.38 - Delete/Re-import Manual Validation Run Foundation
+
+## MS-028.38 - Delete/Re-import Manual Validation Run Foundation
+
+**Milestone**
+MS-028.38 - Delete/Re-import Manual Validation Run Foundation
+
+**Type**
+Product Milestone
+
+This milestone closes the fixture-backed manual validation of the delete/re-open path without introducing a full product re-import wizard. The repository confirms that safe detach stays nondestructive, browser/localStorage cleanup stays nondestructive, metadata root delete works on a temp fixture, working directory / checkout delete works on a temp fixture, and a delete -> recreate/re-open -> rediscovery path works on the fixture. The milestone keeps the real Beauty Client PRO data untouched and does not add UI, API, or Codex panel changes.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Provide a controlled manual validation confirmation that the destructive delete path and fixture-backed rediscovery path are operationally readable and safe before any future product re-import decision.
+
+**Product Outcome**
+The project delete flow is validated end-to-end on a fixture without touching live Beauty Client PRO data, and the remaining full re-import capability stays as a separate Product Owner decision.
+
+**Implementation Note**
+This milestone is validation-only. It does not introduce a full re-import wizard, UI changes, API changes, or Codex panel work.
+
+**Dependencies**
 MS-028.37 - Project Delete UI Execution Wiring Foundation
+
+**Implementation Scope**
+Delete/Re-import Manual Validation Run Foundation.
+
+**Next Product Milestone**
+MS-028.39 - Project Re-import/Re-open Action Foundation
+
+**Allowed Scope**
+* validate safe detach on a fixture
+* validate browser/localStorage cleanup on a fixture
+* validate metadata root delete on a fixture
+* validate working directory / checkout delete on a fixture
+* validate delete -> recreate/re-open -> rediscovery on a fixture
+
+**Forbidden Scope**
+* real delete of Beauty Client PRO
+* full product re-import wizard
+* UI changes
+* API changes
+* Codex panel work
+* AI Workspace changes
+* Workflow Engine refactor
+* store architecture changes
 
 ## MS-028.37 - Project Delete UI Execution Wiring Foundation
 

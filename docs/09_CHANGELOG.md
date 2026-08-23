@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 088 - MS-028.38 delete/re-import manual validation sync
+
+### Date
+
+2026-08-23
+
+### Completed
+
+* Confirmed the fixture-backed manual validation of the delete/re-open path without introducing a full product re-import wizard.
+* Verified that safe detach stays nondestructive, browser/localStorage cleanup stays nondestructive, metadata root delete works on a temp fixture, working directory / checkout delete works on a temp fixture, and the delete -> recreate/re-open -> rediscovery path works on the fixture.
+* Kept the real Beauty Client PRO data untouched and did not add UI, API, or Codex panel changes.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.38 - Delete/Re-import Manual Validation Run Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` advances to `MS-028.39 - Project Re-import/Re-open Action Foundation`.
+
+### Notes
+
+* The validation remains fixture-backed and does not add a full product re-import wizard.
+
 ## Session 088 - MS-028.37 project delete ui execution sync
 
 ### Date
