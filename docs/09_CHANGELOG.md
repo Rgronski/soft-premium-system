@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.51 Project Settings TypeScript Nullability Recovery Foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Added the missing `ProjectSourceWorkingTreeState` import and narrowed nullable `project` paths in the Project Settings page so the page satisfies the existing type contract.
+* Kept the Project Settings UX, source-status semantics, and Git/GitHub execution boundaries unchanged while removing the targeted nullability errors.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.51 - Project Settings TypeScript Nullability Recovery Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept AI Workspace, working-branch setup, and other unrelated TypeScript issues out of scope.
+
+### Notes
+
+* The milestone is nullability recovery only and does not change Project Settings behavior beyond the required type fixes.
+
 ## Session 089 - MS-028.50 Working Branch Setup Mode Type Recovery Foundation
 
 ### Date

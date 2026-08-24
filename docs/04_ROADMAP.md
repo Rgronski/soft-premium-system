@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.51` - Project Settings TypeScript Nullability Recovery Foundation
 * `MS-028.50` - Working Branch Setup Mode Type Recovery Foundation
 * `MS-028.49` - AI Generate Project Context Result Shape Recovery Foundation
 * `MS-028.47` - Project Delete Validation Summary Type Recovery Foundation
@@ -174,7 +175,29 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.50 - Working Branch Setup Mode Type Recovery Foundation
+MS-028.51 - Project Settings TypeScript Nullability Recovery Foundation
+
+## MS-028.51 - Project Settings TypeScript Nullability Recovery Foundation
+
+**Milestone**
+MS-028.51 - Project Settings TypeScript Nullability Recovery Foundation
+
+**Type**
+Product Milestone
+
+This milestone restores the Project Settings type contract by adding the missing `ProjectSourceWorkingTreeState` import and narrowing nullable `project` paths in `src/app/projects/[id]/settings/page.tsx` without changing the page UX, source-status semantics, or Git/GitHub execution boundaries.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Minimal nullability recovery only.
 
 ## MS-028.50 - Working Branch Setup Mode Type Recovery Foundation
 

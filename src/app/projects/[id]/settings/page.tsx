@@ -22,6 +22,7 @@ import {
   saveProjectSourceStatus,
   saveProjectWorkingBranchName,
   type ProjectBranchWorkMode,
+  type ProjectSourceWorkingTreeState,
   type ProjectSourceReconciliationStatus,
 } from "@/lib/project/source-status";
 import { useParams } from "next/navigation";
@@ -895,6 +896,8 @@ export default function ProjectSettingsPage() {
     );
   }
 
+  const currentProject = project;
+
   const reconciledSourceStatus =
     projectSourceStatus?.sourceStatus === "git-repo"
       ? projectSourceStatus
@@ -1003,7 +1006,7 @@ export default function ProjectSettingsPage() {
   function handleSaveGithubUrl() {
     const trimmedGithubUrl = githubUrlInput.trim();
 
-    const nextProject = saveProjectBinding(project, {
+    const nextProject = saveProjectBinding(currentProject, {
       ...(trimmedGithubUrl ? { repositoryUrl: trimmedGithubUrl } : {}),
     });
 
@@ -1025,16 +1028,16 @@ export default function ProjectSettingsPage() {
       return;
     }
 
-    if (isManifestOnlyWorkspaceDirectory(project, trimmedWorkingDirectory)) {
+    if (isManifestOnlyWorkspaceDirectory(currentProject, trimmedWorkingDirectory)) {
       setFeedbackMessage(
         `Ten katalog wskazuje folder manifest-only. Użyj ${buildRepoCheckoutDirectory(
-          project.workingDirectory ?? trimmedWorkingDirectory,
+          currentProject.workingDirectory ?? trimmedWorkingDirectory,
         )} jako repo checkout.`,
       );
       return;
     }
 
-    const nextProject = saveProjectBinding(project, {
+    const nextProject = saveProjectBinding(currentProject, {
       workingDirectory: trimmedWorkingDirectory,
     });
 
@@ -1052,7 +1055,7 @@ export default function ProjectSettingsPage() {
     if (nextBranchWorkMode === "working-branch") {
       const nextWorkingBranchName =
         readProjectWorkingBranchName(params.id) ||
-        buildWorkingBranchName(project.name);
+        buildWorkingBranchName(currentProject.name);
 
       setWorkingBranchName(nextWorkingBranchName);
       saveProjectWorkingBranchName(params.id, nextWorkingBranchName);
@@ -1155,7 +1158,7 @@ export default function ProjectSettingsPage() {
           },
           body: JSON.stringify({
             projectId: params.id,
-            repositoryUrl: project.repositoryUrl?.trim() ?? "",
+            repositoryUrl: currentProject.repositoryUrl?.trim() ?? "",
             workingDirectory: savedWorkingDirectory,
             branchWorkMode,
             workingBranchName: savedWorkingBranchName,
