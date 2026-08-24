@@ -45,12 +45,14 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.52 - TypeScript Baseline Recovery Version Publication Foundation
+MS-028.53 - AI Workbench Copy-Ready Codex Handoff Panel Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
 MS-028.52 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the TypeScript Baseline Recovery Version Publication Foundation. The repository now records the recovered TypeScript baseline after MS-028.46 through MS-028.51, confirms `npx.cmd tsc --noEmit` remains PASS with no known TypeScript errors after MS-028.51, and bumps the visible app version marker to `1.028.52` without changing product behavior. The milestone is a checkpoint only and does not add features.
+
+MS-028.53 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workbench Copy-Ready Codex Handoff Panel Foundation. The repository now adds a compact AI Workbench panel that explains the project-context handoff boundary, states that Codex executes outside the app, and shows a copy-ready handoff template without adding Codex API integration or command execution. The milestone is a UI guidance checkpoint only and does not change AI Workspace behavior beyond the required panel copy.
 
 MS-028.51 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Settings TypeScript Nullability Recovery Foundation. The repository now restores the Project Settings type contract by adding the missing `ProjectSourceWorkingTreeState` import and narrowing nullable `project` paths in `src/app/projects/[id]/settings/page.tsx` without changing the page UX, source-status semantics, or Git/GitHub execution boundaries. The milestone is nullability recovery only and does not change product behavior beyond the required type fixes.
 
@@ -1623,10 +1625,10 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-028.52 - TypeScript Baseline Recovery Version Publication Foundation`
+* `Latest Completed Product Milestone` is `MS-028.53 - AI Workbench Copy-Ready Codex Handoff Panel Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
-* `Session 089` synchronized the `MS-028.52 - TypeScript Baseline Recovery Version Publication Foundation` control files because the repository now records the recovered TypeScript baseline after MS-028.46 through MS-028.51, confirms `npx.cmd tsc --noEmit` remains PASS with no known TypeScript errors after MS-028.51, and bumps the visible app version marker to `1.028.52` without changing product behavior.
-* `Session 089` appended exactly one `.usage/session.jsonl` record for the MS-028.52 implementation task.
+* `Session 089` synchronized the `MS-028.53 - AI Workbench Copy-Ready Codex Handoff Panel Foundation` control files because the repository now records the copy-ready AI Workbench handoff guidance panel, explains the project-context and outside-app Codex boundary, and shows the handoff wrapper template without changing AI Workspace behavior.
+* `Session 089` appended exactly one `.usage/session.jsonl` record for the MS-028.53 implementation task.
 * `Session 089` kept the real Beauty Client PRO destructive delete postponed and did not execute any real delete, re-import, clone, checkout, branch, merge, commit, push, or PR action.
 * `MS-028.10` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation; the repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
 * `MS-028.11` is `PUBLISHED / CLOSED` in the current local workspace as the GitHub First Operation Candidate Decision Foundation; the repository now records the Product Owner decision for the locally selected first operation candidate after `MS-028.9` and `MS-028.10`, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked.

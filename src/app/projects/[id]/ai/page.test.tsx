@@ -1168,7 +1168,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Zapisano" })).toBeTruthy();
       expect(screen.getByText("Architecture note")).toBeTruthy();
     });
 
@@ -1302,7 +1302,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Zapisano" })).toBeTruthy();
       expect(screen.getByText("Latest note")).toBeTruthy();
     });
 
@@ -1354,11 +1354,11 @@ describe("ProjectAiWorkspacePage", () => {
 
     await waitFor(() => {
       expect(
-        screen.getByRole("button", { name: "Generating..." }),
+        screen.getByRole("button", { name: "Generowanie..." }),
       ).toHaveProperty("disabled", true);
     });
 
-    fireEvent.click(screen.getByRole("button", { name: "Generating..." }));
+    fireEvent.click(screen.getByRole("button", { name: "Generowanie..." }));
     expect(fetchMock).toHaveBeenCalledTimes(1);
 
     resolveResponse?.(
@@ -1404,7 +1404,7 @@ describe("ProjectAiWorkspacePage", () => {
 
     expect(fetchMock).not.toHaveBeenCalled();
     expect(
-      screen.queryByRole("button", { name: "Generating..." }),
+      screen.queryByRole("button", { name: "Generowanie..." }),
     ).toBeNull();
     expect(screen.getByText("Enter a valid instruction.")).toBeTruthy();
   });
@@ -1454,7 +1454,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(screen.queryByRole("button", { name: "Saving..." })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Zapisywanie..." })).toBeNull();
     expect(screen.getByText("Enter a valid title.")).toBeTruthy();
   });
 
@@ -1570,13 +1570,13 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: "Saving..." })).toHaveProperty(
+      expect(screen.getByRole("button", { name: "Zapisywanie..." })).toHaveProperty(
         "disabled",
         true,
       );
     });
 
-    fireEvent.click(screen.getByRole("button", { name: "Saving..." }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisywanie..." }));
     expect(fetchMock).toHaveBeenCalledTimes(2);
 
     saveDeferred.resolve(
@@ -1598,14 +1598,14 @@ describe("ProjectAiWorkspacePage", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: "Saved" })).toHaveProperty(
+      expect(screen.getByRole("button", { name: "Zapisano" })).toHaveProperty(
         "disabled",
         true,
       );
     });
 
     expect(getBrowserAiProjectContextMock).toHaveBeenCalledTimes(1);
-    fireEvent.click(screen.getByRole("button", { name: "Saved" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zapisano" }));
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
@@ -1692,7 +1692,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Zapisano" })).toBeTruthy();
     });
     expect(fetchMock).toHaveBeenCalledTimes(3);
   });
@@ -1837,7 +1837,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Zapisano" })).toBeTruthy();
       expect(screen.getByText("Architecture note")).toBeTruthy();
     });
 
@@ -1958,7 +1958,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Zapisano" })).toBeTruthy();
       expect(screen.getByText("Architecture note")).toBeTruthy();
     });
 
@@ -2213,7 +2213,7 @@ describe("ProjectAiWorkspacePage", () => {
         "Architecture note",
         "Generated response",
       );
-      expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Zapisano" })).toBeTruthy();
       expect(screen.getByText("Architecture note")).toBeTruthy();
     });
 
@@ -2299,7 +2299,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: "Saved" })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Zapisano" })).toBeTruthy();
     });
 
     fireEvent.change(screen.getByRole("textbox", { name: "Instrukcja" }), {
@@ -2317,7 +2317,7 @@ describe("ProjectAiWorkspacePage", () => {
       "value",
       "",
     );
-    expect(screen.queryByRole("button", { name: "Saved" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Zapisano" })).toBeNull();
     expect(fetchMock).toHaveBeenCalledTimes(3);
   });
 
@@ -2383,7 +2383,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: "Saving..." })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Zapisywanie..." })).toBeTruthy();
     });
 
     expect(fetchMock).toHaveBeenNthCalledWith(2, "/api/projects/project-1/knowledge", {
@@ -2407,7 +2407,7 @@ describe("ProjectAiWorkspacePage", () => {
     });
 
     expect(screen.getByText("result A")).toBeTruthy();
-    expect(screen.queryByRole("button", { name: "Saved" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Zapisano" })).toBeNull();
     expect(screen.getByRole("textbox", { name: "Tytuł" })).toHaveProperty(
       "value",
       "",
@@ -2437,7 +2437,7 @@ describe("ProjectAiWorkspacePage", () => {
       expect(screen.getByText("result B")).toBeTruthy();
     });
 
-    expect(screen.queryByRole("button", { name: "Saved" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Zapisano" })).toBeNull();
     expect(screen.getByRole("textbox", { name: "Tytuł" })).toHaveProperty(
       "value",
       "",
@@ -2543,7 +2543,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Zapisz do wiedzy" }));
 
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: "Saving..." })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Zapisywanie..." })).toBeTruthy();
     });
 
     useParamsMock.mockReturnValue({ id: "project-2" });
@@ -2555,7 +2555,7 @@ describe("ProjectAiWorkspacePage", () => {
 
     expect(screen.queryByText("Generated response")).toBeNull();
     expect(screen.queryByRole("textbox", { name: "Tytuł" })).toBeNull();
-    expect(screen.queryByRole("button", { name: "Saved" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Zapisano" })).toBeNull();
 
     saveDeferred.resolve(
       new Response(
@@ -2593,7 +2593,7 @@ describe("ProjectAiWorkspacePage", () => {
     expect(
       screen.getByText("Następna generacja nie użyje lokalnego kontekstu rozmowy."),
     ).toBeTruthy();
-    expect(screen.queryByRole("button", { name: "Saved" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Zapisano" })).toBeNull();
     expect(screen.queryByText("Generated response")).toBeNull();
   });
 
@@ -2632,7 +2632,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: "Generating..." })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Generowanie..." })).toBeTruthy();
     });
 
     useParamsMock.mockReturnValue({ id: "project-2" });
@@ -2705,7 +2705,7 @@ describe("ProjectAiWorkspacePage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Generuj" }));
 
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: "Generating..." })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Generowanie..." })).toBeTruthy();
     });
 
     useParamsMock.mockReturnValue({ id: "project-2" });
@@ -2837,5 +2837,44 @@ describe("ProjectAiWorkspacePage", () => {
         "Gotowy wynik możesz skopiować przyciskiem Kopiuj przy odpowiedzi.",
       ),
     ).toBeTruthy();
+  });
+
+  test("renders the handoff template in the AI Workbench panel", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+
+    render(<ProjectAiWorkspacePage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Handoff do Codexa")).toBeTruthy();
+    });
+
+    expect(
+      screen.getByText(
+        (content, element) =>
+          element?.tagName === "PRE" &&
+          content.includes("SPS OS przygotowuje kontekst projektu i blok przekazania."),
+      ),
+    ).toBeTruthy();
+    const handoffTemplate = screen.getByText(
+      (content, element) =>
+        element?.tagName === "PRE" &&
+        content.includes("===== HANDOFF DO CODEXA START =====") &&
+        content.includes("===== HANDOFF DO CODEXA END ====="),
+    );
+
+    expect(handoffTemplate).toBeTruthy();
+    expect(handoffTemplate.textContent).toContain("Codex wykonuje tylko zaakceptowany zakres poza aplikacją.");
+    expect(handoffTemplate.textContent).toContain("Poniższy szablon możesz skopiować i uzupełnić przed wysłaniem.");
+    expect(handoffTemplate.textContent).toContain("Cel:");
+    expect(handoffTemplate.textContent).toContain("Zakres:");
+    expect(handoffTemplate.textContent).toContain("Weryfikacja:");
   });
 });

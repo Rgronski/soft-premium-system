@@ -815,6 +815,23 @@ export default function ProjectAiWorkspacePage() {
                 odpowiedzi.
               </p>
             </div>
+
+            <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-950/70 p-4">
+              <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
+                Handoff do Codexa
+              </p>
+              <pre className="mt-4 overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-6 text-zinc-200">
+                {`SPS OS przygotowuje kontekst projektu i blok przekazania.
+Codex wykonuje tylko zaakceptowany zakres poza aplikacją.
+Poniższy szablon możesz skopiować i uzupełnić przed wysłaniem.
+
+===== HANDOFF DO CODEXA START =====
+Cel:
+Zakres:
+Weryfikacja:
+===== HANDOFF DO CODEXA END =====`}
+              </pre>
+            </div>
           </div>
 
           <form className="mt-4 space-y-4" onSubmit={handleGenerate}>

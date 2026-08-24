@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.53 AI Workbench Copy-Ready Codex Handoff Panel Foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Added a compact AI Workbench guidance panel that explains the project-context handoff boundary, states that Codex executes outside the app, and shows a copy-ready handoff template.
+* Kept the existing AI Workspace flow intact while avoiding Codex API integration, command execution, dynamic handoff generation, and repo mutation behavior.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.53 - AI Workbench Copy-Ready Codex Handoff Panel Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept Project Settings, AI generate route, working-branch setup, and TypeScript baseline fixes out of scope.
+
+### Notes
+
+* The milestone is a compact AI Workbench guidance checkpoint only.
+
 ## Session 089 - MS-028.52 TypeScript Baseline Recovery Version Publication Foundation
 
 ### Date

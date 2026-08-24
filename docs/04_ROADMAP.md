@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.53` - AI Workbench Copy-Ready Codex Handoff Panel Foundation
 * `MS-028.52` - TypeScript Baseline Recovery Version Publication Foundation
 * `MS-028.51` - Project Settings TypeScript Nullability Recovery Foundation
 * `MS-028.50` - Working Branch Setup Mode Type Recovery Foundation
@@ -176,7 +177,7 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.52 - TypeScript Baseline Recovery Version Publication Foundation
+MS-028.53 - AI Workbench Copy-Ready Codex Handoff Panel Foundation
 
 ## MS-028.52 - TypeScript Baseline Recovery Version Publication Foundation
 
