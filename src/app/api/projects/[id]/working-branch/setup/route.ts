@@ -748,10 +748,7 @@ export async function GET(
   const projectId = url.searchParams.get("projectId")?.trim();
   const repositoryUrl = url.searchParams.get("repositoryUrl") ?? "";
   const workingDirectory = url.searchParams.get("workingDirectory") ?? "";
-  const branchWorkMode =
-    url.searchParams.get("branchWorkMode") === "working-branch"
-      ? "working-branch"
-      : "main";
+  const branchWorkMode: "working-branch" = "working-branch";
   const workingBranchName = url.searchParams.get("workingBranchName") ?? "";
 
   if (projectId && projectId !== id) {

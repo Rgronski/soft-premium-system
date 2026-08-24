@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.50` - Working Branch Setup Mode Type Recovery Foundation
 * `MS-028.49` - AI Generate Project Context Result Shape Recovery Foundation
 * `MS-028.47` - Project Delete Validation Summary Type Recovery Foundation
 * `MS-028.46` - TypeScript Baseline Recovery Diagnosis Foundation
@@ -173,7 +174,29 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.49 - AI Generate Project Context Result Shape Recovery Foundation
+MS-028.50 - Working Branch Setup Mode Type Recovery Foundation
+
+## MS-028.50 - Working Branch Setup Mode Type Recovery Foundation
+
+**Milestone**
+MS-028.50 - Working Branch Setup Mode Type Recovery Foundation
+
+**Type**
+Product Milestone
+
+This milestone restores the working-branch setup route contract by narrowing the `branchWorkMode` value passed into `src/app/api/projects/[id]/working-branch/setup/route.ts` so the helper only receives the exact `"working-branch"` mode it requires, without changing Git/GitHub execution boundaries or Project Settings behavior.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Minimal type-shape recovery only.
 
 ## MS-028.49 - AI Generate Project Context Result Shape Recovery Foundation
 

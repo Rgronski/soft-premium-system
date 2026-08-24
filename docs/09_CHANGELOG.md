@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.50 Working Branch Setup Mode Type Recovery Foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Narrowed the working-branch setup route so the helper only receives the exact `"working-branch"` mode it requires.
+* Kept Git/GitHub execution boundaries unchanged while removing the targeted `TS2322` mode mismatch.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.50 - Working Branch Setup Mode Type Recovery Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept Project Settings nullability errors out of scope.
+
+### Notes
+
+* The milestone is mode-recovery only and does not change Git/GitHub execution semantics.
+
 ## Session 089 - MS-028.49 AI Generate Project Context Result Shape Recovery Foundation
 
 ### Date
