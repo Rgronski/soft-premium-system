@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.47 Project Delete Validation Summary Type Recovery Foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Restored the missing `ProjectDeleteValidationSummary` type symbol used by `src/lib/project/server.ts`.
+* Kept the delete/re-import execution semantics unchanged while resolving the four `TS2304` baseline errors tied to the missing symbol.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.47 - Project Delete Validation Summary Type Recovery Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept AI Workspace, project settings, branch setup, and Project Brain behavior out of scope.
+
+### Notes
+
+* The milestone is type-recovery only and does not change runtime behavior.
+
 ## Session 089 - MS-028.46 TypeScript Baseline Recovery Diagnosis Foundation
 
 ### Date

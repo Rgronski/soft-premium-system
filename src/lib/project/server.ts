@@ -8,6 +8,7 @@ import {
   buildDefaultWorkingDirectory,
   getProjectDeleteValidationSummary,
 } from "./project";
+import type { ProjectDeleteValidationSummary } from "./project";
 import type { Project, ProjectFilesystemStatus } from "./types";
 
 type ProjectCreationErrorCode = "working-directory-create-failed";

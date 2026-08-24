@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.47` - Project Delete Validation Summary Type Recovery Foundation
 * `MS-028.46` - TypeScript Baseline Recovery Diagnosis Foundation
 * `MS-028.45` - Codex Operating Charter and Copy-Block Communication Foundation
 * `MS-028.44` - Project AI Workbench Direction Foundation
@@ -170,7 +171,56 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.47 - Project Delete Validation Summary Type Recovery Foundation
+
+## MS-028.47 - Project Delete Validation Summary Type Recovery Foundation
+
+**Milestone**
+MS-028.47 - Project Delete Validation Summary Type Recovery Foundation
+
+**Type**
+Product Milestone
+
+This milestone restores the missing `ProjectDeleteValidationSummary` type symbol used by `src/lib/project/server.ts` so the project-delete validation helpers can compile again without changing execution behavior.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Recover the missing project-delete validation type symbol with the smallest safe change.
+
+**Product Outcome**
+`src/lib/project/server.ts` now compiles with the recovered `ProjectDeleteValidationSummary` type symbol while keeping delete/re-import semantics unchanged.
+
+**Implementation Note**
+This milestone is type-recovery only and does not change runtime behavior.
+
+**Dependencies**
 MS-028.46 - TypeScript Baseline Recovery Diagnosis Foundation
+
+**Implementation Scope**
+Project Delete Validation Summary Type Recovery Foundation.
 
 ## MS-028.46 - TypeScript Baseline Recovery Diagnosis Foundation
 
