@@ -185,6 +185,28 @@ NONE / Product Owner decision required
 
 MS-028.59 - AI Workbench Codex Handoff Operating Rules Fields Foundation
 
+## MS-028.59 - AI Workbench Codex Handoff Operating Rules Fields Foundation
+
+**Milestone**
+MS-028.59 - AI Workbench Codex Handoff Operating Rules Fields Foundation
+
+**Type**
+Product Milestone
+
+This checkpoint extends the static AI Workbench handoff template with a compact `Zasady pracy:` section and keeps the copied block aligned with the visible panel while remaining static, copy-ready, and non-executable.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Operating rules template checkpoint only.
+
 ## MS-028.58 - AI Workbench Manual Context Fill Guidance Foundation
 
 **Milestone**
