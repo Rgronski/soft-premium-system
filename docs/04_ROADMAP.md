@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.54` - AI Workbench Handoff Copy Action Foundation
 * `MS-028.53` - AI Workbench Copy-Ready Codex Handoff Panel Foundation
 * `MS-028.52` - TypeScript Baseline Recovery Version Publication Foundation
 * `MS-028.51` - Project Settings TypeScript Nullability Recovery Foundation
@@ -177,7 +178,17 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.53 - AI Workbench Copy-Ready Codex Handoff Panel Foundation
+MS-028.54 - AI Workbench Handoff Copy Action Foundation
+
+## MS-028.54 - AI Workbench Handoff Copy Action Foundation
+
+**Milestone**
+MS-028.54 - AI Workbench Handoff Copy Action Foundation
+
+**Type**
+Product Milestone
+
+This checkpoint adds a compact `Kopiuj handoff` action to the existing AI Workbench handoff panel. The copy action writes the static Codex handoff block to the clipboard, shows a copied state, and keeps AI Workspace behavior unchanged.
 
 ## MS-028.52 - TypeScript Baseline Recovery Version Publication Foundation
 

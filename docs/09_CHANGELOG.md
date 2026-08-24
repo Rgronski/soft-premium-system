@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.54 AI Workbench Handoff Copy Action Foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Added a compact `Kopiuj handoff` action to the existing AI Workbench handoff panel.
+* Copied the full static Codex handoff block with a simple browser clipboard write and graceful fallback when clipboard access is unavailable.
+* Added focused test coverage for the visible copy button, the expected handoff block content, the copied state, and the clipboard-unavailable path.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.54 - AI Workbench Handoff Copy Action Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept Codex API integration, command execution, repo mutation, Project Brain storage, AI generate route, Project Settings, and large AI Workspace refactors out of scope.
+
+### Notes
+
+* The milestone is a compact AI Workbench handoff copy checkpoint only.
+
 ## Session 089 - MS-028.53 AI Workbench Copy-Ready Codex Handoff Panel Foundation
 
 ### Date

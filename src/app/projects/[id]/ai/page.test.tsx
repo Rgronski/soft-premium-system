@@ -2877,4 +2877,63 @@ describe("ProjectAiWorkspacePage", () => {
     expect(handoffTemplate.textContent).toContain("Zakres:");
     expect(handoffTemplate.textContent).toContain("Weryfikacja:");
   });
+
+  test("copies the handoff block and shows the copied state", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+    clipboardWriteTextMock.mockResolvedValue(undefined);
+
+    render(<ProjectAiWorkspacePage />);
+
+    const copyButton = await screen.findByRole("button", {
+      name: "Kopiuj handoff",
+    });
+
+    fireEvent.click(copyButton);
+
+    await waitFor(() => {
+      expect(clipboardWriteTextMock).toHaveBeenCalledTimes(1);
+      expect(clipboardWriteTextMock).toHaveBeenCalledWith(`===== HANDOFF DO CODEXA START =====
+Cel:
+Zakres:
+Weryfikacja:
+===== HANDOFF DO CODEXA END =====`);
+      expect(screen.getByRole("button", { name: "Skopiowano" })).toBeTruthy();
+    });
+  });
+
+  test("shows the copied state even when clipboard is unavailable", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+    Object.defineProperty(window.navigator, "clipboard", {
+      configurable: true,
+      value: undefined,
+    });
+
+    render(<ProjectAiWorkspacePage />);
+
+    fireEvent.click(
+      await screen.findByRole("button", {
+        name: "Kopiuj handoff",
+      }),
+    );
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Skopiowano" })).toBeTruthy();
+    });
+  });
 });

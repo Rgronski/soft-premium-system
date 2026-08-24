@@ -43,6 +43,12 @@ import type { AiProjectContext } from "@/lib/project-brain/types";
 import { useParams } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
+const CODEXA_HANDOFF_COPY_TEXT = `===== HANDOFF DO CODEXA START =====
+Cel:
+Zakres:
+Weryfikacja:
+===== HANDOFF DO CODEXA END =====`;
+
 type KnowledgeSaveResponse =
   | {
       id: string;
@@ -184,6 +190,7 @@ export default function ProjectAiWorkspacePage() {
     [],
   );
   const [isProjectTasksLoading, setIsProjectTasksLoading] = useState(true);
+  const [isHandoffCopied, setIsHandoffCopied] = useState(false);
 
   useEffect(() => {
     let ignore = false;
@@ -672,6 +679,16 @@ export default function ProjectAiWorkspacePage() {
     await navigator.clipboard.writeText(copyResponseIntentState.response);
   }
 
+  async function handleCopyHandoff() {
+    try {
+      await navigator.clipboard?.writeText?.(CODEXA_HANDOFF_COPY_TEXT);
+    } catch {
+      // Clipboard may be unavailable in test or runtime environments.
+    } finally {
+      setIsHandoffCopied(true);
+    }
+  }
+
   return (
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
       <div className="space-y-6">
@@ -831,6 +848,17 @@ Zakres:
 Weryfikacja:
 ===== HANDOFF DO CODEXA END =====`}
               </pre>
+              <div className="mt-3 flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    void handleCopyHandoff();
+                  }}
+                  className="rounded-xl border border-zinc-700 bg-zinc-100 px-3 py-2 text-sm font-medium text-zinc-950"
+                >
+                  {isHandoffCopied ? "Skopiowano" : "Kopiuj handoff"}
+                </button>
+              </div>
             </div>
           </div>
 
