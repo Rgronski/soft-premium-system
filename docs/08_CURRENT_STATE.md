@@ -45,12 +45,14 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.43 - Operator Guide Delete/Re-import Foundation
+MS-028.44 - Project AI Workbench Direction Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
 MS-028.43 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Operator Guide Delete/Re-import Foundation. The repository now exposes `docs/operator-guide/PROJECT_DELETE_REIMPORT_OPERATOR_GUIDE.md` with the safe delete boundary, browser/localStorage cleanup boundary, Project Brain metadata root boundary, working directory / repo checkout boundary, safe re-import / re-open flow, post-reimport checklist, and stop conditions. The milestone is documentation-only and keeps the real Beauty Client PRO destructive delete postponed.
+
+MS-028.44 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project AI Workbench Direction Foundation. The repository now adds a compact AI Workbench direction block to the existing AI Workspace that explains the chat/work window boundary, the copy-ready Codex handoff boundary, the Project Brain context source, and the Conductor safe-step guidance boundary. The milestone does not add Codex execution or repo automation.
 
 MS-028.42a is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the App Version Marker 1.028.42 Publication. The repository now exposes `1.028.42` from `src/lib/app-version.ts` and keeps the visible app-version badge/test aligned with the accepted marker without changing AI Workspace, Project Brain storage, Core Doctrine storage, or delete/re-import behavior.
 
@@ -1611,10 +1613,10 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-028.43 - Operator Guide Delete/Re-import Foundation`
+* `Latest Completed Product Milestone` is `MS-028.44 - Project AI Workbench Direction Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
-* `Session 089` synchronized the `MS-028.43 - Operator Guide Delete/Re-import Foundation` control files because the repository now exposes a concise operator guide for safe project delete, safe browser/localStorage cleanup, protected Project Brain metadata root handling, working directory / repo checkout handling, safe re-import / re-open work, and stop conditions without changing application behavior.
-* `Session 089` appended exactly one `.usage/session.jsonl` record for the MS-028.43 docs-only publication task.
+* `Session 089` synchronized the `MS-028.44 - Project AI Workbench Direction Foundation` control files because the repository now exposes a compact AI Workbench direction block in the existing AI Workspace that explains the project chat/work window boundary, the copy-ready Codex handoff boundary, the Project Brain context source, and the Conductor safe-step boundary without adding Codex execution or repo automation.
+* `Session 089` appended exactly one `.usage/session.jsonl` record for the MS-028.44 docs-only publication task.
 * `Session 089` kept the real Beauty Client PRO destructive delete postponed and did not execute any real delete, re-import, clone, checkout, branch, merge, commit, push, or PR action.
 * `MS-028.10` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation; the repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
 * `MS-028.11` is `PUBLISHED / CLOSED` in the current local workspace as the GitHub First Operation Candidate Decision Foundation; the repository now records the Product Owner decision for the locally selected first operation candidate after `MS-028.9` and `MS-028.10`, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked.

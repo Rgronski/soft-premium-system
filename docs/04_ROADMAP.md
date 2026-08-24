@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.44` - Project AI Workbench Direction Foundation
 * `MS-028.43` - Operator Guide Delete/Re-import Foundation
 * `MS-028.42a` - App Version Marker 1.028.42 Publication
 
@@ -167,7 +168,74 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.44 - Project AI Workbench Direction Foundation
+
+## MS-028.44 - Project AI Workbench Direction Foundation
+
+**Milestone**
+MS-028.44 - Project AI Workbench Direction Foundation
+
+**Type**
+Product Milestone
+
+This milestone adds a compact AI Workbench direction block to the existing AI Workspace so the project UI makes the current boundary visible: AI Workspace is the project chat/work window, Codex stays handoff-based and copy-ready, Project Brain provides the project context, and Conductor points to the next safe step. It does not add Codex execution or repo automation.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Make the AI Workspace direction understandable in the project UI without changing behavior, repo automation, or Project Brain storage.
+
+**Product Outcome**
+The project AI surface now shows a small AI Workbench boundary note that explains the chat/work window, the handoff-based Codex boundary, the Project Brain context source, and the Conductor guidance boundary.
+
+**Implementation Note**
+This milestone is UI-direction only and stays within the existing AI Workspace surface.
+
+**Dependencies**
 MS-028.43 - Operator Guide Delete/Re-import Foundation
+
+**Implementation Scope**
+Project AI Workbench Direction Foundation.
+
+**Next Product Milestone**
+NONE / Product Owner decision required
+
+**Allowed Scope**
+* add a compact AI Workbench direction block to the existing AI Workspace
+* reuse the existing copy-ready handoff-oriented affordance nearby by reference only
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* Codex API integration
+* command execution from UI
+* repo mutation from UI
+* Project Brain storage changes
+* AI Workspace architecture rewrite
+* large layout refactor
+* repo automation
 
 ## MS-028.43 - Operator Guide Delete/Re-import Foundation
 

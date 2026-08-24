@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.44 project AI workbench direction foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Added a compact AI Workbench direction block to the existing AI Workspace so the project UI explains the chat/work window boundary, the copy-ready Codex handoff boundary, the Project Brain context source, and the Conductor safe-step guidance boundary.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.44 - Project AI Workbench Direction Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept Codex execution, repo automation, and Project Brain storage changes out of scope.
+
+### Notes
+
+* The publication is UI-direction only and does not change product behavior.
+
 ## Session 089 - MS-028.43 operator guide delete/re-import foundation
 
 ### Date

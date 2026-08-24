@@ -2803,4 +2803,39 @@ describe("ProjectAiWorkspacePage", () => {
     expect(screen.queryByText("Alpha")).toBeNull();
     expect(screen.queryByText("First task")).toBeNull();
   });
+
+  test("renders the AI Workbench direction panel in the project workspace", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+
+    render(<ProjectAiWorkspacePage />);
+
+    await waitFor(() => {
+      expect(screen.getByText("AI Workbench")).toBeTruthy();
+    });
+
+    expect(
+      screen.getByText("Rozmowa robocza korzysta z kontekstu projektu."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Codex nadal pracuje przez handoff do skopiowania."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Project Brain dostarcza kontekst, a Konduktor wskazuje następny bezpieczny krok.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Gotowy wynik możesz skopiować przyciskiem Kopiuj przy odpowiedzi.",
+      ),
+    ).toBeTruthy();
+  });
 });

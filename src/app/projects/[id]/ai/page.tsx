@@ -799,6 +799,24 @@ export default function ProjectAiWorkspacePage() {
             </p>
           </div>
 
+          <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-900/80 p-4">
+            <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
+              AI Workbench
+            </p>
+            <div className="mt-3 space-y-2 text-sm text-zinc-300">
+              <p>Rozmowa robocza korzysta z kontekstu projektu.</p>
+              <p>Codex nadal pracuje przez handoff do skopiowania.</p>
+              <p>
+                Project Brain dostarcza kontekst, a Konduktor wskazuje następny
+                bezpieczny krok.
+              </p>
+              <p className="text-zinc-500">
+                Gotowy wynik możesz skopiować przyciskiem Kopiuj przy
+                odpowiedzi.
+              </p>
+            </div>
+          </div>
+
           <form className="mt-4 space-y-4" onSubmit={handleGenerate}>
             <div className="space-y-3">
               <p className="text-sm font-medium text-zinc-100">Propozycje startowe</p>
