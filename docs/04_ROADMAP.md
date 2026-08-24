@@ -183,7 +183,7 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.58 - AI Workbench Manual Context Fill Guidance Foundation
+MS-028.59 - AI Workbench Codex Handoff Operating Rules Fields Foundation
 
 ## MS-028.58 - AI Workbench Manual Context Fill Guidance Foundation
 

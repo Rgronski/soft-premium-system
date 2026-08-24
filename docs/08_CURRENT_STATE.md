@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.55 - AI Workbench Handoff Template Context Fields Foundation
+MS-028.59 - AI Workbench Codex Handoff Operating Rules Fields Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
@@ -457,7 +457,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.42a - App Version Marker 1.028.42 Publication
+Latest Completed Product Milestone: MS-028.59 - AI Workbench Codex Handoff Operating Rules Fields Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Session 088 synchronized the `MS-028.42a - App Version Marker 1.028.42 Publication` control files in the current local workspace. The repository now exposes `1.028.42` from `src/lib/app-version.ts`, keeps the visible app-version badge/test aligned with the accepted marker, and leaves AI Workspace, Project Brain storage, Core Doctrine storage, and delete/re-import behavior unchanged.
 
