@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.45` - Codex Operating Charter and Copy-Block Communication Foundation
 * `MS-028.44` - Project AI Workbench Direction Foundation
 * `MS-028.43` - Operator Guide Delete/Re-import Foundation
 * `MS-028.42a` - App Version Marker 1.028.42 Publication
@@ -168,7 +169,56 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.45 - Codex Operating Charter and Copy-Block Communication Foundation
+
+## MS-028.45 - Codex Operating Charter and Copy-Block Communication Foundation
+
+**Milestone**
+MS-028.45 - Codex Operating Charter and Copy-Block Communication Foundation
+
+**Type**
+Product Milestone
+
+This milestone adds a permanent Codex operating charter that defines role separation, minimal patch behavior, SSOT rules, and the copy-ready handoff and report block formats used in SPS OS.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Make the Codex operating rules explicit and reusable for future SPS OS handoffs.
+
+**Product Outcome**
+The repository now exposes a concise charter that explains who Codex is, how Codex must behave, and how Chief Architect -> Codex and Codex -> Chief Architect communication blocks must be formatted.
+
+**Implementation Note**
+This milestone is documentation-only and does not change product behavior.
+
+**Dependencies**
 MS-028.44 - Project AI Workbench Direction Foundation
+
+**Implementation Scope**
+Codex Operating Charter and Copy-Block Communication Foundation.
 
 ## MS-028.44 - Project AI Workbench Direction Foundation
 

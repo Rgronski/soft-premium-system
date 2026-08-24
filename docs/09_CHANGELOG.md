@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.45 codex operating charter and copy-block communication foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Added `docs/codex/CODEX_OPERATING_CHARTER.md` as a permanent Codex operating charter for SPS OS.
+* Defined the project roles, Codex behavior, SSOT rules, and the copy-ready handoff and report block formats used for future work.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.45 - Codex Operating Charter and Copy-Block Communication Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept product code, AI Workspace behavior, Codex API integration, automation, and repo mutation out of scope.
+
+### Notes
+
+* The publication is documentation-only and does not change product behavior.
+
 ## Session 089 - MS-028.44 project AI workbench direction foundation
 
 ### Date
