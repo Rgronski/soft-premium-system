@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.56 AI Workbench Project Context Read-Only Hint Foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Added a compact read-only hint next to the static AI Workbench handoff template.
+* Explained that `Session Identity` comes from the active SPS OS session/bootstrap, `Repository` is the SPS OS repository, and `Zakres` and `Weryfikacja` come from the accepted milestone contract.
+* Kept the handoff template static and copy-ready with no auto-fill, no Project Brain read, and no API calls.
+* Added focused test coverage for the new hint text.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.56 - AI Workbench Project Context Read-Only Hint Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept Codex API integration, command execution, repo mutation, Project Brain storage, AI generate route, Project Settings, and large AI Workspace refactors out of scope.
+
+### Notes
+
+* The milestone is a read-only hint checkpoint only.
+
 ## Session 089 - MS-028.55 AI Workbench Handoff Template Context Fields Foundation
 
 ### Date

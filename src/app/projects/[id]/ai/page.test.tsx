@@ -2891,6 +2891,40 @@ describe("ProjectAiWorkspacePage", () => {
     expect(handoffTemplate.textContent).toContain("Weryfikacja:");
   });
 
+  test("shows a read-only hint for the handoff context fields", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+
+    render(<ProjectAiWorkspacePage />);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(
+          "Session Identity pobierz z aktywnego SPS OS session/bootstrap.",
+        ),
+      ).toBeTruthy();
+    });
+
+    expect(screen.getByText("Repository to repozytorium SPS OS.")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Zakres i Weryfikacja bierz z zatwierdzonego kontraktu milestone.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "SPS OS nie uzupelnia tych pol automatycznie na tym etapie.",
+      ),
+    ).toBeTruthy();
+  });
+
   test("copies the handoff block and shows the copied state", async () => {
     getBrowserAiProjectContextMock.mockResolvedValue({
       status: "available",

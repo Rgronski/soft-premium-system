@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.56` - AI Workbench Project Context Read-Only Hint Foundation
 * `MS-028.55` - AI Workbench Handoff Template Context Fields Foundation
 * `MS-028.54` - AI Workbench Handoff Copy Action Foundation
 * `MS-028.53` - AI Workbench Copy-Ready Codex Handoff Panel Foundation
@@ -179,7 +180,17 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.55 - AI Workbench Handoff Template Context Fields Foundation
+MS-028.56 - AI Workbench Project Context Read-Only Hint Foundation
+
+## MS-028.56 - AI Workbench Project Context Read-Only Hint Foundation
+
+**Milestone**
+MS-028.56 - AI Workbench Project Context Read-Only Hint Foundation
+
+**Type**
+Product Milestone
+
+This checkpoint adds a compact read-only hint next to the static AI Workbench handoff template. The hint explains where the Product Owner should manually take `Session Identity`, `Repository`, `Zakres`, and `Weryfikacja` values from, while keeping the template static and copy-ready with no auto-fill.
 
 ## MS-028.55 - AI Workbench Handoff Template Context Fields Foundation
 

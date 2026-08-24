@@ -867,6 +867,12 @@ Weryfikacja:
                   {isHandoffCopied ? "Skopiowano" : "Kopiuj handoff"}
                 </button>
               </div>
+              <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-5 text-zinc-400">
+                <p>Session Identity pobierz z aktywnego SPS OS session/bootstrap.</p>
+                <p>Repository to repozytorium SPS OS.</p>
+                <p>Zakres i Weryfikacja bierz z zatwierdzonego kontraktu milestone.</p>
+                <p>SPS OS nie uzupelnia tych pol automatycznie na tym etapie.</p>
+              </div>
             </div>
           </div>
 

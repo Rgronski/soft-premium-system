@@ -1625,10 +1625,10 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-028.55 - AI Workbench Handoff Template Context Fields Foundation`
+ * `Latest Completed Product Milestone` is `MS-028.56 - AI Workbench Project Context Read-Only Hint Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
-* `Session 089` synchronized the `MS-028.55 - AI Workbench Handoff Template Context Fields Foundation` control files because the repository now records the expanded static AI Workbench handoff template with the core SPS OS context fields while keeping it copy-ready and static.
-* `Session 089` appended exactly one `.usage/session.jsonl` record for the MS-028.55 implementation task.
+ * `Session 089` synchronized the `MS-028.56 - AI Workbench Project Context Read-Only Hint Foundation` control files because the repository now records the read-only context hint beside the static AI Workbench handoff template while keeping the template static and copy-ready.
+ * `Session 089` appended exactly one `.usage/session.jsonl` record for the MS-028.56 implementation task.
 * `Session 089` kept the real Beauty Client PRO destructive delete postponed and did not execute any real delete, re-import, clone, checkout, branch, merge, commit, push, or PR action.
 * `MS-028.10` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation; the repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
 * `MS-028.11` is `PUBLISHED / CLOSED` in the current local workspace as the GitHub First Operation Candidate Decision Foundation; the repository now records the Product Owner decision for the locally selected first operation candidate after `MS-028.9` and `MS-028.10`, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked.
