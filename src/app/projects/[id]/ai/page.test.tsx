@@ -16,6 +16,15 @@ const createKnowledgeEntryMock = vi.fn();
 const createTaskOnServerMock = vi.fn();
 const fetchMock = vi.fn<typeof fetch>();
 const clipboardWriteTextMock = vi.fn<(text: string) => Promise<void>>();
+const handoffTemplateText = `===== HANDOFF DO CODEXA START =====
+Session Identity:
+Repository:
+Cel:
+Zakres:
+Dozwolone pliki:
+Zakazane pliki:
+Weryfikacja:
+===== HANDOFF DO CODEXA END =====`;
 const canonicalProjectContext = {
   projectId: "project-1",
   projectName: "Alpha",
@@ -2873,8 +2882,12 @@ describe("ProjectAiWorkspacePage", () => {
     expect(handoffTemplate).toBeTruthy();
     expect(handoffTemplate.textContent).toContain("Codex wykonuje tylko zaakceptowany zakres poza aplikacją.");
     expect(handoffTemplate.textContent).toContain("Poniższy szablon możesz skopiować i uzupełnić przed wysłaniem.");
+    expect(handoffTemplate.textContent).toContain("Session Identity:");
+    expect(handoffTemplate.textContent).toContain("Repository:");
     expect(handoffTemplate.textContent).toContain("Cel:");
     expect(handoffTemplate.textContent).toContain("Zakres:");
+    expect(handoffTemplate.textContent).toContain("Dozwolone pliki:");
+    expect(handoffTemplate.textContent).toContain("Zakazane pliki:");
     expect(handoffTemplate.textContent).toContain("Weryfikacja:");
   });
 
@@ -2900,11 +2913,7 @@ describe("ProjectAiWorkspacePage", () => {
 
     await waitFor(() => {
       expect(clipboardWriteTextMock).toHaveBeenCalledTimes(1);
-      expect(clipboardWriteTextMock).toHaveBeenCalledWith(`===== HANDOFF DO CODEXA START =====
-Cel:
-Zakres:
-Weryfikacja:
-===== HANDOFF DO CODEXA END =====`);
+      expect(clipboardWriteTextMock).toHaveBeenCalledWith(handoffTemplateText);
       expect(screen.getByRole("button", { name: "Skopiowano" })).toBeTruthy();
     });
   });

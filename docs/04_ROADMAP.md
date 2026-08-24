@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.55` - AI Workbench Handoff Template Context Fields Foundation
 * `MS-028.54` - AI Workbench Handoff Copy Action Foundation
 * `MS-028.53` - AI Workbench Copy-Ready Codex Handoff Panel Foundation
 * `MS-028.52` - TypeScript Baseline Recovery Version Publication Foundation
@@ -178,7 +179,17 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.54 - AI Workbench Handoff Copy Action Foundation
+MS-028.55 - AI Workbench Handoff Template Context Fields Foundation
+
+## MS-028.55 - AI Workbench Handoff Template Context Fields Foundation
+
+**Milestone**
+MS-028.55 - AI Workbench Handoff Template Context Fields Foundation
+
+**Type**
+Product Milestone
+
+This checkpoint extends the static AI Workbench handoff template with the core SPS OS context fields and keeps the template copy-ready. The visible panel and copied block now include `Session Identity:`, `Repository:`, `Cel:`, `Zakres:`, `Dozwolone pliki:`, `Zakazane pliki:`, and `Weryfikacja:` while remaining static and compact.
 
 ## MS-028.54 - AI Workbench Handoff Copy Action Foundation
 

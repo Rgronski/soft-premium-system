@@ -44,8 +44,12 @@ import { useParams } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const CODEXA_HANDOFF_COPY_TEXT = `===== HANDOFF DO CODEXA START =====
+Session Identity:
+Repository:
 Cel:
 Zakres:
+Dozwolone pliki:
+Zakazane pliki:
 Weryfikacja:
 ===== HANDOFF DO CODEXA END =====`;
 
@@ -843,8 +847,12 @@ Codex wykonuje tylko zaakceptowany zakres poza aplikacją.
 Poniższy szablon możesz skopiować i uzupełnić przed wysłaniem.
 
 ===== HANDOFF DO CODEXA START =====
+Session Identity:
+Repository:
 Cel:
 Zakres:
+Dozwolone pliki:
+Zakazane pliki:
 Weryfikacja:
 ===== HANDOFF DO CODEXA END =====`}
               </pre>
