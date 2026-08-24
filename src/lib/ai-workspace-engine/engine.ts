@@ -406,7 +406,7 @@ export function deriveGenerateActionPresentation(
 ): GenerateActionPresentation {
   if (generationState === "generating") {
     return {
-      label: "Generating...",
+      label: "Generowanie...",
       disabled: true,
     };
   }
@@ -579,14 +579,14 @@ export function deriveSaveActionPresentation(
 ): SaveActionPresentation {
   if (saveState === "saving") {
     return {
-      label: "Saving...",
+      label: "Zapisywanie...",
       disabled: true,
     };
   }
 
   if (saveState === "saved") {
     return {
-      label: "Saved",
+      label: "Zapisano",
       disabled: true,
     };
   }

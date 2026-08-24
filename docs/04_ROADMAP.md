@@ -161,6 +161,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.47` - Project Delete Validation Summary Type Recovery Foundation
 * `MS-028.46` - TypeScript Baseline Recovery Diagnosis Foundation
 * `MS-028.45` - Codex Operating Charter and Copy-Block Communication Foundation
+* `MS-028.48` - AI Workspace Literal Label Type Recovery Foundation
 * `MS-028.44` - Project AI Workbench Direction Foundation
 * `MS-028.43` - Operator Guide Delete/Re-import Foundation
 * `MS-028.42a` - App Version Marker 1.028.42 Publication
@@ -171,7 +172,56 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.48 - AI Workspace Literal Label Type Recovery Foundation
+
+## MS-028.48 - AI Workspace Literal Label Type Recovery Foundation
+
+**Milestone**
+MS-028.48 - AI Workspace Literal Label Type Recovery Foundation
+
+**Type**
+Product Milestone
+
+This milestone restores the AI Workspace literal label contract by changing the three mismatched labels in `src/lib/ai-workspace-engine/engine.ts` to match the existing Polish literal unions.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Recover the minimal AI Workspace label type contract without changing the state model or broader AI Workspace architecture.
+
+**Product Outcome**
+`src/lib/ai-workspace-engine/engine.ts` now compiles for the targeted literal labels while preserving existing behavior and the existing Polish label contract.
+
+**Implementation Note**
+This milestone is label-recovery only and does not change runtime behavior beyond the required label values.
+
+**Dependencies**
 MS-028.47 - Project Delete Validation Summary Type Recovery Foundation
+
+**Implementation Scope**
+AI Workspace Literal Label Type Recovery Foundation.
 
 ## MS-028.47 - Project Delete Validation Summary Type Recovery Foundation
 

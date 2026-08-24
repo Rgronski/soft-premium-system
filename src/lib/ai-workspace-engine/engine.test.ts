@@ -545,7 +545,7 @@ describe("ai workspace engine", () => {
 
   test("derives a disabled generate action presentation during active generation", () => {
     expect(deriveGenerateActionPresentation("generating")).toEqual({
-      label: "Generating...",
+      label: "Generowanie...",
       disabled: true,
     });
   });
@@ -819,11 +819,11 @@ describe("ai workspace engine", () => {
 
   test("derives disabled save action presentations for saving and saved states", () => {
     expect(deriveSaveActionPresentation("saving")).toEqual({
-      label: "Saving...",
+      label: "Zapisywanie...",
       disabled: true,
     });
     expect(deriveSaveActionPresentation("saved")).toEqual({
-      label: "Saved",
+      label: "Zapisano",
       disabled: true,
     });
   });

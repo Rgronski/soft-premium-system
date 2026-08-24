@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.48 AI Workspace Literal Label Type Recovery Foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Restored the three AI Workspace literal labels in `src/lib/ai-workspace-engine/engine.ts` to match the existing Polish literal unions.
+* Kept the AI Workspace state model and broader architecture unchanged while removing the three targeted `TS2322` label mismatches.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.48 - AI Workspace Literal Label Type Recovery Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept unrelated TypeScript errors in API, settings, branch setup, and Project Brain boundaries out of scope.
+
+### Notes
+
+* The milestone is label-recovery only and does not change runtime behavior beyond the required label values.
+
 ## Session 089 - MS-028.47 Project Delete Validation Summary Type Recovery Foundation
 
 ### Date
