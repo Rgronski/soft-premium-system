@@ -50,6 +50,8 @@ MS-028.59 - AI Workbench Codex Handoff Operating Rules Fields Foundation
 **Next Milestone**
 NONE / Product Owner decision required
 
+MS-028.59 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Workbench Codex Handoff Operating Rules Fields Foundation. The repository now extends the static AI Workspace handoff template with a compact `Zasady pracy:` section and keeps the copied block aligned with the visible panel while remaining static, copy-ready, and non-executable.
+
 MS-028.52 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the TypeScript Baseline Recovery Version Publication Foundation. The repository now records the recovered TypeScript baseline after MS-028.46 through MS-028.51, confirms `npx.cmd tsc --noEmit` remains PASS with no known TypeScript errors after MS-028.51, and bumps the visible app version marker to `1.028.52` without changing product behavior. The milestone is a checkpoint only and does not add features.
 
 MS-028.54 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workbench Handoff Copy Action Foundation. The repository now adds a compact AI Workbench handoff panel with a copy action that writes the static Codex handoff block to the clipboard, shows a copied state, and keeps AI Workspace behavior unchanged.
