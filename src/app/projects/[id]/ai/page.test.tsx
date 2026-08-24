@@ -24,6 +24,15 @@ Zakres:
 Dozwolone pliki:
 Zakazane pliki:
 Weryfikacja:
+Zasady pracy:
+- oszczędzaj tokeny i kredyty
+- diagnozuj przed edycją
+- stosuj minimalny patch
+- nie refaktoruj przy okazji
+- nie rozszerzaj scope
+- nie commituj ani nie pushuj bez trybu publikacji
+- raportuj w bloku do skopiowania
+- nie przechodź na SOL bez decyzji Product Ownera
 ===== HANDOFF DO CODEXA END =====`;
 const canonicalProjectContext = {
   projectId: "project-1",
@@ -2889,6 +2898,15 @@ describe("ProjectAiWorkspacePage", () => {
     expect(handoffTemplate.textContent).toContain("Dozwolone pliki:");
     expect(handoffTemplate.textContent).toContain("Zakazane pliki:");
     expect(handoffTemplate.textContent).toContain("Weryfikacja:");
+    expect(handoffTemplate.textContent).toContain("Zasady pracy:");
+    expect(handoffTemplate.textContent).toContain("oszczędzaj tokeny i kredyty");
+    expect(handoffTemplate.textContent).toContain("diagnozuj przed edycją");
+    expect(handoffTemplate.textContent).toContain("stosuj minimalny patch");
+    expect(handoffTemplate.textContent).toContain("nie refaktoruj przy okazji");
+    expect(handoffTemplate.textContent).toContain("nie rozszerzaj scope");
+    expect(handoffTemplate.textContent).toContain("nie commituj ani nie pushuj bez trybu publikacji");
+    expect(handoffTemplate.textContent).toContain("raportuj w bloku do skopiowania");
+    expect(handoffTemplate.textContent).toContain("nie przechodź na SOL bez decyzji Product Ownera");
   });
 
   test("shows a read-only hint for the handoff context fields", async () => {
@@ -2943,6 +2961,12 @@ describe("ProjectAiWorkspacePage", () => {
     ).toBeTruthy();
     expect(
       screen.getByText("Weryfikacja bierz z planu weryfikacji."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        (content, element) =>
+          element?.tagName === "PRE" && content.includes("Zasady pracy:"),
+      ),
     ).toBeTruthy();
   });
 

@@ -51,6 +51,15 @@ Zakres:
 Dozwolone pliki:
 Zakazane pliki:
 Weryfikacja:
+Zasady pracy:
+- oszczędzaj tokeny i kredyty
+- diagnozuj przed edycją
+- stosuj minimalny patch
+- nie refaktoruj przy okazji
+- nie rozszerzaj scope
+- nie commituj ani nie pushuj bez trybu publikacji
+- raportuj w bloku do skopiowania
+- nie przechodź na SOL bez decyzji Product Ownera
 ===== HANDOFF DO CODEXA END =====`;
 
 type KnowledgeSaveResponse =
@@ -854,6 +863,15 @@ Zakres:
 Dozwolone pliki:
 Zakazane pliki:
 Weryfikacja:
+Zasady pracy:
+- oszczędzaj tokeny i kredyty
+- diagnozuj przed edycją
+- stosuj minimalny patch
+- nie refaktoruj przy okazji
+- nie rozszerzaj scope
+- nie commituj ani nie pushuj bez trybu publikacji
+- raportuj w bloku do skopiowania
+- nie przechodź na SOL bez decyzji Product Ownera
 ===== HANDOFF DO CODEXA END =====`}
               </pre>
               <div className="mt-3 flex items-center gap-3">

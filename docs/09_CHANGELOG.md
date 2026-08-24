@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.59 AI Workbench Codex Handoff Operating Rules Fields Foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Extended the static AI Workbench `Handoff do Codexa` template with a compact `Zasady pracy:` section.
+* Copied the same operating-rules section into the clipboard payload so the handoff text stays identical in the visible panel and copied block.
+* Kept the rules concise and limited them to token savings, diagnosis before edits, minimal patches, no incidental refactors, no scope expansion, no commit/push outside publication mode, reporting in a copy-ready block, and no switch to SOL without Product Owner decision.
+* Added focused test coverage for the visible operating-rules section and the copied block contents.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.59 - AI Workbench Codex Handoff Operating Rules Fields Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept auto-fill, dynamic generator logic, Project Brain reads, API calls, and AI Workspace refactors out of scope.
+
+### Notes
+
+* The milestone is an operating-rules template checkpoint only.
+
 ## Session 089 - MS-028.58 AI Workbench Manual Context Fill Guidance Foundation
 
 ### Date
