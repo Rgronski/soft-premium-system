@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.43 operator guide delete/re-import foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Added `docs/operator-guide/PROJECT_DELETE_REIMPORT_OPERATOR_GUIDE.md` as a concise operator guide for safe project delete, browser/localStorage cleanup, Project Brain metadata root handling, working directory / repo checkout handling, safe re-import / re-open work, and stop conditions.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.43 - Operator Guide Delete/Re-import Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept the real Beauty Client PRO destructive delete postponed and did not execute any real delete, re-import, clone, checkout, branch, merge, commit, push, or PR action.
+
+### Notes
+
+* The publication is documentation-only and does not change product behavior.
+
 ## Session 088 - MS-028.42a app version marker publication
 
 ### Date

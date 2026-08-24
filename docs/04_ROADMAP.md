@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.43` - Operator Guide Delete/Re-import Foundation
 * `MS-028.42a` - App Version Marker 1.028.42 Publication
 
 ## Current
@@ -166,7 +167,70 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.43 - Operator Guide Delete/Re-import Foundation
+
+## MS-028.43 - Operator Guide Delete/Re-import Foundation
+
+**Milestone**
+MS-028.43 - Operator Guide Delete/Re-import Foundation
+
+**Type**
+Product Milestone
+
+This milestone publishes a concise operator guide for safe project delete, browser/localStorage cleanup, Project Brain metadata root handling, working directory / repo checkout handling, and safe re-import / re-open work. It keeps the real Beauty Client PRO destructive delete postponed and does not change application behavior.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Publish a short operator guide that explains the safe delete boundary and the minimum reopen flow after the MS-028.35 to MS-028.42a delete/re-import work.
+
+**Product Outcome**
+Operators now have one practical guide for safe project removal, safe re-import, and the post-reimport checklist without changing product behavior.
+
+**Implementation Note**
+This milestone is documentation-only and only synchronizes the SSOT control files plus the operator guide.
+
+**Dependencies**
 MS-028.42a - App Version Marker 1.028.42 Publication
+
+**Implementation Scope**
+Operator Guide Delete/Re-import Foundation.
+
+**Next Product Milestone**
+NONE / Product Owner decision required
+
+**Allowed Scope**
+* add the operator guide in the docs tree
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* application behavior changes
+* product code changes
+* real destructive delete of Beauty Client PRO
+* real clone, checkout, branch, merge, commit, push, or PR actions
 
 ## MS-028.42a - App Version Marker 1.028.42 Publication
 
