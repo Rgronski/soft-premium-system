@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.46` - TypeScript Baseline Recovery Diagnosis Foundation
 * `MS-028.45` - Codex Operating Charter and Copy-Block Communication Foundation
 * `MS-028.44` - Project AI Workbench Direction Foundation
 * `MS-028.43` - Operator Guide Delete/Re-import Foundation
@@ -169,7 +170,56 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+MS-028.46 - TypeScript Baseline Recovery Diagnosis Foundation
+
+## MS-028.46 - TypeScript Baseline Recovery Diagnosis Foundation
+
+**Milestone**
+MS-028.46 - TypeScript Baseline Recovery Diagnosis Foundation
+
+**Type**
+Diagnostic Milestone
+
+This milestone captures the exact TypeScript baseline blockers currently reported by `npx.cmd tsc --noEmit` without fixing them.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / DIAGNOSED / PUBLISHED / CLOSED
+
+**Active**
+NO
+
+**Runtime Status**
+CLOSED
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Record the current TypeScript baseline blockers and identify one minimal future fix candidate.
+
+**Product Outcome**
+The repository now contains a concise diagnosis of the current TypeScript blockers, grouped by file and category, plus one minimal first fix candidate for a follow-up milestone.
+
+**Implementation Note**
+This milestone is diagnosis-only and does not change product behavior.
+
+**Dependencies**
 MS-028.45 - Codex Operating Charter and Copy-Block Communication Foundation
+
+**Implementation Scope**
+TypeScript Baseline Recovery Diagnosis Foundation.
 
 ## MS-028.45 - Codex Operating Charter and Copy-Block Communication Foundation
 

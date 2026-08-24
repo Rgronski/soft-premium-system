@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.45 - Codex Operating Charter and Copy-Block Communication Foundation
+MS-028.46 - TypeScript Baseline Recovery Diagnosis Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-028.46 is COMPLETED / DIAGNOSED / PUBLISHED / CLOSED in the current local workspace as the TypeScript Baseline Recovery Diagnosis Foundation. The repository now records the exact `npx.cmd tsc --noEmit` blockers in `docs/diagnostics/TS_BASELINE_RECOVERY_DIAGNOSIS_MS_028_46.md` and groups them across AI Workspace/API, Project Settings, repo/context branch setup, AI Workspace presentation labels, and Project Brain/delete validation boundaries. The milestone is diagnosis-only and does not change product behavior.
 
 MS-028.45 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Codex Operating Charter and Copy-Block Communication Foundation. The repository now exposes `docs/codex/CODEX_OPERATING_CHARTER.md` with the project roles, Codex behavior, SSOT rules, and the copy-ready handoff and report block formats used in SPS OS. The milestone is documentation-only and does not change product behavior.
 
@@ -1615,10 +1617,10 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-028.45 - Codex Operating Charter and Copy-Block Communication Foundation`
+* `Latest Completed Product Milestone` is `MS-028.46 - TypeScript Baseline Recovery Diagnosis Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
-* `Session 089` synchronized the `MS-028.45 - Codex Operating Charter and Copy-Block Communication Foundation` control files because the repository now exposes a permanent Codex operating charter that defines role separation, minimal patch behavior, SSOT rules, and the copy-ready handoff and report block formats used in SPS OS without changing product behavior.
-* `Session 089` appended exactly one `.usage/session.jsonl` record for the MS-028.45 docs-only publication task.
+* `Session 089` synchronized the `MS-028.46 - TypeScript Baseline Recovery Diagnosis Foundation` control files because the repository now records the exact TypeScript baseline blockers without fixing them and identifies one minimal first fix candidate for a follow-up milestone.
+* `Session 089` appended exactly one `.usage/session.jsonl` record for the MS-028.46 diagnosis-only task.
 * `Session 089` kept the real Beauty Client PRO destructive delete postponed and did not execute any real delete, re-import, clone, checkout, branch, merge, commit, push, or PR action.
 * `MS-028.10` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation; the repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
 * `MS-028.11` is `PUBLISHED / CLOSED` in the current local workspace as the GitHub First Operation Candidate Decision Foundation; the repository now records the Product Owner decision for the locally selected first operation candidate after `MS-028.9` and `MS-028.10`, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked.

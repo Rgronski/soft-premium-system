@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.46 TypeScript Baseline Recovery Diagnosis Foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Ran exactly one `npx.cmd tsc --noEmit` baseline command and recorded the exact blockers without fixing them.
+* Grouped the reported TypeScript errors across AI Workspace/API, Project Settings, repo/context branch setup, AI Workspace presentation labels, and Project Brain/delete validation boundaries.
+* Added `docs/diagnostics/TS_BASELINE_RECOVERY_DIAGNOSIS_MS_028_46.md` with the diagnosis, impact summary, and one minimal first fix candidate for a future milestone.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.46 - TypeScript Baseline Recovery Diagnosis Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept product code, TypeScript config, AI Workspace behavior, API behavior, Project Brain storage, and repo mutation out of scope.
+
+### Notes
+
+* The milestone is diagnosis-only and does not fix the TypeScript baseline.
+
 ## Session 089 - MS-028.45 codex operating charter and copy-block communication foundation
 
 ### Date
