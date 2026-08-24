@@ -45,12 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.48 - AI Workspace Literal Label Type Recovery Foundation
+MS-028.49 - AI Generate Project Context Result Shape Recovery Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-028.48 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Workspace Literal Label Type Recovery Foundation. The repository now restores the three AI Workspace literal label values in `src/lib/ai-workspace-engine/engine.ts` so they match the existing Polish literal unions without changing the state model or broader AI Workspace architecture. The milestone is label-recovery only and does not change product behavior beyond the required label values.
+MS-028.49 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Generate Project Context Result Shape Recovery Foundation. The repository now restores the AI generate route result contract by adding the required `projectId` field to the `project-not-found` project context result in `src/app/api/projects/[id]/ai/generate/route.ts` without changing AI generation logic or the Project Brain boundary. The milestone is result-shape recovery only and does not change product behavior beyond the required contract field.
 
 MS-028.47 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Delete Validation Summary Type Recovery Foundation. The repository now restores the missing `ProjectDeleteValidationSummary` type symbol used by `src/lib/project/server.ts` and keeps delete/re-import execution semantics unchanged. The milestone is a narrow type-recovery fix and does not change runtime behavior.
 
@@ -1621,10 +1621,10 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-028.48 - AI Workspace Literal Label Type Recovery Foundation`
+* `Latest Completed Product Milestone` is `MS-028.49 - AI Generate Project Context Result Shape Recovery Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
-* `Session 089` synchronized the `MS-028.48 - AI Workspace Literal Label Type Recovery Foundation` control files because the repository now restores the three AI Workspace literal labels in `src/lib/ai-workspace-engine/engine.ts` without changing the state model or broader AI Workspace architecture.
-* `Session 089` appended exactly one `.usage/session.jsonl` record for the MS-028.48 implementation task.
+* `Session 089` synchronized the `MS-028.49 - AI Generate Project Context Result Shape Recovery Foundation` control files because the repository now restores the AI generate route result contract by adding the required `projectId` field to the `project-not-found` project context result in `src/app/api/projects/[id]/ai/generate/route.ts` without changing AI generation logic or the Project Brain boundary.
+* `Session 089` appended exactly one `.usage/session.jsonl` record for the MS-028.49 implementation task.
 * `Session 089` kept the real Beauty Client PRO destructive delete postponed and did not execute any real delete, re-import, clone, checkout, branch, merge, commit, push, or PR action.
 * `MS-028.10` is `COMPLETED / VERIFIED / PUBLISHED / CLOSED` in the current local workspace as the GitHub Selected Operation Readiness Detail Foundation; the repository now records the selected-operation readiness detail layer for the currently selected operation candidate, based only on local UI/browser state and the already selected candidate, while preserving the distinction between selected as candidate and authorized to execute and preserving readiness detail versus real execution. The detail names only bounded candidate families such as `connection check`, `local clone/workspace check`, `clone preparation`, and `branch check`, and keeps real Git/GitHub execution blocked.
 * `MS-028.11` is `PUBLISHED / CLOSED` in the current local workspace as the GitHub First Operation Candidate Decision Foundation; the repository now records the Product Owner decision for the locally selected first operation candidate after `MS-028.9` and `MS-028.10`, distinguishes the selected candidate from the state approved for further preparation and from the state authorized to execute, and keeps real Git/GitHub execution blocked.

@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.49` - AI Generate Project Context Result Shape Recovery Foundation
 * `MS-028.47` - Project Delete Validation Summary Type Recovery Foundation
 * `MS-028.46` - TypeScript Baseline Recovery Diagnosis Foundation
 * `MS-028.45` - Codex Operating Charter and Copy-Block Communication Foundation
@@ -172,7 +173,29 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.48 - AI Workspace Literal Label Type Recovery Foundation
+MS-028.49 - AI Generate Project Context Result Shape Recovery Foundation
+
+## MS-028.49 - AI Generate Project Context Result Shape Recovery Foundation
+
+**Milestone**
+MS-028.49 - AI Generate Project Context Result Shape Recovery Foundation
+
+**Type**
+Product Milestone
+
+This milestone restores the AI generate project-context result contract by adding the required `projectId` field to the `project-not-found` result shape in `src/app/api/projects/[id]/ai/generate/route.ts` without changing AI generation logic or the Project Brain boundary.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Minimal type-shape recovery only.
 
 ## MS-028.48 - AI Workspace Literal Label Type Recovery Foundation
 

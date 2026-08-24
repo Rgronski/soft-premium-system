@@ -139,7 +139,16 @@ export async function POST(
           };
         }
 
-        return getServerAiProjectContext(projectId);
+        const projectContextResult = await getServerAiProjectContext(projectId);
+
+        if (projectContextResult.status === "available") {
+          return projectContextResult;
+        }
+
+        return {
+          ...projectContextResult,
+          projectId,
+        };
       },
     });
 

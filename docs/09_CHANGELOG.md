@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.49 AI Generate Project Context Result Shape Recovery Foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Added the minimal `projectId` field to the AI generate route's `project-not-found` project context result so it satisfies `AiProjectContextResult`.
+* Kept the AI generate route behavior and Project Brain boundary unchanged while removing the targeted `TS2322` mismatch.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.49 - AI Generate Project Context Result Shape Recovery Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept unrelated TypeScript errors in working-branch setup and Project Settings out of scope.
+
+### Notes
+
+* The milestone is result-shape recovery only and does not change AI generation logic.
+
 ## Session 089 - MS-028.48 AI Workspace Literal Label Type Recovery Foundation
 
 ### Date
