@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.58` - AI Workbench Manual Context Fill Guidance Foundation
 * `MS-028.57` - AI Workbench Handoff Panel Usability Review Foundation
 * `MS-028.56` - AI Workbench Project Context Read-Only Hint Foundation
 * `MS-028.55` - AI Workbench Handoff Template Context Fields Foundation
@@ -181,7 +182,17 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.57 - AI Workbench Handoff Panel Usability Review Foundation
+MS-028.58 - AI Workbench Manual Context Fill Guidance Foundation
+
+## MS-028.58 - AI Workbench Manual Context Fill Guidance Foundation
+
+**Milestone**
+MS-028.58 - AI Workbench Manual Context Fill Guidance Foundation
+
+**Type**
+Product Milestone
+
+This checkpoint adds a short manual-fill guidance section beside the static AI Workbench handoff template. The guidance explains where to copy `Session Identity`, `Repository`, `Cel`, `Zakres`, `Dozwolone pliki`, `Zakazane pliki`, and `Weryfikacja` from while keeping the panel read-only and static.
 
 ## MS-028.57 - AI Workbench Handoff Panel Usability Review Foundation
 

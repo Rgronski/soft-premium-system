@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.58 AI Workbench Manual Context Fill Guidance Foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Added a compact manual-fill guidance section next to the static AI Workbench handoff template.
+* Explained that `Session Identity` should be copied from the bootstrap or current SPS OS session, `Repository` should be copied as the repository path, `Cel` should come from the milestone objective, `Zakres` should come from the approved scope, `Dozwolone pliki` and `Zakazane pliki` should come from the handoff or contract, and `Weryfikacja` should come from the verification plan.
+* Kept the guidance read-only and informational with no auto-fill, no dynamic generator, no Project Brain read, and no API calls.
+* Added focused test coverage for the manual-fill guidance text.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.58 - AI Workbench Manual Context Fill Guidance Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept AI Workspace behavior, AI generate route, Project Settings, and other product surfaces unchanged.
+
+### Notes
+
+* The milestone is a manual guidance checkpoint only.
+
 ## Session 089 - MS-028.57 AI Workbench Handoff Panel Usability Review Foundation
 
 ### Date

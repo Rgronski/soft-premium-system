@@ -1625,8 +1625,9 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
- * `Latest Completed Product Milestone` is `MS-028.57 - AI Workbench Handoff Panel Usability Review Foundation`
+ * `Latest Completed Product Milestone` is `MS-028.58 - AI Workbench Manual Context Fill Guidance Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
+ * `Session 089` completed the MS-028.58 guidance checkpoint because the AI Workbench handoff panel now explains how to fill `Session Identity`, `Repository`, `Cel`, `Zakres`, `Dozwolone pliki`, `Zakazane pliki`, and `Weryfikacja` manually from the milestone contract while staying read-only.
  * `Session 089` completed the MS-028.57 review checkpoint because the AI Workbench handoff panel remains compact, readable, safely non-executable, and clear without any auto-fill or generator behavior.
  * `Session 089` synchronized the `MS-028.57 - AI Workbench Handoff Panel Usability Review Foundation` control files and appended exactly one `.usage/session.jsonl` record for the MS-028.57 review task.
  * `Session 089` synchronized the `MS-028.56 - AI Workbench Project Context Read-Only Hint Foundation` control files because the repository now records the read-only context hint beside the static AI Workbench handoff template while keeping the template static and copy-ready.

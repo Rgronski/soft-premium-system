@@ -2923,6 +2923,27 @@ describe("ProjectAiWorkspacePage", () => {
         "SPS OS nie uzupelnia tych pol automatycznie na tym etapie.",
       ),
     ).toBeTruthy();
+    expect(screen.getByText("Manualne wypelnianie")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Session Identity kopiuj z bootstrapu aktywnej sesji SPS OS.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Repository wpisz jako sciezke repozytorium SPS OS.",
+      ),
+    ).toBeTruthy();
+    expect(screen.getByText("Cel bierz z celu zatwierdzonego milestone.")).toBeTruthy();
+    expect(screen.getByText("Zakres bierz z zatwierdzonego scope.")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Dozwolone pliki i Zakazane pliki bierz z handoffu lub kontraktu.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Weryfikacja bierz z planu weryfikacji."),
+    ).toBeTruthy();
   });
 
   test("copies the handoff block and shows the copied state", async () => {

@@ -873,6 +873,15 @@ Weryfikacja:
                 <p>Zakres i Weryfikacja bierz z zatwierdzonego kontraktu milestone.</p>
                 <p>SPS OS nie uzupelnia tych pol automatycznie na tym etapie.</p>
               </div>
+              <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-5 text-zinc-400">
+                <p className="font-medium text-zinc-300">Manualne wypelnianie</p>
+                <p>Session Identity kopiuj z bootstrapu aktywnej sesji SPS OS.</p>
+                <p>Repository wpisz jako sciezke repozytorium SPS OS.</p>
+                <p>Cel bierz z celu zatwierdzonego milestone.</p>
+                <p>Zakres bierz z zatwierdzonego scope.</p>
+                <p>Dozwolone pliki i Zakazane pliki bierz z handoffu lub kontraktu.</p>
+                <p>Weryfikacja bierz z planu weryfikacji.</p>
+              </div>
             </div>
           </div>
 
