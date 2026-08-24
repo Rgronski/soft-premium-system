@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 089 - MS-028.52 TypeScript Baseline Recovery Version Publication Foundation
+
+### Date
+
+2026-08-24
+
+### Completed
+
+* Recorded the recovered TypeScript baseline checkpoint after MS-028.46 through MS-028.51 and bumped the visible app version marker to `1.028.52`.
+* Kept product behavior unchanged while confirming the baseline remains free of known TypeScript errors after MS-028.51.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.52 - TypeScript Baseline Recovery Version Publication Foundation`, while `Current Product Milestone` remains `NONE / Product Owner decision required` and `Next Product Milestone` remains `NONE / Product Owner decision required`.
+* Appended exactly one Session 089 usage record to `.usage/session.jsonl`.
+* Kept AI Workspace, Project Settings, and Git/GitHub execution behavior out of scope.
+
+### Notes
+
+* The milestone is a checkpoint and version publication only.
+
 ## Session 089 - MS-028.51 Project Settings TypeScript Nullability Recovery Foundation
 
 ### Date

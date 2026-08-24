@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.52` - TypeScript Baseline Recovery Version Publication Foundation
 * `MS-028.51` - Project Settings TypeScript Nullability Recovery Foundation
 * `MS-028.50` - Working Branch Setup Mode Type Recovery Foundation
 * `MS-028.49` - AI Generate Project Context Result Shape Recovery Foundation
@@ -175,7 +176,29 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.51 - Project Settings TypeScript Nullability Recovery Foundation
+MS-028.52 - TypeScript Baseline Recovery Version Publication Foundation
+
+## MS-028.52 - TypeScript Baseline Recovery Version Publication Foundation
+
+**Milestone**
+MS-028.52 - TypeScript Baseline Recovery Version Publication Foundation
+
+**Type**
+Product Milestone
+
+This checkpoint records the recovered TypeScript baseline after MS-028.46 through MS-028.51 and bumps the visible app version marker to `1.028.52` without adding features or changing product behavior.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Version publication checkpoint only.
 
 ## MS-028.51 - Project Settings TypeScript Nullability Recovery Foundation
 
