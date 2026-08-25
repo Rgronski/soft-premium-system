@@ -203,10 +203,10 @@ This checkpoint corrects the next visible mojibake / krzaczki area in the SPS OS
 APPROVED
 
 **Publication Status**
-READY FOR PUBLICATION
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
 Visible Polish character cleanup only.
