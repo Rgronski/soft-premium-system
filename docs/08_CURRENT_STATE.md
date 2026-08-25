@@ -465,9 +465,9 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.61 - Mojibake / Krzaczki Cleanup Foundation
+Latest Completed Product Milestone: MS-028.63 - Mojibake / Krzaczki Cleanup Batch 3 Foundation
 Next Product Milestone: NONE / Product Owner decision required
-MS-028.61 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Mojibake / Krzaczki Cleanup Foundation. The repository now corrects obvious Polish text corruption in the visible home screen and its targeted tests while preserving wording and behavior.
+MS-028.63 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Mojibake / Krzaczki Cleanup Batch 3 Foundation. The repository now corrects the next visible Polish text corruption in the project settings surface and its targeted test while preserving wording and behavior.
 
 MS-028.60 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Workbench Handoff Panel Live Use Trial Foundation. The repository confirms the existing AI Workspace handoff panel is visible, copy-ready, field-complete, and non-executable, and it does not mutate Project Brain or repository state by itself.
 
@@ -1635,10 +1635,10 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
- * `Latest Completed Product Milestone` is `MS-028.61 - Mojibake / Krzaczki Cleanup Foundation`
+ * `Latest Completed Product Milestone` is `MS-028.63 - Mojibake / Krzaczki Cleanup Batch 3 Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
- * `Session 090` completed the MS-028.61 mojibake cleanup foundation because the visible home screen text and its targeted tests now use readable Polish characters without changing behavior.
- * `Session 090` synchronized the `MS-028.61 - Mojibake / Krzaczki Cleanup Foundation` control files and appended exactly one `.usage/session.jsonl` record for the cleanup validation task.
+ * `Session 090` completed the MS-028.63 mojibake cleanup batch 3 foundation because the visible project settings text and its targeted tests now use readable Polish characters without changing behavior.
+ * `Session 090` synchronized the `MS-028.63 - Mojibake / Krzaczki Cleanup Batch 3 Foundation` control files and appended exactly one `.usage/session.jsonl` record for the cleanup validation task.
  * `Session 090` completed the MS-028.60 live-use trial foundation because the existing AI Workspace handoff panel is visible, copy-ready, and non-executable without mutating Project Brain or repository state by itself.
  * `Session 089` completed the MS-028.59 operating-rules checkpoint because the AI Workbench handoff panel now includes a compact `Zasady pracy:` section for Codex-ready handoffs while staying static and read-only.
  * `Session 089` completed the MS-028.58 guidance checkpoint because the AI Workbench handoff panel now explains how to fill `Session Identity`, `Repository`, `Cel`, `Zakres`, `Dozwolone pliki`, `Zakazane pliki`, and `Weryfikacja` manually from the milestone contract while staying read-only.
