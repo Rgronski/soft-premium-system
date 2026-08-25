@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 090 - Session close protocol and handoff publication
+
+### Date
+
+2026-08-25
+
+### Completed
+
+* Synchronized `docs/10_SESSION_STATE.md` and created `docs/session-handoffs/2026-08-25_090_SESSION_HANDOFF.md` so the SSOT now records Session 090 as closed with Session 091 queued for the next Product Owner decision chat.
+* Recorded that Session 090 closes with `MS-028.63 - Mojibake / Krzaczki Cleanup Batch 3 Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Appended the Session 090 close usage summary.
+
+### Notes
+
+* No new product code changed in this session-close sync step.
+* Package generation remains the next operational step after the close commit and push.
+
 ## Session 090 - MS-028.63 Mojibake / Krzaczki Cleanup Batch 3 Foundation
 
 ### Date

@@ -50,7 +50,7 @@ MS-028.63 - Mojibake / Krzaczki Cleanup Batch 3 Foundation
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-028.63 is COMPLETED / VERIFIED in the current local workspace as the Mojibake / Krzaczki Cleanup Batch 3 Foundation. The repository now corrects the next visible Polish text corruption in the project settings surface and its targeted test while preserving wording and behavior.
+MS-028.63 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Mojibake / Krzaczki Cleanup Batch 3 Foundation. The repository now corrects the next visible Polish text corruption in the project settings surface and its targeted test while preserving wording and behavior.
 
 MS-028.62 is COMPLETED / VERIFIED in the current local workspace as the Mojibake / Krzaczki Cleanup Batch 2 Foundation. The repository now corrects the next visible Polish text corruption in the project creation surface and its targeted test while preserving wording and behavior.
 
