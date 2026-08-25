@@ -18,17 +18,17 @@ Script implementation is a separate step planned for `CAP-002.5b`.
 
 ---
 
-# Relation To SPS OS â€” KONIEC
+# Relation To SPS OS — KONIEC
 
-`SPS OS â€” KONIEC` closes the session, audits facts, updates Session State, prepares Session Handoff, and requires a fresh session package for the next chat.
+`SPS OS — KONIEC` closes the session, audits facts, updates Session State, prepares Session Handoff, and requires a fresh session package for the next chat.
 
 The generator supports the close protocol by collecting confirmed context into a portable package.
 
 ---
 
-# Relation To SPS OS â€” START
+# Relation To SPS OS — START
 
-`SPS OS â€” START` may use the session package as input for the next bootstrap.
+`SPS OS — START` may use the session package as input for the next bootstrap.
 
 The package supports bootstrap, but it does not replace PCL, SSOT Validation, Git Context validation, or Runtime Dashboard rules.
 
@@ -248,7 +248,7 @@ Bootstrap must still verify package context against SSOT.
 
 Missing package context must become `UNKNOWN`, not guessed.
 
-Session Package supports the next `SPS OS â€” START`.
+Session Package supports the next `SPS OS — START`.
 
 ---
 

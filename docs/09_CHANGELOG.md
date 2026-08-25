@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 091 - MS-028.66 Session Handoff Encoding Source Boundary Diagnosis Foundation
+
+### Date
+
+2026-08-25
+
+### Completed
+
+* Confirmed that the Session 090 generated handoff's permanent `Next Chat Prompt` block was the mojibake source boundary and corrected the matching source contract text in `docs/session-handoffs/README.md`.
+* Verified that `docs/16_SESSION_PACKAGE_GENERATOR.md` now uses the readable source boundary wording for the handoff contract and that `scripts/New-SpsSession.ps1` remains validation-only for the handoff boundary.
+* Preserved the existing `docs/10_SESSION_STATE.md` trace rule and the `.usage/session.jsonl` Session 091 usage record.
+
+### Notes
+
+* This is a source-boundary diagnosis and docs-only fix, not a repo-wide mojibake cleanup.
+* No runtime source code or UI text changed in this session.
+
 ## Session 091 - MS-028.65 Linear App Version Policy Correction Foundation
 
 ### Date

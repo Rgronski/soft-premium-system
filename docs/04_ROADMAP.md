@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.66` - Session Handoff Encoding Source Boundary Diagnosis Foundation
 * `MS-028.65` - Linear App Version Policy Correction Foundation
 * `MS-028.64` - App Version Commit Trace Policy Foundation
 * `MS-028.63` - Mojibake / Krzaczki Cleanup Batch 3 Foundation
@@ -189,47 +190,45 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.65 - Linear App Version Policy Correction Foundation
+MS-028.66 - Session Handoff Encoding Source Boundary Diagnosis Foundation
 
-## MS-028.65 - Linear App Version Policy Correction Foundation
+## MS-028.66 - Session Handoff Encoding Source Boundary Diagnosis Foundation
 
 **Milestone**
-MS-028.65 - Linear App Version Policy Correction Foundation
+MS-028.66 - Session Handoff Encoding Source Boundary Diagnosis Foundation
 
 **Type**
-Product Milestone
+Documentation / Session Boundary Milestone
 
-This checkpoint corrects the app version policy so the version becomes a linear publication counter, the last published MS is tracked separately, and commit subjects for product-relevant publications include the app version while keeping the change docs-only and minimal.
+This checkpoint confirms the source boundary for the Session 090 handoff mojibake, corrects the permanent Next Chat Prompt contract text in the session handoff README, and keeps the session handoff / session package boundary readable and traceable with the smallest safe docs-only scope.
 
 **Contract Status**
 APPROVED
 
 **Publication Status**
-PUBLISHED
+READY FOR PUBLICATION
 
 **Milestone Status**
-COMPLETED / VERIFIED / PUBLISHED / CLOSED
+COMPLETED / VERIFIED
 
 **Active**
-Linear app-version policy and compact version display.
+Session handoff encoding source boundary diagnosis.
 
 **Allowed Implementation Scope**
-* document the linear app-version policy in SSOT
-* keep current app version and last published MS separate
-* update the existing app version badge and focused test
-* record the commit subject policy for product-relevant publications
+* confirm the exact source boundary for the session handoff mojibake
+* correct the matching handoff contract text when the boundary is local and safe
 * synchronize the SSOT control files
 * append the required usage record
 
 **Forbidden Scope**
-* tie app version directly to MS number
-* use semantic versioning
-* use commit hash in the visible app version
-* broad UI refactor
-* broad cleanup
+* repo-wide mojibake cleanup
+* runtime source changes
+* UI text changes
+* generator refactors
+* commit / push actions
 
 **Dependencies**
-* closed `MS-028.62 - Mojibake / Krzaczki Cleanup Batch 2 Foundation`
+* closed `MS-028.65 - Linear App Version Policy Correction Foundation`
 
 ## MS-028.62 - Mojibake / Krzaczki Cleanup Batch 2 Foundation
 

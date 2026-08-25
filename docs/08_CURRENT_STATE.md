@@ -54,6 +54,8 @@ MS-028.65 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local work
 
 MS-028.64 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the App Version Commit Trace Policy Foundation. The repository now records the docs-only app-version commit trace policy so controlled app-version changes stay traceable to the publishing milestone and publishing commit in SSOT, and it records that the Session 090 generated handoff contains mojibake while the source contract text remains readable and no safe generator or copy boundary was confirmed.
 
+MS-028.66 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the Session Handoff Encoding Source Boundary Diagnosis Foundation. The permanent `Next Chat Prompt` block now reads correctly in `docs/session-handoffs/README.md`, and the generator contract text in `docs/16_SESSION_PACKAGE_GENERATOR.md` now uses the readable source boundary wording that the handoff contract depends on.
+
 MS-028.63 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Mojibake / Krzaczki Cleanup Batch 3 Foundation. The repository now corrects the next visible Polish text corruption in the project settings surface and its targeted test while preserving wording and behavior.
 
 MS-028.62 is COMPLETED / VERIFIED in the current local workspace as the Mojibake / Krzaczki Cleanup Batch 2 Foundation. The repository now corrects the next visible Polish text corruption in the project creation surface and its targeted test while preserving wording and behavior.

@@ -4,7 +4,7 @@
 
 # Purpose
 
-Session Handoff is the operational transfer document used by `SPS OS â€” KONIEC` to prepare the next `SPS OS â€” START`.
+Session Handoff is the operational transfer document used by `SPS OS — KONIEC` to prepare the next `SPS OS — START`.
 
 It answers only:
 
@@ -120,7 +120,7 @@ Any mismatch between Session State identity and current handoff identity is a cr
 # Deterministic Template
 
 ```text
-SPS OS â€” SESSION HANDOFF
+SPS OS — SESSION HANDOFF
 
 SPS OS Version: [VALUE OR UNKNOWN]
 Date: [VALUE OR UNKNOWN]
