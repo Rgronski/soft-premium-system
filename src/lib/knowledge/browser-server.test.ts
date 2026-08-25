@@ -59,6 +59,7 @@ describe("getKnowledgeEntriesFromServer", () => {
       "/api/projects/project%2F1/knowledge",
       {
         method: "GET",
+        cache: "no-store",
       },
     );
     expect(result).toEqual(knowledgeEntries);

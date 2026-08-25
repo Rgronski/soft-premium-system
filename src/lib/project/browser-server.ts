@@ -94,6 +94,7 @@ export async function getProjectFromServer(
 ): Promise<Project | null> {
   const response = await executeFetch(buildProjectUrl(projectId), {
     method: "GET",
+    cache: "no-store",
   });
 
   if (response.status === 200) {

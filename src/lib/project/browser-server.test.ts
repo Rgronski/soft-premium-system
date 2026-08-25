@@ -52,6 +52,7 @@ describe("getProjectFromServer", () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(fetchMock).toHaveBeenCalledWith("/api/projects/project%2F1", {
       method: "GET",
+      cache: "no-store",
     });
     expect(result).toEqual(project);
   });

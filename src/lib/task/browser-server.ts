@@ -134,6 +134,7 @@ export async function getTasksFromServer(
 ): Promise<Task[]> {
   const response = await executeFetch(buildTasksUrl(projectId), {
     method: "GET",
+    cache: "no-store",
   });
 
   if (response.status === 200) {

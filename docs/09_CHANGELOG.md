@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 091 - MS-028.67 AI Workspace Browser State Consistency Diagnosis Foundation
+
+### Date
+
+2026-08-25
+
+### Completed
+
+* Confirmed that the AI Workspace browser-state divergence was caused by profile-specific cached reads on the project, task, and knowledge browser fetch boundaries.
+* Added `cache: "no-store"` to the browser Project Brain GET wrappers so normal and incognito browser contexts now read the same canonical project truth.
+* Preserved the existing `docs/10_SESSION_STATE.md` trace rule and the `.usage/session.jsonl` Session 091 usage record.
+
+### Notes
+
+* This is a targeted browser-state consistency fix, not a broad Project Brain refactor.
+* No UI redesign or browser-data deletion was performed.
+
 ## Session 091 - MS-028.66 Session Handoff Encoding Source Boundary Diagnosis Foundation
 
 ### Date

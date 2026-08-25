@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.67` - AI Workspace Browser State Consistency Diagnosis Foundation
 * `MS-028.66` - Session Handoff Encoding Source Boundary Diagnosis Foundation
 * `MS-028.65` - Linear App Version Policy Correction Foundation
 * `MS-028.64` - App Version Commit Trace Policy Foundation
@@ -190,7 +191,45 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.66 - Session Handoff Encoding Source Boundary Diagnosis Foundation
+MS-028.67 - AI Workspace Browser State Consistency Diagnosis Foundation
+
+## MS-028.67 - AI Workspace Browser State Consistency Diagnosis Foundation
+
+**Milestone**
+MS-028.67 - AI Workspace Browser State Consistency Diagnosis Foundation
+
+**Type**
+Documentation / Browser State Consistency Milestone
+
+This checkpoint confirms the AI Workspace browser state boundary by forcing fresh project, task, and knowledge reads so normal and incognito browser contexts converge on the same canonical project truth instead of profile-specific cached responses.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+READY FOR PUBLICATION
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Active**
+AI Workspace browser-state consistency diagnosis.
+
+**Allowed Implementation Scope**
+* confirm the exact source boundary for the AI Workspace browser-state divergence
+* correct the browser-side fetch boundary when the divergence is cache-related
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* repo-wide state cleanup
+* runtime UI redesign
+* broad Project Brain refactor
+* browser-data deletion
+* commit / push actions
+
+**Dependencies**
+* closed `MS-028.66 - Session Handoff Encoding Source Boundary Diagnosis Foundation`
 
 ## MS-028.66 - Session Handoff Encoding Source Boundary Diagnosis Foundation
 

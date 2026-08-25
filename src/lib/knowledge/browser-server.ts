@@ -98,6 +98,7 @@ export async function getKnowledgeEntriesFromServer(
 ): Promise<KnowledgeEntry[]> {
   const response = await executeFetch(buildKnowledgeUrl(projectId), {
     method: "GET",
+    cache: "no-store",
   });
 
   if (response.status === 200) {
