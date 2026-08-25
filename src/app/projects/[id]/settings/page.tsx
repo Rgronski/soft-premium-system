@@ -169,13 +169,13 @@ function buildLocalCloneReadinessSummary(
 
   return [
     "Lokalny klon / workspace nie jest jeszcze skonfigurowany ani zweryfikowany.",
-    "Prawdziwe clone, fetch, checkout i walidacja filesystemu to przyszĹ‚a praca.",
+    "Prawdziwe clone, fetch, checkout i walidacja filesystemu to przyszła praca.",
     branchWorkMode === "working-branch"
-      ? `Przygotowana nazwa gaĹ‚Ä™zi roboczej to \`${preparedWorkingBranchName}\`, ale nadal jest tylko metadanymi przygotowania.`
+      ? `Przygotowana nazwa gałęzi roboczej to \`${preparedWorkingBranchName}\`, ale nadal jest tylko metadanymi przygotowania.`
       : branchWorkMode === "main"
-        ? "Wybrano pracÄ™ na `main`, ale to nadal tylko metadane przygotowania lokalnego workspace."
-        : "WybĂłr gaĹ‚Ä™zi roboczej pozostaje tylko metadanymi przygotowania lokalnego workspace.",
-    "W tym kroku nie kopiujemy plikĂłw i nie klonujemy repozytorium.",
+        ? "Wybrano pracę na `main`, ale to nadal tylko metadane przygotowania lokalnego workspace."
+        : "Wybór gałęzi roboczej pozostaje tylko metadanymi przygotowania lokalnego workspace.",
+    "W tym kroku nie kopiujemy plików i nie klonujemy repozytorium.",
   ];
 }
 
@@ -1587,10 +1587,10 @@ export default function ProjectSettingsPage() {
         {githubReadinessChecklist ? (
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-              GotowoĹ›Ä‡ do realnego wykonania Git
+              Gotowość do realnego wykonania Git
             </p>
             <p className="mt-2 text-sm text-zinc-300">
-              To jest tylko bramka gotowoĹ›ci, nie wykonanie.
+              To jest tylko bramka gotowości, nie wykonanie.
             </p>
             <ul className="mt-3 space-y-2">
               {githubReadinessChecklist.map((item) => (
