@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 091 - MS-028.64 App Version Commit Trace Policy Foundation
+
+### Date
+
+2026-08-25
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.64 - App Version Commit Trace Policy Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Recorded the docs-only app-version commit trace policy foundation that keeps controlled app-version changes traceable to the publishing milestone and publishing commit in SSOT.
+* Confirmed that the Session 090 generated handoff contains mojibake in the permanent `Next Chat Prompt` block, while the source contract text in `docs/session-handoffs/README.md` remains readable and the safe generator / copy boundary was not confirmed.
+* Preserved the existing `docs/10_SESSION_STATE.md` trace rule and the `.usage/session.jsonl` Session 091 usage record.
+
+### Notes
+
+* No runtime source code or UI text changed in this publication.
+* The mojibake diagnosis remains source-boundary only and does not include a broad cleanup.
+
 ## Session 090 - Session close protocol and handoff publication
 
 ### Date

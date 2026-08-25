@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.64` - App Version Commit Trace Policy Foundation
 * `MS-028.63` - Mojibake / Krzaczki Cleanup Batch 3 Foundation
 * `MS-028.62` - Mojibake / Krzaczki Cleanup Batch 2 Foundation
 * `MS-028.61` - Mojibake / Krzaczki Cleanup Foundation
@@ -187,17 +188,17 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.63 - Mojibake / Krzaczki Cleanup Batch 3 Foundation
+MS-028.64 - App Version Commit Trace Policy Foundation
 
-## MS-028.63 - Mojibake / Krzaczki Cleanup Batch 3 Foundation
+## MS-028.64 - App Version Commit Trace Policy Foundation
 
 **Milestone**
-MS-028.63 - Mojibake / Krzaczki Cleanup Batch 3 Foundation
+MS-028.64 - App Version Commit Trace Policy Foundation
 
 **Type**
 Product Milestone
 
-This checkpoint corrects the next visible mojibake / krzaczki area in the SPS OS Polish UI with the smallest safe cleanup scope, preserving wording and behavior while restoring readable Polish characters in the selected project settings surface and its focused test.
+This checkpoint adds the docs-only app-version commit trace policy foundation so controlled app-version changes stay traceable to the publishing milestone and publishing commit in SSOT, and it records the Session 090 handoff mojibake diagnosis without broad cleanup or generator changes.
 
 **Contract Status**
 APPROVED
@@ -209,21 +210,20 @@ PUBLISHED
 COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
-Visible Polish character cleanup only.
+Docs-only app-version trace policy and source-boundary diagnosis.
 
 **Allowed Implementation Scope**
-* correct confirmed mojibake in the selected visible Polish UI surface
-* correct confirmed mojibake in the directly affected targeted test when string expectations change
+* document the app-version trace policy in SSOT
+* keep the publishing milestone and publishing commit traceable together
+* record the Session 090 handoff mojibake diagnosis outcome
 * synchronize the SSOT control files
 * append the required usage record
 
 **Forbidden Scope**
-* wording redesign
-* broad localization work
-* component refactors
-* behavior changes
-* Project Brain / Conductor / AI Workspace logic changes
-* Git/GitHub logic changes
+* repair historical Session 090 handoff
+* change runtime source code
+* change UI text
+* broad mojibake cleanup
 * storage changes
 
 **Dependencies**
