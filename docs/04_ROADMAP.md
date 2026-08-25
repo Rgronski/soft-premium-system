@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.62` - Mojibake / Krzaczki Cleanup Batch 2 Foundation
 * `MS-028.61` - Mojibake / Krzaczki Cleanup Foundation
 * `MS-028.60` - AI Workbench Handoff Panel Live Use Trial Foundation
 * `MS-028.59` - AI Workbench Codex Handoff Operating Rules Fields Foundation
@@ -185,7 +186,47 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.61 - Mojibake / Krzaczki Cleanup Foundation
+MS-028.62 - Mojibake / Krzaczki Cleanup Batch 2 Foundation
+
+## MS-028.62 - Mojibake / Krzaczki Cleanup Batch 2 Foundation
+
+**Milestone**
+MS-028.62 - Mojibake / Krzaczki Cleanup Batch 2 Foundation
+
+**Type**
+Product Milestone
+
+This checkpoint corrects the next visible mojibake / krzaczki area in the SPS OS Polish UI with the smallest safe cleanup scope, preserving wording and behavior while restoring readable Polish characters in the selected project creation surface and its focused test.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+READY FOR PUBLICATION
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Active**
+Visible Polish character cleanup only.
+
+**Allowed Implementation Scope**
+* correct confirmed mojibake in the selected visible Polish UI surface
+* correct confirmed mojibake in the directly affected targeted test when string expectations change
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* wording redesign
+* broad localization work
+* component refactors
+* behavior changes
+* Project Brain / Conductor / AI Workspace logic changes
+* Git/GitHub logic changes
+* storage changes
+
+**Dependencies**
+* closed `MS-028.61 - Mojibake / Krzaczki Cleanup Foundation`
 
 ## MS-028.61 - Mojibake / Krzaczki Cleanup Foundation
 

@@ -252,7 +252,7 @@ describe("ProjectsPage", () => {
     });
 
     expect(screen.getByText("Przypi\u0119ty lokalnie")).toBeTruthy();
-    expect(screen.getByText("Konflikt \u017A\u00F3r\u00F3d\u0142a")).toBeTruthy();
+    expect(screen.getByText("Konflikt źródła")).toBeTruthy();
     expect(screen.getByText("Z C:\\SPS_OS_WORK")).toBeTruthy();
     expect(
       (screen.getByRole("button", { name: "Przypnij" }) as HTMLButtonElement)

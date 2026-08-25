@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.61 - Mojibake / Krzaczki Cleanup Foundation
+MS-028.62 - Mojibake / Krzaczki Cleanup Batch 2 Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-028.62 is COMPLETED / VERIFIED in the current local workspace as the Mojibake / Krzaczki Cleanup Batch 2 Foundation. The repository now corrects the next visible Polish text corruption in the project creation surface and its targeted test while preserving wording and behavior.
 
 MS-028.61 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Mojibake / Krzaczki Cleanup Foundation. The repository now corrects obvious Polish text corruption in the visible home screen and its targeted tests while preserving wording and behavior.
 

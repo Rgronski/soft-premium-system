@@ -34,7 +34,7 @@ function getCreateProjectErrorMessage(
     (errorBody as { status?: unknown }).status ===
       "working-directory-create-failed"
   ) {
-    return "Nie udaĹ‚o siÄ™ utworzyÄ‡ katalogu roboczego projektu. SprawdĹş uprawnienia i sprĂłbuj ponownie.";
+    return "Nie udało się utworzyć katalogu roboczego projektu. Sprawdź uprawnienia i spróbuj ponownie.";
   }
 
   return `Project create request failed with ${responseStatus}`;
@@ -197,7 +197,7 @@ export default function ProjectsPage() {
         }
       } catch {
         if (isActive) {
-          setDiscoveryErrorMessage("Nie udaĹ‚o siÄ™ wczytaÄ‡ projektĂłw z dysku.");
+          setDiscoveryErrorMessage("Nie udało się wczytać projektów z dysku.");
         }
       } finally {
         if (isActive) {
@@ -291,7 +291,7 @@ export default function ProjectsPage() {
       setWorkingDirectoryManuallyEdited(false);
       router.push(`/projects/${canonicalProject.id}`);
     } catch {
-      setErrorMessage("Nie udaĹ‚o siÄ™ utworzyÄ‡ projektu. SprĂłbuj ponownie.");
+      setErrorMessage("Nie udało się utworzyć projektu. Spróbuj ponownie.");
     } finally {
       setIsSubmitting(false);
     }
@@ -401,7 +401,7 @@ export default function ProjectsPage() {
           </p>
 
           <p className="text-zinc-400">
-            To pierwszy krok w przepĹ‚ywie tworzenia projektu.
+            To pierwszy krok w przepływie tworzenia projektu.
           </p>
         </header>
 
@@ -460,7 +460,7 @@ export default function ProjectsPage() {
             />
 
             <p className="mt-2 text-xs text-zinc-500">
-              Lokalna Ĺ›cieĹĽka naleĹĽÄ…ca do SPS. Metadane repozytorium pozostajÄ… osobno.
+              Lokalna ścieżka należąca do SPS. Metadane repozytorium pozostają osobno.
             </p>
           </label>
 
@@ -492,9 +492,9 @@ export default function ProjectsPage() {
               </h2>
 
               <p className="mt-2 text-zinc-400">
-                To sÄ… projekty znalezione przez serwer na podstawie
-                `sps-project.json`. Nie sÄ… jeszcze scalone z lokalnÄ… listÄ…
-                przeglÄ…darki.
+                To są projekty znalezione przez serwer na podstawie
+                `sps-project.json`. Nie są jeszcze scalone z lokalną listą
+                przeglądarki.
               </p>
             </div>
 
@@ -598,7 +598,7 @@ export default function ProjectsPage() {
                               {shouldShowConflictPrompt ? (
                                 <>
                                   <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-amber-100">
-                                    {"Konflikt " + "\u017A" + "\u00F3" + "r\u00F3d\u0142a"}
+                                    {"Konflikt " + "\u017A" + "r\u00F3d\u0142a"}
                                   </span>
 
                                   <button
@@ -711,7 +711,7 @@ export default function ProjectsPage() {
               </ul>
             ) : (
               <p className="mt-4 text-sm text-zinc-500">
-                Nie wykryto lokalnych projektĂłw z poprawnym manifestem.
+                Nie wykryto lokalnych projektów z poprawnym manifestem.
               </p>
             )
           ) : null}
