@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 090 - MS-028.61 Mojibake / Krzaczki Cleanup Foundation
+
+### Date
+
+2026-08-25
+
+### Completed
+
+* Corrected obvious mojibake in the visible SPS OS home screen text so the primary labels and helper copy render readable Polish characters again.
+* Updated the targeted home-page test expectations so they match the corrected Polish strings.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.61 - Mojibake / Krzaczki Cleanup Foundation`, while `Current Product Milestone` and `Next Product Milestone` remain `NONE / Product Owner decision required`.
+* Appended exactly one Session 090 usage record to `.usage/session.jsonl`.
+* Kept component structure, data flow, Project Brain behavior, Conductor behavior, AI Workspace logic, Git/GitHub logic, and storage semantics unchanged.
+
+### Notes
+
+* The milestone is a visible Polish text cleanup checkpoint only.
+
 ## Session 090 - MS-028.60 AI Workbench Handoff Panel Live Use Trial Foundation
 
 ### Date

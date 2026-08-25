@@ -18,17 +18,17 @@ export function HomeContent() {
   const continueHref = latestProject
     ? `/projects/${latestProject.id}`
     : "/projects";
-  const continueLabel = latestProject ? "Kontynuuj" : "UtwĂłrz projekt";
+  const continueLabel = latestProject ? "Kontynuuj" : "Utwórz projekt";
   const primarySectionTitle = hasProjects
-    ? "Kontynuuj pracÄ™"
-    : "UtwĂłrz pierwszy projekt";
+    ? "Kontynuuj pracę"
+    : "Utwórz pierwszy projekt";
   const primarySectionDescription = hasProjects
-    ? "WznĂłw aktywny sprint bazowy."
-    : "UtwĂłrz pierwszy projekt, aby rozpoczÄ…Ä‡ gĹ‚Ăłwny przepĹ‚yw.";
+    ? "Wznów aktywny sprint bazowy."
+    : "Utwórz pierwszy projekt, aby rozpocząć główny przepływ.";
 
   async function handleDeleteProject(project: Project) {
     const confirmed = window.confirm(
-      `UsunÄ…Ä‡ "${project.name}"? Tego nie moĹĽna cofnÄ…Ä‡.`,
+      `Usunąć "${project.name}"? Tego nie można cofnąć.`,
     );
 
     if (!confirmed) {
@@ -44,7 +44,7 @@ export function HomeContent() {
         ),
       );
     } catch {
-      window.alert("Nie udaĹ‚o siÄ™ usunÄ…Ä‡ projektu.");
+      window.alert("Nie udało się usunąć projektu.");
     }
   }
 
@@ -96,7 +96,7 @@ export function HomeContent() {
           <div>
             <h2 className="text-lg font-semibold">Ostatnie projekty</h2>
             <p className="mt-1 text-sm text-zinc-400">
-              Szybki dostÄ™p do ostatniej przestrzeni pracy.
+              Szybki dostęp do ostatniej przestrzeni pracy.
             </p>
           </div>
 
@@ -104,13 +104,13 @@ export function HomeContent() {
             href="/projects"
             className="rounded-full border border-zinc-700 px-5 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
           >
-            UtwĂłrz nowy projekt
+            Utwórz nowy projekt
           </Link>
         </div>
 
         <div className="space-y-3">
           {projects.length === 0 ? (
-            <p className="text-sm text-zinc-400">Brak projektĂłw.</p>
+            <p className="text-sm text-zinc-400">Brak projektów.</p>
           ) : (
             projects.map((project) => (
               <div
@@ -129,7 +129,7 @@ export function HomeContent() {
                   onClick={() => void handleDeleteProject(project)}
                   className="shrink-0 rounded-full border border-red-500/40 px-4 py-2 text-sm font-medium text-red-200 transition-colors hover:border-red-400 hover:bg-red-500/10"
                 >
-                  UsuĹ„
+                  Usuń
                 </button>
               </div>
             ))

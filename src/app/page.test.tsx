@@ -72,7 +72,7 @@ describe("Home", () => {
     });
     expect(screen.getByText("Beta")).toBeTruthy();
 
-    fireEvent.click(screen.getAllByRole("button", { name: "UsuĹ„" })[0]!);
+    fireEvent.click(screen.getAllByRole("button", { name: "Usuń" })[0]!);
 
     await waitFor(() => {
       expect(deleteProjectFromServerMock).toHaveBeenCalledWith("project-1");
@@ -120,11 +120,11 @@ describe("Home", () => {
   test("empty state CTA points to project creation with a matching label", async () => {
     render(await Home());
 
-    expect(screen.getByText("UtwĂłrz pierwszy projekt")).toBeTruthy();
+    expect(screen.getByText("Utwórz pierwszy projekt")).toBeTruthy();
     expect(
-      screen.getByText("UtwĂłrz pierwszy projekt, aby rozpoczÄ…Ä‡ gĹ‚Ăłwny przepĹ‚yw."),
+      screen.getByText("Utwórz pierwszy projekt, aby rozpocząć główny przepływ."),
     ).toBeTruthy();
-    expect(screen.getByText(`PrzestrzeĹ„ robocza v${APP_VERSION}`)).toBeTruthy();
+    expect(screen.getByText(`Przestrzeń robocza v${APP_VERSION}`)).toBeTruthy();
     expect(screen.getByText("Wiedza główna SPS OS")).toBeTruthy();
     expect(
       screen.getByText("To nie jest wiedza konkretnego projektu"),
@@ -134,7 +134,7 @@ describe("Home", () => {
     ).toBeTruthy();
     expect(screen.getByText("8")).toBeTruthy();
     expect(
-      screen.getByRole("link", { name: "UtwĂłrz projekt" }).getAttribute("href"),
+      screen.getByRole("link", { name: "Utwórz projekt" }).getAttribute("href"),
     ).toBe("/projects");
   });
 
@@ -157,7 +157,7 @@ describe("Home", () => {
       expect(screen.getByText("Alpha")).toBeTruthy();
     });
 
-    fireEvent.click(screen.getByRole("button", { name: "UsuĹ„" }));
+    fireEvent.click(screen.getByRole("button", { name: "Usuń" }));
 
     expect(deleteProjectFromServerMock).not.toHaveBeenCalled();
     expect(screen.getByText("Alpha")).toBeTruthy();

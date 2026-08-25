@@ -18,7 +18,7 @@ export default async function Home() {
               Witaj ponownie, Radek
             </h1>
             <p className="text-sm text-zinc-400">
-              PrzestrzeĹ„ robocza v{APP_VERSION}
+              Przestrzeń robocza v{APP_VERSION}
             </p>
           </div>
         </section>
