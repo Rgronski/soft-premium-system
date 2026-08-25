@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.60` - AI Workbench Handoff Panel Live Use Trial Foundation
 * `MS-028.59` - AI Workbench Codex Handoff Operating Rules Fields Foundation
 * `MS-028.58` - AI Workbench Manual Context Fill Guidance Foundation
 * `MS-028.57` - AI Workbench Handoff Panel Usability Review Foundation
@@ -183,7 +184,47 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.59 - AI Workbench Codex Handoff Operating Rules Fields Foundation
+MS-028.60 - AI Workbench Handoff Panel Live Use Trial Foundation
+
+## MS-028.60 - AI Workbench Handoff Panel Live Use Trial Foundation
+
+**Milestone**
+MS-028.60 - AI Workbench Handoff Panel Live Use Trial Foundation
+
+**Type**
+Product Milestone
+
+This checkpoint confirms the existing AI Workbench handoff panel can be used as a live-use trial surface: it is visible in AI Workspace, copy-ready, contains the expected role / SSOT / scope / verification / reporting fields, remains static, does not execute Codex work, and does not mutate Project Brain or repository state by itself.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Live-use trial foundation only.
+
+**Allowed Implementation Scope**
+* confirm the visible AI Workspace handoff panel stays copy-ready
+* confirm the expected role / SSOT / scope / verification / reporting fields are present
+* confirm the panel remains static and non-executable
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* Codex execution inside the app
+* repository mutation from UI
+* Project Brain storage mutation from the panel
+* AI Workspace redesign or broad refactor
+* shell execution from UI
+* commit / push / merge / PR automation
+
+**Dependencies**
+* closed `MS-028.59 - AI Workbench Codex Handoff Operating Rules Fields Foundation`
 
 ## MS-028.59 - AI Workbench Codex Handoff Operating Rules Fields Foundation
 

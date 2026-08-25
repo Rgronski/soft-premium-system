@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.59 - AI Workbench Codex Handoff Operating Rules Fields Foundation
+MS-028.60 - AI Workbench Handoff Panel Live Use Trial Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-028.60 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Workbench Handoff Panel Live Use Trial Foundation. The repository confirms the existing AI Workspace handoff panel is visible, copy-ready, field-complete, and non-executable, and it does not mutate Project Brain or repository state by itself.
 
 MS-028.59 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the AI Workbench Codex Handoff Operating Rules Fields Foundation. The repository now extends the static AI Workspace handoff template with a compact `Zasady pracy:` section and keeps the copied block aligned with the visible panel while remaining static, copy-ready, and non-executable.
 
@@ -459,7 +461,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.59 - AI Workbench Codex Handoff Operating Rules Fields Foundation
+Latest Completed Product Milestone: MS-028.60 - AI Workbench Handoff Panel Live Use Trial Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Session 088 synchronized the `MS-028.42a - App Version Marker 1.028.42 Publication` control files in the current local workspace. The repository now exposes `1.028.42` from `src/lib/app-version.ts`, keeps the visible app-version badge/test aligned with the accepted marker, and leaves AI Workspace, Project Brain storage, Core Doctrine storage, and delete/re-import behavior unchanged.
 
@@ -1627,8 +1629,10 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
- * `Latest Completed Product Milestone` is `MS-028.59 - AI Workbench Codex Handoff Operating Rules Fields Foundation`
+ * `Latest Completed Product Milestone` is `MS-028.60 - AI Workbench Handoff Panel Live Use Trial Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
+ * `Session 090` completed the MS-028.60 live-use trial foundation because the existing AI Workspace handoff panel is visible, copy-ready, and non-executable without mutating Project Brain or repository state by itself.
+ * `Session 090` synchronized the `MS-028.60 - AI Workbench Handoff Panel Live Use Trial Foundation` control files and appended exactly one `.usage/session.jsonl` record for the trial validation task.
  * `Session 089` completed the MS-028.59 operating-rules checkpoint because the AI Workbench handoff panel now includes a compact `Zasady pracy:` section for Codex-ready handoffs while staying static and read-only.
  * `Session 089` completed the MS-028.58 guidance checkpoint because the AI Workbench handoff panel now explains how to fill `Session Identity`, `Repository`, `Cel`, `Zakres`, `Dozwolone pliki`, `Zakazane pliki`, and `Weryfikacja` manually from the milestone contract while staying read-only.
  * `Session 089` completed the MS-028.57 review checkpoint because the AI Workbench handoff panel remains compact, readable, safely non-executable, and clear without any auto-fill or generator behavior.

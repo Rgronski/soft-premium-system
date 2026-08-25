@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 090 - MS-028.60 AI Workbench Handoff Panel Live Use Trial Foundation
+
+### Date
+
+2026-08-25
+
+### Completed
+
+* Confirmed the existing AI Workspace handoff panel is visible in AI Workspace, copy-ready, and field-complete for the expected role / SSOT / scope / verification / reporting handoff.
+* Confirmed the panel remains static and non-executable, does not invoke Codex work, and does not mutate Project Brain or repository state by itself.
+* Synchronized the SSOT snapshot so `Latest Completed Product Milestone` now records `MS-028.60 - AI Workbench Handoff Panel Live Use Trial Foundation`, while `Current Product Milestone` and `Next Product Milestone` remain `NONE / Product Owner decision required`.
+* Appended exactly one Session 090 usage record to `.usage/session.jsonl`.
+* Kept the existing AI Workspace panel implementation unchanged because no source patch was required for this trial foundation.
+
+### Notes
+
+* The milestone is a live-use trial foundation checkpoint only.
+
 ## Session 089 - MS-028.59 AI Workbench Codex Handoff Operating Rules Fields Foundation
 
 ### Date
