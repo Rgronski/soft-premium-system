@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.65` - Linear App Version Policy Correction Foundation
 * `MS-028.64` - App Version Commit Trace Policy Foundation
 * `MS-028.63` - Mojibake / Krzaczki Cleanup Batch 3 Foundation
 * `MS-028.62` - Mojibake / Krzaczki Cleanup Batch 2 Foundation
@@ -188,17 +189,17 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.64 - App Version Commit Trace Policy Foundation
+MS-028.65 - Linear App Version Policy Correction Foundation
 
-## MS-028.64 - App Version Commit Trace Policy Foundation
+## MS-028.65 - Linear App Version Policy Correction Foundation
 
 **Milestone**
-MS-028.64 - App Version Commit Trace Policy Foundation
+MS-028.65 - Linear App Version Policy Correction Foundation
 
 **Type**
 Product Milestone
 
-This checkpoint adds the docs-only app-version commit trace policy foundation so controlled app-version changes stay traceable to the publishing milestone and publishing commit in SSOT, and it records the Session 090 handoff mojibake diagnosis without broad cleanup or generator changes.
+This checkpoint corrects the app version policy so the version becomes a linear publication counter, the last published MS is tracked separately, and commit subjects for product-relevant publications include the app version while keeping the change docs-only and minimal.
 
 **Contract Status**
 APPROVED
@@ -210,21 +211,22 @@ PUBLISHED
 COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
-Docs-only app-version trace policy and source-boundary diagnosis.
+Linear app-version policy and compact version display.
 
 **Allowed Implementation Scope**
-* document the app-version trace policy in SSOT
-* keep the publishing milestone and publishing commit traceable together
-* record the Session 090 handoff mojibake diagnosis outcome
+* document the linear app-version policy in SSOT
+* keep current app version and last published MS separate
+* update the existing app version badge and focused test
+* record the commit subject policy for product-relevant publications
 * synchronize the SSOT control files
 * append the required usage record
 
 **Forbidden Scope**
-* repair historical Session 090 handoff
-* change runtime source code
-* change UI text
-* broad mojibake cleanup
-* storage changes
+* tie app version directly to MS number
+* use semantic versioning
+* use commit hash in the visible app version
+* broad UI refactor
+* broad cleanup
 
 **Dependencies**
 * closed `MS-028.62 - Mojibake / Krzaczki Cleanup Batch 2 Foundation`

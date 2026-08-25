@@ -3,7 +3,12 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, test } from "vitest";
 
-import { APP_VERSION, APP_VERSION_LABEL } from "@/lib/app-version";
+import {
+  APP_VERSION,
+  APP_VERSION_LABEL,
+  LAST_PUBLISHED_MS,
+  LAST_PUBLISHED_MS_LABEL,
+} from "@/lib/app-version";
 
 import { AppVersionBadge } from "./app-version-badge";
 
@@ -16,6 +21,8 @@ describe("AppVersionBadge", () => {
     render(<AppVersionBadge />);
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.028.52");
+    expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
+    expect(APP_VERSION).toBe("1.0001");
+    expect(LAST_PUBLISHED_MS).toBe("MS-028.65");
   });
 });

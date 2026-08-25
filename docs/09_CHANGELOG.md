@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 091 - MS-028.65 Linear App Version Policy Correction Foundation
+
+### Date
+
+2026-08-25
+
+### Completed
+
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.65 - Linear App Version Policy Correction Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Recorded the linear app version policy correction foundation that separates app version from milestone number, tracks the last published MS separately, and keeps product-relevant publications traceable by commit subject policy.
+* Updated the existing version display surface to show the current app version and the last published MS in a compact form.
+* Preserved the existing `docs/10_SESSION_STATE.md` trace rule and the `.usage/session.jsonl` Session 091 usage record.
+
+### Notes
+
+* No runtime source code outside the app-version surface changed in this publication.
+* This session supersedes the earlier MS-028.64 policy direction without rewriting that history.
+
 ## Session 091 - MS-028.64 App Version Commit Trace Policy Foundation
 
 ### Date

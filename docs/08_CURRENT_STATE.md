@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.64 - App Version Commit Trace Policy Foundation
+MS-028.65 - Linear App Version Policy Correction Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-028.65 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Linear App Version Policy Correction Foundation. The repository now uses a linear app version counter, shows the current app version and the last published MS separately in the badge, and records the commit subject policy for product-relevant publications while keeping the change docs-only and minimal.
 
 MS-028.64 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the App Version Commit Trace Policy Foundation. The repository now records the docs-only app-version commit trace policy so controlled app-version changes stay traceable to the publishing milestone and publishing commit in SSOT, and it records that the Session 090 generated handoff contains mojibake while the source contract text remains readable and no safe generator or copy boundary was confirmed.
 
@@ -467,8 +469,10 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.64 - App Version Commit Trace Policy Foundation
+Latest Completed Product Milestone: MS-028.65 - Linear App Version Policy Correction Foundation
 Next Product Milestone: NONE / Product Owner decision required
+MS-028.65 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Linear App Version Policy Correction Foundation. The repository now uses a linear app version counter, shows the current app version and the last published MS separately in the badge, and records the commit subject policy for product-relevant publications while keeping the change docs-only and minimal.
+
 MS-028.64 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the App Version Commit Trace Policy Foundation. The repository now records the docs-only app-version commit trace policy so controlled app-version changes stay traceable to the publishing milestone and publishing commit in SSOT, and it records that the Session 090 generated handoff contains mojibake while the source contract text remains readable and no safe generator or copy boundary was confirmed.
 
 MS-028.63 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Mojibake / Krzaczki Cleanup Batch 3 Foundation. The repository now corrects the next visible Polish text corruption in the project settings surface and its targeted test while preserving wording and behavior.
@@ -1639,8 +1643,10 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
- * `Latest Completed Product Milestone` is `MS-028.64 - App Version Commit Trace Policy Foundation`
+ * `Latest Completed Product Milestone` is `MS-028.65 - Linear App Version Policy Correction Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
+ * `Session 091` completed the MS-028.65 linear app-version policy correction foundation because the repository now keeps the current app version and last published MS separate while preserving the earlier app-version trace policy foundation.
+ * `Session 091` synchronized the `MS-028.65 - Linear App Version Policy Correction Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.
  * `Session 091` completed the MS-028.64 app-version commit trace policy foundation because the repository now keeps the publishing milestone and publishing commit traceable together in SSOT while preserving the existing session-hand-off diagnosis.
  * `Session 091` synchronized the `MS-028.64 - App Version Commit Trace Policy Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.
  * `Session 090` completed the MS-028.63 mojibake cleanup batch 3 foundation because the visible project settings text and its targeted tests now use readable Polish characters without changing behavior.

@@ -219,23 +219,23 @@ Current Session ID: 091
 Current Chat Title: UNKNOWN
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
-Active Capability: App Version Commit Trace Policy Foundation
-Active Work Item: MS-028.64 publication sync
+Active Capability: Linear App Version Policy Correction Foundation
+Active Work Item: MS-028.65 publication sync
 Current Mode: IN PROGRESS
-Completed Capability Items: Session 091 completed the MS-028.64 App Version Commit Trace Policy Foundation; Session 091 synchronized the MS-028.64 control files; Session 091 preserved the existing docs/session-handoffs source-boundary diagnosis and the existing docs/10_SESSION_STATE trace rule; Session 090 completed the Session Close Protocol; Session 090 synchronized the Session 090 close handoff; Session 090 completed the MS-028.63 Mojibake / Krzaczki Cleanup Batch 3 Foundation; Session 090 corrected visible mojibake in the SPS OS project settings surface and targeted tests; Session 090 synchronized the MS-028.63 control files after verified implementation; Session 090 appended the Session 090 usage record; Session 090 corrected visible mojibake in the SPS OS project creation surface and targeted tests; Session 090 synchronized the MS-028.62 control files after verified implementation; Session 090 appended the Session 090 usage record; Session 090 validated the existing AI Workspace handoff panel as visible, copy-ready, field-complete, and non-executable; Session 090 corrected visible mojibake in the SPS OS home screen and targeted tests; Session 090 synchronized the MS-028.61 control files after verified implementation; Session 090 appended the Session 090 usage record; Session 089 completed the MS-028.59 implementation and SSOT sync publication; Session 089 synchronized the Session 089 close protocol handoff; Session 089 completed the Session Close Protocol
+Completed Capability Items: Session 091 completed the MS-028.65 Linear App Version Policy Correction Foundation; Session 091 synchronized the MS-028.65 control files; Session 091 preserved the existing docs/10_SESSION_STATE trace rule and the existing Session 091 usage record; Session 091 completed the MS-028.64 App Version Commit Trace Policy Foundation; Session 091 synchronized the MS-028.64 control files; Session 091 preserved the existing docs/session-handoffs source-boundary diagnosis and the existing docs/10_SESSION_STATE trace rule; Session 090 completed the Session Close Protocol; Session 090 synchronized the Session 090 close handoff; Session 090 completed the MS-028.63 Mojibake / Krzaczki Cleanup Batch 3 Foundation; Session 090 corrected visible mojibake in the SPS OS project settings surface and targeted tests; Session 090 synchronized the MS-028.63 control files after verified implementation; Session 090 appended the Session 090 usage record; Session 090 corrected visible mojibake in the SPS OS project creation surface and targeted tests; Session 090 synchronized the MS-028.62 control files after verified implementation; Session 090 appended the Session 090 usage record; Session 090 validated the existing AI Workspace handoff panel as visible, copy-ready, field-complete, and non-executable; Session 090 corrected visible mojibake in the SPS OS home screen and targeted tests; Session 090 synchronized the MS-028.61 control files after verified implementation; Session 090 appended the Session 090 usage record; Session 089 completed the MS-028.59 implementation and SSOT sync publication; Session 089 synchronized the Session 089 close protocol handoff; Session 089 completed the Session Close Protocol
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.64 - App Version Commit Trace Policy Foundation
+Latest Completed Product Milestone: MS-028.65 - Linear App Version Policy Correction Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 091 completed the MS-028.64 App Version Commit Trace Policy Foundation
+Latest Completed Capability Item: Session 091 completed the MS-028.65 Linear App Version Policy Correction Foundation
 Current Sprint: NONE
 Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, MS-022.3, MS-023.0, MS-027.2, MS-027.3, MS-027.4, MS-027.5, MS-028.0, MS-028.1, MS-028.2, MS-028.3, MS-028.4, MS-028.5, MS-028.6, MS-028.7, MS-028.8, MS-028.9, MS-028.10, MS-028.11, MS-028.12, MS-028.13, MS-028.14, MS-028.15, and MS-028.16 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
 Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: f33a8a4
+Latest Verified Commit: f9089d2
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Product Owner reviews the MS-028.64 publication sync and decides whether to commit or push.
-Next Session Plan: Product Owner reviews the MS-028.64 publication sync and decides whether to commit or push.
+Next Safe Step: Review the SSOT diff and decide whether to commit or push.
+Next Session Plan: Review the SSOT diff and decide whether to commit or push.
