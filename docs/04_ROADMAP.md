@@ -158,6 +158,8 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.69` - AI Workspace Knowledge Server Fallback Alignment Foundation
+* `MS-028.68` - AI Workspace Project Brain Browser Profile Divergence Diagnosis Foundation
 * `MS-028.67` - AI Workspace Browser State Consistency Diagnosis Foundation
 * `MS-028.66` - Session Handoff Encoding Source Boundary Diagnosis Foundation
 * `MS-028.65` - Linear App Version Policy Correction Foundation
@@ -191,7 +193,88 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.67 - AI Workspace Browser State Consistency Diagnosis Foundation
+MS-028.69 - AI Workspace Knowledge Server Fallback Alignment Foundation
+
+## MS-028.69 - AI Workspace Knowledge Server Fallback Alignment Foundation
+
+**Milestone**
+MS-028.69 - AI Workspace Knowledge Server Fallback Alignment Foundation
+
+**Type**
+Documentation / Knowledge Fallback Alignment Milestone
+
+This checkpoint keeps AI Workspace knowledge and recovered memory aligned with server-backed Project Brain state by preferring the canonical browser-server knowledge entries over browser-local fallback content whenever the project context is available, while preserving localStorage only as a recovery fallback when server-backed knowledge is truly unavailable.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+READY FOR PUBLICATION
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Active**
+AI Workspace knowledge fallback alignment.
+
+**Allowed Implementation Scope**
+* confirm the browser/local precedence boundary for AI Workspace knowledge
+* keep server-backed knowledge authoritative when it is available
+* preserve localStorage only as a recovery fallback when server-backed knowledge is unavailable
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* browser-data deletion
+* repo-wide cleanup
+* runtime UI redesign
+* broad Project Brain refactor
+* app version changes
+* commit / push actions
+
+**Dependencies**
+* closed `MS-028.68 - AI Workspace Project Brain Browser Profile Divergence Diagnosis Foundation`
+
+MS-028.68 - AI Workspace Project Brain Browser Profile Divergence Diagnosis Foundation
+
+## MS-028.68 - AI Workspace Project Brain Browser Profile Divergence Diagnosis Foundation
+
+**Milestone**
+MS-028.68 - AI Workspace Project Brain Browser Profile Divergence Diagnosis Foundation
+
+**Type**
+Documentation / Browser Profile Divergence Milestone
+
+This checkpoint confirms the remaining AI Workspace browser-profile divergence boundary by showing that the browser context can still fall back to local Project Brain state when the server project reader is unavailable, while tasks continue to read from the fresh browser/server task boundary. Knowledge and recovered memory stay profile-dependent until a safe shared reload boundary is confirmed.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+READY FOR PUBLICATION
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Active**
+AI Workspace browser-profile divergence diagnosis.
+
+**Allowed Implementation Scope**
+* confirm the exact source boundary for the remaining browser-profile divergence
+* inspect localStorage/project context fallback and browser-side Project Brain/knowledge merge behavior
+* synchronize the SSOT control files
+* append the required usage record
+* apply a minimal fix only if the source boundary is confirmed and safe
+
+**Forbidden Scope**
+* browser-data deletion
+* repo-wide cleanup
+* runtime UI redesign
+* broad Project Brain refactor
+* commit / push actions
+
+**Dependencies**
+* closed `MS-028.67 - AI Workspace Browser State Consistency Diagnosis Foundation`
 
 ## MS-028.67 - AI Workspace Browser State Consistency Diagnosis Foundation
 

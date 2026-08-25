@@ -45,14 +45,20 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.67 - AI Workspace Browser State Consistency Diagnosis Foundation
+MS-028.69 - AI Workspace Knowledge Server Fallback Alignment Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
+MS-028.69 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Knowledge Server Fallback Alignment Foundation. The browser-side Project Brain context now prefers server-backed knowledge entries over local browser fallback content whenever the project is available, while keeping localStorage only as a recovery fallback when server-backed knowledge is unavailable.
+
+MS-028.68 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Project Brain Browser Profile Divergence Diagnosis Foundation. The task read path stays fresh via no-store GETs, but knowledge and recovered memory can still diverge when the browser context falls back to local Project Brain state after a missing server project; no safe runtime fix was applied yet.
+
 MS-028.65 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Linear App Version Policy Correction Foundation. The repository now uses a linear app version counter, shows the current app version and the last published MS separately in the badge, and records the commit subject policy for product-relevant publications while keeping the change docs-only and minimal.
 
 MS-028.64 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the App Version Commit Trace Policy Foundation. The repository now records the docs-only app-version commit trace policy so controlled app-version changes stay traceable to the publishing milestone and publishing commit in SSOT, and it records that the Session 090 generated handoff contains mojibake while the source contract text remains readable and no safe generator or copy boundary was confirmed.
+
+MS-028.68 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Project Brain Browser Profile Divergence Diagnosis Foundation. The task read path stays fresh via no-store GETs, but knowledge and recovered memory can still diverge when the browser context falls back to local Project Brain state after a missing server project; no safe runtime fix was applied yet.
 
 MS-028.67 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Browser State Consistency Diagnosis Foundation. The browser-side AI Workspace loaders now force fresh project, task, and knowledge reads so normal and incognito browser contexts converge on the same canonical project truth instead of profile-specific cached responses.
 
@@ -473,8 +479,12 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.67 - AI Workspace Browser State Consistency Diagnosis Foundation
+Latest Completed Product Milestone: MS-028.69 - AI Workspace Knowledge Server Fallback Alignment Foundation
 Next Product Milestone: NONE / Product Owner decision required
+MS-028.69 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Knowledge Server Fallback Alignment Foundation. The browser-side Project Brain context now prefers server-backed knowledge entries over local browser fallback content whenever the project is available, while keeping localStorage only as a recovery fallback when server-backed knowledge is unavailable.
+
+MS-028.68 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Project Brain Browser Profile Divergence Diagnosis Foundation. The task read path stays fresh via no-store GETs, but knowledge and recovered memory can still diverge when the browser context falls back to local Project Brain state after a missing server project; no safe runtime fix was applied yet.
+
 MS-028.67 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Browser State Consistency Diagnosis Foundation. The browser-side AI Workspace loaders now force fresh project, task, and knowledge reads so normal and incognito browser contexts converge on the same canonical project truth instead of profile-specific cached responses.
 
 MS-028.65 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Linear App Version Policy Correction Foundation. The repository now uses a linear app version counter, shows the current app version and the last published MS separately in the badge, and records the commit subject policy for product-relevant publications while keeping the change docs-only and minimal.
@@ -1649,8 +1659,12 @@ Next:
 # In Progress
 
 * `Current Product Milestone` is `NONE / Product Owner decision required`
- * `Latest Completed Product Milestone` is `MS-028.67 - AI Workspace Browser State Consistency Diagnosis Foundation`
+ * `Latest Completed Product Milestone` is `MS-028.69 - AI Workspace Knowledge Server Fallback Alignment Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
+ * `Session 091` completed the MS-028.69 AI Workspace Knowledge Server Fallback Alignment Foundation because browser-side Project Brain context now prefers server-backed knowledge entries over local browser fallback content whenever the project is available.
+ * `Session 091` synchronized the `MS-028.69 - AI Workspace Knowledge Server Fallback Alignment Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.
+ * `Session 091` completed the MS-028.68 AI Workspace Project Brain Browser Profile Divergence Diagnosis Foundation because the browser-side task reads stay fresh while knowledge and recovered memory can still fall back to profile-local Project Brain state when the server project is unavailable.
+ * `Session 091` synchronized the `MS-028.68 - AI Workspace Project Brain Browser Profile Divergence Diagnosis Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.
  * `Session 091` completed the MS-028.67 AI Workspace browser-state consistency diagnosis foundation because the browser-side GET wrappers now force fresh canonical reads instead of profile-specific cached responses.
  * `Session 091` synchronized the `MS-028.67 - AI Workspace Browser State Consistency Diagnosis Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.
  * `Session 091` completed the MS-028.65 linear app-version policy correction foundation because the repository now keeps the current app version and last published MS separate while preserving the earlier app-version trace policy foundation.

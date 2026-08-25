@@ -164,6 +164,56 @@ describe("createGetBrowserAiProjectContext", () => {
     });
   });
 
+  it("keeps canonical server knowledge ahead of the local browser fallback when ids overlap", async () => {
+    const { createGetBrowserAiProjectContext } =
+      await loadBrowserProjectBrainModule();
+    storage.setItem(
+      "soft-premium-system.projects.project-1.knowledge",
+      JSON.stringify([
+        {
+          id: "knowledge-1",
+          projectId: "project-1",
+          title: "Architecture note",
+          content: "Saved locally after a controlled fallback.",
+          createdAt: "2026-08-12T10:00:00.000Z",
+        },
+      ]),
+    );
+    const getBrowserAiProjectContext = createGetBrowserAiProjectContext({
+      getProjectById: vi.fn().mockResolvedValue({
+        id: "project-1",
+        name: "Alpha",
+        createdAt: "2026-07-24T10:00:00.000Z",
+      }),
+      getTasksByProjectId: vi.fn().mockResolvedValue([]),
+      getKnowledgeEntriesByProjectId: vi.fn().mockResolvedValue([
+        {
+          id: "knowledge-1",
+          projectId: "project-1",
+          title: "Architecture note",
+          content: "Server-backed canonical context.",
+          createdAt: "2026-08-13T10:00:00.000Z",
+        },
+      ]),
+    });
+
+    await expect(getBrowserAiProjectContext("project-1")).resolves.toEqual({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [
+          {
+            id: "knowledge-1",
+            title: "Architecture note",
+            content: "Server-backed canonical context.",
+          },
+        ],
+      },
+    });
+  });
+
   it("returns project-not-found and skips tasks and knowledge readers", async () => {
     const { createGetBrowserAiProjectContext } =
       await loadBrowserProjectBrainModule();

@@ -42,12 +42,12 @@ export function createGetBrowserAiProjectContext(
   ): KnowledgeEntry[] {
     const mergedKnowledgeEntries = new Map<string, KnowledgeEntry>();
 
-    for (const knowledgeEntry of canonicalKnowledgeEntries) {
-      mergedKnowledgeEntries.set(knowledgeEntry.id, knowledgeEntry);
-    }
-
     for (const localKnowledgeEntry of getKnowledge(projectId)) {
       mergedKnowledgeEntries.set(localKnowledgeEntry.id, localKnowledgeEntry);
+    }
+
+    for (const knowledgeEntry of canonicalKnowledgeEntries) {
+      mergedKnowledgeEntries.set(knowledgeEntry.id, knowledgeEntry);
     }
 
     return [...mergedKnowledgeEntries.values()];

@@ -69,6 +69,40 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 091 - MS-028.69 AI Workspace Knowledge Server Fallback Alignment Foundation
+
+### Date
+
+2026-08-25
+
+### Completed
+
+* Confirmed that AI Workspace knowledge and recovered memory now prefer the server-backed browser knowledge entries whenever the project context is available, instead of letting browser-local fallback content win over canonical entries with the same id.
+* Preserved the browser-local Project Brain recovery fallback for cases where server-backed knowledge is truly unavailable.
+* Preserved the existing `docs/10_SESSION_STATE.md` trace rule and the `.usage/session.jsonl` Session 091 usage record.
+
+### Notes
+
+* This is a narrow runtime alignment, not a broad Project Brain refactor.
+* No browser-data deletion was performed.
+
+## Session 091 - MS-028.68 AI Workspace Project Brain Browser Profile Divergence Diagnosis Foundation
+
+### Date
+
+2026-08-25
+
+### Completed
+
+* Confirmed that the remaining normal-vs-incognito divergence comes from the browser-local Project Brain fallback path: tasks still come from fresh browser/server reads, but when the project reader is missing the AI context can fall back to `getAiProjectContext()` and use profile-local knowledge and recovered memory.
+* Recorded that no safe runtime fix was applied yet because the shared browser/project boundary is not confirmed well enough to change precedence without risking a false `project-not-found` outcome.
+* Preserved the existing `docs/10_SESSION_STATE.md` trace rule and the `.usage/session.jsonl` Session 091 usage record.
+
+### Notes
+
+* This is a diagnosis-only milestone record.
+* No browser-data deletion or broad Project Brain refactor was performed.
+
 ## Session 091 - MS-028.67 AI Workspace Browser State Consistency Diagnosis Foundation
 
 ### Date
