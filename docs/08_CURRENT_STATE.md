@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-030.7 - Project Map Storage Path Resolver Foundation
+MS-030.8 - Project Map Missing Read Result Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-030.8 is PUBLISHED / CLOSED in the current local workspace as the Project Map Missing Read Result Foundation. The Product Owner wants the first minimal Project Map read helper to use the MS-030.7 storage-path resolver, return `missing` when `map.json` is absent, and return `unavailable` for invalid project identity or for the still-unparsed present-map boundary. The helper does not parse maps, reconstruct maps, inspect project-owned roadmap/docs/repo evidence, modify client/project repositories, or create runtime files. Beauty Client PRO remains a future candidate without inspection or modification.
 
 MS-030.7 is PUBLISHED / CLOSED in the current local workspace as the Project Map Storage Path Resolver Foundation. The Product Owner wants the minimal Project Map storage helper to resolve the operational Project Map root from the existing project metadata/project-key boundary and return `C:\SPS_OS_WORK\.sps-meta\<project-key>\project-map\` without creating directories or files. The resolver supports SPS OS itself and imported/existing client applications through the same boundary, does not read project-owned roadmap/docs/repo evidence, does not modify client/project repositories, and returns an explicit unavailable result for missing or invalid project identity instead of guessing.
 

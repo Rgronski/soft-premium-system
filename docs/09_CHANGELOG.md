@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.8 Project Map Missing Read Result Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Added the minimal Project Map read helper in `src/lib/project-map/read.ts` so SPS OS can resolve the missing operational-map state from the MS-030.7 storage-path baseline without parsing maps or creating runtime files.
+* Added focused tests for the explicit missing result when `map.json` is absent, the explicit unavailable result for invalid project identity, and the explicit unavailable result for the still-unparsed present-map boundary.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.8 - Project Map Missing Read Result Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is a minimal read-result milestone and does not parse maps, reconstruct maps, or create runtime files.
+* MS-030.7 remains the preceding storage-path baseline.
+* MS-030.6, MS-030.5, MS-030.4, MS-030.3, MS-030.2, MS-030.1, MS-030.0, MS-029.0, MS-029.1, and MS-028.74 remain preserved as earlier baselines.
+
 ## Session 092 - MS-030.7 Project Map Storage Path Resolver Foundation
 
 ### Date

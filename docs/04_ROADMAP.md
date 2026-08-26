@@ -196,6 +196,47 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-030.8 - Project Map Missing Read Result Foundation
+
+**Milestone**
+MS-030.8 - Project Map Missing Read Result Foundation
+
+**Type**
+SPS OS / Project Map Missing Read Result Foundation
+
+This checkpoint records the first minimal Project Map read result for SPS OS. The helper uses the MS-030.7 storage-path resolver, returns `missing` when `map.json` is absent, and returns `unavailable` for invalid project identity or for the present-map state that still remains outside the parser boundary. It does not parse maps, reconstruct maps, inspect project-owned roadmap/docs/repo evidence, modify client/project repositories, or create runtime files. Beauty Client PRO remains a future candidate without inspection or modification.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project Map missing read result only.
+
+**Allowed Implementation Scope**
+* add the minimal read-result helper and tests
+* preserve MS-030.7 as the storage-path baseline
+* keep project-owned docs as input evidence only
+* append the required usage record
+
+**Forbidden Scope**
+* parse available map data
+* reconstruct Project Maps
+* create runtime files
+* inspect or modify Beauty Client PRO
+* modify client repositories or working directories
+* change color or theme direction
+* change app version
+* commit / push actions
+
+**Dependencies**
+* closed `MS-030.7 - Project Map Storage Path Resolver Foundation`
+
 ## MS-030.7 - Project Map Storage Path Resolver Foundation
 
 **Milestone**
