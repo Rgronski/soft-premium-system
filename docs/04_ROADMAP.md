@@ -196,7 +196,46 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.73a - AI Workspace Knowledge Profile Parity Foundation
+MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation
+
+## MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation
+
+**Milestone**
+MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation
+
+**Type**
+Codex Report / Communication Contract Foundation
+
+This checkpoint makes the expected Codex report envelope explicit and machine-reviewable by requiring one clean copy-ready fenced block with exact start/end markers, no escaped markers, and no loose Markdown outside the block. It keeps self-reported report compliance tied to the actual rendered block rather than the presence of a PASS string alone.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+READY FOR PUBLICATION
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Active**
+Codex report copy-block compliance.
+
+**Allowed Implementation Scope**
+* clarify the canonical Codex report envelope in the authoritative operating charter
+* require exact literal start/end markers for copy-ready reports
+* treat escaped markers and loose Markdown outside the block as non-compliant
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* add a Codex runner or parser
+* change app version
+* redesign AI Workspace or Project Brain
+* change runtime product behavior
+* commit / push actions
+
+**Dependencies**
+* closed `MS-028.73a - AI Workspace Knowledge Profile Parity Foundation`
 
 ## MS-028.73a - AI Workspace Knowledge Profile Parity Foundation
 

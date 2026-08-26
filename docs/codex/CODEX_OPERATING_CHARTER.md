@@ -68,6 +68,14 @@ Codex -> Chief Architect reports must use one copy-ready fenced text code block,
 ===== RAPORT CODEXA END =====
 ```
 
+The report block must be clean and machine-reviewable:
+
+* The start marker must appear exactly as `===== RAPORT CODEXA START =====`.
+* The end marker must appear exactly as `===== RAPORT CODEXA END =====`.
+* Escaped markers such as `\===== RAPORT CODEXA START =====` are not compliant.
+* Loose Markdown or other prose outside the fenced block is not compliant.
+* `Report format compliance: PASS` is invalid if the actual markers are escaped, missing, or broken.
+
 ## Stop Conditions
 
 Stop and report when:

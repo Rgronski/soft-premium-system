@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 091 - MS-028.73 Codex Report Copy-Block Compliance Guard Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Clarified the authoritative Codex operating charter so reports must be returned in one clean copy-ready fenced block with exact literal `===== RAPORT CODEXA START =====` and `===== RAPORT CODEXA END =====` markers.
+* Declared escaped markers, loose Markdown outside the block, and PASS claims that do not match the actual envelope as non-compliant.
+* Preserved the existing `docs/10_SESSION_STATE.md` trace rule and the existing Session 091 usage record.
+
+### Notes
+
+* This is a narrow report-contract change, not a Codex runner or parser implementation.
+* No runtime product behavior was changed.
+
 ## Session 091 - MS-028.73a AI Workspace Knowledge Profile Parity Foundation
 
 ### Date
