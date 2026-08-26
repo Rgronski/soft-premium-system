@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-030.6 - Project Map Storage Skeleton Foundation
+MS-030.7 - Project Map Storage Path Resolver Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-030.7 is PUBLISHED / CLOSED in the current local workspace as the Project Map Storage Path Resolver Foundation. The Product Owner wants the minimal Project Map storage helper to resolve the operational Project Map root from the existing project metadata/project-key boundary and return `C:\SPS_OS_WORK\.sps-meta\<project-key>\project-map\` without creating directories or files. The resolver supports SPS OS itself and imported/existing client applications through the same boundary, does not read project-owned roadmap/docs/repo evidence, does not modify client/project repositories, and returns an explicit unavailable result for missing or invalid project identity instead of guessing.
 
 MS-030.6 is PUBLISHED / CLOSED in the current local workspace as the Project Map Storage Skeleton Foundation. The Product Owner wants the future operational Project Map to live in `C:\SPS_OS_WORK\.sps-meta\<project-key>\project-map\` with a minimal file layout of `map.json`, `sources.jsonl`, `parked-ideas.jsonl`, and `events.jsonl`. `map.json` holds the normalized MS-030.3 read model, `sources.jsonl` records source evidence, `parked-ideas.jsonl` keeps ideas attached to the relevant product-area block or milestone, and `events.jsonl` records lifecycle and audit events. The skeleton applies to SPS OS and imported/existing client applications, does not require client repository modification, keeps export / write-back as a separate future milestone, leaves Beauty Client PRO as a future candidate without inspection or modification, and does not create runtime files.
 

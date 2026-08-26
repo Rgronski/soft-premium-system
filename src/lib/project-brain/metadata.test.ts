@@ -197,3 +197,39 @@ describe("getServerAiWorkspaceMetadataContext", () => {
     ).toContain("Repository files: not included.");
   });
 });
+
+describe("resolveProjectMapStorageRoot", () => {
+  it("derives the project-map root from the existing metadata-root strategy", async () => {
+    const { resolveProjectMapStorageRoot } = await loadModule();
+
+    expect(
+      resolveProjectMapStorageRoot({
+        id: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+        name: "Beauty Client PRO",
+        workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+      }),
+    ).toEqual({
+      status: "available",
+      projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+      projectName: "Beauty Client PRO",
+      projectMetadataRootPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+      projectMapRootPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map",
+    });
+  });
+
+  it("returns an explicit unavailable result for a missing project identity", async () => {
+    const { resolveProjectMapStorageRoot } = await loadModule();
+
+    expect(
+      resolveProjectMapStorageRoot({
+        id: "   ",
+        name: "Alpha",
+      }),
+    ).toEqual({
+      status: "unavailable",
+      reason: "invalid-project-identity",
+    });
+  });
+});

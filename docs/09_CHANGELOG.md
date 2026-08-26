@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.7 Project Map Storage Path Resolver Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Added the minimal Project Map storage path resolver in `src/lib/project-brain/metadata.ts` so the operational root resolves to `C:\SPS_OS_WORK\.sps-meta\<project-key>\project-map\` without creating directories or files.
+* Added focused tests for Project Brain metadata resolution and the explicit unavailable result for missing or invalid project identity.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.7 - Project Map Storage Path Resolver Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is a minimal helper milestone and does not load maps, reconstruct maps, or create runtime files.
+* MS-030.6 remains the preceding storage skeleton baseline.
+* MS-030.5, MS-030.4, MS-030.3, MS-030.2, MS-030.1, MS-030.0, MS-029.0, MS-029.1, and MS-028.74 remain preserved as earlier baselines.
+
 ## Session 092 - MS-030.6 Project Map Storage Skeleton Foundation
 
 ### Date

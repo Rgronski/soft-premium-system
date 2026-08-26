@@ -196,6 +196,46 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-030.7 - Project Map Storage Path Resolver Foundation
+
+**Milestone**
+MS-030.7 - Project Map Storage Path Resolver Foundation
+
+**Type**
+SPS OS / Project Map Storage Path Resolver Foundation
+
+This checkpoint records the minimal Project Map storage path resolver for SPS OS. The resolver derives the operational Project Map root from the existing project metadata/project-key boundary and returns `C:\SPS_OS_WORK\.sps-meta\<project-key>\project-map\` without creating directories or files. It supports SPS OS itself and imported/existing client applications through the same project-key boundary, does not read project-owned roadmap/docs/repo evidence, does not modify client/project repositories, and does not inspect Beauty Client PRO. Missing or invalid project identity returns an explicit unavailable result instead of guessing. No runtime files are created in this milestone, and no TypeScript types or source code are implemented beyond the resolver. MS-030.6 remains the preceding storage skeleton baseline.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project Map storage path resolver only.
+
+**Allowed Implementation Scope**
+* resolve the operational Project Map root path
+* preserve MS-030.6 as the storage skeleton baseline
+* keep project-owned docs as input evidence only
+* append the required usage record
+
+**Forbidden Scope**
+* create runtime map files or directories
+* load or reconstruct Project Maps
+* inspect or modify Beauty Client PRO
+* modify client repositories or working directories
+* change color or theme direction
+* change app version
+* commit / push actions
+
+**Dependencies**
+* closed `MS-030.6 - Project Map Storage Skeleton Foundation`
+
 ## MS-030.6 - Project Map Storage Skeleton Foundation
 
 **Milestone**

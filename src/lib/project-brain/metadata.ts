@@ -49,6 +49,20 @@ type ProjectLike = {
 };
 
 const PROJECT_METADATA_ROOT = "C:\\SPS_OS_WORK\\.sps-meta";
+const PROJECT_MAP_ROOT_SEGMENT = "project-map";
+
+export type ProjectMapStorageRootResolution =
+  | {
+      status: "available";
+      projectId: string;
+      projectName: string;
+      projectMetadataRootPath: string;
+      projectMapRootPath: string;
+    }
+  | {
+      status: "unavailable";
+      reason: "invalid-project-identity";
+    };
 
 function slugifyMetadataRootSegment(value: string): string {
   return value
@@ -77,6 +91,37 @@ function buildProjectMetadataRoot(project: ProjectLike): string {
     PROJECT_METADATA_ROOT,
     `${readableRootSegment || "project"}--${shortProjectId}`,
   );
+}
+
+export function resolveProjectMapStorageRoot(
+  project: ProjectLike | null | undefined,
+): ProjectMapStorageRootResolution {
+  const projectId = project?.id.trim() ?? "";
+
+  if (!projectId) {
+    return {
+      status: "unavailable",
+      reason: "invalid-project-identity",
+    };
+  }
+
+  const projectName = project?.name.trim() || projectId;
+  const projectLike: ProjectLike = {
+    id: projectId,
+    name: projectName,
+    ...(project?.workingDirectory?.trim()
+      ? { workingDirectory: project.workingDirectory.trim() }
+      : {}),
+  };
+  const projectMetadataRootPath = buildProjectMetadataRoot(projectLike);
+
+  return {
+    status: "available",
+    projectId,
+    projectName,
+    projectMetadataRootPath,
+    projectMapRootPath: join(projectMetadataRootPath, PROJECT_MAP_ROOT_SEGMENT),
+  };
 }
 
 function formatCount(count: number | null): string {
