@@ -212,10 +212,10 @@ This checkpoint makes the expected Codex report envelope explicit and machine-re
 APPROVED
 
 **Publication Status**
-READY FOR PUBLICATION
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 **Active**
 Codex report copy-block compliance.
