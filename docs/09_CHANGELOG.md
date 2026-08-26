@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 091 - Session close protocol and handoff publication
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Synchronized `docs/10_SESSION_STATE.md` and created `docs/session-handoffs/2026-08-26_091_SESSION_HANDOFF.md` so the SSOT now records Session 091 as closed with Session 092 queued for the next Product Owner decision chat.
+* Recorded that Session 091 closes with `MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Appended the Session 091 close usage summary.
+
+### Notes
+
+* No new product code changed in this session-close sync step.
+* Package generation remains the next operational step after the close commit and push.
+
 ## Session 091 - MS-028.73 Codex Report Copy-Block Compliance Guard Foundation
 
 ### Date
