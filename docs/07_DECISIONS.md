@@ -440,6 +440,46 @@ Rollback:
 
 ---
 
+# ADR-0007
+
+## Status
+
+Accepted
+
+## Context
+
+Soft Premium System needs a stable roadmap contract that keeps large milestone blocks organized by product area instead of treating them as a bucket for whatever work happens next.
+
+## Decision
+
+Roadmap Contract - Milestone Area Map Rule
+
+Large MS blocks are a map of product areas, not a bucket for incidental or next-in-line work.
+
+Do not mix topics inside a large MS block.
+
+Route future work to the correct product-area block.
+
+Open a new large MS only when the Product Owner confirms the topic is a separate product area.
+
+`MS-029.x` is reserved for SPS OS layout-system work.
+
+Codex / AI Workspace / Codex report-contract work must not be placed under `MS-029.x` only because layout is currently active.
+
+Parked ideas and improvements belong under their relevant product-area block and should remain visible when that block is opened.
+
+Completed blocks may be shown as `check`; other allowed map statuses are `active`, `planned`, `parked`, and `blocked`.
+
+## Consequences
+
+Roadmap planning stays aligned with product-area boundaries.
+
+Milestone names remain reserved for actual product milestones rather than organizational contracts.
+
+Parked ideas stay attached to the area that owns them instead of being lost in chat history.
+
+---
+
 # Decision Principles
 
 Architecture decisions should:

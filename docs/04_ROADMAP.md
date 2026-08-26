@@ -196,7 +196,124 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation
+## MS-029.1 - Milestone Map and Parked Ideas Visibility Foundation
+
+**Milestone**
+MS-029.1 - Milestone Map and Parked Ideas Visibility Foundation
+
+**Type**
+SPS OS / Milestone Map Visibility Foundation
+
+This checkpoint records the Product Owner direction for a future SPS OS milestone map that shows larger product milestone blocks with `check`, `active`, `planned`, `parked`, and `blocked` status labels and keeps parked ideas, improvements, and future enhancements visible under the relevant block/MS instead of losing them in chat history.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Milestone/block map visibility direction only.
+
+**Allowed Implementation Scope**
+* record the milestone/block map direction in SSOT
+* keep parked ideas visible under the relevant block/MS
+* preserve the existing milestone chronology
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* implement the milestone map UI
+* change runtime product behavior
+* change color or theme direction
+* change app version
+* commit / push actions
+
+**Dependencies**
+* closed `MS-029.0 - SPS OS Layout System First Implementation Foundation`
+* closed `MS-028.74 - AI Workspace Layout Direction Foundation`
+
+## MS-029.0 - SPS OS Layout System First Implementation Foundation
+
+**Milestone**
+MS-029.0 - SPS OS Layout System First Implementation Foundation
+
+**Type**
+SPS OS / Layout System First Implementation Foundation
+
+This checkpoint records the first real SPS OS layout system implementation based on the Product Owner sketch. The layout now keeps the top project workspace band, the section/navigation band below it, the main workspace split between AI chat and Codex, and a separate project context/value/description panel while preserving the existing AI Workspace behavior and leaving colors/theme unchanged.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+SPS OS layout system first implementation.
+
+**Allowed Implementation Scope**
+* implement the minimal AI Workspace layout change in the page surface
+* preserve existing AI Workspace behavior, data loading, and diagnostics
+* keep the layout responsive on desktop and mobile
+* keep color and theme unchanged
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* change AI engine, Project Brain, task, knowledge, conductor, API, filesystem, or storage logic
+* redesign colors or theme
+* introduce new dependencies
+* commit / push actions
+
+**Dependencies**
+* closed `MS-028.74 - AI Workspace Layout Direction Foundation`
+
+## MS-028.74 - AI Workspace Layout Direction Foundation
+
+**Milestone**
+MS-028.74 - AI Workspace Layout Direction Foundation
+
+**Type**
+AI Workspace / Project Workspace Layout Direction Foundation
+
+This checkpoint records the Product Owner layout direction decision for the future AI Workspace / Project Workspace surface. The direction keeps the top project workspace band, the section/navigation band beneath it, the main work area split between AI chat and Codex, and a project value / description context panel, while explicitly leaving layout implementation for a later milestone.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+AI Workspace layout direction decision only.
+
+**Allowed Implementation Scope**
+* record the Product Owner layout direction decision in SSOT
+* keep the milestone docs-only
+* preserve the current color/theme direction
+* defer layout implementation to a future milestone
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* implement the AI Workspace / Project Workspace layout
+* change runtime product behavior
+* change app version
+* alter colors or theme direction
+* commit / push actions
+
+**Dependencies**
+* closed `MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation`
 
 ## MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation
 

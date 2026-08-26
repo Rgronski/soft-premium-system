@@ -45,10 +45,16 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation
+MS-029.1 - Milestone Map and Parked Ideas Visibility Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-029.1 is PUBLISHED / CLOSED in the current local workspace as the Milestone Map and Parked Ideas Visibility Foundation. The Product Owner wants SPS OS to eventually show milestone blocks with `check`, `active`, `planned`, `parked`, and `blocked` labels and keep parked ideas, improvements, and future enhancements visible under the relevant block/MS instead of losing them in chat history.
+
+MS-029.0 is PUBLISHED / CLOSED in the current local workspace as the SPS OS Layout System First Implementation Foundation. The approved layout direction now has a top project workspace band, a section/navigation band below it, a two-column main workspace split between AI chat and Codex, and a separate project value / description context panel while preserving the existing AI Workspace behavior and keeping color/theme unchanged.
+
+MS-028.74 is PUBLISHED / CLOSED in the current local workspace as the AI Workspace Layout Direction Foundation. The Product Owner clarified that the issue is layout, not color, and the accepted direction keeps a top project workspace band, a section/navigation band below it, a main work area split between AI chat and Codex, and an additional project value / description context panel while leaving layout implementation for a future milestone.
 
 MS-028.73 is PUBLISHED / CLOSED in the current local workspace as the Codex Report Copy-Block Compliance Guard Foundation. The Codex operating charter now requires one clean copy-ready fenced report block with exact `===== RAPORT CODEXA START =====` and `===== RAPORT CODEXA END =====` markers, rejects escaped markers and loose Markdown outside the block, and treats a PASS claim as invalid if the actual envelope is broken.
 

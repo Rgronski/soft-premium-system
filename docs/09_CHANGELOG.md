@@ -69,6 +69,77 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - Roadmap Contract - Milestone Area Map Rule
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Recorded the Product Owner rule that large MS blocks are maps of product areas, not buckets for whatever work happens next.
+* Recorded that future work should route to the correct product area block and that parked ideas and improvements should stay under their relevant area block.
+* Synchronized `docs/07_DECISIONS.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records the roadmap contract while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is docs-only and does not change runtime behavior.
+* The existing `MS-029.1` milestone map visibility foundation remains the latest completed product milestone.
+* The existing `MS-029.0` layout implementation remains the preceding implementation baseline.
+
+## Session 092 - MS-029.1 Milestone Map and Parked Ideas Visibility Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Recorded the Product Owner direction for a future SPS OS milestone map with `check`, `active`, `planned`, `parked`, and `blocked` block statuses.
+* Recorded that parked ideas, improvements, and future enhancements should stay visible under the relevant milestone block/MS instead of being lost in chat history.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-029.1 - Milestone Map and Parked Ideas Visibility Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is docs-only and does not implement the milestone map UI.
+* The existing `MS-029.0` layout implementation remains the preceding baseline.
+* The existing `MS-028.74` layout direction decision remains the preceding direction baseline.
+
+## Session 092 - MS-029.0 SPS OS Layout System First Implementation Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Implemented the first real SPS OS layout system change based on the Product Owner sketch while preserving existing AI Workspace behavior.
+* Added a restrained two-column layout direction with the top project workspace band, a section/navigation band below it, the main workspace split between AI chat and Codex, and a separate project value / description context panel.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-029.0 - SPS OS Layout System First Implementation Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is a minimal UI implementation and does not change color or theme direction.
+* No AI engine, Project Brain, task, knowledge, conductor, API, filesystem, or storage logic changed.
+* This reclassifies the already implemented layout work from the earlier `MS-028.75` label into the SPS OS layout-system block while preserving `MS-028.74` as the preceding docs-only layout direction decision.
+
+## Session 092 - MS-028.74 AI Workspace Layout Direction Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Captured the Product Owner layout direction decision for the future AI Workspace / Project Workspace surface as a docs-only milestone.
+* Recorded the accepted layout direction input: top project workspace band, section/navigation band below it, main work area split between AI chat and Codex, and an additional project value / description context panel.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-028.74 - AI Workspace Layout Direction Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is a docs-only milestone and does not implement the layout.
+* No color or theme changes were made.
+
 ## Session 091 - Session close protocol and handoff publication
 
 ### Date

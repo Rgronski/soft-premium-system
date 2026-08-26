@@ -3024,4 +3024,34 @@ describe("ProjectAiWorkspacePage", () => {
       expect(screen.getByRole("button", { name: "Skopiowano" })).toBeTruthy();
     });
   });
+
+  test("renders the AI Workspace layout bands and anchors", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+
+    render(<ProjectAiWorkspacePage />);
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole("navigation", { name: "Sekcje obszaru AI" }),
+      ).toBeTruthy();
+    });
+
+    expect(screen.getByRole("link", { name: "Kontekst projektu" })).toBeTruthy();
+    expect(screen.getByRole("link", { name: "AI chat" })).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Wartość projektu" })).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Codex" })).toBeTruthy();
+    expect(document.getElementById("project-context")).not.toBeNull();
+    expect(document.getElementById("project-value")).not.toBeNull();
+    expect(document.getElementById("ai-chat")).not.toBeNull();
+    expect(document.getElementById("ai-workbench")).not.toBeNull();
+    expect(document.getElementById("codex-handoff")).not.toBeNull();
+  });
 });

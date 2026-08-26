@@ -304,7 +304,7 @@ export default function ProjectAiWorkspacePage() {
   if (contextState.projectId !== params.id || contextState.status === "loading") {
     return (
       <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
-        <div className="space-y-2">
+        <div className="space-y-2 xl:col-span-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
             Przestrzeń AI
           </p>
@@ -319,7 +319,7 @@ export default function ProjectAiWorkspacePage() {
   if (contextState.status === "project-not-found") {
     return (
       <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
-        <div className="space-y-2">
+        <div className="space-y-2 xl:col-span-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
             Przestrzeń AI
           </p>
@@ -704,7 +704,7 @@ export default function ProjectAiWorkspacePage() {
 
   return (
     <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
-      <div className="space-y-6">
+      <div className="space-y-6 xl:grid xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.95fr)] xl:gap-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
             Przestrzeń AI
@@ -714,7 +714,40 @@ export default function ProjectAiWorkspacePage() {
           </h2>
         </div>
 
-        <div className="rounded-xl border border-emerald-900/40 bg-emerald-950/30 p-4">
+        <nav
+          aria-label="Sekcje obszaru AI"
+          className="flex flex-wrap gap-2 rounded-xl border border-zinc-800 bg-zinc-950/60 p-3 xl:col-span-2"
+        >
+          <a
+            href="#project-context"
+            className="rounded-full border border-zinc-700 bg-zinc-900 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-zinc-200 transition hover:border-zinc-600 hover:bg-zinc-800"
+          >
+            Kontekst projektu
+          </a>
+          <a
+            href="#ai-chat"
+            className="rounded-full border border-zinc-700 bg-zinc-900 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-zinc-200 transition hover:border-zinc-600 hover:bg-zinc-800"
+          >
+            AI chat
+          </a>
+          <a
+            href="#project-value"
+            className="rounded-full border border-zinc-700 bg-zinc-900 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-zinc-200 transition hover:border-zinc-600 hover:bg-zinc-800"
+          >
+            Wartość projektu
+          </a>
+          <a
+            href="#codex-handoff"
+            className="rounded-full border border-zinc-700 bg-zinc-900 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-zinc-200 transition hover:border-zinc-600 hover:bg-zinc-800"
+          >
+            Codex
+          </a>
+        </nav>
+
+        <div
+          id="project-context"
+          className="rounded-xl border border-emerald-900/40 bg-emerald-950/30 p-4 scroll-mt-6"
+        >
           <p className="text-sm uppercase tracking-[0.2em] text-emerald-200">
             Ostatnio odzyskana pamięć
           </p>
@@ -761,7 +794,10 @@ export default function ProjectAiWorkspacePage() {
           )}
         </div>
 
-        <div className="grid gap-4 xl:grid-cols-2">
+        <div
+          id="project-value"
+          className="grid gap-4 xl:grid-cols-2 scroll-mt-6"
+        >
           <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
               Zadania
@@ -812,7 +848,10 @@ export default function ProjectAiWorkspacePage() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+        <div
+          id="ai-chat"
+          className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4 scroll-mt-6"
+        >
           <div className="space-y-2">
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
               Generowanie
@@ -829,7 +868,10 @@ export default function ProjectAiWorkspacePage() {
             </p>
           </div>
 
-          <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-900/80 p-4">
+          <div
+            id="ai-workbench"
+            className="mt-4 rounded-xl border border-zinc-800 bg-zinc-900/80 p-4"
+          >
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
               AI Workbench
             </p>
@@ -846,7 +888,10 @@ export default function ProjectAiWorkspacePage() {
               </p>
             </div>
 
-            <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-950/70 p-4">
+            <div
+              id="codex-handoff"
+              className="mt-4 rounded-xl border border-zinc-800 bg-zinc-950/70 p-4"
+            >
               <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
                 Handoff do Codexa
               </p>
