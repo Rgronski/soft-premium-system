@@ -50,7 +50,7 @@ MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-028.73 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the Codex Report Copy-Block Compliance Guard Foundation. The Codex operating charter now requires one clean copy-ready fenced report block with exact `===== RAPORT CODEXA START =====` and `===== RAPORT CODEXA END =====` markers, rejects escaped markers and loose Markdown outside the block, and treats a PASS claim as invalid if the actual envelope is broken.
+MS-028.73 is PUBLISHED / CLOSED in the current local workspace as the Codex Report Copy-Block Compliance Guard Foundation. The Codex operating charter now requires one clean copy-ready fenced report block with exact `===== RAPORT CODEXA START =====` and `===== RAPORT CODEXA END =====` markers, rejects escaped markers and loose Markdown outside the block, and treats a PASS claim as invalid if the actual envelope is broken.
 
 MS-028.73a is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Knowledge Profile Parity Foundation. The default knowledge list now shows canonical server-backed Project Brain knowledge only when it is available, while browser-local knowledge remains only a recovery fallback when the server knowledge read fails.
 
@@ -1673,7 +1673,7 @@ Next:
  * `Current Product Milestone` is `NONE / Product Owner decision required`
  * `Latest Completed Product Milestone` is `MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation`
  * `Next Product Milestone` is `NONE / Product Owner decision required`
- * `Session 091` completed the MS-028.73 Codex Report Copy-Block Compliance Guard Foundation because the Codex operating charter now requires one clean copy-ready fenced report block with exact start and end markers and rejects escaped markers or loose Markdown outside the block.
+ * `Session 091` published the MS-028.73 Codex Report Copy-Block Compliance Guard Foundation because the Codex operating charter now requires one clean copy-ready fenced report block with exact start and end markers and rejects escaped markers or loose Markdown outside the block.
  * `Session 091` synchronized the `MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.
  * `Session 091` completed the MS-028.73a AI Workspace Knowledge Profile Parity Foundation because the default knowledge list now shows canonical server-backed Project Brain knowledge only when it is available and keeps browser-local knowledge as recovery fallback only when the server knowledge read fails.
  * `Session 091` synchronized the `MS-028.73a - AI Workspace Knowledge Profile Parity Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.
