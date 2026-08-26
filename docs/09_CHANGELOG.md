@@ -69,6 +69,44 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.5 Project Map Missing State Contract Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Recorded the Project Map missing-state contract so missing operational maps stay explicit instead of being treated as empty complete maps.
+* Recorded the read-model state labels `available`, `missing`, `empty`, `partial`, `unreadable`, `source-unavailable`, and `error`, and recorded that `UNKNOWN` is used for unknown fields instead of guessed values.
+* Recorded that Project Brain exposes blockers and warnings for missing, unreadable, unavailable, partial, and error states, and that AI Workspace, Conductor, and future MAPA projektu UI show those states as guidance or blockers instead of pretending the map is ready.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.5 - Project Map Missing State Contract Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is docs-only and does not implement missing-state handling code.
+* MS-030.4 remains the preceding loader baseline.
+* MS-030.3, MS-030.2, MS-030.1, MS-030.0, MS-029.0, MS-029.1, and MS-028.74 remain preserved as earlier baselines.
+
+## Session 092 - MS-030.4 Project Map Loader Contract Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Recorded the Project Map loader contract for project entry and open flows that resolve the stable project key, check the SPS-owned metadata root, and read the operational Project Map when present.
+* Recorded that project-owned roadmap/map/docs are input evidence only, must not be modified, and that missing operational map data is reported as `UNKNOWN` or not available rather than guessed.
+* Recorded that the loader returns the MS-030.3 read model shape to Project Brain, keeps reconstruction handoff out of scope, and exposes loader errors as blockers or warnings.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.4 - Project Map Loader Contract Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is docs-only and does not implement loader code.
+* MS-030.3 remains the preceding read-model baseline.
+* MS-030.2, MS-030.1, MS-030.0, MS-029.0, MS-029.1, and MS-028.74 remain preserved as earlier baselines.
+
 ## Session 092 - MS-030.3 Project Map Read Model Contract Foundation
 
 ### Date

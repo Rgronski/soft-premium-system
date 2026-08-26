@@ -196,6 +196,88 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-030.5 - Project Map Missing State Contract Foundation
+
+**Milestone**
+MS-030.5 - Project Map Missing State Contract Foundation
+
+**Type**
+SPS OS / Project Map Missing State Contract Foundation
+
+This checkpoint records the Project Map missing state contract for SPS OS. Missing operational Project Map must be explicit, not silently treated as an empty complete map. The read model state labels distinguish `available`, `missing`, `empty`, `partial`, `unreadable`, `source-unavailable`, and `error`. `UNKNOWN` is used for unknown fields rather than guessed values. Project Brain exposes blockers and warnings for missing, unreadable, unavailable, partial, and error states, while AI Workspace, Conductor, and future MAPA projektu UI show the same states as guidance or blockers instead of pretending the map is ready. Missing map may later trigger reconstruction flow, but reconstruction is not part of this milestone. Empty map means a valid operational map exists but contains no product-area blocks yet. Partial map means reconstruction or source evidence is incomplete and needs Product Owner review. Unreadable or corrupt map means the operational map exists but cannot be safely parsed or trusted. Source-unavailable means project-owned evidence cannot be read, but the operational map state stays honest. Loader error means a technical loader failure occurred and must be visible. Beauty Client PRO remains a future candidate for missing/reconstruction validation without inspection or modification.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project Map missing state contract only.
+
+**Allowed Implementation Scope**
+* record the missing-state contract in SSOT
+* preserve MS-030.4 as the loader baseline
+* keep project-owned docs as input evidence only
+* append the required usage record
+
+**Forbidden Scope**
+* implement missing-state handling code
+* change storage authority or loader behavior
+* modify runtime product behavior
+* inspect or modify Beauty Client PRO
+* modify client repositories or working directories
+* change color or theme direction
+* change app version
+* commit / push actions
+
+**Dependencies**
+* closed `MS-030.4 - Project Map Loader Contract Foundation`
+
+## MS-030.4 - Project Map Loader Contract Foundation
+
+**Milestone**
+MS-030.4 - Project Map Loader Contract Foundation
+
+**Type**
+SPS OS / Project Map Loader Contract Foundation
+
+This checkpoint records the Project Map loader contract for SPS OS. The loader triggers when SPS OS enters or opens a project, determines the stable project key using the existing SPS-owned project identity strategy, and checks the SPS-owned metadata root at `C:\SPS_OS_WORK\.sps-meta\<project-key>\project-map\`. When the operational Project Map is present, the loader reads it from the SPS-owned metadata root and returns the MS-030.3 read model shape to Project Brain. Project-owned roadmap/map/docs from the working directory or repository remain input evidence only, must not be modified, and are read only as supporting evidence. Missing operational map data is reported as `UNKNOWN` or not available rather than guessed, and any later reconstruction handoff remains a separate future flow outside this milestone. Project Brain owns the loaded operational Project Map context, while AI Workspace, Conductor, and future MAPA projektu UI consume the loaded read model through Project Brain. Loader errors must stay visible as blockers or warnings, and Beauty Client PRO remains a future candidate without inspection or modification.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project Map loader contract only.
+
+**Allowed Implementation Scope**
+* record the loader contract in SSOT
+* preserve MS-030.3 as the read-model baseline
+* keep project-owned docs as input evidence only
+* append the required usage record
+
+**Forbidden Scope**
+* implement loader code
+* change storage authority or read-model behavior
+* modify runtime product behavior
+* inspect or modify Beauty Client PRO
+* modify client repositories or working directories
+* change color or theme direction
+* change app version
+* commit / push actions
+
+**Dependencies**
+* closed `MS-030.3 - Project Map Read Model Contract Foundation`
+
 ## MS-030.3 - Project Map Read Model Contract Foundation
 
 **Milestone**
