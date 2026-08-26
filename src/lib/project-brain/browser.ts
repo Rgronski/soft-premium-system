@@ -25,6 +25,29 @@ export type BrowserAiProjectContextResult =
       status: "unavailable";
     };
 
+export type BrowserProjectContextBranch =
+  | "server-project"
+  | "browser-local-project-fallback"
+  | "project-not-found"
+  | "unavailable";
+
+export type BrowserProjectContextDiagnostics = {
+  routeProjectId: string;
+  projectResponse: Project | null;
+  branchUsed: BrowserProjectContextBranch;
+  serverTaskCount: number | null;
+  serverKnowledgeCount: number | null;
+  localKnowledgeCount: number;
+};
+
+export type BrowserProjectContextDiagnosticsReporter = (
+  diagnostics: BrowserProjectContextDiagnostics,
+) => void;
+
+export type BrowserProjectContextOptions = {
+  reportDiagnostics?: BrowserProjectContextDiagnosticsReporter;
+};
+
 export type BrowserProjectContextReader = {
   getProjectById(projectId: string): Promise<Project | null>;
   getTasksByProjectId(projectId: string): Promise<Task[]>;
@@ -35,7 +58,42 @@ export type BrowserProjectContextReader = {
 
 export function createGetBrowserAiProjectContext(
   reader: BrowserProjectContextReader,
+  options: BrowserProjectContextOptions = {},
 ) {
+  function reportDiagnostics(diagnostics: BrowserProjectContextDiagnostics) {
+    options.reportDiagnostics?.(diagnostics);
+  }
+
+  function debugDiagnostics(diagnostics: BrowserProjectContextDiagnostics) {
+    if (process.env.NODE_ENV !== "development") {
+      return;
+    }
+
+    console.debug("AI Workspace project context diagnostics", diagnostics);
+  }
+
+  function emitDiagnostics(diagnostics: BrowserProjectContextDiagnostics) {
+    reportDiagnostics(diagnostics);
+    debugDiagnostics(diagnostics);
+  }
+
+  function buildDiagnostics(input: {
+    routeProjectId: string;
+    projectResponse: Project | null;
+    branchUsed: BrowserProjectContextBranch;
+    serverTaskCount: number | null;
+    serverKnowledgeCount: number | null;
+  }): BrowserProjectContextDiagnostics {
+    return {
+      routeProjectId: input.routeProjectId,
+      projectResponse: input.projectResponse,
+      branchUsed: input.branchUsed,
+      serverTaskCount: input.serverTaskCount,
+      serverKnowledgeCount: input.serverKnowledgeCount,
+      localKnowledgeCount: getKnowledge(input.routeProjectId).length,
+    };
+  }
+
   function mergeKnowledgeEntries(
     projectId: string,
     canonicalKnowledgeEntries: KnowledgeEntry[],
@@ -61,6 +119,16 @@ export function createGetBrowserAiProjectContext(
     try {
       project = await reader.getProjectById(projectId);
     } catch {
+      emitDiagnostics(
+        buildDiagnostics({
+          routeProjectId: projectId,
+          projectResponse: null,
+          branchUsed: "unavailable",
+          serverTaskCount: null,
+          serverKnowledgeCount: null,
+        }),
+      );
+
       return {
         status: "unavailable",
       };
@@ -70,8 +138,28 @@ export function createGetBrowserAiProjectContext(
       const localContext = getAiProjectContext(projectId);
 
       if (localContext.status === "available") {
+        emitDiagnostics(
+          buildDiagnostics({
+            routeProjectId: projectId,
+            projectResponse: null,
+            branchUsed: "browser-local-project-fallback",
+            serverTaskCount: null,
+            serverKnowledgeCount: null,
+          }),
+        );
+
         return localContext;
       }
+
+      emitDiagnostics(
+        buildDiagnostics({
+          routeProjectId: projectId,
+          projectResponse: null,
+          branchUsed: localContext.status,
+          serverTaskCount: null,
+          serverKnowledgeCount: null,
+        }),
+      );
 
       return {
         status: localContext.status,
@@ -85,6 +173,16 @@ export function createGetBrowserAiProjectContext(
       tasks = await reader.getTasksByProjectId(projectId);
       knowledgeEntries = await reader.getKnowledgeEntriesByProjectId(projectId);
     } catch {
+      emitDiagnostics(
+        buildDiagnostics({
+          routeProjectId: projectId,
+          projectResponse: project,
+          branchUsed: "unavailable",
+          serverTaskCount: null,
+          serverKnowledgeCount: null,
+        }),
+      );
+
       return {
         status: "unavailable",
       };
@@ -98,11 +196,31 @@ export function createGetBrowserAiProjectContext(
         projectId,
       });
 
+      emitDiagnostics(
+        buildDiagnostics({
+          routeProjectId: projectId,
+          projectResponse: project,
+          branchUsed: "server-project",
+          serverTaskCount: tasks.length,
+          serverKnowledgeCount: knowledgeEntries.length,
+        }),
+      );
+
       return {
         status: "available",
         context: aiProjectContextFromSnapshot(snapshot),
       };
     } catch {
+      emitDiagnostics(
+        buildDiagnostics({
+          routeProjectId: projectId,
+          projectResponse: project,
+          branchUsed: "unavailable",
+          serverTaskCount: tasks.length,
+          serverKnowledgeCount: knowledgeEntries.length,
+        }),
+      );
+
       return {
         status: "unavailable",
       };

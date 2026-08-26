@@ -69,6 +69,40 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 091 - MS-028.71 Project API Filesystem Rebinding Fallback Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Added a server-side filesystem recovery path so `/api/projects/[id]` can recover the known Beauty Client PRO project from the SPS-owned workspace manifest when the database registry misses it.
+* Aligned the project API lookup with the existing task filesystem recovery pattern, keeping the canonical server project available for the known project instead of silently dropping into browser-local fallback.
+* Preserved the existing `docs/10_SESSION_STATE.md` trace rule and the `.usage/session.jsonl` Session 091 usage record.
+
+### Notes
+
+* This is a narrow server/API recovery change, not a broader Project Brain or AI Workspace refactor.
+* No browser-data deletion was performed.
+
+## Session 091 - MS-028.70 AI Workspace Project Identity Divergence Instrumentation Foundation
+
+### Date
+
+2026-08-25
+
+### Completed
+
+* Added the smallest controlled diagnostic surface in the AI Workspace browser Project Brain loader so tests can observe the route project id, the server project response, task and knowledge counts, the local knowledge count, and the branch used for the current profile.
+* Kept the diagnostic surface narrow and testable so the remaining normal-vs-incognito divergence can be compared without deleting browser data or guessing at the source boundary.
+* Preserved the existing `docs/10_SESSION_STATE.md` trace rule and the `.usage/session.jsonl` Session 091 usage record.
+
+### Notes
+
+* This is an instrumentation milestone, not a broad Project Brain refactor.
+* No browser-data deletion was performed.
+
 ## Session 091 - MS-028.69 AI Workspace Knowledge Server Fallback Alignment Foundation
 
 ### Date

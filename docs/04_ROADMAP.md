@@ -158,6 +158,8 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.71` - Project API Filesystem Rebinding Fallback Foundation
+* `MS-028.70` - AI Workspace Project Identity Divergence Instrumentation Foundation
 * `MS-028.69` - AI Workspace Knowledge Server Fallback Alignment Foundation
 * `MS-028.68` - AI Workspace Project Brain Browser Profile Divergence Diagnosis Foundation
 * `MS-028.67` - AI Workspace Browser State Consistency Diagnosis Foundation
@@ -193,7 +195,89 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.69 - AI Workspace Knowledge Server Fallback Alignment Foundation
+MS-028.71 - Project API Filesystem Rebinding Fallback Foundation
+
+## MS-028.71 - Project API Filesystem Rebinding Fallback Foundation
+
+**Milestone**
+MS-028.71 - Project API Filesystem Rebinding Fallback Foundation
+
+**Type**
+Server / Filesystem Rebinding Foundation
+
+This checkpoint lets `/api/projects/[id]` recover the known Beauty Client PRO project from the SPS-owned workspace manifest when the server registry misses it, so AI Workspace can resolve the canonical server project instead of falling back to browser-local project truth for the known project.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+READY FOR PUBLICATION
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Active**
+Project API filesystem rebinding fallback.
+
+**Allowed Implementation Scope**
+* recover a known project from the SPS-owned workspace manifest when the server registry misses it
+* align project API lookup with the existing task filesystem recovery pattern where safe
+* keep AI Workspace on the canonical server project path for the known Beauty Client PRO project
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* browser-data deletion
+* repo-wide cleanup
+* runtime UI redesign
+* broad Project Brain refactor
+* app version changes
+* commit / push actions
+
+**Dependencies**
+* closed `MS-028.70 - AI Workspace Project Identity Divergence Instrumentation Foundation`
+
+## MS-028.70 - AI Workspace Project Identity Divergence Instrumentation Foundation
+
+## MS-028.70 - AI Workspace Project Identity Divergence Instrumentation Foundation
+
+**Milestone**
+MS-028.70 - AI Workspace Project Identity Divergence Instrumentation Foundation
+
+**Type**
+Diagnostic / Instrumentation Milestone
+
+This checkpoint adds the smallest controlled diagnostic surface needed to compare the route project id, the server project response, task and knowledge counts, and the branch used by AI Workspace so the remaining normal-vs-incognito divergence can be observed without guessing or deleting browser data.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+READY FOR PUBLICATION
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Active**
+AI Workspace project identity divergence instrumentation.
+
+**Allowed Implementation Scope**
+* instrument the AI Workspace project context derivation path
+* report the route project id, project response, task count, knowledge count, and branch used
+* keep the diagnostic surface developer-only or test-driven
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* browser-data deletion
+* repo-wide cleanup
+* runtime UI redesign
+* broad Project Brain refactor
+* app version changes
+* commit / push actions
+
+**Dependencies**
+* closed `MS-028.69 - AI Workspace Knowledge Server Fallback Alignment Foundation`
 
 ## MS-028.69 - AI Workspace Knowledge Server Fallback Alignment Foundation
 

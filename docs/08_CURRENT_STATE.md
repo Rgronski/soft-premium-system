@@ -45,10 +45,14 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.69 - AI Workspace Knowledge Server Fallback Alignment Foundation
+MS-028.71 - Project API Filesystem Rebinding Fallback Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-028.71 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the Project API Filesystem Rebinding Fallback Foundation. The project API now recovers the known Beauty Client PRO project from the SPS-owned workspace manifest when the server registry misses it, so the canonical server project can be resolved instead of silently dropping into browser-local fallback for the known project.
+
+MS-028.70 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Project Identity Divergence Instrumentation Foundation. The AI Workspace browser-side project context derivation now exposes the route project id, the server project response, task and knowledge counts, and the branch used so normal and incognito browser profiles can be compared without guessing or deleting browser data.
 
 MS-028.69 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Knowledge Server Fallback Alignment Foundation. The browser-side Project Brain context now prefers server-backed knowledge entries over local browser fallback content whenever the project is available, while keeping localStorage only as a recovery fallback when server-backed knowledge is unavailable.
 
@@ -479,8 +483,12 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.69 - AI Workspace Knowledge Server Fallback Alignment Foundation
+Latest Completed Product Milestone: MS-028.71 - Project API Filesystem Rebinding Fallback Foundation
 Next Product Milestone: NONE / Product Owner decision required
+MS-028.71 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the Project API Filesystem Rebinding Fallback Foundation. The project API now recovers the known Beauty Client PRO project from the SPS-owned workspace manifest when the server registry misses it, so the canonical server project can be resolved instead of silently dropping into browser-local fallback for the known project.
+
+MS-028.70 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Project Identity Divergence Instrumentation Foundation. The AI Workspace browser-side project context derivation now exposes the route project id, the server project response, task and knowledge counts, and the branch used so normal and incognito browser profiles can be compared without guessing or deleting browser data.
+
 MS-028.69 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Knowledge Server Fallback Alignment Foundation. The browser-side Project Brain context now prefers server-backed knowledge entries over local browser fallback content whenever the project is available, while keeping localStorage only as a recovery fallback when server-backed knowledge is unavailable.
 
 MS-028.68 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Project Brain Browser Profile Divergence Diagnosis Foundation. The task read path stays fresh via no-store GETs, but knowledge and recovered memory can still diverge when the browser context falls back to local Project Brain state after a missing server project; no safe runtime fix was applied yet.
@@ -1658,9 +1666,11 @@ Next:
 
 # In Progress
 
-* `Current Product Milestone` is `NONE / Product Owner decision required`
- * `Latest Completed Product Milestone` is `MS-028.69 - AI Workspace Knowledge Server Fallback Alignment Foundation`
+ * `Current Product Milestone` is `NONE / Product Owner decision required`
+ * `Latest Completed Product Milestone` is `MS-028.70 - AI Workspace Project Identity Divergence Instrumentation Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
+ * `Session 091` completed the MS-028.70 AI Workspace Project Identity Divergence Instrumentation Foundation because the browser-side project context derivation now exposes the route project id, the server project response, task and knowledge counts, and the branch used for comparison.
+ * `Session 091` synchronized the `MS-028.70 - AI Workspace Project Identity Divergence Instrumentation Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.
  * `Session 091` completed the MS-028.69 AI Workspace Knowledge Server Fallback Alignment Foundation because browser-side Project Brain context now prefers server-backed knowledge entries over local browser fallback content whenever the project is available.
  * `Session 091` synchronized the `MS-028.69 - AI Workspace Knowledge Server Fallback Alignment Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.
  * `Session 091` completed the MS-028.68 AI Workspace Project Brain Browser Profile Divergence Diagnosis Foundation because the browser-side task reads stay fresh while knowledge and recovered memory can still fall back to profile-local Project Brain state when the server project is unavailable.

@@ -199,6 +199,56 @@ LIMIT 1`,
     });
   });
 
+  it("recovers a missing database project from the SPS work root manifest", async () => {
+    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
+
+    const queryMock = vi.fn().mockResolvedValue([]);
+
+    neonMock.mockReturnValue({
+      query: queryMock,
+    });
+
+    readdirMock.mockResolvedValueOnce([
+      { name: "beauty-client-pro", isDirectory: () => true },
+      { name: "core", isDirectory: () => true },
+    ]);
+    readFileMock.mockImplementation(async (path: string) => {
+      if (path === "C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json") {
+        return JSON.stringify({
+          id: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+          name: "Beauty Client PRO",
+          createdAt: "2026-08-23T20:29:16.690Z",
+        });
+      }
+
+      throw new Error("ENOENT");
+    });
+
+    const { getServerProjectById } = await loadServerModule();
+    const result = await getServerProjectById(
+      "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+    );
+
+    expect(neonMock).toHaveBeenCalledWith("postgresql://pooled-runtime-url");
+    expect(queryMock).toHaveBeenCalledWith(
+      `SELECT id, name, repository_url, created_at
+FROM public.projects
+WHERE id = $1
+LIMIT 1`,
+      ["0d3e28cb-6dff-442a-b94c-007a5d6b5779"],
+    );
+    expect(readdirMock).toHaveBeenCalledWith("C:\\SPS_OS_WORK", {
+      withFileTypes: true,
+    });
+    expect(result).toEqual({
+      id: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+      name: "Beauty Client PRO",
+      workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+      projectFilesystemStatus: "manifest-present",
+      createdAt: "2026-08-23T20:29:16.690Z",
+    });
+  });
+
   it("uses repository_url when the row includes it", async () => {
     process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
 

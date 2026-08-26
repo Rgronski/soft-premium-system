@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type { BrowserProjectContextDiagnostics } from "./browser";
 
 const getProjectFromServerMock = vi.fn();
 const getTasksFromServerMock = vi.fn();
@@ -164,6 +165,90 @@ describe("createGetBrowserAiProjectContext", () => {
     });
   });
 
+  it("reports server-backed diagnostics when canonical project and knowledge are available", async () => {
+    const { createGetBrowserAiProjectContext } =
+      await loadBrowserProjectBrainModule();
+    const diagnostics: BrowserProjectContextDiagnostics[] = [];
+    storage.setItem(
+      "soft-premium-system.projects.project-1.knowledge",
+      JSON.stringify([
+        {
+          id: "knowledge-local-1",
+          projectId: "project-1",
+          title: "Architecture note",
+          content: "Saved locally after a controlled fallback.",
+          createdAt: "2026-08-12T10:00:00.000Z",
+        },
+      ]),
+    );
+    const getBrowserAiProjectContext = createGetBrowserAiProjectContext(
+      {
+        getProjectById: vi.fn().mockResolvedValue({
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-24T10:00:00.000Z",
+        }),
+        getTasksByProjectId: vi.fn().mockResolvedValue([
+          {
+            id: "task-1",
+            projectId: "project-1",
+            title: "First task",
+            createdAt: "2026-07-24T10:05:00.000Z",
+          },
+        ]),
+        getKnowledgeEntriesByProjectId: vi.fn().mockResolvedValue([
+          {
+            id: "knowledge-1",
+            projectId: "project-1",
+            title: "Architecture note",
+            content: "Server-backed canonical context.",
+            createdAt: "2026-07-24T10:10:00.000Z",
+          },
+        ]),
+      },
+      {
+        reportDiagnostics: (diagnostic) => {
+          diagnostics.push(diagnostic);
+        },
+      },
+    );
+
+    await expect(getBrowserAiProjectContext("project-1")).resolves.toEqual({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [{ id: "task-1", title: "First task" }],
+        knowledgeEntries: [
+          {
+            id: "knowledge-local-1",
+            title: "Architecture note",
+            content: "Saved locally after a controlled fallback.",
+          },
+          {
+            id: "knowledge-1",
+            title: "Architecture note",
+            content: "Server-backed canonical context.",
+          },
+        ],
+      },
+    });
+    expect(diagnostics).toEqual([
+      {
+        routeProjectId: "project-1",
+        projectResponse: {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-24T10:00:00.000Z",
+        },
+        branchUsed: "server-project",
+        serverTaskCount: 1,
+        serverKnowledgeCount: 1,
+        localKnowledgeCount: 1,
+      },
+    ]);
+  });
+
   it("keeps canonical server knowledge ahead of the local browser fallback when ids overlap", async () => {
     const { createGetBrowserAiProjectContext } =
       await loadBrowserProjectBrainModule();
@@ -293,6 +378,139 @@ describe("createGetBrowserAiProjectContext", () => {
     });
     expect(getTasksByProjectId).not.toHaveBeenCalled();
     expect(getKnowledgeEntriesByProjectId).not.toHaveBeenCalled();
+  });
+
+  it("reports browser-local fallback diagnostics when the project record is missing", async () => {
+    const { createGetBrowserAiProjectContext } =
+      await loadBrowserProjectBrainModule();
+    const diagnostics: BrowserProjectContextDiagnostics[] = [];
+    storage.setItem(
+      "soft-premium-system.projects",
+      JSON.stringify([
+        {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-24T10:00:00.000Z",
+        },
+      ]),
+    );
+    storage.setItem(
+      "soft-premium-system.projects.project-1.tasks",
+      JSON.stringify([
+        {
+          id: "task-1",
+          projectId: "project-1",
+          title: "First task",
+          createdAt: "2026-07-24T10:05:00.000Z",
+        },
+      ]),
+    );
+    storage.setItem(
+      "soft-premium-system.projects.project-1.knowledge",
+      JSON.stringify([
+        {
+          id: "knowledge-1",
+          projectId: "project-1",
+          title: "Architecture note",
+          content: "Body",
+          createdAt: "2026-07-24T10:10:00.000Z",
+        },
+      ]),
+    );
+    const getBrowserAiProjectContext = createGetBrowserAiProjectContext(
+      {
+        getProjectById: vi.fn().mockResolvedValue(null),
+        getTasksByProjectId: vi.fn(),
+        getKnowledgeEntriesByProjectId: vi.fn(),
+      },
+      {
+        reportDiagnostics: (diagnostic) => {
+          diagnostics.push(diagnostic);
+        },
+      },
+    );
+
+    await expect(getBrowserAiProjectContext("project-1")).resolves.toEqual({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [{ id: "task-1", title: "First task" }],
+        knowledgeEntries: [
+          {
+            id: "knowledge-1",
+            title: "Architecture note",
+            content: "Body",
+          },
+        ],
+      },
+    });
+    expect(diagnostics).toEqual([
+      {
+        routeProjectId: "project-1",
+        projectResponse: null,
+        branchUsed: "browser-local-project-fallback",
+        serverTaskCount: null,
+        serverKnowledgeCount: null,
+        localKnowledgeCount: 1,
+      },
+    ]);
+  });
+
+  it("logs live diagnostics in development mode", async () => {
+    const debugSpy = vi.spyOn(console, "debug").mockImplementation(() => {});
+
+    vi.stubEnv("NODE_ENV", "development");
+
+    try {
+      const { createGetBrowserAiProjectContext } =
+        await loadBrowserProjectBrainModule();
+      const getBrowserAiProjectContext = createGetBrowserAiProjectContext({
+        getProjectById: vi.fn().mockResolvedValue({
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-24T10:00:00.000Z",
+        }),
+        getTasksByProjectId: vi.fn().mockResolvedValue([
+          {
+            id: "task-1",
+            projectId: "project-1",
+            title: "First task",
+            createdAt: "2026-07-24T10:05:00.000Z",
+          },
+        ]),
+        getKnowledgeEntriesByProjectId: vi.fn().mockResolvedValue([
+          {
+            id: "knowledge-1",
+            projectId: "project-1",
+            title: "Architecture note",
+            content: "Server-backed canonical context.",
+            createdAt: "2026-07-24T10:10:00.000Z",
+          },
+        ]),
+      });
+
+      await getBrowserAiProjectContext("project-1");
+
+      expect(debugSpy).toHaveBeenCalledWith(
+        "AI Workspace project context diagnostics",
+        expect.objectContaining({
+          routeProjectId: "project-1",
+          projectResponse: {
+            id: "project-1",
+            name: "Alpha",
+            createdAt: "2026-07-24T10:00:00.000Z",
+          },
+          branchUsed: "server-project",
+          serverTaskCount: 1,
+          serverKnowledgeCount: 1,
+          localKnowledgeCount: 0,
+        }),
+      );
+    } finally {
+      vi.unstubAllEnvs();
+      debugSpy.mockRestore();
+    }
   });
 
   it("returns unavailable when the project reader throws", async () => {

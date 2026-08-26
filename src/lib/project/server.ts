@@ -47,6 +47,7 @@ const DELETE_PROJECT_BY_ID = `DELETE FROM public.projects
 WHERE id = $1`;
 
 const localProjects = new Map<string, Project>();
+const PROJECT_WORK_ROOT = "C:\\SPS_OS_WORK";
 
 function getDatabaseUrl(): string {
   const databaseUrl = process.env.DATABASE_URL?.trim();
@@ -296,6 +297,22 @@ function deleteLocalProject(id: string): void {
   localProjects.delete(id);
 }
 
+async function recoverServerProjectFromWorkingRoot(
+  projectId: string,
+): Promise<Project | null> {
+  const discoveredProjects = await discoverServerProjectsFromWorkingRoot(
+    PROJECT_WORK_ROOT,
+  );
+
+  for (const project of discoveredProjects) {
+    if (project.id === projectId) {
+      return project;
+    }
+  }
+
+  return null;
+}
+
 export async function getServerProjectById(
   id: string,
 ): Promise<Project | null> {
@@ -319,16 +336,26 @@ export async function getServerProjectById(
     const row = rows[0];
 
     if (!row) {
-      return null;
+      const recoveredProject = await recoverServerProjectFromWorkingRoot(
+        normalizedId,
+      );
+
+      return recoveredProject ? storeLocalProject(recoveredProject) : null;
     }
 
     return attachProjectFilesystemStatus(storeLocalProject(mapProjectRow(row)));
   } catch {
     const fallbackProject = getLocalProjectById(normalizedId);
 
-    return fallbackProject
-      ? attachProjectFilesystemStatus(fallbackProject)
-      : null;
+    if (fallbackProject) {
+      return attachProjectFilesystemStatus(fallbackProject);
+    }
+
+    const recoveredProject = await recoverServerProjectFromWorkingRoot(
+      normalizedId,
+    );
+
+    return recoveredProject ? storeLocalProject(recoveredProject) : null;
   }
 }
 
