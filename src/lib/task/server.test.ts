@@ -13,9 +13,11 @@ vi.mock("server-only", () => ({}));
 
 const projectId = "0d3e28cb-6dff-442a-b94c-007a5d6b5779";
 const projectWorkingDirectory = "C:\\SPS_OS_WORK\\beauty-client-pro";
-const metadataRootSegment = "beauty-client-pro--0d3e28cb";
-const taskStoreDirectory = `C:\\SPS_OS_WORK\\.sps-meta\\${metadataRootSegment}\\tasks`;
-const taskStorePath = `${taskStoreDirectory}\\open.jsonl`;
+const canonicalTaskStoreDirectory =
+  "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\tasks";
+const canonicalTaskStorePath = `${canonicalTaskStoreDirectory}\\open.jsonl`;
+const legacyTaskStoreDirectory = `C:\\SPS_OS_WORK\\.sps-meta\\${projectId}\\tasks`;
+const legacyTaskStorePath = `${legacyTaskStoreDirectory}\\open.jsonl`;
 
 const mkdirMock = vi.fn();
 const readFileMock = vi.fn();
@@ -105,7 +107,7 @@ describe("getServerTasksByProjectId", () => {
     ];
 
     fileStore.set(
-      taskStorePath,
+      canonicalTaskStorePath,
       `${tasks.map((task) => JSON.stringify(task)).join("\n")}\n`,
     );
 
@@ -113,8 +115,33 @@ describe("getServerTasksByProjectId", () => {
     const result = await getServerTasksByProjectId(projectId);
 
     expect(getServerProjectByIdMock).toHaveBeenCalledWith(projectId);
-    expect(readFileMock).toHaveBeenCalledWith(taskStorePath, "utf8");
+    expect(readFileMock).toHaveBeenCalledWith(canonicalTaskStorePath, "utf8");
     expect(result).toEqual(tasks);
+  });
+
+  test("recovers projectId-only legacy task data when the canonical store is empty", async () => {
+    const legacyTasks: Task[] = [
+      {
+        id: "task-legacy-1",
+        projectId,
+        title: "Legacy task",
+        createdAt: "2026-08-23T10:00:00.000Z",
+      },
+    ];
+
+    fileStore.set(canonicalTaskStorePath, "");
+    fileStore.set(
+      legacyTaskStorePath,
+      `${legacyTasks.map((task) => JSON.stringify(task)).join("\n")}\n`,
+    );
+
+    const { getServerTasksByProjectId } = await loadServerModule();
+    const result = await getServerTasksByProjectId(projectId);
+
+    expect(getServerProjectByIdMock).toHaveBeenCalledWith(projectId);
+    expect(readFileMock).toHaveBeenCalledWith(canonicalTaskStorePath, "utf8");
+    expect(readFileMock).toHaveBeenCalledWith(legacyTaskStorePath, "utf8");
+    expect(result).toEqual(legacyTasks);
   });
 });
 
@@ -129,11 +156,11 @@ describe("createServerTask", () => {
     });
 
     expect(getServerProjectByIdMock).toHaveBeenCalledWith(projectId);
-    expect(mkdirMock).toHaveBeenCalledWith(taskStoreDirectory, {
+    expect(mkdirMock).toHaveBeenCalledWith(canonicalTaskStoreDirectory, {
       recursive: true,
     });
     expect(writeFileMock).toHaveBeenCalledWith(
-      taskStorePath,
+      canonicalTaskStorePath,
       `${JSON.stringify(createdTask)}\n`,
       "utf8",
     );

@@ -1,8 +1,8 @@
 import "server-only";
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { basename, join } from "node:path";
-
+import { basename } from "node:path";
+import { join } from "node:path";
 import { getServerProjectById } from "../project/server";
 import type { Task } from "./types";
 
@@ -63,6 +63,10 @@ function slugifyMetadataRootSegment(value: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+}
+
+function getShortProjectId(projectId: string): string {
+  return projectId.replace(/[^a-z0-9]/gi, "").slice(0, 8).toLowerCase();
 }
 
 function isTask(value: unknown): value is Task {
@@ -129,45 +133,58 @@ function serializeTaskJsonl(tasks: Task[]): string {
   return `${tasks.map((task) => JSON.stringify(task)).join("\n")}\n`;
 }
 
-function getShortProjectId(projectId: string): string {
-  return projectId.replace(/[^a-z0-9]/gi, "").slice(0, 8).toLowerCase();
+function buildCanonicalTaskStoreRoot(project: {
+  id: string;
+  name: string;
+  workingDirectory?: string;
+}): string {
+  const workingDirectorySlug = basename(project.workingDirectory ?? "").trim();
+  const readableRootSegment = slugifyMetadataRootSegment(
+    workingDirectorySlug || project.name,
+  );
+  const shortProjectId = getShortProjectId(project.id);
+
+  if (!shortProjectId) {
+    return join(TASK_STORE_ROOT, readableRootSegment || project.id);
+  }
+
+  return join(TASK_STORE_ROOT, `${readableRootSegment || "project"}--${shortProjectId}`);
 }
 
-async function resolveTaskStoreRoot(projectId: string): Promise<string> {
+async function resolveTaskStoreRoots(projectId: string): Promise<string[]> {
   const cachedRoot = resolvedTaskStoreRootsByProjectId.get(projectId);
 
   if (cachedRoot) {
-    return cachedRoot;
+    const legacyRoot = join(TASK_STORE_ROOT, projectId);
+
+    return cachedRoot === legacyRoot
+      ? [legacyRoot]
+      : [cachedRoot, legacyRoot];
   }
 
   const serverProject = await getServerProjectById(projectId);
 
   if (!serverProject) {
-    const fallbackRoot = join(TASK_STORE_ROOT, projectId);
-    resolvedTaskStoreRootsByProjectId.set(projectId, fallbackRoot);
+    const legacyRoot = join(TASK_STORE_ROOT, projectId);
+    resolvedTaskStoreRootsByProjectId.set(projectId, legacyRoot);
 
-    return fallbackRoot;
+    return [legacyRoot];
   }
 
-  const workingDirectorySlug = basename(
-    serverProject.workingDirectory ?? "",
-  ).trim();
-  const readableRootSegment = slugifyMetadataRootSegment(
-    workingDirectorySlug || serverProject.name,
-  );
-  const shortProjectId = getShortProjectId(serverProject.id);
-  const rootSegment = shortProjectId
-    ? `${readableRootSegment || "project"}--${shortProjectId}`
-    : readableRootSegment || projectId;
-  const resolvedRoot = join(TASK_STORE_ROOT, rootSegment);
+  const canonicalRoot = buildCanonicalTaskStoreRoot(serverProject);
+  const legacyRoot = join(TASK_STORE_ROOT, projectId);
+  const roots =
+    canonicalRoot === legacyRoot ? [canonicalRoot] : [canonicalRoot, legacyRoot];
 
-  resolvedTaskStoreRootsByProjectId.set(projectId, resolvedRoot);
+  resolvedTaskStoreRootsByProjectId.set(projectId, canonicalRoot);
 
-  return resolvedRoot;
+  return roots;
 }
 
 async function getTaskStoreDirectory(projectId: string): Promise<string> {
-  return join(await resolveTaskStoreRoot(projectId), "tasks");
+  const [taskStoreRoot] = await resolveTaskStoreRoots(projectId);
+
+  return join(taskStoreRoot, "tasks");
 }
 
 async function getTaskStorePath(projectId: string): Promise<string> {
@@ -175,35 +192,48 @@ async function getTaskStorePath(projectId: string): Promise<string> {
 }
 
 async function readFilesystemTasks(projectId: string): Promise<Task[]> {
-  const taskStorePath = await getTaskStorePath(projectId);
+  const taskStorePaths = (await resolveTaskStoreRoots(projectId)).map((root) =>
+    join(root, "tasks", TASK_STORE_FILE_NAME),
+  );
+  const lastTaskStorePath = taskStorePaths[taskStorePaths.length - 1];
 
-  try {
-    const content = await readFile(taskStorePath, "utf8");
-    const parsedTasks = parseTaskJsonl(content);
+  for (const taskStorePath of taskStorePaths) {
+    try {
+      const content = await readFile(taskStorePath, "utf8");
+      const parsedTasks = parseTaskJsonl(content);
 
-    localTasksByProjectId.set(projectId, parsedTasks);
+      if (parsedTasks.length === 0 && taskStorePath !== lastTaskStorePath) {
+        continue;
+      }
 
-    return parsedTasks;
-  } catch (error) {
-    const cachedTasks = localTasksByProjectId.get(projectId);
+      localTasksByProjectId.set(projectId, parsedTasks);
 
-    if (cachedTasks) {
-      return cachedTasks;
+      return parsedTasks;
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        "code" in error &&
+        (error as { code?: string }).code === "ENOENT"
+      ) {
+        continue;
+      }
+
+      const cachedTasks = localTasksByProjectId.get(projectId);
+
+      if (cachedTasks) {
+        return cachedTasks;
+      }
+
+      throw createTaskRepositoryError(
+        "source-read-failed",
+        "Task repository could not read the task store.",
+      );
     }
-
-    if (
-      error instanceof Error &&
-      "code" in error &&
-      (error as { code?: string }).code === "ENOENT"
-    ) {
-      return [];
-    }
-
-    throw createTaskRepositoryError(
-      "source-read-failed",
-      "Task repository could not read the task store.",
-    );
   }
+
+  const cachedTasks = localTasksByProjectId.get(projectId);
+
+  return cachedTasks ?? [];
 }
 
 async function writeFilesystemTasks(

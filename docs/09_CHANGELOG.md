@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 091 - MS-028.72 AI Workspace Task Fallback Alignment After Project Rebinding Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Aligned the AI Workspace task list with the canonical `<working-directory-slug>--<shortProjectId>` store first, while preserving `projectId`-only fallback as a legacy recovery path if the canonical root is unavailable.
+* Preserved the existing browser-side task load flow and the current `docs/10_SESSION_STATE.md` trace rule.
+* Preserved the existing `.usage/session.jsonl` Session 091 usage record.
+
+### Notes
+
+* This is a narrow task-store alignment change, not a broader Project Brain or AI Workspace redesign.
+* No browser-data deletion was performed.
+
 ## Session 091 - MS-028.71 Project API Filesystem Rebinding Fallback Foundation
 
 ### Date

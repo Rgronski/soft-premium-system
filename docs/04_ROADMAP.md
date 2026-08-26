@@ -158,6 +158,7 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.40` - Delete/Re-import Live Project Trial Decision Foundation
 * `MS-028.41` - Delete/Re-import Live Trial Execution Foundation
 * `MS-028.42` - Delete/Re-import Live Trial Product Owner Execution Decision
+* `MS-028.72` - AI Workspace Task Fallback Alignment After Project Rebinding Foundation
 * `MS-028.71` - Project API Filesystem Rebinding Fallback Foundation
 * `MS-028.70` - AI Workspace Project Identity Divergence Instrumentation Foundation
 * `MS-028.69` - AI Workspace Knowledge Server Fallback Alignment Foundation
@@ -195,7 +196,47 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.71 - Project API Filesystem Rebinding Fallback Foundation
+MS-028.72 - AI Workspace Task Fallback Alignment After Project Rebinding Foundation
+
+## MS-028.72 - AI Workspace Task Fallback Alignment After Project Rebinding Foundation
+
+**Milestone**
+MS-028.72 - AI Workspace Task Fallback Alignment After Project Rebinding Foundation
+
+**Type**
+Task / Project Brain Alignment Foundation
+
+This checkpoint keeps the AI Workspace task list aligned after project rebinding by reading the canonical `<working-directory-slug>--<shortProjectId>` task store first and using the `projectId`-only task store only as a legacy recovery path if the canonical root is unavailable.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+READY FOR PUBLICATION
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Active**
+AI Workspace task fallback alignment.
+
+**Allowed Implementation Scope**
+* keep the AI Workspace task list readable after project rebinding
+* align task store resolution with the existing canonical metadata root path and a narrow legacy recovery path
+* preserve the existing browser-side task load flow
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* browser-data deletion
+* repo-wide cleanup
+* runtime UI redesign
+* broad Project Brain refactor
+* app version changes
+* commit / push actions
+
+**Dependencies**
+* closed `MS-028.71 - Project API Filesystem Rebinding Fallback Foundation`
 
 ## MS-028.71 - Project API Filesystem Rebinding Fallback Foundation
 
