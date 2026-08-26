@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 091 - MS-028.73a AI Workspace Knowledge Profile Parity Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Aligned the AI Workspace default knowledge list so canonical server-backed Project Brain knowledge is shown only when it is available.
+* Preserved browser-local knowledge as recovery fallback only when the server knowledge read fails, without deleting or migrating browser data.
+* Preserved the existing `docs/10_SESSION_STATE.md` trace rule and the existing Session 091 usage record.
+
+### Notes
+
+* This is a narrow knowledge-precedence change, not a broader Project Brain or AI Workspace redesign.
+* No browser-data deletion was performed.
+
 ## Session 091 - MS-028.72 AI Workspace Task Fallback Alignment After Project Rebinding Foundation
 
 ### Date

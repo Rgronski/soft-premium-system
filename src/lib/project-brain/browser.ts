@@ -27,6 +27,7 @@ export type BrowserAiProjectContextResult =
 
 export type BrowserProjectContextBranch =
   | "server-project"
+  | "server-project-local-knowledge-fallback"
   | "browser-local-project-fallback"
   | "project-not-found"
   | "unavailable";
@@ -94,21 +95,36 @@ export function createGetBrowserAiProjectContext(
     };
   }
 
-  function mergeKnowledgeEntries(
+  function buildAvailableContext(input: {
+    project: Project;
+    tasks: Task[];
+    knowledgeEntries: KnowledgeEntry[];
+    projectId: string;
+  }): BrowserAiProjectContextResult {
+    const snapshot = composeProjectBrainSnapshot({
+      project: input.project,
+      tasks: input.tasks,
+      knowledgeEntries: input.knowledgeEntries,
+      projectId: input.projectId,
+    });
+
+    return {
+      status: "available",
+      context: aiProjectContextFromSnapshot(snapshot),
+    };
+  }
+
+  function buildServerKnowledgeFallbackContext(
     projectId: string,
-    canonicalKnowledgeEntries: KnowledgeEntry[],
-  ): KnowledgeEntry[] {
-    const mergedKnowledgeEntries = new Map<string, KnowledgeEntry>();
-
-    for (const localKnowledgeEntry of getKnowledge(projectId)) {
-      mergedKnowledgeEntries.set(localKnowledgeEntry.id, localKnowledgeEntry);
-    }
-
-    for (const knowledgeEntry of canonicalKnowledgeEntries) {
-      mergedKnowledgeEntries.set(knowledgeEntry.id, knowledgeEntry);
-    }
-
-    return [...mergedKnowledgeEntries.values()];
+    project: Project,
+    tasks: Task[],
+  ): BrowserAiProjectContextResult {
+    return buildAvailableContext({
+      project,
+      tasks,
+      knowledgeEntries: getKnowledge(projectId),
+      projectId,
+    });
   }
 
   return async function getBrowserAiProjectContext(
@@ -171,7 +187,6 @@ export function createGetBrowserAiProjectContext(
 
     try {
       tasks = await reader.getTasksByProjectId(projectId);
-      knowledgeEntries = await reader.getKnowledgeEntriesByProjectId(projectId);
     } catch {
       emitDiagnostics(
         buildDiagnostics({
@@ -189,12 +204,7 @@ export function createGetBrowserAiProjectContext(
     }
 
     try {
-      const snapshot = composeProjectBrainSnapshot({
-        project,
-        tasks,
-        knowledgeEntries: mergeKnowledgeEntries(projectId, knowledgeEntries),
-        projectId,
-      });
+      knowledgeEntries = await reader.getKnowledgeEntriesByProjectId(projectId);
 
       emitDiagnostics(
         buildDiagnostics({
@@ -206,24 +216,46 @@ export function createGetBrowserAiProjectContext(
         }),
       );
 
-      return {
-        status: "available",
-        context: aiProjectContextFromSnapshot(snapshot),
-      };
+      return buildAvailableContext({
+        project,
+        tasks,
+        knowledgeEntries,
+        projectId,
+      });
     } catch {
-      emitDiagnostics(
-        buildDiagnostics({
-          routeProjectId: projectId,
-          projectResponse: project,
-          branchUsed: "unavailable",
-          serverTaskCount: tasks.length,
-          serverKnowledgeCount: knowledgeEntries.length,
-        }),
-      );
+      try {
+        const fallbackContext = buildServerKnowledgeFallbackContext(
+          projectId,
+          project,
+          tasks,
+        );
 
-      return {
-        status: "unavailable",
-      };
+        emitDiagnostics(
+          buildDiagnostics({
+            routeProjectId: projectId,
+            projectResponse: project,
+            branchUsed: "server-project-local-knowledge-fallback",
+            serverTaskCount: tasks.length,
+            serverKnowledgeCount: null,
+          }),
+        );
+
+        return fallbackContext;
+      } catch {
+        emitDiagnostics(
+          buildDiagnostics({
+            routeProjectId: projectId,
+            projectResponse: project,
+            branchUsed: "unavailable",
+            serverTaskCount: tasks.length,
+            serverKnowledgeCount: null,
+          }),
+        );
+
+        return {
+          status: "unavailable",
+        };
+      }
     }
   };
 }

@@ -123,7 +123,7 @@ describe("createGetBrowserAiProjectContext", () => {
     });
   });
 
-  it("merges locally saved knowledge entries into the browser AI context when the server knowledge list is empty", async () => {
+  it("does not append locally saved knowledge entries when the server knowledge list is available", async () => {
     const { createGetBrowserAiProjectContext } =
       await loadBrowserProjectBrainModule();
     storage.setItem(
@@ -145,7 +145,15 @@ describe("createGetBrowserAiProjectContext", () => {
         createdAt: "2026-07-24T10:00:00.000Z",
       }),
       getTasksByProjectId: vi.fn().mockResolvedValue([]),
-      getKnowledgeEntriesByProjectId: vi.fn().mockResolvedValue([]),
+      getKnowledgeEntriesByProjectId: vi.fn().mockResolvedValue([
+        {
+          id: "knowledge-1",
+          projectId: "project-1",
+          title: "Architecture note",
+          content: "Server-backed canonical context.",
+          createdAt: "2026-07-24T10:10:00.000Z",
+        },
+      ]),
     });
 
     await expect(getBrowserAiProjectContext("project-1")).resolves.toEqual({
@@ -156,9 +164,9 @@ describe("createGetBrowserAiProjectContext", () => {
         tasks: [],
         knowledgeEntries: [
           {
-            id: "knowledge-local-1",
+            id: "knowledge-1",
             title: "Architecture note",
-            content: "Saved locally after a controlled fallback.",
+            content: "Server-backed canonical context.",
           },
         ],
       },
@@ -220,11 +228,6 @@ describe("createGetBrowserAiProjectContext", () => {
         projectName: "Alpha",
         tasks: [{ id: "task-1", title: "First task" }],
         knowledgeEntries: [
-          {
-            id: "knowledge-local-1",
-            title: "Architecture note",
-            content: "Saved locally after a controlled fallback.",
-          },
           {
             id: "knowledge-1",
             title: "Architecture note",
@@ -297,6 +300,72 @@ describe("createGetBrowserAiProjectContext", () => {
         ],
       },
     });
+  });
+
+  it("falls back to local knowledge when the server knowledge reader throws", async () => {
+    const { createGetBrowserAiProjectContext } =
+      await loadBrowserProjectBrainModule();
+    const diagnostics: BrowserProjectContextDiagnostics[] = [];
+    storage.setItem(
+      "soft-premium-system.projects.project-1.knowledge",
+      JSON.stringify([
+        {
+          id: "knowledge-local-1",
+          projectId: "project-1",
+          title: "Architecture note",
+          content: "Saved locally after a controlled fallback.",
+          createdAt: "2026-08-12T10:00:00.000Z",
+        },
+      ]),
+    );
+    const getBrowserAiProjectContext = createGetBrowserAiProjectContext(
+      {
+        getProjectById: vi.fn().mockResolvedValue({
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-24T10:00:00.000Z",
+        }),
+        getTasksByProjectId: vi.fn().mockResolvedValue([]),
+        getKnowledgeEntriesByProjectId: vi.fn().mockRejectedValue(
+          new Error("network"),
+        ),
+      },
+      {
+        reportDiagnostics: (diagnostic) => {
+          diagnostics.push(diagnostic);
+        },
+      },
+    );
+
+    await expect(getBrowserAiProjectContext("project-1")).resolves.toEqual({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [
+          {
+            id: "knowledge-local-1",
+            title: "Architecture note",
+            content: "Saved locally after a controlled fallback.",
+          },
+        ],
+      },
+    });
+    expect(diagnostics).toEqual([
+      {
+        routeProjectId: "project-1",
+        projectResponse: {
+          id: "project-1",
+          name: "Alpha",
+          createdAt: "2026-07-24T10:00:00.000Z",
+        },
+        branchUsed: "server-project-local-knowledge-fallback",
+        serverTaskCount: 0,
+        serverKnowledgeCount: null,
+        localKnowledgeCount: 1,
+      },
+    ]);
   });
 
   it("returns project-not-found and skips tasks and knowledge readers", async () => {
@@ -547,7 +616,7 @@ describe("createGetBrowserAiProjectContext", () => {
     expect(getKnowledgeEntriesByProjectId).not.toHaveBeenCalled();
   });
 
-  it("returns unavailable when the knowledge reader throws", async () => {
+  it("returns available with an empty local fallback when the server knowledge reader throws", async () => {
     const { createGetBrowserAiProjectContext } =
       await loadBrowserProjectBrainModule();
     const getBrowserAiProjectContext = createGetBrowserAiProjectContext({
@@ -563,7 +632,13 @@ describe("createGetBrowserAiProjectContext", () => {
     });
 
     await expect(getBrowserAiProjectContext("project-1")).resolves.toEqual({
-      status: "unavailable",
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
     });
   });
 

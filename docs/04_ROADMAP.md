@@ -196,7 +196,47 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
-MS-028.72 - AI Workspace Task Fallback Alignment After Project Rebinding Foundation
+MS-028.73a - AI Workspace Knowledge Profile Parity Foundation
+
+## MS-028.73a - AI Workspace Knowledge Profile Parity Foundation
+
+**Milestone**
+MS-028.73a - AI Workspace Knowledge Profile Parity Foundation
+
+**Type**
+Knowledge / Project Brain Parity Foundation
+
+This checkpoint keeps the AI Workspace default knowledge list aligned with canonical server-backed Project Brain truth by showing canonical knowledge only when it is available and using browser-local knowledge only as a recovery fallback when the server knowledge read fails.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+READY FOR PUBLICATION
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Active**
+AI Workspace knowledge profile parity.
+
+**Allowed Implementation Scope**
+* keep the default AI Workspace knowledge list canonical when server-backed knowledge is available
+* preserve browser-local knowledge as recovery fallback only when canonical knowledge cannot be read
+* keep task fallback alignment and project API rebinding intact
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* browser-data deletion
+* browser data migration
+* runtime UI redesign
+* broad Project Brain refactor
+* app version changes
+* commit / push actions
+
+**Dependencies**
+* closed `MS-028.72 - AI Workspace Task Fallback Alignment After Project Rebinding Foundation`
 
 ## MS-028.72 - AI Workspace Task Fallback Alignment After Project Rebinding Foundation
 

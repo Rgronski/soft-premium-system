@@ -45,12 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.72 - AI Workspace Task Fallback Alignment After Project Rebinding Foundation
+MS-028.73a - AI Workspace Knowledge Profile Parity Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-028.72 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Task Fallback Alignment After Project Rebinding Foundation. The task list now resolves from the canonical `<working-directory-slug>--<shortProjectId>` store first, and only falls back to the legacy `projectId`-only store if the canonical root is unavailable, so the known Beauty Client PRO tasks remain visible after canonical server project recovery.
+MS-028.73a is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Knowledge Profile Parity Foundation. The default knowledge list now shows canonical server-backed Project Brain knowledge only when it is available, while browser-local knowledge remains only a recovery fallback when the server knowledge read fails.
 
 MS-028.71 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the Project API Filesystem Rebinding Fallback Foundation. The project API now recovers the known Beauty Client PRO project from the SPS-owned workspace manifest when the server registry misses it, so the canonical server project can be resolved instead of silently dropping into browser-local fallback for the known project.
 
@@ -485,7 +485,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-028.72 - AI Workspace Task Fallback Alignment After Project Rebinding Foundation
+Latest Completed Product Milestone: MS-028.73a - AI Workspace Knowledge Profile Parity Foundation
 Next Product Milestone: NONE / Product Owner decision required
 MS-028.71 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the Project API Filesystem Rebinding Fallback Foundation. The project API now recovers the known Beauty Client PRO project from the SPS-owned workspace manifest when the server registry misses it, so the canonical server project can be resolved instead of silently dropping into browser-local fallback for the known project.
 
@@ -1669,8 +1669,10 @@ Next:
 # In Progress
 
  * `Current Product Milestone` is `NONE / Product Owner decision required`
- * `Latest Completed Product Milestone` is `MS-028.72 - AI Workspace Task Fallback Alignment After Project Rebinding Foundation`
+ * `Latest Completed Product Milestone` is `MS-028.73a - AI Workspace Knowledge Profile Parity Foundation`
 * `Next Product Milestone` is `NONE / Product Owner decision required`
+ * `Session 091` completed the MS-028.73a AI Workspace Knowledge Profile Parity Foundation because the default knowledge list now shows canonical server-backed Project Brain knowledge only when it is available and keeps browser-local knowledge as recovery fallback only when the server knowledge read fails.
+ * `Session 091` synchronized the `MS-028.73a - AI Workspace Knowledge Profile Parity Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.
  * `Session 091` completed the MS-028.72 AI Workspace Task Fallback Alignment After Project Rebinding Foundation because the task list now resolves from the canonical `<working-directory-slug>--<shortProjectId>` store first and only falls back to the legacy `projectId`-only store if the canonical root is unavailable.
  * `Session 091` synchronized the `MS-028.72 - AI Workspace Task Fallback Alignment After Project Rebinding Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.
  * `Session 091` completed the MS-028.70 AI Workspace Project Identity Divergence Instrumentation Foundation because the browser-side project context derivation now exposes the route project id, the server project response, task and knowledge counts, and the branch used for comparison.
