@@ -196,6 +196,49 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-030.3 - Project Map Read Model Contract Foundation
+
+**Milestone**
+MS-030.3 - Project Map Read Model Contract Foundation
+
+**Type**
+SPS OS / Project Map Read Model Contract Foundation
+
+This checkpoint records the Project Map read model contract for SPS OS. The read model is the project-facing projection that the Project Brain, AI Workspace, and Conductor can consume from the SPS-owned metadata root. It treats the storage-authority contract from MS-030.2 as the source boundary, reads Project Map evidence without redefining storage ownership, and keeps project-owned roadmap/map/docs as preserved source evidence when present. The contract defines read-side shape and usage only; it does not add storage, editing, export, or UI implementation, and Beauty Client PRO remains a future candidate without inspection or modification.
+
+The normalized project-map view includes project identity, map source, source authority, generated/reconstructed status, and last updated / evidence timestamp when available. It includes product-area blocks, child milestones, status values `check`, `active`, `planned`, `parked`, and `blocked`, parked ideas, improvements / enhancements, risks / gaps, related ADR / decisions, evidence sources, and the next candidate. The read model is a read-only consumer boundary: Project Brain owns the operational map context, while AI Workspace, Conductor, and future MAPA projektu UI consume but do not own the read model. It supports SPS OS itself and imported/existing client applications. If reconstructed data is incomplete, the contract uses `UNKNOWN` instead of guessing. No TypeScript types or source code are implemented in this milestone.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project Map read model contract only.
+
+**Allowed Implementation Scope**
+* record the read model contract in SSOT
+* preserve MS-030.2 as the storage-authority baseline
+* keep project-owned roadmap/map/docs as source evidence when present
+* append the required usage record
+
+**Forbidden Scope**
+* implement read model code
+* change storage authority or write-back behavior
+* modify runtime product behavior
+* inspect or modify Beauty Client PRO
+* modify client repositories or working directories
+* change color or theme direction
+* change app version
+* commit / push actions
+
+**Dependencies**
+* closed `MS-030.2 - Project Map Storage Authority Contract Foundation`
+
 ## MS-030.2 - Project Map Storage Authority Contract Foundation
 
 **Milestone**

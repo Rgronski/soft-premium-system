@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-030.2 - Project Map Storage Authority Contract Foundation
+MS-030.3 - Project Map Read Model Contract Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-030.3 is PUBLISHED / CLOSED in the current local workspace as the Project Map Read Model Contract Foundation. The Product Owner wants the Project Map read model to expose the project-facing projection consumed by the Project Brain, AI Workspace, and Conductor while treating MS-030.2 as the storage-authority source boundary. Project-owned roadmap/map/docs remain preserved source evidence when present, and the contract keeps storage, editing, export, and UI implementation out of scope. Beauty Client PRO remains a future candidate for this flow without inspection or modification.
 
 MS-030.2 is PUBLISHED / CLOSED in the current local workspace as the Project Map Storage Authority Contract Foundation. The default operational Project Map lives in the SPS-owned metadata root at `C:\SPS_OS_WORK\.sps-meta\<project-key>\project-map\`. Project-owned roadmap/map/docs inside the project repository or working directory are input evidence, are not automatically modified by SPS OS, and may be read and preserved as source evidence when present. If a project lacks its own roadmap/map, SPS OS may later reconstruct a proposed Project Map into the SPS-owned metadata root. The Project Brain uses the SPS-owned Project Map as operational context, and AI Workspace, Conductor, and future MAPA projektu UI consume that context. Exporting or writing a map back into a client/project repository remains a separate future Product Owner-approved milestone. Beauty Client PRO remains a future candidate for this flow without inspection or modification.
 

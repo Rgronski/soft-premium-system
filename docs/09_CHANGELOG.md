@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.3 Project Map Read Model Contract Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Recorded the Project Map read model contract for the project-facing projection consumed by the Project Brain, AI Workspace, and Conductor.
+* Recorded that MS-030.2 remains the storage-authority baseline and that Project Map read access preserves project-owned roadmap/map/docs as source evidence when present.
+* Recorded that the read model contract defines read-side shape and usage only, with storage, editing, export, and UI implementation out of scope.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.3 - Project Map Read Model Contract Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is docs-only and does not implement read model code.
+* MS-030.2 remains the preceding storage authority baseline.
+* MS-030.1, MS-030.0, MS-029.0, MS-029.1, and MS-028.74 remain preserved as the earlier baselines.
+
 ## Session 092 - MS-030.2 Project Map Storage Authority Contract Foundation
 
 ### Date
