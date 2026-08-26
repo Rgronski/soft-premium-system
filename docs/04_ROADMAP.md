@@ -196,6 +196,47 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-030.6 - Project Map Storage Skeleton Foundation
+
+**Milestone**
+MS-030.6 - Project Map Storage Skeleton Foundation
+
+**Type**
+SPS OS / Project Map Storage Skeleton Foundation
+
+This checkpoint records the future Project Map storage skeleton for SPS OS. The operational Project Map will live in `C:\SPS_OS_WORK\.sps-meta\<project-key>\project-map\`, with a minimal file layout of `map.json`, `sources.jsonl`, `parked-ideas.jsonl`, and `events.jsonl`. `map.json` holds the normalized MS-030.3 read model, `sources.jsonl` records source evidence from project-owned roadmap/docs/repo files, `parked-ideas.jsonl` keeps ideas and improvements attached to the relevant product-area block or milestone, and `events.jsonl` records lifecycle and audit events such as created, loaded, reconstructed, reviewed, updated, and blocked. The skeleton applies to SPS OS itself and imported/existing client applications, does not require modifying client/project repositories, keeps export / write-back to project repositories as a separate future Product Owner-approved milestone, and leaves Beauty Client PRO as a future candidate without inspection or modification. No runtime files are created in this milestone, and no TypeScript types or source code are implemented here.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project Map storage skeleton only.
+
+**Allowed Implementation Scope**
+* record the storage skeleton contract in SSOT
+* preserve MS-030.5 as the missing-state baseline
+* keep project-owned docs as input evidence only
+* append the required usage record
+
+**Forbidden Scope**
+* implement storage skeleton files or runtime file creation
+* change storage authority, loader, or missing-state behavior
+* modify runtime product behavior
+* inspect or modify Beauty Client PRO
+* modify client repositories or working directories
+* change color or theme direction
+* change app version
+* commit / push actions
+
+**Dependencies**
+* closed `MS-030.5 - Project Map Missing State Contract Foundation`
+
 ## MS-030.5 - Project Map Missing State Contract Foundation
 
 **Milestone**

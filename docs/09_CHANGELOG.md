@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.6 Project Map Storage Skeleton Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Recorded the future Project Map storage skeleton for SPS OS with `map.json`, `sources.jsonl`, `parked-ideas.jsonl`, and `events.jsonl` under `C:\SPS_OS_WORK\.sps-meta\<project-key>\project-map\`.
+* Recorded that `map.json` holds the normalized MS-030.3 read model, `sources.jsonl` records source evidence, `parked-ideas.jsonl` keeps ideas attached to the relevant product-area block or milestone, and `events.jsonl` records lifecycle and audit events.
+* Recorded that the skeleton applies to SPS OS and imported/existing client applications, does not require client repository modification, and keeps export / write-back as a separate future milestone.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.6 - Project Map Storage Skeleton Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is docs-only and does not create runtime files.
+* MS-030.5 remains the preceding missing-state baseline.
+* MS-030.4, MS-030.3, MS-030.2, MS-030.1, MS-030.0, MS-029.0, MS-029.1, and MS-028.74 remain preserved as earlier baselines.
+
 ## Session 092 - MS-030.5 Project Map Missing State Contract Foundation
 
 ### Date

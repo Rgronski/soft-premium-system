@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-030.5 - Project Map Missing State Contract Foundation
+MS-030.6 - Project Map Storage Skeleton Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-030.6 is PUBLISHED / CLOSED in the current local workspace as the Project Map Storage Skeleton Foundation. The Product Owner wants the future operational Project Map to live in `C:\SPS_OS_WORK\.sps-meta\<project-key>\project-map\` with a minimal file layout of `map.json`, `sources.jsonl`, `parked-ideas.jsonl`, and `events.jsonl`. `map.json` holds the normalized MS-030.3 read model, `sources.jsonl` records source evidence, `parked-ideas.jsonl` keeps ideas attached to the relevant product-area block or milestone, and `events.jsonl` records lifecycle and audit events. The skeleton applies to SPS OS and imported/existing client applications, does not require client repository modification, keeps export / write-back as a separate future milestone, leaves Beauty Client PRO as a future candidate without inspection or modification, and does not create runtime files.
 
 MS-030.5 is PUBLISHED / CLOSED in the current local workspace as the Project Map Missing State Contract Foundation. The Product Owner wants SPS OS and Project Brain to keep missing operational maps explicit rather than silently treating them as empty complete maps. The read-model states distinguish `available`, `missing`, `empty`, `partial`, `unreadable`, `source-unavailable`, and `error`; `UNKNOWN` is used for unknown fields rather than guessed values; Project Brain exposes blockers and warnings for missing, unreadable, unavailable, partial, and error states; AI Workspace, Conductor, and future MAPA projektu UI show these states as guidance or blockers instead of pretending the map is ready; and missing map may later trigger reconstruction flow outside this milestone. Empty map means a valid operational map exists but contains no product-area blocks yet. Partial map means reconstruction or source evidence is incomplete and needs Product Owner review. Unreadable or corrupt map means the operational map exists but cannot be safely parsed or trusted. Source-unavailable means project-owned evidence cannot be read, but the operational map state remains honest. Loader error means a technical loader failure occurred and must be visible. Beauty Client PRO remains a future candidate for this flow without inspection or modification.
 
