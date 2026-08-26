@@ -45,10 +45,14 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-030.0 - Project Map Source and Reconstruction Contract Foundation
+MS-030.2 - Project Map Storage Authority Contract Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-030.2 is PUBLISHED / CLOSED in the current local workspace as the Project Map Storage Authority Contract Foundation. The default operational Project Map lives in the SPS-owned metadata root at `C:\SPS_OS_WORK\.sps-meta\<project-key>\project-map\`. Project-owned roadmap/map/docs inside the project repository or working directory are input evidence, are not automatically modified by SPS OS, and may be read and preserved as source evidence when present. If a project lacks its own roadmap/map, SPS OS may later reconstruct a proposed Project Map into the SPS-owned metadata root. The Project Brain uses the SPS-owned Project Map as operational context, and AI Workspace, Conductor, and future MAPA projektu UI consume that context. Exporting or writing a map back into a client/project repository remains a separate future Product Owner-approved milestone. Beauty Client PRO remains a future candidate for this flow without inspection or modification.
+
+MS-030.1 is PUBLISHED / CLOSED in the current local workspace as the Project Map Inventory Contract Foundation. The Product Owner wants Project Map inventory items to represent large product areas or major MS blocks, small MS / child milestones, statuses `check`, `active`, `planned`, `parked`, and `blocked`, titles or names, product areas, summaries, evidence sources, related SSOT documents, related ADR / decision contracts, completed items, parked ideas, improvements or enhancements, risks or gaps, and the next candidate. The contract applies to SPS OS and imported/existing client applications, does not depend on a perfect roadmap, preserves an existing roadmap/map when present, and supports later reconstruction from application evidence if no map exists. Schema files, UI, parsers, scanners, and reconstruction logic remain out of scope, and MS-030.0 remains the preceding source/reconstruction baseline.
 
 MS-030.0 is PUBLISHED / CLOSED in the current local workspace as the Project Map Source and Reconstruction Contract Foundation. The Product Owner wants SPS OS to treat Project Map as a first-class Project Brain context module, load maps from the working directory / repository, and have SPS OS, Project Brain, AI Workspace, and Conductor use the map to understand what belongs where. It should preserve existing roadmap/maps, or reconstruct a proposed map when none exists, mark implemented foundations/features as `check`, mark future work as `planned` or `blocked`, keep parked ideas attached to the relevant product-area block, and leave Beauty Client PRO as a future reconstruction candidate without inspection or modification. Further MS-029 layout work remains paused after MS-029.0 and MS-029.1.
 

@@ -196,6 +196,86 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-030.2 - Project Map Storage Authority Contract Foundation
+
+**Milestone**
+MS-030.2 - Project Map Storage Authority Contract Foundation
+
+**Type**
+SPS OS / Project Map Storage Authority Contract Foundation
+
+This checkpoint records the storage authority contract for Project Map. The default operational Project Map lives in the SPS-owned metadata root at `C:\SPS_OS_WORK\.sps-meta\<project-key>\project-map\`. Project-owned roadmap/map/docs inside the project repository or working directory are input evidence, are not automatically modified by SPS OS, and may be read and preserved as source evidence when present. If a project lacks its own roadmap/map, SPS OS may later reconstruct a proposed Project Map into the SPS-owned metadata root. The Project Brain uses the SPS-owned Project Map as operational context, and AI Workspace, Conductor, and future MAPA projektu UI consume that context. Exporting or writing a map back into a client/project repository remains a separate future Product Owner-approved milestone. Beauty Client PRO remains a future candidate for this flow without inspection or modification, and no implementation is introduced here.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project Map storage authority contract only.
+
+**Allowed Implementation Scope**
+* record the storage authority contract in SSOT
+* preserve project-owned roadmap/map/docs as input evidence when present
+* preserve the existing milestone chronology
+* append the required usage record
+
+**Forbidden Scope**
+* implement filesystem/storage logic
+* change runtime product behavior
+* inspect or modify Beauty Client PRO
+* modify client repositories or working directories
+* change color or theme direction
+* change app version
+* commit / push actions
+
+**Dependencies**
+* closed `MS-030.1 - Project Map Inventory Contract Foundation`
+
+## MS-030.1 - Project Map Inventory Contract Foundation
+
+**Milestone**
+MS-030.1 - Project Map Inventory Contract Foundation
+
+**Type**
+SPS OS / Project Map Inventory Contract Foundation
+
+This checkpoint records the minimum Project Map inventory contract. A map item can represent a large product area / major MS block or a small MS / child milestone, carry a status of `check`, `active`, `planned`, `parked`, or `blocked`, and include a title or name, product area, summary, evidence source, related SSOT documents, related ADR / decision contracts, completed items, parked ideas, improvements / enhancements, risks / gaps, and the next candidate. The contract applies to SPS OS and imported/existing client applications, does not depend on a perfect roadmap, preserves an existing roadmap/map when present, and supports later reconstruction from application evidence if no map exists. Schema files, UI, parsers, scanners, and reconstruction logic remain out of scope, and MS-030.0 remains the preceding source/reconstruction contract baseline.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project Map inventory contract only.
+
+**Allowed Implementation Scope**
+* record the Project Map inventory contract in SSOT
+* preserve an existing roadmap/map when present
+* describe later reconstruction from application evidence when no map exists
+* keep the milestone chronology intact
+* append the required usage record
+
+**Forbidden Scope**
+* implement schema files, UI, parsers, scanners, or reconstruction logic
+* change runtime product behavior
+* inspect or modify Beauty Client PRO
+* change color or theme direction
+* change app version
+* commit / push actions
+
+**Dependencies**
+* closed `MS-030.0 - Project Map Source and Reconstruction Contract Foundation`
+
 ## MS-030.0 - Project Map Source and Reconstruction Contract Foundation
 
 **Milestone**

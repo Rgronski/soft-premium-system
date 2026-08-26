@@ -69,6 +69,44 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.2 Project Map Storage Authority Contract Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Recorded the storage authority contract for Project Map and the SPS-owned metadata root path `C:\SPS_OS_WORK\.sps-meta\<project-key>\project-map\`.
+* Recorded that project-owned roadmap/map/docs are input evidence, are not automatically modified by SPS OS, and may be read and preserved as source evidence when present.
+* Recorded that later reconstruction of a proposed Project Map may target the SPS-owned metadata root when a project lacks its own roadmap/map, and that exporting or writing a map back to a client/project repository remains a separate future Product Owner-approved milestone.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.2 - Project Map Storage Authority Contract Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is docs-only and does not implement filesystem/storage logic.
+* The existing `MS-030.1` inventory contract remains the preceding baseline.
+* MS-030.0, MS-030.1, MS-029.0, MS-029.1, and MS-028.74 remain preserved as the earlier baselines.
+
+## Session 092 - MS-030.1 Project Map Inventory Contract Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Recorded the minimum Project Map inventory contract for large product areas, major MS blocks, small MS / child milestones, status, title, product area, summary, evidence source, related SSOT documents, related ADR / decision contracts, completed items, parked ideas, improvements / enhancements, risks / gaps, and the next candidate.
+* Recorded that the inventory contract applies to SPS OS and imported/existing client applications and does not depend on a perfect roadmap.
+* Recorded that an existing roadmap/map should be preserved when present and that later reconstruction from application evidence remains a future boundary when no map exists.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.1 - Project Map Inventory Contract Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is docs-only and does not implement schema files, UI, parsers, scanners, or reconstruction logic.
+* The existing `MS-030.0` source/reconstruction contract remains the preceding baseline.
+* MS-029.0, MS-029.1, and MS-028.74 remain preserved as the earlier layout direction and implementation baselines.
+
 ## Session 092 - MS-030.0 Project Map Source and Reconstruction Contract Foundation
 
 ### Date
