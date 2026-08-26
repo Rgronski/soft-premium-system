@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-029.1 - Milestone Map and Parked Ideas Visibility Foundation
+MS-030.0 - Project Map Source and Reconstruction Contract Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-030.0 is PUBLISHED / CLOSED in the current local workspace as the Project Map Source and Reconstruction Contract Foundation. The Product Owner wants SPS OS to treat Project Map as a first-class Project Brain context module, load maps from the working directory / repository, and have SPS OS, Project Brain, AI Workspace, and Conductor use the map to understand what belongs where. It should preserve existing roadmap/maps, or reconstruct a proposed map when none exists, mark implemented foundations/features as `check`, mark future work as `planned` or `blocked`, keep parked ideas attached to the relevant product-area block, and leave Beauty Client PRO as a future reconstruction candidate without inspection or modification. Further MS-029 layout work remains paused after MS-029.0 and MS-029.1.
 
 MS-029.1 is PUBLISHED / CLOSED in the current local workspace as the Milestone Map and Parked Ideas Visibility Foundation. The Product Owner wants SPS OS to eventually show milestone blocks with `check`, `active`, `planned`, `parked`, and `blocked` labels and keep parked ideas, improvements, and future enhancements visible under the relevant block/MS instead of losing them in chat history.
 

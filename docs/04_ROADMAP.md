@@ -196,6 +196,50 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-030.0 - Project Map Source and Reconstruction Contract Foundation
+
+**Milestone**
+MS-030.0 - Project Map Source and Reconstruction Contract Foundation
+
+**Type**
+SPS OS / Project Map and Milestone Intelligence Contract Foundation
+
+This checkpoint records the Product Owner contract that Project Map is a first-class Project Brain context module. SPS OS should load a project map from the working directory / repository when entering a project, and SPS OS, Project Brain, AI Workspace, and Conductor should use the map to understand what belongs where. It should preserve an existing roadmap/map when one is present, or reconstruct a proposed map from the existing application when one is absent. Implemented foundations/features should be marked `check`, missing future work should be marked `planned` or `blocked`, parked ideas and improvements should stay attached to the relevant product-area block, Beauty Client PRO remains a future reconstruction candidate without inspection or modification, and further MS-029 layout work stays paused after MS-029.0 / MS-029.1.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project Map and Milestone Intelligence contract only.
+
+**Allowed Implementation Scope**
+* record the project map source and reconstruction contract in SSOT
+* load or preserve a project map from the working directory / repository
+* reconstruct a proposed project map when one is absent
+* mark implemented foundations/features as `check`
+* mark missing future work as `planned` or `blocked`
+* keep parked ideas and improvements attached to the relevant product-area block
+* preserve the existing milestone chronology
+* synchronize the SSOT control files
+* append the required usage record
+
+**Forbidden Scope**
+* implement source-map extraction or reconstruction logic
+* change runtime product behavior
+* inspect or modify Beauty Client PRO
+* change color or theme direction
+* change app version
+* commit / push actions
+
+**Dependencies**
+* closed `MS-029.1 - Milestone Map and Parked Ideas Visibility Foundation`
+
 ## MS-029.1 - Milestone Map and Parked Ideas Visibility Foundation
 
 **Milestone**

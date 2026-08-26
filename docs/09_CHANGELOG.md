@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.0 Project Map Source and Reconstruction Contract Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Recorded the Product Owner contract that Project Map is a first-class Project Brain context module and that SPS OS, Project Brain, AI Workspace, and Conductor should use the map to understand what belongs where.
+* Recorded the working-directory / repository map load rule, including preserving an existing roadmap/map or reconstructing a proposed map when none exists.
+* Recorded that implemented foundations/features should be marked `check`, missing future work should be marked `planned` or `blocked`, parked ideas and improvements should stay attached to the relevant product-area block, and Beauty Client PRO remains a future reconstruction candidate without inspection or modification.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.0 - Project Map Source and Reconstruction Contract Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is docs-only and does not implement project-map loading or reconstruction.
+* Further MS-029 layout work remains paused after MS-029.0 and MS-029.1.
+* The existing `MS-029.1` milestone map visibility foundation remains the previous completed milestone, with `MS-029.0` and `MS-028.74` preserved as the preceding layout baselines.
+
 ## Session 092 - Roadmap Contract - Milestone Area Map Rule
 
 ### Date
