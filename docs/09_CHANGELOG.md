@@ -85,6 +85,26 @@ Each release entry should contain:
 
 * The next product-relevant publication must pass the App Version Gate before it is committed or pushed.
 
+## Session 092 - MS-030.12 Project Map Evidence Classification Contract Foundation
+
+### Date
+
+2026-08-27
+
+### Completed
+
+* Recorded the project map evidence classification contract in `docs/04_ROADMAP.md` as future read-model logic over scanner-discovered evidence.
+* Recorded that evidence items carry type, source path or identifier, source owner, discovery status, confidence, and timestamp when available, and that evidence types, discovery statuses, and confidence levels remain explicit and distinct.
+* Recorded that evidence can link to foundation areas and milestone states when applicable, that weak or inferred evidence must not be upgraded to completed or check without explicit support, and that conflicting or missing evidence must remain explicit.
+* Recorded that classification output may feed reconstruction candidates, keeps canonical Project Map writing as a separate future step, and preserves source ownership without making `.sps-meta` the source of truth.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.12 - Project Map Evidence Classification Contract Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is a contract/read-model foundation and does not implement classifier code.
+* MS-030.11 remains the preceding evidence-scanner baseline.
+* MS-030.10, MS-030.9, MS-030.8, MS-030.7, MS-030.6, MS-030.5, MS-030.4, MS-030.3, MS-030.2, MS-030.1, MS-030.0, MS-029.0, MS-029.1, and MS-028.74 remain preserved as earlier baselines.
+
 ## Session 092 - MS-030.11 Project Map Evidence Scanner Contract Foundation
 
 ### Date

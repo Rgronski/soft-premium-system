@@ -233,6 +233,46 @@ App version recovery only.
 * closed `MS-028.65 - Linear App Version Policy Correction Foundation`
 * closed `MS-030.11 - Project Map Evidence Scanner Contract Foundation`
 
+## MS-030.12 - Project Map Evidence Classification Contract Foundation
+
+**Milestone**
+MS-030.12 - Project Map Evidence Classification Contract Foundation
+
+**Type**
+SPS OS / Project Map Evidence Classification Contract Foundation
+
+This checkpoint records the contract for future read-model classification over scanner-discovered evidence. Each evidence item carries an evidence type, source path or source identifier, source owner, discovery status, confidence, and timestamp when available. Evidence types include `bible`, `roadmap`, `current-state`, `changelog`, `session-state`, `decision/ADR`, `handoff`, `readme`, `package/config`, `deployment`, `working-source`, and `unknown`. Discovery status includes `found`, `missing`, `unavailable`, `unreadable`, `ambiguous`, and `ignored`. Confidence distinguishes direct evidence, inferred evidence, weak evidence, and conflicting evidence. Evidence links to foundation areas such as Project Identity, SSOT, Project Bible, Project Map, Working Source, First Layout, First Working Flow, and Publication Path when applicable, and it may link to milestone states such as completed, planned, blocked, parked, absent, or unknown. The classification preserves source ownership and does not make SPS OS metadata the source of truth. Weak or inferred evidence must not be upgraded to completed or check without explicit support, conflicting evidence must be represented explicitly, missing evidence must not be treated as complete, and the output may feed reconstruction candidates while canonical Project Map writing remains a separate future step. The classification should support SPS OS itself as a future validation project. Beauty Client PRO remains a future client-project validation candidate only without inspection or modification. This milestone is contract only and does not implement classifier code.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project map evidence classification contract only.
+
+**Allowed Implementation Scope**
+* record the classification contract in SSOT
+* preserve the MS-030.11 evidence scanner contract as the prior baseline
+* keep scanner-discovered evidence read-only input only
+* append the required usage record
+
+**Forbidden Scope**
+* implement classifier code
+* change project file contents
+* inspect or modify Beauty Client PRO
+* modify client repositories or working directories
+* change color or theme direction
+* change app version
+* commit / push actions
+
+**Dependencies**
+* closed `MS-030.11 - Project Map Evidence Scanner Contract Foundation`
+
 ## MS-030.11 - Project Map Evidence Scanner Contract Foundation
 
 **Milestone**

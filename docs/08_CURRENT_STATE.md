@@ -1,4 +1,4 @@
-# 08_CURRENT_STATE
+﻿# 08_CURRENT_STATE
 
 ---
 
@@ -45,14 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-028.74d - App Version Publication Drift Recovery Foundation
+MS-030.12 - Project Map Evidence Classification Contract Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-028.74d is PUBLISHED / CLOSED in the current local workspace as the App Version Publication Drift Recovery Foundation. The Product Owner flagged that several published milestones were pushed without bumping the canonical app version. The authoritative app version source is `src/lib/app-version.ts`; the previous recorded version was `1.0008`; the last verified correct bump was `MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation` at commit `8322cda`; and 11 product-relevant publications followed without a matching bump. The corrected app version is `1.0019`, `LAST_PUBLISHED_MS` now tracks `MS-030.11 - Project Map Evidence Scanner Contract Foundation`, and future product-relevant publication handoffs must pass the App Version Gate before commit or push.
-
-MS-030.11 is PUBLISHED / CLOSED in the current local workspace as the Project Map Evidence Scanner Contract Foundation. The Product Owner wants SPS OS to discover project evidence read-only from project-owned sources so it can build or reconstruct a Project Map without creating, modifying, or deleting project files. The scanner may inspect repository URL metadata, local working source path metadata, and known documentation candidates such as Project Bible, roadmap, current state, changelog, session state, decisions / ADR, handoff docs, README, package / config files, and deployment docs. It classifies evidence by foundation area, classifies milestone evidence as completed, planned, blocked, parked, absent, or unknown, preserves source ownership, may cache derived evidence in .sps-meta, and leaves canonical Project Map writing for a later separate step. SPS OS itself may be used as a future validation project because it already has Bible / roadmap / current / session / changelog evidence, while Beauty Client PRO remains a future candidate without inspection or modification.
+MS-030.12 is PUBLISHED / CLOSED in the current local workspace as the Project Map Evidence Classification Contract Foundation. The Product Owner wants SPS OS to classify scanner-discovered evidence as future read-model logic over read-only evidence while preserving source ownership and avoiding silent upgrades of weak or inferred evidence. Each evidence item carries evidence type, source path or source identifier, source owner, discovery status, confidence, and timestamp when available. Evidence types include Bible, roadmap, current-state, changelog, session-state, decision / ADR, handoff, readme, package / config, deployment, working-source, and unknown. Discovery status includes found, missing, unavailable, unreadable, ambiguous, and ignored. Confidence distinguishes direct evidence, inferred evidence, weak evidence, and conflicting evidence. Evidence can link to foundation areas such as Project Identity, SSOT, Project Bible, Project Map, Working Source, First Layout, First Working Flow, and Publication Path, and it can link to milestone states such as completed, planned, blocked, parked, absent, or unknown. Missing evidence is never treated as complete, conflicting evidence stays explicit, `.sps-meta` remains metadata rather than the source of truth, and reconstruction candidates remain separate from any future canonical Project Map write step. SPS OS itself may be used as a future validation project, while Beauty Client PRO remains a future candidate without inspection or modification.
 
 MS-030.8 is PUBLISHED / CLOSED in the current local workspace as the Project Map Missing Read Result Foundation. The Product Owner wants the first minimal Project Map read helper to use the MS-030.7 storage-path resolver, return `missing` when `map.json` is absent, and return `unavailable` for invalid project identity or for the still-unparsed present-map boundary. The helper does not parse maps, reconstruct maps, inspect project-owned roadmap/docs/repo evidence, modify client/project repositories, or create runtime files. Beauty Client PRO remains a future candidate without inspection or modification.
 
