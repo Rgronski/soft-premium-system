@@ -196,6 +196,46 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-030.11 - Project Map Evidence Scanner Contract Foundation
+
+**Milestone**
+MS-030.11 - Project Map Evidence Scanner Contract Foundation
+
+**Type**
+SPS OS / Project Map Evidence Scanner Contract Foundation
+
+This checkpoint records the contract for future read-only discovery over project-owned sources used to build or reconstruct a Project Map. The scanner may inspect configured repository URL metadata and local working source path metadata, and it may inspect known documentation candidates such as Project Bible, roadmap, current state, changelog, session state, decisions / ADR, handoff docs, README, package / config files, and deployment docs. It classifies evidence by foundation area: Project Identity, SSOT, Project Bible, Project Map, Working Source, First Layout, First Working Flow, and Publication Path. It classifies milestone evidence as `completed`, `planned`, `blocked`, `parked`, `absent`, or `unknown`. The scanner preserves source ownership and discovery does not transfer ownership to SPS OS. It is read-only by default and must not create, modify, or delete project files. Missing evidence must not be treated as complete; missing, unavailable, and unreadable evidence must be reported explicitly. The scanner may produce reconstruction candidates, but writing a canonical Project Map remains a separate future step. It may cache derived evidence context in `.sps-meta` without making `.sps-meta` the source of project truth. The SPS OS repository itself may serve as a future validation project because it already has Bible, roadmap, current, session, and changelog evidence. Beauty Client PRO remains a future client-project validation candidate only without inspection or modification. This milestone is contract only and does not implement scanner code.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project map evidence scanner contract only.
+
+**Allowed Implementation Scope**
+* record the scanner contract in SSOT
+* preserve the MS-030.10 checklist contract as the prior baseline
+* keep project-owned evidence as read-only input only
+* append the required usage record
+
+**Forbidden Scope**
+* implement scanner code
+* change project file contents
+* inspect or modify Beauty Client PRO
+* modify client repositories or working directories
+* change color or theme direction
+* change app version
+* commit / push actions
+
+**Dependencies**
+* closed `MS-030.10 - Project Creation Foundation Checklist Contract Foundation`
+
 ## MS-030.10 - Project Creation Foundation Checklist Contract Foundation
 
 **Milestone**

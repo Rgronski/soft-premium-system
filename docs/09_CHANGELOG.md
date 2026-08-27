@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.11 Project Map Evidence Scanner Contract Foundation
+
+### Date
+
+2026-08-27
+
+### Completed
+
+* Recorded the project map evidence scanner contract in `docs/04_ROADMAP.md` as future read-only discovery over project-owned sources used to build or reconstruct a Project Map.
+* Recorded that the scanner may inspect repository URL metadata, local working source path metadata, and known documentation candidates such as Project Bible, roadmap, current state, changelog, session state, decisions / ADR, handoff docs, README, package / config files, and deployment docs.
+* Recorded that the scanner classifies evidence by foundation area and classifies milestone evidence as `completed`, `planned`, `blocked`, `parked`, `absent`, or `unknown`, while preserving source ownership and reporting missing, unavailable, and unreadable evidence explicitly.
+* Recorded that the scanner is read-only by default, may produce reconstruction candidates, may cache derived evidence context in `.sps-meta`, and keeps canonical Project Map writing as a separate future step.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.11 - Project Map Evidence Scanner Contract Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is a contract/read-model foundation and does not implement scanner code.
+* MS-030.10 remains the preceding checklist baseline.
+* MS-030.9, MS-030.8, MS-030.7, MS-030.6, MS-030.5, MS-030.4, MS-030.3, MS-030.2, MS-030.1, MS-030.0, MS-029.0, MS-029.1, and MS-028.74 remain preserved as earlier baselines.
+
 ## Session 092 - MS-030.10 Project Creation Foundation Checklist Contract Foundation
 
 ### Date
