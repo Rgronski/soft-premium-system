@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.14 Project Map Canonical Write Boundary Contract Foundation
+
+### Date
+
+2026-08-27
+
+### Completed
+
+* Recorded the canonical write boundary contract in `docs/04_ROADMAP.md` as the boundary between a reconstruction candidate and the canonical project-owned Project Map.
+* Recorded that canonical write or export requires explicit approval, an explicit write target, preserved source ownership, and preserved evidence links or provenance where possible.
+* Recorded that the candidate must remain reviewable until accepted, that missing, weak, inferred, conflicting, or ambiguous items must remain visible before acceptance, and that missing evidence must not be written as completed or `check`.
+* Recorded that rejected candidate items may remain parked, ignored, or deferred according to Product Owner decision and that canonical write should be reversible and auditable in future implementation.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.14 - Project Map Canonical Write Boundary Contract Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is a contract/read-model foundation and does not implement canonical write code.
+* MS-030.13 remains the preceding reconstruction-candidate baseline.
+* MS-030.12, MS-030.11, MS-030.10, MS-030.9, MS-030.8, MS-030.7, MS-030.6, MS-030.5, MS-030.4, MS-030.3, MS-030.2, MS-030.1, MS-030.0, MS-029.0, MS-029.1, and MS-028.74 remain preserved as earlier baselines.
+
 ## Session 092 - MS-030.13 Project Map Reconstruction Candidate Contract Foundation
 
 ### Date

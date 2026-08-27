@@ -233,6 +233,40 @@ App version recovery only.
 * closed `MS-028.65 - Linear App Version Policy Correction Foundation`
 * closed `MS-030.11 - Project Map Evidence Scanner Contract Foundation`
 
+## MS-030.14 - Project Map Canonical Write Boundary Contract Foundation
+
+**Milestone**
+MS-030.14 - Project Map Canonical Write Boundary Contract Foundation
+
+**Type**
+SPS OS / Project Map Canonical Write Boundary Contract Foundation
+
+This checkpoint records the boundary between a Project Map reconstruction candidate and the canonical project-owned Project Map. The canonical Project Map is the accepted project-owned map, not the reconstruction candidate. The reconstruction candidate must remain reviewable until accepted by Product Owner or an explicit project authority, and SPS OS must not silently promote a candidate to canonical Project Map. Canonical write or export requires explicit approval, with the write target made explicit before writing to a project-owned source path, `.sps-meta` cache, export artifact, or future configured destination. Writing to `.sps-meta` is operational or cache state only unless the project explicitly defines it as canonical. Source ownership remains with the project after write or export, and canonical write should preserve evidence links or provenance where possible. Conflicting, weak, inferred, missing, or ambiguous items must remain visible before acceptance, missing evidence must not be written as completed or `check`, and accepted items may be written as `check` or completed only when supported by direct evidence or explicit Product Owner decision. Rejected candidate items should remain parked, ignored, or deferred according to Product Owner decision when useful, and canonical write should be reversible and auditable in future implementation. SPS OS itself may be used as a future validation project, while Beauty Client PRO remains a future client-project validation candidate only without inspection or modification. This milestone is contract only and does not implement canonical write code.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project map canonical write boundary contract only.
+
+**Allowed Implementation Scope**
+* record the canonical write boundary contract in SSOT
+* preserve the MS-030.13 reconstruction candidate contract as the prior baseline
+* keep canonical write/export outside this milestone
+* preserve source ownership and provenance for the canonical boundary
+
+**Dependencies**
+* closed `MS-028.65 - Linear App Version Policy Correction Foundation`
+* closed `MS-030.11 - Project Map Evidence Scanner Contract Foundation`
+* closed `MS-030.12 - Project Map Evidence Classification Contract Foundation`
+* closed `MS-030.13 - Project Map Reconstruction Candidate Contract Foundation`
+
 ## MS-030.13 - Project Map Reconstruction Candidate Contract Foundation
 
 **Milestone**
