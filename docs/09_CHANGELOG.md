@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.13 Project Map Reconstruction Candidate Contract Foundation
+
+### Date
+
+2026-08-27
+
+### Completed
+
+* Recorded the project map reconstruction candidate contract in `docs/04_ROADMAP.md` as a proposed Project Map view rather than the canonical Project Map.
+* Recorded that the candidate preserves evidence links for every proposed foundation, area, milestone, and status, distinguishes confirmed, inferred, weak, conflicting, and missing items, and only marks items as `check` or completed from direct or explicitly supported evidence.
+* Recorded that the candidate must not silently resolve conflicts or treat missing evidence as complete, should surface foundation checklist and product-area / milestone status, and should keep parked ideas and unknown or ambiguous areas visible for Product Owner review.
+* Recorded that canonical Project Map writing or exporting remains a separate future step and that `.sps-meta` may cache candidate context without becoming source of truth.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.13 - Project Map Reconstruction Candidate Contract Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is a contract/read-model foundation and does not implement reconstruction code.
+* MS-030.12 remains the preceding evidence-classification baseline.
+* MS-030.11, MS-030.10, MS-030.9, MS-030.8, MS-030.7, MS-030.6, MS-030.5, MS-030.4, MS-030.3, MS-030.2, MS-030.1, MS-030.0, MS-029.0, MS-029.1, and MS-028.74 remain preserved as earlier baselines.
+
 ## Session 092 - MS-028.74d App Version Publication Drift Recovery Foundation
 
 ### Date

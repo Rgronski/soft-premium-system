@@ -233,6 +233,39 @@ App version recovery only.
 * closed `MS-028.65 - Linear App Version Policy Correction Foundation`
 * closed `MS-030.11 - Project Map Evidence Scanner Contract Foundation`
 
+## MS-030.13 - Project Map Reconstruction Candidate Contract Foundation
+
+**Milestone**
+MS-030.13 - Project Map Reconstruction Candidate Contract Foundation
+
+**Type**
+SPS OS / Project Map Reconstruction Candidate Contract Foundation
+
+This checkpoint records the contract for producing a proposed Project Map reconstruction candidate from classified project evidence. The reconstruction candidate is a proposed Project Map view, not the canonical Project Map. It may be built from classified evidence produced by the future scanner / classifier flow, preserves evidence links for every proposed foundation, area, milestone, and status, and distinguishes confirmed, inferred, weak, conflicting, and missing items. Confirmed or explicitly supported evidence may mark items as `check` or completed, but the candidate must not silently resolve conflicts or treat missing evidence as complete. The candidate should include foundation checklist status for Project Identity, SSOT, Project Bible, Project Map, Working Source, First Layout, First Working Flow, and Publication Path, and should include product-area / milestone status where evidence supports it. Parked ideas remain visible when evidence supports parked, deferred, future, later, or not-active-scope intent, and unknown or ambiguous areas remain visible for Product Owner review. Writing or exporting the candidate into the canonical project-owned Project Map remains a separate future step. `.sps-meta` may cache candidate context, but source ownership and canonical truth remain with the project. SPS OS itself may be used as a future validation project, while Beauty Client PRO remains a future client-project validation candidate only without inspection or modification. This milestone is contract only and does not implement reconstruction code.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project map reconstruction candidate contract only.
+
+**Allowed Implementation Scope**
+* record the reconstruction candidate contract in SSOT
+* preserve the MS-030.12 evidence classification contract as the prior baseline
+* keep canonical Project Map writing outside this milestone
+* preserve source ownership and evidence links for the proposed candidate
+
+**Dependencies**
+* closed `MS-028.65 - Linear App Version Policy Correction Foundation`
+* closed `MS-030.11 - Project Map Evidence Scanner Contract Foundation`
+* closed `MS-030.12 - Project Map Evidence Classification Contract Foundation`
+
 ## MS-030.12 - Project Map Evidence Classification Contract Foundation
 
 **Milestone**
