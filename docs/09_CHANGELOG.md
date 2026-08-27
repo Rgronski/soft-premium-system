@@ -69,6 +69,22 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-028.74d App Version Publication Drift Recovery Foundation
+
+### Date
+
+2026-08-27
+
+### Completed
+
+* Recovered the canonical app version source in `src/lib/app-version.ts` from `1.0008` to `1.0019` and reset `LAST_PUBLISHED_MS` to `MS-030.11 - Project Map Evidence Scanner Contract Foundation`.
+* Recorded that the last verified correct app version bump was `MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation` at commit `8322cda`, and that 11 product-relevant publications followed without a matching bump.
+* Recorded the App Version Gate requirement for future product-relevant publication handoffs so version verification and linear bumping happen before commit or push.
+
+### Notes
+
+* The next product-relevant publication must pass the App Version Gate before it is committed or pushed.
+
 ## Session 092 - MS-030.11 Project Map Evidence Scanner Contract Foundation
 
 ### Date

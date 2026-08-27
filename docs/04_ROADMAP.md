@@ -196,6 +196,43 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-028.74d - App Version Publication Drift Recovery Foundation
+
+**Milestone**
+MS-028.74d - App Version Publication Drift Recovery Foundation
+
+**Type**
+SPS OS / App Version Publication Drift Recovery Foundation
+
+This checkpoint records the recovery from app version publication drift after several product-relevant publications were pushed without bumping the canonical app version. The authoritative app version source is `src/lib/app-version.ts`. The previous recorded app version was `1.0008`, the last verified correct bump was `MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation` at commit `8322cda`, and 11 product-relevant publications followed without a matching version bump. The corrected app version is `1.0019`, and `LAST_PUBLISHED_MS` now tracks `MS-030.11 - Project Map Evidence Scanner Contract Foundation`. Future product-relevant publication handoffs must pass the App Version Gate before any commit or push. This milestone is recovery only and does not change product behavior.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+App version recovery only.
+
+**Allowed Implementation Scope**
+* recover the canonical app version source
+* record the App Version Gate for future publication handoffs
+* append the required usage record
+
+**Forbidden Scope**
+* implement product work
+* change unrelated UI, layout, or Project Map logic
+* inspect or modify Beauty Client PRO
+* commit / push actions
+
+**Dependencies**
+* closed `MS-028.65 - Linear App Version Policy Correction Foundation`
+* closed `MS-030.11 - Project Map Evidence Scanner Contract Foundation`
+
 ## MS-030.11 - Project Map Evidence Scanner Contract Foundation
 
 **Milestone**
