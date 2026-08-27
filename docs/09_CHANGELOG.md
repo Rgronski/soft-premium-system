@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.9 Project Foundation Triad Contract Foundation
+
+### Date
+
+2026-08-26
+
+### Completed
+
+* Recorded the SPS OS project foundation triad contract in `docs/04_ROADMAP.md` so every managed project is understood through SSOT, Project Bible, and Project Map.
+* Recorded that SSOT defines the authoritative source for project truth, Project Bible defines purpose / quality / scope sense, and Project Map defines product-area, completion, planning, parked ideas, and next-candidate context.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.9 - Project Foundation Triad Contract Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is a contract-only milestone and does not implement code.
+* MS-030.8 remains the preceding missing-read baseline.
+* MS-030.7, MS-030.6, MS-030.5, MS-030.4, MS-030.3, MS-030.2, MS-030.1, MS-030.0, MS-029.0, MS-029.1, and MS-028.74 remain preserved as earlier baselines.
+
 ## Session 092 - MS-030.8 Project Map Missing Read Result Foundation
 
 ### Date

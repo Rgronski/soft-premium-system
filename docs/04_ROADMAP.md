@@ -196,6 +196,46 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-030.9 - Project Foundation Triad Contract Foundation
+
+**Milestone**
+MS-030.9 - Project Foundation Triad Contract Foundation
+
+**Type**
+SPS OS / Project Foundation Triad Contract Foundation
+
+This checkpoint records the project foundation triad for SPS OS: SSOT, Project Bible, and Project Map. SSOT defines the authoritative source for project truth. Project Bible defines purpose, quality rules, scope sense, and whether work serves the project or is only noise / fajerwerki / wodotrysk. Project Map defines the product-area map, completed work, planned work, blocked work, parked ideas, and next candidates. The SPS OS Project Bible acts as a quality and decision compass for SPS OS itself and as a guidance standard for client projects. The SPS OS Project Map acts as a template / metamap for other project maps, not as a replacement for them. Client projects may have their own Project Bible and Project Map, and client ownership remains with the client project. SPS OS may reconstruct a client Project Map when absent by comparing project evidence to the SPS OS Project Map template / metamap, and if a client project already has its own map SPS OS can compare it against that template / metamap to help choose the safest path forward. SPS OS may cache or operate on client map context in its `.sps-meta` metadata root, but source ownership remains with the client project when exported or written back. Beauty Client PRO remains a future candidate for this triad without inspection or modification. This milestone is contract only and does not implement code.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project foundation triad contract only.
+
+**Allowed Implementation Scope**
+* record the triad contract in SSOT
+* preserve MS-030.8 as the missing-read baseline
+* keep project-owned evidence as input only
+* append the required usage record
+
+**Forbidden Scope**
+* implement triad code
+* change storage or read behavior
+* inspect or modify Beauty Client PRO
+* modify client repositories or working directories
+* change color or theme direction
+* change app version
+* commit / push actions
+
+**Dependencies**
+* closed `MS-030.8 - Project Map Missing Read Result Foundation`
+
 ## MS-030.8 - Project Map Missing Read Result Foundation
 
 **Milestone**
