@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.10 Project Creation Foundation Checklist Contract Foundation
+
+### Date
+
+2026-08-27
+
+### Completed
+
+* Recorded the project creation foundation checklist contract in `docs/04_ROADMAP.md` so SPS OS can evaluate created, imported, reconstructed, or reviewed projects against a consistent checklist derived from SSOT, Project Bible, and Project Map.
+* Recorded that Project Identity is the first required foundation, Working Source identifies where project-owned files or code live, and First Layout, First Working Flow, and Publication Path remain planned / checkable foundations where applicable.
+* Recorded that existing project evidence may mark checklist items as `check`, missing items must stay explicit as planned, blocked, parked, or absent, and source ownership remains with the project even when SPS OS reconstructs the checklist from evidence.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.10 - Project Creation Foundation Checklist Contract Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is a contract/read-model foundation and does not implement code.
+* MS-030.9 remains the preceding triad baseline.
+* MS-030.8, MS-030.7, MS-030.6, MS-030.5, MS-030.4, MS-030.3, MS-030.2, MS-030.1, MS-030.0, MS-029.0, MS-029.1, and MS-028.74 remain preserved as earlier baselines.
+
 ## Session 092 - MS-030.9 Project Foundation Triad Contract Foundation
 
 ### Date

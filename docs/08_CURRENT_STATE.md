@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-030.9 - Project Foundation Triad Contract Foundation
+MS-030.10 - Project Creation Foundation Checklist Contract Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required

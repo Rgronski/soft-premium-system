@@ -196,6 +196,46 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-030.10 - Project Creation Foundation Checklist Contract Foundation
+
+**Milestone**
+MS-030.10 - Project Creation Foundation Checklist Contract Foundation
+
+**Type**
+SPS OS / Project Creation Foundation Checklist Contract Foundation
+
+This checkpoint records the foundation checklist used when SPS OS creates, imports, reconstructs, or evaluates a project. The checklist is derived from the MS-030.9 triad: SSOT + Project Bible + Project Map. Project Identity is the first required foundation for every SPS OS-managed project. SSOT is required to define the authoritative project truth source. Project Bible is required to define purpose, quality rules, scope sense, and anti-noise guidance. Project Map is required to define areas, completed work, planned work, blocked work, parked ideas, and next candidates. Working Source must identify where project-owned files or code live. First Layout is a planned / checkable foundation item for app or site projects. First Working Flow is a planned / checkable foundation item for usable projects. Publication Path is a planned / checkable foundation item when the project will be deployed, exported, or delivered. Existing project evidence may mark checklist items as `check`, but missing items must be represented as `planned`, `blocked`, `parked`, or absent instead of being silently treated as complete. SPS OS may reconstruct this checklist from available evidence, but source ownership remains with the project. This checklist is a contract / read-model foundation only and does not implement code.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project creation foundation checklist contract only.
+
+**Allowed Implementation Scope**
+* record the checklist contract in SSOT
+* preserve the MS-030.9 triad contract as the source foundation
+* keep project-owned evidence as input only
+* append the required usage record
+
+**Forbidden Scope**
+* implement checklist code
+* change project creation behavior
+* inspect or modify Beauty Client PRO
+* modify client repositories or working directories
+* change color or theme direction
+* change app version
+* commit / push actions
+
+**Dependencies**
+* closed `MS-030.9 - Project Foundation Triad Contract Foundation`
+
 ## MS-030.9 - Project Foundation Triad Contract Foundation
 
 **Milestone**
