@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-030.14 - Project Map Canonical Write Boundary Contract Foundation
+MS-030.15 - Project Map UI Readiness Contract Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-030.15 is PUBLISHED / CLOSED in the current local workspace as the Project Map UI Readiness Contract Foundation. The Product Owner wants SPS OS to keep the future Project Map UI as a project-facing view that shows the foundation checklist, status for each foundation, product areas and milestones, completed blocks, planned work, parked ideas, and inspectable evidence or provenance where available. The UI must distinguish canonical Project Map data from reconstruction candidate data, must expose missing, ambiguous, conflicting, weak, and inferred items, and must not allow silent canonical write or promotion. Any future accept or write action must require explicit Product Owner or project authority confirmation. SPS OS itself may be used as a future validation project, and Beauty Client PRO remains a future candidate without inspection or modification.
 
 MS-030.14 is PUBLISHED / CLOSED in the current local workspace as the Project Map Canonical Write Boundary Contract Foundation. The Product Owner wants SPS OS to keep the reconstruction candidate distinct from the canonical project-owned Project Map and require explicit approval before any canonical write or export. The canonical Project Map is the accepted project-owned map, not the candidate, and SPS OS must not silently promote a candidate to canonical Project Map. The write target must be explicit before writing, source ownership remains with the project after write or export, evidence links or provenance should be preserved where possible, and conflicting, weak, inferred, missing, or ambiguous items must remain visible before acceptance. Missing evidence must not be written as completed or `check`, accepted items may be written as `check` or completed only from direct evidence or explicit Product Owner decision, rejected candidate items may remain parked, ignored, or deferred when useful, and canonical write should be reversible and auditable in future implementation. `.sps-meta` may remain operational or cache state unless the project explicitly defines it as canonical, SPS OS itself may be used as a future validation project, and Beauty Client PRO remains a future candidate without inspection or modification.
 

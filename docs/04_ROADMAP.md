@@ -233,6 +233,41 @@ App version recovery only.
 * closed `MS-028.65 - Linear App Version Policy Correction Foundation`
 * closed `MS-030.11 - Project Map Evidence Scanner Contract Foundation`
 
+## MS-030.15 - Project Map UI Readiness Contract Foundation
+
+**Milestone**
+MS-030.15 - Project Map UI Readiness Contract Foundation
+
+**Type**
+SPS OS / Project Map UI Readiness Contract Foundation
+
+This checkpoint records the readiness contract for the future Project Map tab or view before any UI implementation. The Project Map UI is a future project-facing view, not implemented in this milestone. The UI must show the project foundation checklist for Project Identity, SSOT, Project Bible, Project Map, Working Source, First Layout, First Working Flow, and Publication Path. The UI must show foundation status for each item as `check` or completed, planned, blocked, parked, absent, unknown, or needs review, and it must show product areas and milestones where Project Map data or the reconstruction candidate supports them. Completed blocks must appear with a clear check state, planned work must remain separate from completed work, parked ideas / udogodnienia must appear under the relevant product area or milestone when evidence supports them, and missing, ambiguous, conflicting, weak, and inferred items must remain visible instead of being hidden. The UI must distinguish canonical Project Map data from reconstruction candidate data, make source / evidence / provenance inspectable where available, and must not allow silent canonical write or promotion. Any future accept or write action must require explicit Product Owner or project authority confirmation. The UI should support SPS OS itself as a future validation project, and it should support client projects such as Beauty Client PRO in the future without inspecting or modifying them in this milestone. This milestone is contract only and does not implement UI code.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project map UI readiness contract only.
+
+**Allowed Implementation Scope**
+* record the UI readiness contract in SSOT
+* preserve the MS-030.14 canonical write boundary contract as the prior baseline
+* keep UI implementation outside this milestone
+* preserve source / evidence / provenance inspectability requirements for the future UI
+
+**Dependencies**
+* closed `MS-028.65 - Linear App Version Policy Correction Foundation`
+* closed `MS-030.11 - Project Map Evidence Scanner Contract Foundation`
+* closed `MS-030.12 - Project Map Evidence Classification Contract Foundation`
+* closed `MS-030.13 - Project Map Reconstruction Candidate Contract Foundation`
+* closed `MS-030.14 - Project Map Canonical Write Boundary Contract Foundation`
+
 ## MS-030.14 - Project Map Canonical Write Boundary Contract Foundation
 
 **Milestone**

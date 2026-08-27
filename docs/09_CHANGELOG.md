@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.15 Project Map UI Readiness Contract Foundation
+
+### Date
+
+2026-08-27
+
+### Completed
+
+* Recorded the project map UI readiness contract in `docs/04_ROADMAP.md` as a future project-facing view rather than implemented UI.
+* Recorded that the UI must show the foundation checklist, foundation status, product areas, milestones, completed blocks, planned work, parked ideas / udogodnienia, and inspectable source or evidence provenance where available.
+* Recorded that the UI must expose missing, ambiguous, conflicting, weak, and inferred items, distinguish canonical Project Map data from reconstruction candidate data, and must not allow silent canonical write or promotion.
+* Recorded that any future accept or write action requires explicit Product Owner or project authority confirmation and that SPS OS can later be used as a validation project.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.15 - Project Map UI Readiness Contract Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is a contract/read-model foundation and does not implement UI code.
+* MS-030.14 remains the preceding canonical-write boundary baseline.
+* MS-030.13, MS-030.12, MS-030.11, MS-030.10, MS-030.9, MS-030.8, MS-030.7, MS-030.6, MS-030.5, MS-030.4, MS-030.3, MS-030.2, MS-030.1, MS-030.0, MS-029.0, MS-029.1, and MS-028.74 remain preserved as earlier baselines.
+
 ## Session 092 - MS-030.14 Project Map Canonical Write Boundary Contract Foundation
 
 ### Date
