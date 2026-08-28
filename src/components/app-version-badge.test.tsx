@@ -22,7 +22,7 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0023");
-    expect(LAST_PUBLISHED_MS).toBe("MS-030.15");
+    expect(APP_VERSION).toBe("1.0024");
+    expect(LAST_PUBLISHED_MS).toBe("MS-030.16 - Project Map Tab Shell Implementation Foundation");
   });
 });

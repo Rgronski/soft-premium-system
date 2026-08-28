@@ -233,6 +233,43 @@ App version recovery only.
 * closed `MS-028.65 - Linear App Version Policy Correction Foundation`
 * closed `MS-030.11 - Project Map Evidence Scanner Contract Foundation`
 
+## MS-030.16 - Project Map Tab Shell Implementation Foundation
+
+**Milestone**
+MS-030.16 - Project Map Tab Shell Implementation Foundation
+
+**Type**
+SPS OS / Project Map Tab Shell Implementation Foundation
+
+This checkpoint records the first visible Project Map UI shell in SPS OS. The Project Map / Mapa projektu entry appears in the project-facing workspace navigation and opens a project-local shell that makes the future map area discoverable without pretending the full map engine exists. The shell shows foundation checklist placeholders for Project Identity, SSOT, Project Bible, Project Map, Working Source, First Layout, First Working Flow, and Publication Path. Placeholder states remain not ready, missing, planned, or unavailable rather than complete unless existing app data directly supports them. The shell distinguishes future, candidate, and canonical concepts in copy without adding accept, write, or promote actions. Scanner, classifier, reconstruction, and canonical write logic remain outside this milestone. SPS OS itself may be used as a future validation project, while Beauty Client PRO remains a future client-project validation candidate only without inspection or modification. This milestone is the first visible shell only and does not implement map-engine code.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+DRAFT
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Active**
+Project map tab shell implementation only.
+
+**Allowed Implementation Scope**
+* add the Project Map / Mapa projektu entry to project navigation
+* render a visible project-local shell for the current project context
+* show foundation checklist placeholders with not-ready statuses
+* distinguish candidate/canonical wording without adding write actions
+* keep scanner, classifier, reconstruction, and canonical write logic outside this milestone
+
+**Dependencies**
+* closed `MS-028.65 - Linear App Version Policy Correction Foundation`
+* closed `MS-030.11 - Project Map Evidence Scanner Contract Foundation`
+* closed `MS-030.12 - Project Map Evidence Classification Contract Foundation`
+* closed `MS-030.13 - Project Map Reconstruction Candidate Contract Foundation`
+* closed `MS-030.14 - Project Map Canonical Write Boundary Contract Foundation`
+* closed `MS-030.15 - Project Map UI Readiness Contract Foundation`
+
 ## MS-030.15 - Project Map UI Readiness Contract Foundation
 
 **Milestone**

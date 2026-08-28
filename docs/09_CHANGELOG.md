@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.16 Project Map Tab Shell Implementation Foundation
+
+### Date
+
+2026-08-27
+
+### Completed
+
+* Added a visible `Mapa projektu` entry to the project-facing navigation and introduced a local Project Map shell for the current project context.
+* Rendered the foundation checklist placeholders for Project Identity, SSOT, Project Bible, Project Map, Working Source, First Layout, First Working Flow, and Publication Path with not-ready statuses instead of completed claims.
+* Distinguished candidate versus canonical Project Map wording in the shell and kept accept, write, promote, scanner, classifier, reconstruction, and canonical write actions out of scope.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.16 - Project Map Tab Shell Implementation Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This is the first visible Project Map shell and does not implement map-engine logic.
+* MS-030.15 remains the preceding UI-readiness baseline.
+* MS-030.14, MS-030.13, MS-030.12, MS-030.11, MS-030.10, MS-030.9, MS-030.8, MS-030.7, MS-030.6, MS-030.5, MS-030.4, MS-030.3, MS-030.2, MS-030.1, MS-030.0, MS-029.0, MS-029.1, and MS-028.74 remain preserved as earlier baselines.
+
 ## Session 092 - MS-030.15 Project Map UI Readiness Contract Foundation
 
 ### Date

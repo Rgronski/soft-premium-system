@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-030.15 - Project Map UI Readiness Contract Foundation
+MS-030.16 - Project Map Tab Shell Implementation Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-030.16 is COMPLETED / VERIFIED in the current local workspace as the Project Map Tab Shell Implementation Foundation. The Product Owner wants SPS OS to keep the future Project Map UI as a project-facing view that shows the foundation checklist, status for each foundation, product areas and milestones, completed blocks, planned work, parked ideas, and inspectable evidence or provenance where available. The UI must distinguish canonical Project Map data from reconstruction candidate data, must expose missing, ambiguous, conflicting, weak, and inferred items, and must not allow silent canonical write or promotion. The local shell exposes the Project Map / Mapa projektu entry and checklist placeholders while leaving scanner, classifier, reconstruction, and canonical write logic outside scope. Any future accept or write action must require explicit Product Owner or project authority confirmation. SPS OS itself may be used as a future validation project, and Beauty Client PRO remains a future candidate without inspection or modification.
 
 MS-030.15 is PUBLISHED / CLOSED in the current local workspace as the Project Map UI Readiness Contract Foundation. The Product Owner wants SPS OS to keep the future Project Map UI as a project-facing view that shows the foundation checklist, status for each foundation, product areas and milestones, completed blocks, planned work, parked ideas, and inspectable evidence or provenance where available. The UI must distinguish canonical Project Map data from reconstruction candidate data, must expose missing, ambiguous, conflicting, weak, and inferred items, and must not allow silent canonical write or promotion. Any future accept or write action must require explicit Product Owner or project authority confirmation. SPS OS itself may be used as a future validation project, and Beauty Client PRO remains a future candidate without inspection or modification.
 
