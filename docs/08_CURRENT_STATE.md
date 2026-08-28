@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-030.21 - Project Map Candidate UI Integration Foundation
+MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-030.22 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Project Map Trial Readiness Contract Foundation. The next-session controlled trial remains planned for Session 093 and starts read-only with a preflight of configured BCP project identity, repository URL, and local working source availability. The trial must not write to BCP repository files, must not create or overwrite a canonical Project Map, and must keep missing, unavailable, unreadable, and conflicting evidence explicit. It uses the MS-030.18 scanner, MS-030.19 classifier, MS-030.20 reconstruction candidate pipeline, and the MS-030.21 candidate UI view as readiness references only. Beauty Client PRO itself remains the future controlled trial target, but this milestone does not inspect or modify that project.
 
 MS-030.21 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map Candidate UI Integration Foundation. The Project Map UI page now connects to the read-only scanner, classifier, and reconstruction pipeline so it can render a reviewable candidate summary when project source evidence is available. Missing and unavailable states remain explicit when no candidate can be produced, candidate data stays separate from canonical Project Map data, and evidence or provenance summaries are shown without adding canonical write behavior. Beauty Client PRO remains the future controlled trial target, but this milestone does not inspect or modify that project.
 

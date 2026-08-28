@@ -196,6 +196,39 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation
+
+**Milestone**
+MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation
+
+**Type**
+SPS OS / Beauty Client PRO Project Map Trial Readiness Contract Foundation
+
+This checkpoint records the readiness contract for the next-session Beauty Client PRO Project Map controlled trial. The trial is planned for Session 093, starts read-only, and begins with a preflight of configured BCP project identity, repository URL, and local working source availability. It must not write to BCP repository files, must not write to `.sps-meta` unless later explicit approval allows cache or write behavior, and must not create or overwrite a canonical Project Map. Trial output remains a reconstruction candidate only and uses the MS-030.18 scanner, MS-030.19 classifier, and MS-030.20 reconstruction candidate pipeline, with the MS-030.21 candidate view available for UI rendering. Missing, unavailable, unreadable, and conflicting evidence must be reported explicitly, missing BCP source or invalid BCP identity must return controlled BLOCKED rather than guessed results, weak or inferred evidence must remain visible, and Product Owner review is required before any canonical write, export, or promotion. Beauty Client PRO itself is not inspected or modified in this milestone.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Beauty Client PRO trial readiness only.
+
+**Allowed Implementation Scope**
+* define trial entry conditions, read-only boundaries, evidence expectations, and blocker behavior for the next-session Beauty Client PRO Project Map controlled trial
+* use the scanner, classifier, reconstruction candidate pipeline, and MS-030.21 candidate UI view without canonical write or promotion
+* keep Beauty Client PRO inspection/modification outside this milestone
+
+**Dependencies**
+* closed `MS-030.21 - Project Map Candidate UI Integration Foundation`
+* closed `MS-030.20 - Project Map Reconstruction Candidate Minimal Implementation Foundation`
+* closed `MS-030.19 - Project Map Evidence Classification Minimal Implementation Foundation`
+* closed `MS-030.18 - Project Map Evidence Scanner Minimal Implementation Foundation`
+
 ## MS-030.21 - Project Map Candidate UI Integration Foundation
 
 **Milestone**

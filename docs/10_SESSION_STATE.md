@@ -216,15 +216,17 @@ SPS OS Session State
 
 Date: 2026-08-28
 Current Session ID: 092
-Current Chat Title: 092 SPS OS - MS-030.21 Publication Review
+Current Chat Title: 092 SPS OS - MS-030.22 Publication
 Next Session ID: 093
-Suggested Next Chat Title: 093 SPS OS - MS-030.21 Publication Review
-Active Capability: Project Map Candidate UI Integration Foundation
-Active Work Item: Session 092 MS-030.21 publication
+Suggested Next Chat Title: 093 SPS OS - MS-030.23 Beauty Client PRO Project Map Controlled Trial Foundation
+Active Capability: Beauty Client PRO Project Map Trial Readiness Contract Foundation
+Active Work Item: Session 092 MS-030.22 publication
 Current Mode: PUBLISHED
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.21 - Project Map Candidate UI Integration Foundation
+Latest Completed Product Milestone: MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation
 Next Product Milestone: NONE / Product Owner decision required
+MS-030.22 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Project Map Trial Readiness Contract Foundation. The next-session controlled trial remains planned for Session 093 and starts read-only with a preflight of configured BCP project identity, repository URL, and local working source availability. The trial must not write to BCP repository files, must not create or overwrite a canonical Project Map, and must keep missing, unavailable, unreadable, and conflicting evidence explicit. It uses the MS-030.18 scanner, MS-030.19 classifier, MS-030.20 reconstruction candidate pipeline, and the MS-030.21 candidate UI view as readiness references only. Beauty Client PRO itself remains the future controlled trial target, but this milestone does not inspect or modify that project.
+
 MS-030.21 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map Candidate UI Integration Foundation. The Project Map UI page now connects to the read-only scanner, classifier, and reconstruction pipeline so it can render a reviewable candidate summary when project source evidence is available. Missing and unavailable states remain explicit when no candidate can be produced, candidate data stays separate from canonical Project Map data, and evidence or provenance summaries are shown without adding canonical write behavior. Beauty Client PRO remains the future controlled trial target, but this milestone does not inspect or modify that project.
 MS-030.19 is COMPLETED / VERIFIED in the current local workspace as the Project Map Evidence Classification Minimal Implementation Foundation. The new read-only classifier consumes MS-030.18 scanner output, preserves evidence type, source path or identifier, source owner, and discovery status, and attaches confidence plus direct foundation-area and milestone links when known. Missing evidence stays out of completed or `check` states, unavailable source state stays explicit, weak or unknown evidence remains visible when present, and conflict handling stays representable without resolving it. The classifier does not generate a reconstruction candidate, does not write `.sps-meta`, and does not promote anything to a canonical Project Map. Beauty Client PRO remains the future controlled trial target, but this milestone does not inspect or modify that project. Classified output stays separate from canonical Project Map data.
 MS-030.18 is COMPLETED / VERIFIED in the current local workspace as the Project Map Evidence Scanner Minimal Implementation Foundation. The new read-only scanner foundation discovers known documentation and config candidates from a configured local project source path, returns explicit found, missing, unavailable, and unreadable states where safely detectable, and preserves project source ownership without writing `.sps-meta` or reconstructing a map. The controlled Beauty Client PRO trial remains the future target, but this milestone does not inspect or modify that project. Scanner output remains separate from canonical Project Map data.
@@ -243,15 +245,15 @@ MS-030.0 is PUBLISHED / CLOSED in the current local workspace as the Project Map
 MS-029.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Milestone Map and Parked Ideas Visibility Foundation. The Product Owner wants SPS OS to eventually show milestone blocks with `check`, `active`, `planned`, `parked`, and `blocked` labels and keep parked ideas, improvements, and future enhancements visible under the relevant block/MS instead of losing them in chat history.
 MS-029.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS OS Layout System First Implementation Foundation. The layout now implements the approved top project workspace band, section/navigation band, two-column AI chat/Codex main area, and separate project value / description context panel while preserving existing AI Workspace behavior and keeping color/theme unchanged.
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 092 published the MS-030.21 Project Map Candidate UI Integration Foundation
+Latest Completed Capability Item: Session 092 published the MS-030.22 Beauty Client PRO Project Map Trial Readiness Contract Foundation
 Current Sprint: NONE
 Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, MS-022.3, MS-023.0, MS-027.2, MS-027.3, MS-027.4, MS-027.5, MS-028.0, MS-028.1, MS-028.2, MS-028.3, MS-028.4, MS-028.5, MS-028.6, MS-028.7, MS-028.8, MS-028.9, MS-028.10, MS-028.11, MS-028.12, MS-028.13, MS-028.14, MS-028.15, and MS-028.16 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
-Repository Working Tree State: DIRTY
+Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: f161245
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Product Owner reviews the MS-030.21 publication result and confirms the APP v1.0029 gate before the next milestone.
-Next Session Plan: Product Owner starts Session 093 from the fresh `sps-session.zip` after MS-030.21 publication and selects the next milestone.
+Next Safe Step: Product Owner reviews the published MS-030.22 commit and confirms Session 093 preparation.
+Next Session Plan: Product Owner starts Session 093 from the fresh `sps-session.zip` after MS-030.22 publication and selects MS-030.23 - Beauty Client PRO Project Map Controlled Trial Foundation.

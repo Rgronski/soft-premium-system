@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.22 Beauty Client PRO Project Map Trial Readiness Contract Foundation
+
+### Date
+
+2026-08-28
+
+### Completed
+
+* Recorded the next-session Beauty Client PRO Project Map controlled-trial readiness contract so the trial starts read-only, begins with identity / repository URL / working source preflight, and stays blocked when BCP identity or source is missing.
+* Kept trial output limited to a reconstruction candidate and preserved explicit handling for missing, unavailable, unreadable, and conflicting evidence.
+* Kept canonical write, export, promotion, and `.sps-meta` write behavior outside the milestone unless later explicit approval changes that boundary.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/10_SESSION_STATE.md`, `src/lib/app-version.ts`, and `src/components/app-version-badge.test.tsx` so the SSOT now records `MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Recorded that Beauty Client PRO itself was not inspected or modified.
+
+### Evidence
+
+* Published changes in `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/10_SESSION_STATE.md`, `src/lib/app-version.ts`, and `src/components/app-version-badge.test.tsx`
+
+### Notes
+
+* This is a docs-only readiness milestone and does not run the BCP trial yet.
+* MS-030.21 remains the candidate UI baseline immediately before this readiness layer.
+
 ## Session 092 - MS-030.21 Project Map Candidate UI Integration Foundation
 
 ### Date
