@@ -22,7 +22,7 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0025");
-    expect(LAST_PUBLISHED_MS).toBe("MS-030.17 - Project Map Missing State Integration Foundation");
+    expect(APP_VERSION).toBe("1.0026");
+    expect(LAST_PUBLISHED_MS).toBe("MS-030.18 - Project Map Evidence Scanner Minimal Implementation Foundation");
   });
 });

@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.18 Project Map Evidence Scanner Minimal Implementation Foundation
+
+### Date
+
+2026-08-28
+
+### Completed
+
+* Added a minimal read-only Project Map evidence scanner that can discover known documentation and config candidates from a configured local project source path without parsing full roadmap content or writing `.sps-meta`.
+* Returned explicit discovery statuses for found, missing, unavailable, and unreadable candidates while preserving project source ownership and keeping scanner output separate from canonical Project Map data.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.18 - Project Map Evidence Scanner Minimal Implementation Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* Beauty Client PRO is the upcoming controlled trial target, but this milestone does not inspect or modify it.
+* MS-030.17 remains the preceding integration baseline.
+
 ## Session 092 - MS-030.17 Project Map Missing State Integration Foundation
 
 ### Date

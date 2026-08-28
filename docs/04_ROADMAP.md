@@ -233,6 +233,38 @@ App version recovery only.
 * closed `MS-028.65 - Linear App Version Policy Correction Foundation`
 * closed `MS-030.11 - Project Map Evidence Scanner Contract Foundation`
 
+## MS-030.18 - Project Map Evidence Scanner Minimal Implementation Foundation
+
+**Milestone**
+MS-030.18 - Project Map Evidence Scanner Minimal Implementation Foundation
+
+**Type**
+SPS OS / Project Map Evidence Scanner Minimal Implementation Foundation
+
+This checkpoint adds the minimal read-only evidence scanner foundation for Project Map inputs. The scanner accepts a configured local project source path, discovers known documentation and config candidates without parsing full roadmap content or writing `.sps-meta`, and returns explicit discovery statuses for found, missing, unavailable, and unreadable files where safely detectable. It labels directly known evidence types such as readme, roadmap, current-state, changelog, session-state, decision / ADR, package / config, deployment, and unknown, preserves project source ownership, and does not reconstruct a map yet. Scanner output stays separate from canonical Project Map. Beauty Client PRO is the upcoming controlled trial target, but this milestone does not inspect or modify it.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+DRAFT
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Active**
+Project Map evidence scanner minimal implementation only.
+
+**Allowed Implementation Scope**
+* scan known project documentation and config candidates from a configured local project source path
+* return explicit discovery statuses without writing files
+* preserve source ownership and keep scanner output read-only
+* keep reconstruction and canonical write logic outside this milestone
+
+**Dependencies**
+* closed `MS-030.17 - Project Map Missing State Integration Foundation`
+* closed `MS-030.11 - Project Map Evidence Scanner Contract Foundation`
+
 ## MS-030.17 - Project Map Missing State Integration Foundation
 
 **Milestone**
