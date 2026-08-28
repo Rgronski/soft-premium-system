@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 093 - MS-030.24 Beauty Client PRO Project Map Source Identity Persistence Foundation
+
+### Date
+
+2026-08-28
+
+### Completed
+
+* Persisted the accepted Beauty Client PRO source identity in SPS OS-owned metadata state so the Project Map read boundary can reuse it without depending only on checkout-level git metadata.
+* Recorded the BCP project id, project name, repository URL, working source path, and derived checkout path in a source-identity sidecar separate from the canonical Project Map.
+* Kept the canonical Project Map root missing and unchanged, and did not create, overwrite, or promote canonical Project Map data.
+* Added focused read/persistence tests and verified the Project Map test set plus TypeScript.
+
+### Evidence
+
+* Published changes in `src/lib/project-map/read.ts` and `src/lib/project-map/read.test.ts`
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`
+
+### Notes
+
+* The source-identity sidecar is separate from canonical Project Map storage.
+* MS-030.23 remains the accepted controlled-trial milestone immediately before this persistence foundation.
+
 ## Session 093 - MS-030.23 Beauty Client PRO Project Map Controlled Trial Foundation
 
 ### Date

@@ -22,7 +22,7 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0030");
-    expect(LAST_PUBLISHED_MS).toBe("MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation");
+    expect(APP_VERSION).toBe("1.0031");
+    expect(LAST_PUBLISHED_MS).toBe("MS-030.24 - Beauty Client PRO Project Map Source Identity Persistence Foundation");
   });
 });

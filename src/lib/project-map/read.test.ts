@@ -11,9 +11,13 @@ const getProjectConductorDecisionsMock = vi.fn();
 const getProjectConductorStateMock = vi.fn();
 const getCoreDoctrineBootstrapStatusMock = vi.fn();
 const accessMock = vi.fn();
+const mkdirMock = vi.fn();
+const writeFileMock = vi.fn();
 
 vi.mock("node:fs/promises", () => ({
   access: accessMock,
+  mkdir: mkdirMock,
+  writeFile: writeFileMock,
 }));
 
 vi.mock("@/lib/project/server", () => ({
@@ -59,15 +63,20 @@ beforeEach(() => {
   getProjectConductorStateMock.mockReset();
   getCoreDoctrineBootstrapStatusMock.mockReset();
   accessMock.mockReset();
+  mkdirMock.mockReset();
+  writeFileMock.mockReset();
 
   getServerProjectByIdMock.mockResolvedValue({
     id: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
     name: "Beauty Client PRO",
+    repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
     workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
   });
   accessMock.mockImplementation(async () => {
     throw createEnoentError();
   });
+  mkdirMock.mockResolvedValue(undefined);
+  writeFileMock.mockResolvedValue(undefined);
 });
 
 afterEach(() => {
@@ -88,6 +97,8 @@ describe("resolveProjectMapReadResult", () => {
       reason: "invalid-project-identity",
     });
     expect(accessMock).not.toHaveBeenCalled();
+    expect(mkdirMock).not.toHaveBeenCalled();
+    expect(writeFileMock).not.toHaveBeenCalled();
   });
 
   it("returns missing when the project-map root does not exist", async () => {
@@ -95,6 +106,7 @@ describe("resolveProjectMapReadResult", () => {
     const result = await resolveProjectMapReadResult({
       id: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
       name: "Beauty Client PRO",
+      repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
       workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
     });
 
@@ -108,9 +120,30 @@ describe("resolveProjectMapReadResult", () => {
         "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map",
       mapJsonPath:
         "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map\\map.json",
+      projectSourceIdentity: {
+        projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+        projectName: "Beauty Client PRO",
+        repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+        workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+        projectCheckoutPath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+        projectMetadataRootPath:
+          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+        projectSourceIdentityPath:
+          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
+        persistedAt: expect.any(String),
+      },
     });
     expect(accessMock).toHaveBeenCalledWith(
       "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map",
+    );
+    expect(mkdirMock).toHaveBeenCalledWith(
+      "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+      { recursive: true },
+    );
+    expect(writeFileMock).toHaveBeenCalledWith(
+      "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
+      expect.stringContaining('"repositoryUrl": "https://github.com/Beautyclient/BeautyClientPro.git"'),
+      "utf8",
     );
   });
 
@@ -125,6 +158,7 @@ describe("resolveProjectMapReadResult", () => {
     const result = await resolveProjectMapReadResult({
       id: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
       name: "Beauty Client PRO",
+      repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
       workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
     });
 
@@ -138,6 +172,18 @@ describe("resolveProjectMapReadResult", () => {
         "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map",
       mapJsonPath:
         "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map\\map.json",
+      projectSourceIdentity: {
+        projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+        projectName: "Beauty Client PRO",
+        repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+        workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+        projectCheckoutPath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+        projectMetadataRootPath:
+          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+        projectSourceIdentityPath:
+          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
+        persistedAt: expect.any(String),
+      },
     });
     expect(accessMock).toHaveBeenNthCalledWith(
       1,
@@ -160,6 +206,7 @@ describe("resolveProjectMapReadResult", () => {
     const result = await resolveProjectMapReadResult({
       id: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
       name: "Beauty Client PRO",
+      repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
       workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
     });
 
@@ -174,6 +221,27 @@ describe("resolveProjectMapReadResult", () => {
         "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map",
       mapJsonPath:
         "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map\\map.json",
+      projectSourceIdentity: {
+        projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+        projectName: "Beauty Client PRO",
+        repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+        workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+        projectCheckoutPath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+        projectMetadataRootPath:
+          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+        projectSourceIdentityPath:
+          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
+        persistedAt: expect.any(String),
+      },
     });
+    expect(mkdirMock).toHaveBeenCalledWith(
+      "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+      { recursive: true },
+    );
+    expect(writeFileMock).toHaveBeenCalledWith(
+      "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
+      expect.stringContaining('"projectCheckoutPath": "C:\\\\SPS_OS_WORK\\\\beauty-client-pro\\\\repo"'),
+      "utf8",
+    );
   });
 });

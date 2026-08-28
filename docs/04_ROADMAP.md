@@ -193,9 +193,44 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.23 - Beauty Client PRO Project Map Controlled Trial Foundation
+Latest Completed Product Milestone: MS-030.24 - Beauty Client PRO Project Map Source Identity Persistence Foundation
 
 ## Latest Completed Product Milestone
+
+## MS-030.24 - Beauty Client PRO Project Map Source Identity Persistence Foundation
+
+**Milestone**
+MS-030.24 - Beauty Client PRO Project Map Source Identity Persistence Foundation
+
+**Type**
+SPS OS / Beauty Client PRO Project Map Source Identity Persistence Foundation
+
+This checkpoint records the SPS OS-owned persistence boundary for Beauty Client PRO source identity. The Project Map read boundary now stores the accepted BCP project id, project name, repository URL, working source path, and derived checkout path in a project-scoped metadata sidecar at `C:\SPS_OS_WORK\.sps-meta\<project-key>\project-source-identity.json`. The sidecar stays separate from the canonical Project Map, keeps the missing canonical map explicit, and gives future Project Map reconstruction and read flows a stable source boundary without depending only on checkout-level git metadata. Beauty Client PRO itself was not modified in this milestone.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Source identity persistence only.
+
+**Allowed Implementation Scope**
+* persist project source identity in SPS-owned metadata state
+* expose the persisted source identity through the Project Map read boundary
+* keep canonical Project Map storage unchanged
+
+**Dependencies**
+* closed `MS-030.23 - Beauty Client PRO Project Map Controlled Trial Foundation`
+* closed `MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation`
+* closed `MS-030.21 - Project Map Candidate UI Integration Foundation`
+* closed `MS-030.20 - Project Map Reconstruction Candidate Minimal Implementation Foundation`
+* closed `MS-030.19 - Project Map Evidence Classification Minimal Implementation Foundation`
+* closed `MS-030.18 - Project Map Evidence Scanner Minimal Implementation Foundation`
 
 ## MS-030.23 - Beauty Client PRO Project Map Controlled Trial Foundation
 
