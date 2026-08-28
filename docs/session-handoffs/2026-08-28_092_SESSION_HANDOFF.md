@@ -36,7 +36,7 @@ Blockers: NONE
 Open Risks: NONE
 
 Recommendation: Open a new chat titled `093 SPS OS - MS-030.23 Beauty Client PRO Project Map Controlled Trial Foundation` and attach `sps-session.zip`.
-Next Safe Step: Product Owner starts Session 093 from the fresh `sps-session.zip` and selects the next milestone.
+Next Safe Step: Product Owner starts Session 093 from the fresh `sps-session.zip` and selects MS-030.23 - Beauty Client PRO Project Map Controlled Trial Foundation.
 Next Chat Prompt: SPS OS - START. Project: C:\Users\p700\soft-premium-system. Attach C:\Users\p700\soft-premium-system\sps-session.zip to the new chat before bootstrap; the local path alone does not give the next chat access to the ZIP. Run the full bootstrap, confirm package Git Context and SSOT consistency, keep Current Product Milestone as `NONE / Product Owner decision required`, keep Next Product Milestone as `NONE / Product Owner decision required`, preserve `MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation` as `COMPLETED / VERIFIED / PUBLISHED / CLOSED`, and start Session 093 only after the Product Owner selects the next milestone.
 
 ## Stałe zasady pracy
