@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.20 Project Map Reconstruction Candidate Minimal Implementation Foundation
+
+### Date
+
+2026-08-28
+
+### Completed
+
+* Added a minimal read-only Project Map reconstruction candidate builder that consumes classified evidence and keeps the foundation checklist visible.
+* Preserved evidence links, support states, and review handling for conflicting foundation areas without inventing canonical write behavior.
+* Kept scanner, classifier, UI, and canonical write logic outside the milestone.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.20 - Project Map Reconstruction Candidate Minimal Implementation Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Recorded that Beauty Client PRO remains the future controlled trial target and was not inspected or modified.
+
+### Evidence
+
+* Local uncommitted changes in `src/lib/project-map/reconstruct.ts` and `src/lib/project-map/reconstruct.test.ts`
+
+### Notes
+
+* This is a focused implementation milestone and does not add scanner, classifier, UI, or canonical write logic.
+* MS-030.19 remains the classifier baseline immediately before this reconstruction candidate builder.
+
 ## Session 092 - MS-030.19 Project Map Evidence Classification Minimal Implementation Foundation
 
 ### Date

@@ -196,6 +196,38 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-030.20 - Project Map Reconstruction Candidate Minimal Implementation Foundation
+
+**Milestone**
+MS-030.20 - Project Map Reconstruction Candidate Minimal Implementation Foundation
+
+**Type**
+SPS OS / Project Map Reconstruction Candidate Minimal Implementation Foundation
+
+This checkpoint adds the minimal reconstruction candidate builder for classified Project Map evidence. The builder preserves evidence links, groups classified evidence by foundation area, carries forward confirmed, inferred, weak, and missing support states, marks conflicting foundation areas for review, and keeps the foundation checklist visible without inventing canonical write behavior. It does not add scanner, classifier, UI, or canonical write logic. Beauty Client PRO remains the future controlled trial target, but this milestone does not inspect or modify it.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+DRAFT
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Active**
+Project Map reconstruction candidate minimal implementation only.
+
+**Allowed Implementation Scope**
+* build the reconstruction candidate from classified Project Map evidence
+* preserve evidence links, support states, and foundation checklist visibility
+* keep scanner, classifier, UI, and canonical write logic outside this milestone
+* focused tests for the directly touched path
+
+**Dependencies**
+* closed `MS-030.19 - Project Map Evidence Classification Minimal Implementation Foundation`
+* closed `MS-030.13 - Project Map Reconstruction Candidate Contract Foundation`
+
 ## MS-030.19 - Project Map Evidence Classification Minimal Implementation Foundation
 
 **Milestone**

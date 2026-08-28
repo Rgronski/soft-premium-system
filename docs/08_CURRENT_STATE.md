@@ -45,12 +45,14 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-030.19 - Project Map Evidence Classification Minimal Implementation Foundation
+MS-030.20 - Project Map Reconstruction Candidate Minimal Implementation Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
 MS-030.19 is COMPLETED / VERIFIED in the current local workspace as the Project Map Evidence Classification Minimal Implementation Foundation. The new read-only classifier consumes MS-030.18 scanner output, preserves evidence type, source path or identifier, source owner, and discovery status, and attaches confidence plus direct foundation-area and milestone links when known. Missing evidence stays out of completed or `check` states, unavailable source state stays explicit, weak or unknown evidence remains visible when present, and conflict handling stays representable without resolving it. The classifier does not generate a reconstruction candidate, does not write `.sps-meta`, and does not promote anything to a canonical Project Map. Beauty Client PRO remains the future controlled trial target, but this milestone does not inspect or modify that project. Classified output stays separate from canonical Project Map data.
+
+MS-030.20 is COMPLETED / VERIFIED in the current local workspace as the Project Map Reconstruction Candidate Minimal Implementation Foundation. The new read-only candidate builder consumes MS-030.19 classified evidence, preserves evidence links, keeps confirmed, inferred, weak, and missing support states visible, marks conflicting foundation areas as needs review, and keeps the foundation checklist available without inventing canonical write behavior. Beauty Client PRO remains the future controlled trial target, but this milestone does not inspect or modify that project. Candidate output stays separate from canonical Project Map data.
 
 MS-030.18 is COMPLETED / VERIFIED in the current local workspace as the Project Map Evidence Scanner Minimal Implementation Foundation. The new read-only scanner foundation discovers known documentation and config candidates from a configured local project source path, returns explicit found, missing, unavailable, and unreadable states where safely detectable, and preserves project source ownership without writing `.sps-meta` or reconstructing a map. The controlled Beauty Client PRO trial remains the future target, but this milestone does not inspect or modify that project. Scanner output remains separate from canonical Project Map data.
 
