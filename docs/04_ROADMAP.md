@@ -193,9 +193,43 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation
+Latest Completed Product Milestone: MS-030.23 - Beauty Client PRO Project Map Controlled Trial Foundation
 
 ## Latest Completed Product Milestone
+
+## MS-030.23 - Beauty Client PRO Project Map Controlled Trial Foundation
+
+**Milestone**
+MS-030.23 - Beauty Client PRO Project Map Controlled Trial Foundation
+
+**Type**
+SPS OS / Beauty Client PRO Project Map Controlled Trial Foundation
+
+This checkpoint records the accepted read-only Beauty Client PRO Project Map controlled trial after Product Owner review. The trial confirmed the BCP project identity, local source, and checkout-level repository URL, while the canonical Project Map root and map.json remained missing. The candidate flow stayed read-only and candidate-only, and no canonical Project Map was created, overwritten, or promoted. Repository URL availability currently depends on checkout-level git metadata rather than the root manifest alone. The trial result is PASS / ACCEPTABLE FOR REVIEW and the publication sync records it as completed, verified, published, and closed. Beauty Client PRO itself was not modified in this milestone.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Publication sync only.
+
+**Allowed Implementation Scope**
+* record the accepted read-only trial result
+* synchronize SSOT control files for MS-030.23 publication
+* keep canonical Project Map and Beauty Client PRO repository files unchanged
+
+**Dependencies**
+* closed `MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation`
+* closed `MS-030.21 - Project Map Candidate UI Integration Foundation`
+* closed `MS-030.20 - Project Map Reconstruction Candidate Minimal Implementation Foundation`
+* closed `MS-030.19 - Project Map Evidence Classification Minimal Implementation Foundation`
+* closed `MS-030.18 - Project Map Evidence Scanner Minimal Implementation Foundation`
 
 ## MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation
 

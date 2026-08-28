@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 093 - MS-030.23 Beauty Client PRO Project Map Controlled Trial Foundation
+
+### Date
+
+2026-08-28
+
+### Completed
+
+* Recorded the accepted read-only Beauty Client PRO Project Map controlled trial as PASS / ACCEPTABLE FOR REVIEW and synchronized the publication control files so MS-030.23 is now recorded as completed, verified, published, and closed.
+* Confirmed the BCP project identity, local source, and checkout-level repository URL, while preserving the explicit missing canonical Project Map root and missing `map.json` as safe-boundary evidence.
+* Kept the candidate flow read-only and candidate-only, and did not create, overwrite, or promote a canonical Project Map.
+* Appended the Session 093 usage record for the publication sync.
+
+### Evidence
+
+* Published changes in `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`
+* Appended one `.usage/session.jsonl` record for Session 093
+
+### Notes
+
+* Publication sync is separate from trial execution.
+* MS-030.22 remains the prior completed readiness milestone immediately before this controlled trial publication.
+
 ## Session 092 - MS-030.22 Beauty Client PRO Project Map Trial Readiness Contract Foundation
 
 ### Date
