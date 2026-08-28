@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.17 Project Map Missing State Integration Foundation
+
+### Date
+
+2026-08-28
+
+### Completed
+
+* Connected the visible Project Map tab shell to the existing missing-read helper so the page now shows explicit missing, unavailable, and read-not-implemented states instead of pretending the map engine is complete.
+* Kept the foundation checklist visible while making Project Identity available only when the current project context supports it and keeping Project Map itself out of any completed state when the helper reports missing or unavailable.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.17 - Project Map Missing State Integration Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+
+### Notes
+
+* This remains a focused integration milestone and does not add scanner, classifier, reconstruction, or canonical write logic.
+* MS-030.16 remains the preceding shell baseline.
+
 ## Session 092 - MS-030.16 Project Map Tab Shell Implementation Foundation
 
 ### Date

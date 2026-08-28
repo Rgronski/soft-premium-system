@@ -1,10 +1,11 @@
-"use client";
-
 import Link from "next/link";
-import { useParams } from "next/navigation";
 
 import { SectionCard } from "@/components/ui/SectionCard";
-import { getProjectById } from "@/lib/project/project";
+import { getServerProjectById } from "@/lib/project/server";
+import {
+  resolveProjectMapReadResult,
+  type ProjectMapReadResult,
+} from "@/lib/project-map/read";
 
 type FoundationStatus = {
   label: string;
@@ -12,11 +13,79 @@ type FoundationStatus = {
   description: string;
 };
 
-function buildFoundationStatuses(projectName: string | null): FoundationStatus[] {
+type ProjectMapStateCopy = {
+  title: string;
+  description: string;
+  details: string[];
+};
+
+function buildProjectMapStateCopy(
+  mapReadResult: ProjectMapReadResult | null,
+): ProjectMapStateCopy {
+  if (!mapReadResult) {
+    return {
+      title: "Kontekst projektu niedostępny",
+      description:
+        "Nie rozpoznano poprawnego projektu, więc Mapa projektu pozostaje niedostępna.",
+      details: [
+        "Brak poprawnego kontekstu projektu.",
+        "Shell nie promuje żadnej mapy do stanu kanonicznego.",
+      ],
+    };
+  }
+
+  if (mapReadResult.status === "missing") {
+    return {
+      title: "Mapa projektu nie jest jeszcze gotowa",
+      description:
+        "Dla tego projektu nie ma jeszcze folderu Project Map ani pliku map.json, więc stan pozostaje jawnie niegotowy.",
+      details: [
+        `Project Map root: ${mapReadResult.projectMapRootPath}`,
+        `map.json: ${mapReadResult.mapJsonPath}`,
+      ],
+    };
+  }
+
+  if (mapReadResult.reason === "project-map-present-but-read-not-implemented") {
+    return {
+      title: "Mapa projektu jest obecna, ale odczyt niezaimplementowany",
+      description:
+        "Helper wykrył obecność pliku map.json, ale właściwy odczyt mapy nadal pozostaje poza zakresem tej wersji.",
+      details: [
+        `Project Map root: ${mapReadResult.projectMapRootPath ?? "brak"}`,
+        `map.json: ${mapReadResult.mapJsonPath ?? "brak"}`,
+      ],
+    };
+  }
+
+  return {
+    title: "Stan mapy projektu niedostępny",
+    description:
+      "Dostęp do Project Map nie mógł zostać bezpiecznie potwierdzony, więc shell pokazuje stan niedostępny zamiast udawać kompletność.",
+    details: [
+      `Powód: ${mapReadResult.reason}`,
+      `Project Map root: ${mapReadResult.projectMapRootPath ?? "brak"}`,
+      `map.json: ${mapReadResult.mapJsonPath ?? "brak"}`,
+    ],
+  };
+}
+
+function buildFoundationStatuses(
+  projectName: string | null,
+  mapReadResult: ProjectMapReadResult | null,
+): FoundationStatus[] {
+  const projectIdentityStatus = projectName ? "dostępny" : "niedostępny";
+  const projectMapStatus =
+    !mapReadResult || mapReadResult.status === "missing"
+      ? "brak / niegotowe"
+      : mapReadResult.reason === "project-map-present-but-read-not-implemented"
+        ? "obecna / odczyt niezaimplementowany"
+        : "niedostępna";
+
   return [
     {
       label: "Project Identity",
-      status: projectName ? "dostępny" : "nieznany",
+      status: projectIdentityStatus,
       description: projectName
         ? `Bieżący projekt: ${projectName}.`
         : "Brak rozpoznanego projektu w bieżącym kontekście.",
@@ -33,8 +102,13 @@ function buildFoundationStatuses(projectName: string | null): FoundationStatus[]
     },
     {
       label: "Project Map",
-      status: "niegotowe",
-      description: "Kandydacka mapa nie jest jeszcze zbudowana ani kanoniczna.",
+      status: projectMapStatus,
+      description:
+        projectMapStatus === "brak / niegotowe"
+          ? "Mapa projektu nie jest jeszcze gotowa do użycia."
+          : projectMapStatus === "obecna / odczyt niezaimplementowany"
+            ? "Mapa projektu istnieje, ale odczyt pozostaje niezaimplementowany."
+            : "Mapa projektu pozostaje niedostępna.",
     },
     {
       label: "Working Source",
@@ -54,15 +128,26 @@ function buildFoundationStatuses(projectName: string | null): FoundationStatus[]
     {
       label: "Publication Path",
       status: "planowane",
-      description: "Eksport i publikacja pozostają poza tym shell'em.",
+      description: "Eksport i publikacja pozostają poza tym shellem.",
     },
   ];
 }
 
-export default function ProjectMapPage() {
-  const params = useParams<{ id: string }>();
-  const project = getProjectById(params.id);
-  const foundationStatuses = buildFoundationStatuses(project?.name ?? null);
+export default async function ProjectMapPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const project = await getServerProjectById(id);
+  const mapReadResult = project
+    ? await resolveProjectMapReadResult(project)
+    : null;
+  const foundationStatuses = buildFoundationStatuses(
+    project?.name ?? null,
+    mapReadResult,
+  );
+  const projectMapStateCopy = buildProjectMapStateCopy(mapReadResult);
 
   return (
     <SectionCard className="space-y-6">
@@ -104,6 +189,25 @@ export default function ProjectMapPage() {
         </p>
       </div>
 
+      <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+        <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
+          Stan odczytu mapy
+        </p>
+        <h3 className="mt-1 text-xl font-semibold text-zinc-50">
+          {projectMapStateCopy.title}
+        </h3>
+        <p className="mt-2 text-sm text-zinc-400">
+          {projectMapStateCopy.description}
+        </p>
+        <ul className="mt-4 space-y-2 text-sm text-zinc-300">
+          {projectMapStateCopy.details.map((detail) => (
+            <li key={detail} className="rounded-lg border border-zinc-800 px-3 py-2">
+              {detail}
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <div className="space-y-3">
         <div className="space-y-1">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
@@ -141,7 +245,7 @@ export default function ProjectMapPage() {
 
       <div className="flex flex-wrap items-center gap-3">
         <Link
-          href={`/projects/${params.id}`}
+          href={`/projects/${id}`}
           className="rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
         >
           Wróć do przeglądu projektu

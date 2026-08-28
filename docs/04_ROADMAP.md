@@ -233,6 +233,39 @@ App version recovery only.
 * closed `MS-028.65 - Linear App Version Policy Correction Foundation`
 * closed `MS-030.11 - Project Map Evidence Scanner Contract Foundation`
 
+## MS-030.17 - Project Map Missing State Integration Foundation
+
+**Milestone**
+MS-030.17 - Project Map Missing State Integration Foundation
+
+**Type**
+SPS OS / Project Map Missing State Integration Foundation
+
+This checkpoint connects the visible Project Map / Mapa projektu shell to the existing Project Map missing-read helper so the page can safely show missing, unavailable, and read-not-implemented states without pretending the map engine is complete. The Project Map page reads the current project context, shows the foundation checklist, and makes Project Identity available only when the current project context supports it. For valid project identity, a missing project-map root or missing map.json is shown explicitly as not ready; invalid project identity is shown explicitly as unavailable. Project Map itself never appears complete when the helper reports missing or unavailable. Scanner, classifier, reconstruction, canonical write, and any accept/write/promote action remain outside this milestone. SPS OS itself may be used as a future validation project, while Beauty Client PRO remains a future client-project validation candidate only without inspection or modification.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+DRAFT
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Active**
+Project map missing-state integration only.
+
+**Allowed Implementation Scope**
+* use the existing Project Map read helper patterns where available
+* render explicit missing, unavailable, and read-not-implemented Project Map states
+* keep the foundation checklist visible
+* keep scanner, classifier, reconstruction, and canonical write logic outside this milestone
+
+**Dependencies**
+* closed `MS-030.16 - Project Map Tab Shell Implementation Foundation`
+* closed `MS-030.8 - Project Map Missing Read Result Foundation`
+* closed `MS-030.7 - Project Map Storage Path Resolver Foundation`
+
 ## MS-030.16 - Project Map Tab Shell Implementation Foundation
 
 **Milestone**

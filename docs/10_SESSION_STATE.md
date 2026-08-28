@@ -214,17 +214,18 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-08-27
+Date: 2026-08-28
 Current Session ID: 092
-Current Chat Title: 092 SPS OS - MS-030.16 Implementation Draft
+Current Chat Title: 092 SPS OS - MS-030.17 Implementation Draft
 Next Session ID: 093
-Suggested Next Chat Title: 093 SPS OS - MS-030.16 Publication Review
-Active Capability: Project Map Tab Shell Implementation Foundation
-Active Work Item: Session 092 MS-030.16 implementation draft
+Suggested Next Chat Title: 093 SPS OS - MS-030.17 Publication Review
+Active Capability: Project Map Missing State Integration Foundation
+Active Work Item: Session 092 MS-030.17 implementation draft
 Current Mode: ACTIVE
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.16 - Project Map Tab Shell Implementation Foundation
+Latest Completed Product Milestone: MS-030.17 - Project Map Missing State Integration Foundation
 Next Product Milestone: NONE / Product Owner decision required
+MS-030.17 is COMPLETED / VERIFIED in the current local workspace as the Project Map Missing State Integration Foundation. The visible Project Map / Mapa projektu shell now consults the existing read helper so valid projects can show explicit missing, unavailable, and read-not-implemented states without pretending the map engine is complete. The Project Map page keeps the foundation checklist visible, shows Project Identity as available only when the current project context supports it, and keeps Project Map itself from appearing complete when the helper reports missing or unavailable. Scanner, classifier, reconstruction, and canonical write logic remain outside this milestone, and Beauty Client PRO remains a future candidate without inspection or modification.
 MS-030.16 is COMPLETED / VERIFIED in the current local workspace as the Project Map Tab Shell Implementation Foundation. The Product Owner wants SPS OS to keep the future Project Map UI as a project-facing view that shows the foundation checklist, status for each foundation, product areas and milestones, completed blocks, planned work, parked ideas, and inspectable evidence or provenance where available. The UI must distinguish canonical Project Map data from reconstruction candidate data, must expose missing, ambiguous, conflicting, weak, and inferred items, and must not allow silent canonical write or promotion. The local shell exposes the Project Map / Mapa projektu entry and checklist placeholders while leaving scanner, classifier, reconstruction, and canonical write logic outside scope. Any future accept or write action must require explicit Product Owner or project authority confirmation. SPS OS itself may be used as a future validation project, and Beauty Client PRO remains a future candidate without inspection or modification.
 MS-030.15 is PUBLISHED / CLOSED in the current local workspace as the Project Map UI Readiness Contract Foundation. The Product Owner wants SPS OS to keep the future Project Map UI as a project-facing view that shows the foundation checklist, status for each foundation, product areas and milestones, completed blocks, planned work, parked ideas, and inspectable evidence or provenance where available. The UI must distinguish canonical Project Map data from reconstruction candidate data, must expose missing, ambiguous, conflicting, weak, and inferred items, and must not allow silent canonical write or promotion. Any future accept or write action must require explicit Product Owner or project authority confirmation. SPS OS itself may be used as a future validation project, and Beauty Client PRO remains a future candidate without inspection or modification.
 MS-030.14 is PUBLISHED / CLOSED in the current local workspace as the Project Map Canonical Write Boundary Contract Foundation. The Product Owner wants SPS OS to keep the reconstruction candidate distinct from the canonical project-owned Project Map and require explicit approval before any canonical write or export. The canonical Project Map is the accepted project-owned map, not the candidate, and SPS OS must not silently promote a candidate to canonical Project Map. The write target must be explicit before writing, source ownership remains with the project after write or export, evidence links or provenance should be preserved where possible, and conflicting, weak, inferred, missing, or ambiguous items must remain visible before acceptance. Missing evidence must not be written as completed or `check`, accepted items may be written as `check` or completed only from direct evidence or explicit Product Owner decision, rejected candidate items may remain parked, ignored, or deferred when useful, and canonical write should be reversible and auditable in future implementation. `.sps-meta` may remain operational or cache state unless the project explicitly defines it as canonical, SPS OS itself may be used as a future validation project, and Beauty Client PRO remains a future candidate without inspection or modification.
@@ -239,7 +240,7 @@ MS-030.0 is PUBLISHED / CLOSED in the current local workspace as the Project Map
 MS-029.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Milestone Map and Parked Ideas Visibility Foundation. The Product Owner wants SPS OS to eventually show milestone blocks with `check`, `active`, `planned`, `parked`, and `blocked` labels and keep parked ideas, improvements, and future enhancements visible under the relevant block/MS instead of losing them in chat history.
 MS-029.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS OS Layout System First Implementation Foundation. The layout now implements the approved top project workspace band, section/navigation band, two-column AI chat/Codex main area, and separate project value / description context panel while preserving existing AI Workspace behavior and keeping color/theme unchanged.
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 092 completed the MS-030.16 Project Map Tab Shell Implementation Foundation
+Latest Completed Capability Item: Session 092 completed the MS-030.17 Project Map Missing State Integration Foundation
 Current Sprint: NONE
 Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, MS-022.3, MS-023.0, MS-027.2, MS-027.3, MS-027.4, MS-027.5, MS-028.0, MS-028.1, MS-028.2, MS-028.3, MS-028.4, MS-028.5, MS-028.6, MS-028.7, MS-028.8, MS-028.9, MS-028.10, MS-028.11, MS-028.12, MS-028.13, MS-028.14, MS-028.15, and MS-028.16 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
@@ -249,5 +250,5 @@ Latest Verified Commit: f161245
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Product Owner reviews the MS-030.16 draft and confirms the APP v1.0024 publication gate before any commit or push.
-Next Session Plan: Product Owner starts Session 093 from the fresh `sps-session.zip` after MS-030.16 preparation and selects the next milestone.
+Next Safe Step: Product Owner reviews the MS-030.17 draft and confirms the APP v1.0025 publication gate before any commit or push.
+Next Session Plan: Product Owner starts Session 093 from the fresh `sps-session.zip` after MS-030.17 preparation and selects the next milestone.
