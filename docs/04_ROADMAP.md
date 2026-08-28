@@ -193,6 +193,7 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
+Latest Completed Product Milestone: MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation
 
 ## Latest Completed Product Milestone
 
