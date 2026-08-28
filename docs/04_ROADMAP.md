@@ -196,6 +196,38 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-030.19 - Project Map Evidence Classification Minimal Implementation Foundation
+
+**Milestone**
+MS-030.19 - Project Map Evidence Classification Minimal Implementation Foundation
+
+**Type**
+SPS OS / Project Map Evidence Classification Minimal Implementation Foundation
+
+This checkpoint adds the minimal read-only evidence classifier foundation for Project Map inputs. The classifier accepts the MS-030.18 scanner output, preserves evidence type, source path or identifier, source owner, and discovery status, and attaches confidence plus direct foundation-area and milestone links when known. It keeps missing evidence out of completed or `check` states, keeps unavailable source state explicit, exposes weak or unknown evidence when present, and leaves conflict handling representable without resolving it. The classifier remains read-only, does not generate a reconstruction candidate, does not write `.sps-meta`, and does not promote anything to a canonical Project Map. Beauty Client PRO remains the future controlled trial target, but this milestone does not inspect or modify it.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+DRAFT
+
+**Milestone Status**
+COMPLETED / VERIFIED
+
+**Active**
+Project Map evidence classification minimal implementation only.
+
+**Allowed Implementation Scope**
+* classify scanner-discovered evidence into read-model-friendly Project Map evidence
+* preserve source ownership, source identity, discovery status, and confidence
+* attach direct foundation-area and milestone links where known
+* keep scanner, reconstruction, and canonical write logic outside this milestone
+
+**Dependencies**
+* closed `MS-030.18 - Project Map Evidence Scanner Minimal Implementation Foundation`
+* closed `MS-030.12 - Project Map Evidence Classification Contract Foundation`
+
 ## MS-028.74d - App Version Publication Drift Recovery Foundation
 
 **Milestone**
