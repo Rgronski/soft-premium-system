@@ -22,7 +22,7 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0028");
-    expect(LAST_PUBLISHED_MS).toBe("MS-030.20 - Project Map Reconstruction Candidate Minimal Implementation Foundation");
+    expect(APP_VERSION).toBe("1.0029");
+    expect(LAST_PUBLISHED_MS).toBe("MS-030.21 - Project Map Candidate UI Integration Foundation");
   });
 });

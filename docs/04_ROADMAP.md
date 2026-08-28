@@ -196,6 +196,38 @@ NONE / Product Owner decision required
 
 ## Latest Completed Product Milestone
 
+## MS-030.21 - Project Map Candidate UI Integration Foundation
+
+**Milestone**
+MS-030.21 - Project Map Candidate UI Integration Foundation
+
+**Type**
+SPS OS / Project Map Candidate UI Integration Foundation
+
+This checkpoint connects the Project Map UI page to the read-only scanner, classifier, and reconstruction pipeline. The page can render a reviewable candidate summary when project source evidence is available, keeps missing and unavailable states explicit when no candidate can be produced, distinguishes candidate data from canonical Project Map data, and shows evidence or provenance summaries without adding canonical write behavior. It does not inspect or modify Beauty Client PRO. This milestone is UI integration only and does not implement canonical write or export.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED / CLOSED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Project Map candidate UI integration only.
+
+**Allowed Implementation Scope**
+* connect the Project Map UI page to the scanner, classifier, and reconstruction pipeline
+* show reviewable candidate summary data when project source evidence is available
+* preserve missing and unavailable states when no candidate can be produced
+* keep canonical write/export and Beauty Client PRO inspection outside this milestone
+
+**Dependencies**
+* closed `MS-030.20 - Project Map Reconstruction Candidate Minimal Implementation Foundation`
+* closed `MS-030.19 - Project Map Evidence Classification Minimal Implementation Foundation`
+
 ## MS-030.20 - Project Map Reconstruction Candidate Minimal Implementation Foundation
 
 **Milestone**

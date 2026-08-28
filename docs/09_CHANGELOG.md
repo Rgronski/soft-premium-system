@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 092 - MS-030.21 Project Map Candidate UI Integration Foundation
+
+### Date
+
+2026-08-28
+
+### Completed
+
+* Connected the Project Map page to the read-only scanner, classifier, and reconstruction pipeline so it can render a reviewable candidate summary when source evidence is available.
+* Preserved explicit missing and unavailable states when the pipeline cannot produce a candidate.
+* Kept candidate data visually separate from canonical Project Map data and exposed evidence or provenance summaries without adding canonical write behavior.
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md` so the SSOT now records `MS-030.21 - Project Map Candidate UI Integration Foundation` as the latest completed product milestone while keeping `Current Product Milestone` and `Next Product Milestone` at `NONE / Product Owner decision required`.
+* Recorded that Beauty Client PRO remains the future controlled trial target and was not inspected or modified.
+
+### Evidence
+
+* Published changes in `src/app/projects/[id]/project-map/page.tsx` and `src/app/projects/[id]/project-map/page.test.tsx`
+
+### Notes
+
+* This is a focused UI integration milestone and does not add canonical write or export behavior.
+* MS-030.20 remains the reconstruction-candidate baseline immediately before this UI integration layer.
+
 ## Session 092 - MS-030.20 Project Map Reconstruction Candidate Minimal Implementation Foundation
 
 ### Date

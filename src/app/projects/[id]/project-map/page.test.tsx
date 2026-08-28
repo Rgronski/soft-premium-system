@@ -5,6 +5,9 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 const getServerProjectByIdMock = vi.fn();
 const resolveProjectMapReadResultMock = vi.fn();
+const scanProjectMapEvidenceMock = vi.fn();
+const classifyProjectMapEvidenceMock = vi.fn();
+const buildProjectMapReconstructionCandidateMock = vi.fn();
 
 vi.mock("@/lib/project/server", () => ({
   getServerProjectById: (projectId: string) => getServerProjectByIdMock(projectId),
@@ -15,17 +18,169 @@ vi.mock("@/lib/project-map/read", () => ({
     resolveProjectMapReadResultMock(project),
 }));
 
+vi.mock("@/lib/project-map/scan", () => ({
+  scanProjectMapEvidence: (project: unknown) => scanProjectMapEvidenceMock(project),
+}));
+
+vi.mock("@/lib/project-map/classify", () => ({
+  classifyProjectMapEvidence: (scanResult: unknown) =>
+    classifyProjectMapEvidenceMock(scanResult),
+}));
+
+vi.mock("@/lib/project-map/reconstruct", () => ({
+  buildProjectMapReconstructionCandidate: (classification: unknown) =>
+    buildProjectMapReconstructionCandidateMock(classification),
+}));
+
 import ProjectMapPage from "./page";
+
+function buildAvailableCandidate() {
+  return {
+    status: "available" as const,
+    projectId: "project-1",
+    projectName: "Alpha Workspace",
+    sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace",
+    foundationChecklist: [
+      {
+        foundationArea: "Project Identity",
+        status: "completed",
+        supportState: "confirmed",
+        conflictState: "none",
+        milestoneStates: ["completed"],
+        evidence: [
+          {
+            evidenceType: "readme",
+            discoveryStatus: "found",
+            sourceOwner: "project",
+            sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace\\README.md",
+            sourceRelativePath: "README.md",
+            projectId: "project-1",
+            projectName: "Alpha Workspace",
+            confidence: "direct",
+            foundationAreas: ["Project Identity", "Working Source"],
+            milestoneStates: ["unknown"],
+            conflictState: "none",
+            supportState: "confirmed",
+          },
+        ],
+      },
+      {
+        foundationArea: "SSOT",
+        status: "planned",
+        supportState: "confirmed",
+        conflictState: "none",
+        milestoneStates: ["planned"],
+        evidence: [],
+      },
+      {
+        foundationArea: "Project Bible",
+        status: "planned",
+        supportState: "confirmed",
+        conflictState: "none",
+        milestoneStates: ["planned"],
+        evidence: [],
+      },
+      {
+        foundationArea: "Project Map",
+        status: "needs review",
+        supportState: "inferred",
+        conflictState: "conflicting",
+        milestoneStates: ["unknown"],
+        evidence: [],
+      },
+      {
+        foundationArea: "Working Source",
+        status: "completed",
+        supportState: "confirmed",
+        conflictState: "none",
+        milestoneStates: ["completed"],
+        evidence: [],
+      },
+      {
+        foundationArea: "First Layout",
+        status: "absent",
+        supportState: "missing",
+        conflictState: "none",
+        milestoneStates: ["absent"],
+        evidence: [],
+      },
+      {
+        foundationArea: "First Working Flow",
+        status: "planned",
+        supportState: "confirmed",
+        conflictState: "none",
+        milestoneStates: ["planned"],
+        evidence: [],
+      },
+      {
+        foundationArea: "Publication Path",
+        status: "completed",
+        supportState: "confirmed",
+        conflictState: "none",
+        milestoneStates: ["completed"],
+        evidence: [],
+      },
+    ],
+    evidence: [
+      {
+        evidenceType: "readme",
+        discoveryStatus: "found",
+        sourceOwner: "project",
+        sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace\\README.md",
+        sourceRelativePath: "README.md",
+        projectId: "project-1",
+        projectName: "Alpha Workspace",
+        confidence: "direct",
+        foundationAreas: ["Project Identity", "Working Source"],
+        milestoneStates: ["unknown"],
+        conflictState: "none",
+        supportState: "confirmed",
+      },
+      {
+        evidenceType: "roadmap",
+        discoveryStatus: "found",
+        sourceOwner: "project",
+        sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace\\docs\\04_ROADMAP.md",
+        sourceRelativePath: "docs/04_ROADMAP.md",
+        projectId: "project-1",
+        projectName: "Alpha Workspace",
+        confidence: "direct",
+        foundationAreas: ["Project Map"],
+        milestoneStates: ["planned"],
+        conflictState: "none",
+        supportState: "confirmed",
+      },
+    ],
+  };
+}
+
+function buildUnavailableCandidate() {
+  return {
+    status: "unavailable" as const,
+    reason: "project-source-path-unavailable" as const,
+    confidence: "unavailable" as const,
+    projectId: "project-1",
+    projectName: "Alpha Workspace",
+    sourcePath: undefined,
+    foundationChecklist: [],
+    evidence: [],
+  };
+}
 
 describe("ProjectMapPage", () => {
   beforeEach(() => {
     getServerProjectByIdMock.mockReset();
     resolveProjectMapReadResultMock.mockReset();
+    scanProjectMapEvidenceMock.mockReset();
+    classifyProjectMapEvidenceMock.mockReset();
+    buildProjectMapReconstructionCandidateMock.mockReset();
+
     getServerProjectByIdMock.mockResolvedValue({
       id: "project-1",
       name: "Alpha Workspace",
       workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
     });
+
     resolveProjectMapReadResultMock.mockResolvedValue({
       status: "missing",
       projectId: "project-1",
@@ -37,6 +192,26 @@ describe("ProjectMapPage", () => {
       mapJsonPath:
         "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\map.json",
     });
+
+    scanProjectMapEvidenceMock.mockResolvedValue({
+      status: "available",
+      projectId: "project-1",
+      projectName: "Alpha Workspace",
+      sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace",
+      evidence: [],
+    });
+
+    classifyProjectMapEvidenceMock.mockReturnValue({
+      status: "available",
+      projectId: "project-1",
+      projectName: "Alpha Workspace",
+      sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace",
+      evidence: [],
+    });
+
+    buildProjectMapReconstructionCandidateMock.mockReturnValue(
+      buildAvailableCandidate(),
+    );
   });
 
   afterEach(() => {
@@ -44,25 +219,33 @@ describe("ProjectMapPage", () => {
     vi.restoreAllMocks();
   });
 
-  test("renders the visible Project Map shell with an explicit missing map state", async () => {
+  test("renders the visible Project Map shell with explicit missing map state and a reviewable candidate", async () => {
     render(
       await ProjectMapPage({
         params: Promise.resolve({ id: "project-1" }),
       }),
     );
 
-    expect(screen.getByText("Mapa projektu")).toBeTruthy();
-    expect(screen.getByText("Shell przyszłej Mapy projektu")).toBeTruthy();
+    expect(screen.getByText((content) => content.includes("Shell"))).toBeTruthy();
     expect(screen.getByText("Alpha Workspace")).toBeTruthy();
     expect(screen.getByText("Stan odczytu mapy")).toBeTruthy();
-    expect(screen.getByText("Mapa projektu nie jest jeszcze gotowa")).toBeTruthy();
-    expect(screen.getByText("Project Identity")).toBeTruthy();
-    expect(screen.getByText("dostępny")).toBeTruthy();
-    expect(screen.getAllByText("planowane")).toHaveLength(6);
-    expect(screen.getByText("brak / niegotowe")).toBeTruthy();
     expect(
-      screen.getByText(
-        "To jest widok kandydacki, nie kanoniczna Mapa projektu. Akcje zapisu, promowania i accept/write pozostają poza zakresem.",
+      screen.getAllByText((content) => content.includes("Mapa projektu nie jest jeszcze gotowa")),
+    ).toHaveLength(2);
+    expect(screen.getByText("brak / niegotowe")).toBeTruthy();
+    expect(screen.getByText("Reviewable Project Map candidate")).toBeTruthy();
+    expect(screen.getByText("Candidate foundation statuses")).toBeTruthy();
+    expect(screen.getByText("Evidence and provenance")).toBeTruthy();
+    expect(screen.getAllByText("Project Identity").length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByText("Project Map").length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByText("needs review")).toBeTruthy();
+    expect(screen.getByText((content) => content.includes("README.md"))).toBeTruthy();
+    expect(
+      screen.getByText("support: confirmed | conflict: none | evidence: 1 | milestones: completed"),
+    ).toBeTruthy();
+    expect(
+      screen.getByText((content) =>
+        content.includes("No canonical write, export, promote, or accept action is implemented."),
       ),
     ).toBeTruthy();
     expect(getServerProjectByIdMock).toHaveBeenCalledWith("project-1");
@@ -71,6 +254,24 @@ describe("ProjectMapPage", () => {
       name: "Alpha Workspace",
       workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
     });
+    expect(scanProjectMapEvidenceMock).toHaveBeenCalledWith({
+      id: "project-1",
+      name: "Alpha Workspace",
+      workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+    });
+    expect(classifyProjectMapEvidenceMock).toHaveBeenCalledWith({
+      status: "available",
+      projectId: "project-1",
+      projectName: "Alpha Workspace",
+      sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace",
+      evidence: [],
+    });
+    expect(buildProjectMapReconstructionCandidateMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        status: "available",
+        projectId: "project-1",
+      }),
+    );
   });
 
   test("shows an unavailable shell when the project identity is missing", async () => {
@@ -82,11 +283,14 @@ describe("ProjectMapPage", () => {
       }),
     );
 
-    expect(screen.getByText("Projekt nie został znaleziony.")).toBeTruthy();
-    expect(screen.getByText("niedostępny")).toBeTruthy();
+    expect(
+      screen.getByText((content) => content.includes("Projekt nie został znaleziony.")),
+    ).toBeTruthy();
     expect(screen.getByText("Kontekst projektu niedostępny")).toBeTruthy();
-    expect(screen.getByText("Brak poprawnego kontekstu projektu.")).toBeTruthy();
+    expect(screen.getByText((content) => content.includes("Brak poprawnego kontekstu projektu."))).toBeTruthy();
+    expect(screen.queryByText("Reviewable Project Map candidate")).toBeNull();
     expect(resolveProjectMapReadResultMock).not.toHaveBeenCalled();
+    expect(scanProjectMapEvidenceMock).not.toHaveBeenCalled();
   });
 
   test("shows an explicit read-not-implemented state when the map file already exists", async () => {
@@ -110,11 +314,51 @@ describe("ProjectMapPage", () => {
     );
 
     expect(
-      screen.getByText(
-        "Mapa projektu jest obecna, ale odczyt niezaimplementowany",
+      screen.getByText((content) =>
+        content.includes("Mapa projektu jest obecna, ale odczyt niezaimplementowany"),
       ),
     ).toBeTruthy();
-    expect(screen.getByText("obecna / odczyt niezaimplementowany")).toBeTruthy();
+    expect(screen.getByText((content) => content.includes("obecna / odczyt niezaimplementowany"))).toBeTruthy();
     expect(screen.getByText((content) => content.includes("map.json:"))).toBeTruthy();
+    expect(screen.getByText("Reviewable Project Map candidate")).toBeTruthy();
+    expect(screen.getByText("Candidate foundation statuses")).toBeTruthy();
+    expect(screen.getByText("Evidence and provenance")).toBeTruthy();
+    expect(screen.getAllByText("Project Identity").length).toBeGreaterThanOrEqual(2);
+    expect(scanProjectMapEvidenceMock).toHaveBeenCalledWith({
+      id: "project-1",
+      name: "Alpha Workspace",
+      workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+    });
+  });
+
+  test("shows an explicit candidate-not-ready state when the pipeline cannot produce a candidate", async () => {
+    scanProjectMapEvidenceMock.mockResolvedValueOnce({
+      status: "unavailable",
+      reason: "project-source-path-unavailable",
+      projectId: "project-1",
+      projectName: "Alpha Workspace",
+      evidence: [],
+    });
+    classifyProjectMapEvidenceMock.mockReturnValueOnce({
+      status: "unavailable",
+      reason: "project-source-path-unavailable",
+      confidence: "unavailable",
+      projectId: "project-1",
+      projectName: "Alpha Workspace",
+      evidence: [],
+    });
+    buildProjectMapReconstructionCandidateMock.mockReturnValueOnce(
+      buildUnavailableCandidate(),
+    );
+
+    render(
+      await ProjectMapPage({
+        params: Promise.resolve({ id: "project-1" }),
+      }),
+    );
+
+    expect(screen.getByText("Project Map candidate not ready")).toBeTruthy();
+    expect(screen.getByText((content) => content.includes("Reason:"))).toBeTruthy();
+    expect(screen.queryByText("Candidate foundation statuses")).toBeNull();
   });
 });

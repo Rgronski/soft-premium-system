@@ -2,10 +2,17 @@ import Link from "next/link";
 
 import { SectionCard } from "@/components/ui/SectionCard";
 import { getServerProjectById } from "@/lib/project/server";
+import { classifyProjectMapEvidence } from "@/lib/project-map/classify";
+import { buildProjectMapReconstructionCandidate } from "@/lib/project-map/reconstruct";
+import { scanProjectMapEvidence } from "@/lib/project-map/scan";
 import {
   resolveProjectMapReadResult,
   type ProjectMapReadResult,
 } from "@/lib/project-map/read";
+import type {
+  ProjectMapReconstructionCandidateChecklistItem,
+  ProjectMapReconstructionCandidateResult,
+} from "@/lib/project-map/reconstruct";
 
 type FoundationStatus = {
   label: string;
@@ -17,6 +24,14 @@ type ProjectMapStateCopy = {
   title: string;
   description: string;
   details: string[];
+};
+
+type ProjectMapCandidateCopy = {
+  title: string;
+  description: string;
+  details: string[];
+  foundationChecklist: ProjectMapReconstructionCandidateChecklistItem[];
+  evidenceSummaries: string[];
 };
 
 function buildProjectMapStateCopy(
@@ -68,6 +83,74 @@ function buildProjectMapStateCopy(
       `map.json: ${mapReadResult.mapJsonPath ?? "brak"}`,
     ],
   };
+}
+
+function buildProjectMapCandidateCopy(
+  candidate: ProjectMapReconstructionCandidateResult | null,
+): ProjectMapCandidateCopy | null {
+  if (!candidate) {
+    return null;
+  }
+
+  if (candidate.status === "unavailable") {
+    return {
+      title: "Project Map candidate not ready",
+      description:
+        "The reconstruction pipeline could not build a reviewable candidate, so the page keeps the state explicit instead of pretending the map is ready.",
+      details: [
+        `Reason: ${candidate.reason}`,
+        `Project ID: ${candidate.projectId ?? "missing"}`,
+        `Project name: ${candidate.projectName ?? "missing"}`,
+        `Source path: ${candidate.sourcePath ?? "missing"}`,
+      ],
+      foundationChecklist: [],
+      evidenceSummaries: [],
+    };
+  }
+
+  return {
+    title: "Reviewable Project Map candidate",
+    description:
+      "This is a read-only reconstruction candidate, not canonical Project Map data. It keeps source evidence and foundation states visible for review.",
+    details: [
+      `Evidence items: ${candidate.evidence.length}`,
+      `Foundation areas: ${candidate.foundationChecklist.length}`,
+      "No canonical write, export, promote, or accept action is implemented.",
+    ],
+    foundationChecklist: candidate.foundationChecklist,
+    evidenceSummaries: candidate.evidence.map((evidence) => {
+      const foundationAreas =
+        evidence.foundationAreas.length > 0
+          ? evidence.foundationAreas.join(", ")
+          : "none";
+
+      return `${evidence.evidenceType} / ${evidence.discoveryStatus} / ${evidence.supportState} / ${evidence.sourceRelativePath} / ${foundationAreas}`;
+    }),
+  };
+}
+
+function buildProjectMapCandidateFoundationDescription(
+  item: ProjectMapReconstructionCandidateChecklistItem,
+): string {
+  return [
+    `support: ${item.supportState}`,
+    `conflict: ${item.conflictState}`,
+    `evidence: ${item.evidence.length}`,
+    `milestones: ${item.milestoneStates.join(", ")}`,
+  ].join(" | ");
+}
+
+async function loadProjectMapCandidate(
+  project: Awaited<ReturnType<typeof getServerProjectById>>,
+): Promise<ProjectMapReconstructionCandidateResult | null> {
+  if (!project) {
+    return null;
+  }
+
+  const scanResult = await scanProjectMapEvidence(project);
+  const classificationResult = classifyProjectMapEvidence(scanResult);
+
+  return buildProjectMapReconstructionCandidate(classificationResult);
 }
 
 function buildFoundationStatuses(
@@ -143,11 +226,13 @@ export default async function ProjectMapPage({
   const mapReadResult = project
     ? await resolveProjectMapReadResult(project)
     : null;
+  const mapCandidate = await loadProjectMapCandidate(project);
   const foundationStatuses = buildFoundationStatuses(
     project?.name ?? null,
     mapReadResult,
   );
   const projectMapStateCopy = buildProjectMapStateCopy(mapReadResult);
+  const projectMapCandidateCopy = buildProjectMapCandidateCopy(mapCandidate);
 
   return (
     <SectionCard className="space-y-6">
@@ -207,6 +292,96 @@ export default async function ProjectMapPage({
           ))}
         </ul>
       </div>
+
+      {projectMapCandidateCopy ? (
+        <div className="space-y-3 rounded-xl border border-sky-900/50 bg-sky-950/20 p-4">
+          <div className="space-y-1">
+            <p className="text-sm uppercase tracking-[0.2em] text-sky-200/70">
+              Candidate pipeline
+            </p>
+            <h3 className="text-xl font-semibold text-sky-50">
+              {projectMapCandidateCopy.title}
+            </h3>
+            <p className="text-sm text-sky-100/80">
+              {projectMapCandidateCopy.description}
+            </p>
+          </div>
+
+          <ul className="space-y-2 text-sm text-sky-50/90">
+            {projectMapCandidateCopy.details.map((detail) => (
+              <li
+                key={detail}
+                className="rounded-lg border border-sky-900/60 bg-sky-950/40 px-3 py-2"
+              >
+                {detail}
+              </li>
+            ))}
+          </ul>
+
+          {projectMapCandidateCopy.foundationChecklist.length > 0 ? (
+            <div className="space-y-3">
+              <div className="space-y-1">
+                <p className="text-sm uppercase tracking-[0.2em] text-sky-200/70">
+                  Candidate foundation statuses
+                </p>
+                <p className="text-sm text-sky-100/70">
+                  Reviewable candidate data stays separate from canonical Project
+                  Map data.
+                </p>
+              </div>
+
+              <div className="grid gap-3">
+                {projectMapCandidateCopy.foundationChecklist.map((item) => (
+                  <div
+                    key={item.foundationArea}
+                    className="rounded-xl border border-sky-900/60 bg-sky-950/30 p-4"
+                  >
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="space-y-1">
+                        <p className="text-base font-medium text-sky-50">
+                          {item.foundationArea}
+                        </p>
+                        <p className="text-sm text-sky-100/70">
+                          {buildProjectMapCandidateFoundationDescription(item)}
+                        </p>
+                      </div>
+
+                      <span className="inline-flex items-center rounded-full border border-sky-700 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-sky-100">
+                        {item.status}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          {projectMapCandidateCopy.evidenceSummaries.length > 0 ? (
+            <div className="space-y-3">
+              <div className="space-y-1">
+                <p className="text-sm uppercase tracking-[0.2em] text-sky-200/70">
+                  Evidence and provenance
+                </p>
+                <p className="text-sm text-sky-100/70">
+                  Source links remain visible so the candidate can be reviewed
+                  without promoting it to canonical data.
+                </p>
+              </div>
+
+              <ul className="space-y-2 text-sm text-sky-50/90">
+                {projectMapCandidateCopy.evidenceSummaries.map((summary) => (
+                  <li
+                    key={summary}
+                    className="rounded-lg border border-sky-900/60 bg-sky-950/40 px-3 py-2"
+                  >
+                    {summary}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
 
       <div className="space-y-3">
         <div className="space-y-1">

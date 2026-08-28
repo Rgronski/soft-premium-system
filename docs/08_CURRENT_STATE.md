@@ -45,12 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-MS-030.20 - Project Map Reconstruction Candidate Minimal Implementation Foundation
+MS-030.21 - Project Map Candidate UI Integration Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
 
-MS-030.19 is COMPLETED / VERIFIED in the current local workspace as the Project Map Evidence Classification Minimal Implementation Foundation. The new read-only classifier consumes MS-030.18 scanner output, preserves evidence type, source path or identifier, source owner, and discovery status, and attaches confidence plus direct foundation-area and milestone links when known. Missing evidence stays out of completed or `check` states, unavailable source state stays explicit, weak or unknown evidence remains visible when present, and conflict handling stays representable without resolving it. The classifier does not generate a reconstruction candidate, does not write `.sps-meta`, and does not promote anything to a canonical Project Map. Beauty Client PRO remains the future controlled trial target, but this milestone does not inspect or modify that project. Classified output stays separate from canonical Project Map data.
+MS-030.21 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map Candidate UI Integration Foundation. The Project Map UI page now connects to the read-only scanner, classifier, and reconstruction pipeline so it can render a reviewable candidate summary when project source evidence is available. Missing and unavailable states remain explicit when no candidate can be produced, candidate data stays separate from canonical Project Map data, and evidence or provenance summaries are shown without adding canonical write behavior. Beauty Client PRO remains the future controlled trial target, but this milestone does not inspect or modify that project.
 
 MS-030.20 is COMPLETED / VERIFIED in the current local workspace as the Project Map Reconstruction Candidate Minimal Implementation Foundation. The new read-only candidate builder consumes MS-030.19 classified evidence, preserves evidence links, keeps confirmed, inferred, weak, and missing support states visible, marks conflicting foundation areas as needs review, and keeps the foundation checklist available without inventing canonical write behavior. Beauty Client PRO remains the future controlled trial target, but this milestone does not inspect or modify that project. Candidate output stays separate from canonical Project Map data.
 
