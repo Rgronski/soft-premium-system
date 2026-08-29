@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-030.25 - Project Map Source Identity Write Failure Status Foundation
+  MS-030.26 - Beauty Client PRO Project Map Reconstruction Candidate Review Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-030.26 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Project Map Reconstruction Candidate Review Foundation. The reconstruction candidate review now stays read-only and candidate-only while surfacing the persisted BCP source identity, explicit source-identity persistence status, canonical Project Map absence, foundation checklist candidate states, product-area and milestone evidence, missing evidence, weak or inferred evidence, conflicts, and parked ideas where available. The review keeps candidate data separate from canonical Project Map data and does not create, overwrite, accept, or promote a canonical Project Map. Beauty Client PRO itself was not modified in this milestone.
 
 MS-030.23 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Project Map Controlled Trial Foundation. The accepted read-only trial confirmed the BCP project identity, local source, and checkout-level repository URL, while the canonical Project Map root and map.json remained missing. The candidate flow stayed read-only and candidate-only, and no canonical Project Map was created, overwritten, or promoted. Repository URL availability currently depends on checkout-level git metadata rather than the root manifest alone. The trial result is PASS / ACCEPTABLE FOR REVIEW, and the publication sync records that result without treating the missing canonical map as a failure. Beauty Client PRO itself was not modified in this milestone.
 

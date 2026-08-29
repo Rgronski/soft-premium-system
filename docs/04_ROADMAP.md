@@ -193,9 +193,41 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.25 - Project Map Source Identity Write Failure Status Foundation
+Latest Completed Product Milestone: MS-030.26 - Beauty Client PRO Project Map Reconstruction Candidate Review Foundation
 
 ## Latest Completed Product Milestone
+
+## MS-030.26 - Beauty Client PRO Project Map Reconstruction Candidate Review Foundation
+
+**Milestone**
+MS-030.26 - Beauty Client PRO Project Map Reconstruction Candidate Review Foundation
+
+**Type**
+SPS OS / Beauty Client PRO Project Map Reconstruction Candidate Review Foundation
+
+This checkpoint records the read-only review boundary for the Beauty Client PRO Project Map reconstruction candidate. The review consumes the persisted SPS OS-owned source identity and the explicit source-identity persistence status from MS-030.24 and MS-030.25, keeps the candidate separate from canonical Project Map data, and exposes project identity, source-identity persistence status, canonical map absence, foundation checklist candidate states, product-area and milestone evidence, missing evidence, weak or inferred evidence, conflicts, and parked ideas when available. Beauty Client PRO itself was not modified in this milestone.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Candidate review only.
+
+**Allowed Implementation Scope**
+* review the reconstruction candidate in read-only mode
+* keep candidate data separate from canonical Project Map data
+* expose evidence, missing, weak, inferred, conflict, and parked-idea states without canonical write or promotion
+
+**Dependencies**
+* closed `MS-030.25 - Project Map Source Identity Write Failure Status Foundation`
+* closed `MS-030.24 - Beauty Client PRO Project Map Source Identity Persistence Foundation`
+* closed `MS-030.23 - Beauty Client PRO Project Map Controlled Trial Foundation`
 
 ## MS-030.25 - Project Map Source Identity Write Failure Status Foundation
 
