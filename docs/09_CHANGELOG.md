@@ -69,6 +69,28 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 093 - MS-030.28 Beauty Client PRO Canonical Project Map Write Approval Foundation
+
+### Date
+
+2026-08-29
+
+### Completed
+
+* Defined the read-only approval boundary required before any Beauty Client PRO reconstruction candidate can be written as a canonical Project Map.
+* Distinguished not requested, approval required, approved, rejected, and blocked by evidence while keeping canonical write out of scope.
+* Kept Beauty Client PRO repository files untouched and did not create, overwrite, or promote any canonical Project Map files.
+
+### Evidence
+
+* Published new Project Map write-approval helper and focused tests in `src/lib/project-map/write-approval.ts` and `src/lib/project-map/write-approval.test.ts`
+* Updated `src/lib/app-version.ts` and `src/components/app-version-badge.test.tsx`
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`
+
+### Notes
+
+* MS-030.27 remains the candidate-acceptance baseline immediately before this approval-boundary update.
+
 ## Session 093 - MS-030.27 Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
 
 ### Date

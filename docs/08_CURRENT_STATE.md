@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-030.27 - Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
+  MS-030.28 - Beauty Client PRO Canonical Project Map Write Approval Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-030.28 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Canonical Project Map Write Approval Foundation. The approval boundary now stays read-only and approval-boundary only while distinguishing not requested, approval required, approved, rejected, and blocked by evidence. The gate uses the persisted BCP source identity, explicit source-identity persistence status, reconstruction candidate review, and candidate acceptance as inputs while keeping canonical write out of scope. Beauty Client PRO itself was not modified in this milestone.
 
 MS-030.27 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation. The acceptance boundary now stays read-only and candidate-only while distinguishing candidate reviewed, candidate acceptable, candidate rejected, candidate needs evidence, and canonical write not allowed yet. The boundary uses the persisted SPS OS-owned source identity, explicit source-identity persistence status, and the candidate review boundary as inputs, while keeping missing, weak, inferred, and conflicting evidence visible. Beauty Client PRO itself was not modified in this milestone.
 

@@ -193,7 +193,34 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.27 - Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
+Latest Completed Product Milestone: MS-030.28 - Beauty Client PRO Canonical Project Map Write Approval Foundation
+
+## MS-030.28 - Beauty Client PRO Canonical Project Map Write Approval Foundation
+
+**Milestone**
+MS-030.28 - Beauty Client PRO Canonical Project Map Write Approval Foundation
+
+**Type**
+SPS OS / Beauty Client PRO Canonical Project Map Write Approval Foundation
+
+This checkpoint records the read-only approval boundary that must exist before any Beauty Client PRO reconstruction candidate can be written as a canonical Project Map. The approval gate stays separate from the canonical write itself and distinguishes not requested, approval required, approved, rejected, and blocked by evidence. It uses the persisted SPS OS-owned source identity, the explicit source-identity persistence status, the reconstruction candidate review boundary, and the candidate acceptance boundary as inputs while keeping canonical write out of scope. Beauty Client PRO itself was not modified in this milestone.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Canonical write approval only.
+
+**Allowed Implementation Scope**
+* define the approval boundary before canonical Project Map write
+* keep approval explicit, traceable, and separate from canonical write execution
+* block approval when evidence is missing, weak, inferred, conflicting, or otherwise insufficient
 
 ## MS-030.27 - Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
 
@@ -223,6 +250,33 @@ Acceptance boundary only.
 * preserve candidate-only handling until future Product Owner approval
 
 ## Latest Completed Product Milestone
+
+## MS-030.28 - Beauty Client PRO Canonical Project Map Write Approval Foundation
+
+**Milestone**
+MS-030.28 - Beauty Client PRO Canonical Project Map Write Approval Foundation
+
+**Type**
+SPS OS / Beauty Client PRO Canonical Project Map Write Approval Foundation
+
+This checkpoint records the read-only approval boundary that must exist before any Beauty Client PRO reconstruction candidate can be written as a canonical Project Map. The approval gate stays separate from the canonical write itself and distinguishes not requested, approval required, approved, rejected, and blocked by evidence. It uses the persisted SPS OS-owned source identity, the explicit source-identity persistence status, the reconstruction candidate review boundary, and the candidate acceptance boundary as inputs while keeping canonical write out of scope. Beauty Client PRO itself was not modified in this milestone.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Canonical write approval only.
+
+**Allowed Implementation Scope**
+* define the approval boundary before canonical Project Map write
+* keep approval explicit, traceable, and separate from canonical write execution
+* block approval when evidence is missing, weak, inferred, conflicting, or otherwise insufficient
 
 ## MS-030.27 - Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
 
