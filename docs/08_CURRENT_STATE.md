@@ -553,7 +553,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation
+Latest Completed Product Milestone: MS-030.34 - Project Map Area Completion Record Foundation
 Next Product Milestone: NONE / Product Owner decision required
 MS-028.71 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the Project API Filesystem Rebinding Fallback Foundation. The project API now recovers the known Beauty Client PRO project from the SPS-owned workspace manifest when the server registry misses it, so the canonical server project can be resolved instead of silently dropping into browser-local fallback for the known project.
 
@@ -1737,7 +1737,7 @@ Next:
 # In Progress
 
  * `Current Product Milestone` is `NONE / Product Owner decision required`
- * `Latest Completed Product Milestone` is `MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation`
+ * `Latest Completed Product Milestone` is `MS-030.34 - Project Map Area Completion Record Foundation`
  * `Next Product Milestone` is `NONE / Product Owner decision required`
  * `Session 091` published the MS-028.73 Codex Report Copy-Block Compliance Guard Foundation because the Codex operating charter now requires one clean copy-ready fenced report block with exact start and end markers and rejects escaped markers or loose Markdown outside the block.
  * `Session 091` synchronized the `MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.

@@ -21,7 +21,7 @@ Next Work Item: Product Owner starts Session 094 from the fresh `sps-session.zip
 
 Repository State:
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: 075b3a0
 Push Status: synchronized 0 / 0 after Session 093 close publication
@@ -36,7 +36,7 @@ Blockers: NONE
 Open Risks: NONE
 
 Recommendation: Open a new chat titled `094 SPS OS - Product Owner decision required` and attach `sps-session.zip` after the package generator completes.
-Next Safe Step: Product Owner confirms `Package Consistency: PASS`, verifies the ZIP path and `LastWriteTime`, and then starts Session 094 from the fresh package.
+Next Safe Step: Run `powershell -ExecutionPolicy Bypass -File .\scripts\New-SpsSession.ps1`
 Next Chat Prompt: SPS OS - START. Project: C:\Users\p700\soft-premium-system. Attach C:\Users\p700\soft-premium-system\sps-session.zip to the new chat before bootstrap; the local path alone does not give the next chat access to the ZIP. Run the full bootstrap, confirm package Git Context and SSOT consistency, keep Current Product Milestone as `NONE / Product Owner decision required`, keep Next Product Milestone as `NONE / Product Owner decision required`, preserve `MS-030.34 - Project Map Area Completion Record Foundation` as `COMPLETED / VERIFIED / PUBLISHED / CLOSED`, and start Session 094 only after the Product Owner selects the next milestone.
 
 ## Stałe zasady pracy

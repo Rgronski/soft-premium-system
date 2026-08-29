@@ -265,11 +265,11 @@ Latest Completed Capability Item: Session 093 completed the MS-030.34 area compl
 Current Sprint: NONE
 Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, MS-022.3, MS-023.0, MS-027.2, MS-027.3, MS-027.4, MS-027.5, MS-028.0, MS-028.1, MS-028.2, MS-028.3, MS-028.4, MS-028.5, MS-028.6, MS-028.7, MS-028.8, MS-028.9, MS-028.10, MS-028.11, MS-028.12, MS-028.13, MS-028.14, MS-028.15, and MS-028.16 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: 075b3a0
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Run `powershell -ExecutionPolicy Bypass -File .\scripts\New-SpsSession.ps1` after confirming the close commit is pushed and the repository is clean.
+Next Safe Step: Run `powershell -ExecutionPolicy Bypass -File .\scripts\New-SpsSession.ps1`
 Next Session Plan: Open a new chat, attach `sps-session.zip`, and use the supplied Session 094 START prompt after the fresh package is generated.
