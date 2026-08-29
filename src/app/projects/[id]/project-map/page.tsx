@@ -34,6 +34,12 @@ type ProjectMapCandidateCopy = {
   evidenceSummaries: string[];
 };
 
+type ProjectMapCanonicalVsCandidateCopy = {
+  title: string;
+  description: string;
+  details: string[];
+};
+
 function buildProjectMapStateCopy(
   mapReadResult: ProjectMapReadResult | null,
 ): ProjectMapStateCopy {
@@ -126,6 +132,77 @@ function buildProjectMapCandidateCopy(
 
       return `${evidence.evidenceType} / ${evidence.discoveryStatus} / ${evidence.supportState} / ${evidence.sourceRelativePath} / ${foundationAreas}`;
     }),
+  };
+}
+
+function buildProjectMapCanonicalVsCandidateCopy(
+  mapReadResult: ProjectMapReadResult | null,
+  candidate: ProjectMapReconstructionCandidateResult | null,
+): ProjectMapCanonicalVsCandidateCopy | null {
+  if (!mapReadResult && !candidate) {
+    return null;
+  }
+
+  const canonicalStatus =
+    !mapReadResult || mapReadResult.status === "missing"
+      ? "missing"
+      : mapReadResult.reason === "project-map-present-but-read-not-implemented"
+        ? "present"
+        : "unavailable";
+
+  const candidateStatus =
+    !candidate || candidate.status === "unavailable" ? "unavailable" : "available";
+
+  const viewMode =
+    canonicalStatus === "present" && candidateStatus === "available"
+      ? "mixed"
+      : canonicalStatus === "present"
+        ? "canonical"
+        : candidateStatus === "available"
+          ? "candidate"
+          : "missing";
+
+  const details = [
+    `Current view: ${viewMode}`,
+    `Canonical Project Map: ${canonicalStatus}`,
+    `Reconstruction candidate: ${candidateStatus}`,
+    "Candidate data is not canonical unless it is explicitly written through the approved boundary.",
+  ];
+
+  if (
+    mapReadResult &&
+    "projectSourceIdentityPersistence" in mapReadResult &&
+    mapReadResult.projectSourceIdentityPersistence
+  ) {
+    details.push(
+      `Source identity persistence: ${mapReadResult.projectSourceIdentityPersistence.status}`,
+    );
+  }
+
+  if (
+    mapReadResult &&
+    "projectSourceIdentity" in mapReadResult &&
+    mapReadResult.projectSourceIdentity
+  ) {
+    details.push(
+      `Repository URL: ${mapReadResult.projectSourceIdentity.repositoryUrl ?? "missing"}`,
+    );
+    details.push(
+      `Working source: ${mapReadResult.projectSourceIdentity.workingDirectory ?? "missing"}`,
+    );
+    details.push(
+      `Checkout path: ${mapReadResult.projectSourceIdentity.projectCheckoutPath ?? "missing"}`,
+    );
+    details.push(
+      `Canonical storage root: ${mapReadResult.projectMapRootPath ?? "missing"}`,
+    );
+  }
+
+  return {
+    title: "Canonical vs candidate state",
+    description:
+      "This summary keeps canonical Project Map state separate from reconstruction candidate state and makes the current view explicit.",
+    details,
   };
 }
 
@@ -233,6 +310,8 @@ export default async function ProjectMapPage({
   );
   const projectMapStateCopy = buildProjectMapStateCopy(mapReadResult);
   const projectMapCandidateCopy = buildProjectMapCandidateCopy(mapCandidate);
+  const projectMapCanonicalVsCandidateCopy =
+    buildProjectMapCanonicalVsCandidateCopy(mapReadResult, mapCandidate);
 
   return (
     <SectionCard className="space-y-6">
@@ -273,6 +352,30 @@ export default async function ProjectMapPage({
           promowania i accept/write pozostają poza zakresem.
         </p>
       </div>
+
+      {projectMapCanonicalVsCandidateCopy ? (
+        <div className="rounded-xl border border-emerald-900/50 bg-emerald-950/20 p-4">
+          <p className="text-sm uppercase tracking-[0.2em] text-emerald-200/70">
+            Canonical vs candidate state
+          </p>
+          <h3 className="mt-1 text-xl font-semibold text-emerald-50">
+            {projectMapCanonicalVsCandidateCopy.title}
+          </h3>
+          <p className="mt-2 text-sm text-emerald-100/80">
+            {projectMapCanonicalVsCandidateCopy.description}
+          </p>
+          <ul className="mt-4 space-y-2 text-sm text-emerald-50/90">
+            {projectMapCanonicalVsCandidateCopy.details.map((detail) => (
+              <li
+                key={detail}
+                className="rounded-lg border border-emerald-900/60 bg-emerald-950/40 px-3 py-2"
+              >
+                {detail}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
         <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">

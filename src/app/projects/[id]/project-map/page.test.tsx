@@ -191,6 +191,16 @@ describe("ProjectMapPage", () => {
         "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map",
       mapJsonPath:
         "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\map.json",
+      projectSourceIdentityPersistence: {
+        status: "persisted",
+      },
+      projectSourceIdentity: {
+        projectId: "project-1",
+        projectName: "Alpha Workspace",
+        repositoryUrl: "https://github.com/example/alpha-workspace.git",
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+        projectCheckoutPath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
+      },
     });
 
     scanProjectMapEvidenceMock.mockResolvedValue({
@@ -228,6 +238,13 @@ describe("ProjectMapPage", () => {
 
     expect(screen.getByText((content) => content.includes("Shell"))).toBeTruthy();
     expect(screen.getByText("Alpha Workspace")).toBeTruthy();
+    expect(
+      screen.getByRole("heading", { name: "Canonical vs candidate state" }),
+    ).toBeTruthy();
+    expect(screen.getByText("Current view: candidate")).toBeTruthy();
+    expect(screen.getByText("Canonical Project Map: missing")).toBeTruthy();
+    expect(screen.getByText("Reconstruction candidate: available")).toBeTruthy();
+    expect(screen.getByText("Source identity persistence: persisted")).toBeTruthy();
     expect(screen.getByText("Stan odczytu mapy")).toBeTruthy();
     expect(
       screen.getAllByText((content) => content.includes("Mapa projektu nie jest jeszcze gotowa")),
@@ -318,6 +335,12 @@ describe("ProjectMapPage", () => {
         content.includes("Mapa projektu jest obecna, ale odczyt niezaimplementowany"),
       ),
     ).toBeTruthy();
+    expect(
+      screen.getByRole("heading", { name: "Canonical vs candidate state" }),
+    ).toBeTruthy();
+    expect(screen.getByText("Current view: mixed")).toBeTruthy();
+    expect(screen.getByText("Canonical Project Map: present")).toBeTruthy();
+    expect(screen.getByText("Reconstruction candidate: available")).toBeTruthy();
     expect(screen.getByText((content) => content.includes("obecna / odczyt niezaimplementowany"))).toBeTruthy();
     expect(screen.getByText((content) => content.includes("map.json:"))).toBeTruthy();
     expect(screen.getByText("Reviewable Project Map candidate")).toBeTruthy();
@@ -358,6 +381,12 @@ describe("ProjectMapPage", () => {
     );
 
     expect(screen.getByText("Project Map candidate not ready")).toBeTruthy();
+    expect(
+      screen.getByRole("heading", { name: "Canonical vs candidate state" }),
+    ).toBeTruthy();
+    expect(screen.getByText("Current view: missing")).toBeTruthy();
+    expect(screen.getByText("Canonical Project Map: missing")).toBeTruthy();
+    expect(screen.getByText("Reconstruction candidate: unavailable")).toBeTruthy();
     expect(screen.getByText((content) => content.includes("Reason:"))).toBeTruthy();
     expect(screen.queryByText("Candidate foundation statuses")).toBeNull();
   });

@@ -69,6 +69,28 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 093 - MS-030.30 Project Map UI Canonical vs Candidate State Foundation
+
+### Date
+
+2026-08-29
+
+### Completed
+
+* Updated the Project Map UI shell so canonical Project Map state and reconstruction candidate state are shown separately and the current view is explicit.
+* Kept canonical, candidate, and missing states visible without adding broader Project Map editing behavior.
+* Preserved the BCP repository boundary and kept Beauty Client PRO repository files untouched.
+
+### Evidence
+
+* Updated `src/app/projects/[id]/project-map/page.tsx` and `src/app/projects/[id]/project-map/page.test.tsx`
+* Updated `src/lib/app-version.ts` and `src/components/app-version-badge.test.tsx`
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`
+
+### Notes
+
+* MS-030.29 remains the minimal canonical write baseline immediately before this UI-state foundation.
+
 ## Session 093 - MS-030.29 Beauty Client PRO Canonical Project Map Minimal Write Foundation
 
 ### Date

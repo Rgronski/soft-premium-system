@@ -193,15 +193,15 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.29 - Beauty Client PRO Canonical Project Map Minimal Write Foundation
+Latest Completed Product Milestone: MS-030.30 - Project Map UI Canonical vs Candidate State Foundation
 
-## MS-030.29 - Beauty Client PRO Canonical Project Map Minimal Write Foundation
+## MS-030.30 - Project Map UI Canonical vs Candidate State Foundation
 
 **Milestone**
-MS-030.29 - Beauty Client PRO Canonical Project Map Minimal Write Foundation
+MS-030.30 - Project Map UI Canonical vs Candidate State Foundation
 
 **Type**
-SPS OS / Beauty Client PRO Canonical Project Map Minimal Write Foundation
+SPS OS / Project Map UI Canonical vs Candidate State Foundation
 
 This checkpoint records the first minimal canonical Project Map write into the SPS OS-owned metadata root only. The write stays separate from the BCP repository, uses the MS-030.28 approval boundary, and only proceeds when approval is explicitly `approved`. The written map keeps candidate data distinguishable from canonical data and preserves the BCP source identity boundary while keeping Beauty Client PRO itself untouched.
 
@@ -279,13 +279,13 @@ Acceptance boundary only.
 
 ## Latest Completed Product Milestone
 
-## MS-030.29 - Beauty Client PRO Canonical Project Map Minimal Write Foundation
+## MS-030.30 - Project Map UI Canonical vs Candidate State Foundation
 
 **Milestone**
-MS-030.29 - Beauty Client PRO Canonical Project Map Minimal Write Foundation
+MS-030.30 - Project Map UI Canonical vs Candidate State Foundation
 
 **Type**
-SPS OS / Beauty Client PRO Canonical Project Map Minimal Write Foundation
+SPS OS / Project Map UI Canonical vs Candidate State Foundation
 
 This checkpoint records the first minimal canonical Project Map write into the SPS OS-owned metadata root only. The write stays separate from the BCP repository, uses the MS-030.28 approval boundary, and only proceeds when approval is explicitly `approved`. The written map keeps candidate data distinguishable from canonical data and preserves the BCP source identity boundary while keeping Beauty Client PRO itself untouched.
 

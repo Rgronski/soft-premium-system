@@ -22,7 +22,7 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0035");
-    expect(LAST_PUBLISHED_MS).toBe("MS-030.29 - Beauty Client PRO Canonical Project Map Minimal Write Foundation");
+    expect(APP_VERSION).toBe("1.0036");
+    expect(LAST_PUBLISHED_MS).toBe("MS-030.30 - Project Map UI Canonical vs Candidate State Foundation");
   });
 });
