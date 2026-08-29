@@ -193,7 +193,38 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.32 - Project Map Milestone Evidence Drilldown Foundation
+Latest Completed Product Milestone: MS-030.33 - Project Map End-to-End Flow Verification Foundation
+
+## MS-030.33 - Project Map End-to-End Flow Verification Foundation
+
+**Milestone**
+MS-030.33 - Project Map End-to-End Flow Verification Foundation
+
+**Type**
+SPS OS / Project Map End-to-End Flow Verification Foundation
+
+This checkpoint verifies the complete Project Map MS-030 chain end to end using the existing controlled target and the already published Project Map foundations. The verification confirms the BCP source identity, source-identity persistence status, reconstruction candidate review boundary, candidate acceptance boundary, canonical write approval boundary, minimal canonical write helper, canonical versus candidate UI state, parked ideas visibility, and milestone evidence drilldown without expanding product behavior. Beauty Client PRO remains read-only and untouched.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Verification only.
+
+**Allowed Implementation Scope**
+* verify the complete Project Map MS-030 chain end to end
+* keep the controlled Beauty Client PRO target read-only and untouched
+* preserve canonical versus candidate separation, parked ideas visibility, and evidence drilldown as already implemented
+* keep missing, weak, inferred, conflicting, parked, and canonical evidence states explicit
+* avoid adding new product behavior unless a blocking gap is found
+
+## MS-030.32 - Project Map Milestone Evidence Drilldown Foundation
 
 ## MS-030.32 - Project Map Milestone Evidence Drilldown Foundation
 
