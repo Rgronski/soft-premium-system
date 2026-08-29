@@ -193,7 +193,36 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.30 - Project Map UI Canonical vs Candidate State Foundation
+Latest Completed Product Milestone: MS-030.31 - Project Map Parked Ideas Visibility Implementation Foundation
+
+## MS-030.31 - Project Map Parked Ideas Visibility Implementation Foundation
+
+**Milestone**
+MS-030.31 - Project Map Parked Ideas Visibility Implementation Foundation
+
+**Type**
+SPS OS / Project Map Parked Ideas Visibility Implementation Foundation
+
+This checkpoint records the minimal Project Map visibility foundation for parked ideas and future improvements. The Project Map UI now surfaces parked ideas when source evidence links them to a relevant milestone or block, keeps them attached to the relevant area, labels them as parked or future context instead of active scope, and shows an explicit empty state when no parked-ideas evidence exists. The candidate and canonical separation from MS-030.30 remains intact and Beauty Client PRO itself is untouched.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Parked ideas visibility only.
+
+**Allowed Implementation Scope**
+* show parked ideas only when source evidence supports the link to a relevant milestone or block
+* keep parked ideas labeled as parked, deferred, future, or not active scope
+* keep an explicit empty state when no parked-ideas evidence exists
+* keep candidate / canonical separation intact
+* keep Beauty Client PRO repository files untouched
 
 ## MS-030.30 - Project Map UI Canonical vs Candidate State Foundation
 

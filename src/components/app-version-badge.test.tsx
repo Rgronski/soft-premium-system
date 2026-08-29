@@ -22,7 +22,7 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0036");
-    expect(LAST_PUBLISHED_MS).toBe("MS-030.30 - Project Map UI Canonical vs Candidate State Foundation");
+    expect(APP_VERSION).toBe("1.0037");
+    expect(LAST_PUBLISHED_MS).toBe("MS-030.31 - Project Map Parked Ideas Visibility Implementation Foundation");
   });
 });

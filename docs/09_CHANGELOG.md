@@ -69,6 +69,28 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 093 - MS-030.31 Project Map Parked Ideas Visibility Implementation Foundation
+
+### Date
+
+2026-08-29
+
+### Completed
+
+* Added parked ideas visibility to the Project Map UI so source-backed parked ideas can stay attached to the relevant milestone or block.
+* Kept parked ideas explicitly labeled as parked or future context and preserved an explicit empty state when no parked-idea evidence exists.
+* Preserved canonical vs candidate separation and kept Beauty Client PRO repository files untouched.
+
+### Evidence
+
+* Updated `src/app/projects/[id]/project-map/page.tsx` and `src/app/projects/[id]/project-map/page.test.tsx`
+* Updated `src/lib/app-version.ts` and `src/components/app-version-badge.test.tsx`
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`
+
+### Notes
+
+* MS-030.30 remains the canonical-vs-candidate baseline immediately before this parked-ideas visibility update.
+
 ## Session 093 - MS-030.30 Project Map UI Canonical vs Candidate State Foundation
 
 ### Date

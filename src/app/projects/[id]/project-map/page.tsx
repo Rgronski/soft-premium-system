@@ -40,6 +40,12 @@ type ProjectMapCanonicalVsCandidateCopy = {
   details: string[];
 };
 
+type ProjectMapParkedIdeasCopy = {
+  title: string;
+  description: string;
+  details: string[];
+};
+
 function buildProjectMapStateCopy(
   mapReadResult: ProjectMapReadResult | null,
 ): ProjectMapStateCopy {
@@ -206,6 +212,41 @@ function buildProjectMapCanonicalVsCandidateCopy(
   };
 }
 
+function buildProjectMapParkedIdeasCopy(
+  candidate: ProjectMapReconstructionCandidateResult | null,
+): ProjectMapParkedIdeasCopy | null {
+  if (!candidate) {
+    return null;
+  }
+
+  const parkedIdeas = candidate.foundationChecklist.filter(
+    (item) =>
+      item.status === "parked" || item.milestoneStates.includes("parked"),
+  );
+
+  if (parkedIdeas.length === 0) {
+    return {
+      title: "Parked ideas / future improvements",
+      description:
+        "Parked ideas stay attached to the relevant milestone or block and remain reviewable context, not active scope.",
+      details: [
+        "No parked or deferred items were found in the current candidate.",
+        "Parked ideas remain explicit only when source evidence supports them.",
+      ],
+    };
+  }
+
+  return {
+    title: "Parked ideas / future improvements",
+    description:
+      "Parked ideas stay attached to the relevant milestone or block and remain reviewable context, not active scope.",
+    details: parkedIdeas.map(
+      (item) =>
+        `${item.foundationArea}: ${item.status} | milestones: ${item.milestoneStates.join(", ")}`,
+    ),
+  };
+}
+
 function buildProjectMapCandidateFoundationDescription(
   item: ProjectMapReconstructionCandidateChecklistItem,
 ): string {
@@ -312,6 +353,7 @@ export default async function ProjectMapPage({
   const projectMapCandidateCopy = buildProjectMapCandidateCopy(mapCandidate);
   const projectMapCanonicalVsCandidateCopy =
     buildProjectMapCanonicalVsCandidateCopy(mapReadResult, mapCandidate);
+  const projectMapParkedIdeasCopy = buildProjectMapParkedIdeasCopy(mapCandidate);
 
   return (
     <SectionCard className="space-y-6">
@@ -369,6 +411,30 @@ export default async function ProjectMapPage({
               <li
                 key={detail}
                 className="rounded-lg border border-emerald-900/60 bg-emerald-950/40 px-3 py-2"
+              >
+                {detail}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      {projectMapParkedIdeasCopy ? (
+        <div className="rounded-xl border border-lime-900/50 bg-lime-950/20 p-4">
+          <p className="text-sm uppercase tracking-[0.2em] text-lime-200/70">
+            Parked ideas visibility
+          </p>
+          <h3 className="mt-1 text-xl font-semibold text-lime-50">
+            {projectMapParkedIdeasCopy.title}
+          </h3>
+          <p className="mt-2 text-sm text-lime-100/80">
+            {projectMapParkedIdeasCopy.description}
+          </p>
+          <ul className="mt-4 space-y-2 text-sm text-lime-50/90">
+            {projectMapParkedIdeasCopy.details.map((detail) => (
+              <li
+                key={detail}
+                className="rounded-lg border border-lime-900/60 bg-lime-950/40 px-3 py-2"
               >
                 {detail}
               </li>

@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-030.30 - Project Map UI Canonical vs Candidate State Foundation
+  MS-030.31 - Project Map Parked Ideas Visibility Implementation Foundation
+
+MS-030.31 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map Parked Ideas Visibility Implementation Foundation. The Project Map UI now makes parked ideas visible under the relevant milestone or block when source evidence exists, keeps them labeled as parked or future context instead of active scope, and shows an explicit empty state when no parked-ideas evidence is available. Candidate and canonical separation from MS-030.30 remains intact, and Beauty Client PRO itself was not modified in this milestone.
 
 **Next Milestone**
 NONE / Product Owner decision required

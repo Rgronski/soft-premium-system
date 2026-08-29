@@ -114,11 +114,28 @@ function buildAvailableCandidate() {
       },
       {
         foundationArea: "Publication Path",
-        status: "completed",
+        status: "parked",
         supportState: "confirmed",
         conflictState: "none",
-        milestoneStates: ["completed"],
-        evidence: [],
+        milestoneStates: ["parked"],
+        evidence: [
+          {
+            evidenceType: "decision/ADR",
+            discoveryStatus: "found",
+            sourceOwner: "project",
+            sourcePath:
+              "C:\\SPS_OS_WORK\\alpha-workspace\\docs\\adr\\2026-08-29-parked-ideas.md",
+            sourceRelativePath:
+              "docs/adr/2026-08-29-parked-ideas.md",
+            projectId: "project-1",
+            projectName: "Alpha Workspace",
+            confidence: "direct",
+            foundationAreas: ["Publication Path"],
+            milestoneStates: ["parked"],
+            conflictState: "none",
+            supportState: "confirmed",
+          },
+        ],
       },
     ],
     evidence: [
@@ -245,6 +262,10 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Canonical Project Map: missing")).toBeTruthy();
     expect(screen.getByText("Reconstruction candidate: available")).toBeTruthy();
     expect(screen.getByText("Source identity persistence: persisted")).toBeTruthy();
+    expect(
+      screen.getByRole("heading", { name: "Parked ideas / future improvements" }),
+    ).toBeTruthy();
+    expect(screen.getByText("Publication Path: parked | milestones: parked")).toBeTruthy();
     expect(screen.getByText("Stan odczytu mapy")).toBeTruthy();
     expect(
       screen.getAllByText((content) => content.includes("Mapa projektu nie jest jeszcze gotowa")),
@@ -341,6 +362,10 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Current view: mixed")).toBeTruthy();
     expect(screen.getByText("Canonical Project Map: present")).toBeTruthy();
     expect(screen.getByText("Reconstruction candidate: available")).toBeTruthy();
+    expect(
+      screen.getByRole("heading", { name: "Parked ideas / future improvements" }),
+    ).toBeTruthy();
+    expect(screen.getByText("Publication Path: parked | milestones: parked")).toBeTruthy();
     expect(screen.getByText((content) => content.includes("obecna / odczyt niezaimplementowany"))).toBeTruthy();
     expect(screen.getByText((content) => content.includes("map.json:"))).toBeTruthy();
     expect(screen.getByText("Reviewable Project Map candidate")).toBeTruthy();
@@ -387,6 +412,12 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Current view: missing")).toBeTruthy();
     expect(screen.getByText("Canonical Project Map: missing")).toBeTruthy();
     expect(screen.getByText("Reconstruction candidate: unavailable")).toBeTruthy();
+    expect(
+      screen.getByRole("heading", { name: "Parked ideas / future improvements" }),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("No parked or deferred items were found in the current candidate."),
+    ).toBeTruthy();
     expect(screen.getByText((content) => content.includes("Reason:"))).toBeTruthy();
     expect(screen.queryByText("Candidate foundation statuses")).toBeNull();
   });
