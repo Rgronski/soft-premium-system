@@ -11,7 +11,7 @@
 
 ## 3. Session Summary
 - Session 093 completed the full MS-030 Project Map chain from the Beauty Client PRO controlled trial through the MS-030.34 area completion record.
-- The close snapshot preserves the final accepted baseline at commit `075b3a0` on `main` / `origin/main`.
+- The close snapshot preserves the final accepted baseline at commit `35bb92b` on `main` / `origin/main`.
 - The session remains docs/usage only for the close step and does not change product code, app version, or Beauty Client PRO repository files.
 
 ## 4. Completed Work
@@ -69,7 +69,7 @@
 - 1.0038
 
 ## 11. Final HEAD
-- 075b3a0
+- 35bb92b
 
 ## 12. Package path
 - `C:\Users\p700\soft-premium-system\sps-session.zip`
