@@ -86,7 +86,7 @@ Each release entry should contain:
 
 * Updated `docs/10_SESSION_STATE.md` for the close snapshot.
 * App version remains `1.0038` and `LAST_PUBLISHED_MS` remains `MS-030.32 - Project Map Milestone Evidence Drilldown Foundation`.
-* Repository state at the close baseline is `main`, `origin/main`, `35bb92b`, clean and synchronized before package generation.
+* Repository state at the close baseline is `main`, `origin/main`, `5a4396d`, clean and synchronized.
 
 ### Notes
 
