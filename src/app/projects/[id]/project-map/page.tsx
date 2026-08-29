@@ -46,6 +46,20 @@ type ProjectMapParkedIdeasCopy = {
   details: string[];
 };
 
+type ProjectMapMilestoneEvidenceDrilldownEntryCopy = {
+  foundationArea: string;
+  status: string;
+  statusReason: string;
+  evidenceLines: string[];
+};
+
+type ProjectMapMilestoneEvidenceDrilldownCopy = {
+  title: string;
+  description: string;
+  entries: ProjectMapMilestoneEvidenceDrilldownEntryCopy[];
+  emptyState: string;
+};
+
 function buildProjectMapStateCopy(
   mapReadResult: ProjectMapReadResult | null,
 ): ProjectMapStateCopy {
@@ -247,6 +261,97 @@ function buildProjectMapParkedIdeasCopy(
   };
 }
 
+function buildProjectMapMilestoneEvidenceStateLabel(
+  evidence: ProjectMapReconstructionCandidateChecklistItem["evidence"][number],
+): string {
+  const labels = ["candidate"];
+
+  if (evidence.confidence === "missing") {
+    labels.push("missing");
+  } else if (evidence.confidence === "weak") {
+    labels.push("weak");
+  } else if (evidence.confidence === "unknown") {
+    labels.push("inferred");
+  }
+
+  if (evidence.conflictState === "conflicting") {
+    labels.push("conflicting");
+  }
+
+  if (evidence.milestoneStates.includes("parked")) {
+    labels.push("parked");
+  }
+
+  return labels.join(" / ");
+}
+
+function buildProjectMapMilestoneEvidenceStatusReason(
+  item: ProjectMapReconstructionCandidateChecklistItem,
+): string {
+  if (item.status === "completed") {
+    return item.supportState === "confirmed"
+      ? "Direct source evidence supports this block as completed."
+      : "Evidence points to completion, but the support signal remains weaker.";
+  }
+
+  if (item.status === "planned") {
+    return item.evidence.length > 0
+      ? "Source evidence links this block to planned future work."
+      : "Planned because no completion evidence was found.";
+  }
+
+  if (item.status === "blocked") {
+    return "Unavailable or unreadable evidence keeps this block blocked.";
+  }
+
+  if (item.status === "parked") {
+    return "Parked evidence keeps this block as future context, not active scope.";
+  }
+
+  if (item.status === "needs review") {
+    return "Conflicting evidence keeps this block on review.";
+  }
+
+  if (item.status === "absent") {
+    return "No supporting evidence was found, so the block stays absent.";
+  }
+
+  return "Evidence exists, but the block remains unresolved.";
+}
+
+function buildProjectMapMilestoneEvidenceDrilldownCopy(
+  candidate: ProjectMapCandidateCopy | null,
+): ProjectMapMilestoneEvidenceDrilldownCopy | null {
+  if (!candidate) {
+    return null;
+  }
+
+  const entries = candidate.foundationChecklist.map((item) => {
+    const evidenceLines =
+      item.evidence.length > 0
+        ? item.evidence.map(
+            (evidence) =>
+              `Evidence state: ${buildProjectMapMilestoneEvidenceStateLabel(evidence)} | source type: ${evidence.evidenceType} | source owner: ${evidence.sourceOwner} | source path: ${evidence.sourcePath} | confidence: ${evidence.confidence} | support: ${evidence.supportState} | conflict: ${evidence.conflictState}`,
+          )
+        : ["No source evidence linked to this block yet."];
+
+    return {
+      foundationArea: item.foundationArea,
+      status: item.status,
+      statusReason: buildProjectMapMilestoneEvidenceStatusReason(item),
+      evidenceLines,
+    };
+  });
+
+  return {
+    title: "Milestone evidence drilldown",
+    description:
+      "This drilldown explains why each block stays check, planned, blocked, unknown, parked, or needs review without upgrading evidence by implication.",
+    entries,
+    emptyState: "No candidate evidence was available for drilldown yet.",
+  };
+}
+
 function buildProjectMapCandidateFoundationDescription(
   item: ProjectMapReconstructionCandidateChecklistItem,
 ): string {
@@ -354,6 +459,8 @@ export default async function ProjectMapPage({
   const projectMapCanonicalVsCandidateCopy =
     buildProjectMapCanonicalVsCandidateCopy(mapReadResult, mapCandidate);
   const projectMapParkedIdeasCopy = buildProjectMapParkedIdeasCopy(mapCandidate);
+  const projectMapMilestoneEvidenceDrilldownCopy =
+    buildProjectMapMilestoneEvidenceDrilldownCopy(projectMapCandidateCopy);
 
   return (
     <SectionCard className="space-y-6">
@@ -440,6 +547,63 @@ export default async function ProjectMapPage({
               </li>
             ))}
           </ul>
+        </div>
+      ) : null}
+
+      {projectMapMilestoneEvidenceDrilldownCopy ? (
+        <div className="space-y-3 rounded-xl border border-cyan-900/50 bg-cyan-950/20 p-4">
+          <div className="space-y-1">
+            <p className="text-sm uppercase tracking-[0.2em] text-cyan-200/70">
+              Milestone evidence drilldown
+            </p>
+            <h3 className="text-xl font-semibold text-cyan-50">
+              {projectMapMilestoneEvidenceDrilldownCopy.title}
+            </h3>
+            <p className="text-sm text-cyan-100/80">
+              {projectMapMilestoneEvidenceDrilldownCopy.description}
+            </p>
+          </div>
+
+          {projectMapMilestoneEvidenceDrilldownCopy.entries.length > 0 ? (
+            <div className="grid gap-3">
+              {projectMapMilestoneEvidenceDrilldownCopy.entries.map((entry) => (
+                <div
+                  key={entry.foundationArea}
+                  className="rounded-xl border border-cyan-900/60 bg-cyan-950/40 p-4"
+                >
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="space-y-1">
+                      <p className="text-base font-medium text-cyan-50">
+                        {entry.foundationArea}
+                      </p>
+                      <p className="text-sm text-cyan-100/80">
+                        Status reason: {entry.statusReason}
+                      </p>
+                    </div>
+
+                    <span className="inline-flex items-center rounded-full border border-cyan-700 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100">
+                      {entry.status}
+                    </span>
+                  </div>
+
+                  <ul className="mt-3 space-y-2 text-sm text-cyan-50/90">
+                    {entry.evidenceLines.map((evidenceLine) => (
+                      <li
+                        key={evidenceLine}
+                        className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2"
+                      >
+                        {evidenceLine}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2 text-sm text-cyan-50/90">
+              {projectMapMilestoneEvidenceDrilldownCopy.emptyState}
+            </p>
+          )}
         </div>
       ) : null}
 

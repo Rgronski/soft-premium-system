@@ -69,6 +69,28 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 093 - MS-030.32 Project Map Milestone Evidence Drilldown Foundation
+
+### Date
+
+2026-08-29
+
+### Completed
+
+* Added a minimal milestone evidence drilldown to the Project Map UI so milestone and block statuses can explain their source evidence and provenance.
+* Kept source type, source owner, source path or identifier, confidence, and status reason visible without upgrading evidence by implication.
+* Preserved canonical vs candidate separation and parked ideas visibility while keeping Beauty Client PRO repository files untouched.
+
+### Evidence
+
+* Updated `src/app/projects/[id]/project-map/page.tsx` and `src/app/projects/[id]/project-map/page.test.tsx`
+* Updated `src/lib/app-version.ts` and `src/components/app-version-badge.test.tsx`
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`
+
+### Notes
+
+* MS-030.31 remains the parked-ideas visibility baseline immediately before this evidence drilldown update.
+
 ## Session 093 - MS-030.31 Project Map Parked Ideas Visibility Implementation Foundation
 
 ### Date

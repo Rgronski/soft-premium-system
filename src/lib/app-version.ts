@@ -1,5 +1,5 @@
-export const APP_VERSION = "1.0037";
-export const LAST_PUBLISHED_MS = "MS-030.31 - Project Map Parked Ideas Visibility Implementation Foundation";
+export const APP_VERSION = "1.0038";
+export const LAST_PUBLISHED_MS = "MS-030.32 - Project Map Milestone Evidence Drilldown Foundation";
 
 export const APP_VERSION_LABEL = `APP v${APP_VERSION}`;
 export const LAST_PUBLISHED_MS_LABEL = `Ostatni MS: ${LAST_PUBLISHED_MS}`;

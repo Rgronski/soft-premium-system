@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-030.31 - Project Map Parked Ideas Visibility Implementation Foundation
+  MS-030.32 - Project Map Milestone Evidence Drilldown Foundation
+
+MS-030.32 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map Milestone Evidence Drilldown Foundation. The Project Map UI now explains why a milestone or block is shown as check, planned, blocked, unknown, parked, canonical, or candidate by surfacing source type, source owner, source path or identifier, confidence, and status reason while keeping evidence/provenance explanatory and not promotive. Candidate and canonical separation from MS-030.30 remains intact, parked ideas from MS-030.31 remain context only, and Beauty Client PRO itself was not modified in this milestone.
 
 MS-030.31 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map Parked Ideas Visibility Implementation Foundation. The Project Map UI now makes parked ideas visible under the relevant milestone or block when source evidence exists, keeps them labeled as parked or future context instead of active scope, and shows an explicit empty state when no parked-ideas evidence is available. Candidate and canonical separation from MS-030.30 remains intact, and Beauty Client PRO itself was not modified in this milestone.
 

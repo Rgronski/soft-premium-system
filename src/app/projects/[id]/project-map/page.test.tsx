@@ -266,6 +266,17 @@ describe("ProjectMapPage", () => {
       screen.getByRole("heading", { name: "Parked ideas / future improvements" }),
     ).toBeTruthy();
     expect(screen.getByText("Publication Path: parked | milestones: parked")).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Milestone evidence drilldown" })).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Status reason: Parked evidence keeps this block as future context, not active scope.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Evidence state: candidate / parked | source type: decision/ADR | source owner: project | source path: C:\\SPS_OS_WORK\\alpha-workspace\\docs\\adr\\2026-08-29-parked-ideas.md | confidence: direct | support: confirmed | conflict: none",
+      ),
+    ).toBeTruthy();
     expect(screen.getByText("Stan odczytu mapy")).toBeTruthy();
     expect(
       screen.getAllByText((content) => content.includes("Mapa projektu nie jest jeszcze gotowa")),
@@ -276,8 +287,10 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Evidence and provenance")).toBeTruthy();
     expect(screen.getAllByText("Project Identity").length).toBeGreaterThanOrEqual(2);
     expect(screen.getAllByText("Project Map").length).toBeGreaterThanOrEqual(2);
-    expect(screen.getByText("needs review")).toBeTruthy();
-    expect(screen.getByText((content) => content.includes("README.md"))).toBeTruthy();
+    expect(screen.getAllByText("needs review").length).toBeGreaterThan(0);
+    expect(
+      screen.getAllByText((content) => content.includes("README.md")).length,
+    ).toBeGreaterThan(0);
     expect(
       screen.getByText("support: confirmed | conflict: none | evidence: 1 | milestones: completed"),
     ).toBeTruthy();
@@ -366,6 +379,7 @@ describe("ProjectMapPage", () => {
       screen.getByRole("heading", { name: "Parked ideas / future improvements" }),
     ).toBeTruthy();
     expect(screen.getByText("Publication Path: parked | milestones: parked")).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Milestone evidence drilldown" })).toBeTruthy();
     expect(screen.getByText((content) => content.includes("obecna / odczyt niezaimplementowany"))).toBeTruthy();
     expect(screen.getByText((content) => content.includes("map.json:"))).toBeTruthy();
     expect(screen.getByText("Reviewable Project Map candidate")).toBeTruthy();
@@ -417,6 +431,10 @@ describe("ProjectMapPage", () => {
     ).toBeTruthy();
     expect(
       screen.getByText("No parked or deferred items were found in the current candidate."),
+    ).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Milestone evidence drilldown" })).toBeTruthy();
+    expect(
+      screen.getByText("No candidate evidence was available for drilldown yet."),
     ).toBeTruthy();
     expect(screen.getByText((content) => content.includes("Reason:"))).toBeTruthy();
     expect(screen.queryByText("Candidate foundation statuses")).toBeNull();

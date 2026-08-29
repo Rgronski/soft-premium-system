@@ -22,7 +22,7 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0037");
-    expect(LAST_PUBLISHED_MS).toBe("MS-030.31 - Project Map Parked Ideas Visibility Implementation Foundation");
+    expect(APP_VERSION).toBe("1.0038");
+    expect(LAST_PUBLISHED_MS).toBe("MS-030.32 - Project Map Milestone Evidence Drilldown Foundation");
   });
 });

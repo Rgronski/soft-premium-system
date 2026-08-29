@@ -193,7 +193,36 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.31 - Project Map Parked Ideas Visibility Implementation Foundation
+Latest Completed Product Milestone: MS-030.32 - Project Map Milestone Evidence Drilldown Foundation
+
+## MS-030.32 - Project Map Milestone Evidence Drilldown Foundation
+
+**Milestone**
+MS-030.32 - Project Map Milestone Evidence Drilldown Foundation
+
+**Type**
+SPS OS / Project Map Milestone Evidence Drilldown Foundation
+
+This checkpoint records the minimal Project Map milestone evidence drilldown foundation. The Project Map UI now explains why a milestone or block is shown as check, planned, blocked, unknown, parked, canonical, or candidate by surfacing source type, source owner, source path or identifier, confidence, and status reason while keeping evidence/provenance explanatory and not promotive. Candidate and canonical separation from MS-030.30 remains intact, parked ideas from MS-030.31 remain context only, and Beauty Client PRO itself is untouched.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Milestone evidence drilldown only.
+
+**Allowed Implementation Scope**
+* explain milestone and block status with evidence/provenance details when available
+* keep missing, weak, inferred, conflicting, and parked evidence explicit
+* keep candidate and canonical separation intact
+* keep parked ideas as context, not active scope
+* keep Beauty Client PRO repository files untouched
 
 ## MS-030.31 - Project Map Parked Ideas Visibility Implementation Foundation
 
