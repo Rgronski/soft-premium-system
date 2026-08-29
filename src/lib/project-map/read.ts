@@ -25,6 +25,28 @@ export type ProjectMapSourceIdentity = {
   persistedAt: string;
 };
 
+export type ProjectMapSourceIdentityPersistenceResult =
+  | {
+      status: "persisted";
+      projectSourceIdentityPath: string;
+      persistedAt: string;
+    }
+  | {
+      status: "skipped";
+      reason: "invalid-project-identity" | "project-not-provided";
+    }
+  | {
+      status: "failed";
+      reason: "source-identity-write-failed";
+      projectSourceIdentityPath: string;
+      errorMessage: string;
+      persistedAt: string;
+    }
+  | {
+      status: "unavailable";
+      reason: "project-source-identity-unavailable";
+    };
+
 function isMissingPathError(error: unknown): boolean {
   if (typeof error !== "object" || error === null || !("code" in error)) {
     return false;
@@ -44,6 +66,7 @@ export type ProjectMapReadResult =
       projectMapRootPath: string;
       mapJsonPath: string;
       projectSourceIdentity: ProjectMapSourceIdentity;
+      projectSourceIdentityPersistence: ProjectMapSourceIdentityPersistenceResult;
     }
   | {
       status: "unavailable";
@@ -57,6 +80,7 @@ export type ProjectMapReadResult =
       projectMapRootPath?: string;
       mapJsonPath?: string;
       projectSourceIdentity?: ProjectMapSourceIdentity;
+      projectSourceIdentityPersistence: ProjectMapSourceIdentityPersistenceResult;
     };
 
 function buildProjectSourceIdentityPath(
@@ -94,7 +118,7 @@ function buildProjectSourceIdentity(
 
 async function persistProjectSourceIdentity(
   sourceIdentity: ProjectMapSourceIdentity,
-): Promise<void> {
+): Promise<ProjectMapSourceIdentityPersistenceResult> {
   try {
     await mkdir(sourceIdentity.projectMetadataRootPath, { recursive: true });
     await writeFile(
@@ -102,20 +126,47 @@ async function persistProjectSourceIdentity(
       `${JSON.stringify(sourceIdentity, null, 2)}\n`,
       "utf8",
     );
-  } catch {
-    // Source identity persistence is best-effort; the read boundary still returns explicit evidence.
+    return {
+      status: "persisted",
+      projectSourceIdentityPath: sourceIdentity.projectSourceIdentityPath,
+      persistedAt: sourceIdentity.persistedAt,
+    };
+  } catch (error) {
+    return {
+      status: "failed",
+      reason: "source-identity-write-failed",
+      projectSourceIdentityPath: sourceIdentity.projectSourceIdentityPath,
+      errorMessage:
+        error instanceof Error ? error.message : "unknown write failure",
+      persistedAt: sourceIdentity.persistedAt,
+    };
   }
 }
 
 export async function resolveProjectMapReadResult(
   project: ProjectLike | null | undefined,
 ): Promise<ProjectMapReadResult> {
+  if (!project) {
+    return {
+      status: "unavailable",
+      reason: "invalid-project-identity",
+      projectSourceIdentityPersistence: {
+        status: "unavailable",
+        reason: "project-source-identity-unavailable",
+      },
+    };
+  }
+
   const projectMapStorageRoot = resolveProjectMapStorageRoot(project);
 
   if (projectMapStorageRoot.status === "unavailable") {
     return {
       status: "unavailable",
       reason: projectMapStorageRoot.reason,
+      projectSourceIdentityPersistence: {
+        status: "skipped",
+        reason: "invalid-project-identity",
+      },
     };
   }
 
@@ -127,8 +178,9 @@ export async function resolveProjectMapReadResult(
     projectMapStorageRoot,
     project,
   );
-
-  await persistProjectSourceIdentity(projectSourceIdentity);
+  const projectSourceIdentityPersistence = await persistProjectSourceIdentity(
+    projectSourceIdentity,
+  );
 
   try {
     await access(projectMapStorageRoot.projectMapRootPath);
@@ -142,6 +194,7 @@ export async function resolveProjectMapReadResult(
         projectMapRootPath: projectMapStorageRoot.projectMapRootPath,
         mapJsonPath,
         projectSourceIdentity,
+        projectSourceIdentityPersistence,
       };
     }
 
@@ -154,6 +207,7 @@ export async function resolveProjectMapReadResult(
       projectMapRootPath: projectMapStorageRoot.projectMapRootPath,
       mapJsonPath,
       projectSourceIdentity,
+      projectSourceIdentityPersistence,
     };
   }
 
@@ -169,6 +223,7 @@ export async function resolveProjectMapReadResult(
         projectMapRootPath: projectMapStorageRoot.projectMapRootPath,
         mapJsonPath,
         projectSourceIdentity,
+        projectSourceIdentityPersistence,
       };
     }
 
@@ -181,6 +236,7 @@ export async function resolveProjectMapReadResult(
       projectMapRootPath: projectMapStorageRoot.projectMapRootPath,
       mapJsonPath,
       projectSourceIdentity,
+      projectSourceIdentityPersistence,
     };
   }
 
@@ -193,5 +249,6 @@ export async function resolveProjectMapReadResult(
     projectMapRootPath: projectMapStorageRoot.projectMapRootPath,
     mapJsonPath,
     projectSourceIdentity,
+    projectSourceIdentityPersistence,
   };
 }

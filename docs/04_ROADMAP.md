@@ -193,9 +193,41 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.24 - Beauty Client PRO Project Map Source Identity Persistence Foundation
+Latest Completed Product Milestone: MS-030.25 - Project Map Source Identity Write Failure Status Foundation
 
 ## Latest Completed Product Milestone
+
+## MS-030.25 - Project Map Source Identity Write Failure Status Foundation
+
+**Milestone**
+MS-030.25 - Project Map Source Identity Write Failure Status Foundation
+
+**Type**
+SPS OS / Project Map Source Identity Write Failure Status Foundation
+
+This checkpoint records the explicit source-identity persistence status boundary for the Project Map read flow. The SPS OS-owned source-identity sidecar remains separate from canonical Project Map data, and the read boundary now reports whether persistence was persisted, skipped, failed, or unavailable instead of silently treating filesystem write failure as best-effort. The canonical Project Map remains intentionally absent, Beauty Client PRO itself was not modified, and the source-identity sidecar is still not canonical Project Map output.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Source-identity persistence status only.
+
+**Allowed Implementation Scope**
+* expose explicit source-identity persistence status in the Project Map read boundary
+* keep failed writes visible without creating canonical Project Map data
+* preserve the SPS OS-owned source-identity sidecar boundary
+
+**Dependencies**
+* closed `MS-030.24 - Beauty Client PRO Project Map Source Identity Persistence Foundation`
+* closed `MS-030.23 - Beauty Client PRO Project Map Controlled Trial Foundation`
+* closed `MS-030.22 - Beauty Client PRO Project Map Trial Readiness Contract Foundation`
 
 ## MS-030.24 - Beauty Client PRO Project Map Source Identity Persistence Foundation
 

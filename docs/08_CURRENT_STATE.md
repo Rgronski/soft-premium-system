@@ -45,7 +45,7 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-030.24 - Beauty Client PRO Project Map Source Identity Persistence Foundation
+  MS-030.25 - Project Map Source Identity Write Failure Status Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
@@ -53,6 +53,8 @@ NONE / Product Owner decision required
 MS-030.23 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Project Map Controlled Trial Foundation. The accepted read-only trial confirmed the BCP project identity, local source, and checkout-level repository URL, while the canonical Project Map root and map.json remained missing. The candidate flow stayed read-only and candidate-only, and no canonical Project Map was created, overwritten, or promoted. Repository URL availability currently depends on checkout-level git metadata rather than the root manifest alone. The trial result is PASS / ACCEPTABLE FOR REVIEW, and the publication sync records that result without treating the missing canonical map as a failure. Beauty Client PRO itself was not modified in this milestone.
 
 MS-030.24 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Project Map Source Identity Persistence Foundation. The Project Map read boundary now persists the accepted BCP project id, project name, repository URL, working source path, and derived checkout path into an SPS-owned source-identity sidecar, while the canonical Project Map root remains missing and unchanged. The persisted source identity is separate from canonical Project Map data and gives future Project Map steps a stable source boundary without depending only on checkout-level git metadata. Beauty Client PRO itself was not modified in this milestone.
+
+MS-030.25 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map Source Identity Write Failure Status Foundation. The Project Map read boundary now exposes explicit source-identity persistence status so filesystem write failures are no longer hidden as silent best-effort behavior. The result now distinguishes persisted, skipped, failed, and unavailable states while keeping the SPS OS-owned source-identity sidecar separate from canonical Project Map data. Beauty Client PRO itself was not modified in this milestone.
 
 MS-030.22 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Project Map Trial Readiness Contract Foundation. The next-session controlled trial remains planned for Session 093 and starts read-only with a preflight of configured BCP project identity, repository URL, and local working source availability. The trial must not write to BCP repository files, must not create or overwrite a canonical Project Map, and must keep missing, unavailable, unreadable, and conflicting evidence explicit. It uses the MS-030.18 scanner, MS-030.19 classifier, MS-030.20 reconstruction candidate pipeline, and the MS-030.21 candidate UI view as readiness references only. Beauty Client PRO itself remains the future controlled trial target, but this milestone does not inspect or modify that project.
 

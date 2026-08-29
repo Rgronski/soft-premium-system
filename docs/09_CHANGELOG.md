@@ -69,6 +69,28 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 093 - MS-030.25 Project Map Source Identity Write Failure Status Foundation
+
+### Date
+
+2026-08-29
+
+### Completed
+
+* Exposed explicit source-identity persistence status in the Project Map read boundary so filesystem write failures no longer disappear as silent best-effort behavior.
+* Distinguished persisted, skipped, failed, and unavailable states while preserving the SPS OS-owned source-identity sidecar boundary.
+* Kept the canonical Project Map absent and unchanged, and did not modify Beauty Client PRO repository files.
+* Updated the app version policy to `APP_VERSION = 1.0032` and aligned the badge test with `LAST_PUBLISHED_MS = MS-030.25`.
+
+### Evidence
+
+* Published changes in `src/lib/project-map/read.ts`, `src/lib/project-map/read.test.ts`, `src/lib/app-version.ts`, and `src/components/app-version-badge.test.tsx`
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`
+
+### Notes
+
+* MS-030.24 remains the source-identity boundary baseline immediately before this status-foundation update.
+
 ## Session 093 - MS-030.24 Beauty Client PRO Project Map Source Identity Persistence Foundation
 
 ### Date
