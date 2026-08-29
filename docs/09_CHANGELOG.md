@@ -69,6 +69,28 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 093 - MS-030.29 Beauty Client PRO Canonical Project Map Minimal Write Foundation
+
+### Date
+
+2026-08-29
+
+### Completed
+
+* Implemented the first minimal canonical Project Map write into the SPS OS-owned metadata root only.
+* Kept canonical write blocked unless MS-030.28 approval is explicitly `approved`.
+* Kept candidate data distinguishable from canonical data and preserved the BCP repository boundary.
+
+### Evidence
+
+* Added `src/lib/project-map/write.ts` and `src/lib/project-map/write.test.ts`
+* Updated `src/lib/app-version.ts` and `src/components/app-version-badge.test.tsx`
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`
+
+### Notes
+
+* MS-030.28 remains the approval boundary immediately before this minimal write implementation.
+
 ## Session 093 - MS-030.28 Beauty Client PRO Canonical Project Map Write Approval Foundation
 
 ### Date

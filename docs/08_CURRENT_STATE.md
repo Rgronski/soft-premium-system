@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-030.28 - Beauty Client PRO Canonical Project Map Write Approval Foundation
+  MS-030.29 - Beauty Client PRO Canonical Project Map Minimal Write Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-030.29 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Canonical Project Map Minimal Write Foundation. The canonical write now stays SPS-owned metadata-root only while writing `map.json` only after the MS-030.28 approval boundary is explicitly `approved`. The write keeps candidate and canonical data distinguishable and keeps Beauty Client PRO itself untouched in this milestone.
 
 MS-030.28 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Canonical Project Map Write Approval Foundation. The approval boundary now stays read-only and approval-boundary only while distinguishing not requested, approval required, approved, rejected, and blocked by evidence. The gate uses the persisted BCP source identity, explicit source-identity persistence status, reconstruction candidate review, and candidate acceptance as inputs while keeping canonical write out of scope. Beauty Client PRO itself was not modified in this milestone.
 
