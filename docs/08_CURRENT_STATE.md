@@ -45,10 +45,12 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-030.26 - Beauty Client PRO Project Map Reconstruction Candidate Review Foundation
+  MS-030.27 - Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
 
 **Next Milestone**
 NONE / Product Owner decision required
+
+MS-030.27 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation. The acceptance boundary now stays read-only and candidate-only while distinguishing candidate reviewed, candidate acceptable, candidate rejected, candidate needs evidence, and canonical write not allowed yet. The boundary uses the persisted SPS OS-owned source identity, explicit source-identity persistence status, and the candidate review boundary as inputs, while keeping missing, weak, inferred, and conflicting evidence visible. Beauty Client PRO itself was not modified in this milestone.
 
 MS-030.26 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Project Map Reconstruction Candidate Review Foundation. The reconstruction candidate review now stays read-only and candidate-only while surfacing the persisted BCP source identity, explicit source-identity persistence status, canonical Project Map absence, foundation checklist candidate states, product-area and milestone evidence, missing evidence, weak or inferred evidence, conflicts, and parked ideas where available. The review keeps candidate data separate from canonical Project Map data and does not create, overwrite, accept, or promote a canonical Project Map. Beauty Client PRO itself was not modified in this milestone.
 

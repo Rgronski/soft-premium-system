@@ -193,9 +193,63 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.26 - Beauty Client PRO Project Map Reconstruction Candidate Review Foundation
+Latest Completed Product Milestone: MS-030.27 - Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
+
+## MS-030.27 - Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
+
+**Milestone**
+MS-030.27 - Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
+
+**Type**
+SPS OS / Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
+
+This checkpoint records the read-only acceptance boundary for the Beauty Client PRO Project Map reconstruction candidate. The boundary stays separate from canonical Project Map write logic and distinguishes candidate reviewed, candidate acceptable, candidate rejected, candidate needs evidence, and canonical write not allowed yet. It uses the persisted SPS OS-owned source identity, the explicit source-identity persistence status, and the candidate review boundary as inputs, while keeping missing, weak, inferred, and conflicting evidence visible. Beauty Client PRO itself was not modified in this milestone.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Acceptance boundary only.
+
+**Allowed Implementation Scope**
+* define the candidate acceptance boundary without canonical write behavior
+* keep reviewed, acceptable, rejected, and needs evidence states explicit
+* preserve candidate-only handling until future Product Owner approval
 
 ## Latest Completed Product Milestone
+
+## MS-030.27 - Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
+
+**Milestone**
+MS-030.27 - Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
+
+**Type**
+SPS OS / Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
+
+This checkpoint records the read-only acceptance boundary for the Beauty Client PRO Project Map reconstruction candidate. The boundary stays separate from canonical Project Map write logic and distinguishes candidate reviewed, candidate acceptable, candidate rejected, candidate needs evidence, and canonical write not allowed yet. It uses the persisted SPS OS-owned source identity, the explicit source-identity persistence status, and the candidate review boundary as inputs, while keeping missing, weak, inferred, and conflicting evidence visible. Beauty Client PRO itself was not modified in this milestone.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+**Active**
+Acceptance boundary only.
+
+**Allowed Implementation Scope**
+* define the candidate acceptance boundary without canonical write behavior
+* keep reviewed, acceptable, rejected, and needs evidence states explicit
+* preserve candidate-only handling until future Product Owner approval
 
 ## MS-030.26 - Beauty Client PRO Project Map Reconstruction Candidate Review Foundation
 

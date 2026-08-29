@@ -216,15 +216,16 @@ SPS OS Session State
 
 Date: 2026-08-29
 Current Session ID: 093
-Current Chat Title: 093 SPS OS - MS-030.26 Reconstruction Candidate Review Publication
+Current Chat Title: 093 SPS OS - MS-030.27 Candidate Acceptance Boundary Publication
 Next Session ID: 094
 Suggested Next Chat Title: 094 SPS OS - Product Owner decision required
 Active Capability: Control Files Sync / Publication
-Active Work Item: MS-030.26 reconstruction candidate review
+Active Work Item: MS-030.27 candidate acceptance boundary
 Current Mode: PUBLICATION
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.26 - Beauty Client PRO Project Map Reconstruction Candidate Review Foundation
+Latest Completed Product Milestone: MS-030.27 - Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
 Next Product Milestone: NONE / Product Owner decision required
+MS-030.27 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation. The acceptance boundary now stays read-only and candidate-only while distinguishing candidate reviewed, candidate acceptable, candidate rejected, candidate needs evidence, and canonical write not allowed yet. The boundary uses the persisted SPS OS-owned source identity, explicit source-identity persistence status, and the candidate review boundary as inputs, while keeping missing, weak, inferred, and conflicting evidence visible. Beauty Client PRO itself was not modified in this milestone.
 MS-030.26 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Beauty Client PRO Project Map Reconstruction Candidate Review Foundation. The reconstruction candidate review now stays read-only and candidate-only while surfacing the persisted BCP source identity, explicit source-identity persistence status, canonical Project Map absence, foundation checklist candidate states, product-area and milestone evidence, missing evidence, weak or inferred evidence, conflicts, and parked ideas where available. The review keeps candidate data separate from canonical Project Map data and does not create, overwrite, accept, or promote a canonical Project Map. Beauty Client PRO itself was not modified in this milestone.
 MS-030.25 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map Source Identity Write Failure Status Foundation. The Project Map read boundary now exposes explicit source-identity persistence status so filesystem write failures are no longer hidden as silent best-effort behavior. The result now distinguishes persisted, skipped, failed, and unavailable states while keeping the SPS OS-owned source-identity sidecar separate from canonical Project Map data. Beauty Client PRO itself was not modified in this milestone.
 

@@ -69,6 +69,27 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 093 - MS-030.27 Beauty Client PRO Project Map Candidate Acceptance Boundary Foundation
+
+### Date
+
+2026-08-29
+
+### Completed
+
+* Defined the read-only candidate acceptance boundary for the Beauty Client PRO Project Map reconstruction candidate.
+* Distinguished candidate reviewed, candidate acceptable, candidate rejected, candidate needs evidence, and canonical write not allowed yet while keeping the boundary separate from canonical Project Map write logic.
+* Kept missing, weak, inferred, and conflicting evidence visible and did not modify Beauty Client PRO repository files.
+
+### Evidence
+
+* Published new Project Map acceptance-boundary helper and focused tests in `src/lib/project-map/acceptance.ts` and `src/lib/project-map/acceptance.test.ts`
+* Synchronized `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`
+
+### Notes
+
+* MS-030.26 remains the candidate-review baseline immediately before this acceptance-boundary update.
+
 ## Session 093 - MS-030.26 Beauty Client PRO Project Map Reconstruction Candidate Review Foundation
 
 ### Date
