@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 093 - Session 093 Close Protocol
+
+### Date
+
+2026-08-29
+
+### Completed
+
+* Captured the final Session 093 close snapshot after the MS-030 Project Map area was completed and the repository was published at `075b3a0`.
+* Created the durable session summary file at `docs/session-summaries/2026-08-29_093_SPS_OS_SESSION_SUMMARY.md`.
+* Created the Session 094 handoff at `docs/session-handoffs/2026-08-29_093_SESSION_HANDOFF.md`.
+* Preserved the MS-030 area completion record, kept the product milestones at `NONE / Product Owner decision required`, and left app version unchanged.
+
+### Evidence
+
+* Updated `docs/10_SESSION_STATE.md` for the close snapshot.
+* App version remains `1.0038` and `LAST_PUBLISHED_MS` remains `MS-030.32 - Project Map Milestone Evidence Drilldown Foundation`.
+* Repository state at the close baseline is `main`, `origin/main`, `075b3a0`, clean and synchronized.
+
+### Notes
+
+* `MS-030.34` remains the final MS-030 area completion record.
+* `MS-028.74e - Session Close Text Summary and Parked Ideas Artifact Foundation` remains parked as a future standard and was not implemented as automation.
+
 ## Session 093 - MS-030.34 Project Map Area Completion Record Foundation
 
 ### Date
