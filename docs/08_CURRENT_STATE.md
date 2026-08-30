@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-030.34 - Project Map Area Completion Record Foundation
+  MS-031.0 - Project Map Usable Overview Foundation
+
+MS-031.0 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Usable Overview Foundation. The Project Map first screen is now shorter and easier to scan on desktop and mobile, with Done / Next / Parked summarized up front, candidate and canonical state kept compact but visible, and evidence / provenance / technical details moved behind expandable drilldown. Beauty Client PRO itself was not modified in this milestone, and no canonical Project Map write behavior was added.
 
 MS-030.34 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map Area Completion Record Foundation. The MS-030 Project Map area is now recorded as a fully completed and verified chain across source identity, source-identity persistence, candidate review, candidate acceptance, canonical write approval, minimal canonical write, canonical versus candidate UI state, parked ideas visibility, milestone evidence drilldown, and end-to-end flow verification. Beauty Client PRO itself was not modified in this milestone.
 

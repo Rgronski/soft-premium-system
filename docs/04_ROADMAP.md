@@ -193,7 +193,36 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.34 - Project Map Area Completion Record Foundation
+Latest Completed Product Milestone: MS-031.0 - Project Map Usable Overview Foundation
+
+## MS-031.0 - Project Map Usable Overview Foundation
+
+**Milestone**
+MS-031.0 - Project Map Usable Overview Foundation
+
+**Type**
+SPS OS / Project Map Usable Overview Foundation
+
+This checkpoint records the overview-first Project Map presentation that was accepted after desktop and mobile UX review. The first screen is shorter, Done / Next / Parked are summarized up front, evidence and provenance move into expandable drilldown, candidate and canonical state stays compact but visible, and technical details remain available without dominating the default view. Beauty Client PRO repository files were not modified and no new canonical write behavior was added.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Active**
+Overview-first Project Map presentation only.
+
+**Allowed Implementation Scope**
+* keep Current Product Milestone and Next Product Milestone at NONE / Product Owner decision required
+* preserve the existing Project Map data model, scanner, classifier, reconstruction, and write behavior
+* keep evidence and provenance behind expandable drilldown
+* keep candidate and canonical state compact but visible
+* keep Beauty Client PRO repository files untouched
 
 ## MS-030.34 - Project Map Area Completion Record Foundation
 

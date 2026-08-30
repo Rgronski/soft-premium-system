@@ -34,6 +34,13 @@ type ProjectMapCandidateCopy = {
   evidenceSummaries: string[];
 };
 
+type ProjectMapOverviewCardCopy = {
+  label: string;
+  title: string;
+  description: string;
+  detail: string;
+};
+
 type ProjectMapCanonicalVsCandidateCopy = {
   title: string;
   description: string;
@@ -153,6 +160,49 @@ function buildProjectMapCandidateCopy(
       return `${evidence.evidenceType} / ${evidence.discoveryStatus} / ${evidence.supportState} / ${evidence.sourceRelativePath} / ${foundationAreas}`;
     }),
   };
+}
+
+function buildProjectMapOverviewCards(
+  projectMapStateCopy: ProjectMapStateCopy,
+  projectMapCandidateCopy: ProjectMapCandidateCopy | null,
+  projectMapCanonicalVsCandidateCopy: ProjectMapCanonicalVsCandidateCopy | null,
+  projectMapParkedIdeasCopy: ProjectMapParkedIdeasCopy | null,
+): ProjectMapOverviewCardCopy[] {
+  return [
+    {
+      label: "Done",
+      title: "Current state",
+      description:
+        projectMapCanonicalVsCandidateCopy?.description ??
+        "Canonical and candidate state is not available yet.",
+      detail:
+        projectMapCanonicalVsCandidateCopy?.details[0] ??
+        "Current view: unavailable",
+    },
+    {
+      label: "Next",
+      title: "Candidate status",
+      description:
+        projectMapCandidateCopy?.description ??
+        "No reviewable candidate could be built yet.",
+      detail:
+        projectMapCandidateCopy?.details[0] ??
+        (projectMapStateCopy.title === "Kontekst projektu niedostÄ™pny"
+          ? "No project context is available yet."
+          : projectMapStateCopy.details[0]) ??
+        "Candidate pipeline remains unavailable.",
+    },
+    {
+      label: "Parked",
+      title: "Parked context",
+      description:
+        projectMapParkedIdeasCopy?.description ??
+        "Parked ideas remain visible as future context.",
+      detail:
+        projectMapParkedIdeasCopy?.details[0] ??
+        "No parked or deferred items were found in the current candidate.",
+    },
+  ];
 }
 
 function buildProjectMapCanonicalVsCandidateCopy(
@@ -461,6 +511,12 @@ export default async function ProjectMapPage({
   const projectMapParkedIdeasCopy = buildProjectMapParkedIdeasCopy(mapCandidate);
   const projectMapMilestoneEvidenceDrilldownCopy =
     buildProjectMapMilestoneEvidenceDrilldownCopy(projectMapCandidateCopy);
+  const projectMapOverviewCards = buildProjectMapOverviewCards(
+    projectMapStateCopy,
+    projectMapCandidateCopy,
+    projectMapCanonicalVsCandidateCopy,
+    projectMapParkedIdeasCopy,
+  );
 
   return (
     <SectionCard className="space-y-6">
@@ -502,109 +558,131 @@ export default async function ProjectMapPage({
         </p>
       </div>
 
+      <div className="grid gap-3 md:grid-cols-3">
+        {projectMapOverviewCards.map((card) => (
+          <div
+            key={card.label}
+            className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
+          >
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              {card.label}
+            </p>
+            <h3 className="mt-1 text-lg font-semibold text-zinc-50">{card.title}</h3>
+            <p className="mt-2 text-sm text-zinc-400">{card.description}</p>
+            <p className="mt-3 text-sm text-zinc-200">{card.detail}</p>
+          </div>
+        ))}
+      </div>
+
       {projectMapCanonicalVsCandidateCopy ? (
-        <div className="rounded-xl border border-emerald-900/50 bg-emerald-950/20 p-4">
-          <p className="text-sm uppercase tracking-[0.2em] text-emerald-200/70">
+        <details className="rounded-xl border border-emerald-900/50 bg-emerald-950/20 p-4">
+          <summary className="cursor-pointer list-none text-sm uppercase tracking-[0.2em] text-emerald-200/70">
             Canonical vs candidate state
-          </p>
-          <h3 className="mt-1 text-xl font-semibold text-emerald-50">
-            {projectMapCanonicalVsCandidateCopy.title}
-          </h3>
-          <p className="mt-2 text-sm text-emerald-100/80">
-            {projectMapCanonicalVsCandidateCopy.description}
-          </p>
-          <ul className="mt-4 space-y-2 text-sm text-emerald-50/90">
-            {projectMapCanonicalVsCandidateCopy.details.map((detail) => (
-              <li
-                key={detail}
-                className="rounded-lg border border-emerald-900/60 bg-emerald-950/40 px-3 py-2"
-              >
-                {detail}
-              </li>
-            ))}
-          </ul>
-        </div>
+          </summary>
+          <div className="mt-4">
+            <h3 className="text-xl font-semibold text-emerald-50">
+              Canonical state details
+            </h3>
+            <p className="mt-2 text-sm text-emerald-100/80">
+              {projectMapCanonicalVsCandidateCopy.description}
+            </p>
+            <ul className="mt-4 space-y-2 text-sm text-emerald-50/90">
+              {projectMapCanonicalVsCandidateCopy.details.map((detail) => (
+                <li
+                  key={detail}
+                  className="rounded-lg border border-emerald-900/60 bg-emerald-950/40 px-3 py-2"
+                >
+                  {detail}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </details>
       ) : null}
 
       {projectMapParkedIdeasCopy ? (
-        <div className="rounded-xl border border-lime-900/50 bg-lime-950/20 p-4">
-          <p className="text-sm uppercase tracking-[0.2em] text-lime-200/70">
+        <details className="rounded-xl border border-lime-900/50 bg-lime-950/20 p-4">
+          <summary className="cursor-pointer list-none text-sm uppercase tracking-[0.2em] text-lime-200/70">
             Parked ideas visibility
-          </p>
-          <h3 className="mt-1 text-xl font-semibold text-lime-50">
-            {projectMapParkedIdeasCopy.title}
-          </h3>
-          <p className="mt-2 text-sm text-lime-100/80">
-            {projectMapParkedIdeasCopy.description}
-          </p>
-          <ul className="mt-4 space-y-2 text-sm text-lime-50/90">
-            {projectMapParkedIdeasCopy.details.map((detail) => (
-              <li
-                key={detail}
-                className="rounded-lg border border-lime-900/60 bg-lime-950/40 px-3 py-2"
-              >
-                {detail}
-              </li>
-            ))}
-          </ul>
-        </div>
+          </summary>
+          <div className="mt-4">
+            <h3 className="text-xl font-semibold text-lime-50">
+              Parked ideas details
+            </h3>
+            <p className="mt-2 text-sm text-lime-100/80">
+              {projectMapParkedIdeasCopy.description}
+            </p>
+            <ul className="mt-4 space-y-2 text-sm text-lime-50/90">
+              {projectMapParkedIdeasCopy.details.map((detail) => (
+                <li
+                  key={detail}
+                  className="rounded-lg border border-lime-900/60 bg-lime-950/40 px-3 py-2"
+                >
+                  {detail}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </details>
       ) : null}
 
       {projectMapMilestoneEvidenceDrilldownCopy ? (
-        <div className="space-y-3 rounded-xl border border-cyan-900/50 bg-cyan-950/20 p-4">
-          <div className="space-y-1">
-            <p className="text-sm uppercase tracking-[0.2em] text-cyan-200/70">
-              Milestone evidence drilldown
-            </p>
-            <h3 className="text-xl font-semibold text-cyan-50">
-              {projectMapMilestoneEvidenceDrilldownCopy.title}
-            </h3>
-            <p className="text-sm text-cyan-100/80">
-              {projectMapMilestoneEvidenceDrilldownCopy.description}
-            </p>
-          </div>
+        <details className="space-y-3 rounded-xl border border-cyan-900/50 bg-cyan-950/20 p-4">
+          <summary className="cursor-pointer list-none text-sm uppercase tracking-[0.2em] text-cyan-200/70">
+            Milestone evidence drilldown
+          </summary>
+          <div className="mt-4 space-y-3">
+            <div className="space-y-1">
+              <h3 className="text-xl font-semibold text-cyan-50">
+                Milestone evidence details
+              </h3>
+              <p className="text-sm text-cyan-100/80">
+                {projectMapMilestoneEvidenceDrilldownCopy.description}
+              </p>
+            </div>
 
-          {projectMapMilestoneEvidenceDrilldownCopy.entries.length > 0 ? (
-            <div className="grid gap-3">
-              {projectMapMilestoneEvidenceDrilldownCopy.entries.map((entry) => (
-                <div
-                  key={entry.foundationArea}
-                  className="rounded-xl border border-cyan-900/60 bg-cyan-950/40 p-4"
-                >
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                    <div className="space-y-1">
-                      <p className="text-base font-medium text-cyan-50">
-                        {entry.foundationArea}
-                      </p>
-                      <p className="text-sm text-cyan-100/80">
-                        Status reason: {entry.statusReason}
-                      </p>
+            {projectMapMilestoneEvidenceDrilldownCopy.entries.length > 0 ? (
+              <div className="grid gap-3">
+                {projectMapMilestoneEvidenceDrilldownCopy.entries.map((entry) => (
+                  <div
+                    key={entry.foundationArea}
+                    className="rounded-xl border border-cyan-900/60 bg-cyan-950/40 p-4"
+                  >
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="space-y-1">
+                        <p className="text-base font-medium text-cyan-50">
+                          {entry.foundationArea}
+                        </p>
+                        <p className="text-sm text-cyan-100/80">
+                          Status reason: {entry.statusReason}
+                        </p>
+                      </div>
+
+                      <span className="inline-flex items-center rounded-full border border-cyan-700 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100">
+                        {entry.status}
+                      </span>
                     </div>
 
-                    <span className="inline-flex items-center rounded-full border border-cyan-700 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100">
-                      {entry.status}
-                    </span>
+                    <ul className="mt-3 space-y-2 text-sm text-cyan-50/90">
+                      {entry.evidenceLines.map((evidenceLine) => (
+                        <li
+                          key={evidenceLine}
+                          className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2"
+                        >
+                          {evidenceLine}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-
-                  <ul className="mt-3 space-y-2 text-sm text-cyan-50/90">
-                    {entry.evidenceLines.map((evidenceLine) => (
-                      <li
-                        key={evidenceLine}
-                        className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2"
-                      >
-                        {evidenceLine}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2 text-sm text-cyan-50/90">
-              {projectMapMilestoneEvidenceDrilldownCopy.emptyState}
-            </p>
-          )}
-        </div>
+                ))}
+              </div>
+            ) : (
+              <p className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2 text-sm text-cyan-50/90">
+                {projectMapMilestoneEvidenceDrilldownCopy.emptyState}
+              </p>
+            )}
+          </div>
+        </details>
       ) : null}
 
       <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
@@ -627,93 +705,95 @@ export default async function ProjectMapPage({
       </div>
 
       {projectMapCandidateCopy ? (
-        <div className="space-y-3 rounded-xl border border-sky-900/50 bg-sky-950/20 p-4">
-          <div className="space-y-1">
-            <p className="text-sm uppercase tracking-[0.2em] text-sky-200/70">
-              Candidate pipeline
-            </p>
-            <h3 className="text-xl font-semibold text-sky-50">
-              {projectMapCandidateCopy.title}
-            </h3>
-            <p className="text-sm text-sky-100/80">
-              {projectMapCandidateCopy.description}
-            </p>
-          </div>
+        <details className="space-y-3 rounded-xl border border-sky-900/50 bg-sky-950/20 p-4">
+          <summary className="cursor-pointer list-none text-sm uppercase tracking-[0.2em] text-sky-200/70">
+            Candidate pipeline
+          </summary>
+          <div className="mt-4 space-y-3">
+            <div className="space-y-1">
+              <h3 className="text-xl font-semibold text-sky-50">
+                Candidate pipeline details
+              </h3>
+              <p className="text-sm text-sky-100/80">
+                {projectMapCandidateCopy.description}
+              </p>
+            </div>
 
-          <ul className="space-y-2 text-sm text-sky-50/90">
-            {projectMapCandidateCopy.details.map((detail) => (
-              <li
-                key={detail}
-                className="rounded-lg border border-sky-900/60 bg-sky-950/40 px-3 py-2"
-              >
-                {detail}
-              </li>
-            ))}
-          </ul>
+            <ul className="space-y-2 text-sm text-sky-50/90">
+              {projectMapCandidateCopy.details.map((detail) => (
+                <li
+                  key={detail}
+                  className="rounded-lg border border-sky-900/60 bg-sky-950/40 px-3 py-2"
+                >
+                  {detail}
+                </li>
+              ))}
+            </ul>
 
-          {projectMapCandidateCopy.foundationChecklist.length > 0 ? (
-            <div className="space-y-3">
-              <div className="space-y-1">
-                <p className="text-sm uppercase tracking-[0.2em] text-sky-200/70">
-                  Candidate foundation statuses
-                </p>
-                <p className="text-sm text-sky-100/70">
-                  Reviewable candidate data stays separate from canonical Project
-                  Map data.
-                </p>
-              </div>
+            {projectMapCandidateCopy.foundationChecklist.length > 0 ? (
+              <div className="space-y-3">
+                <div className="space-y-1">
+                  <p className="text-sm uppercase tracking-[0.2em] text-sky-200/70">
+                    Candidate foundation statuses
+                  </p>
+                  <p className="text-sm text-sky-100/70">
+                    Reviewable candidate data stays separate from canonical Project
+                    Map data.
+                  </p>
+                </div>
 
-              <div className="grid gap-3">
-                {projectMapCandidateCopy.foundationChecklist.map((item) => (
-                  <div
-                    key={item.foundationArea}
-                    className="rounded-xl border border-sky-900/60 bg-sky-950/30 p-4"
-                  >
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                      <div className="space-y-1">
-                        <p className="text-base font-medium text-sky-50">
-                          {item.foundationArea}
-                        </p>
-                        <p className="text-sm text-sky-100/70">
-                          {buildProjectMapCandidateFoundationDescription(item)}
-                        </p>
+                <div className="grid gap-3">
+                  {projectMapCandidateCopy.foundationChecklist.map((item) => (
+                    <div
+                      key={item.foundationArea}
+                      className="rounded-xl border border-sky-900/60 bg-sky-950/30 p-4"
+                    >
+                      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                        <div className="space-y-1">
+                          <p className="text-base font-medium text-sky-50">
+                            {item.foundationArea}
+                          </p>
+                          <p className="text-sm text-sky-100/70">
+                            {buildProjectMapCandidateFoundationDescription(item)}
+                          </p>
+                        </div>
+
+                        <span className="inline-flex items-center rounded-full border border-sky-700 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-sky-100">
+                          {item.status}
+                        </span>
                       </div>
-
-                      <span className="inline-flex items-center rounded-full border border-sky-700 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-sky-100">
-                        {item.status}
-                      </span>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          ) : null}
+            ) : null}
 
-          {projectMapCandidateCopy.evidenceSummaries.length > 0 ? (
-            <div className="space-y-3">
-              <div className="space-y-1">
-                <p className="text-sm uppercase tracking-[0.2em] text-sky-200/70">
-                  Evidence and provenance
-                </p>
-                <p className="text-sm text-sky-100/70">
-                  Source links remain visible so the candidate can be reviewed
-                  without promoting it to canonical data.
-                </p>
+            {projectMapCandidateCopy.evidenceSummaries.length > 0 ? (
+              <div className="space-y-3">
+                <div className="space-y-1">
+                  <p className="text-sm uppercase tracking-[0.2em] text-sky-200/70">
+                    Evidence and provenance
+                  </p>
+                  <p className="text-sm text-sky-100/70">
+                    Source links remain visible so the candidate can be reviewed
+                    without promoting it to canonical data.
+                  </p>
+                </div>
+
+                <ul className="space-y-2 text-sm text-sky-50/90">
+                  {projectMapCandidateCopy.evidenceSummaries.map((summary) => (
+                    <li
+                      key={summary}
+                      className="rounded-lg border border-sky-900/60 bg-sky-950/40 px-3 py-2"
+                    >
+                      {summary}
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              <ul className="space-y-2 text-sm text-sky-50/90">
-                {projectMapCandidateCopy.evidenceSummaries.map((summary) => (
-                  <li
-                    key={summary}
-                    className="rounded-lg border border-sky-900/60 bg-sky-950/40 px-3 py-2"
-                  >
-                    {summary}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-        </div>
+            ) : null}
+          </div>
+        </details>
       ) : null}
 
       <div className="space-y-3">

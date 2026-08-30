@@ -223,7 +223,9 @@ Active Capability: Session Close Protocol
 Active Work Item: Session 093 close
 Current Mode: CLOSURE PENDING
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.34 - Project Map Area Completion Record Foundation
+Latest Completed Product Milestone: MS-031.0 - Project Map Usable Overview Foundation
+
+MS-031.0 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Usable Overview Foundation. The Project Map page now opens with a shorter overview-first first screen, keeps Done / Next / Parked visible, moves evidence and provenance into expandable drilldown, and keeps candidate/canonical state compact but readable without changing canonical write behavior. Beauty Client PRO itself was not modified in this milestone.
 
 MS-030.34 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map Area Completion Record Foundation. The MS-030 Project Map area is now recorded as a fully completed and verified chain across source identity, source-identity persistence, candidate review, candidate acceptance, canonical write approval, minimal canonical write, canonical versus candidate UI state, parked ideas visibility, milestone evidence drilldown, and end-to-end flow verification. Beauty Client PRO itself was not modified in this milestone.
 

@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 094 - MS-031.0 Project Map Usable Overview Foundation
+
+### Date
+
+2026-08-30
+
+### Completed
+
+* Synchronized the publication state so the SSOT now records `MS-031.0 - Project Map Usable Overview Foundation` as the latest completed product milestone.
+* Recorded the accepted overview-first Project Map presentation with a shorter first screen, Done / Next / Parked overview, expandable evidence and provenance drilldown, and compact but visible candidate/canonical state.
+* Kept Beauty Client PRO repository files untouched and did not add any canonical Project Map write behavior.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* `APP_VERSION` remains `1.0039` and `LAST_PUBLISHED_MS` remains `MS-031.0 - Project Map Usable Overview Foundation`.
+* The repo continued to treat `Current Product Milestone` and `Next Product Milestone` as `NONE / Product Owner decision required`.
+
+### Notes
+
+* `MS-031.0` is the new latest completed publication baseline for Project Map overview-first UX.
+* `MS-030.34` remains the final MS-030 area completion record.
+
 ## Session 093 - Session 093 Close Protocol
 
 ### Date
