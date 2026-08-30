@@ -3,11 +3,29 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
+const accessMock = vi.fn();
+const mkdirMock = vi.fn();
 const getServerProjectByIdMock = vi.fn();
+const resolveProjectMapStorageRootMock = vi.fn();
 const resolveProjectMapReadResultMock = vi.fn();
 const scanProjectMapEvidenceMock = vi.fn();
 const classifyProjectMapEvidenceMock = vi.fn();
 const buildProjectMapReconstructionCandidateMock = vi.fn();
+
+vi.mock("node:fs/promises", () => ({
+  __esModule: true,
+  access: (...args: unknown[]) => accessMock(...args),
+  mkdir: (...args: unknown[]) => mkdirMock(...args),
+  default: {
+    access: (...args: unknown[]) => accessMock(...args),
+    mkdir: (...args: unknown[]) => mkdirMock(...args),
+  },
+}));
+
+vi.mock("@/lib/project-brain/metadata", () => ({
+  resolveProjectMapStorageRoot: (project: unknown) =>
+    resolveProjectMapStorageRootMock(project),
+}));
 
 vi.mock("@/lib/project/server", () => ({
   getServerProjectById: (projectId: string) => getServerProjectByIdMock(projectId),
@@ -186,16 +204,32 @@ function buildUnavailableCandidate() {
 
 describe("ProjectMapPage", () => {
   beforeEach(() => {
+    accessMock.mockReset();
+    mkdirMock.mockReset();
     getServerProjectByIdMock.mockReset();
+    resolveProjectMapStorageRootMock.mockReset();
     resolveProjectMapReadResultMock.mockReset();
     scanProjectMapEvidenceMock.mockReset();
     classifyProjectMapEvidenceMock.mockReset();
     buildProjectMapReconstructionCandidateMock.mockReset();
 
+    accessMock.mockRejectedValue(
+      Object.assign(new Error("missing"), { code: "ENOENT" }),
+    );
+    mkdirMock.mockResolvedValue(undefined);
+
     getServerProjectByIdMock.mockResolvedValue({
       id: "project-1",
       name: "Alpha Workspace",
       workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+    });
+
+    resolveProjectMapStorageRootMock.mockReturnValue({
+      status: "available",
+      projectMetadataRootPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1",
+      projectMapRootPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map",
     });
 
     resolveProjectMapReadResultMock.mockResolvedValue({
@@ -255,6 +289,18 @@ describe("ProjectMapPage", () => {
 
     expect(screen.getByText((content) => content.includes("Shell"))).toBeTruthy();
     expect(screen.getByText("Alpha Workspace")).toBeTruthy();
+    expect(screen.getByText("Następny krok")).toBeTruthy();
+    expect(
+      screen
+        .getByRole("link", { name: "Przygotuj miejsce na mapę projektu" })
+        .getAttribute("href"),
+    ).toBe("/projects/project-1/project-map?prepareStorage=1");
+    expect(screen.getByRole("link", { name: "Odśwież kandydata mapy" })).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Kanoniczny zapis pozostaje osobną, approval-bound akcją.",
+      ),
+    ).toBeTruthy();
     expect(screen.getByText("Done")).toBeTruthy();
     expect(screen.getByText("Next")).toBeTruthy();
     expect(screen.getByText("Parked")).toBeTruthy();
@@ -325,6 +371,42 @@ describe("ProjectMapPage", () => {
       }),
     );
   });
+
+  test("creates Project Map storage and shows the ready CTA when preparation is requested", async () => {
+    accessMock
+      .mockResolvedValueOnce(undefined)
+      .mockRejectedValueOnce(
+        Object.assign(new Error("missing"), { code: "ENOENT" }),
+      )
+      .mockResolvedValueOnce(undefined);
+
+    render(
+      await ProjectMapPage({
+        params: Promise.resolve({ id: "project-1" }),
+        searchParams: Promise.resolve({ prepareStorage: "1" }),
+      }),
+    );
+
+    expect(mkdirMock).toHaveBeenCalledWith(
+      "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map",
+      { recursive: true },
+    );
+    expect(
+      screen.getByText((content) =>
+        content.includes("Miejsce na mapę projektu jest gotowe"),
+      ),
+    ).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Odśwież kandydata mapy" })).toBeTruthy();
+    expect(
+      screen.queryByRole("link", { name: "Przygotuj miejsce na mapę projektu" }),
+    ).toBeNull();
+    expect(
+      screen.getByText((content) =>
+        content.includes("Kanoniczny zapis nadal wymaga osobnej zgody."),
+      ),
+    ).toBeTruthy();
+  });
+
 
   test("shows an unavailable shell when the project identity is missing", async () => {
     getServerProjectByIdMock.mockResolvedValueOnce(null);

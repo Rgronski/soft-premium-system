@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 094 - MS-031.0 Project Map Usable Overview Foundation
+## Session 094 - MS-031.2 Project Map Storage Initialization Flow Foundation
 
 ### Date
 
@@ -77,14 +77,15 @@ Each release entry should contain:
 
 ### Completed
 
-* Synchronized the publication state so the SSOT now records `MS-031.0 - Project Map Usable Overview Foundation` as the latest completed product milestone.
-* Recorded the accepted overview-first Project Map presentation with a shorter first screen, Done / Next / Parked overview, expandable evidence and provenance drilldown, and compact but visible candidate/canonical state.
+* Synchronized the publication state so the SSOT now records `MS-031.2 - Project Map Storage Initialization Flow Foundation` as the latest completed product milestone.
+* Recorded the accepted Project Map storage initialization flow that creates the SPS OS-owned storage directory at `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb\project-map`, switches the page to a ready state after success, and keeps canonical map.json creation or promotion out of scope.
 * Kept Beauty Client PRO repository files untouched and did not add any canonical Project Map write behavior.
+* Treated MS-031.1 as an intermediate CTA step that led into the published storage initialization flow.
 
 ### Evidence
 
-* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
-* `APP_VERSION` remains `1.0039` and `LAST_PUBLISHED_MS` remains `MS-031.0 - Project Map Usable Overview Foundation`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md`.
+* `APP_VERSION` remains `1.0041` and `LAST_PUBLISHED_MS` remains `MS-031.2 - Project Map Storage Initialization Flow Foundation`.
 * The repo continued to treat `Current Product Milestone` and `Next Product Milestone` as `NONE / Product Owner decision required`.
 
 ### Notes

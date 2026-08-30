@@ -223,7 +223,9 @@ Active Capability: Session Close Protocol
 Active Work Item: Session 093 close
 Current Mode: CLOSURE PENDING
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.0 - Project Map Usable Overview Foundation
+Latest Completed Product Milestone: MS-031.2 - Project Map Storage Initialization Flow Foundation
+
+MS-031.2 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Storage Initialization Flow Foundation. The Project Map page now exposes the storage initialization action, creates the SPS OS-owned Project Map storage directory at `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb\project-map`, and switches to a ready state after success. Canonical map.json creation and promotion remain out of scope, Beauty Client PRO itself was not modified in this milestone, and MS-031.1 is treated as an intermediate CTA step superseded by this storage-flow milestone.
 
 MS-031.0 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Usable Overview Foundation. The Project Map page now opens with a shorter overview-first first screen, keeps Done / Next / Parked visible, moves evidence and provenance into expandable drilldown, and keeps candidate/canonical state compact but readable without changing canonical write behavior. Beauty Client PRO itself was not modified in this milestone.
 

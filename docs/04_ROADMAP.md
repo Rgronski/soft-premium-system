@@ -193,7 +193,36 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.0 - Project Map Usable Overview Foundation
+Latest Completed Product Milestone: MS-031.2 - Project Map Storage Initialization Flow Foundation
+
+## MS-031.2 - Project Map Storage Initialization Flow Foundation
+
+**Milestone**
+MS-031.2 - Project Map Storage Initialization Flow Foundation
+
+**Type**
+SPS OS / Project Map Storage Initialization Flow Foundation
+
+This checkpoint records the accepted Project Map storage initialization flow for Beauty Client PRO. The Project Map page now presents a clear storage initialization action, creates the SPS OS-owned Project Map storage directory at `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb\project-map`, transitions the page to a ready state after success, keeps canonical map.json creation or promotion out of scope, and leaves the Beauty Client PRO repository untouched. MS-031.1 was an intermediate CTA step that led into this storage flow and is superseded by this milestone as the published completion point.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Active**
+Project Map storage initialization flow only.
+
+**Allowed Implementation Scope**
+* keep the Project Map storage initialization CTA visible and actionable
+* create the SPS OS-owned Project Map storage directory for the selected project
+* transition the page to a ready state after successful storage initialization
+* keep canonical map.json creation or promotion out of scope
+* keep Beauty Client PRO repository files untouched
 
 ## MS-031.0 - Project Map Usable Overview Foundation
 

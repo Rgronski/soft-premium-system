@@ -1,6 +1,9 @@
+import { access, mkdir } from "node:fs/promises";
+
 import Link from "next/link";
 
 import { SectionCard } from "@/components/ui/SectionCard";
+import { resolveProjectMapStorageRoot } from "@/lib/project-brain/metadata";
 import { getServerProjectById } from "@/lib/project/server";
 import { classifyProjectMapEvidence } from "@/lib/project-map/classify";
 import { buildProjectMapReconstructionCandidate } from "@/lib/project-map/reconstruct";
@@ -41,6 +44,23 @@ type ProjectMapOverviewCardCopy = {
   detail: string;
 };
 
+type ProjectMapActionEntryCopy = {
+  title: string;
+  description: string;
+  primaryActionLabel: string;
+  primaryActionHref: string;
+  secondaryActionLabel: string;
+  secondaryActionHref: string;
+  note: string;
+};
+
+type ProjectMapStorageReadinessCopy = {
+  status: "missing" | "ready" | "unavailable";
+  projectMapRootPath?: string;
+  projectMetadataRootPath?: string;
+  reason?: "invalid-project-identity" | "project-map-access-unavailable";
+};
+
 type ProjectMapCanonicalVsCandidateCopy = {
   title: string;
   description: string;
@@ -66,6 +86,69 @@ type ProjectMapMilestoneEvidenceDrilldownCopy = {
   entries: ProjectMapMilestoneEvidenceDrilldownEntryCopy[];
   emptyState: string;
 };
+
+function isMissingPathError(error: unknown): boolean {
+  if (typeof error !== "object" || error === null || !("code" in error)) {
+    return false;
+  }
+
+  const code = (error as { code?: unknown }).code;
+
+  return code === "ENOENT" || code === "ENOTDIR";
+}
+
+async function resolveProjectMapStorageReadiness(
+  project: Awaited<ReturnType<typeof getServerProjectById>> | null,
+): Promise<ProjectMapStorageReadinessCopy | null> {
+  if (!project) {
+    return null;
+  }
+
+  const storageRoot = resolveProjectMapStorageRoot(project);
+
+  if (storageRoot.status === "unavailable") {
+    return {
+      status: "unavailable",
+      reason: "invalid-project-identity",
+    };
+  }
+
+  try {
+    await access(storageRoot.projectMapRootPath);
+    return {
+      status: "ready",
+      projectMapRootPath: storageRoot.projectMapRootPath,
+      projectMetadataRootPath: storageRoot.projectMetadataRootPath,
+    };
+  } catch (error) {
+    if (isMissingPathError(error)) {
+      return {
+        status: "missing",
+        projectMapRootPath: storageRoot.projectMapRootPath,
+        projectMetadataRootPath: storageRoot.projectMetadataRootPath,
+      };
+    }
+
+    return {
+      status: "unavailable",
+      reason: "project-map-access-unavailable",
+      projectMapRootPath: storageRoot.projectMapRootPath,
+      projectMetadataRootPath: storageRoot.projectMetadataRootPath,
+    };
+  }
+}
+
+async function prepareProjectMapStorage(
+  project: Awaited<ReturnType<typeof getServerProjectById>>,
+): Promise<void> {
+  const storageRoot = resolveProjectMapStorageRoot(project);
+
+  if (storageRoot.status === "unavailable") {
+    return;
+  }
+
+  await mkdir(storageRoot.projectMapRootPath, { recursive: true });
+}
 
 function buildProjectMapStateCopy(
   mapReadResult: ProjectMapReadResult | null,
@@ -203,6 +286,62 @@ function buildProjectMapOverviewCards(
         "No parked or deferred items were found in the current candidate.",
     },
   ];
+}
+
+function buildProjectMapActionEntryCopy(
+  projectId: string | null,
+  mapReadResult: ProjectMapReadResult | null,
+  projectMapCandidateCopy: ProjectMapCandidateCopy | null,
+  storageReadiness: ProjectMapStorageReadinessCopy | null,
+): ProjectMapActionEntryCopy | null {
+  if (!projectId) {
+    return null;
+  }
+
+  const storageIsReady = storageReadiness?.status === "ready";
+  const readNotImplemented =
+    !!mapReadResult &&
+    mapReadResult.status === "unavailable" &&
+    mapReadResult.reason === "project-map-present-but-read-not-implemented";
+
+  if (!storageIsReady) {
+    return {
+      title: "Miejsce na mapę projektu nie jest jeszcze gotowe",
+      description:
+        "Przygotuj katalog Project Map w SPS OS, aby odczyt i odświeżanie kandydata miały własne miejsce bez tworzenia canonical map.json.",
+      primaryActionLabel: "Przygotuj miejsce na mapę projektu",
+      primaryActionHref: `/projects/${projectId}/project-map?prepareStorage=1`,
+      secondaryActionLabel: projectMapCandidateCopy
+        ? "Odśwież kandydata mapy"
+        : "Pokaż stan kandydata",
+      secondaryActionHref: "#project-map-candidate",
+      note: "Kanoniczny zapis pozostaje osobną, approval-bound akcją.",
+    };
+  }
+
+  if (readNotImplemented) {
+    return {
+      title: "Miejsce na mapę projektu jest gotowe",
+      description:
+        "Folder Project Map już istnieje. Teraz możesz odczytać lub odświeżyć kandydata bez ruszania canonical map.json.",
+      primaryActionLabel: "Odśwież kandydata mapy",
+      primaryActionHref: `/projects/${projectId}/project-map?refresh=1`,
+      secondaryActionLabel: "Pokaż stan kandydata",
+      secondaryActionHref: "#project-map-candidate",
+      note: "Kanoniczny zapis nadal wymaga osobnej zgody.",
+    };
+  }
+
+  return {
+    title: "Miejsce na mapę projektu jest gotowe",
+    description:
+      "Folder Project Map istnieje. Możesz od razu odświeżyć kandydata albo przejść do jego stanu bez tworzenia canonical map.json.",
+    primaryActionLabel: "Odśwież kandydata mapy",
+    primaryActionHref: `/projects/${projectId}/project-map?refresh=1`,
+    secondaryActionLabel: "Pokaż stan kandydata",
+    secondaryActionHref: "#project-map-candidate",
+    note: "Kanoniczny zapis nadal wymaga osobnej zgody.",
+  };
 }
 
 function buildProjectMapCanonicalVsCandidateCopy(
@@ -491,21 +630,40 @@ function buildFoundationStatuses(
 
 export default async function ProjectMapPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams?: Promise<{ prepareStorage?: string }>;
 }) {
   const { id } = await params;
   const project = await getServerProjectById(id);
+  const { prepareStorage } = await (
+    searchParams ?? Promise.resolve({} as { prepareStorage?: string })
+  );
+
+  if (project && prepareStorage === "1") {
+    await prepareProjectMapStorage(project);
+  }
+
   const mapReadResult = project
     ? await resolveProjectMapReadResult(project)
     : null;
   const mapCandidate = await loadProjectMapCandidate(project);
+  const projectMapStorageReadiness = await resolveProjectMapStorageReadiness(
+    project,
+  );
   const foundationStatuses = buildFoundationStatuses(
     project?.name ?? null,
     mapReadResult,
   );
   const projectMapStateCopy = buildProjectMapStateCopy(mapReadResult);
   const projectMapCandidateCopy = buildProjectMapCandidateCopy(mapCandidate);
+  const projectMapActionEntryCopy = buildProjectMapActionEntryCopy(
+    project?.id ?? null,
+    mapReadResult,
+    projectMapCandidateCopy,
+    projectMapStorageReadiness,
+  );
   const projectMapCanonicalVsCandidateCopy =
     buildProjectMapCanonicalVsCandidateCopy(mapReadResult, mapCandidate);
   const projectMapParkedIdeasCopy = buildProjectMapParkedIdeasCopy(mapCandidate);
@@ -520,7 +678,7 @@ export default async function ProjectMapPage({
 
   return (
     <SectionCard className="space-y-6">
-      <div className="space-y-4 border-b border-zinc-800 pb-6">
+      <div className="space-y-2 border-b border-zinc-800 pb-4 sm:space-y-4 sm:pb-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
             Mapa projektu
@@ -528,34 +686,75 @@ export default async function ProjectMapPage({
           <h2 className="text-2xl font-semibold text-zinc-50">
             Shell przyszłej Mapy projektu
           </h2>
-          <p className="text-sm text-zinc-400">
+          <p className="hidden text-sm text-zinc-400 sm:block">
             To jest kandydacki shell przyszłej Mapy projektu. Nie promuje mapy do
             stanu kanonicznego, nie zapisuje niczego i nie uruchamia silnika mapy.
           </p>
         </div>
 
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
-          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Kontekst projektu
-          </p>
-          {project ? (
-            <div className="mt-2 space-y-1">
-              <p className="text-lg font-medium text-zinc-100">{project.name}</p>
-              <p className="text-sm text-zinc-400">ID projektu: {project.id}</p>
-            </div>
-          ) : (
-            <p className="mt-2 text-sm text-zinc-400">
-              Projekt nie został znaleziony.
-            </p>
-          )}
-        </div>
       </div>
 
-      <div className="rounded-xl border border-amber-900/50 bg-amber-950/20 p-4">
+      {projectMapActionEntryCopy ? (
+        <section
+          id="project-map-action-entry"
+          className="rounded-xl border border-sky-900/50 bg-sky-950/20 p-4"
+        >
+          <div className="space-y-3">
+            <div className="space-y-1">
+              <p className="text-xs uppercase tracking-[0.2em] text-sky-200/70">
+                Następny krok
+              </p>
+              <h3 className="text-xl font-semibold text-sky-50">
+                {projectMapActionEntryCopy.title}
+              </h3>
+              <p className="text-sm text-sky-100/80">
+                {projectMapActionEntryCopy.description}
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <a
+                href={projectMapActionEntryCopy.primaryActionHref}
+                className="inline-flex items-center justify-center rounded-full border border-sky-500 bg-sky-500/10 px-4 py-2 text-sm font-medium text-sky-50 transition-colors hover:border-sky-400 hover:bg-sky-500/20"
+              >
+                {projectMapActionEntryCopy.primaryActionLabel}
+              </a>
+              <a
+                href={projectMapActionEntryCopy.secondaryActionHref}
+                className="inline-flex items-center justify-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+              >
+                {projectMapActionEntryCopy.secondaryActionLabel}
+              </a>
+            </div>
+
+            <p className="text-xs text-sky-100/70">
+              {projectMapActionEntryCopy.note}
+            </p>
+          </div>
+        </section>
+      ) : null}
+
+      <div className="hidden rounded-xl border border-amber-900/50 bg-amber-950/20 p-4 sm:block">
         <p className="text-sm text-amber-100">
           To jest widok kandydacki, nie kanoniczna Mapa projektu. Akcje zapisu,
           promowania i accept/write pozostają poza zakresem.
         </p>
+      </div>
+
+      <div className="hidden rounded-xl border border-zinc-800 bg-zinc-950/60 p-4 sm:block">
+        <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+          Kontekst projektu
+        </p>
+        {project ? (
+          <div className="mt-2 space-y-1">
+            <p className="text-lg font-medium text-zinc-100">{project.name}</p>
+            <p className="text-sm text-zinc-400">ID projektu: {project.id}</p>
+          </div>
+        ) : (
+          <p className="mt-2 text-sm text-zinc-400">
+            Projekt nie został znaleziony.
+          </p>
+        )}
       </div>
 
       <div className="grid gap-3 md:grid-cols-3">
@@ -575,7 +774,10 @@ export default async function ProjectMapPage({
       </div>
 
       {projectMapCanonicalVsCandidateCopy ? (
-        <details className="rounded-xl border border-emerald-900/50 bg-emerald-950/20 p-4">
+        <details
+          id="project-map-candidate"
+          className="rounded-xl border border-emerald-900/50 bg-emerald-950/20 p-4"
+        >
           <summary className="cursor-pointer list-none text-sm uppercase tracking-[0.2em] text-emerald-200/70">
             Canonical vs candidate state
           </summary>
@@ -685,7 +887,10 @@ export default async function ProjectMapPage({
         </details>
       ) : null}
 
-      <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+      <div
+        id="project-map-state"
+        className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
+      >
         <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
           Stan odczytu mapy
         </p>
