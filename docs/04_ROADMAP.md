@@ -193,7 +193,34 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.2 - Project Map Storage Initialization Flow Foundation
+Latest Completed Product Milestone: MS-031.3 - Project Map Readiness State Consistency Foundation
+
+## MS-031.3 - Project Map Readiness State Consistency Foundation
+
+**Milestone**
+MS-031.3 - Project Map Readiness State Consistency Foundation
+
+**Type**
+SPS OS / Project Map Readiness State Consistency Foundation
+
+This checkpoint records the readiness-copy consistency fix for the Project Map page after the storage initialization flow was accepted. The page now keeps the storage-ready state distinct from the missing canonical `map.json` state, keeps the current view explicitly candidate/read-only, and preserves the separation between the ready storage folder, canonical write approval, and candidate read guidance. Beauty Client PRO repository files were not modified and no canonical `map.json` was created or promoted.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Active**
+Readiness consistency only.
+
+**Allowed Implementation Scope**
+* keep Project Map readiness copy consistent across storage-ready, canonical-missing, and candidate/read-only states
+* keep canonical `map.json` creation or promotion out of scope
+* keep Beauty Client PRO repository files untouched
 
 ## MS-031.2 - Project Map Storage Initialization Flow Foundation
 

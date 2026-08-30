@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 094 - MS-031.3 Project Map Readiness State Consistency Foundation
+
+### Date
+
+2026-08-30
+
+### Completed
+
+* Synchronized the publication state so the SSOT now records `MS-031.3 - Project Map Readiness State Consistency Foundation` as the latest completed product milestone.
+* Recorded that Project Map readiness copy now consistently separates the storage folder ready state, the missing canonical `map.json` state, and the candidate/read-only view.
+* Kept Beauty Client PRO repository files untouched and did not create or promote canonical `map.json`.
+* Fixed the earlier contradictory readiness state so the storage-ready state and missing canonical state are no longer conflated.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/10_SESSION_STATE.md`, and `.usage/session.jsonl`.
+* `APP_VERSION` is `1.0043` and `LAST_PUBLISHED_MS` is `MS-031.3 - Project Map Readiness State Consistency Foundation`.
+* `Current Product Milestone` and `Next Product Milestone` remain `NONE / Product Owner decision required`.
+
+### Notes
+
+* `MS-031.2` remains the storage-initialization baseline immediately before this consistency update.
+
 ## Session 094 - MS-031.2 Project Map Storage Initialization Flow Foundation
 
 ### Date

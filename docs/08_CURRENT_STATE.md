@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.2 - Project Map Storage Initialization Flow Foundation
+  MS-031.3 - Project Map Readiness State Consistency Foundation
+
+MS-031.3 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Readiness State Consistency Foundation. The Project Map readiness copy now consistently separates the storage folder ready state, the missing canonical `map.json` state, and the candidate/read-only view. The earlier contradictory readiness state is fixed, canonical map.json creation and promotion remain out of scope, Beauty Client PRO itself was not modified in this milestone, and MS-031.2 remains the storage initialization baseline immediately before this consistency update.
 
 MS-031.2 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Storage Initialization Flow Foundation. The Project Map page now exposes the storage initialization action, creates the SPS OS-owned Project Map storage directory at `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb\project-map`, and switches to a ready state after success. Canonical map.json creation and promotion remain out of scope, Beauty Client PRO itself was not modified in this milestone, and MS-031.1 is treated as an intermediate CTA step superseded by this storage-flow milestone.
 
@@ -557,7 +559,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-030.34 - Project Map Area Completion Record Foundation
+Latest Completed Product Milestone: MS-031.3 - Project Map Readiness State Consistency Foundation
 Next Product Milestone: NONE / Product Owner decision required
 MS-028.71 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the Project API Filesystem Rebinding Fallback Foundation. The project API now recovers the known Beauty Client PRO project from the SPS-owned workspace manifest when the server registry misses it, so the canonical server project can be resolved instead of silently dropping into browser-local fallback for the known project.
 
@@ -1741,7 +1743,7 @@ Next:
 # In Progress
 
  * `Current Product Milestone` is `NONE / Product Owner decision required`
- * `Latest Completed Product Milestone` is `MS-030.34 - Project Map Area Completion Record Foundation`
+ * `Latest Completed Product Milestone` is `MS-031.3 - Project Map Readiness State Consistency Foundation`
  * `Next Product Milestone` is `NONE / Product Owner decision required`
  * `Session 091` published the MS-028.73 Codex Report Copy-Block Compliance Guard Foundation because the Codex operating charter now requires one clean copy-ready fenced report block with exact start and end markers and rejects escaped markers or loose Markdown outside the block.
  * `Session 091` synchronized the `MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.

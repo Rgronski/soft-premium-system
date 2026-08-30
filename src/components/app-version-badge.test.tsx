@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0042");
+    expect(APP_VERSION).toBe("1.0043");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-031.2 - Project Map Storage Initialization Flow Foundation",
+      "MS-031.3 - Project Map Readiness State Consistency Foundation",
     );
   });
 });

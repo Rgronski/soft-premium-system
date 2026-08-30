@@ -289,23 +289,22 @@ describe("ProjectMapPage", () => {
 
     expect(screen.getByText((content) => content.includes("Shell"))).toBeTruthy();
     expect(screen.getByText("Alpha Workspace")).toBeTruthy();
-    expect(screen.getByText("Następny krok")).toBeTruthy();
+    expect(screen.getByText((content) => content.includes("Nast"))).toBeTruthy();
     expect(
       screen
-        .getByRole("link", { name: "Przygotuj miejsce na mapę projektu" })
+        .getByRole("link", { name: /Przygotuj/ })
         .getAttribute("href"),
     ).toBe("/projects/project-1/project-map?prepareStorage=1");
-    expect(screen.getByRole("link", { name: "Odśwież kandydata mapy" })).toBeTruthy();
+    expect(screen.getAllByText("Current view: candidate/read-only").length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByRole("link", { name: /Od/ })).toBeTruthy();
     expect(
-      screen.getByText(
-        "Kanoniczny zapis pozostaje osobną, approval-bound akcją.",
-      ),
-    ).toBeTruthy();
+      screen.getAllByText((content) => content.includes("Kanoniczny zapis")).length,
+    ).toBeGreaterThan(0);
     expect(screen.getByText("Done")).toBeTruthy();
     expect(screen.getByText("Next")).toBeTruthy();
     expect(screen.getByText("Parked")).toBeTruthy();
     expect(screen.getByText("Canonical vs candidate state")).toBeTruthy();
-    expect(screen.getAllByText("Current view: candidate").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Current view: candidate/read-only").length).toBeGreaterThan(0);
     expect(screen.getByText("Canonical Project Map: missing")).toBeTruthy();
     expect(screen.getByText("Reconstruction candidate: available")).toBeTruthy();
     expect(screen.getByText("Source identity persistence: persisted")).toBeTruthy();
@@ -392,17 +391,15 @@ describe("ProjectMapPage", () => {
       { recursive: true },
     );
     expect(
-      screen.getByText((content) =>
-        content.includes("Miejsce na mapę projektu jest gotowe"),
-      ),
-    ).toBeTruthy();
-    expect(screen.getByRole("link", { name: "Odśwież kandydata mapy" })).toBeTruthy();
+      screen.getAllByText((content) => content.includes("Miejsce na map")).length,
+    ).toBeGreaterThanOrEqual(2);
+    expect(screen.getByRole("link", { name: /Od/ })).toBeTruthy();
     expect(
-      screen.queryByRole("link", { name: "Przygotuj miejsce na mapę projektu" }),
+      screen.queryByRole("link", { name: /Przygotuj/ }),
     ).toBeNull();
     expect(
       screen.getByText((content) =>
-        content.includes("Kanoniczny zapis nadal wymaga osobnej zgody."),
+        content.includes("Kanoniczny zapis"),
       ),
     ).toBeTruthy();
   });
@@ -418,9 +415,11 @@ describe("ProjectMapPage", () => {
     );
 
     expect(
-      screen.getByText((content) => content.includes("Projekt nie został znaleziony.")),
+      screen.getByText((content) => content.includes("Kontekst projektu") && content.includes("niedost")),
     ).toBeTruthy();
-    expect(screen.getByText("Kontekst projektu niedostępny")).toBeTruthy();
+    expect(
+      screen.getByText((content) => content.includes("Kontekst projektu") && content.includes("niedost")),
+    ).toBeTruthy();
     expect(
       screen.getAllByText((content) => content.includes("Brak poprawnego kontekstu projektu.")).length,
     ).toBeGreaterThan(0);

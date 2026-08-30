@@ -214,22 +214,24 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-08-29
-Current Session ID: 093
-Current Chat Title: 093 SPS OS - Session 093 Close Protocol
-Next Session ID: 094
-Suggested Next Chat Title: 094 SPS OS - Product Owner decision required
+Date: 2026-08-30
+Current Session ID: 094
+Current Chat Title: 094 SPS OS - Product Owner decision required
+Next Session ID: 095
+Suggested Next Chat Title: 095 SPS OS - Product Owner decision required
 Active Capability: Session Close Protocol
-Active Work Item: Session 093 close
+Active Work Item: Session 094 control files sync
 Current Mode: CLOSURE PENDING
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.2 - Project Map Storage Initialization Flow Foundation
+Latest Completed Product Milestone: MS-031.3 - Project Map Readiness State Consistency Foundation
+
+MS-031.3 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Readiness State Consistency Foundation. The Project Map readiness copy now consistently separates the storage folder ready state, the missing canonical `map.json` state, and the candidate/read-only view. The earlier contradictory readiness state is fixed, canonical map.json creation and promotion remain out of scope, Beauty Client PRO itself was not modified in this milestone, and MS-031.2 remains the storage initialization baseline immediately before this consistency update.
 
 MS-031.2 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Storage Initialization Flow Foundation. The Project Map page now exposes the storage initialization action, creates the SPS OS-owned Project Map storage directory at `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb\project-map`, and switches to a ready state after success. Canonical map.json creation and promotion remain out of scope, Beauty Client PRO itself was not modified in this milestone, and MS-031.1 is treated as an intermediate CTA step superseded by this storage-flow milestone.
 
 MS-031.0 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Usable Overview Foundation. The Project Map page now opens with a shorter overview-first first screen, keeps Done / Next / Parked visible, moves evidence and provenance into expandable drilldown, and keeps candidate/canonical state compact but readable without changing canonical write behavior. Beauty Client PRO itself was not modified in this milestone.
 
-MS-030.34 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map Area Completion Record Foundation. The MS-030 Project Map area is now recorded as a fully completed and verified chain across source identity, source-identity persistence, candidate review, candidate acceptance, canonical write approval, minimal canonical write, canonical versus candidate UI state, parked ideas visibility, milestone evidence drilldown, and end-to-end flow verification. Beauty Client PRO itself was not modified in this milestone.
+MS-031.3 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Readiness State Consistency Foundation. The Project Map readiness copy now consistently separates the storage folder ready state, the missing canonical `map.json` state, and the candidate/read-only view. The earlier contradictory readiness state is fixed, canonical map.json creation and promotion remain out of scope, Beauty Client PRO itself was not modified in this milestone, and MS-031.2 remains the storage initialization baseline immediately before this consistency update.
 
 MS-030.33 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map End-to-End Flow Verification Foundation. The Project Map MS-030 chain is now verified end to end using the published source identity, source-identity persistence status, reconstruction candidate review, candidate acceptance boundary, canonical write approval boundary, minimal canonical write helper, UI canonical/candidate state, parked ideas visibility, and milestone evidence drilldown. Beauty Client PRO itself was not modified in this milestone.
 Next Product Milestone: NONE / Product Owner decision required
@@ -265,15 +267,15 @@ MS-030.0 is PUBLISHED / CLOSED in the current local workspace as the Project Map
 MS-029.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Milestone Map and Parked Ideas Visibility Foundation. The Product Owner wants SPS OS to eventually show milestone blocks with `check`, `active`, `planned`, `parked`, and `blocked` labels and keep parked ideas, improvements, and future enhancements visible under the relevant block/MS instead of losing them in chat history.
 MS-029.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS OS Layout System First Implementation Foundation. The layout now implements the approved top project workspace band, section/navigation band, two-column AI chat/Codex main area, and separate project value / description context panel while preserving existing AI Workspace behavior and keeping color/theme unchanged.
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 093 completed the MS-030.34 area completion record publication
+Latest Completed Capability Item: Session 094 synchronized the MS-031.3 control files publication
 Current Sprint: NONE
 Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, MS-022.3, MS-023.0, MS-027.2, MS-027.3, MS-027.4, MS-027.5, MS-028.0, MS-028.1, MS-028.2, MS-028.3, MS-028.4, MS-028.5, MS-028.6, MS-028.7, MS-028.8, MS-028.9, MS-028.10, MS-028.11, MS-028.12, MS-028.13, MS-028.14, MS-028.15, and MS-028.16 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
 Latest Verified Commit: 5a4396d
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Run `powershell -ExecutionPolicy Bypass -File .\scripts\New-SpsSession.ps1`
-Next Session Plan: Open a new chat, attach `sps-session.zip`, and use the supplied Session 094 START prompt after the fresh package is generated.
+Next Safe Step: Run `git status --short` and prepare the MS-031.3 commit handoff.
+Next Session Plan: Complete the MS-031.3 publication sync handoff, then proceed with the approved commit and push flow.

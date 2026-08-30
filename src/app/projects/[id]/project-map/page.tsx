@@ -151,6 +151,7 @@ async function prepareProjectMapStorage(
 }
 
 function buildProjectMapStateCopy(
+  storageReadiness: ProjectMapStorageReadinessCopy | null,
   mapReadResult: ProjectMapReadResult | null,
 ): ProjectMapStateCopy {
   if (!mapReadResult) {
@@ -166,6 +167,20 @@ function buildProjectMapStateCopy(
   }
 
   if (mapReadResult.status === "missing") {
+    if (storageReadiness?.status === "ready") {
+      return {
+        title: "Miejsce na mapę projektu jest gotowe",
+        description:
+          "Folder Project Map już istnieje, ale canonical map.json jeszcze nie został utworzony. Widok pozostaje candidate/read-only.",
+        details: [
+          `Project Map root: ${mapReadResult.projectMapRootPath}`,
+          `map.json: ${mapReadResult.mapJsonPath}`,
+          "Current view: candidate/read-only",
+          "Next step: odśwież kandydata mapy.",
+        ],
+      };
+    }
+
     return {
       title: "Mapa projektu nie jest jeszcze gotowa",
       description:
@@ -368,7 +383,7 @@ function buildProjectMapCanonicalVsCandidateCopy(
       : canonicalStatus === "present"
         ? "canonical"
         : candidateStatus === "available"
-          ? "candidate"
+          ? "candidate/read-only"
           : "missing";
 
   const details = [
@@ -567,12 +582,15 @@ async function loadProjectMapCandidate(
 
 function buildFoundationStatuses(
   projectName: string | null,
+  storageReadiness: ProjectMapStorageReadinessCopy | null,
   mapReadResult: ProjectMapReadResult | null,
 ): FoundationStatus[] {
   const projectIdentityStatus = projectName ? "dostępny" : "niedostępny";
   const projectMapStatus =
     !mapReadResult || mapReadResult.status === "missing"
-      ? "brak / niegotowe"
+      ? storageReadiness?.status === "ready"
+        ? "gotowe / bez map.json"
+        : "brak / niegotowe"
       : mapReadResult.reason === "project-map-present-but-read-not-implemented"
         ? "obecna / odczyt niezaimplementowany"
         : "niedostępna";
@@ -654,9 +672,13 @@ export default async function ProjectMapPage({
   );
   const foundationStatuses = buildFoundationStatuses(
     project?.name ?? null,
+    projectMapStorageReadiness,
     mapReadResult,
   );
-  const projectMapStateCopy = buildProjectMapStateCopy(mapReadResult);
+  const projectMapStateCopy = buildProjectMapStateCopy(
+    projectMapStorageReadiness,
+    mapReadResult,
+  );
   const projectMapCandidateCopy = buildProjectMapCandidateCopy(mapCandidate);
   const projectMapActionEntryCopy = buildProjectMapActionEntryCopy(
     project?.id ?? null,
