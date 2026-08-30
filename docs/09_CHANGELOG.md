@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 094 - MS-031.4 Project Map Create Candidate Action Foundation
+
+### Date
+
+2026-08-31
+
+### Completed
+
+* Synchronized the publication state so the SSOT now records `MS-031.4 - Project Map Create Candidate Action Foundation` as the latest completed product milestone.
+* Recorded the plain-language Project Map primary CTA `Stwórz roboczą mapę projektu`, kept the secondary action `Pokaż roboczą mapę`, and preserved the candidate/read-only boundary without creating or promoting canonical `map.json`.
+* Kept Beauty Client PRO repository files untouched and did not add any canonical Project Map write behavior.
+* Treated MS-031.3 as the readiness-consistency baseline immediately before the candidate-action update.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* `APP_VERSION` is `1.0044` and `LAST_PUBLISHED_MS` is `MS-031.4 - Project Map Create Candidate Action Foundation`.
+* The repo continued to treat `Current Product Milestone` and `Next Product Milestone` as `NONE / Product Owner decision required`.
+
+### Notes
+
+* `MS-031.4` is the new latest completed publication baseline for the Project Map candidate-action flow.
+
 ## Session 094 - MS-031.3 Project Map Readiness State Consistency Foundation
 
 ### Date

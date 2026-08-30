@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.3 - Project Map Readiness State Consistency Foundation
+  MS-031.4 - Project Map Create Candidate Action Foundation
+
+MS-031.4 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Create Candidate Action Foundation. The Project Map page now exposes the plain-language primary CTA `Stwórz roboczą mapę projektu`, keeps the secondary action `Pokaż roboczą mapę`, preserves the candidate/read-only boundary, and keeps canonical `map.json` creation or promotion out of scope. Beauty Client PRO itself was not modified in this milestone, and MS-031.3 remains the readiness-consistency baseline immediately before this candidate-action update.
 
 MS-031.3 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Readiness State Consistency Foundation. The Project Map readiness copy now consistently separates the storage folder ready state, the missing canonical `map.json` state, and the candidate/read-only view. The earlier contradictory readiness state is fixed, canonical map.json creation and promotion remain out of scope, Beauty Client PRO itself was not modified in this milestone, and MS-031.2 remains the storage initialization baseline immediately before this consistency update.
 

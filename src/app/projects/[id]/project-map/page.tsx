@@ -176,7 +176,7 @@ function buildProjectMapStateCopy(
           `Project Map root: ${mapReadResult.projectMapRootPath}`,
           `map.json: ${mapReadResult.mapJsonPath}`,
           "Current view: candidate/read-only",
-          "Next step: odśwież kandydata mapy.",
+          "Next step: Pokaż roboczą mapę.",
         ],
       };
     }
@@ -225,9 +225,9 @@ function buildProjectMapCandidateCopy(
 
   if (candidate.status === "unavailable") {
     return {
-      title: "Project Map candidate not ready",
+      title: "Nie udało się zbudować roboczej mapy projektu",
       description:
-        "The reconstruction pipeline could not build a reviewable candidate, so the page keeps the state explicit instead of pretending the map is ready.",
+        "Pipeline nie zdołał zbudować roboczej mapy projektu z dostępnych danych, więc stan pozostaje jawny.",
       details: [
         `Reason: ${candidate.reason}`,
         `Project ID: ${candidate.projectId ?? "missing"}`,
@@ -240,9 +240,9 @@ function buildProjectMapCandidateCopy(
   }
 
   return {
-    title: "Reviewable Project Map candidate",
+    title: "Robocza mapa projektu gotowa",
     description:
-      "This is a read-only reconstruction candidate, not canonical Project Map data. It keeps source evidence and foundation states visible for review.",
+      "Robocza mapa projektu została zbudowana z dostępnych danych. Pozostaje candidate/read-only i nie jest canonical map.json.",
     details: [
       `Evidence items: ${candidate.evidence.length}`,
       `Foundation areas: ${candidate.foundationChecklist.length}`,
@@ -327,8 +327,8 @@ function buildProjectMapActionEntryCopy(
       primaryActionLabel: "Przygotuj miejsce na mapę projektu",
       primaryActionHref: `/projects/${projectId}/project-map?prepareStorage=1`,
       secondaryActionLabel: projectMapCandidateCopy
-        ? "Odśwież kandydata mapy"
-        : "Pokaż stan kandydata",
+        ? "Pokaż roboczą mapę"
+        : "Pokaż roboczą mapę",
       secondaryActionHref: "#project-map-candidate",
       note: "Kanoniczny zapis pozostaje osobną, approval-bound akcją.",
     };
@@ -338,10 +338,10 @@ function buildProjectMapActionEntryCopy(
     return {
       title: "Miejsce na mapę projektu jest gotowe",
       description:
-        "Folder Project Map już istnieje. Teraz możesz odczytać lub odświeżyć kandydata bez ruszania canonical map.json.",
-      primaryActionLabel: "Odśwież kandydata mapy",
+        "Folder Project Map już istnieje. Stwórz lub odśwież roboczą mapę projektu z dostępnych danych bez ruszania canonical map.json.",
+      primaryActionLabel: "Stwórz roboczą mapę projektu",
       primaryActionHref: `/projects/${projectId}/project-map?refresh=1`,
-      secondaryActionLabel: "Pokaż stan kandydata",
+      secondaryActionLabel: "Pokaż roboczą mapę",
       secondaryActionHref: "#project-map-candidate",
       note: "Kanoniczny zapis nadal wymaga osobnej zgody.",
     };
@@ -350,10 +350,10 @@ function buildProjectMapActionEntryCopy(
   return {
     title: "Miejsce na mapę projektu jest gotowe",
     description:
-      "Folder Project Map istnieje. Możesz od razu odświeżyć kandydata albo przejść do jego stanu bez tworzenia canonical map.json.",
-    primaryActionLabel: "Odśwież kandydata mapy",
+      "Folder Project Map istnieje. Stwórz lub odśwież roboczą mapę projektu z dostępnych danych bez tworzenia canonical map.json.",
+    primaryActionLabel: "Stwórz roboczą mapę projektu",
     primaryActionHref: `/projects/${projectId}/project-map?refresh=1`,
-    secondaryActionLabel: "Pokaż stan kandydata",
+    secondaryActionLabel: "Pokaż roboczą mapę",
     secondaryActionHref: "#project-map-candidate",
     note: "Kanoniczny zapis nadal wymaga osobnej zgody.",
   };

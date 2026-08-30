@@ -193,7 +193,35 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.3 - Project Map Readiness State Consistency Foundation
+Latest Completed Product Milestone: MS-031.4 - Project Map Create Candidate Action Foundation
+
+## MS-031.4 - Project Map Create Candidate Action Foundation
+
+**Milestone**
+MS-031.4 - Project Map Create Candidate Action Foundation
+
+**Type**
+SPS OS / Project Map Create Candidate Action Foundation
+
+This checkpoint records the plain-language candidate-action entry for the Project Map page after the readiness-copy consistency fix. The page now presents the main action as `Stwórz roboczą mapę projektu`, keeps the secondary action as `Pokaż roboczą mapę`, keeps the candidate/read-only boundary explicit, and continues to keep canonical `map.json` creation or promotion out of scope. Beauty Client PRO repository files were not modified. MS-031.3 remains the preceding readiness baseline immediately before this candidate-action update.
+
+**Contract Status**
+APPROVED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Active**
+Candidate-action entry only.
+
+**Allowed Implementation Scope**
+* keep the Project Map primary CTA plain-language and visible near the top
+* keep the action candidate/read-only rather than canonical
+* keep canonical `map.json` creation or promotion out of scope
+* keep Beauty Client PRO repository files untouched
 
 ## MS-031.3 - Project Map Readiness State Consistency Foundation
 

@@ -296,7 +296,12 @@ describe("ProjectMapPage", () => {
         .getAttribute("href"),
     ).toBe("/projects/project-1/project-map?prepareStorage=1");
     expect(screen.getAllByText("Current view: candidate/read-only").length).toBeGreaterThanOrEqual(2);
-    expect(screen.getByRole("link", { name: /Od/ })).toBeTruthy();
+    expect(
+      screen.getAllByText(
+        "Robocza mapa projektu została zbudowana z dostępnych danych. Pozostaje candidate/read-only i nie jest canonical map.json.",
+      ).length,
+    ).toBeGreaterThanOrEqual(2);
+    expect(screen.getByRole("link", { name: "Pokaż roboczą mapę" })).toBeTruthy();
     expect(
       screen.getAllByText((content) => content.includes("Kanoniczny zapis")).length,
     ).toBeGreaterThan(0);
@@ -393,7 +398,8 @@ describe("ProjectMapPage", () => {
     expect(
       screen.getAllByText((content) => content.includes("Miejsce na map")).length,
     ).toBeGreaterThanOrEqual(2);
-    expect(screen.getByRole("link", { name: /Od/ })).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Stwórz roboczą mapę projektu" })).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Pokaż roboczą mapę" })).toBeTruthy();
     expect(
       screen.queryByRole("link", { name: /Przygotuj/ }),
     ).toBeNull();
