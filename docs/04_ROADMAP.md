@@ -193,7 +193,35 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.9 - SPS Metadata Root Write Permission Recovery Foundation
+Latest Completed Product Milestone: MS-031.10 - Project Map Candidate Structure Foundation
+
+## MS-031.10 - Project Map Candidate Structure Foundation
+
+**Milestone**
+MS-031.10 - Project Map Candidate Structure Foundation
+
+**Type**
+SPS OS / Project Map Candidate Structure Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Product Outcome**
+The Project Map page now renders a real map-shaped candidate instead of a checklist-only result. The candidate shows project identity, current state, completed items, under-review items, rejected or blocked items, missing inputs, next steps, evidence refs, and trust state while keeping the candidate/read-only boundary explicit and leaving canonical `map.json` absent and unpromoted.
+
+**Implementation Evidence**
+* live Project Map verification confirms the real map-shaped candidate is visible after the dev server restart
+* SSOT evidence is correctly classified as candidate / review when SSOT docs are found
+* missing inputs no longer include SSOT when SSOT docs are present
+* empty placeholder sections are removed or populated
+* `src/lib/app-version.ts` now records `APP_VERSION 1.0048` and `LAST_PUBLISHED_MS MS-031.10 - Project Map Candidate Structure Foundation`
+* Beauty Client PRO repository files were not modified
+* the earlier live mismatch was caused by a stale `next dev` process and was resolved by restarting the dev server
+
+**Residual Risk**
+* canonical `map.json` remains absent until a separate approval-bound milestone writes or promotes it
+* source identity persistence depends on the durable SPS metadata root remaining writable
+* Beauty Client PRO itself was not modified in this milestone
 
 ## MS-031.9 - SPS Metadata Root Write Permission Recovery Foundation
 

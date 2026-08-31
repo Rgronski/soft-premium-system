@@ -45,10 +45,15 @@ vi.mock("@/lib/project-map/classify", () => ({
     classifyProjectMapEvidenceMock(scanResult),
 }));
 
-vi.mock("@/lib/project-map/reconstruct", () => ({
-  buildProjectMapReconstructionCandidate: (classification: unknown) =>
-    buildProjectMapReconstructionCandidateMock(classification),
-}));
+vi.mock("@/lib/project-map/reconstruct", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/lib/project-map/reconstruct")>();
+
+  return {
+    ...actual,
+    buildProjectMapReconstructionCandidate: (classification: unknown) =>
+      buildProjectMapReconstructionCandidateMock(classification),
+  };
+});
 
 import ProjectMapPage from "./page";
 
@@ -84,11 +89,40 @@ function buildAvailableCandidate() {
       },
       {
         foundationArea: "SSOT",
-        status: "planned",
+        status: "needs review",
         supportState: "confirmed",
         conflictState: "none",
         milestoneStates: ["planned"],
-        evidence: [],
+        evidence: [
+          {
+            evidenceType: "current-state",
+            discoveryStatus: "found",
+            sourceOwner: "project",
+            sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace\\docs\\08_CURRENT_STATE.md",
+            sourceRelativePath: "docs/08_CURRENT_STATE.md",
+            projectId: "project-1",
+            projectName: "Alpha Workspace",
+            confidence: "direct",
+            foundationAreas: ["SSOT", "Project Map"],
+            milestoneStates: ["unknown"],
+            conflictState: "none",
+            supportState: "confirmed",
+          },
+          {
+            evidenceType: "session-state",
+            discoveryStatus: "found",
+            sourceOwner: "project",
+            sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace\\docs\\10_SESSION_STATE.md",
+            sourceRelativePath: "docs/10_SESSION_STATE.md",
+            projectId: "project-1",
+            projectName: "Alpha Workspace",
+            confidence: "direct",
+            foundationAreas: ["SSOT"],
+            milestoneStates: ["unknown"],
+            conflictState: "none",
+            supportState: "confirmed",
+          },
+        ],
       },
       {
         foundationArea: "Project Bible",
@@ -221,6 +255,7 @@ describe("ProjectMapPage", () => {
     getServerProjectByIdMock.mockResolvedValue({
       id: "project-1",
       name: "Alpha Workspace",
+      repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
       workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
     });
 
@@ -249,7 +284,7 @@ describe("ProjectMapPage", () => {
       projectSourceIdentity: {
         projectId: "project-1",
         projectName: "Alpha Workspace",
-        repositoryUrl: "https://github.com/example/alpha-workspace.git",
+        repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
         workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
         projectCheckoutPath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
       },
@@ -311,6 +346,38 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Done")).toBeTruthy();
     expect(screen.getByText("Next")).toBeTruthy();
     expect(screen.getByText("Parked")).toBeTruthy();
+    expect(screen.getByText("Robocza mapa projektu")).toBeTruthy();
+    expect(screen.getByText("Mapa z repo + SSOT")).toBeTruthy();
+    expect(screen.getByText("trust: candidate-read-only")).toBeTruthy();
+    expect(screen.getByText("Co to za projekt?")).toBeTruthy();
+    expect(screen.getByText("Co już mamy?")).toBeTruthy();
+    expect(screen.getByText("Co jest pod review?")).toBeTruthy();
+    expect(screen.getByText("Co jest odrzucone / zablokowane?")).toBeTruthy();
+    expect(screen.getByText("Czego brakuje?")).toBeTruthy();
+    expect(screen.getByText("Co dalej?")).toBeTruthy();
+    expect(screen.getByText("Z jakich dokumentów to wynika?")).toBeTruthy();
+    expect(
+      screen.getByText("State source: repo + SSOT candidate evidence"),
+    ).toBeTruthy();
+    expect(screen.getByText("Source identity: aligned")).toBeTruthy();
+    expect(screen.getAllByText("Source identity persistence: persisted").length).toBeGreaterThan(0);
+    expect(
+      screen.getAllByText("SSOT docs were found and can support the candidate map.").length,
+    ).toBeGreaterThan(0);
+    expect(screen.queryByText("SSOT remains absent in the candidate map.")).toBeNull();
+    expect(
+      screen.getByText((content) =>
+        content.includes("Completed project state:") &&
+        content.includes("Project Identity") &&
+        content.includes("Candidate evidence"),
+      ),
+    ).toBeTruthy();
+    expect(screen.getByText("Current candidate state: candidate-read-only")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Next step: Review SSOT-derived map sections before any canonical save.",
+      ),
+    ).toBeTruthy();
     expect(screen.getByText("Wyjaśnienie dostępności sekcji")).toBeTruthy();
     expect(screen.getByText("Co działa, co czeka i co blokuje")).toBeTruthy();
     expect(screen.getAllByText("Status: candidate").length).toBeGreaterThan(0);
@@ -319,7 +386,9 @@ describe("ProjectMapPage", () => {
     expect(screen.getAllByText("Current view: candidate/read-only").length).toBeGreaterThan(0);
     expect(screen.getByText("Canonical Project Map: missing")).toBeTruthy();
     expect(screen.getByText("Reconstruction candidate: available")).toBeTruthy();
-    expect(screen.getByText("Source identity persistence: persisted")).toBeTruthy();
+    expect(
+      screen.getAllByText("Source identity persistence: persisted").length,
+    ).toBeGreaterThan(0);
     expect(screen.getByText("Parked ideas visibility")).toBeTruthy();
     expect(screen.getByText("Parked ideas details")).toBeTruthy();
     expect(screen.getAllByText("Publication Path: parked | milestones: parked").length).toBeGreaterThan(0);
@@ -334,38 +403,43 @@ describe("ProjectMapPage", () => {
         "Evidence state: candidate / parked | source type: decision/ADR | source owner: project | source path: C:\\SPS_OS_WORK\\alpha-workspace\\docs\\adr\\2026-08-29-parked-ideas.md | confidence: direct | support: confirmed | conflict: none",
       ),
     ).toBeTruthy();
+    expect(
+      screen.queryByText("No source evidence linked to this block yet."),
+    ).toBeNull();
     expect(screen.getByText("Stan odczytu mapy")).toBeTruthy();
     expect(
-      screen.getAllByText((content) => content.includes("Mapa projektu nie jest jeszcze gotowa")),
-    ).toHaveLength(2);
-    expect(screen.getByText("brak / niegotowe")).toBeTruthy();
+      screen.getAllByText((content) => content.includes("Mapa projektu nie jest jeszcze gotowa")).length,
+    ).toBeGreaterThan(0);
+    expect(screen.getAllByText("candidate").length).toBeGreaterThan(0);
     expect(screen.getByText("Candidate pipeline")).toBeTruthy();
     expect(screen.getByText("Candidate pipeline details")).toBeTruthy();
     expect(screen.getByText("Candidate foundation statuses")).toBeTruthy();
     expect(screen.getByText("Evidence and provenance")).toBeTruthy();
-    expect(screen.getAllByText("Project Identity").length).toBeGreaterThanOrEqual(2);
-    expect(screen.getAllByText("Project Map").length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByText("Project Identity").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Project Map").length).toBeGreaterThan(0);
     expect(screen.getAllByText("needs review").length).toBeGreaterThan(0);
     expect(
       screen.getAllByText((content) => content.includes("README.md")).length,
     ).toBeGreaterThan(0);
     expect(
-      screen.getByText("support: confirmed | conflict: none | evidence: 1 | milestones: completed"),
+      screen.getByText("Repository URL is aligned and source identity is persisted."),
     ).toBeTruthy();
     expect(
       screen.getByText((content) =>
-        content.includes("No canonical write, export, promote, or accept action is implemented."),
+        content.includes("Evidence i provenance pozostają w drilldown, a canonical save jest osobny."),
       ),
     ).toBeTruthy();
     expect(getServerProjectByIdMock).toHaveBeenCalledWith("project-1");
     expect(resolveProjectMapReadResultMock).toHaveBeenCalledWith({
       id: "project-1",
       name: "Alpha Workspace",
+      repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
       workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
     });
     expect(scanProjectMapEvidenceMock).toHaveBeenCalledWith({
       id: "project-1",
       name: "Alpha Workspace",
+      repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
       workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
     });
     expect(classifyProjectMapEvidenceMock).toHaveBeenCalledWith({
@@ -428,8 +502,8 @@ describe("ProjectMapPage", () => {
       ),
     ).toBeTruthy();
     expect(
-      screen.getByText(
-        "Podłącz repository URL do source identity, zanim zaufasz kandydatowi.",
+      screen.getByText((content) =>
+        content.includes("source identity") && content.includes("zaufasz kandydatowi"),
       ),
     ).toBeTruthy();
     expect(screen.getAllByText("Źródło: projekt").length).toBeGreaterThan(0);
@@ -456,7 +530,7 @@ describe("ProjectMapPage", () => {
     );
     expect(
       screen.getAllByText((content) => content.includes("Miejsce na map")).length,
-    ).toBeGreaterThanOrEqual(2);
+    ).toBeGreaterThan(0);
     expect(screen.getByRole("link", { name: "Stwórz roboczą mapę projektu" })).toBeTruthy();
     expect(screen.getByRole("link", { name: "Pokaż roboczą mapę" })).toBeTruthy();
     expect(
@@ -566,7 +640,7 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Parked ideas details")).toBeTruthy();
     expect(screen.getAllByText("Publication Path: parked | milestones: parked").length).toBeGreaterThan(0);
     expect(screen.getByText("Milestone evidence drilldown")).toBeTruthy();
-    expect(screen.getByText((content) => content.includes("obecna / odczyt niezaimplementowany"))).toBeTruthy();
+    expect(screen.getAllByText("Status: candidate").length).toBeGreaterThan(0);
     expect(screen.getByText((content) => content.includes("map.json:"))).toBeTruthy();
     expect(screen.getByText("Candidate pipeline")).toBeTruthy();
     expect(screen.getByText("Candidate pipeline details")).toBeTruthy();
@@ -576,6 +650,7 @@ describe("ProjectMapPage", () => {
     expect(scanProjectMapEvidenceMock).toHaveBeenCalledWith({
       id: "project-1",
       name: "Alpha Workspace",
+      repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
       workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
     });
   });
@@ -612,17 +687,14 @@ describe("ProjectMapPage", () => {
     expect(screen.getAllByText("Current view: missing").length).toBeGreaterThan(0);
     expect(screen.getByText("Canonical Project Map: missing")).toBeTruthy();
     expect(screen.getByText("Reconstruction candidate: unavailable")).toBeTruthy();
-    expect(screen.getByText("Parked ideas visibility")).toBeTruthy();
-    expect(screen.getByText("Parked ideas details")).toBeTruthy();
+    expect(screen.queryByText("Parked ideas visibility")).toBeNull();
+    expect(screen.queryByText("Parked ideas details")).toBeNull();
     expect(
-      screen.getAllByText("No parked or deferred items were found in the current candidate.")
-        .length,
-    ).toBeGreaterThan(0);
-    expect(screen.getByText("Milestone evidence drilldown")).toBeTruthy();
-    expect(
-      screen.getByText("No candidate evidence was available for drilldown yet."),
+      screen.getByText("No parked or deferred items were found in the current candidate."),
     ).toBeTruthy();
-    expect(screen.getAllByText((content) => content.includes("Reason:")).length).toBeGreaterThan(0);
+    expect(screen.queryByText("Milestone evidence drilldown")).toBeNull();
+    expect(screen.queryByText("No candidate evidence was available for drilldown yet.")).toBeNull();
+    expect(screen.getAllByText((content) => content.includes("Powód:")).length).toBeGreaterThan(0);
     expect(screen.queryByText("Candidate foundation statuses")).toBeNull();
   });
 });

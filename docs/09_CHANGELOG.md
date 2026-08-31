@@ -69,6 +69,32 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 094 - MS-031.10 Project Map Candidate Structure Publication Sync
+
+### Date
+
+2026-08-31
+
+### Completed
+
+* Recorded MS-031.10 as accepted and published-ready after the Project Map candidate structure fix made the live page render a real map-shaped candidate.
+* Recorded that SSOT evidence is correctly treated as candidate / review when SSOT docs are found, missing inputs no longer include SSOT in that case, and empty placeholder sections are removed or populated.
+* Preserved the candidate/read-only boundary, kept canonical `map.json` absent, kept Beauty Client PRO repository files untouched, and documented that the earlier live mismatch came from a stale `next dev` process that was resolved by restarting the dev server.
+* Kept the published app-version baseline aligned with the current code state, which now records `APP_VERSION 1.0048` and `LAST_PUBLISHED_MS MS-031.10 - Project Map Candidate Structure Foundation` in the source file.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Live verification after restart showed the map-shaped candidate and removed the stale mismatch.
+* The live page still kept the candidate/read-only boundary explicit and did not create or promote canonical `map.json`.
+
+### Notes
+
+* MS-031.9 remains accepted and published-ready as the metadata root recovery foundation.
+* MS-031.6 remains IMPLEMENTED / UNDER REVIEW.
+* MS-031.5 remains REJECTED / NOT ACCEPTED / NEEDS FIX.
+* No canonical map.json was created or promoted.
+
 ## Session 094 - MS-031.8 and MS-031.9 Publication Sync
 
 ### Date
