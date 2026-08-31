@@ -244,6 +244,7 @@ describe("ProjectMapPage", () => {
         "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\map.json",
       projectSourceIdentityPersistence: {
         status: "persisted",
+        persistedAt: "2026-08-30T12:34:56.000Z",
       },
       projectSourceIdentity: {
         projectId: "project-1",
@@ -287,9 +288,11 @@ describe("ProjectMapPage", () => {
       }),
     );
 
-    expect(screen.getByText((content) => content.includes("Shell"))).toBeTruthy();
+    expect(
+      screen.getByRole("heading", { name: "Shell przyszłej Mapy projektu" }),
+    ).toBeTruthy();
     expect(screen.getByText("Alpha Workspace")).toBeTruthy();
-    expect(screen.getByText((content) => content.includes("Nast"))).toBeTruthy();
+    expect(screen.getAllByText("Następny krok").length).toBeGreaterThan(0);
     expect(
       screen
         .getByRole("link", { name: /Przygotuj/ })
@@ -308,6 +311,10 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Done")).toBeTruthy();
     expect(screen.getByText("Next")).toBeTruthy();
     expect(screen.getByText("Parked")).toBeTruthy();
+    expect(screen.getByText("Wyjaśnienie dostępności sekcji")).toBeTruthy();
+    expect(screen.getByText("Co działa, co czeka i co blokuje")).toBeTruthy();
+    expect(screen.getAllByText("Status: candidate").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Źródło: candidate").length).toBeGreaterThan(0);
     expect(screen.getByText("Canonical vs candidate state")).toBeTruthy();
     expect(screen.getAllByText("Current view: candidate/read-only").length).toBeGreaterThan(0);
     expect(screen.getByText("Canonical Project Map: missing")).toBeTruthy();
@@ -376,6 +383,58 @@ describe("ProjectMapPage", () => {
     );
   });
 
+  test("shows a precise repository-url source-identity warning when the project URL is not connected", async () => {
+    getServerProjectByIdMock.mockResolvedValueOnce({
+      id: "project-1",
+      name: "Alpha Workspace",
+      repositoryUrl: "https://github.com/example/alpha-workspace.git",
+      workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+    });
+
+    resolveProjectMapReadResultMock.mockResolvedValueOnce({
+      status: "missing",
+      projectId: "project-1",
+      projectName: "Alpha Workspace",
+      projectMetadataRootPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1",
+      projectMapRootPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map",
+      mapJsonPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\map.json",
+      projectSourceIdentityPersistence: {
+        status: "persisted",
+        persistedAt: "2026-08-30T12:34:56.000Z",
+      },
+      projectSourceIdentity: {
+        projectId: "project-1",
+        projectName: "Alpha Workspace",
+        repositoryUrl: null,
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+        projectCheckoutPath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
+      },
+    });
+
+    render(
+      await ProjectMapPage({
+        params: Promise.resolve({ id: "project-1" }),
+      }),
+    );
+
+    expect(screen.getByText("Repository URL / Source Identity")).toBeTruthy();
+    expect(screen.getByText("Status: blocker")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Repository URL jest oczekiwany w BCP, ale Project Map source identity nadal pokazuje brak połączenia.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Podłącz repository URL do source identity, zanim zaufasz kandydatowi.",
+      ),
+    ).toBeTruthy();
+    expect(screen.getAllByText("Źródło: projekt").length).toBeGreaterThan(0);
+  });
+
   test("creates Project Map storage and shows the ready CTA when preparation is requested", async () => {
     accessMock
       .mockResolvedValueOnce(undefined)
@@ -406,6 +465,46 @@ describe("ProjectMapPage", () => {
     expect(
       screen.getByText((content) =>
         content.includes("Kanoniczny zapis"),
+      ),
+    ).toBeTruthy();
+  });
+
+  test("shows explicit candidate build feedback when refresh is requested", async () => {
+    accessMock
+      .mockResolvedValueOnce(undefined)
+      .mockRejectedValueOnce(
+        Object.assign(new Error("missing"), { code: "ENOENT" }),
+      )
+      .mockResolvedValueOnce(undefined);
+
+    render(
+      await ProjectMapPage({
+        params: Promise.resolve({ id: "project-1" }),
+        searchParams: Promise.resolve({ refresh: "1" }),
+      }),
+    );
+
+    expect(
+      screen.getByRole("link", {
+        name: "Stwórz roboczą mapę projektu",
+      }).getAttribute("href"),
+    ).toBe("/projects/project-1/project-map?refresh=1#project-map-refresh-result");
+    expect(screen.getByText("Wynik odświeżenia")).toBeTruthy();
+    expect(screen.getByText("Robocza mapa projektu została zbudowana")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Candidate pipeline zwrócił widoczny wynik candidate/read-only bez promowania go do canonical map.json.",
+      ),
+    ).toBeTruthy();
+    expect(screen.getByText("Candidate result: available")).toBeTruthy();
+    expect(screen.getByText("Evidence count: 2")).toBeTruthy();
+    expect(screen.getAllByText("Foundation areas: 8").length).toBeGreaterThan(0);
+    expect(
+      screen.getByText("Ostatnio odświeżono: 2026-08-30T12:34:56.000Z"),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Canonical map.json pozostaje poza zakresem tego kroku.",
       ),
     ).toBeTruthy();
   });

@@ -54,6 +54,34 @@ type ProjectMapActionEntryCopy = {
   note: string;
 };
 
+type ProjectMapRefreshFeedbackCopy = {
+  title: string;
+  description: string;
+  details: string[];
+};
+
+type ProjectMapAvailabilityExplanationStatus =
+  | "działa"
+  | "candidate"
+  | "planowane"
+  | "wymaga danych"
+  | "wymaga integracji"
+  | "blocker";
+
+type ProjectMapAvailabilityExplanationRow = {
+  label: string;
+  status: ProjectMapAvailabilityExplanationStatus;
+  why: string;
+  nextStep: string;
+  source: "projekt" | "SPS shell" | "candidate" | "canonical" | "missing";
+};
+
+type ProjectMapAvailabilityExplanationCopy = {
+  title: string;
+  description: string;
+  rows: ProjectMapAvailabilityExplanationRow[];
+};
+
 type ProjectMapStorageReadinessCopy = {
   status: "missing" | "ready" | "unavailable";
   projectMapRootPath?: string;
@@ -303,6 +331,145 @@ function buildProjectMapOverviewCards(
   ];
 }
 
+function buildProjectMapAvailabilityExplanationCopy(
+  project: Awaited<ReturnType<typeof getServerProjectById>> | null,
+  storageReadiness: ProjectMapStorageReadinessCopy | null,
+  mapReadResult: ProjectMapReadResult | null,
+  projectMapCandidateCopy: ProjectMapCandidateCopy | null,
+): ProjectMapAvailabilityExplanationCopy | null {
+  if (!project && !storageReadiness && !mapReadResult && !projectMapCandidateCopy) {
+    return null;
+  }
+
+  const projectRepositoryUrl = project?.repositoryUrl?.trim() || null;
+  const sourceIdentityRepositoryUrl =
+    mapReadResult &&
+    "projectSourceIdentity" in mapReadResult &&
+    mapReadResult.projectSourceIdentity
+      ? mapReadResult.projectSourceIdentity.repositoryUrl
+      : null;
+  const projectMapReady = storageReadiness?.status === "ready";
+  const candidateResultAvailable =
+    projectMapCandidateCopy?.title === "Robocza mapa projektu gotowa";
+
+  const rows: ProjectMapAvailabilityExplanationRow[] = [
+    {
+      label: "Project Identity",
+      status: project ? "działa" : "blocker",
+      why: project
+        ? `Rozpoznano projekt ${project.name}.`
+        : "Brak poprawnego kontekstu projektu.",
+      nextStep: project
+        ? "Utrzymaj bieżący kontekst projektu i nie promuj niczego automatycznie."
+        : "Wybierz poprawny projekt, zanim ocenisz dostępność sekcji.",
+      source: project ? "projekt" : "missing",
+    },
+    {
+      label: "SSOT",
+      status: "planowane",
+      why: "Źródło prawdy dla milestone'ów żyje w docs/SSOT, nie w tej stronie.",
+      nextStep: "Trzymaj docs/04_ROADMAP.md, docs/08_CURRENT_STATE.md i docs/10_SESSION_STATE.md w zgodzie.",
+      source: "SPS shell",
+    },
+    {
+      label: "Project Bible",
+      status: project ? "wymaga danych" : "blocker",
+      why: "Kompas celu i zakresu nie jest jeszcze podłączony do tej warstwy widoku.",
+      nextStep: "Dołącz źródło Project Bible zanim uznasz sekcję za gotową.",
+      source: "missing",
+    },
+    {
+      label: "Project Map",
+      status: candidateResultAvailable
+        ? "candidate"
+        : projectMapReady
+          ? "wymaga integracji"
+          : "wymaga danych",
+      why: candidateResultAvailable
+        ? "Widok potrafi już pokazać kandydacką mapę w trybie candidate/read-only."
+        : projectMapReady
+          ? "Folder jest gotowy, ale widok nadal potrzebuje dalszej integracji, żeby dać użyteczny wynik."
+          : "Brakuje gotowego folderu lub odczytu, więc mapa pozostaje niegotowa.",
+      nextStep: candidateResultAvailable
+        ? "Przejrzyj wynik kandydata i trzymaj canonical save osobno."
+        : "Uzupełnij brakującą integrację albo przygotuj storage, zależnie od stanu projektu.",
+      source: candidateResultAvailable ? "candidate" : "SPS shell",
+    },
+    {
+      label: "Working Source",
+      status: project?.workingDirectory ? "wymaga integracji" : "blocker",
+      why: project?.workingDirectory
+        ? `Working source wskazuje na ${project.workingDirectory}, ale wciąż wymaga wyjaśnienia względem innych źródeł projektu.`
+        : "Brak rozpoznanego working source dla bieżącego projektu.",
+      nextStep: project?.workingDirectory
+        ? "Uzgodnij working source z resztą źródeł przed zaufaniem kandydatowi."
+        : "Podłącz working source, zanim zaczniesz ufać kandydatowi.",
+      source: project?.workingDirectory ? "projekt" : "missing",
+    },
+    {
+      label: "First Layout",
+      status: "działa",
+      why: "Shell już pokazuje pierwszy układ overview-first i następny krok.",
+      nextStep: "Zachowaj układ zwięzły i czytelny na desktopie.",
+      source: "SPS shell",
+    },
+    {
+      label: "First Working Flow",
+      status: "planowane",
+      why: projectMapCandidateCopy
+        ? "Kandydacki przepływ już istnieje, ale pierwszy prawdziwy working flow pozostaje osobnym krokiem."
+        : "Pierwszy prawdziwy working flow nie jest jeszcze gotowy do użycia.",
+      nextStep: projectMapCandidateCopy
+        ? "Zachowaj kandydacki wynik oddzielnie od przyszłego working flow."
+        : "Zdefiniuj osobny krok working flow po ustabilizowaniu źródła.",
+      source: projectMapCandidateCopy ? "candidate" : "missing",
+    },
+    {
+      label: "Publication Path",
+      status: "planowane",
+      why: "Canonical save / publish pozostaje approval-bound i poza tym milestone'em.",
+      nextStep: "Dodaj path publikacji dopiero po osobnej zgodzie Product Ownera.",
+      source: "canonical",
+    },
+    {
+      label: "Repository URL / Source Identity",
+      status:
+        projectRepositoryUrl && sourceIdentityRepositoryUrl
+          ? projectRepositoryUrl === sourceIdentityRepositoryUrl
+            ? "działa"
+            : "blocker"
+          : "blocker",
+      why:
+        projectRepositoryUrl && sourceIdentityRepositoryUrl
+          ? projectRepositoryUrl === sourceIdentityRepositoryUrl
+            ? "Repository URL jest połączony z source identity."
+            : "Repository URL w source identity nie zgadza się z kontekstem projektu."
+          : "Repository URL jest oczekiwany w BCP, ale Project Map source identity nadal pokazuje brak połączenia.",
+      nextStep:
+        "Podłącz repository URL do source identity, zanim zaufasz kandydatowi.",
+      source: projectRepositoryUrl || sourceIdentityRepositoryUrl ? "projekt" : "missing",
+    },
+    {
+      label: "Candidate result / evidence",
+      status: candidateResultAvailable ? "candidate" : "wymaga danych",
+      why: candidateResultAvailable
+        ? `Kandydat zwraca ${projectMapCandidateCopy?.evidenceSummaries.length ?? 0} wpisów evidence i pozostaje read-only.`
+        : "Brak czytelnego wyniku kandydata, więc nie ma jeszcze czego oceniać.",
+      nextStep: candidateResultAvailable
+        ? "Przejrzyj evidence i nie promuj wyniku bez approval-bound save."
+        : "Uruchom candidate pipeline albo przygotuj dane wejściowe.",
+      source: candidateResultAvailable ? "candidate" : "missing",
+    },
+  ];
+
+  return {
+    title: "Wyjaśnienie dostępności sekcji",
+    description:
+      "Każda sekcja pokazuje status, dlaczego jest taka, jaki jest następny krok i z jakiego źródła pochodzi.",
+    rows,
+  };
+}
+
 function buildProjectMapActionEntryCopy(
   projectId: string | null,
   mapReadResult: ProjectMapReadResult | null,
@@ -352,10 +519,67 @@ function buildProjectMapActionEntryCopy(
     description:
       "Folder Project Map istnieje. Stwórz lub odśwież roboczą mapę projektu z dostępnych danych bez tworzenia canonical map.json.",
     primaryActionLabel: "Stwórz roboczą mapę projektu",
-    primaryActionHref: `/projects/${projectId}/project-map?refresh=1`,
+    primaryActionHref: `/projects/${projectId}/project-map?refresh=1#project-map-refresh-result`,
     secondaryActionLabel: "Pokaż roboczą mapę",
     secondaryActionHref: "#project-map-candidate",
     note: "Kanoniczny zapis nadal wymaga osobnej zgody.",
+  };
+}
+
+function buildProjectMapRefreshFeedbackCopy(
+  refreshRequested: boolean,
+  mapReadResult: ProjectMapReadResult | null,
+  candidate: ProjectMapReconstructionCandidateResult | null,
+): ProjectMapRefreshFeedbackCopy | null {
+  if (!refreshRequested) {
+    return null;
+  }
+
+  const refreshedAt =
+    mapReadResult &&
+    "projectSourceIdentityPersistence" in mapReadResult &&
+    mapReadResult.projectSourceIdentityPersistence.status === "persisted"
+      ? mapReadResult.projectSourceIdentityPersistence.persistedAt
+      : null;
+
+  if (!candidate) {
+    return {
+      title: "Brak danych do zbudowania roboczej mapy",
+      description:
+        "Odświeżenie uruchomiło candidate pipeline, ale nie zwrócił on jeszcze użytecznego wyniku.",
+      details: [
+        "Candidate result: unavailable",
+        `Ostatnio odświeżono: ${refreshedAt ?? "brak znacznika czasu"}`,
+        "Canonical map.json nie został utworzony ani promowany.",
+      ],
+    };
+  }
+
+  if (candidate.status === "unavailable") {
+    return {
+      title: "Nie udało się zbudować roboczej mapy",
+      description:
+        "Odświeżenie uruchomiło pipeline, ale dostępne dane nie wystarczyły do zbudowania czytelnego wyniku candidate.",
+      details: [
+        `Candidate result: unavailable (${candidate.reason})`,
+        `Project ID: ${candidate.projectId ?? "missing"}`,
+        `Project name: ${candidate.projectName ?? "missing"}`,
+        `Ostatnio odświeżono: ${refreshedAt ?? "brak znacznika czasu"}`,
+      ],
+    };
+  }
+
+  return {
+    title: "Robocza mapa projektu została zbudowana",
+    description:
+      "Candidate pipeline zwrócił widoczny wynik candidate/read-only bez promowania go do canonical map.json.",
+    details: [
+      `Candidate result: available`,
+      `Evidence count: ${candidate.evidence.length}`,
+      `Foundation areas: ${candidate.foundationChecklist.length}`,
+      `Ostatnio odświeżono: ${refreshedAt ?? "brak znacznika czasu"}`,
+      "Canonical map.json pozostaje poza zakresem tego kroku.",
+    ],
   };
 }
 
@@ -651,12 +875,13 @@ export default async function ProjectMapPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams?: Promise<{ prepareStorage?: string }>;
+  searchParams?: Promise<{ prepareStorage?: string; refresh?: string }>;
 }) {
   const { id } = await params;
   const project = await getServerProjectById(id);
-  const { prepareStorage } = await (
-    searchParams ?? Promise.resolve({} as { prepareStorage?: string })
+  const { prepareStorage, refresh } = await (
+    searchParams ??
+    Promise.resolve({} as { prepareStorage?: string; refresh?: string })
   );
 
   if (project && prepareStorage === "1") {
@@ -686,6 +911,13 @@ export default async function ProjectMapPage({
     projectMapCandidateCopy,
     projectMapStorageReadiness,
   );
+  const projectMapAvailabilityExplanationCopy =
+    buildProjectMapAvailabilityExplanationCopy(
+      project ?? null,
+      projectMapStorageReadiness,
+      mapReadResult,
+      projectMapCandidateCopy,
+    );
   const projectMapCanonicalVsCandidateCopy =
     buildProjectMapCanonicalVsCandidateCopy(mapReadResult, mapCandidate);
   const projectMapParkedIdeasCopy = buildProjectMapParkedIdeasCopy(mapCandidate);
@@ -696,6 +928,11 @@ export default async function ProjectMapPage({
     projectMapCandidateCopy,
     projectMapCanonicalVsCandidateCopy,
     projectMapParkedIdeasCopy,
+  );
+  const projectMapRefreshFeedbackCopy = buildProjectMapRefreshFeedbackCopy(
+    refresh === "1",
+    mapReadResult,
+    mapCandidate,
   );
 
   return (
@@ -756,6 +993,39 @@ export default async function ProjectMapPage({
         </section>
       ) : null}
 
+      {projectMapRefreshFeedbackCopy ? (
+        <section
+          id="project-map-refresh-result"
+          className="rounded-xl border border-emerald-900/50 bg-emerald-950/20 p-4"
+          aria-live="polite"
+        >
+          <div className="space-y-3">
+            <div className="space-y-1">
+              <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
+                Wynik odświeżenia
+              </p>
+              <h3 className="text-xl font-semibold text-emerald-50">
+                {projectMapRefreshFeedbackCopy.title}
+              </h3>
+              <p className="text-sm text-emerald-100/80">
+                {projectMapRefreshFeedbackCopy.description}
+              </p>
+            </div>
+
+            <ul className="space-y-2 text-sm text-emerald-50/90">
+              {projectMapRefreshFeedbackCopy.details.map((detail) => (
+                <li
+                  key={detail}
+                  className="rounded-lg border border-emerald-900/60 bg-emerald-950/40 px-3 py-2"
+                >
+                  {detail}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
+
       <div className="hidden rounded-xl border border-amber-900/50 bg-amber-950/20 p-4 sm:block">
         <p className="text-sm text-amber-100">
           To jest widok kandydacki, nie kanoniczna Mapa projektu. Akcje zapisu,
@@ -794,6 +1064,55 @@ export default async function ProjectMapPage({
           </div>
         ))}
       </div>
+
+      {projectMapAvailabilityExplanationCopy ? (
+        <section className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+          <div className="space-y-1">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              {projectMapAvailabilityExplanationCopy.title}
+            </p>
+            <h3 className="text-xl font-semibold text-zinc-50">
+              Co działa, co czeka i co blokuje
+            </h3>
+            <p className="text-sm text-zinc-400">
+              {projectMapAvailabilityExplanationCopy.description}
+            </p>
+          </div>
+
+          <div className="mt-4 grid gap-3 lg:grid-cols-2">
+            {projectMapAvailabilityExplanationCopy.rows.map((row) => (
+              <article
+                key={row.label}
+                className="rounded-xl border border-zinc-800 bg-zinc-950/80 p-4"
+              >
+                <div className="flex flex-col gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-sm font-semibold text-zinc-50">
+                      {row.label}
+                    </p>
+                    <span className="rounded-full border border-zinc-700 px-2 py-0.5 text-xs uppercase tracking-[0.18em] text-zinc-300">
+                      Status: {row.status}
+                    </span>
+                    <span className="rounded-full border border-zinc-700 px-2 py-0.5 text-xs uppercase tracking-[0.18em] text-zinc-300">
+                      Źródło: {row.source}
+                    </span>
+                  </div>
+                  <p className="text-sm text-zinc-300">
+                    <span className="font-medium text-zinc-100">Dlaczego:</span>{" "}
+                    {row.why}
+                  </p>
+                  <p className="text-sm text-zinc-300">
+                    <span className="font-medium text-zinc-100">
+                      Następny krok:
+                    </span>{" "}
+                    {row.nextStep}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {projectMapCanonicalVsCandidateCopy ? (
         <details

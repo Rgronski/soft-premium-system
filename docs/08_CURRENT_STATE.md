@@ -45,7 +45,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.4 - Project Map Create Candidate Action Foundation
+  MS-031.9 - SPS Metadata Root Write Permission Recovery Foundation
+
+MS-031.9 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the SPS Metadata Root Write Permission Recovery Foundation. Durable source identity persistence now writes to the SPS OS-owned metadata root successfully in the live runtime, with the BCP repository URL visible and persisted at `https://github.com/Beautyclient/BeautyClientPro.git`. The durable metadata root at `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb` is writable again for the Project Map source identity file, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
+
+MS-031.8 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Source Identity Alignment Foundation. The Project Map source identity now receives the hydrated BCP repository URL from the git remote so the live page shows `https://github.com/Beautyclient/BeautyClientPro.git` instead of a missing source identity value. The alignment keeps the candidate/read-only boundary explicit, preserves the canonical save/publish separation, and does not create or promote canonical `map.json`.
+
+MS-031.6 is IMPLEMENTED / UNDER REVIEW in the current local workspace as the Project Map Availability Explanation Foundation. The Project Map page now explains why each major visible section is candidate-only, planned, missing data, missing integration, or blocked by source identity, and it shows compact `Status`, `Dlaczego`, `Następny krok`, and `Źródło` rows for the visible sections. The Repository URL / Source Identity gap is surfaced as an explicit trust blocker instead of a silent missing label, but live/Product Owner acceptance is still pending and Beauty Client PRO itself was not modified in this milestone.
+
+MS-031.5 is REJECTED / NOT ACCEPTED / NEEDS FIX in the current local workspace as the Project Map Candidate Build Action Foundation. The Project Map page now shows an explicit refresh/build confirmation after `Stwórz roboczą mapę projektu`, surfaces the candidate result, evidence count, foundation areas, and timestamp, and keeps the candidate/read-only boundary explicit without creating or promoting canonical `map.json`. The live Product Owner review rejected this because it does not render an actual usable working Project Map. Repository URL is still shown as missing in Project Map source identity even though BCP has a known repository URL, so candidate output remains a trust blocker until source identity consistency is verified. MS-031.6 now provides the explanation layer for planned and unavailable sections, and Beauty Client PRO itself was not modified in this milestone.
 
 MS-031.4 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Create Candidate Action Foundation. The Project Map page now exposes the plain-language primary CTA `Stwórz roboczą mapę projektu`, keeps the secondary action `Pokaż roboczą mapę`, preserves the candidate/read-only boundary, and keeps canonical `map.json` creation or promotion out of scope. Beauty Client PRO itself was not modified in this milestone, and MS-031.3 remains the readiness-consistency baseline immediately before this candidate-action update.
 
@@ -561,7 +569,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.3 - Project Map Readiness State Consistency Foundation
+Latest Completed Product Milestone: MS-031.4 - Project Map Create Candidate Action Foundation
 Next Product Milestone: NONE / Product Owner decision required
 MS-028.71 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the Project API Filesystem Rebinding Fallback Foundation. The project API now recovers the known Beauty Client PRO project from the SPS-owned workspace manifest when the server registry misses it, so the canonical server project can be resolved instead of silently dropping into browser-local fallback for the known project.
 
@@ -1745,7 +1753,7 @@ Next:
 # In Progress
 
  * `Current Product Milestone` is `NONE / Product Owner decision required`
- * `Latest Completed Product Milestone` is `MS-031.3 - Project Map Readiness State Consistency Foundation`
+ * `Latest Completed Product Milestone` is `MS-031.4 - Project Map Create Candidate Action Foundation`
  * `Next Product Milestone` is `NONE / Product Owner decision required`
  * `Session 091` published the MS-028.73 Codex Report Copy-Block Compliance Guard Foundation because the Codex operating charter now requires one clean copy-ready fenced report block with exact start and end markers and rejects escaped markers or loose Markdown outside the block.
  * `Session 091` synchronized the `MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.

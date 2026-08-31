@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 
 const mkdirMock = vi.fn();
+const execFileMock = vi.fn();
 const readFileMock = vi.fn();
 const readdirMock = vi.fn();
 const writeFileMock = vi.fn();
@@ -13,6 +14,10 @@ vi.mock("node:fs/promises", () => ({
   readFile: readFileMock,
   readdir: readdirMock,
   writeFile: writeFileMock,
+}));
+
+vi.mock("node:child_process", () => ({
+  execFile: execFileMock,
 }));
 
 vi.mock("@neondatabase/serverless", () => ({
@@ -35,10 +40,22 @@ afterEach(() => {
 
   neonMock.mockReset();
   mkdirMock.mockReset();
+  execFileMock.mockReset();
   readFileMock.mockReset();
   readdirMock.mockReset();
   writeFileMock.mockReset();
   vi.restoreAllMocks();
+
+  execFileMock.mockImplementation(
+    (
+      _command: string,
+      _args: string[],
+      _options: { cwd?: string },
+      callback: (error: Error | null, stdout: string, stderr: string) => void,
+    ) => {
+      callback(new Error("git remote unavailable"), "", "");
+    },
+  );
 });
 
 describe("discoverServerProjectsFromWorkingRoot", () => {
@@ -54,6 +71,7 @@ describe("discoverServerProjectsFromWorkingRoot", () => {
         return JSON.stringify({
           id: "project-1",
           name: "Alpha",
+          repositoryUrl: "https://github.com/example/alpha",
           createdAt: "2026-07-24T10:11:12.000Z",
         });
       }
@@ -82,6 +100,7 @@ describe("discoverServerProjectsFromWorkingRoot", () => {
       {
         id: "project-1",
         name: "Alpha",
+        repositoryUrl: "https://github.com/example/alpha",
         workingDirectory: "C:\\SPS_OS_WORK\\alpha",
         projectFilesystemStatus: "manifest-present",
         createdAt: "2026-07-24T10:11:12.000Z",
@@ -169,7 +188,7 @@ describe("getServerProjectById", () => {
       {
         id: "project-1",
         name: "Alpha",
-        repository_url: null,
+        repository_url: "https://github.com/example/project",
         created_at: "2026-07-23T10:11:12.000Z",
       },
     ]);
@@ -194,9 +213,83 @@ LIMIT 1`,
     expect(result).toEqual({
       id: "project-1",
       name: "Alpha",
+      repositoryUrl: "https://github.com/example/project",
       createdAt: "2026-07-23T10:11:12.000Z",
       projectFilesystemStatus: "unknown",
     });
+  });
+
+  it("hydrates a cached local project from the checkout remote before returning it", async () => {
+    process.env.DATABASE_URL = "postgresql://pooled-runtime-url";
+
+    const queryMock = vi
+      .fn()
+      .mockResolvedValueOnce([
+        {
+          id: "project-1",
+          name: "Alpha",
+          repository_url: null,
+          created_at: "2026-07-23T10:11:12.000Z",
+        },
+      ]);
+
+    neonMock.mockReturnValue({
+      query: queryMock,
+    });
+
+    execFileMock.mockImplementationOnce(
+      (
+        _command: string,
+        _args: string[],
+        _options: { cwd?: string },
+        callback: (error: Error | null, stdout: string, stderr: string) => void,
+      ) => {
+        callback(null, "https://github.com/example/project.git\n", "");
+      },
+    );
+
+    const { createServerProject, getServerProjectById } =
+      await loadServerModule();
+
+    await expect(
+      createServerProject({
+        id: "project-1",
+        name: "Alpha",
+      }),
+    ).resolves.toEqual(
+      expect.objectContaining({
+        id: "project-1",
+        name: "Alpha",
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+        projectFilesystemStatus: "manifest-present",
+      }),
+    );
+
+    await expect(getServerProjectById("project-1")).resolves.toEqual(
+      expect.objectContaining({
+        id: "project-1",
+        name: "Alpha",
+        repositoryUrl: "https://github.com/example/project.git",
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+        projectFilesystemStatus: "manifest-present",
+        createdAt: "2026-07-23T10:11:12.000Z",
+      }),
+    );
+    expect(queryMock).toHaveBeenCalledTimes(1);
+    expect(execFileMock).toHaveBeenCalledWith(
+      "git",
+      [
+        "-c",
+        "safe.directory=C:\\SPS_OS_WORK\\alpha\\repo",
+        "-C",
+        "C:\\SPS_OS_WORK\\alpha\\repo",
+        "remote",
+        "get-url",
+        "origin",
+      ],
+      expect.objectContaining({ cwd: process.cwd(), windowsHide: true }),
+      expect.any(Function),
+    );
   });
 
   it("recovers a missing database project from the SPS work root manifest", async () => {
@@ -223,6 +316,20 @@ LIMIT 1`,
 
       throw new Error("ENOENT");
     });
+    execFileMock.mockImplementation(
+      (
+        _command: string,
+        _args: string[],
+        _options: { cwd?: string },
+        callback: (error: Error | null, stdout: string, stderr: string) => void,
+      ) => {
+        callback(
+          null,
+          "https://github.com/Beautyclient/BeautyClientPro.git\n",
+          "",
+        );
+      },
+    );
 
     const { getServerProjectById } = await loadServerModule();
     const result = await getServerProjectById(
@@ -243,10 +350,25 @@ LIMIT 1`,
     expect(result).toEqual({
       id: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
       name: "Beauty Client PRO",
+      repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
       workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
       projectFilesystemStatus: "manifest-present",
       createdAt: "2026-08-23T20:29:16.690Z",
     });
+    expect(execFileMock).toHaveBeenCalledWith(
+      "git",
+      [
+        "-c",
+        "safe.directory=C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+        "-C",
+        "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+        "remote",
+        "get-url",
+        "origin",
+      ],
+      expect.objectContaining({ cwd: process.cwd(), windowsHide: true }),
+      expect.any(Function),
+    );
   });
 
   it("uses repository_url when the row includes it", async () => {

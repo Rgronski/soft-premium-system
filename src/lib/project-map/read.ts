@@ -136,8 +136,7 @@ async function persistProjectSourceIdentity(
       status: "failed",
       reason: "source-identity-write-failed",
       projectSourceIdentityPath: sourceIdentity.projectSourceIdentityPath,
-      errorMessage:
-        error instanceof Error ? error.message : "unknown write failure",
+      errorMessage: error instanceof Error ? error.message : "unknown write failure",
       persistedAt: sourceIdentity.persistedAt,
     };
   }

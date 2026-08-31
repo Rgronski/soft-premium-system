@@ -69,7 +69,7 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 094 - MS-031.4 Project Map Create Candidate Action Foundation
+## Session 094 - MS-031.8 and MS-031.9 Publication Sync
 
 ### Date
 
@@ -77,21 +77,69 @@ Each release entry should contain:
 
 ### Completed
 
-* Synchronized the publication state so the SSOT now records `MS-031.4 - Project Map Create Candidate Action Foundation` as the latest completed product milestone.
-* Recorded the plain-language Project Map primary CTA `Stwórz roboczą mapę projektu`, kept the secondary action `Pokaż roboczą mapę`, and preserved the candidate/read-only boundary without creating or promoting canonical `map.json`.
-* Kept Beauty Client PRO repository files untouched and did not add any canonical Project Map write behavior.
-* Treated MS-031.3 as the readiness-consistency baseline immediately before the candidate-action update.
+* Recorded MS-031.8 as accepted and published-ready after the Project Map source identity alignment fix made the BCP repository URL visible in the live page.
+* Recorded MS-031.9 as accepted and published-ready after durable SPS metadata root persistence was recovered for `project-source-identity.json`.
+* Preserved the canonical candidate/read-only boundary, kept canonical `map.json` absent, and kept Beauty Client PRO repository files untouched.
+* Kept the published app-version baseline aligned with the current code state, which now records `APP_VERSION 1.0047` and `LAST_PUBLISHED_MS MS-031.9 - SPS Metadata Root Write Permission Recovery Foundation` in the source file.
 
 ### Evidence
 
 * Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
-* `APP_VERSION` is `1.0044` and `LAST_PUBLISHED_MS` is `MS-031.4 - Project Map Create Candidate Action Foundation`.
+* Live verification showed `Repository URL: https://github.com/Beautyclient/BeautyClientPro.git` and `Source identity persistence: persisted`.
+* Durable source identity file remains at `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb\project-source-identity.json`.
+
+### Notes
+
+* MS-031.6 remains IMPLEMENTED / UNDER REVIEW.
+* MS-031.5 remains REJECTED / NOT ACCEPTED / NEEDS FIX.
+* No canonical map.json was created or promoted.
+
+## Session 094 - MS-031.6 Project Map Availability Explanation Foundation
+
+### Date
+
+2026-08-30
+
+### Completed
+
+* Implemented the Project Map availability explanation layer so each major visible section now shows a compact `Status`, `Dlaczego`, `Następny krok`, and `Źródło` row set.
+* Recorded the explicit Repository URL / Source Identity blocker copy so the missing source connection is treated as a trust risk instead of a silent missing label.
+* Kept the candidate/read-only boundary explicit, preserved the canonical save / publish separation, and did not create or promote canonical `map.json`.
+* Preserved the MS-031.5 rejection record while making the explanation of planned, unavailable, candidate-only, and blocked sections visible to the Product Owner.
+
+### Evidence
+
+* Updated `src/app/projects/[id]/project-map/page.tsx`, `src/app/projects/[id]/project-map/page.test.tsx`, `src/lib/app-version.ts`, `src/components/app-version-badge.test.tsx`, `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/10_SESSION_STATE.md`, and `.usage/session.jsonl`.
+* `APP_VERSION` is `1.0047` and `LAST_PUBLISHED_MS` is `MS-031.9 - SPS Metadata Root Write Permission Recovery Foundation`.
+* `Current Product Milestone` and `Next Product Milestone` remain `NONE / Product Owner decision required`.
+
+### Notes
+
+* MS-031.5 remains rejected / not accepted / needs fix, and MS-031.6 remains implemented but under review until Product Owner acceptance.
+
+## Session 094 - MS-031.5 Project Map Candidate Build Action Rejection Correction
+
+### Date
+
+2026-08-31
+
+### Completed
+
+* Corrected the SSOT because the live Product Owner review rejected the MS-031.5 publication as not solving the product need.
+* Recorded that `Stwórz roboczą mapę projektu` only produces a technical refresh/build confirmation with candidate result, evidence count, foundation areas, and timestamp instead of an actual usable working Project Map.
+* Restored `MS-031.4 - Project Map Create Candidate Action Foundation` as the latest completed product milestone and kept canonical promotion out of scope.
+* Recorded the unresolved trust blocker that Repository URL is still shown as missing in Project Map source identity even though BCP has a known repository URL.
+* Kept Beauty Client PRO repository files untouched and did not add any canonical Project Map write behavior.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* `APP_VERSION` remains `1.0045` in the product code workspace, but the docs correction rolls the latest completed publication baseline back to `MS-031.4 - Project Map Create Candidate Action Foundation`.
 * The repo continued to treat `Current Product Milestone` and `Next Product Milestone` as `NONE / Product Owner decision required`.
 
 ### Notes
 
-* `MS-031.4` is the new latest completed publication baseline for the Project Map candidate-action flow.
-
+* `MS-031.5` is now recorded as rejected / not accepted / needs fix instead of published acceptance.
 ## Session 094 - MS-031.3 Project Map Readiness State Consistency Foundation
 
 ### Date

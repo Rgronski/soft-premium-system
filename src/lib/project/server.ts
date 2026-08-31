@@ -1,5 +1,6 @@
 import "server-only";
 
+import { execFile } from "node:child_process";
 import { access, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { neon } from "@neondatabase/serverless";
@@ -8,6 +9,7 @@ import {
   buildDefaultWorkingDirectory,
   getProjectDeleteValidationSummary,
 } from "./project";
+import { buildRepoCheckoutDirectory } from "./source-status";
 import type { ProjectDeleteValidationSummary } from "./project";
 import type { Project, ProjectFilesystemStatus } from "./types";
 
@@ -66,6 +68,122 @@ function mapProjectRow(row: ProjectRow): Project {
     ...(row.repository_url ? { repositoryUrl: row.repository_url } : {}),
     createdAt: new Date(row.created_at).toISOString(),
   };
+}
+
+type GitCommandResult = {
+  stdout: string;
+  stderr: string;
+};
+
+function execGitCommand(
+  args: string[],
+  cwd?: string,
+): Promise<GitCommandResult> {
+  return new Promise((resolve, reject) => {
+    execFile(
+      "git",
+      args,
+      {
+        cwd,
+        windowsHide: true,
+      },
+      (error, stdout, stderr) => {
+        if (error) {
+          const gitError = new Error(
+            stderr.trim() || error.message || "Git command failed.",
+          ) as Error & {
+            code?: number;
+            stderr?: string;
+          };
+
+          if (typeof (error as { code?: number }).code === "number") {
+            gitError.code = (error as { code?: number }).code;
+          }
+
+          gitError.stderr = stderr.trim();
+          reject(gitError);
+          return;
+        }
+
+        resolve({
+          stdout,
+          stderr,
+        });
+      },
+    );
+  });
+}
+
+async function getGitRemoteOriginUrl(targetPath: string): Promise<string | null> {
+  try {
+    const result = await execGitCommand(
+      [
+        "-c",
+        `safe.directory=${targetPath}`,
+        "-C",
+        targetPath,
+        "remote",
+        "get-url",
+        "origin",
+      ],
+      process.cwd(),
+    );
+
+    return result.stdout.trim() || null;
+  } catch {
+    return null;
+  }
+}
+
+async function hydrateProjectRepositoryUrl(project: Project): Promise<Project> {
+  const normalizedWorkingDirectory = project.workingDirectory?.trim() || null;
+  const normalizedRepositoryUrl = project.repositoryUrl?.trim() || null;
+
+  if (normalizedRepositoryUrl || !normalizedWorkingDirectory) {
+    return project;
+  }
+
+  const recoveredRepositoryUrl = await getGitRemoteOriginUrl(
+    buildRepoCheckoutDirectory(normalizedWorkingDirectory),
+  );
+
+  if (!recoveredRepositoryUrl) {
+    return project;
+  }
+
+  return {
+    ...project,
+    repositoryUrl: recoveredRepositoryUrl,
+  };
+}
+
+async function hydrateProjectSourceIdentity(project: Project): Promise<Project> {
+  const normalizedWorkingDirectory = project.workingDirectory?.trim() || null;
+  const normalizedRepositoryUrl = project.repositoryUrl?.trim() || null;
+
+  if (normalizedWorkingDirectory && normalizedRepositoryUrl) {
+    return project;
+  }
+
+  const recoveredProject = await recoverServerProjectFromWorkingRoot(project.id);
+  const recoveredWorkingDirectory =
+    normalizedWorkingDirectory ||
+    recoveredProject?.workingDirectory?.trim() ||
+    null;
+  const recoveredRepositoryUrl =
+    normalizedRepositoryUrl ||
+    recoveredProject?.repositoryUrl?.trim() ||
+    null;
+
+  const mergedProject = {
+    ...project,
+    ...(recoveredWorkingDirectory
+      ? { workingDirectory: recoveredWorkingDirectory }
+      : {}),
+    ...(recoveredRepositoryUrl ? { repositoryUrl: recoveredRepositoryUrl } : {}),
+  };
+
+  return hydrateProjectRepositoryUrl(mergedProject);
 }
 
 function normalizeProjectId(id: string): string {
@@ -179,7 +297,7 @@ export async function getServerProjectByWorkingDirectory(
       return null;
     }
 
-    return {
+    const project: Project = {
       id: manifest.id,
       name: manifest.name,
       ...(manifest.repositoryUrl ? { repositoryUrl: manifest.repositoryUrl } : {}),
@@ -187,6 +305,8 @@ export async function getServerProjectByWorkingDirectory(
       projectFilesystemStatus: "manifest-present",
       createdAt: manifest.createdAt,
     };
+
+    return hydrateProjectRepositoryUrl(project);
   } catch {
     return null;
   }
@@ -325,7 +445,9 @@ export async function getServerProjectById(
   const localProject = getLocalProjectById(normalizedId);
 
   if (localProject) {
-    return attachProjectFilesystemStatus(localProject);
+    const hydratedLocalProject = await hydrateProjectRepositoryUrl(localProject);
+
+    return attachProjectFilesystemStatus(hydratedLocalProject);
   }
 
   try {
@@ -343,7 +465,13 @@ export async function getServerProjectById(
       return recoveredProject ? storeLocalProject(recoveredProject) : null;
     }
 
-    return attachProjectFilesystemStatus(storeLocalProject(mapProjectRow(row)));
+    const hydratedProject = await hydrateProjectSourceIdentity(
+      mapProjectRow(row),
+    );
+
+    return attachProjectFilesystemStatus(
+      storeLocalProject(hydratedProject),
+    );
   } catch {
     const fallbackProject = getLocalProjectById(normalizedId);
 
@@ -355,7 +483,9 @@ export async function getServerProjectById(
       normalizedId,
     );
 
-    return recoveredProject ? storeLocalProject(recoveredProject) : null;
+    return recoveredProject
+      ? storeLocalProject(await hydrateProjectSourceIdentity(recoveredProject))
+      : null;
   }
 }
 

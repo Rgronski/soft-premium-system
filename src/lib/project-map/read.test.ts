@@ -13,6 +13,10 @@ const getCoreDoctrineBootstrapStatusMock = vi.fn();
 const accessMock = vi.fn();
 const mkdirMock = vi.fn();
 const writeFileMock = vi.fn();
+const projectSourceIdentityPath =
+  "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json";
+const projectMetadataRootPath =
+  "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb";
 
 vi.mock("node:fs/promises", () => ({
   access: accessMock,
@@ -134,8 +138,7 @@ describe("resolveProjectMapReadResult", () => {
       status: "missing",
       projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
       projectName: "Beauty Client PRO",
-      projectMetadataRootPath:
-        "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+      projectMetadataRootPath,
       projectMapRootPath:
         "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map",
       mapJsonPath:
@@ -146,16 +149,13 @@ describe("resolveProjectMapReadResult", () => {
         repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
         workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
         projectCheckoutPath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
-        projectMetadataRootPath:
-          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
-        projectSourceIdentityPath:
-          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
+        projectMetadataRootPath,
+        projectSourceIdentityPath,
         persistedAt: expect.any(String),
       },
       projectSourceIdentityPersistence: {
         status: "persisted",
-        projectSourceIdentityPath:
-          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
+        projectSourceIdentityPath,
         persistedAt: expect.any(String),
       },
     });
@@ -163,18 +163,23 @@ describe("resolveProjectMapReadResult", () => {
       "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map",
     );
     expect(mkdirMock).toHaveBeenCalledWith(
-      "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+      projectMetadataRootPath,
       { recursive: true },
     );
     expect(writeFileMock).toHaveBeenCalledWith(
-      "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
+      projectSourceIdentityPath,
       expect.stringContaining('"repositoryUrl": "https://github.com/Beautyclient/BeautyClientPro.git"'),
       "utf8",
     );
   });
 
   it("returns failed persistence status when source identity cannot be written", async () => {
-    mkdirMock.mockRejectedValueOnce(new Error("permission denied"));
+    const epermError = new Error("EPERM: operation not permitted") as Error & {
+      code: string;
+    };
+
+    epermError.code = "EPERM";
+    writeFileMock.mockRejectedValueOnce(epermError);
 
     const { resolveProjectMapReadResult } = await loadModule();
     const result = await resolveProjectMapReadResult({
@@ -188,8 +193,7 @@ describe("resolveProjectMapReadResult", () => {
       status: "missing",
       projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
       projectName: "Beauty Client PRO",
-      projectMetadataRootPath:
-        "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+      projectMetadataRootPath,
       projectMapRootPath:
         "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map",
       mapJsonPath:
@@ -200,22 +204,26 @@ describe("resolveProjectMapReadResult", () => {
         repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
         workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
         projectCheckoutPath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
-        projectMetadataRootPath:
-          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
-        projectSourceIdentityPath:
-          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
+        projectMetadataRootPath,
+        projectSourceIdentityPath,
         persistedAt: expect.any(String),
       },
       projectSourceIdentityPersistence: {
         status: "failed",
         reason: "source-identity-write-failed",
-        projectSourceIdentityPath:
-          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
-        errorMessage: "permission denied",
+        projectSourceIdentityPath,
+        errorMessage: "EPERM: operation not permitted",
         persistedAt: expect.any(String),
       },
     });
-    expect(writeFileMock).not.toHaveBeenCalled();
+    expect(mkdirMock).toHaveBeenCalledWith(projectMetadataRootPath, {
+      recursive: true,
+    });
+    expect(writeFileMock).toHaveBeenCalledWith(
+      projectSourceIdentityPath,
+      expect.stringContaining('"repositoryUrl": "https://github.com/Beautyclient/BeautyClientPro.git"'),
+      "utf8",
+    );
   });
 
   it("returns missing when map.json does not exist inside an existing project-map root", async () => {
@@ -237,8 +245,7 @@ describe("resolveProjectMapReadResult", () => {
       status: "missing",
       projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
       projectName: "Beauty Client PRO",
-      projectMetadataRootPath:
-        "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+      projectMetadataRootPath,
       projectMapRootPath:
         "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map",
       mapJsonPath:
@@ -249,16 +256,13 @@ describe("resolveProjectMapReadResult", () => {
         repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
         workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
         projectCheckoutPath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
-        projectMetadataRootPath:
-          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
-        projectSourceIdentityPath:
-          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
+        projectMetadataRootPath,
+        projectSourceIdentityPath,
         persistedAt: expect.any(String),
       },
       projectSourceIdentityPersistence: {
         status: "persisted",
-        projectSourceIdentityPath:
-          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
+        projectSourceIdentityPath,
         persistedAt: expect.any(String),
       },
     });
@@ -292,8 +296,7 @@ describe("resolveProjectMapReadResult", () => {
       reason: "project-map-present-but-read-not-implemented",
       projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
       projectName: "Beauty Client PRO",
-      projectMetadataRootPath:
-        "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+      projectMetadataRootPath,
       projectMapRootPath:
         "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map",
       mapJsonPath:
@@ -304,25 +307,22 @@ describe("resolveProjectMapReadResult", () => {
         repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
         workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
         projectCheckoutPath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
-        projectMetadataRootPath:
-          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
-        projectSourceIdentityPath:
-        "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
+        projectMetadataRootPath,
+        projectSourceIdentityPath,
         persistedAt: expect.any(String),
       },
       projectSourceIdentityPersistence: {
         status: "persisted",
-        projectSourceIdentityPath:
-          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
+        projectSourceIdentityPath,
         persistedAt: expect.any(String),
       },
     });
     expect(mkdirMock).toHaveBeenCalledWith(
-      "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+      projectMetadataRootPath,
       { recursive: true },
     );
     expect(writeFileMock).toHaveBeenCalledWith(
-      "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-source-identity.json",
+      projectSourceIdentityPath,
       expect.stringContaining('"projectCheckoutPath": "C:\\\\SPS_OS_WORK\\\\beauty-client-pro\\\\repo"'),
       "utf8",
     );

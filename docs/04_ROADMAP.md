@@ -193,8 +193,114 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.4 - Project Map Create Candidate Action Foundation
+Latest Completed Product Milestone: MS-031.9 - SPS Metadata Root Write Permission Recovery Foundation
 
+## MS-031.9 - SPS Metadata Root Write Permission Recovery Foundation
+
+**Milestone**
+MS-031.9 - SPS Metadata Root Write Permission Recovery Foundation
+
+**Type**
+SPS OS / Project Map Source Identity Persistence Recovery Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Product Outcome**
+The durable SPS OS metadata root write path is now recovered for Project Map source identity persistence. The live runtime can persist `project-source-identity.json` to `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb`, the BCP repository URL remains visible and persisted, and canonical `map.json` creation or promotion remains out of scope.
+
+**Implementation Evidence**
+* live Project Map verification confirms `Source identity persistence: persisted`
+* `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb\project-source-identity.json` is writable again in the live runtime
+* `src/lib/app-version.ts` now records `APP_VERSION 1.0047` and `LAST_PUBLISHED_MS MS-031.9 - SPS Metadata Root Write Permission Recovery Foundation`
+* Beauty Client PRO repository files were not modified
+
+**Residual Risk**
+* canonical `map.json` remains absent until a separate approval-bound milestone writes or promotes it
+* source identity persistence depends on the durable SPS metadata root remaining writable
+* Beauty Client PRO itself was not modified in this milestone
+
+## MS-031.8 - Project Map Source Identity Alignment Foundation
+
+**Milestone**
+MS-031.8 - Project Map Source Identity Alignment Foundation
+
+**Type**
+SPS OS / Project Map Source Identity Alignment Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Product Outcome**
+The Project Map source identity now hydrates and displays the BCP repository URL from the git remote, so the live page shows `https://github.com/Beautyclient/BeautyClientPro.git` instead of a missing source identity value. The alignment keeps the candidate/read-only boundary explicit and does not create or promote canonical `map.json`.
+
+**Implementation Evidence**
+* live Project Map verification confirms the repository URL is visible in source identity
+* source identity hydration now recovers the BCP repository URL from the checkout remote
+* `src/lib/app-version.ts` now records `APP_VERSION 1.0047` and `LAST_PUBLISHED_MS MS-031.9 - SPS Metadata Root Write Permission Recovery Foundation`
+* Beauty Client PRO repository files were not modified
+
+**Residual Risk**
+* source identity persistence still depends on the durable SPS metadata root being writable
+* canonical `map.json` remains absent until a separate approval-bound milestone writes or promotes it
+* Beauty Client PRO itself was not modified in this milestone
+
+## MS-031.6 - Project Map Availability Explanation Foundation
+
+**Milestone**
+MS-031.6 - Project Map Availability Explanation Foundation
+
+**Type**
+SPS OS / Project Map Availability Explanation Foundation
+
+**Status**
+IMPLEMENTED / UNDER REVIEW
+
+**Product Outcome**
+The Project Map page now explains why each visible section is available, planned, blocked, candidate-only, or missing data by showing compact `Status`, `Dlaczego`, `Następny krok`, and `Źródło` rows. The Repository URL / Source Identity gap is now shown as an explicit blocker instead of a silent missing label, so the Product Owner can see what is working, what is still candidate-only, and what still needs source-identity follow-up.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/project-map/page.tsx` adds the compact availability explanation rows and the explicit Repository URL / Source Identity blocker copy
+* `src/app/projects/[id]/project-map/page.test.tsx` covers the new explanation section and the repository URL / source identity warning wording
+* `src/lib/app-version.ts` now records `APP_VERSION 1.0047` and `LAST_PUBLISHED_MS MS-031.9 - SPS Metadata Root Write Permission Recovery Foundation`
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` stay aligned with the MS-031.6 implementation state under review
+
+**Residual Risk**
+* Repository URL consistency still needs follow-up verification before any canonical promotion path is considered
+* MS-031.5 remains rejected because its technical refresh/build result did not render a usable robocza mapa, but that limitation is now easier to interpret through the availability explanation layer
+* Beauty Client PRO itself was not modified in this milestone
+
+## MS-031.5 - Project Map Candidate Build Action Foundation
+
+**Milestone**
+MS-031.5 - Project Map Candidate Build Action Foundation
+
+**Type**
+SPS OS / Project Map Candidate Build Action Foundation
+
+**Status**
+REJECTED / NOT ACCEPTED / NEEDS FIX
+
+**Product Outcome**
+The Project Map page now gives the Product Owner a technical refresh/build confirmation after clicking `Stwórz roboczą mapę projektu`, but the live Product Owner review rejected it because it does not render an actual usable working Project Map. The visible output shows candidate result, evidence count, foundation areas, and timestamp, yet it remains a technical candidate/read-only result instead of the requested robocza mapa. Repository URL is still shown as missing in Project Map source identity even though BCP has a known repository URL, so candidate output remains a trust blocker rather than a publishable milestone.
+
+**Implementation Evidence**
+* `src/app/projects/[id]/project-map/page.tsx` now shows a visible refresh/build result block after the candidate CTA is used
+* `src/app/projects/[id]/project-map/page.test.tsx` covers the explicit refresh result and canonical boundary copy
+* `src/lib/app-version.ts` was on `APP_VERSION 1.0045` and `LAST_PUBLISHED_MS MS-031.5 - Project Map Candidate Build Action Foundation` during the rejected MS-031.5 state; the current publication baseline records `APP_VERSION 1.0047` and `LAST_PUBLISHED_MS MS-031.9 - SPS Metadata Root Write Permission Recovery Foundation`
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` stay aligned with the MS-031.5 rejection state
+
+**Residual Risk**
+* Repository URL is shown as missing in Project Map source identity and needs follow-up verification before any canonical promotion path is considered
+* MS-031.6 now provides the explanation layer for planned / unavailable sections
+* the milestone is rejected because the technical refresh result did not produce an actual usable working Project Map
+
+**Allowed Implementation Scope**
+* keep Current Product Milestone and Next Product Milestone at NONE / Product Owner decision required
+* preserve the existing Project Map data model, scanner, classifier, reconstruction, and write behavior
+* keep the candidate/read-only boundary explicit
+* keep canonical `map.json` creation or promotion out of scope
+* keep Beauty Client PRO repository files untouched
 ## MS-031.4 - Project Map Create Candidate Action Foundation
 
 **Milestone**

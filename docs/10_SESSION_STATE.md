@@ -214,7 +214,7 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-08-30
+Date: 2026-08-31
 Current Session ID: 094
 Current Chat Title: 094 SPS OS - Product Owner decision required
 Next Session ID: 095
@@ -223,7 +223,15 @@ Active Capability: Session Close Protocol
 Active Work Item: Session 094 control files sync
 Current Mode: CLOSURE PENDING
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.4 - Project Map Create Candidate Action Foundation
+Latest Completed Product Milestone: MS-031.9 - SPS Metadata Root Write Permission Recovery Foundation
+
+MS-031.9 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the SPS Metadata Root Write Permission Recovery Foundation. The live runtime now persists the source identity into the durable SPS OS metadata root at `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb`, `project-source-identity.json` contains the hydrated repository URL, and the Project Map source identity persistence status is `persisted`. Beauty Client PRO itself was not modified in this milestone.
+
+MS-031.8 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Source Identity Alignment Foundation. The Project Map source identity now hydrates and displays the BCP repository URL from the git remote so the live page shows `https://github.com/Beautyclient/BeautyClientPro.git` instead of a missing source identity value. The alignment keeps the candidate/read-only boundary explicit and does not create or promote canonical `map.json`.
+
+MS-031.6 is IMPLEMENTED / UNDER REVIEW in the current local workspace as the Project Map Availability Explanation Foundation. The Project Map page now explains why each major visible section is candidate-only, planned, missing data, missing integration, or blocked by source identity, and it shows compact `Status`, `Dlaczego`, `Następny krok`, and `Źródło` rows for the visible sections. The Repository URL / Source Identity gap is surfaced as an explicit trust blocker instead of a silent missing label, but live/Product Owner acceptance is still pending and Beauty Client PRO itself was not modified in this milestone.
+
+MS-031.5 is REJECTED / NOT ACCEPTED / NEEDS FIX in the current local workspace as the Project Map Candidate Build Action Foundation. The Project Map page now shows an explicit refresh/build confirmation after `Stwórz roboczą mapę projektu`, surfaces the candidate result, evidence count, foundation areas, and timestamp, and keeps the candidate/read-only boundary explicit without creating or promoting canonical `map.json`. The live Product Owner review rejected this because it does not render an actual usable working Project Map. Repository URL is still shown as missing in Project Map source identity even though BCP has a known repository URL, so candidate output remains a trust blocker until source identity consistency is verified. MS-031.6 now provides the explanation layer for planned and unavailable sections, and Beauty Client PRO itself was not modified in this milestone.
 
 MS-031.4 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Create Candidate Action Foundation. The Project Map page now exposes the plain-language primary CTA `Stwórz roboczą mapę projektu`, keeps the secondary action `Pokaż roboczą mapę`, preserves the candidate/read-only boundary, and keeps canonical `map.json` creation or promotion out of scope. Beauty Client PRO itself was not modified in this milestone, and MS-031.3 remains the readiness-consistency baseline immediately before this candidate-action update.
 
@@ -269,7 +277,7 @@ MS-030.0 is PUBLISHED / CLOSED in the current local workspace as the Project Map
 MS-029.1 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Milestone Map and Parked Ideas Visibility Foundation. The Product Owner wants SPS OS to eventually show milestone blocks with `check`, `active`, `planned`, `parked`, and `blocked` labels and keep parked ideas, improvements, and future enhancements visible under the relevant block/MS instead of losing them in chat history.
 MS-029.0 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the SPS OS Layout System First Implementation Foundation. The layout now implements the approved top project workspace band, section/navigation band, two-column AI chat/Codex main area, and separate project value / description context panel while preserving existing AI Workspace behavior and keeping color/theme unchanged.
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 094 synchronized the MS-031.4 control files publication
+Latest Completed Capability Item: Session 094 synchronized the MS-031.8 and MS-031.9 control files to accepted status
 Current Sprint: NONE
 Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-014.0, MS-015.0, MS-016.0, MS-016.1, MS-016.2, MS-017.0, MS-017.1, MS-017.2, MS-018.0, MS-018.1, MS-018.3, MS-019.0, MS-020.0, MS-021.0, MS-021.1, MS-021.2, MS-021.3, MS-021.4, MS-021.5, MS-021.6, MS-021.7, MS-021.8, MS-021.9, MS-021.10, MS-021.11, MS-021.12, MS-021.13, MS-021.14, MS-021.15, MS-021.16, MS-021.17, MS-022.0, MS-022.1, MS-022.2, MS-022.3, MS-023.0, MS-027.2, MS-027.3, MS-027.4, MS-027.5, MS-028.0, MS-028.1, MS-028.2, MS-028.3, MS-028.4, MS-028.5, MS-028.6, MS-028.7, MS-028.8, MS-028.9, MS-028.10, MS-028.11, MS-028.12, MS-028.13, MS-028.14, MS-028.15, and MS-028.16 immutable while awaiting Product Owner decision for the next milestone.
 Repository Branch: main
@@ -279,5 +287,5 @@ Latest Verified Commit: 5a4396d
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Run `git status --short` and prepare the MS-031.4 commit handoff.
-Next Session Plan: Complete the MS-031.4 publication sync handoff, then proceed with the approved commit and push flow.
+Next Safe Step: Review the Project Map source identity and metadata recovery publication state in the live browser before any canonical promotion decision.
+Next Session Plan: Keep the MS-031.6 under-review state aligned in SSOT and await the next Product Owner decision before introducing any new milestone.
