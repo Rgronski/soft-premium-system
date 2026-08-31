@@ -365,7 +365,7 @@ function Get-LatestCompletedMilestonePublicationIssues {
 
     $issues = New-Object System.Collections.Generic.List[string]
 
-    if ($publicationStatus -ne "PUBLISHED") {
+    if ($publicationStatus -notmatch '\bPUBLISHED\b') {
         $issues.Add("Latest completed milestone '$LatestCompletedMilestone' must report Publication Status: PUBLISHED in $RoadmapPath.")
     }
 
