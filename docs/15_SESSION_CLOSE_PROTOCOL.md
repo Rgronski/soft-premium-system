@@ -207,6 +207,22 @@ If any required element is missing:
 * do not declare `Session closed`
 * first prepare, verify, and publish the required minimal patch according to this protocol
 
+## Development Log Requirement
+
+Every completed Session Close must create a dated markdown development log at:
+
+`docs/development-log/YYYY/YYYY-MM-DD_session_<CurrentSessionID>.md`
+
+The development log must be factual and concise. It should record:
+
+* the session date,
+* the session id,
+* the objective,
+* the actual problem or state at the start,
+* the work completed during close,
+* any blockers or failed experiments,
+* the next safe step.
+
 Mandatory sequence after recognizing `SPS OS — KONIEC`:
 
 1. Recognize `SPS OS — KONIEC`.

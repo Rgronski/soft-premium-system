@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 094 - Session Close Protocol
+
+### Date
+
+2026-08-31
+
+### Completed
+
+* Synchronized the Session 094 close state so the operational snapshot now reflects `Current Mode: CLOSED`, a completed close work item, a clean repository state, and the latest verified baseline commit.
+* Created the dated development log for Session 094 and the next-session handoff for Session 095.
+* Kept the published product baseline intact, with MS-031.10 still the latest completed product milestone and no new product code changes in the close step.
+
+### Evidence
+
+* Updated `docs/15_SESSION_CLOSE_PROTOCOL.md`.
+* Updated `docs/10_SESSION_STATE.md`.
+* Added `docs/development-log/2026/2026-08-31_session_094.md`.
+* Added `docs/session-handoffs/2026-08-31_094_SESSION_HANDOFF.md`.
+
+### Notes
+
+* The session close documentation now has an explicit development log requirement.
+* The close step keeps canonical `map.json` absent and does not modify Beauty Client PRO.
+
 ## Session 094 - MS-031.10 Project Map Candidate Structure Publication Sync
 
 ### Date
