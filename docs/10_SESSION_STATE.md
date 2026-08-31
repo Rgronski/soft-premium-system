@@ -299,5 +299,5 @@ Latest Verified Commit: e5729dd
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Generate and attach the fresh sps-session.zip for Session 095 bootstrap.
+Next Safe Step: Generate and attach the fresh `sps-session.zip` for Session 095 bootstrap.
 Next Session Plan: Start Session 095 from the fresh sps-session.zip and continue from the Product Owner decision point.
