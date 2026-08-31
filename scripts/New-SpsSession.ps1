@@ -354,7 +354,14 @@ function Get-LatestCompletedMilestonePublicationIssues {
     }
 
     $publicationStatus = Get-SectionFieldValue -Lines $sectionLines -FieldName "Publication Status"
+    if ([string]::IsNullOrWhiteSpace($publicationStatus)) {
+        $publicationStatus = Get-SectionFieldValue -Lines $sectionLines -FieldName "Status"
+    }
+
     $milestoneStatus = Get-SectionFieldValue -Lines $sectionLines -FieldName "Milestone Status"
+    if ([string]::IsNullOrWhiteSpace($milestoneStatus)) {
+        $milestoneStatus = Get-SectionFieldValue -Lines $sectionLines -FieldName "Status"
+    }
 
     $issues = New-Object System.Collections.Generic.List[string]
 
