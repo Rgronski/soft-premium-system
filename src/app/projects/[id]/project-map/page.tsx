@@ -118,6 +118,11 @@ type ProjectMapMilestoneEvidenceDrilldownCopy = {
   emptyState: string;
 };
 
+type ProjectMapMissingInputCopy = {
+  label: string;
+  detail?: string;
+};
+
 function isMissingPathError(error: unknown): boolean {
   if (typeof error !== "object" || error === null || !("code" in error)) {
     return false;
@@ -844,6 +849,68 @@ function buildProjectMapCandidateFoundationDescription(
   return "Status tej części wymaga ręcznego sprawdzenia.";
 }
 
+function buildProjectMapMissingInputCopy(item: string): ProjectMapMissingInputCopy {
+  if (item.includes("Repository URL is missing from Project Map source identity.")) {
+    return {
+      label: "Brak pełnego źródła dla bloku: source identity",
+      detail: "Project Map source identity nie zawiera Repository URL.",
+    };
+  }
+
+  if (item.includes("Repository URL in Project Map source identity does not match")) {
+    return {
+      label: "Brak spójnego źródła dla bloku: source identity",
+      detail: "Source identity nie zgadza się z rekordem BCP.",
+    };
+  }
+
+  if (item.includes("SSOT is missing because no SSOT docs were found.")) {
+    return {
+      label: "Brak pełnego źródła dla bloku: SSOT",
+      detail: "Nie znaleziono dokumentów SSOT.",
+    };
+  }
+
+  if (item.includes("Project Bible is missing because no dedicated Project Bible source was found.")) {
+    return {
+      label: "Brak danych wejściowych dla sekcji: Project Bible",
+      detail: "Nie znaleziono osobnego źródła Project Bible.",
+    };
+  }
+
+  if (item.includes("Project Map is missing because canonical map.json does not exist yet.")) {
+    return {
+      label: "Brak canonical map.json",
+      detail: "Mapa kanoniczna nie została jeszcze utworzona.",
+    };
+  }
+
+  if (item.includes("First Layout is missing because no BCP layout evidence was found; the shell layout exists separately.")) {
+    return {
+      label: "Brak danych wejściowych dla sekcji: First Layout",
+      detail: "Brakuje potwierdzenia układu BCP.",
+    };
+  }
+
+  if (item.includes("First Working Flow is missing because no flow evidence was found.")) {
+    return {
+      label: "Brak danych wejściowych dla sekcji: First Working Flow",
+      detail: "Brakuje potwierdzenia pierwszego przepływu.",
+    };
+  }
+
+  if (item.includes("Publication Path is missing because canonical save/publish is not implemented or approved yet.")) {
+    return {
+      label: "Brak decyzji akceptacyjnej",
+      detail: "Kanoniczny zapis pozostaje osobnym krokiem.",
+    };
+  }
+
+  return {
+    label: item,
+  };
+}
+
 async function loadProjectMapCandidate(
   project: Awaited<ReturnType<typeof getServerProjectById>>,
 ): Promise<ProjectMapReconstructionCandidateResult | null> {
@@ -1195,7 +1262,22 @@ export default async function ProjectMapPage({
                 <ul className="mt-3 space-y-2 text-sm text-cyan-50/90">
                   {projectMapCandidateStructure.missingInputs.map((item) => (
                     <li key={item} className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">
-                      {item}
+                      {(() => {
+                        const missingInputCopy = buildProjectMapMissingInputCopy(item);
+
+                        return (
+                          <>
+                            <p className="font-medium text-cyan-50">
+                              {missingInputCopy.label}
+                            </p>
+                            {missingInputCopy.detail ? (
+                              <p className="mt-1 text-xs text-cyan-100/75">
+                                {missingInputCopy.detail}
+                              </p>
+                            ) : null}
+                          </>
+                        );
+                      })()}
                     </li>
                   ))}
                 </ul>

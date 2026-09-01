@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 095 - MS-031.12 Project Map Candidate Missing Inputs Clarification Publication Sync
+
+### Date
+
+2026-09-01
+
+### Completed
+
+* Recorded MS-031.12 as accepted and published-ready after the Project Map missing-inputs clarification sync made the candidate labels more concrete.
+* Recorded that the Project Map candidate missing-inputs area now shows concrete Polish-first labels instead of only verbose raw reasons, while preserving the underlying candidate truth and original detail text where helpful.
+* Preserved the candidate/read-only boundary, kept canonical `map.json` absent, kept Beauty Client PRO repository files untouched, and confirmed the focused test coverage locks the new First Layout label.
+* Updated the published app-version baseline so the source file now records `APP_VERSION 1.0051` and `LAST_PUBLISHED_MS MS-031.12 - Project Map Candidate Missing Inputs Clarification Foundation`.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Appended one usage record to `.usage/session.jsonl`.
+* Verification remained targeted to the existing Project Map page test and typecheck path from the implementation step.
+
+### Notes
+
+* The missing-inputs clarification is intentionally read-only and local-only.
+* Beauty Client PRO repository files were not modified.
+
 ## Session 095 - MS-031.11 Project Map Candidate Review Action Publication Sync
 
 ### Date

@@ -193,15 +193,15 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.11 - Project Map Candidate Review Action Foundation
+Latest Completed Product Milestone: MS-031.12 - Project Map Candidate Missing Inputs Clarification Foundation
 
-## MS-031.11 - Project Map Candidate Review Action Foundation
+## MS-031.12 - Project Map Candidate Missing Inputs Clarification Foundation
 
 **Milestone**
-MS-031.11 - Project Map Candidate Review Action Foundation
+MS-031.12 - Project Map Candidate Missing Inputs Clarification Foundation
 
 **Type**
-SPS OS / Project Map Candidate Review Action Foundation
+SPS OS / Project Map Candidate Missing Inputs Clarification Foundation
 
 **Status**
 COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
@@ -213,14 +213,14 @@ PUBLISHED
 COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Product Outcome**
-The Project Map page now adds a compact read-only review block for the candidate so the next action is explicit after viewing the robocza mapa. The review block states that it does not write `map.json`, does not promote the candidate to canonical state, and keeps the candidate/read-only boundary explicit.
+The Project Map candidate missing-inputs area now shows concrete Polish-first labels instead of only verbose raw reasons. The mapper preserves the underlying candidate truth, keeps original detail text where helpful, and keeps the candidate/read-only boundary explicit.
 
 **Implementation Evidence**
 * the Project Map page now shows the compact review block headed `Sprawdź roboczą mapę`
 * the review block explicitly says it does not write `map.json` and does not promote the candidate to canonical state
 * the review block exposes the local decision chips `Akceptuję kierunek`, `Widzę braki`, and `Odkładam`
 * focused tests cover both available-candidate and unavailable-candidate paths
-* `src/lib/app-version.ts` now records `APP_VERSION 1.0050` and `LAST_PUBLISHED_MS MS-031.11 - Project Map Candidate Review Action Foundation`
+* `src/lib/app-version.ts` now records `APP_VERSION 1.0051` and `LAST_PUBLISHED_MS MS-031.12 - Project Map Candidate Missing Inputs Clarification Foundation`
 * Beauty Client PRO repository files were not modified
 
 **Residual Risk**

@@ -223,7 +223,9 @@ Active Capability: Session Close Protocol
 Active Work Item: Session 094 close protocol complete
 Current Mode: CLOSED
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.11 - Project Map Candidate Review Action Foundation
+Latest Completed Product Milestone: MS-031.12 - Project Map Candidate Missing Inputs Clarification Foundation
+
+MS-031.12 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Missing Inputs Clarification Foundation. The Project Map candidate missing-inputs area now shows concrete Polish-first labels instead of only verbose raw reasons. The mapper preserves the underlying candidate truth, keeps original detail text where helpful, and keeps the candidate/read-only boundary explicit. Focused test coverage locks the new First Layout label, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 
 MS-031.11 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Review Action Foundation. The Project Map page now includes a compact read-only review block headed `Sprawdź roboczą mapę` so the next action is explicit after viewing the robocza mapa. The block states that it does not write `map.json`, does not promote the candidate to canonical state, and keeps the candidate/read-only boundary explicit. Focused tests cover the available-candidate and unavailable-candidate paths, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 

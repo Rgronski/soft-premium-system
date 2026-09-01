@@ -648,6 +648,7 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Evidence and provenance")).toBeTruthy();
     expect(screen.getByText("Sprawdź roboczą mapę")).toBeTruthy();
     expect(screen.getByText("Akceptuję kierunek")).toBeTruthy();
+    expect(screen.getByText("Brak danych wejściowych dla sekcji: First Layout")).toBeTruthy();
     expect(screen.getAllByText("Project Identity").length).toBeGreaterThanOrEqual(2);
     expect(scanProjectMapEvidenceMock).toHaveBeenCalledWith({
       id: "project-1",
