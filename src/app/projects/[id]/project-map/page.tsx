@@ -63,6 +63,42 @@ type ProjectMapCanonicalWriteReadinessCopy = {
   details: string[];
 };
 
+const projectMapReviewDecisionOptions = [
+  {
+    id: "accept",
+    label: "Akceptuję kierunek",
+    confirmation: "Decyzja robocza: Akceptuję kierunek",
+  },
+  {
+    id: "braki",
+    label: "Widzę braki",
+    confirmation: "Decyzja robocza: Widzę braki",
+  },
+  {
+    id: "odkladam",
+    label: "Odkładam",
+    confirmation: "Decyzja robocza: Odkładam",
+  },
+] as const;
+
+const projectMapNextStepOptions = [
+  {
+    id: "uzupelnij",
+    label: "Uzupełnij braki",
+    confirmation: "Następny krok: Uzupełnij braki",
+  },
+  {
+    id: "przygotuj",
+    label: "Przygotuj akceptację kierunku",
+    confirmation: "Następny krok: Przygotuj akceptację kierunku",
+  },
+  {
+    id: "odloz",
+    label: "Odłóż mapę",
+    confirmation: "Następny krok: Odłóż mapę",
+  },
+] as const;
+
 type ProjectMapRefreshFeedbackCopy = {
   title: string;
   description: string;
@@ -1738,7 +1774,10 @@ export default async function ProjectMapPage({
               </div>
             ) : null}
 
-            <div className="rounded-xl border border-sky-800/70 bg-sky-950/40 p-4">
+            <div
+              className="rounded-xl border border-sky-800/70 bg-sky-950/40 p-4"
+              data-project-map-selection
+            >
               <div className="space-y-1">
                 <p className="text-sm uppercase tracking-[0.2em] text-sky-200/70">
                   Sprawdź roboczą mapę
@@ -1761,15 +1800,31 @@ export default async function ProjectMapPage({
                     Czy kierunek roboczej mapy jest dobry?
                   </p>
                   <div className="mt-3 grid gap-2 sm:grid-cols-3">
-                    <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
-                      Akceptuję kierunek
-                    </div>
-                    <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
-                      Widzę braki
-                    </div>
-                    <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
-                      Odkładam
-                    </div>
+                    {projectMapReviewDecisionOptions.map((option) => {
+                      const inputId = `project-map-review-${option.id}`;
+
+                      return (
+                        <div key={option.id} className="space-y-1">
+                          <input
+                            id={inputId}
+                            type="radio"
+                            name="project-map-review-decision"
+                            value={option.id}
+                            data-project-map-review-choice
+                            className="peer sr-only"
+                          />
+                          <label
+                            htmlFor={inputId}
+                            className="block cursor-pointer rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90 transition hover:border-sky-700 hover:bg-sky-900/40 peer-checked:border-sky-300 peer-checked:bg-sky-500/20 peer-checked:text-sky-50"
+                          >
+                            {option.label}
+                          </label>
+                          <p className="hidden text-xs text-sky-100/70 peer-checked:block">
+                            {option.confirmation}
+                          </p>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -1781,15 +1836,31 @@ export default async function ProjectMapPage({
                     Co robimy dalej po tej ocenie?
                   </p>
                   <div className="mt-3 grid gap-2 sm:grid-cols-3">
-                    <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
-                      Uzupełnij braki
-                    </div>
-                    <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
-                      Przygotuj akceptację kierunku
-                    </div>
-                    <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
-                      Odłóż mapę
-                    </div>
+                    {projectMapNextStepOptions.map((option) => {
+                      const inputId = `project-map-next-${option.id}`;
+
+                      return (
+                        <div key={option.id} className="space-y-1">
+                          <input
+                            id={inputId}
+                            type="radio"
+                            name="project-map-next-step"
+                            value={option.id}
+                            data-project-map-next-choice
+                            className="peer sr-only"
+                          />
+                          <label
+                            htmlFor={inputId}
+                            className="block cursor-pointer rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90 transition hover:border-sky-700 hover:bg-sky-900/40 peer-checked:border-sky-300 peer-checked:bg-sky-500/20 peer-checked:text-sky-50"
+                          >
+                            {option.label}
+                          </label>
+                          <p className="hidden text-xs text-sky-100/70 peer-checked:block">
+                            {option.confirmation}
+                          </p>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

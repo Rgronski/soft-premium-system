@@ -193,7 +193,42 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.15 - Project Map Canonical Write Readiness Foundation
+Latest Completed Product Milestone: MS-031.16 - Project Map Candidate Review Local Selection Foundation
+
+## MS-031.16 - Project Map Candidate Review Local Selection Foundation
+
+**Milestone**
+MS-031.16 - Project Map Candidate Review Local Selection Foundation
+
+**Type**
+SPS OS / Project Map Candidate Review Local Selection Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Product Outcome**
+The Project Map review choices now behave as real local selection controls inside the read-only candidate review block. The block uses native radio inputs and labels instead of the earlier non-working button/script selection logic, keeps the selection local-only and unpersisted, and preserves the candidate/read-only boundary.
+
+**Implementation Evidence**
+* the Project Map review block still keeps the heading `Sprawdź roboczą mapę`
+* the review choices are native radio inputs with labels instead of script-driven buttons
+* selected choice is reflected by browser-native checked state and visible selected styling
+* the selection is local-only and not persisted
+* focused tests cover the available-candidate and unavailable-candidate paths
+* `src/lib/app-version.ts` already records `APP_VERSION 1.0055` and `LAST_PUBLISHED_MS MS-031.16 - Project Map Candidate Review Local Selection Foundation`
+* Beauty Client PRO repository files were not modified
+
+**Residual Risk**
+* candidate/read-only/canonical separation remains explicit and canonical `map.json` still must be handled by a separate approval-bound milestone
+* Beauty Client PRO itself was not modified in this milestone
+
+## MS-031.15 - Project Map Canonical Write Readiness Foundation
 
 ## MS-031.15 - Project Map Canonical Write Readiness Foundation
 

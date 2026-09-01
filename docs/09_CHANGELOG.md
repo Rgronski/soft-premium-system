@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 095 - MS-031.16 Project Map Candidate Review Local Selection Publication Sync
+
+### Date
+
+2026-09-01
+
+### Completed
+
+* Recorded MS-031.16 as accepted and published-ready after the Project Map review local selection sync made the review controls behave as real local radio inputs and labels.
+* Recorded that the Project Map candidate review block keeps the heading `Sprawdź roboczą mapę`, preserves the read-only candidate boundary, and reflects the local selection through browser-native checked state and visible selected styling.
+* Preserved the candidate/read-only boundary, kept canonical `map.json` absent, kept Beauty Client PRO repository files untouched, and confirmed the focused page test and TypeScript check passed for the current implementation snapshot.
+* Verified the published app-version baseline remains `APP_VERSION 1.0055` and `LAST_PUBLISHED_MS MS-031.16 - Project Map Candidate Review Local Selection Foundation`.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Verification remained targeted to the existing Project Map page test and typecheck path from the implementation step.
+
+### Notes
+
+* The review controls are intentionally local-only and read-only.
+* Beauty Client PRO repository files were not modified.
+
 ## Session 095 - MS-031.15 Project Map Canonical Write Readiness Publication Sync
 
 ### Date

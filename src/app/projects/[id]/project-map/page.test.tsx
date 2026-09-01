@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 const accessMock = vi.fn();
@@ -517,13 +517,12 @@ describe("ProjectMapPage", () => {
       )
       .mockResolvedValueOnce(undefined);
 
-    render(
+    const view = render(
       await ProjectMapPage({
         params: Promise.resolve({ id: "project-1" }),
         searchParams: Promise.resolve({ prepareStorage: "1" }),
       }),
     );
-
     expect(mkdirMock).toHaveBeenCalledWith(
       "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map",
       { recursive: true },
@@ -587,12 +586,11 @@ describe("ProjectMapPage", () => {
   test("shows an unavailable shell when the project identity is missing", async () => {
     getServerProjectByIdMock.mockResolvedValueOnce(null);
 
-    render(
+    const view = render(
       await ProjectMapPage({
         params: Promise.resolve({ id: "project-1" }),
       }),
     );
-
     expect(
       screen.getByText((content) => content.includes("Kontekst projektu") && content.includes("niedost")),
     ).toBeTruthy();
@@ -653,11 +651,29 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Oceń kandydata przed dalszą pracą")).toBeTruthy();
     expect(screen.getByText("Czy kierunek roboczej mapy jest dobry?")).toBeTruthy();
     expect(screen.getByText("Decyzja robocza")).toBeTruthy();
-    expect(screen.getByText("Akceptuję kierunek")).toBeTruthy();
+    const reviewAcceptChoice = screen.getByLabelText("Akceptuję kierunek");
+    const reviewBrakiChoice = screen.getByLabelText("Widzę braki");
+    const reviewOdkładamChoice = screen.getByLabelText("Odkładam");
+    expect((reviewAcceptChoice as HTMLInputElement).checked).toBe(false);
+    expect((reviewBrakiChoice as HTMLInputElement).checked).toBe(false);
+    expect((reviewOdkładamChoice as HTMLInputElement).checked).toBe(false);
     expect(screen.getByText("Brak danych wejściowych dla sekcji: First Layout")).toBeTruthy();
     expect(screen.getAllByText("Następny krok").length).toBeGreaterThanOrEqual(2);
     expect(screen.getByText("Co robimy dalej po tej ocenie?")).toBeTruthy();
-    expect(screen.getByText("Uzupełnij braki")).toBeTruthy();
+    const nextUzupełnijChoice = screen.getByLabelText("Uzupełnij braki");
+    const nextPrzygotujChoice = screen.getByLabelText("Przygotuj akceptację kierunku");
+    const nextOdłóżChoice = screen.getByLabelText("Odłóż mapę");
+    expect((nextUzupełnijChoice as HTMLInputElement).checked).toBe(false);
+    expect((nextPrzygotujChoice as HTMLInputElement).checked).toBe(false);
+    expect((nextOdłóżChoice as HTMLInputElement).checked).toBe(false);
+
+    fireEvent.click(reviewBrakiChoice);
+    fireEvent.click(nextUzupełnijChoice);
+
+    expect((reviewBrakiChoice as HTMLInputElement).checked).toBe(true);
+    expect((reviewAcceptChoice as HTMLInputElement).checked).toBe(false);
+    expect((nextUzupełnijChoice as HTMLInputElement).checked).toBe(true);
+    expect((nextPrzygotujChoice as HTMLInputElement).checked).toBe(false);
     expect(screen.getAllByText("Project Identity").length).toBeGreaterThanOrEqual(2);
     expect(scanProjectMapEvidenceMock).toHaveBeenCalledWith({
       id: "project-1",
@@ -712,7 +728,14 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Oceń kandydata przed dalszą pracą")).toBeTruthy();
     expect(screen.getByText("Gotowość do zapisu kanonicznego")).toBeTruthy();
     expect(screen.getByText("Robocza mapa: brak gotowego kandydata")).toBeTruthy();
-    expect(screen.getByText("Widzę braki")).toBeTruthy();
+    const reviewBrakiChoice = screen.getByLabelText("Widzę braki");
+    const nextPrzygotujChoice = screen.getByLabelText("Przygotuj akceptację kierunku");
+    expect((reviewBrakiChoice as HTMLInputElement).checked).toBe(false);
+    expect((nextPrzygotujChoice as HTMLInputElement).checked).toBe(false);
+    fireEvent.click(reviewBrakiChoice);
+    fireEvent.click(nextPrzygotujChoice);
+    expect((reviewBrakiChoice as HTMLInputElement).checked).toBe(true);
+    expect((nextPrzygotujChoice as HTMLInputElement).checked).toBe(true);
     expect(screen.getAllByText("Następny krok").length).toBeGreaterThanOrEqual(2);
     expect(screen.getByText("Co robimy dalej po tej ocenie?")).toBeTruthy();
   });
