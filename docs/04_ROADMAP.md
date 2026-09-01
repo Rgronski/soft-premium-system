@@ -193,7 +193,38 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.16 - Project Map Candidate Review Local Selection Foundation
+Latest Completed Product Milestone: MS-031.17 - Session Close IP/R&D Development Log Contract Foundation
+
+## MS-031.17 - Session Close IP/R&D Development Log Contract Foundation
+
+**Milestone**
+MS-031.17 - Session Close IP/R&D Development Log Contract Foundation
+
+**Type**
+SPS OS / Session Close IP/R&D Development Log Contract Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Product Outcome**
+The Session Close protocol now requires a richer factual development log for every completed close, so the session record captures not only what changed but why it changed. The contract preserves the chain `problem -> analysis -> decision -> implementation -> verification -> result`, supports future continuity and evidence of systematic software development / IP / R&D work, and keeps the log factual rather than legal or tax advice.
+
+**Implementation Evidence**
+* `docs/15_SESSION_CLOSE_PROTOCOL.md` now requires the development log to record the session date, session id, project, author / Product Owner, objective, starting problem or initial state, work designed / developed, technical decisions and why they were taken, creative element / new knowledge, AI role, tools used, result, files / components affected, Git branch and commits, verification, status, working time when available, and next step
+* the protocol explicitly requires the evidence chain `problem -> analysis -> decision -> implementation -> verification -> result`
+* the protocol says the log must remain factual and use `UNKNOWN` when data is not available
+* the protocol states that the log is evidence and continuity documentation, not legal or tax advice
+* `src/lib/app-version.ts` already records `APP_VERSION 1.0056` and `LAST_PUBLISHED_MS MS-031.17 - Session Close IP/R&D Development Log Contract Foundation`
+
+**Residual Risk**
+* the development log remains dependent on the availability of confirmed evidence for each session
+* Beauty Client PRO itself was not modified in this milestone
 
 ## MS-031.16 - Project Map Candidate Review Local Selection Foundation
 

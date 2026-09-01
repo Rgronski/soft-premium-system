@@ -223,6 +223,36 @@ The development log must be factual and concise. It should record:
 * any blockers or failed experiments,
 * the next safe step.
 
+The development log must also capture the full evidence chain for the session in a factual way:
+
+* problem or initial state
+* analysis
+* decision
+* implementation
+* verification
+* result
+
+When available, the log should also record:
+
+* project
+* author / Product Owner
+* work designed / developed
+* technical decisions and why they were taken
+* creative element / new knowledge
+* AI role
+* tools used
+* files / components affected
+* Git branch and commits
+* working time
+
+Principles:
+
+* record not only what changed, but why
+* preserve the chain `problem -> analysis -> decision -> implementation -> verification -> result`
+* keep the log factual
+* use `UNKNOWN` when data is not available
+* keep the log as evidence and continuity documentation, not legal or tax advice
+
 Mandatory sequence after recognizing `SPS OS — KONIEC`:
 
 1. Recognize `SPS OS — KONIEC`.

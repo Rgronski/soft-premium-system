@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 095 - MS-031.17 Session Close IP/R&D Development Log Contract Publication Sync
+
+### Date
+
+2026-09-01
+
+### Completed
+
+* Recorded MS-031.17 as accepted and published-ready after the Session Close contract update added the richer factual development log requirement.
+* Recorded that the Session Close protocol now requires the development log to capture the problem-to-result evidence chain, the session metadata, the work completed, the reasoning behind decisions, the verification result, and the next safe step.
+* Preserved the session-close boundary, kept Beauty Client PRO repository files untouched, and confirmed the targeted text checks passed for the current protocol snapshot.
+* Verified the published app-version baseline remains `APP_VERSION 1.0056` and `LAST_PUBLISHED_MS MS-031.17 - Session Close IP/R&D Development Log Contract Foundation`.
+
+### Evidence
+
+* Updated `docs/15_SESSION_CLOSE_PROTOCOL.md`, `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Verification remained targeted to the protocol text and SSOT text checks from the implementation step.
+
+### Notes
+
+* The requirement is evidence/continuity documentation, not legal or tax advice.
+* Beauty Client PRO repository files were not modified.
+
 ## Session 095 - MS-031.16 Project Map Candidate Review Local Selection Publication Sync
 
 ### Date
