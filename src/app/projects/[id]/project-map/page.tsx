@@ -1650,54 +1650,53 @@ export default async function ProjectMapPage({
                   Sprawdź roboczą mapę
                 </p>
                 <h4 className="text-lg font-semibold text-sky-50">
-                  Oceń kandydat przed dalszą pracą
+                  Oceń kandydata przed dalszą pracą
                 </h4>
                 <p className="text-sm text-sky-100/80">
-                  Ta sekcja służy wyłącznie do przeglądu. Nie zapisuje map.json i nie
-                  promuje kandydata do stanu kanonicznego.
+                  To nadal tryb roboczy: nie zapisuje map.json i nie publikuje mapy
+                  kanonicznej.
                 </p>
               </div>
 
-              <div className="mt-3 grid gap-2 sm:grid-cols-3">
-                <div className="rounded-lg border border-sky-900/60 bg-sky-950/30 px-3 py-2 text-sm text-sky-50/90">
-                  Akceptuję kierunek
+              <div className="mt-4 grid gap-3 lg:grid-cols-2">
+                <div className="rounded-lg border border-sky-900/60 bg-sky-950/30 p-3">
+                  <p className="text-xs uppercase tracking-[0.2em] text-sky-200/70">
+                    Decyzja robocza
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-sky-50">
+                    Czy kierunek roboczej mapy jest dobry?
+                  </p>
+                  <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                    <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
+                      Akceptuję kierunek
+                    </div>
+                    <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
+                      Widzę braki
+                    </div>
+                    <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
+                      Odkładam
+                    </div>
+                  </div>
                 </div>
-                <div className="rounded-lg border border-sky-900/60 bg-sky-950/30 px-3 py-2 text-sm text-sky-50/90">
-                  Widzę braki
-                </div>
-                <div className="rounded-lg border border-sky-900/60 bg-sky-950/30 px-3 py-2 text-sm text-sky-50/90">
-                  Odkładam
-                </div>
-              </div>
 
-              <p className="mt-3 text-xs text-sky-100/70">
-                Po sprawdzeniu możesz wskazać decyzję roboczą, ale canonical save
-                pozostaje osobnym krokiem.
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-sky-800/70 bg-sky-950/30 p-4">
-              <div className="space-y-1">
-                <p className="text-sm uppercase tracking-[0.2em] text-sky-200/70">
-                  Wybierz następny krok
-                </p>
-                <h4 className="text-lg font-semibold text-sky-50">
-                  Co chcesz zrobić po przeglądzie?
-                </h4>
-                <p className="text-sm text-sky-100/80">
-                  To tylko wybór roboczy. Nie zapisuje map.json i nie publikuje mapy.
-                </p>
-              </div>
-
-              <div className="mt-3 grid gap-2 sm:grid-cols-3">
-                <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
-                  Uzupełnij braki
-                </div>
-                <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
-                  Przygotuj akceptację kierunku
-                </div>
-                <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
-                  Odłóż mapę
+                <div className="rounded-lg border border-sky-900/60 bg-sky-950/30 p-3">
+                  <p className="text-xs uppercase tracking-[0.2em] text-sky-200/70">
+                    Następny krok
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-sky-50">
+                    Co robimy dalej po tej ocenie?
+                  </p>
+                  <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                    <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
+                      Uzupełnij braki
+                    </div>
+                    <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
+                      Przygotuj akceptację kierunku
+                    </div>
+                    <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
+                      Odłóż mapę
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

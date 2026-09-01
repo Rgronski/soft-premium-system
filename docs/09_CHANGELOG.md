@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 095 - MS-031.14 Project Map Candidate Review Block Coherence Publication Sync
+
+### Date
+
+2026-09-01
+
+### Completed
+
+* Recorded MS-031.14 as accepted and published-ready after the Project Map review / next-step coherence sync made the module read as one flow.
+* Recorded that the Project Map candidate review block now keeps the heading `Sprawdź roboczą mapę`, corrects the review subheading to `Oceń kandydata przed dalszą pracą`, and keeps the shared read-only boundary explicit.
+* Recorded that the module separates `Decyzja robocza` from `Następny krok`, keeps review first and next-step selection second, preserves the candidate/read-only boundary, and keeps canonical `map.json` absent.
+* Updated the published app-version baseline so the source file now records `APP_VERSION 1.0053` and `LAST_PUBLISHED_MS MS-031.14 - Project Map Candidate Review Block Coherence Foundation`.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Verification remained targeted to the existing Project Map page test and typecheck path from the implementation step.
+
+### Notes
+
+* The review block coherence refinement is intentionally local-only and read-only.
+* Beauty Client PRO repository files were not modified.
+
 ## Session 095 - MS-031.13 Project Map Candidate Next Step Selection Publication Sync
 
 ### Date

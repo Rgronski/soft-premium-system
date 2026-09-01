@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.13 - Project Map Candidate Next Step Selection Foundation
+  MS-031.14 - Project Map Candidate Review Block Coherence Foundation
+
+MS-031.14 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Review Block Coherence Foundation. The Project Map candidate review and next-step UI now reads as one coherent module that keeps review first and next-step selection second while preserving the read-only candidate boundary. The block keeps the heading `Sprawdź roboczą mapę`, corrects the review subheading to `Oceń kandydata przed dalszą pracą`, states the shared boundary `To nadal tryb roboczy: nie zapisuje map.json i nie publikuje mapy kanonicznej.`, and separates `Decyzja robocza` from `Następny krok`. Focused page test coverage and the TypeScript check both passed, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 
 MS-031.13 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Next Step Selection Foundation. The Project Map candidate view now includes a compact read-only next-step selection block headed `Wybierz następny krok` so the next action stays explicit after reviewing the robocza mapa. The block exposes the local options `Uzupełnij braki`, `Przygotuj akceptację kierunku`, and `Odłóż mapę`, states that it is only a local choice and does not write `map.json` or publish the map, and keeps the candidate/read-only boundary explicit. Focused test coverage and the TypeScript check both passed, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 

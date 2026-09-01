@@ -193,7 +193,42 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.13 - Project Map Candidate Next Step Selection Foundation
+Latest Completed Product Milestone: MS-031.14 - Project Map Candidate Review Block Coherence Foundation
+
+## MS-031.14 - Project Map Candidate Review Block Coherence Foundation
+
+**Milestone**
+MS-031.14 - Project Map Candidate Review Block Coherence Foundation
+
+**Type**
+SPS OS / Project Map Candidate Review Block Coherence Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Product Outcome**
+The Project Map candidate review and next-step UI now reads as one coherent module that keeps review first and next-step selection second while preserving the read-only candidate boundary.
+
+**Implementation Evidence**
+* the Project Map candidate review block keeps the heading `Sprawdź roboczą mapę`
+* the review subheading now reads `Oceń kandydata przed dalszą pracą`
+* the block states `To nadal tryb roboczy: nie zapisuje map.json i nie publikuje mapy kanonicznej.`
+* the module separates `Decyzja robocza` from `Następny krok`
+* the flow now makes review first and next-step selection second
+* focused tests and the TypeScript check passed for the current implementation snapshot
+* `src/lib/app-version.ts` now records `APP_VERSION 1.0053` and `LAST_PUBLISHED_MS MS-031.14 - Project Map Candidate Review Block Coherence Foundation`
+* Beauty Client PRO repository files were not modified
+
+**Residual Risk**
+* canonical `map.json` remains absent until a separate approval-bound milestone writes or promotes it
+* source identity persistence depends on the durable SPS metadata root remaining writable
+* Beauty Client PRO itself was not modified in this milestone
 
 ## MS-031.13 - Project Map Candidate Next Step Selection Foundation
 

@@ -647,9 +647,13 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Candidate foundation statuses")).toBeTruthy();
     expect(screen.getByText("Evidence and provenance")).toBeTruthy();
     expect(screen.getByText("Sprawdź roboczą mapę")).toBeTruthy();
+    expect(screen.getByText("Oceń kandydata przed dalszą pracą")).toBeTruthy();
+    expect(screen.getByText("Czy kierunek roboczej mapy jest dobry?")).toBeTruthy();
+    expect(screen.getByText("Decyzja robocza")).toBeTruthy();
     expect(screen.getByText("Akceptuję kierunek")).toBeTruthy();
     expect(screen.getByText("Brak danych wejściowych dla sekcji: First Layout")).toBeTruthy();
-    expect(screen.getByText("Wybierz następny krok")).toBeTruthy();
+    expect(screen.getAllByText("Następny krok").length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByText("Co robimy dalej po tej ocenie?")).toBeTruthy();
     expect(screen.getByText("Uzupełnij braki")).toBeTruthy();
     expect(screen.getAllByText("Project Identity").length).toBeGreaterThanOrEqual(2);
     expect(scanProjectMapEvidenceMock).toHaveBeenCalledWith({
@@ -702,7 +706,9 @@ describe("ProjectMapPage", () => {
     expect(screen.getAllByText((content) => content.includes("Powód:")).length).toBeGreaterThan(0);
     expect(screen.queryByText("Candidate foundation statuses")).toBeNull();
     expect(screen.getByText("Sprawdź roboczą mapę")).toBeTruthy();
+    expect(screen.getByText("Oceń kandydata przed dalszą pracą")).toBeTruthy();
     expect(screen.getByText("Widzę braki")).toBeTruthy();
-    expect(screen.getByText("Wybierz następny krok")).toBeTruthy();
+    expect(screen.getAllByText("Następny krok").length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByText("Co robimy dalej po tej ocenie?")).toBeTruthy();
   });
 });
