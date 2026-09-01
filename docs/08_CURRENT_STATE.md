@@ -45,13 +45,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.10 - Project Map Candidate Structure Foundation
+  MS-031.11 - Project Map Candidate Review Action Foundation
 
 **Publication Status**
 PUBLISHED / CLOSED
 
 **Milestone Status**
 COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
+MS-031.11 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Review Action Foundation. The Project Map page now includes a compact read-only review block headed `Sprawdź roboczą mapę` so the next action is explicit after viewing the robocza mapa. The block states that it does not write `map.json`, does not promote the candidate to canonical state, and keeps the candidate/read-only boundary explicit. Focused tests cover the available-candidate and unavailable-candidate paths, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 
 MS-031.10 is PUBLISHED / CLOSED in the current local workspace as the Project Map Candidate Structure Foundation. The Project Map page now renders a real map-shaped candidate with project identity, current state, completed items, under-review items, rejected or blocked items, missing inputs, next steps, evidence refs, and trust state while keeping the candidate/read-only boundary explicit. SSOT evidence is correctly classified as candidate / review when SSOT docs are found, missing inputs no longer include SSOT in that case, empty placeholder sections are removed or populated, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone. The earlier live mismatch was caused by a stale `next dev` process and was resolved by restarting the dev server.
 
@@ -577,7 +579,7 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.10 - Project Map Candidate Structure Foundation
+Latest Completed Product Milestone: MS-031.11 - Project Map Candidate Review Action Foundation
 Next Product Milestone: NONE / Product Owner decision required
 MS-028.71 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the Project API Filesystem Rebinding Fallback Foundation. The project API now recovers the known Beauty Client PRO project from the SPS-owned workspace manifest when the server registry misses it, so the canonical server project can be resolved instead of silently dropping into browser-local fallback for the known project.
 
@@ -1761,7 +1763,7 @@ Next:
 # In Progress
 
  * `Current Product Milestone` is `NONE / Product Owner decision required`
-* `Latest Completed Product Milestone` is `MS-031.10 - Project Map Candidate Structure Foundation`
+* `Latest Completed Product Milestone` is `MS-031.11 - Project Map Candidate Review Action Foundation`
  * `Next Product Milestone` is `NONE / Product Owner decision required`
  * `Session 091` published the MS-028.73 Codex Report Copy-Block Compliance Guard Foundation because the Codex operating charter now requires one clean copy-ready fenced report block with exact start and end markers and rejects escaped markers or loose Markdown outside the block.
  * `Session 091` synchronized the `MS-028.73 - Codex Report Copy-Block Compliance Guard Foundation` control files and preserved the existing `docs/10_SESSION_STATE.md` trace rule and `.usage/session.jsonl` usage record.

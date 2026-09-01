@@ -193,15 +193,15 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.10 - Project Map Candidate Structure Foundation
+Latest Completed Product Milestone: MS-031.11 - Project Map Candidate Review Action Foundation
 
-## MS-031.10 - Project Map Candidate Structure Foundation
+## MS-031.11 - Project Map Candidate Review Action Foundation
 
 **Milestone**
-MS-031.10 - Project Map Candidate Structure Foundation
+MS-031.11 - Project Map Candidate Review Action Foundation
 
 **Type**
-SPS OS / Project Map Candidate Structure Foundation
+SPS OS / Project Map Candidate Review Action Foundation
 
 **Status**
 COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
@@ -213,16 +213,15 @@ PUBLISHED
 COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Product Outcome**
-The Project Map page now renders a real map-shaped candidate instead of a checklist-only result. The candidate shows project identity, current state, completed items, under-review items, rejected or blocked items, missing inputs, next steps, evidence refs, and trust state while keeping the candidate/read-only boundary explicit and leaving canonical `map.json` absent and unpromoted.
+The Project Map page now adds a compact read-only review block for the candidate so the next action is explicit after viewing the robocza mapa. The review block states that it does not write `map.json`, does not promote the candidate to canonical state, and keeps the candidate/read-only boundary explicit.
 
 **Implementation Evidence**
-* live Project Map verification confirms the real map-shaped candidate is visible after the dev server restart
-* SSOT evidence is correctly classified as candidate / review when SSOT docs are found
-* missing inputs no longer include SSOT when SSOT docs are present
-* empty placeholder sections are removed or populated
-* `src/lib/app-version.ts` now records `APP_VERSION 1.0048` and `LAST_PUBLISHED_MS MS-031.10 - Project Map Candidate Structure Foundation`
+* the Project Map page now shows the compact review block headed `Sprawdź roboczą mapę`
+* the review block explicitly says it does not write `map.json` and does not promote the candidate to canonical state
+* the review block exposes the local decision chips `Akceptuję kierunek`, `Widzę braki`, and `Odkładam`
+* focused tests cover both available-candidate and unavailable-candidate paths
+* `src/lib/app-version.ts` now records `APP_VERSION 1.0050` and `LAST_PUBLISHED_MS MS-031.11 - Project Map Candidate Review Action Foundation`
 * Beauty Client PRO repository files were not modified
-* the earlier live mismatch was caused by a stale `next dev` process and was resolved by restarting the dev server
 
 **Residual Risk**
 * canonical `map.json` remains absent until a separate approval-bound milestone writes or promotes it

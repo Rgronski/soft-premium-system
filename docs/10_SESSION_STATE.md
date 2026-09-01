@@ -223,7 +223,9 @@ Active Capability: Session Close Protocol
 Active Work Item: Session 094 close protocol complete
 Current Mode: CLOSED
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.10 - Project Map Candidate Structure Foundation
+Latest Completed Product Milestone: MS-031.11 - Project Map Candidate Review Action Foundation
+
+MS-031.11 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Review Action Foundation. The Project Map page now includes a compact read-only review block headed `Sprawdź roboczą mapę` so the next action is explicit after viewing the robocza mapa. The block states that it does not write `map.json`, does not promote the candidate to canonical state, and keeps the candidate/read-only boundary explicit. Focused tests cover the available-candidate and unavailable-candidate paths, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 
 MS-031.10 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Structure Foundation. The Project Map page now renders a real map-shaped candidate with project identity, current state, completed items, under-review items, rejected or blocked items, missing inputs, next steps, evidence refs, and trust state while keeping the candidate/read-only boundary explicit. SSOT evidence is correctly treated as candidate / review when SSOT docs are found, missing inputs no longer include SSOT in that case, empty placeholder sections are removed or populated, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone. The earlier live mismatch was caused by a stale `next dev` process and was resolved by restarting the dev server.
 

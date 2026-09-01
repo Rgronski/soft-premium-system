@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 095 - MS-031.11 Project Map Candidate Review Action Publication Sync
+
+### Date
+
+2026-09-01
+
+### Completed
+
+* Recorded MS-031.11 as accepted and published-ready after the Project Map review-action sync made the candidate review step explicit.
+* Recorded that the Project Map page now shows a compact read-only review block headed `Sprawdź roboczą mapę`, states that it does not write `map.json` or promote canonical state, and exposes the local decision chips `Akceptuję kierunek`, `Widzę braki`, and `Odkładam`.
+* Preserved the candidate/read-only boundary, kept canonical `map.json` absent, kept Beauty Client PRO repository files untouched, and confirmed the focused tests cover the available-candidate and unavailable-candidate paths.
+* Updated the published app-version baseline so the source file now records `APP_VERSION 1.0050` and `LAST_PUBLISHED_MS MS-031.11 - Project Map Candidate Review Action Foundation`.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, `docs/10_SESSION_STATE.md`, and `src/lib/app-version.ts`.
+* Appended one usage record to `.usage/session.jsonl`.
+* Verification remained targeted to the existing Project Map page test and typecheck path.
+
+### Notes
+
+* The review block is intentionally local-only and read-only.
+* Beauty Client PRO repository files were not modified.
+
 ## Session 094 - Session Close Protocol
 
 ### Date
