@@ -214,16 +214,18 @@ The generator must not invent missing state.
 
 SPS OS Session State
 
-Date: 2026-08-31
-Current Session ID: 094
-Current Chat Title: 094 SPS OS - Product Owner decision required
-Next Session ID: 095
-Suggested Next Chat Title: 095 SPS OS - Product Owner decision required
+Date: 2026-09-01
+Current Session ID: 095
+Current Chat Title: 095 SPS OS - Product Owner decision required
+Next Session ID: 096
+Suggested Next Chat Title: 096 SPS OS - Product Owner decision required
 Active Capability: Session Close Protocol
-Active Work Item: Session 094 close protocol complete
+Active Work Item: Session 095 close protocol complete
 Current Mode: CLOSED
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.12 - Project Map Candidate Missing Inputs Clarification Foundation
+Latest Completed Product Milestone: MS-031.13 - Project Map Candidate Next Step Selection Foundation
+
+MS-031.13 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Next Step Selection Foundation. The Project Map candidate view now includes a compact read-only next-step selection block headed `Wybierz następny krok` so the next action stays explicit after reviewing the robocza mapa. The block exposes the local options `Uzupełnij braki`, `Przygotuj akceptację kierunku`, and `Odłóż mapę`, states that it is only a local choice and does not write `map.json` or publish the map, and keeps the candidate/read-only boundary explicit. Focused test coverage and the TypeScript check both passed, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 
 MS-031.12 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Missing Inputs Clarification Foundation. The Project Map candidate missing-inputs area now shows concrete Polish-first labels instead of only verbose raw reasons. The mapper preserves the underlying candidate truth, keeps original detail text where helpful, and keeps the candidate/read-only boundary explicit. Focused test coverage locks the new First Layout label, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 

@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 095 - MS-031.13 Project Map Candidate Next Step Selection Publication Sync
+
+### Date
+
+2026-09-01
+
+### Completed
+
+* Recorded MS-031.13 as accepted and published-ready after the Project Map next-step selection sync made the candidate follow-up explicit.
+* Recorded that the Project Map candidate view now includes a compact read-only next-step selection block headed `Wybierz następny krok`, with the local options `Uzupełnij braki`, `Przygotuj akceptację kierunku`, and `Odłóż mapę`.
+* Preserved the candidate/read-only boundary, kept canonical `map.json` absent, kept Beauty Client PRO repository files untouched, and confirmed the focused page test and TypeScript check passed for the current implementation snapshot.
+* Updated the published app-version baseline so the source file now records `APP_VERSION 1.0052` and `LAST_PUBLISHED_MS MS-031.13 - Project Map Candidate Next Step Selection Foundation`.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Verification remained targeted to the existing Project Map page test and typecheck path from the implementation step.
+
+### Notes
+
+* The next-step selection block is intentionally local-only and read-only.
+* Beauty Client PRO repository files were not modified.
+
 ## Session 095 - MS-031.12 Project Map Candidate Missing Inputs Clarification Publication Sync
 
 ### Date

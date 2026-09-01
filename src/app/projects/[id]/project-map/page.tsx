@@ -1675,6 +1675,32 @@ export default async function ProjectMapPage({
                 pozostaje osobnym krokiem.
               </p>
             </div>
+
+            <div className="rounded-xl border border-sky-800/70 bg-sky-950/30 p-4">
+              <div className="space-y-1">
+                <p className="text-sm uppercase tracking-[0.2em] text-sky-200/70">
+                  Wybierz następny krok
+                </p>
+                <h4 className="text-lg font-semibold text-sky-50">
+                  Co chcesz zrobić po przeglądzie?
+                </h4>
+                <p className="text-sm text-sky-100/80">
+                  To tylko wybór roboczy. Nie zapisuje map.json i nie publikuje mapy.
+                </p>
+              </div>
+
+              <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
+                  Uzupełnij braki
+                </div>
+                <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
+                  Przygotuj akceptację kierunku
+                </div>
+                <div className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2 text-sm text-sky-50/90">
+                  Odłóż mapę
+                </div>
+              </div>
+            </div>
           </div>
         </details>
       ) : null}

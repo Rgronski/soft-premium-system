@@ -193,7 +193,40 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.12 - Project Map Candidate Missing Inputs Clarification Foundation
+Latest Completed Product Milestone: MS-031.13 - Project Map Candidate Next Step Selection Foundation
+
+## MS-031.13 - Project Map Candidate Next Step Selection Foundation
+
+**Milestone**
+MS-031.13 - Project Map Candidate Next Step Selection Foundation
+
+**Type**
+SPS OS / Project Map Candidate Next Step Selection Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Product Outcome**
+The Project Map candidate view now includes a compact read-only next-step selection block that helps the user choose what to do next after reviewing the robocza mapa.
+
+**Implementation Evidence**
+* the Project Map page now shows the compact block headed `Wybierz następny krok`
+* the block exposes the local options `Uzupełnij braki`, `Przygotuj akceptację kierunku`, and `Odłóż mapę`
+* the block states `To tylko wybór roboczy. Nie zapisuje map.json i nie publikuje mapy.`
+* focused tests and the TypeScript check passed for the current implementation snapshot
+* `src/lib/app-version.ts` now records `APP_VERSION 1.0052` and `LAST_PUBLISHED_MS MS-031.13 - Project Map Candidate Next Step Selection Foundation`
+* Beauty Client PRO repository files were not modified
+
+**Residual Risk**
+* canonical `map.json` remains absent until a separate approval-bound milestone writes or promotes it
+* source identity persistence depends on the durable SPS metadata root remaining writable
+* Beauty Client PRO itself was not modified in this milestone
 
 ## MS-031.12 - Project Map Candidate Missing Inputs Clarification Foundation
 
