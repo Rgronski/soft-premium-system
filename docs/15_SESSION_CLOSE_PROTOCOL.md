@@ -303,6 +303,42 @@ If any of those checks fail, the session remains `PARTIAL` and no fresh package 
 
 ---
 
+## Session Summary Artifact Requirement
+
+Every completed Session Close must also create a concise session summary artifact at:
+
+`docs/session-summaries/YYYY-MM-DD_XXX_SPS_OS_SESSION_SUMMARY.md`
+
+The session summary must be factual, concise, and use `UNKNOWN` when data is not available.
+It is a quick-recap and continuity artifact, while the development log remains the richer IP/R&D/evidence artifact introduced by MS-031.17.
+
+Both artifacts are created during completed Session Close, and neither may invent missing data.
+
+The session summary must include these minimum sections:
+
+1. Session Identity
+2. Session Title
+3. Session Summary
+4. Completed Work
+5. Published Milestones
+6. Decisions
+7. Fixes / Incidents
+8. Parked Ideas / Deferred Work
+9. Risks / Open Questions
+10. Final APP version
+11. Final HEAD
+12. Package path
+13. Suggested Next Chat Title
+14. Next Session Candidate
+
+Principles:
+
+* record only confirmed facts
+* use `UNKNOWN` when data is not available
+* keep the summary separate from the development log
+* do not replace the development log with the summary
+* treat the summary as continuity documentation, not legal or tax advice
+
 # Session Audit Template
 
 Use this deterministic audit output template:

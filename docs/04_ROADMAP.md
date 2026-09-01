@@ -193,7 +193,39 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.17 - Session Close IP/R&D Development Log Contract Foundation
+Latest Completed Product Milestone: MS-031.18 - Session Close Summary Artifact Contract Foundation
+
+## MS-031.18 - Session Close Summary Artifact Contract Foundation
+
+**Milestone**
+MS-031.18 - Session Close Summary Artifact Contract Foundation
+
+**Type**
+SPS OS / Session Close Summary Artifact Contract Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Product Outcome**
+The Session Close protocol now requires a concise session summary artifact for every completed close. The summary is a factual continuity and quick-recap artifact that sits alongside the richer development log, uses `UNKNOWN` when data is unavailable, and keeps the summary separate from the IP/R&D/evidence log.
+
+**Implementation Evidence**
+* `docs/15_SESSION_CLOSE_PROTOCOL.md` now requires every completed Session Close to create a session summary artifact at `docs/session-summaries/YYYY-MM-DD_XXX_SPS_OS_SESSION_SUMMARY.md`
+* the protocol defines the minimum session summary sections: Session Identity, Session Title, Session Summary, Completed Work, Published Milestones, Decisions, Fixes / Incidents, Parked Ideas / Deferred Work, Risks / Open Questions, Final APP version, Final HEAD, Package path, Suggested Next Chat Title, and Next Session Candidate
+* the protocol states that the summary must be factual, concise, and use `UNKNOWN` when data is not available
+* the protocol states that both the summary and the development log are created during completed Session Close and that neither may invent missing data
+* `src/lib/app-version.ts` already records `APP_VERSION 1.0057` and `LAST_PUBLISHED_MS MS-031.18 - Session Close Summary Artifact Contract Foundation`
+* Beauty Client PRO repository files were not modified
+
+**Residual Risk**
+* the summary remains dependent on the availability of confirmed evidence for each session
+* Beauty Client PRO itself was not modified in this milestone
 
 ## MS-031.17 - Session Close IP/R&D Development Log Contract Foundation
 

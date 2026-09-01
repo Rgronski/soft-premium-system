@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 095 - MS-031.18 Session Close Summary Artifact Contract Publication Sync
+
+### Date
+
+2026-09-01
+
+### Completed
+
+* Recorded MS-031.18 as accepted and published-ready after the Session Close protocol update added the concise session summary artifact requirement.
+* Recorded that every completed Session Close must create a factual quick-recap summary alongside the richer development log, and that the summary uses `UNKNOWN` when data is unavailable.
+* Recorded the minimum summary sections and the explicit separation between the summary and the IP/R&D development log.
+* Verified the published app-version baseline remains `APP_VERSION 1.0057` and `LAST_PUBLISHED_MS MS-031.18 - Session Close Summary Artifact Contract Foundation`.
+
+### Evidence
+
+* Updated `docs/15_SESSION_CLOSE_PROTOCOL.md`, `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Verification remained targeted to the protocol text and SSOT text checks from the implementation step.
+
+### Notes
+
+* The summary is a continuity / quick-recap artifact, not legal or tax advice.
+* Beauty Client PRO repository files were not modified.
+
 ## Session 095 - MS-031.17 Session Close IP/R&D Development Log Contract Publication Sync
 
 ### Date
