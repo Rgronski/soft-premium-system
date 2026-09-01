@@ -193,7 +193,43 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.14 - Project Map Candidate Review Block Coherence Foundation
+Latest Completed Product Milestone: MS-031.15 - Project Map Canonical Write Readiness Foundation
+
+## MS-031.15 - Project Map Canonical Write Readiness Foundation
+
+**Milestone**
+MS-031.15 - Project Map Canonical Write Readiness Foundation
+
+**Type**
+SPS OS / Project Map Canonical Write Readiness Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Product Outcome**
+The Project Map page now includes a compact read-only readiness section that explains whether a robocza mapa exists, where canonical `map.json` would be written later, what would be written later, what still blocks or delays canonical write, and that create/write is not available in this milestone.
+
+**Implementation Evidence**
+* the Project Map page now shows the heading `Gotowość do zapisu kanonicznego`
+* the readiness copy is derived from existing candidate/read/storage data only
+* the section shows whether a robocza mapa exists
+* the section shows where canonical `map.json` would be written later
+* the section shows what would be written later
+* the section shows blockers or delays before canonical write
+* the section states that create/write is not available in this milestone
+* focused tests cover the available-candidate and unavailable-candidate paths
+* `src/lib/app-version.ts` now records `APP_VERSION 1.0054` and `LAST_PUBLISHED_MS MS-031.15 - Project Map Canonical Write Readiness Foundation`
+* Beauty Client PRO repository files were not modified
+
+**Residual Risk**
+* candidate/read-only/canonical separation remains explicit and canonical `map.json` still must be handled by a separate approval-bound milestone
+* Beauty Client PRO itself was not modified in this milestone
 
 ## MS-031.14 - Project Map Candidate Review Block Coherence Foundation
 

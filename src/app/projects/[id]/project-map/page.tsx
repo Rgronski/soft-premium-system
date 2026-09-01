@@ -57,6 +57,12 @@ type ProjectMapActionEntryCopy = {
   note: string;
 };
 
+type ProjectMapCanonicalWriteReadinessCopy = {
+  title: string;
+  description: string;
+  details: string[];
+};
+
 type ProjectMapRefreshFeedbackCopy = {
   title: string;
   description: string;
@@ -569,6 +575,57 @@ function buildProjectMapActionEntryCopy(
   };
 }
 
+function buildProjectMapCanonicalWriteReadinessCopy(
+  storageReadiness: ProjectMapStorageReadinessCopy | null,
+  mapReadResult: ProjectMapReadResult | null,
+  mapCandidate: ProjectMapReconstructionCandidateResult | null,
+  projectMapCandidateCopy: ProjectMapCandidateCopy | null,
+): ProjectMapCanonicalWriteReadinessCopy | null {
+  if (
+    !storageReadiness &&
+    !mapReadResult &&
+    !mapCandidate &&
+    !projectMapCandidateCopy
+  ) {
+    return null;
+  }
+
+  const candidateAvailable = mapCandidate?.status === "available";
+  const projectMapRootPath =
+    mapReadResult?.projectMapRootPath ?? storageReadiness?.projectMapRootPath ?? null;
+  const canonicalMapJsonPath =
+    mapReadResult?.mapJsonPath ??
+    (projectMapRootPath ? `${projectMapRootPath}\\map.json` : null);
+  const blockingAreas =
+    projectMapCandidateCopy?.foundationChecklist.filter(
+      (item) => item.status !== "completed",
+    ) ?? [];
+  const blockingSummary = candidateAvailable
+    ? blockingAreas.length > 0
+      ? blockingAreas
+          .slice(0, 3)
+          .map(
+            (item) =>
+              `${item.foundationArea}: ${buildProjectMapCandidateFoundationDescription(item)}`,
+          )
+          .join(" • ")
+      : "Brak otwartych blokad w foundationChecklist. Zapis nadal pozostaje osobnym krokiem."
+    : projectMapCandidateCopy?.details[0] ?? "Brak gotowego kandydata do przeniesienia.";
+
+  return {
+    title: "Gotowość do zapisu kanonicznego",
+    description:
+      "To tylko kontrola gotowości: pokazuje, czy robocza mapa istnieje, gdzie później trafi canonical map.json i co jeszcze blokuje zapis. Sam zapis nie jest dostępny w tym milestone.",
+    details: [
+      `Robocza mapa: ${candidateAvailable ? "obecna" : "brak gotowego kandydata"}`,
+      `Docelowy zapis: ${canonicalMapJsonPath ?? "Project Map root (ścieżka jeszcze niepotwierdzona)"}`,
+      `Do zapisania później: ${candidateAvailable ? "zatwierdzona robocza mapa projektu w trybie read-only" : "najpierw trzeba zbudować candidate/read-only"}`,
+      `Blokady / opóźnienia: ${blockingSummary}`,
+      "Ten krok nie udostępnia create/write dla canonical map.json.",
+    ],
+  };
+}
+
 function buildProjectMapRefreshFeedbackCopy(
   refreshRequested: boolean,
   mapReadResult: ProjectMapReadResult | null,
@@ -1052,6 +1109,13 @@ export default async function ProjectMapPage({
     projectMapCandidateCopy,
     projectMapStorageReadiness,
   );
+  const projectMapCanonicalWriteReadinessCopy =
+    buildProjectMapCanonicalWriteReadinessCopy(
+      projectMapStorageReadiness,
+      mapReadResult,
+      mapCandidate,
+      projectMapCandidateCopy,
+    );
   const projectMapAvailabilityExplanationCopy =
     buildProjectMapAvailabilityExplanationCopy(
       project ?? null,
@@ -1131,6 +1195,36 @@ export default async function ProjectMapPage({
               {projectMapActionEntryCopy.note}
             </p>
           </div>
+        </section>
+      ) : null}
+
+      {projectMapCanonicalWriteReadinessCopy ? (
+        <section
+          id="project-map-canonical-write-readiness"
+          className="rounded-xl border border-emerald-900/50 bg-emerald-950/20 p-4"
+        >
+          <div className="space-y-1">
+            <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
+              Gotowość do zapisu
+            </p>
+            <h3 className="text-xl font-semibold text-emerald-50">
+              {projectMapCanonicalWriteReadinessCopy.title}
+            </h3>
+            <p className="text-sm text-emerald-100/80">
+              {projectMapCanonicalWriteReadinessCopy.description}
+            </p>
+          </div>
+
+          <ul className="mt-4 space-y-2 text-sm text-emerald-50/90">
+            {projectMapCanonicalWriteReadinessCopy.details.map((detail) => (
+              <li
+                key={detail}
+                className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 px-3 py-2"
+              >
+                {detail}
+              </li>
+            ))}
+          </ul>
         </section>
       ) : null}
 

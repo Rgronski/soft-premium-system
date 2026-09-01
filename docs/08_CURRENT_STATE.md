@@ -585,8 +585,9 @@ Final Release Acceptance: ACCEPTED.
 Offline Git limitation: accepted.
 SPS OS 1.0: Released / Accepted.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.11 - Project Map Candidate Review Action Foundation
+Latest Completed Product Milestone: MS-031.15 - Project Map Canonical Write Readiness Foundation
 Next Product Milestone: NONE / Product Owner decision required
+MS-031.15 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Canonical Write Readiness Foundation. The Project Map page now includes a compact read-only readiness section headed `Gotowość do zapisu kanonicznego` that explains whether a robocza mapa exists, where canonical `map.json` would be written later, what would be written later, what still blocks or delays canonical write, and that create/write is not available in this milestone. The readiness copy is derived from existing candidate/read/storage data only, focused tests cover the available-candidate and unavailable-candidate paths, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 MS-028.71 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the Project API Filesystem Rebinding Fallback Foundation. The project API now recovers the known Beauty Client PRO project from the SPS-owned workspace manifest when the server registry misses it, so the canonical server project can be resolved instead of silently dropping into browser-local fallback for the known project.
 
 MS-028.70 is COMPLETED / VERIFIED / CLOSED in the current local workspace as the AI Workspace Project Identity Divergence Instrumentation Foundation. The AI Workspace browser-side project context derivation now exposes the route project id, the server project response, task and knowledge counts, and the branch used so normal and incognito browser profiles can be compared without guessing or deleting browser data.

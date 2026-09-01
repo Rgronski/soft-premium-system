@@ -223,7 +223,9 @@ Active Capability: Session Close Protocol
 Active Work Item: Session 095 close protocol complete
 Current Mode: CLOSED
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.14 - Project Map Candidate Review Block Coherence Foundation
+Latest Completed Product Milestone: MS-031.15 - Project Map Canonical Write Readiness Foundation
+
+MS-031.15 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Canonical Write Readiness Foundation. The Project Map page now includes a compact read-only readiness section headed `Gotowość do zapisu kanonicznego` that explains whether a robocza mapa exists, where canonical `map.json` would be written later, what would be written later, what still blocks or delays canonical write, and that create/write is not available in this milestone. The readiness copy is derived from existing candidate/read/storage data only, focused tests cover the available-candidate and unavailable-candidate paths, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 
 MS-031.14 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Review Block Coherence Foundation. The Project Map candidate review and next-step UI now reads as one coherent module that keeps review first and next-step selection second while preserving the read-only candidate boundary. The block keeps the heading `Sprawdź roboczą mapę`, corrects the review subheading to `Oceń kandydata przed dalszą pracą`, states the shared boundary `To nadal tryb roboczy: nie zapisuje map.json i nie publikuje mapy kanonicznej.`, and separates `Decyzja robocza` from `Następny krok`. Focused page test coverage and the TypeScript check both passed, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 

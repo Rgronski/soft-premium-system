@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 095 - MS-031.15 Project Map Canonical Write Readiness Publication Sync
+
+### Date
+
+2026-09-01
+
+### Completed
+
+* Recorded MS-031.15 as accepted and published-ready after the readiness sync added the compact read-only canonical-write gate.
+* Recorded that the Project Map page now includes `Gotowość do zapisu kanonicznego` and that the copy is derived from existing candidate/read/storage data only.
+* Recorded that the readiness section explains whether a robocza mapa exists, where canonical `map.json` would be written later, what would be written later, and what still blocks or delays canonical write while keeping create/write out of scope.
+* Updated the published app-version baseline so the source file now records `APP_VERSION 1.0054` and `LAST_PUBLISHED_MS MS-031.15 - Project Map Canonical Write Readiness Foundation`.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Verification remained targeted to the existing Project Map page test and typecheck path from the implementation step.
+
+### Notes
+
+* The readiness gate is intentionally local-only and read-only.
+* Beauty Client PRO repository files were not modified.
+
 ## Session 095 - MS-031.14 Project Map Candidate Review Block Coherence Publication Sync
 
 ### Date

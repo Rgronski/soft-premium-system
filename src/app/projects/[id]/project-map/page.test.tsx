@@ -646,6 +646,9 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Candidate pipeline details")).toBeTruthy();
     expect(screen.getByText("Candidate foundation statuses")).toBeTruthy();
     expect(screen.getByText("Evidence and provenance")).toBeTruthy();
+    expect(screen.getByText("Gotowość do zapisu kanonicznego")).toBeTruthy();
+    expect(screen.getByText("Robocza mapa: obecna")).toBeTruthy();
+    expect(screen.getByText((content) => content.includes("Ten krok nie udostępnia create/write dla canonical map.json."))).toBeTruthy();
     expect(screen.getByText("Sprawdź roboczą mapę")).toBeTruthy();
     expect(screen.getByText("Oceń kandydata przed dalszą pracą")).toBeTruthy();
     expect(screen.getByText("Czy kierunek roboczej mapy jest dobry?")).toBeTruthy();
@@ -707,6 +710,8 @@ describe("ProjectMapPage", () => {
     expect(screen.queryByText("Candidate foundation statuses")).toBeNull();
     expect(screen.getByText("Sprawdź roboczą mapę")).toBeTruthy();
     expect(screen.getByText("Oceń kandydata przed dalszą pracą")).toBeTruthy();
+    expect(screen.getByText("Gotowość do zapisu kanonicznego")).toBeTruthy();
+    expect(screen.getByText("Robocza mapa: brak gotowego kandydata")).toBeTruthy();
     expect(screen.getByText("Widzę braki")).toBeTruthy();
     expect(screen.getAllByText("Następny krok").length).toBeGreaterThanOrEqual(2);
     expect(screen.getByText("Co robimy dalej po tej ocenie?")).toBeTruthy();
