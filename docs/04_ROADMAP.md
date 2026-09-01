@@ -209,6 +209,9 @@ COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 **Publication Status**
 PUBLISHED
 
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
 **Product Outcome**
 The Project Map page now renders a real map-shaped candidate instead of a checklist-only result. The candidate shows project identity, current state, completed items, under-review items, rejected or blocked items, missing inputs, next steps, evidence refs, and trust state while keeping the candidate/read-only boundary explicit and leaving canonical `map.json` absent and unpromoted.
 
