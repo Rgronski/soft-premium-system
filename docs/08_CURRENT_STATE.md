@@ -47,6 +47,12 @@ NONE / Product Owner decision required
 **Latest Completed Milestone**
   MS-031.10 - Project Map Candidate Structure Foundation
 
+**Publication Status**
+PUBLISHED / CLOSED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
+
 MS-031.10 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Structure Foundation. The Project Map page now renders a real map-shaped candidate with project identity, current state, completed items, under-review items, rejected or blocked items, missing inputs, next steps, evidence refs, and trust state while keeping the candidate/read-only boundary explicit. SSOT evidence is correctly classified as candidate / review when SSOT docs are found, missing inputs no longer include SSOT in that case, empty placeholder sections are removed or populated, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone. The earlier live mismatch was caused by a stale `next dev` process and was resolved by restarting the dev server.
 
 MS-031.9 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the SPS Metadata Root Write Permission Recovery Foundation. Durable source identity persistence now writes to the SPS OS-owned metadata root successfully in the live runtime, with the BCP repository URL visible and persisted at `https://github.com/Beautyclient/BeautyClientPro.git`. The durable metadata root at `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb` is writable again for the Project Map source identity file, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
