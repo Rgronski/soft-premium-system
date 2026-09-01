@@ -216,9 +216,9 @@ SPS OS Session State
 
 Date: 2026-09-01
 Current Session ID: 095
-Current Chat Title: 095 SPS OS - Product Owner decision required
+Current Chat Title: 095 SPS OS - KONIEC
 Next Session ID: 096
-Suggested Next Chat Title: 096 SPS OS - Product Owner decision required
+Suggested Next Chat Title: 096 SPS OS - MS-032.0 Historical Session Development Log And Summary Backfill Foundation
 Active Capability: Session Close Protocol
 Active Work Item: Session 095 close protocol complete
 Current Mode: CLOSED
@@ -311,9 +311,9 @@ Platform Priority: Keep MS-024.1, MS-024.0, MS-011.0, MS-012.10, MS-013.0, MS-01
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: e5729dd
+Latest Verified Commit: 54caf96
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Generate and attach the fresh `sps-session.zip` for Session 095 bootstrap.
-Next Session Plan: Start Session 095 from the fresh sps-session.zip and continue from the Product Owner decision point.
+Next Safe Step: Start Session 096 from the fresh `sps-session.zip` and begin MS-032.0 historical backfill with the newest closed historical session.
+Next Session Plan: Start Session 096 from the fresh `sps-session.zip` and begin MS-032.0 historical backfill with the newest closed historical session.
