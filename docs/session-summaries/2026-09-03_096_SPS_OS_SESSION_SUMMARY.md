@@ -54,11 +54,11 @@
 
 ## 11. Final HEAD
 
-- 6e395ca at close start; final close commit: UNKNOWN
+- 6676dba
 
 ## 12. Package path
 
-- UNKNOWN
+- `C:\Users\p700\soft-premium-system\sps-session.zip`
 
 ## 13. Suggested Next Chat Title
 
