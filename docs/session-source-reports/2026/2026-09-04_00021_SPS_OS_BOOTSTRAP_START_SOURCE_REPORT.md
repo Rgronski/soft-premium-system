@@ -1,0 +1,296 @@
+===== ARCHIWALNY RAPORT SPS OS START =====
+1.  Conversation Identity
+-  Chat title: UNKNOWN
+-  Chat title source: Tytuł czatu nie jest widoczny w dostępnym źródle rozmowy.
+-  Source completeness: FULL
+-  Source conversation date: 2026-09-04
+-  Report prepared date: 2026-09-04
+-  Evidence source: Pełna widoczna rozmowa bieżącego czatu SPS OS, raporty Codexa, diffy, wyniki PowerShell/Git, wyniki kolejnych testów SPS OS — START w nowych czatach oraz ręczny Session Handoff przygotowany pod koniec sesji.
+-  Visible UI evidence / side panel sources: Widoczne załączniki i artefakty obejmują m.in. sps-session(29).zip, kolejne pakiety testowe sps-session(30).zip–sps-session(38).zip, sps-git-context.txt oraz dokumenty repozytorium wymieniane w raportach i diffach. Treść ZIP-ów nie jest tu traktowana jako niezależnie zweryfikowana poza tym, co zostało jawnie pokazane w rozmowie.
+-  Is this clearly SPS OS-related: YES
+-  Suggested historical label: SPS OS Bootstrap Runtime Contract Stabilization and Session Lifecycle Discovery
+-  Suggested session number if visible: UNKNOWN
+-  Confidence: HIGH
+2.  Historical Role
+-  Czy to była formalna sesja SPS OS, pre-formalna rozmowa, Foundation/origin conversation, poboczny materiał, czy fragment dowodowy?
+-  Formalna sesja rozwojowa SPS OS.
+-  Uzasadnienie: Rozmowa rozpoczęła się komendą SPS OS — START, wykonano ZIP Mode, bootstrap, iteracyjne testy na nowych czatach, pracę Chief Architect → Codex, review diffów, commity dokumentacyjne oraz ręczne zamknięcie / handoff. Głównym przedmiotem była stabilizacja mechanizmu uruchamiania SPS OS i odkrycie brakującego mechanizmu zamykania sesji.
+3.  What Happened
+-  Sesja rozpoczęła się od testu istniejącego SPS OS Bootstrap/Project Context Loader.
+-  Product Owner porównał wynik z wcześniejszymi założeniami i wskazał, że raport startowy powinien:
+  -  ładować pełną listę SSOT,
+  -  pokazywać szczegółowy stan projektu,
+  -  jawnie raportować rolę Chief Architect i aktywne tryby pracy.
+-  Chief Architect początkowo naruszył granicę ról, samodzielnie przygotowując patch/ZIP zamiast przekazać implementację do Codexa. Product Owner skorygował to jako błąd procesu.
+-  Ustalono twardą zasadę: ChatGPT w SPS OS zawsze pozostaje Chief Architect, a Codex jest implementerem.
+-  Iteracyjnie rozwijano docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md poprzez Codexa:
+  -  Chief Architect Role Lock,
+  -  Session Lock,
+  -  Role Separation Check,
+  -  Runtime Dashboard Specification,
+  -  Final Output Contract,
+  -  Mandatory Runtime Dashboard Template,
+  -  ZIP Access Gate,
+  -  kontrolę field-by-field końcowego raportu.
+-  Wiele nowych czatów testowych uruchamiano przez SPS OS — START, sprawdzając faktyczne zachowanie modelu.
+-  Kolejne testy wykazały, że opisowa specyfikacja raportu była za słaba; dopiero literalny obowiązkowy szablon umieszczony wysoko w dokumencie spowodował poprawne odwzorowanie ośmiu sekcji Runtime Dashboard.
+-  Następnie dopracowano przekazywanie Git Context:
+  -  wykryto, że sam ZIP nie zawiera .git,
+  -  zaprojektowano sps-git-context.txt,
+  -  zmieniono instrukcje ZIP w docs/11_SPS_START.md i docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md,
+  -  doprecyzowano CLEAN / DIRTY / UNKNOWN,
+  -  rozdzielono lokalną ścieżkę tworzenia pliku od ścieżki pliku wewnątrz ZIP.
+-  Rozdzielono semantykę Project State na:
+  -  Current Product Milestone,
+  -  Next Product Milestone,
+  -  Active Parallel Capability,
+  -  Latest Completed Capability Item,
+  -  Current Sprint,
+  -  Platform Priority,
+  -  Roadmap Status.
+-  Testy ujawniły również fundamentalne ograniczenie: dokumentacja znajdująca się wewnątrz ZIP może sterować bootstrapem dopiero po jego odczycie, ale nie może niezawodnie sterować etapem pre-boot, który ma dopiero przygotować ZIP.
+-  Z tego powodu wyłonił się nowy kierunek architektoniczny:
+  -  rozdzielenie Launcher Contract od Bootstrap Contract,
+  -  przyszły deterministyczny generator pakietu typu New-SpsSession.ps1.
+-  Product Owner wskazał, że analogiczny mechanizm powinien działać przy SPS OS — KONIEC: zebrać stan sesji, decyzje, problemy, Git Context i przygotować właściwy ZIP dla kolejnego czatu.
+-  Ustalono koncepcję nowego capability dotyczącego pełnego cyklu życia sesji, opisywanego jako CAP-002 — SPS Lifecycle Engine / wcześniej Session Continuity Engine.
+-  Ponieważ formalna komenda SPS OS — KONIEC nie była jeszcze wdrożona, przygotowano ręczny Session Handoff.
+-  Kolejny nowy czat został uruchomiony z tym ręcznym handoffem. Zachował rolę Chief Architect i wykrył niespójności SSOT/Git zamiast automatycznie przejść do implementacji, co potwierdziło wartość mechanizmu przekazywania stanu sesji.
+4.  Why It Mattered
+-  Sesja przekształciła bootstrap z luźnego zestawu instrukcji w znacznie bardziej deterministyczny kontrakt uruchomienia SPS OS.
+-  Utrwalono kluczową granicę architektoniczną: Product Owner → Chief Architect → Codex.
+-  Wprowadzono Runtime Lock i raport, który pozwala nowemu czatowi jawnie stwierdzić:
+  -  jaką ma rolę,
+  -  jakie tryby są aktywne,
+  -  kto implementuje,
+  -  jaki jest stan projektu,
+  -  jakie dokumenty SSOT zostały odczytane,
+  -  jaki jest następny bezpieczny krok.
+-  Testy pokazały różnicę między „dokument opisuje regułę” a „model faktycznie ją egzekwuje”.
+-  Odkryto architektoniczny podział na:
+  -  Pre-Boot Launcher,
+  -  właściwy Bootstrap po otrzymaniu pakietu.
+-  Odkryto również brakującą drugą połowę cyklu pracy: deterministyczny Session Close Protocol.
+-  Sesja stała się podstawą przyszłego pełnego cyklu:
+ START → Bootstrap → Work → KONIEC → Audit/Handoff → Git Context → Session Package → kolejny START.
+5.  Decisions Made
+-  ChatGPT w SPS OS zawsze działa jako Chief Architect.
+-  Chief Architect nie implementuje, nie edytuje repo i nie zastępuje Codexa.
+-  Implementacja należy do Codexa.
+-  Credit Saving Mode i Minimal Patch Mode mają być aktywne przez całą sesję.
+-  Bootstrap ma posiadać Session Lock i Role Separation Check.
+-  Runtime Dashboard jest jedynym poprawnym finalnym formatem raportu bootstrapu.
+-  Runtime Dashboard ma zawierać dokładnie 8 sekcji:
+  1.  Bootstrap
+  2.  Chief Architect
+  3.  Runtime Modes
+  4.  Repository
+  5.  Project State
+  6.  SSOT Loaded
+  7.  Recommendation
+  8.  Next Safe Step
+-  Brak danych ma skutkować UNKNOWN, nie zgadywaniem.
+- NONE wolno używać wyłącznie, gdy SSOT jawnie potwierdza brak aktywnego elementu.
+-  SSOT Loaded ma być pełną listą faktycznie odczytanych dokumentów.
+-  ZIP Access Gate ma zatrzymywać bootstrap, jeśli załącznik jest widoczny, ale jego treść nie jest dostępna.
+-  Git Context ma być przekazywany do ZIP przez sps-git-context.txt.
+-  Plik Git Context ma być tworzony poza repozytorium, aby nie generować fałszywego DIRTY.
+-  Podczas PCL źródłem ma być sps-git-context.txt z rootu ZIP, a nie lokalna ścieżka Windows użytkownika.
+-  Project State ma rozróżniać current, next, parallel capability, latest completed capability item i platform priority.
+-  Nie należy automatycznie traktować „ahead of origin” jako zaległości w commitowaniu; oznacza to lokalne commity nieopublikowane na origin.
+-  Raport powinien raportować stan synchronizacji Git jako fakt, bez automatycznego sugerowania push jako „pending action”.
+-  Rozdzielenie Launcher Contract i Bootstrap Contract jest potrzebne, ponieważ dokumentacja z ZIP nie może deterministycznie sterować etapem przed otrzymaniem ZIP.
+-  Planowany przyszły generator pakietu: New-SpsSession.ps1.
+-  Planowany Session Close Protocol ma być uruchamiany komendą SPS OS — KONIEC.
+-  Nowy kierunek capability: CAP-002 — SPS Lifecycle Engine.
+-  CAP-001 / Bootstrap Engine został uznany za funkcjonalnie dojrzały na tyle, aby przejść do prac nad cyklem zamykania sesji, choć pozostały wykryte problemy jakościowe i SSOT.
+6.  Ideas Proposed
+- SPDM-008 — Bootstrap Report Quality.
+- SPDM-009 — Bootstrap Runtime Report Specification.
+-  Nazwanie mechanizmu egzekwowania reguł Session Lock Engine.
+-  Rozdzielenie:
+  -  Bootstrap Behaviour Specification,
+  -  Bootstrap Report Specification.
+-  Literalny „POST/BIOS-like” Runtime Dashboard dla SPS OS.
+- SPS Launcher Contract.
+- New-SpsSession.ps1 jako deterministyczny generator pakietu.
+- CAP-002 — Session Continuity Engine, później szerzej CAP-002 — SPS Lifecycle Engine.
+-  Proponowane podobszary CAP-002:
+  -  CAP-002.1 Session Close Protocol,
+  -  CAP-002.2 Session Audit,
+  -  CAP-002.3 Session State,
+  -  CAP-002.4 Session Handoff,
+  -  CAP-002.5 Session Package Generator,
+  -  CAP-002.6 Bootstrap Integration.
+- docs/session-handoffs/ jako archiwum zakończonych sesji.
+- docs/10_SESSION_STATE.md jako lekki „Current Session Pointer”.
+-  Przekazywanie stanu i decyzji zamiast pełnego surowego transcriptu rozmowy.
+7.  Work Actually Done
+-  Codex faktycznie modyfikował docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md w wielu małych iteracjach.
+-  Widoczne i zatwierdzone zmiany obejmowały:
+  -  Chief Architect Role Lock,
+  -  Session Lock,
+  -  Role Separation Check,
+  -  Runtime Dashboard Specification,
+  -  Final Output Contract,
+  -  Mandatory Runtime Dashboard Template,
+  -  ZIP Access Gate,
+  -  field-by-field final verification,
+  -  Git Context handling,
+  -  Project State field separation.
+-  Codex faktycznie modyfikował również docs/11_SPS_START.md w celu synchronizacji literalnych instrukcji ZIP Mode.
+-  Widoczne wyniki PowerShell potwierdzają lokalne commity:
+  - 973ba24 — docs: add SPS OS session role lock
+  - 4142a47 — docs: add bootstrap runtime dashboard specification
+  - 541a95d — docs: enforce bootstrap runtime dashboard output
+  - 930b4a0 — docs: make runtime dashboard the bootstrap output contract
+  - a9a3f87 — docs: prioritize bootstrap final output contract
+  - 93148ef — docs: add bootstrap zip access gate
+  - 66ff483 — docs: add mandatory bootstrap runtime dashboard template
+  - 548ca94 — docs: prioritize mandatory runtime dashboard template
+  - 9f53584 — docs: add git context and clarify project state
+-  Po commitach git status był raportowany jako clean.
+-  W pewnym momencie branch był raportowany jako feature/documentation-foundation i lokalna gałąź była ahead of origin o kolejne commity.
+-  Przeprowadzono serię realnych testów na nowych czatach i pakietach sps-session(...).
+-  Jeden z testów po wprowadzeniu obowiązkowego literalnego dashboardu zakończył się pełnym ośmiosekcyjnym Runtime Dashboard z poprawnym:
+  - Role: Chief Architect,
+  - Implementation Engine: Codex,
+  -  aktywnymi Runtime Modes.
+-  Test Git Context po osobnym przekazaniu sps-git-context.txt poprawnie odczytał:
+  -  branch feature/documentation-foundation,
+  -  clean working tree,
+  -  latest commit 9f53584.
+-  Przygotowano ręczny Session Handoff pod przyszły SPS OS — KONIEC.
+-  Nie wykonano jeszcze formalnej implementacji SPS OS — KONIEC, New-SpsSession.ps1 ani CAP-002.
+-  W źródle nie ma dowodu pushu 9 lokalnych commitów do origin; wręcz przeciwnie, raportowano gałąź jako ahead of origin.
+8.  Artifacts / Files Mentioned
+- docs/00_SPS_DEVELOPMENT_METHOD.md
+- docs/00_PROJECT_BIBLE.md
+- docs/00_ORIGINS.md
+- docs/01_VISION.md
+- docs/02_ARCHITECTURE.md
+- docs/03_DEVELOPMENT_STANDARD.md
+- docs/04_ROADMAP.md
+- docs/04_UI_STANDARD.md
+- docs/05_ROADMAP.md
+- docs/06_BACKLOG.md
+- docs/06_UI_INVENTORY.md
+- docs/07_DECISIONS.md
+- docs/08_CURRENT_STATE.md
+- docs/09_CHANGELOG.md
+- docs/10_PROJECT_LIFECYCLE.md
+- docs/10_SESSION_STATE.md
+- docs/11_SPS_START.md
+- docs/11_WORKFLOW_ENGINE.md
+- docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md
+- docs/13_PROJECT_CAPABILITY.md
+- docs/14_GIT_WORKFLOW.md
+- docs/AI_CONTEXT.md
+- docs/ai-workflow/*
+- docs/session-handoffs/ — proponowany katalog, nie ma dowodu jego utworzenia w tej sesji
+- sps-git-context.txt
+- New-SpsSession.ps1 — projektowany, brak dowodu implementacji
+- C:\Users\p700\soft-premium-system
+- C:\Users\p700\sps-session.zip
+- C:\Users\p700\sps-git-context.txt
+- sps-session(29).zip
+- sps-session(30).zip
+- sps-session(31).zip
+- sps-session(32).zip
+- sps-session(33).zip
+- sps-session(34).zip
+- sps-session(35).zip
+- sps-session(36).zip
+- sps-session(37).zip
+- sps-session(38).zip
+- sps-session-29-bootstrap-report-quality.zip
+-  Pliki / źródła / narzędzia widoczne w panelu UI: załączniki ZIP i sps-git-context.txt wskazane powyżej; widoczne w rozmowie były także raporty Codexa, diffy oraz wyniki PowerShell/Git. Brak podstaw do stwierdzenia, że każdy wymieniony dokument został faktycznie zmieniony; jawne diffy potwierdzają przede wszystkim docs/11_SPS_START.md i docs/12_DEVELOPMENT_SESSION_BOOTSTRAP.md.
+9.  Milestones / Labels Mentioned
+- SPDM-007
+- SPDM-008 — Bootstrap Report Quality
+- SPDM-009 — Bootstrap Runtime Report Specification
+- CAP-001 — Bootstrap Engine / parallel capability w testowym stanie
+- CAP-001.2 — wskazywany jako latest completed capability item w późniejszej diagnozie
+- CAP-002 — Session Continuity Engine
+- CAP-002 — SPS Lifecycle Engine
+- CAP-002.1 — Session Close Protocol
+- CAP-002.2 — Session Audit
+- CAP-002.3 — Session State
+- CAP-002.4 — Session Handoff
+- CAP-002.5 — Session Package Generator
+- CAP-002.6 — Bootstrap Integration
+- MS-001.3 — Workflow Engine
+- MS-001.4 — Release Readiness
+- ENG-000 / SPS Core / SPS OS 1.0
+-  Session ID: UNKNOWN z widocznego tytułu/źródła tej rozmowy.
+-  Branch: feature/documentation-foundation
+-  Widoczne commity lokalne:
+  - 973ba24
+  - 4142a47
+  - 541a95d
+  - 930b4a0
+  - a9a3f87
+  - 93148ef
+  - 66ff483
+  - 548ca94
+  - 9f53584
+-  Inne commit references wykryte w późniejszym teście nowego czatu:
+  - 7f6c634
+  - 287803c
+  - caba05d
+ Ich dokładna semantyka pozostaje nierozstrzygnięta w tej sesji.
+10.  Open Questions / Unknowns
+-  Dokładny tytuł tej rozmowy: UNKNOWN.
+-  Formalny numer sesji: UNKNOWN.
+-  Czy lokalne commity zostały później wypchnięte do origin: brak dowodu w źródle.
+-  Czy Bootstrap Version: v2.2 było rzeczywistą wartością SSOT czy interpretacją modelu: nie rozstrzygnięto.
+-  Czy CAP-001 formalnie został zamknięty w SSOT, czy tylko uznany koncepcyjnie za funkcjonalnie dojrzały: UNKNOWN.
+-  Czy CAP-002 został formalnie wpisany do roadmapy/backlogu: brak dowodu.
+-  Czy New-SpsSession.ps1 został utworzony: nie.
+-  Czy SPS OS — KONIEC został formalnie zaimplementowany: nie.
+-  Czy docs/session-handoffs/ został utworzony w tej sesji: brak dowodu.
+-  Czy różne referencje commitów 7f6c634, 287803c, caba05d oznaczają rzeczywisty konflikt SSOT czy różne etapy/historyczne checkpointy: nierozstrzygnięte.
+-  Wykryta niespójność 04_ROADMAP.md vs 05_ROADMAP.md pozostała otwarta jako osobne zadanie.
+- Current Sprint powinien być UNKNOWN, jeżeli SSOT nie potwierdza jawnie aktywnego/brakującego sprintu; testy pokazały okresowe błędne użycie NONE.
+-  Launcher przed ZIP nadal nie zawsze korzystał z najnowszej instrukcji tworzenia sps-git-context.txt, co potwierdziło ograniczenie Pre-Boot Launcher.
+-  Nie ma formalnie zweryfikowanego finalnego Definition of Done dla przyszłego Lifecycle Engine.
+11.  Suggested Archive Treatment
+-  historical session candidate
+-  Uzasadnienie: To pełna, bogata sesja rozwojowa z realnymi decyzjami architektonicznymi, wieloma iteracjami Codex → review → commit, serią testów nowego bootstrapu oraz odkryciem przyszłego Session Close/Lifecycle Engine. Źródło jest wystarczająco kompletne, aby służyć jako wysokiej jakości materiał do backfillu, ale zgodnie z instrukcją nie jest jeszcze gotowym formalnym development logiem ani session summary.
+12.  Suggested Filenames If Archived
+-  Source report filename: 2026-09-04_SPS_OS_BOOTSTRAP_RUNTIME_CONTRACT_AND_SESSION_LIFECYCLE_DISCOVERY_SOURCE_REPORT.md
+-  Development log filename: NOT APPLICABLE
+-  Session summary filename: UNKNOWN
+-  Origin note filename: NOT APPLICABLE
+13.  Source Excerpts
+-  „zawsze jest jako Chief Architect !!! nie zminiaj workflow”
+-  „jestem za, rozwijamy”
+-  „Raport ma podawac te istotne informacje. Jak powiedziałes wczesniej, niewazne kto usiadzie, bedzie wiedział gdzie jest i robi”
+-  W kolejnych testach raport stopniowo przeszedł od luźnego PCL/Integrity/Recommendation do literalnego:
+  - SPS OS Runtime Dashboard
+  - Role: Chief Architect
+  - Implementation Engine: Codex
+  - Runtime Lock: ACTIVE
+-  Product Owner zwrócił uwagę na brak informacji Git i zaproponował utrwalanie branch/status/log do pliku pakowanego do ZIP.
+-  W późniejszej części ustalono, że ahead of origin by 9 commits nie oznacza braku commitów, tylko lokalne commity jeszcze niewysłane do origin.
+-  Kluczowy wniosek architektoniczny: dokumentacja wewnątrz ZIP nie może deterministycznie sterować etapem przygotowania ZIP przed jej odczytaniem.
+-  Kluczowy kierunek końcowy: START → Bootstrap → Work → KONIEC → Audit/Handoff → Git Context → Session Package → kolejny START.
+-  Ręczny handoff końcowy opisywał CAP-001 jako funkcjonalnie ukończony oraz rekomendował przejście do projektowania CAP-002 / Session Close Protocol.
+-  Kolejny nowy czat po ręcznym handoffie wszedł w rolę Chief Architect, wykonał Runtime Dashboard i zatrzymał pracę na wykrytej niespójności zamiast automatycznie wdrażać zmiany.
+14.  Backfill Use Recommendation
+-  Czy używać tego raportu w MS-032.0: YES
+-  Jak używać:
+  -  jako źródło dla backfillu historii rozwoju SPS OS Bootstrap/Launcher,
+  -  do odtworzenia ewolucji od Project Context Loader do Runtime Dashboard i Runtime Lock,
+  -  do udokumentowania wprowadzenia twardej granicy Chief Architect / Codex,
+  -  do udokumentowania test-driven refinement procesu startowego,
+  -  jako źródło odkrycia potrzeby Session Close Protocol / Lifecycle Engine,
+  -  jako dowód konkretnych lokalnych commitów dokumentacyjnych pokazanych w PowerShell.
+-  Czego nie robić na podstawie tego raportu:
+  -  nie przypisywać sesji numeru, którego nie widać w źródle,
+  -  nie traktować CAP-002 jako formalnie wdrożonego lub opublikowanego bez dodatkowego SSOT,
+  -  nie zakładać, że New-SpsSession.ps1 lub SPS OS — KONIEC zostały zaimplementowane,
+  -  nie uznawać wszystkich referencji commitów za konflikt bez osobnej analizy semantyki,
+  -  nie zakładać pushu lokalnych commitów do origin,
+  -  nie tworzyć z tego raportu automatycznie pełnego formalnego session summary bez dalszego procesu backfillu i weryfikacji tożsamości sesji.
+===== ARCHIWALNY RAPORT SPS OS END =====
