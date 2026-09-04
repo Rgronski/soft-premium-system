@@ -1,0 +1,195 @@
+===== ARCHIWALNY RAPORT SPS OS START =====
+1.  Conversation Identity
+-  Chat title: UNKNOWN
+-  Chat title source: Tytuł rozmowy nie jest dostępny w widocznym źródle.
+-  Source completeness: FULL
+-  Source conversation date: 2026-09-04
+-  Report prepared date: 2026-09-04
+-  Evidence source: Pełna lub prawie pełna widoczna treść bieżącej rozmowy SPS OS, w tym wiadomości użytkownika, odpowiedzi Chief Architect, raporty Codexa, wyniki commit/push oraz przekazany ZIP projektu.
+-  Visible UI evidence / side panel sources: sps-session(8).zip, sps-session(9).zip; widoczne ślady plików dokumentacji docs/00_ORIGINS.md, docs/00_PROJECT_BIBLE.md, docs/01_VISION.md, docs/02_ARCHITECTURE.md, docs/03_DEVELOPMENT_STANDARD.md, docs/04_UI_STANDARD.md, docs/05_ROADMAP.md, docs/06_BACKLOG.md, docs/07_DECISIONS.md, docs/08_CURRENT_STATE.md, docs/09_CHANGELOG.md, docs/10_PROJECT_LIFECYCLE.md, docs/10_SESSION_STATE.md, docs/AI_CONTEXT.md, docs/BACKLOG.md; skill codex-oszczedny-debug; tymczasowe artefakty sps-ms-009-3-calendar-navigation.zip i sps-ms-009-3-calendar-navigation.patch.
+-  Is this clearly SPS OS-related: YES
+-  Suggested historical label: Formal SPS OS development session with Scheduling Engine milestones and AI Development Workflow foundation decision
+-  Suggested session number if visible: UNKNOWN
+-  Confidence: HIGH
+2.  Historical Role
+-  Czy to była formalna sesja SPS OS, pre-formalna rozmowa, Foundation/origin conversation, poboczny materiał, czy fragment dowodowy? Formalna sesja SPS OS z istotnym zdarzeniem procesowym / foundation dotyczącym rozdzielenia ról Chief Architect ↔ Codex oraz rozpoczęcia koncepcji ENG-000 — AI Development Platform.
+-  Uzasadnienie: Rozmowa rozpoczęła się formalnym Start Session, wykorzystano Project Context Loader, Project Integrity Check, milestone workflow, implementacje wykonywane przez Codexa, review Chief Architect, commit/push i synchronizację dokumentacji. W trakcie sesji zidentyfikowano również błąd procesu polegający na wejściu ChatGPT w rolę kodera i formalnie ustalono nowy podział ról.
+3.  What Happened
+-  Sesja rozpoczęła się od formalnego uruchomienia SPS OS i przekazania ZIP projektu.
+-  Project Context Loader oraz Project Integrity Check potwierdziły gotowość do pracy nad MS-009.3 — Scheduling Engine Calendar Navigation.
+-  Początkowo ChatGPT błędnie wszedł w rolę wykonawcy i przygotował patch/ZIP implementacyjny. Użytkownik zatrzymał ten kierunek i przypomniał zasadę: „Codex jest coderem”, natomiast ChatGPT ma przygotowywać prompt, wykonywać review i prowadzić architekturę.
+-  Zasada została zaakceptowana jako przyszły obowiązkowy element procesu SPS oraz materiał do komendy końca czatu.
+-  Następnie właściwy workflow Chief Architect → Codex został zastosowany do MS-009.3.
+-  Codex zaimplementował Calendar Navigation. Chief Architect wykrył problem inicjalizacji viewDate; Codex przygotował minimalny fix przez effectiveViewDate.
+- MS-009.3 został zaakceptowany, zacommitowany jako befbc96 feat(calendar): add month navigation, wypchnięty, a dokumentacja została zaktualizowana i zamknięta commitem 0a93935 docs: close MS-009.3.
+-  Ustalono ważne rozróżnienie: Milestone Close ≠ Session Close. Użytkownik chciał kontynuować pracę w tym samym czacie.
+-  Po świeżym ZIP i ponownej ocenie stanu zdefiniowano MS-009.4 — Scheduling Engine Day Selection.
+-  Codex zaimplementował wybór dnia, wynik przeszedł lint/build, został zaakceptowany, commit implementacyjny wskazany później w dokumentacji to cd93ea0. Dokumentacja została zaktualizowana i zamknięta.
+-  Następnie zdefiniowano MS-009.5 — Scheduling Engine Day Details.
+-  Codex dodał panel szczegółów dnia. Chief Architect wykrył, że activeDayKey pozostaje aktywny po zmianie miesiąca. Codex poprawił handlers Previous/Next/Today tak, aby czyściły aktywny dzień.
+-  Implementacja MS-009.5 została zaakceptowana; commit implementacyjny wskazany w dokumentacji to d92b2a3. Dokumentacja została zaktualizowana i zamknięta.
+-  Po zamknięciu trzech milestone’ów użytkownik zapytał, jak bezpośrednio połączyć ChatGPT i Codexa.
+-  Wypracowano model docelowy oparty o GitHub jako wspólny, audytowalny stan pracy: Chief Architect przygotowuje spec/prompt, Codex implementuje w repo/branch/PR, Chief Architect robi review, Codex poprawia, użytkownik zatwierdza, następnie commit/push/docs.
+-  Użytkownik świadomie zaakceptował wyłamanie się z roadmapy aplikacyjnej, aby najpierw zbudować ten proces.
+-  Zaproponowano nowy engine: ENG-000 — AI Development Platform, z MS-000.2 — AI Development Workflow jako pierwszym aktywnym zadaniem tego bloku.
+-  Przygotowano prompt do Codexa dotyczący utworzenia AGENTS.md, docs/ai-workflow/ oraz minimalnej biblioteki workflow/promptów/checklist.
+-  Ponieważ czat stał się zbyt długi i zaczął się zawieszać, użytkownik poprosił o prompt startowy do nowej rozmowy. Przygotowano prompt przenoszący kontekst, role, PCL, Integrity Check oraz zakres ENG-000 / MS-000.2.
+4.  Why It Mattered
+-  Sesja doprowadziła do faktycznego wdrożenia i zamknięcia trzech kolejnych milestone’ów Scheduling Engine.
+-  Ważniejszym skutkiem procesowym było jawne rozdzielenie odpowiedzialności:
+  -  ChatGPT = Chief Architect,
+  -  Codex = Coder / wykonawca,
+  -  User = Product Owner / osoba zatwierdzająca,
+  -  GitHub = wspólny audytowalny stan kodu.
+-  Zidentyfikowano i nazwano błąd procesu: Chief Architect nie powinien sam implementować ani dostarczać ZIP-ów/patchy jako sposobu wdrożenia.
+-  Powstała koncepcja ENG-000 — AI Development Platform, czyli potraktowania procesu tworzenia SPS jako części samej platformy.
+-  Ustalono rozróżnienie między zamknięciem milestone’u a zamknięciem całej sesji, co pozwala prowadzić wiele milestone’ów w jednym czacie.
+-  Sesja stanowi silne źródło historyczne dla późniejszej formalizacji AI Development Workflow.
+5.  Decisions Made
+-  ChatGPT pełni rolę Chief Architect i nie jest coderem.
+-  Codex jest wykonawcą kodu.
+-  ChatGPT po Scope Approval ma przygotowywać gotowy prompt do Codexa zamiast implementować patch.
+-  ZIP służy do Project Context Loader, diagnozy i review, nie do wdrażania kodu przez ChatGPT.
+-  Dokumentacja pozostaje Single Source of Truth.
+-  Po implementacji Codex pokazuje diff/testy, Chief Architect wykonuje Verification, następnie użytkownik zatwierdza commit/push.
+- Milestone Close nie jest tym samym co Session Close.
+-  Session Close ma następować dopiero, gdy użytkownik faktycznie kończy czat/pracę.
+- MS-009.4 zdefiniowano jako Scheduling Engine Day Selection.
+- MS-009.5 zdefiniowano jako Scheduling Engine Day Details.
+-  Docelowy proces integracji ChatGPT ↔ Codex ma opierać się o GitHub/repo/branch/PR jako wspólny audytowalny stan.
+-  Świadomie zaakceptowano czasowe wyłamanie się z roadmapy aplikacyjnej.
+-  Zaproponowano ENG-000 — AI Development Platform.
+- MS-000.2 — AI Development Workflow ma formalizować role i workflow agentów.
+-  Preferowana przyszła struktura obejmuje AGENTS.md i docs/ai-workflow/.
+-  Prompty do Codexa mają być zwracane jako czyste, łatwe do skopiowania bloki.
+6.  Ideas Proposed
+- AI Constitution / Role Check na początku sesji.
+- Workflow Guard sprawdzający, czy Chief Architect nie przekracza swojej roli.
+-  Biblioteka szablonów promptów, np. CA-01, CA-02, CA-03, CA-04, CA-05.
+-  GitHub Issues jako reprezentacja milestone’ów.
+-  Pull Request jako wspólne miejsce implementacji i review.
+-  Branch roboczy per milestone.
+- ENG-000 — AI Development Platform z potencjalnymi przyszłymi milestone’ami:
+  - MS-000.1 — PCL
+  - MS-000.2 — AI Workflow
+  - MS-000.3 — Prompt Library
+  - MS-000.4 — GitHub Integration
+  - MS-000.5 — Agent Automation
+-  Standard pełnych nazw kolejnych milestone’ów w dokumentacji zamiast samego numeru, np. MS-009.5 — ....
+-  Proces ma być ważniejszy niż konkretny model AI, aby wykonawca implementacji był wymienialny.
+7.  Work Actually Done
+-  Wykonano Project Context Loader na przekazanym ZIP.
+-  Przeprowadzono Project Integrity Check.
+-  Przygotowano i zastosowano handoff do Codexa dla MS-009.3.
+-  Codex zaimplementował Month Navigation i wykonał minimalny fix wskazany podczas review.
+- MS-009.3 został zacommitowany i wypchnięty:
+  - befbc96 feat(calendar): add month navigation
+-  Dokumentacja po MS-009.3 została zaktualizowana i zacommitowana:
+  - 0a93935 docs: close MS-009.3
+-  Zdefiniowano i wdrożono MS-009.4 — Scheduling Engine Day Selection.
+-  Z dokumentacji wynika commit implementacyjny:
+  - cd93ea0
+-  Dokumentacja MS-009.4 została przygotowana przez Codexa, review została zaakceptowana, a użytkownik potwierdził wykonanie commit/push.
+-  Zdefiniowano i wdrożono MS-009.5 — Scheduling Engine Day Details.
+-  Chief Architect wykrył problem zachowania panelu po zmianie miesiąca; Codex wykonał minimalną poprawkę.
+-  Z dokumentacji wynika commit implementacyjny:
+  - d92b2a3
+-  Dokumentacja MS-009.5 została przygotowana, zaakceptowana i użytkownik potwierdził commit/push.
+-  Przygotowano prompt do Codexa dla ENG-000 / MS-000.2.
+-  Przygotowano prompt startowy do nowego czatu utrwalający nowy model ról i stan projektu.
+-  Asystent wcześniej zadeklarował utworzenie sps-ms-009-3-calendar-navigation.patch oraz sps-ms-009-3-calendar-navigation.zip; widoczny interfejs pokazuje te artefakty, ale ten sposób implementacji został następnie uznany przez użytkownika za niewłaściwy procesowo i porzucony jako wzorzec.
+8.  Artifacts / Files Mentioned
+- C:\Users\p700\soft-premium-system
+- C:\Users\p700\sps-session.zip
+- sps-session(8).zip
+- sps-session(9).zip
+- src/app/projects/[id]/calendar/page.tsx
+- docs/00_ORIGINS.md
+- docs/00_PROJECT_BIBLE.md
+- docs/01_VISION.md
+- docs/02_ARCHITECTURE.md
+- docs/03_DEVELOPMENT_STANDARD.md
+- docs/04_UI_STANDARD.md
+- docs/05_ROADMAP.md
+- docs/06_BACKLOG.md
+- docs/07_DECISIONS.md
+- docs/08_CURRENT_STATE.md
+- docs/09_CHANGELOG.md
+- docs/10_PROJECT_LIFECYCLE.md
+- docs/10_SESSION_STATE.md
+- docs/AI_CONTEXT.md
+- docs/BACKLOG.md
+-  proponowany AGENTS.md
+-  proponowany docs/ai-workflow/README.md
+-  proponowany docs/ai-workflow/ROLES.md
+-  proponowany docs/ai-workflow/WORKFLOW.md
+-  proponowany docs/ai-workflow/prompts/CA-01_IMPLEMENTATION_HANDOFF.md
+-  proponowany docs/ai-workflow/prompts/CA-02_DOCUMENTATION_UPDATE.md
+-  proponowany docs/ai-workflow/checklists/PROJECT_INTEGRITY_CHECK.md
+- sps-ms-009-3-calendar-navigation.patch
+- sps-ms-009-3-calendar-navigation.zip
+-  Repozytorium GitHub: https://github.com/Rgronski/soft-premium-system.git
+-  Branch widoczny podczas push: feature/documentation-foundation
+-  Pliki / źródła / narzędzia widoczne w panelu UI: skill codex-oszczedny-debug; widoczne ślady wielu plików dokumentacji w katalogach roboczych; ZIP-y sesyjne i tymczasowy patch/ZIP MS-009.3.
+9.  Milestones / Labels Mentioned
+- ENG-001 — Scheduling Engine
+- MS-009.1 — Calendar Shell
+- MS-009.2 — Scheduling Engine Month View
+- MS-009.3 — Scheduling Engine Calendar Navigation
+- MS-009.4 — Scheduling Engine Day Selection
+- MS-009.5 — Scheduling Engine Day Details
+- MS-009.6
+-  proponowane MS-009.6 — Create Visit
+- ENG-000 — AI Development Platform
+- MS-000.2 — AI Development Workflow
+-  proponowane:
+  - MS-000.1 — PCL
+  - MS-000.3 — Prompt Library
+  - MS-000.4 — GitHub Integration
+  - MS-000.5 — Agent Automation
+- Chief Architect
+- Codex
+- Workflow Guard
+- AI Constitution
+- Project Context Loader
+- Project Integrity Check
+- Milestone Close
+- Session Close
+10.  Open Questions / Unknowns
+-  Dokładny tytuł czatu: UNKNOWN.
+-  Formalny numer sesji SPS OS: UNKNOWN.
+-  Dokładny hash commita dokumentacyjnego zamykającego MS-009.4: UNKNOWN w widocznym źródle.
+-  Dokładny hash commita dokumentacyjnego zamykającego MS-009.5: UNKNOWN w widocznym źródle.
+-  Nie ma dowodu w widocznym źródle, że ENG-000 i MS-000.2 zostały już formalnie zapisane do SSOT; są zatwierdzoną decyzją kierunkową i przygotowano prompt dla Codexa, ale implementacja tego bloku miała rozpocząć się w kolejnej rozmowie.
+-  Nie ma dowodu, że proponowane pliki AGENTS.md i docs/ai-workflow/* zostały już utworzone.
+-  Nie wiadomo, czy przyszłe milestone’y MS-000.3–MS-000.5 zostały formalnie zaakceptowane jako SSOT, czy pozostały roadmapą koncepcyjną.
+-  Nie wiadomo, czy docelowa automatyczna integracja ChatGPT ↔ Codex przez GitHub/PR została technicznie uruchomiona; w tej sesji była projektowana.
+-  Nie ma widocznego pełnego git status po ostatnim commicie dokumentacyjnym MS-009.5.
+11.  Suggested Archive Treatment
+-  Czy tę rozmowę / fragment zapisać jako: historical session candidate
+-  Uzasadnienie: Widoczne źródło obejmuje pełny rozwój kilku milestone’ów, realne raporty Codexa, review, commit/push, synchronizację dokumentacji oraz bardzo istotną decyzję procesową prowadzącą do koncepcji ENG-000. Materiał nadaje się jako silne źródło do backfillu pełnej sesji, ale sam raport źródłowy nie powinien być traktowany jako formalny session summary.
+12.  Suggested Filenames If Archived
+-  Source report filename: 2026-09-04_UNKNOWN_SPS_OS_SCHEDULING_ENGINE_AND_AI_DEVELOPMENT_WORKFLOW_SOURCE_REPORT.md
+-  Development log filename: NOT APPLICABLE
+-  Session summary filename: UNKNOWN
+-  Origin note filename: 2026-09-04_ENG-000_AI_DEVELOPMENT_PLATFORM_ORIGIN_NOTE_CANDIDATE.md
+13.  Source Excerpts
+-  Użytkownik o podziale ról: „codex jest coderem, masz przygotowac prompt dla codex a on go wykonuje”.
+-  Ustalony model: „ChatGPT = Chief Architect / Codex = Coder”.
+-  Użytkownik o końcu czatu: chciał rozróżnić formalne zamknięcie milestone’u od faktycznego końca długiej rozmowy i kontynuować pracę.
+-  Kluczowa decyzja: „Milestone Close ≠ Session Close”.
+-  Po MS-009.3 widoczny commit: befbc96 feat(calendar): add month navigation.
+-  Dokumentacja MS-009.3: 0a93935 docs: close MS-009.3.
+-  Raport Codexa dla MS-009.4 wskazywał dodanie activeDayKey i single active day selection.
+-  Raport Codexa dla MS-009.5 wskazywał Day Details, datę, weekday, visit count/list i Brak wizyt.
+-  Chief Architect wykrył problem pozostawania activeDayKey po zmianie miesiąca; Codex dodał czyszczenie tego stanu do Previous/Next/Today.
+-  Użytkownik o integracji AI: chciał, aby Chief Architect wysyłał zadanie do Codexa, Codex implementował, a wynik wracał automatycznie do review.
+-  Kierunek integracji: GitHub/repo/branch/PR jako wspólny audytowalny stan.
+-  Decyzja o nowej warstwie: ENG-000 — AI Development Platform.
+-  Użytkownik zaakceptował świadome wyłamanie się z roadmapy: „super, to jedziemy”.
+-  Na końcu użytkownik poprosił o prompt do nowego czatu, ponieważ bieżący był już zbyt długi i się zawieszał.
+14.  Backfill Use Recommendation
+-  Czy używać tego raportu w MS-032.0: YES
+-  Jak używać: Jako źródło wysokiej jakości do rekonstrukcji formalnej sesji, przede wszystkim dla historii MS-009.3, MS-009.4, MS-009.5 oraz genezy ENG-000 — AI Development Platform i MS-000.2 — AI Development Workflow. Szczególnie wartościowe są raporty Codexa, konkretne commity, opis błędu procesowego ChatGPT-as-coder oraz formalizacja nowego podziału ról.
+-  Czego nie robić na podstawie tego raportu: Nie przypisywać numeru sesji bez dodatkowego dowodu. Nie uznawać ENG-000, MS-000.2, AGENTS.md ani docs/ai-workflow/* za wdrożone wyłącznie na podstawie tej rozmowy. Nie wymyślać brakujących hashy commitów. Nie traktować tymczasowego patcha/ZIP wygenerowanego przez ChatGPT jako obowiązującego workflow — został wyraźnie odrzucony. Nie tworzyć formalnego session summary bez dodatkowego ustalenia Session ID.
+===== ARCHIWALNY RAPORT SPS OS END =====
