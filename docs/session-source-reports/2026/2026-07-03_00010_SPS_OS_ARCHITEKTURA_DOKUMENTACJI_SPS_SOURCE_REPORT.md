@@ -1,0 +1,261 @@
+===== ARCHIWALNY RAPORT SPS OS START =====
+1.  Conversation Identity
+-  Chat title: UNKNOWN
+-  Chat title source: Tytuł rozmowy nie jest dostępny w widocznym źródle; zgodnie z instrukcją nie został wywnioskowany.
+-  Source completeness: FULL
+-  Source conversation date: 2026-07-01–2026-07-03 — widoczne są daty w materiałach repozytorium i poleceniach terminala; dokładna data rozpoczęcia/zakończenia rozmowy jest UNKNOWN.
+-  Report prepared date: 2026-09-04
+-  Evidence source: Pełna/prawie pełna historyczna treść rozmowy widoczna powyżej promptu, w tym wypowiedzi Product Ownera, odpowiedzi Chief Architecta oraz wklejone wyniki PowerShell/Git.
+-  Visible UI evidence / side panel sources: Brak widocznego panelu „Wyniki” / „Źródła” z dodatkowymi dokumentami lub narzędziami.
+-  Is this clearly SPS OS-related: YES
+-  Suggested historical label: Soft Premium System — Documentation Sprint / Project Brain and Project Knowledge Foundation
+-  Suggested session number if visible: UNKNOWN
+-  Confidence: HIGH dla przebiegu i decyzji; MEDIUM dla daty rozmowy; brak podstaw do ustalenia formalnego numeru sesji.
+2.  Historical Role
+-  Czy to była formalna sesja SPS OS, pre-formalna rozmowa, Foundation/origin conversation, poboczny materiał, czy fragment dowodowy?
+  -  Foundation/origin conversation / pre-formal SPS OS development session.
+-  Uzasadnienie:
+  -  Rozmowa ustanowiła podstawową dokumentację SPS, role Product Owner / Chief Architect, Source of Truth, Project Brain, proces pracy, SPS Commands, pierwszą architekturę dokumentacji oraz zasady późniejszego Project Context Loader.
+  -  W źródle nie jest widoczny formalny numer sesji ani późniejszy kontrakt START/KONIEC znany z dojrzałego SPS OS, dlatego nie należy retroaktywnie nadawać jej formalnego Session ID.
+3.  What Happened
+-  Product Owner rozpoczął Documentation Sprint, zatrzymując implementację funkcji i ustanawiając cel stworzenia profesjonalnej dokumentacji jako źródła prawdy projektu.
+-  Zaprojektowano odpowiedzialności dokumentów:
+  - 00_PROJECT_BIBLE.md
+  - 01_VISION.md
+  - 02_ARCHITECTURE.md
+  - 03_DEVELOPMENT_STANDARD.md
+  - 04_UI_STANDARD.md
+  - 05_ROADMAP.md
+  - 06_BACKLOG.md
+  - 07_DECISIONS.md
+  - 08_CURRENT_STATE.md
+  - 09_CHANGELOG.md
+  - AI_CONTEXT.md
+-  Ustanowiono nadrzędną zasadę Source of Truth: każda informacja ma jednego właściciela, nie jest kopiowana pomiędzy dokumentami, a inne dokumenty jedynie odwołują się do jej właściciela.
+-  Zdefiniowano SPS Commands dla AI_CONTEXT.md, m.in. /architect, /product, /project-check, /diagnoza, /review, /minimal-patch, /verify, /challenge, /simplify, /backlog, /adr, /wf, /ms, /state, /changelog, /sot, /dod.
+-  W toku rozmowy skorygowano błędne założenie Chief Architecta, że SPS jest związany z Beauty Client Pro. Product Owner doprecyzował, że:
+  -  Beauty Client Pro powstał wcześniej,
+  -  SPS jest głównym produktem/narzędziem pracy do tworzenia małych i szybkich aplikacji,
+  -  Beauty Client Pro ma w przyszłości zostać poddany audytowi przez SPS,
+  -  nie wiadomo, czy SPS kiedykolwiek będzie sprzedawany lub udostępniany jako open source.
+-  Product Owner dostarczył historyczny Project Brain Model v0.1 oraz wcześniejszy model Information Architecture.
+-  Ustalono, że 02_ARCHITECTURE.md ma zawierać trzy obszary:
+  -  Knowledge Architecture,
+  -  Information Architecture,
+  -  Software Architecture.
+-  Ustalono neutralną zasadę:
+  - Project Brain is the Single Source of Truth. User interfaces expose and operate on that knowledge.
+-  Odkryto główną wizję SPS:
+  -  nie zaczynać każdego projektu od zera,
+  -  utrzymywać tę samą wysoką jakość w kolejnych projektach,
+  -  ograniczać przypadkowe decyzje.
+-  Przyjęto Core Transformation / North Star:
+  - Transform software development from a series of isolated decisions into a consistent, repeatable system.
+-  Utworzono branch feature/documentation-foundation.
+-  W repo utworzono docelowe pliki dokumentacji.
+- 00_PROJECT_BIBLE.md został zapisany, zreviewowany, zaakceptowany przez Product Ownera i zacommitowany.
+-  Następnie przygotowano i według deklaracji Product Ownera zapisano/zamknięto pozostałe dokumenty Documentation Sprint.
+-  Przeprowadzono Documentation Audit v1.1 bez Critical ani Major findings.
+-  Documentation Sprint v1.0 został formalnie zaakceptowany przez Product Ownera jako zamknięty.
+-  Na końcu rozmowy zidentyfikowano bardzo ważny przyszły koncept: Project Context Loader, którego zadaniem ma być odtwarzanie pełnego kontekstu projektu z Project Brain dla nowej sesji AI.
+-  Przygotowano prompt do rozpoczęcia kolejnego czatu i kontynuacji prac nad MS-007 — Calendar View.
+4.  Why It Mattered
+-  Rozmowa ustanowiła fundament filozoficzny i dokumentacyjny SPS.
+-  Przeniosła projekt z modelu „AI pamięta historię rozmowy” do modelu „projekt przechowuje własną wiedzę, a AI ją odczytuje”.
+-  Ustanowiła Source of Truth jako centralną zasadę dokumentacji i Project Brain.
+-  Rozdzieliła role Product Ownera i Chief Architecta.
+-  Ustanowiła diagnozę przed implementacją, minimal patch, review, Definition of Done i dokumentację jako część produktu.
+-  Wyraźnie oddzieliła SPS od Beauty Client Pro.
+-  Doprowadziła do odkrycia Project Context Loader jako potencjalnie fundamentalnej funkcji późniejszego SPS OS.
+-  Jest silnym źródłem origin/foundation dla późniejszych zasad SPDM, Project Brain i sesyjnego bootstrapu.
+5.  Decisions Made
+-  Documentation Sprint ma poprzedzać dalszą implementację produktu.
+-  Każdy dokument ma odpowiadać za jeden obszar wiedzy.
+-  Source of Truth:
+  -  każda informacja ma jednego właściciela,
+  -  nie kopiujemy informacji pomiędzy dokumentami,
+  -  stosujemy odwołania.
+- AI_CONTEXT.md, a nie PROJECT_BIBLE.md, jest właścicielem SPS Commands i operacyjnych reguł AI.
+- 02_ARCHITECTURE.md zawiera:
+  -  Knowledge Architecture,
+  -  Information Architecture,
+  -  Software Architecture.
+-  Project Brain jest Single Source of Truth projektu.
+-  UI operuje na wiedzy Project Brain, bez przesądzania, że UI jest wyłącznie dodatkiem do niego.
+-  SPS nie jest produktem beauty ani systemem stworzonym dla Beauty Client Pro.
+-  Beauty Client Pro jest wcześniejszą, niezależną aplikacją, która może być później audytowana przez SPS.
+-  Główna transformacja SPS:
+  - Transform software development from a series of isolated decisions into a consistent, repeatable system.
+-  Podczas głównej pracy nowe idee mają być parkowane i przywoływane dopiero po komendzie Product Ownera pomysły.
+-  Dokumentacja v1.0 została zaakceptowana po audycie bez obowiązkowego patcha v1.1.
+-  Project Context Loader został uznany przez Product Ownera za „BARDZO WAŻNE” i wymagający późniejszego dodania do To Do / backlogu.
+6.  Ideas Proposed
+- docs/README.md jako mapa dokumentacji — zaparkowane.
+- GLOSSARY.md — zaparkowane / uznane za potencjalnie zbędny dodatkowy dokument na obecnym etapie.
+-  Architecture Log — zaparkowany.
+-  Documentation Audit Checklist — zaparkowany.
+-  Consistency Review — zaparkowany.
+-  Canonical Project Model Diagram — zaparkowany.
+-  Formalny Architecture RFC process — zaparkowany.
+-  Documentation Generator z Project Brain — przyszły kierunek.
+-  AI Multi-Role — przyszły kierunek.
+-  Zasada SPS should always use SPS — zaparkowana.
+- The Rule of Discovery: We document discoveries, not assumptions. — pomysł do późniejszego utrwalenia.
+-  Documentation Pyramid — model pomocniczy; nie został formalnie wpisany do dokumentacji.
+- /docs i /vision jako potencjalne dodatkowe SPS Commands — zaproponowane, brak dowodu formalnego wdrożenia.
+-  Project Context Loader — wskazany na końcu jako bardzo ważny kandydat do To Do/backlogu.
+7.  Work Actually Done
+-  Zdiagnozowano istniejący katalog:
+  - C:\Users\p700\soft-premium-system\docs
+-  Widoczny początkowy stan:
+  - docs/adr/
+  - docs/architecture/
+  - docs/BACKLOG.md
+-  Odczytano istniejący:
+  - docs/architecture/project-brain-specification-v0.1.md.txt
+  - docs/BACKLOG.md
+-  Utworzono branch:
+  - feature/documentation-foundation
+-  Widoczny Git potwierdził:
+  -  branch został utworzony,
+  -  working tree był czysty przed tworzeniem nowych dokumentów.
+-  Utworzono 11 nowych plików dokumentacji w docs/.
+- 00_PROJECT_BIBLE.md:
+  -  został zapisany,
+  -  odczytany przez Get-Content,
+  -  zaakceptowany przez Product Ownera,
+  -  zacommitowany.
+-  Widoczny dowód commita:
+  - c79f9d5 docs: add Project Bible
+- 01_VISION.md:
+  -  Product Owner później zadeklarował „01 zamkniety”.
+  -  Brak w źródle wklejonego git log/hasha potwierdzającego commit.
+- 02_ARCHITECTURE.md:
+  -  Product Owner zadeklarował zapis i następnie „gotowe”.
+  -  Brak w źródle wklejonego hasha commita.
+- 03–09 i AI_CONTEXT.md:
+  -  przygotowano gotowe treści,
+  -  Product Owner deklarował kolejne zapisanie/ukończenie,
+  -  na końcu stwierdził „całość jest gotowa”.
+  -  Źródło nie zawiera bezpośredniego git log potwierdzającego każdy commit ani push.
+-  Przeprowadzono logiczny audit wszystkich 11 dokumentów w rozmowie.
+-  Product Owner potwierdził zamknięcie Documentation Sprint v1.0.
+-  Jeżeli asystent deklarował wykonanie zmian, ale źródło nie daje dowodu ich skutecznego zapisania w repo:
+  -  poza 00_PROJECT_BIBLE.md i utworzeniem pustych plików/brancha brak pełnego bezpośredniego dowodu Git dla późniejszych zapisów i commitów.
+  -  Nie należy retroaktywnie uznawać wszystkich późniejszych commitów/pushów za potwierdzone bez dodatkowego repo evidence.
+8.  Artifacts / Files Mentioned
+-  Repozytorium:
+  - C:\Users\p700\soft-premium-system
+-  Branch:
+  - feature/documentation-foundation
+-  Dokumenty docelowe:
+  - docs/00_PROJECT_BIBLE.md
+  - docs/01_VISION.md
+  - docs/02_ARCHITECTURE.md
+  - docs/03_DEVELOPMENT_STANDARD.md
+  - docs/04_UI_STANDARD.md
+  - docs/05_ROADMAP.md
+  - docs/06_BACKLOG.md
+  - docs/07_DECISIONS.md
+  - docs/08_CURRENT_STATE.md
+  - docs/09_CHANGELOG.md
+  - docs/AI_CONTEXT.md
+-  Wcześniejsze artefakty:
+  - docs/BACKLOG.md
+  - docs/adr/
+  - docs/architecture/
+  - docs/architecture/project-brain-specification-v0.1.md.txt
+-  Widoczny commit:
+  - c79f9d5 docs: add Project Bible
+-  Widoczny poprzedni HEAD/main:
+  - 5a27f53 feat(visits): implement WF-024 visit details
+  - 6e3ef01 feat(visits): implement WF-023 save visit
+-  Prompty/artefakty tekstowe:
+  -  Project Knowledge Transfer
+  -  Project Brain Model v0.1
+  -  Information Architecture
+  -  SPS Commands
+  -  prompt do nowej sesji Soft Premium System — Development Session
+-  Pliki / źródła / narzędzia widoczne w panelu UI:
+  -  NONE VISIBLE
+9.  Milestones / Labels Mentioned
+-  Historyczne milestones aplikacji widoczne na początku:
+  -  MS-001 Foundation Workspace
+  -  MS-002 First Project
+  -  MS-003 Project Workspace
+  -  MS-004 Clients Foundation
+  -  MS-005 Services Foundation
+  -  MS-006 Visits Foundation
+  -  MS-007 Calendar View
+-  Documentation Sprint
+-  WS-001 Documentation Foundation
+-  WS-002 Foundation Documents
+-  WS-003 — używane roboczo przy 02_ARCHITECTURE.md
+- Documentation Sprint v1.0
+- Documentation Audit v1.1
+-  Project Brain Model v0.1
+-  ADR-0001–ADR-0004 w przygotowanym 07_DECISIONS.md
+-  Formalny SPS OS Session ID: UNKNOWN
+10.  Open Questions / Unknowns
+-  Dokładny tytuł czatu: UNKNOWN.
+-  Formalny numer sesji SPS OS: UNKNOWN.
+-  Czy rozmowa była już formalnie klasyfikowana jako sesja SPS OS w późniejszym systemie: UNKNOWN.
+-  Dokładna data rozpoczęcia i zakończenia rozmowy: UNKNOWN; widoczne ślady wskazują 2026-07-01–2026-07-03.
+-  Czy wszystkie dokumenty 01–09 oraz AI_CONTEXT.md zostały faktycznie zacommitowane: UNKNOWN.
+-  Czy branch feature/documentation-foundation został później zmergowany do main: UNKNOWN.
+-  Czy wykonano push brancha/dokumentacji: UNKNOWN.
+-  Czy Documentation Sprint otrzymał później formalny tag: UNKNOWN.
+-  Czy Project Context Loader został później formalnie dodany do backlogu/repo: z tego źródła UNKNOWN.
+-  Czy dwa minor findings z audytu zostały kiedykolwiek poprawione: UNKNOWN.
+-  Czy docs/BACKLOG.md, docs/adr/ oraz docs/architecture/ zostały później usunięte, przeniesione lub zachowane: UNKNOWN.
+11.  Suggested Archive Treatment
+-  Czy tę rozmowę / fragment zapisać jako:
+  -  origin note candidate
+  -  historical session candidate
+-  Uzasadnienie:
+  -  Jest to pełne i bardzo istotne źródło powstania fundamentalnych zasad SPS OS: Project Brain, SSOT, dokumentacji, roli Chief Architecta, procesu audytu, parkowania pomysłów oraz Project Context Loader.
+  -  Brak formalnego Session ID przemawia przeciwko automatycznemu traktowaniu materiału jako formalnego session summary.
+  -  Materiał jest wystarczająco kompletny, aby stanowić silne źródło do historycznego backfillu i origin history.
+12.  Suggested Filenames If Archived
+-  Source report filename: 2026-07-03_UNKNOWN_SPS_OS_DOCUMENTATION_SPRINT_PROJECT_BRAIN_FOUNDATION_SOURCE_REPORT.md
+-  Development log filename: NOT APPLICABLE
+-  Session summary filename: UNKNOWN
+-  Origin note filename: 2026-07-03_SPS_OS_DOCUMENTATION_AND_PROJECT_BRAIN_ORIGIN_NOTE.md
+13.  Source Excerpts
+-  Product Owner:
+  -  „Każda informacja ma jedno źródło prawdy.”
+  -  „Nie kopiujemy informacji pomiędzy dokumentami.”
+  -  „SPS to główny produkt stworzony i przemyslany aby upraszczacz i standaryzowac pracę nad kolejnymi aplikacjami.”
+  -  „SPS ma być dla mnie nazędziem pracy do tworzenia małych i szybkich aplikacji dla mnie, dla przyjaciół lub klientów.”
+  -  „Project Brain jest Single Source of Truth dla projektu.”
+  -  „Project Brain is the Single Source of Truth. User interfaces expose and operate on that knowledge.”
+  -  „1. Nie zaczynam już żadnego projektu od zera. 2. Każdy projekt ma tę samą wysoką jakość.”
+  -  O North Star: „i to jest to”
+  -  O Project Context Loader: „to jest wg mnie BARDZO WAZNE i DOBRE!!”
+-  Przyjęta Core Transformation:
+  -  „Transform software development from a series of isolated decisions into a consistent, repeatable system.”
+-  Historyczny Project Brain Model:
+  -  Identity, Vision, Roadmap, Architecture, Decisions, Backlog, Sprints, Tasks, Sessions, Developer Journal, AI Context, Releases, Templates.
+-  Widoczny Git:
+  - c79f9d5 docs: add Project Bible
+14.  Backfill Use Recommendation
+-  Czy używać tego raportu w MS-032.0: YES
+-  Jak używać:
+  -  Jako wysokiej jakości source report dla wczesnej historii SPS OS.
+  -  Jako evidence dla genezy:
+    -  Documentation Sprint,
+    -  SSOT,
+    -  Project Brain,
+    -  AI_CONTEXT / SPS Commands,
+    -  rozdzielenia ról Product Owner / Chief Architect,
+    -  Documentation Audit,
+    -  parkowania pomysłów,
+    -  Project Context Loader.
+  -  Może wspierać późniejszy backfill development log/session summary wyłącznie wtedy, gdy osobne źródła pozwolą bezpiecznie ustalić formalny Session ID i wymagane metadane.
+-  Czego nie robić na podstawie tego raportu:
+  -  Nie nadawać retrospektywnie numeru sesji.
+  -  Nie twierdzić, że wszystkie dokumenty zostały zacommitowane lub wypchnięte bez dodatkowego Git evidence.
+  -  Nie twierdzić, że Documentation Sprint został zmergowany do main bez weryfikacji.
+  -  Nie twierdzić, że Project Context Loader został wdrożony; w tej rozmowie został zidentyfikowany jako bardzo ważny przyszły element.
+  -  Nie tworzyć na tej podstawie gotowego development logu ani formalnego session summary bez dalszej korelacji z repozytorium i późniejszym systemem sesji.
+===== ARCHIWALNY RAPORT SPS OS END =====
