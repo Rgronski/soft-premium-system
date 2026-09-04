@@ -1,0 +1,252 @@
+===== ARCHIWALNY RAPORT SPS OS START =====
+1.  Conversation Identity
+-  Chat title: UNKNOWN
+-  Chat title source: Tytuł rozmowy nie jest widoczny w dostępnym źródle; nie został zgadnięty.
+-  Source completeness: FULL
+-  Source conversation date: UNKNOWN
+-  Report prepared date: 2026-09-04
+-  Evidence source: Pełna widoczna rozmowa SPS OS w tym czacie, raporty Codexa wklejane przez użytkownika, wyniki git diff, git status, git commit, git push, zrzuty UI, kolejne ZIP-y projektu oraz przesłany dokument 000_ORIGINS.md / docelowo docs/00_ORIGINS.md. Treść przesłanego dokumentu ORIGINS była widoczna i została wykorzystana jako materiał źródłowy.
+-  Visible UI evidence / side panel sources: Widoczne ślady użycia skilla codex-oszczedny-debug; wielokrotnie przesyłane ZIP-y sps-session(1).zip do sps-session(6).zip; zrzuty ekranu Calendar / Dashboard; przesłany plik 000_ORIGINS.md; widoczne pliki dokumentacji SPS podczas rozpakowywania ZIP-ów, m.in. 00_PROJECT_BIBLE.md, 01_VISION.md, 02_ARCHITECTURE.md, 03_DEVELOPMENT_STANDARD.md, 04_UI_STANDARD.md, 05_ROADMAP.md, 06_BACKLOG.md, 07_DECISIONS.md, 08_CURRENT_STATE.md, 09_CHANGELOG.md, 10_PROJECT_LIFECYCLE.md, 10_SESSION_STATE.md, AI_CONTEXT.md, BACKLOG.md.
+-  Is this clearly SPS OS-related: Tak.
+-  Suggested historical label: SPS OS development session — MS-008 closure, MS-DOC-003 Platform Identity & Origins, MS-009 Scheduling Engine foundation
+-  Suggested session number if visible: UNKNOWN
+-  Confidence: High
+2.  Historical Role
+-  Czy to była formalna sesja SPS OS, pre-formalna rozmowa, Foundation/origin conversation, poboczny materiał, czy fragment dowodowy?
+ Formalna sesja rozwojowa SPS OS z istotnym elementem foundation/origin.
+-  Uzasadnienie: Rozmowa stosowała formalny workflow SPS, Project Integrity Check, rozdział ról Chief Architect / Codex / Product Owner, handoffy do Codexa, weryfikację lint/build, commit/push, synchronizację dokumentacji oraz session-close bootstrap. Jednocześnie w trakcie sesji formalnie włączono genezę SPS do 00_ORIGINS.md i zdefiniowano Platform Identity / Domain Independence.
+3.  What Happened
+-  Sesja rozpoczęła się od bootstrapu projektu z deklarowanym stanem MS-007 — Calendar View, po czym obowiązkowy Project Integrity Check wykrył rozjazd między 08_CURRENT_STATE.md, 10_SESSION_STATE.md i 09_CHANGELOG.md dotyczący MS-DOC-002 — Workflow Governance v1.0.
+-  Użytkownik doprecyzował fakty dla MS-DOC-002: commit b07e7cc docs: establish workflow governance v1.0, push completed, working tree clean, workflow Version 1.0 / Stable.
+-  Przygotowano i wykonano minimalny patch dokumentacyjny w 08_CURRENT_STATE.md i 10_SESSION_STATE.md, tak aby MS-DOC-002 nie był już aktywnym milestone’em i aby następny krok prowadził do MS-008.
+-  Po restarcie komputera przywrócono lokalny dev workflow i przygotowano kolejne ZIP-y do Project Integrity Check.
+-  Zaplanowano i wykonano MS-008 — Project Workspace Dashboard Polish: dashboard projektu otrzymał KPI z localStorage oraz działające Quick Actions.
+-  Podczas weryfikacji MS-008 npm run lint ujawnił istniejące błędy react-hooks/set-state-in-effect również poza dashboardem. Po zgodzie użytkownika zakres rozszerzono na 8 dodatkowych plików, aby doprowadzić cały projekt do npm run lint: OK; npm run build również zakończył się OK.
+-  MS-008 został następnie zamknięty kodowo i dokumentacyjnie przez aktualizację 08_CURRENT_STATE.md, 09_CHANGELOG.md, 10_SESSION_STATE.md.
+-  Rozmowa przeszła następnie w ważny etap definiowania tożsamości SPS. Użytkownik przypomniał, że SPS nie jest systemem beauty, lecz rozwiązaniem ogólnym. Z tego wynikła decyzja o Domain Independence.
+-  Użytkownik przedstawił historyczną genezę RGDF — Radek Groński Development Framework — jako wcześniejszej koncepcji, z której wyewoluował SPS.
+-  Wybrano nazwę dokumentu fundamentu: 00_ORIGINS.md.
+-  Użytkownik przesłał gotowy materiał historyczny opisujący narodziny SPS od Beauty Client Pro, problemów z AI/Codexem, poprzez RGDF/proces, Foundation Day, Project Brain, podział ról i DNA produktu.
+-  Zaplanowano i wykonano MS-DOC-003 — Platform Identity & Origins.
+-  MS-DOC-003 dodał formalnie 00_ORIGINS.md, Project Context Loader (PCL), Platform Vision, Domain Independence oraz ADR-001.
+-  Commit MS-DOC-003 został potwierdzony: 7d2b81e docs: establish platform identity and origins, push completed.
+-  Po MS-DOC-003 rozpoczęto Phase II / Platform Engines i zaplanowano MS-009 — Scheduling Engine Foundation.
+- MS-009.1 — Calendar Shell został wykonany w jednym pliku src/app/projects/[id]/calendar/page.tsx, zweryfikowany przez lint/build i wypchnięty.
+- MS-009.2 — Scheduling Engine Month View został wykonany w tym samym pliku: nagłówek miesiąca, siatka 7 kolumn, today highlight, liczniki visits per dzień; lint/build OK; użytkownik pokazał screenshot działającego Month View i potwierdził push.
+-  Przy przejściu do MS-009.3 następna sesja / kontrola wykryła, że dokumentacja nadal kończyła się na MS-DOC-003. Zgodnie z Project Integrity Check wykonano STOP i przygotowano minimalny sync dokumentacyjny dla MS-009.1 / MS-009.2 oraz aktywnego MS-009.3.
+-  Dokumentacja została zsynchronizowana w 08_CURRENT_STATE.md, 09_CHANGELOG.md, 10_SESSION_STATE.md. Próba commita początkowo nie powiodła się z powodu uruchomienia Git z C:\Users\p700, po czym wskazano właściwy katalog repo.
+-  Sesja zakończyła się przygotowaniem bootstrap promptu do kolejnej sesji, z aktywnym MS-009.3 — Scheduling Engine Calendar Navigation.
+4.  Why It Mattered
+-  Sesja uporządkowała formalny stan projektu po MS-DOC-002 i MS-008.
+-  Doprowadziła repo do zielonego lint i build, usuwając wcześniej istniejący problem z synchronicznym setState w useEffect.
+-  Była przełomowa dla tożsamości SPS: formalnie zapisano, że SPS jest platformą niezależną domenowo, a Beauty Client Pro jest historycznym źródłem / przykładem, nie definicją architektury.
+-  Wprowadzono 00_ORIGINS.md jako canonical foundation document oraz Project Context Loader jako pierwszy etap workflow.
+-  Powstał ADR-001 dla Platform Identity & Domain Independence.
+-  Rozpoczęto pierwszy świadomie projektowany Platform Engine: Scheduling Engine.
+-  Ustalono rozdział między nazwą architektoniczną platformy (Scheduling Engine) a nazwą UI (Calendar).
+-  Sesja ujawniła i skorygowała ważny błąd procesowy: zakończone MS-009.1 / MS-009.2 nie zostały od razu odzwierciedlone w dokumentacji, co później prawidłowo zatrzymało dalszą implementację przez Project Integrity Check.
+5.  Decisions Made
+-  MS-DOC-002 jest ukończony; potwierdzony commit b07e7cc, push completed, workflow Version 1.0 / Stable.
+-  Po ukończeniu milestone’u Current Milestone ma być None, a zakończony milestone ma być wykazywany jako Latest Completed Milestone.
+-  MS-008 został zdefiniowany jako Project Workspace Dashboard Polish.
+-  Dashboard ma używać istniejących danych localStorage i istniejącego routingu, bez zmian architektury danych.
+-  Pełny lint projektu ma być zielony; po zgodzie użytkownika naprawiono także 8 wcześniejszych plików poza pierwotnym zakresem MS-008.
+-  SPS nie jest platformą dla branży beauty.
+-  SPS ma być platformą ogólnego przeznaczenia do tworzenia nowoczesnych aplikacji biznesowych.
+-  Branżowe implementacje nie mogą definiować platform core.
+-  RGDF jest historycznym źródłem / etapem ewolucji koncepcji SPS.
+-  Dokument genezy został nazwany 00_ORIGINS.md.
+- 00_ORIGINS.md ma status Canonical Foundation Document i Load Priority: 0 (Foundation).
+-  Project Context Loader (PCL) stał się oficjalnym pierwszym etapem workflow.
+-  Wprowadzono ADR-001 — Platform Identity & Domain Independence.
+-  Platform Engine i Application UI są odrębnymi warstwami.
+-  Dla pierwszego silnika:
+  -  Platform Engine: Scheduling Engine.
+  -  Application UI: Calendar.
+-  Nazwa Scheduling Engine nie powinna być eksponowana użytkownikowi jako tytuł UI.
+-  MS-009 ma być rozwijany mikro-krokami.
+-  Najpierw Calendar Shell, następnie Month View, następnie nawigacja / kolejne widoki.
+-  Nowe pomysły niezwiązane z aktywnym milestone’em mają być parkowane zgodnie z wcześniejszą zasadą „pomysły”.
+6.  Ideas Proposed
+-  RGDF jako historyczna metodyka pracy z wieloma modelami AI, z rolami dla ChatGPT, Codex, Gemini i Claude.
+-  SPS jako „platforma do budowania platform” / środowisko do tworzenia inteligentnych aplikacji biznesowych.
+- 11_PLATFORM_MODULES.md jako przyszła mapa Platform Engines.
+-  Numerowanie engine’ów, np. ENG-001 Scheduling Engine, ENG-002 Workflow Engine, itd.
+-  Przyszłe Platform Engines:
+  -  Scheduling Engine
+  -  Workflow Engine
+  -  Notification Engine
+  -  Document Engine
+  -  AI Engine
+  -  Integration Engine
+  -  Reporting Engine
+  -  Automation Engine
+  -  Identity Engine
+-  Możliwa przyszła korekta numeracji dokumentów.
+-  Konsolidacja dwóch backlogów: 06_BACKLOG.md i BACKLOG.md.
+-  Uporządkowanie dwóch dokumentów z numerem 10.
+-  Potencjalna przyszła ewolucja nazwy Visit do bardziej domenowo-neutralnego Appointment lub Scheduled Event; nie wdrożono.
+-  Przyszłe integracje: Supabase, Vercel, Resend, AI.
+-  Przyszłe funkcje Scheduling Engine: Week View, Day View, Event Details, drag & drop, resources, realtime, AI Scheduler.
+-  Motto / slogan SPS — pomysł zaparkowany, nie wdrożony.
+7.  Work Actually Done
+-  Wykonano diagnostykę i minimalny patch dokumentacyjny po MS-DOC-002.
+-  Potwierdzono i wykorzystano fakty:
+  -  commit b07e7cc docs: establish workflow governance v1.0
+  -  push completed
+  -  working tree clean
+  -  workflow v1.0 Stable
+-  MS-008:
+  -  zmieniono dashboard projektu,
+  -  dodano KPI: Clients, Services, Visits, Upcoming Visits,
+  -  dodano Quick Actions,
+  -  naprawiono lokalny lint dashboardu,
+  -  po zgodzie użytkownika naprawiono 8 dalszych plików z tym samym wzorcem,
+  - npm run lint: OK,
+  - npm run build: OK,
+  -  użytkownik potwierdził commit/push.
+-  Wykonano dokumentacyjne zamknięcie MS-008 w 08_CURRENT_STATE.md, 09_CHANGELOG.md, 10_SESSION_STATE.md; użytkownik potwierdził commit/push.
+-  Utworzono i wdrożono MS-DOC-003:
+  - docs/00_ORIGINS.md
+  -  PCL w Project Bible i AI Context
+  -  Platform Vision
+  -  Domain Independence
+  -  ADR-001
+  -  aktualizacje state/changelog/session state
+-  Wykryto duplikat docs/000_ORIGINS.md i usunięto go, pozostawiając docs/00_ORIGINS.md.
+-  MS-DOC-003 został zacommitowany i wypchnięty:
+  - 7d2b81e docs: establish platform identity and origins
+-  MS-009.1:
+  -  zmieniono tylko src/app/projects/[id]/calendar/page.tsx,
+  -  powstał Calendar Shell,
+  -  lint/build OK,
+  -  użytkownik potwierdził push.
+-  MS-009.2:
+  -  zmieniono tylko src/app/projects/[id]/calendar/page.tsx,
+  -  powstał funkcjonalny Month View,
+  -  current month/year,
+  -  7-column grid,
+  -  today highlight,
+  -  visit counters per day,
+  -  lint/build OK,
+  -  użytkownik pokazał działający ekran i potwierdził push.
+-  Przygotowano patch synchronizujący dokumentację do:
+  -  Latest Completed: MS-009.2
+  -  Current Milestone: MS-009.3
+  -  wpisy changeloga MS-009.1 / MS-009.2
+-  Źródło nie pokazuje końcowego sukcesu commita/pusha ostatniego patcha dokumentacyjnego po MS-009.2; pokazuje jedynie pierwszą nieudaną próbę z niewłaściwego katalogu oraz instrukcję ponowienia z repo.
+-  W trakcie sesji asystent kilkukrotnie deklarował wykonanie patcha w swoim środowisku lub przygotował ZIP do podmiany, lecz użytkownik przypomniał ustaloną zasadę, że realne zmiany lokalnego repo mają być wykonywane przez Codexa. Samo przygotowanie pliku/ZIP-u po stronie asystenta nie stanowi dowodu zapisania zmian w repo użytkownika.
+8.  Artifacts / Files Mentioned
+- C:\Users\p700\soft-premium-system
+- C:\Users\p700\sps-session.zip
+- sps-session(1).zip
+- sps-session(2).zip
+- sps-session(3).zip
+- sps-session(4).zip
+- sps-session(5).zip
+- sps-session(6).zip
+- docs/00_ORIGINS.md
+- docs/000_ORIGINS.md — wykryty duplikat, następnie usunięty
+- docs/00_PROJECT_BIBLE.md
+- docs/01_VISION.md
+- docs/02_ARCHITECTURE.md
+- docs/03_DEVELOPMENT_STANDARD.md
+- docs/04_UI_STANDARD.md
+- docs/05_ROADMAP.md
+- docs/06_BACKLOG.md
+- docs/BACKLOG.md
+- docs/07_DECISIONS.md
+- docs/08_CURRENT_STATE.md
+- docs/09_CHANGELOG.md
+- docs/10_PROJECT_LIFECYCLE.md
+- docs/10_SESSION_STATE.md
+- docs/AI_CONTEXT.md
+- src/app/page.tsx
+- src/app/projects/[id]/page.tsx
+- src/app/projects/[id]/calendar/page.tsx
+- src/app/projects/[id]/clients/page.tsx
+- src/app/projects/[id]/clients/[clientId]/page.tsx
+- src/app/projects/[id]/services/page.tsx
+- src/app/projects/[id]/services/[serviceId]/page.tsx
+- src/app/projects/[id]/visits/page.tsx
+- src/app/projects/[id]/visits/new/page.tsx
+- src/app/projects/[id]/visits/[visitId]/page.tsx
+- sps-ms008-doc-update.zip — przygotowany przez asystenta, lecz użytkownik odrzucił workflow podmiany ZIP-em na rzecz Codexa
+-  Zrzuty ekranu Dashboard / Calendar
+-  Przesłany historyczny plik 000_ORIGINS.md, którego treść odpowiada genezie SPS i została następnie wykorzystana do docs/00_ORIGINS.md.
+-  Pliki / źródła / narzędzia widoczne w panelu UI:
+  -  skill codex-oszczedny-debug
+  -  kolejne rozpakowane zestawy docs/ z ZIP-ów
+  -  narzędzia używane do odczytu przesłanych artefaktów
+  -  widoczne screenshoty interfejsu SPS
+9.  Milestones / Labels Mentioned
+-  MS-007 — Calendar View
+-  MS-DOC-002 — Workflow Governance v1.0
+-  MS-008 — Project Workspace Dashboard Polish
+-  MS-DOC-003 — Platform Identity & Origins
+-  MS-009 — Scheduling Engine Foundation
+-  MS-009A — Scheduling Engine Architecture Review — proponowany / roboczy label
+-  MS-009.1 — Calendar Shell
+-  MS-009.2 — Scheduling Engine Month View
+-  MS-009.3 — Scheduling Engine Calendar Navigation
+-  MS-009.4 — Day/Week-related future step discussed, exact final assignment not fixed
+-  MS-009.5 — Event Details — proposed
+-  MS-009.6 — Polish & Verification — proposed
+-  ENG-001 — Scheduling Engine — proposed architectural numbering; nie potwierdzono formalnego wdrożenia do dokumentacji
+-  Phase I — Foundation
+-  Phase II — Platform Engines
+-  ADR-001 — Platform Identity & Domain Independence
+-  Project Context Loader (PCL)
+-  RGDF — Radek Groński Development Framework
+-  Foundation Day
+10.  Open Questions / Unknowns
+-  Dokładny tytuł tej rozmowy: UNKNOWN.
+-  Formalny numer sesji SPS OS: UNKNOWN.
+-  Dokładna data rozpoczęcia tej rozmowy źródłowej: UNKNOWN.
+-  Hash commita dla MS-008 code changes: UNKNOWN.
+-  Hash commita dla dokumentacyjnego zamknięcia MS-008: UNKNOWN.
+-  Hash commita dla MS-009.1: UNKNOWN.
+-  Hash commita dla MS-009.2: UNKNOWN.
+-  Czy ostatni patch dokumentacyjny synchronizujący MS-009.1 / MS-009.2 / MS-009.3 został finalnie zacommitowany i wypchnięty po poprawieniu katalogu PowerShell: UNKNOWN z widocznego źródła.
+-  Czy ENG-001 został formalnie zapisany do repo: brak dowodu; wygląda na koncepcję / label architektoniczny używany w rozmowie.
+-  Czy Phase II — Platform Engines został formalnie zapisany w dokumentacji repo: brak jednoznacznego dowodu.
+-  Czy wszystkie pomysły z recenzji pierwszego architekta zostały zapisane w backlogu / docs: brak dowodu.
+-  Relacja formalna RGDF ↔ SPS poza ORIGINS: historycznie opisana w rozmowie, ale zakres finalnego zapisu w repo wymaga weryfikacji źródłowej.
+-  Formalne miejsce 00_ORIGINS.md w Source of Truth hierarchy zostało opisane w patchu, ale pełna finalna treść wszystkich plików po commicie nie jest widoczna.
+11.  Suggested Archive Treatment
+-  Czy tę rozmowę / fragment zapisać jako:
+ historical session candidate
+-  Uzasadnienie: Źródło jest pełne i zawiera wieloetapowy przebieg formalnej pracy SPS OS: integrity checks, milestone’y, poprawki kodu, testy, commity/pushe, dokumentację, architektoniczne decyzje, powstanie 00_ORIGINS.md, PCL, ADR-001 oraz start pierwszego Platform Engine. Ma wysoką wartość zarówno jako źródło rozwojowe, jak i źródło genezy / filozofii projektu. Nie należy jednak traktować tego raportu jako gotowego session summary bez ustalenia formalnego numeru sesji.
+12.  Suggested Filenames If Archived
+-  Source report filename: 2026-09-04_UNKNOWN_SPS_OS_MS-008_MS-DOC-003_MS-009_SOURCE_REPORT.md
+-  Development log filename: NOT APPLICABLE
+-  Session summary filename: UNKNOWN
+-  Origin note filename: 2026-09-04_SPS_OS_PLATFORM_IDENTITY_AND_ORIGINS_ORIGIN_NOTE.md
+13.  Source Excerpts
+-  „SPS nie jest tylko dla ani pod branżę beauty. może z tego wyszedł pomysł na ten system ale to jest bardziej ogólne.”
+-  „z RGDF powstało SPS!!! tak ewoluował pomysł”
+-  „00_ORIGINS.md to mi sie podoba”
+-  Z ORIGINS: projekt rozpoczął się od problemu uporządkowania współpracy z AI, utraty kontekstu i potrzeby lepszego procesu; Beauty Client Pro był projektem, który doprowadził do narodzin SPS.
+-  Z ORIGINS: „Nie budujemy generatora promptów. Nie budujemy frameworka. Budujemy platformę.”
+-  Z ORIGINS: Project Brain powstał z obserwacji, że największym problemem nie jest zdolność AI do pisania kodu, lecz pamięć projektu.
+-  „Platform Engine → Scheduling Engine / Application UI → Calendar.”
+-  „Nazwy silników platformy nie muszą być tożsame z nazwami widocznymi w interfejsie użytkownika.”
+-  Raport Codexa dla MS-008: npm run lint: OK, npm run build: OK.
+-  Raport Codexa dla MS-009.2: realny Month View, current month/year, siatka 7 kolumn, today highlight, visit counters per day, lint/build OK.
+-  Końcowy Project Integrity Check: dokumentacja była opóźniona względem MS-009.1 i MS-009.2, dlatego implementacja MS-009.3 została prawidłowo zatrzymana do czasu synchronizacji.
+14.  Backfill Use Recommendation
+-  Czy używać tego raportu w MS-032.0: Tak.
+-  Jak używać:
+  -  Jako pełny raport źródłowy dla historycznej sesji obejmującej zamknięcie MS-008, ustanowienie MS-DOC-003 i rozpoczęcie MS-009.
+  -  Jako silne źródło dla genezy 00_ORIGINS.md, formalizacji PCL, Platform Identity, Domain Independence i ADR-001.
+  -  Jako źródło dla historii pierwszego Platform Engine oraz mikro-etapów MS-009.1 / MS-009.2.
+  -  Jako evidence procesu: Project Integrity Check faktycznie zatrzymał dalszą implementację, gdy dokumentacja nie nadążyła za kodem.
+  -  Przy backfillu rozdzielić fakty potwierdzone przez commit/push od deklaracji planistycznych i pomysłów zaparkowanych.
+-  Czego nie robić na podstawie tego raportu:
+  -  Nie zgadywać numeru formalnej sesji.
+  -  Nie przypisywać nieznanych hashy commitów do MS-008, MS-009.1 lub MS-009.2.
+  -  Nie uznawać ostatniego sync patcha MS-009 za finalnie zacommitowany/pushed bez dodatkowego dowodu.
+  -  Nie traktować ENG-001, Phase II ani przyszłych engine’ów jako formalnie wdrożonych elementów repo bez potwierdzenia.
+  -  Nie traktować pomysłów o zmianie numeracji dokumentów, konsolidacji backlogów, 11_PLATFORM_MODULES.md, motto SPS czy dalszej ewolucji nazw domenowych jako wykonanej pracy.
+  -  Nie tworzyć na podstawie tego raportu gotowego development logu lub session summary bez ustalenia formalnej tożsamości sesji.
+===== ARCHIWALNY RAPORT SPS OS END =====
