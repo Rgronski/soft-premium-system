@@ -1,0 +1,200 @@
+===== ARCHIWALNY RAPORT SPS OS START =====
+1.  Conversation Identity
+-  Chat title: UNKNOWN
+-  Chat title source: Tytuł rozmowy nie jest widoczny w dostępnym źródle.
+-  Source completeness: FULL
+-  Source conversation date: 2026-09-04
+-  Report prepared date: 2026-09-04
+-  Evidence source: Pełna widoczna rozmowa bieżącego czatu SPS OS, raporty Codexa wklejane przez Product Ownera, wyniki poleceń PowerShell/Git, załączone archiwa projektu i dokumentacji oraz widoczne ślady użycia narzędzi/asystenta.
+-  Visible UI evidence / side panel sources: docs.rar, docs.zip, sps-ms007.zip, sps-ms007-project-lifecycle-update.zip, sps-ms007-calendar-view-update.zip; widoczne pliki dokumentacji docs/00_PROJECT_BIBLE.md, 01_VISION.md, 02_ARCHITECTURE.md, 03_DEVELOPMENT_STANDARD.md, 04_UI_STANDARD.md, 05_ROADMAP.md, 06_BACKLOG.md, 07_DECISIONS.md, 08_CURRENT_STATE.md, 09_CHANGELOG.md, AI_CONTEXT.md, 10_PROJECT_LIFECYCLE.md, 10_SESSION_STATE.md; skill codex-oszczedny-debug.
+-  Is this clearly SPS OS-related: YES
+-  Suggested historical label: SPS OS — MS-007 Calendar View + SPS Operating Workflow v1.0 / Project Lifecycle / Session Close / Integrity Check / Workflow Governance
+-  Suggested session number if visible: UNKNOWN
+-  Confidence: HIGH
+2.  Historical Role
+-  Czy to była formalna sesja SPS OS, pre-formalna rozmowa, Foundation/origin conversation, poboczny materiał, czy fragment dowodowy?
+  -  Formalna sesja rozwojowa SPS OS z równoległym utworzeniem i ustabilizowaniem fundamentu operacyjnego SPS Operating Workflow v1.0.
+-  Uzasadnienie:
+  -  Rozmowa rozpoczęła się jako kontynuacja istniejącego projektu Soft Premium System z rolą Chief Architect i jawnie zdefiniowanym milestone’em MS-007 — Calendar View.
+  -  W trakcie pracy wdrożono formalny rozdział odpowiedzialności Chief Architect / Codex / Product Owner, Project Lifecycle, Session State, Session Close Protocol, Project Integrity Check oraz Workflow Governance.
+  -  Widoczne są konkretne implementacje, raporty Codexa, commity, pushe i końcowe stany working tree clean.
+3.  What Happened
+-  Sesja rozpoczęła się od próby wczytania dokumentacji SPS i przygotowania kontekstu do MS-007 — Calendar View.
+-  Ustalono praktyczny sposób przekazywania projektu do nowego czatu poprzez ZIP generowany poleceniem PowerShell, ponieważ sam lokalny path C:\Users\p700\soft-premium-system nie dawał asystentowi dostępu do repo.
+-  Po analizie MS-007 ustalono, że Calendar powinien być tylko widokiem istniejących Visits, Clients i Services, bez nowego modelu danych.
+-  Początkowo asystent przygotował patch w sandboxie, po czym Product Owner zwrócił uwagę, że właściwy proces powinien wykorzystywać Codexa jako wykonawcę lokalnych zmian.
+-  Na tej podstawie formalnie zapisano podział odpowiedzialności:
+  -  Chief Architect: diagnoza, scope, architektura, handoff i weryfikacja,
+  -  Codex: lokalna implementacja minimalnego patcha,
+  -  Product Owner: akceptacja, testy, commit i push.
+-  Dodano formalny etap Chief Architect -> Codex Handoff.
+-  Codex zaimplementował MS-007 — Calendar View; build przeszedł, zmiany zostały zacommitowane i wypchnięte.
+-  Następnie przetestowano nowy mechanizm startu i końca sesji na świeżym czacie.
+-  Test wykrył realne niespójności pomiędzy 08_CURRENT_STATE.md, 09_CHANGELOG.md i 10_SESSION_STATE.md.
+-  W odpowiedzi utworzono Project Integrity Check jako obowiązkową bramkę jakości przed rozpoczęciem kolejnego milestone’u.
+-  Następnie ustanowiono SPS Operating Workflow Version 1.0 / Status: Stable oraz formalne Workflow Governance.
+-  Kolejny test ponownie wykrył pozostawiony pending verification po MS-DOC-002, co doprowadziło do finalnego patcha synchronizującego stan dokumentacji.
+-  Ostatecznie repo zostało potwierdzone jako zsynchronizowane, wypchnięte i working tree clean.
+4.  Why It Mattered
+-  Sesja zakończyła funkcjonalny MS-007 — Calendar View.
+-  Znacznie ważniejszym rezultatem systemowym było przekształcenie dotychczasowych praktyk pracy SPS w formalny, zapisany w SOT proces operacyjny.
+-  Powstał mechanizm pozwalający nowym czatom:
+  -  automatycznie poprosić o ZIP,
+  -  wczytać docs/,
+  -  wykonać Project Integrity Check,
+  -  wykryć niespójności przed rozpoczęciem kolejnego milestone’u,
+  -  zachować podział Chief Architect / Codex / Product Owner.
+-  Workflow przestał być zbiorem promptów i został potraktowany jako architektoniczny asset projektu.
+-  Testy między czatami dostarczyły praktycznego dowodu, że proces potrafi wykrywać własne niespójności.
+5.  Decisions Made
+- docs/ pozostaje Single Source of Truth.
+-  Nowy czat powinien otrzymywać ZIP projektu i od razu podawać Product Ownerowi komendę PowerShell do jego utworzenia.
+-  Standardowy ZIP sesyjny ma obejmować co najmniej package.json, tsconfig.json, next.config.*, src i docs.
+- MS-007 Calendar ma być read-only view nad istniejącymi Visits, Clients, Services.
+-  Nie tworzyć nowego modelu CalendarEvent, nowego storage ani zewnętrznej biblioteki kalendarza w tym milestone.
+-  Domyślna implementacja kodu odbywa się przez Codexa w lokalnym repo.
+-  Chief Architect nie powinien domyślnie przygotowywać patchy ZIP z kodem.
+-  Product Owner wykonuje commit i push.
+-  Wprowadzono formalny etap Chief Architect -> Codex Handoff.
+-  Wprowadzono Project Integrity Check przed Diagnosis.
+-  Przy niespójności Project Integrity Check zatrzymuje rozpoczęcie kolejnego milestone’u.
+-  Wprowadzono Session Close Protocol i Session State.
+- SPS Operating Workflow otrzymał:
+  -  Version: 1.0
+  -  Status: Stable
+-  Workflow jest architektonicznym assetem i częścią Source of Truth.
+-  Zmiany workflow wymagają architectural justification, Product Owner approval, aktualizacji dokumentacji i odpowiedniego changelogu/versioning.
+-  Zmiany workflow nie powinny być wprowadzane przypadkowo podczas routine feature development.
+-  Następny planowany milestone po pozytywnym integrity check: MS-008.
+6.  Ideas Proposed
+- Project Context Loader jako powtarzalny mechanizm startu sesji.
+- Session Close Protocol.
+- Session State.
+- Project Integrity Check.
+-  Workflow versioning 1.x / 2.x.
+-  Workflow Governance.
+-  Workflow Change Policy.
+-  Product Boundary oddzielający workflow improvements od application milestones.
+-  Potencjalny przyszły docs/11_RELEASE_CHECKLIST.md / checklist dla Session Close — zaproponowany, ale świadomie niewdrożony.
+- MS-008 — Project Brain Foundation został zaproponowany przez nowy czat jako następny milestone, ale nie rozpoczęto jego implementacji.
+7.  Work Actually Done
+-  Faktycznie wykonano i potwierdzono przez logi Git:
+  -  commit 2777b74 — docs: add project lifecycle and session state
+  -  commit b51dc74 — docs: clarify codex implementation workflow
+  -  commit 2321571 — docs: add codex handoff to development workflow
+  -  commit 2615dde — feat: add calendar view
+  -  commit f3c12e2 — docs: close ms-007 session state
+  -  commit e08a781 — docs: add project integrity check to workflow
+  -  commit b07e7cc — docs: establish workflow governance v1.0
+  -  commit 658b407 — docs: close workflow governance session state
+-  Widoczne logi potwierdzają push tych commitów do origin/feature/documentation-foundation.
+-  Widoczny git status po odpowiednich etapach potwierdzał nothing to commit, working tree clean.
+- npm run build dla MS-007 przeszedł:
+  -  Next.js production build compiled successfully,
+  -  TypeScript finished,
+  -  route /projects/[id]/calendar została zbudowana.
+- npm run lint nie był green dla całego repo; raport Codexa wskazywał istniejące błędy poza zakresem MS-007, a sam calendar/page.tsx został oczyszczony z własnych lint issues.
+- src/app/projects/[id]/calendar/page.tsx został zmieniony z placeholdera Coming soon na realny read-only Calendar View.
+-  Utworzono docs/10_PROJECT_LIFECYCLE.md.
+-  Utworzono docs/10_SESSION_STATE.md.
+-  Zmieniono odpowiednie dokumenty SOT, w tym 03_DEVELOPMENT_STANDARD.md, AI_CONTEXT.md, 08_CURRENT_STATE.md, 09_CHANGELOG.md, 00_PROJECT_BIBLE.md.
+-  Początkowe patche ZIP przygotowane przez asystenta były tylko artefaktami sandboxowymi; późniejszy właściwy model implementacji został przeniesiony do Codexa lokalnego.
+-  Nie ma podstaw, by twierdzić, że wszystkie tymczasowe ZIP-y zostały zachowane w repo; przeciwnie, część z nich była usuwana jako untracked artifacts.
+8.  Artifacts / Files Mentioned
+-  Pliki / katalogi / repozytoria / ZIP-y:
+  - C:\Users\p700\soft-premium-system
+  - docs/
+  - src/
+  - src/app/projects/[id]/calendar/page.tsx
+  - src/app/projects/[id]/visits/new/page.tsx
+  - src/app/projects/[id]/visits/page.tsx
+  - src/app/projects/[id]/clients/page.tsx
+  - src/app/projects/[id]/services/page.tsx
+  - docs/00_PROJECT_BIBLE.md
+  - docs/01_VISION.md
+  - docs/02_ARCHITECTURE.md
+  - docs/03_DEVELOPMENT_STANDARD.md
+  - docs/04_UI_STANDARD.md
+  - docs/05_ROADMAP.md
+  - docs/06_BACKLOG.md
+  - docs/07_DECISIONS.md
+  - docs/08_CURRENT_STATE.md
+  - docs/09_CHANGELOG.md
+  - docs/AI_CONTEXT.md
+  - docs/10_PROJECT_LIFECYCLE.md
+  - docs/10_SESSION_STATE.md
+  - docs.rar
+  - docs.zip
+  - sps-ms007.zip
+  - sps-ms007-project-lifecycle-update.zip
+  - sps-ms007-calendar-view-update.zip
+  - sps-session.zip
+  - sps-session-small.zip
+  - sps-session-doc-patch.zip
+-  Pliki / źródła / narzędzia widoczne w panelu UI:
+  -  skill codex-oszczedny-debug
+  -  widoczne załączone dokumenty docs/*.md
+  -  widoczne archiwa ZIP/RAR wymienione wyżej.
+9.  Milestones / Labels Mentioned
+- MS-007 — Calendar View
+- MS-DOC-001 — Finalizacja Workflow SPS — etykieta zaproponowana w rozmowie.
+- MS-DOC-002 — Workflow Governance v1.0
+- MS-008 — następny planowany milestone.
+- MS-008 — Project Brain Foundation — propozycja nowego czatu, nie rozpoczęta.
+- SPS Operating Workflow v1.0
+- Status: Stable
+- Project Context Loader
+- Session Close Protocol
+- Session State
+- Chief Architect -> Codex Handoff
+- Project Integrity Check
+- Workflow Governance
+- Workflow Change Policy
+- Product Boundary
+10.  Open Questions / Unknowns
+-  Formalny numer sesji SPS OS: UNKNOWN.
+-  Widoczny tytuł czatu: UNKNOWN.
+-  Nie ma dowodu w widocznym źródle, że gałąź feature/documentation-foundation została zmergowana do main; potwierdzony jest push na tę gałąź.
+-  Nie wiadomo, czy MS-DOC-001 został formalnie zapisany jako milestone w SOT, czy pozostał tylko nazwą roboczą używaną w rozmowie.
+-  Nie wiadomo, czy MS-008 — Project Brain Foundation jest finalnym wyborem roadmapy; został jedynie zaproponowany przez nową sesję.
+-  Nie wiadomo, czy pełny lint repository został później naprawiony; w tej sesji znane były istniejące błędy poza zakresem MS-007.
+-  Nie da się potwierdzić, czy wszystkie tymczasowe archiwa sandboxowe zostały zachowane poza bieżącym środowiskiem.
+11.  Suggested Archive Treatment
+-  Czy tę rozmowę / fragment zapisać jako:
+  -  historical session candidate
+  -  supporting evidence only dla Workflow v1.0 governance/history
+-  Uzasadnienie:
+  -  Źródło jest pełne i zawiera formalny development flow, konkretne decyzje, implementację MS-007, commity, pushe, walidacje oraz powstanie kluczowych elementów SPS Operating Workflow.
+  -  Jest wystarczająco bogate, aby stanowić podstawę późniejszego backfillu formalnego development logu/session summary, ale zgodnie z bieżącym zadaniem pozostaje raportem źródłowym, nie gotowym logiem ani summary.
+12.  Suggested Filenames If Archived
+-  Source report filename: 2026-09-04_UNKNOWN_SPS_OS_MS-007_CALENDAR_VIEW_AND_WORKFLOW_V1_SOURCE_REPORT.md
+-  Development log filename: NOT APPLICABLE
+-  Session summary filename: UNKNOWN
+-  Origin note filename: 2026-09-04_SPS_OS_OPERATING_WORKFLOW_V1_GOVERNANCE_ORIGIN_NOTE.md
+13.  Source Excerpts
+-  „Calendar jest WYŁĄCZNIE widokiem istniejących danych.”
+-  „ChatGPT / Chief Architect: prowadzi diagnozę, ustala scope, pilnuje architektury, przygotowuje prompt dla Codexa.”
+-  „Codex: wykonuje minimalny patch bezpośrednio w lokalnym repozytorium.”
+-  „Product Owner: akceptuje scope, uruchamia lub potwierdza testy, wykonuje commit i push.”
+- 2615dde feat: add calendar view
+- e08a781 docs: add project integrity check to workflow
+- b07e7cc docs: establish workflow governance v1.0
+- 658b407 docs: close workflow governance session state
+-  „SPS Operating Workflow — Version: 1.0 — Status: Stable.”
+-  Nowy czat podczas testu: „STOP — wykryłem niespójność dokumentacji.”
+-  Finalny stan Git: nothing to commit, working tree clean.
+14.  Backfill Use Recommendation
+-  Czy używać tego raportu w MS-032.0: YES
+-  Jak używać:
+  -  Jako pełne źródło historyczne do odtworzenia sesji, w której ukończono MS-007 — Calendar View i jednocześnie ustanowiono/ustabilizowano SPS Operating Workflow v1.0.
+  -  Jako evidence dla genezy 10_PROJECT_LIFECYCLE.md, 10_SESSION_STATE.md, Chief Architect -> Codex Handoff, Project Integrity Check i Workflow Governance.
+  -  Przy backfillu zachować kolejność commitów i fakt, że proces był rozwijany iteracyjnie na podstawie kolejnych realnych testów nowych czatów.
+  -  Rozdzielić implementację MS-007 od równoległego nurtu procesowego, mimo że wystąpiły w jednej rozmowie.
+-  Czego nie robić na podstawie tego raportu:
+  -  Nie nadawać formalnego numeru sesji bez dodatkowego źródła.
+  -  Nie zakładać merge do main.
+  -  Nie traktować MS-DOC-001 jako formalnie opublikowanego milestone’u bez dodatkowego potwierdzenia w SOT.
+  -  Nie traktować MS-008 — Project Brain Foundation jako zaakceptowanego/rozpoczętego milestone’u.
+  -  Nie twierdzić, że repo miało globalnie green lint.
+  -  Nie traktować tymczasowych ZIP-ów sandboxowych jako trwałych artefaktów repo bez dodatkowego dowodu.
+===== ARCHIWALNY RAPORT SPS OS END =====
