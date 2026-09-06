@@ -1,0 +1,211 @@
+===== ARCHIWALNY RAPORT SPS OS START =====
+1.  Conversation Identity
+-  Chat title: UNKNOWN
+-  Chat title source: Tytuł rozmowy nie jest dostępny w widocznym źródle tekstowym; nie został odgadnięty.
+-  Source completeness: FULL
+-  Source conversation date: 2026-09-04
+-  Report prepared date: 2026-09-04
+-  Evidence source: Pełna widoczna rozmowa SPS OS obejmująca bootstrap sesji, PCL, prowadzenie przez Chief Architect, raporty Codexa, kolejne milestone’y, synchronizację dokumentacji, commit/push oraz końcowe ustalenia dotyczące SPS Session Bootstrap v2.1.
+-  Visible UI evidence / side panel sources: Widoczne były przesłane archiwa: sps-session(11).zip, sps-session-after-ms-0005.zip, sps-session-roadmap-review.zip, sps-session-ms-0007-review.zip, sps-session-ms-0008-review.zip, sps-session-ms-0009-review.zip, sps-session-ms-0010-review.zip, sps-session-ms-0012a-final.zip; widoczne były również dokumenty repozytorium m.in. docs/00_ORIGINS.md, docs/00_PROJECT_BIBLE.md, docs/01_VISION.md, docs/02_ARCHITECTURE.md, docs/03_DEVELOPMENT_STANDARD.md, docs/04_ROADMAP.md, docs/05_ROADMAP.md, docs/08_CURRENT_STATE.md, docs/09_CHANGELOG.md, docs/10_SESSION_STATE.md; użyto skilla codex-oszczedny-debug.
+-  Is this clearly SPS OS-related: YES
+-  Suggested historical label: SPS OS — Conductor, Roadmap Engine, Workspace / Project / Task / Knowledge foundations, UI Foundation and ENG-000 workflow hardening
+-  Suggested session number if visible: UNKNOWN
+-  Confidence: HIGH
+2.  Historical Role
+-  Czy to była formalna sesja SPS OS, pre-formalna rozmowa, Foundation/origin conversation, poboczny materiał, czy fragment dowodowy?: Formalna, wieloetapowa sesja rozwojowa SPS OS prowadzona w trybie Chief Architect → Codex, zawierająca również istotne ustalenia procesowe dotyczące PCL, ENG-000, Control Files Sync i bootstrapu następnych sesji.
+-  Uzasadnienie: Rozmowa rozpoczęła się formalnym bootstrapem SPS Development Session, załadowaniem PCL, Integrity Check, wskazaniem roadmapy i prowadzeniem kolejnych milestone’ów według określonego workflow. Widoczne są raporty implementacyjne Codexa, akceptacje Chief Architect, synchronizacje dokumentacji, commit/push oraz finalne ustalenia procesu.
+3.  What Happened
+-  Sesja rozpoczęła się od żądania świeżego ZIP-a projektu i wykonania Project Context Loader.
+-  Po początkowym PCL uruchomiono prace nad MS-000.5 — The Conductor.
+-  Zdefiniowano minimalną architekturę Conductora: model ConductorState, serwis oraz ConductorPanel w dashboardzie.
+-  Następnie utworzono formalną roadmapę wykonawczą jako MS-000.6 — Roadmap Engine, z docs/04_ROADMAP.md jako execution roadmap / milestone contract SSOT.
+-  W MS-000.7 — Workspace Engine wydzielono strukturę Workspace do osobnych komponentów.
+-  W MS-000.8 — Project Engine scentralizowano model projektu i dostęp do soft-premium-system.projects.
+-  W MS-000.9 — Task Engine dodano minimalny model i serwis zadań.
+-  Roadmapę skorygowano, dodając etap integracyjny MS-001.0 — Task Workspace Integration, w którym powstał ekran Tasks i podłączenie Task Engine do UI.
+-  W MS-001.1 — Knowledge Engine dodano minimalny model i serwis wiedzy projektowej bez UI.
+-  W MS-001.2A — UI Foundation dodano SectionCard i zastosowano go na kilku prostych ekranach bez redesignu.
+-  W trakcie prac zauważono powtarzający się problem: po implementacji i akceptacji kodu dokumentacja kontrolna nie zawsze była synchronizowana przed commit/push/ZIP, co powodowało późniejsze błędy PCL / Integrity Check.
+-  W odpowiedzi ustalono obowiązkowy przepływ: implementacja → review → Control Files / Documentation Sync → commit → push → ZIP → final audit.
+-  Zaproponowano SPS Session Bootstrap v2.1, zawierający twardą regułę aktualizacji plików kontrolnych przed commitem, pushem i ZIP-em.
+-  Pod koniec źródła PCL ponownie wykrył niejednoznaczność pomiędzy Current Milestone: None, Next Milestone i stanem roadmapy. Wykonano minimalny cleanup dokumentacji, rozdzielając rolę 04_ROADMAP.md jako execution SSOT i 05_ROADMAP.md jako strategiczną roadmapę produktu.
+4.  Why It Mattered
+-  Sesja przekształciła rozwój SPS OS z serii pojedynczych zmian w bardziej formalny, powtarzalny cykl inżynieryjny.
+-  Powstały podstawowe warstwy systemu: Conductor, Roadmap Engine, Workspace Engine, Project Engine, Task Engine, Knowledge Engine oraz UI Foundation.
+-  Został praktycznie przetestowany rozdział ról: ChatGPT jako Chief Architect i Codex jako wykonawca implementacji.
+-  Ujawniono istotną wadę procesu zamykania milestone’ów: brak gwarantowanej synchronizacji plików kontrolnych przed finalnym stanem Git/ZIP.
+-  Ustalenie Control Files Sync przed commit/push/ZIP było ważnym krokiem do uczynienia PCL bardziej niezawodnym przy kolejnych bootstrapach.
+-  Sesja przybliżyła projekt do docelowej wizji „Continue SPS Development”, gdzie dokumentacja i repo deterministycznie wskazują kolejny krok bez ręcznego odtwarzania kontekstu.
+5.  Decisions Made
+-  Chief Architect pozostaje rolą planującą i zatwierdzającą; Codex pozostaje wykonawcą technicznym.
+- MS-000.5 — The Conductor ma zacząć się od minimalnego, statycznego modelu/serwisu/panelu bez AI.
+- docs/04_ROADMAP.md ma pełnić rolę execution roadmap / milestone contract SSOT.
+- docs/05_ROADMAP.md pozostaje strategiczną roadmapą produktu, a nie źródłem wykonawczym dla PCL.
+- MS-000.7 — Workspace Engine ma wydzielić strukturę UI bez zmiany logiki danych.
+- MS-000.8 — Project Engine ma rozpocząć się od wspólnego modelu projektu i centralizacji dostępu do istniejącego localStorage, bez migracji i bez rozszerzenia lifecycle.
+- MS-000.9 — Task Engine ma rozpocząć się od samego modelu i serwisu bez UI.
+-  Dodano etap MS-001.0 — Task Workspace Integration przed Knowledge Engine, aby zweryfikować Task Engine end-to-end.
+- MS-001.1 — Knowledge Engine ma rozpocząć się od warstwy domenowej bez UI, AI, embeddings, wyszukiwania czy tagów.
+- MS-001.2A — UI Foundation ma rozpocząć się od jednego wspólnego komponentu SectionCard, bez redesignu.
+-  Po każdej zaakceptowanej implementacji obowiązkowy ma być Control Files / Documentation Sync przed commit, push i ZIP.
+-  Finalny workflow ma obejmować m.in. Diagnosis, Contract, Implementation, Review, Documentation Sync, Commit/Push, ZIP Review, Final Audit, Architecture Retrospective i Release Gate.
+-  Nowe pomysły wykraczające poza SPS OS 1.0 mają trafiać do 🅿️ Parking.
+- Current Milestone: None ma oznaczać stan pomiędzy zamknięciem poprzedniego milestone’u a formalnym startem następnego przez Chief Architect po PCL i Integrity Check.
+6.  Ideas Proposed
+-  Docelowy przycisk / doświadczenie Continue SPS Development, uruchamiające PCL, Integrity Check, Chief Architect i dalszy workflow.
+-  „SPS Brain” jako przyszły mechanizm startowy upraszczający rozpoczęcie nowej sesji do jednej komendy; pomysł jawnie zaparkowany poza SPS OS 1.0.
+-  Wspólna warstwa Storage Engine / helpery localStorage dla Project, Task i Knowledge Engine; pomysł zaparkowany.
+-  Formalny dokument ENG-000 opisujący pełny lifecycle milestone’u.
+-  Architecture Retrospective / Lessons Learned po każdym zamkniętym milestone.
+-  Dalsza automatyzacja bootstrapu tak, aby pełny prompt startowy nie był potrzebny.
+-  Ujednolicenie UI przez kolejne komponenty typu InfoCard, ActionTile, FieldLabel, SectionEyebrow; nie wdrożono ich w widocznym źródle.
+7.  Work Actually Done
+-  Według raportu Codexa utworzono:
+  - src/lib/conductor/types.ts
+  - src/lib/conductor/conductor.ts
+  - src/components/conductor/ConductorPanel.tsx
+  -  integrację Conductora w src/app/projects/[id]/page.tsx.
+-  Według raportu Codexa utworzono docs/04_ROADMAP.md i aktualizowano docs/08_CURRENT_STATE.md, docs/09_CHANGELOG.md, docs/10_SESSION_STATE.md.
+-  Według raportu Codexa wydzielono:
+  - WorkspaceLayout.tsx
+  - WorkspaceHeader.tsx
+  - WorkspaceContent.tsx
+  - WorkspacePanels.tsx.
+-  Według raportu Codexa utworzono:
+  - src/lib/project/types.ts
+  - src/lib/project/project.ts
+ i przepięto trzy ekrany na wspólny Project Engine.
+-  Według raportu Codexa utworzono:
+  - src/lib/task/types.ts
+  - src/lib/task/task.ts.
+-  Według raportu Codexa utworzono ekran src/app/projects/[id]/tasks/page.tsx i dodano link Tasks do src/app/projects/[id]/layout.tsx.
+-  Według raportu Codexa utworzono:
+  - src/lib/knowledge/types.ts
+  - src/lib/knowledge/knowledge.ts.
+-  Według raportu Codexa utworzono:
+  - src/components/ui/SectionCard.tsx
+ i zastosowano go na trzech ekranach.
+-  Użytkownik wykonał commit:
+  - 95ab9fc feat: complete MS-001.2A UI foundation
+-  Użytkownik wykonał skuteczny push:
+  - 537596b..95ab9fc feature/documentation-foundation -> feature/documentation-foundation
+-  Po pushu git status pokazał:
+  -  branch up to date z origin/feature/documentation-foundation
+  - nothing to commit, working tree clean.
+-  Wykonano kolejne synchronizacje dokumentacji po raportach Codexa, w tym cleanup znaczenia Current Milestone = None oraz rozdzielenie ról 04_ROADMAP.md i 05_ROADMAP.md.
+-  Asystent wielokrotnie deklarował wykonanie ZIP review / final audit. Widoczne źródło potwierdza przesłanie odpowiednich ZIP-ów, ale samo źródło rozmowy nie daje pełnego niezależnego dowodu zawartości każdego audytu poza raportami i późniejszymi decyzjami.
+8.  Artifacts / Files Mentioned
+- C:\Users\p700\soft-premium-system
+- C:\Users\p700\sps-session.zip
+- sps-session(11).zip
+- sps-session-after-ms-0005.zip
+- sps-session-roadmap-review.zip
+- sps-session-ms-0007-review.zip
+- sps-session-ms-0008-review.zip
+- sps-session-ms-0009-review.zip
+- sps-session-ms-0010-review.zip
+- sps-session-ms-0012a-final.zip
+- docs/00_ORIGINS.md
+- docs/00_PROJECT_BIBLE.md
+- docs/01_VISION.md
+- docs/02_ARCHITECTURE.md
+- docs/03_DEVELOPMENT_STANDARD.md
+- docs/04_ROADMAP.md
+- docs/04_UI_STANDARD.md
+- docs/05_ROADMAP.md
+- docs/06_BACKLOG.md
+- docs/07_DECISIONS.md
+- docs/08_CURRENT_STATE.md
+- docs/09_CHANGELOG.md
+- docs/10_PROJECT_LIFECYCLE.md
+- docs/10_SESSION_STATE.md
+- docs/AI_CONTEXT.md
+- docs/BACKLOG.md
+- docs/experience/
+- docs/ai-workflow/
+- src/lib/conductor/types.ts
+- src/lib/conductor/conductor.ts
+- src/components/conductor/ConductorPanel.tsx
+- src/components/workspace/WorkspaceLayout.tsx
+- src/components/workspace/WorkspaceHeader.tsx
+- src/components/workspace/WorkspaceContent.tsx
+- src/components/workspace/WorkspacePanels.tsx
+- src/lib/project/types.ts
+- src/lib/project/project.ts
+- src/lib/task/types.ts
+- src/lib/task/task.ts
+- src/lib/knowledge/types.ts
+- src/lib/knowledge/knowledge.ts
+- src/components/ui/SectionCard.tsx
+- src/app/page.tsx
+- src/app/projects/page.tsx
+- src/app/projects/[id]/page.tsx
+- src/app/projects/[id]/layout.tsx
+- src/app/projects/[id]/tasks/page.tsx
+- src/app/projects/[id]/settings/page.tsx
+- src/app/projects/[id]/invoices/page.tsx
+-  Pliki / źródła / narzędzia widoczne w panelu UI: skill codex-oszczedny-debug; przesłane archiwa ZIP wymienione powyżej; widoczne dokumenty repozytorium z docs/.
+9.  Milestones / Labels Mentioned
+-  MS-000.1 — Foundation
+-  MS-000.2 — Workflow Foundation
+-  MS-000.3 — Command Center
+-  MS-000.4 — Experience Blueprint
+-  MS-000.5 — The Conductor
+-  MS-000.6 — Roadmap Engine
+-  MS-000.7 — Workspace Engine
+-  MS-000.8 — Project Engine
+-  MS-000.9 — Task Engine
+-  MS-001.0 — Task Workspace Integration
+-  MS-001.1 — Knowledge Engine
+-  MS-001.2 — UI System
+-  MS-001.2A — UI Foundation / SectionCard
+-  MS-001.2B — UI Foundation Continuation
+-  MS-001.3 — Workflow Engine / późniejsze odniesienia do formalizacji procesu
+-  MS-001.4 — Release Readiness w jednej wersji roadmapy
+-  MS-001.5 — SPS OS 1.0 Release w skorygowanej sekwencji
+-  ENG-000
+-  ENG-000 v2 / v2.1
+-  SPS Session Bootstrap v2.0
+-  SPS Session Bootstrap v2.1
+-  PCL — Project Context Loader
+-  Chief Architect
+-  Control Files Rule
+-  Release Gate
+-  Architecture Retrospective
+-  🅿️ Parking
+-  SPS Brain
+-  SPS OS 1.0
+-  SPS OS 2.0
+10.  Open Questions / Unknowns
+-  Dokładny tytuł tej rozmowy: UNKNOWN.
+-  Formalny numer sesji SPS OS przypisany do tej rozmowy: UNKNOWN.
+-  Nie da się z samego widocznego źródła potwierdzić, czy każda deklarowana przez asystenta kontrola ZIP faktycznie obejmowała pełne techniczne porównanie zawartości.
+-  Nie jest jednoznacznie widoczne, czy wszystkie wcześniejsze milestone’y MS-000.5–MS-001.1 zostały commitowane i pushowane osobno, czy część zmian została skumulowana w późniejszym commicie.
+-  Widoczny końcowy branch to feature/documentation-foundation; nie ustalono w tej rozmowie, czy i kiedy zmiany zostały scalone do main.
+-  Nie ma widocznego finalnego commita/pusha po ostatnim cleanupie 04_ROADMAP.md, 08_CURRENT_STATE.md, 10_SESSION_STATE.md wykonanym po wykryciu niespójności przez kolejny PCL.
+-  Status formalnego zapisania SPS Session Bootstrap v2.1 jako pliku w repo: UNKNOWN; w źródle istnieje jako uzgodniony prompt, nie jako potwierdzony artefakt repo.
+-  Status formalnego zapisania ENG-000 v2.1 do dokumentacji: UNKNOWN.
+-  Nie ustalono, czy MS-001.2B został formalnie rozpoczęty po ostatnim cleanupie; widoczny stan docelowy to gotowość do startu.
+11.  Suggested Archive Treatment
+-  Czy tę rozmowę / fragment zapisać jako: historical session candidate
+-  Uzasadnienie: Źródło jest pełne i zawiera ciąg formalnej pracy SPS OS: bootstrap, PCL, milestone’y, decyzje architektoniczne, raporty Codexa, synchronizację dokumentacji, Git commit/push, procesowe korekty ENG-000 oraz przygotowanie nowego bootstrapu. Materiał ma wysoką wartość dla backfillu i historii ewolucji SPS OS.
+12.  Suggested Filenames If Archived
+-  Source report filename: 2026-09-04_SPS_OS_CONDUCTOR_ROADMAP_ENGINES_UI_FOUNDATION_WORKFLOW_HARDENING_SOURCE_REPORT.md
+-  Development log filename: NOT APPLICABLE
+-  Session summary filename: UNKNOWN
+-  Origin note filename: NOT APPLICABLE
+13.  Source Excerpts
+-  Użytkownik zdefiniował docelowe doświadczenie: „continue SPS development”.
+-  W toku prac ustalono: „Najpierw kończymy SPS OS 1.0. Dopiero później rozwijamy SPS 2.0.”
+-  Wprowadzono praktyczny przepływ: „PCL → Integrity Check → Chief Architect → Codex → Review → Documentation Sync → Milestone Closed”.
+-  Użytkownik zwrócił uwagę na błąd procesu: po akceptacji zadania powinien zawsze pojawić się prompt do Codexa na aktualizację plików kontrolnych przed ZIP-em.
+-  Finalnie sformułowano twardą regułę: nie przechodzić do git commit / git push / ZIP, dopóki Control Files Sync nie został wykonany i zaakceptowany.
+-  PCL wykrył później niejednoznaczność Current Milestone: None kontra Next Milestone, co spowodowało dodatkowy cleanup dokumentacji.
+-  Rozdzielono znaczenie roadmap:
+  - 04_ROADMAP.md = execution roadmap / milestone contracts / SSOT wykonawczy.
+  - 05_ROADMAP.md = roadmapa strategiczna produktu.
+14.  Backfill Use Recommendation
+-  Czy używać tego raportu w MS-032.0: YES
+-  Jak używać: Jako wysokiej jakości pełne źródło historyczne do odtworzenia przebiegu sesji dotyczącej wprowadzenia i praktycznego przetestowania Conductora, Roadmap Engine, Workspace/Project/Task/Knowledge foundations, Task Workspace Integration, UI Foundation oraz ewolucji ENG-000 i bootstrapu sesji. Szczególnie wartościowe są widoczne raporty Codexa, nazwy plików, milestone’y, commit 95ab9fc, potwierdzony push oraz wykryty procesowy problem z synchronizacją plików kontrolnych.
+-  Czego nie robić na podstawie tego raportu: Nie przypisywać tej rozmowie numeru sesji bez zewnętrznego dowodu. Nie zakładać merge do main. Nie uznawać SPS Session Bootstrap v2.1 ani ENG-000 v2.1 za zapisane formalnie w repo, dopóki nie potwierdzi tego inne źródło. Nie traktować wszystkich deklaracji asystenta o ZIP review jako niezależnego dowodu technicznego bez repo/commit evidence. Nie tworzyć na tej podstawie automatycznie gotowego development logu lub session summary bez dalszego procesu backfillu.
+===== ARCHIWALNY RAPORT SPS OS END =====
