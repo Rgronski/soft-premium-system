@@ -193,8 +193,62 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.27 - Project Map Canonical Write Action Gate Foundation
+Latest Completed Product Milestone: MS-031.28 - Project Map Canonical Write Approval Capture Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.28 - Project Map Canonical Write Approval Capture Foundation
+
+**Milestone**
+MS-031.28 - Project Map Canonical Write Approval Capture Foundation
+
+**Type**
+SPS OS / Project Map Canonical Write Approval Capture Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+LOCAL PATCH / NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+
+**Product Outcome**
+The Project Map canonical write action gate now includes a local-only Product Owner approval capture control. The control may capture browser-local planning intent when the preflight status is ready for future approval, but it does not persist approval, enable execution, create writer behavior, or write canonical `map.json`.
+
+**Approval Capture Boundary**
+The capture control is local UI state only. It is not a persisted approval record, not an execution approval, not a preflight PASS, and not a substitute for a separate future Product Owner-approved canonical write execution milestone.
+
+**Behavior**
+* when preflight is `READY_FOR_FUTURE_WRITE`, the local checkbox can be selected for planning intent only
+* when preflight is blocked, needs evidence, rejected, or unknown, the capture control remains unavailable or explicitly insufficient
+* the canonical write action gate remains disabled and non-executing in every state
+* copy states that no `map.json` write is performed now
+
+**Non-Goals**
+* no approval persistence
+* no canonical Project Map writer
+* no server-side write route
+* no filesystem writer helper
+* no executing write handler
+* no creation, overwrite, promotion, or modification of `map.json`
+* no creation or modification of Project Map runtime files
+* no Beauty Client PRO repository inspection or modification
+
+**Implementation Evidence**
+* `src/app/projects/[id]/project-map/page.tsx` adds the local-only approval capture checkbox inside the action gate
+* `src/app/projects/[id]/project-map/page.test.tsx` verifies local capture copy, selected local intent, blocked/needs-evidence insufficiency, and the disabled action gate
+* `src/lib/app-version.ts` records `APP_VERSION 1.0061` and `LAST_PUBLISHED_MS MS-031.28 - Project Map Canonical Write Approval Capture Foundation`
+* `src/components/app-version-badge.test.tsx` keeps the visible app-version marker aligned
+
+**Verification**
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed
+* no canonical Project Map runtime files were created or modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* local approval capture is intentionally non-persistent and disappears with normal browser/UI lifecycle
+* future execution still needs explicit persisted approval design, writer implementation, audit/recovery behavior, and canonical output validation in separate Product Owner-approved milestones
 
 ## MS-031.27 - Project Map Canonical Write Action Gate Foundation
 
@@ -205,13 +259,13 @@ MS-031.27 - Project Map Canonical Write Action Gate Foundation
 SPS OS / Project Map Canonical Write Action Gate Foundation
 
 **Status**
-COMPLETED / VERIFIED / ACCEPTED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Publication Status**
-LOCAL PATCH / NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Product Outcome**
 The Project Map page now shows a guarded, non-executing canonical write action gate near the preview/status area. The gate consumes the MS-031.26 preflight evaluator status and shows whether the future action is ready for future approval, blocked, needs evidence, rejected, or unknown while keeping the control disabled.

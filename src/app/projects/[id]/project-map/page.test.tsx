@@ -419,6 +419,18 @@ describe("ProjectMapPage", () => {
       ).disabled,
     ).toBe(true);
     expect(
+      (
+        screen.getByRole("checkbox", {
+          name: /Lokalne potwierdzenie niewystarczające/,
+        }) as HTMLInputElement
+      ).disabled,
+    ).toBe(true);
+    expect(
+      screen.getByText(
+        "Approval capture nie odblokowuje wykonania, gdy preflight wymaga evidence, i nie zapisuje map.json.",
+      ),
+    ).toBeTruthy();
+    expect(
       screen.getByText(
         "map.json teraz: absent / brak kanonicznego pliku",
       ),
@@ -821,5 +833,21 @@ describe("ProjectMapPage", () => {
         }) as HTMLButtonElement
       ).disabled,
     ).toBe(true);
+    const approvalCapture = screen.getByRole("checkbox", {
+      name: /Rozumiem: to tylko lokalne potwierdzenie gotowości/,
+    }) as HTMLInputElement;
+    expect(approvalCapture.disabled).toBe(false);
+    fireEvent.click(approvalCapture);
+    expect(approvalCapture.checked).toBe(true);
+    expect(
+      screen.getByText(
+        "Lokalna intencja Product Ownera może zostać zaznaczona tylko do planowania. Nadal nie zastępuje osobnego przyszłego milestone wykonania.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Intencja lokalna uchwycona do planowania, bez persistencji i bez zapisu map.json.",
+      ),
+    ).toBeTruthy();
   });
 });

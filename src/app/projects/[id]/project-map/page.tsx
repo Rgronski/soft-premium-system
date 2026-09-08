@@ -82,6 +82,9 @@ type ProjectMapCanonicalWriteActionGateCopy = {
   controlLabel: string;
   description: string;
   detail: string;
+  approvalCaptureLabel: string;
+  approvalCaptureStatus: string;
+  approvalCaptureDisabled: boolean;
 };
 
 const projectMapReviewDecisionOptions = [
@@ -747,6 +750,11 @@ function buildProjectMapCanonicalWriteActionGateCopy(
         "Preflight wygląda gotowo do planowania, ale wykonanie zapisu wymaga osobnego przyszłego milestone zatwierdzonego przez Product Ownera.",
       detail:
         "MS-031.27 pokazuje tylko bramkę akcji; nie zapisuje, nie tworzy i nie promuje map.json.",
+      approvalCaptureLabel:
+        "Rozumiem: to tylko lokalne potwierdzenie gotowości, bez zapisu map.json.",
+      approvalCaptureStatus:
+        "Lokalna intencja Product Ownera może zostać zaznaczona tylko do planowania. Nadal nie zastępuje osobnego przyszłego milestone wykonania.",
+      approvalCaptureDisabled: false,
     };
   }
 
@@ -760,6 +768,11 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       detail:
         evaluation.blockers[0] ??
         "MS-031.27 nie wykonuje zapisu map.json przy stanie rejected.",
+      approvalCaptureLabel:
+        "Lokalne potwierdzenie niedostępne: stan rejected blokuje planowanie zapisu.",
+      approvalCaptureStatus:
+        "Approval capture nie jest traktowany jako gotowość do wykonania i nie zapisuje map.json.",
+      approvalCaptureDisabled: true,
     };
   }
 
@@ -773,6 +786,11 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       detail:
         evaluation.reasons[0] ??
         "MS-031.27 nie wykonuje zapisu map.json przy stanie needs evidence.",
+      approvalCaptureLabel:
+        "Lokalne potwierdzenie niewystarczające: najpierw potrzeba evidence.",
+      approvalCaptureStatus:
+        "Approval capture nie odblokowuje wykonania, gdy preflight wymaga evidence, i nie zapisuje map.json.",
+      approvalCaptureDisabled: true,
     };
   }
 
@@ -787,6 +805,11 @@ function buildProjectMapCanonicalWriteActionGateCopy(
         evaluation.blockers[0] ??
         evaluation.reasons[0] ??
         "MS-031.27 nie wykonuje zapisu map.json przy stanie unknown.",
+      approvalCaptureLabel:
+        "Lokalne potwierdzenie niedostępne: stan unknown wymaga ustalenia faktów.",
+      approvalCaptureStatus:
+        "Approval capture nie zastępuje brakujących danych preflight i nie zapisuje map.json.",
+      approvalCaptureDisabled: true,
     };
   }
 
@@ -800,6 +823,11 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       evaluation.blockers[0] ??
       evaluation.reasons[0] ??
       "MS-031.27 nie wykonuje zapisu map.json przy stanie blocked.",
+    approvalCaptureLabel:
+      "Lokalne potwierdzenie niedostępne: blocked wymaga usunięcia blokady.",
+    approvalCaptureStatus:
+      "Approval capture nie odblokowuje wykonania przy stanie blocked i nie zapisuje map.json.",
+    approvalCaptureDisabled: true,
   };
 }
 
@@ -1474,6 +1502,33 @@ export default async function ProjectMapPage({
             {projectMapCanonicalWritePreviewCopy.actionGate.detail}
           </p>
         </div>
+
+        <label className="mt-4 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 rounded-lg border border-zinc-800 bg-zinc-900/60 px-3 py-2 text-sm text-zinc-200">
+          <input
+            type="checkbox"
+            name="project-map-canonical-write-approval-capture"
+            disabled={
+              projectMapCanonicalWritePreviewCopy.actionGate
+                .approvalCaptureDisabled
+            }
+            className="peer mt-1 h-4 w-4 shrink-0 accent-amber-400 disabled:cursor-not-allowed disabled:opacity-50"
+          />
+          <span>
+            {
+              projectMapCanonicalWritePreviewCopy.actionGate
+                .approvalCaptureLabel
+            }
+          </span>
+          <span className="col-start-2 hidden text-xs text-amber-200 peer-checked:block">
+            Intencja lokalna uchwycona do planowania, bez persistencji i bez zapisu map.json.
+          </span>
+          <span className="col-start-2 text-xs text-zinc-400">
+            {
+              projectMapCanonicalWritePreviewCopy.actionGate
+                .approvalCaptureStatus
+            }
+          </span>
+        </label>
       </section>
 
       {projectMapRefreshFeedbackCopy ? (

@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.28 Project Map Canonical Write Approval Capture Foundation
+
+### Date
+
+2026-09-09
+
+### Completed
+
+* Added a local-only Product Owner approval capture checkbox near the canonical write action gate.
+* Kept approval capture browser-local and non-persistent.
+* Kept the canonical write action gate disabled and non-executing after local capture.
+* Marked blocked and needs-evidence preflight states as unavailable or insufficient for approval capture.
+* Updated the app-version marker to `APP_VERSION 1.0061` and `LAST_PUBLISHED_MS MS-031.28 - Project Map Canonical Write Approval Capture Foundation`.
+
+### Evidence
+
+* Updated `src/app/projects/[id]/project-map/page.tsx`.
+* Updated `src/app/projects/[id]/project-map/page.test.tsx`.
+* Updated `src/lib/app-version.ts` and `src/components/app-version-badge.test.tsx`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Appended one estimated Session 099 usage record to `.usage/session.jsonl`.
+
+### Notes
+
+* This milestone is local UI approval-capture work only.
+* No approval persistence, writer route, writer helper, executing write handler, canonical Project Map runtime file write, or Beauty Client PRO modification was added.
+
 ## Session 099 - MS-031.27 Project Map Canonical Write Action Gate Foundation
 
 ### Date
