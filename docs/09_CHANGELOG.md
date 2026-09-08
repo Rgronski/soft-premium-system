@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.23 Project Map Canonical Write Preflight Contract Foundation
+
+### Date
+
+2026-09-09
+
+### Completed
+
+* Defined the MS-031.23 canonical write preflight contract without approving, implementing, or performing the write.
+* Recorded the preflight objective: confirm whether a future canonical Project Map write execution milestone may safely start.
+* Recorded required checks for candidate, source identity, storage path, approval gate state, write plan, visible weak or conflicting evidence, clean relevant workspace, and unambiguous ownership.
+* Recorded required outputs: `PASS`, `BLOCKED`, `NEEDS_EVIDENCE`, `REJECTED`, and `UNKNOWN`.
+* Recorded stop conditions and non-goals, including no file writes, no promotion, no runtime behavior, no UI/API/helper/write implementation, and no Beauty Client PRO repository modification or inspection.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Appended one estimated Session 099 usage record to `.usage/session.jsonl`.
+
+### Notes
+
+* This milestone is documentation-only preflight-contract work.
+* The actual canonical Project Map write remains a separate Product Owner-approved future milestone.
+
 ## Session 099 - MS-031.22 Project Map Canonical Write Plan Contract Foundation
 
 ### Date

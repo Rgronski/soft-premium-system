@@ -193,8 +193,80 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.22 - Project Map Canonical Write Plan Contract Foundation
+Latest Completed Product Milestone: MS-031.23 - Project Map Canonical Write Preflight Contract Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.23 - Project Map Canonical Write Preflight Contract Foundation
+
+**Milestone**
+MS-031.23 - Project Map Canonical Write Preflight Contract Foundation
+
+**Type**
+SPS OS / Project Map Canonical Write Preflight Contract Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Product Outcome**
+The Project Map canonical write preflight contract is now defined for a future canonical write execution milestone. The preflight determines whether it is safe to approach execution, but it does not approve, implement, create, write, overwrite, or promote canonical `map.json`.
+
+**Preflight Objective**
+Confirm whether a future canonical Project Map write execution milestone may safely start after the MS-031.20 decision contract, MS-031.21 approval gate, and MS-031.22 write plan contract are all in place.
+
+**Required Checks**
+* reviewed Project Map candidate exists
+* source identity is persisted
+* SPS OS-owned Project Map storage path is known
+* approval gate state is explicit
+* write plan exists
+* missing, weak, inferred, and conflicting evidence remains visible
+* repository state is clean when repository files are in scope for a later milestone
+* ownership boundary is unambiguous before any future write target is used
+
+**Required Outputs**
+* PASS
+* BLOCKED
+* NEEDS_EVIDENCE
+* REJECTED
+* UNKNOWN
+
+**Stop Conditions**
+* no reviewed candidate exists
+* source identity is missing or not persisted
+* target storage path is unknown
+* evidence conflict remains unresolved
+* approval is missing, not requested, needs evidence, blocked, or rejected
+* ownership of the future write target is ambiguous
+* relevant workspace is dirty when the future execution milestone requires a clean baseline
+* any planned action would modify Beauty Client PRO repository files
+
+**Non-Goals**
+* no file writes
+* no candidate promotion
+* no runtime behavior
+* no UI, API, helper, or write implementation
+* no Beauty Client PRO repository modification or inspection
+* no canonical Project Map runtime file creation or modification
+
+**Future Boundary**
+A later implementation milestone may consume the preflight result, but it must still be separately approved by the Product Owner. A PASS result only confirms that execution may be approached; it does not execute the write or convert candidate data into canonical Project Map data.
+
+**Implementation Evidence**
+* `docs/04_ROADMAP.md` records the MS-031.23 preflight contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` record the accepted preflight state
+* no source code or canonical Project Map runtime files were modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* canonical `map.json` remains absent until a separate approval-bound milestone writes or promotes it
+* future execution still needs explicit Product Owner approval after preflight
+* preflight implementation mechanics remain outside this documentation-only milestone
 
 ## MS-031.22 - Project Map Canonical Write Plan Contract Foundation
 
