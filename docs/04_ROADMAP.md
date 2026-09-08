@@ -193,8 +193,65 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.18 - Session Close Summary Artifact Contract Foundation
-Next Product Milestone Candidate: MS-031.20 - Project Map Canonical Write Decision Contract Foundation
+Latest Completed Product Milestone: MS-031.20 - Project Map Canonical Write Decision Contract Foundation
+Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.20 - Project Map Canonical Write Decision Contract Foundation
+
+**Milestone**
+MS-031.20 - Project Map Canonical Write Decision Contract Foundation
+
+**Type**
+SPS OS / Project Map Canonical Write Decision Contract Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Product Outcome**
+The Project Map canonical write decision contract is now explicit before any canonical `map.json` write or promotion. The decision owner is the Product Owner, and the decision subject is whether a reviewed Project Map candidate may proceed toward a future canonical write milestone. This milestone is contract-only and does not create, write, overwrite, or promote canonical Project Map runtime files.
+
+**Decision Preconditions**
+* a Project Map candidate exists
+* source identity is persisted
+* the storage path is known
+* missing, weak, inferred, or conflicting evidence is visible
+* review state is explicit
+* unavailable facts remain `UNKNOWN` instead of guessed
+
+**Allowed Decision States**
+* not requested
+* ready for decision
+* approved for future write milestone
+* rejected
+* needs evidence
+* blocked
+
+**Forbidden Behavior**
+* silent promotion from candidate Project Map data to canonical Project Map data
+* implicit approval from local review, readiness copy, or candidate presence
+* writing missing evidence as completed or accepted
+* modifying Beauty Client PRO repository files
+* creating, writing, overwriting, or promoting canonical `map.json` in this milestone
+
+**Future Boundary**
+An actual canonical Project Map write must be a separate Product Owner-approved milestone after this contract. Future implementation may only use an approved decision state as input; it must still keep candidate Project Map data separate from canonical Project Map data until the approved write milestone performs and verifies the write.
+
+**Implementation Evidence**
+* `docs/04_ROADMAP.md` records the MS-031.20 decision contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` record the accepted contract state
+* no source code or canonical Project Map runtime files were modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* canonical `map.json` remains absent until a separate approval-bound milestone writes or promotes it
+* the next implementation step remains Product Owner decision-bound
+* any future canonical write must preserve visible missing, weak, inferred, and conflicting evidence instead of treating it as complete
 
 ## MS-031.19 - Project Map Return State Reconciliation Foundation
 

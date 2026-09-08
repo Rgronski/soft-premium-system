@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.20 Project Map Canonical Write Decision Contract Foundation
+
+### Date
+
+2026-09-08
+
+### Completed
+
+* Activated MS-031.20 as the real next Project Map milestone after Product Owner confirmation.
+* Defined the Product Owner-owned decision contract for whether a reviewed Project Map candidate may proceed toward a future canonical write milestone.
+* Recorded required preconditions: candidate exists, source identity is persisted, storage path is known, missing / weak / inferred / conflicting evidence is visible, review state is explicit, and unavailable facts remain `UNKNOWN`.
+* Recorded allowed decision states: `not requested`, `ready for decision`, `approved for future write milestone`, `rejected`, `needs evidence`, and `blocked`.
+* Recorded forbidden behavior: silent promotion, implicit approval, writing missing evidence as completed, modifying Beauty Client PRO repository files, and creating or promoting canonical `map.json` in this milestone.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Appended one estimated Session 099 usage record to `.usage/session.jsonl`.
+
+### Notes
+
+* The actual canonical Project Map write remains a separate Product Owner-approved future milestone.
+* No source code, Beauty Client PRO repository files, or canonical Project Map runtime files were modified.
+
 ## Session 098 - MS-031.19 Project Map Return State Reconciliation Foundation
 
 ### Date

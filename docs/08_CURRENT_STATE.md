@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.19 - Project Map Return State Reconciliation Foundation
+  MS-031.20 - Project Map Canonical Write Decision Contract Foundation
+
+MS-031.20 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Canonical Write Decision Contract Foundation. The canonical write decision owner is the Product Owner, and the decision subject is whether a reviewed Project Map candidate may proceed toward a future canonical write milestone. Required preconditions are: a candidate exists, source identity is persisted, the storage path is known, missing / weak / inferred / conflicting evidence is visible, review state is explicit, and unavailable facts remain `UNKNOWN`. Allowed decision states are `not requested`, `ready for decision`, `approved for future write milestone`, `rejected`, `needs evidence`, and `blocked`. Silent promotion, implicit approval, writing missing evidence as completed, modifying Beauty Client PRO repository files, and creating or promoting canonical `map.json` are forbidden in this milestone. The actual canonical write remains a separate Product Owner-approved future milestone.
 
 MS-031.19 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Return State Reconciliation Foundation. The MS-032 historical/backfill block is complete for its approved scope, Project Map is the intended return track, and the latest accepted Project Map implementation milestone remains MS-031.16. MS-031.5 remains historical rejected / not accepted / needs fix. MS-031.6 is resolved as superseded / closed by later accepted Project Map milestones MS-031.8 through MS-031.16. Canonical `map.json` write or promotion remains out of scope, and the recommended next Project Map milestone candidate is MS-031.20 - Project Map Canonical Write Decision Contract Foundation.
 
@@ -90,7 +92,7 @@ MS-030.32 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local work
 MS-030.31 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map Parked Ideas Visibility Implementation Foundation. The Project Map UI now makes parked ideas visible under the relevant milestone or block when source evidence exists, keeps them labeled as parked or future context instead of active scope, and shows an explicit empty state when no parked-ideas evidence is available. Candidate and canonical separation from MS-030.30 remains intact, and Beauty Client PRO itself was not modified in this milestone.
 
 **Next Milestone**
-MS-031.20 - Project Map Canonical Write Decision Contract Foundation Candidate / Product Owner decision required
+UNKNOWN / Product Owner decision required
 
 MS-030.30 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map UI Canonical vs Candidate State Foundation. The Project Map UI now clearly distinguishes canonical Project Map state from reconstruction candidate state, shows when canonical data exists, when candidate data exists, and when canonical data is missing, and keeps candidate data visibly separate from any explicit canonical write boundary. Beauty Client PRO itself was not modified in this milestone.
 

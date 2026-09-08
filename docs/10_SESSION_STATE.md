@@ -325,27 +325,29 @@ Next Session Plan: Start Session 097 from the fresh `sps-session.zip` and contin
 SPS OS Session State
 
 Date: 2026-09-08
-Current Session ID: 098
-Current Chat Title: 098 SPS OS - MS-031.20 Project Map Canonical Write Decision Contract Foundation
-Next Session ID: 099
-Suggested Next Chat Title: 099 SPS OS - MS-031.20 Project Map Canonical Write Decision Contract Foundation
-Active Capability: Session Close Protocol
-Active Work Item: Session 098 close after MS-032 completion, MS-031.19 reconciliation, and MS-031.20 candidate selection
-Current Mode: CLOSED
-Completed Capability Items: Session 098 completed and published MS-032.19 Release Readiness Development Log Backfill, MS-032.20 Backfill Status Index Alignment, MS-032.22 through MS-032.26 remaining backfill path audits, MS-032.27 Historical Backfill Block Completion Audit, MS-031.19 Project Map Return State Reconciliation Foundation, and MS-031.20 next-session Project Map candidate selection.
+Current Session ID: 099
+Current Chat Title: 099 SPS OS - MS-031.20 Project Map Canonical Write Decision Contract Foundation
+Next Session ID: UNKNOWN
+Suggested Next Chat Title: UNKNOWN
+Active Capability: Project Map Canonical Write Decision Contract
+Active Work Item: MS-031.20 Project Map Canonical Write Decision Contract Foundation
+Current Mode: ACTIVE
+Completed Capability Items: MS-031.20 defines the Product Owner-owned canonical write decision contract before any canonical Project Map `map.json` write or promotion.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.18 - Session Close Summary Artifact Contract Foundation
-Next Product Milestone: MS-031.20 - Project Map Canonical Write Decision Contract Foundation Candidate / Product Owner decision required
+Latest Completed Product Milestone: MS-031.20 - Project Map Canonical Write Decision Contract Foundation
+Next Product Milestone: UNKNOWN / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 098 completed the MS-032 historical/backfill block, reconciled Project Map return state, and selected MS-031.20 as the next Project Map candidate
+Latest Completed Capability Item: MS-031.20 Project Map canonical write decision contract defined and accepted as documentation-only boundary work
 Current Sprint: NONE
-Platform Priority: Return to Project Map / main SPS OS product work only after a separate Product Owner decision selects the next real Project Map milestone.
+Platform Priority: Preserve Project Map candidate/canonical separation until a separate Product Owner-approved future milestone performs any canonical write.
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: MODIFIED / documentation-only after MS-031.20 patch
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 24a76cf
+Latest Verified Commit: 6aa6ba8
 Verification Status: PASS
 Blockers: NONE
-Open Risks: Canonical `map.json` write or promotion remains approval-bound and must not start without a separate Product Owner-approved milestone.
-Next Safe Step: Start Session 099 from the fresh `sps-session.zip` and run `SPS OS — START` with MS-031.20 as the candidate Project Map contract milestone only after Product Owner confirmation.
-Next Session Plan: Start Session 099 from a fresh package, keep Current Product Milestone at `NONE / Product Owner decision required` until MS-031.20 is explicitly activated, and define the Project Map canonical write decision contract before any canonical `map.json` write or promotion.
+Open Risks: Canonical `map.json` write or promotion remains approval-bound and must not start without a separate Product Owner-approved future milestone.
+Next Safe Step: Product Owner decides whether to approve a separate future canonical Project Map write milestone using the MS-031.20 decision contract.
+Next Session Plan: UNKNOWN
+
+MS-031.20 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Canonical Write Decision Contract Foundation. The decision owner is the Product Owner. The decision subject is whether a reviewed Project Map candidate may proceed toward a future canonical write milestone. Required preconditions are: candidate exists, source identity is persisted, storage path is known, missing / weak / inferred / conflicting evidence is visible, review state is explicit, and unavailable facts remain `UNKNOWN`. Allowed decision states are `not requested`, `ready for decision`, `approved for future write milestone`, `rejected`, `needs evidence`, and `blocked`. Silent promotion, implicit approval, writing missing evidence as completed, modifying Beauty Client PRO repository files, and creating or promoting canonical `map.json` are forbidden. Actual canonical write remains a separate Product Owner-approved future milestone. No source code, Beauty Client PRO repository files, or canonical Project Map runtime files were modified in this milestone.
