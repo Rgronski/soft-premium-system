@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.24 Project Map Canonical Write Execution Boundary Foundation
+
+### Date
+
+2026-09-09
+
+### Completed
+
+* Defined the MS-031.24 canonical write execution boundary without approving, implementing, or performing the write.
+* Recorded the required entry condition: MS-031.23 preflight result must be `PASS`, and Product Owner must separately approve the future execution milestone.
+* Recorded the required input bundle for later writer execution: reviewed candidate, persisted source identity, approval gate state, write plan, PASS preflight result, visible evidence risks, and Product Owner decision for unsupported evidence promotion.
+* Recorded the allowed future operation as canonical Project Map artifact creation/write only inside the SPS OS-owned Project Map storage boundary.
+* Recorded forbidden future operations, required future output bundle, stop boundary, non-goals, and the separate future implementation boundary.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Appended one estimated Session 099 usage record to `.usage/session.jsonl`.
+
+### Notes
+
+* This milestone is documentation-only execution-boundary work.
+* The actual canonical Project Map writer remains a separate Product Owner-approved future implementation milestone.
+
 ## Session 099 - MS-031.23 Project Map Canonical Write Preflight Contract Foundation
 
 ### Date

@@ -193,8 +193,85 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.23 - Project Map Canonical Write Preflight Contract Foundation
+Latest Completed Product Milestone: MS-031.24 - Project Map Canonical Write Execution Boundary Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.24 - Project Map Canonical Write Execution Boundary Foundation
+
+**Milestone**
+MS-031.24 - Project Map Canonical Write Execution Boundary Foundation
+
+**Type**
+SPS OS / Project Map Canonical Write Execution Boundary Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Product Outcome**
+The Project Map canonical write execution boundary is now defined for a later implementation milestone. The boundary describes the allowed envelope for future writer execution, but this milestone does not approve, implement, create, write, overwrite, or promote canonical `map.json`.
+
+**Execution Boundary Objective**
+Define when a later canonical write implementation milestone may start writer execution, what input bundle it must receive, which storage boundary it may use, and which actions remain forbidden even during execution.
+
+**Required Entry Condition**
+MS-031.23 preflight result must be `PASS`, and the Product Owner must separately approve the future execution milestone. A passing preflight without separate Product Owner execution approval is not enough to run a writer.
+
+**Required Input Bundle**
+* reviewed Project Map candidate
+* persisted source identity
+* explicit approval gate state from MS-031.21
+* write plan from MS-031.22
+* PASS preflight result from MS-031.23
+* visible missing, weak, inferred, conflicting, or otherwise risky evidence
+* explicit Product Owner decision for any candidate evidence promotion that lacks direct support
+
+**Allowed Future Operation**
+A later approved implementation milestone may create or write canonical Project Map artifacts only inside the SPS OS-owned Project Map storage boundary for the project. The future writer must keep the Beauty Client PRO repository outside the write target.
+
+**Forbidden Future Operation**
+* modifying Beauty Client PRO repository files
+* silently promoting candidate data to canonical Project Map data
+* writing missing evidence as completed or `check`
+* overwriting canonical Project Map data without an audit or recovery path
+* bypassing Product Owner approval
+* using local review controls, readiness copy, candidate presence, or source identity persistence as implicit approval
+
+**Required Output Bundle For Later Implementation**
+* canonical Project Map artifact
+* source evidence sidecar as defined by existing Project Map storage contracts
+* audit or event evidence as defined by existing Project Map storage contracts
+* explicit result status for written, blocked, failed, skipped, or unknown outcome
+* visible record of the candidate, approval, preflight, and write plan used by the writer
+
+**Stop Boundary**
+If any required input is missing, unknown, rejected, blocked, insufficient, or conflicting, later execution must stop before any file write. Execution must also stop before writing if the operation would modify Beauty Client PRO repository files or leave missing / weak / inferred / conflicting evidence hidden.
+
+**Non-Goals**
+* no source code changes
+* no runtime behavior
+* no UI, API, helper, writer, or filesystem implementation
+* no actual file write, creation, overwrite, or promotion in MS-031.24
+* no Beauty Client PRO repository inspection or modification
+
+**Future Boundary**
+The actual canonical Project Map writer remains a separate future implementation milestone. That milestone must cite this execution boundary, restate Product Owner approval, consume a PASS preflight result, and verify the output bundle before treating any canonical Project Map artifact as written.
+
+**Implementation Evidence**
+* `docs/04_ROADMAP.md` records the MS-031.24 execution boundary contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` record the accepted execution boundary state
+* no source code or canonical Project Map runtime files were modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* canonical `map.json` remains absent until a separate approval-bound implementation milestone writes or promotes it
+* future writer implementation, validation mechanics, and recovery mechanics remain outside this documentation-only milestone
+* Product Owner still must explicitly approve any future canonical write execution milestone
 
 ## MS-031.23 - Project Map Canonical Write Preflight Contract Foundation
 
