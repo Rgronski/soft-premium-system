@@ -193,7 +193,7 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.19 - Project Map Return State Reconciliation Foundation
+Latest Completed Product Milestone: MS-031.18 - Session Close Summary Artifact Contract Foundation
 Next Product Milestone Candidate: MS-031.20 - Project Map Canonical Write Decision Contract Foundation
 
 ## MS-031.19 - Project Map Return State Reconciliation Foundation
