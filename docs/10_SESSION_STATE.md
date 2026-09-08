@@ -327,25 +327,25 @@ SPS OS Session State
 Date: 2026-09-08
 Current Session ID: 098
 Current Chat Title: 098 SPS OS - MS-031.20 Project Map Canonical Write Decision Contract Foundation
-Next Session ID: UNKNOWN
+Next Session ID: 099
 Suggested Next Chat Title: 099 SPS OS - MS-031.20 Project Map Canonical Write Decision Contract Foundation
-Active Capability: Project Map Next Candidate Selection
-Active Work Item: MS-031.20 Project Map canonical write decision contract candidate selection for next session
-Current Mode: ACTIVE
-Completed Capability Items: Session 098 completed MS-032.19 through MS-032.27, published the MS-032 historical/backfill block completion audit, reconciled the Project Map return state for MS-031.19, and recorded MS-031.20 as the recommended next Project Map milestone candidate.
+Active Capability: Session Close Protocol
+Active Work Item: Session 098 close after MS-032 completion, MS-031.19 reconciliation, and MS-031.20 candidate selection
+Current Mode: CLOSED
+Completed Capability Items: Session 098 completed and published MS-032.19 Release Readiness Development Log Backfill, MS-032.20 Backfill Status Index Alignment, MS-032.22 through MS-032.26 remaining backfill path audits, MS-032.27 Historical Backfill Block Completion Audit, MS-031.19 Project Map Return State Reconciliation Foundation, and MS-031.20 next-session Project Map candidate selection.
 Current Product Milestone: NONE / Product Owner decision required
 Latest Completed Product Milestone: MS-031.19 - Project Map Return State Reconciliation Foundation
 Next Product Milestone: MS-031.20 - Project Map Canonical Write Decision Contract Foundation Candidate / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: Session 098 recorded MS-031.20 as the next Project Map milestone candidate
+Latest Completed Capability Item: Session 098 completed the MS-032 historical/backfill block, reconciled Project Map return state, and selected MS-031.20 as the next Project Map candidate
 Current Sprint: NONE
 Platform Priority: Return to Project Map / main SPS OS product work only after a separate Product Owner decision selects the next real Project Map milestone.
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 27acd6a
+Latest Verified Commit: 24a76cf
 Verification Status: PASS
 Blockers: NONE
 Open Risks: Canonical `map.json` write or promotion remains approval-bound and must not start without a separate Product Owner-approved milestone.
-Next Safe Step: Close Session 098, then start Session 099 with MS-031.20 as the candidate contract milestone only after Product Owner confirmation.
+Next Safe Step: Start Session 099 from the fresh `sps-session.zip` and run `SPS OS — START` with MS-031.20 as the candidate Project Map contract milestone only after Product Owner confirmation.
 Next Session Plan: Start Session 099 from a fresh package, keep Current Product Milestone at `NONE / Product Owner decision required` until MS-031.20 is explicitly activated, and define the Project Map canonical write decision contract before any canonical `map.json` write or promotion.
