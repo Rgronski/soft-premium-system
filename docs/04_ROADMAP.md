@@ -193,8 +193,74 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.20 - Project Map Canonical Write Decision Contract Foundation
+Latest Completed Product Milestone: MS-031.21 - Project Map Canonical Write Approval Gate Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.21 - Project Map Canonical Write Approval Gate Foundation
+
+**Milestone**
+MS-031.21 - Project Map Canonical Write Approval Gate Foundation
+
+**Type**
+SPS OS / Project Map Canonical Write Approval Gate Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Product Outcome**
+The Project Map canonical write approval gate is now defined as the smallest safe milestone after MS-031.20. The gate turns the MS-031.20 decision contract into a future pre-write approval boundary, but it remains documentation-only and does not create, write, overwrite, or promote canonical `map.json`.
+
+**Gate Inputs**
+* MS-031.20 decision contract is accepted
+* a reviewed Project Map candidate exists
+* source identity is persisted
+* storage path is known
+* missing, weak, inferred, and conflicting evidence remains visible
+* review state is explicit
+* Product Owner decision state is explicit
+
+**Gate Output States**
+* not requested
+* ready for Product Owner approval
+* approved for separate canonical write milestone
+* rejected
+* needs evidence
+* blocked
+
+**Approval Rules**
+* only the Product Owner may move the gate to `approved for separate canonical write milestone`
+* readiness copy, candidate presence, local review controls, or source identity persistence cannot imply approval
+* `needs evidence` or `blocked` prevents any future canonical write milestone from starting
+* unknown evidence remains `UNKNOWN` and cannot be converted into completed evidence by this gate
+* an approved gate allows planning a separate future write milestone only; it does not execute the write
+
+**Forbidden Behavior**
+* writing, creating, overwriting, or promoting canonical `map.json`
+* modifying canonical Project Map runtime files
+* modifying source code or product configuration
+* modifying Beauty Client PRO repository files
+* treating candidate Project Map data as canonical Project Map data
+* treating missing, weak, inferred, or conflicting evidence as complete
+
+**Future Boundary**
+The actual canonical Project Map write remains a separate Product Owner-approved milestone after this gate. That future milestone must name the write target, preserve candidate/canonical separation until write verification, and keep missing or insufficient evidence visible instead of silently completing it.
+
+**Implementation Evidence**
+* `docs/04_ROADMAP.md` records the MS-031.21 approval gate contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` record the accepted gate state
+* no source code or canonical Project Map runtime files were modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* canonical `map.json` remains absent until a separate approval-bound milestone writes or promotes it
+* Product Owner still must explicitly approve any future canonical write milestone
+* the exact future write target and verification procedure remain outside this milestone
 
 ## MS-031.20 - Project Map Canonical Write Decision Contract Foundation
 

@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.21 Project Map Canonical Write Approval Gate Foundation
+
+### Date
+
+2026-09-08
+
+### Completed
+
+* Diagnosed MS-031.21 as the smallest safe next Project Map milestone after MS-031.20.
+* Defined the Product Owner approval gate that may allow planning a separate future canonical write milestone without executing the write.
+* Recorded gate inputs: accepted MS-031.20 contract, reviewed candidate, persisted source identity, known storage path, visible missing / weak / inferred / conflicting evidence, explicit review state, and explicit Product Owner decision state.
+* Recorded gate output states: `not requested`, `ready for Product Owner approval`, `approved for separate canonical write milestone`, `rejected`, `needs evidence`, and `blocked`.
+* Preserved the prohibition on writing or promoting canonical `map.json`, modifying canonical Project Map runtime files, modifying product code/configuration, or modifying Beauty Client PRO repository files.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Appended one estimated Session 099 usage record to `.usage/session.jsonl`.
+
+### Notes
+
+* This milestone is documentation-only approval-gate work.
+* The actual canonical Project Map write remains a separate Product Owner-approved future milestone.
+
 ## Session 099 - MS-031.20 Project Map Canonical Write Decision Contract Foundation
 
 ### Date
