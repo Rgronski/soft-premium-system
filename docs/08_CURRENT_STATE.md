@@ -47,17 +47,17 @@ NONE / Product Owner decision required
 **Latest Completed Milestone**
   MS-031.19 - Project Map Return State Reconciliation Foundation
 
-MS-031.19 is COMPLETED / VERIFIED / PENDING PUBLICATION in the current local workspace as the Project Map Return State Reconciliation Foundation. The MS-032 historical/backfill block is complete for its approved scope, Project Map is the intended return track, and the latest accepted Project Map implementation milestone remains MS-031.16. MS-031.5 remains historical rejected / not accepted / needs fix. MS-031.6 is resolved as superseded / closed by later accepted Project Map milestones MS-031.8 through MS-031.16. Canonical `map.json` write or promotion remains out of scope, and the next real Project Map product step requires a separate Product Owner decision.
+MS-031.19 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Return State Reconciliation Foundation. The MS-032 historical/backfill block is complete for its approved scope, Project Map is the intended return track, and the latest accepted Project Map implementation milestone remains MS-031.16. MS-031.5 remains historical rejected / not accepted / needs fix. MS-031.6 is resolved as superseded / closed by later accepted Project Map milestones MS-031.8 through MS-031.16. Canonical `map.json` write or promotion remains out of scope, and the recommended next Project Map milestone candidate is MS-031.20 - Project Map Canonical Write Decision Contract Foundation.
 
 MS-031.18 is PUBLISHED / CLOSED in the current local workspace as the Session Close Summary Artifact Contract Foundation. The Session Close protocol now requires a concise session summary artifact for every completed close. The summary is a factual continuity and quick-recap artifact that sits alongside the richer development log, uses `UNKNOWN` when data is unavailable, keeps the summary separate from the IP/R&D/evidence log, and preserves the session close boundary as documentation rather than runtime behavior. The required summary sections now cover Session Identity, Session Title, Session Summary, Completed Work, Published Milestones, Decisions, Fixes / Incidents, Parked Ideas / Deferred Work, Risks / Open Questions, Final APP version, Final HEAD, Package path, Suggested Next Chat Title, and Next Session Candidate. Beauty Client PRO itself was not modified in this milestone.
 
 MS-031.13 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Next Step Selection Foundation. The Project Map candidate view now includes a compact read-only next-step selection block headed `Wybierz następny krok` so the next action stays explicit after reviewing the robocza mapa. The block exposes the local options `Uzupełnij braki`, `Przygotuj akceptację kierunku`, and `Odłóż mapę`, states that it is only a local choice and does not write `map.json` or publish the map, and keeps the candidate/read-only boundary explicit. Focused test coverage and the TypeScript check both passed, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 
 **Publication Status**
-PENDING PUBLICATION
+PUBLISHED / CLOSED
 
 **Milestone Status**
-COMPLETED / VERIFIED / PENDING PUBLICATION
+COMPLETED / VERIFIED / PUBLISHED / CLOSED
 
 MS-031.12 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Missing Inputs Clarification Foundation. The Project Map candidate missing-inputs area now shows concrete Polish-first labels instead of only verbose raw reasons. The mapper preserves the underlying candidate truth, keeps original detail text where helpful, and keeps the candidate/read-only boundary explicit. Focused test coverage locks the new First Layout label, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 
@@ -90,7 +90,7 @@ MS-030.32 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local work
 MS-030.31 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map Parked Ideas Visibility Implementation Foundation. The Project Map UI now makes parked ideas visible under the relevant milestone or block when source evidence exists, keeps them labeled as parked or future context instead of active scope, and shows an explicit empty state when no parked-ideas evidence is available. Candidate and canonical separation from MS-030.30 remains intact, and Beauty Client PRO itself was not modified in this milestone.
 
 **Next Milestone**
-NONE / Product Owner decision required
+MS-031.20 - Project Map Canonical Write Decision Contract Foundation Candidate / Product Owner decision required
 
 MS-030.30 is COMPLETED / VERIFIED / PUBLISHED / CLOSED in the current local workspace as the Project Map UI Canonical vs Candidate State Foundation. The Project Map UI now clearly distinguishes canonical Project Map state from reconstruction candidate state, shows when canonical data exists, when candidate data exists, and when canonical data is missing, and keeps candidate data visibly separate from any explicit canonical write boundary. Beauty Client PRO itself was not modified in this milestone.
 

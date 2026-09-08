@@ -194,6 +194,7 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 Latest Completed Product Milestone: MS-031.19 - Project Map Return State Reconciliation Foundation
+Next Product Milestone Candidate: MS-031.20 - Project Map Canonical Write Decision Contract Foundation
 
 ## MS-031.19 - Project Map Return State Reconciliation Foundation
 
@@ -204,13 +205,13 @@ MS-031.19 - Project Map Return State Reconciliation Foundation
 SPS OS / Project Map Return State Reconciliation Foundation
 
 **Status**
-COMPLETED / VERIFIED / PENDING PUBLICATION
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Publication Status**
-PENDING
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / PENDING PUBLICATION
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Product Outcome**
 The Project Map return state is reconciled after the MS-032 historical/backfill block. MS-032 is complete for its approved historical/backfill scope, Project Map is the intended return track, and the latest accepted Project Map implementation milestone remains `MS-031.16 - Project Map Candidate Review Local Selection Foundation`.
@@ -225,6 +226,7 @@ The Project Map return state is reconciled after the MS-032 historical/backfill 
 
 **Residual Risk**
 * the next real Project Map product step still requires a separate Product Owner decision
+* the recommended next candidate is `MS-031.20 - Project Map Canonical Write Decision Contract Foundation`
 * canonical `map.json` remains absent until a separate approval-bound milestone writes or promotes it
 * Beauty Client PRO itself was not modified in this milestone
 
