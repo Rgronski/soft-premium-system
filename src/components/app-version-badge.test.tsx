@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0059");
+    expect(APP_VERSION).toBe("1.0060");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-031.26 - Project Map Canonical Write Preflight Evaluator Foundation",
+      "MS-031.27 - Project Map Canonical Write Action Gate Foundation",
     );
   });
 });

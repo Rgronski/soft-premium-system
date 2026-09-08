@@ -13,6 +13,7 @@ import {
 import { scanProjectMapEvidence } from "@/lib/project-map/scan";
 import {
   evaluateProjectMapCanonicalWritePreflight,
+  type ProjectMapCanonicalWritePreflightEvaluation,
   type ProjectMapCanonicalWritePreflightStatus,
 } from "@/lib/project-map/canonical-write-preflight";
 import {
@@ -72,6 +73,15 @@ type ProjectMapCanonicalWritePreviewCopy = {
   status: ProjectMapCanonicalWritePreflightStatus;
   description: string;
   details: string[];
+  actionGate: ProjectMapCanonicalWriteActionGateCopy;
+};
+
+type ProjectMapCanonicalWriteActionGateCopy = {
+  title: string;
+  actionState: string;
+  controlLabel: string;
+  description: string;
+  detail: string;
 };
 
 const projectMapReviewDecisionOptions = [
@@ -700,6 +710,9 @@ function buildProjectMapCanonicalWritePreviewCopy(
     sourceIdentityPersistenceStatus:
       mapReadResult?.projectSourceIdentityPersistence?.status ?? null,
   });
+  const actionGate = buildProjectMapCanonicalWriteActionGateCopy(
+    preflightEvaluation,
+  );
 
   return {
     title: "Preview status zapisu kanonicznego",
@@ -718,6 +731,75 @@ function buildProjectMapCanonicalWritePreviewCopy(
       "Planowanie przyszłego zapisu wymaga PASS preflight i osobnej zgody Product Ownera.",
       "Ten milestone nie zapisuje, nie tworzy i nie promuje map.json.",
     ],
+    actionGate,
+  };
+}
+
+function buildProjectMapCanonicalWriteActionGateCopy(
+  evaluation: ProjectMapCanonicalWritePreflightEvaluation,
+): ProjectMapCanonicalWriteActionGateCopy {
+  if (evaluation.status === "READY_FOR_FUTURE_WRITE") {
+    return {
+      title: "Bramka akcji zapisu kanonicznego",
+      actionState: "ready for future approval",
+      controlLabel: "Gotowe do osobnej zgody Product Ownera",
+      description:
+        "Preflight wygląda gotowo do planowania, ale wykonanie zapisu wymaga osobnego przyszłego milestone zatwierdzonego przez Product Ownera.",
+      detail:
+        "MS-031.27 pokazuje tylko bramkę akcji; nie zapisuje, nie tworzy i nie promuje map.json.",
+    };
+  }
+
+  if (evaluation.status === "REJECTED") {
+    return {
+      title: "Bramka akcji zapisu kanonicznego",
+      actionState: "rejected",
+      controlLabel: "Akcja odrzucona",
+      description:
+        "Przyszły zapis kanoniczny jest odrzucony przez jawny stan review i nie może być uruchomiony.",
+      detail:
+        evaluation.blockers[0] ??
+        "MS-031.27 nie wykonuje zapisu map.json przy stanie rejected.",
+    };
+  }
+
+  if (evaluation.status === "NEEDS_EVIDENCE") {
+    return {
+      title: "Bramka akcji zapisu kanonicznego",
+      actionState: "needs evidence",
+      controlLabel: "Akcja niedostępna - potrzeba evidence",
+      description:
+        "Przyszły zapis kanoniczny wymaga uzupełnienia lub rozstrzygnięcia evidence przed osobną zgodą.",
+      detail:
+        evaluation.reasons[0] ??
+        "MS-031.27 nie wykonuje zapisu map.json przy stanie needs evidence.",
+    };
+  }
+
+  if (evaluation.status === "UNKNOWN") {
+    return {
+      title: "Bramka akcji zapisu kanonicznego",
+      actionState: "unknown",
+      controlLabel: "Akcja niedostępna - stan unknown",
+      description:
+        "Przyszły zapis kanoniczny nie może być planowany, bo brakuje wymaganych faktów preflight.",
+      detail:
+        evaluation.blockers[0] ??
+        evaluation.reasons[0] ??
+        "MS-031.27 nie wykonuje zapisu map.json przy stanie unknown.",
+    };
+  }
+
+  return {
+    title: "Bramka akcji zapisu kanonicznego",
+    actionState: "blocked",
+    controlLabel: "Akcja niedostępna - blocked",
+    description:
+      "Przyszły zapis kanoniczny jest zablokowany do czasu usunięcia blokady i osobnej zgody Product Ownera.",
+    detail:
+      evaluation.blockers[0] ??
+      evaluation.reasons[0] ??
+      "MS-031.27 nie wykonuje zapisu map.json przy stanie blocked.",
   };
 }
 
@@ -1358,6 +1440,40 @@ export default async function ProjectMapPage({
             </li>
           ))}
         </ul>
+      </section>
+
+      <section
+        id="project-map-canonical-write-action-gate"
+        className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
+      >
+        <div className="space-y-1">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">
+            Bramka akcji
+          </p>
+          <h3 className="text-xl font-semibold text-zinc-50">
+            {projectMapCanonicalWritePreviewCopy.actionGate.title}
+          </h3>
+          <p className="text-sm text-zinc-300">
+            Status akcji: {projectMapCanonicalWritePreviewCopy.actionGate.actionState}
+          </p>
+          <p className="text-sm text-zinc-400">
+            {projectMapCanonicalWritePreviewCopy.actionGate.description}
+          </p>
+        </div>
+
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <button
+            type="button"
+            disabled
+            aria-disabled="true"
+            className="inline-flex cursor-not-allowed items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 px-4 py-2 text-sm font-medium text-zinc-400"
+          >
+            {projectMapCanonicalWritePreviewCopy.actionGate.controlLabel}
+          </button>
+          <p className="text-sm text-zinc-400">
+            {projectMapCanonicalWritePreviewCopy.actionGate.detail}
+          </p>
+        </div>
       </section>
 
       {projectMapRefreshFeedbackCopy ? (

@@ -193,8 +193,65 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.26 - Project Map Canonical Write Preflight Evaluator Foundation
+Latest Completed Product Milestone: MS-031.27 - Project Map Canonical Write Action Gate Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.27 - Project Map Canonical Write Action Gate Foundation
+
+**Milestone**
+MS-031.27 - Project Map Canonical Write Action Gate Foundation
+
+**Type**
+SPS OS / Project Map Canonical Write Action Gate Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+LOCAL PATCH / NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+
+**Product Outcome**
+The Project Map page now shows a guarded, non-executing canonical write action gate near the preview/status area. The gate consumes the MS-031.26 preflight evaluator status and shows whether the future action is ready for future approval, blocked, needs evidence, rejected, or unknown while keeping the control disabled.
+
+**Action Gate Boundary**
+The action gate is a UI/status boundary only. It does not create a write route, writer helper, filesystem write behavior, or executable canonical write action. A `READY_FOR_FUTURE_WRITE` preflight status still requires a separate future Product Owner-approved execution milestone before any canonical write can run.
+
+**Visible States**
+* ready for future approval
+* blocked
+* needs evidence
+* rejected
+* unknown
+
+**Non-Executing Control**
+The rendered control is disabled and has no write handler, href, server action, or route target. It explains compactly in Polish why no write happens now and shows the top blocker or reason when the preflight status is not ready.
+
+**Non-Goals**
+* no canonical Project Map writer
+* no server-side write route
+* no filesystem writer helper
+* no write button that can execute a write
+* no creation, overwrite, promotion, or modification of `map.json`
+* no creation or modification of Project Map runtime files
+* no Beauty Client PRO repository inspection or modification
+
+**Implementation Evidence**
+* `src/app/projects/[id]/project-map/page.tsx` adds the disabled action gate section
+* `src/app/projects/[id]/project-map/page.test.tsx` verifies ready, needs-evidence, and blocked action states remain non-executing
+* `src/lib/app-version.ts` records `APP_VERSION 1.0060` and `LAST_PUBLISHED_MS MS-031.27 - Project Map Canonical Write Action Gate Foundation`
+* `src/components/app-version-badge.test.tsx` keeps the visible app-version marker aligned
+
+**Verification**
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed
+* no canonical Project Map runtime files were created or modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* the action gate is intentionally non-executing until a separate Product Owner-approved milestone authorizes writer implementation
+* future execution still needs explicit approval, route/helper design, audit/recovery behavior, and canonical output validation
 
 ## MS-031.26 - Project Map Canonical Write Preflight Evaluator Foundation
 
@@ -205,13 +262,13 @@ MS-031.26 - Project Map Canonical Write Preflight Evaluator Foundation
 SPS OS / Project Map Canonical Write Preflight Evaluator Foundation
 
 **Status**
-COMPLETED / VERIFIED / ACCEPTED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Publication Status**
-LOCAL PATCH / NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Product Outcome**
 The Project Map canonical write preview now uses a small non-writing preflight evaluator for future canonical write planning status. The evaluator returns a status, compact reasons, blockers, and evidence-risk count from existing read-only inputs without creating writer behavior, routes, buttons, or Project Map runtime files.

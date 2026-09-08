@@ -236,6 +236,26 @@ function buildUnavailableCandidate() {
   };
 }
 
+function buildReadyCandidate() {
+  return {
+    status: "available" as const,
+    projectId: "project-1",
+    projectName: "Alpha Workspace",
+    sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace",
+    foundationChecklist: [
+      {
+        foundationArea: "Project Identity",
+        status: "completed",
+        supportState: "confirmed",
+        conflictState: "none",
+        milestoneStates: ["completed"],
+        evidence: [],
+      },
+    ],
+    evidence: [],
+  };
+}
+
 describe("ProjectMapPage", () => {
   beforeEach(() => {
     accessMock.mockReset();
@@ -389,6 +409,15 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Preview status zapisu kanonicznego")).toBeTruthy();
     expect(screen.getByRole("heading", { name: "NEEDS_EVIDENCE" })).toBeTruthy();
     expect(screen.getByText("Status preview: NEEDS_EVIDENCE")).toBeTruthy();
+    expect(screen.getByText("Bramka akcji zapisu kanonicznego")).toBeTruthy();
+    expect(screen.getByText("Status akcji: needs evidence")).toBeTruthy();
+    expect(
+      (
+        screen.getByRole("button", {
+          name: "Akcja niedostępna - potrzeba evidence",
+        }) as HTMLButtonElement
+      ).disabled,
+    ).toBe(true);
     expect(
       screen.getByText(
         "map.json teraz: absent / brak kanonicznego pliku",
@@ -744,6 +773,14 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Gotowość do zapisu kanonicznego")).toBeTruthy();
     expect(screen.getByText("Robocza mapa: brak gotowego kandydata")).toBeTruthy();
     expect(screen.getByText("Status preview: BLOCKED")).toBeTruthy();
+    expect(screen.getByText("Status akcji: blocked")).toBeTruthy();
+    expect(
+      (
+        screen.getByRole("button", {
+          name: "Akcja niedostępna - blocked",
+        }) as HTMLButtonElement
+      ).disabled,
+    ).toBe(true);
     expect(
       screen.getByText("Co byłoby zapisane później: UNKNOWN - brak gotowego kandydata"),
     ).toBeTruthy();
@@ -757,5 +794,32 @@ describe("ProjectMapPage", () => {
     expect((nextPrzygotujChoice as HTMLInputElement).checked).toBe(true);
     expect(screen.getAllByText("Następny krok").length).toBeGreaterThanOrEqual(2);
     expect(screen.getByText("Co robimy dalej po tej ocenie?")).toBeTruthy();
+  });
+
+  test("keeps the canonical write action disabled even when preflight is ready", async () => {
+    buildProjectMapReconstructionCandidateMock.mockReturnValueOnce(
+      buildReadyCandidate(),
+    );
+
+    render(
+      await ProjectMapPage({
+        params: Promise.resolve({ id: "project-1" }),
+      }),
+    );
+
+    expect(screen.getByText("Status preview: READY_FOR_FUTURE_WRITE")).toBeTruthy();
+    expect(screen.getByText("Status akcji: ready for future approval")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "MS-031.27 pokazuje tylko bramkę akcji; nie zapisuje, nie tworzy i nie promuje map.json.",
+      ),
+    ).toBeTruthy();
+    expect(
+      (
+        screen.getByRole("button", {
+          name: "Gotowe do osobnej zgody Product Ownera",
+        }) as HTMLButtonElement
+      ).disabled,
+    ).toBe(true);
   });
 });

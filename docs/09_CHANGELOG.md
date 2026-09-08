@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.27 Project Map Canonical Write Action Gate Foundation
+
+### Date
+
+2026-09-09
+
+### Completed
+
+* Added a guarded, disabled, non-executing canonical write action gate to the Project Map page.
+* Connected the gate to the MS-031.26 preflight evaluator status.
+* Showed ready-for-future-approval, blocked, needs-evidence, rejected, and unknown action states without enabling execution.
+* Kept the UI explicit that MS-031.27 does not write, create, overwrite, or promote canonical `map.json`.
+* Updated the app-version marker to `APP_VERSION 1.0060` and `LAST_PUBLISHED_MS MS-031.27 - Project Map Canonical Write Action Gate Foundation`.
+
+### Evidence
+
+* Updated `src/app/projects/[id]/project-map/page.tsx`.
+* Updated `src/app/projects/[id]/project-map/page.test.tsx`.
+* Updated `src/lib/app-version.ts` and `src/components/app-version-badge.test.tsx`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Appended one estimated Session 099 usage record to `.usage/session.jsonl`.
+
+### Notes
+
+* This milestone is non-executing UI/action-gate work only.
+* No writer route, writer helper, executable write button, canonical Project Map runtime file write, or Beauty Client PRO modification was added.
+
 ## Session 099 - MS-031.26 Project Map Canonical Write Preflight Evaluator Foundation
 
 ### Date
