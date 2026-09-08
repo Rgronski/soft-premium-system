@@ -69,6 +69,34 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.26 Project Map Canonical Write Preflight Evaluator Foundation
+
+### Date
+
+2026-09-09
+
+### Completed
+
+* Added a small non-writing Project Map canonical write preflight evaluator.
+* Returned preflight status, compact reasons, blockers, and evidence-risk count from existing read-only inputs.
+* Covered `READY_FOR_FUTURE_WRITE`, `BLOCKED`, `NEEDS_EVIDENCE`, `REJECTED`, and `UNKNOWN` with focused helper tests.
+* Connected the existing Project Map preview/status UI to the evaluator without adding writer behavior.
+* Updated the app-version marker to `APP_VERSION 1.0059` and `LAST_PUBLISHED_MS MS-031.26 - Project Map Canonical Write Preflight Evaluator Foundation`.
+
+### Evidence
+
+* Added `src/lib/project-map/canonical-write-preflight.ts`.
+* Added `src/lib/project-map/canonical-write-preflight.test.ts`.
+* Updated `src/app/projects/[id]/project-map/page.tsx` and `src/app/projects/[id]/project-map/page.test.tsx`.
+* Updated `src/lib/app-version.ts` and `src/components/app-version-badge.test.tsx`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Appended one estimated Session 099 usage record to `.usage/session.jsonl`.
+
+### Notes
+
+* This milestone is evaluator/status work only.
+* No canonical writer, server-side write route, write button, canonical Project Map runtime file write, or Beauty Client PRO modification was added.
+
 ## Session 099 - MS-031.25 Project Map Canonical Write Preview Status Foundation
 
 ### Date

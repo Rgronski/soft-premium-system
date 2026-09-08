@@ -193,8 +193,70 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.25 - Project Map Canonical Write Preview Status Foundation
+Latest Completed Product Milestone: MS-031.26 - Project Map Canonical Write Preflight Evaluator Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.26 - Project Map Canonical Write Preflight Evaluator Foundation
+
+**Milestone**
+MS-031.26 - Project Map Canonical Write Preflight Evaluator Foundation
+
+**Type**
+SPS OS / Project Map Canonical Write Preflight Evaluator Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+LOCAL PATCH / NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+
+**Product Outcome**
+The Project Map canonical write preview now uses a small non-writing preflight evaluator for future canonical write planning status. The evaluator returns a status, compact reasons, blockers, and evidence-risk count from existing read-only inputs without creating writer behavior, routes, buttons, or Project Map runtime files.
+
+**Evaluator Boundary**
+The evaluator may classify readiness for future planning only. It does not write files, promote candidates, approve canonical write, or convert candidate evidence into canonical evidence. It consumes existing Project Map candidate, source identity, storage path, persistence, and review-state inputs and returns a read-only evaluation.
+
+**Status Rules**
+* `READY_FOR_FUTURE_WRITE` is returned only when candidate, source identity, storage target, and evidence state are sufficient for future write planning
+* `BLOCKED` is returned when candidate or source identity is missing, unavailable, or not persisted
+* `NEEDS_EVIDENCE` is returned when visible candidate evidence is missing, weak, inferred, conflicting, blocked, absent, unknown, or needs review
+* `REJECTED` is returned only from an explicit rejected review state
+* `UNKNOWN` is returned when required preflight facts such as the SPS OS Project Map storage target are unknown
+
+**UI Integration**
+The existing MS-031.25 preview/status section consumes the evaluator result and shows the same read-only status boundary to the user. It remains explicit that no canonical `map.json` write happens now and that future write execution still requires separate Product Owner approval.
+
+**Non-Goals**
+* no canonical Project Map writer
+* no server-side write route
+* no write button that performs a write
+* no filesystem write behavior
+* no creation, overwrite, promotion, or modification of `map.json`
+* no creation or modification of Project Map runtime files
+* no Beauty Client PRO repository inspection or modification
+
+**Implementation Evidence**
+* `src/lib/project-map/canonical-write-preflight.ts` adds the non-writing evaluator
+* `src/lib/project-map/canonical-write-preflight.test.ts` verifies `READY_FOR_FUTURE_WRITE`, `BLOCKED`, `NEEDS_EVIDENCE`, `REJECTED`, and `UNKNOWN`
+* `src/app/projects/[id]/project-map/page.tsx` consumes the evaluator in the preview/status section
+* `src/app/projects/[id]/project-map/page.test.tsx` preserves focused UI coverage for preview states
+* `src/lib/app-version.ts` records `APP_VERSION 1.0059` and `LAST_PUBLISHED_MS MS-031.26 - Project Map Canonical Write Preflight Evaluator Foundation`
+* `src/components/app-version-badge.test.tsx` keeps the visible app-version marker aligned
+
+**Verification**
+* `npm test -- "src/lib/project-map/canonical-write-preflight.test.ts"` passed
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed
+* `npx tsc --noEmit` passed
+* no canonical Project Map runtime files were created or modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* evaluator readiness is still planning-only and does not approve or execute canonical write
+* actual canonical `map.json` write remains blocked until a separate Product Owner-approved future milestone
+* future persisted approval/rejection state may require adding a real input source instead of inferring from local controls
 
 ## MS-031.25 - Project Map Canonical Write Preview Status Foundation
 
@@ -205,13 +267,13 @@ MS-031.25 - Project Map Canonical Write Preview Status Foundation
 SPS OS / Project Map Canonical Write Preview Status Foundation
 
 **Status**
-COMPLETED / VERIFIED / ACCEPTED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Publication Status**
-LOCAL PATCH / NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Product Outcome**
 The Project Map page now exposes a read-only canonical write preview status near the existing canonical readiness area. The status shows whether a future canonical write is `READY_FOR_FUTURE_WRITE`, `BLOCKED`, `NEEDS_EVIDENCE`, `REJECTED`, or `UNKNOWN` from the currently available candidate, source identity, storage path, canonical absence, and evidence-risk state. The UI explicitly states that MS-031.25 does not create, write, overwrite, or promote canonical `map.json`.

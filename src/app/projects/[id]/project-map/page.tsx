@@ -12,6 +12,10 @@ import {
 } from "@/lib/project-map/reconstruct";
 import { scanProjectMapEvidence } from "@/lib/project-map/scan";
 import {
+  evaluateProjectMapCanonicalWritePreflight,
+  type ProjectMapCanonicalWritePreflightStatus,
+} from "@/lib/project-map/canonical-write-preflight";
+import {
   resolveProjectMapReadResult,
   type ProjectMapReadResult,
 } from "@/lib/project-map/read";
@@ -63,16 +67,9 @@ type ProjectMapCanonicalWriteReadinessCopy = {
   details: string[];
 };
 
-type ProjectMapCanonicalWritePreviewStatus =
-  | "READY_FOR_FUTURE_WRITE"
-  | "BLOCKED"
-  | "NEEDS_EVIDENCE"
-  | "REJECTED"
-  | "UNKNOWN";
-
 type ProjectMapCanonicalWritePreviewCopy = {
   title: string;
-  status: ProjectMapCanonicalWritePreviewStatus;
+  status: ProjectMapCanonicalWritePreflightStatus;
   description: string;
   details: string[];
 };
@@ -687,8 +684,6 @@ function buildProjectMapCanonicalWritePreviewCopy(
   const canonicalMapJsonPath =
     mapReadResult?.mapJsonPath ??
     (projectMapRootPath ? `${projectMapRootPath}\\map.json` : null);
-  const sourceIdentityPersisted =
-    mapReadResult?.projectSourceIdentityPersistence?.status === "persisted";
   const sourceIdentityAvailable = Boolean(mapReadResult?.projectSourceIdentity);
   const canonicalState =
     mapReadResult?.status === "missing"
@@ -697,54 +692,28 @@ function buildProjectMapCanonicalWritePreviewCopy(
           mapReadResult.reason === "project-map-present-but-read-not-implemented"
         ? "present / odczyt kanoniczny nie jest jeszcze zaimplementowany"
         : "UNKNOWN";
-  const evidenceRiskCount = candidateAvailable
-    ? mapCandidate.foundationChecklist.filter(
-        (item) =>
-          item.status === "absent" ||
-          item.status === "blocked" ||
-          item.status === "needs review" ||
-          item.status === "unknown" ||
-          item.supportState !== "confirmed" ||
-          item.conflictState !== "none",
-      ).length
-    : null;
-
-  let status: ProjectMapCanonicalWritePreviewStatus = "UNKNOWN";
-  let reason =
-    "UNKNOWN: brakuje pełnych danych, więc preview nie może potwierdzić gotowości.";
-
-  if (!projectMapRootPath || !canonicalMapJsonPath) {
-    status = "UNKNOWN";
-    reason = "UNKNOWN: docelowa ścieżka SPS OS Project Map storage nie jest znana.";
-  } else if (!candidateAvailable) {
-    status = "BLOCKED";
-    reason = "BLOCKED: brak reviewowanego kandydata Project Map do przyszłego zapisu.";
-  } else if (!sourceIdentityAvailable || !sourceIdentityPersisted) {
-    status = "BLOCKED";
-    reason =
-      "BLOCKED: source identity nie jest dostępne lub nie ma potwierdzonego zapisu.";
-  } else if (evidenceRiskCount && evidenceRiskCount > 0) {
-    status = "NEEDS_EVIDENCE";
-    reason =
-      "NEEDS_EVIDENCE: candidate pokazuje braki, review, inferred, missing lub conflicting evidence.";
-  } else {
-    status = "BLOCKED";
-    reason =
-      "BLOCKED: dane wyglądają spójnie, ale brak jawnego approval gate dla osobnego milestone zapisu.";
-  }
+  const preflightEvaluation = evaluateProjectMapCanonicalWritePreflight({
+    candidate: mapCandidate,
+    projectMapRootPath,
+    mapJsonPath: canonicalMapJsonPath,
+    sourceIdentityAvailable,
+    sourceIdentityPersistenceStatus:
+      mapReadResult?.projectSourceIdentityPersistence?.status ?? null,
+  });
 
   return {
     title: "Preview status zapisu kanonicznego",
-    status,
+    status: preflightEvaluation.status,
     description:
       "Read-only preview pokazuje, co można planować przed przyszłym zapisem. Nie uruchamia writerów i nie tworzy map.json.",
     details: [
-      `Status preview: ${status}`,
+      `Status preview: ${preflightEvaluation.status}`,
       `Co byłoby zapisane później: ${candidateAvailable ? "reviewed Project Map candidate po osobnej zgodzie Product Ownera" : "UNKNOWN - brak gotowego kandydata"}`,
       `Gdzie byłoby zapisane później: ${canonicalMapJsonPath ?? "UNKNOWN - brak znanej ścieżki"}`,
       `map.json teraz: ${canonicalState}`,
-      `Evidence risks: ${evidenceRiskCount ?? "UNKNOWN"}`,
-      reason,
+      `Evidence risks: ${preflightEvaluation.evidenceRiskCount ?? "UNKNOWN"}`,
+      `Preflight reasons: ${preflightEvaluation.reasons.join(" | ")}`,
+      `Preflight blockers: ${preflightEvaluation.blockers.length > 0 ? preflightEvaluation.blockers.join(" | ") : "none"}`,
       "Dlaczego nie zapisuje teraz: MS-031.25 jest tylko preview/status i nie wykonuje canonical write.",
       "Planowanie przyszłego zapisu wymaga PASS preflight i osobnej zgody Product Ownera.",
       "Ten milestone nie zapisuje, nie tworzy i nie promuje map.json.",

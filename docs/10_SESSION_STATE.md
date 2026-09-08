@@ -326,31 +326,33 @@ SPS OS Session State
 
 Date: 2026-09-09
 Current Session ID: 099
-Current Chat Title: 099 SPS OS - MS-031.25 Project Map Canonical Write Preview Status Foundation
+Current Chat Title: 099 SPS OS - MS-031.26 Project Map Canonical Write Preflight Evaluator Foundation
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
-Active Capability: Project Map Canonical Write Preview Status
-Active Work Item: MS-031.25 Project Map Canonical Write Preview Status Foundation
+Active Capability: Project Map Canonical Write Preflight Evaluator
+Active Work Item: MS-031.26 Project Map Canonical Write Preflight Evaluator Foundation
 Current Mode: ACTIVE
-Completed Capability Items: MS-031.25 adds a read-only Project Map canonical write preview status without creating, writing, overwriting, or promoting canonical Project Map `map.json`.
+Completed Capability Items: MS-031.26 adds a non-writing Project Map canonical write preflight evaluator without creating writer behavior or modifying canonical Project Map runtime files.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.25 - Project Map Canonical Write Preview Status Foundation
+Latest Completed Product Milestone: MS-031.26 - Project Map Canonical Write Preflight Evaluator Foundation
 Next Product Milestone: UNKNOWN / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: MS-031.25 Project Map canonical write preview status implemented and accepted as local read-only UI/status work
+Latest Completed Capability Item: MS-031.26 Project Map canonical write preflight evaluator implemented and accepted as local non-writing status work
 Current Sprint: NONE
 Platform Priority: Preserve Project Map candidate/canonical separation until a separate Product Owner-approved future milestone performs any canonical write.
 Repository Branch: main
-Repository Working Tree State: MODIFIED / local MS-031.25 read-only UI/status patch
+Repository Working Tree State: MODIFIED / local MS-031.26 non-writing evaluator patch
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: f0ea8d7
+Latest Verified Commit: f60a818
 Verification Status: PASS
 Blockers: NONE
 Open Risks: Canonical `map.json` write or promotion remains approval-bound and must not start without a separate Product Owner-approved future milestone.
-Next Safe Step: Product Owner reviews the MS-031.25 preview/status patch and decides whether to publish it; canonical write execution remains a separate future approval.
+Next Safe Step: Product Owner reviews the MS-031.26 preflight evaluator patch and decides whether to publish it; canonical write execution remains a separate future approval.
 Next Session Plan: UNKNOWN
 
-MS-031.25 is COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED in the current local workspace as the Project Map Canonical Write Preview Status Foundation. The Project Map page now exposes a read-only canonical write preview status near the existing canonical readiness area. It shows one of `READY_FOR_FUTURE_WRITE`, `BLOCKED`, `NEEDS_EVIDENCE`, `REJECTED`, or `UNKNOWN` from current SPS OS read-only data: candidate availability, source identity availability and persistence, SPS OS-owned Project Map storage path, canonical `map.json` read/absence state, and visible missing / weak / inferred / conflicting / blocked / absent / unknown / needs-review evidence. The preview states what would be written later, where it would be written later, why it is not written now, and what blocks or allows future write planning. MS-031.25 does not create a writer, server-side write route, or write button, does not create or modify `map.json` or Project Map runtime files, and does not inspect or modify Beauty Client PRO repository files. `APP_VERSION` is now `1.0058` and `LAST_PUBLISHED_MS` is `MS-031.25 - Project Map Canonical Write Preview Status Foundation`.
+MS-031.26 is COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED in the current local workspace as the Project Map Canonical Write Preflight Evaluator Foundation. The Project Map canonical write preview now uses a small non-writing evaluator that returns future planning status, compact reasons, blockers, and evidence-risk count from existing read-only inputs. It supports `READY_FOR_FUTURE_WRITE`, `BLOCKED`, `NEEDS_EVIDENCE`, `REJECTED`, and `UNKNOWN`, treats missing candidate/source/storage as blocked or unknown, treats missing / weak / inferred / conflicting evidence as `NEEDS_EVIDENCE`, and returns `REJECTED` only from an explicit rejected review state. The evaluator does not write files, create writer behavior, create a server-side write route, add a write button, promote candidate data, convert missing evidence into completed/check state, inspect Beauty Client PRO source, or create / modify canonical Project Map runtime files. `APP_VERSION` is now `1.0059` and `LAST_PUBLISHED_MS` is `MS-031.26 - Project Map Canonical Write Preflight Evaluator Foundation`.
+
+MS-031.25 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Canonical Write Preview Status Foundation. The Project Map page now exposes a read-only canonical write preview status near the existing canonical readiness area. It shows one of `READY_FOR_FUTURE_WRITE`, `BLOCKED`, `NEEDS_EVIDENCE`, `REJECTED`, or `UNKNOWN` from current SPS OS read-only data: candidate availability, source identity availability and persistence, SPS OS-owned Project Map storage path, canonical `map.json` read/absence state, and visible missing / weak / inferred / conflicting / blocked / absent / unknown / needs-review evidence. The preview states what would be written later, where it would be written later, why it is not written now, and what blocks or allows future write planning. MS-031.25 does not create a writer, server-side write route, or write button, does not create or modify `map.json` or Project Map runtime files, and does not inspect or modify Beauty Client PRO repository files. `APP_VERSION` is now `1.0058` and `LAST_PUBLISHED_MS` is `MS-031.25 - Project Map Canonical Write Preview Status Foundation`.
 
 MS-031.24 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Canonical Write Execution Boundary Foundation. It defines the allowed envelope for a later canonical write implementation milestone without approving, implementing, or performing the write. Required entry condition: MS-031.23 preflight result must be `PASS`, and the Product Owner must separately approve the future execution milestone. Required input bundle: reviewed Project Map candidate, persisted source identity, explicit MS-031.21 approval gate state, MS-031.22 write plan, PASS MS-031.23 preflight result, visible missing / weak / inferred / conflicting evidence, and explicit Product Owner decision for any unsupported evidence promotion. A later approved implementation may create or write canonical Project Map artifacts only inside the SPS OS-owned Project Map storage boundary for the project. It must not modify Beauty Client PRO repository files, silently promote candidate data, write missing evidence as completed or `check`, overwrite without audit/recovery path, bypass Product Owner approval, or treat local review/readiness/source identity as implicit approval. Required future output bundle includes canonical map artifact, source sidecar, audit/event evidence, explicit result status, and visible record of candidate, approval, preflight, and write plan. If any required input is missing, unknown, rejected, blocked, insufficient, or conflicting, later execution must stop before file write. No source code, Beauty Client PRO repository files, canonical `map.json`, or canonical Project Map runtime files were modified in this milestone.
 
