@@ -193,7 +193,40 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.18 - Session Close Summary Artifact Contract Foundation
+Latest Completed Product Milestone: MS-031.19 - Project Map Return State Reconciliation Foundation
+
+## MS-031.19 - Project Map Return State Reconciliation Foundation
+
+**Milestone**
+MS-031.19 - Project Map Return State Reconciliation Foundation
+
+**Type**
+SPS OS / Project Map Return State Reconciliation Foundation
+
+**Status**
+COMPLETED / VERIFIED / PENDING PUBLICATION
+
+**Publication Status**
+PENDING
+
+**Milestone Status**
+COMPLETED / VERIFIED / PENDING PUBLICATION
+
+**Product Outcome**
+The Project Map return state is reconciled after the MS-032 historical/backfill block. MS-032 is complete for its approved historical/backfill scope, Project Map is the intended return track, and the latest accepted Project Map implementation milestone remains `MS-031.16 - Project Map Candidate Review Local Selection Foundation`.
+
+**Implementation Evidence**
+* `docs/session-source-reports/2026/2026-09-08_MS-032.27_HISTORICAL_BACKFILL_BLOCK_COMPLETION_AUDIT.md` records MS-032 as `COMPLETE_FOR_APPROVED_SCOPE`, with remaining historical work `NONE_ACTIVE`
+* MS-031.16 remains the latest accepted Project Map implementation milestone and preserves the candidate/read-only local selection boundary
+* MS-031.5 remains `REJECTED / NOT ACCEPTED / NEEDS FIX` as historical rejected work
+* MS-031.6 is resolved as superseded by later accepted Project Map milestones MS-031.8 through MS-031.16, which address source identity, persistence, candidate structure, review flow, next-step selection, canonical write readiness, and local review selection
+* canonical `map.json` write or promotion remains out of scope
+* Beauty Client PRO repository files were not modified
+
+**Residual Risk**
+* the next real Project Map product step still requires a separate Product Owner decision
+* canonical `map.json` remains absent until a separate approval-bound milestone writes or promotes it
+* Beauty Client PRO itself was not modified in this milestone
 
 ## MS-031.18 - Session Close Summary Artifact Contract Foundation
 
@@ -489,7 +522,7 @@ MS-031.6 - Project Map Availability Explanation Foundation
 SPS OS / Project Map Availability Explanation Foundation
 
 **Status**
-IMPLEMENTED / UNDER REVIEW
+SUPERSEDED / CLOSED BY LATER ACCEPTED PROJECT MAP MILESTONES
 
 **Product Outcome**
 The Project Map page now explains why each visible section is available, planned, blocked, candidate-only, or missing data by showing compact `Status`, `Dlaczego`, `Następny krok`, and `Źródło` rows. The Repository URL / Source Identity gap is now shown as an explicit blocker instead of a silent missing label, so the Product Owner can see what is working, what is still candidate-only, and what still needs source-identity follow-up.
@@ -498,11 +531,12 @@ The Project Map page now explains why each visible section is available, planned
 * `src/app/projects/[id]/project-map/page.tsx` adds the compact availability explanation rows and the explicit Repository URL / Source Identity blocker copy
 * `src/app/projects/[id]/project-map/page.test.tsx` covers the new explanation section and the repository URL / source identity warning wording
 * `src/lib/app-version.ts` now records `APP_VERSION 1.0047` and `LAST_PUBLISHED_MS MS-031.9 - SPS Metadata Root Write Permission Recovery Foundation`
-* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` stay aligned with the MS-031.6 implementation state under review
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` now record MS-031.6 as superseded / closed by later accepted Project Map milestones
 
 **Residual Risk**
-* Repository URL consistency still needs follow-up verification before any canonical promotion path is considered
+* Repository URL consistency was addressed by MS-031.8 and MS-031.9 before later accepted Project Map candidate milestones continued from that baseline
 * MS-031.5 remains rejected because its technical refresh/build result did not render a usable robocza mapa, but that limitation is now easier to interpret through the availability explanation layer
+* canonical `map.json` write or promotion remains outside MS-031.6 and requires a separate Product Owner decision
 * Beauty Client PRO itself was not modified in this milestone
 
 ## MS-031.5 - Project Map Candidate Build Action Foundation

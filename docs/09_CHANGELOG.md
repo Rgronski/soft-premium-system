@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 098 - MS-031.19 Project Map Return State Reconciliation Foundation
+
+### Date
+
+2026-09-08
+
+### Completed
+
+* Recorded the return from MS-032 historical/backfill work to the Project Map / main SPS OS product track.
+* Confirmed MS-032 is complete for the approved historical/backfill scope and no active historical promotion debt remains.
+* Confirmed the latest accepted Project Map implementation milestone remains `MS-031.16 - Project Map Candidate Review Local Selection Foundation`.
+* Preserved `MS-031.5` as historical rejected / not accepted / needs fix.
+* Resolved `MS-031.6` as superseded / closed by later accepted Project Map milestones MS-031.8 through MS-031.16.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Used the published MS-032.27 completion audit and existing Project Map SSOT state.
+
+### Notes
+
+* Canonical `map.json` write or promotion remains outside this milestone.
+* Beauty Client PRO repository files were not modified.
+
 ## Session 095 - MS-031.18 Session Close Summary Artifact Contract Publication Sync
 
 ### Date

@@ -45,17 +45,19 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.18 - Session Close Summary Artifact Contract Foundation
+  MS-031.19 - Project Map Return State Reconciliation Foundation
+
+MS-031.19 is COMPLETED / VERIFIED / PENDING PUBLICATION in the current local workspace as the Project Map Return State Reconciliation Foundation. The MS-032 historical/backfill block is complete for its approved scope, Project Map is the intended return track, and the latest accepted Project Map implementation milestone remains MS-031.16. MS-031.5 remains historical rejected / not accepted / needs fix. MS-031.6 is resolved as superseded / closed by later accepted Project Map milestones MS-031.8 through MS-031.16. Canonical `map.json` write or promotion remains out of scope, and the next real Project Map product step requires a separate Product Owner decision.
 
 MS-031.18 is PUBLISHED / CLOSED in the current local workspace as the Session Close Summary Artifact Contract Foundation. The Session Close protocol now requires a concise session summary artifact for every completed close. The summary is a factual continuity and quick-recap artifact that sits alongside the richer development log, uses `UNKNOWN` when data is unavailable, keeps the summary separate from the IP/R&D/evidence log, and preserves the session close boundary as documentation rather than runtime behavior. The required summary sections now cover Session Identity, Session Title, Session Summary, Completed Work, Published Milestones, Decisions, Fixes / Incidents, Parked Ideas / Deferred Work, Risks / Open Questions, Final APP version, Final HEAD, Package path, Suggested Next Chat Title, and Next Session Candidate. Beauty Client PRO itself was not modified in this milestone.
 
 MS-031.13 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Next Step Selection Foundation. The Project Map candidate view now includes a compact read-only next-step selection block headed `Wybierz następny krok` so the next action stays explicit after reviewing the robocza mapa. The block exposes the local options `Uzupełnij braki`, `Przygotuj akceptację kierunku`, and `Odłóż mapę`, states that it is only a local choice and does not write `map.json` or publish the map, and keeps the candidate/read-only boundary explicit. Focused test coverage and the TypeScript check both passed, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 
 **Publication Status**
-PUBLISHED / CLOSED
+PENDING PUBLICATION
 
 **Milestone Status**
-COMPLETED / VERIFIED / PUBLISHED / CLOSED
+COMPLETED / VERIFIED / PENDING PUBLICATION
 
 MS-031.12 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Candidate Missing Inputs Clarification Foundation. The Project Map candidate missing-inputs area now shows concrete Polish-first labels instead of only verbose raw reasons. The mapper preserves the underlying candidate truth, keeps original detail text where helpful, and keeps the candidate/read-only boundary explicit. Focused test coverage locks the new First Layout label, canonical `map.json` remains absent, and Beauty Client PRO itself was not modified in this milestone.
 
@@ -67,7 +69,7 @@ MS-031.9 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local wor
 
 MS-031.8 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Source Identity Alignment Foundation. The Project Map source identity now receives the hydrated BCP repository URL from the git remote so the live page shows `https://github.com/Beautyclient/BeautyClientPro.git` instead of a missing source identity value. The alignment keeps the candidate/read-only boundary explicit, preserves the canonical save/publish separation, and does not create or promote canonical `map.json`.
 
-MS-031.6 is IMPLEMENTED / UNDER REVIEW in the current local workspace as the Project Map Availability Explanation Foundation. The Project Map page now explains why each major visible section is candidate-only, planned, missing data, missing integration, or blocked by source identity, and it shows compact `Status`, `Dlaczego`, `Następny krok`, and `Źródło` rows for the visible sections. The Repository URL / Source Identity gap is surfaced as an explicit trust blocker instead of a silent missing label, but live/Product Owner acceptance is still pending and Beauty Client PRO itself was not modified in this milestone.
+MS-031.6 is SUPERSEDED / CLOSED BY LATER ACCEPTED PROJECT MAP MILESTONES in the current local workspace as the Project Map Availability Explanation Foundation. The Project Map page explains why each major visible section is candidate-only, planned, missing data, missing integration, or blocked by source identity, and later accepted MS-031.8 through MS-031.16 work resolved the return-risk baseline around source identity, persistence, candidate structure, review flow, next-step selection, canonical write readiness, and local review selection. Beauty Client PRO itself was not modified in this milestone.
 
 MS-031.5 is REJECTED / NOT ACCEPTED / NEEDS FIX in the current local workspace as the Project Map Candidate Build Action Foundation. The Project Map page now shows an explicit refresh/build confirmation after `Stwórz roboczą mapę projektu`, surfaces the candidate result, evidence count, foundation areas, and timestamp, and keeps the candidate/read-only boundary explicit without creating or promoting canonical `map.json`. The live Product Owner review rejected this because it does not render an actual usable working Project Map. Repository URL is still shown as missing in Project Map source identity even though BCP has a known repository URL, so candidate output remains a trust blocker until source identity consistency is verified. MS-031.6 now provides the explanation layer for planned and unavailable sections, and Beauty Client PRO itself was not modified in this milestone.
 
