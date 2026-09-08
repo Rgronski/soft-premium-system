@@ -63,6 +63,20 @@ type ProjectMapCanonicalWriteReadinessCopy = {
   details: string[];
 };
 
+type ProjectMapCanonicalWritePreviewStatus =
+  | "READY_FOR_FUTURE_WRITE"
+  | "BLOCKED"
+  | "NEEDS_EVIDENCE"
+  | "REJECTED"
+  | "UNKNOWN";
+
+type ProjectMapCanonicalWritePreviewCopy = {
+  title: string;
+  status: ProjectMapCanonicalWritePreviewStatus;
+  description: string;
+  details: string[];
+};
+
 const projectMapReviewDecisionOptions = [
   {
     id: "accept",
@@ -662,6 +676,82 @@ function buildProjectMapCanonicalWriteReadinessCopy(
   };
 }
 
+function buildProjectMapCanonicalWritePreviewCopy(
+  storageReadiness: ProjectMapStorageReadinessCopy | null,
+  mapReadResult: ProjectMapReadResult | null,
+  mapCandidate: ProjectMapReconstructionCandidateResult | null,
+): ProjectMapCanonicalWritePreviewCopy {
+  const candidateAvailable = mapCandidate?.status === "available";
+  const projectMapRootPath =
+    mapReadResult?.projectMapRootPath ?? storageReadiness?.projectMapRootPath ?? null;
+  const canonicalMapJsonPath =
+    mapReadResult?.mapJsonPath ??
+    (projectMapRootPath ? `${projectMapRootPath}\\map.json` : null);
+  const sourceIdentityPersisted =
+    mapReadResult?.projectSourceIdentityPersistence?.status === "persisted";
+  const sourceIdentityAvailable = Boolean(mapReadResult?.projectSourceIdentity);
+  const canonicalState =
+    mapReadResult?.status === "missing"
+      ? "absent / brak kanonicznego pliku"
+      : mapReadResult?.status === "unavailable" &&
+          mapReadResult.reason === "project-map-present-but-read-not-implemented"
+        ? "present / odczyt kanoniczny nie jest jeszcze zaimplementowany"
+        : "UNKNOWN";
+  const evidenceRiskCount = candidateAvailable
+    ? mapCandidate.foundationChecklist.filter(
+        (item) =>
+          item.status === "absent" ||
+          item.status === "blocked" ||
+          item.status === "needs review" ||
+          item.status === "unknown" ||
+          item.supportState !== "confirmed" ||
+          item.conflictState !== "none",
+      ).length
+    : null;
+
+  let status: ProjectMapCanonicalWritePreviewStatus = "UNKNOWN";
+  let reason =
+    "UNKNOWN: brakuje pełnych danych, więc preview nie może potwierdzić gotowości.";
+
+  if (!projectMapRootPath || !canonicalMapJsonPath) {
+    status = "UNKNOWN";
+    reason = "UNKNOWN: docelowa ścieżka SPS OS Project Map storage nie jest znana.";
+  } else if (!candidateAvailable) {
+    status = "BLOCKED";
+    reason = "BLOCKED: brak reviewowanego kandydata Project Map do przyszłego zapisu.";
+  } else if (!sourceIdentityAvailable || !sourceIdentityPersisted) {
+    status = "BLOCKED";
+    reason =
+      "BLOCKED: source identity nie jest dostępne lub nie ma potwierdzonego zapisu.";
+  } else if (evidenceRiskCount && evidenceRiskCount > 0) {
+    status = "NEEDS_EVIDENCE";
+    reason =
+      "NEEDS_EVIDENCE: candidate pokazuje braki, review, inferred, missing lub conflicting evidence.";
+  } else {
+    status = "BLOCKED";
+    reason =
+      "BLOCKED: dane wyglądają spójnie, ale brak jawnego approval gate dla osobnego milestone zapisu.";
+  }
+
+  return {
+    title: "Preview status zapisu kanonicznego",
+    status,
+    description:
+      "Read-only preview pokazuje, co można planować przed przyszłym zapisem. Nie uruchamia writerów i nie tworzy map.json.",
+    details: [
+      `Status preview: ${status}`,
+      `Co byłoby zapisane później: ${candidateAvailable ? "reviewed Project Map candidate po osobnej zgodzie Product Ownera" : "UNKNOWN - brak gotowego kandydata"}`,
+      `Gdzie byłoby zapisane później: ${canonicalMapJsonPath ?? "UNKNOWN - brak znanej ścieżki"}`,
+      `map.json teraz: ${canonicalState}`,
+      `Evidence risks: ${evidenceRiskCount ?? "UNKNOWN"}`,
+      reason,
+      "Dlaczego nie zapisuje teraz: MS-031.25 jest tylko preview/status i nie wykonuje canonical write.",
+      "Planowanie przyszłego zapisu wymaga PASS preflight i osobnej zgody Product Ownera.",
+      "Ten milestone nie zapisuje, nie tworzy i nie promuje map.json.",
+    ],
+  };
+}
+
 function buildProjectMapRefreshFeedbackCopy(
   refreshRequested: boolean,
   mapReadResult: ProjectMapReadResult | null,
@@ -1152,6 +1242,12 @@ export default async function ProjectMapPage({
       mapCandidate,
       projectMapCandidateCopy,
     );
+  const projectMapCanonicalWritePreviewCopy =
+    buildProjectMapCanonicalWritePreviewCopy(
+      projectMapStorageReadiness,
+      mapReadResult,
+      mapCandidate,
+    );
   const projectMapAvailabilityExplanationCopy =
     buildProjectMapAvailabilityExplanationCopy(
       project ?? null,
@@ -1263,6 +1359,37 @@ export default async function ProjectMapPage({
           </ul>
         </section>
       ) : null}
+
+      <section
+        id="project-map-canonical-write-preview-status"
+        className="rounded-xl border border-amber-900/50 bg-amber-950/20 p-4"
+      >
+        <div className="space-y-1">
+          <p className="text-xs uppercase tracking-[0.2em] text-amber-200/70">
+            Preview zapisu
+          </p>
+          <h3 className="text-xl font-semibold text-amber-50">
+            {projectMapCanonicalWritePreviewCopy.status}
+          </h3>
+          <p className="text-sm font-medium text-amber-100">
+            {projectMapCanonicalWritePreviewCopy.title}
+          </p>
+          <p className="text-sm text-amber-100/80">
+            {projectMapCanonicalWritePreviewCopy.description}
+          </p>
+        </div>
+
+        <ul className="mt-4 space-y-2 text-sm text-amber-50/90">
+          {projectMapCanonicalWritePreviewCopy.details.map((detail) => (
+            <li
+              key={detail}
+              className="rounded-lg border border-amber-900/60 bg-amber-950/35 px-3 py-2"
+            >
+              {detail}
+            </li>
+          ))}
+        </ul>
+      </section>
 
       {projectMapRefreshFeedbackCopy ? (
         <section

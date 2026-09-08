@@ -69,6 +69,32 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.25 Project Map Canonical Write Preview Status Foundation
+
+### Date
+
+2026-09-09
+
+### Completed
+
+* Added a read-only canonical write preview status section to the Project Map page.
+* Exposed the allowed preview states `READY_FOR_FUTURE_WRITE`, `BLOCKED`, `NEEDS_EVIDENCE`, `REJECTED`, and `UNKNOWN`.
+* Derived the visible status from current SPS OS read-only data: candidate availability, source identity availability and persistence, storage path, canonical `map.json` absence/read state, and visible evidence risks.
+* Kept the UI explicit that MS-031.25 does not create, write, overwrite, or promote canonical `map.json`.
+* Updated the app-version marker to `APP_VERSION 1.0058` and `LAST_PUBLISHED_MS MS-031.25 - Project Map Canonical Write Preview Status Foundation`.
+
+### Evidence
+
+* Updated `src/app/projects/[id]/project-map/page.tsx` and `src/app/projects/[id]/project-map/page.test.tsx`.
+* Updated `src/lib/app-version.ts` and `src/components/app-version-badge.test.tsx`.
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Appended one estimated Session 099 usage record to `.usage/session.jsonl`.
+
+### Notes
+
+* This milestone is read-only UI/status work and does not perform canonical Project Map write.
+* Beauty Client PRO repository files and canonical Project Map runtime files were not inspected or modified.
+
 ## Session 099 - MS-031.24 Project Map Canonical Write Execution Boundary Foundation
 
 ### Date

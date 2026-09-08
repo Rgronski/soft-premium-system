@@ -386,6 +386,18 @@ describe("ProjectMapPage", () => {
     expect(screen.getAllByText("Current view: candidate/read-only").length).toBeGreaterThan(0);
     expect(screen.getByText("Canonical Project Map: missing")).toBeTruthy();
     expect(screen.getByText("Reconstruction candidate: available")).toBeTruthy();
+    expect(screen.getByText("Preview status zapisu kanonicznego")).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "NEEDS_EVIDENCE" })).toBeTruthy();
+    expect(screen.getByText("Status preview: NEEDS_EVIDENCE")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "map.json teraz: absent / brak kanonicznego pliku",
+      ),
+    ).toBeTruthy();
+    expect(screen.getByText("Evidence risks: 3")).toBeTruthy();
+    expect(
+      screen.getByText("Ten milestone nie zapisuje, nie tworzy i nie promuje map.json."),
+    ).toBeTruthy();
     expect(
       screen.getAllByText("Source identity persistence: persisted").length,
     ).toBeGreaterThan(0);
@@ -600,6 +612,9 @@ describe("ProjectMapPage", () => {
     expect(
       screen.getAllByText((content) => content.includes("Brak poprawnego kontekstu projektu.")).length,
     ).toBeGreaterThan(0);
+    expect(screen.getByText("Preview status zapisu kanonicznego")).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "UNKNOWN" })).toBeTruthy();
+    expect(screen.getByText("Status preview: UNKNOWN")).toBeTruthy();
     expect(screen.queryByText("Candidate pipeline")).toBeNull();
     expect(resolveProjectMapReadResultMock).not.toHaveBeenCalled();
     expect(scanProjectMapEvidenceMock).not.toHaveBeenCalled();
@@ -728,6 +743,10 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Oceń kandydata przed dalszą pracą")).toBeTruthy();
     expect(screen.getByText("Gotowość do zapisu kanonicznego")).toBeTruthy();
     expect(screen.getByText("Robocza mapa: brak gotowego kandydata")).toBeTruthy();
+    expect(screen.getByText("Status preview: BLOCKED")).toBeTruthy();
+    expect(
+      screen.getByText("Co byłoby zapisane później: UNKNOWN - brak gotowego kandydata"),
+    ).toBeTruthy();
     const reviewBrakiChoice = screen.getByLabelText("Widzę braki");
     const nextPrzygotujChoice = screen.getByLabelText("Przygotuj akceptację kierunku");
     expect((reviewBrakiChoice as HTMLInputElement).checked).toBe(false);

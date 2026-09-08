@@ -193,8 +193,70 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.24 - Project Map Canonical Write Execution Boundary Foundation
+Latest Completed Product Milestone: MS-031.25 - Project Map Canonical Write Preview Status Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.25 - Project Map Canonical Write Preview Status Foundation
+
+**Milestone**
+MS-031.25 - Project Map Canonical Write Preview Status Foundation
+
+**Type**
+SPS OS / Project Map Canonical Write Preview Status Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+LOCAL PATCH / NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+
+**Product Outcome**
+The Project Map page now exposes a read-only canonical write preview status near the existing canonical readiness area. The status shows whether a future canonical write is `READY_FOR_FUTURE_WRITE`, `BLOCKED`, `NEEDS_EVIDENCE`, `REJECTED`, or `UNKNOWN` from the currently available candidate, source identity, storage path, canonical absence, and evidence-risk state. The UI explicitly states that MS-031.25 does not create, write, overwrite, or promote canonical `map.json`.
+
+**Preview Status Boundary**
+The preview is a planning/status surface only. It may describe what would be written later, where it would be written later, why it is not written now, and what blocks or allows future write planning. It must not approve the write, perform the write, create a write route, or treat local readiness as Product Owner approval.
+
+**Status Inputs**
+* reviewed Project Map candidate availability
+* Project Map source identity availability and persistence state
+* SPS OS-owned Project Map storage path
+* canonical `map.json` read state, including explicit absence when missing
+* candidate foundation evidence states for missing, weak, inferred, conflicting, blocked, absent, unknown, or needs-review evidence
+
+**Status Rules**
+* `UNKNOWN` is shown when the target storage path or other required facts cannot be known from the current read-only data
+* `BLOCKED` is shown when no reviewed candidate exists, source identity is absent or not persisted, or approval remains unavailable for a future write milestone
+* `NEEDS_EVIDENCE` is shown when the candidate is available but contains missing, weak, inferred, conflicting, blocked, absent, unknown, or needs-review evidence
+* `REJECTED` remains reserved for an explicit future rejection signal and is not inferred from local review controls
+* `READY_FOR_FUTURE_WRITE` remains reserved for a future state with explicit Product Owner approval and a passing preflight; it is not inferred by MS-031.25
+
+**Non-Goals**
+* no canonical Project Map writer
+* no server-side write route
+* no write button that performs a write
+* no creation, overwrite, promotion, or modification of `map.json`
+* no creation or modification of Project Map runtime files
+* no Beauty Client PRO repository inspection or modification
+
+**Implementation Evidence**
+* `src/app/projects/[id]/project-map/page.tsx` adds the read-only preview status section and local status builder
+* `src/app/projects/[id]/project-map/page.test.tsx` verifies `NEEDS_EVIDENCE`, `BLOCKED`, and `UNKNOWN` preview states
+* `src/lib/app-version.ts` records `APP_VERSION 1.0058` and `LAST_PUBLISHED_MS MS-031.25 - Project Map Canonical Write Preview Status Foundation`
+* `src/components/app-version-badge.test.tsx` keeps the visible app-version marker aligned
+
+**Verification**
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed
+* `npx tsc --noEmit` passed
+* no canonical Project Map runtime files were created or modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* canonical `map.json` remains absent until a separate Product Owner-approved future milestone writes or promotes it
+* the preview status is derived only from current SPS OS read-only data and does not persist an approval gate state
+* future write execution still requires separate Product Owner approval, PASS preflight, audit/recovery design, and explicit output validation
 
 ## MS-031.24 - Project Map Canonical Write Execution Boundary Foundation
 

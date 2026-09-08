@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0049");
+    expect(APP_VERSION).toBe("1.0058");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-031.10 - Project Map Candidate Structure Foundation",
+      "MS-031.25 - Project Map Canonical Write Preview Status Foundation",
     );
   });
 });
