@@ -193,8 +193,82 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.21 - Project Map Canonical Write Approval Gate Foundation
+Latest Completed Product Milestone: MS-031.22 - Project Map Canonical Write Plan Contract Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.22 - Project Map Canonical Write Plan Contract Foundation
+
+**Milestone**
+MS-031.22 - Project Map Canonical Write Plan Contract Foundation
+
+**Type**
+SPS OS / Project Map Canonical Write Plan Contract Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Product Outcome**
+The Project Map canonical write plan contract is now defined for a future canonical write milestone. The plan describes what a later approved write must do, where it may write, which inputs it may use, how it must validate evidence, and when it must stop. This milestone is documentation-only and does not approve, implement, create, write, overwrite, or promote canonical `map.json`.
+
+**Future Write Objective**
+Create the canonical Project Map only after explicit Product Owner approval in a separate future milestone. The future write must convert an approved and reviewable candidate into a canonical Project Map artifact without silently changing evidence state or source ownership.
+
+**Write Target Boundary**
+The future write target is the SPS OS-owned Project Map storage path for the project, not Beauty Client PRO repository files. The exact storage path must be known before writing and must remain separate from any BCP source repository path.
+
+**Input Boundary**
+* reviewed Project Map candidate
+* persisted source identity
+* explicit approval gate state from MS-031.21
+* known SPS OS-owned Project Map storage path
+* visible missing, weak, inferred, and conflicting evidence
+* explicit Product Owner decision for any evidence promotion that lacks direct support
+
+**Output Boundary**
+The future write may produce a canonical Project Map artifact and audit/source sidecars only in the later approved write milestone. Candidate data must remain distinguishable from canonical data until that future write is performed and verified.
+
+**Validation Boundary**
+Missing evidence may not become completed or `check` without direct evidence or explicit Product Owner decision. Weak, inferred, conflicting, or unavailable evidence must remain visible and must not be silently normalized into completed canonical state.
+
+**Stop Conditions**
+* Project Map candidate is absent
+* source identity is missing or not persisted
+* SPS OS-owned Project Map storage path is unknown
+* approval gate is rejected, not requested, needs evidence, or blocked
+* unresolved evidence conflict affects the proposed canonical content
+* repository state is dirty when the future write milestone requires a clean baseline
+* the planned write would modify Beauty Client PRO repository files
+
+**Rollback And Audit Expectation**
+The future canonical write design must be auditable and reversible. It must preserve enough source, decision, and lifecycle evidence for a later implementation to report what was written, from which candidate and approval state, and how to recover or supersede the written artifact.
+
+**Forbidden Behavior**
+* silent promotion from candidate Project Map data to canonical Project Map data
+* implicit approval from readiness, local review controls, or candidate presence
+* modifying Beauty Client PRO repository files
+* writing, creating, overwriting, or promoting canonical `map.json` in MS-031.22
+* creating or modifying Project Map runtime files in MS-031.22
+* implementing UI, API, helper, or runtime write behavior in MS-031.22
+
+**Future Boundary**
+The actual canonical Project Map write remains a separate Product Owner-approved milestone after this plan contract. That future milestone must restate the approved target, inputs, validation checks, stop conditions, and audit/rollback approach before any runtime file is written.
+
+**Implementation Evidence**
+* `docs/04_ROADMAP.md` records the MS-031.22 write plan contract
+* `docs/08_CURRENT_STATE.md`, `docs/09_CHANGELOG.md`, and `docs/10_SESSION_STATE.md` record the accepted plan state
+* no source code or canonical Project Map runtime files were modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* canonical `map.json` remains absent until a separate approval-bound milestone writes or promotes it
+* future write implementation still needs explicit Product Owner approval
+* exact runtime validation and rollback mechanics remain outside this documentation-only milestone
 
 ## MS-031.21 - Project Map Canonical Write Approval Gate Foundation
 

@@ -69,6 +69,30 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.22 Project Map Canonical Write Plan Contract Foundation
+
+### Date
+
+2026-09-09
+
+### Completed
+
+* Defined the MS-031.22 future canonical write plan contract without approving, implementing, or performing the write.
+* Recorded the future write objective: create the canonical Project Map only after explicit Product Owner approval in a separate future milestone.
+* Recorded the write target boundary as the SPS OS-owned Project Map storage path, not Beauty Client PRO repository files.
+* Recorded input, output, validation, stop-condition, rollback, and audit expectations for the future canonical write milestone.
+* Preserved the prohibition on silent promotion, implicit approval, Beauty Client PRO repository modification, runtime Project Map file writes, and UI/API/helper/runtime implementation in MS-031.22.
+
+### Evidence
+
+* Updated `docs/04_ROADMAP.md`, `docs/08_CURRENT_STATE.md`, and `docs/10_SESSION_STATE.md`.
+* Appended one estimated Session 099 usage record to `.usage/session.jsonl`.
+
+### Notes
+
+* This milestone is documentation-only plan-contract work.
+* The actual canonical Project Map write remains a separate Product Owner-approved future milestone.
+
 ## Session 099 - MS-031.21 Project Map Canonical Write Approval Gate Foundation
 
 ### Date

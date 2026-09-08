@@ -324,31 +324,33 @@ Next Session Plan: Start Session 097 from the fresh `sps-session.zip` and contin
 
 SPS OS Session State
 
-Date: 2026-09-08
+Date: 2026-09-09
 Current Session ID: 099
-Current Chat Title: 099 SPS OS - MS-031.21 Project Map Canonical Write Approval Gate Foundation
+Current Chat Title: 099 SPS OS - MS-031.22 Project Map Canonical Write Plan Contract Foundation
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
-Active Capability: Project Map Canonical Write Approval Gate
-Active Work Item: MS-031.21 Project Map Canonical Write Approval Gate Foundation
+Active Capability: Project Map Canonical Write Plan Contract
+Active Work Item: MS-031.22 Project Map Canonical Write Plan Contract Foundation
 Current Mode: ACTIVE
-Completed Capability Items: MS-031.21 defines the Product Owner approval gate before any separate future canonical Project Map `map.json` write milestone.
+Completed Capability Items: MS-031.22 defines the future canonical write plan contract without approving, implementing, or performing canonical Project Map `map.json` write.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.21 - Project Map Canonical Write Approval Gate Foundation
+Latest Completed Product Milestone: MS-031.22 - Project Map Canonical Write Plan Contract Foundation
 Next Product Milestone: UNKNOWN / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: MS-031.21 Project Map canonical write approval gate defined and accepted as documentation-only boundary work
+Latest Completed Capability Item: MS-031.22 Project Map canonical write plan contract defined and accepted as documentation-only boundary work
 Current Sprint: NONE
 Platform Priority: Preserve Project Map candidate/canonical separation until a separate Product Owner-approved future milestone performs any canonical write.
 Repository Branch: main
-Repository Working Tree State: MODIFIED / documentation-only after MS-031.21 patch
+Repository Working Tree State: MODIFIED / documentation-only after MS-031.22 patch
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 091554f
+Latest Verified Commit: 74d4b57
 Verification Status: PASS
 Blockers: NONE
 Open Risks: Canonical `map.json` write or promotion remains approval-bound and must not start without a separate Product Owner-approved future milestone.
-Next Safe Step: Product Owner decides whether to publish MS-031.21, then separately decides whether to approve a future canonical Project Map write milestone.
+Next Safe Step: Product Owner decides whether to publish MS-031.22, then separately decides whether to approve a future canonical Project Map write milestone.
 Next Session Plan: UNKNOWN
+
+MS-031.22 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Canonical Write Plan Contract Foundation. It defines the future canonical write plan without approving, implementing, or performing the write. The future write objective is to create the canonical Project Map only after explicit Product Owner approval in a separate future milestone. The write target is the SPS OS-owned Project Map storage path, not Beauty Client PRO repository files. Inputs are a reviewed candidate, persisted source identity, explicit MS-031.21 approval gate state, known storage path, visible missing / weak / inferred / conflicting evidence, and explicit Product Owner decision for any evidence promotion lacking direct support. Future output is a canonical Project Map artifact with audit/source sidecars only in the later approved write milestone. Validation forbids converting missing evidence into completed or `check` without direct evidence or explicit Product Owner decision. Stop conditions include absent candidate, missing source identity, unknown storage path, rejected / not requested / needs evidence / blocked approval gate, unresolved evidence conflict, dirty repository when a clean baseline is required, or any plan that would modify Beauty Client PRO repository files. No source code, Beauty Client PRO repository files, canonical `map.json`, or canonical Project Map runtime files were modified in this milestone.
 
 MS-031.21 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Canonical Write Approval Gate Foundation. It is the smallest safe next Project Map milestone after MS-031.20 because it defines the Product Owner approval gate without executing canonical write. Gate inputs are: MS-031.20 accepted, a reviewed Project Map candidate exists, source identity is persisted, storage path is known, missing / weak / inferred / conflicting evidence remains visible, review state is explicit, and Product Owner decision state is explicit. Gate output states are `not requested`, `ready for Product Owner approval`, `approved for separate canonical write milestone`, `rejected`, `needs evidence`, and `blocked`. Only the Product Owner may approve the gate for a separate future canonical write milestone. Candidate presence, readiness copy, local review controls, or source identity persistence cannot imply approval. No source code, Beauty Client PRO repository files, canonical `map.json`, or canonical Project Map runtime files were modified in this milestone.
 
