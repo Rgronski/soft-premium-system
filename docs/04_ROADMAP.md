@@ -194,7 +194,7 @@ The roadmap applies only to SPS OS 1.0.
 
 NONE / Product Owner decision required
 Latest Completed Product Milestone: MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation
-Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+Next Product Milestone Candidate: MS-031.37 - Project Map Canonical Write Execution Foundation
 
 ## MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation
 
@@ -208,10 +208,10 @@ SPS OS / Project Map Visible Technical Token Polish Pass Foundation
 COMPLETED / VERIFIED / ACCEPTED
 
 **Publication Status**
-LOCAL PATCH / NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Product Outcome**
 The Project Map tab now polishes remaining visible English / mixed technical labels, badges, and handoff preview copy after MS-031.35 while preserving raw technical values only where they are data.

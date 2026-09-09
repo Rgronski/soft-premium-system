@@ -327,30 +327,30 @@ SPS OS Session State
 Date: 2026-09-10
 Current Session ID: 099
 Current Chat Title: 099 SPS OS - MS-031.36 Project Map Visible Technical Token Polish Pass Foundation
-Next Session ID: UNKNOWN
-Suggested Next Chat Title: UNKNOWN
-Active Capability: Project Map Visible Technical Token Polish Pass
-Active Work Item: MS-031.36 Project Map Visible Technical Token Polish Pass Foundation
-Current Mode: ACTIVE
+Next Session ID: 100
+Suggested Next Chat Title: 100 SPS OS - MS-031.37 Project Map Canonical Write Execution Foundation
+Active Capability: Session Close Protocol
+Active Work Item: Session 099 close protocol after MS-031.20 through MS-031.36 publication
+Current Mode: CLOSED
 Completed Capability Items: MS-031.36 polishes remaining visible English / mixed Project Map technical labels and badges without evaluator behavior or canonical Project Map runtime file modification.
 Current Product Milestone: NONE / Product Owner decision required
 Latest Completed Product Milestone: MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation
-Next Product Milestone: UNKNOWN / Product Owner decision required
+Next Product Milestone: MS-031.37 - Project Map Canonical Write Execution Foundation
 Active Parallel Capability: NONE
 Latest Completed Capability Item: MS-031.36 Project Map visible technical token polish pass implemented and accepted as local UI/readability work
 Current Sprint: NONE
 Platform Priority: Preserve Project Map candidate/canonical separation until a separate Product Owner-approved future milestone performs any canonical write.
 Repository Branch: main
-Repository Working Tree State: MODIFIED / local MS-031.36 visible technical token polish pass patch
+Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 601651b
+Latest Verified Commit: 17e7b3b
 Verification Status: PASS
 Blockers: NONE
 Open Risks: Canonical `map.json` write or promotion remains approval-bound and must not start without a separate Product Owner-approved future milestone.
-Next Safe Step: Product Owner reviews the MS-031.36 visible technical token polish pass patch and decides whether to publish it; canonical write execution remains a separate future approval.
-Next Session Plan: UNKNOWN
+Next Safe Step: Run `New-SpsSession.ps1`, confirm `Package Consistency: PASS`, then open Session 100 with the fresh `sps-session.zip`.
+Next Session Plan: Start Session 100 from the fresh `sps-session.zip` and diagnose `MS-031.37 - Project Map Canonical Write Execution Foundation` as the real canonical Project Map write/upload milestone, without creating or promoting `map.json` until the next session confirms SSOT and Product Owner approval.
 
-MS-031.36 is COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED in the current local workspace as the Project Map Visible Technical Token Polish Pass Foundation. The Project Map tab now polishes remaining visible English / mixed technical labels, badges, and handoff preview copy after MS-031.35 while preserving raw technical values only where they are data. Foundation labels now include `Tożsamość projektu`, `Źródło robocze`, `Pierwszy layout`, `Pierwszy działający przepływ`, and `Ścieżka publikacji`; overview labels and status/source badges are Polish-first; handoff preview copy now names the future milestone wykonawczy boundary in Polish. MS-031.36 does not change evaluator behavior, candidate data model, approval persistence, writer routes/helpers/handlers, canonical Project Map runtime files, or Beauty Client PRO repository files. `APP_VERSION` is now `1.0069` and `LAST_PUBLISHED_MS` is `MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation`.
+MS-031.36 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Visible Technical Token Polish Pass Foundation. The Project Map tab now polishes remaining visible English / mixed technical labels, badges, and handoff preview copy after MS-031.35 while preserving raw technical values only where they are data. Foundation labels now include `Tożsamość projektu`, `Źródło robocze`, `Pierwszy layout`, `Pierwszy działający przepływ`, and `Ścieżka publikacji`; overview labels and status/source badges are Polish-first; handoff preview copy now names the future milestone wykonawczy boundary in Polish. MS-031.36 does not change evaluator behavior, candidate data model, approval persistence, writer routes/helpers/handlers, canonical Project Map runtime files, or Beauty Client PRO repository files. `APP_VERSION` is now `1.0069` and `LAST_PUBLISHED_MS` is `MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation`.
 
 MS-031.35 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Remaining Technical Sentence Localization Foundation. The Project Map tab now localizes the remaining visible English technical sentences identified after MS-031.34, including SSOT support copy and source-identity persistence labels. Raw values such as `aligned`, `persisted`, `candidate`, `evidence`, `SSOT`, `map.json`, URLs, IDs, and paths remain visible where they are data. MS-031.35 does not change evaluator behavior, candidate data model, approval persistence, writer routes/helpers/handlers, canonical Project Map runtime files, or Beauty Client PRO repository files. `APP_VERSION` is now `1.0068` and `LAST_PUBLISHED_MS` is `MS-031.35 - Project Map Remaining Technical Sentence Localization Foundation`.
 

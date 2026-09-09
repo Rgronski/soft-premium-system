@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - Close Protocol
+
+### Date
+
+2026-09-10
+
+### Completed
+
+* Closed Session 099 after publishing MS-031.20 through MS-031.36.
+* Prepared Session 099 close artifacts: session state sync, current handoff, concise session summary, and development log.
+* Preserved the next-session intent as `MS-031.37 - Project Map Canonical Write Execution Foundation` for real canonical Project Map write/upload work after Product Owner approval.
+* Confirmed Session 099 close did not implement the next milestone, did not create writer route/helper/handler behavior, did not persist approval, did not modify Beauty Client PRO files, and did not create/write/promote canonical `map.json`.
+
+### Verification
+
+* Close verification and package consistency are performed during the Session Close Protocol after the close patch is prepared and published.
+
 ## Session 099 - MS-031.36 Project Map Visible Technical Token Polish Pass Foundation
 
 ### Date
