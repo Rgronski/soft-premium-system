@@ -667,17 +667,18 @@ function buildProjectMapCanonicalWriteReadinessCopy(
     projectMapCandidateCopy?.foundationChecklist.filter(
       (item) => item.status !== "completed",
     ) ?? [];
-  const blockingSummary = candidateAvailable
+  const blockingDetails = candidateAvailable
     ? blockingAreas.length > 0
       ? blockingAreas
           .slice(0, 3)
           .map(
             (item) =>
-              `${item.foundationArea}: ${buildProjectMapCandidateFoundationDescription(item)}`,
+              `Blokada: ${item.foundationArea} - ${buildProjectMapCandidateFoundationDescription(item)}`,
           )
-          .join(" • ")
-      : "Brak otwartych blokad w foundationChecklist. Zapis nadal pozostaje osobnym krokiem."
-    : projectMapCandidateCopy?.details[0] ?? "Brak gotowego kandydata do przeniesienia.";
+      : ["Blokady: brak otwartych blokad; zapis nadal pozostaje osobnym krokiem."]
+    : [
+        `Blokada: ${projectMapCandidateCopy?.details[0] ?? "Brak gotowego kandydata do przeniesienia."}`,
+      ];
 
   return {
     title: "Gotowość do zapisu kanonicznego",
@@ -687,7 +688,7 @@ function buildProjectMapCanonicalWriteReadinessCopy(
       `Robocza mapa: ${candidateAvailable ? "obecna" : "brak gotowego kandydata"}`,
       `Docelowy zapis: ${canonicalMapJsonPath ?? "Project Map root (ścieżka jeszcze niepotwierdzona)"}`,
       `Do zapisania później: ${candidateAvailable ? "zatwierdzona robocza mapa projektu w trybie read-only" : "najpierw trzeba zbudować candidate/read-only"}`,
-      `Blokady / opóźnienia: ${blockingSummary}`,
+      ...blockingDetails,
       "Ten krok nie udostępnia create/write dla canonical map.json.",
     ],
   };
@@ -729,7 +730,7 @@ function buildProjectMapCanonicalWritePreviewCopy(
     "none";
   const localApprovalCaptureState = actionGate.approvalCaptureDisabled
     ? `unavailable / ${actionGate.actionState}`
-    : "available locally / planning-only / not persisted";
+    : "dostępne lokalnie / tylko planowanie / nie zapisuje decyzji";
 
   return {
     title: "Preview status zapisu kanonicznego",
@@ -754,11 +755,11 @@ function buildProjectMapCanonicalWritePreviewCopy(
       description:
         "Copy-ready preview dla Codexa opisuje tylko warunki przyszłego wykonania; nie uruchamia API, writerów ani zapisu plików.",
       details: [
-        `Preflight status: ${preflightEvaluation.status}`,
-        `Local approval capture: ${localApprovalCaptureState}`,
-        `Top blocker / reason: ${topBlockerOrReason}`,
-        "No write authorized now: nie wolno teraz tworzyć, zapisywać, nadpisywać ani promować map.json.",
-        "Future execution requires a separate Product Owner-approved milestone before any canonical write.",
+        `Status gotowości: ${preflightEvaluation.status}`,
+        `Lokalne potwierdzenie: ${localApprovalCaptureState}`,
+        `Główna blokada / powód: ${topBlockerOrReason}`,
+        "Brak zgody na zapis teraz: nie wolno teraz tworzyć, zapisywać, nadpisywać ani promować map.json.",
+        "Przyszłe wykonanie wymaga osobnego zatwierdzonego milestone wykonawczego.",
       ],
     },
   };
@@ -773,13 +774,13 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       actionState: "ready for future approval",
       controlLabel: "Gotowe do osobnej zgody Product Ownera",
       description:
-        "Preflight wygląda gotowo do planowania, ale wykonanie zapisu wymaga osobnego przyszłego milestone zatwierdzonego przez Product Ownera.",
+        "Status gotowości pozwala planować dalej, ale wykonanie zapisu wymaga osobnego zatwierdzonego milestone wykonawczego.",
       detail:
         "MS-031.29 pokazuje tylko komunikat approval capture; nie zapisuje, nie tworzy i nie promuje map.json.",
       approvalCaptureLabel:
         "Rozumiem: to tylko lokalne potwierdzenie gotowości, bez zapisu map.json.",
       approvalCaptureStatus:
-        "Lokalna intencja Product Ownera jest tylko planning-only, nie jest persisted i nie zastępuje osobnego przyszłego execution milestone.",
+        "Lokalna intencja Product Ownera jest tylko do planowania, nie jest persisted i nie zastępuje osobnego przyszłego milestone wykonawczego.",
       approvalCaptureDisabled: false,
     };
   }
@@ -797,7 +798,7 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       approvalCaptureLabel:
         "Lokalne potwierdzenie niedostępne: stan rejected blokuje planowanie zapisu.",
       approvalCaptureStatus:
-        "Approval capture nie override'uje rejected, nie jest persisted, nie uruchamia execution milestone i nie zapisuje map.json.",
+        "Lokalne potwierdzenie nie omija stanu rejected, nie jest persisted, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
       approvalCaptureDisabled: true,
     };
   }
@@ -815,7 +816,7 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       approvalCaptureLabel:
         "Lokalne potwierdzenie niewystarczające: najpierw potrzeba evidence.",
       approvalCaptureStatus:
-        "Approval capture nie override'uje braków evidence, nie jest persisted, nie uruchamia execution milestone i nie zapisuje map.json.",
+        "Lokalne potwierdzenie nie omija braków evidence, nie jest persisted, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
       approvalCaptureDisabled: true,
     };
   }
@@ -834,7 +835,7 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       approvalCaptureLabel:
         "Lokalne potwierdzenie niedostępne: stan unknown wymaga ustalenia faktów.",
       approvalCaptureStatus:
-        "Approval capture nie override'uje unknown blockers, nie jest persisted, nie uruchamia execution milestone i nie zapisuje map.json.",
+        "Lokalne potwierdzenie nie omija nieznanych blokad, nie jest persisted, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
       approvalCaptureDisabled: true,
     };
   }
@@ -852,7 +853,7 @@ function buildProjectMapCanonicalWriteActionGateCopy(
     approvalCaptureLabel:
       "Lokalne potwierdzenie niedostępne: blocked wymaga usunięcia blokady.",
     approvalCaptureStatus:
-      "Approval capture nie override'uje blockers, nie jest persisted, nie uruchamia execution milestone i nie zapisuje map.json.",
+      "Lokalne potwierdzenie nie omija blokad, nie jest persisted, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
     approvalCaptureDisabled: true,
   };
 }
@@ -1385,8 +1386,8 @@ export default async function ProjectMapPage({
       ? "Widoczna mapa: roboczy kandydat, nie stan kanoniczny."
       : "Widoczna mapa: brak gotowego roboczego kandydata.",
     "Zapis kanoniczny: nie jest teraz wykonywany.",
-    "Local approval capture: nie jest persisted i nie zapisuje map.json.",
-    "Następny wymagany krok: osobny Product Owner-approved execution milestone.",
+    "Lokalne potwierdzenie: nie jest persisted i nie zapisuje map.json.",
+    "Następny wymagany krok: osobny zatwierdzony milestone wykonawczy.",
   ];
 
   return (

@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.32 Project Map Current State Copy Cleanup Foundation
+
+### Date
+
+2026-09-09
+
+### Completed
+
+* Replaced remaining mixed Polish/English current-state and handoff labels with Polish-first copy.
+* Split dense readiness blocker text into shorter visible list items.
+* Kept the current-state summary visible and the canonical write action gate disabled and non-executing.
+* Updated the app-version marker to `1.0065`.
+
+### Verification
+
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed.
+
 ## Session 099 - MS-031.31 Project Map Current State Clarity Foundation
 
 ### Date

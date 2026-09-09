@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0064");
+    expect(APP_VERSION).toBe("1.0065");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-031.31 - Project Map Current State Clarity Foundation",
+      "MS-031.32 - Project Map Current State Copy Cleanup Foundation",
     );
   });
 });

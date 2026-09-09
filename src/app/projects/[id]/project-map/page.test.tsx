@@ -411,11 +411,11 @@ describe("ProjectMapPage", () => {
       screen.getByText("Zapis kanoniczny: nie jest teraz wykonywany."),
     ).toBeTruthy();
     expect(
-      screen.getByText("Local approval capture: nie jest persisted i nie zapisuje map.json."),
+      screen.getByText("Lokalne potwierdzenie: nie jest persisted i nie zapisuje map.json."),
     ).toBeTruthy();
     expect(
       screen.getByText(
-        "Następny wymagany krok: osobny Product Owner-approved execution milestone.",
+        "Następny wymagany krok: osobny zatwierdzony milestone wykonawczy.",
       ),
     ).toBeTruthy();
     expect(screen.getAllByText("Status: candidate").length).toBeGreaterThan(0);
@@ -445,7 +445,7 @@ describe("ProjectMapPage", () => {
     ).toBe(true);
     expect(
       screen.getByText(
-        "Approval capture nie override'uje braków evidence, nie jest persisted, nie uruchamia execution milestone i nie zapisuje map.json.",
+        "Lokalne potwierdzenie nie omija braków evidence, nie jest persisted, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
       ),
     ).toBeTruthy();
     expect(
@@ -817,16 +817,16 @@ describe("ProjectMapPage", () => {
     expect(
       screen.getByText("Preview handoffu dla przyszłego execution milestone"),
     ).toBeTruthy();
-    expect(screen.getByText("Preflight status: BLOCKED")).toBeTruthy();
-    expect(screen.getByText("Local approval capture: unavailable / blocked")).toBeTruthy();
+    expect(screen.getByText("Status gotowości: BLOCKED")).toBeTruthy();
+    expect(screen.getByText("Lokalne potwierdzenie: unavailable / blocked")).toBeTruthy();
     expect(
       screen.getAllByText((content) =>
-        content.startsWith("Top blocker / reason: "),
+        content.startsWith("Główna blokada / powód: "),
       ).length,
     ).toBeTruthy();
     expect(
       screen.getByText(
-        "No write authorized now: nie wolno teraz tworzyć, zapisywać, nadpisywać ani promować map.json.",
+        "Brak zgody na zapis teraz: nie wolno teraz tworzyć, zapisywać, nadpisywać ani promować map.json.",
       ),
     ).toBeTruthy();
     expect(
@@ -838,7 +838,7 @@ describe("ProjectMapPage", () => {
     ).toBe(true);
     expect(
       screen.getByText(
-        "Approval capture nie override'uje blockers, nie jest persisted, nie uruchamia execution milestone i nie zapisuje map.json.",
+        "Lokalne potwierdzenie nie omija blokad, nie jest persisted, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
       ),
     ).toBeTruthy();
     expect(
@@ -869,20 +869,20 @@ describe("ProjectMapPage", () => {
 
     expect(screen.getByText("Status preview: READY_FOR_FUTURE_WRITE")).toBeTruthy();
     expect(screen.getByText("Status akcji: ready for future approval")).toBeTruthy();
-    expect(screen.getByText("Preflight status: READY_FOR_FUTURE_WRITE")).toBeTruthy();
+    expect(screen.getByText("Status gotowości: READY_FOR_FUTURE_WRITE")).toBeTruthy();
     expect(
       screen.getByText(
-        "Local approval capture: available locally / planning-only / not persisted",
+        "Lokalne potwierdzenie: dostępne lokalnie / tylko planowanie / nie zapisuje decyzji",
       ),
     ).toBeTruthy();
     expect(
       screen.getAllByText((content) =>
-        content.startsWith("Top blocker / reason: "),
+        content.startsWith("Główna blokada / powód: "),
       ).length,
     ).toBeTruthy();
     expect(
       screen.getByText(
-        "Future execution requires a separate Product Owner-approved milestone before any canonical write.",
+        "Przyszłe wykonanie wymaga osobnego zatwierdzonego milestone wykonawczego.",
       ),
     ).toBeTruthy();
     expect(
@@ -905,7 +905,7 @@ describe("ProjectMapPage", () => {
     expect(approvalCapture.checked).toBe(true);
     expect(
       screen.getByText(
-        "Lokalna intencja Product Ownera jest tylko planning-only, nie jest persisted i nie zastępuje osobnego przyszłego execution milestone.",
+        "Lokalna intencja Product Ownera jest tylko do planowania, nie jest persisted i nie zastępuje osobnego przyszłego milestone wykonawczego.",
       ),
     ).toBeTruthy();
     expect(

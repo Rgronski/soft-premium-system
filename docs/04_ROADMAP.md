@@ -193,8 +193,64 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.31 - Project Map Current State Clarity Foundation
+Latest Completed Product Milestone: MS-031.32 - Project Map Current State Copy Cleanup Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.32 - Project Map Current State Copy Cleanup Foundation
+
+**Milestone**
+MS-031.32 - Project Map Current State Copy Cleanup Foundation
+
+**Type**
+SPS OS / Project Map Current State Copy Cleanup Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+LOCAL PATCH / NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+
+**Product Outcome**
+The Project Map current-state, readiness, action-gate, and handoff-preview copy now uses clearer Polish-first labels and shorter blocker lines. The first-screen summary remains the primary orientation point while technical readiness details stay secondary.
+
+**Copy Cleanup Boundary**
+This milestone changes visible copy and readability only. It does not change Project Map data, candidate reconstruction, preflight evaluation, approval persistence, writer behavior, routes, handlers, or canonical Project Map runtime files.
+
+**Behavior**
+* `Local approval capture` is now shown as `Lokalne potwierdzenie`
+* `Product Owner-approved execution milestone` is now shown as `osobny zatwierdzony milestone wykonawczy`
+* `Preflight status` is now shown as `Status gotowości`
+* readiness blockers are split into shorter list items instead of one dense sentence
+* copy still states that no `map.json` write happens now
+* the action gate remains disabled and non-executing
+
+**Non-Goals**
+* no canonical Project Map writer
+* no server-side write route
+* no filesystem writer helper
+* no executing write handler
+* no approval persistence
+* no evaluator change
+* no creation, overwrite, promotion, or modification of `map.json`
+* no creation or modification of Project Map runtime files
+* no Beauty Client PRO repository inspection or modification
+
+**Implementation Evidence**
+* `src/app/projects/[id]/project-map/page.tsx` clarifies Polish-first labels and splits readiness blocker copy
+* `src/app/projects/[id]/project-map/page.test.tsx` verifies Polish-first labels, split blocker copy, no-write copy, and disabled action behavior
+* `src/lib/app-version.ts` records `APP_VERSION 1.0065` and `LAST_PUBLISHED_MS MS-031.32 - Project Map Current State Copy Cleanup Foundation`
+* `src/components/app-version-badge.test.tsx` keeps the visible app-version marker aligned
+
+**Verification**
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed
+* no canonical Project Map runtime files were created or modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* this milestone improves wording only; further reduction of adjacent modules may require a separate Product Owner-approved layout milestone
 
 ## MS-031.31 - Project Map Current State Clarity Foundation
 
@@ -205,13 +261,13 @@ MS-031.31 - Project Map Current State Clarity Foundation
 SPS OS / Project Map Current State Clarity Foundation
 
 **Status**
-COMPLETED / VERIFIED / ACCEPTED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Publication Status**
-LOCAL PATCH / NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Product Outcome**
 The Project Map tab now opens with a concise Polish current-state summary before detailed candidate, readiness, canonical write, approval capture, and handoff sections. The summary makes the current canonical/candidate/write state explicit before the lower-level controls.
