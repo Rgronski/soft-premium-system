@@ -353,7 +353,7 @@ describe("ProjectMapPage", () => {
         .getByRole("link", { name: /Przygotuj/ })
         .getAttribute("href"),
     ).toBe("/projects/project-1/project-map?prepareStorage=1");
-    expect(screen.getAllByText("Current view: candidate/read-only").length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByText("Widok teraz: candidate/read-only").length).toBeGreaterThanOrEqual(2);
     expect(
       screen.getAllByText(
         "Robocza mapa projektu została zbudowana z dostępnych danych. Pozostaje candidate/read-only i nie jest canonical map.json.",
@@ -371,7 +371,7 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("trust: candidate-read-only")).toBeTruthy();
     expect(screen.getByText("Co to za projekt?")).toBeTruthy();
     expect(screen.getAllByText((content) => content.includes("ID projektu:")).length).toBeGreaterThan(0);
-    expect(screen.getByText((content) => content.includes("Adres repozytorium:"))).toBeTruthy();
+    expect(screen.getAllByText((content) => content.includes("Adres repozytorium:")).length).toBeGreaterThan(0);
     expect(screen.getByText("Co już mamy?")).toBeTruthy();
     expect(screen.getByText("Co jest pod review?")).toBeTruthy();
     expect(screen.getByText("Co jest odrzucone / zablokowane?")).toBeTruthy();
@@ -384,22 +384,21 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Source identity: aligned")).toBeTruthy();
     expect(screen.getAllByText("Persistence source identity: persisted").length).toBeGreaterThan(0);
     expect(
-      screen.getAllByText("SSOT docs were found and can support the candidate map.").length,
+      screen.getAllByText("Znaleziono dokumenty SSOT, które mogą wspierać roboczą mapę.").length,
     ).toBeGreaterThan(0);
     expect(screen.queryByText("SSOT remains absent in the candidate map.")).toBeNull();
     expect(
       screen.getByText((content) =>
         content.includes("Potwierdzony stan projektu:") &&
-        content.includes("Project Identity") &&
-        content.includes("Candidate evidence"),
+        content.includes("Project Identity"),
       ),
     ).toBeTruthy();
     expect(screen.getByText("Stan kandydata: candidate-read-only")).toBeTruthy();
     expect(
-      screen.getByText(
-        "Następny krok: Review SSOT-derived map sections before any canonical save.",
-      ),
-    ).toBeTruthy();
+      screen.getAllByText((content) =>
+        content.includes("Przejrzyj sekcje mapy wynikające z SSOT przed jakimkolwiek zapisem kanonicznym."),
+      ).length,
+    ).toBeGreaterThan(0);
     expect(screen.getByText("Wyjaśnienie dostępności sekcji")).toBeTruthy();
     expect(screen.getByText("Co działa, co czeka i co blokuje")).toBeTruthy();
     expect(screen.getByText("Co jest aktualne w Mapie projektu")).toBeTruthy();
@@ -422,10 +421,10 @@ describe("ProjectMapPage", () => {
     ).toBeTruthy();
     expect(screen.getAllByText("Status: candidate").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Źródło: candidate").length).toBeGreaterThan(0);
-    expect(screen.getByText("Canonical vs candidate state")).toBeTruthy();
-    expect(screen.getAllByText("Current view: candidate/read-only").length).toBeGreaterThan(0);
-    expect(screen.getByText("Canonical Project Map: missing")).toBeTruthy();
-    expect(screen.getByText("Reconstruction candidate: available")).toBeTruthy();
+    expect(screen.getByText("Stan kanoniczny vs kandydat")).toBeTruthy();
+    expect(screen.getAllByText("Widok teraz: candidate/read-only").length).toBeGreaterThan(0);
+    expect(screen.getByText("Kanoniczna Project Map: missing")).toBeTruthy();
+    expect(screen.getByText("Kandydat rekonstrukcji: available")).toBeTruthy();
     expect(screen.getByText("Preview status zapisu kanonicznego")).toBeTruthy();
     expect(screen.getByRole("heading", { name: "NEEDS_EVIDENCE" })).toBeTruthy();
     expect(screen.getByText("Status preview: NEEDS_EVIDENCE")).toBeTruthy();
@@ -465,34 +464,34 @@ describe("ProjectMapPage", () => {
       screen.getByText("Ten milestone nie zapisuje, nie tworzy i nie promuje map.json."),
     ).toBeTruthy();
     expect(
-      screen.getAllByText("Source identity persistence: persisted").length,
+      screen.getAllByText("Persistence source identity: persisted").length,
     ).toBeGreaterThan(0);
-    expect(screen.getByText("Parked ideas visibility")).toBeTruthy();
-    expect(screen.getByText("Parked ideas details")).toBeTruthy();
+    expect(screen.getByText("Widoczność odłożonych pomysłów")).toBeTruthy();
+    expect(screen.getByText("Szczegóły odłożonych pomysłów")).toBeTruthy();
     expect(screen.getAllByText("Publication Path: parked | milestones: parked").length).toBeGreaterThan(0);
-    expect(screen.getByText("Milestone evidence drilldown")).toBeTruthy();
+    expect(screen.getByText("Szczegóły evidence milestone'ów")).toBeTruthy();
     expect(
       screen.getByText(
-        "Status reason: Parked evidence keeps this block as future context, not active scope.",
+        "Powód statusu: Parked evidence utrzymuje ten blok jako przyszły kontekst, nie aktywny zakres.",
       ),
     ).toBeTruthy();
     expect(
       screen.getByText(
-        "Evidence state: candidate / parked | source type: decision/ADR | source owner: project | source path: C:\\SPS_OS_WORK\\alpha-workspace\\docs\\adr\\2026-08-29-parked-ideas.md | confidence: direct | support: confirmed | conflict: none",
+        "Stan evidence: candidate / parked | typ źródła: decision/ADR | właściciel źródła: project | ścieżka źródła: C:\\SPS_OS_WORK\\alpha-workspace\\docs\\adr\\2026-08-29-parked-ideas.md | confidence: direct | support: confirmed | conflict: none",
       ),
     ).toBeTruthy();
     expect(
-      screen.queryByText("No source evidence linked to this block yet."),
+      screen.queryByText("Brak source evidence połączonego z tym blokiem."),
     ).toBeNull();
     expect(screen.getByText("Stan odczytu mapy")).toBeTruthy();
     expect(
       screen.getAllByText((content) => content.includes("Mapa projektu nie jest jeszcze gotowa")).length,
     ).toBeGreaterThan(0);
     expect(screen.getAllByText("candidate").length).toBeGreaterThan(0);
-    expect(screen.getByText("Candidate pipeline")).toBeTruthy();
-    expect(screen.getByText("Candidate pipeline details")).toBeTruthy();
-    expect(screen.getByText("Candidate foundation statuses")).toBeTruthy();
-    expect(screen.getByText("Evidence and provenance")).toBeTruthy();
+    expect(screen.getByText("Pipeline kandydata")).toBeTruthy();
+    expect(screen.getByText("Szczegóły pipeline kandydata")).toBeTruthy();
+    expect(screen.getByText("Statusy foundation kandydata")).toBeTruthy();
+    expect(screen.getByText("Evidence i provenance")).toBeTruthy();
     expect(screen.getAllByText("Project Identity").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Project Map").length).toBeGreaterThan(0);
     expect(screen.getAllByText("needs review").length).toBeGreaterThan(0);
@@ -500,11 +499,11 @@ describe("ProjectMapPage", () => {
       screen.getAllByText((content) => content.includes("README.md")).length,
     ).toBeGreaterThan(0);
     expect(
-      screen.getByText("Repository URL is aligned and source identity is persisted."),
+      screen.getByText("Adres repozytorium jest połączony z source identity i persisted w SPS metadata root."),
     ).toBeTruthy();
     expect(
       screen.getByText((content) =>
-        content.includes("Evidence i provenance pozostają w drilldown, a canonical save jest osobny."),
+        content.includes("Evidence i provenance pozostają w szczegółach, a zapis kanoniczny jest osobny."),
       ),
     ).toBeTruthy();
     expect(getServerProjectByIdMock).toHaveBeenCalledWith("project-1");
@@ -572,11 +571,11 @@ describe("ProjectMapPage", () => {
       }),
     );
 
-    expect(screen.getByText("Repository URL / Source Identity")).toBeTruthy();
+    expect(screen.getByText("Adres repozytorium / Source Identity")).toBeTruthy();
     expect(screen.getByText("Status: blocker")).toBeTruthy();
     expect(
       screen.getByText(
-        "Repository URL jest oczekiwany w BCP, ale Project Map source identity nadal pokazuje brak połączenia.",
+        "Adres repozytorium jest oczekiwany w BCP, ale Project Map source identity nadal pokazuje brak połączenia.",
       ),
     ).toBeTruthy();
     expect(
@@ -644,12 +643,12 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Robocza mapa projektu została zbudowana")).toBeTruthy();
     expect(
       screen.getByText(
-        "Candidate pipeline zwrócił widoczny wynik candidate/read-only bez promowania go do canonical map.json.",
+        "Pipeline kandydata zwrócił widoczny wynik candidate/read-only bez promowania go do canonical map.json.",
       ),
     ).toBeTruthy();
-    expect(screen.getByText("Candidate result: available")).toBeTruthy();
-    expect(screen.getByText("Evidence count: 2")).toBeTruthy();
-    expect(screen.getAllByText("Foundation areas: 8").length).toBeGreaterThan(0);
+    expect(screen.getByText("Wynik kandydata: available")).toBeTruthy();
+    expect(screen.getByText("Liczba evidence: 2")).toBeTruthy();
+    expect(screen.getAllByText("Obszary foundation: 8").length).toBeGreaterThan(0);
     expect(
       screen.getByText("Ostatnio odświeżono: 2026-08-30T12:34:56.000Z"),
     ).toBeTruthy();
@@ -681,7 +680,7 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Preview status zapisu kanonicznego")).toBeTruthy();
     expect(screen.getByRole("heading", { name: "UNKNOWN" })).toBeTruthy();
     expect(screen.getByText("Status preview: UNKNOWN")).toBeTruthy();
-    expect(screen.queryByText("Candidate pipeline")).toBeNull();
+    expect(screen.queryByText("Pipeline kandydata")).toBeNull();
     expect(resolveProjectMapReadResultMock).not.toHaveBeenCalled();
     expect(scanProjectMapEvidenceMock).not.toHaveBeenCalled();
   });
@@ -711,20 +710,20 @@ describe("ProjectMapPage", () => {
         content.includes("Mapa projektu jest obecna, ale odczyt niezaimplementowany"),
       ),
     ).toBeTruthy();
-    expect(screen.getByText("Canonical vs candidate state")).toBeTruthy();
-    expect(screen.getAllByText("Current view: mixed").length).toBeGreaterThan(0);
-    expect(screen.getByText("Canonical Project Map: present")).toBeTruthy();
-    expect(screen.getByText("Reconstruction candidate: available")).toBeTruthy();
-    expect(screen.getByText("Parked ideas visibility")).toBeTruthy();
-    expect(screen.getByText("Parked ideas details")).toBeTruthy();
+    expect(screen.getByText("Stan kanoniczny vs kandydat")).toBeTruthy();
+    expect(screen.getAllByText("Widok teraz: mixed").length).toBeGreaterThan(0);
+    expect(screen.getByText("Kanoniczna Project Map: present")).toBeTruthy();
+    expect(screen.getByText("Kandydat rekonstrukcji: available")).toBeTruthy();
+    expect(screen.getByText("Widoczność odłożonych pomysłów")).toBeTruthy();
+    expect(screen.getByText("Szczegóły odłożonych pomysłów")).toBeTruthy();
     expect(screen.getAllByText("Publication Path: parked | milestones: parked").length).toBeGreaterThan(0);
-    expect(screen.getByText("Milestone evidence drilldown")).toBeTruthy();
+    expect(screen.getByText("Szczegóły evidence milestone'ów")).toBeTruthy();
     expect(screen.getAllByText("Status: candidate").length).toBeGreaterThan(0);
     expect(screen.getByText((content) => content.includes("map.json:"))).toBeTruthy();
-    expect(screen.getByText("Candidate pipeline")).toBeTruthy();
-    expect(screen.getByText("Candidate pipeline details")).toBeTruthy();
-    expect(screen.getByText("Candidate foundation statuses")).toBeTruthy();
-    expect(screen.getByText("Evidence and provenance")).toBeTruthy();
+    expect(screen.getByText("Pipeline kandydata")).toBeTruthy();
+    expect(screen.getByText("Szczegóły pipeline kandydata")).toBeTruthy();
+    expect(screen.getByText("Statusy foundation kandydata")).toBeTruthy();
+    expect(screen.getByText("Evidence i provenance")).toBeTruthy();
     expect(screen.getByText("Gotowość do zapisu kanonicznego")).toBeTruthy();
     expect(screen.getByText("Robocza mapa: obecna")).toBeTruthy();
     expect(screen.getByText((content) => content.includes("Ten krok nie udostępnia create/write dla canonical map.json."))).toBeTruthy();
@@ -790,13 +789,13 @@ describe("ProjectMapPage", () => {
       }),
     );
 
-    expect(screen.getByText("Candidate pipeline")).toBeTruthy();
-    expect(screen.getByText("Candidate pipeline details")).toBeTruthy();
-    expect(screen.getByText("Canonical vs candidate state")).toBeTruthy();
+    expect(screen.getByText("Pipeline kandydata")).toBeTruthy();
+    expect(screen.getByText("Szczegóły pipeline kandydata")).toBeTruthy();
+    expect(screen.getByText("Stan kanoniczny vs kandydat")).toBeTruthy();
     expect(screen.getByText("Co jest aktualne w Mapie projektu")).toBeTruthy();
-    expect(screen.getAllByText("Current view: missing").length).toBeGreaterThan(0);
-    expect(screen.getByText("Canonical Project Map: missing")).toBeTruthy();
-    expect(screen.getByText("Reconstruction candidate: unavailable")).toBeTruthy();
+    expect(screen.getAllByText("Widok teraz: missing").length).toBeGreaterThan(0);
+    expect(screen.getByText("Kanoniczna Project Map: missing")).toBeTruthy();
+    expect(screen.getByText("Kandydat rekonstrukcji: unavailable")).toBeTruthy();
     expect(
       screen.getByText("Kanoniczna mapa: absent / brak kanonicznego map.json."),
     ).toBeTruthy();
@@ -809,12 +808,12 @@ describe("ProjectMapPage", () => {
     expect(screen.queryByText("Parked ideas visibility")).toBeNull();
     expect(screen.queryByText("Parked ideas details")).toBeNull();
     expect(
-      screen.getByText("No parked or deferred items were found in the current candidate."),
+      screen.getByText("Nie znaleziono odłożonych ani deferred elementów w bieżącym kandydacie."),
     ).toBeTruthy();
-    expect(screen.queryByText("Milestone evidence drilldown")).toBeNull();
+    expect(screen.queryByText("Szczegóły evidence milestone'ów")).toBeNull();
     expect(screen.queryByText("No candidate evidence was available for drilldown yet.")).toBeNull();
     expect(screen.getAllByText((content) => content.includes("Powód:")).length).toBeGreaterThan(0);
-    expect(screen.queryByText("Candidate foundation statuses")).toBeNull();
+    expect(screen.queryByText("Statusy foundation kandydata")).toBeNull();
     expect(screen.getByText("Sprawdź roboczą mapę")).toBeTruthy();
     expect(screen.getByText("Oceń kandydata przed dalszą pracą")).toBeTruthy();
     expect(screen.getByText("Gotowość do zapisu kanonicznego")).toBeTruthy();

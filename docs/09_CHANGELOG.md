@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.34 Project Map Remaining English Copy Cleanup Foundation
+
+### Date
+
+2026-09-09
+
+### Completed
+
+* Replaced remaining visible English Project Map labels with Polish-first labels.
+* Polished SSOT review guidance, parked-context empty state, candidate refresh feedback, canonical-vs-candidate copy, and milestone evidence drilldown reasons.
+* Kept technical values such as `candidate`, `evidence`, `SSOT`, URLs, IDs, paths, and `map.json` visible where they are data.
+* Updated the app-version marker to `1.0067`.
+
+### Verification
+
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed.
+
 ## Session 099 - MS-031.33 Project Map Candidate Metadata Copy Cleanup Foundation
 
 ### Date

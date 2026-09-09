@@ -289,10 +289,10 @@ function buildProjectMapStateCopy(
         details: [
           `Project Map root: ${mapReadResult.projectMapRootPath}`,
           `map.json: ${mapReadResult.mapJsonPath}`,
-          "Current view: candidate/read-only",
+          "Widok teraz: candidate/read-only",
           candidateAvailable
-            ? "Next step: Review the candidate and keep canonical save separate."
-            : "Next step: Pokaż roboczą mapę.",
+            ? "Następny krok: przejrzyj kandydata i trzymaj zapis kanoniczny osobno."
+            : "Następny krok: pokaż roboczą mapę.",
         ],
       };
     }
@@ -361,8 +361,8 @@ function buildProjectMapCandidateCopy(
       "Robocza mapa projektu została zbudowana z dostępnych danych. Pozostaje candidate/read-only i nie jest canonical map.json.",
     details: [
       "Źródło stanu: repo + SSOT + candidate evidence.",
-      "Primary view pokazuje gotowe elementy, review, blokady i next steps.",
-      "Evidence i provenance pozostają w drilldown, a canonical save jest osobny.",
+      "Główny widok pokazuje gotowe elementy, review, blokady i następne kroki.",
+      "Evidence i provenance pozostają w szczegółach, a zapis kanoniczny jest osobny.",
     ],
     foundationChecklist: candidate.foundationChecklist,
     evidenceSummaries: candidate.evidence.map((evidence) => {
@@ -385,36 +385,36 @@ function buildProjectMapOverviewCards(
   return [
     {
       label: "Done",
-      title: "Current state",
+      title: "Aktualny stan",
       description:
         projectMapCanonicalVsCandidateCopy?.description ??
-        "Canonical and candidate state is not available yet.",
+        "Stan kanoniczny i kandydat nie są jeszcze dostępne.",
       detail:
         projectMapCanonicalVsCandidateCopy?.details[0] ??
-        "Current view: unavailable",
+        "Widok teraz: unavailable",
     },
     {
       label: "Next",
-      title: "Candidate status",
+      title: "Status kandydata",
       description:
         projectMapCandidateCopy?.description ??
-        "No reviewable candidate could be built yet.",
+        "Nie udało się jeszcze zbudować kandydata do review.",
       detail:
         projectMapCandidateCopy?.details[0] ??
         (projectMapStateCopy.title === "Kontekst projektu niedostÄ™pny"
-          ? "No project context is available yet."
+          ? "Brak dostępnego kontekstu projektu."
           : projectMapStateCopy.details[0]) ??
-        "Candidate pipeline remains unavailable.",
+        "Pipeline kandydata pozostaje niedostępny.",
     },
     {
       label: "Parked",
-      title: "Parked context",
+      title: "Kontekst odłożony",
       description:
         projectMapParkedIdeasCopy?.description ??
-        "Parked ideas remain visible as future context.",
+        "Odłożone pomysły pozostają widoczne jako przyszły kontekst.",
       detail:
         projectMapParkedIdeasCopy?.details[0] ??
-        "No parked or deferred items were found in the current candidate.",
+        "Nie znaleziono odłożonych ani deferred elementów w bieżącym kandydacie.",
     },
   ];
 }
@@ -467,10 +467,10 @@ function buildProjectMapAvailabilityExplanationCopy(
       label: "SSOT",
       status: ssotDocsFound ? "candidate" : "planowane",
       why: ssotDocsFound
-        ? "SSOT docs were found and can support the candidate map."
+        ? "Znaleziono dokumenty SSOT, które mogą wspierać roboczą mapę."
         : "Źródło prawdy dla milestone'ów żyje w docs/SSOT, nie w tej stronie.",
       nextStep: ssotDocsFound
-        ? "Review SSOT-derived map sections before any canonical save."
+        ? "Przejrzyj sekcje mapy wynikające z SSOT przed jakimkolwiek zapisem kanonicznym."
         : "Trzymaj docs/04_ROADMAP.md, docs/08_CURRENT_STATE.md i docs/10_SESSION_STATE.md w zgodzie.",
       source: ssotDocsFound ? "candidate" : "SPS shell",
     },
@@ -494,7 +494,7 @@ function buildProjectMapAvailabilityExplanationCopy(
           ? "Folder jest gotowy, ale widok nadal potrzebuje dalszej integracji, żeby dać użyteczny wynik."
           : "Brakuje gotowego folderu lub odczytu, więc mapa pozostaje niegotowa.",
       nextStep: candidateResultAvailable
-        ? "Przejrzyj wynik kandydata i trzymaj canonical save osobno."
+        ? "Przejrzyj wynik kandydata i trzymaj zapis kanoniczny osobno."
         : "Uzupełnij brakującą integrację albo przygotuj storage, zależnie od stanu projektu.",
       source: candidateResultAvailable ? "candidate" : "SPS shell",
     },
@@ -530,12 +530,12 @@ function buildProjectMapAvailabilityExplanationCopy(
     {
       label: "Publication Path",
       status: "planowane",
-      why: "Canonical save / publish pozostaje approval-bound i poza tym milestone'em.",
+      why: "Zapis kanoniczny / publikacja pozostaje approval-bound i poza tym milestone'em.",
       nextStep: "Dodaj path publikacji dopiero po osobnej zgodzie Product Ownera.",
       source: "canonical",
     },
     {
-      label: "Repository URL / Source Identity",
+      label: "Adres repozytorium / Source Identity",
       status:
         sourceIdentityReady
           ? "działa"
@@ -546,19 +546,19 @@ function buildProjectMapAvailabilityExplanationCopy(
             : "blocker",
       why:
         sourceIdentityReady
-          ? "Repository URL jest połączony z source identity i persisted w SPS metadata root."
+          ? "Adres repozytorium jest połączony z source identity i persisted w SPS metadata root."
           : projectRepositoryUrl && sourceIdentityRepositoryUrl
             ? projectRepositoryUrl === sourceIdentityRepositoryUrl
-              ? "Repository URL jest połączony, ale source identity persistence nie jest jeszcze potwierdzone."
-              : "Repository URL w source identity nie zgadza się z kontekstem projektu."
-            : "Repository URL jest oczekiwany w BCP, ale Project Map source identity nadal pokazuje brak połączenia.",
+              ? "Adres repozytorium jest połączony, ale source identity persistence nie jest jeszcze potwierdzone."
+              : "Adres repozytorium w source identity nie zgadza się z kontekstem projektu."
+            : "Adres repozytorium jest oczekiwany w BCP, ale Project Map source identity nadal pokazuje brak połączenia.",
       nextStep: sourceIdentityReady
-        ? "Review SSOT-derived map sections before any canonical save."
+        ? "Przejrzyj sekcje mapy wynikające z SSOT przed jakimkolwiek zapisem kanonicznym."
         : projectRepositoryUrl && sourceIdentityRepositoryUrl
           ? projectRepositoryUrl === sourceIdentityRepositoryUrl
-            ? "Persist source identity before trusting the candidate."
-            : "Align repositoryUrl with the BCP project record, then re-evaluate source identity."
-          : "Pod??cz repository URL do source identity, zanim zaufasz kandydatowi.",
+            ? "Utrwal source identity przed zaufaniem kandydatowi."
+            : "Uzgodnij repositoryUrl z rekordem projektu BCP, potem oceń source identity ponownie."
+          : "Podłącz adres repozytorium do source identity, zanim zaufasz kandydatowi.",
       source: sourceIdentityReady
         ? "candidate"
         : projectRepositoryUrl || sourceIdentityRepositoryUrl
@@ -566,13 +566,13 @@ function buildProjectMapAvailabilityExplanationCopy(
           : "missing",
     },
     {
-      label: "Candidate result / evidence",
+      label: "Wynik kandydata / evidence",
       status: candidateResultAvailable ? "candidate" : "wymaga danych",
       why: candidateResultAvailable
         ? `Kandydat zwraca ${projectMapCandidateCopy?.evidenceSummaries.length ?? 0} wpisów evidence i pozostaje read-only.`
         : "Brak czytelnego wyniku kandydata, więc nie ma jeszcze czego oceniać.",
       nextStep: candidateResultAvailable
-        ? "Przejrzyj evidence i nie promuj wyniku bez approval-bound save."
+        ? "Przejrzyj evidence i nie promuj wyniku bez osobno zatwierdzonego zapisu."
         : "Uruchom candidate pipeline albo przygotuj dane wejściowe.",
       source: candidateResultAvailable ? "candidate" : "missing",
     },
@@ -912,7 +912,7 @@ function buildProjectMapRefreshFeedbackCopy(
       description:
         "Odświeżenie uruchomiło candidate pipeline, ale nie zwrócił on jeszcze użytecznego wyniku.",
       details: [
-        "Candidate result: unavailable",
+        "Wynik kandydata: unavailable",
         `Ostatnio odświeżono: ${refreshedAt ?? "brak znacznika czasu"}`,
         "Canonical map.json nie został utworzony ani promowany.",
       ],
@@ -925,9 +925,9 @@ function buildProjectMapRefreshFeedbackCopy(
       description:
         "Odświeżenie uruchomiło pipeline, ale dostępne dane nie wystarczyły do zbudowania czytelnego wyniku candidate.",
       details: [
-        `Candidate result: unavailable (${candidate.reason})`,
-        `Project ID: ${candidate.projectId ?? "missing"}`,
-        `Project name: ${candidate.projectName ?? "missing"}`,
+        `Wynik kandydata: unavailable (${candidate.reason})`,
+        `ID projektu: ${candidate.projectId ?? "missing"}`,
+        `Nazwa projektu: ${candidate.projectName ?? "missing"}`,
         `Ostatnio odświeżono: ${refreshedAt ?? "brak znacznika czasu"}`,
       ],
     };
@@ -936,11 +936,11 @@ function buildProjectMapRefreshFeedbackCopy(
   return {
     title: "Robocza mapa projektu została zbudowana",
     description:
-      "Candidate pipeline zwrócił widoczny wynik candidate/read-only bez promowania go do canonical map.json.",
+      "Pipeline kandydata zwrócił widoczny wynik candidate/read-only bez promowania go do canonical map.json.",
     details: [
-      `Candidate result: available`,
-      `Evidence count: ${candidate.evidence.length}`,
-      `Foundation areas: ${candidate.foundationChecklist.length}`,
+      `Wynik kandydata: available`,
+      `Liczba evidence: ${candidate.evidence.length}`,
+      `Obszary foundation: ${candidate.foundationChecklist.length}`,
       `Ostatnio odświeżono: ${refreshedAt ?? "brak znacznika czasu"}`,
       "Canonical map.json pozostaje poza zakresem tego kroku.",
     ],
@@ -975,10 +975,10 @@ function buildProjectMapCanonicalVsCandidateCopy(
           : "missing";
 
   const details = [
-    `Current view: ${viewMode}`,
-    `Canonical Project Map: ${canonicalStatus}`,
-    `Reconstruction candidate: ${candidateStatus}`,
-    "Candidate data is not canonical unless it is explicitly written through the approved boundary.",
+    `Widok teraz: ${viewMode}`,
+    `Kanoniczna Project Map: ${canonicalStatus}`,
+    `Kandydat rekonstrukcji: ${candidateStatus}`,
+    "Dane kandydata nie są kanoniczne bez jawnego zapisu przez zatwierdzoną granicę.",
   ];
 
   if (
@@ -987,7 +987,7 @@ function buildProjectMapCanonicalVsCandidateCopy(
     mapReadResult.projectSourceIdentityPersistence
   ) {
     details.push(
-      `Source identity persistence: ${mapReadResult.projectSourceIdentityPersistence.status}`,
+      `Persistence source identity: ${mapReadResult.projectSourceIdentityPersistence.status}`,
     );
   }
 
@@ -997,7 +997,7 @@ function buildProjectMapCanonicalVsCandidateCopy(
     mapReadResult.projectSourceIdentity
   ) {
     details.push(
-      `Repository URL: ${mapReadResult.projectSourceIdentity.repositoryUrl ?? "missing"}`,
+      `Adres repozytorium: ${mapReadResult.projectSourceIdentity.repositoryUrl ?? "missing"}`,
     );
     details.push(
       `Working source: ${mapReadResult.projectSourceIdentity.workingDirectory ?? "missing"}`,
@@ -1011,9 +1011,9 @@ function buildProjectMapCanonicalVsCandidateCopy(
   }
 
   return {
-    title: "Canonical vs candidate state",
+    title: "Stan kanoniczny vs kandydat",
     description:
-      "This summary keeps canonical Project Map state separate from reconstruction candidate state and makes the current view explicit.",
+      "To podsumowanie oddziela stan kanoniczny Project Map od kandydata rekonstrukcji i jasno pokazuje bieżący widok.",
     details,
   };
 }
@@ -1074,33 +1074,33 @@ function buildProjectMapMilestoneEvidenceStatusReason(
 ): string {
   if (item.status === "completed") {
     return item.supportState === "confirmed"
-      ? "Direct source evidence supports this block as completed."
-      : "Evidence points to completion, but the support signal remains weaker.";
+      ? "Bezpośrednie evidence ze źródła potwierdza ten blok jako completed."
+      : "Evidence wskazuje ukończenie, ale sygnał wsparcia pozostaje słabszy.";
   }
 
   if (item.status === "planned") {
     return item.evidence.length > 0
-      ? "Source evidence links this block to planned future work."
-      : "Planned because no completion evidence was found.";
+      ? "Evidence ze źródła łączy ten blok z planowaną przyszłą pracą."
+      : "Planowane, bo nie znaleziono evidence ukończenia.";
   }
 
   if (item.status === "blocked") {
-    return "Unavailable or unreadable evidence keeps this block blocked.";
+    return "Niedostępne albo nieczytelne evidence utrzymuje ten blok jako blocked.";
   }
 
   if (item.status === "parked") {
-    return "Parked evidence keeps this block as future context, not active scope.";
+    return "Parked evidence utrzymuje ten blok jako przyszły kontekst, nie aktywny zakres.";
   }
 
   if (item.status === "needs review") {
-    return "Conflicting evidence keeps this block on review.";
+    return "Konflikt evidence utrzymuje ten blok w review.";
   }
 
   if (item.status === "absent") {
-    return "No supporting evidence was found, so the block stays absent.";
+    return "Nie znaleziono wspierającego evidence, więc blok pozostaje absent.";
   }
 
-  return "Evidence exists, but the block remains unresolved.";
+  return "Evidence istnieje, ale blok pozostaje nierozstrzygnięty.";
 }
 
 function buildProjectMapMilestoneEvidenceDrilldownCopy(
@@ -1115,7 +1115,7 @@ function buildProjectMapMilestoneEvidenceDrilldownCopy(
       item.evidence.length > 0
         ? item.evidence.map(
             (evidence) =>
-              `Evidence state: ${buildProjectMapMilestoneEvidenceStateLabel(evidence)} | source type: ${evidence.evidenceType} | source owner: ${evidence.sourceOwner} | source path: ${evidence.sourcePath} | confidence: ${evidence.confidence} | support: ${evidence.supportState} | conflict: ${evidence.conflictState}`,
+              `Stan evidence: ${buildProjectMapMilestoneEvidenceStateLabel(evidence)} | typ źródła: ${evidence.evidenceType} | właściciel źródła: ${evidence.sourceOwner} | ścieżka źródła: ${evidence.sourcePath} | confidence: ${evidence.confidence} | support: ${evidence.supportState} | conflict: ${evidence.conflictState}`,
           )
         : [];
 
@@ -1132,11 +1132,11 @@ function buildProjectMapMilestoneEvidenceDrilldownCopy(
   }
 
     return {
-      title: "Milestone evidence drilldown",
+      title: "Szczegóły evidence milestone'ów",
       description:
-        "This drilldown shows only evidence-backed blocks and explains why they stay check, planned, blocked, unknown, parked, or needs review without upgrading evidence by implication.",
+        "Te szczegóły pokazują tylko bloki oparte na evidence i wyjaśniają, czemu zostają check, planned, blocked, unknown, parked albo needs review bez domyślnego podbijania evidence.",
       entries,
-      emptyState: "No candidate evidence was available for drilldown yet.",
+      emptyState: "Brak candidate evidence dostępnego w szczegółach.",
     };
   }
 
@@ -1174,7 +1174,7 @@ function buildProjectMapMissingInputCopy(item: string): ProjectMapMissingInputCo
   if (item.includes("Repository URL is missing from Project Map source identity.")) {
     return {
       label: "Brak pełnego źródła dla bloku: source identity",
-      detail: "Project Map source identity nie zawiera Repository URL.",
+      detail: "Project Map source identity nie zawiera adresu repozytorium.",
     };
   }
 
@@ -1939,11 +1939,11 @@ export default async function ProjectMapPage({
           className="rounded-xl border border-emerald-900/50 bg-emerald-950/20 p-4"
         >
           <summary className="cursor-pointer list-none text-sm uppercase tracking-[0.2em] text-emerald-200/70">
-            Canonical vs candidate state
+            Stan kanoniczny vs kandydat
           </summary>
           <div className="mt-4">
             <h3 className="text-xl font-semibold text-emerald-50">
-              Canonical state details
+              Szczegóły stanu kanonicznego
             </h3>
             <p className="mt-2 text-sm text-emerald-100/80">
               {projectMapCanonicalVsCandidateCopy.description}
@@ -1965,11 +1965,11 @@ export default async function ProjectMapPage({
       {projectMapParkedIdeasCopy ? (
         <details className="rounded-xl border border-lime-900/50 bg-lime-950/20 p-4">
           <summary className="cursor-pointer list-none text-sm uppercase tracking-[0.2em] text-lime-200/70">
-            Parked ideas visibility
+            Widoczność odłożonych pomysłów
           </summary>
           <div className="mt-4">
             <h3 className="text-xl font-semibold text-lime-50">
-              Parked ideas details
+              Szczegóły odłożonych pomysłów
             </h3>
             <p className="mt-2 text-sm text-lime-100/80">
               {projectMapParkedIdeasCopy.description}
@@ -1991,12 +1991,12 @@ export default async function ProjectMapPage({
       {projectMapMilestoneEvidenceDrilldownCopy ? (
         <details className="space-y-3 rounded-xl border border-cyan-900/50 bg-cyan-950/20 p-4">
           <summary className="cursor-pointer list-none text-sm uppercase tracking-[0.2em] text-cyan-200/70">
-            Milestone evidence drilldown
+            Szczegóły evidence milestone'ów
           </summary>
           <div className="mt-4 space-y-3">
             <div className="space-y-1">
               <h3 className="text-xl font-semibold text-cyan-50">
-                Milestone evidence details
+                Detale evidence milestone'ów
               </h3>
               <p className="text-sm text-cyan-100/80">
                 {projectMapMilestoneEvidenceDrilldownCopy.description}
@@ -2016,7 +2016,7 @@ export default async function ProjectMapPage({
                           {entry.foundationArea}
                         </p>
                         <p className="text-sm text-cyan-100/80">
-                          Status reason: {entry.statusReason}
+                          Powód statusu: {entry.statusReason}
                         </p>
                       </div>
 
@@ -2036,7 +2036,7 @@ export default async function ProjectMapPage({
                       </ul>
                     ) : (
                       <p className="mt-3 rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2 text-sm text-cyan-50/90">
-                        No source evidence linked to this block yet.
+                        Brak source evidence połączonego z tym blokiem.
                       </p>
                     )}
                   </div>
@@ -2076,12 +2076,12 @@ export default async function ProjectMapPage({
       {projectMapCandidateCopy ? (
         <details className="space-y-3 rounded-xl border border-sky-900/50 bg-sky-950/20 p-4">
           <summary className="cursor-pointer list-none text-sm uppercase tracking-[0.2em] text-sky-200/70">
-            Candidate pipeline
+            Pipeline kandydata
           </summary>
           <div className="mt-4 space-y-3">
             <div className="space-y-1">
               <h3 className="text-xl font-semibold text-sky-50">
-                Candidate pipeline details
+                Szczegóły pipeline kandydata
               </h3>
               <p className="text-sm text-sky-100/80">
                 {projectMapCandidateCopy.description}
@@ -2103,11 +2103,11 @@ export default async function ProjectMapPage({
               <div className="space-y-3">
                 <div className="space-y-1">
                   <p className="text-sm uppercase tracking-[0.2em] text-sky-200/70">
-                    Candidate foundation statuses
+                    Statusy foundation kandydata
                   </p>
                   <p className="text-sm text-sky-100/70">
-                    Reviewable candidate data stays separate from canonical Project
-                    Map data.
+                    Dane kandydata do review pozostają oddzielone od kanonicznych
+                    danych Project Map.
                   </p>
                 </div>
 
@@ -2141,11 +2141,11 @@ export default async function ProjectMapPage({
               <div className="space-y-3">
                 <div className="space-y-1">
                   <p className="text-sm uppercase tracking-[0.2em] text-sky-200/70">
-                    Evidence and provenance
+                    Evidence i provenance
                   </p>
                   <p className="text-sm text-sky-100/70">
-                    Source links remain visible so the candidate can be reviewed
-                    without promoting it to canonical data.
+                    Linki źródłowe pozostają widoczne, żeby kandydat mógł zostać
+                    sprawdzony bez promowania go do danych kanonicznych.
                   </p>
                 </div>
 

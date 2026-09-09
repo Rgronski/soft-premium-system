@@ -193,8 +193,64 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.33 - Project Map Candidate Metadata Copy Cleanup Foundation
+Latest Completed Product Milestone: MS-031.34 - Project Map Remaining English Copy Cleanup Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.34 - Project Map Remaining English Copy Cleanup Foundation
+
+**Milestone**
+MS-031.34 - Project Map Remaining English Copy Cleanup Foundation
+
+**Type**
+SPS OS / Project Map Remaining English Copy Cleanup Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+LOCAL PATCH / NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+
+**Product Outcome**
+The lower Project Map UI now removes the remaining visible English copy from status cards, availability explanations, candidate refresh feedback, canonical-vs-candidate details, parked context, and milestone evidence drilldown while preserving technical/raw values where they are actual data.
+
+**Copy Cleanup Boundary**
+This milestone changes visible copy/readability only. It does not change candidate data, evaluator behavior, approval persistence, writer behavior, routes, handlers, or canonical Project Map runtime files.
+
+**Behavior**
+* remaining UI labels now use Polish-first wording such as `Aktualny stan`, `Status kandydata`, `Kontekst odłożony`, `Adres repozytorium`, and `Wynik kandydata / evidence`
+* common reason and next-step strings are Polish-first, including SSOT review guidance, parked-context empty state, refresh feedback, and evidence drilldown status reasons
+* raw terms such as `SSOT`, `candidate`, `evidence`, `map.json`, URLs, IDs, and file paths remain visible where they are data
+* copy still states that no `map.json` write happens now
+* the action gate remains disabled and non-executing
+
+**Non-Goals**
+* no canonical Project Map writer
+* no server-side write route
+* no filesystem writer helper
+* no executing write handler
+* no approval persistence
+* no evaluator behavior change
+* no candidate data model change
+* no creation, overwrite, promotion, or modification of `map.json`
+* no creation or modification of Project Map runtime files
+* no Beauty Client PRO repository inspection or modification
+
+**Implementation Evidence**
+* `src/app/projects/[id]/project-map/page.tsx` polishes remaining visible English labels and short reason/next-step strings in the Project Map UI
+* `src/app/projects/[id]/project-map/page.test.tsx` verifies Polish labels, removed English UI labels, no-write copy, and disabled action behavior
+* `src/lib/app-version.ts` records `APP_VERSION 1.0067` and `LAST_PUBLISHED_MS MS-031.34 - Project Map Remaining English Copy Cleanup Foundation`
+* `src/components/app-version-badge.test.tsx` keeps the visible app-version marker aligned
+
+**Verification**
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed
+* no canonical Project Map runtime files were created or modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* technical domain tokens such as `candidate`, `evidence`, `SSOT`, and file names remain visible by design because they are current Project Map data vocabulary
 
 ## MS-031.33 - Project Map Candidate Metadata Copy Cleanup Foundation
 
@@ -208,10 +264,10 @@ SPS OS / Project Map Candidate Metadata Copy Cleanup Foundation
 COMPLETED / VERIFIED / ACCEPTED
 
 **Publication Status**
-LOCAL PATCH / NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Product Outcome**
 The lower Project Map candidate metadata and canonical write action-gate reason copy now reads more consistently as Polish-first UI. Technical values remain visible where they are data, while labels and user-facing reasons are simplified.
