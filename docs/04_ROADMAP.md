@@ -193,8 +193,66 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.30 - Project Map Canonical Write Execution Handoff Preview Foundation
+Latest Completed Product Milestone: MS-031.31 - Project Map Current State Clarity Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.31 - Project Map Current State Clarity Foundation
+
+**Milestone**
+MS-031.31 - Project Map Current State Clarity Foundation
+
+**Type**
+SPS OS / Project Map Current State Clarity Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+LOCAL PATCH / NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+
+**Product Outcome**
+The Project Map tab now opens with a concise Polish current-state summary before detailed candidate, readiness, canonical write, approval capture, and handoff sections. The summary makes the current canonical/candidate/write state explicit before the lower-level controls.
+
+**Clarity Boundary**
+This milestone changes UI readability only. It does not change Project Map data, candidate reconstruction, preflight evaluation, approval persistence, writer behavior, routes, handlers, or canonical Project Map runtime files.
+
+**Behavior**
+* the first visible Project Map area shows whether canonical `map.json` is absent or present
+* the summary states whether the visible map is a roboczy kandydat or whether no ready candidate exists
+* the summary states that canonical write is not currently executed
+* the summary states that local approval capture is not persisted and does not write `map.json`
+* the summary states that a separate Product Owner-approved execution milestone is still required
+* the technical preview status details are collapsed behind the existing details pattern
+* the action gate and handoff preview remain visible and non-executing
+
+**Non-Goals**
+* no canonical Project Map writer
+* no server-side write route
+* no filesystem writer helper
+* no executing write handler
+* no approval persistence
+* no evaluator change
+* no creation, overwrite, promotion, or modification of `map.json`
+* no creation or modification of Project Map runtime files
+* no Beauty Client PRO repository inspection or modification
+
+**Implementation Evidence**
+* `src/app/projects/[id]/project-map/page.tsx` adds the top current-state summary and collapses technical preview details
+* `src/app/projects/[id]/project-map/page.test.tsx` verifies current-state summary copy and preserved non-executing action gate behavior
+* `src/lib/app-version.ts` records `APP_VERSION 1.0064` and `LAST_PUBLISHED_MS MS-031.31 - Project Map Current State Clarity Foundation`
+* `src/components/app-version-badge.test.tsx` keeps the visible app-version marker aligned
+
+**Verification**
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed
+* no canonical Project Map runtime files were created or modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* this milestone improves clarity only; canonical write execution remains separate future work
+* further simplification may require Product Owner UX review before moving or hiding more sections
 
 ## MS-031.30 - Project Map Canonical Write Execution Handoff Preview Foundation
 
@@ -205,13 +263,13 @@ MS-031.30 - Project Map Canonical Write Execution Handoff Preview Foundation
 SPS OS / Project Map Canonical Write Execution Handoff Preview Foundation
 
 **Status**
-COMPLETED / VERIFIED / ACCEPTED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Publication Status**
-LOCAL PATCH / NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Product Outcome**
 The Project Map canonical write action gate now includes a compact read-only handoff preview for a future execution milestone. The preview surfaces the preflight status, local approval capture state, top blocker or reason, and the explicit boundary that no canonical `map.json` write is authorized now.

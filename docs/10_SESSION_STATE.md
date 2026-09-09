@@ -326,31 +326,33 @@ SPS OS Session State
 
 Date: 2026-09-09
 Current Session ID: 099
-Current Chat Title: 099 SPS OS - MS-031.30 Project Map Canonical Write Execution Handoff Preview Foundation
+Current Chat Title: 099 SPS OS - MS-031.31 Project Map Current State Clarity Foundation
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
-Active Capability: Project Map Canonical Write Execution Handoff Preview
-Active Work Item: MS-031.30 Project Map Canonical Write Execution Handoff Preview Foundation
+Active Capability: Project Map Current State Clarity
+Active Work Item: MS-031.31 Project Map Current State Clarity Foundation
 Current Mode: ACTIVE
-Completed Capability Items: MS-031.30 adds a non-executing Project Map canonical write execution handoff preview without persistence, writer behavior, or canonical Project Map runtime file modification.
+Completed Capability Items: MS-031.31 adds a top current-state summary and collapses lower-priority technical preview status details without writer behavior or canonical Project Map runtime file modification.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.30 - Project Map Canonical Write Execution Handoff Preview Foundation
+Latest Completed Product Milestone: MS-031.31 - Project Map Current State Clarity Foundation
 Next Product Milestone: UNKNOWN / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: MS-031.30 Project Map canonical write execution handoff preview implemented and accepted as local read-only UI/copy work
+Latest Completed Capability Item: MS-031.31 Project Map current-state clarity implemented and accepted as local UI/readability work
 Current Sprint: NONE
 Platform Priority: Preserve Project Map candidate/canonical separation until a separate Product Owner-approved future milestone performs any canonical write.
 Repository Branch: main
-Repository Working Tree State: MODIFIED / local MS-031.30 execution handoff preview patch
+Repository Working Tree State: MODIFIED / local MS-031.31 current-state clarity patch
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 739ff25
+Latest Verified Commit: 9f2207c
 Verification Status: PASS
 Blockers: NONE
 Open Risks: Canonical `map.json` write or promotion remains approval-bound and must not start without a separate Product Owner-approved future milestone.
-Next Safe Step: Product Owner reviews the MS-031.30 execution handoff preview patch and decides whether to publish it; canonical write execution remains a separate future approval.
+Next Safe Step: Product Owner reviews the MS-031.31 current-state clarity patch and decides whether to publish it; canonical write execution remains a separate future approval.
 Next Session Plan: UNKNOWN
 
-MS-031.30 is COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED in the current local workspace as the Project Map Canonical Write Execution Handoff Preview Foundation. The Project Map canonical write action gate now includes a compact read-only handoff preview for a future execution milestone. The preview shows preflight status, local approval capture state, top blocker or reason, that no current `map.json` write is authorized, and that future execution still requires a separate Product Owner-approved milestone. MS-031.30 does not persist approval, change the evaluator, create a write route, writer helper, filesystem write behavior, executing write handler, clipboard/copy handler, canonical Project Map runtime file, or Beauty Client PRO repository modification. `APP_VERSION` is now `1.0063` and `LAST_PUBLISHED_MS` is `MS-031.30 - Project Map Canonical Write Execution Handoff Preview Foundation`.
+MS-031.31 is COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED in the current local workspace as the Project Map Current State Clarity Foundation. The Project Map tab now opens with a concise Polish current-state summary that states whether canonical `map.json` is absent or present, whether the visible map is a roboczy kandydat or not ready, that canonical write is not currently executed, that local approval capture is not persisted and does not write `map.json`, and that a separate Product Owner-approved execution milestone is still required. Technical preview status details are collapsed behind the existing details pattern while the action gate and handoff preview remain visible, secondary, disabled, and non-executing. MS-031.31 does not change the evaluator, persist approval, create a write route, writer helper, filesystem write behavior, executing write handler, canonical Project Map runtime file, or Beauty Client PRO repository modification. `APP_VERSION` is now `1.0064` and `LAST_PUBLISHED_MS` is `MS-031.31 - Project Map Current State Clarity Foundation`.
+
+MS-031.30 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Canonical Write Execution Handoff Preview Foundation. The Project Map canonical write action gate now includes a compact read-only handoff preview for a future execution milestone. The preview shows preflight status, local approval capture state, top blocker or reason, that no current `map.json` write is authorized, and that future execution still requires a separate Product Owner-approved milestone. MS-031.30 does not persist approval, change the evaluator, create a write route, writer helper, filesystem write behavior, executing write handler, clipboard/copy handler, canonical Project Map runtime file, or Beauty Client PRO repository modification. `APP_VERSION` is now `1.0063` and `LAST_PUBLISHED_MS` is `MS-031.30 - Project Map Canonical Write Execution Handoff Preview Foundation`.
 
 MS-031.29 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Canonical Write Approval Messaging Foundation. The local approval capture and action-gate messaging now states more explicitly that captured intent is local, planning-only, non-persistent, does not write canonical `map.json`, and does not replace a separate future Product Owner-approved execution milestone. The disabled action gate remains disabled after local capture, and blocked / needs-evidence states state that approval capture cannot override blockers or evidence gaps. MS-031.29 does not change the evaluator, persist approval, create a write route, writer helper, filesystem write behavior, executing write handler, canonical Project Map runtime file, or Beauty Client PRO repository modification. `APP_VERSION` is now `1.0062` and `LAST_PUBLISHED_MS` is `MS-031.29 - Project Map Canonical Write Approval Messaging Foundation`.
 

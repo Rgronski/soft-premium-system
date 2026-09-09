@@ -400,6 +400,24 @@ describe("ProjectMapPage", () => {
     ).toBeTruthy();
     expect(screen.getByText("Wyjaśnienie dostępności sekcji")).toBeTruthy();
     expect(screen.getByText("Co działa, co czeka i co blokuje")).toBeTruthy();
+    expect(screen.getByText("Co jest aktualne w Mapie projektu")).toBeTruthy();
+    expect(
+      screen.getByText("Kanoniczna mapa: absent / brak kanonicznego map.json."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Widoczna mapa: roboczy kandydat, nie stan kanoniczny."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Zapis kanoniczny: nie jest teraz wykonywany."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Local approval capture: nie jest persisted i nie zapisuje map.json."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Następny wymagany krok: osobny Product Owner-approved execution milestone.",
+      ),
+    ).toBeTruthy();
     expect(screen.getAllByText("Status: candidate").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Źródło: candidate").length).toBeGreaterThan(0);
     expect(screen.getByText("Canonical vs candidate state")).toBeTruthy();
@@ -768,9 +786,19 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Candidate pipeline")).toBeTruthy();
     expect(screen.getByText("Candidate pipeline details")).toBeTruthy();
     expect(screen.getByText("Canonical vs candidate state")).toBeTruthy();
+    expect(screen.getByText("Co jest aktualne w Mapie projektu")).toBeTruthy();
     expect(screen.getAllByText("Current view: missing").length).toBeGreaterThan(0);
     expect(screen.getByText("Canonical Project Map: missing")).toBeTruthy();
     expect(screen.getByText("Reconstruction candidate: unavailable")).toBeTruthy();
+    expect(
+      screen.getByText("Kanoniczna mapa: absent / brak kanonicznego map.json."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Widoczna mapa: brak gotowego roboczego kandydata."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Zapis kanoniczny: nie jest teraz wykonywany."),
+    ).toBeTruthy();
     expect(screen.queryByText("Parked ideas visibility")).toBeNull();
     expect(screen.queryByText("Parked ideas details")).toBeNull();
     expect(

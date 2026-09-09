@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.31 Project Map Current State Clarity Foundation
+
+### Date
+
+2026-09-09
+
+### Completed
+
+* Added a concise top current-state summary to the Project Map tab.
+* Clarified canonical `map.json` absence, candidate-only state, non-executing canonical write, non-persistent local approval capture, and the need for a separate Product Owner-approved execution milestone.
+* Collapsed lower-priority technical preview status details behind the existing details pattern while keeping action gate and handoff preview visible.
+* Updated the app-version marker to `1.0064`.
+
+### Verification
+
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed.
+
 ## Session 099 - MS-031.30 Project Map Canonical Write Execution Handoff Preview Foundation
 
 ### Date

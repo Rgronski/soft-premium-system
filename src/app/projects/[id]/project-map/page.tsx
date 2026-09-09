@@ -1376,6 +1376,18 @@ export default async function ProjectMapPage({
     mapReadResult,
     mapCandidate,
   );
+  const currentStateSummaryItems = [
+    mapReadResult?.status === "unavailable" &&
+    mapReadResult.reason === "project-map-present-but-read-not-implemented"
+      ? "Kanoniczna mapa: plik map.json istnieje, odczyt pozostaje poza tym widokiem."
+      : "Kanoniczna mapa: absent / brak kanonicznego map.json.",
+    projectMapCandidateCopy?.title === "Robocza mapa projektu gotowa"
+      ? "Widoczna mapa: roboczy kandydat, nie stan kanoniczny."
+      : "Widoczna mapa: brak gotowego roboczego kandydata.",
+    "Zapis kanoniczny: nie jest teraz wykonywany.",
+    "Local approval capture: nie jest persisted i nie zapisuje map.json.",
+    "Następny wymagany krok: osobny Product Owner-approved execution milestone.",
+  ];
 
   return (
     <SectionCard className="space-y-6">
@@ -1394,6 +1406,30 @@ export default async function ProjectMapPage({
         </div>
 
       </div>
+
+      <section
+        id="project-map-current-state-summary"
+        className="rounded-xl border border-zinc-800 bg-zinc-950/70 p-4"
+      >
+        <div className="space-y-1">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">
+            Stan teraz
+          </p>
+          <h3 className="text-xl font-semibold text-zinc-50">
+            Co jest aktualne w Mapie projektu
+          </h3>
+        </div>
+        <ul className="mt-4 grid gap-2 text-sm text-zinc-200 md:grid-cols-2">
+          {currentStateSummaryItems.map((item) => (
+            <li
+              key={item}
+              className="rounded-lg border border-zinc-800 bg-zinc-900/60 px-3 py-2"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
 
       {projectMapActionEntryCopy ? (
         <section
@@ -1465,14 +1501,14 @@ export default async function ProjectMapPage({
         </section>
       ) : null}
 
-      <section
+      <details
         id="project-map-canonical-write-preview-status"
         className="rounded-xl border border-amber-900/50 bg-amber-950/20 p-4"
       >
+        <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-amber-200/70">
+          Preview zapisu
+        </summary>
         <div className="space-y-1">
-          <p className="text-xs uppercase tracking-[0.2em] text-amber-200/70">
-            Preview zapisu
-          </p>
           <h3 className="text-xl font-semibold text-amber-50">
             {projectMapCanonicalWritePreviewCopy.status}
           </h3>
@@ -1494,7 +1530,7 @@ export default async function ProjectMapPage({
             </li>
           ))}
         </ul>
-      </section>
+      </details>
 
       <section
         id="project-map-canonical-write-action-gate"
