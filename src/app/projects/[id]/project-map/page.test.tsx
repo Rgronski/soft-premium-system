@@ -381,10 +381,10 @@ describe("ProjectMapPage", () => {
     expect(
       screen.getByText("Źródło stanu: repo + SSOT candidate evidence"),
     ).toBeTruthy();
-    expect(screen.getByText("Source identity: aligned")).toBeTruthy();
-    expect(screen.getAllByText("Persistence source identity: persisted").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Status source identity: aligned").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Utrwalenie source identity: persisted").length).toBeGreaterThan(0);
     expect(
-      screen.getAllByText("Znaleziono dokumenty SSOT, które mogą wspierać roboczą mapę.").length,
+      screen.getAllByText("Dokumenty SSOT zostały znalezione i mogą wspierać mapę kandydata.").length,
     ).toBeGreaterThan(0);
     expect(screen.queryByText("SSOT remains absent in the candidate map.")).toBeNull();
     expect(
@@ -464,7 +464,7 @@ describe("ProjectMapPage", () => {
       screen.getByText("Ten milestone nie zapisuje, nie tworzy i nie promuje map.json."),
     ).toBeTruthy();
     expect(
-      screen.getAllByText("Persistence source identity: persisted").length,
+      screen.getAllByText("Utrwalenie source identity: persisted").length,
     ).toBeGreaterThan(0);
     expect(screen.getByText("Widoczność odłożonych pomysłów")).toBeTruthy();
     expect(screen.getByText("Szczegóły odłożonych pomysłów")).toBeTruthy();

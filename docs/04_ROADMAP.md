@@ -193,8 +193,64 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.34 - Project Map Remaining English Copy Cleanup Foundation
+Latest Completed Product Milestone: MS-031.35 - Project Map Remaining Technical Sentence Localization Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.35 - Project Map Remaining Technical Sentence Localization Foundation
+
+**Milestone**
+MS-031.35 - Project Map Remaining Technical Sentence Localization Foundation
+
+**Type**
+SPS OS / Project Map Remaining Technical Sentence Localization Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+LOCAL PATCH / NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+
+**Product Outcome**
+The Project Map tab now localizes the remaining visible English technical sentences identified after MS-031.34 while preserving raw technical values as data.
+
+**Copy Cleanup Boundary**
+This milestone changes visible copy/readability only. It does not change candidate data, evaluator behavior, approval persistence, writer behavior, routes, handlers, or canonical Project Map runtime files.
+
+**Behavior**
+* remaining SSOT support copy is Polish-first
+* source-identity persistence labels now use Polish-first wording
+* raw status values such as `aligned`, `persisted`, `candidate`, `evidence`, `SSOT`, and `map.json` remain visible where they are data
+* copy still states that no `map.json` write happens now
+* the action gate remains disabled and non-executing
+
+**Non-Goals**
+* no canonical Project Map writer
+* no server-side write route
+* no filesystem writer helper
+* no executing write handler
+* no approval persistence
+* no evaluator behavior change
+* no candidate data model change
+* no creation, overwrite, promotion, or modification of `map.json`
+* no creation or modification of Project Map runtime files
+* no Beauty Client PRO repository inspection or modification
+
+**Implementation Evidence**
+* `src/app/projects/[id]/project-map/page.tsx` localizes remaining visible technical sentence labels
+* `src/app/projects/[id]/project-map/page.test.tsx` verifies the Polish-first copy and unchanged non-writing boundary
+* `src/lib/app-version.ts` records `APP_VERSION 1.0068` and `LAST_PUBLISHED_MS MS-031.35 - Project Map Remaining Technical Sentence Localization Foundation`
+* `src/components/app-version-badge.test.tsx` keeps the visible app-version marker aligned
+
+**Verification**
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed
+* no canonical Project Map runtime files were created or modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* raw status tokens remain visible by design where they represent Project Map data rather than explanatory UI copy
 
 ## MS-031.34 - Project Map Remaining English Copy Cleanup Foundation
 
@@ -208,10 +264,10 @@ SPS OS / Project Map Remaining English Copy Cleanup Foundation
 COMPLETED / VERIFIED / ACCEPTED
 
 **Publication Status**
-LOCAL PATCH / NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Product Outcome**
 The lower Project Map UI now removes the remaining visible English copy from status cards, availability explanations, candidate refresh feedback, canonical-vs-candidate details, parked context, and milestone evidence drilldown while preserving technical/raw values where they are actual data.

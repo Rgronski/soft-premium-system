@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.35 Project Map Remaining Technical Sentence Localization Foundation
+
+### Date
+
+2026-09-09
+
+### Completed
+
+* Localized the remaining visible English technical sentences on the Project Map tab.
+* Replaced SSOT support copy and source-identity persistence labels with Polish-first copy.
+* Kept raw technical values such as `aligned`, `persisted`, `candidate`, `evidence`, `SSOT`, `map.json`, URLs, IDs, and paths visible as data.
+* Updated the app-version marker to `1.0068`.
+
+### Verification
+
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed.
+
 ## Session 099 - MS-031.34 Project Map Remaining English Copy Cleanup Foundation
 
 ### Date

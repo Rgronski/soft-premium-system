@@ -1281,7 +1281,7 @@ function buildFoundationStatuses(
       label: "SSOT",
       status: ssotDocsFound ? "candidate" : "planowane",
       description: ssotDocsFound
-        ? "SSOT docs were found and can support the candidate map."
+        ? "Dokumenty SSOT zostały znalezione i mogą wspierać mapę kandydata."
         : "Źródło prawdy pozostaje w dokumentacji SSOT.",
     },
     {
@@ -1720,7 +1720,7 @@ export default async function ProjectMapPage({
                 <li>Ścieżka checkout: {projectMapCandidateStructure.projectIdentity.checkoutPath ?? "missing"}</li>
                 <li>Adres repozytorium w source identity: {projectMapCandidateStructure.projectIdentity.sourceIdentityRepositoryUrl ?? "missing"}</li>
                 <li>Status source identity: {projectMapCandidateStructure.projectIdentity.sourceIdentityStatus}</li>
-                <li>Persistence source identity: {projectMapCandidateStructure.projectIdentity.sourceIdentityPersistence}</li>
+                <li>Utrwalenie source identity: {projectMapCandidateStructure.projectIdentity.sourceIdentityPersistence}</li>
               </ul>
             </article>
 
@@ -1832,8 +1832,8 @@ export default async function ProjectMapPage({
               <p className="text-sm font-semibold text-cyan-50">Aktualny stan</p>
               <ul className="mt-3 grid gap-2 text-sm text-cyan-50/90 sm:grid-cols-2">
                 <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Źródło stanu: {projectMapCandidateStructure.currentState.stateSource}</li>
-                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Source identity: {projectMapCandidateStructure.currentState.sourceIdentityStatus}</li>
-                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Persistence source identity: {projectMapCandidateStructure.currentState.sourceIdentityPersistence}</li>
+                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Status source identity: {projectMapCandidateStructure.currentState.sourceIdentityStatus}</li>
+                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Utrwalenie source identity: {projectMapCandidateStructure.currentState.sourceIdentityPersistence}</li>
                 <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Potwierdzony stan projektu: {projectMapCandidateStructure.currentState.projectCompletedState}</li>
                 <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Stan kandydata: {projectMapCandidateStructure.currentState.projectCurrentState}</li>
                 <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Następny krok: {projectMapCandidateStructure.currentState.projectNextState}</li>
