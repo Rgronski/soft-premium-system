@@ -326,31 +326,33 @@ SPS OS Session State
 
 Date: 2026-09-09
 Current Session ID: 099
-Current Chat Title: 099 SPS OS - MS-031.28 Project Map Canonical Write Approval Capture Foundation
+Current Chat Title: 099 SPS OS - MS-031.29 Project Map Canonical Write Approval Messaging Foundation
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
-Active Capability: Project Map Canonical Write Approval Capture
-Active Work Item: MS-031.28 Project Map Canonical Write Approval Capture Foundation
+Active Capability: Project Map Canonical Write Approval Messaging
+Active Work Item: MS-031.29 Project Map Canonical Write Approval Messaging Foundation
 Current Mode: ACTIVE
-Completed Capability Items: MS-031.28 adds local-only Product Owner approval capture without persistence, writer behavior, or canonical Project Map runtime file modification.
+Completed Capability Items: MS-031.29 clarifies local approval capture messaging without persistence, writer behavior, or canonical Project Map runtime file modification.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.28 - Project Map Canonical Write Approval Capture Foundation
+Latest Completed Product Milestone: MS-031.29 - Project Map Canonical Write Approval Messaging Foundation
 Next Product Milestone: UNKNOWN / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: MS-031.28 Project Map canonical write approval capture implemented and accepted as local-only UI work
+Latest Completed Capability Item: MS-031.29 Project Map canonical write approval messaging implemented and accepted as local UI/copy work
 Current Sprint: NONE
 Platform Priority: Preserve Project Map candidate/canonical separation until a separate Product Owner-approved future milestone performs any canonical write.
 Repository Branch: main
-Repository Working Tree State: MODIFIED / local MS-031.28 approval capture patch
+Repository Working Tree State: MODIFIED / local MS-031.29 approval messaging patch
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 482b278
+Latest Verified Commit: 30ca012
 Verification Status: PASS
 Blockers: NONE
 Open Risks: Canonical `map.json` write or promotion remains approval-bound and must not start without a separate Product Owner-approved future milestone.
-Next Safe Step: Product Owner reviews the MS-031.28 approval capture patch and decides whether to publish it; canonical write execution remains a separate future approval.
+Next Safe Step: Product Owner reviews the MS-031.29 approval messaging patch and decides whether to publish it; canonical write execution remains a separate future approval.
 Next Session Plan: UNKNOWN
 
-MS-031.28 is COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED in the current local workspace as the Project Map Canonical Write Approval Capture Foundation. The Project Map canonical write action gate now includes a local-only Product Owner approval capture checkbox. When preflight is `READY_FOR_FUTURE_WRITE`, the checkbox can capture browser-local planning intent only; when preflight is blocked, needs evidence, rejected, or unknown, the capture control remains unavailable or explicitly insufficient. The canonical write action gate remains disabled and non-executing in every state, and the copy states that no `map.json` write is performed now. MS-031.28 does not persist approval, create a write route, writer helper, filesystem write behavior, executing write handler, canonical Project Map runtime file, or Beauty Client PRO repository modification. `APP_VERSION` is now `1.0061` and `LAST_PUBLISHED_MS` is `MS-031.28 - Project Map Canonical Write Approval Capture Foundation`.
+MS-031.29 is COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED in the current local workspace as the Project Map Canonical Write Approval Messaging Foundation. The local approval capture and action-gate messaging now states more explicitly that captured intent is local, planning-only, non-persistent, does not write canonical `map.json`, and does not replace a separate future Product Owner-approved execution milestone. The disabled action gate remains disabled after local capture, and blocked / needs-evidence states state that approval capture cannot override blockers or evidence gaps. MS-031.29 does not change the evaluator, persist approval, create a write route, writer helper, filesystem write behavior, executing write handler, canonical Project Map runtime file, or Beauty Client PRO repository modification. `APP_VERSION` is now `1.0062` and `LAST_PUBLISHED_MS` is `MS-031.29 - Project Map Canonical Write Approval Messaging Foundation`.
+
+MS-031.28 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Canonical Write Approval Capture Foundation. The Project Map canonical write action gate now includes a local-only Product Owner approval capture checkbox. When preflight is `READY_FOR_FUTURE_WRITE`, the checkbox can capture browser-local planning intent only; when preflight is blocked, needs evidence, rejected, or unknown, the capture control remains unavailable or explicitly insufficient. The canonical write action gate remains disabled and non-executing in every state, and the copy states that no `map.json` write is performed now. MS-031.28 does not persist approval, create a write route, writer helper, filesystem write behavior, executing write handler, canonical Project Map runtime file, or Beauty Client PRO repository modification. `APP_VERSION` is now `1.0061` and `LAST_PUBLISHED_MS` is `MS-031.28 - Project Map Canonical Write Approval Capture Foundation`.
 
 MS-031.27 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Canonical Write Action Gate Foundation. The Project Map page now shows a guarded, disabled, non-executing canonical write action gate near the preview/status area. The gate consumes the MS-031.26 preflight evaluator status and shows whether the future action is ready for future approval, blocked, needs evidence, rejected, or unknown. It keeps the control disabled, shows the top blocker or reason when not ready, and states that no `map.json` write is performed now. MS-031.27 does not create a write route, writer helper, filesystem write behavior, executable write button, canonical Project Map runtime file, or Beauty Client PRO repository modification. `APP_VERSION` is now `1.0060` and `LAST_PUBLISHED_MS` is `MS-031.27 - Project Map Canonical Write Action Gate Foundation`.
 

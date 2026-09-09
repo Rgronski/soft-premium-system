@@ -749,11 +749,11 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       description:
         "Preflight wygląda gotowo do planowania, ale wykonanie zapisu wymaga osobnego przyszłego milestone zatwierdzonego przez Product Ownera.",
       detail:
-        "MS-031.27 pokazuje tylko bramkę akcji; nie zapisuje, nie tworzy i nie promuje map.json.",
+        "MS-031.29 pokazuje tylko komunikat approval capture; nie zapisuje, nie tworzy i nie promuje map.json.",
       approvalCaptureLabel:
         "Rozumiem: to tylko lokalne potwierdzenie gotowości, bez zapisu map.json.",
       approvalCaptureStatus:
-        "Lokalna intencja Product Ownera może zostać zaznaczona tylko do planowania. Nadal nie zastępuje osobnego przyszłego milestone wykonania.",
+        "Lokalna intencja Product Ownera jest tylko planning-only, nie jest persisted i nie zastępuje osobnego przyszłego execution milestone.",
       approvalCaptureDisabled: false,
     };
   }
@@ -771,7 +771,7 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       approvalCaptureLabel:
         "Lokalne potwierdzenie niedostępne: stan rejected blokuje planowanie zapisu.",
       approvalCaptureStatus:
-        "Approval capture nie jest traktowany jako gotowość do wykonania i nie zapisuje map.json.",
+        "Approval capture nie override'uje rejected, nie jest persisted, nie uruchamia execution milestone i nie zapisuje map.json.",
       approvalCaptureDisabled: true,
     };
   }
@@ -789,7 +789,7 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       approvalCaptureLabel:
         "Lokalne potwierdzenie niewystarczające: najpierw potrzeba evidence.",
       approvalCaptureStatus:
-        "Approval capture nie odblokowuje wykonania, gdy preflight wymaga evidence, i nie zapisuje map.json.",
+        "Approval capture nie override'uje braków evidence, nie jest persisted, nie uruchamia execution milestone i nie zapisuje map.json.",
       approvalCaptureDisabled: true,
     };
   }
@@ -808,7 +808,7 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       approvalCaptureLabel:
         "Lokalne potwierdzenie niedostępne: stan unknown wymaga ustalenia faktów.",
       approvalCaptureStatus:
-        "Approval capture nie zastępuje brakujących danych preflight i nie zapisuje map.json.",
+        "Approval capture nie override'uje unknown blockers, nie jest persisted, nie uruchamia execution milestone i nie zapisuje map.json.",
       approvalCaptureDisabled: true,
     };
   }
@@ -826,7 +826,7 @@ function buildProjectMapCanonicalWriteActionGateCopy(
     approvalCaptureLabel:
       "Lokalne potwierdzenie niedostępne: blocked wymaga usunięcia blokady.",
     approvalCaptureStatus:
-      "Approval capture nie odblokowuje wykonania przy stanie blocked i nie zapisuje map.json.",
+      "Approval capture nie override'uje blockers, nie jest persisted, nie uruchamia execution milestone i nie zapisuje map.json.",
     approvalCaptureDisabled: true,
   };
 }
@@ -1520,7 +1520,7 @@ export default async function ProjectMapPage({
             }
           </span>
           <span className="col-start-2 hidden text-xs text-amber-200 peer-checked:block">
-            Intencja lokalna uchwycona do planowania, bez persistencji i bez zapisu map.json.
+            Intencja lokalna uchwycona tylko do planowania; nie jest persisted, nie włącza wykonania i nie zastępuje osobnego future execution milestone.
           </span>
           <span className="col-start-2 text-xs text-zinc-400">
             {

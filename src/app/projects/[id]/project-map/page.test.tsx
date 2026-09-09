@@ -427,7 +427,7 @@ describe("ProjectMapPage", () => {
     ).toBe(true);
     expect(
       screen.getByText(
-        "Approval capture nie odblokowuje wykonania, gdy preflight wymaga evidence, i nie zapisuje map.json.",
+        "Approval capture nie override'uje braków evidence, nie jest persisted, nie uruchamia execution milestone i nie zapisuje map.json.",
       ),
     ).toBeTruthy();
     expect(
@@ -794,6 +794,11 @@ describe("ProjectMapPage", () => {
       ).disabled,
     ).toBe(true);
     expect(
+      screen.getByText(
+        "Approval capture nie override'uje blockers, nie jest persisted, nie uruchamia execution milestone i nie zapisuje map.json.",
+      ),
+    ).toBeTruthy();
+    expect(
       screen.getByText("Co byłoby zapisane później: UNKNOWN - brak gotowego kandydata"),
     ).toBeTruthy();
     const reviewBrakiChoice = screen.getByLabelText("Widzę braki");
@@ -823,7 +828,7 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Status akcji: ready for future approval")).toBeTruthy();
     expect(
       screen.getByText(
-        "MS-031.27 pokazuje tylko bramkę akcji; nie zapisuje, nie tworzy i nie promuje map.json.",
+        "MS-031.29 pokazuje tylko komunikat approval capture; nie zapisuje, nie tworzy i nie promuje map.json.",
       ),
     ).toBeTruthy();
     expect(
@@ -841,12 +846,12 @@ describe("ProjectMapPage", () => {
     expect(approvalCapture.checked).toBe(true);
     expect(
       screen.getByText(
-        "Lokalna intencja Product Ownera może zostać zaznaczona tylko do planowania. Nadal nie zastępuje osobnego przyszłego milestone wykonania.",
+        "Lokalna intencja Product Ownera jest tylko planning-only, nie jest persisted i nie zastępuje osobnego przyszłego execution milestone.",
       ),
     ).toBeTruthy();
     expect(
       screen.getByText(
-        "Intencja lokalna uchwycona do planowania, bez persistencji i bez zapisu map.json.",
+        "Intencja lokalna uchwycona tylko do planowania; nie jest persisted, nie włącza wykonania i nie zastępuje osobnego future execution milestone.",
       ),
     ).toBeTruthy();
   });

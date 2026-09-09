@@ -193,8 +193,63 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.28 - Project Map Canonical Write Approval Capture Foundation
+Latest Completed Product Milestone: MS-031.29 - Project Map Canonical Write Approval Messaging Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.29 - Project Map Canonical Write Approval Messaging Foundation
+
+**Milestone**
+MS-031.29 - Project Map Canonical Write Approval Messaging Foundation
+
+**Type**
+SPS OS / Project Map Canonical Write Approval Messaging Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+LOCAL PATCH / NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+
+**Product Outcome**
+The Project Map approval capture and action-gate messaging now states more explicitly that local approval capture is planning-only, non-persistent, does not write canonical `map.json`, and does not replace a separate future Product Owner-approved execution milestone.
+
+**Messaging Boundary**
+This milestone refines copy and UI state only. It does not add persistence, a server-side write route, a writer helper, an executing write handler, or any canonical Project Map runtime file behavior.
+
+**Behavior**
+* selected local approval capture shows that intent is local, planning-only, non-persistent, and not an execution approval
+* the disabled action gate remains disabled after local capture
+* blocked and needs-evidence states state that local approval capture cannot override blockers or evidence gaps
+* copy states that no `map.json` write happens now
+
+**Non-Goals**
+* no approval persistence
+* no evaluator change
+* no canonical Project Map writer
+* no server-side write route
+* no filesystem writer helper
+* no executing write handler
+* no creation, overwrite, promotion, or modification of `map.json`
+* no creation or modification of Project Map runtime files
+* no Beauty Client PRO repository inspection or modification
+
+**Implementation Evidence**
+* `src/app/projects/[id]/project-map/page.tsx` refines local approval capture and blocker messaging
+* `src/app/projects/[id]/project-map/page.test.tsx` verifies selected planning-only copy, disabled write action, and blocker override copy
+* `src/lib/app-version.ts` records `APP_VERSION 1.0062` and `LAST_PUBLISHED_MS MS-031.29 - Project Map Canonical Write Approval Messaging Foundation`
+* `src/components/app-version-badge.test.tsx` keeps the visible app-version marker aligned
+
+**Verification**
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed
+* no canonical Project Map runtime files were created or modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* approval capture remains local-only and non-persistent
+* persisted approval and writer execution remain separate future Product Owner-approved milestones
 
 ## MS-031.28 - Project Map Canonical Write Approval Capture Foundation
 
@@ -205,13 +260,13 @@ MS-031.28 - Project Map Canonical Write Approval Capture Foundation
 SPS OS / Project Map Canonical Write Approval Capture Foundation
 
 **Status**
-COMPLETED / VERIFIED / ACCEPTED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Publication Status**
-LOCAL PATCH / NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Product Outcome**
 The Project Map canonical write action gate now includes a local-only Product Owner approval capture control. The control may capture browser-local planning intent when the preflight status is ready for future approval, but it does not persist approval, enable execution, create writer behavior, or write canonical `map.json`.
