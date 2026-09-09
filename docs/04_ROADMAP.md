@@ -193,8 +193,64 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.35 - Project Map Remaining Technical Sentence Localization Foundation
+Latest Completed Product Milestone: MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation
+
+**Milestone**
+MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation
+
+**Type**
+SPS OS / Project Map Visible Technical Token Polish Pass Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+LOCAL PATCH / NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+
+**Product Outcome**
+The Project Map tab now polishes remaining visible English / mixed technical labels, badges, and handoff preview copy after MS-031.35 while preserving raw technical values only where they are data.
+
+**Copy Cleanup Boundary**
+This milestone changes visible copy/readability only. It does not change candidate data, evaluator behavior, approval persistence, writer behavior, routes, handlers, or canonical Project Map runtime files.
+
+**Behavior**
+* visible foundation labels now use Polish-first wording such as `Tożsamość projektu`, `Źródło robocze`, `Pierwszy layout`, `Pierwszy działający przepływ`, and `Ścieżka publikacji`
+* overview card labels now use Polish-first wording
+* status/source badges translate common visible status values such as `candidate`, `needs evidence`, `blocked`, `parked`, and `candidate-read-only`
+* handoff preview copy now uses Polish-first wording for the future execution milestone boundary
+* raw terms such as `SSOT`, `map.json`, URLs, IDs, paths, and technical evidence terms remain visible where they are data
+
+**Non-Goals**
+* no canonical Project Map writer
+* no server-side write route
+* no filesystem writer helper
+* no executing write handler
+* no approval persistence
+* no evaluator behavior change
+* no candidate data model change
+* no creation, overwrite, promotion, or modification of `map.json`
+* no creation or modification of Project Map runtime files
+* no Beauty Client PRO repository inspection or modification
+
+**Implementation Evidence**
+* `src/app/projects/[id]/project-map/page.tsx` maps remaining visible technical labels and selected display tokens to Polish-first UI copy
+* `src/app/projects/[id]/project-map/page.test.tsx` verifies the Polish-first labels, badges, preview copy, and unchanged non-writing boundary
+* `src/lib/app-version.ts` records `APP_VERSION 1.0069` and `LAST_PUBLISHED_MS MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation`
+* `src/components/app-version-badge.test.tsx` keeps the visible app-version marker aligned
+
+**Verification**
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed
+* no canonical Project Map runtime files were created or modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* raw status and evidence tokens remain visible where they represent underlying Project Map data rather than explanatory UI copy
 
 ## MS-031.35 - Project Map Remaining Technical Sentence Localization Foundation
 
@@ -208,10 +264,10 @@ SPS OS / Project Map Remaining Technical Sentence Localization Foundation
 COMPLETED / VERIFIED / ACCEPTED
 
 **Publication Status**
-LOCAL PATCH / NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Product Outcome**
 The Project Map tab now localizes the remaining visible English technical sentences identified after MS-031.34 while preserving raw technical values as data.

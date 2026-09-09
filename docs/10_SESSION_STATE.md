@@ -324,33 +324,35 @@ Next Session Plan: Start Session 097 from the fresh `sps-session.zip` and contin
 
 SPS OS Session State
 
-Date: 2026-09-09
+Date: 2026-09-10
 Current Session ID: 099
-Current Chat Title: 099 SPS OS - MS-031.35 Project Map Remaining Technical Sentence Localization Foundation
+Current Chat Title: 099 SPS OS - MS-031.36 Project Map Visible Technical Token Polish Pass Foundation
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
-Active Capability: Project Map Remaining Technical Sentence Localization
-Active Work Item: MS-031.35 Project Map Remaining Technical Sentence Localization Foundation
+Active Capability: Project Map Visible Technical Token Polish Pass
+Active Work Item: MS-031.36 Project Map Visible Technical Token Polish Pass Foundation
 Current Mode: ACTIVE
-Completed Capability Items: MS-031.35 localizes remaining visible English Project Map technical sentences without evaluator behavior or canonical Project Map runtime file modification.
+Completed Capability Items: MS-031.36 polishes remaining visible English / mixed Project Map technical labels and badges without evaluator behavior or canonical Project Map runtime file modification.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.35 - Project Map Remaining Technical Sentence Localization Foundation
+Latest Completed Product Milestone: MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation
 Next Product Milestone: UNKNOWN / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: MS-031.35 Project Map remaining technical sentence localization implemented and accepted as local UI/readability work
+Latest Completed Capability Item: MS-031.36 Project Map visible technical token polish pass implemented and accepted as local UI/readability work
 Current Sprint: NONE
 Platform Priority: Preserve Project Map candidate/canonical separation until a separate Product Owner-approved future milestone performs any canonical write.
 Repository Branch: main
-Repository Working Tree State: MODIFIED / local MS-031.35 remaining technical sentence localization patch
+Repository Working Tree State: MODIFIED / local MS-031.36 visible technical token polish pass patch
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: d8bc42f
+Latest Verified Commit: 601651b
 Verification Status: PASS
 Blockers: NONE
 Open Risks: Canonical `map.json` write or promotion remains approval-bound and must not start without a separate Product Owner-approved future milestone.
-Next Safe Step: Product Owner reviews the MS-031.35 remaining technical sentence localization patch and decides whether to publish it; canonical write execution remains a separate future approval.
+Next Safe Step: Product Owner reviews the MS-031.36 visible technical token polish pass patch and decides whether to publish it; canonical write execution remains a separate future approval.
 Next Session Plan: UNKNOWN
 
-MS-031.35 is COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED in the current local workspace as the Project Map Remaining Technical Sentence Localization Foundation. The Project Map tab now localizes the remaining visible English technical sentences identified after MS-031.34, including SSOT support copy and source-identity persistence labels. Raw values such as `aligned`, `persisted`, `candidate`, `evidence`, `SSOT`, `map.json`, URLs, IDs, and paths remain visible where they are data. MS-031.35 does not change evaluator behavior, candidate data model, approval persistence, writer routes/helpers/handlers, canonical Project Map runtime files, or Beauty Client PRO repository files. `APP_VERSION` is now `1.0068` and `LAST_PUBLISHED_MS` is `MS-031.35 - Project Map Remaining Technical Sentence Localization Foundation`.
+MS-031.36 is COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED in the current local workspace as the Project Map Visible Technical Token Polish Pass Foundation. The Project Map tab now polishes remaining visible English / mixed technical labels, badges, and handoff preview copy after MS-031.35 while preserving raw technical values only where they are data. Foundation labels now include `Tożsamość projektu`, `Źródło robocze`, `Pierwszy layout`, `Pierwszy działający przepływ`, and `Ścieżka publikacji`; overview labels and status/source badges are Polish-first; handoff preview copy now names the future milestone wykonawczy boundary in Polish. MS-031.36 does not change evaluator behavior, candidate data model, approval persistence, writer routes/helpers/handlers, canonical Project Map runtime files, or Beauty Client PRO repository files. `APP_VERSION` is now `1.0069` and `LAST_PUBLISHED_MS` is `MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation`.
+
+MS-031.35 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Remaining Technical Sentence Localization Foundation. The Project Map tab now localizes the remaining visible English technical sentences identified after MS-031.34, including SSOT support copy and source-identity persistence labels. Raw values such as `aligned`, `persisted`, `candidate`, `evidence`, `SSOT`, `map.json`, URLs, IDs, and paths remain visible where they are data. MS-031.35 does not change evaluator behavior, candidate data model, approval persistence, writer routes/helpers/handlers, canonical Project Map runtime files, or Beauty Client PRO repository files. `APP_VERSION` is now `1.0068` and `LAST_PUBLISHED_MS` is `MS-031.35 - Project Map Remaining Technical Sentence Localization Foundation`.
 
 MS-031.34 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Remaining English Copy Cleanup Foundation. The lower Project Map UI now removes the remaining visible English copy from status cards, availability explanations, candidate refresh feedback, canonical-vs-candidate details, parked context, and milestone evidence drilldown while preserving technical/raw values where they are actual data. Polish-first labels now include `Aktualny stan`, `Status kandydata`, `Kontekst odłożony`, `Adres repozytorium`, and `Wynik kandydata / evidence`. Common reason and next-step copy is Polish-first, including SSOT review guidance, parked-context empty state, refresh feedback, and evidence drilldown status reasons. MS-031.34 does not change evaluator behavior, candidate data model, approval persistence, writer routes/helpers/handlers, canonical Project Map runtime files, or Beauty Client PRO repository files. `APP_VERSION` is now `1.0067` and `LAST_PUBLISHED_MS` is `MS-031.34 - Project Map Remaining English Copy Cleanup Foundation`.
 

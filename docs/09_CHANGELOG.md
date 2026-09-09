@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.36 Project Map Visible Technical Token Polish Pass Foundation
+
+### Date
+
+2026-09-10
+
+### Completed
+
+* Polished remaining visible English / mixed Project Map technical labels and badges.
+* Localized foundation labels, overview card labels, action status display, and handoff preview copy.
+* Kept raw technical values such as `SSOT`, `map.json`, URLs, IDs, paths, and evidence terms visible where they are data.
+* Updated the app-version marker to `1.0069`.
+
+### Verification
+
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed.
+
 ## Session 099 - MS-031.35 Project Map Remaining Technical Sentence Localization Foundation
 
 ### Date

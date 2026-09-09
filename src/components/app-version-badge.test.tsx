@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0068");
+    expect(APP_VERSION).toBe("1.0069");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-031.35 - Project Map Remaining Technical Sentence Localization Foundation",
+      "MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation",
     );
   });
 });

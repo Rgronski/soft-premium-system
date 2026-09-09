@@ -284,12 +284,12 @@ function buildProjectMapStateCopy(
           : "Miejsce na mapę projektu jest gotowe",
         description:
           candidateAvailable
-            ? "Folder Project Map istnieje, robocza mapa candidate/read-only jest widoczna, a canonical map.json nadal nie został utworzony."
-            : "Folder Project Map już istnieje, ale canonical map.json jeszcze nie został utworzony. Widok pozostaje candidate/read-only.",
+            ? "Folder Project Map istnieje, robocza mapa kandydata w trybie read-only jest widoczna, a canonical map.json nadal nie został utworzony."
+            : "Folder Project Map już istnieje, ale canonical map.json jeszcze nie został utworzony. Widok pozostaje kandydatem read-only.",
         details: [
           `Project Map root: ${mapReadResult.projectMapRootPath}`,
           `map.json: ${mapReadResult.mapJsonPath}`,
-          "Widok teraz: candidate/read-only",
+          "Widok teraz: kandydat read-only",
           candidateAvailable
             ? "Następny krok: przejrzyj kandydata i trzymaj zapis kanoniczny osobno."
             : "Następny krok: pokaż roboczą mapę.",
@@ -348,7 +348,7 @@ function buildProjectMapCandidateCopy(
         `Powód: ${candidate.reason}`,
         `Projekt: ${candidate.projectName ?? "missing"}`,
         `Źródło projektu: ${candidate.sourcePath ?? "missing"}`,
-        "Źródło stanu pozostaje candidate/read-only.",
+        "Źródło stanu pozostaje kandydatem read-only.",
       ],
       foundationChecklist: [],
       evidenceSummaries: [],
@@ -358,9 +358,9 @@ function buildProjectMapCandidateCopy(
   return {
     title: "Robocza mapa projektu gotowa",
     description:
-      "Robocza mapa projektu została zbudowana z dostępnych danych. Pozostaje candidate/read-only i nie jest canonical map.json.",
+      "Robocza mapa projektu została zbudowana z dostępnych danych. Pozostaje kandydatem read-only i nie jest canonical map.json.",
     details: [
-      "Źródło stanu: repo + SSOT + candidate evidence.",
+      "Źródło stanu: repo + SSOT + evidence kandydata.",
       "Główny widok pokazuje gotowe elementy, review, blokady i następne kroki.",
       "Evidence i provenance pozostają w szczegółach, a zapis kanoniczny jest osobny.",
     ],
@@ -384,17 +384,17 @@ function buildProjectMapOverviewCards(
 ): ProjectMapOverviewCardCopy[] {
   return [
     {
-      label: "Done",
+      label: "Gotowe",
       title: "Aktualny stan",
       description:
         projectMapCanonicalVsCandidateCopy?.description ??
         "Stan kanoniczny i kandydat nie są jeszcze dostępne.",
       detail:
         projectMapCanonicalVsCandidateCopy?.details[0] ??
-        "Widok teraz: unavailable",
+        "Widok teraz: niedostępny",
     },
     {
-      label: "Next",
+      label: "Następne",
       title: "Status kandydata",
       description:
         projectMapCandidateCopy?.description ??
@@ -407,14 +407,14 @@ function buildProjectMapOverviewCards(
         "Pipeline kandydata pozostaje niedostępny.",
     },
     {
-      label: "Parked",
+      label: "Odłożone",
       title: "Kontekst odłożony",
       description:
         projectMapParkedIdeasCopy?.description ??
         "Odłożone pomysły pozostają widoczne jako przyszły kontekst.",
       detail:
         projectMapParkedIdeasCopy?.details[0] ??
-        "Nie znaleziono odłożonych ani deferred elementów w bieżącym kandydacie.",
+        "Nie znaleziono odłożonych elementów w bieżącym kandydacie.",
     },
   ];
 }
@@ -453,7 +453,7 @@ function buildProjectMapAvailabilityExplanationCopy(
 
   const rows: ProjectMapAvailabilityExplanationRow[] = [
     {
-      label: "Project Identity",
+      label: "Tożsamość projektu",
       status: project ? "działa" : "blocker",
       why: project
         ? `Rozpoznano projekt ${project.name}.`
@@ -489,7 +489,7 @@ function buildProjectMapAvailabilityExplanationCopy(
           ? "wymaga integracji"
           : "wymaga danych",
       why: candidateResultAvailable
-        ? "Widok pokazuje roboczą mapę candidate/read-only, a canonical map.json nadal pozostaje osobnym krokiem."
+        ? "Widok pokazuje roboczą mapę kandydata w trybie read-only, a canonical map.json nadal pozostaje osobnym krokiem."
         : projectMapReady
           ? "Folder jest gotowy, ale widok nadal potrzebuje dalszej integracji, żeby dać użyteczny wynik."
           : "Brakuje gotowego folderu lub odczytu, więc mapa pozostaje niegotowa.",
@@ -499,43 +499,43 @@ function buildProjectMapAvailabilityExplanationCopy(
       source: candidateResultAvailable ? "candidate" : "SPS shell",
     },
     {
-      label: "Working Source",
+      label: "Źródło robocze",
       status: project?.workingDirectory ? "wymaga integracji" : "blocker",
       why: project?.workingDirectory
-        ? `Working source wskazuje na ${project.workingDirectory}, ale wciąż wymaga wyjaśnienia względem innych źródeł projektu.`
-        : "Brak rozpoznanego working source dla bieżącego projektu.",
+        ? `Źródło robocze wskazuje na ${project.workingDirectory}, ale wciąż wymaga wyjaśnienia względem innych źródeł projektu.`
+        : "Brak rozpoznanego źródła roboczego dla bieżącego projektu.",
       nextStep: project?.workingDirectory
-        ? "Uzgodnij working source z resztą źródeł przed zaufaniem kandydatowi."
-        : "Podłącz working source, zanim zaczniesz ufać kandydatowi.",
+        ? "Uzgodnij źródło robocze z resztą źródeł przed zaufaniem kandydatowi."
+        : "Podłącz źródło robocze, zanim zaczniesz ufać kandydatowi.",
       source: project?.workingDirectory ? "projekt" : "missing",
     },
     {
-      label: "First Layout",
+      label: "Pierwszy layout",
       status: "działa",
-      why: "Shell overview-first już działa, ale to nadal osobna warstwa od BCP layout evidence.",
-      nextStep: "Traktuj shell layout jako niezależny od projektu evidence, dopóki nie masz BCP layout source.",
+      why: "Shell z podsumowaniem na początku już działa, ale to nadal osobna warstwa od evidence layoutu BCP.",
+      nextStep: "Traktuj layout shella jako niezależny od evidence projektu, dopóki nie masz źródła layoutu BCP.",
       source: "SPS shell",
     },
     {
-      label: "First Working Flow",
+      label: "Pierwszy działający przepływ",
       status: "planowane",
       why: projectMapCandidateCopy
-        ? "Kandydacki przepływ już istnieje, ale pierwszy prawdziwy working flow pozostaje osobnym krokiem."
-        : "Pierwszy prawdziwy working flow nie jest jeszcze gotowy do użycia.",
+        ? "Przepływ kandydata już istnieje, ale pierwszy prawdziwy przepływ roboczy pozostaje osobnym krokiem."
+        : "Pierwszy prawdziwy przepływ roboczy nie jest jeszcze gotowy do użycia.",
       nextStep: projectMapCandidateCopy
-        ? "Zachowaj kandydacki wynik oddzielnie od przyszłego working flow."
-        : "Zdefiniuj osobny krok working flow po ustabilizowaniu źródła.",
+        ? "Zachowaj wynik kandydata oddzielnie od przyszłego przepływu roboczego."
+        : "Zdefiniuj osobny krok przepływu roboczego po ustabilizowaniu źródła.",
       source: projectMapCandidateCopy ? "candidate" : "missing",
     },
     {
-      label: "Publication Path",
+      label: "Ścieżka publikacji",
       status: "planowane",
-      why: "Zapis kanoniczny / publikacja pozostaje approval-bound i poza tym milestone'em.",
+      why: "Zapis kanoniczny / publikacja pozostaje związana z osobną zgodą i poza tym milestone'em.",
       nextStep: "Dodaj path publikacji dopiero po osobnej zgodzie Product Ownera.",
       source: "canonical",
     },
     {
-      label: "Adres repozytorium / Source Identity",
+      label: "Adres repozytorium / tożsamość źródła",
       status:
         sourceIdentityReady
           ? "działa"
@@ -546,19 +546,19 @@ function buildProjectMapAvailabilityExplanationCopy(
             : "blocker",
       why:
         sourceIdentityReady
-          ? "Adres repozytorium jest połączony z source identity i persisted w SPS metadata root."
+          ? "Adres repozytorium jest połączony z tożsamością źródła i utrwalony w SPS metadata root."
           : projectRepositoryUrl && sourceIdentityRepositoryUrl
             ? projectRepositoryUrl === sourceIdentityRepositoryUrl
-              ? "Adres repozytorium jest połączony, ale source identity persistence nie jest jeszcze potwierdzone."
-              : "Adres repozytorium w source identity nie zgadza się z kontekstem projektu."
-            : "Adres repozytorium jest oczekiwany w BCP, ale Project Map source identity nadal pokazuje brak połączenia.",
+              ? "Adres repozytorium jest połączony, ale utrwalenie tożsamości źródła nie jest jeszcze potwierdzone."
+              : "Adres repozytorium w tożsamości źródła nie zgadza się z kontekstem projektu."
+            : "Adres repozytorium jest oczekiwany w BCP, ale tożsamość źródła Project Map nadal pokazuje brak połączenia.",
       nextStep: sourceIdentityReady
         ? "Przejrzyj sekcje mapy wynikające z SSOT przed jakimkolwiek zapisem kanonicznym."
         : projectRepositoryUrl && sourceIdentityRepositoryUrl
           ? projectRepositoryUrl === sourceIdentityRepositoryUrl
-            ? "Utrwal source identity przed zaufaniem kandydatowi."
-            : "Uzgodnij repositoryUrl z rekordem projektu BCP, potem oceń source identity ponownie."
-          : "Podłącz adres repozytorium do source identity, zanim zaufasz kandydatowi.",
+            ? "Utrwal tożsamość źródła przed zaufaniem kandydatowi."
+            : "Uzgodnij repositoryUrl z rekordem projektu BCP, potem oceń tożsamość źródła ponownie."
+          : "Podłącz adres repozytorium do tożsamości źródła, zanim zaufasz kandydatowi.",
       source: sourceIdentityReady
         ? "candidate"
         : projectRepositoryUrl || sourceIdentityRepositoryUrl
@@ -613,7 +613,7 @@ function buildProjectMapActionEntryCopy(
         ? "Pokaż roboczą mapę"
         : "Pokaż roboczą mapę",
       secondaryActionHref: "#project-map-candidate",
-      note: "Kanoniczny zapis pozostaje osobną, approval-bound akcją.",
+      note: "Kanoniczny zapis pozostaje osobną akcją wymagającą zgody.",
     };
   }
 
@@ -673,7 +673,7 @@ function buildProjectMapCanonicalWriteReadinessCopy(
           .slice(0, 3)
           .map(
             (item) =>
-              `Blokada: ${item.foundationArea} - ${buildProjectMapCandidateFoundationDescription(item)}`,
+              `Blokada: ${buildProjectMapVisibleTokenLabel(item.foundationArea)} - ${buildProjectMapCandidateFoundationDescription(item)}`,
           )
       : ["Blokady: brak otwartych blokad; zapis nadal pozostaje osobnym krokiem."]
     : [
@@ -687,7 +687,7 @@ function buildProjectMapCanonicalWriteReadinessCopy(
     details: [
       `Robocza mapa: ${candidateAvailable ? "obecna" : "brak gotowego kandydata"}`,
       `Docelowy zapis: ${canonicalMapJsonPath ?? "Project Map root (ścieżka jeszcze niepotwierdzona)"}`,
-      `Do zapisania później: ${candidateAvailable ? "zatwierdzona robocza mapa projektu w trybie read-only" : "najpierw trzeba zbudować candidate/read-only"}`,
+      `Do zapisania później: ${candidateAvailable ? "zatwierdzona robocza mapa projektu w trybie read-only" : "najpierw trzeba zbudować kandydata read-only"}`,
       ...blockingDetails,
       "Ten krok nie udostępnia create/write dla canonical map.json.",
     ],
@@ -751,7 +751,7 @@ function buildProjectMapCanonicalWritePreviewCopy(
     ],
     actionGate,
     handoffPreview: {
-      title: "Preview handoffu dla przyszłego execution milestone",
+      title: "Preview handoffu dla przyszłego milestone wykonawczego",
       description:
         "Copy-ready preview dla Codexa opisuje tylko warunki przyszłego wykonania; nie uruchamia API, writerów ani zapisu plików.",
       details: [
@@ -780,7 +780,7 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       approvalCaptureLabel:
         "Rozumiem: to tylko lokalne potwierdzenie gotowości, bez zapisu map.json.",
       approvalCaptureStatus:
-        "Lokalna intencja Product Ownera jest tylko do planowania, nie jest persisted i nie zastępuje osobnego przyszłego milestone wykonawczego.",
+        "Lokalna intencja Product Ownera jest tylko do planowania, nie jest utrwalona i nie zastępuje osobnego przyszłego milestone wykonawczego.",
       approvalCaptureDisabled: false,
     };
   }
@@ -800,7 +800,7 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       approvalCaptureLabel:
         "Lokalne potwierdzenie niedostępne: stan rejected blokuje planowanie zapisu.",
       approvalCaptureStatus:
-        "Lokalne potwierdzenie nie omija stanu rejected, nie jest persisted, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
+        "Lokalne potwierdzenie nie omija stanu rejected, nie jest utrwalone, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
       approvalCaptureDisabled: true,
     };
   }
@@ -815,12 +815,12 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       detail:
         buildProjectMapCanonicalWriteReasonLabel(
           evaluation.reasons[0] ??
-            "MS-031.27 nie wykonuje zapisu map.json przy stanie needs evidence.",
+            "MS-031.27 nie wykonuje zapisu map.json przy stanie potrzeba evidence.",
         ),
       approvalCaptureLabel:
         "Lokalne potwierdzenie niewystarczające: najpierw potrzeba evidence.",
       approvalCaptureStatus:
-        "Lokalne potwierdzenie nie omija braków evidence, nie jest persisted, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
+        "Lokalne potwierdzenie nie omija braków evidence, nie jest utrwalone, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
       approvalCaptureDisabled: true,
     };
   }
@@ -829,7 +829,7 @@ function buildProjectMapCanonicalWriteActionGateCopy(
     return {
       title: "Bramka akcji zapisu kanonicznego",
       actionState: "unknown",
-      controlLabel: "Akcja niedostępna - stan unknown",
+      controlLabel: "Akcja niedostępna - stan nieznany",
       description:
         "Przyszły zapis kanoniczny nie może być planowany, bo brakuje wymaganych faktów preflight.",
       detail:
@@ -841,7 +841,7 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       approvalCaptureLabel:
         "Lokalne potwierdzenie niedostępne: stan unknown wymaga ustalenia faktów.",
       approvalCaptureStatus:
-        "Lokalne potwierdzenie nie omija nieznanych blokad, nie jest persisted, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
+        "Lokalne potwierdzenie nie omija nieznanych blokad, nie jest utrwalone, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
       approvalCaptureDisabled: true,
     };
   }
@@ -849,7 +849,7 @@ function buildProjectMapCanonicalWriteActionGateCopy(
   return {
     title: "Bramka akcji zapisu kanonicznego",
     actionState: "blocked",
-    controlLabel: "Akcja niedostępna - blocked",
+    controlLabel: "Akcja niedostępna - blokada",
     description:
       "Przyszły zapis kanoniczny jest zablokowany do czasu usunięcia blokady i osobnej zgody Product Ownera.",
     detail:
@@ -861,7 +861,7 @@ function buildProjectMapCanonicalWriteActionGateCopy(
     approvalCaptureLabel:
       "Lokalne potwierdzenie niedostępne: blocked wymaga usunięcia blokady.",
     approvalCaptureStatus:
-      "Lokalne potwierdzenie nie omija blokad, nie jest persisted, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
+      "Lokalne potwierdzenie nie omija blokad, nie jest utrwalone, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
     approvalCaptureDisabled: true,
   };
 }
@@ -888,6 +888,41 @@ function buildProjectMapCanonicalWriteReasonLabel(reason: string): string {
   }
 
   return reason;
+}
+
+function buildProjectMapVisibleTokenLabel(value: string): string {
+  const labels: Record<string, string> = {
+    "Project Identity": "Tożsamość projektu",
+    "Project Map": "Mapa projektu",
+    "Working Source": "Źródło robocze",
+    "First Layout": "Pierwszy layout",
+    "First Working Flow": "Pierwszy działający przepływ",
+    "Publication Path": "Ścieżka publikacji",
+    candidate: "kandydat",
+    canonical: "kanoniczne",
+    missing: "brak",
+    available: "dostępny",
+    unavailable: "niedostępny",
+    blocker: "blokada",
+    blocked: "blokada",
+    parked: "odłożone",
+    "needs evidence": "potrzeba evidence",
+    "needs review": "wymaga review",
+    "candidate-read-only": "kandydat read-only",
+    "candidate/read-only": "kandydat read-only",
+    "ready for future approval": "gotowe do przyszłej zgody",
+    persisted: "utrwalone",
+    aligned: "zgodne",
+  };
+
+  if (labels[value]) {
+    return labels[value];
+  }
+
+  return Object.entries(labels).reduce(
+    (label, [source, replacement]) => label.replaceAll(source, replacement),
+    value,
+  );
 }
 
 function buildProjectMapRefreshFeedbackCopy(
@@ -936,7 +971,7 @@ function buildProjectMapRefreshFeedbackCopy(
   return {
     title: "Robocza mapa projektu została zbudowana",
     description:
-      "Pipeline kandydata zwrócił widoczny wynik candidate/read-only bez promowania go do canonical map.json.",
+      "Pipeline kandydata zwrócił widoczny wynik w trybie read-only bez promowania go do canonical map.json.",
     details: [
       `Wynik kandydata: available`,
       `Liczba evidence: ${candidate.evidence.length}`,
@@ -971,13 +1006,13 @@ function buildProjectMapCanonicalVsCandidateCopy(
       : canonicalStatus === "present"
         ? "canonical"
         : candidateStatus === "available"
-          ? "candidate/read-only"
+          ? "kandydat read-only"
           : "missing";
 
   const details = [
-    `Widok teraz: ${viewMode}`,
-    `Kanoniczna Project Map: ${canonicalStatus}`,
-    `Kandydat rekonstrukcji: ${candidateStatus}`,
+    `Widok teraz: ${buildProjectMapVisibleTokenLabel(viewMode)}`,
+    `Kanoniczna Mapa projektu: ${buildProjectMapVisibleTokenLabel(canonicalStatus)}`,
+    `Kandydat rekonstrukcji: ${buildProjectMapVisibleTokenLabel(candidateStatus)}`,
     "Dane kandydata nie są kanoniczne bez jawnego zapisu przez zatwierdzoną granicę.",
   ];
 
@@ -987,7 +1022,7 @@ function buildProjectMapCanonicalVsCandidateCopy(
     mapReadResult.projectSourceIdentityPersistence
   ) {
     details.push(
-      `Persistence source identity: ${mapReadResult.projectSourceIdentityPersistence.status}`,
+      `Utrwalenie tożsamości źródła: ${buildProjectMapVisibleTokenLabel(mapReadResult.projectSourceIdentityPersistence.status)}`,
     );
   }
 
@@ -1000,13 +1035,13 @@ function buildProjectMapCanonicalVsCandidateCopy(
       `Adres repozytorium: ${mapReadResult.projectSourceIdentity.repositoryUrl ?? "missing"}`,
     );
     details.push(
-      `Working source: ${mapReadResult.projectSourceIdentity.workingDirectory ?? "missing"}`,
+      `Źródło robocze: ${mapReadResult.projectSourceIdentity.workingDirectory ?? "missing"}`,
     );
     details.push(
-      `Checkout path: ${mapReadResult.projectSourceIdentity.projectCheckoutPath ?? "missing"}`,
+      `Ścieżka checkout: ${mapReadResult.projectSourceIdentity.projectCheckoutPath ?? "missing"}`,
     );
     details.push(
-      `Canonical storage root: ${mapReadResult.projectMapRootPath ?? "missing"}`,
+      `Kanoniczny katalog storage: ${mapReadResult.projectMapRootPath ?? "missing"}`,
     );
   }
 
@@ -1040,7 +1075,7 @@ function buildProjectMapParkedIdeasCopy(
       "Parked ideas stay attached to the relevant milestone or block and remain reviewable context, not active scope.",
     details: parkedIdeas.map(
       (item) =>
-        `${item.foundationArea}: ${item.status} | milestones: ${item.milestoneStates.join(", ")}`,
+        `${buildProjectMapVisibleTokenLabel(item.foundationArea)}: ${buildProjectMapVisibleTokenLabel(item.status)} | milestones: ${item.milestoneStates.map(buildProjectMapVisibleTokenLabel).join(", ")}`,
     ),
   };
 }
@@ -1136,7 +1171,7 @@ function buildProjectMapMilestoneEvidenceDrilldownCopy(
       description:
         "Te szczegóły pokazują tylko bloki oparte na evidence i wyjaśniają, czemu zostają check, planned, blocked, unknown, parked albo needs review bez domyślnego podbijania evidence.",
       entries,
-      emptyState: "Brak candidate evidence dostępnego w szczegółach.",
+      emptyState: "Brak evidence kandydata dostępnego w szczegółach.",
     };
   }
 
@@ -1173,15 +1208,15 @@ function buildProjectMapCandidateFoundationDescription(
 function buildProjectMapMissingInputCopy(item: string): ProjectMapMissingInputCopy {
   if (item.includes("Repository URL is missing from Project Map source identity.")) {
     return {
-      label: "Brak pełnego źródła dla bloku: source identity",
-      detail: "Project Map source identity nie zawiera adresu repozytorium.",
+      label: "Brak pełnego źródła dla bloku: tożsamość źródła",
+      detail: "Tożsamość źródła Project Map nie zawiera adresu repozytorium.",
     };
   }
 
   if (item.includes("Repository URL in Project Map source identity does not match")) {
     return {
-      label: "Brak spójnego źródła dla bloku: source identity",
-      detail: "Source identity nie zgadza się z rekordem BCP.",
+      label: "Brak spójnego źródła dla bloku: tożsamość źródła",
+      detail: "Tożsamość źródła nie zgadza się z rekordem BCP.",
     };
   }
 
@@ -1208,21 +1243,21 @@ function buildProjectMapMissingInputCopy(item: string): ProjectMapMissingInputCo
 
   if (item.includes("First Layout is missing because no BCP layout evidence was found; the shell layout exists separately.")) {
     return {
-      label: "Brak danych wejściowych dla sekcji: First Layout",
+      label: "Brak danych wejściowych dla sekcji: pierwszy layout",
       detail: "Brakuje potwierdzenia układu BCP.",
     };
   }
 
   if (item.includes("First Working Flow is missing because no flow evidence was found.")) {
     return {
-      label: "Brak danych wejściowych dla sekcji: First Working Flow",
+      label: "Brak danych wejściowych dla sekcji: pierwszy działający przepływ",
       detail: "Brakuje potwierdzenia pierwszego przepływu.",
     };
   }
 
   if (item.includes("Publication Path is missing because canonical save/publish is not implemented or approved yet.")) {
     return {
-      label: "Brak decyzji akceptacyjnej",
+      label: "Brak decyzji akceptacyjnej dla ścieżki publikacji",
       detail: "Kanoniczny zapis pozostaje osobnym krokiem.",
     };
   }
@@ -1271,7 +1306,7 @@ function buildFoundationStatuses(
 
   return [
     {
-      label: "Project Identity",
+      label: "Tożsamość projektu",
       status: projectIdentityStatus,
       description: projectName
         ? `Bieżący projekt: ${projectName}.`
@@ -1290,7 +1325,7 @@ function buildFoundationStatuses(
       description: "Kompas celu, jakości i zakresu pozostaje do odczytu.",
     },
     {
-      label: "Project Map",
+      label: "Mapa projektu",
       status: projectMapStatus,
       description:
         projectMapStatus === "candidate"
@@ -1302,23 +1337,23 @@ function buildFoundationStatuses(
             : "Mapa projektu pozostaje niedostępna.",
     },
     {
-      label: "Working Source",
+      label: "Źródło robocze",
       status: "planowane",
       description: "Wskaż miejsce, w którym żyją projektowe pliki lub kod.",
     },
     {
-      label: "First Layout",
+      label: "Pierwszy layout",
       status: "działa",
       description:
         "Shell overview-first już działa, ale to nadal osobna warstwa od BCP layout evidence.",
     },
     {
-      label: "First Working Flow",
+      label: "Pierwszy działający przepływ",
       status: "planowane",
       description: "Pierwszy użyteczny przepływ pozostaje osobnym krokiem.",
     },
     {
-      label: "Publication Path",
+      label: "Ścieżka publikacji",
       status: "planowane",
       description: "Eksport i publikacja pozostają poza tym shellem.",
     },
@@ -1418,7 +1453,7 @@ export default async function ProjectMapPage({
       ? "Widoczna mapa: roboczy kandydat, nie stan kanoniczny."
       : "Widoczna mapa: brak gotowego roboczego kandydata.",
     "Zapis kanoniczny: nie jest teraz wykonywany.",
-    "Lokalne potwierdzenie: nie jest persisted i nie zapisuje map.json.",
+    "Lokalne potwierdzenie: nie jest utrwalone i nie zapisuje map.json.",
     "Następny wymagany krok: osobny zatwierdzony milestone wykonawczy.",
   ];
 
@@ -1577,7 +1612,7 @@ export default async function ProjectMapPage({
             {projectMapCanonicalWritePreviewCopy.actionGate.title}
           </h3>
           <p className="text-sm text-zinc-300">
-            Status akcji: {projectMapCanonicalWritePreviewCopy.actionGate.actionState}
+            Status akcji: {buildProjectMapVisibleTokenLabel(projectMapCanonicalWritePreviewCopy.actionGate.actionState)}
           </p>
           <p className="text-sm text-zinc-400">
             {projectMapCanonicalWritePreviewCopy.actionGate.description}
@@ -1615,7 +1650,7 @@ export default async function ProjectMapPage({
             }
           </span>
           <span className="col-start-2 hidden text-xs text-amber-200 peer-checked:block">
-            Intencja lokalna uchwycona tylko do planowania; nie jest persisted, nie włącza wykonania i nie zastępuje osobnego future execution milestone.
+            Intencja lokalna uchwycona tylko do planowania; nie jest utrwalona, nie włącza wykonania i nie zastępuje osobnego przyszłego milestone wykonawczego.
           </span>
           <span className="col-start-2 text-xs text-zinc-400">
             {
@@ -1628,7 +1663,7 @@ export default async function ProjectMapPage({
         <div className="mt-4 rounded-lg border border-zinc-800 bg-zinc-950/70 p-3">
           <div className="space-y-1">
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-              Handoff preview
+              Preview handoffu
             </p>
             <h4 className="text-sm font-semibold text-zinc-100">
               {projectMapCanonicalWritePreviewCopy.handoffPreview.title}
@@ -1696,7 +1731,7 @@ export default async function ProjectMapPage({
                 Robocza mapa projektu
               </p>
               <span className="rounded-full border border-cyan-700 px-2 py-0.5 text-[11px] uppercase tracking-[0.18em] text-cyan-100">
-                trust: {projectMapCandidateStructure.trustState}
+                Zaufanie: {buildProjectMapVisibleTokenLabel(projectMapCandidateStructure.trustState)}
               </span>
             </div>
             <h3 className="text-xl font-semibold text-cyan-50">
@@ -1704,7 +1739,7 @@ export default async function ProjectMapPage({
             </h3>
             <p className="text-sm text-cyan-100/80">
               To jest czytelna robocza mapa zbudowana z danych projektu i
-              sygnałów SSOT. Pozostaje candidate/read-only i nie promuje
+              sygnałów SSOT. Pozostaje kandydatem read-only i nie promuje
               canonical map.json.
             </p>
           </div>
@@ -1718,9 +1753,9 @@ export default async function ProjectMapPage({
                 <li>Adres repozytorium: {projectMapCandidateStructure.projectIdentity.repositoryUrl ?? "missing"}</li>
                 <li>Katalog roboczy: {projectMapCandidateStructure.projectIdentity.workingDirectory ?? "missing"}</li>
                 <li>Ścieżka checkout: {projectMapCandidateStructure.projectIdentity.checkoutPath ?? "missing"}</li>
-                <li>Adres repozytorium w source identity: {projectMapCandidateStructure.projectIdentity.sourceIdentityRepositoryUrl ?? "missing"}</li>
-                <li>Status source identity: {projectMapCandidateStructure.projectIdentity.sourceIdentityStatus}</li>
-                <li>Utrwalenie source identity: {projectMapCandidateStructure.projectIdentity.sourceIdentityPersistence}</li>
+                <li>Adres repozytorium w tożsamości źródła: {projectMapCandidateStructure.projectIdentity.sourceIdentityRepositoryUrl ?? "missing"}</li>
+                <li>Status tożsamości źródła: {buildProjectMapVisibleTokenLabel(projectMapCandidateStructure.projectIdentity.sourceIdentityStatus)}</li>
+                <li>Utrwalenie tożsamości źródła: {buildProjectMapVisibleTokenLabel(projectMapCandidateStructure.projectIdentity.sourceIdentityPersistence)}</li>
               </ul>
             </article>
 
@@ -1730,7 +1765,7 @@ export default async function ProjectMapPage({
                 <ul className="mt-3 space-y-2 text-sm text-cyan-50/90">
                   {projectMapCandidateStructure.completedItems.map((item) => (
                     <li key={item.title} className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">
-                      <p className="font-medium">{item.title}</p>
+                      <p className="font-medium">{buildProjectMapVisibleTokenLabel(item.title)}</p>
                       <p className="text-cyan-100/80">{item.summary}</p>
                     </li>
                   ))}
@@ -1746,7 +1781,7 @@ export default async function ProjectMapPage({
                 <ul className="mt-3 space-y-2 text-sm text-cyan-50/90">
                   {projectMapCandidateStructure.underReviewItems.map((item) => (
                     <li key={item.title} className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">
-                      <p className="font-medium">{item.title}</p>
+                      <p className="font-medium">{buildProjectMapVisibleTokenLabel(item.title)}</p>
                       <p className="text-cyan-100/80">{item.summary}</p>
                     </li>
                   ))}
@@ -1764,7 +1799,7 @@ export default async function ProjectMapPage({
                 <ul className="mt-3 space-y-2 text-sm text-cyan-50/90">
                   {projectMapCandidateStructure.rejectedOrBlockedItems.map((item) => (
                     <li key={item.title} className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">
-                      <p className="font-medium">{item.title}</p>
+                      <p className="font-medium">{buildProjectMapVisibleTokenLabel(item.title)}</p>
                       <p className="text-cyan-100/80">{item.summary}</p>
                     </li>
                   ))}
@@ -1832,10 +1867,10 @@ export default async function ProjectMapPage({
               <p className="text-sm font-semibold text-cyan-50">Aktualny stan</p>
               <ul className="mt-3 grid gap-2 text-sm text-cyan-50/90 sm:grid-cols-2">
                 <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Źródło stanu: {projectMapCandidateStructure.currentState.stateSource}</li>
-                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Status source identity: {projectMapCandidateStructure.currentState.sourceIdentityStatus}</li>
-                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Utrwalenie source identity: {projectMapCandidateStructure.currentState.sourceIdentityPersistence}</li>
-                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Potwierdzony stan projektu: {projectMapCandidateStructure.currentState.projectCompletedState}</li>
-                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Stan kandydata: {projectMapCandidateStructure.currentState.projectCurrentState}</li>
+                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Status tożsamości źródła: {buildProjectMapVisibleTokenLabel(projectMapCandidateStructure.currentState.sourceIdentityStatus)}</li>
+                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Utrwalenie tożsamości źródła: {buildProjectMapVisibleTokenLabel(projectMapCandidateStructure.currentState.sourceIdentityPersistence)}</li>
+                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Potwierdzony stan projektu: {buildProjectMapVisibleTokenLabel(projectMapCandidateStructure.currentState.projectCompletedState)}</li>
+                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Stan kandydata: {buildProjectMapVisibleTokenLabel(projectMapCandidateStructure.currentState.projectCurrentState)}</li>
                 <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Następny krok: {projectMapCandidateStructure.currentState.projectNextState}</li>
                 <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Stan kanoniczny: {projectMapCandidateStructure.currentState.canonicalMapStatus}</li>
                 <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Status kandydata: {projectMapCandidateStructure.currentState.candidateStatus}</li>
@@ -1907,13 +1942,13 @@ export default async function ProjectMapPage({
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-wrap items-center gap-2">
                     <p className="text-sm font-semibold text-zinc-50">
-                      {row.label}
+                      {buildProjectMapVisibleTokenLabel(row.label)}
                     </p>
                     <span className="rounded-full border border-zinc-700 px-2 py-0.5 text-xs uppercase tracking-[0.18em] text-zinc-300">
-                      Status: {row.status}
+                      Status: {buildProjectMapVisibleTokenLabel(row.status)}
                     </span>
                     <span className="rounded-full border border-zinc-700 px-2 py-0.5 text-xs uppercase tracking-[0.18em] text-zinc-300">
-                      Źródło: {row.source}
+                      Źródło: {buildProjectMapVisibleTokenLabel(row.source)}
                     </span>
                   </div>
                   <p className="text-sm text-zinc-300">
@@ -2013,7 +2048,7 @@ export default async function ProjectMapPage({
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                       <div className="space-y-1">
                         <p className="text-base font-medium text-cyan-50">
-                          {entry.foundationArea}
+                          {buildProjectMapVisibleTokenLabel(entry.foundationArea)}
                         </p>
                         <p className="text-sm text-cyan-100/80">
                           Powód statusu: {entry.statusReason}
@@ -2021,7 +2056,7 @@ export default async function ProjectMapPage({
                       </div>
 
                       <span className="inline-flex items-center rounded-full border border-cyan-700 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100">
-                        {entry.status}
+                        {buildProjectMapVisibleTokenLabel(entry.status)}
                       </span>
                     </div>                    {entry.evidenceLines.length > 0 ? (
                       <ul className="mt-3 space-y-2 text-sm text-cyan-50/90">
@@ -2120,7 +2155,7 @@ export default async function ProjectMapPage({
                       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                         <div className="space-y-1">
                           <p className="text-base font-medium text-sky-50">
-                            {item.foundationArea}
+                            {buildProjectMapVisibleTokenLabel(item.foundationArea)}
                           </p>
                           <p className="text-sm text-sky-100/70">
                             {buildProjectMapCandidateFoundationDescription(item)}
@@ -2128,7 +2163,7 @@ export default async function ProjectMapPage({
                         </div>
 
                         <span className="inline-flex items-center rounded-full border border-sky-700 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-sky-100">
-                          {item.status}
+                          {buildProjectMapVisibleTokenLabel(item.status)}
                         </span>
                       </div>
                     </div>
