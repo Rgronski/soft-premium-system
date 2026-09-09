@@ -223,7 +223,7 @@ Active Capability: Session Close Protocol
 Active Work Item: Session 096 close protocol complete after MS-032.0 historical backfill and source-report work
 Current Mode: CLOSED
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.18 - Session Close Summary Artifact Contract Foundation
+Latest Completed Product Milestone: MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation
 
 MS-032.0 - Historical Session Development Log And Summary Backfill Foundation is the active session work. Sessions 094-021, 020-011, 010, 009, 007, 006, and 005 were backfilled or completed and published in local commits. Sessions 094-009, 007, 006, and 005 are represented by committed historical artifacts; Session 008 remains without a direct handoff and has changelog evidence only; Sessions 004, 003, 002, and 001 have no direct repository evidence. Product Owner supplied evidence indicates approximately 23 earlier/pre-formal conversations, including Foundation Day, but those require source reports before archive writing. The source-report path for `0003 SPS OS - SPS OS Bootstrap Assistance` is outside this close patch and is not reprocessed here.
 
