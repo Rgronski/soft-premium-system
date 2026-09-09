@@ -326,31 +326,33 @@ SPS OS Session State
 
 Date: 2026-09-09
 Current Session ID: 099
-Current Chat Title: 099 SPS OS - MS-031.32 Project Map Current State Copy Cleanup Foundation
+Current Chat Title: 099 SPS OS - MS-031.33 Project Map Candidate Metadata Copy Cleanup Foundation
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
-Active Capability: Project Map Current State Copy Cleanup
-Active Work Item: MS-031.32 Project Map Current State Copy Cleanup Foundation
+Active Capability: Project Map Candidate Metadata Copy Cleanup
+Active Work Item: MS-031.33 Project Map Candidate Metadata Copy Cleanup Foundation
 Current Mode: ACTIVE
-Completed Capability Items: MS-031.32 clarifies Project Map current-state/readiness/action-gate copy with Polish-first labels and shorter blocker lines without writer behavior or canonical Project Map runtime file modification.
+Completed Capability Items: MS-031.33 clarifies lower Project Map candidate metadata labels and action-gate reason copy without evaluator behavior or canonical Project Map runtime file modification.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.32 - Project Map Current State Copy Cleanup Foundation
+Latest Completed Product Milestone: MS-031.33 - Project Map Candidate Metadata Copy Cleanup Foundation
 Next Product Milestone: UNKNOWN / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: MS-031.32 Project Map current-state copy cleanup implemented and accepted as local UI/readability work
+Latest Completed Capability Item: MS-031.33 Project Map candidate metadata copy cleanup implemented and accepted as local UI/readability work
 Current Sprint: NONE
 Platform Priority: Preserve Project Map candidate/canonical separation until a separate Product Owner-approved future milestone performs any canonical write.
 Repository Branch: main
-Repository Working Tree State: MODIFIED / local MS-031.32 current-state copy cleanup patch
+Repository Working Tree State: MODIFIED / local MS-031.33 candidate metadata copy cleanup patch
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 98b86b8
+Latest Verified Commit: 6f3571a
 Verification Status: PASS
 Blockers: NONE
 Open Risks: Canonical `map.json` write or promotion remains approval-bound and must not start without a separate Product Owner-approved future milestone.
-Next Safe Step: Product Owner reviews the MS-031.32 current-state copy cleanup patch and decides whether to publish it; canonical write execution remains a separate future approval.
+Next Safe Step: Product Owner reviews the MS-031.33 candidate metadata copy cleanup patch and decides whether to publish it; canonical write execution remains a separate future approval.
 Next Session Plan: UNKNOWN
 
-MS-031.32 is COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED in the current local workspace as the Project Map Current State Copy Cleanup Foundation. The Project Map current-state, readiness, action-gate, and handoff-preview copy now uses clearer Polish-first labels, including `Lokalne potwierdzenie`, `Status gotowości`, and `osobny zatwierdzony milestone wykonawczy`. Readiness blockers are split into shorter list items while the first-screen summary remains visible and copy still states that no `map.json` write happens now. The action gate remains disabled and non-executing. MS-031.32 does not change the evaluator, persist approval, create a write route, writer helper, filesystem write behavior, executing write handler, canonical Project Map runtime file, or Beauty Client PRO repository modification. `APP_VERSION` is now `1.0065` and `LAST_PUBLISHED_MS` is `MS-031.32 - Project Map Current State Copy Cleanup Foundation`.
+MS-031.33 is COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED in the current local workspace as the Project Map Candidate Metadata Copy Cleanup Foundation. The lower Project Map candidate metadata and canonical write action-gate reason copy now reads more consistently as Polish-first UI. Candidate metadata labels now include `ID projektu`, `Adres repozytorium`, `Aktualny stan`, and `Następny krok`, while technical action-gate reason text is translated into concise Polish copy. Raw values such as paths, IDs, repository URLs, and status tokens remain visible as data. MS-031.33 does not change the evaluator, candidate data model, persist approval, create a write route, writer helper, filesystem write behavior, executing write handler, canonical Project Map runtime file, or Beauty Client PRO repository modification. `APP_VERSION` is now `1.0066` and `LAST_PUBLISHED_MS` is `MS-031.33 - Project Map Candidate Metadata Copy Cleanup Foundation`.
+
+MS-031.32 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Current State Copy Cleanup Foundation. The Project Map current-state, readiness, action-gate, and handoff-preview copy now uses clearer Polish-first labels, including `Lokalne potwierdzenie`, `Status gotowości`, and `osobny zatwierdzony milestone wykonawczy`. Readiness blockers are split into shorter list items while the first-screen summary remains visible and copy still states that no `map.json` write happens now. The action gate remains disabled and non-executing. MS-031.32 does not change the evaluator, persist approval, create a write route, writer helper, filesystem write behavior, executing write handler, canonical Project Map runtime file, or Beauty Client PRO repository modification. `APP_VERSION` is now `1.0065` and `LAST_PUBLISHED_MS` is `MS-031.32 - Project Map Current State Copy Cleanup Foundation`.
 
 MS-031.31 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Current State Clarity Foundation. The Project Map tab now opens with a concise Polish current-state summary that states whether canonical `map.json` is absent or present, whether the visible map is a roboczy kandydat or not ready, that canonical write is not currently executed, that local approval capture is not persisted and does not write `map.json`, and that a separate Product Owner-approved execution milestone is still required. Technical preview status details are collapsed behind the existing details pattern while the action gate and handoff preview remain visible, secondary, disabled, and non-executing. MS-031.31 does not change the evaluator, persist approval, create a write route, writer helper, filesystem write behavior, executing write handler, canonical Project Map runtime file, or Beauty Client PRO repository modification. `APP_VERSION` is now `1.0064` and `LAST_PUBLISHED_MS` is `MS-031.31 - Project Map Current State Clarity Foundation`.
 

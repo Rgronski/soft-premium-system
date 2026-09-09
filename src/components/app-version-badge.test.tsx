@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0065");
+    expect(APP_VERSION).toBe("1.0066");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-031.32 - Project Map Current State Copy Cleanup Foundation",
+      "MS-031.33 - Project Map Candidate Metadata Copy Cleanup Foundation",
     );
   });
 });

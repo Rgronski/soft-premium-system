@@ -370,6 +370,8 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Mapa z repo + SSOT")).toBeTruthy();
     expect(screen.getByText("trust: candidate-read-only")).toBeTruthy();
     expect(screen.getByText("Co to za projekt?")).toBeTruthy();
+    expect(screen.getAllByText((content) => content.includes("ID projektu:")).length).toBeGreaterThan(0);
+    expect(screen.getByText((content) => content.includes("Adres repozytorium:"))).toBeTruthy();
     expect(screen.getByText("Co już mamy?")).toBeTruthy();
     expect(screen.getByText("Co jest pod review?")).toBeTruthy();
     expect(screen.getByText("Co jest odrzucone / zablokowane?")).toBeTruthy();
@@ -377,25 +379,25 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Co dalej?")).toBeTruthy();
     expect(screen.getByText("Z jakich dokumentów to wynika?")).toBeTruthy();
     expect(
-      screen.getByText("State source: repo + SSOT candidate evidence"),
+      screen.getByText("Źródło stanu: repo + SSOT candidate evidence"),
     ).toBeTruthy();
     expect(screen.getByText("Source identity: aligned")).toBeTruthy();
-    expect(screen.getAllByText("Source identity persistence: persisted").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Persistence source identity: persisted").length).toBeGreaterThan(0);
     expect(
       screen.getAllByText("SSOT docs were found and can support the candidate map.").length,
     ).toBeGreaterThan(0);
     expect(screen.queryByText("SSOT remains absent in the candidate map.")).toBeNull();
     expect(
       screen.getByText((content) =>
-        content.includes("Completed project state:") &&
+        content.includes("Potwierdzony stan projektu:") &&
         content.includes("Project Identity") &&
         content.includes("Candidate evidence"),
       ),
     ).toBeTruthy();
-    expect(screen.getByText("Current candidate state: candidate-read-only")).toBeTruthy();
+    expect(screen.getByText("Stan kandydata: candidate-read-only")).toBeTruthy();
     expect(
       screen.getByText(
-        "Next step: Review SSOT-derived map sections before any canonical save.",
+        "Następny krok: Review SSOT-derived map sections before any canonical save.",
       ),
     ).toBeTruthy();
     expect(screen.getByText("Wyjaśnienie dostępności sekcji")).toBeTruthy();
@@ -446,6 +448,11 @@ describe("ProjectMapPage", () => {
     expect(
       screen.getByText(
         "Lokalne potwierdzenie nie omija braków evidence, nie jest persisted, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Kandydat ma braki, słabe dowody, wnioski lub konflikty evidence.",
       ),
     ).toBeTruthy();
     expect(

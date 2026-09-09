@@ -757,7 +757,7 @@ function buildProjectMapCanonicalWritePreviewCopy(
       details: [
         `Status gotowości: ${preflightEvaluation.status}`,
         `Lokalne potwierdzenie: ${localApprovalCaptureState}`,
-        `Główna blokada / powód: ${topBlockerOrReason}`,
+        `Główna blokada / powód: ${buildProjectMapCanonicalWriteReasonLabel(topBlockerOrReason)}`,
         "Brak zgody na zapis teraz: nie wolno teraz tworzyć, zapisywać, nadpisywać ani promować map.json.",
         "Przyszłe wykonanie wymaga osobnego zatwierdzonego milestone wykonawczego.",
       ],
@@ -793,8 +793,10 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       description:
         "Przyszły zapis kanoniczny jest odrzucony przez jawny stan review i nie może być uruchomiony.",
       detail:
-        evaluation.blockers[0] ??
-        "MS-031.27 nie wykonuje zapisu map.json przy stanie rejected.",
+        buildProjectMapCanonicalWriteReasonLabel(
+          evaluation.blockers[0] ??
+            "MS-031.27 nie wykonuje zapisu map.json przy stanie rejected.",
+        ),
       approvalCaptureLabel:
         "Lokalne potwierdzenie niedostępne: stan rejected blokuje planowanie zapisu.",
       approvalCaptureStatus:
@@ -811,8 +813,10 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       description:
         "Przyszły zapis kanoniczny wymaga uzupełnienia lub rozstrzygnięcia evidence przed osobną zgodą.",
       detail:
-        evaluation.reasons[0] ??
-        "MS-031.27 nie wykonuje zapisu map.json przy stanie needs evidence.",
+        buildProjectMapCanonicalWriteReasonLabel(
+          evaluation.reasons[0] ??
+            "MS-031.27 nie wykonuje zapisu map.json przy stanie needs evidence.",
+        ),
       approvalCaptureLabel:
         "Lokalne potwierdzenie niewystarczające: najpierw potrzeba evidence.",
       approvalCaptureStatus:
@@ -829,9 +833,11 @@ function buildProjectMapCanonicalWriteActionGateCopy(
       description:
         "Przyszły zapis kanoniczny nie może być planowany, bo brakuje wymaganych faktów preflight.",
       detail:
-        evaluation.blockers[0] ??
-        evaluation.reasons[0] ??
-        "MS-031.27 nie wykonuje zapisu map.json przy stanie unknown.",
+        buildProjectMapCanonicalWriteReasonLabel(
+          evaluation.blockers[0] ??
+            evaluation.reasons[0] ??
+            "MS-031.27 nie wykonuje zapisu map.json przy stanie unknown.",
+        ),
       approvalCaptureLabel:
         "Lokalne potwierdzenie niedostępne: stan unknown wymaga ustalenia faktów.",
       approvalCaptureStatus:
@@ -847,15 +853,41 @@ function buildProjectMapCanonicalWriteActionGateCopy(
     description:
       "Przyszły zapis kanoniczny jest zablokowany do czasu usunięcia blokady i osobnej zgody Product Ownera.",
     detail:
+    buildProjectMapCanonicalWriteReasonLabel(
       evaluation.blockers[0] ??
-      evaluation.reasons[0] ??
-      "MS-031.27 nie wykonuje zapisu map.json przy stanie blocked.",
+        evaluation.reasons[0] ??
+        "MS-031.27 nie wykonuje zapisu map.json przy stanie blocked.",
+    ),
     approvalCaptureLabel:
       "Lokalne potwierdzenie niedostępne: blocked wymaga usunięcia blokady.",
     approvalCaptureStatus:
       "Lokalne potwierdzenie nie omija blokad, nie jest persisted, nie uruchamia milestone wykonawczego i nie zapisuje map.json.",
     approvalCaptureDisabled: true,
   };
+}
+
+function buildProjectMapCanonicalWriteReasonLabel(reason: string): string {
+  if (reason === "none") {
+    return "brak";
+  }
+
+  if (
+    reason.includes(
+      "Candidate contains missing, weak, inferred, conflicting, blocked, absent, unknown, or needs-review evidence.",
+    )
+  ) {
+    return "Kandydat ma braki, słabe dowody, wnioski lub konflikty evidence.";
+  }
+
+  if (reason.includes("SPS OS Project Map storage target is unknown.")) {
+    return "Nieznana ścieżka docelowa Project Map w SPS OS.";
+  }
+
+  if (reason.includes("No reviewed Project Map candidate is available.")) {
+    return "Brak sprawdzonego kandydata Project Map.";
+  }
+
+  return reason;
 }
 
 function buildProjectMapRefreshFeedbackCopy(
@@ -1681,14 +1713,14 @@ export default async function ProjectMapPage({
             <article className="rounded-xl border border-cyan-900/60 bg-cyan-950/40 p-4">
               <p className="text-sm font-semibold text-cyan-50">Co to za projekt?</p>
               <ul className="mt-3 space-y-2 text-sm text-cyan-50/90">
-                <li>Project ID: {projectMapCandidateStructure.projectIdentity.projectId}</li>
-                <li>Project name: {projectMapCandidateStructure.projectIdentity.projectName}</li>
-                <li>Repository URL: {projectMapCandidateStructure.projectIdentity.repositoryUrl ?? "missing"}</li>
-                <li>Working directory: {projectMapCandidateStructure.projectIdentity.workingDirectory ?? "missing"}</li>
-                <li>Checkout path: {projectMapCandidateStructure.projectIdentity.checkoutPath ?? "missing"}</li>
-                <li>Source identity repositoryUrl: {projectMapCandidateStructure.projectIdentity.sourceIdentityRepositoryUrl ?? "missing"}</li>
-                <li>Source identity status: {projectMapCandidateStructure.projectIdentity.sourceIdentityStatus}</li>
-                <li>Source identity persistence: {projectMapCandidateStructure.projectIdentity.sourceIdentityPersistence}</li>
+                <li>ID projektu: {projectMapCandidateStructure.projectIdentity.projectId}</li>
+                <li>Nazwa projektu: {projectMapCandidateStructure.projectIdentity.projectName}</li>
+                <li>Adres repozytorium: {projectMapCandidateStructure.projectIdentity.repositoryUrl ?? "missing"}</li>
+                <li>Katalog roboczy: {projectMapCandidateStructure.projectIdentity.workingDirectory ?? "missing"}</li>
+                <li>Ścieżka checkout: {projectMapCandidateStructure.projectIdentity.checkoutPath ?? "missing"}</li>
+                <li>Adres repozytorium w source identity: {projectMapCandidateStructure.projectIdentity.sourceIdentityRepositoryUrl ?? "missing"}</li>
+                <li>Status source identity: {projectMapCandidateStructure.projectIdentity.sourceIdentityStatus}</li>
+                <li>Persistence source identity: {projectMapCandidateStructure.projectIdentity.sourceIdentityPersistence}</li>
               </ul>
             </article>
 
@@ -1797,16 +1829,16 @@ export default async function ProjectMapPage({
             </article>
 
             <article className="rounded-xl border border-cyan-900/60 bg-cyan-950/40 p-4 lg:col-span-2">
-              <p className="text-sm font-semibold text-cyan-50">Current state</p>
+              <p className="text-sm font-semibold text-cyan-50">Aktualny stan</p>
               <ul className="mt-3 grid gap-2 text-sm text-cyan-50/90 sm:grid-cols-2">
-                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">State source: {projectMapCandidateStructure.currentState.stateSource}</li>
+                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Źródło stanu: {projectMapCandidateStructure.currentState.stateSource}</li>
                 <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Source identity: {projectMapCandidateStructure.currentState.sourceIdentityStatus}</li>
-                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Source identity persistence: {projectMapCandidateStructure.currentState.sourceIdentityPersistence}</li>
-                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Completed project state: {projectMapCandidateStructure.currentState.projectCompletedState}</li>
-                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Current candidate state: {projectMapCandidateStructure.currentState.projectCurrentState}</li>
-                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Next step: {projectMapCandidateStructure.currentState.projectNextState}</li>
-                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Canonical state: {projectMapCandidateStructure.currentState.canonicalMapStatus}</li>
-                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Candidate status: {projectMapCandidateStructure.currentState.candidateStatus}</li>
+                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Persistence source identity: {projectMapCandidateStructure.currentState.sourceIdentityPersistence}</li>
+                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Potwierdzony stan projektu: {projectMapCandidateStructure.currentState.projectCompletedState}</li>
+                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Stan kandydata: {projectMapCandidateStructure.currentState.projectCurrentState}</li>
+                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Następny krok: {projectMapCandidateStructure.currentState.projectNextState}</li>
+                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Stan kanoniczny: {projectMapCandidateStructure.currentState.canonicalMapStatus}</li>
+                <li className="rounded-lg border border-cyan-900/60 bg-cyan-950/30 px-3 py-2">Status kandydata: {projectMapCandidateStructure.currentState.candidateStatus}</li>
               </ul>
             </article>
           </div>

@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.33 Project Map Candidate Metadata Copy Cleanup Foundation
+
+### Date
+
+2026-09-09
+
+### Completed
+
+* Replaced lower Project Map candidate metadata labels with Polish-first labels.
+* Simplified technical action-gate reason copy into concise Polish UI text.
+* Kept raw IDs, paths, repository URLs, and status values visible as data.
+* Updated the app-version marker to `1.0066`.
+
+### Verification
+
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed.
+
 ## Session 099 - MS-031.32 Project Map Current State Copy Cleanup Foundation
 
 ### Date
