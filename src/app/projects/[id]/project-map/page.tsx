@@ -74,6 +74,7 @@ type ProjectMapCanonicalWritePreviewCopy = {
   description: string;
   details: string[];
   actionGate: ProjectMapCanonicalWriteActionGateCopy;
+  handoffPreview: ProjectMapCanonicalWriteHandoffPreviewCopy;
 };
 
 type ProjectMapCanonicalWriteActionGateCopy = {
@@ -85,6 +86,12 @@ type ProjectMapCanonicalWriteActionGateCopy = {
   approvalCaptureLabel: string;
   approvalCaptureStatus: string;
   approvalCaptureDisabled: boolean;
+};
+
+type ProjectMapCanonicalWriteHandoffPreviewCopy = {
+  title: string;
+  description: string;
+  details: string[];
 };
 
 const projectMapReviewDecisionOptions = [
@@ -716,6 +723,13 @@ function buildProjectMapCanonicalWritePreviewCopy(
   const actionGate = buildProjectMapCanonicalWriteActionGateCopy(
     preflightEvaluation,
   );
+  const topBlockerOrReason =
+    preflightEvaluation.blockers[0] ??
+    preflightEvaluation.reasons[0] ??
+    "none";
+  const localApprovalCaptureState = actionGate.approvalCaptureDisabled
+    ? `unavailable / ${actionGate.actionState}`
+    : "available locally / planning-only / not persisted";
 
   return {
     title: "Preview status zapisu kanonicznego",
@@ -735,6 +749,18 @@ function buildProjectMapCanonicalWritePreviewCopy(
       "Ten milestone nie zapisuje, nie tworzy i nie promuje map.json.",
     ],
     actionGate,
+    handoffPreview: {
+      title: "Preview handoffu dla przyszłego execution milestone",
+      description:
+        "Copy-ready preview dla Codexa opisuje tylko warunki przyszłego wykonania; nie uruchamia API, writerów ani zapisu plików.",
+      details: [
+        `Preflight status: ${preflightEvaluation.status}`,
+        `Local approval capture: ${localApprovalCaptureState}`,
+        `Top blocker / reason: ${topBlockerOrReason}`,
+        "No write authorized now: nie wolno teraz tworzyć, zapisywać, nadpisywać ani promować map.json.",
+        "Future execution requires a separate Product Owner-approved milestone before any canonical write.",
+      ],
+    },
   };
 }
 
@@ -1529,6 +1555,32 @@ export default async function ProjectMapPage({
             }
           </span>
         </label>
+
+        <div className="mt-4 rounded-lg border border-zinc-800 bg-zinc-950/70 p-3">
+          <div className="space-y-1">
+            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+              Handoff preview
+            </p>
+            <h4 className="text-sm font-semibold text-zinc-100">
+              {projectMapCanonicalWritePreviewCopy.handoffPreview.title}
+            </h4>
+            <p className="text-xs text-zinc-400">
+              {projectMapCanonicalWritePreviewCopy.handoffPreview.description}
+            </p>
+          </div>
+          <ul className="mt-3 space-y-2 text-xs text-zinc-300">
+            {projectMapCanonicalWritePreviewCopy.handoffPreview.details.map(
+              (detail) => (
+                <li
+                  key={detail}
+                  className="rounded-md border border-zinc-800 bg-zinc-900/70 px-3 py-2"
+                >
+                  {detail}
+                </li>
+              ),
+            )}
+          </ul>
+        </div>
       </section>
 
       {projectMapRefreshFeedbackCopy ? (

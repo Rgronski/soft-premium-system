@@ -787,6 +787,21 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Status preview: BLOCKED")).toBeTruthy();
     expect(screen.getByText("Status akcji: blocked")).toBeTruthy();
     expect(
+      screen.getByText("Preview handoffu dla przyszłego execution milestone"),
+    ).toBeTruthy();
+    expect(screen.getByText("Preflight status: BLOCKED")).toBeTruthy();
+    expect(screen.getByText("Local approval capture: unavailable / blocked")).toBeTruthy();
+    expect(
+      screen.getAllByText((content) =>
+        content.startsWith("Top blocker / reason: "),
+      ).length,
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "No write authorized now: nie wolno teraz tworzyć, zapisywać, nadpisywać ani promować map.json.",
+      ),
+    ).toBeTruthy();
+    expect(
       (
         screen.getByRole("button", {
           name: "Akcja niedostępna - blocked",
@@ -826,6 +841,22 @@ describe("ProjectMapPage", () => {
 
     expect(screen.getByText("Status preview: READY_FOR_FUTURE_WRITE")).toBeTruthy();
     expect(screen.getByText("Status akcji: ready for future approval")).toBeTruthy();
+    expect(screen.getByText("Preflight status: READY_FOR_FUTURE_WRITE")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Local approval capture: available locally / planning-only / not persisted",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getAllByText((content) =>
+        content.startsWith("Top blocker / reason: "),
+      ).length,
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Future execution requires a separate Product Owner-approved milestone before any canonical write.",
+      ),
+    ).toBeTruthy();
     expect(
       screen.getByText(
         "MS-031.29 pokazuje tylko komunikat approval capture; nie zapisuje, nie tworzy i nie promuje map.json.",

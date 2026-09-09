@@ -193,8 +193,66 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.29 - Project Map Canonical Write Approval Messaging Foundation
+Latest Completed Product Milestone: MS-031.30 - Project Map Canonical Write Execution Handoff Preview Foundation
 Next Product Milestone Candidate: UNKNOWN / Product Owner decision required
+
+## MS-031.30 - Project Map Canonical Write Execution Handoff Preview Foundation
+
+**Milestone**
+MS-031.30 - Project Map Canonical Write Execution Handoff Preview Foundation
+
+**Type**
+SPS OS / Project Map Canonical Write Execution Handoff Preview Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+LOCAL PATCH / NOT PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+
+**Product Outcome**
+The Project Map canonical write action gate now includes a compact read-only handoff preview for a future execution milestone. The preview surfaces the preflight status, local approval capture state, top blocker or reason, and the explicit boundary that no canonical `map.json` write is authorized now.
+
+**Handoff Preview Boundary**
+This milestone adds preview/copy UI only. It does not persist approval, create a server-side write route, create a filesystem writer helper, add an executing write handler, call an API route, or create / write / overwrite / promote canonical Project Map runtime files.
+
+**Behavior**
+* the preview is rendered near `Bramka akcji zapisu kanonicznego`
+* the preview includes preflight status and local approval capture state
+* the preview includes the top blocker or reason from the existing preflight evaluation
+* the preview states that no current `map.json` write is authorized
+* the preview states that future execution still requires a separate Product Owner-approved milestone
+* the disabled action gate remains disabled and non-executing
+
+**Non-Goals**
+* no approval persistence
+* no evaluator change
+* no canonical Project Map writer
+* no server-side write route
+* no filesystem writer helper
+* no executing write handler
+* no clipboard/copy handler
+* no creation, overwrite, promotion, or modification of `map.json`
+* no creation or modification of Project Map runtime files
+* no Beauty Client PRO repository inspection or modification
+
+**Implementation Evidence**
+* `src/app/projects/[id]/project-map/page.tsx` adds the read-only handoff preview near the action gate
+* `src/app/projects/[id]/project-map/page.test.tsx` verifies status, local approval capture state, blocker/reason copy, no-write authorization copy, and disabled action behavior
+* `src/lib/app-version.ts` records `APP_VERSION 1.0063` and `LAST_PUBLISHED_MS MS-031.30 - Project Map Canonical Write Execution Handoff Preview Foundation`
+* `src/components/app-version-badge.test.tsx` keeps the visible app-version marker aligned
+
+**Verification**
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed
+* no canonical Project Map runtime files were created or modified
+* Beauty Client PRO repository files were not inspected or modified
+
+**Residual Risk**
+* this remains a preview/handoff aid only; actual execution still needs a separate Product Owner-approved implementation milestone
+* persisted approval, writer execution, audit/recovery behavior, and canonical output validation remain future work
 
 ## MS-031.29 - Project Map Canonical Write Approval Messaging Foundation
 
@@ -205,13 +263,13 @@ MS-031.29 - Project Map Canonical Write Approval Messaging Foundation
 SPS OS / Project Map Canonical Write Approval Messaging Foundation
 
 **Status**
-COMPLETED / VERIFIED / ACCEPTED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Publication Status**
-LOCAL PATCH / NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED / ACCEPTED / NOT PUBLISHED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Product Outcome**
 The Project Map approval capture and action-gate messaging now states more explicitly that local approval capture is planning-only, non-persistent, does not write canonical `map.json`, and does not replace a separate future Product Owner-approved execution milestone.

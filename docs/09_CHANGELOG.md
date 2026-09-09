@@ -69,6 +69,23 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 099 - MS-031.30 Project Map Canonical Write Execution Handoff Preview Foundation
+
+### Date
+
+2026-09-09
+
+### Completed
+
+* Added a compact read-only handoff preview near the Project Map canonical write action gate.
+* Surfaced the preflight status, local approval capture state, and top blocker or reason for a future separately approved execution milestone.
+* Kept the preview non-executing: no approval persistence, API route, writer helper, write handler, clipboard handler, canonical `map.json` write, Project Map runtime file modification, or Beauty Client PRO repository modification.
+* Updated the app-version marker to `1.0063`.
+
+### Verification
+
+* `npm test -- "src/app/projects/[id]/project-map/page.test.tsx"` passed.
+
 ## Session 099 - MS-031.29 Project Map Canonical Write Approval Messaging Foundation
 
 ### Date
