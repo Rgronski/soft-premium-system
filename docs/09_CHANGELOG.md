@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.39 Project Map Remaining Risk Decision Panel Foundation
+
+### Date
+
+2026-09-10
+
+### Completed
+
+* Added a read-only Project Map panel for remaining accepted and open risks after the first canonical write.
+* Kept candidate evidence separate from canonical storage and stated that accepted or open risks are not resolved evidence.
+* Added focused coverage for accepted/open risk labels and the disabled write action.
+* Verified TypeScript, Project Map readback/page tests, unchanged canonical artifacts, and a clean Beauty Client PRO checkout.
+
+### Notes
+
+* No canonical artifact rewrite, approval persistence, canonical write execution, or Beauty Client PRO repository modification was performed.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.38B Project Map Canonical Readback SSOT Sync Foundation
 
 ### Date

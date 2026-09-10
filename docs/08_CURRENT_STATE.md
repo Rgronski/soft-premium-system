@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.38B - Project Map Canonical Readback SSOT Sync Foundation
+  MS-031.39 - Project Map Remaining Risk Decision Panel Foundation
+
+MS-031.39 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Remaining Risk Decision Panel Foundation. The Project Map view now shows remaining accepted and open risks in a read-only panel, keeps candidate/canonical separation visible, and explicitly states that accepted or open risks are not resolved evidence. TypeScript and focused Project Map tests pass; canonical artifacts remain unchanged and the Beauty Client PRO checkout remains clean. Commit and push remain pending.
 
 MS-031.38B is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Canonical Readback SSOT Sync Foundation. SSOT now records the verified read-only canonical readback, the completed TypeScript cleanup, unchanged canonical artifacts, and the clean Beauty Client PRO checkout. Commit and push remain pending.
 

@@ -193,8 +193,36 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.38B - Project Map Canonical Readback SSOT Sync Foundation
+Latest Completed Product Milestone: MS-031.39 - Project Map Remaining Risk Decision Panel Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.39 - Project Map Remaining Risk Decision Panel Foundation
+
+**Milestone**
+MS-031.39 - Project Map Remaining Risk Decision Panel Foundation
+
+**Type**
+SPS OS / Project Map read-only risk visibility
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+READY FOR COMMIT / PUSH
+
+**Product Outcome**
+The Project Map view now presents remaining accepted and open risks after the first canonical write. The panel keeps candidate and canonical state visibly separate and does not treat accepted or open risks as resolved evidence.
+
+**Verification**
+* `npx.cmd tsc --noEmit --pretty false` passes
+* Project Map readback and page tests pass (`6 / 6`, `10 / 10`)
+* canonical artifacts remain present and unchanged
+* Beauty Client PRO checkout remains clean
+
+**Non-Goals**
+* no canonical artifact rewrite or write execution
+* no new approval persistence
+* no Beauty Client PRO repository modification
 
 ## MS-031.38B - Project Map Canonical Readback SSOT Sync Foundation
 

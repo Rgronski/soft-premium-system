@@ -766,6 +766,42 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Preflight: NEEDS_EVIDENCE")).toBeTruthy();
     expect(screen.getByText("Evidence risk count: 5")).toBeTruthy();
     expect(screen.getByText("Zapis kanoniczny: nie jest teraz wykonywany.")).toBeTruthy();
+    expect(screen.getByText("Pozostałe ryzyka i decyzje")).toBeTruthy();
+    expect(screen.getAllByText("zaakceptowane").length).toBeGreaterThan(0);
+    expect(screen.getAllByText((content) => content.includes("nie jest dowodem resolved evidence")).length).toBeGreaterThan(0);
+  });
+
+  test("shows open remaining risks from the candidate without adding a write path", async () => {
+    resolveProjectMapReadResultMock.mockResolvedValueOnce({
+      status: "missing",
+      projectId: "project-1",
+      projectName: "Alpha Workspace",
+      projectMetadataRootPath: "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1",
+      projectMapRootPath: "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map",
+      mapJsonPath: "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\map.json",
+      projectSourceIdentityPersistence: {
+        status: "persisted",
+        persistedAt: "2026-08-30T12:34:56.000Z",
+      },
+      projectSourceIdentity: {
+        projectId: "project-1",
+        projectName: "Alpha Workspace",
+        repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+        projectCheckoutPath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
+      },
+    });
+
+    render(
+      await ProjectMapPage({
+        params: Promise.resolve({ id: "project-1" }),
+      }),
+    );
+
+    expect(screen.getByText("Pozostałe ryzyka i decyzje")).toBeTruthy();
+    expect(screen.getAllByText("otwarte").length).toBeGreaterThan(0);
+    expect(screen.getAllByText((content) => content.includes("Wymaga późniejszej decyzji Product Ownera")).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("button").some((button) => (button as HTMLButtonElement).disabled)).toBe(true);
   });
 
   test("shows an explicit read-not-implemented state when the map file already exists", async () => {

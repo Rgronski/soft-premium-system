@@ -96,6 +96,18 @@ type ProjectMapCanonicalWriteHandoffPreviewCopy = {
   details: string[];
 };
 
+type ProjectMapRemainingRisk = {
+  label: string;
+  state: "accepted" | "open";
+  detail: string;
+};
+
+type ProjectMapRemainingRiskPanelCopy = {
+  title: string;
+  description: string;
+  risks: ProjectMapRemainingRisk[];
+};
+
 const projectMapReviewDecisionOptions = [
   {
     id: "accept",
@@ -655,6 +667,64 @@ function buildProjectMapActionEntryCopy(
     secondaryActionLabel: "Pokaż roboczą mapę",
     secondaryActionHref: "#project-map-candidate",
     note: "Kanoniczny zapis nadal wymaga osobnej zgody.",
+  };
+}
+
+function buildProjectMapRemainingRiskPanelCopy(
+  mapReadResult: ProjectMapReadResult | null,
+  candidate: ProjectMapReconstructionCandidateResult | null,
+): ProjectMapRemainingRiskPanelCopy | null {
+  const acceptedRisks = new Set(
+    mapReadResult?.status === "present"
+      ? [
+          ...mapReadResult.canonicalMap.writeApproval.acceptedRisks,
+          ...(mapReadResult.audit?.acceptedRisks ?? []),
+        ]
+      : [],
+  );
+  const candidateRisks = new Map(
+    candidate?.foundationChecklist
+      .filter(
+        (item) =>
+          item.status !== "completed" ||
+          item.supportState !== "confirmed" ||
+          item.conflictState === "conflicting",
+      )
+      .map((item) => [item.foundationArea, item]) ?? [],
+  );
+  const riskAreas: ProjectMapReconstructionCandidateChecklistItem["foundationArea"][] = [
+    "SSOT",
+    "Project Bible",
+    "Project Map",
+    "First Layout",
+  ];
+  const risks = riskAreas
+    .filter((area) => acceptedRisks.has(area) || candidateRisks.has(area))
+    .map((area) => {
+      const candidateRisk = candidateRisks.get(area);
+      const accepted = acceptedRisks.has(area);
+      const state: ProjectMapRemainingRisk["state"] = accepted
+        ? "accepted"
+        : "open";
+
+      return {
+        label: buildProjectMapVisibleTokenLabel(area),
+        state,
+        detail: accepted
+          ? "Ryzyko świadomie zaakceptowane dla bieżącego zapisu; nie jest dowodem resolved evidence."
+          : `Ryzyko pozostaje otwarte: status kandydata ${candidateRisk?.status ?? "unknown"}. Wymaga późniejszej decyzji Product Ownera lub bezpośredniego evidence.`,
+      };
+    });
+
+  if (risks.length === 0) {
+    return null;
+  }
+
+  return {
+    title: "Pozostałe ryzyka i decyzje",
+    description:
+      "Panel jest read-only. Pokazuje ryzyka zaakceptowane przy zapisie oraz ryzyka nadal otwarte; żadna pozycja nie jest automatycznie uznawana za resolved evidence.",
+    risks,
   };
 }
 
@@ -1427,6 +1497,8 @@ export default async function ProjectMapPage({
     project,
   );
   const projectMapCandidateCopy = buildProjectMapCandidateCopy(mapCandidate);
+  const projectMapRemainingRiskPanelCopy =
+    buildProjectMapRemainingRiskPanelCopy(mapReadResult, mapCandidate);
   const foundationStatuses = buildFoundationStatuses(
     project?.name ?? null,
     projectMapStorageReadiness,
@@ -1590,6 +1662,42 @@ export default async function ProjectMapPage({
               )}
             </article>
           </div>
+        </section>
+      ) : null}
+
+      {projectMapRemainingRiskPanelCopy ? (
+        <section
+          id="project-map-remaining-risks"
+          className="rounded-xl border border-rose-900/50 bg-rose-950/20 p-4"
+        >
+          <div className="space-y-1">
+            <p className="text-xs uppercase tracking-[0.2em] text-rose-200/70">
+              Ryzyka po zapisie
+            </p>
+            <h3 className="text-xl font-semibold text-rose-50">
+              {projectMapRemainingRiskPanelCopy.title}
+            </h3>
+            <p className="text-sm text-rose-100/80">
+              {projectMapRemainingRiskPanelCopy.description}
+            </p>
+          </div>
+
+          <ul className="mt-4 grid gap-3 lg:grid-cols-2">
+            {projectMapRemainingRiskPanelCopy.risks.map((risk) => (
+              <li
+                key={risk.label}
+                className="rounded-lg border border-rose-900/60 bg-rose-950/35 px-3 py-3"
+              >
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="font-medium text-rose-50">{risk.label}</p>
+                  <span className="rounded-full border border-rose-700 px-2 py-0.5 text-xs uppercase tracking-[0.18em] text-rose-100">
+                    {risk.state === "accepted" ? "zaakceptowane" : "otwarte"}
+                  </span>
+                </div>
+                <p className="mt-2 text-sm text-rose-100/80">{risk.detail}</p>
+              </li>
+            ))}
+          </ul>
         </section>
       ) : null}
 
