@@ -193,8 +193,40 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.46 - Project Map Candidate Drift Detection Foundation
+Latest Completed Product Milestone: MS-031.47 - Project Map Structural Fingerprint Baseline Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.47 - Project Map Structural Fingerprint Baseline Foundation
+
+**Milestone**
+MS-031.47 - Project Map Structural Fingerprint Baseline Foundation
+
+**Type**
+SPS OS / Project Map read-only structural baseline
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+READY FOR COMMIT / PUSH
+
+**Product Outcome**
+SPS OS now stores a deterministic structural fingerprint for the validated Beauty Client PRO checkout in the SPS OS-owned metadata boundary, separate from candidate evidence and canonical Project Map artifacts.
+
+**Verification**
+* persisted canonical source identity and checkout path are validated before scanning
+* normalized, sorted regular-file entries contain byte size and SHA-256 content hashes
+* `.git`, dependencies, build output, caches, environment files, and sensitive key/token patterns are excluded
+* malformed identity is invalid and unavailable checkout/storage is preserved as unavailable
+* structural fingerprint tests and TypeScript verification pass
+* existing Project Map artifacts remain present and unchanged
+* Beauty Client PRO checkout remains clean
+
+**Non-Goals**
+* no rewrite of `map.json`, `map-write-audit.json`, or `risk-decisions.json`
+* no canonical write, promotion, or candidate mutation
+* no scan of secrets or environment files
+* no Beauty Client PRO repository modification
 
 ## MS-031.46 - Project Map Candidate Drift Detection Foundation
 

@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.47 Project Map Structural Fingerprint Baseline Foundation
+
+### Date
+
+2026-09-11
+
+### Completed
+
+* Added a deterministic SPS OS-owned structural fingerprint baseline for the validated Beauty Client PRO checkout.
+* Recorded normalized file paths, byte sizes, SHA-256 content hashes, explicit scope, exclusions, and an overall fingerprint.
+* Excluded `.git`, dependencies, build output, caches, environment files, and sensitive key/token patterns.
+* Verified the baseline is separate from candidate evidence and canonical Project Map artifacts, while the BCP checkout remains clean.
+
+### Notes
+
+* `structural-fingerprint.json` was created only under SPS OS metadata.
+* `map.json`, `map-write-audit.json`, and `risk-decisions.json` were not rewritten.
+* Canonical write and promotion remain disabled.
+
 ## Session 100 - MS-031.46 Project Map Candidate Drift Detection Foundation
 
 ### Date

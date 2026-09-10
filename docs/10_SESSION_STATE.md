@@ -329,26 +329,26 @@ Current Session ID: 100
 Current Chat Title: 100 SPS OS - MS-031.46 Project Map Candidate Drift Detection Foundation
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
-Active Capability: Project Map Candidate Drift Detection
-Active Work Item: MS-031.46 read-only candidate drift detection
+Active Capability: Project Map Structural Fingerprint Baseline
+Active Work Item: MS-031.47 read-only structural fingerprint baseline
 Current Mode: ACTIVE
-Completed Capability Items: MS-031.38 records the read-only canonical Project Map and audit sidecar readback; MS-031.38A records the passing TypeScript cleanup; MS-031.38B synchronizes these results into SSOT; MS-031.39 adds read-only risk visibility; MS-031.40 distinguishes accepted, open, and needs-evidence states; MS-031.41 verifies canonical/audit integrity; MS-031.42 summarizes readiness; MS-031.43 persists Product Owner risk decisions; MS-031.44 adds controlled capture feedback; MS-031.45 verifies deterministic SPS foundation alignment; MS-031.46 detects candidate drift without rewriting canonical artifacts.
+Completed Capability Items: MS-031.38 records the read-only canonical Project Map and audit sidecar readback; MS-031.38A records the passing TypeScript cleanup; MS-031.38B synchronizes these results into SSOT; MS-031.39 adds read-only risk visibility; MS-031.40 distinguishes accepted, open, and needs-evidence states; MS-031.41 verifies canonical/audit integrity; MS-031.42 summarizes readiness; MS-031.43 persists Product Owner risk decisions; MS-031.44 adds controlled capture feedback; MS-031.45 verifies deterministic SPS foundation alignment; MS-031.46 detects candidate drift without rewriting canonical artifacts; MS-031.47 creates the SPS-owned structural fingerprint baseline.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.46 - Project Map Candidate Drift Detection Foundation
+Latest Completed Product Milestone: MS-031.47 - Project Map Structural Fingerprint Baseline Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: MS-031.46 Project Map candidate drift detection verified while preserving read-only canonical behavior
+Latest Completed Capability Item: MS-031.47 Project Map structural fingerprint baseline verified while preserving read-only canonical behavior
 Current Sprint: NONE
 Platform Priority: Preserve candidate/canonical separation and keep SSOT, Project Bible, candidate evidence, and First Layout risks explicit.
 Repository Branch: main
 Repository Working Tree State: DIRTY
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: ffbc359
+Latest Verified Commit: ba1f87c
 Verification Status: PASS
 Blockers: NONE
-Open Risks: SSOT missing in BCP; Project Bible missing in BCP; candidate Project Map evidence remains separate from canonical storage; First Layout lacks direct BCP evidence; persisted risk decisions remain decisions rather than resolved evidence; drift is unavailable when comparison data is insufficient; commit/push remain pending.
-Next Safe Step: Review the verified MS-031.46 diff before deciding whether to commit and push.
-Next Session Plan: Continue from the verified Session 100 MS-031.46 state; keep canonical write disabled until a separately authorized execution step.
+Open Risks: SSOT missing in BCP; Project Bible missing in BCP; candidate Project Map evidence remains separate from canonical storage; First Layout lacks direct BCP evidence; persisted risk decisions remain decisions rather than resolved evidence; structural baseline does not yet provide a canonical structural fingerprint for historical comparison; commit/push remain pending.
+Next Safe Step: Review the verified MS-031.47 diff before deciding whether to commit and push.
+Next Session Plan: Continue from the verified Session 100 MS-031.47 state; keep canonical write disabled until a separately authorized execution step.
 
 MS-031.36 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Visible Technical Token Polish Pass Foundation. The Project Map tab now polishes remaining visible English / mixed technical labels, badges, and handoff preview copy after MS-031.35 while preserving raw technical values only where they are data. Foundation labels now include `Tożsamość projektu`, `Źródło robocze`, `Pierwszy layout`, `Pierwszy działający przepływ`, and `Ścieżka publikacji`; overview labels and status/source badges are Polish-first; handoff preview copy now names the future milestone wykonawczy boundary in Polish. MS-031.36 does not change evaluator behavior, candidate data model, approval persistence, writer routes/helpers/handlers, canonical Project Map runtime files, or Beauty Client PRO repository files. `APP_VERSION` is now `1.0069` and `LAST_PUBLISHED_MS` is `MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation`.
 

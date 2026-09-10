@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.46 - Project Map Candidate Drift Detection Foundation
+  MS-031.47 - Project Map Structural Fingerprint Baseline Foundation
+
+MS-031.47 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Structural Fingerprint Baseline Foundation. SPS OS generated `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb\project-map\structural-fingerprint.json` from the validated read-only Beauty Client PRO checkout with 209 deterministic entries, normalized ordering, and SHA-256 hashes. The baseline excludes `.git`, dependencies, build output, caches, environment files, and sensitive key/token patterns, and remains separate from candidate evidence and canonical Project Map artifacts. Existing canonical artifacts remain unchanged, the Beauty Client PRO checkout remains clean, and canonical write remains disabled. Commit and push remain pending.
 
 MS-031.46 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Candidate Drift Detection Foundation. SPS OS now compares the current read-only checkout context with canonical Project Map identity and reports no_drift, changed, unavailable, or invalid with explicit changed, added, removed, and unavailable evidence categories. Missing data is never inferred as unchanged, canonical artifacts remain unchanged, the Beauty Client PRO checkout remains clean, and canonical write remains disabled. Commit and push remain pending.
 
