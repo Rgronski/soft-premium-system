@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.46 Project Map Candidate Drift Detection Foundation
+
+### Date
+
+2026-09-11
+
+### Completed
+
+* Added deterministic read-only comparison of the current checkout context with canonical Project Map identity and storage boundaries.
+* Added explicit no_drift, changed, unavailable, and invalid results.
+* Added changed, added, removed, and unavailable evidence categories without inferring missing evidence as unchanged.
+* Displayed candidate drift status in the Project Map UI while preserving canonical write and promotion boundaries.
+* Verified TypeScript, drift, Project Map readback/page tests, unchanged Project Map artifacts, and a clean Beauty Client PRO checkout.
+
+### Notes
+
+* No baseline or candidate artifact was created.
+* No canonical artifact rewrite, canonical write, promotion, or Beauty Client PRO repository modification was performed.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.45 Project Map SPS Foundation Alignment Verification
 
 ### Date

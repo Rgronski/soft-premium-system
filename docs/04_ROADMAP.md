@@ -193,8 +193,38 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.45 - Project Map SPS Foundation Alignment Verification
+Latest Completed Product Milestone: MS-031.46 - Project Map Candidate Drift Detection Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.46 - Project Map Candidate Drift Detection Foundation
+
+**Milestone**
+MS-031.46 - Project Map Candidate Drift Detection Foundation
+
+**Type**
+SPS OS / Project Map read-only candidate drift detection
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+READY FOR COMMIT / PUSH
+
+**Product Outcome**
+The Project Map view now compares the current read-only checkout context with canonical map identity and reports no_drift, changed, unavailable, or invalid without creating a baseline or modifying any artifact.
+
+**Verification**
+* persisted checkout identity and SPS metadata boundary checks are deterministic
+* changed, added, removed, and unavailable evidence categories are explicit
+* malformed canonical data is invalid and insufficient comparison data is unavailable
+* TypeScript, drift, Project Map readback, and page tests pass
+* canonical artifacts remain present and unchanged
+* Beauty Client PRO checkout remains clean
+
+**Non-Goals**
+* no candidate or canonical artifact creation
+* no canonical write, promotion, or artifact rewrite
+* no BCP repository modification or fabricated evidence
 
 ## MS-031.45 - Project Map SPS Foundation Alignment Verification
 

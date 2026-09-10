@@ -34,6 +34,7 @@ import {
   type ProjectMapRiskDecisionWriteResult,
 } from "@/lib/project-map/risk-decisions";
 import { evaluateProjectMapSpsFoundationAlignment } from "@/lib/project-map/alignment";
+import { detectProjectMapCandidateDrift } from "@/lib/project-map/drift";
 import type {
   ProjectMapReconstructionCandidateChecklistItem,
   ProjectMapReconstructionCandidateResult,
@@ -1712,6 +1713,11 @@ export default async function ProjectMapPage({
     candidate: mapCandidate,
     canonicalWriteEnabled: false,
   });
+  const projectMapDrift = detectProjectMapCandidateDrift({
+    project,
+    mapReadResult,
+    candidate: mapCandidate,
+  });
   const foundationStatuses = buildFoundationStatuses(
     project?.name ?? null,
     projectMapStorageReadiness,
@@ -1881,6 +1887,45 @@ export default async function ProjectMapPage({
         </ul>
         <p className="mt-3 text-xs text-cyan-100/70">
           Źródła reguł SPS OS: {projectMapSpsAlignment.controlSources.join(", ")}. Nie są kopiowane jako evidence BCP.
+        </p>
+      </section>
+
+      <section
+        id="project-map-candidate-drift"
+        className="rounded-xl border border-amber-900/50 bg-amber-950/20 p-4"
+      >
+        <div className="space-y-1">
+          <p className="text-xs uppercase tracking-[0.2em] text-amber-200/70">
+            Drift kandydata
+          </p>
+          <h3 className="text-xl font-semibold text-amber-50">
+            Candidate drift detection
+          </h3>
+          <p className="text-sm font-medium text-amber-100">
+            Status: {projectMapDrift.status}
+          </p>
+        </div>
+        <ul className="mt-4 grid gap-2 text-sm text-amber-50/90 md:grid-cols-2">
+          <li className="rounded-lg border border-amber-900/60 bg-amber-950/35 px-3 py-2">
+            Changed: {projectMapDrift.changed.join(" | ") || "none"}
+          </li>
+          <li className="rounded-lg border border-amber-900/60 bg-amber-950/35 px-3 py-2">
+            Added: {projectMapDrift.added.join(" | ") || "none"}
+          </li>
+          <li className="rounded-lg border border-amber-900/60 bg-amber-950/35 px-3 py-2">
+            Removed: {projectMapDrift.removed.join(" | ") || "none"}
+          </li>
+          <li className="rounded-lg border border-amber-900/60 bg-amber-950/35 px-3 py-2">
+            Unavailable: {projectMapDrift.unavailable.join(" | ") || "none"}
+          </li>
+          {projectMapDrift.details.map((detail) => (
+            <li key={detail} className="rounded-lg border border-amber-900/60 bg-amber-950/35 px-3 py-2">
+              {detail}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-xs text-amber-100/70">
+          Odczyt checkoutu i canonical mapy jest read-only; canonical write i promocja pozostają wyłączone.
         </p>
       </section>
 

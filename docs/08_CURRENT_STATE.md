@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.45 - Project Map SPS Foundation Alignment Verification
+  MS-031.46 - Project Map Candidate Drift Detection Foundation
+
+MS-031.46 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Candidate Drift Detection Foundation. SPS OS now compares the current read-only checkout context with canonical Project Map identity and reports no_drift, changed, unavailable, or invalid with explicit changed, added, removed, and unavailable evidence categories. Missing data is never inferred as unchanged, canonical artifacts remain unchanged, the Beauty Client PRO checkout remains clean, and canonical write remains disabled. Commit and push remain pending.
 
 MS-031.45 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map SPS Foundation Alignment Verification. SPS OS now compares deterministic project, canonical/audit, persisted risk-decision, required-evidence, storage-boundary, candidate/canonical, and write-boundary facts against SPS OS control rules and presents aligned, missing_data, needs_review, or mismatch results. SPS OS documents remain control rules rather than BCP evidence; canonical artifacts remain unchanged, the Beauty Client PRO checkout remains clean, and canonical write remains disabled. Commit and push remain pending.
 
