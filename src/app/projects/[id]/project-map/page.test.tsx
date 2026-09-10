@@ -801,6 +801,8 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Pozostałe ryzyka i decyzje")).toBeTruthy();
     expect(screen.getAllByText("otwarte").length).toBeGreaterThan(0);
     expect(screen.getAllByText((content) => content.includes("Wymaga późniejszej decyzji Product Ownera")).length).toBeGreaterThan(0);
+    expect(screen.getAllByText("needs evidence").length).toBeGreaterThan(0);
+    expect(screen.getAllByText((content) => content.includes("Nie uznawaj tego ryzyka za resolved")).length).toBeGreaterThan(0);
     expect(screen.getAllByRole("button").some((button) => (button as HTMLButtonElement).disabled)).toBe(true);
   });
 

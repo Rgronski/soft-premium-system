@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.40 Project Map Risk Review Decision Foundation
+
+### Date
+
+2026-09-10
+
+### Completed
+
+* Extended the read-only remaining-risk panel with explicit `accepted`, `open`, and `needs evidence` states.
+* Preserved candidate/canonical separation and kept unresolved evidence visible.
+* Added focused coverage for needs-evidence presentation while keeping the write action disabled.
+* Verified TypeScript, Project Map readback/page tests, unchanged canonical artifacts, and a clean Beauty Client PRO checkout.
+
+### Notes
+
+* No canonical artifact rewrite, approval persistence, write execution, or Beauty Client PRO repository modification was performed.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.39 Project Map Remaining Risk Decision Panel Foundation
 
 ### Date

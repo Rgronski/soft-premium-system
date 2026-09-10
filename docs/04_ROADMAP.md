@@ -193,8 +193,36 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.39 - Project Map Remaining Risk Decision Panel Foundation
+Latest Completed Product Milestone: MS-031.40 - Project Map Risk Review Decision Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.40 - Project Map Risk Review Decision Foundation
+
+**Milestone**
+MS-031.40 - Project Map Risk Review Decision Foundation
+
+**Type**
+SPS OS / Project Map read-only risk review state
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+READY FOR COMMIT / PUSH
+
+**Product Outcome**
+The Project Map remaining-risk panel now distinguishes accepted, open, and needs-evidence states for SSOT, Project Bible, Project Map, and First Layout. The panel remains read-only and does not treat any state as resolved evidence.
+
+**Verification**
+* `npx.cmd tsc --noEmit --pretty false` passes
+* Project Map readback and page tests pass (`6 / 6`, `10 / 10`)
+* canonical artifacts remain present and unchanged
+* Beauty Client PRO checkout remains clean
+
+**Non-Goals**
+* no canonical artifact rewrite or write execution
+* no approval persistence or promotion path
+* no Beauty Client PRO repository modification
 
 ## MS-031.39 - Project Map Remaining Risk Decision Panel Foundation
 

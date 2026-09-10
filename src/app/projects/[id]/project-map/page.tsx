@@ -98,7 +98,7 @@ type ProjectMapCanonicalWriteHandoffPreviewCopy = {
 
 type ProjectMapRemainingRisk = {
   label: string;
-  state: "accepted" | "open";
+  state: "accepted" | "open" | "needs evidence";
   detail: string;
 };
 
@@ -703,16 +703,29 @@ function buildProjectMapRemainingRiskPanelCopy(
     .map((area) => {
       const candidateRisk = candidateRisks.get(area);
       const accepted = acceptedRisks.has(area);
+      const needsEvidence =
+        !accepted &&
+        !!candidateRisk &&
+        (candidateRisk.conflictState === "conflicting" ||
+          candidateRisk.supportState === "missing" ||
+          candidateRisk.supportState === "weak" ||
+          candidateRisk.supportState === "inferred" ||
+          candidateRisk.status === "needs review" ||
+          candidateRisk.status === "unknown");
       const state: ProjectMapRemainingRisk["state"] = accepted
         ? "accepted"
-        : "open";
+        : needsEvidence
+          ? "needs evidence"
+          : "open";
 
       return {
         label: buildProjectMapVisibleTokenLabel(area),
         state,
         detail: accepted
           ? "Ryzyko świadomie zaakceptowane dla bieżącego zapisu; nie jest dowodem resolved evidence."
-          : `Ryzyko pozostaje otwarte: status kandydata ${candidateRisk?.status ?? "unknown"}. Wymaga późniejszej decyzji Product Ownera lub bezpośredniego evidence.`,
+          : needsEvidence
+            ? "Brakuje bezpośredniego lub spójnego evidence. Nie uznawaj tego ryzyka za resolved bez uzupełnienia danych."
+            : `Ryzyko pozostaje otwarte: status kandydata ${candidateRisk?.status ?? "unknown"}. Wymaga późniejszej decyzji Product Ownera.`,
       };
     });
 
@@ -723,7 +736,7 @@ function buildProjectMapRemainingRiskPanelCopy(
   return {
     title: "Pozostałe ryzyka i decyzje",
     description:
-      "Panel jest read-only. Pokazuje ryzyka zaakceptowane przy zapisie oraz ryzyka nadal otwarte; żadna pozycja nie jest automatycznie uznawana za resolved evidence.",
+      "Panel jest read-only. Pokazuje ryzyka zaakceptowane, otwarte oraz wymagające evidence; żadna pozycja nie jest automatycznie uznawana za resolved evidence.",
     risks,
   };
 }
@@ -1691,7 +1704,11 @@ export default async function ProjectMapPage({
                 <div className="flex flex-wrap items-center gap-2">
                   <p className="font-medium text-rose-50">{risk.label}</p>
                   <span className="rounded-full border border-rose-700 px-2 py-0.5 text-xs uppercase tracking-[0.18em] text-rose-100">
-                    {risk.state === "accepted" ? "zaakceptowane" : "otwarte"}
+                    {risk.state === "accepted"
+                      ? "zaakceptowane"
+                      : risk.state === "needs evidence"
+                        ? "needs evidence"
+                        : "otwarte"}
                   </span>
                 </div>
                 <p className="mt-2 text-sm text-rose-100/80">{risk.detail}</p>
