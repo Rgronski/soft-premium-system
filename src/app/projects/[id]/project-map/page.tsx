@@ -20,6 +20,8 @@ import {
 } from "@/lib/project-map/canonical-write-preflight";
 import {
   resolveProjectMapReadResult,
+  verifyProjectMapCanonicalIntegrity,
+  type ProjectMapCanonicalIntegrityResult,
   type ProjectMapReadResult,
 } from "@/lib/project-map/read";
 import type {
@@ -107,6 +109,23 @@ type ProjectMapRemainingRiskPanelCopy = {
   description: string;
   risks: ProjectMapRemainingRisk[];
 };
+
+function buildProjectMapCanonicalIntegrityCopy(
+  result: ProjectMapCanonicalIntegrityResult,
+) {
+  return {
+    title: "Integralność canonical / audit",
+    description:
+      "Read-only porównanie canonical map.json z map-write-audit.json. Wynik nie zapisuje, nie promuje i nie zmienia żadnego artifactu.",
+    statusLabel:
+      result.status === "consistent"
+        ? "consistent"
+        : result.status === "warning"
+          ? "warning"
+          : "invalid",
+    checks: result.checks,
+  };
+}
 
 const projectMapReviewDecisionOptions = [
   {
@@ -1493,6 +1512,20 @@ export default async function ProjectMapPage({
   const mapReadResult = project
     ? await resolveProjectMapReadResult(project)
     : null;
+  const projectMapCanonicalIntegrityCopy = buildProjectMapCanonicalIntegrityCopy(
+    mapReadResult
+      ? verifyProjectMapCanonicalIntegrity(mapReadResult)
+      : {
+          status: "invalid",
+          checks: [
+            {
+              label: "Canonical Project Map",
+              status: "invalid",
+              detail: "Canonical map.json nie jest poprawnie dostępna do porównania.",
+            },
+          ],
+        },
+  );
   const persistedCheckoutPath = mapReadResult?.projectSourceIdentity?.projectCheckoutPath;
   const expectedCheckoutPath = project?.workingDirectory
     ? buildRepoCheckoutDirectory(project.workingDirectory)
@@ -1717,6 +1750,38 @@ export default async function ProjectMapPage({
           </ul>
         </section>
       ) : null}
+
+      <section
+        id="project-map-canonical-integrity"
+        className="rounded-xl border border-violet-900/50 bg-violet-950/20 p-4"
+      >
+        <div className="space-y-1">
+          <p className="text-xs uppercase tracking-[0.2em] text-violet-200/70">
+            Weryfikacja integralności
+          </p>
+          <h3 className="text-xl font-semibold text-violet-50">
+            {projectMapCanonicalIntegrityCopy.title}
+          </h3>
+          <p className="text-sm text-violet-100/80">
+            {projectMapCanonicalIntegrityCopy.description}
+          </p>
+          <p className="text-sm font-medium text-violet-100">
+            Status: {projectMapCanonicalIntegrityCopy.statusLabel}
+          </p>
+        </div>
+
+        <ul className="mt-4 grid gap-2 text-sm text-violet-50/90 md:grid-cols-2">
+          {projectMapCanonicalIntegrityCopy.checks.map((check) => (
+            <li
+              key={check.label}
+              className="rounded-lg border border-violet-900/60 bg-violet-950/35 px-3 py-2"
+            >
+              <p className="font-medium">{check.label}: {check.status}</p>
+              <p className="mt-1 text-violet-100/75">{check.detail}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       {projectMapActionEntryCopy ? (
         <section

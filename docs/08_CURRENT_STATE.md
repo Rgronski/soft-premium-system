@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.40 - Project Map Risk Review Decision Foundation
+  MS-031.41 - Project Map Canonical Integrity Verification Foundation
+
+MS-031.41 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Canonical Integrity Verification Foundation. SPS OS now compares canonical `map.json` with `map-write-audit.json` and presents `consistent`, `warning`, or `invalid` status with safe missing/malformed handling. Candidate/canonical separation remains visible, canonical artifacts remain unchanged, and the Beauty Client PRO checkout remains clean. Commit and push remain pending.
 
 MS-031.40 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Risk Review Decision Foundation. The read-only remaining-risk panel now distinguishes accepted, open, and needs-evidence states for SSOT, Project Bible, Project Map, and First Layout. Candidate/canonical separation remains visible, canonical artifacts remain unchanged, and the Beauty Client PRO checkout remains clean. Commit and push remain pending.
 

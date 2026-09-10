@@ -360,3 +360,85 @@ describe("resolveProjectMapReadResult", () => {
     );
   });
 });
+
+describe("verifyProjectMapCanonicalIntegrity", () => {
+  it("returns consistent when canonical and audit identity and decisions match", async () => {
+    const { verifyProjectMapCanonicalIntegrity } = await loadModule();
+    const identity = {
+      projectId: "project-1",
+      projectName: "Alpha",
+      repositoryUrl: "https://example.com/alpha.git",
+      workingDirectory: "C:\\SPS_OS_WORK\\alpha",
+      projectCheckoutPath: "C:\\SPS_OS_WORK\\alpha\\repo",
+      projectMetadataRootPath,
+      projectSourceIdentityPath,
+      persistedAt: "2026-09-10T13:40:05.300Z",
+    };
+
+    const result = verifyProjectMapCanonicalIntegrity({
+      status: "present",
+      projectId: "project-1",
+      projectName: "Alpha",
+      projectMetadataRootPath,
+      projectMapRootPath: `${projectMetadataRootPath}\\project-map`,
+      mapJsonPath: `${projectMetadataRootPath}\\project-map\\map.json`,
+      projectSourceIdentity: identity,
+      projectSourceIdentityPersistence: { status: "persisted", projectSourceIdentityPath, persistedAt: identity.persistedAt },
+      canonicalMap: {
+        kind: "canonical-project-map",
+        version: 1,
+        canonical: {
+          projectId: "project-1",
+          projectName: "Alpha",
+          projectMetadataRootPath,
+          projectMapRootPath: `${projectMetadataRootPath}\\project-map`,
+          mapJsonPath: `${projectMetadataRootPath}\\project-map\\map.json`,
+          projectSourceIdentityPath,
+          sourceIdentity: identity,
+          writtenAt: identity.persistedAt,
+        },
+        writeApproval: { status: "approved", canonicalWriteAllowed: true, acceptedRisks: ["SSOT"] },
+      },
+      auditStatus: "present",
+      audit: {
+        kind: "canonical-project-map-write-audit",
+        version: 1,
+        projectId: "project-1",
+        projectName: "Alpha",
+        mapJsonPath: `${projectMetadataRootPath}\\project-map\\map.json`,
+        projectSourceIdentityPath,
+        sourceIdentity: identity,
+        acceptedRisks: ["SSOT"],
+        preflight: { status: "NEEDS_EVIDENCE", evidenceRiskCount: 1 },
+        writeResult: "written",
+        writtenAt: identity.persistedAt,
+      },
+    });
+
+    expect(result.status).toBe("consistent");
+  });
+
+  it("returns warning for a missing audit sidecar and invalid for a mismatch", async () => {
+    const { verifyProjectMapCanonicalIntegrity } = await loadModule();
+    const base = {
+      status: "present" as const,
+      projectId: "project-1",
+      projectName: "Alpha",
+      projectMetadataRootPath,
+      projectMapRootPath: `${projectMetadataRootPath}\\project-map`,
+      mapJsonPath: `${projectMetadataRootPath}\\project-map\\map.json`,
+      projectSourceIdentity: {} as never,
+      projectSourceIdentityPersistence: { status: "unavailable" as const, reason: "project-source-identity-unavailable" as const },
+      canonicalMap: {} as never,
+    };
+
+    expect(verifyProjectMapCanonicalIntegrity({ ...base, auditStatus: "missing" }).status).toBe("warning");
+    expect(
+      verifyProjectMapCanonicalIntegrity({
+        ...base,
+        auditStatus: "present",
+        audit: { projectId: "other" } as never,
+      }).status,
+    ).toBe("invalid");
+  });
+});

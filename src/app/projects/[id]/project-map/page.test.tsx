@@ -34,6 +34,16 @@ vi.mock("@/lib/project/server", () => ({
 vi.mock("@/lib/project-map/read", () => ({
   resolveProjectMapReadResult: (project: unknown) =>
     resolveProjectMapReadResultMock(project),
+  verifyProjectMapCanonicalIntegrity: () => ({
+    status: "warning",
+    checks: [
+      {
+        label: "Source identity",
+        status: "warning",
+        detail: "Audit sidecar nie zawiera source identity do pełnego porównania.",
+      },
+    ],
+  }),
 }));
 
 vi.mock("@/lib/project-map/scan", () => ({
@@ -766,6 +776,9 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Preflight: NEEDS_EVIDENCE")).toBeTruthy();
     expect(screen.getByText("Evidence risk count: 5")).toBeTruthy();
     expect(screen.getByText("Zapis kanoniczny: nie jest teraz wykonywany.")).toBeTruthy();
+    expect(screen.getByText("Integralność canonical / audit")).toBeTruthy();
+    expect(screen.getByText("Status: warning")).toBeTruthy();
+    expect(screen.getByText("Source identity: warning")).toBeTruthy();
     expect(screen.getByText("Pozostałe ryzyka i decyzje")).toBeTruthy();
     expect(screen.getAllByText("zaakceptowane").length).toBeGreaterThan(0);
     expect(screen.getAllByText((content) => content.includes("nie jest dowodem resolved evidence")).length).toBeGreaterThan(0);

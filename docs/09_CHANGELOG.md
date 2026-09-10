@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.41 Project Map Canonical Integrity Verification Foundation
+
+### Date
+
+2026-09-10
+
+### Completed
+
+* Added read-only integrity verification between canonical `map.json` and `map-write-audit.json`.
+* Added explicit `consistent`, `warning`, and `invalid` results with safe missing/malformed handling.
+* Displayed the integrity result in the Project Map UI and added focused coverage for agreement, missing audit, and mismatch cases.
+* Verified TypeScript, Project Map readback/page tests, unchanged canonical artifacts, and a clean Beauty Client PRO checkout.
+
+### Notes
+
+* No canonical artifact rewrite, approval persistence, write execution, or Beauty Client PRO repository modification was performed.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.40 Project Map Risk Review Decision Foundation
 
 ### Date

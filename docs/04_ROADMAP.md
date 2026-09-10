@@ -193,8 +193,37 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.40 - Project Map Risk Review Decision Foundation
+Latest Completed Product Milestone: MS-031.41 - Project Map Canonical Integrity Verification Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.41 - Project Map Canonical Integrity Verification Foundation
+
+**Milestone**
+MS-031.41 - Project Map Canonical Integrity Verification Foundation
+
+**Type**
+SPS OS / Project Map read-only integrity verification
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+READY FOR COMMIT / PUSH
+
+**Product Outcome**
+SPS OS now compares canonical `map.json` with `map-write-audit.json` and presents explicit `consistent`, `warning`, or `invalid` integrity status without rewriting either artifact.
+
+**Verification**
+* `npx.cmd tsc --noEmit --pretty false` passes
+* Project Map readback and page tests pass (`8 / 8`, `10 / 10`)
+* missing and malformed artifact fallback remains safe
+* canonical artifacts remain present and unchanged
+* Beauty Client PRO checkout remains clean
+
+**Non-Goals**
+* no canonical artifact rewrite or write execution
+* no approval persistence or promotion path
+* no Beauty Client PRO repository modification
 
 ## MS-031.40 - Project Map Risk Review Decision Foundation
 

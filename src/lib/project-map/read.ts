@@ -74,6 +74,7 @@ export type ProjectMapWriteAuditReadback = {
   projectName: string;
   mapJsonPath: string;
   projectSourceIdentityPath: string;
+  sourceIdentity?: ProjectMapSourceIdentity;
   acceptedRisks: string[];
   preflight: {
     status: string;
@@ -81,6 +82,17 @@ export type ProjectMapWriteAuditReadback = {
   };
   writeResult: string;
   writtenAt: string;
+};
+
+export type ProjectMapCanonicalIntegrityCheck = {
+  label: string;
+  status: "consistent" | "warning" | "invalid";
+  detail: string;
+};
+
+export type ProjectMapCanonicalIntegrityResult = {
+  status: "consistent" | "warning" | "invalid";
+  checks: ProjectMapCanonicalIntegrityCheck[];
 };
 
 function isMissingPathError(error: unknown): boolean {
@@ -224,6 +236,158 @@ function readWriteAudit(value: unknown): ProjectMapWriteAuditReadback | null {
   }
 
   return value as unknown as ProjectMapWriteAuditReadback;
+}
+
+export function verifyProjectMapCanonicalIntegrity(
+  readResult: ProjectMapReadResult,
+): ProjectMapCanonicalIntegrityResult {
+  if (readResult.status !== "present") {
+    return {
+      status: "invalid",
+      checks: [
+        {
+          label: "Canonical Project Map",
+          status: "invalid",
+          detail: "Canonical map.json nie jest poprawnie dostępna do porównania.",
+        },
+      ],
+    };
+  }
+
+  const checks: ProjectMapCanonicalIntegrityCheck[] = [];
+  const canonical = readResult.canonicalMap;
+  const audit = readResult.audit;
+
+  if (readResult.auditStatus === "missing" || !audit) {
+    return {
+      status: "warning",
+      checks: [
+        {
+          label: "Audit sidecar",
+          status: "warning",
+          detail: "Audit sidecar nie jest dostępny, więc pełna zgodność nie może zostać potwierdzona.",
+        },
+      ],
+    };
+  }
+
+  if (readResult.auditStatus === "invalid") {
+    return {
+      status: "invalid",
+      checks: [
+        {
+          label: "Audit sidecar",
+          status: "invalid",
+          detail: "Audit sidecar ma niepoprawny format i nie może zostać bezpiecznie porównany.",
+        },
+      ],
+    };
+  }
+
+  if (
+    !isRecord(canonical.canonical) ||
+    !isRecord(canonical.writeApproval) ||
+    !isRecord(audit) ||
+    !isRecord(audit.preflight)
+  ) {
+    return {
+      status: "invalid",
+      checks: [
+        {
+          label: "Canonical / audit payload",
+          status: "invalid",
+          detail: "Canonical lub audit payload ma niepoprawny format.",
+        },
+      ],
+    };
+  }
+
+  const compare = (label: string, left: unknown, right: unknown): void => {
+    if (typeof left !== "string" || typeof right !== "string") {
+      checks.push({
+        label,
+        status: "invalid",
+        detail: "Brak poprawnej wartości po jednej ze stron porównania.",
+      });
+      return;
+    }
+
+    checks.push(
+      left === right
+        ? { label, status: "consistent", detail: "Wartości są zgodne." }
+        : {
+            label,
+            status: "invalid",
+            detail: "Wartości canonical i audit sidecar różnią się.",
+          },
+    );
+  };
+
+  compare("Project ID", canonical.canonical.projectId, audit.projectId);
+  compare("Project name", canonical.canonical.projectName, audit.projectName);
+
+  const canonicalIdentity = canonical.canonical.sourceIdentity;
+  const auditIdentity = audit.sourceIdentity;
+  if (!isRecord(canonicalIdentity)) {
+    checks.push({
+      label: "Source identity",
+      status: "invalid",
+      detail: "Canonical source identity ma niepoprawny format.",
+    });
+  } else if (!auditIdentity) {
+    checks.push({
+      label: "Source identity",
+      status: "warning",
+      detail: "Audit sidecar nie zawiera source identity do pełnego porównania.",
+    });
+  } else {
+    compare("Repository URL", canonicalIdentity.repositoryUrl, auditIdentity.repositoryUrl);
+    compare("Working directory", canonicalIdentity.workingDirectory, auditIdentity.workingDirectory);
+    compare("Checkout path", canonicalIdentity.projectCheckoutPath, auditIdentity.projectCheckoutPath);
+  }
+
+  checks.push({
+    label: "Approval status",
+    status: canonical.writeApproval.status ? "consistent" : "invalid",
+    detail: canonical.writeApproval.status
+      ? `Canonical approval status: ${canonical.writeApproval.status}.`
+      : "Canonical approval status jest pusty.",
+  });
+  checks.push({
+    label: "Preflight status",
+    status: audit.preflight.status ? "consistent" : "invalid",
+    detail: audit.preflight.status
+      ? `Audit preflight status: ${audit.preflight.status}.`
+      : "Audit preflight status jest pusty.",
+  });
+
+  const canonicalRisks = [...canonical.writeApproval.acceptedRisks].sort();
+  const auditRisks = [...audit.acceptedRisks].sort();
+  const risksMatch =
+    canonicalRisks.length === auditRisks.length &&
+    canonicalRisks.every((risk, index) => risk === auditRisks[index]);
+  checks.push({
+    label: "Accepted risks",
+    status: risksMatch ? "consistent" : "invalid",
+    detail: risksMatch
+      ? "Lista zaakceptowanych ryzyk jest zgodna."
+      : "Lista zaakceptowanych ryzyk różni się między artifactami.",
+  });
+  checks.push({
+    label: "Write result",
+    status: audit.writeResult ? "consistent" : "invalid",
+    detail: audit.writeResult
+      ? `Audit write result: ${audit.writeResult}.`
+      : "Audit write result jest pusty.",
+  });
+
+  const status = checks.some((check) => check.status === "invalid")
+    ? "invalid"
+    : checks.some((check) => check.status === "warning")
+      ? "warning"
+      : "consistent";
+
+  return { status, checks };
 }
 
 async function persistProjectSourceIdentity(
