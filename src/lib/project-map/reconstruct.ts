@@ -472,7 +472,12 @@ export function enrichProjectMapReconstructionCandidateWithSourceIdentity(
             ...item,
             status: "completed",
             supportState: "confirmed",
-            milestoneStates: [...new Set([...item.milestoneStates, "completed"])],
+            milestoneStates: [
+              ...new Set<ProjectMapMilestoneState>([
+                ...item.milestoneStates,
+                "completed",
+              ]),
+            ],
             evidence: [identityEvidence, ...item.evidence],
           }
         : item,
@@ -642,7 +647,9 @@ export function buildProjectMapCandidateStructure(
       canonicalMapStatus:
         mapReadResult.status === "missing"
           ? "missing"
-          : mapReadResult.reason === "project-map-present-but-read-not-implemented"
+          : mapReadResult.status === "present" ||
+              (mapReadResult.status === "unavailable" &&
+                mapReadResult.reason === "project-map-present-but-read-not-implemented")
             ? "present"
             : "unavailable",
       candidateStatus: candidate.status,

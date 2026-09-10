@@ -326,18 +326,18 @@ SPS OS Session State
 
 Date: 2026-09-10
 Current Session ID: 100
-Current Chat Title: 100 SPS OS - MS-031.37E Project Map Canonical Write SSOT Sync Foundation
+Current Chat Title: 100 SPS OS - MS-031.38B Project Map Canonical Readback SSOT Sync Foundation
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
-Active Capability: Project Map Canonical Write SSOT Sync
-Active Work Item: MS-031.37E documentation synchronization after canonical Project Map write
+Active Capability: Project Map Canonical Readback SSOT Sync
+Active Work Item: MS-031.38B documentation synchronization after verified canonical readback and TypeScript cleanup
 Current Mode: ACTIVE
-Completed Capability Items: MS-031.37E records the first canonical Beauty Client PRO Project Map write, its audit sidecar, aligned source identity, clean BCP checkout, and accepted/open evidence risks without rewriting canonical artifacts.
+Completed Capability Items: MS-031.38 records the read-only canonical Project Map and audit sidecar readback; MS-031.38A records the passing TypeScript cleanup; MS-031.38B synchronizes these results into SSOT without rewriting canonical artifacts.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.37E - Project Map Canonical Write SSOT Sync Foundation
+Latest Completed Product Milestone: MS-031.38B - Project Map Canonical Readback SSOT Sync Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: MS-031.36 Project Map visible technical token polish pass implemented and accepted as local UI/readability work
+Latest Completed Capability Item: MS-031.38A Project Map TypeScript verification cleanup passed while preserving readback behavior
 Current Sprint: NONE
 Platform Priority: Preserve candidate/canonical separation and keep SSOT, Project Bible, candidate evidence, and First Layout risks explicit.
 Repository Branch: main

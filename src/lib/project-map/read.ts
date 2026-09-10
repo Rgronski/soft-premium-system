@@ -1,4 +1,4 @@
-import { access, mkdir, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
 import { resolveProjectMapStorageRoot } from "../project-brain/metadata";
@@ -47,6 +47,42 @@ export type ProjectMapSourceIdentityPersistenceResult =
       reason: "project-source-identity-unavailable";
     };
 
+export type ProjectMapCanonicalReadback = {
+  kind: "canonical-project-map";
+  version: 1;
+  canonical: {
+    projectId: string;
+    projectName: string;
+    projectMetadataRootPath: string;
+    projectMapRootPath: string;
+    mapJsonPath: string;
+    projectSourceIdentityPath: string;
+    sourceIdentity: ProjectMapSourceIdentity;
+    writtenAt: string;
+  };
+  writeApproval: {
+    status: string;
+    canonicalWriteAllowed: boolean;
+    acceptedRisks: string[];
+  };
+};
+
+export type ProjectMapWriteAuditReadback = {
+  kind: "canonical-project-map-write-audit";
+  version: 1;
+  projectId: string;
+  projectName: string;
+  mapJsonPath: string;
+  projectSourceIdentityPath: string;
+  acceptedRisks: string[];
+  preflight: {
+    status: string;
+    evidenceRiskCount: number;
+  };
+  writeResult: string;
+  writtenAt: string;
+};
+
 function isMissingPathError(error: unknown): boolean {
   if (typeof error !== "object" || error === null || !("code" in error)) {
     return false;
@@ -69,11 +105,25 @@ export type ProjectMapReadResult =
       projectSourceIdentityPersistence: ProjectMapSourceIdentityPersistenceResult;
     }
   | {
+      status: "present";
+      projectId: string;
+      projectName: string;
+      projectMetadataRootPath: string;
+      projectMapRootPath: string;
+      mapJsonPath: string;
+      projectSourceIdentity: ProjectMapSourceIdentity;
+      projectSourceIdentityPersistence: ProjectMapSourceIdentityPersistenceResult;
+      canonicalMap: ProjectMapCanonicalReadback;
+      auditStatus: "present" | "missing" | "invalid";
+      audit?: ProjectMapWriteAuditReadback;
+    }
+  | {
       status: "unavailable";
       reason:
         | "invalid-project-identity"
         | "project-map-access-unavailable"
-        | "project-map-present-but-read-not-implemented";
+        | "project-map-present-but-read-not-implemented"
+        | "project-map-invalid";
       projectId?: string;
       projectName?: string;
       projectMetadataRootPath?: string;
@@ -114,6 +164,66 @@ function buildProjectSourceIdentity(
     ),
     persistedAt: new Date().toISOString(),
   };
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+function readCanonicalMap(value: unknown): ProjectMapCanonicalReadback | null {
+  if (!isRecord(value) || value.kind !== "canonical-project-map" || value.version !== 1) {
+    return null;
+  }
+
+  const canonical = value.canonical;
+  const approval = value.writeApproval;
+
+  if (
+    !isRecord(canonical) ||
+    !isRecord(approval) ||
+    typeof canonical.projectId !== "string" ||
+    typeof canonical.projectName !== "string" ||
+    typeof canonical.projectMetadataRootPath !== "string" ||
+    typeof canonical.projectMapRootPath !== "string" ||
+    typeof canonical.mapJsonPath !== "string" ||
+    typeof canonical.projectSourceIdentityPath !== "string" ||
+    !isRecord(canonical.sourceIdentity) ||
+    typeof canonical.writtenAt !== "string" ||
+    typeof approval.status !== "string" ||
+    typeof approval.canonicalWriteAllowed !== "boolean" ||
+    !Array.isArray(approval.acceptedRisks) ||
+    !approval.acceptedRisks.every((risk) => typeof risk === "string")
+  ) {
+    return null;
+  }
+
+  return value as unknown as ProjectMapCanonicalReadback;
+}
+
+function readWriteAudit(value: unknown): ProjectMapWriteAuditReadback | null {
+  if (!isRecord(value) || value.kind !== "canonical-project-map-write-audit" || value.version !== 1) {
+    return null;
+  }
+
+  const preflight = value.preflight;
+
+  if (
+    !isRecord(preflight) ||
+    typeof value.projectId !== "string" ||
+    typeof value.projectName !== "string" ||
+    typeof value.mapJsonPath !== "string" ||
+    typeof value.projectSourceIdentityPath !== "string" ||
+    !Array.isArray(value.acceptedRisks) ||
+    !value.acceptedRisks.every((risk) => typeof risk === "string") ||
+    typeof preflight.status !== "string" ||
+    typeof preflight.evidenceRiskCount !== "number" ||
+    typeof value.writeResult !== "string" ||
+    typeof value.writtenAt !== "string"
+  ) {
+    return null;
+  }
+
+  return value as unknown as ProjectMapWriteAuditReadback;
 }
 
 async function persistProjectSourceIdentity(
@@ -239,9 +349,50 @@ export async function resolveProjectMapReadResult(
     };
   }
 
+  let canonicalMap: ProjectMapCanonicalReadback | null;
+
+  try {
+    canonicalMap = readCanonicalMap(
+      JSON.parse(await readFile(mapJsonPath, "utf8")) as unknown,
+    );
+  } catch {
+    canonicalMap = null;
+  }
+
+  if (!canonicalMap) {
+    return {
+      status: "unavailable",
+      reason: "project-map-invalid",
+      projectId: projectMapStorageRoot.projectId,
+      projectName: projectMapStorageRoot.projectName,
+      projectMetadataRootPath: projectMapStorageRoot.projectMetadataRootPath,
+      projectMapRootPath: projectMapStorageRoot.projectMapRootPath,
+      mapJsonPath,
+      projectSourceIdentity,
+      projectSourceIdentityPersistence,
+    };
+  }
+
+  const auditJsonPath = join(
+    projectMapStorageRoot.projectMapRootPath,
+    "map-write-audit.json",
+  );
+  let auditStatus: "present" | "missing" | "invalid" = "missing";
+  let audit: ProjectMapWriteAuditReadback | undefined;
+
+  try {
+    audit = readWriteAudit(
+      JSON.parse(await readFile(auditJsonPath, "utf8")) as unknown,
+    ) ?? undefined;
+    auditStatus = audit ? "present" : "invalid";
+  } catch (error) {
+    if (!isMissingPathError(error)) {
+      auditStatus = "invalid";
+    }
+  }
+
   return {
-    status: "unavailable",
-    reason: "project-map-present-but-read-not-implemented",
+    status: "present",
     projectId: projectMapStorageRoot.projectId,
     projectName: projectMapStorageRoot.projectName,
     projectMetadataRootPath: projectMapStorageRoot.projectMetadataRootPath,
@@ -249,5 +400,8 @@ export async function resolveProjectMapReadResult(
     mapJsonPath,
     projectSourceIdentity,
     projectSourceIdentityPersistence,
+    canonicalMap,
+    auditStatus,
+    ...(audit ? { audit } : {}),
   };
 }

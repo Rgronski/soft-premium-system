@@ -69,6 +69,51 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.38B Project Map Canonical Readback SSOT Sync Foundation
+
+### Date
+
+2026-09-10
+
+### Completed
+
+* Synchronized SSOT to record verified MS-031.38 canonical readback and MS-031.38A TypeScript cleanup.
+* Recorded that canonical artifacts were read-only validated and not rewritten.
+* Recorded that the Beauty Client PRO repository remained clean and unmodified.
+
+### Verification
+
+* `tsc --noEmit` passed.
+* Focused Project Map readback and page tests passed.
+
+## Session 100 - MS-031.38A Project Map TypeScript Verification Cleanup Foundation
+
+### Date
+
+2026-09-10
+
+### Completed
+
+* Corrected the Project Map milestone-state typing and related writer test fixtures.
+* Preserved canonical readback, candidate/canonical separation, and writer behavior.
+
+## Session 100 - MS-031.38 Project Map Canonical Readback View Foundation
+
+### Date
+
+2026-09-10
+
+### Completed
+
+* Added defensive readback of canonical `map.json` and `map-write-audit.json`.
+* Added read-only UI visibility for canonical metadata, approval, accepted risks, preflight, and audit status.
+* Preserved missing-artifact fallback and the non-executing canonical write boundary.
+
+### Verification
+
+* Focused readback and Project Map page tests passed.
+* Canonical artifacts were not rewritten and Beauty Client PRO was not modified.
+
 ## Session 100 - MS-031.37E Project Map Canonical Write SSOT Sync Foundation
 
 ### Date

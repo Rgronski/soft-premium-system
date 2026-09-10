@@ -686,6 +686,88 @@ describe("ProjectMapPage", () => {
     expect(scanProjectMapEvidenceMock).not.toHaveBeenCalled();
   });
 
+  test("shows canonical map and audit readback as read-only", async () => {
+    resolveProjectMapReadResultMock.mockResolvedValueOnce({
+      status: "present",
+      projectId: "project-1",
+      projectName: "Alpha Workspace",
+      projectMetadataRootPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1",
+      projectMapRootPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map",
+      mapJsonPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\map.json",
+      projectSourceIdentityPersistence: {
+        status: "persisted",
+        persistedAt: "2026-09-10T13:40:05.300Z",
+      },
+      projectSourceIdentity: {
+        projectId: "project-1",
+        projectName: "Alpha Workspace",
+        repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+        projectCheckoutPath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
+      },
+      canonicalMap: {
+        kind: "canonical-project-map",
+        version: 1,
+        canonical: {
+          projectId: "project-1",
+          projectName: "Alpha Workspace",
+          projectMetadataRootPath:
+            "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1",
+          projectMapRootPath:
+            "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map",
+          mapJsonPath:
+            "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\map.json",
+          projectSourceIdentityPath:
+            "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-source-identity.json",
+          sourceIdentity: {
+            projectId: "project-1",
+            projectName: "Alpha Workspace",
+            repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+            workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+            projectCheckoutPath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
+          },
+          writtenAt: "2026-09-10T13:40:05.300Z",
+        },
+        writeApproval: {
+          status: "approved",
+          canonicalWriteAllowed: true,
+          acceptedRisks: ["SSOT", "Project Bible", "Project Map", "First Layout"],
+        },
+      },
+      auditStatus: "present",
+      audit: {
+        kind: "canonical-project-map-write-audit",
+        version: 1,
+        projectId: "project-1",
+        projectName: "Alpha Workspace",
+        mapJsonPath: "map.json",
+        projectSourceIdentityPath: "project-source-identity.json",
+        acceptedRisks: ["SSOT", "Project Bible", "Project Map", "First Layout"],
+        preflight: { status: "NEEDS_EVIDENCE", evidenceRiskCount: 5 },
+        writeResult: "written",
+        writtenAt: "2026-09-10T13:40:05.300Z",
+      },
+    });
+
+    render(
+      await ProjectMapPage({
+        params: Promise.resolve({ id: "project-1" }),
+      }),
+    );
+
+    expect(screen.getByText("Canonical Project Map: obecna")).toBeTruthy();
+    expect(screen.getByText("Status: canonical / read-only")).toBeTruthy();
+    expect(screen.getByText("Status approval: approved")).toBeTruthy();
+    expect(screen.getByText("Status sidecara: obecny / valid")).toBeTruthy();
+    expect(screen.getByText("Write result: written")).toBeTruthy();
+    expect(screen.getByText("Preflight: NEEDS_EVIDENCE")).toBeTruthy();
+    expect(screen.getByText("Evidence risk count: 5")).toBeTruthy();
+    expect(screen.getByText("Zapis kanoniczny: nie jest teraz wykonywany.")).toBeTruthy();
+  });
+
   test("shows an explicit read-not-implemented state when the map file already exists", async () => {
     resolveProjectMapReadResultMock.mockResolvedValueOnce({
       status: "unavailable",

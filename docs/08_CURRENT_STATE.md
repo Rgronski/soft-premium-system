@@ -45,7 +45,13 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.37E - Project Map Canonical Write SSOT Sync Foundation
+  MS-031.38B - Project Map Canonical Readback SSOT Sync Foundation
+
+MS-031.38B is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Canonical Readback SSOT Sync Foundation. SSOT now records the verified read-only canonical readback, the completed TypeScript cleanup, unchanged canonical artifacts, and the clean Beauty Client PRO checkout. Commit and push remain pending.
+
+MS-031.38A is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map TypeScript Verification Cleanup Foundation. `tsc --noEmit` passes for the repository, and the cleanup preserves readback and writer runtime behavior.
+
+MS-031.38 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Canonical Readback View Foundation. SPS OS reads canonical `map.json` and `map-write-audit.json` defensively and presents their metadata read-only while preserving candidate/canonical separation. Canonical artifacts were not rewritten and Beauty Client PRO was not modified.
 
 MS-031.37E is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Canonical Write SSOT Sync Foundation. SPS OS documentation now records the first canonical Beauty Client PRO Project Map write. `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb\project-map\map.json` and `map-write-audit.json` exist and were read back successfully, persisted Project Identity matches the project and checkout path, and the Beauty Client PRO checkout remains clean. SSOT, Project Bible, candidate-evidence separation, and First Layout remain explicit accepted or open risks; they are not represented as resolved evidence. Commit and push remain pending.
 

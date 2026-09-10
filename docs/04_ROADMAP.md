@@ -193,8 +193,66 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.37E - Project Map Canonical Write SSOT Sync Foundation
+Latest Completed Product Milestone: MS-031.38B - Project Map Canonical Readback SSOT Sync Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.38B - Project Map Canonical Readback SSOT Sync Foundation
+
+**Milestone**
+MS-031.38B - Project Map Canonical Readback SSOT Sync Foundation
+
+**Type**
+SPS OS / Project Map Canonical Readback SSOT Sync Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+READY FOR COMMIT / PUSH
+
+**Product Outcome**
+SPS OS SSOT now records the verified read-only canonical Project Map readback and the completed TypeScript verification cleanup. The canonical artifacts remain unchanged, the BCP checkout remains clean, and candidate/canonical separation remains explicit.
+
+**Verification**
+* canonical `map.json` and `map-write-audit.json` remain present and unchanged
+* `tsc --noEmit` passes
+* focused Project Map readback and page tests pass
+* no product code changes were made in this SSOT sync
+
+**Non-Goals**
+* no canonical artifact rewrite
+* no Beauty Client PRO repository modification
+* no commit or push in this milestone
+
+## MS-031.38A - Project Map TypeScript Verification Cleanup Foundation
+
+**Milestone**
+MS-031.38A - Project Map TypeScript Verification Cleanup Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Product Outcome**
+Project Map TypeScript verification now passes after narrowing the milestone-state types in reconstruction and correcting the related writer test fixtures. Runtime behavior and canonical readback behavior were preserved.
+
+**Non-Goals**
+* no canonical artifact rewrite
+* no Beauty Client PRO repository modification
+
+## MS-031.38 - Project Map Canonical Readback View Foundation
+
+**Milestone**
+MS-031.38 - Project Map Canonical Readback View Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Product Outcome**
+SPS OS now reads canonical `map.json` and its audit sidecar defensively and presents project identity, approval, accepted risks, preflight, and audit status in a read-only Project Map view while preserving candidate/canonical separation.
+
+**Non-Goals**
+* no canonical write execution or artifact rewrite
+* no Beauty Client PRO repository modification
 
 ## MS-031.37E - Project Map Canonical Write SSOT Sync Foundation
 

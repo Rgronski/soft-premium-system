@@ -310,6 +310,20 @@ function buildProjectMapStateCopy(
     };
   }
 
+  if (mapReadResult.status === "present") {
+    return {
+      title: "Kanoniczna mapa projektu jest dostępna",
+      description:
+        "Canonical map.json został odczytany w trybie read-only. Kandydat i kanoniczny zapis pozostają rozdzielone.",
+      details: [
+        `Project Map root: ${mapReadResult.projectMapRootPath}`,
+        `map.json: ${mapReadResult.mapJsonPath}`,
+        "Widok teraz: canonical read-only",
+        `Audit sidecar: ${mapReadResult.auditStatus}`,
+      ],
+    };
+  }
+
   if (mapReadResult.reason === "project-map-present-but-read-not-implemented") {
     return {
       title: "Mapa projektu jest obecna, ale odczyt niezaimplementowany",
@@ -995,8 +1009,10 @@ function buildProjectMapCanonicalVsCandidateCopy(
   const canonicalStatus =
     !mapReadResult || mapReadResult.status === "missing"
       ? "missing"
-      : mapReadResult.reason === "project-map-present-but-read-not-implemented"
+      : mapReadResult.status === "present"
         ? "present"
+        : mapReadResult.reason === "project-map-present-but-read-not-implemented"
+          ? "present"
         : "unavailable";
 
   const candidateStatus =
@@ -1311,8 +1327,10 @@ function buildFoundationStatuses(
       ? storageReadiness?.status === "ready"
         ? "gotowe / bez map.json"
         : "brak / niegotowe"
-      : mapReadResult.reason === "project-map-present-but-read-not-implemented"
-        ? "obecna / odczyt niezaimplementowany"
+      : mapReadResult.status === "present"
+        ? "canonical / read-only"
+        : mapReadResult.reason === "project-map-present-but-read-not-implemented"
+          ? "obecna / odczyt niezaimplementowany"
         : "niedostępna";
 
   return [
@@ -1468,9 +1486,11 @@ export default async function ProjectMapPage({
     mapCandidate,
   );
   const currentStateSummaryItems = [
-    mapReadResult?.status === "unavailable" &&
-    mapReadResult.reason === "project-map-present-but-read-not-implemented"
-      ? "Kanoniczna mapa: plik map.json istnieje, odczyt pozostaje poza tym widokiem."
+    mapReadResult?.status === "present"
+      ? "Kanoniczna mapa: present / odczyt read-only."
+      : mapReadResult?.status === "unavailable" &&
+          mapReadResult.reason === "project-map-present-but-read-not-implemented"
+        ? "Kanoniczna mapa: plik map.json istnieje, odczyt pozostaje poza tym widokiem."
       : "Kanoniczna mapa: absent / brak kanonicznego map.json.",
     projectMapCandidateCopy?.title === "Robocza mapa projektu gotowa"
       ? "Widoczna mapa: roboczy kandydat, nie stan kanoniczny."
@@ -1521,6 +1541,57 @@ export default async function ProjectMapPage({
           ))}
         </ul>
       </section>
+
+      {mapReadResult?.status === "present" ? (
+        <section
+          id="project-map-canonical-readback"
+          className="rounded-xl border border-emerald-900/60 bg-emerald-950/25 p-4"
+        >
+          <div className="space-y-1">
+            <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
+              Odczyt kanoniczny
+            </p>
+            <h3 className="text-xl font-semibold text-emerald-50">
+              Canonical Project Map: obecna
+            </h3>
+            <p className="text-sm text-emerald-100/80">
+              Dane poniżej pochodzą z SPS OS-owned metadata storage i są prezentowane wyłącznie read-only.
+            </p>
+          </div>
+
+          <div className="mt-4 grid gap-3 lg:grid-cols-2">
+            <article className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 p-3">
+              <p className="text-sm font-semibold text-emerald-50">Metadane canonical</p>
+              <ul className="mt-3 space-y-2 text-sm text-emerald-50/90">
+                <li>Status: canonical / read-only</li>
+                <li>ID projektu: {mapReadResult.canonicalMap.canonical.projectId}</li>
+                <li>Nazwa projektu: {mapReadResult.canonicalMap.canonical.projectName}</li>
+                <li>Ścieżka checkout: {mapReadResult.canonicalMap.canonical.sourceIdentity.projectCheckoutPath ?? "missing"}</li>
+                <li>Źródło robocze: {mapReadResult.canonicalMap.canonical.sourceIdentity.workingDirectory ?? "missing"}</li>
+                <li>Status approval: {mapReadResult.canonicalMap.writeApproval.status}</li>
+                <li>Akceptowane ryzyka: {mapReadResult.canonicalMap.writeApproval.acceptedRisks.map(buildProjectMapVisibleTokenLabel).join(", ") || "brak"}</li>
+              </ul>
+            </article>
+
+            <article className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 p-3">
+              <p className="text-sm font-semibold text-emerald-50">Audit sidecar</p>
+              {mapReadResult.audit ? (
+                <ul className="mt-3 space-y-2 text-sm text-emerald-50/90">
+                  <li>Status sidecara: obecny / valid</li>
+                  <li>Write result: {mapReadResult.audit.writeResult}</li>
+                  <li>Preflight: {mapReadResult.audit.preflight.status}</li>
+                  <li>Evidence risk count: {mapReadResult.audit.preflight.evidenceRiskCount}</li>
+                  <li>Akceptowane ryzyka: {mapReadResult.audit.acceptedRisks.map(buildProjectMapVisibleTokenLabel).join(", ") || "brak"}</li>
+                </ul>
+              ) : (
+                <p className="mt-3 text-sm text-emerald-100/80">
+                  Audit sidecar: {mapReadResult.auditStatus}. Canonical map pozostaje odczytywalna, ale brak sidecara jest jawny.
+                </p>
+              )}
+            </article>
+          </div>
+        </section>
+      ) : null}
 
       {projectMapActionEntryCopy ? (
         <section

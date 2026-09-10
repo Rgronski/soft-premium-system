@@ -11,6 +11,7 @@ const getProjectConductorDecisionsMock = vi.fn();
 const getProjectConductorStateMock = vi.fn();
 const getCoreDoctrineBootstrapStatusMock = vi.fn();
 const accessMock = vi.fn();
+const readFileMock = vi.fn();
 const mkdirMock = vi.fn();
 const writeFileMock = vi.fn();
 const projectSourceIdentityPath =
@@ -20,6 +21,7 @@ const projectMetadataRootPath =
 
 vi.mock("node:fs/promises", () => ({
   access: accessMock,
+  readFile: readFileMock,
   mkdir: mkdirMock,
   writeFile: writeFileMock,
 }));
@@ -67,6 +69,7 @@ beforeEach(() => {
   getProjectConductorStateMock.mockReset();
   getCoreDoctrineBootstrapStatusMock.mockReset();
   accessMock.mockReset();
+  readFileMock.mockReset();
   mkdirMock.mockReset();
   writeFileMock.mockReset();
 
@@ -79,6 +82,7 @@ beforeEach(() => {
   accessMock.mockImplementation(async () => {
     throw createEnoentError();
   });
+  readFileMock.mockRejectedValue(createEnoentError());
   mkdirMock.mockResolvedValue(undefined);
   writeFileMock.mockResolvedValue(undefined);
 });
@@ -276,12 +280,55 @@ describe("resolveProjectMapReadResult", () => {
     );
   });
 
-  it("returns unavailable when the map file exists but read parsing is not implemented yet", async () => {
+  it("reads the canonical map and audit sidecar without rewriting either artifact", async () => {
     accessMock
       .mockImplementationOnce(async () => undefined)
       .mockImplementationOnce(async () => undefined);
-
-    accessMock.mockResolvedValue(undefined);
+    readFileMock
+      .mockResolvedValueOnce(
+        JSON.stringify({
+          kind: "canonical-project-map",
+          version: 1,
+          canonical: {
+            projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+            projectName: "Beauty Client PRO",
+            projectMetadataRootPath: projectMetadataRootPath,
+            projectMapRootPath: "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map",
+            mapJsonPath: "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map\\map.json",
+            projectSourceIdentityPath,
+            sourceIdentity: {
+              projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+              projectName: "Beauty Client PRO",
+              repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+              workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+              projectCheckoutPath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+              projectMetadataRootPath: projectMetadataRootPath,
+              projectSourceIdentityPath,
+              persistedAt: "2026-09-10T13:40:05.300Z",
+            },
+            writtenAt: "2026-09-10T13:40:05.300Z",
+          },
+          writeApproval: {
+            status: "approved",
+            canonicalWriteAllowed: true,
+            acceptedRisks: ["SSOT", "Project Bible", "Project Map", "First Layout"],
+          },
+        }),
+      )
+      .mockResolvedValueOnce(
+        JSON.stringify({
+          kind: "canonical-project-map-write-audit",
+          version: 1,
+          projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+          projectName: "Beauty Client PRO",
+          mapJsonPath: "map.json",
+          projectSourceIdentityPath,
+          acceptedRisks: ["SSOT", "Project Bible", "Project Map", "First Layout"],
+          preflight: { status: "NEEDS_EVIDENCE", evidenceRiskCount: 5 },
+          writeResult: "written",
+          writtenAt: "2026-09-10T13:40:05.300Z",
+        }),
+      );
 
     const { resolveProjectMapReadResult } = await loadModule();
     const result = await resolveProjectMapReadResult({
@@ -291,32 +338,17 @@ describe("resolveProjectMapReadResult", () => {
       workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
     });
 
-    expect(result).toEqual({
-      status: "unavailable",
-      reason: "project-map-present-but-read-not-implemented",
-      projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
-      projectName: "Beauty Client PRO",
-      projectMetadataRootPath,
-      projectMapRootPath:
-        "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map",
-      mapJsonPath:
-        "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map\\map.json",
-      projectSourceIdentity: {
-        projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
-        projectName: "Beauty Client PRO",
-        repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
-        workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
-        projectCheckoutPath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
-        projectMetadataRootPath,
-        projectSourceIdentityPath,
-        persistedAt: expect.any(String),
-      },
-      projectSourceIdentityPersistence: {
-        status: "persisted",
-        projectSourceIdentityPath,
-        persistedAt: expect.any(String),
-      },
-    });
+    expect(result.status).toBe("present");
+    if (result.status !== "present") {
+      throw new Error("expected canonical map readback");
+    }
+    expect(result.canonicalMap.canonical.projectName).toBe("Beauty Client PRO");
+    expect(result.audit?.preflight.evidenceRiskCount).toBe(5);
+    expect(result.auditStatus).toBe("present");
+    expect(readFileMock).toHaveBeenNthCalledWith(1, expect.stringContaining("map.json"), "utf8");
+    expect(readFileMock).toHaveBeenNthCalledWith(2, expect.stringContaining("map-write-audit.json"), "utf8");
+    expect(mkdirMock).toHaveBeenCalledTimes(1);
+    expect(writeFileMock).toHaveBeenCalledTimes(1);
     expect(mkdirMock).toHaveBeenCalledWith(
       projectMetadataRootPath,
       { recursive: true },
