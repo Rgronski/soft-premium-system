@@ -1,8 +1,15 @@
 // @vitest-environment node
 
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+import { resolveProjectMapStorageRoot } from "../project-brain/metadata";
+
+vi.mock("../project-brain/metadata", () => ({
+  resolveProjectMapStorageRoot: vi.fn(),
+}));
 
 import { detectProjectMapCandidateDrift } from "./drift";
+import { detectProjectMapStructuralDrift } from "./drift";
 import type { ProjectMapReadResult } from "./read";
 import type { ProjectMapReconstructionCandidateResult } from "./reconstruct";
 
@@ -78,5 +85,28 @@ describe("Project Map candidate drift", () => {
     });
 
     expect(result.status).toBe("invalid");
+  });
+
+  it("reports no_drift when the persisted baseline matches the current checkout", async () => {
+    vi.mocked(resolveProjectMapStorageRoot).mockReturnValue({
+      status: "available",
+      projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+      projectName: "Beauty Client PRO",
+      projectMetadataRootPath: "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+      projectMapRootPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map",
+    });
+
+    const result = await detectProjectMapStructuralDrift({
+      id: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+      name: "Beauty Client PRO",
+      repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+      workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+    });
+
+    expect(result.status).toBe("no_drift");
+    expect(result.changed).toEqual([]);
+    expect(result.added).toEqual([]);
+    expect(result.removed).toEqual([]);
   });
 });

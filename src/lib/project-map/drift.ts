@@ -1,5 +1,10 @@
 import type { ProjectMapReadResult } from "./read";
 import type { ProjectMapReconstructionCandidateResult } from "./reconstruct";
+import {
+  compareProjectMapStructuralFingerprints,
+  readProjectMapStructuralFingerprint,
+  scanProjectMapStructuralFingerprint,
+} from "./structural-fingerprint";
 
 export type ProjectMapDriftStatus =
   | "no_drift"
@@ -14,6 +19,13 @@ export type ProjectMapDriftResult = {
   removed: string[];
   unavailable: string[];
   details: string[];
+};
+
+type StructuralDriftProject = {
+  id: string;
+  name: string;
+  repositoryUrl?: string | null;
+  workingDirectory?: string | null;
 };
 
 type ProjectLike = {
@@ -114,4 +126,101 @@ export function detectProjectMapCandidateDrift({
       : "no_drift";
 
   return { status, changed, added, removed, unavailable, details };
+}
+
+export async function detectProjectMapStructuralDrift(
+  project: StructuralDriftProject | null,
+): Promise<ProjectMapDriftResult> {
+  const normalizedProject = project
+    ? {
+        id: project.id,
+        name: project.name,
+        ...(project.repositoryUrl ? { repositoryUrl: project.repositoryUrl } : {}),
+        ...(project.workingDirectory ? { workingDirectory: project.workingDirectory } : {}),
+      }
+    : null;
+  const baseline = await readProjectMapStructuralFingerprint(normalizedProject);
+
+  if (baseline.status === "unavailable") {
+    return {
+      status: "unavailable",
+      changed: [],
+      added: [],
+      removed: [],
+      unavailable: ["structural fingerprint baseline"],
+      details: ["A structural fingerprint baseline is required for comparison."],
+    };
+  }
+
+  if (baseline.status === "invalid") {
+    return {
+      status: "invalid",
+      changed: [],
+      added: [],
+      removed: [],
+      unavailable: [],
+      details: ["The structural fingerprint baseline is malformed or invalid."],
+    };
+  }
+
+  const current = await scanProjectMapStructuralFingerprint(normalizedProject);
+
+  if (current.status === "unavailable") {
+    return {
+      status: "unavailable",
+      changed: [],
+      added: [],
+      removed: [],
+      unavailable: [current.reason],
+      details: ["The current checkout could not be scanned completely."],
+    };
+  }
+
+  if (current.status === "invalid") {
+    return {
+      status: "invalid",
+      changed: [],
+      added: [],
+      removed: [],
+      unavailable: [],
+      details: ["The current canonical identity or checkout path is invalid."],
+    };
+  }
+
+  const comparison = compareProjectMapStructuralFingerprints(
+    baseline.artifact,
+    current.artifact,
+  );
+  const changed = [...comparison.changed];
+  const identityComparisons: Array<[string, string, string]> = [
+    ["project id", baseline.artifact.projectId, current.artifact.projectId],
+    ["project name", baseline.artifact.projectName, current.artifact.projectName],
+    ["repository URL", baseline.artifact.repositoryUrl, current.artifact.repositoryUrl],
+    ["working directory", baseline.artifact.workingDirectory, current.artifact.workingDirectory],
+    ["checkout path", baseline.artifact.checkoutPath, current.artifact.checkoutPath],
+  ];
+
+  for (const [label, expected, actual] of identityComparisons) {
+    if (expected !== actual) {
+      changed.push(`${label}: expected ${expected || "missing"}, actual ${actual || "missing"}`);
+    }
+  }
+
+  if (baseline.artifact.overallFingerprint !== current.artifact.overallFingerprint && changed.length === 0) {
+    changed.push("overall fingerprint changed without a file-level difference");
+  }
+
+  return {
+    status: changed.length > 0 || comparison.added.length > 0 || comparison.removed.length > 0
+      ? "changed"
+      : "no_drift",
+    changed,
+    added: comparison.added,
+    removed: comparison.removed,
+    unavailable: [],
+    details: [
+      "The persisted structural baseline and current checkout were compared read-only.",
+      `Baseline entries: ${baseline.artifact.entries.length}; current entries: ${current.artifact.entries.length}.`,
+    ],
+  };
 }

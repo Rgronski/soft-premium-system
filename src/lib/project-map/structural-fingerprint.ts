@@ -86,6 +86,22 @@ export type ProjectMapStructuralFingerprintResult =
       artifactPath?: string;
     };
 
+export type ProjectMapStructuralFingerprintReadResult =
+  | { status: "present"; artifactPath: string; artifact: ProjectMapStructuralFingerprintArtifact }
+  | { status: "unavailable"; reason: "baseline-unavailable"; artifactPath: string }
+  | { status: "invalid"; reason: "baseline-invalid"; artifactPath: string };
+
+export type ProjectMapStructuralFingerprintScanResult =
+  | { status: "available"; artifact: ProjectMapStructuralFingerprintArtifact }
+  | { status: "unavailable"; reason: "source-checkout-unavailable" | "scan-unavailable" }
+  | { status: "invalid"; reason: "canonical-map-invalid" | "project-identity-mismatch" };
+
+export type ProjectMapStructuralFingerprintComparison = {
+  changed: string[];
+  added: string[];
+  removed: string[];
+};
+
 type ProjectLike = {
   id: string;
   name: string;
@@ -159,6 +175,64 @@ function buildOverallFingerprint(
     .digest("hex");
 }
 
+function isFingerprintArtifact(value: unknown): value is ProjectMapStructuralFingerprintArtifact {
+  if (!isRecord(value) || value.kind !== "project-map-structural-fingerprint" || value.version !== 1) {
+    return false;
+  }
+
+  return (
+    typeof value.projectId === "string" &&
+    typeof value.projectName === "string" &&
+    typeof value.repositoryUrl === "string" &&
+    typeof value.workingDirectory === "string" &&
+    typeof value.checkoutPath === "string" &&
+    typeof value.generatedAt === "string" &&
+    value.hashAlgorithm === "sha256" &&
+    Array.isArray(value.scanScope) &&
+    value.scanScope.every((item) => typeof item === "string") &&
+    Array.isArray(value.exclusions) &&
+    value.exclusions.every((item) => typeof item === "string") &&
+    Array.isArray(value.entries) &&
+    value.entries.every(
+      (entry) =>
+        isRecord(entry) &&
+        typeof entry.path === "string" &&
+        typeof entry.size === "number" &&
+        Number.isSafeInteger(entry.size) &&
+        typeof entry.sha256 === "string",
+    ) &&
+    typeof value.overallFingerprint === "string"
+  );
+}
+
+export function compareProjectMapStructuralFingerprints(
+  baseline: ProjectMapStructuralFingerprintArtifact,
+  current: ProjectMapStructuralFingerprintArtifact,
+): ProjectMapStructuralFingerprintComparison {
+  const baselineEntries = new Map(baseline.entries.map((entry) => [entry.path, entry]));
+  const currentEntries = new Map(current.entries.map((entry) => [entry.path, entry]));
+  const added = [...currentEntries.keys()]
+    .filter((path) => !baselineEntries.has(path))
+    .sort();
+  const removed = [...baselineEntries.keys()]
+    .filter((path) => !currentEntries.has(path))
+    .sort();
+  const changed = [...currentEntries.keys()]
+    .filter((path) => {
+      const baselineEntry = baselineEntries.get(path);
+      const currentEntry = currentEntries.get(path);
+
+      return Boolean(
+        baselineEntry &&
+          currentEntry &&
+          (baselineEntry.size !== currentEntry.size || baselineEntry.sha256 !== currentEntry.sha256),
+      );
+    })
+    .sort();
+
+  return { changed, added, removed };
+}
+
 export function buildProjectMapStructuralFingerprintArtifact(input: {
   project: ProjectLike;
   checkoutPath: string;
@@ -228,6 +302,77 @@ async function readCanonicalIdentityFromMap(mapJsonPath: string): Promise<Canoni
     return readCanonicalIdentity(JSON.parse(await readFile(mapJsonPath, "utf8")));
   } catch {
     return null;
+  }
+}
+
+export async function readProjectMapStructuralFingerprint(
+  project: ProjectLike | null | undefined,
+): Promise<ProjectMapStructuralFingerprintReadResult> {
+  const storageRoot = resolveProjectMapStorageRoot(project);
+  const artifactPath =
+    storageRoot.status === "available"
+      ? join(storageRoot.projectMapRootPath, STRUCTURAL_FINGERPRINT_FILE_NAME)
+      : "";
+
+  if (storageRoot.status === "unavailable") {
+    return { status: "unavailable", reason: "baseline-unavailable", artifactPath };
+  }
+
+  try {
+    const artifact = JSON.parse(await readFile(artifactPath, "utf8"));
+
+    return isFingerprintArtifact(artifact)
+      ? { status: "present", artifactPath, artifact }
+      : { status: "invalid", reason: "baseline-invalid", artifactPath };
+  } catch {
+    return { status: "unavailable", reason: "baseline-unavailable", artifactPath };
+  }
+}
+
+export async function scanProjectMapStructuralFingerprint(
+  project: ProjectLike | null | undefined,
+): Promise<ProjectMapStructuralFingerprintScanResult> {
+  if (!project?.workingDirectory?.trim() || !project.repositoryUrl?.trim()) {
+    return { status: "invalid", reason: "project-identity-mismatch" };
+  }
+
+  const storageRoot = resolveProjectMapStorageRoot(project);
+
+  if (storageRoot.status === "unavailable") {
+    return { status: "unavailable", reason: "source-checkout-unavailable" };
+  }
+
+  const canonicalIdentity = await readCanonicalIdentityFromMap(
+    join(storageRoot.projectMapRootPath, "map.json"),
+  );
+  const checkoutPath = buildRepoCheckoutDirectory(project.workingDirectory);
+
+  if (
+    !canonicalIdentity ||
+    canonicalIdentity.projectId !== project.id ||
+    canonicalIdentity.projectName !== project.name ||
+    canonicalIdentity.repositoryUrl !== project.repositoryUrl.trim() ||
+    canonicalIdentity.workingDirectory !== project.workingDirectory.trim() ||
+    normalizeWindowsPath(canonicalIdentity.projectCheckoutPath ?? "") !==
+      normalizeWindowsPath(checkoutPath)
+  ) {
+    return { status: "invalid", reason: "project-identity-mismatch" };
+  }
+
+  try {
+    await access(checkoutPath);
+    const entries = await collectEntries(checkoutPath);
+
+    return {
+      status: "available",
+      artifact: buildProjectMapStructuralFingerprintArtifact({
+        project,
+        checkoutPath,
+        entries,
+      }),
+    };
+  } catch {
+    return { status: "unavailable", reason: "scan-unavailable" };
   }
 }
 

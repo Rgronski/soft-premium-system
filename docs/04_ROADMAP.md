@@ -193,8 +193,39 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.47 - Project Map Structural Fingerprint Baseline Foundation
+Latest Completed Product Milestone: MS-031.48 - Project Map Structural Drift Comparison Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.48 - Project Map Structural Drift Comparison Foundation
+
+**Milestone**
+MS-031.48 - Project Map Structural Drift Comparison Foundation
+
+**Type**
+SPS OS / Project Map read-only structural drift comparison
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+READY FOR COMMIT / PUSH
+
+**Product Outcome**
+The Project Map view now compares the current validated BCP checkout with the SPS OS-owned structural fingerprint baseline and reports deterministic no_drift, changed, unavailable, or invalid results.
+
+**Verification**
+* baseline schema and persisted source identity are validated before comparison
+* the current scan reuses the baseline scope, exclusions, normalized paths, ordering, and SHA-256 rules
+* overall fingerprint, project identity, checkout path, added files, removed files, and changed files are compared explicitly
+* missing baseline or insufficient source data is unavailable; malformed baseline or invalid identity is invalid
+* no baseline refresh or artifact rewrite occurs during comparison
+* TypeScript, structural drift, baseline, and Project Map page tests pass
+* all Project Map artifacts remain unchanged and Beauty Client PRO checkout remains clean
+
+**Non-Goals**
+* no automatic baseline refresh
+* no rewrite of any Project Map artifact
+* no canonical write, promotion, or Beauty Client PRO repository modification
 
 ## MS-031.47 - Project Map Structural Fingerprint Baseline Foundation
 

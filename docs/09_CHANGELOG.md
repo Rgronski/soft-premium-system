@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.48 Project Map Structural Drift Comparison Foundation
+
+### Date
+
+2026-09-11
+
+### Completed
+
+* Connected read-only structural drift comparison to the SPS OS-owned fingerprint baseline.
+* Reused the baseline scan scope, exclusions, normalized ordering, and SHA-256 rules for the current BCP checkout.
+* Added explicit overall, identity, checkout-path, added, removed, changed, unavailable, and invalid comparison behavior.
+* Displayed the structural drift result in the Project Map UI without enabling baseline refresh or canonical write.
+
+### Notes
+
+* No Project Map artifact was rewritten.
+* The Beauty Client PRO repository remained unmodified.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.47 Project Map Structural Fingerprint Baseline Foundation
 
 ### Date

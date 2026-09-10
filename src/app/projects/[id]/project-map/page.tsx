@@ -34,7 +34,10 @@ import {
   type ProjectMapRiskDecisionWriteResult,
 } from "@/lib/project-map/risk-decisions";
 import { evaluateProjectMapSpsFoundationAlignment } from "@/lib/project-map/alignment";
-import { detectProjectMapCandidateDrift } from "@/lib/project-map/drift";
+import {
+  detectProjectMapCandidateDrift,
+  detectProjectMapStructuralDrift,
+} from "@/lib/project-map/drift";
 import type {
   ProjectMapReconstructionCandidateChecklistItem,
   ProjectMapReconstructionCandidateResult,
@@ -1718,6 +1721,7 @@ export default async function ProjectMapPage({
     mapReadResult,
     candidate: mapCandidate,
   });
+  const projectMapStructuralDrift = await detectProjectMapStructuralDrift(project);
   const foundationStatuses = buildFoundationStatuses(
     project?.name ?? null,
     projectMapStorageReadiness,
@@ -1926,6 +1930,45 @@ export default async function ProjectMapPage({
         </ul>
         <p className="mt-3 text-xs text-amber-100/70">
           Odczyt checkoutu i canonical mapy jest read-only; canonical write i promocja pozostają wyłączone.
+        </p>
+      </section>
+
+      <section
+        id="project-map-structural-drift"
+        className="rounded-xl border border-orange-900/60 bg-orange-950/20 p-4"
+      >
+        <div className="space-y-1">
+          <p className="text-xs uppercase tracking-[0.2em] text-orange-200/70">
+            Structural baseline
+          </p>
+          <h3 className="text-xl font-semibold text-orange-50">
+            Project Map structural drift
+          </h3>
+          <p className="text-sm font-medium text-orange-100">
+            Status: {projectMapStructuralDrift.status}
+          </p>
+        </div>
+        <ul className="mt-4 grid gap-2 text-sm text-orange-50/90 md:grid-cols-2">
+          <li className="rounded-lg border border-orange-900/60 bg-orange-950/35 px-3 py-2">
+            Changed files: {projectMapStructuralDrift.changed.join(" | ") || "none"}
+          </li>
+          <li className="rounded-lg border border-orange-900/60 bg-orange-950/35 px-3 py-2">
+            Added files: {projectMapStructuralDrift.added.join(" | ") || "none"}
+          </li>
+          <li className="rounded-lg border border-orange-900/60 bg-orange-950/35 px-3 py-2">
+            Removed files: {projectMapStructuralDrift.removed.join(" | ") || "none"}
+          </li>
+          <li className="rounded-lg border border-orange-900/60 bg-orange-950/35 px-3 py-2">
+            Unavailable: {projectMapStructuralDrift.unavailable.join(" | ") || "none"}
+          </li>
+          {projectMapStructuralDrift.details.map((detail) => (
+            <li key={detail} className="rounded-lg border border-orange-900/60 bg-orange-950/35 px-3 py-2 md:col-span-2">
+              {detail}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-xs text-orange-100/70">
+          Baseline i checkout są odczytywane bez zapisu; automatyczne odświeżanie baseline'u pozostaje wyłączone.
         </p>
       </section>
 
