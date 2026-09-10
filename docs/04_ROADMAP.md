@@ -193,8 +193,50 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation
-Next Product Milestone Candidate: MS-031.37 - Project Map Canonical Write Execution Foundation
+Latest Completed Product Milestone: MS-031.37E - Project Map Canonical Write SSOT Sync Foundation
+Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.37E - Project Map Canonical Write SSOT Sync Foundation
+
+**Milestone**
+MS-031.37E - Project Map Canonical Write SSOT Sync Foundation
+
+**Type**
+SPS OS / Project Map Canonical Write SSOT Sync Foundation
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+READY FOR COMMIT / PUSH
+
+**Milestone Status**
+COMPLETED / VERIFIED / ACCEPTED / READY FOR COMMIT / PUSH
+
+**Product Outcome**
+SPS OS documentation now records that the first canonical Project Map for Beauty Client PRO was created inside the SPS OS-owned metadata root. The canonical `map.json` and `map-write-audit.json` sidecar exist, the BCP checkout remains clean, and the accepted first-write risks remain explicit rather than being represented as resolved evidence.
+
+**Recorded Canonical Write**
+* `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb\project-map\map.json` exists and was read back successfully
+* `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb\project-map\map-write-audit.json` exists and records the write result, preflight result, source identity, and accepted risks
+* the canonical storage path remains SPS OS-owned and outside `C:\SPS_OS_WORK\beauty-client-pro`
+
+**Accepted / Open Risks**
+* SSOT is missing in BCP and remains an accepted initial risk
+* Project Bible is missing in BCP and remains an accepted initial risk
+* Project Map candidate evidence remains separate from canonical storage
+* First Layout has no direct BCP evidence and remains an accepted initial risk
+
+**Verification**
+* canonical `map.json` and `map-write-audit.json` were present and validated by read-back
+* persisted Project Identity and checkout path matched the project record
+* Beauty Client PRO checkout status was clean
+* focused Project Map, preflight, writer, and page tests passed
+
+**Non-Goals**
+* no Beauty Client PRO repository modification
+* no new canonical write or artifact creation in this SSOT sync
+* no commit or push in this milestone
 
 ## MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation
 

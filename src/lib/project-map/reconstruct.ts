@@ -5,7 +5,11 @@ import type {
   ProjectMapFoundationArea,
   ProjectMapMilestoneState,
 } from "./classify";
-import type { ProjectMapReadResult } from "./read";
+import type {
+  ProjectMapReadResult,
+  ProjectMapSourceIdentity,
+} from "./read";
+import { buildRepoCheckoutDirectory } from "@/lib/project/source-status";
 
 const FOUNDATION_AREAS: ProjectMapFoundationArea[] = [
   "Project Identity",
@@ -137,6 +141,48 @@ function toCandidateEvidenceItem(
 
 function uniqueStrings(values: string[]): string[] {
   return [...new Set(values.filter((value) => value.trim().length > 0))];
+}
+
+function resolveSourceIdentityStatus(
+  project: {
+    id: string;
+    name: string;
+    repositoryUrl?: string | null;
+    workingDirectory?: string | null;
+  },
+  mapReadResult: ProjectMapReadResult,
+): "aligned" | "missing" | "mismatch" {
+  const sourceIdentity =
+    "projectSourceIdentity" in mapReadResult
+      ? mapReadResult.projectSourceIdentity
+      : null;
+  const persistence = mapReadResult.projectSourceIdentityPersistence;
+
+  if (
+    !sourceIdentity ||
+    persistence.status !== "persisted" ||
+    !sourceIdentity.projectId ||
+    !sourceIdentity.projectName ||
+    !sourceIdentity.repositoryUrl ||
+    !sourceIdentity.workingDirectory ||
+    !sourceIdentity.projectCheckoutPath ||
+    !project.repositoryUrl?.trim() ||
+    !project.workingDirectory?.trim()
+  ) {
+    return "missing";
+  }
+
+  const expectedCheckoutPath = buildRepoCheckoutDirectory(
+    project.workingDirectory,
+  );
+
+  return sourceIdentity.projectId === project.id &&
+    sourceIdentity.projectName === project.name &&
+    sourceIdentity.repositoryUrl === project.repositoryUrl.trim() &&
+    sourceIdentity.workingDirectory === project.workingDirectory.trim() &&
+    sourceIdentity.projectCheckoutPath === expectedCheckoutPath
+    ? "aligned"
+    : "mismatch";
 }
 
 function buildCandidateStructureStatus(
@@ -345,6 +391,25 @@ function buildFoundationChecklist(
   );
 }
 
+function buildPersistedProjectIdentityEvidence(
+  sourceIdentity: ProjectMapSourceIdentity,
+): ProjectMapReconstructionCandidateEvidenceItem {
+  return {
+    evidenceType: "package/config",
+    discoveryStatus: "found",
+    sourceOwner: "project",
+    sourcePath: sourceIdentity.projectSourceIdentityPath,
+    sourceRelativePath: "project-source-identity.json",
+    projectId: sourceIdentity.projectId,
+    projectName: sourceIdentity.projectName,
+    confidence: "direct",
+    foundationAreas: ["Project Identity"],
+    milestoneStates: ["completed"],
+    conflictState: "none",
+    supportState: "confirmed",
+  };
+}
+
 export function buildProjectMapReconstructionCandidate(
   classification: ProjectMapEvidenceClassificationResult,
 ): ProjectMapReconstructionCandidateResult {
@@ -370,6 +435,48 @@ export function buildProjectMapReconstructionCandidate(
     sourcePath: classification.sourcePath,
     foundationChecklist: buildFoundationChecklist(evidence),
     evidence,
+  };
+}
+
+export function enrichProjectMapReconstructionCandidateWithSourceIdentity(
+  candidate: ProjectMapReconstructionCandidateResult,
+  project: {
+    id: string;
+    name: string;
+    repositoryUrl?: string | null;
+    workingDirectory?: string | null;
+  } | null,
+  mapReadResult: ProjectMapReadResult | null,
+): ProjectMapReconstructionCandidateResult {
+  if (
+    candidate.status !== "available" ||
+    !project ||
+    !mapReadResult ||
+    resolveSourceIdentityStatus(project, mapReadResult) !== "aligned" ||
+    !("projectSourceIdentity" in mapReadResult) ||
+    !mapReadResult.projectSourceIdentity
+  ) {
+    return candidate;
+  }
+
+  const identityEvidence = buildPersistedProjectIdentityEvidence(
+    mapReadResult.projectSourceIdentity,
+  );
+
+  return {
+    ...candidate,
+    evidence: [identityEvidence, ...candidate.evidence],
+    foundationChecklist: candidate.foundationChecklist.map((item) =>
+      item.foundationArea === "Project Identity"
+        ? {
+            ...item,
+            status: "completed",
+            supportState: "confirmed",
+            milestoneStates: [...new Set([...item.milestoneStates, "completed"])],
+            evidence: [identityEvidence, ...item.evidence],
+          }
+        : item,
+    ),
   };
 }
 
@@ -402,12 +509,10 @@ export function buildProjectMapCandidateStructure(
     "projectSourceIdentity" in mapReadResult && mapReadResult.projectSourceIdentity
       ? mapReadResult.projectSourceIdentity.projectCheckoutPath ?? null
       : null;
-  const sourceIdentityStatus =
-    repositoryUrl && sourceIdentityRepositoryUrl
-      ? repositoryUrl === sourceIdentityRepositoryUrl
-        ? "aligned"
-        : "mismatch"
-      : "missing";
+  const sourceIdentityStatus = resolveSourceIdentityStatus(
+    project,
+    mapReadResult,
+  );
 
   const completedItems = uniqueStrings([
     sourceIdentityStatus === "aligned"

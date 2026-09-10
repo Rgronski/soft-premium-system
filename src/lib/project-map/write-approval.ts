@@ -9,6 +9,16 @@ export type ProjectMapCanonicalWriteApprovalStatus =
   | "rejected"
   | "blocked by evidence";
 
+export const PROJECT_MAP_CANONICAL_WRITE_ACCEPTED_RISKS = [
+  "SSOT",
+  "Project Bible",
+  "Project Map",
+  "First Layout",
+] as const;
+
+export type ProjectMapCanonicalWriteAcceptedRisk =
+  (typeof PROJECT_MAP_CANONICAL_WRITE_ACCEPTED_RISKS)[number];
+
 export type ProjectMapCanonicalWriteApprovalResult = {
   status: ProjectMapCanonicalWriteApprovalStatus;
   canonicalWriteAllowed: boolean;
@@ -18,26 +28,39 @@ export type ProjectMapCanonicalWriteApprovalResult = {
   acceptanceStatus: ProjectMapCandidateAcceptanceResult["status"];
   requiredEvidence: ProjectMapCandidateAcceptanceResult["requiredEvidence"];
   reviewedFoundationAreas: ProjectMapCandidateAcceptanceResult["reviewedFoundationAreas"];
+  acceptedRisks: ProjectMapCanonicalWriteAcceptedRisk[];
 };
 
 export type ProjectMapCanonicalWriteApprovalInput = {
   requested: boolean;
   decision?: ProjectMapCanonicalWriteApprovalDecision;
   acceptance: ProjectMapCandidateAcceptanceResult;
+  acceptedRisks?: ProjectMapCanonicalWriteAcceptedRisk[];
 };
 
 function hasEvidenceBlockingApproval(
   acceptance: ProjectMapCandidateAcceptanceResult,
+  acceptedRisks: ProjectMapCanonicalWriteAcceptedRisk[],
 ): boolean {
-  return (
-    acceptance.status === "candidate needs evidence" ||
-    acceptance.requiredEvidence.length > 0
+  return acceptance.requiredEvidence.some(
+    (requirement) =>
+      !acceptedRisks.includes(
+        requirement.foundationArea as ProjectMapCanonicalWriteAcceptedRisk,
+      ),
   );
 }
 
 export function evaluateProjectMapCanonicalWriteApproval(
   input: ProjectMapCanonicalWriteApprovalInput,
 ): ProjectMapCanonicalWriteApprovalResult {
+  const acceptedRisks = [
+    ...new Set(
+      (input.acceptedRisks ?? []).filter((risk) =>
+        PROJECT_MAP_CANONICAL_WRITE_ACCEPTED_RISKS.includes(risk),
+      ),
+    ),
+  ];
+
   if (!input.requested) {
     return {
       status: "not requested",
@@ -48,10 +71,11 @@ export function evaluateProjectMapCanonicalWriteApproval(
       acceptanceStatus: input.acceptance.status,
       requiredEvidence: input.acceptance.requiredEvidence,
       reviewedFoundationAreas: input.acceptance.reviewedFoundationAreas,
+      acceptedRisks,
     };
   }
 
-  if (hasEvidenceBlockingApproval(input.acceptance)) {
+  if (hasEvidenceBlockingApproval(input.acceptance, acceptedRisks)) {
     return {
       status: "blocked by evidence",
       canonicalWriteAllowed: false,
@@ -61,6 +85,7 @@ export function evaluateProjectMapCanonicalWriteApproval(
       acceptanceStatus: input.acceptance.status,
       requiredEvidence: input.acceptance.requiredEvidence,
       reviewedFoundationAreas: input.acceptance.reviewedFoundationAreas,
+      acceptedRisks,
     };
   }
 
@@ -77,6 +102,7 @@ export function evaluateProjectMapCanonicalWriteApproval(
       acceptanceStatus: input.acceptance.status,
       requiredEvidence: input.acceptance.requiredEvidence,
       reviewedFoundationAreas: input.acceptance.reviewedFoundationAreas,
+      acceptedRisks,
     };
   }
 
@@ -90,6 +116,7 @@ export function evaluateProjectMapCanonicalWriteApproval(
       acceptanceStatus: input.acceptance.status,
       requiredEvidence: input.acceptance.requiredEvidence,
       reviewedFoundationAreas: input.acceptance.reviewedFoundationAreas,
+      acceptedRisks,
     };
   }
 
@@ -102,5 +129,6 @@ export function evaluateProjectMapCanonicalWriteApproval(
     acceptanceStatus: input.acceptance.status,
     requiredEvidence: input.acceptance.requiredEvidence,
     reviewedFoundationAreas: input.acceptance.reviewedFoundationAreas,
+    acceptedRisks,
   };
 }

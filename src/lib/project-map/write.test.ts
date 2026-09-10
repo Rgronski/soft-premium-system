@@ -162,6 +162,15 @@ function buildApprovedCandidate() {
   };
 }
 
+function buildReadyPreflight() {
+  return {
+    status: "READY_FOR_FUTURE_WRITE" as const,
+    reasons: ["Candidate is ready for future write planning."],
+    blockers: [],
+    evidenceRiskCount: 0,
+  };
+}
+
 describe("writeProjectMapCanonicalMap", () => {
   it("blocks canonical write when approval is not requested", async () => {
     const { candidate, acceptance } = buildApprovedCandidate();
@@ -180,6 +189,7 @@ describe("writeProjectMapCanonicalMap", () => {
       },
       approval,
       candidate,
+      preflight: buildReadyPreflight(),
     });
 
     expect(result).toMatchObject({
@@ -213,6 +223,7 @@ describe("writeProjectMapCanonicalMap", () => {
       },
       approval,
       candidate,
+      preflight: buildReadyPreflight(),
     });
 
     expect(result.status).toBe("written");
@@ -236,6 +247,11 @@ describe("writeProjectMapCanonicalMap", () => {
       expect.stringContaining('"kind": "canonical-project-map"'),
       "utf8",
     );
+    expect(writeFileMock).toHaveBeenCalledWith(
+      "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map\\map-write-audit.json",
+      expect.stringContaining('"kind": "canonical-project-map-write-audit"'),
+      "utf8",
+    );
   });
 
   it("keeps candidate data distinguishable from canonical data after write", async () => {
@@ -256,6 +272,7 @@ describe("writeProjectMapCanonicalMap", () => {
       },
       approval,
       candidate,
+      preflight: buildReadyPreflight(),
     });
 
     expect(result.status).toBe("written");
@@ -291,6 +308,87 @@ describe("writeProjectMapCanonicalMap", () => {
     expect(parsedPayload.canonical).not.toBe(parsedPayload.candidate);
   });
 
+  it("allows only the explicitly accepted first-write risks and records them in the audit", async () => {
+    const candidate = {
+      status: "available" as const,
+      projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+      projectName: "Beauty Client PRO",
+      sourcePath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+      foundationChecklist: [
+        "SSOT",
+        "Project Bible",
+        "Project Map",
+        "First Layout",
+      ].map((foundationArea) => ({
+        foundationArea: foundationArea as "SSOT" | "Project Bible" | "Project Map" | "First Layout",
+        status: "absent" as const,
+        supportState: "missing" as const,
+        conflictState: "none" as const,
+        milestoneStates: ["absent"] as const,
+        evidence: [],
+      })),
+      evidence: [
+        {
+          evidenceType: "readme" as const,
+          discoveryStatus: "found" as const,
+          sourceOwner: "project" as const,
+          sourcePath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo\\README.md",
+          sourceRelativePath: "README.md",
+          projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+          projectName: "Beauty Client PRO",
+          confidence: "direct" as const,
+          foundationAreas: ["Project Identity"] as const,
+          milestoneStates: ["unknown"] as const,
+          conflictState: "none" as const,
+          supportState: "confirmed" as const,
+        },
+      ],
+    };
+    const acceptance = evaluateProjectMapCandidateAcceptance(candidate);
+    const approval = evaluateProjectMapCanonicalWriteApproval({
+      requested: true,
+      decision: "approved",
+      acceptance,
+      acceptedRisks: ["SSOT", "Project Bible", "Project Map", "First Layout"],
+    });
+
+    expect(approval).toMatchObject({
+      status: "approved",
+      canonicalWriteAllowed: true,
+      acceptedRisks: ["SSOT", "Project Bible", "Project Map", "First Layout"],
+      requiredEvidence: [
+        { foundationArea: "SSOT" },
+        { foundationArea: "Project Bible" },
+        { foundationArea: "Project Map" },
+      ],
+    });
+
+    const { writeProjectMapCanonicalMap } = await loadModule();
+    const result = await writeProjectMapCanonicalMap({
+      project: {
+        id: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+        name: "Beauty Client PRO",
+        repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+        workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+      },
+      approval,
+      candidate,
+      preflight: {
+        status: "NEEDS_EVIDENCE",
+        reasons: ["Accepted first-write risks remain visible."],
+        blockers: [],
+        evidenceRiskCount: 4,
+      },
+    });
+
+    expect(result.status).toBe("written");
+    expect(writeFileMock).toHaveBeenCalledWith(
+      "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb\\project-map\\map-write-audit.json",
+      expect.stringContaining('"acceptedRisks": [\n    "SSOT"'),
+      "utf8",
+    );
+  });
+
   it("returns unavailable when the candidate is unavailable", async () => {
     const { writeProjectMapCanonicalMap } = await loadModule();
     const result = await writeProjectMapCanonicalMap({
@@ -309,6 +407,7 @@ describe("writeProjectMapCanonicalMap", () => {
         acceptanceStatus: "candidate acceptable",
         requiredEvidence: [],
         reviewedFoundationAreas: [],
+        acceptedRisks: [],
       },
       candidate: {
         status: "unavailable",

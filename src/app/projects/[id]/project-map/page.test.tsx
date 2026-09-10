@@ -314,7 +314,7 @@ describe("ProjectMapPage", () => {
       status: "available",
       projectId: "project-1",
       projectName: "Alpha Workspace",
-      sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace",
+      sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
       evidence: [],
     });
 
@@ -322,7 +322,7 @@ describe("ProjectMapPage", () => {
       status: "available",
       projectId: "project-1",
       projectName: "Alpha Workspace",
-      sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace",
+      sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
       evidence: [],
     });
 
@@ -518,12 +518,13 @@ describe("ProjectMapPage", () => {
       name: "Alpha Workspace",
       repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
       workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+      sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
     });
     expect(classifyProjectMapEvidenceMock).toHaveBeenCalledWith({
       status: "available",
       projectId: "project-1",
       projectName: "Alpha Workspace",
-      sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace",
+      sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
       evidence: [],
     });
     expect(buildProjectMapReconstructionCandidateMock).toHaveBeenCalledWith(
@@ -647,7 +648,7 @@ describe("ProjectMapPage", () => {
       ),
     ).toBeTruthy();
     expect(screen.getByText("Wynik kandydata: available")).toBeTruthy();
-    expect(screen.getByText("Liczba evidence: 2")).toBeTruthy();
+    expect(screen.getByText("Liczba evidence: 3")).toBeTruthy();
     expect(screen.getAllByText("Obszary foundation: 8").length).toBeGreaterThan(0);
     expect(
       screen.getByText("Ostatnio odświeżono: 2026-08-30T12:34:56.000Z"),
@@ -760,6 +761,7 @@ describe("ProjectMapPage", () => {
       name: "Alpha Workspace",
       repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
       workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+      sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace",
     });
   });
 

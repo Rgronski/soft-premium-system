@@ -5,10 +5,12 @@ import Link from "next/link";
 import { SectionCard } from "@/components/ui/SectionCard";
 import { resolveProjectMapStorageRoot } from "@/lib/project-brain/metadata";
 import { getServerProjectById } from "@/lib/project/server";
+import { buildRepoCheckoutDirectory } from "@/lib/project/source-status";
 import { classifyProjectMapEvidence } from "@/lib/project-map/classify";
 import {
   buildProjectMapCandidateStructure,
   buildProjectMapReconstructionCandidate,
+  enrichProjectMapReconstructionCandidateWithSourceIdentity,
 } from "@/lib/project-map/reconstruct";
 import { scanProjectMapEvidence } from "@/lib/project-map/scan";
 import {
@@ -1269,15 +1271,24 @@ function buildProjectMapMissingInputCopy(item: string): ProjectMapMissingInputCo
 
 async function loadProjectMapCandidate(
   project: Awaited<ReturnType<typeof getServerProjectById>>,
+  sourcePath?: string,
+  mapReadResult?: ProjectMapReadResult | null,
 ): Promise<ProjectMapReconstructionCandidateResult | null> {
   if (!project) {
     return null;
   }
 
-  const scanResult = await scanProjectMapEvidence(project);
+  const scanResult = await scanProjectMapEvidence({
+    ...project,
+    ...(sourcePath ? { sourcePath } : {}),
+  });
   const classificationResult = classifyProjectMapEvidence(scanResult);
 
-  return buildProjectMapReconstructionCandidate(classificationResult);
+  return enrichProjectMapReconstructionCandidateWithSourceIdentity(
+    buildProjectMapReconstructionCandidate(classificationResult),
+    project,
+    mapReadResult ?? null,
+  );
 }
 
 function buildFoundationStatuses(
@@ -1381,7 +1392,19 @@ export default async function ProjectMapPage({
   const mapReadResult = project
     ? await resolveProjectMapReadResult(project)
     : null;
-  const mapCandidate = await loadProjectMapCandidate(project);
+  const persistedCheckoutPath = mapReadResult?.projectSourceIdentity?.projectCheckoutPath;
+  const expectedCheckoutPath = project?.workingDirectory
+    ? buildRepoCheckoutDirectory(project.workingDirectory)
+    : null;
+  const candidateSourcePath =
+    persistedCheckoutPath && expectedCheckoutPath === persistedCheckoutPath
+      ? persistedCheckoutPath
+      : project?.workingDirectory;
+  const mapCandidate = await loadProjectMapCandidate(
+    project,
+    candidateSourcePath,
+    mapReadResult,
+  );
   const projectMapStorageReadiness = await resolveProjectMapStorageReadiness(
     project,
   );

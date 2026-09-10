@@ -3,7 +3,9 @@ import { join } from "node:path";
 
 import { resolveProjectMapStorageRoot } from "../project-brain/metadata";
 import { buildRepoCheckoutDirectory } from "../project/source-status";
+import type { ProjectMapCanonicalWritePreflightEvaluation } from "./canonical-write-preflight";
 import type {
+  ProjectMapCanonicalWriteAcceptedRisk,
   ProjectMapCanonicalWriteApprovalResult,
   ProjectMapCanonicalWriteApprovalStatus,
 } from "./write-approval";
@@ -17,6 +19,7 @@ type ProjectLike = {
 };
 
 const PROJECT_MAP_FILE_NAME = "map.json";
+const PROJECT_MAP_WRITE_AUDIT_FILE_NAME = "map-write-audit.json";
 const PROJECT_SOURCE_IDENTITY_FILE_NAME = "project-source-identity.json";
 
 export type ProjectMapCanonicalSourceIdentity = {
@@ -44,6 +47,20 @@ export type ProjectMapCanonicalMap = {
   };
   writeApproval: ProjectMapCanonicalWriteApprovalResult;
   candidate: ProjectMapReconstructionCandidateResult;
+};
+
+export type ProjectMapCanonicalWriteAudit = {
+  kind: "canonical-project-map-write-audit";
+  version: 1;
+  projectId: string;
+  projectName: string;
+  mapJsonPath: string;
+  projectSourceIdentityPath: string;
+  sourceIdentity: ProjectMapCanonicalSourceIdentity;
+  acceptedRisks: ProjectMapCanonicalWriteAcceptedRisk[];
+  preflight: ProjectMapCanonicalWritePreflightEvaluation;
+  writeResult: "written";
+  writtenAt: string;
 };
 
 export type ProjectMapCanonicalWriteResult =
@@ -104,6 +121,7 @@ export type ProjectMapCanonicalWriteInput = {
   project: ProjectLike | null | undefined;
   approval: ProjectMapCanonicalWriteApprovalResult;
   candidate: ProjectMapReconstructionCandidateResult;
+  preflight?: ProjectMapCanonicalWritePreflightEvaluation;
 };
 
 function buildProjectSourceIdentityPath(
@@ -196,6 +214,10 @@ function serializeCanonicalMap(canonicalMap: ProjectMapCanonicalMap): string {
   return `${JSON.stringify(canonicalMap, null, 2)}\n`;
 }
 
+function serializeWriteAudit(audit: ProjectMapCanonicalWriteAudit): string {
+  return `${JSON.stringify(audit, null, 2)}\n`;
+}
+
 function createBlockedResult(
   projectMapStorageRoot: Extract<
     ReturnType<typeof resolveProjectMapStorageRoot>,
@@ -261,6 +283,10 @@ export async function writeProjectMapCanonicalMap(
     projectMapStorageRoot.projectMapRootPath,
     PROJECT_MAP_FILE_NAME,
   );
+  const auditJsonPath = join(
+    projectMapStorageRoot.projectMapRootPath,
+    PROJECT_MAP_WRITE_AUDIT_FILE_NAME,
+  );
 
   if (
     input.approval.status !== "approved" ||
@@ -283,6 +309,21 @@ export async function writeProjectMapCanonicalMap(
     );
   }
 
+  if (
+    !input.preflight ||
+    input.preflight.blockers.length > 0 ||
+    !["READY_FOR_FUTURE_WRITE", "NEEDS_EVIDENCE"].includes(
+      input.preflight.status,
+    )
+  ) {
+    return createBlockedResult(
+      projectMapStorageRoot,
+      input.approval.status,
+      "blocked-by-evidence",
+      mapJsonPath,
+    );
+  }
+
   const writtenAt = new Date().toISOString();
   const canonicalMap = buildCanonicalMap(
     projectMapStorageRoot,
@@ -292,12 +333,30 @@ export async function writeProjectMapCanonicalMap(
     mapJsonPath,
     writtenAt,
   );
+  const writeAudit: ProjectMapCanonicalWriteAudit = {
+    kind: "canonical-project-map-write-audit",
+    version: 1,
+    projectId: projectMapStorageRoot.projectId,
+    projectName: projectMapStorageRoot.projectName,
+    mapJsonPath,
+    projectSourceIdentityPath: canonicalMap.canonical.projectSourceIdentityPath,
+    sourceIdentity: canonicalMap.canonical.sourceIdentity,
+    acceptedRisks: input.approval.acceptedRisks,
+    preflight: input.preflight,
+    writeResult: "written",
+    writtenAt,
+  };
 
   try {
     await mkdir(projectMapStorageRoot.projectMapRootPath, { recursive: true });
     await writeFile(
       mapJsonPath,
       serializeCanonicalMap(canonicalMap),
+      "utf8",
+    );
+    await writeFile(
+      auditJsonPath,
+      serializeWriteAudit(writeAudit),
       "utf8",
     );
   } catch (error) {

@@ -6,6 +6,7 @@ import { classifyProjectMapEvidenceItem } from "./classify";
 import {
   buildProjectMapCandidateStructure,
   buildProjectMapReconstructionCandidate,
+  enrichProjectMapReconstructionCandidateWithSourceIdentity,
 } from "./reconstruct";
 
 describe("buildProjectMapReconstructionCandidate", () => {
@@ -445,5 +446,137 @@ describe("buildProjectMapReconstructionCandidate", () => {
       "SSOT",
     );
     expect(structure?.missingInputs.join(" ")).not.toContain("SSOT docs were found");
+  });
+
+  it("does not confirm Project Identity when persisted identity fields mismatch", () => {
+    const candidate = buildProjectMapReconstructionCandidate({
+      status: "available",
+      projectId: "project-1",
+      projectName: "Alpha Workspace",
+      sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
+      evidence: [],
+    });
+
+    const structure = buildProjectMapCandidateStructure(
+      {
+        id: "project-1",
+        name: "Alpha Workspace",
+        repositoryUrl: "https://github.com/example/alpha-workspace.git",
+        workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+      },
+      {
+        status: "missing",
+        projectId: "project-1",
+        projectName: "Alpha Workspace",
+        projectMetadataRootPath:
+          "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1",
+        projectMapRootPath:
+          "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map",
+        mapJsonPath:
+          "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\map.json",
+        projectSourceIdentity: {
+          projectId: "project-1",
+          projectName: "Alpha Workspace",
+          repositoryUrl: "https://github.com/example/different-workspace.git",
+          workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+          projectCheckoutPath: "C:\\SPS_OS_WORK\\different-checkout",
+          projectMetadataRootPath:
+            "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1",
+          projectSourceIdentityPath:
+            "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-source-identity.json",
+          persistedAt: "2026-08-31T11:48:02.9592588Z",
+        },
+        projectSourceIdentityPersistence: {
+          status: "persisted",
+          projectSourceIdentityPath:
+            "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-source-identity.json",
+          persistedAt: "2026-08-31T11:48:02.9592588Z",
+        },
+      },
+      candidate,
+    );
+
+    expect(structure).toMatchObject({
+      trustState: "needs-review",
+      projectIdentity: {
+        sourceIdentityStatus: "mismatch",
+        sourceIdentityPersistence: "persisted",
+      },
+      currentState: {
+        sourceIdentityStatus: "mismatch",
+      },
+    });
+    expect(structure?.completedItems.map((item) => item.title)).not.toContain(
+      "Project Identity",
+    );
+    expect(structure?.missingInputs).toContain(
+      "Repository URL in Project Map source identity does not match the BCP project record.",
+    );
+  });
+
+  it("confirms Project Identity from a fully aligned persisted source identity", () => {
+    const project = {
+      id: "project-1",
+      name: "Alpha Workspace",
+      repositoryUrl: "https://github.com/example/alpha-workspace.git",
+      workingDirectory: "C:\\SPS_OS_WORK\\alpha-workspace",
+    };
+    const candidate = buildProjectMapReconstructionCandidate({
+      status: "available",
+      projectId: project.id,
+      projectName: project.name,
+      sourcePath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
+      evidence: [],
+    });
+    const alignedCandidate = enrichProjectMapReconstructionCandidateWithSourceIdentity(
+      candidate,
+      project,
+      {
+        status: "missing",
+        projectId: project.id,
+        projectName: project.name,
+        projectMetadataRootPath:
+          "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1",
+        projectMapRootPath:
+          "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map",
+        mapJsonPath:
+          "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\map.json",
+        projectSourceIdentity: {
+          projectId: project.id,
+          projectName: project.name,
+          repositoryUrl: project.repositoryUrl,
+          workingDirectory: project.workingDirectory,
+          projectCheckoutPath: "C:\\SPS_OS_WORK\\alpha-workspace\\repo",
+          projectMetadataRootPath:
+            "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1",
+          projectSourceIdentityPath:
+            "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-source-identity.json",
+          persistedAt: "2026-09-10T00:00:00.000Z",
+        },
+        projectSourceIdentityPersistence: {
+          status: "persisted",
+          projectSourceIdentityPath:
+            "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-source-identity.json",
+          persistedAt: "2026-09-10T00:00:00.000Z",
+        },
+      },
+    );
+
+    expect(alignedCandidate).toMatchObject({
+      evidence: [
+        expect.objectContaining({
+          sourceRelativePath: "project-source-identity.json",
+          confidence: "direct",
+          supportState: "confirmed",
+        }),
+      ],
+      foundationChecklist: expect.arrayContaining([
+        expect.objectContaining({
+          foundationArea: "Project Identity",
+          status: "completed",
+          supportState: "confirmed",
+        }),
+      ]),
+    });
   });
 });
