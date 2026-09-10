@@ -33,6 +33,7 @@ import {
   type ProjectMapRiskKey,
   type ProjectMapRiskDecisionWriteResult,
 } from "@/lib/project-map/risk-decisions";
+import { evaluateProjectMapSpsFoundationAlignment } from "@/lib/project-map/alignment";
 import type {
   ProjectMapReconstructionCandidateChecklistItem,
   ProjectMapReconstructionCandidateResult,
@@ -1664,22 +1665,20 @@ export default async function ProjectMapPage({
   const mapReadResult = project
     ? await resolveProjectMapReadResult(project)
     : null;
+  const riskDecisionsResult = project
+    ? await readProjectMapRiskDecisions(project)
+    : null;
   const projectMapRiskDecisionReadCopy = buildProjectMapRiskDecisionReadCopy(
-    project ? await readProjectMapRiskDecisions(project) : null,
+    riskDecisionsResult,
   );
+  const canonicalIntegrityResult = mapReadResult
+    ? verifyProjectMapCanonicalIntegrity(mapReadResult)
+    : {
+        status: "invalid" as const,
+        checks: [],
+      };
   const projectMapCanonicalIntegrityCopy = buildProjectMapCanonicalIntegrityCopy(
-    mapReadResult
-      ? verifyProjectMapCanonicalIntegrity(mapReadResult)
-      : {
-          status: "invalid",
-          checks: [
-            {
-              label: "Canonical Project Map",
-              status: "invalid",
-              detail: "Canonical map.json nie jest poprawnie dostępna do porównania.",
-            },
-          ],
-        },
+    canonicalIntegrityResult,
   );
   const persistedCheckoutPath = mapReadResult?.projectSourceIdentity?.projectCheckoutPath;
   const expectedCheckoutPath = project?.workingDirectory
@@ -1702,14 +1701,17 @@ export default async function ProjectMapPage({
     buildProjectMapRemainingRiskPanelCopy(mapReadResult, mapCandidate);
   const projectMapReadinessSummaryCopy = buildProjectMapReadinessSummaryCopy(
     mapReadResult,
-    mapReadResult
-      ? verifyProjectMapCanonicalIntegrity(mapReadResult)
-      : {
-          status: "invalid",
-          checks: [],
-        },
+    canonicalIntegrityResult,
     projectMapRemainingRiskPanelCopy,
   );
+  const projectMapSpsAlignment = evaluateProjectMapSpsFoundationAlignment({
+    project,
+    mapReadResult,
+    integrity: canonicalIntegrityResult,
+    riskDecisions: riskDecisionsResult,
+    candidate: mapCandidate,
+    canonicalWriteEnabled: false,
+  });
   const foundationStatuses = buildFoundationStatuses(
     project?.name ?? null,
     projectMapStorageReadiness,
@@ -1850,6 +1852,36 @@ export default async function ProjectMapPage({
             </li>
           ))}
         </ul>
+      </section>
+
+      <section
+        id="project-map-sps-foundation-alignment"
+        className="rounded-xl border border-cyan-900/50 bg-cyan-950/20 p-4"
+      >
+        <div className="space-y-1">
+          <p className="text-xs uppercase tracking-[0.2em] text-cyan-200/70">
+            Wyrównanie z fundamentami SPS OS
+          </p>
+          <h3 className="text-xl font-semibold text-cyan-50">
+            Project Map foundation alignment
+          </h3>
+          <p className="text-sm font-medium text-cyan-100">
+            Status: {projectMapSpsAlignment.status}
+          </p>
+        </div>
+        <ul className="mt-4 grid gap-2 text-sm text-cyan-50/90 md:grid-cols-2">
+          {projectMapSpsAlignment.checks.map((check) => (
+            <li
+              key={check.key}
+              className="rounded-lg border border-cyan-900/60 bg-cyan-950/35 px-3 py-2"
+            >
+              {check.label}: {check.status}. {check.detail}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-xs text-cyan-100/70">
+          Źródła reguł SPS OS: {projectMapSpsAlignment.controlSources.join(", ")}. Nie są kopiowane jako evidence BCP.
+        </p>
       </section>
 
       {mapReadResult?.status === "present" ? (

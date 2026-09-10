@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.45 Project Map SPS Foundation Alignment Verification
+
+### Date
+
+2026-09-11
+
+### Completed
+
+* Added deterministic SPS foundation alignment checks for project identity, canonical/audit consistency, persisted decisions, required evidence, storage boundary, candidate/canonical separation, and canonical write boundary.
+* Added explicit aligned, missing_data, needs_review, and mismatch results with safe missing-data behavior.
+* Displayed the alignment result, per-check status, and SPS OS control sources in the read-only Project Map UI.
+* Verified TypeScript, alignment, Project Map readback/page tests, unchanged canonical artifacts, and a clean Beauty Client PRO checkout.
+
+### Notes
+
+* SPS OS documents remain control rules and are not copied or inferred as BCP evidence.
+* No canonical artifact rewrite, promotion, canonical write, or Beauty Client PRO repository modification was performed.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.44 Project Map Risk Decision Capture UI Foundation
 
 ### Date

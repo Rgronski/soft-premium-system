@@ -193,8 +193,37 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.44 - Project Map Risk Decision Capture UI Foundation
+Latest Completed Product Milestone: MS-031.45 - Project Map SPS Foundation Alignment Verification
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.45 - Project Map SPS Foundation Alignment Verification
+
+**Milestone**
+MS-031.45 - Project Map SPS Foundation Alignment Verification
+
+**Type**
+SPS OS / Project Map read-only SPS foundation alignment
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+READY FOR COMMIT / PUSH
+
+**Product Outcome**
+The Project Map view now compares explicit project, canonical/audit, risk-decision, evidence, storage-boundary, candidate/canonical, and write-boundary facts against SPS OS control rules and reports aligned, missing_data, needs_review, or mismatch.
+
+**Verification**
+* deterministic alignment checks and missing/mismatch behavior are covered
+* TypeScript, alignment, Project Map readback, and page tests pass
+* SPS OS documents remain control sources and are not copied as BCP evidence
+* canonical artifacts remain present and unchanged
+* Beauty Client PRO checkout remains clean
+
+**Non-Goals**
+* no inference of missing BCP facts from SPS OS documents
+* no canonical artifact rewrite, promotion, or write execution
+* no approval persistence or Beauty Client PRO repository modification
 
 ## MS-031.44 - Project Map Risk Decision Capture UI Foundation
 

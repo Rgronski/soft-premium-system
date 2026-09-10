@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.44 - Project Map Risk Decision Capture UI Foundation
+  MS-031.45 - Project Map SPS Foundation Alignment Verification
+
+MS-031.45 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map SPS Foundation Alignment Verification. SPS OS now compares deterministic project, canonical/audit, persisted risk-decision, required-evidence, storage-boundary, candidate/canonical, and write-boundary facts against SPS OS control rules and presents aligned, missing_data, needs_review, or mismatch results. SPS OS documents remain control rules rather than BCP evidence; canonical artifacts remain unchanged, the Beauty Client PRO checkout remains clean, and canonical write remains disabled. Commit and push remain pending.
 
 MS-031.44 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Risk Decision Capture UI Foundation. The Project Map risk panel now offers controlled Product Owner decision actions for all four risk areas and three decision states, persists only through the SPS OS-owned decision helper, reads the result back, and exposes success, missing-storage, invalid-data, mismatch, and write-failure states. Evidence status remains separate, canonical artifacts remain unchanged, the Beauty Client PRO checkout remains clean, and canonical write remains disabled. Commit and push remain pending.
 
