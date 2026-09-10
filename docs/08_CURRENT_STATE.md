@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.41 - Project Map Canonical Integrity Verification Foundation
+  MS-031.42 - Project Map Canonical Readiness Summary Foundation
+
+MS-031.42 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Canonical Readiness Summary Foundation. The Project Map view now shows one concise read-only readiness summary for canonical presence, integrity, preflight, accepted/open risks, and audit sidecar status, with explicit valid/requires-review/unavailable mapping. Canonical artifacts remain unchanged and the Beauty Client PRO checkout remains clean. Commit and push remain pending.
 
 MS-031.41 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Canonical Integrity Verification Foundation. SPS OS now compares canonical `map.json` with `map-write-audit.json` and presents `consistent`, `warning`, or `invalid` status with safe missing/malformed handling. Candidate/canonical separation remains visible, canonical artifacts remain unchanged, and the Beauty Client PRO checkout remains clean. Commit and push remain pending.
 

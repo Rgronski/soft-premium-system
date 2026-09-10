@@ -110,6 +110,11 @@ type ProjectMapRemainingRiskPanelCopy = {
   risks: ProjectMapRemainingRisk[];
 };
 
+type ProjectMapReadinessSummaryCopy = {
+  status: "canonical artifact valid" | "canonical artifact requires review" | "canonical artifact unavailable";
+  details: string[];
+};
+
 function buildProjectMapCanonicalIntegrityCopy(
   result: ProjectMapCanonicalIntegrityResult,
 ) {
@@ -757,6 +762,47 @@ function buildProjectMapRemainingRiskPanelCopy(
     description:
       "Panel jest read-only. Pokazuje ryzyka zaakceptowane, otwarte oraz wymagające evidence; żadna pozycja nie jest automatycznie uznawana za resolved evidence.",
     risks,
+  };
+}
+
+function buildProjectMapReadinessSummaryCopy(
+  mapReadResult: ProjectMapReadResult | null,
+  integrity: ProjectMapCanonicalIntegrityResult,
+  riskPanel: ProjectMapRemainingRiskPanelCopy | null,
+): ProjectMapReadinessSummaryCopy {
+  if (!mapReadResult || mapReadResult.status !== "present") {
+    return {
+      status: "canonical artifact unavailable",
+      details: [
+        "Canonical map.json nie jest dostępny jako poprawny artifact do podsumowania.",
+        "Zapis i promocja pozostają wyłączone.",
+      ],
+    };
+  }
+
+  const status =
+    integrity.status === "consistent" && mapReadResult.auditStatus === "present"
+      ? "canonical artifact valid"
+      : "canonical artifact requires review";
+  const acceptedRisks = riskPanel?.risks
+    .filter((risk) => risk.state === "accepted")
+    .map((risk) => risk.label)
+    .join(", ") || "brak";
+  const openRisks = riskPanel?.risks
+    .filter((risk) => risk.state !== "accepted")
+    .map((risk) => `${risk.label} (${risk.state})`)
+    .join(", ") || "brak";
+
+  return {
+    status,
+    details: [
+      `Canonical: present / ${integrity.status}.`,
+      `Preflight: ${mapReadResult.audit?.preflight.status ?? "unknown"}.`,
+      `Audit sidecar: ${mapReadResult.auditStatus}.`,
+      `Akceptowane ryzyka: ${acceptedRisks}.`,
+      `Otwarte / wymagające evidence: ${openRisks}.`,
+      "Podsumowanie jest read-only; canonical write pozostaje wyłączony.",
+    ],
   };
 }
 
@@ -1545,6 +1591,16 @@ export default async function ProjectMapPage({
   const projectMapCandidateCopy = buildProjectMapCandidateCopy(mapCandidate);
   const projectMapRemainingRiskPanelCopy =
     buildProjectMapRemainingRiskPanelCopy(mapReadResult, mapCandidate);
+  const projectMapReadinessSummaryCopy = buildProjectMapReadinessSummaryCopy(
+    mapReadResult,
+    mapReadResult
+      ? verifyProjectMapCanonicalIntegrity(mapReadResult)
+      : {
+          status: "invalid",
+          checks: [],
+        },
+    projectMapRemainingRiskPanelCopy,
+  );
   const foundationStatuses = buildFoundationStatuses(
     project?.name ?? null,
     projectMapStorageReadiness,
@@ -1655,6 +1711,33 @@ export default async function ProjectMapPage({
               className="rounded-lg border border-zinc-800 bg-zinc-900/60 px-3 py-2"
             >
               {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section
+        id="project-map-readiness-summary"
+        className="rounded-xl border border-sky-900/50 bg-sky-950/20 p-4"
+      >
+        <div className="space-y-1">
+          <p className="text-xs uppercase tracking-[0.2em] text-sky-200/70">
+            Podsumowanie gotowości
+          </p>
+          <h3 className="text-xl font-semibold text-sky-50">
+            Project Map readiness
+          </h3>
+          <p className="text-sm font-medium text-sky-100">
+            {projectMapReadinessSummaryCopy.status}
+          </p>
+        </div>
+        <ul className="mt-4 grid gap-2 text-sm text-sky-50/90 md:grid-cols-2">
+          {projectMapReadinessSummaryCopy.details.map((detail) => (
+            <li
+              key={detail}
+              className="rounded-lg border border-sky-900/60 bg-sky-950/35 px-3 py-2"
+            >
+              {detail}
             </li>
           ))}
         </ul>

@@ -193,8 +193,37 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.41 - Project Map Canonical Integrity Verification Foundation
+Latest Completed Product Milestone: MS-031.42 - Project Map Canonical Readiness Summary Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.42 - Project Map Canonical Readiness Summary Foundation
+
+**Milestone**
+MS-031.42 - Project Map Canonical Readiness Summary Foundation
+
+**Type**
+SPS OS / Project Map read-only readiness summary
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+READY FOR COMMIT / PUSH
+
+**Product Outcome**
+The Project Map view now presents one concise read-only readiness summary combining canonical presence, integrity, preflight, accepted/open risks, and audit sidecar status.
+
+**Verification**
+* `npx.cmd tsc --noEmit --pretty false` passes
+* Project Map readback and page tests pass (`8 / 8`, `10 / 10`)
+* missing and malformed artifact handling remains safe
+* canonical artifacts remain present and unchanged
+* Beauty Client PRO checkout remains clean
+
+**Non-Goals**
+* no canonical artifact rewrite or write execution
+* no approval persistence or promotion path
+* no Beauty Client PRO repository modification
 
 ## MS-031.41 - Project Map Canonical Integrity Verification Foundation
 

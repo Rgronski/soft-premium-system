@@ -776,6 +776,8 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Preflight: NEEDS_EVIDENCE")).toBeTruthy();
     expect(screen.getByText("Evidence risk count: 5")).toBeTruthy();
     expect(screen.getByText("Zapis kanoniczny: nie jest teraz wykonywany.")).toBeTruthy();
+    expect(screen.getByText("canonical artifact requires review")).toBeTruthy();
+    expect(screen.getByText((content) => content.includes("Otwarte / wymagające evidence:"))).toBeTruthy();
     expect(screen.getByText("Integralność canonical / audit")).toBeTruthy();
     expect(screen.getByText("Status: warning")).toBeTruthy();
     expect(screen.getByText("Source identity: warning")).toBeTruthy();
