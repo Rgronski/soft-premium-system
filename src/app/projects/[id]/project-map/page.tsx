@@ -24,6 +24,15 @@ import {
   type ProjectMapCanonicalIntegrityResult,
   type ProjectMapReadResult,
 } from "@/lib/project-map/read";
+import {
+  PROJECT_MAP_RISK_KEYS,
+  persistProjectMapRiskDecision,
+  readProjectMapRiskDecisions,
+  type ProjectMapRiskDecision,
+  type ProjectMapRiskDecisionState,
+  type ProjectMapRiskKey,
+  type ProjectMapRiskDecisionWriteResult,
+} from "@/lib/project-map/risk-decisions";
 import type {
   ProjectMapReconstructionCandidateChecklistItem,
   ProjectMapReconstructionCandidateResult,
@@ -110,6 +119,18 @@ type ProjectMapRemainingRiskPanelCopy = {
   risks: ProjectMapRemainingRisk[];
 };
 
+type ProjectMapRiskDecisionReadCopy = {
+  status: string;
+  decisions: ProjectMapRiskDecision[];
+  riskDecisionsPath?: string;
+};
+
+type ProjectMapRiskDecisionCaptureCopy = {
+  status: "success" | "missing-storage" | "invalid-data" | "mismatch" | "write-failure";
+  detail: string;
+  riskDecisionsPath?: string;
+};
+
 type ProjectMapReadinessSummaryCopy = {
   status: "canonical artifact valid" | "canonical artifact requires review" | "canonical artifact unavailable";
   details: string[];
@@ -129,6 +150,60 @@ function buildProjectMapCanonicalIntegrityCopy(
           ? "warning"
           : "invalid",
     checks: result.checks,
+  };
+}
+
+function buildProjectMapRiskDecisionReadCopy(
+  result: Awaited<ReturnType<typeof readProjectMapRiskDecisions>> | null,
+): ProjectMapRiskDecisionReadCopy {
+  if (!result) {
+    return { status: "unavailable", decisions: [] };
+  }
+
+  return {
+    status: result.status,
+    decisions: result.status === "present" ? result.decisions : [],
+    riskDecisionsPath: result.riskDecisionsPath,
+  };
+}
+
+function buildProjectMapRiskDecisionCaptureCopy(
+  result: ProjectMapRiskDecisionWriteResult | null,
+): ProjectMapRiskDecisionCaptureCopy | null {
+  if (!result) {
+    return null;
+  }
+
+  if (result.status === "persisted") {
+    return {
+      status: "success",
+      detail: "Decyzja została zapisana i zostanie odczytana ponownie z artefaktu SPS OS metadata.",
+      riskDecisionsPath: result.riskDecisionsPath,
+    };
+  }
+
+  const copyByStatus = {
+    unavailable: {
+      status: "missing-storage" as const,
+      detail: "SPS OS metadata storage nie jest dostępny; decyzja nie została zapisana.",
+    },
+    invalid: {
+      status: "invalid-data" as const,
+      detail: "Istniejący artefakt decyzji jest nieprawidłowy; decyzja nie została nadpisana.",
+    },
+    mismatched: {
+      status: "mismatch" as const,
+      detail: "Tożsamość artefaktu decyzji nie pasuje do bieżącego projektu; decyzja nie została zapisana.",
+    },
+    "write-failure": {
+      status: "write-failure" as const,
+      detail: "Zapis artefaktu decyzji nie powiódł się; istniejące decyzje nie są uznane za zmienione.",
+    },
+  }[result.status];
+
+  return {
+    ...copyByStatus,
+    riskDecisionsPath: result.riskDecisionsPath,
   };
 }
 
@@ -1542,22 +1617,56 @@ export default async function ProjectMapPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams?: Promise<{ prepareStorage?: string; refresh?: string }>;
+  searchParams?: Promise<{
+    prepareStorage?: string;
+    refresh?: string;
+    riskKey?: string;
+    riskState?: string;
+  }>;
 }) {
   const { id } = await params;
   const project = await getServerProjectById(id);
-  const { prepareStorage, refresh } = await (
+  const { prepareStorage, refresh, riskKey, riskState } = await (
     searchParams ??
-    Promise.resolve({} as { prepareStorage?: string; refresh?: string })
+    Promise.resolve({} as {
+      prepareStorage?: string;
+      refresh?: string;
+      riskKey?: string;
+      riskState?: string;
+    })
   );
+
+  const parsedRiskKey = PROJECT_MAP_RISK_KEYS.includes(
+    riskKey as ProjectMapRiskKey,
+  )
+    ? (riskKey as ProjectMapRiskKey)
+    : null;
+  const parsedRiskState =
+    riskState === "accepted" ||
+    riskState === "open" ||
+    riskState === "needs_evidence"
+      ? (riskState as ProjectMapRiskDecisionState)
+      : null;
 
   if (project && prepareStorage === "1") {
     await prepareProjectMapStorage(project);
   }
 
+  let projectMapRiskDecisionCaptureCopy: ProjectMapRiskDecisionCaptureCopy | null = null;
+  if (project && parsedRiskKey && parsedRiskState) {
+    const writeResult = await persistProjectMapRiskDecision(project, {
+      riskKey: parsedRiskKey,
+      decisionState: parsedRiskState,
+    });
+    projectMapRiskDecisionCaptureCopy = buildProjectMapRiskDecisionCaptureCopy(writeResult);
+  }
+
   const mapReadResult = project
     ? await resolveProjectMapReadResult(project)
     : null;
+  const projectMapRiskDecisionReadCopy = buildProjectMapRiskDecisionReadCopy(
+    project ? await readProjectMapRiskDecisions(project) : null,
+  );
   const projectMapCanonicalIntegrityCopy = buildProjectMapCanonicalIntegrityCopy(
     mapReadResult
       ? verifyProjectMapCanonicalIntegrity(mapReadResult)
@@ -1806,9 +1915,23 @@ export default async function ProjectMapPage({
             <h3 className="text-xl font-semibold text-rose-50">
               {projectMapRemainingRiskPanelCopy.title}
             </h3>
-            <p className="text-sm text-rose-100/80">
+          <p className="text-sm text-rose-100/80">
               {projectMapRemainingRiskPanelCopy.description}
             </p>
+            <p className="text-sm text-rose-100/80">
+              Decyzje Product Ownera: {projectMapRiskDecisionReadCopy.status}
+              {projectMapRiskDecisionReadCopy.riskDecisionsPath
+                ? ` | ${projectMapRiskDecisionReadCopy.riskDecisionsPath}`
+                : ""}
+            </p>
+            {projectMapRiskDecisionCaptureCopy ? (
+              <p className="text-sm font-medium text-rose-100">
+                Capture decyzji: {projectMapRiskDecisionCaptureCopy.status}. {projectMapRiskDecisionCaptureCopy.detail}
+                {projectMapRiskDecisionCaptureCopy.riskDecisionsPath
+                  ? ` | ${projectMapRiskDecisionCaptureCopy.riskDecisionsPath}`
+                  : ""}
+              </p>
+            ) : null}
           </div>
 
           <ul className="mt-4 grid gap-3 lg:grid-cols-2">
@@ -1828,6 +1951,34 @@ export default async function ProjectMapPage({
                   </span>
                 </div>
                 <p className="mt-2 text-sm text-rose-100/80">{risk.detail}</p>
+                {(() => {
+                  const decision = projectMapRiskDecisionReadCopy.decisions.find(
+                    (item) => item.riskKey === risk.label ||
+                      (item.riskKey === "Project Map" && risk.label === "Mapa projektu") ||
+                      (item.riskKey === "First Layout" && risk.label === "Pierwszy layout"),
+                  );
+
+                  return decision ? (
+                    <p className="mt-2 text-xs text-rose-100/70">
+                      Decyzja PO: {decision.decisionState} | aktor: {decision.actor} | czas: {decision.decidedAt}
+                    </p>
+                  ) : (
+                    <p className="mt-2 text-xs text-rose-100/70">
+                      Decyzja PO: brak utrwalonej decyzji
+                    </p>
+                  );
+                })()}
+                <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                  {(["accepted", "open", "needs_evidence"] as const).map((state) => (
+                    <Link
+                      key={state}
+                      href={`?riskKey=${encodeURIComponent(risk.label === "Mapa projektu" ? "Project Map" : risk.label === "Pierwszy layout" ? "First Layout" : risk.label)}&riskState=${state}`}
+                      className="rounded border border-rose-800 px-2 py-1 text-rose-100 hover:border-rose-500"
+                    >
+                      Ustaw {state}
+                    </Link>
+                  ))}
+                </div>
               </li>
             ))}
           </ul>

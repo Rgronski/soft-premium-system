@@ -69,6 +69,44 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.44 Project Map Risk Decision Capture UI Foundation
+
+### Date
+
+2026-09-10
+
+### Completed
+
+* Added controlled Product Owner actions for `SSOT`, `Project Bible`, `Project Map`, and `First Layout` with `accepted`, `open`, and `needs_evidence` states.
+* Added explicit success, missing-storage, invalid-data, mismatch, and write-failure feedback for decision capture.
+* Preserved existing evidence status, candidate/canonical separation, and SPS OS metadata-only persistence.
+* Verified TypeScript, Project Map readback/risk-decision/page tests, unchanged canonical artifacts, and a clean Beauty Client PRO checkout.
+
+### Notes
+
+* Accepted decisions are not represented as resolved evidence.
+* No canonical artifact rewrite, promotion, canonical write, or Beauty Client PRO repository modification was performed.
+* Commit and push remain pending.
+
+## Session 100 - MS-031.43 Project Map Risk Decision Persistence Foundation
+
+### Date
+
+2026-09-10
+
+### Completed
+
+* Added SPS OS-owned `risk-decisions.json` persistence for Product Owner decisions on SSOT, Project Bible, Project Map, and First Layout.
+* Added defensive handling for missing, malformed, and mismatched decision artifacts while preserving original evidence status.
+* Read persisted decision states back into the read-only Project Map risk panel with explicit candidate/canonical separation.
+* Verified TypeScript, Project Map readback/risk-decision/page tests, unchanged canonical artifacts, and a clean Beauty Client PRO checkout.
+
+### Notes
+
+* Accepted decisions are not represented as resolved evidence.
+* No canonical artifact rewrite, promotion, write execution, or Beauty Client PRO repository modification was performed.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.42 Project Map Canonical Readiness Summary Foundation
 
 ### Date

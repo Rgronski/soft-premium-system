@@ -193,8 +193,67 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.42 - Project Map Canonical Readiness Summary Foundation
+Latest Completed Product Milestone: MS-031.44 - Project Map Risk Decision Capture UI Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.44 - Project Map Risk Decision Capture UI Foundation
+
+**Milestone**
+MS-031.44 - Project Map Risk Decision Capture UI Foundation
+
+**Type**
+SPS OS / Project Map controlled Product Owner decision capture
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+READY FOR COMMIT / PUSH
+
+**Product Outcome**
+The Project Map risk panel now provides controlled actions for Product Owner decisions and reports success, missing storage, invalid data, identity mismatch, and write failure states while preserving the existing evidence status.
+
+**Verification**
+* all four risk areas and all three decision states remain supported
+* TypeScript, Project Map readback, risk-decision, and page tests pass
+* persistence remains restricted to SPS OS-owned metadata
+* canonical artifacts remain present and unchanged
+* Beauty Client PRO checkout remains clean
+
+**Non-Goals**
+* no canonical map write, promotion, or rewrite
+* no global approval persistence
+* no conversion of accepted risks into resolved evidence
+* no Beauty Client PRO repository modification
+
+## MS-031.43 - Project Map Risk Decision Persistence Foundation
+
+**Milestone**
+MS-031.43 - Project Map Risk Decision Persistence Foundation
+
+**Type**
+SPS OS / Project Map risk decision persistence
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+READY FOR COMMIT / PUSH
+
+**Product Outcome**
+SPS OS persists Product Owner decisions for SSOT, Project Bible, Project Map, and First Layout in the SPS OS-owned `risk-decisions.json` metadata artifact and reads them back into the read-only Project Map panel.
+
+**Verification**
+* valid, missing, malformed, mismatched, and all supported decision states are covered
+* TypeScript, Project Map readback, risk-decision, and page tests pass
+* canonical artifacts remain present and unchanged
+* Beauty Client PRO checkout remains clean
+
+**Non-Goals**
+* no conversion of accepted risks into resolved evidence
+* no canonical artifact rewrite, promotion, or write execution
+* no approval persistence beyond the dedicated Product Owner decision artifact
+* no Beauty Client PRO repository modification
 
 ## MS-031.42 - Project Map Canonical Readiness Summary Foundation
 

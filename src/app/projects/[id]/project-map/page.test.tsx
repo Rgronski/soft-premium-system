@@ -8,6 +8,8 @@ const mkdirMock = vi.fn();
 const getServerProjectByIdMock = vi.fn();
 const resolveProjectMapStorageRootMock = vi.fn();
 const resolveProjectMapReadResultMock = vi.fn();
+const readProjectMapRiskDecisionsMock = vi.fn();
+const persistProjectMapRiskDecisionMock = vi.fn();
 const scanProjectMapEvidenceMock = vi.fn();
 const classifyProjectMapEvidenceMock = vi.fn();
 const buildProjectMapReconstructionCandidateMock = vi.fn();
@@ -44,6 +46,14 @@ vi.mock("@/lib/project-map/read", () => ({
       },
     ],
   }),
+}));
+
+vi.mock("@/lib/project-map/risk-decisions", () => ({
+  PROJECT_MAP_RISK_KEYS: ["SSOT", "Project Bible", "Project Map", "First Layout"],
+  readProjectMapRiskDecisions: (project: unknown) =>
+    readProjectMapRiskDecisionsMock(project),
+  persistProjectMapRiskDecision: (project: unknown, input: unknown) =>
+    persistProjectMapRiskDecisionMock(project, input),
 }));
 
 vi.mock("@/lib/project-map/scan", () => ({
@@ -273,6 +283,8 @@ describe("ProjectMapPage", () => {
     getServerProjectByIdMock.mockReset();
     resolveProjectMapStorageRootMock.mockReset();
     resolveProjectMapReadResultMock.mockReset();
+    readProjectMapRiskDecisionsMock.mockReset();
+    persistProjectMapRiskDecisionMock.mockReset();
     scanProjectMapEvidenceMock.mockReset();
     classifyProjectMapEvidenceMock.mockReset();
     buildProjectMapReconstructionCandidateMock.mockReset();
@@ -339,6 +351,19 @@ describe("ProjectMapPage", () => {
     buildProjectMapReconstructionCandidateMock.mockReturnValue(
       buildAvailableCandidate(),
     );
+    readProjectMapRiskDecisionsMock.mockResolvedValue({
+      status: "missing",
+      riskDecisionsPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\risk-decisions.json",
+      projectId: "project-1",
+      projectName: "Alpha Workspace",
+    });
+    persistProjectMapRiskDecisionMock.mockResolvedValue({
+      status: "persisted",
+      riskDecisionsPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\risk-decisions.json",
+      decision: {},
+    });
   });
 
   afterEach(() => {
@@ -761,6 +786,23 @@ describe("ProjectMapPage", () => {
         writtenAt: "2026-09-10T13:40:05.300Z",
       },
     });
+    readProjectMapRiskDecisionsMock.mockResolvedValueOnce({
+      status: "present",
+      riskDecisionsPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\risk-decisions.json",
+      projectId: "project-1",
+      projectName: "Alpha Workspace",
+      decisions: [
+        {
+          riskKey: "SSOT",
+          decisionState: "accepted",
+          decidedAt: "2026-09-10T23:30:00.000Z",
+          actor: "Product Owner",
+          projectId: "project-1",
+          projectName: "Alpha Workspace",
+        },
+      ],
+    });
 
     render(
       await ProjectMapPage({
@@ -781,6 +823,11 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Integralność canonical / audit")).toBeTruthy();
     expect(screen.getByText("Status: warning")).toBeTruthy();
     expect(screen.getByText("Source identity: warning")).toBeTruthy();
+    const riskDecisionSection = screen.getByText(/Decyzje Product Ownera:/).parentElement;
+    expect(riskDecisionSection?.textContent).toContain("present");
+    expect(screen.getAllByText(/Decyzja PO:/).map((element) => element.textContent)).toContain(
+      "Decyzja PO: accepted | aktor: Product Owner | czas: 2026-09-10T23:30:00.000Z",
+    );
     expect(screen.getByText("Pozostałe ryzyka i decyzje")).toBeTruthy();
     expect(screen.getAllByText("zaakceptowane").length).toBeGreaterThan(0);
     expect(screen.getAllByText((content) => content.includes("nie jest dowodem resolved evidence")).length).toBeGreaterThan(0);
@@ -819,6 +866,72 @@ describe("ProjectMapPage", () => {
     expect(screen.getAllByText("needs evidence").length).toBeGreaterThan(0);
     expect(screen.getAllByText((content) => content.includes("Nie uznawaj tego ryzyka za resolved")).length).toBeGreaterThan(0);
     expect(screen.getAllByRole("button").some((button) => (button as HTMLButtonElement).disabled)).toBe(true);
+  });
+
+  test("captures a Product Owner decision and reports the persistence result", async () => {
+    persistProjectMapRiskDecisionMock.mockResolvedValueOnce({
+      status: "persisted",
+      riskDecisionsPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\risk-decisions.json",
+      decision: {
+        riskKey: "SSOT",
+        decisionState: "accepted",
+        decidedAt: "2026-09-10T23:45:00.000Z",
+        actor: "Product Owner",
+        projectId: "project-1",
+        projectName: "Alpha Workspace",
+      },
+    });
+    readProjectMapRiskDecisionsMock.mockResolvedValueOnce({
+      status: "present",
+      riskDecisionsPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\risk-decisions.json",
+      projectId: "project-1",
+      projectName: "Alpha Workspace",
+      decisions: [
+        {
+          riskKey: "SSOT",
+          decisionState: "accepted",
+          decidedAt: "2026-09-10T23:45:00.000Z",
+          actor: "Product Owner",
+          projectId: "project-1",
+          projectName: "Alpha Workspace",
+        },
+      ],
+    });
+
+    render(
+      await ProjectMapPage({
+        params: Promise.resolve({ id: "project-1" }),
+        searchParams: Promise.resolve({ riskKey: "SSOT", riskState: "accepted" }),
+      }),
+    );
+
+    expect(persistProjectMapRiskDecisionMock).toHaveBeenCalledWith(
+      expect.objectContaining({ id: "project-1", name: "Alpha Workspace" }),
+      { riskKey: "SSOT", decisionState: "accepted" },
+    );
+    expect(screen.getByText(/Capture decyzji: success/)).toBeTruthy();
+    expect(screen.getByText(/Decyzje Product Ownera: present/)).toBeTruthy();
+    expect(screen.getAllByText(/Decyzja PO: accepted/).length).toBeGreaterThan(0);
+  });
+
+  test("shows a mismatch capture failure without changing evidence state", async () => {
+    persistProjectMapRiskDecisionMock.mockResolvedValueOnce({
+      status: "mismatched",
+      riskDecisionsPath:
+        "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\risk-decisions.json",
+    });
+
+    render(
+      await ProjectMapPage({
+        params: Promise.resolve({ id: "project-1" }),
+        searchParams: Promise.resolve({ riskKey: "Project Map", riskState: "needs_evidence" }),
+      }),
+    );
+
+    expect(screen.getByText(/Capture decyzji: mismatch/)).toBeTruthy();
+    expect(screen.getByText(/Tożsamość artefaktu decyzji nie pasuje/)).toBeTruthy();
   });
 
   test("shows an explicit read-not-implemented state when the map file already exists", async () => {

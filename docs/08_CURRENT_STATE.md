@@ -45,7 +45,11 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.42 - Project Map Canonical Readiness Summary Foundation
+  MS-031.44 - Project Map Risk Decision Capture UI Foundation
+
+MS-031.44 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Risk Decision Capture UI Foundation. The Project Map risk panel now offers controlled Product Owner decision actions for all four risk areas and three decision states, persists only through the SPS OS-owned decision helper, reads the result back, and exposes success, missing-storage, invalid-data, mismatch, and write-failure states. Evidence status remains separate, canonical artifacts remain unchanged, the Beauty Client PRO checkout remains clean, and canonical write remains disabled. Commit and push remain pending.
+
+MS-031.43 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Risk Decision Persistence Foundation. SPS OS persists Product Owner decisions for SSOT, Project Bible, Project Map, and First Layout in the SPS OS-owned `risk-decisions.json` artifact and reads them back into the read-only Project Map panel. Original evidence status remains separate from decision state, canonical artifacts remain unchanged, the Beauty Client PRO checkout remains clean, and canonical write remains disabled. Commit and push remain pending.
 
 MS-031.42 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Canonical Readiness Summary Foundation. The Project Map view now shows one concise read-only readiness summary for canonical presence, integrity, preflight, accepted/open risks, and audit sidecar status, with explicit valid/requires-review/unavailable mapping. Canonical artifacts remain unchanged and the Beauty Client PRO checkout remains clean. Commit and push remain pending.
 
