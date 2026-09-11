@@ -39,6 +39,9 @@ import {
   detectProjectMapStructuralDrift,
 } from "@/lib/project-map/drift";
 import { buildProjectMapCandidateRefreshPreview } from "@/lib/project-map/candidate-refresh-preview";
+import { executeControlledProjectMapRefresh } from "@/lib/project-map/controlled-refresh";
+import { evaluateProjectMapCandidateAcceptance } from "@/lib/project-map/acceptance";
+import { evaluateProjectMapCanonicalWriteApproval } from "@/lib/project-map/write-approval";
 import type {
   ProjectMapReconstructionCandidateChecklistItem,
   ProjectMapReconstructionCandidateResult,
@@ -1626,17 +1629,19 @@ export default async function ProjectMapPage({
   searchParams?: Promise<{
     prepareStorage?: string;
     refresh?: string;
+    refreshApproval?: string;
     riskKey?: string;
     riskState?: string;
   }>;
 }) {
   const { id } = await params;
   const project = await getServerProjectById(id);
-  const { prepareStorage, refresh, riskKey, riskState } = await (
+  const { prepareStorage, refresh, refreshApproval, riskKey, riskState } = await (
     searchParams ??
     Promise.resolve({} as {
       prepareStorage?: string;
       refresh?: string;
+      refreshApproval?: string;
       riskKey?: string;
       riskState?: string;
     })
@@ -1730,6 +1735,35 @@ export default async function ProjectMapPage({
     integrity: canonicalIntegrityResult,
     alignment: projectMapSpsAlignment,
   });
+  const projectMapPreflight = evaluateProjectMapCanonicalWritePreflight({
+    candidate: mapCandidate,
+    projectMapRootPath: mapReadResult?.projectMapRootPath ?? projectMapStorageReadiness?.projectMapRootPath ?? null,
+    mapJsonPath: mapReadResult?.mapJsonPath ?? null,
+    sourceIdentityAvailable: Boolean(mapReadResult?.projectSourceIdentity),
+    sourceIdentityPersistenceStatus: mapReadResult?.projectSourceIdentityPersistence?.status ?? null,
+  });
+  const candidateAcceptance = mapCandidate
+    ? evaluateProjectMapCandidateAcceptance(mapCandidate)
+    : null;
+  const refreshApprovalResult = candidateAcceptance
+    ? evaluateProjectMapCanonicalWriteApproval({
+        requested: refreshApproval === "approved",
+        decision: refreshApproval === "approved" ? "approved" : undefined,
+        acceptance: candidateAcceptance,
+        acceptedRisks: mapReadResult?.status === "present"
+          ? mapReadResult.canonicalMap.writeApproval.acceptedRisks as never
+          : [],
+      })
+    : null;
+  const controlledRefreshResult = refreshApprovalResult
+    ? await executeControlledProjectMapRefresh({
+        project,
+        preview: projectMapCandidateRefreshPreview,
+        approval: refreshApprovalResult,
+        candidate: mapCandidate,
+        preflight: projectMapPreflight,
+      })
+    : { status: "blocked" as const, reason: "project refresh inputs are unavailable" };
   const foundationStatuses = buildFoundationStatuses(
     project?.name ?? null,
     projectMapStorageReadiness,
@@ -2022,6 +2056,28 @@ export default async function ProjectMapPage({
         </ul>
         <p className="mt-3 text-xs text-violet-100/70">
           To jest preview kandydata. Nie zapisuje ani nie promuje map.json i nie odświeża baseline'u.
+        </p>
+      </section>
+
+      <section
+        id="project-map-controlled-refresh-result"
+        className="rounded-xl border border-orange-900/60 bg-orange-950/20 p-4"
+      >
+        <p className="text-xs uppercase tracking-[0.2em] text-orange-200/70">
+          Controlled refresh execution
+        </p>
+        <h3 className="mt-1 text-xl font-semibold text-orange-50">
+          Wynik kontrolowanego odświeżenia
+        </h3>
+        <p className="mt-2 text-sm text-orange-100/90">
+          Status: {controlledRefreshResult.status}. {controlledRefreshResult.status === "no-op"
+            ? "Brak driftu: canonical map.json nie został przepisany."
+            : controlledRefreshResult.status === "written"
+              ? `Zapis wykonany po backupie: ${controlledRefreshResult.backupPath}`
+              : `Zapis nie został uznany za udany: ${controlledRefreshResult.reason}`}
+        </p>
+        <p className="mt-2 text-xs text-orange-100/70">
+          Odświeżenie wymaga jawnego approval Product Ownera; baseline i BCP pozostają poza automatycznym zapisem.
         </p>
       </section>
 

@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.50 Controlled Project Map Refresh Execution Foundation
+
+### Date
+
+2026-09-11
+
+### Completed
+
+* Added a controlled refresh executor with identity, preflight, candidate, approval, backup, validation, audit, and recovery boundaries.
+* Added strict no-op behavior for the current `no_changes` state and explicit blocked/failed outcomes.
+* Exposed the controlled refresh result in the Project Map UI without automatic baseline refresh.
+* Advanced the pending publication version to `APP_VERSION 1.0071`.
+
+### Notes
+
+* Existing canonical artifacts and risk decisions were not rewritten.
+* The Beauty Client PRO repository remained unmodified.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.49 Project Map Candidate Refresh Preview Foundation
 
 ### Date

@@ -196,6 +196,22 @@ NONE / Product Owner decision required
 Latest Completed Product Milestone: MS-031.49 - Project Map Candidate Refresh Preview Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
 
+## MS-031.50 - Controlled Project Map Refresh Execution Foundation
+
+**Status**
+ACTIVE / VERIFIED LOCALLY / READY FOR SEPARATE PUBLICATION
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-031.50 uses the next sequential version, `1.0071`, and updates `LAST_PUBLISHED_MS` only with this publication.
+
+**Contract**
+The controlled refresh validates identity, integrity, alignment, structural drift, candidate preview, and explicit Product Owner approval. `no_changes` is a strict no-op. A changing candidate is backed up before the existing writer runs, validated after write, and traced in SPS metadata; failure attempts recovery of the previous canonical and audit artifacts.
+
+**Non-Goals**
+* no automatic baseline refresh
+* no write under the Beauty Client PRO checkout
+* no approval bypass or candidate/canonical conflation
+
 ## MS-031.49 - Project Map Candidate Refresh Preview Foundation
 
 **Milestone**
