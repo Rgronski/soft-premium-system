@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0073");
+    expect(APP_VERSION).toBe("1.0074");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-031.52 - Project Map Operations History Summary Foundation",
+      "MS-031.53 - Project Map End-to-End Acceptance Gate Foundation",
     );
   });
 });

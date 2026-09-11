@@ -192,14 +192,28 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-Current Product Milestone: MS-031.52 - Project Map Operations History Summary Foundation
-Latest Completed Product Milestone: MS-031.51 - Project Map Controlled Refresh Readiness UX Foundation
+Current Product Milestone: MS-031.53 - Project Map End-to-End Acceptance Gate Foundation
+Latest Completed Product Milestone: MS-031.52 - Project Map Operations History Summary Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.53 - Project Map End-to-End Acceptance Gate Foundation
+
+**Status**
+ACTIVE / VERIFIED LOCALLY / PENDING PUBLICATION
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-031.53 uses the next sequential version, `1.0074`, and sets `LAST_PUBLISHED_MS` to this milestone for the current pending publication.
+
+**Contract**
+The Project Map page now presents one read-only end-to-end acceptance gate over the complete Project Map block. It consumes existing canonical readback, audit, risk decisions, structural fingerprint, structural drift, refresh readiness, operations summary, integrity, and SPS alignment state to report accepted, accepted_with_known_risks, requires_review, or blocked.
+
+**Boundary**
+MS-031.53 does not resolve missing BCP SSOT, Project Bible, or First Layout evidence; accepted risks remain traceable as risks. It does not create or rewrite external artifacts, refresh the baseline, execute canonical write/refresh, persist Product Owner approval, or modify the Beauty Client PRO repository.
 
 ## MS-031.52 - Project Map Operations History Summary Foundation
 
 **Status**
-ACTIVE / VERIFIED LOCALLY / PENDING PUBLICATION
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Version Decision**
 The authoritative version source is `src/lib/app-version.ts`. MS-031.52 uses the next sequential version, `1.0073`, and sets `LAST_PUBLISHED_MS` to this milestone for the current pending publication.

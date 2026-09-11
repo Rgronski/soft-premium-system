@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.53 Project Map End-to-End Acceptance Gate Foundation
+
+### Date
+
+2026-09-11
+
+### Completed
+
+* Added a read-only end-to-end acceptance gate for the Project Map block.
+* The gate reports accepted, accepted_with_known_risks, requires_review, or blocked from existing Project Map readback, operations summary, integrity, alignment, risk decision, structural drift, fingerprint, and refresh readiness data.
+* Advanced the pending publication version to `APP_VERSION 1.0074`.
+
+### Notes
+
+* Accepted risks remain traceable and are not converted into resolved BCP evidence.
+* No Project Map external artifact was rewritten.
+* The Beauty Client PRO repository remained unmodified.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.52 Project Map Operations History Summary Foundation
 
 ### Date

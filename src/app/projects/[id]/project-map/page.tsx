@@ -40,6 +40,7 @@ import {
   detectProjectMapStructuralDrift,
 } from "@/lib/project-map/drift";
 import { buildProjectMapCandidateRefreshPreview } from "@/lib/project-map/candidate-refresh-preview";
+import { buildProjectMapEndToEndAcceptanceGate } from "@/lib/project-map/acceptance-gate";
 import {
   buildProjectMapControlledRefreshReadiness,
   executeControlledProjectMapRefresh,
@@ -1792,6 +1793,16 @@ export default async function ProjectMapPage({
     riskDecisions: riskDecisionsResult,
     refreshReadiness: controlledRefreshReadiness,
   });
+  const projectMapAcceptanceGate = buildProjectMapEndToEndAcceptanceGate({
+    mapReadResult,
+    integrity: canonicalIntegrityResult,
+    alignment: projectMapSpsAlignment,
+    structuralFingerprint: projectMapStructuralFingerprint,
+    structuralDrift: projectMapStructuralDrift,
+    riskDecisions: riskDecisionsResult,
+    refreshReadiness: controlledRefreshReadiness,
+    operationsSummary: projectMapOperationsSummary,
+  });
   const foundationStatuses = buildFoundationStatuses(
     project?.name ?? null,
     projectMapStorageReadiness,
@@ -2143,6 +2154,37 @@ export default async function ProjectMapPage({
               {detail}
             </li>
           ))}
+        </ul>
+      </section>
+
+      <section
+        id="project-map-end-to-end-acceptance"
+        className="rounded-xl border border-emerald-800/60 bg-emerald-950/20 p-4"
+      >
+        <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
+          Project Map acceptance gate
+        </p>
+        <h3 className="mt-1 text-xl font-semibold text-emerald-50">
+          {projectMapAcceptanceGate.title}
+        </h3>
+        <p className="mt-2 text-sm font-medium text-emerald-100">
+          Status: {projectMapAcceptanceGate.status}
+        </p>
+        <p className="mt-2 text-sm text-emerald-100/85">
+          {projectMapAcceptanceGate.summary}
+        </p>
+        <ul className="mt-4 grid gap-2 text-sm text-emerald-50/90 md:grid-cols-2">
+          {projectMapAcceptanceGate.details.map((detail) => (
+            <li
+              key={detail}
+              className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 px-3 py-2"
+            >
+              {detail}
+            </li>
+          ))}
+          <li className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 px-3 py-2 md:col-span-2">
+            Known risks: {projectMapAcceptanceGate.knownRisks.join(", ") || "none"}
+          </li>
         </ul>
       </section>
 
