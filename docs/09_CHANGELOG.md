@@ -69,24 +69,44 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.54 Project Map Block Closure And Final SSOT Acceptance Foundation
+
+### Date
+
+2026-09-12
+
+### Completed
+
+* Recorded final SSOT acceptance for the Project Map work block.
+* Marked the Project Map block operationally complete for the current Beauty Client PRO baseline.
+* Advanced the closure version to `APP_VERSION 1.0075`.
+
+### Notes
+
+* The final recorded state remains `accepted_with_known_risks`.
+* Missing BCP SSOT, Project Bible, and First Layout evidence remain traceable accepted/open risks, not resolved evidence.
+* No Project Map external artifact was rewritten.
+* The Beauty Client PRO repository remained unmodified.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.53 Project Map End-to-End Acceptance Gate Foundation
 
 ### Date
 
-2026-09-11
+2026-09-12
 
 ### Completed
 
 * Added a read-only end-to-end acceptance gate for the Project Map block.
 * The gate reports accepted, accepted_with_known_risks, requires_review, or blocked from existing Project Map readback, operations summary, integrity, alignment, risk decision, structural drift, fingerprint, and refresh readiness data.
-* Advanced the pending publication version to `APP_VERSION 1.0074`.
+* Published the milestone at `APP_VERSION 1.0074`.
 
 ### Notes
 
 * Accepted risks remain traceable and are not converted into resolved BCP evidence.
 * No Project Map external artifact was rewritten.
 * The Beauty Client PRO repository remained unmodified.
-* Commit and push remain pending.
+* Commit `295bfe32993d8a948bd93d10dc377d039e393a8d` was pushed to `origin/main`.
 
 ## Session 100 - MS-031.52 Project Map Operations History Summary Foundation
 

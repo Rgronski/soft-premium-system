@@ -833,7 +833,7 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Project Map operations")).toBeTruthy();
     expect(screen.getByText("Operations history unavailable")).toBeTruthy();
     expect(screen.getAllByText("Status: unavailable").length).toBeGreaterThan(0);
-    expect(screen.getByText("SPS version: 1.0074")).toBeTruthy();
+    expect(screen.getByText("SPS version: 1.0075")).toBeTruthy();
     expect(screen.getByText("Project Map acceptance gate")).toBeTruthy();
     expect(screen.getByText("Project Map acceptance blocked")).toBeTruthy();
     expect(

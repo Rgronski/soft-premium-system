@@ -192,17 +192,31 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-Current Product Milestone: MS-031.53 - Project Map End-to-End Acceptance Gate Foundation
-Latest Completed Product Milestone: MS-031.52 - Project Map Operations History Summary Foundation
+Current Product Milestone: NONE / Product Owner decision required
+Latest Completed Product Milestone: MS-031.54 - Project Map Block Closure And Final SSOT Acceptance Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.54 - Project Map Block Closure And Final SSOT Acceptance Foundation
+
+**Status**
+COMPLETED / VERIFIED LOCALLY / ACCEPTED / PENDING PUBLICATION
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-031.54 uses the next sequential version, `1.0075`, and sets `LAST_PUBLISHED_MS` to this milestone for the current closure publication state.
+
+**Contract**
+The Project Map work block is operationally complete for the current Beauty Client PRO baseline. The recorded final state is: canonical `map.json` exists, `map-write-audit.json` exists, `risk-decisions.json` exists, `structural-fingerprint.json` exists, structural drift is `no_drift`, controlled refresh readiness is `safe_no_op`, the end-to-end acceptance gate is `accepted_with_known_risks`, and the Beauty Client PRO checkout remains clean.
+
+**Boundary**
+MS-031.54 is SSOT/version closure only. It does not add product behavior, execute canonical write or refresh, refresh the structural baseline, persist new Product Owner approval, create or rewrite Project Map artifacts, modify the Beauty Client PRO repository, or treat missing BCP SSOT, Project Bible, or First Layout evidence as resolved. Those gaps remain traceable accepted/open Product Owner risks.
 
 ## MS-031.53 - Project Map End-to-End Acceptance Gate Foundation
 
 **Status**
-ACTIVE / VERIFIED LOCALLY / PENDING PUBLICATION
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Version Decision**
-The authoritative version source is `src/lib/app-version.ts`. MS-031.53 uses the next sequential version, `1.0074`, and sets `LAST_PUBLISHED_MS` to this milestone for the current pending publication.
+The authoritative version source is `src/lib/app-version.ts`. MS-031.53 was published as version `1.0074`.
 
 **Contract**
 The Project Map page now presents one read-only end-to-end acceptance gate over the complete Project Map block. It consumes existing canonical readback, audit, risk decisions, structural fingerprint, structural drift, refresh readiness, operations summary, integrity, and SPS alignment state to report accepted, accepted_with_known_risks, requires_review, or blocked.
