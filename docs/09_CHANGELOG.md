@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.56 Project Map User-Facing Status And Collapsed Diagnostics Foundation
+
+### Date
+
+2026-09-12
+
+### Completed
+
+* Corrected the Project Map first-screen copy so accepted known risks no longer make the current BCP state look broken.
+* Collapsed advanced diagnostic sections by default while preserving raw statuses and evidence below the user-facing dashboard summary.
+* Advanced the local milestone version to `APP_VERSION 1.0077`.
+
+### Notes
+
+* No Project Map computation logic or external artifact was changed.
+* No canonical write, refresh execution, baseline refresh, or approval persistence was added.
+* The Beauty Client PRO repository remained unmodified.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.55 Project Map UX Consolidation Foundation
 
 ### Date

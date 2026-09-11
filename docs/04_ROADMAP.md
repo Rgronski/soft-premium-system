@@ -193,8 +193,22 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.55 - Project Map UX Consolidation Foundation
+Latest Completed Product Milestone: MS-031.56 - Project Map User-Facing Status And Collapsed Diagnostics Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.56 - Project Map User-Facing Status And Collapsed Diagnostics Foundation
+
+**Status**
+COMPLETED / VERIFIED LOCALLY / ACCEPTED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-031.56 sets `APP_VERSION` to `1.0077` and `LAST_PUBLISHED_MS` to `MS-031.56 - Project Map User-Facing Status And Collapsed Diagnostics Foundation`.
+
+**Contract**
+The Project Map page keeps the top summary and compact known-risk summary visible while making the current BCP state read as a usable dashboard: the map is ready with accepted risks, the BCP repo has no drift, refresh is unnecessary now, and technical details remain available below. Raw diagnostic statuses such as `blocked`, `requires_review`, and `needs_review` remain available in advanced collapsed sections rather than driving the top-level user story.
+
+**Boundary**
+MS-031.56 is a presentation readability correction only. It does not change Project Map computation logic, execute canonical write or refresh, refresh the structural baseline, persist new approval, rewrite external Project Map artifacts, remove diagnostic evidence, or modify the Beauty Client PRO repository.
 
 ## MS-031.55 - Project Map UX Consolidation Foundation
 

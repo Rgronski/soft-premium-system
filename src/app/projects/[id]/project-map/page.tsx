@@ -1880,7 +1880,7 @@ export default async function ProjectMapPage({
   );
   const mapWorksCopy =
     projectMapAcceptanceGate.status === "accepted_with_known_risks"
-      ? "Mapa działa. Są świadomie zaakceptowane ryzyka startowe."
+      ? "Mapa działa z zaakceptowanymi ryzykami."
       : projectMapAcceptanceGate.status === "accepted"
         ? "Mapa działa bez aktywnych ostrzeżeń."
         : projectMapAcceptanceGate.status === "requires_review"
@@ -1918,7 +1918,7 @@ export default async function ProjectMapPage({
       : "Sprawdź szczegóły poniżej";
   const projectMapOperationalCards = [
     {
-      label: "Canonical map",
+      label: "Mapa projektu",
       title: canonicalMapCopy,
       detail:
         mapReadResult?.status === "present"
@@ -1926,7 +1926,7 @@ export default async function ProjectMapPage({
           : "Brakuje gotowego odczytu kanonicznej mapy.",
     },
     {
-      label: "Repo comparison / drift",
+      label: "Repo BCP",
       title:
         projectMapStructuralDrift.status === "no_drift"
           ? "Repo BCP: bez zmian"
@@ -1934,7 +1934,7 @@ export default async function ProjectMapPage({
       detail: repoDriftCopy,
     },
     {
-      label: "Refresh readiness",
+      label: "Odświeżenie",
       title: refreshRecommendationCopy,
       detail:
         controlledRefreshReadiness.status === "safe_no_op"
@@ -1942,8 +1942,11 @@ export default async function ProjectMapPage({
           : controlledRefreshReadiness.summary,
     },
     {
-      label: "Acceptance gate",
-      title: `Status: ${mapStatusCopy}`,
+      label: "Akceptacja",
+      title:
+        projectMapAcceptanceGate.status === "accepted_with_known_risks"
+          ? "Mapa działa z zaakceptowanymi ryzykami"
+          : `Status: ${mapStatusCopy}`,
       detail: mapWorksCopy,
     },
   ];
@@ -2022,6 +2025,9 @@ export default async function ProjectMapPage({
           <li className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 px-3 py-2 md:col-span-2">
             Znane ryzyka: {acceptedRiskLabels.join(", ") || "brak"}
           </li>
+          <li className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 px-3 py-2 md:col-span-2">
+            Szczegóły techniczne są dostępne poniżej
+          </li>
         </ul>
       </section>
 
@@ -2074,10 +2080,13 @@ export default async function ProjectMapPage({
         </p>
       </section>
 
-      <section
+      <details
         id="project-map-current-state-summary"
         className="rounded-xl border border-zinc-800 bg-zinc-950/70 p-4"
       >
+        <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-zinc-400">
+          Stan teraz
+        </summary>
         <div className="space-y-1">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">
             Stan teraz
@@ -2096,12 +2105,15 @@ export default async function ProjectMapPage({
             </li>
           ))}
         </ul>
-      </section>
+      </details>
 
-      <section
+      <details
         id="project-map-readiness-summary"
         className="rounded-xl border border-sky-900/50 bg-sky-950/20 p-4"
       >
+        <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-sky-200/70">
+          Gotowość do zapisu
+        </summary>
         <div className="space-y-1">
           <p className="text-xs uppercase tracking-[0.2em] text-sky-200/70">
             Podsumowanie gotowości
@@ -2123,12 +2135,15 @@ export default async function ProjectMapPage({
             </li>
           ))}
         </ul>
-      </section>
+      </details>
 
-      <section
+      <details
         id="project-map-sps-foundation-alignment"
         className="rounded-xl border border-cyan-900/50 bg-cyan-950/20 p-4"
       >
+        <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-cyan-200/70">
+          Project Map foundation alignment
+        </summary>
         <div className="space-y-1">
           <p className="text-xs uppercase tracking-[0.2em] text-cyan-200/70">
             Wyrównanie z fundamentami SPS OS
@@ -2153,12 +2168,15 @@ export default async function ProjectMapPage({
         <p className="mt-3 text-xs text-cyan-100/70">
           Źródła reguł SPS OS: {projectMapSpsAlignment.controlSources.join(", ")}. Nie są kopiowane jako evidence BCP.
         </p>
-      </section>
+      </details>
 
-      <section
+      <details
         id="project-map-candidate-drift"
         className="rounded-xl border border-amber-900/50 bg-amber-950/20 p-4"
       >
+        <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-amber-200/70">
+          Candidate drift detection
+        </summary>
         <div className="space-y-1">
           <p className="text-xs uppercase tracking-[0.2em] text-amber-200/70">
             Drift kandydata
@@ -2192,12 +2210,15 @@ export default async function ProjectMapPage({
         <p className="mt-3 text-xs text-amber-100/70">
           Odczyt checkoutu i canonical mapy jest read-only; canonical write i promocja pozostają wyłączone.
         </p>
-      </section>
+      </details>
 
-      <section
+      <details
         id="project-map-structural-drift"
         className="rounded-xl border border-orange-900/60 bg-orange-950/20 p-4"
       >
+        <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-orange-200/70">
+          Structural drift details
+        </summary>
         <div className="space-y-1">
           <p className="text-xs uppercase tracking-[0.2em] text-orange-200/70">
             Structural baseline
@@ -2231,12 +2252,15 @@ export default async function ProjectMapPage({
         <p className="mt-3 text-xs text-orange-100/70">
           Baseline i checkout są odczytywane bez zapisu; automatyczne odświeżanie baseline'u pozostaje wyłączone.
         </p>
-      </section>
+      </details>
 
-      <section
+      <details
         id="project-map-candidate-refresh-preview"
         className="rounded-xl border border-violet-900/60 bg-violet-950/20 p-4"
       >
+        <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-violet-200/70">
+          Candidate refresh preview
+        </summary>
         <div className="space-y-1">
           <p className="text-xs uppercase tracking-[0.2em] text-violet-200/70">
             Candidate refresh preview
@@ -2276,12 +2300,15 @@ export default async function ProjectMapPage({
         <p className="mt-3 text-xs text-violet-100/70">
           To jest preview kandydata. Nie zapisuje ani nie promuje map.json i nie odświeża baseline'u.
         </p>
-      </section>
+      </details>
 
-      <section
+      <details
         id="project-map-controlled-refresh-readiness"
         className="rounded-xl border border-lime-900/50 bg-lime-950/20 p-4"
       >
+        <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-lime-200/70">
+          Controlled refresh readiness
+        </summary>
         <p className="text-xs uppercase tracking-[0.2em] text-lime-200/70">
           Controlled refresh readiness
         </p>
@@ -2307,12 +2334,15 @@ export default async function ProjectMapPage({
             Backup/audit: {controlledRefreshReadiness.backupAndAudit}
           </li>
         </ul>
-      </section>
+      </details>
 
-      <section
+      <details
         id="project-map-operations-summary"
         className="rounded-xl border border-slate-700 bg-slate-950/60 p-4"
       >
+        <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-slate-300/70">
+          Operations details
+        </summary>
         <p className="text-xs uppercase tracking-[0.2em] text-slate-300/70">
           Project Map operations
         </p>
@@ -2335,12 +2365,15 @@ export default async function ProjectMapPage({
             </li>
           ))}
         </ul>
-      </section>
+      </details>
 
-      <section
+      <details
         id="project-map-end-to-end-acceptance"
         className="rounded-xl border border-emerald-800/60 bg-emerald-950/20 p-4"
       >
+        <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-emerald-200/70">
+          Acceptance gate raw details
+        </summary>
         <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
           Project Map acceptance gate
         </p>
@@ -2366,12 +2399,15 @@ export default async function ProjectMapPage({
             Known risks: {projectMapAcceptanceGate.knownRisks.join(", ") || "none"}
           </li>
         </ul>
-      </section>
+      </details>
 
-      <section
+      <details
         id="project-map-controlled-refresh-result"
         className="rounded-xl border border-orange-900/60 bg-orange-950/20 p-4"
       >
+        <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-orange-200/70">
+          Controlled refresh execution
+        </summary>
         <p className="text-xs uppercase tracking-[0.2em] text-orange-200/70">
           Controlled refresh execution
         </p>
@@ -2388,13 +2424,16 @@ export default async function ProjectMapPage({
         <p className="mt-2 text-xs text-orange-100/70">
           Odświeżenie wymaga jawnego approval Product Ownera; baseline i BCP pozostają poza automatycznym zapisem.
         </p>
-      </section>
+      </details>
 
       {mapReadResult?.status === "present" ? (
-        <section
+        <details
           id="project-map-canonical-readback"
           className="rounded-xl border border-emerald-900/60 bg-emerald-950/25 p-4"
         >
+          <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-emerald-200/70">
+            Canonical readback details
+          </summary>
           <div className="space-y-1">
             <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
               Odczyt kanoniczny
@@ -2438,14 +2477,17 @@ export default async function ProjectMapPage({
               )}
             </article>
           </div>
-        </section>
+        </details>
       ) : null}
 
       {projectMapRemainingRiskPanelCopy ? (
-        <section
+        <details
           id="project-map-remaining-risks"
           className="rounded-xl border border-rose-900/50 bg-rose-950/20 p-4"
         >
+          <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-rose-200/70">
+            Pozostałe ryzyka i decyzje detailed cards
+          </summary>
           <div className="space-y-1">
             <p className="text-xs uppercase tracking-[0.2em] text-rose-200/70">
               Ryzyka po zapisie
@@ -2520,13 +2562,16 @@ export default async function ProjectMapPage({
               </li>
             ))}
           </ul>
-        </section>
+        </details>
       ) : null}
 
-      <section
+      <details
         id="project-map-canonical-integrity"
         className="rounded-xl border border-violet-900/50 bg-violet-950/20 p-4"
       >
+        <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-violet-200/70">
+          Integralność canonical/audit
+        </summary>
         <div className="space-y-1">
           <p className="text-xs uppercase tracking-[0.2em] text-violet-200/70">
             Weryfikacja integralności
@@ -2553,7 +2598,7 @@ export default async function ProjectMapPage({
             </li>
           ))}
         </ul>
-      </section>
+      </details>
 
       {projectMapActionEntryCopy ? (
         <section
@@ -2596,10 +2641,13 @@ export default async function ProjectMapPage({
       ) : null}
 
       {projectMapCanonicalWriteReadinessCopy ? (
-        <section
+        <details
           id="project-map-canonical-write-readiness"
           className="rounded-xl border border-emerald-900/50 bg-emerald-950/20 p-4"
         >
+          <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-emerald-200/70">
+            Gotowość do zapisu
+          </summary>
           <div className="space-y-1">
             <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
               Gotowość do zapisu
@@ -2622,7 +2670,7 @@ export default async function ProjectMapPage({
               </li>
             ))}
           </ul>
-        </section>
+        </details>
       ) : null}
 
       <details
@@ -2656,10 +2704,13 @@ export default async function ProjectMapPage({
         </ul>
       </details>
 
-      <section
+      <details
         id="project-map-canonical-write-action-gate"
         className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
       >
+        <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-zinc-400">
+          Preview handoffu
+        </summary>
         <div className="space-y-1">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">
             Bramka akcji
@@ -2741,7 +2792,7 @@ export default async function ProjectMapPage({
             )}
           </ul>
         </div>
-      </section>
+      </details>
 
       {projectMapRefreshFeedbackCopy ? (
         <section
@@ -2777,10 +2828,13 @@ export default async function ProjectMapPage({
       ) : null}
 
       {projectMapCandidateStructure ? (
-        <section
+        <details
           id="project-map-candidate-structure"
           className="rounded-xl border border-cyan-900/50 bg-cyan-950/20 p-4"
         >
+          <summary className="cursor-pointer list-none text-xs uppercase tracking-[0.2em] text-cyan-200/70">
+            Robocza mapa projektu
+          </summary>
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
               <p className="text-xs uppercase tracking-[0.2em] text-cyan-200/70">
@@ -2933,7 +2987,7 @@ export default async function ProjectMapPage({
               </ul>
             </article>
           </div>
-        </section>
+        </details>
       ) : null}
 
       <div className="hidden rounded-xl border border-amber-900/50 bg-amber-950/20 p-4 sm:block">
@@ -2959,24 +3013,32 @@ export default async function ProjectMapPage({
         )}
       </div>
 
-      <div className="grid gap-3 md:grid-cols-3">
-        {projectMapOverviewCards.map((card) => (
-          <div
-            key={card.label}
-            className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
-          >
-            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-              {card.label}
-            </p>
-            <h3 className="mt-1 text-lg font-semibold text-zinc-50">{card.title}</h3>
-            <p className="mt-2 text-sm text-zinc-400">{card.description}</p>
-            <p className="mt-3 text-sm text-zinc-200">{card.detail}</p>
-          </div>
-        ))}
-      </div>
+      <details className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+        <summary className="cursor-pointer list-none text-sm uppercase tracking-[0.2em] text-zinc-500">
+          Techniczny overview mapy
+        </summary>
+        <div className="mt-4 grid gap-3 md:grid-cols-3">
+          {projectMapOverviewCards.map((card) => (
+            <div
+              key={card.label}
+              className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
+            >
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                {card.label}
+              </p>
+              <h3 className="mt-1 text-lg font-semibold text-zinc-50">{card.title}</h3>
+              <p className="mt-2 text-sm text-zinc-400">{card.description}</p>
+              <p className="mt-3 text-sm text-zinc-200">{card.detail}</p>
+            </div>
+          ))}
+        </div>
+      </details>
 
       {projectMapAvailabilityExplanationCopy ? (
-        <section className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+        <details className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+          <summary className="cursor-pointer list-none text-sm uppercase tracking-[0.2em] text-zinc-500">
+            Szczegóły dostępności mapy
+          </summary>
           <div className="space-y-1">
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
               {projectMapAvailabilityExplanationCopy.title}
@@ -3021,7 +3083,7 @@ export default async function ProjectMapPage({
               </article>
             ))}
           </div>
-        </section>
+        </details>
       ) : null}
 
       {projectMapCanonicalVsCandidateCopy ? (
@@ -3142,10 +3204,13 @@ export default async function ProjectMapPage({
         </details>
       ) : null}
 
-      <div
+      <details
         id="project-map-state"
         className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4"
       >
+        <summary className="cursor-pointer list-none text-sm uppercase tracking-[0.2em] text-zinc-500">
+          Stan teraz
+        </summary>
         <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
           Stan odczytu mapy
         </p>
@@ -3162,7 +3227,7 @@ export default async function ProjectMapPage({
             </li>
           ))}
         </ul>
-      </div>
+      </details>
 
       {projectMapCandidateCopy ? (
         <details className="space-y-3 rounded-xl border border-sky-900/50 bg-sky-950/20 p-4">

@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.55 - Project Map UX Consolidation Foundation
+  MS-031.56 - Project Map User-Facing Status And Collapsed Diagnostics Foundation
+
+MS-031.56 is COMPLETED / VERIFIED LOCALLY / ACCEPTED as the Project Map User-Facing Status And Collapsed Diagnostics Foundation. The Project Map tab now keeps the first-screen story user-facing: the map is ready with accepted risks, the BCP repo has no drift, refresh is unnecessary now, and technical details are available below. Advanced diagnostics remain present but are collapsed by default, including current state, write readiness, handoff preview, candidate map details, remaining risk detail cards, canonical/audit integrity, SPS foundation alignment, drift, refresh preview/readiness/execution, canonical readback, operations details, and raw acceptance gate details. Project Map computation, canonical artifacts, baseline, approval persistence, and Beauty Client PRO files remain unchanged. `APP_VERSION` is now `1.0077` and `LAST_PUBLISHED_MS` is `MS-031.56 - Project Map User-Facing Status And Collapsed Diagnostics Foundation`; commit and push remain pending.
 
 MS-031.55 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED as the Project Map UX Consolidation Foundation. The Project Map page now starts with a compact user-facing summary answering whether the map works, whether the BCP repo changed against the remembered baseline, and whether any action is needed now. Main operational cards summarize canonical map state, repo drift, refresh readiness, and acceptance gate before lower-priority diagnostics. The current BCP state is presented as a working map with accepted start risks, no repo drift, no refresh needed now, and no required next action. Project Map behavior, canonical artifacts, baseline, approval persistence, and Beauty Client PRO files remain unchanged. `APP_VERSION` is now `1.0076` and `LAST_PUBLISHED_MS` is `MS-031.55 - Project Map UX Consolidation Foundation`.
 

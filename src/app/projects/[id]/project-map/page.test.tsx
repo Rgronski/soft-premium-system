@@ -401,7 +401,7 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Gotowe")).toBeTruthy();
     expect(screen.getByText("Następne")).toBeTruthy();
     expect(screen.getByText("Odłożone")).toBeTruthy();
-    expect(screen.getByText("Robocza mapa projektu")).toBeTruthy();
+    expect(screen.getAllByText("Robocza mapa projektu").length).toBeGreaterThan(0);
     expect(screen.getByText("Mapa z repo + SSOT")).toBeTruthy();
     expect(screen.getByText("Zaufanie: kandydat read-only")).toBeTruthy();
     expect(screen.getByText("Co to za projekt?")).toBeTruthy();
@@ -819,10 +819,10 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Evidence risk count: 5")).toBeTruthy();
     expect(screen.getByText("Zapis kanoniczny: nie jest teraz wykonywany.")).toBeTruthy();
     expect(screen.getByText("canonical artifact requires review")).toBeTruthy();
-    expect(screen.getByText("Project Map foundation alignment")).toBeTruthy();
-    expect(screen.getByText("Candidate drift detection")).toBeTruthy();
+    expect(screen.getAllByText("Project Map foundation alignment").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Candidate drift detection").length).toBeGreaterThan(0);
     expect(screen.getByText("Candidate-only Project Map refresh")).toBeTruthy();
-    expect(screen.getByText("Controlled refresh readiness")).toBeTruthy();
+    expect(screen.getAllByText("Controlled refresh readiness").length).toBeGreaterThan(0);
     expect(screen.getByText("Review required")).toBeTruthy();
     expect(screen.getByText("Status: requires_review")).toBeTruthy();
     expect(
@@ -833,18 +833,18 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Project Map operations")).toBeTruthy();
     expect(screen.getByText("Operations history unavailable")).toBeTruthy();
     expect(screen.getAllByText("Status: unavailable").length).toBeGreaterThan(0);
-    expect(screen.getByText("SPS version: 1.0076")).toBeTruthy();
+    expect(screen.getByText("SPS version: 1.0077")).toBeTruthy();
     expect(screen.getByText("Project Map summary")).toBeTruthy();
+    expect(screen.getAllByText("Mapa projektu: gotowa").length).toBeGreaterThan(0);
+    expect(screen.getByText("Szczegóły techniczne są dostępne poniżej")).toBeTruthy();
     expect(screen.getByText("Czy mapa działa?")).toBeTruthy();
     expect(screen.getByText("Czy repo BCP zmieniło się względem mapy?")).toBeTruthy();
     expect(screen.getByText("Czy trzeba coś zrobić teraz?")).toBeTruthy();
     expect(screen.getByText("Project Map acceptance gate")).toBeTruthy();
     expect(screen.getByText("Project Map acceptance blocked")).toBeTruthy();
-    expect(
-      document
-        .getElementById("project-map-end-to-end-acceptance")
-        ?.textContent?.includes("Status: blocked"),
-    ).toBe(true);
+    const acceptanceDetails = document.getElementById("project-map-end-to-end-acceptance") as HTMLDetailsElement | null;
+    expect(acceptanceDetails?.open).toBe(false);
+    expect(acceptanceDetails?.textContent?.includes("Status: blocked")).toBe(true);
     expect(screen.getByText((content) => content.includes("Otwarte / wymagające evidence:"))).toBeTruthy();
     expect(screen.getByText("Integralność canonical / audit")).toBeTruthy();
     expect(screen.getByText("Status: warning")).toBeTruthy();
