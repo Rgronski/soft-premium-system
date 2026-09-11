@@ -326,18 +326,18 @@ SPS OS Session State
 
 Date: 2026-09-12
 Current Session ID: 100
-Current Chat Title: 100 SPS OS - Project Map User-Facing Status And Collapsed Diagnostics
+Current Chat Title: 100 SPS OS - Project Map User-Facing Status Semantics
 Next Session ID: UNKNOWN
 Suggested Next Chat Title: UNKNOWN
-Active Capability: Project Map UX readability correction
-Active Work Item: MS-031.56 Project Map user-facing status and collapsed diagnostics foundation
+Active Capability: Project Map UX status semantics correction
+Active Work Item: MS-031.57 Project Map user-facing status semantics foundation
 Current Mode: ACTIVE
-Completed Capability Items: MS-031.38 records the read-only canonical Project Map and audit sidecar readback; MS-031.38A records the passing TypeScript cleanup; MS-031.38B synchronizes these results into SSOT; MS-031.39 adds read-only risk visibility; MS-031.40 distinguishes accepted, open, and needs-evidence states; MS-031.41 verifies canonical/audit integrity; MS-031.42 summarizes readiness; MS-031.43 persists Product Owner risk decisions; MS-031.44 adds controlled capture feedback; MS-031.45 verifies deterministic SPS foundation alignment; MS-031.46 detects candidate drift without rewriting canonical artifacts; MS-031.47 creates the SPS-owned structural fingerprint baseline; MS-031.48 compares the current checkout with that baseline; MS-031.49 presents candidate refresh preview state; MS-031.50 publishes controlled refresh execution with no-op, backup, audit, and recovery boundaries; MS-031.51 publishes controlled refresh readiness UX; MS-031.52 publishes Project Map operations history summary; MS-031.53 publishes the Project Map end-to-end acceptance gate; MS-031.54 records final SSOT acceptance and closes the Project Map work block for the current BCP baseline; MS-031.55 consolidates the Project Map UX summary while preserving diagnostics; MS-031.56 makes the current BCP map state read as usable and collapses advanced diagnostics by default.
+Completed Capability Items: MS-031.38 records the read-only canonical Project Map and audit sidecar readback; MS-031.38A records the passing TypeScript cleanup; MS-031.38B synchronizes these results into SSOT; MS-031.39 adds read-only risk visibility; MS-031.40 distinguishes accepted, open, and needs-evidence states; MS-031.41 verifies canonical/audit integrity; MS-031.42 summarizes readiness; MS-031.43 persists Product Owner risk decisions; MS-031.44 adds controlled capture feedback; MS-031.45 verifies deterministic SPS foundation alignment; MS-031.46 detects candidate drift without rewriting canonical artifacts; MS-031.47 creates the SPS-owned structural fingerprint baseline; MS-031.48 compares the current checkout with that baseline; MS-031.49 presents candidate refresh preview state; MS-031.50 publishes controlled refresh execution with no-op, backup, audit, and recovery boundaries; MS-031.51 publishes controlled refresh readiness UX; MS-031.52 publishes Project Map operations history summary; MS-031.53 publishes the Project Map end-to-end acceptance gate; MS-031.54 records final SSOT acceptance and closes the Project Map work block for the current BCP baseline; MS-031.55 consolidates the Project Map UX summary while preserving diagnostics; MS-031.56 makes the current BCP map state read as usable and collapses advanced diagnostics by default; MS-031.57 separates operational map status from accepted BCP foundation/evidence incompleteness.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.56 - Project Map User-Facing Status And Collapsed Diagnostics Foundation
+Latest Completed Product Milestone: MS-031.57 - Project Map User-Facing Status Semantics Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: MS-031.56 Project Map user-facing status and collapsed diagnostics verified locally at `APP_VERSION 1.0077`
+Latest Completed Capability Item: MS-031.57 Project Map user-facing status semantics verified locally at `APP_VERSION 1.0078`
 Current Sprint: NONE
 Platform Priority: Preserve candidate/canonical separation and keep SSOT, Project Bible, candidate evidence, and First Layout risks explicit.
 Repository Branch: main
@@ -346,9 +346,9 @@ Ahead / Behind Status: 0 / 0
 Latest Verified Commit: 42e11f2903c55817fc9454cf474d3b50f25d4f35
 Verification Status: PASS
 Blockers: NONE
-Open Risks: SSOT missing in BCP; Project Bible missing in BCP; candidate Project Map evidence remains separate from canonical storage; First Layout lacks direct BCP evidence; persisted risk decisions remain decisions rather than resolved evidence; acceptance gate is `accepted_with_known_risks`; user-facing readability correction does not resolve BCP evidence gaps.
+Open Risks: SSOT missing in BCP; Project Bible missing in BCP; candidate Project Map evidence remains separate from canonical storage; First Layout lacks direct BCP evidence; persisted risk decisions remain decisions rather than resolved evidence; acceptance gate is `accepted_with_known_risks`; user-facing semantics correction does not resolve BCP evidence gaps.
 Next Safe Step: Product Owner selects the next milestone from `NONE / Product Owner decision required`.
-Next Session Plan: Continue from the locally verified MS-031.56 readability correction state; keep diagnostics available and require explicit approval for commit/push, changing refresh, or canonical write.
+Next Session Plan: Continue from the locally verified MS-031.57 status semantics correction state; keep diagnostics available and require explicit approval for commit/push, changing refresh, or canonical write.
 
 MS-031.36 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Visible Technical Token Polish Pass Foundation. The Project Map tab now polishes remaining visible English / mixed technical labels, badges, and handoff preview copy after MS-031.35 while preserving raw technical values only where they are data. Foundation labels now include `Tożsamość projektu`, `Źródło robocze`, `Pierwszy layout`, `Pierwszy działający przepływ`, and `Ścieżka publikacji`; overview labels and status/source badges are Polish-first; handoff preview copy now names the future milestone wykonawczy boundary in Polish. MS-031.36 does not change evaluator behavior, candidate data model, approval persistence, writer routes/helpers/handlers, canonical Project Map runtime files, or Beauty Client PRO repository files. `APP_VERSION` is now `1.0069` and `LAST_PUBLISHED_MS` is `MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation`.
 

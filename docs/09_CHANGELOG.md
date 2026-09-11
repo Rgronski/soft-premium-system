@@ -69,6 +69,25 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.57 Project Map User-Facing Status Semantics Foundation
+
+### Date
+
+2026-09-12
+
+### Completed
+
+* Corrected first-screen Project Map status semantics so operational map readiness is not conflated with BCP foundation/evidence incompleteness.
+* Added a compact BCP foundation/evidence card that keeps accepted missing evidence visible as risk, not as map failure.
+* Advanced the local milestone version to `APP_VERSION 1.0078`.
+
+### Notes
+
+* Raw diagnostic statuses remain available in collapsed diagnostics.
+* No Project Map computation logic or external artifact was changed.
+* The Beauty Client PRO repository remained unmodified.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.56 Project Map User-Facing Status And Collapsed Diagnostics Foundation
 
 ### Date

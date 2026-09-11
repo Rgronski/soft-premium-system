@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.56 - Project Map User-Facing Status And Collapsed Diagnostics Foundation
+  MS-031.57 - Project Map User-Facing Status Semantics Foundation
+
+MS-031.57 is COMPLETED / VERIFIED LOCALLY / ACCEPTED as the Project Map User-Facing Status Semantics Foundation. The Project Map first screen now separates operational map status from BCP foundation/evidence completeness: canonical map and audit presence can read as `Mapa projektu: gotowa`, `Czy mapa działa? Tak`, and `Status: działa z zaakceptowanymi ryzykami`, while missing BCP SSOT, Project Bible, and First Layout evidence remains visible as accepted start risk / foundation incompleteness. Refresh and action recommendation copy remains separate from raw diagnostic states. Project Map computation, canonical artifacts, baseline, approval persistence, and Beauty Client PRO files remain unchanged. `APP_VERSION` is now `1.0078` and `LAST_PUBLISHED_MS` is `MS-031.57 - Project Map User-Facing Status Semantics Foundation`; commit and push remain pending.
 
 MS-031.56 is COMPLETED / VERIFIED LOCALLY / ACCEPTED as the Project Map User-Facing Status And Collapsed Diagnostics Foundation. The Project Map tab now keeps the first-screen story user-facing: the map is ready with accepted risks, the BCP repo has no drift, refresh is unnecessary now, and technical details are available below. Advanced diagnostics remain present but are collapsed by default, including current state, write readiness, handoff preview, candidate map details, remaining risk detail cards, canonical/audit integrity, SPS foundation alignment, drift, refresh preview/readiness/execution, canonical readback, operations details, and raw acceptance gate details. Project Map computation, canonical artifacts, baseline, approval persistence, and Beauty Client PRO files remain unchanged. `APP_VERSION` is now `1.0077` and `LAST_PUBLISHED_MS` is `MS-031.56 - Project Map User-Facing Status And Collapsed Diagnostics Foundation`; commit and push remain pending.
 

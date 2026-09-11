@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0077");
+    expect(APP_VERSION).toBe("1.0078");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-031.56 - Project Map User-Facing Status And Collapsed Diagnostics Foundation",
+      "MS-031.57 - Project Map User-Facing Status Semantics Foundation",
     );
   });
 });

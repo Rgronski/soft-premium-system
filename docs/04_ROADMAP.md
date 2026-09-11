@@ -193,8 +193,22 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.56 - Project Map User-Facing Status And Collapsed Diagnostics Foundation
+Latest Completed Product Milestone: MS-031.57 - Project Map User-Facing Status Semantics Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.57 - Project Map User-Facing Status Semantics Foundation
+
+**Status**
+COMPLETED / VERIFIED LOCALLY / ACCEPTED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-031.57 sets `APP_VERSION` to `1.0078` and `LAST_PUBLISHED_MS` to `MS-031.57 - Project Map User-Facing Status Semantics Foundation`.
+
+**Contract**
+The Project Map page now separates user-facing map operation status from BCP foundation/evidence completeness. When the canonical map and audit are present and Product Owner risks are accepted, the first screen says the map is ready and works with accepted risks, while BCP foundation gaps are shown as a separate accepted-risk/evidence-completeness concern.
+
+**Boundary**
+MS-031.57 is a presentation semantics correction only. It does not change Project Map computation logic, execute canonical write or refresh, refresh the structural baseline, persist new approval, rewrite external Project Map artifacts, remove raw diagnostics, or modify the Beauty Client PRO repository.
 
 ## MS-031.56 - Project Map User-Facing Status And Collapsed Diagnostics Foundation
 

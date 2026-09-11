@@ -1878,17 +1878,25 @@ export default async function ProjectMapPage({
   const acceptedRiskLabels = projectMapAcceptanceGate.knownRisks.map(
     buildProjectMapVisibleTokenLabel,
   );
+  const mapOperationalWithAcceptedRisks =
+    mapReadResult?.status === "present" &&
+    mapReadResult.auditStatus === "present" &&
+    acceptedRiskLabels.length > 0;
   const mapWorksCopy =
-    projectMapAcceptanceGate.status === "accepted_with_known_risks"
+    mapOperationalWithAcceptedRisks
       ? "Mapa działa z zaakceptowanymi ryzykami."
+      : projectMapAcceptanceGate.status === "accepted_with_known_risks"
+        ? "Mapa działa z zaakceptowanymi ryzykami."
       : projectMapAcceptanceGate.status === "accepted"
         ? "Mapa działa bez aktywnych ostrzeżeń."
         : projectMapAcceptanceGate.status === "requires_review"
           ? "Mapa działa technicznie, ale wymaga przeglądu przed decyzją."
           : "Mapa wymaga uzupełnienia danych, zanim będzie gotowa.";
   const mapStatusCopy =
-    projectMapAcceptanceGate.status === "accepted_with_known_risks"
+    mapOperationalWithAcceptedRisks
       ? "działa z zaakceptowanymi ryzykami"
+      : projectMapAcceptanceGate.status === "accepted_with_known_risks"
+        ? "działa z zaakceptowanymi ryzykami"
       : projectMapAcceptanceGate.status === "accepted"
         ? "działa"
         : projectMapAcceptanceGate.status === "requires_review"
@@ -1911,10 +1919,10 @@ export default async function ProjectMapPage({
         ? "Odświeżenie: gotowe po jawnej zgodzie"
         : "Odświeżenie: wymaga przeglądu";
   const nextActionCopy =
-    projectMapAcceptanceGate.status === "accepted_with_known_risks" &&
+    mapOperationalWithAcceptedRisks &&
     projectMapStructuralDrift.status === "no_drift" &&
     controlledRefreshReadiness.status === "safe_no_op"
-      ? "Brak wymaganej akcji"
+      ? "Nie"
       : "Sprawdź szczegóły poniżej";
   const projectMapOperationalCards = [
     {
@@ -1944,10 +1952,22 @@ export default async function ProjectMapPage({
     {
       label: "Akceptacja",
       title:
+        mapOperationalWithAcceptedRisks ||
         projectMapAcceptanceGate.status === "accepted_with_known_risks"
           ? "Mapa działa z zaakceptowanymi ryzykami"
           : `Status: ${mapStatusCopy}`,
       detail: mapWorksCopy,
+    },
+    {
+      label: "Fundamenty projektu BCP",
+      title:
+        acceptedRiskLabels.length > 0
+          ? "Fundamenty projektu BCP: wymagają uzupełnienia"
+          : "Fundamenty projektu BCP: bez zaakceptowanych braków",
+      detail:
+        acceptedRiskLabels.length > 0
+          ? "Fundamenty projektu BCP wymagają uzupełnienia, ale braki są zaakceptowane jako ryzyko startowe. Fundamenty SPS OS pozostają osobną warstwą kontrolną."
+          : "Brak utrwalonych zaakceptowanych ryzyk fundamentów.",
     },
   ];
 
@@ -1989,10 +2009,10 @@ export default async function ProjectMapPage({
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           <article className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 px-3 py-3">
             <p className="text-xs uppercase tracking-[0.18em] text-emerald-200/70">
-              Czy mapa działa?
+              Czy mapa działa? {mapOperationalWithAcceptedRisks ? "Tak" : ""}
             </p>
             <p className="mt-2 text-sm font-medium text-emerald-50">
-              {mapStatusCopy}
+              {mapOperationalWithAcceptedRisks ? "Tak" : mapStatusCopy}
             </p>
           </article>
           <article className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 px-3 py-3">
@@ -2007,7 +2027,7 @@ export default async function ProjectMapPage({
           </article>
           <article className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 px-3 py-3">
             <p className="text-xs uppercase tracking-[0.18em] text-emerald-200/70">
-              Czy trzeba coś zrobić teraz?
+              Czy trzeba coś zrobić teraz? {nextActionCopy === "Nie" ? "Nie" : ""}
             </p>
             <p className="mt-2 text-sm font-medium text-emerald-50">
               {nextActionCopy}
@@ -3416,7 +3436,7 @@ export default async function ProjectMapPage({
       <div className="space-y-3">
         <div className="space-y-1">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
-            Fundamenty
+            Fundamenty projektu
           </p>
           <h3 className="text-xl font-semibold text-zinc-50">
             Stan checklisty fundamentów
