@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.48 - Project Map Structural Drift Comparison Foundation
+  MS-031.49 - Project Map Candidate Refresh Preview Foundation
+
+MS-031.49 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Candidate Refresh Preview Foundation. SPS OS now presents a deterministic candidate-only preview using canonical readback, structural baseline comparison, source identity, integrity, and alignment results. The preview reports `no_changes`, `changes_ready`, `blocked`, or `invalid`, exposes added/removed/changed/unchanged details and source/target identity, and never writes or refreshes Project Map artifacts. The pending version correction sets the authoritative `APP_VERSION` to `1.0070`; MS-031.37 through MS-031.48 historical version omissions remain recorded without history rewrite. The Beauty Client PRO checkout remains clean and canonical write remains disabled. Commit and push remain pending.
 
 MS-031.48 is COMPLETED / VERIFIED / ACCEPTED locally as the Project Map Structural Drift Comparison Foundation. SPS OS now reads the SPS OS-owned structural fingerprint baseline and recomputes a read-only fingerprint from the validated Beauty Client PRO checkout using the same scope, exclusions, normalized ordering, and SHA-256 rules. It reports no_drift, changed, unavailable, or invalid with explicit added, removed, changed, and unavailable details, without refreshing or rewriting the baseline or any existing Project Map artifact. The Beauty Client PRO checkout remains clean and canonical write remains disabled. Commit and push remain pending.
 

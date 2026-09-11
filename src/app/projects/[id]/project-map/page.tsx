@@ -38,6 +38,7 @@ import {
   detectProjectMapCandidateDrift,
   detectProjectMapStructuralDrift,
 } from "@/lib/project-map/drift";
+import { buildProjectMapCandidateRefreshPreview } from "@/lib/project-map/candidate-refresh-preview";
 import type {
   ProjectMapReconstructionCandidateChecklistItem,
   ProjectMapReconstructionCandidateResult,
@@ -1722,6 +1723,13 @@ export default async function ProjectMapPage({
     candidate: mapCandidate,
   });
   const projectMapStructuralDrift = await detectProjectMapStructuralDrift(project);
+  const projectMapCandidateRefreshPreview = buildProjectMapCandidateRefreshPreview({
+    project,
+    mapReadResult,
+    structuralDrift: projectMapStructuralDrift,
+    integrity: canonicalIntegrityResult,
+    alignment: projectMapSpsAlignment,
+  });
   const foundationStatuses = buildFoundationStatuses(
     project?.name ?? null,
     projectMapStorageReadiness,
@@ -1969,6 +1977,51 @@ export default async function ProjectMapPage({
         </ul>
         <p className="mt-3 text-xs text-orange-100/70">
           Baseline i checkout są odczytywane bez zapisu; automatyczne odświeżanie baseline'u pozostaje wyłączone.
+        </p>
+      </section>
+
+      <section
+        id="project-map-candidate-refresh-preview"
+        className="rounded-xl border border-violet-900/60 bg-violet-950/20 p-4"
+      >
+        <div className="space-y-1">
+          <p className="text-xs uppercase tracking-[0.2em] text-violet-200/70">
+            Candidate refresh preview
+          </p>
+          <h3 className="text-xl font-semibold text-violet-50">
+            Candidate-only Project Map refresh
+          </h3>
+          <p className="text-sm font-medium text-violet-100">
+            Status: {projectMapCandidateRefreshPreview.status}
+          </p>
+        </div>
+        <ul className="mt-4 grid gap-2 text-sm text-violet-50/90 md:grid-cols-2">
+          <li className="rounded-lg border border-violet-900/60 bg-violet-950/35 px-3 py-2">
+            Added: {projectMapCandidateRefreshPreview.addedItems.join(" | ") || "none"}
+          </li>
+          <li className="rounded-lg border border-violet-900/60 bg-violet-950/35 px-3 py-2">
+            Removed: {projectMapCandidateRefreshPreview.removedItems.join(" | ") || "none"}
+          </li>
+          <li className="rounded-lg border border-violet-900/60 bg-violet-950/35 px-3 py-2">
+            Changed: {projectMapCandidateRefreshPreview.changedItems.join(" | ") || "none"}
+          </li>
+          <li className="rounded-lg border border-violet-900/60 bg-violet-950/35 px-3 py-2">
+            Unchanged: {projectMapCandidateRefreshPreview.unchangedSummary}
+          </li>
+          <li className="rounded-lg border border-violet-900/60 bg-violet-950/35 px-3 py-2 md:col-span-2">
+            Source: {projectMapCandidateRefreshPreview.sourceIdentity}
+          </li>
+          <li className="rounded-lg border border-violet-900/60 bg-violet-950/35 px-3 py-2 md:col-span-2">
+            Target: {projectMapCandidateRefreshPreview.targetIdentity}
+          </li>
+          {projectMapCandidateRefreshPreview.blockingReasons.map((reason) => (
+            <li key={reason} className="rounded-lg border border-violet-900/60 bg-violet-950/35 px-3 py-2 md:col-span-2">
+              Blocking reason: {reason}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-xs text-violet-100/70">
+          To jest preview kandydata. Nie zapisuje ani nie promuje map.json i nie odświeża baseline'u.
         </p>
       </section>
 

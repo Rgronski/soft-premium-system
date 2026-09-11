@@ -193,8 +193,43 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.48 - Project Map Structural Drift Comparison Foundation
+Latest Completed Product Milestone: MS-031.49 - Project Map Candidate Refresh Preview Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.49 - Project Map Candidate Refresh Preview Foundation
+
+**Milestone**
+MS-031.49 - Project Map Candidate Refresh Preview Foundation
+
+**Type**
+SPS OS / Project Map read-only candidate refresh preview
+
+**Status**
+COMPLETED / VERIFIED / ACCEPTED
+
+**Publication Status**
+READY FOR COMMIT / PUSH
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. The last valid published version is `1.0069` for MS-031.36. MS-031.37 through MS-031.48 introduced product changes without historical version bumps; those omissions are recorded and are not rewritten. The pending MS-031.49 correction uses the next sequential version, `1.0070`.
+
+**Product Outcome**
+The Project Map view now presents a deterministic candidate-only preview of added, removed, changed, and unchanged content before any future canonical write.
+
+**Verification**
+* preview consumes canonical readback, structural drift, integrity, alignment, source identity, and target identity results
+* preview statuses are `no_changes`, `changes_ready`, `blocked`, and `invalid`
+* missing comparison data blocks preview and malformed or invalid comparison data remains invalid
+* source and target paths remain visible and candidate/canonical separation is explicit
+* no baseline refresh or Project Map artifact rewrite occurs
+* TypeScript, candidate preview, drift, readback, and Project Map page tests pass
+* Beauty Client PRO checkout remains clean
+
+**Non-Goals**
+* no candidate promotion or canonical write
+* no automatic baseline refresh
+* no rewrite of any Project Map metadata artifact
+* no Beauty Client PRO repository modification
 
 ## MS-031.48 - Project Map Structural Drift Comparison Foundation
 

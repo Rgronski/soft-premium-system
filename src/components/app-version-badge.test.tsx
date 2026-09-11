@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0069");
+    expect(APP_VERSION).toBe("1.0070");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation",
+      "MS-031.49 - Project Map Candidate Refresh Preview Foundation",
     );
   });
 });

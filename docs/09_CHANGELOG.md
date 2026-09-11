@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.49 Project Map Candidate Refresh Preview Foundation
+
+### Date
+
+2026-09-11
+
+### Completed
+
+* Added a deterministic candidate-only refresh preview for Project Map changes.
+* Combined canonical readback, structural drift, integrity, alignment, source identity, and target identity inputs.
+* Added `no_changes`, `changes_ready`, `blocked`, and `invalid` preview states with explicit added, removed, changed, unchanged, and blocking details.
+* Displayed the preview in the Project Map UI while keeping canonical write, promotion, and baseline refresh disabled.
+
+### Notes
+
+* No Project Map artifact was rewritten.
+* The Beauty Client PRO repository remained unmodified.
+* Version-policy audit found the last valid `APP_VERSION 1.0069` at MS-031.36; MS-031.37 through MS-031.48 did not carry historical bumps. The pending correction sets `APP_VERSION 1.0070` without rewriting Git history.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.48 Project Map Structural Drift Comparison Foundation
 
 ### Date
