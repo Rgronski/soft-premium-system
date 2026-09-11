@@ -830,6 +830,10 @@ describe("ProjectMapPage", () => {
         content.includes("No backup, canonical write, or refresh audit is created"),
       ),
     ).toBeTruthy();
+    expect(screen.getByText("Project Map operations")).toBeTruthy();
+    expect(screen.getByText("Operations history unavailable")).toBeTruthy();
+    expect(screen.getAllByText("Status: unavailable").length).toBeGreaterThan(0);
+    expect(screen.getByText("SPS version: 1.0073")).toBeTruthy();
     expect(screen.getByText((content) => content.includes("Otwarte / wymagające evidence:"))).toBeTruthy();
     expect(screen.getByText("Integralność canonical / audit")).toBeTruthy();
     expect(screen.getByText("Status: warning")).toBeTruthy();

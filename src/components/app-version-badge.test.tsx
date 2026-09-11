@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0072");
+    expect(APP_VERSION).toBe("1.0073");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-031.51 - Project Map Controlled Refresh Readiness UX Foundation",
+      "MS-031.52 - Project Map Operations History Summary Foundation",
     );
   });
 });

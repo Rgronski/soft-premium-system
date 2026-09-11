@@ -3,6 +3,7 @@ import { access, mkdir } from "node:fs/promises";
 import Link from "next/link";
 
 import { SectionCard } from "@/components/ui/SectionCard";
+import { APP_VERSION, LAST_PUBLISHED_MS } from "@/lib/app-version";
 import { resolveProjectMapStorageRoot } from "@/lib/project-brain/metadata";
 import { getServerProjectById } from "@/lib/project/server";
 import { buildRepoCheckoutDirectory } from "@/lib/project/source-status";
@@ -43,6 +44,8 @@ import {
   buildProjectMapControlledRefreshReadiness,
   executeControlledProjectMapRefresh,
 } from "@/lib/project-map/controlled-refresh";
+import { buildProjectMapOperationsSummary } from "@/lib/project-map/operations-summary";
+import { readProjectMapStructuralFingerprint } from "@/lib/project-map/structural-fingerprint";
 import { evaluateProjectMapCandidateAcceptance } from "@/lib/project-map/acceptance";
 import { evaluateProjectMapCanonicalWriteApproval } from "@/lib/project-map/write-approval";
 import type {
@@ -1730,6 +1733,7 @@ export default async function ProjectMapPage({
     mapReadResult,
     candidate: mapCandidate,
   });
+  const projectMapStructuralFingerprint = await readProjectMapStructuralFingerprint(project);
   const projectMapStructuralDrift = await detectProjectMapStructuralDrift(project);
   const projectMapCandidateRefreshPreview = buildProjectMapCandidateRefreshPreview({
     project,
@@ -1776,6 +1780,17 @@ export default async function ProjectMapPage({
     riskDecisions: riskDecisionsResult,
     approval: refreshApprovalResult,
     execution: controlledRefreshResult,
+  });
+  const projectMapOperationsSummary = buildProjectMapOperationsSummary({
+    appVersion: APP_VERSION,
+    lastPublishedMilestone: LAST_PUBLISHED_MS,
+    mapReadResult,
+    integrity: canonicalIntegrityResult,
+    alignment: projectMapSpsAlignment,
+    structuralFingerprint: projectMapStructuralFingerprint,
+    structuralDrift: projectMapStructuralDrift,
+    riskDecisions: riskDecisionsResult,
+    refreshReadiness: controlledRefreshReadiness,
   });
   const foundationStatuses = buildFoundationStatuses(
     project?.name ?? null,
@@ -2100,6 +2115,34 @@ export default async function ProjectMapPage({
           <li className="rounded-lg border border-lime-900/60 bg-lime-950/35 px-3 py-2 md:col-span-2">
             Backup/audit: {controlledRefreshReadiness.backupAndAudit}
           </li>
+        </ul>
+      </section>
+
+      <section
+        id="project-map-operations-summary"
+        className="rounded-xl border border-slate-700 bg-slate-950/60 p-4"
+      >
+        <p className="text-xs uppercase tracking-[0.2em] text-slate-300/70">
+          Project Map operations
+        </p>
+        <h3 className="mt-1 text-xl font-semibold text-slate-50">
+          {projectMapOperationsSummary.title}
+        </h3>
+        <p className="mt-2 text-sm font-medium text-slate-100">
+          Status: {projectMapOperationsSummary.status}
+        </p>
+        <p className="mt-2 text-sm text-slate-300">
+          {projectMapOperationsSummary.summary}
+        </p>
+        <ul className="mt-4 grid gap-2 text-sm text-slate-100 md:grid-cols-2">
+          {projectMapOperationsSummary.details.map((detail) => (
+            <li
+              key={detail}
+              className="rounded-lg border border-slate-700 bg-slate-950/80 px-3 py-2"
+            >
+              {detail}
+            </li>
+          ))}
         </ul>
       </section>
 

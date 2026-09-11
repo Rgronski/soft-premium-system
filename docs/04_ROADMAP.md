@@ -192,14 +192,28 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-Current Product Milestone: MS-031.51 - Project Map Controlled Refresh Readiness UX Foundation
-Latest Completed Product Milestone: MS-031.50 - Controlled Project Map Refresh Execution Foundation
+Current Product Milestone: MS-031.52 - Project Map Operations History Summary Foundation
+Latest Completed Product Milestone: MS-031.51 - Project Map Controlled Refresh Readiness UX Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.52 - Project Map Operations History Summary Foundation
+
+**Status**
+ACTIVE / VERIFIED LOCALLY / PENDING PUBLICATION
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-031.52 uses the next sequential version, `1.0073`, and sets `LAST_PUBLISHED_MS` to this milestone for the current pending publication.
+
+**Contract**
+The Project Map page now presents a read-only operations summary from existing canonical map readback, audit sidecar, risk decisions, structural fingerprint baseline, structural drift, integrity, SPS alignment, controlled refresh readiness, and SPS version data. The summary makes the current lifecycle understandable without reading runtime files manually.
+
+**Boundary**
+MS-031.52 does not create a new external operations artifact, rewrite Project Map artifacts, refresh the structural baseline, persist Product Owner approval, execute canonical write/refresh, or modify the Beauty Client PRO repository.
 
 ## MS-031.51 - Project Map Controlled Refresh Readiness UX Foundation
 
 **Status**
-ACTIVE / VERIFIED LOCALLY / PENDING PUBLICATION
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Version Decision**
 The authoritative version source is `src/lib/app-version.ts`. MS-031.51 uses the next sequential version, `1.0072`, and sets `LAST_PUBLISHED_MS` to this milestone for the current pending publication.
