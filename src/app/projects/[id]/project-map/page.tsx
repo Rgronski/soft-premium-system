@@ -39,7 +39,10 @@ import {
   detectProjectMapStructuralDrift,
 } from "@/lib/project-map/drift";
 import { buildProjectMapCandidateRefreshPreview } from "@/lib/project-map/candidate-refresh-preview";
-import { executeControlledProjectMapRefresh } from "@/lib/project-map/controlled-refresh";
+import {
+  buildProjectMapControlledRefreshReadiness,
+  executeControlledProjectMapRefresh,
+} from "@/lib/project-map/controlled-refresh";
 import { evaluateProjectMapCandidateAcceptance } from "@/lib/project-map/acceptance";
 import { evaluateProjectMapCanonicalWriteApproval } from "@/lib/project-map/write-approval";
 import type {
@@ -1764,6 +1767,16 @@ export default async function ProjectMapPage({
         preflight: projectMapPreflight,
       })
     : { status: "blocked" as const, reason: "project refresh inputs are unavailable" };
+  const controlledRefreshReadiness = buildProjectMapControlledRefreshReadiness({
+    mapReadResult,
+    integrity: canonicalIntegrityResult,
+    alignment: projectMapSpsAlignment,
+    structuralDrift: projectMapStructuralDrift,
+    preview: projectMapCandidateRefreshPreview,
+    riskDecisions: riskDecisionsResult,
+    approval: refreshApprovalResult,
+    execution: controlledRefreshResult,
+  });
   const foundationStatuses = buildFoundationStatuses(
     project?.name ?? null,
     projectMapStorageReadiness,
@@ -2057,6 +2070,37 @@ export default async function ProjectMapPage({
         <p className="mt-3 text-xs text-violet-100/70">
           To jest preview kandydata. Nie zapisuje ani nie promuje map.json i nie odświeża baseline'u.
         </p>
+      </section>
+
+      <section
+        id="project-map-controlled-refresh-readiness"
+        className="rounded-xl border border-lime-900/50 bg-lime-950/20 p-4"
+      >
+        <p className="text-xs uppercase tracking-[0.2em] text-lime-200/70">
+          Controlled refresh readiness
+        </p>
+        <h3 className="mt-1 text-xl font-semibold text-lime-50">
+          {controlledRefreshReadiness.title}
+        </h3>
+        <p className="mt-2 text-sm font-medium text-lime-100">
+          Status: {controlledRefreshReadiness.status}
+        </p>
+        <p className="mt-2 text-sm text-lime-100/85">
+          {controlledRefreshReadiness.summary}
+        </p>
+        <ul className="mt-4 grid gap-2 text-sm text-lime-50/90 md:grid-cols-2">
+          {controlledRefreshReadiness.details.map((detail) => (
+            <li
+              key={detail}
+              className="rounded-lg border border-lime-900/60 bg-lime-950/35 px-3 py-2"
+            >
+              {detail}
+            </li>
+          ))}
+          <li className="rounded-lg border border-lime-900/60 bg-lime-950/35 px-3 py-2 md:col-span-2">
+            Backup/audit: {controlledRefreshReadiness.backupAndAudit}
+          </li>
+        </ul>
       </section>
 
       <section

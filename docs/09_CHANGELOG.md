@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.51 Project Map Controlled Refresh Readiness UX Foundation
+
+### Date
+
+2026-09-11
+
+### Completed
+
+* Added a read-only controlled refresh readiness summary for the Project Map UI.
+* The summary derives safe no-op, approved-execution, blocked, unavailable, and review-required states from the existing canonical readback, audit, integrity, alignment, drift, preview, risk decision, approval, and execution contract data.
+* Advanced the pending publication version to `APP_VERSION 1.0072`.
+
+### Notes
+
+* No Project Map external artifact was rewritten.
+* The Beauty Client PRO repository remained unmodified.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.50 Controlled Project Map Refresh Execution Foundation
 
 ### Date

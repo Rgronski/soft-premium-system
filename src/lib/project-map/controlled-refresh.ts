@@ -8,6 +8,10 @@ import type { ProjectMapCanonicalWriteApprovalResult } from "./write-approval";
 import type { ProjectMapCanonicalWritePreflightEvaluation } from "./canonical-write-preflight";
 import type { ProjectMapCandidateRefreshPreview } from "./candidate-refresh-preview";
 import type { ProjectMapReconstructionCandidateResult } from "./reconstruct";
+import type { ProjectMapSpsAlignmentResult } from "./alignment";
+import type { ProjectMapDriftResult } from "./drift";
+import type { ProjectMapCanonicalIntegrityResult, ProjectMapReadResult } from "./read";
+import type { ProjectMapRiskDecisionReadResult } from "./risk-decisions";
 
 type ProjectLike = { id: string; name: string; repositoryUrl?: string; workingDirectory?: string };
 
@@ -30,6 +34,21 @@ export type ProjectMapRefreshAudit = {
   backupPath: string;
   writeResult: "written";
   writtenAt: string;
+};
+
+export type ProjectMapControlledRefreshReadinessStatus =
+  | "safe_no_op"
+  | "ready_for_approved_execution"
+  | "blocked"
+  | "failed_unavailable"
+  | "requires_review";
+
+export type ProjectMapControlledRefreshReadiness = {
+  status: ProjectMapControlledRefreshReadinessStatus;
+  title: string;
+  summary: string;
+  details: string[];
+  backupAndAudit: string;
 };
 
 type FileDeps = {
@@ -58,6 +77,83 @@ const defaultDeps: FileDeps = {
 
 function sha256(value: Uint8Array | string): string {
   return createHash("sha256").update(value).digest("hex");
+}
+
+export function buildProjectMapControlledRefreshReadiness(input: {
+  mapReadResult: ProjectMapReadResult | null;
+  integrity: ProjectMapCanonicalIntegrityResult;
+  alignment: ProjectMapSpsAlignmentResult;
+  structuralDrift: ProjectMapDriftResult;
+  preview: ProjectMapCandidateRefreshPreview;
+  riskDecisions: ProjectMapRiskDecisionReadResult | null;
+  approval: ProjectMapCanonicalWriteApprovalResult | null;
+  execution: ProjectMapControlledRefreshResult;
+}): ProjectMapControlledRefreshReadiness {
+  const details = [
+    `canonical: ${input.mapReadResult?.status ?? "unavailable"}`,
+    `audit: ${input.mapReadResult?.status === "present" ? input.mapReadResult.auditStatus : "unavailable"}`,
+    `integrity: ${input.integrity.status}`,
+    `alignment: ${input.alignment.status}`,
+    `structural drift: ${input.structuralDrift.status}`,
+    `candidate preview: ${input.preview.status}`,
+    `risk decisions: ${input.riskDecisions?.status ?? "unavailable"}`,
+    `approval: ${input.approval?.status ?? "not requested"}`,
+  ];
+
+  if (input.execution.status === "failed" || input.preview.status === "invalid" || input.structuralDrift.status === "invalid") {
+    return {
+      status: "failed_unavailable",
+      title: "Refresh unavailable",
+      summary: "Controlled refresh cannot be treated as executable because required comparison data is invalid or execution failed.",
+      details: [...details, input.execution.status === "failed" ? `failure: ${input.execution.errorMessage}` : "invalid comparison data blocks refresh"],
+      backupAndAudit: "No new backup or refresh audit is created for invalid or failed readiness.",
+    };
+  }
+
+  if (input.preview.status === "no_changes" && input.structuralDrift.status === "no_drift") {
+    return {
+      status: "safe_no_op",
+      title: "Safe no-op",
+      summary: "Current checkout has no structural drift and the candidate preview has no changes, so refresh would not rewrite canonical map.json.",
+      details: [...details, "no canonical write is needed"],
+      backupAndAudit: "No backup or refresh audit is needed for the current no-op path.",
+    };
+  }
+
+  if (input.preview.status === "changes_ready") {
+    const approved = input.approval?.status === "approved" && input.approval.canonicalWriteAllowed;
+
+    return {
+      status: approved ? "ready_for_approved_execution" : "requires_review",
+      title: approved ? "Ready for approved execution" : "Approval required",
+      summary: approved
+        ? "Detected changes can follow the controlled execution contract with backup, canonical write, readback validation, and refresh audit."
+        : "Detected changes require explicit Product Owner approval before the controlled execution path may write canonical metadata.",
+      details: [
+        ...details,
+        `added: ${input.preview.addedItems.length}`,
+        `removed: ${input.preview.removedItems.length}`,
+        `changed: ${input.preview.changedItems.length}`,
+      ],
+      backupAndAudit: "A changed refresh must create a backup before write and a refresh audit after successful readback validation.",
+    };
+  }
+
+  const needsReview =
+    input.integrity.status === "warning" ||
+    input.alignment.status === "needs_review" ||
+    input.structuralDrift.status === "unavailable" ||
+    input.preview.blockingReasons.length > 0;
+
+  return {
+    status: needsReview ? "requires_review" : "blocked",
+    title: needsReview ? "Review required" : "Blocked",
+    summary: needsReview
+      ? "Refresh readiness needs review because one or more read-only control checks is warning, unavailable, or blocked."
+      : "Refresh is blocked because required canonical, storage, identity, or candidate data is missing.",
+    details: [...details, ...input.preview.blockingReasons.map((reason) => `blocking reason: ${reason}`)],
+    backupAndAudit: "No backup, canonical write, or refresh audit is created while readiness is blocked or under review.",
+  };
 }
 
 export async function executeControlledProjectMapRefresh(

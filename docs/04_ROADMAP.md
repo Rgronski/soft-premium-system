@@ -192,14 +192,28 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.49 - Project Map Candidate Refresh Preview Foundation
+Current Product Milestone: MS-031.51 - Project Map Controlled Refresh Readiness UX Foundation
+Latest Completed Product Milestone: MS-031.50 - Controlled Project Map Refresh Execution Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.51 - Project Map Controlled Refresh Readiness UX Foundation
+
+**Status**
+ACTIVE / VERIFIED LOCALLY / PENDING PUBLICATION
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-031.51 uses the next sequential version, `1.0072`, and sets `LAST_PUBLISHED_MS` to this milestone for the current pending publication.
+
+**Contract**
+The Project Map page now presents a read-only controlled-refresh readiness summary derived from canonical readback, audit state, integrity, SPS alignment, structural drift, candidate refresh preview, risk decisions, approval state, and the MS-031.50 execution contract. It clarifies whether refresh is a safe no-op, ready for approved execution, blocked, unavailable, or requires review.
+
+**Boundary**
+MS-031.51 does not rewrite `map.json`, `map-write-audit.json`, `risk-decisions.json`, or `structural-fingerprint.json`; does not refresh the structural baseline; does not persist Product Owner approval; and does not modify the Beauty Client PRO repository.
 
 ## MS-031.50 - Controlled Project Map Refresh Execution Foundation
 
 **Status**
-ACTIVE / VERIFIED LOCALLY / READY FOR SEPARATE PUBLICATION
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Version Decision**
 The authoritative version source is `src/lib/app-version.ts`. MS-031.50 uses the next sequential version, `1.0071`, and updates `LAST_PUBLISHED_MS` only with this publication.

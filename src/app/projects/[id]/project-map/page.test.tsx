@@ -822,6 +822,14 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Project Map foundation alignment")).toBeTruthy();
     expect(screen.getByText("Candidate drift detection")).toBeTruthy();
     expect(screen.getByText("Candidate-only Project Map refresh")).toBeTruthy();
+    expect(screen.getByText("Controlled refresh readiness")).toBeTruthy();
+    expect(screen.getByText("Review required")).toBeTruthy();
+    expect(screen.getByText("Status: requires_review")).toBeTruthy();
+    expect(
+      screen.getByText((content) =>
+        content.includes("No backup, canonical write, or refresh audit is created"),
+      ),
+    ).toBeTruthy();
     expect(screen.getByText((content) => content.includes("Otwarte / wymagające evidence:"))).toBeTruthy();
     expect(screen.getByText("Integralność canonical / audit")).toBeTruthy();
     expect(screen.getByText("Status: warning")).toBeTruthy();
