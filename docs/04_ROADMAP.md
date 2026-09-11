@@ -193,16 +193,30 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.54 - Project Map Block Closure And Final SSOT Acceptance Foundation
+Latest Completed Product Milestone: MS-031.55 - Project Map UX Consolidation Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.55 - Project Map UX Consolidation Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-031.55 is published as version `1.0076`.
+
+**Contract**
+The Project Map page now starts with a compact user-facing summary that answers whether the map works, whether the BCP repo drifted from the remembered baseline, and whether any action is required now. Main operational cards summarize the canonical map, repo comparison, refresh readiness, and acceptance gate before lower-priority diagnostics.
+
+**Boundary**
+MS-031.55 is a presentation consolidation only. It does not change Project Map computation logic, execute canonical write or refresh, refresh the structural baseline, persist new approval, rewrite external Project Map artifacts, or modify the Beauty Client PRO repository. Diagnostic and safety information remains available below the summary.
 
 ## MS-031.54 - Project Map Block Closure And Final SSOT Acceptance Foundation
 
 **Status**
-COMPLETED / VERIFIED LOCALLY / ACCEPTED / PENDING PUBLICATION
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Version Decision**
-The authoritative version source is `src/lib/app-version.ts`. MS-031.54 uses the next sequential version, `1.0075`, and sets `LAST_PUBLISHED_MS` to this milestone for the current closure publication state.
+The authoritative version source is `src/lib/app-version.ts`. MS-031.54 was published as version `1.0075`.
 
 **Contract**
 The Project Map work block is operationally complete for the current Beauty Client PRO baseline. The recorded final state is: canonical `map.json` exists, `map-write-audit.json` exists, `risk-decisions.json` exists, `structural-fingerprint.json` exists, structural drift is `no_drift`, controlled refresh readiness is `safe_no_op`, the end-to-end acceptance gate is `accepted_with_known_risks`, and the Beauty Client PRO checkout remains clean.

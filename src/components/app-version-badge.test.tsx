@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0075");
+    expect(APP_VERSION).toBe("1.0076");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-031.54 - Project Map Block Closure And Final SSOT Acceptance Foundation",
+      "MS-031.55 - Project Map UX Consolidation Foundation",
     );
   });
 });

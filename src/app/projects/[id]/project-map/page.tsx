@@ -1875,6 +1875,78 @@ export default async function ProjectMapPage({
     "Lokalne potwierdzenie: nie jest utrwalone i nie zapisuje map.json.",
     "Następny wymagany krok: osobny zatwierdzony milestone wykonawczy.",
   ];
+  const acceptedRiskLabels = projectMapAcceptanceGate.knownRisks.map(
+    buildProjectMapVisibleTokenLabel,
+  );
+  const mapWorksCopy =
+    projectMapAcceptanceGate.status === "accepted_with_known_risks"
+      ? "Mapa działa. Są świadomie zaakceptowane ryzyka startowe."
+      : projectMapAcceptanceGate.status === "accepted"
+        ? "Mapa działa bez aktywnych ostrzeżeń."
+        : projectMapAcceptanceGate.status === "requires_review"
+          ? "Mapa działa technicznie, ale wymaga przeglądu przed decyzją."
+          : "Mapa wymaga uzupełnienia danych, zanim będzie gotowa.";
+  const mapStatusCopy =
+    projectMapAcceptanceGate.status === "accepted_with_known_risks"
+      ? "działa z zaakceptowanymi ryzykami"
+      : projectMapAcceptanceGate.status === "accepted"
+        ? "działa"
+        : projectMapAcceptanceGate.status === "requires_review"
+          ? "wymaga przeglądu"
+          : "zablokowana";
+  const canonicalMapCopy =
+    mapReadResult?.status === "present"
+      ? "Mapa projektu: gotowa"
+      : "Mapa projektu: niedostępna";
+  const repoDriftCopy =
+    projectMapStructuralDrift.status === "no_drift"
+      ? "Repo BCP nie zmieniło się względem zapamiętanego baseline."
+      : projectMapStructuralDrift.status === "changed"
+        ? "Repo BCP ma zmiany względem zapamiętanego baseline."
+        : "Nie można teraz potwierdzić porównania repo BCP.";
+  const refreshRecommendationCopy =
+    controlledRefreshReadiness.status === "safe_no_op"
+      ? "Odświeżenie: niepotrzebne teraz"
+      : controlledRefreshReadiness.status === "ready_for_approved_execution"
+        ? "Odświeżenie: gotowe po jawnej zgodzie"
+        : "Odświeżenie: wymaga przeglądu";
+  const nextActionCopy =
+    projectMapAcceptanceGate.status === "accepted_with_known_risks" &&
+    projectMapStructuralDrift.status === "no_drift" &&
+    controlledRefreshReadiness.status === "safe_no_op"
+      ? "Brak wymaganej akcji"
+      : "Sprawdź szczegóły poniżej";
+  const projectMapOperationalCards = [
+    {
+      label: "Canonical map",
+      title: canonicalMapCopy,
+      detail:
+        mapReadResult?.status === "present"
+          ? "Kanoniczny map.json i audit sidecar są odczytywane read-only."
+          : "Brakuje gotowego odczytu kanonicznej mapy.",
+    },
+    {
+      label: "Repo comparison / drift",
+      title:
+        projectMapStructuralDrift.status === "no_drift"
+          ? "Repo BCP: bez zmian"
+          : "Repo BCP: wymaga przeglądu",
+      detail: repoDriftCopy,
+    },
+    {
+      label: "Refresh readiness",
+      title: refreshRecommendationCopy,
+      detail:
+        controlledRefreshReadiness.status === "safe_no_op"
+          ? "Brak driftu oznacza, że kontrolowany refresh nie ma teraz nic do wykonania."
+          : controlledRefreshReadiness.summary,
+    },
+    {
+      label: "Acceptance gate",
+      title: `Status: ${mapStatusCopy}`,
+      detail: mapWorksCopy,
+    },
+  ];
 
   return (
     <SectionCard className="space-y-6">
@@ -1893,6 +1965,114 @@ export default async function ProjectMapPage({
         </div>
 
       </div>
+
+      <section
+        id="project-map-user-summary"
+        className="rounded-xl border border-emerald-800/60 bg-emerald-950/25 p-4"
+      >
+        <div className="space-y-2">
+          <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
+            Project Map summary
+          </p>
+          <h3 className="text-2xl font-semibold text-emerald-50">
+            {canonicalMapCopy}
+          </h3>
+          <p className="text-base font-medium text-emerald-100">
+            Status: {mapStatusCopy}
+          </p>
+          <p className="text-sm text-emerald-100/85">{mapWorksCopy}</p>
+        </div>
+
+        <div className="mt-4 grid gap-3 md:grid-cols-3">
+          <article className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 px-3 py-3">
+            <p className="text-xs uppercase tracking-[0.18em] text-emerald-200/70">
+              Czy mapa działa?
+            </p>
+            <p className="mt-2 text-sm font-medium text-emerald-50">
+              {mapStatusCopy}
+            </p>
+          </article>
+          <article className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 px-3 py-3">
+            <p className="text-xs uppercase tracking-[0.18em] text-emerald-200/70">
+              Czy repo BCP zmieniło się względem mapy?
+            </p>
+            <p className="mt-2 text-sm font-medium text-emerald-50">
+              {projectMapStructuralDrift.status === "no_drift"
+                ? "Nie, bez zmian"
+                : "Wymaga sprawdzenia"}
+            </p>
+          </article>
+          <article className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 px-3 py-3">
+            <p className="text-xs uppercase tracking-[0.18em] text-emerald-200/70">
+              Czy trzeba coś zrobić teraz?
+            </p>
+            <p className="mt-2 text-sm font-medium text-emerald-50">
+              {nextActionCopy}
+            </p>
+          </article>
+        </div>
+
+        <ul className="mt-4 grid gap-2 text-sm text-emerald-50/90 md:grid-cols-2">
+          <li className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 px-3 py-2">
+            Repo BCP: {repoDriftCopy}
+          </li>
+          <li className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 px-3 py-2">
+            {refreshRecommendationCopy}
+          </li>
+          <li className="rounded-lg border border-emerald-900/60 bg-emerald-950/35 px-3 py-2 md:col-span-2">
+            Znane ryzyka: {acceptedRiskLabels.join(", ") || "brak"}
+          </li>
+        </ul>
+      </section>
+
+      <section
+        id="project-map-operational-cards"
+        className="rounded-xl border border-zinc-800 bg-zinc-950/70 p-4"
+      >
+        <div className="space-y-1">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">
+            Najważniejsze operacyjnie
+          </p>
+          <h3 className="text-xl font-semibold text-zinc-50">
+            Co warto wiedzieć teraz
+          </h3>
+        </div>
+        <div className="mt-4 grid gap-3 lg:grid-cols-4">
+          {projectMapOperationalCards.map((card) => (
+            <article
+              key={card.label}
+              className="rounded-lg border border-zinc-800 bg-zinc-900/60 p-3"
+            >
+              <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">
+                {card.label}
+              </p>
+              <h4 className="mt-2 text-sm font-semibold text-zinc-50">
+                {card.title}
+              </h4>
+              <p className="mt-2 text-sm text-zinc-300">{card.detail}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section
+        id="project-map-known-risks-summary"
+        className="rounded-xl border border-amber-900/50 bg-amber-950/20 p-4"
+      >
+        <p className="text-xs uppercase tracking-[0.2em] text-amber-200/70">
+          Znane zaakceptowane ryzyka
+        </p>
+        <h3 className="mt-1 text-xl font-semibold text-amber-50">
+          Ryzyka są świadome, nie ukryte
+        </h3>
+        <p className="mt-2 text-sm text-amber-100/85">
+          Braki BCP pozostają widoczne jako zaakceptowane ryzyka startowe. Nie są
+          zamieniane w rozwiązane evidence.
+        </p>
+        <p className="mt-3 text-sm font-medium text-amber-50">
+          {acceptedRiskLabels.join(", ") || "Brak zaakceptowanych ryzyk"}
+        </p>
+      </section>
 
       <section
         id="project-map-current-state-summary"

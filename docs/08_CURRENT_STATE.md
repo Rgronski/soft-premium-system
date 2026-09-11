@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.54 - Project Map Block Closure And Final SSOT Acceptance Foundation
+  MS-031.55 - Project Map UX Consolidation Foundation
+
+MS-031.55 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED as the Project Map UX Consolidation Foundation. The Project Map page now starts with a compact user-facing summary answering whether the map works, whether the BCP repo changed against the remembered baseline, and whether any action is needed now. Main operational cards summarize canonical map state, repo drift, refresh readiness, and acceptance gate before lower-priority diagnostics. The current BCP state is presented as a working map with accepted start risks, no repo drift, no refresh needed now, and no required next action. Project Map behavior, canonical artifacts, baseline, approval persistence, and Beauty Client PRO files remain unchanged. `APP_VERSION` is now `1.0076` and `LAST_PUBLISHED_MS` is `MS-031.55 - Project Map UX Consolidation Foundation`.
 
 MS-031.54 is COMPLETED / VERIFIED LOCALLY / ACCEPTED as the Project Map Block Closure And Final SSOT Acceptance Foundation. The Project Map block is recorded as operationally complete for the current Beauty Client PRO baseline: canonical `map.json`, `map-write-audit.json`, `risk-decisions.json`, and `structural-fingerprint.json` exist; drift is `no_drift`; controlled refresh readiness is `safe_no_op`; the end-to-end acceptance gate is `accepted_with_known_risks`; and the Beauty Client PRO checkout remains clean. Missing BCP SSOT, Project Bible, and First Layout evidence remain traceable accepted/open Product Owner risks rather than resolved evidence. No external Project Map artifact was rewritten, no new artifact was created, and no Project Map product behavior changed. `APP_VERSION` is now `1.0075` and `LAST_PUBLISHED_MS` is `MS-031.54 - Project Map Block Closure And Final SSOT Acceptance Foundation`; commit and push remain pending.
 
