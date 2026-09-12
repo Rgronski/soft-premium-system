@@ -201,6 +201,12 @@ Next Product Milestone Candidate: NONE / Product Owner decision required
 **Status**
 COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
 
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
 **Version Decision**
 The authoritative version source is `src/lib/app-version.ts`. MS-034.1 sets `APP_VERSION` to `1.0082` and `LAST_PUBLISHED_MS` to `MS-034.1 - Project Workspace Lookup Consistency Sweep Foundation`.
 
