@@ -69,6 +69,27 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-034.1 Project Workspace Lookup Consistency Sweep Foundation
+
+### Date
+
+2026-09-12
+
+### Completed
+
+* Folded the unpublished MS-034.0 overview-only fix into a wider project workspace lookup sweep.
+* Fixed the `/projects/[id]` overview route so a stale browser/Project Brain project miss can recover from the server project registry.
+* Fixed `/projects/[id]/settings` so source settings can recover the same server-backed project identity.
+* Hydrated home/recent projects from the server registry when browser project storage is empty.
+* Preserved the explicit `Projekt nie został znaleziony` state when both browser and server project lookups miss.
+* Added focused regression coverage for overview recovery, settings recovery, home/recent hydration, and true not-found behavior.
+* Advanced the local milestone version to `APP_VERSION 1.0082`.
+
+### Notes
+
+* No Project Map behavior, Project Map artifact, AI route behavior, Beauty Client PRO file, or broad routing architecture was changed.
+* Commit and push remain pending.
+
 ## Session 100 - MS-033.0 SPS OS Credit Saving Mode Foundation
 
 ### Date
@@ -85,7 +106,7 @@ Each release entry should contain:
 ### Notes
 
 * No Project Map behavior, BCP files, Conductor enforcement, broad UI redesign, or automation was added.
-* Commit and push remain pending.
+* Published as the MS-033.0 version marker for `APP_VERSION 1.0080`.
 
 ## Session 100 - MS-031.58 Project Map Final Copy Polish Foundation
 

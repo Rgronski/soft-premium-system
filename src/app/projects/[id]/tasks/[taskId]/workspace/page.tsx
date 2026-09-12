@@ -6,6 +6,7 @@ import {
   type ProjectWorkspaceEntry,
 } from "@/lib/project-brain/engine";
 import { getProjectFromServer } from "@/lib/project/browser-server";
+import { getProjectFromBrowserOrServer } from "@/lib/project/browser-lookup";
 import { getTasksFromServer, TaskServerError } from "@/lib/task/browser-server";
 import {
   getProjectById,
@@ -43,12 +44,12 @@ type TaskWorkspaceState = {
   recoveryMessage: string | null;
 };
 
-function createLocalRecoveryTask(
+async function createLocalRecoveryTask(
   projectId: string,
   taskId: string,
-): { task: Task; recoveryMessage: string } | null {
+): Promise<{ task: Task; recoveryMessage: string } | null> {
   try {
-    if (!getProjectById(projectId)) {
+    if (!(await getProjectFromBrowserOrServer(projectId))) {
       return null;
     }
 
@@ -345,7 +346,7 @@ export default function ProjectTaskWorkspacePage() {
         const recoveryTask =
           errorCode === "project-not-found" ||
           errorCode === "context-unavailable"
-            ? createLocalRecoveryTask(projectId, taskId)
+            ? await createLocalRecoveryTask(projectId, taskId)
             : null;
 
         if (recoveryTask) {

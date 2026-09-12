@@ -6,7 +6,7 @@ import {
   getTasksFromServer,
   TaskServerError,
 } from "@/lib/task/browser-server";
-import { getProjectById } from "@/lib/project/project";
+import { getProjectFromBrowserOrServer } from "@/lib/project/browser-lookup";
 import { getTasks } from "@/lib/task/task";
 import type { Task } from "@/lib/task/types";
 import { useParams } from "next/navigation";
@@ -31,11 +31,11 @@ function getTaskErrorMessage(error: unknown): string {
   return "Nie udało się wykonać operacji na zadaniach.";
 }
 
-function createLocalRecoveryState(
+async function createLocalRecoveryState(
   projectId: string,
-): { tasks: Task[]; recoveryMessage: string } | null {
+): Promise<{ tasks: Task[]; recoveryMessage: string } | null> {
   try {
-    if (!getProjectById(projectId)) {
+    if (!(await getProjectFromBrowserOrServer(projectId))) {
       return null;
     }
 
@@ -109,7 +109,7 @@ export default function ProjectTasksPage() {
         const recoveryState =
           errorCode === "project-not-found" ||
           errorCode === "context-unavailable"
-            ? createLocalRecoveryState(projectId)
+            ? await createLocalRecoveryState(projectId)
             : null;
 
         if (recoveryState) {

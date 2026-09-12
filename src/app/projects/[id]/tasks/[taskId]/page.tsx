@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { getTasksFromServer, TaskServerError } from "@/lib/task/browser-server";
-import { getProjectById } from "@/lib/project/project";
+import { getProjectFromBrowserOrServer } from "@/lib/project/browser-lookup";
 import { getTask } from "@/lib/task/task";
 import type { Task } from "@/lib/task/types";
 import { useParams } from "next/navigation";
@@ -37,12 +37,12 @@ function getTaskDetailErrorMessage(error: unknown): string {
   return "Nie udało się wykonać operacji na zadaniach.";
 }
 
-function createLocalRecoveryTask(
+async function createLocalRecoveryTask(
   projectId: string,
   taskId: string,
-): { task: Task; recoveryMessage: string } | null {
+): Promise<{ task: Task; recoveryMessage: string } | null> {
   try {
-    if (!getProjectById(projectId)) {
+    if (!(await getProjectFromBrowserOrServer(projectId))) {
       return null;
     }
 
@@ -117,7 +117,7 @@ export default function ProjectTaskDetailPage() {
         const recoveryTask =
           errorCode === "project-not-found" ||
           errorCode === "context-unavailable"
-            ? createLocalRecoveryTask(projectId, taskId)
+            ? await createLocalRecoveryTask(projectId, taskId)
             : null;
 
         if (recoveryTask) {

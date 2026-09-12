@@ -1,6 +1,9 @@
 "use client";
 
-import { deleteProjectFromServer } from "@/lib/project/browser-server";
+import {
+  deleteProjectFromServer,
+} from "@/lib/project/browser-server";
+import { getProjectFromBrowserOrServer } from "@/lib/project/browser-lookup";
 import { WorkspaceContent } from "@/components/workspace/WorkspaceContent";
 import { WorkspaceCollections } from "@/components/workspace/WorkspaceCollections";
 import { WorkspaceHeader } from "@/components/workspace/WorkspaceHeader";
@@ -17,6 +20,7 @@ import {
   getProjectById,
   getProjectBindingDecisionSummary,
 } from "@/lib/project/project";
+import type { Project } from "@/lib/project/types";
 import {
   buildRepoCheckoutDirectoryHint,
   clearProjectSourceStatus,
@@ -150,9 +154,10 @@ function buildProjectSourceRevalidationRequestUrl(
 
 function createLocalRecoveryWorkspaceEntry(
   projectId: string,
+  fallbackProject: Project | null = null,
 ): ProjectWorkspaceEntry | null {
   try {
-    const localProject = getProjectById(projectId);
+    const localProject = fallbackProject ?? getProjectById(projectId);
 
     if (!localProject) {
       return null;
@@ -249,16 +254,20 @@ export default function ProjectWorkspacePage() {
     useState(false);
   const [deleteExecutionResult, setDeleteExecutionResult] =
     useState<ProjectDeleteExecutionResult | null>(null);
+  const [serverProject, setServerProject] = useState<Project | null>(null);
+  const [isServerProjectLookupPending, setIsServerProjectLookupPending] =
+    useState(false);
   const localProject = getProjectById(params.id);
+  const project = localProject ?? serverProject;
   const sourceBindingSummary = getProjectBindingDecisionSummary(
-    localProject,
+    project,
     revalidatedSourceStatus,
   );
-  const projectBrainStatus = localProject?.projectBrainStatus ?? "pending";
+  const projectBrainStatus = project?.projectBrainStatus ?? "pending";
   const projectFilesystemStatus =
-    localProject?.projectFilesystemStatus ?? "unknown";
-  const repoCheckoutDirectoryHint = localProject
-    ? buildRepoCheckoutDirectoryHint(localProject)
+    project?.projectFilesystemStatus ?? "unknown";
+  const repoCheckoutDirectoryHint = project
+    ? buildRepoCheckoutDirectoryHint(project)
     : null;
   const dashboard = useMemo<DashboardSnapshot>(() => {
     if (typeof window === "undefined") {
@@ -311,7 +320,7 @@ export default function ProjectWorkspacePage() {
           : "source-read-failed";
       const recoveryWorkspaceEntry =
         errorCode === "project-not-found"
-          ? createLocalRecoveryWorkspaceEntry(params.id)
+          ? createLocalRecoveryWorkspaceEntry(params.id, project)
           : null;
 
       return {
@@ -324,7 +333,7 @@ export default function ProjectWorkspacePage() {
         errorCode: recoveryWorkspaceEntry ? null : errorCode,
       };
     }
-  }, [params.id]);
+  }, [params.id, project]);
 
   const deleteProjectName =
     dashboard.workspaceEntry?.workspace.overview.project.name.trim() ?? "";
@@ -360,8 +369,47 @@ export default function ProjectWorkspacePage() {
 
   useEffect(() => {
     let ignore = false;
-    const repositoryUrl = localProject?.repositoryUrl?.trim() ?? "";
-    const workingDirectory = localProject?.workingDirectory?.trim() ?? "";
+
+    if (localProject) {
+      setServerProject(null);
+      setIsServerProjectLookupPending(false);
+      return () => {
+        ignore = true;
+      };
+    }
+
+    setServerProject(null);
+    setIsServerProjectLookupPending(true);
+
+    async function loadServerProject() {
+      try {
+        const loadedProject = await getProjectFromBrowserOrServer(params.id);
+
+        if (!ignore) {
+          setServerProject(loadedProject);
+        }
+      } catch {
+        if (!ignore) {
+          setServerProject(null);
+        }
+      } finally {
+        if (!ignore) {
+          setIsServerProjectLookupPending(false);
+        }
+      }
+    }
+
+    void loadServerProject();
+
+    return () => {
+      ignore = true;
+    };
+  }, [localProject?.id, params.id]);
+
+  useEffect(() => {
+    let ignore = false;
+    const repositoryUrl = project?.repositoryUrl?.trim() ?? "";
+    const workingDirectory = project?.workingDirectory?.trim() ?? "";
     const branchWorkMode = readProjectBranchWorkMode(params.id);
     const workingBranchName = readProjectWorkingBranchName(params.id) ?? "";
 
@@ -421,8 +469,8 @@ export default function ProjectWorkspacePage() {
       ignore = true;
     };
   }, [
-    localProject?.repositoryUrl,
-    localProject?.workingDirectory,
+    project?.repositoryUrl,
+    project?.workingDirectory,
     params.id,
   ]);
 
@@ -499,7 +547,10 @@ export default function ProjectWorkspacePage() {
 
   return (
     <WorkspaceLayout>
-      {!dashboard.isLoaded ? null : dashboard.workspaceEntry ? (
+      {!dashboard.isLoaded ||
+      (isServerProjectLookupPending &&
+        !dashboard.workspaceEntry &&
+        dashboard.errorCode === "project-not-found") ? null : dashboard.workspaceEntry ? (
         <WorkspaceContent>
           {projectBrainStatus !== "available" ? (
             <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 text-amber-100">
@@ -554,7 +605,7 @@ export default function ProjectWorkspacePage() {
                   Local git repo present
                 </p>
                 <p className="text-sm text-zinc-300">
-                  Project workspace folder: {localProject?.workingDirectory ?? "brak"}
+                  Project workspace folder: {project?.workingDirectory ?? "brak"}
                 </p>
                 <p className="text-sm text-zinc-300">
                   Repo checkout folder: {revalidatedSourceStatus.repoCheckoutPath}
@@ -579,7 +630,7 @@ export default function ProjectWorkspacePage() {
                   Lokalne repo Git: nadal niedostępne
                 </p>
                 <p className="text-sm text-zinc-300">
-                  Project workspace folder: {localProject?.workingDirectory ?? "brak"}
+                  Project workspace folder: {project?.workingDirectory ?? "brak"}
                 </p>
                 <p className="text-sm text-zinc-400">
                   Repo checkout folder: {repoCheckoutDirectoryHint ?? "brak"}

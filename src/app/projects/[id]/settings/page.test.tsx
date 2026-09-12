@@ -190,6 +190,55 @@ describe("ProjectSettingsPage", () => {
     expect(screen.getByText(/Lokalne repo Git: obecne/)).toBeTruthy();
   });
 
+  test("recovers settings from the server project registry when browser state is missing", async () => {
+    localStorage.setItem("soft-premium-system.projects", JSON.stringify([]));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((input: RequestInfo | URL) => {
+        const url = typeof input === "string" ? input : input.toString();
+
+        if (url === "/api/projects/project-1") {
+          return Promise.resolve(
+            new Response(
+              JSON.stringify({
+                id: "project-1",
+                name: "Beauty Client PRO",
+                repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+                workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+                projectFilesystemStatus: "manifest-present",
+                createdAt: "2026-09-10T10:00:00.000Z",
+              }),
+              {
+                status: 200,
+                headers: {
+                  "content-type": "application/json",
+                },
+              },
+            ),
+          );
+        }
+
+        return Promise.resolve(createBlockedSourceRevalidationResponse());
+      }),
+    );
+
+    render(<ProjectSettingsPage />);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(/Project selected for live trial: Beauty Client PRO/),
+      ).toBeTruthy();
+    });
+
+    expect(screen.queryByText("Projekt nie został znaleziony.")).toBeNull();
+    expect(
+      screen.getByDisplayValue("https://github.com/Beautyclient/BeautyClientPro.git"),
+    ).toBeTruthy();
+    expect(
+      screen.getByDisplayValue("C:\\SPS_OS_WORK\\beauty-client-pro"),
+    ).toBeTruthy();
+  });
+
   test("shows a blocked GitHub readiness action state until the repository URL exists", () => {
     render(<ProjectSettingsPage />);
 

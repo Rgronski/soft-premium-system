@@ -22,6 +22,8 @@ const deleteProjectMock = vi.fn((projectId: string) => {
   );
 });
 const deleteProjectFromServerMock = vi.fn();
+const getProjectFromServerMock = vi.fn();
+const getProjectsFromServerMock = vi.fn();
 
 function createBlockedSourceRevalidationResponse(): Response {
   return new Response(
@@ -182,6 +184,9 @@ vi.mock("@/lib/knowledge/knowledge", () => ({
 vi.mock("@/lib/project/browser-server", () => ({
   deleteProjectFromServer: (projectId: string) =>
     deleteProjectFromServerMock(projectId),
+  getProjectFromServer: (projectId: string) =>
+    getProjectFromServerMock(projectId),
+  getProjectsFromServer: () => getProjectsFromServerMock(),
 }));
 
 import ProjectWorkspacePage from "./page";
@@ -194,6 +199,10 @@ describe("ProjectWorkspacePage", () => {
     deleteProjectMock.mockClear();
     deleteProjectFromServerMock.mockReset();
     deleteProjectFromServerMock.mockResolvedValue(undefined);
+    getProjectFromServerMock.mockReset();
+    getProjectFromServerMock.mockResolvedValue(null);
+    getProjectsFromServerMock.mockReset();
+    getProjectsFromServerMock.mockResolvedValue([]);
     getProjectWorkspaceEntryMock.mockReset();
     getProjectByIdMock.mockReset();
     getConductorStateFromServerMock.mockReset();
@@ -705,6 +714,70 @@ describe("ProjectWorkspacePage", () => {
     expect(deleteProjectFromServerMock).toHaveBeenCalledWith("project-1");
     expect(deleteProjectMock).toHaveBeenCalledWith("project-1");
     expect(pushMock).not.toHaveBeenCalled();
+  });
+
+  test("recovers a Project Brain miss from the server project registry when browser state is missing", async () => {
+    getProjectByIdMock.mockReturnValue(null);
+    getProjectFromServerMock.mockResolvedValue({
+      id: "project-1",
+      name: "Alpha Workspace",
+      createdAt: "2026-08-03T10:00:00.000Z",
+      repositoryUrl: "https://example.com/repos/alpha-workspace",
+    });
+    getProjectWorkspaceEntryMock.mockImplementation(() => {
+      const error = new Error("Project Brain could not find the requested project.") as Error & {
+        code: string;
+      };
+      error.code = "project-not-found";
+      throw error;
+    });
+    getTasksMock.mockReturnValue([
+      {
+        id: "task-1",
+        projectId: "project-1",
+        title: "Server recovered task",
+        createdAt: "2026-08-03T12:00:00.000Z",
+      },
+    ]);
+    getKnowledgeMock.mockReturnValue([
+      {
+        id: "knowledge-1",
+        projectId: "project-1",
+        title: "Server recovered knowledge",
+        content: "Recovered from server project identity.",
+        createdAt: "2026-08-03T13:00:00.000Z",
+      },
+    ]);
+
+    render(<ProjectWorkspacePage />);
+
+    await waitFor(() => {
+      expect(getProjectFromServerMock).toHaveBeenCalledWith("project-1");
+      expect(screen.getByText("Alpha Workspace")).toBeTruthy();
+    });
+
+    expect(screen.queryByText("Projekt nie został znaleziony")).toBeNull();
+    expect(screen.getByText("Server recovered task")).toBeTruthy();
+    expect(screen.getByText("Server recovered knowledge")).toBeTruthy();
+  });
+
+  test("keeps the not-found state when browser and server project lookups miss", async () => {
+    getProjectByIdMock.mockReturnValue(null);
+    getProjectFromServerMock.mockResolvedValue(null);
+    getProjectWorkspaceEntryMock.mockImplementation(() => {
+      const error = new Error("Project Brain could not find the requested project.") as Error & {
+        code: string;
+      };
+      error.code = "project-not-found";
+      throw error;
+    });
+
+    render(<ProjectWorkspacePage />);
+
+    await waitFor(() => {
+      expect(getProjectFromServerMock).toHaveBeenCalledWith("project-1");
+      expect(screen.getByText("Projekt nie został znaleziony")).toBeTruthy();
+    });
   });
 
   test("recovers from a stale Project Brain miss using local project state", () => {

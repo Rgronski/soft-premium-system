@@ -12,12 +12,14 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { APP_VERSION } from "@/lib/app-version";
 
 const deleteProjectFromServerMock = vi.fn();
+const getProjectsFromServerMock = vi.fn();
 const getCoreDoctrineBootstrapStatusMock = vi.fn();
 let confirmSpy: ReturnType<typeof vi.spyOn>;
 
 vi.mock("@/lib/project/browser-server", () => ({
   deleteProjectFromServer: (projectId: string) =>
     deleteProjectFromServerMock(projectId),
+  getProjectsFromServer: () => getProjectsFromServerMock(),
 }));
 
 vi.mock("@/lib/knowledge/core-doctrine", () => ({
@@ -31,6 +33,8 @@ describe("Home", () => {
     localStorage.clear();
     deleteProjectFromServerMock.mockReset();
     deleteProjectFromServerMock.mockResolvedValue(undefined);
+    getProjectsFromServerMock.mockReset();
+    getProjectsFromServerMock.mockResolvedValue([]);
     getCoreDoctrineBootstrapStatusMock.mockReset();
     getCoreDoctrineBootstrapStatusMock.mockResolvedValue({
       status: "available",
@@ -136,6 +140,29 @@ describe("Home", () => {
     expect(
       screen.getByRole("link", { name: "Utwórz projekt" }).getAttribute("href"),
     ).toBe("/projects");
+  });
+
+  test("hydrates recent projects from the server registry when browser storage is empty", async () => {
+    getProjectsFromServerMock.mockResolvedValue([
+      {
+        id: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+        name: "Beauty Client PRO",
+        repositoryUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+        workingDirectory: "C:\\SPS_OS_WORK\\beauty-client-pro",
+        createdAt: "2026-09-10T10:00:00.000Z",
+      },
+    ]);
+
+    render(await Home());
+
+    await waitFor(() => {
+      expect(screen.getByText("Beauty Client PRO")).toBeTruthy();
+    });
+
+    expect(screen.queryByText("Brak projektów.")).toBeNull();
+    expect(
+      screen.getByRole("link", { name: "Kontynuuj" }).getAttribute("href"),
+    ).toBe("/projects/0d3e28cb-6dff-442a-b94c-007a5d6b5779");
   });
 
   test("keeps the project when deletion is cancelled", async () => {

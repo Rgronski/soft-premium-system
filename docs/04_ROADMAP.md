@@ -193,13 +193,27 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-033.0 - SPS OS Credit Saving Mode Foundation
+Latest Completed Product Milestone: MS-034.1 - Project Workspace Lookup Consistency Sweep Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.1 - Project Workspace Lookup Consistency Sweep Foundation
+
+**Status**
+COMPLETED / VERIFIED LOCALLY / ACCEPTED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.1 sets `APP_VERSION` to `1.0082` and `LAST_PUBLISHED_MS` to `MS-034.1 - Project Workspace Lookup Consistency Sweep Foundation`.
+
+**Contract**
+The project workspace now uses a shared browser-or-server lookup fallback for user-facing client sections that can otherwise lose the project when browser/local project state is missing. A stale Project Brain or browser-state miss can recover from the server project registry for overview, settings, and home/recent projects, while truly missing project IDs still show `Projekt nie został znaleziony`.
+
+**Boundary**
+MS-034.1 folds the unpublished MS-034.0 overview-only fix into a wider but still focused lookup sweep. It does not change Project Map behavior, AI workspace behavior, canonical artifacts, Beauty Client PRO files, broad routing architecture, or repository publication.
 
 ## MS-033.0 - SPS OS Credit Saving Mode Foundation
 
 **Status**
-COMPLETED / VERIFIED LOCALLY / ACCEPTED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Version Decision**
 The authoritative version source is `src/lib/app-version.ts`. MS-033.0 sets `APP_VERSION` to `1.0080` and `LAST_PUBLISHED_MS` to `MS-033.0 - SPS OS Credit Saving Mode Foundation`.

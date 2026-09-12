@@ -1,7 +1,8 @@
 "use client";
 
 import { deleteProjectFromServer } from "@/lib/project/browser-server";
-import { deleteProject, getProjects } from "@/lib/project/project";
+import { getProjectsFromBrowserOrServer } from "@/lib/project/browser-lookup";
+import { deleteProject } from "@/lib/project/project";
 import type { Project } from "@/lib/project/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -10,7 +11,21 @@ export function HomeContent() {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    setProjects(getProjects());
+    let ignore = false;
+
+    async function loadProjects() {
+      const loadedProjects = await getProjectsFromBrowserOrServer();
+
+      if (!ignore) {
+        setProjects(loadedProjects);
+      }
+    }
+
+    void loadProjects();
+
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   const latestProject = projects[projects.length - 1] ?? null;

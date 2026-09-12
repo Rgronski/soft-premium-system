@@ -28,6 +28,10 @@ function buildProjectUrl(projectId: string): string {
   return `/api/projects/${encodeURIComponent(projectId)}`;
 }
 
+function buildProjectsUrl(): string {
+  return "/api/projects";
+}
+
 function isPlainObject(
   value: unknown,
 ): value is Record<string, unknown> {
@@ -46,6 +50,14 @@ function isValidProject(value: unknown): value is Project {
     typeof value.name === "string" &&
     typeof value.createdAt === "string" &&
     value.createdAt.trim().length > 0
+  );
+}
+
+function isValidProjectList(value: unknown): value is { projects: Project[] } {
+  return (
+    isPlainObject(value) &&
+    Array.isArray(value.projects) &&
+    value.projects.every(isValidProject)
   );
 }
 
@@ -129,6 +141,25 @@ export async function getProjectFromServer(
   }
 
   throw new ProjectServerError("invalid-response", response.status);
+}
+
+export async function getProjectsFromServer(): Promise<Project[]> {
+  const response = await executeFetch(buildProjectsUrl(), {
+    method: "GET",
+    cache: "no-store",
+  });
+
+  if (response.status !== 200) {
+    throw new ProjectServerError("invalid-response", response.status);
+  }
+
+  const json = await readJson(response);
+
+  if (!isValidProjectList(json)) {
+    throw new ProjectServerError("invalid-response", response.status);
+  }
+
+  return json.projects;
 }
 
 export async function deleteProjectFromServer(

@@ -7,6 +7,7 @@ import {
   getProjectDeleteValidationSummary,
   upsertProject,
 } from "@/lib/project/project";
+import { getProjectFromBrowserOrServer } from "@/lib/project/browser-lookup";
 import type { Project } from "@/lib/project/types";
 import {
   buildRepoCheckoutDirectory,
@@ -736,21 +737,21 @@ function buildGitHubRealOperationReadinessDetailSummary(
 
 export default function ProjectSettingsPage() {
   const params = useParams<{ id: string }>();
-  const [project, setProject] = useState<Project | null>(() =>
-    getProjectById(params.id),
-  );
+  const initialProject = getProjectById(params.id);
+  const [project, setProject] = useState<Project | null>(initialProject);
+  const [isProjectLookupPending, setIsProjectLookupPending] =
+    useState(!initialProject);
   const [githubUrlInput, setGithubUrlInput] = useState(
-    () => getProjectById(params.id)?.repositoryUrl ?? "",
+    () => initialProject?.repositoryUrl ?? "",
   );
   const [workingDirectoryInput, setWorkingDirectoryInput] = useState(
-    () => getProjectById(params.id)?.workingDirectory ?? "",
+    () => initialProject?.workingDirectory ?? "",
   );
   const [branchWorkMode, setBranchWorkMode] =
     useState<ProjectBranchWorkMode | null>(() =>
       readProjectBranchWorkMode(params.id),
     );
   const [workingBranchName, setWorkingBranchName] = useState<string>(() => {
-    const nextProject = getProjectById(params.id);
     const nextBranchWorkMode = readProjectBranchWorkMode(params.id);
     const storedWorkingBranchName =
       readProjectWorkingBranchName(params.id) ?? "";
@@ -759,8 +760,8 @@ export default function ProjectSettingsPage() {
       return storedWorkingBranchName;
     }
 
-    if (nextProject?.repositoryUrl?.trim() && nextBranchWorkMode === "working-branch") {
-      return buildWorkingBranchName(nextProject.name);
+    if (initialProject?.repositoryUrl?.trim() && nextBranchWorkMode === "working-branch") {
+      return buildWorkingBranchName(initialProject.name);
     }
 
     return "";
@@ -778,28 +779,57 @@ export default function ProjectSettingsPage() {
     useState<ProjectSourceReconciliationStatus | null>(null);
 
   useEffect(() => {
-    const nextProject = getProjectById(params.id);
+    let ignore = false;
+    const nextLocalProject = getProjectById(params.id);
     const nextBranchWorkMode = readProjectBranchWorkMode(params.id);
     const storedWorkingBranchName =
       readProjectWorkingBranchName(params.id) ?? "";
 
-    setProject(nextProject);
-    setGithubUrlInput(nextProject?.repositoryUrl ?? "");
-    setWorkingDirectoryInput(nextProject?.workingDirectory ?? "");
-    setBranchWorkMode(nextBranchWorkMode);
-    setWorkingBranchName(
-      storedWorkingBranchName ||
-        (nextProject?.repositoryUrl?.trim() &&
-        nextBranchWorkMode === "working-branch"
-          ? buildWorkingBranchName(nextProject.name)
-          : ""),
-    );
-    setGithubRealOperationSelection(null);
-    setGithubRealOperationCandidateDecision("pending");
-    setGithubRealOperationAuthorization("authorization required");
-    setGithubLocalWorkingBranchCreationOutcome("idle");
-    setProjectSourceStatus(null);
-    setFeedbackMessage(null);
+    function applyProject(nextProject: Project | null) {
+      setProject(nextProject);
+      setGithubUrlInput(nextProject?.repositoryUrl ?? "");
+      setWorkingDirectoryInput(nextProject?.workingDirectory ?? "");
+      setBranchWorkMode(nextBranchWorkMode);
+      setWorkingBranchName(
+        storedWorkingBranchName ||
+          (nextProject?.repositoryUrl?.trim() &&
+          nextBranchWorkMode === "working-branch"
+            ? buildWorkingBranchName(nextProject.name)
+            : ""),
+      );
+      setGithubRealOperationSelection(null);
+      setGithubRealOperationCandidateDecision("pending");
+      setGithubRealOperationAuthorization("authorization required");
+      setGithubLocalWorkingBranchCreationOutcome("idle");
+      setProjectSourceStatus(null);
+      setFeedbackMessage(null);
+    }
+
+    if (nextLocalProject) {
+      setIsProjectLookupPending(false);
+      applyProject(nextLocalProject);
+      return () => {
+        ignore = true;
+      };
+    }
+
+    setIsProjectLookupPending(true);
+    applyProject(null);
+
+    async function loadProject() {
+      const nextProject = await getProjectFromBrowserOrServer(params.id);
+
+      if (!ignore) {
+        applyProject(nextProject);
+        setIsProjectLookupPending(false);
+      }
+    }
+
+    void loadProject();
+
+    return () => {
+      ignore = true;
+    };
   }, [params.id]);
 
   useEffect(() => {
@@ -882,6 +912,10 @@ export default function ProjectSettingsPage() {
     githubRealOperationCandidateDecision,
     githubRealOperationAuthorization,
   ]);
+
+  if (!project && isProjectLookupPending) {
+    return null;
+  }
 
   if (!project) {
     return (

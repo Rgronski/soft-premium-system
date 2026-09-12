@@ -1,6 +1,6 @@
 "use client";
 
-import { getProjectById } from "@/lib/project/project";
+import { getProjectFromBrowserOrServer } from "@/lib/project/browser-lookup";
 import { getKnowledge } from "@/lib/knowledge/knowledge";
 import { getBrowserAiProjectContext } from "@/lib/project-brain/browser";
 import { useParams } from "next/navigation";
@@ -16,9 +16,9 @@ type DashboardSnapshot = {
   recoveryMessage: string | null;
 };
 
-function createLocalRecoveryKnowledgeSnapshot(projectId: string) {
+async function createLocalRecoveryKnowledgeSnapshot(projectId: string) {
   try {
-    if (!getProjectById(projectId)) {
+    if (!(await getProjectFromBrowserOrServer(projectId))) {
       return null;
     }
 
@@ -68,7 +68,7 @@ export default function ProjectKnowledgePage() {
         const recoveryKnowledge =
           errorCode === "project-not-found" ||
           errorCode === "unavailable"
-            ? createLocalRecoveryKnowledgeSnapshot(params.id)
+            ? await createLocalRecoveryKnowledgeSnapshot(params.id)
             : null;
 
         setDashboard({
@@ -82,7 +82,7 @@ export default function ProjectKnowledgePage() {
           return;
         }
 
-        const recoveryKnowledge = createLocalRecoveryKnowledgeSnapshot(params.id);
+        const recoveryKnowledge = await createLocalRecoveryKnowledgeSnapshot(params.id);
 
         setDashboard({
           knowledgeEntries: recoveryKnowledge?.knowledgeEntries ?? null,
