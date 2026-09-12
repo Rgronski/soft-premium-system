@@ -69,6 +69,24 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-033.0 SPS OS Credit Saving Mode Foundation
+
+### Date
+
+2026-09-12
+
+### Completed
+
+* Documented Credit Saving Mode / Tryb oszczędny as the default economical SPS OS AI/Codex process.
+* Added cost classes, handoff/report cost fields, model baseline rules, and usage-record measurement boundaries.
+* Clarified that estimated usage is not real visible credits.
+* Advanced the local milestone version to `APP_VERSION 1.0080`.
+
+### Notes
+
+* No Project Map behavior, BCP files, Conductor enforcement, broad UI redesign, or automation was added.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.58 Project Map Final Copy Polish Foundation
 
 ### Date
@@ -87,7 +105,7 @@ Each release entry should contain:
 * No Project Map computation logic or external artifact was changed.
 * No canonical write, refresh execution, baseline refresh, or approval persistence was added.
 * The Beauty Client PRO repository remained unmodified.
-* Commit and push remain pending.
+* Published as the MS-031.58 version marker for `APP_VERSION 1.0079`.
 
 ## Session 100 - MS-031.57 Project Map User-Facing Status Semantics Foundation
 

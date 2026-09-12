@@ -144,7 +144,10 @@ The handoff prompt must include:
 * files that may be changed,
 * files that must not be changed,
 * verification plan,
-* implementation constraints under the Minimal Patch rule.
+* implementation constraints under the Minimal Patch rule,
+* expected cost class,
+* model baseline,
+* cost controls.
 
 This handoff formalizes the transition from diagnosis and architectural control to local repository implementation by Codex.
 
@@ -161,6 +164,42 @@ Implementation should:
 * introduce the smallest possible change.
 
 Large refactoring is not performed unless explicitly planned.
+
+---
+
+# Credit Saving Mode Standard
+
+SPS OS uses Credit Saving Mode / Tryb oszczędny as the default Codex operating mode.
+
+Each handoff should state:
+
+* expected cost class,
+* model baseline,
+* cost controls.
+
+Allowed cost classes are:
+
+* `niski`,
+* `średni`,
+* `wysoki`,
+* `bardzo wysoki`.
+
+Codex should keep work economical by default:
+
+* diagnose before editing,
+* keep the patch minimal,
+* change only narrow allowed files,
+* respect explicit forbidden files,
+* run targeted tests first,
+* avoid broad build unless needed,
+* avoid dev server or browser run unless needed,
+* avoid broad repository scans unless needed,
+* avoid unrelated refactors,
+* avoid duplicate usage records.
+
+Escalation is reserved for hard bugs, larger refactors, unclear architecture, repeated verification failure, or materially unsafe scope ambiguity.
+
+Estimated usage must never be presented as real credits.
 
 ---
 
@@ -193,7 +232,33 @@ The report must include:
 8. `git status --short`,
 9. intentional non-changes,
 10. whether commit or push happened,
-11. blockers and contract deviations.
+11. blockers and contract deviations,
+12. expected cost class,
+13. observed cost class,
+14. model used or baseline,
+15. real credits if visible,
+16. avoided cost,
+17. missing usage components.
+
+If provider counters are unavailable, Codex must report usage measurement as estimated and real credits as not visible.
+
+---
+
+# Usage Record Standard
+
+SPS OS keeps Codex usage records in `.usage/session.jsonl`.
+
+Usage record rules:
+
+* append exactly one usage record per Codex task/report,
+* use the current `session_id`,
+* do not store prompts,
+* do not store source code,
+* do not store secrets,
+* do not store personal data,
+* if provider counters are unavailable, set `measurement` to `estimated`,
+* token fields may remain `0` when measured counters are unavailable,
+* estimated records must not be reported as real credits.
 
 ---
 

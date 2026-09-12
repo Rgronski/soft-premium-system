@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0079");
+    expect(APP_VERSION).toBe("1.0080");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-031.58 - Project Map Final Copy Polish Foundation",
+      "MS-033.0 - SPS OS Credit Saving Mode Foundation",
     );
   });
 });

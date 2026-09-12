@@ -116,7 +116,41 @@ Efficiency is part of the method, not an optimization after the fact.
 
 ---
 
-# 10. Definition of Done
+# 10. Credit Saving Mode / Tryb oszczędny
+
+Credit Saving Mode / Tryb oszczędny is the default operating discipline for AI and Codex work in SPS OS.
+
+It makes economical work explicit, repeatable, and auditable.
+
+Credit Saving Mode requires:
+
+* diagnosis before edit,
+* the smallest safe patch,
+* narrow allowed files,
+* explicit forbidden files,
+* targeted tests before broader verification,
+* no broad build unless needed,
+* no dev server or browser run unless needed,
+* no broad repository scans unless needed,
+* no unrelated refactors,
+* no duplicate usage records,
+* expected cost class in every handoff and observed cost class in every report,
+* model baseline per task,
+* escalation only for a hard bug, larger refactor, unclear architecture, or repeated failure,
+* estimated usage must not be reported as real credits.
+
+Cost classes are:
+
+* `niski`,
+* `średni`,
+* `wysoki`,
+* `bardzo wysoki`.
+
+Credit Saving Mode is a process foundation. It does not reduce quality gates, hide missing evidence, or allow skipped verification when verification is required.
+
+---
+
+# 11. Definition of Done
 
 Work is done only when the approved scope is completed, verified, and reflected in the appropriate source of truth.
 
@@ -128,7 +162,7 @@ Done requires scope completion, validation, and documentation alignment.
 
 ---
 
-# 11. Milestone Closure Review
+# 12. Milestone Closure Review
 
 Every milestone requires an explicit closure review.
 
@@ -143,7 +177,7 @@ Milestone closure is a formal act, not an assumption.
 
 ---
 
-# 12. SSOT Validation
+# 13. SSOT Validation
 
 SPDM requires continuous validation of Single Source of Truth alignment.
 
@@ -155,7 +189,7 @@ Validation protects continuity across sessions and contributors.
 
 ---
 
-# 13. Batch Mode
+# 14. Batch Mode
 
 SPDM allows work to be split into small controlled batches when a milestone is too broad for one safe change.
 
@@ -165,7 +199,7 @@ Batch Mode is not a shortcut around validation.
 
 ---
 
-# 14. Decision Log
+# 15. Decision Log
 
 Important decisions must be traceable.
 
@@ -175,7 +209,7 @@ If a decision matters later, it should not depend on memory alone.
 
 ---
 
-# 15. Future Evolution
+# 16. Future Evolution
 
 SPDM is foundational, but not frozen forever.
 

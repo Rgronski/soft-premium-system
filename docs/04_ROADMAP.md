@@ -193,13 +193,27 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.58 - Project Map Final Copy Polish Foundation
+Latest Completed Product Milestone: MS-033.0 - SPS OS Credit Saving Mode Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-033.0 - SPS OS Credit Saving Mode Foundation
+
+**Status**
+COMPLETED / VERIFIED LOCALLY / ACCEPTED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-033.0 sets `APP_VERSION` to `1.0080` and `LAST_PUBLISHED_MS` to `MS-033.0 - SPS OS Credit Saving Mode Foundation`.
+
+**Contract**
+SPS OS now documents Credit Saving Mode / Tryb oszczędny as a process foundation for economical AI and Codex work. The method records diagnosis-before-edit, minimal patch, narrow allowed files, explicit forbidden files, targeted tests first, no broad build/browser/dev-server scans unless needed, no unrelated refactors, no duplicate usage records, cost classes, handoff/report cost fields, model baseline, usage-record rules, and the boundary between estimated usage and real visible credits.
+
+**Boundary**
+MS-033.0 is a documentation/process foundation with version and test synchronization only. It does not add Conductor enforcement, Project Map behavior, broad UI redesign, automation, BCP modification, or repository publication.
 
 ## MS-031.58 - Project Map Final Copy Polish Foundation
 
 **Status**
-COMPLETED / VERIFIED LOCALLY / ACCEPTED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Version Decision**
 The authoritative version source is `src/lib/app-version.ts`. MS-031.58 sets `APP_VERSION` to `1.0079` and `LAST_PUBLISHED_MS` to `MS-031.58 - Project Map Final Copy Polish Foundation`.
