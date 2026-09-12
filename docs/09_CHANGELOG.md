@@ -83,12 +83,12 @@ Each release entry should contain:
 * Hydrated home/recent projects from the server registry when browser project storage is empty.
 * Preserved the explicit `Projekt nie został znaleziony` state when both browser and server project lookups miss.
 * Added focused regression coverage for overview recovery, settings recovery, home/recent hydration, and true not-found behavior.
-* Advanced the local milestone version to `APP_VERSION 1.0082`.
+* Advanced the published milestone version to `APP_VERSION 1.0082`.
 
 ### Notes
 
 * No Project Map behavior, Project Map artifact, AI route behavior, Beauty Client PRO file, or broad routing architecture was changed.
-* Commit and push remain pending.
+* Published as commit `d79fe70` with subject `fix: align project workspace lookup fallback (v1.0082)`.
 
 ## Session 100 - MS-033.0 SPS OS Credit Saving Mode Foundation
 
