@@ -45,7 +45,9 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-031.57 - Project Map User-Facing Status Semantics Foundation
+  MS-031.58 - Project Map Final Copy Polish Foundation
+
+MS-031.58 is COMPLETED / VERIFIED LOCALLY / ACCEPTED as the Project Map Final Copy Polish Foundation. The Project Map top summary now shows `Odświeżenie: niepotrzebne teraz` for the current operational map with accepted risks and `no_drift` repository state, while raw technical diagnostics remain available below. Remaining foundation checklist copy uses `Fundamenty projektu` plus the current project name when available, so it is not confused with SPS OS foundations and does not hardcode BCP globally. Project Map computation, canonical artifacts, baseline, approval persistence, and Beauty Client PRO files remain unchanged. `APP_VERSION` is now `1.0079` and `LAST_PUBLISHED_MS` is `MS-031.58 - Project Map Final Copy Polish Foundation`; commit and push remain pending.
 
 MS-031.57 is COMPLETED / VERIFIED LOCALLY / ACCEPTED as the Project Map User-Facing Status Semantics Foundation. The Project Map first screen now separates operational map status from BCP foundation/evidence completeness: canonical map and audit presence can read as `Mapa projektu: gotowa`, `Czy mapa działa? Tak`, and `Status: działa z zaakceptowanymi ryzykami`, while missing BCP SSOT, Project Bible, and First Layout evidence remains visible as accepted start risk / foundation incompleteness. Refresh and action recommendation copy remains separate from raw diagnostic states. Project Map computation, canonical artifacts, baseline, approval persistence, and Beauty Client PRO files remain unchanged. `APP_VERSION` is now `1.0078` and `LAST_PUBLISHED_MS` is `MS-031.57 - Project Map User-Facing Status Semantics Foundation`; commit and push remain pending.
 

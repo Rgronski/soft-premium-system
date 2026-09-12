@@ -69,6 +69,26 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 100 - MS-031.58 Project Map Final Copy Polish Foundation
+
+### Date
+
+2026-09-12
+
+### Completed
+
+* Polished the Project Map top summary copy so the current no-drift operational state says `Odświeżenie: niepotrzebne teraz`.
+* Preserved raw diagnostic statuses below the user-facing summary instead of using them as top-level refresh guidance.
+* Confirmed project foundation checklist wording as `Fundamenty projektu` plus the current project name when available, without hardcoding BCP globally.
+* Advanced the local milestone version to `APP_VERSION 1.0079`.
+
+### Notes
+
+* No Project Map computation logic or external artifact was changed.
+* No canonical write, refresh execution, baseline refresh, or approval persistence was added.
+* The Beauty Client PRO repository remained unmodified.
+* Commit and push remain pending.
+
 ## Session 100 - MS-031.57 Project Map User-Facing Status Semantics Foundation
 
 ### Date

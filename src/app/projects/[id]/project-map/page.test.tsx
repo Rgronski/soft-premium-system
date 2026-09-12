@@ -13,6 +13,7 @@ const persistProjectMapRiskDecisionMock = vi.fn();
 const scanProjectMapEvidenceMock = vi.fn();
 const classifyProjectMapEvidenceMock = vi.fn();
 const buildProjectMapReconstructionCandidateMock = vi.fn();
+const detectProjectMapStructuralDriftMock = vi.fn();
 
 vi.mock("node:fs/promises", () => ({
   __esModule: true,
@@ -72,6 +73,16 @@ vi.mock("@/lib/project-map/reconstruct", async (importOriginal) => {
     ...actual,
     buildProjectMapReconstructionCandidate: (classification: unknown) =>
       buildProjectMapReconstructionCandidateMock(classification),
+  };
+});
+
+vi.mock("@/lib/project-map/drift", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/lib/project-map/drift")>();
+
+  return {
+    ...actual,
+    detectProjectMapStructuralDrift: (project: unknown) =>
+      detectProjectMapStructuralDriftMock(project),
   };
 });
 
@@ -288,6 +299,7 @@ describe("ProjectMapPage", () => {
     scanProjectMapEvidenceMock.mockReset();
     classifyProjectMapEvidenceMock.mockReset();
     buildProjectMapReconstructionCandidateMock.mockReset();
+    detectProjectMapStructuralDriftMock.mockReset();
 
     accessMock.mockRejectedValue(
       Object.assign(new Error("missing"), { code: "ENOENT" }),
@@ -363,6 +375,14 @@ describe("ProjectMapPage", () => {
       riskDecisionsPath:
         "C:\\SPS_OS_WORK\\.sps-meta\\alpha-workspace--project1\\project-map\\risk-decisions.json",
       decision: {},
+    });
+    detectProjectMapStructuralDriftMock.mockResolvedValue({
+      status: "unavailable",
+      changed: [],
+      added: [],
+      removed: [],
+      unavailable: ["structural fingerprint baseline"],
+      details: ["Structural fingerprint baseline is unavailable in the test fixture."],
     });
   });
 
@@ -722,6 +742,14 @@ describe("ProjectMapPage", () => {
   });
 
   test("shows canonical map and audit readback as read-only", async () => {
+    detectProjectMapStructuralDriftMock.mockResolvedValueOnce({
+      status: "no_drift",
+      changed: [],
+      added: [],
+      removed: [],
+      unavailable: [],
+      details: ["Current checkout matches the stored structural fingerprint baseline."],
+    });
     resolveProjectMapReadResultMock.mockResolvedValueOnce({
       status: "present",
       projectId: "project-1",
@@ -833,18 +861,20 @@ describe("ProjectMapPage", () => {
     expect(screen.getByText("Project Map operations")).toBeTruthy();
     expect(screen.getByText("Operations history unavailable")).toBeTruthy();
     expect(screen.getAllByText("Status: unavailable").length).toBeGreaterThan(0);
-    expect(screen.getByText("SPS version: 1.0078")).toBeTruthy();
+    expect(screen.getByText("SPS version: 1.0079")).toBeTruthy();
     expect(screen.getByText("Project Map summary")).toBeTruthy();
     expect(screen.getAllByText("Mapa projektu: gotowa").length).toBeGreaterThan(0);
     expect(screen.getAllByText((content) => content.includes("Status: działa z zaakceptowanymi ryzykami")).length).toBeGreaterThan(0);
     expect(screen.getByText("Czy mapa działa? Tak")).toBeTruthy();
     expect(screen.getAllByText("Tak").length).toBeGreaterThan(0);
-    expect(screen.getByText("Fundamenty projektu BCP")).toBeTruthy();
-    expect(screen.getByText("Fundamenty projektu BCP: wymagają uzupełnienia")).toBeTruthy();
-    expect(screen.getByText((content) => content.includes("Fundamenty projektu BCP wymagają uzupełnienia"))).toBeTruthy();
+    expect(screen.getByText("Fundamenty projektu Alpha Workspace")).toBeTruthy();
+    expect(screen.getByText("Fundamenty projektu Alpha Workspace: wymagają uzupełnienia")).toBeTruthy();
+    expect(screen.getByText((content) => content.includes("Fundamenty projektu Alpha Workspace wymagają uzupełnienia"))).toBeTruthy();
     expect(screen.getByText((content) => content.includes("Fundamenty SPS OS pozostają osobną warstwą kontrolną"))).toBeTruthy();
     expect(screen.getByText("Szczegóły techniczne są dostępne poniżej")).toBeTruthy();
     expect(screen.getByText("Czy repo BCP zmieniło się względem mapy?")).toBeTruthy();
+    expect(screen.getAllByText("Odświeżenie: niepotrzebne teraz").length).toBeGreaterThan(0);
+    expect(screen.queryByText("Odświeżenie: wymaga przeglądu")).toBeNull();
     expect(screen.getByText((content) => content.includes("Czy trzeba coś zrobić teraz?"))).toBeTruthy();
     expect(screen.getByText("Project Map acceptance gate")).toBeTruthy();
     expect(screen.getByText("Project Map acceptance blocked")).toBeTruthy();

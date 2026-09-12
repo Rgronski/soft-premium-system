@@ -1912,18 +1912,21 @@ export default async function ProjectMapPage({
       : projectMapStructuralDrift.status === "changed"
         ? "Repo BCP ma zmiany względem zapamiętanego baseline."
         : "Nie można teraz potwierdzić porównania repo BCP.";
+  const refreshNotNeededNow =
+    mapOperationalWithAcceptedRisks && projectMapStructuralDrift.status === "no_drift";
   const refreshRecommendationCopy =
-    controlledRefreshReadiness.status === "safe_no_op"
+    refreshNotNeededNow || controlledRefreshReadiness.status === "safe_no_op"
       ? "Odświeżenie: niepotrzebne teraz"
       : controlledRefreshReadiness.status === "ready_for_approved_execution"
         ? "Odświeżenie: gotowe po jawnej zgodzie"
-        : "Odświeżenie: wymaga przeglądu";
+        : "Odświeżenie: sprawdź szczegóły techniczne";
   const nextActionCopy =
-    mapOperationalWithAcceptedRisks &&
-    projectMapStructuralDrift.status === "no_drift" &&
-    controlledRefreshReadiness.status === "safe_no_op"
+    refreshNotNeededNow || controlledRefreshReadiness.status === "safe_no_op"
       ? "Nie"
       : "Sprawdź szczegóły poniżej";
+  const projectFoundationLabel = project?.name?.trim()
+    ? `Fundamenty projektu ${project.name.trim()}`
+    : "Fundamenty projektu";
   const projectMapOperationalCards = [
     {
       label: "Mapa projektu",
@@ -1945,7 +1948,7 @@ export default async function ProjectMapPage({
       label: "Odświeżenie",
       title: refreshRecommendationCopy,
       detail:
-        controlledRefreshReadiness.status === "safe_no_op"
+        refreshNotNeededNow || controlledRefreshReadiness.status === "safe_no_op"
           ? "Brak driftu oznacza, że kontrolowany refresh nie ma teraz nic do wykonania."
           : controlledRefreshReadiness.summary,
     },
@@ -1959,14 +1962,14 @@ export default async function ProjectMapPage({
       detail: mapWorksCopy,
     },
     {
-      label: "Fundamenty projektu BCP",
+      label: projectFoundationLabel,
       title:
         acceptedRiskLabels.length > 0
-          ? "Fundamenty projektu BCP: wymagają uzupełnienia"
-          : "Fundamenty projektu BCP: bez zaakceptowanych braków",
+          ? `${projectFoundationLabel}: wymagają uzupełnienia`
+          : `${projectFoundationLabel}: bez zaakceptowanych braków`,
       detail:
         acceptedRiskLabels.length > 0
-          ? "Fundamenty projektu BCP wymagają uzupełnienia, ale braki są zaakceptowane jako ryzyko startowe. Fundamenty SPS OS pozostają osobną warstwą kontrolną."
+          ? `${projectFoundationLabel} wymagają uzupełnienia, ale braki są zaakceptowane jako ryzyko startowe. Fundamenty SPS OS pozostają osobną warstwą kontrolną.`
           : "Brak utrwalonych zaakceptowanych ryzyk fundamentów.",
     },
   ];

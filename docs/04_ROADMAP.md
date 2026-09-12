@@ -193,8 +193,22 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-031.57 - Project Map User-Facing Status Semantics Foundation
+Latest Completed Product Milestone: MS-031.58 - Project Map Final Copy Polish Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-031.58 - Project Map Final Copy Polish Foundation
+
+**Status**
+COMPLETED / VERIFIED LOCALLY / ACCEPTED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-031.58 sets `APP_VERSION` to `1.0079` and `LAST_PUBLISHED_MS` to `MS-031.58 - Project Map Final Copy Polish Foundation`.
+
+**Contract**
+The Project Map page now finishes the screenshot-driven copy polish for the current BCP baseline. When the map is operational with accepted risks and repository drift is `no_drift`, the top user-facing cards show `Odświeżenie: niepotrzebne teraz` instead of implying a review is required. Remaining project foundation checklist wording stays explicit as `Fundamenty projektu` and uses the current project name when available instead of hardcoding a BCP label.
+
+**Boundary**
+MS-031.58 is a final presentation copy polish only. It does not change Project Map computation semantics, execute canonical write or refresh, refresh the structural baseline, persist new approval, rewrite external Project Map artifacts, remove raw diagnostics, or modify the Beauty Client PRO repository.
 
 ## MS-031.57 - Project Map User-Facing Status Semantics Foundation
 
