@@ -69,6 +69,29 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.2 Project AI Workspace Two-Column Layout Foundation
+
+### Version
+
+1.0083
+
+### Date
+
+2026-09-12
+
+### Completed
+
+* Moved the project section bar directly below `Przestrzeń robocza`.
+* Expanded the project AI workspace to use the available project workspace width.
+* Established the left pane as `Chat / Konduktor / Chief Architect` with conductor proposals, ready instruction text, and local quick actions: `Dalej`, `Akceptuję`, `Przygotuj handoff`, and `Kopiuj`.
+* Established the right pane as `Codex: handoff i wykonanie` for copy/paste handoff work and returning with Codex execution results.
+* Advanced the published milestone version to `APP_VERSION 1.0083`.
+
+### Notes
+
+* This is UI/layout/workflow-surface scaffolding only.
+* No real AI automation, API calls, storage, persistence, routes, Codex integration, Project Map behavior, canonical artifact, or Beauty Client PRO repository change was introduced.
+
 ## Session 100 - MS-034.1 Project Workspace Lookup Consistency Sweep Foundation
 
 ### Date

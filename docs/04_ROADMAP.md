@@ -189,12 +189,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.44` - Project AI Workbench Direction Foundation
 * `MS-028.43` - Operator Guide Delete/Re-import Foundation
 * `MS-028.42a` - App Version Marker 1.028.42 Publication
+* `MS-034.2` - Project AI Workspace Two-Column Layout Foundation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.1 - Project Workspace Lookup Consistency Sweep Foundation
+Latest Completed Product Milestone: MS-034.2 - Project AI Workspace Two-Column Layout Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.2 - Project AI Workspace Two-Column Layout Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.2 sets `APP_VERSION` to `1.0083` and `LAST_PUBLISHED_MS` to `MS-034.2 - Project AI Workspace Two-Column Layout Foundation`.
+
+**Contract**
+The Project AI Workspace now uses the available project workspace width and presents a two-pane SPS OS work surface. The project section bar sits directly below `Przestrzeń robocza`; the left pane represents `Chat / Konduktor / Chief Architect` with conductor proposals, ready instruction text, and local quick actions `Dalej`, `Akceptuję`, `Przygotuj handoff`, and `Kopiuj`; the right pane represents `Codex: handoff i wykonanie` and explains the copy/paste handoff and result-return flow.
+
+**Boundary**
+MS-034.2 is UI/layout/workflow-surface scaffolding only. It does not add real AI automation, API calls, storage, persistence, routes, Codex integration, Project Map behavior, canonical artifact changes, or Beauty Client PRO repository changes.
 
 ## MS-034.1 - Project Workspace Lookup Consistency Sweep Foundation
 

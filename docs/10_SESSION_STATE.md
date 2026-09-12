@@ -325,30 +325,30 @@ Next Session Plan: Start Session 097 from the fresh `sps-session.zip` and contin
 SPS OS Session State
 
 Date: 2026-09-12
-Current Session ID: 100
-Current Chat Title: 100 SPS OS - Project Workspace Lookup Consistency Sweep
-Next Session ID: 101
-Suggested Next Chat Title: 101 SPS OS - Product Owner Decision
-Active Capability: Session Close Protocol
-Active Work Item: Session 100 close protocol after MS-034.1 publication
-Current Mode: CLOSED
-Completed Capability Items: MS-031.38 records the read-only canonical Project Map and audit sidecar readback; MS-031.38A records the passing TypeScript cleanup; MS-031.38B synchronizes these results into SSOT; MS-031.39 adds read-only risk visibility; MS-031.40 distinguishes accepted, open, and needs-evidence states; MS-031.41 verifies canonical/audit integrity; MS-031.42 summarizes readiness; MS-031.43 persists Product Owner risk decisions; MS-031.44 adds controlled capture feedback; MS-031.45 verifies deterministic SPS foundation alignment; MS-031.46 detects candidate drift without rewriting canonical artifacts; MS-031.47 creates the SPS-owned structural fingerprint baseline; MS-031.48 compares the current checkout with that baseline; MS-031.49 presents candidate refresh preview state; MS-031.50 publishes controlled refresh execution with no-op, backup, audit, and recovery boundaries; MS-031.51 publishes controlled refresh readiness UX; MS-031.52 publishes Project Map operations history summary; MS-031.53 publishes the Project Map end-to-end acceptance gate; MS-031.54 records final SSOT acceptance and closes the Project Map work block for the current BCP baseline; MS-031.55 consolidates the Project Map UX summary while preserving diagnostics; MS-031.56 makes the current BCP map state read as usable and collapses advanced diagnostics by default; MS-031.57 separates operational map status from accepted BCP foundation/evidence incompleteness; MS-031.58 publishes final top-summary refresh copy and BCP foundation terminology; MS-033.0 records Credit Saving Mode / Tryb oszczędny as the economical AI/Codex process foundation; MS-034.1 folds the unpublished overview fix into a project workspace lookup consistency sweep.
+Current Session ID: 101
+Current Chat Title: 101 SPS OS - MS-034.2 Project AI Workspace Two-Column Layout Foundation
+Next Session ID: 102
+Suggested Next Chat Title: 102 SPS OS - START
+Active Capability: NONE
+Active Work Item: MS-034.2 control files sync and publication preparation complete
+Current Mode: DEFAULT
+Completed Capability Items: MS-031.38 records the read-only canonical Project Map and audit sidecar readback; MS-031.38A records the passing TypeScript cleanup; MS-031.38B synchronizes these results into SSOT; MS-031.39 adds read-only risk visibility; MS-031.40 distinguishes accepted, open, and needs-evidence states; MS-031.41 verifies canonical/audit integrity; MS-031.42 summarizes readiness; MS-031.43 persists Product Owner risk decisions; MS-031.44 adds controlled capture feedback; MS-031.45 verifies deterministic SPS foundation alignment; MS-031.46 detects candidate drift without rewriting canonical artifacts; MS-031.47 creates the SPS-owned structural fingerprint baseline; MS-031.48 compares the current checkout with that baseline; MS-031.49 presents candidate refresh preview state; MS-031.50 publishes controlled refresh execution with no-op, backup, audit, and recovery boundaries; MS-031.51 publishes controlled refresh readiness UX; MS-031.52 publishes Project Map operations history summary; MS-031.53 publishes the Project Map end-to-end acceptance gate; MS-031.54 records final SSOT acceptance and closes the Project Map work block for the current BCP baseline; MS-031.55 consolidates the Project Map UX summary while preserving diagnostics; MS-031.56 makes the current BCP map state read as usable and collapses advanced diagnostics by default; MS-031.57 separates operational map status from accepted BCP foundation/evidence incompleteness; MS-031.58 publishes final top-summary refresh copy and BCP foundation terminology; MS-033.0 records Credit Saving Mode / Tryb oszczędny as the economical AI/Codex process foundation; MS-034.1 folds the unpublished overview fix into a project workspace lookup consistency sweep; MS-034.2 establishes the Project AI Workspace two-pane Chat / Konduktor / Chief Architect plus Codex handoff surface.
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.1 - Project Workspace Lookup Consistency Sweep Foundation
+Latest Completed Product Milestone: MS-034.2 - Project AI Workspace Two-Column Layout Foundation
 Next Product Milestone: NONE / Product Owner decision required
 Active Parallel Capability: NONE
-Latest Completed Capability Item: MS-034.1 Project Workspace Lookup Consistency Sweep published at `APP_VERSION 1.0082`
+Latest Completed Capability Item: MS-034.2 Project AI Workspace Two-Column Layout Foundation published at `APP_VERSION 1.0083`
 Current Sprint: NONE
 Platform Priority: Preserve candidate/canonical separation and keep SSOT, Project Bible, candidate evidence, and First Layout risks explicit.
 Repository Branch: main
-Repository Working Tree State: CLEAN
+Repository Working Tree State: DIRTY - MS-034.2 publication sync changes are local and uncommitted
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: d79fe70481d41919cb02d3e51100a4ea156a92e4
+Latest Verified Commit: 6906a7f25c026c6bfb3db55fbf571a66c635689e
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Start Session 101 from the fresh `sps-session.zip` and select the next Product Owner-approved milestone.
-Next Session Plan: Start Session 101 from the fresh `sps-session.zip`, run `SPS OS — START`, confirm package Git Context and SSOT consistency, keep Current Product Milestone as `NONE / Product Owner decision required`, preserve `MS-034.1 - Project Workspace Lookup Consistency Sweep Foundation` as `COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED`, and select the next Product Owner-approved milestone only after bootstrap.
+Next Safe Step: Await Product Owner decision for a separate next milestone; do not activate MS-034.3 without explicit approval.
+Next Session Plan: Start Session 102 from the fresh package, run `SPS OS — START`, confirm package Git Context and SSOT consistency, keep Current Product Milestone and Next Product Milestone as `NONE / Product Owner decision required`, preserve `MS-034.2 - Project AI Workspace Two-Column Layout Foundation` as `COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED`, and select any MS-034.3 or later milestone only after explicit Product Owner activation.
 
 MS-031.36 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Visible Technical Token Polish Pass Foundation. The Project Map tab now polishes remaining visible English / mixed technical labels, badges, and handoff preview copy after MS-031.35 while preserving raw technical values only where they are data. Foundation labels now include `Tożsamość projektu`, `Źródło robocze`, `Pierwszy layout`, `Pierwszy działający przepływ`, and `Ścieżka publikacji`; overview labels and status/source badges are Polish-first; handoff preview copy now names the future milestone wykonawczy boundary in Polish. MS-031.36 does not change evaluator behavior, candidate data model, approval persistence, writer routes/helpers/handlers, canonical Project Map runtime files, or Beauty Client PRO repository files. `APP_VERSION` is now `1.0069` and `LAST_PUBLISHED_MS` is `MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation`.
 

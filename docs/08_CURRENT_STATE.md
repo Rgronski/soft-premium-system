@@ -44,10 +44,15 @@ Unlike the roadmap, this document changes frequently as the project evolves.
 
 NONE / Product Owner decision required
 
-**Latest Completed Milestone**
-  MS-034.1 - Project Workspace Lookup Consistency Sweep Foundation
+**Next Product Milestone**
+  NONE / Product Owner decision required
 
-MS-034.1 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED as the Project Workspace Lookup Consistency Sweep Foundation. The unpublished MS-034.0 overview-only fix was folded into this wider lookup sweep. Overview, source settings, and home/recent projects now share a browser-or-server project lookup fallback, so an existing server-backed Beauty Client PRO project can be recovered even when browser/local project state is missing. True missing project IDs still preserve `Projekt nie został znaleziony`. AI Workspace and Project Map behavior were not changed. `APP_VERSION` is `1.0082`, `LAST_PUBLISHED_MS` is `MS-034.1 - Project Workspace Lookup Consistency Sweep Foundation`, and the milestone was published at commit `d79fe70`.
+**Latest Completed Milestone**
+  MS-034.2 - Project AI Workspace Two-Column Layout Foundation
+
+MS-034.2 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED as the Project AI Workspace Two-Column Layout Foundation. The project section bar now sits directly below `Przestrzeń robocza`, the AI workspace uses the available project width, the left pane represents `Chat / Konduktor / Chief Architect` with conductor proposals, ready instruction text, and local quick actions (`Dalej`, `Akceptuję`, `Przygotuj handoff`, `Kopiuj`), and the right pane represents `Codex: handoff i wykonanie` for the copy/paste handoff and execution-result return flow. This is UI/layout/workflow-surface scaffolding only: it adds no real automation, AI execution, API calls, storage, persistence, routes, Codex integration, Project Map behavior, canonical artifact changes, or Beauty Client PRO repository changes. `APP_VERSION` is `1.0083` and `LAST_PUBLISHED_MS` is `MS-034.2 - Project AI Workspace Two-Column Layout Foundation`.
+
+MS-034.1 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED as the Project Workspace Lookup Consistency Sweep Foundation. The unpublished MS-034.0 overview-only fix was folded into this wider lookup sweep. Overview, source settings, and home/recent projects now share a browser-or-server project lookup fallback, so an existing server-backed Beauty Client PRO project can be recovered even when browser/local project state is missing. True missing project IDs still preserve `Projekt nie został znaleziony`. AI Workspace and Project Map behavior were not changed. `APP_VERSION` was published as `1.0082`, `LAST_PUBLISHED_MS` was `MS-034.1 - Project Workspace Lookup Consistency Sweep Foundation`, and the milestone was published at commit `d79fe70`.
 
 MS-033.0 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED as the SPS OS Credit Saving Mode Foundation. SPS OS now documents Credit Saving Mode / Tryb oszczędny as the default economical AI/Codex process: diagnosis before edit, minimal patch, narrow allowed files, explicit forbidden files, targeted tests first, no broad build/dev-server/browser run unless needed, no broad scans, no unrelated refactors, no duplicate usage records, cost classes, model baseline, handoff/report cost fields, and usage-record rules that keep estimated usage separate from real visible credits. `APP_VERSION` was published as `1.0080`.
 

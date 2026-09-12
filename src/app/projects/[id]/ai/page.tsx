@@ -62,6 +62,27 @@ Zasady pracy:
 - nie przechodź na SOL bez decyzji Product Ownera
 ===== HANDOFF DO CODEXA END =====`;
 
+const CONDUCTOR_QUICK_ACTIONS = [
+  {
+    id: "next",
+    label: "Dalej",
+    instruction:
+      "Dalej. Przejdź do następnego bezpiecznego kroku zgodnie z aktualnym milestone.",
+  },
+  {
+    id: "accept",
+    label: "Akceptuję",
+    instruction:
+      "Akceptuję proponowany krok. Potwierdź zakres i wskaż najmniejszy bezpieczny następny ruch.",
+  },
+  {
+    id: "handoff",
+    label: "Przygotuj handoff",
+    instruction:
+      "Przygotuj handoff do Codexa dla wybranego zakresu. Uwzględnij cel, dozwolone pliki, zakazy i komendy weryfikacji.",
+  },
+] as const;
+
 type KnowledgeSaveResponse =
   | {
       id: string;
@@ -204,6 +225,12 @@ export default function ProjectAiWorkspacePage() {
   );
   const [isProjectTasksLoading, setIsProjectTasksLoading] = useState(true);
   const [isHandoffCopied, setIsHandoffCopied] = useState(false);
+  const [selectedConductorInstruction, setSelectedConductorInstruction] =
+    useState<string>(CONDUCTOR_QUICK_ACTIONS[0].instruction);
+  const [conductorInstructionCopyStatus, setConductorInstructionCopyStatus] =
+    useState<string | null>(
+      null,
+  );
 
   useEffect(() => {
     let ignore = false;
@@ -702,9 +729,25 @@ export default function ProjectAiWorkspacePage() {
     }
   }
 
+  function handleSelectConductorQuickAction(instruction: string) {
+    setSelectedConductorInstruction(instruction);
+    setConductorInstructionCopyStatus(null);
+  }
+
+  async function handleCopyConductorInstruction() {
+    try {
+      await navigator.clipboard?.writeText?.(selectedConductorInstruction);
+      setConductorInstructionCopyStatus("Skopiowano instrukcję Konduktora.");
+    } catch {
+      setConductorInstructionCopyStatus(
+        "Instrukcja jest gotowa do ręcznego skopiowania.",
+      );
+    }
+  }
+
   return (
-    <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
-      <div className="space-y-6 xl:grid xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.95fr)] xl:gap-6">
+    <section className="w-full min-w-0 rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
+      <div className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
             Przestrzeń AI
@@ -716,7 +759,7 @@ export default function ProjectAiWorkspacePage() {
 
         <nav
           aria-label="Sekcje obszaru AI"
-          className="flex flex-wrap gap-2 rounded-xl border border-zinc-800 bg-zinc-950/60 p-3 xl:col-span-2"
+          className="flex flex-wrap gap-2 rounded-xl border border-zinc-800 bg-zinc-950/60 p-3"
         >
           <a
             href="#project-context"
@@ -796,7 +839,7 @@ export default function ProjectAiWorkspacePage() {
 
         <div
           id="project-value"
-          className="grid gap-4 xl:grid-cols-2 scroll-mt-6"
+          className="grid gap-4 scroll-mt-6 lg:grid-cols-2"
         >
           <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
@@ -849,157 +892,150 @@ export default function ProjectAiWorkspacePage() {
         </div>
 
         <div
-          id="ai-chat"
-          className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4 scroll-mt-6"
+          id="ai-workbench"
+          className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-4"
         >
-          <div className="space-y-2">
-            <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-              Generowanie
+          <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
+            Model pracy AI
+          </p>
+          <div className="mt-3 space-y-2 text-sm text-zinc-300">
+            <p>Lewa strona prowadzi rozmowę Chief Architect / Konduktor.</p>
+            <p>Prawa strona przygotowuje okno pracy Codexa i handoff.</p>
+            <p>
+              Project Brain dostarcza kontekst, a Konduktor wskazuje następny
+              bezpieczny krok.
             </p>
-            <p className="text-sm text-zinc-400">
-              Wpisz jedną instrukcję, aby dodać następną lokalną wymianę AI.
-            </p>
-            <p className="text-sm text-zinc-500">
-              AI Workspace korzysta z Project Brain. Przypięte repo nie
-              przekazuje jeszcze plików repo do promptu AI.
-            </p>
-            <p className="text-sm text-zinc-500">
-              {conversationContextState.statusMessage}
+            <p className="text-zinc-500">
+              Gotowy wynik możesz skopiować przyciskiem Kopiuj przy
+              odpowiedzi.
             </p>
           </div>
+        </div>
 
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)]">
           <div
-            id="ai-workbench"
-            className="mt-4 rounded-xl border border-zinc-800 bg-zinc-900/80 p-4"
+            id="ai-chat"
+            className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4 scroll-mt-6"
           >
-            <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-              AI Workbench
-            </p>
-            <div className="mt-3 space-y-2 text-sm text-zinc-300">
-              <p>Rozmowa robocza korzysta z kontekstu projektu.</p>
-              <p>Codex nadal pracuje przez handoff do skopiowania.</p>
-              <p>
-                Project Brain dostarcza kontekst, a Konduktor wskazuje następny
-                bezpieczny krok.
+            <div className="space-y-2">
+              <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
+                Chat / Konduktor / Chief Architect
               </p>
-              <p className="text-zinc-500">
-                Gotowy wynik możesz skopiować przyciskiem Kopiuj przy
-                odpowiedzi.
+              <h3 className="text-xl font-semibold text-zinc-50">
+                Decyzje i przygotowanie handoffu
+              </h3>
+              <p className="text-sm text-zinc-400">
+                Rozmawiaj o kierunku prac, propozycjach Konduktora i następnym
+                bezpiecznym kroku.
+              </p>
+              <p className="text-sm text-zinc-500">
+                AI Workspace korzysta z Project Brain. Przypięte repo nie
+                przekazuje jeszcze plików repo do promptu AI.
+              </p>
+              <p className="text-sm text-zinc-500">
+                {conversationContextState.statusMessage}
               </p>
             </div>
 
-            <div
-              id="codex-handoff"
-              className="mt-4 rounded-xl border border-zinc-800 bg-zinc-950/70 p-4"
-            >
+            <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-900/80 p-4">
               <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-                Handoff do Codexa
+                Propozycje Konduktora
               </p>
-              <pre className="mt-4 overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-6 text-zinc-200">
-                {`SPS OS przygotowuje kontekst projektu i blok przekazania.
-Codex wykonuje tylko zaakceptowany zakres poza aplikacją.
-Poniższy szablon możesz skopiować i uzupełnić przed wysłaniem.
-
-===== HANDOFF DO CODEXA START =====
-Session Identity:
-Repository:
-Cel:
-Zakres:
-Dozwolone pliki:
-Zakazane pliki:
-Weryfikacja:
-Zasady pracy:
-- oszczędzaj tokeny i kredyty
-- diagnozuj przed edycją
-- stosuj minimalny patch
-- nie refaktoruj przy okazji
-- nie rozszerzaj scope
-- nie commituj ani nie pushuj bez trybu publikacji
-- raportuj w bloku do skopiowania
-- nie przechodź na SOL bez decyzji Product Ownera
-===== HANDOFF DO CODEXA END =====`}
-              </pre>
-              <div className="mt-3 flex items-center gap-3">
+              <p className="mt-3 text-sm text-zinc-300">
+                Szybkie akcje przygotowują lokalną instrukcję do rozmowy. Nie
+                wykonują milestone ani pracy Codexa.
+              </p>
+              <div className="mt-3 flex flex-wrap items-center gap-3">
+                {CONDUCTOR_QUICK_ACTIONS.map((action) => (
+                  <button
+                    key={action.id}
+                    type="button"
+                    onClick={() =>
+                      handleSelectConductorQuickAction(action.instruction)
+                    }
+                    className="rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-sm font-medium text-zinc-100 transition hover:border-zinc-500 hover:bg-zinc-800"
+                  >
+                    {action.label}
+                  </button>
+                ))}
                 <button
                   type="button"
+                  aria-label="Kopiuj instrukcję Konduktora"
                   onClick={() => {
-                    void handleCopyHandoff();
+                    void handleCopyConductorInstruction();
                   }}
                   className="rounded-xl border border-zinc-700 bg-zinc-100 px-3 py-2 text-sm font-medium text-zinc-950"
                 >
-                  {isHandoffCopied ? "Skopiowano" : "Kopiuj handoff"}
+                  Kopiuj
                 </button>
               </div>
-              <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-5 text-zinc-400">
-                <p>Session Identity pobierz z aktywnego SPS OS session/bootstrap.</p>
-                <p>Repository to repozytorium SPS OS.</p>
-                <p>Zakres i Weryfikacja bierz z zatwierdzonego kontraktu milestone.</p>
-                <p>SPS OS nie uzupelnia tych pol automatycznie na tym etapie.</p>
+              <div className="mt-4 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                  Gotowa instrukcja
+                </p>
+                <p className="mt-3 whitespace-pre-wrap text-sm text-zinc-100">
+                  {selectedConductorInstruction}
+                </p>
               </div>
-              <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-5 text-zinc-400">
-                <p className="font-medium text-zinc-300">Manualne wypelnianie</p>
-                <p>Session Identity kopiuj z bootstrapu aktywnej sesji SPS OS.</p>
-                <p>Repository wpisz jako sciezke repozytorium SPS OS.</p>
-                <p>Cel bierz z celu zatwierdzonego milestone.</p>
-                <p>Zakres bierz z zatwierdzonego scope.</p>
-                <p>Dozwolone pliki i Zakazane pliki bierz z handoffu lub kontraktu.</p>
-                <p>Weryfikacja bierz z planu weryfikacji.</p>
-              </div>
+              {conductorInstructionCopyStatus ? (
+                <p className="mt-3 text-sm text-zinc-400">
+                  {conductorInstructionCopyStatus}
+                </p>
+              ) : null}
             </div>
-          </div>
 
-          <form className="mt-4 space-y-4" onSubmit={handleGenerate}>
-            <div className="space-y-3">
-              <p className="text-sm font-medium text-zinc-100">Propozycje startowe</p>
+            <form className="mt-4 space-y-4" onSubmit={handleGenerate}>
               <div className="space-y-3">
-                {STARTER_PROMPTS.map((prompt) => (
-                  <button
-                    key={prompt.id}
-                    type="button"
-                    onClick={() =>
-                      setInstructionState(
-                        deriveSelectedStarterPromptInstructionState(
-                          params.id,
-                          prompt,
-                        ),
-                      )
-                    }
-                    aria-pressed={selectedPromptId === prompt.id}
-                    className="block w-full rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-left transition hover:border-zinc-700 aria-pressed:border-zinc-600"
-                  >
-                    <span className="block text-sm font-medium text-zinc-100">
-                      {prompt.label}
-                    </span>
-                    <span className="mt-2 block text-sm text-zinc-400">
-                      {prompt.instruction}
-                    </span>
-                  </button>
-                ))}
+                <p className="text-sm font-medium text-zinc-100">Propozycje startowe</p>
+                <div className="space-y-3">
+                  {STARTER_PROMPTS.map((prompt) => (
+                    <button
+                      key={prompt.id}
+                      type="button"
+                      onClick={() =>
+                        setInstructionState(
+                          deriveSelectedStarterPromptInstructionState(
+                            params.id,
+                            prompt,
+                          ),
+                        )
+                      }
+                      aria-pressed={selectedPromptId === prompt.id}
+                      className="block w-full rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-left transition hover:border-zinc-700 aria-pressed:border-zinc-600"
+                    >
+                      <span className="block text-sm font-medium text-zinc-100">
+                        {prompt.label}
+                      </span>
+                      <span className="mt-2 block text-sm text-zinc-400">
+                        {prompt.instruction}
+                      </span>
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <label className="block space-y-2">
-              <span className="text-sm font-medium text-zinc-100">
-                Instrukcja
-              </span>
-              <textarea
-                value={instruction}
-                onChange={(event) =>
-                  setInstructionValue(event.target.value, null)
-                }
-                rows={4}
-                className="w-full rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-100 outline-none transition focus:border-zinc-600"
-              />
-            </label>
+              <label className="block space-y-2">
+                <span className="text-sm font-medium text-zinc-100">
+                  Instrukcja
+                </span>
+                <textarea
+                  value={instruction}
+                  onChange={(event) =>
+                    setInstructionValue(event.target.value, null)
+                  }
+                  rows={4}
+                  className="w-full rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-100 outline-none transition focus:border-zinc-600"
+                />
+              </label>
 
-            <button
-              type="submit"
-              disabled={generateActionPresentation.disabled}
-              className="rounded-xl border border-zinc-700 bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-950 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {generateActionPresentation.label}
-            </button>
-          </form>
+              <button
+                type="submit"
+                disabled={generateActionPresentation.disabled}
+                className="rounded-xl border border-zinc-700 bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-950 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {generateActionPresentation.label}
+              </button>
+            </form>
 
           {resetActionPresentation.visible ? (
             <div className="mt-4 space-y-4">
@@ -1117,6 +1153,73 @@ Zasady pracy:
               </p>
             </div>
           ) : null}
+          </div>
+
+          <div
+            id="codex-handoff"
+            className="rounded-xl border border-zinc-800 bg-zinc-950/70 p-4 scroll-mt-6"
+          >
+            <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
+              Codex: handoff i wykonanie
+            </p>
+            <h3 className="mt-2 text-xl font-semibold text-zinc-50">
+              Okno pracy Codexa
+            </h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              Skopiuj przygotowany handoff, wklej go do Codexa i wróć tutaj z
+              wynikiem wykonania.
+            </p>
+            <pre className="mt-4 overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-6 text-zinc-200">
+              {`SPS OS przygotowuje kontekst projektu i blok przekazania.
+Codex wykonuje tylko zaakceptowany zakres poza aplikacją.
+Poniższy szablon możesz skopiować i uzupełnić przed wysłaniem.
+
+===== HANDOFF DO CODEXA START =====
+Session Identity:
+Repository:
+Cel:
+Zakres:
+Dozwolone pliki:
+Zakazane pliki:
+Weryfikacja:
+Zasady pracy:
+- oszczędzaj tokeny i kredyty
+- diagnozuj przed edycją
+- stosuj minimalny patch
+- nie refaktoruj przy okazji
+- nie rozszerzaj scope
+- nie commituj ani nie pushuj bez trybu publikacji
+- raportuj w bloku do skopiowania
+- nie przechodź na SOL bez decyzji Product Ownera
+===== HANDOFF DO CODEXA END =====`}
+            </pre>
+            <div className="mt-3 flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  void handleCopyHandoff();
+                }}
+                className="rounded-xl border border-zinc-700 bg-zinc-100 px-3 py-2 text-sm font-medium text-zinc-950"
+              >
+                {isHandoffCopied ? "Skopiowano" : "Kopiuj handoff"}
+              </button>
+            </div>
+            <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-5 text-zinc-400">
+              <p>Session Identity pobierz z aktywnego SPS OS session/bootstrap.</p>
+              <p>Repository to repozytorium SPS OS.</p>
+              <p>Zakres i Weryfikacja bierz z zatwierdzonego kontraktu milestone.</p>
+              <p>SPS OS nie uzupelnia tych pol automatycznie na tym etapie.</p>
+            </div>
+            <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-5 text-zinc-400">
+              <p className="font-medium text-zinc-300">Manualne wypelnianie</p>
+              <p>Session Identity kopiuj z bootstrapu aktywnej sesji SPS OS.</p>
+              <p>Repository wpisz jako sciezke repozytorium SPS OS.</p>
+              <p>Cel bierz z celu zatwierdzonego milestone.</p>
+              <p>Zakres bierz z zatwierdzonego scope.</p>
+              <p>Dozwolone pliki i Zakazane pliki bierz z handoffu lub kontraktu.</p>
+              <p>Weryfikacja bierz z planu weryfikacji.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

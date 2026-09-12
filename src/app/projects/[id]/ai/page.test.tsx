@@ -2822,7 +2822,7 @@ describe("ProjectAiWorkspacePage", () => {
     expect(screen.queryByText("First task")).toBeNull();
   });
 
-  test("renders the AI Workbench direction panel in the project workspace", async () => {
+  test("renders the Chief Architect and Codex operating model in the project workspace", async () => {
     getBrowserAiProjectContextMock.mockResolvedValue({
       status: "available",
       context: {
@@ -2836,14 +2836,14 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     await waitFor(() => {
-      expect(screen.getByText("AI Workbench")).toBeTruthy();
+      expect(screen.getByText("Model pracy AI")).toBeTruthy();
     });
 
     expect(
-      screen.getByText("Rozmowa robocza korzysta z kontekstu projektu."),
+      screen.getByText("Lewa strona prowadzi rozmowę Chief Architect / Konduktor."),
     ).toBeTruthy();
     expect(
-      screen.getByText("Codex nadal pracuje przez handoff do skopiowania."),
+      screen.getByText("Prawa strona przygotowuje okno pracy Codexa i handoff."),
     ).toBeTruthy();
     expect(
       screen.getByText(
@@ -2855,9 +2855,108 @@ describe("ProjectAiWorkspacePage", () => {
         "Gotowy wynik możesz skopiować przyciskiem Kopiuj przy odpowiedzi.",
       ),
     ).toBeTruthy();
+    expect(screen.getByText("Chat / Konduktor / Chief Architect")).toBeTruthy();
+    expect(screen.getByText("Decyzje i przygotowanie handoffu")).toBeTruthy();
+    expect(screen.getByText("Propozycje Konduktora")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Dalej" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Akceptuję" })).toBeTruthy();
+    expect(
+      screen.getByRole("button", { name: "Przygotuj handoff" }),
+    ).toBeTruthy();
+    expect(
+      screen.getByRole("button", { name: "Kopiuj instrukcję Konduktora" }),
+    ).toBeTruthy();
+    expect(screen.getByText("Gotowa instrukcja")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Dalej. Przejdź do następnego bezpiecznego kroku zgodnie z aktualnym milestone.",
+      ),
+    ).toBeTruthy();
+    expect(screen.getByText("Codex: handoff i wykonanie")).toBeTruthy();
+    expect(screen.getByText("Okno pracy Codexa")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Skopiuj przygotowany handoff, wklej go do Codexa i wróć tutaj z wynikiem wykonania.",
+      ),
+    ).toBeTruthy();
   });
 
-  test("renders the handoff template in the AI Workbench panel", async () => {
+  test("selects Conductor quick actions with ready local instructions", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+
+    render(<ProjectAiWorkspacePage />);
+
+    const nextButton = await screen.findByRole("button", { name: "Dalej" });
+
+    fireEvent.click(nextButton);
+
+    expect(
+      screen.getByText(
+        "Dalej. Przejdź do następnego bezpiecznego kroku zgodnie z aktualnym milestone.",
+      ),
+    ).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Akceptuję" }));
+    expect(
+      screen.getByText(
+        "Akceptuję proponowany krok. Potwierdź zakres i wskaż najmniejszy bezpieczny następny ruch.",
+      ),
+    ).toBeTruthy();
+    fireEvent.click(
+      screen.getByRole("button", { name: "Przygotuj handoff" }),
+    );
+    expect(
+      screen.getByText(
+        "Przygotuj handoff do Codexa dla wybranego zakresu. Uwzględnij cel, dozwolone pliki, zakazy i komendy weryfikacji.",
+      ),
+    ).toBeTruthy();
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(clipboardWriteTextMock).not.toHaveBeenCalled();
+  });
+
+  test("copies the displayed Conductor instruction only", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+    clipboardWriteTextMock.mockResolvedValue(undefined);
+
+    render(<ProjectAiWorkspacePage />);
+
+    await screen.findByText("Propozycje Konduktora");
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Przygotuj handoff" }),
+    );
+    fireEvent.click(
+      screen.getByRole("button", { name: "Kopiuj instrukcję Konduktora" }),
+    );
+
+    await waitFor(() => {
+      expect(clipboardWriteTextMock).toHaveBeenCalledTimes(1);
+      expect(clipboardWriteTextMock).toHaveBeenCalledWith(
+        "Przygotuj handoff do Codexa dla wybranego zakresu. Uwzględnij cel, dozwolone pliki, zakazy i komendy weryfikacji.",
+      );
+      expect(
+        screen.getByText("Skopiowano instrukcję Konduktora."),
+      ).toBeTruthy();
+    });
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  test("renders the handoff template in the Codex execution panel", async () => {
     getBrowserAiProjectContextMock.mockResolvedValue({
       status: "available",
       context: {
@@ -2871,7 +2970,7 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     await waitFor(() => {
-      expect(screen.getByText("Handoff do Codexa")).toBeTruthy();
+      expect(screen.getByText("Codex: handoff i wykonanie")).toBeTruthy();
     });
 
     expect(
