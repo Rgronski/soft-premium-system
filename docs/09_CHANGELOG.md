@@ -69,6 +69,31 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.3D BCP Registry Detach Preview Foundation
+
+### Version
+
+1.0084
+
+### Date
+
+2026-09-12
+
+### Summary
+
+Published the read-only BCP registry detach preview in project settings.
+
+### Completed Work
+
+* Added `Podgląd odpięcia z rejestru SPS` as a preview-only settings surface.
+* Reported main project entry impact, all `soft-premium-system.projects.<projectId>` browser keys, `wouldRemoveBrowserProjectEntry`, `wouldRemoveServerRegistryEntry`, `browserScopedKeysFound`, and `wouldCallDeleteExecution: false`.
+* Displayed preserved workspace, repo checkout, and metadata root paths plus the `sps-project.json` rediscovery warning.
+* Bumped `APP_VERSION` to `1.0084` and `LAST_PUBLISHED_MS` to `MS-034.3D - BCP Registry Detach Preview Foundation`.
+
+### Notes
+
+No detach, delete, write, `DELETE /api/projects/[id]`, `/delete-execution`, BCP repository change, SPS metadata change, Project Map change, or canonical artifact change was added.
+
 ## Session 101 - MS-034.2 Project AI Workspace Two-Column Layout Foundation
 
 ### Version

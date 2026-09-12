@@ -190,12 +190,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.43` - Operator Guide Delete/Re-import Foundation
 * `MS-028.42a` - App Version Marker 1.028.42 Publication
 * `MS-034.2` - Project AI Workspace Two-Column Layout Foundation
+* `MS-034.3D` - BCP Registry Detach Preview Foundation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.2 - Project AI Workspace Two-Column Layout Foundation
+Latest Completed Product Milestone: MS-034.3D - BCP Registry Detach Preview Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.3D - BCP Registry Detach Preview Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.3D sets `APP_VERSION` to `1.0084` and `LAST_PUBLISHED_MS` to `MS-034.3D - BCP Registry Detach Preview Foundation`.
+
+**Contract**
+The project settings surface now shows `Podgląd odpięcia z rejestru SPS` as a read-only BCP registry detach preview. The preview reports the main browser project entry impact, all browser keys prefixed by `soft-premium-system.projects.<projectId>`, `wouldRemoveBrowserProjectEntry`, `wouldRemoveServerRegistryEntry`, `browserScopedKeysFound`, `wouldCallDeleteExecution: false`, preserved workspace / repo checkout / metadata root paths, and the manifest rediscovery warning for `sps-project.json`.
+
+**Boundary**
+MS-034.3D is preview-only. It does not execute detach, delete, write, `DELETE /api/projects/[id]`, or `/delete-execution`; it does not modify Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, Project Map behavior, canonical `map.json`, audit, risk decisions, fingerprint, source identity, or knowledge store.
 
 ## MS-034.2 - Project AI Workspace Two-Column Layout Foundation
 

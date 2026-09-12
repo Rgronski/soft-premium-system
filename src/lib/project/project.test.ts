@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 import {
+  buildProjectRegistryDetachPreview,
   buildDefaultWorkingDirectory,
   createProject,
   deleteProject,
@@ -14,6 +15,10 @@ import { getProjectWorkspaceEntry } from "../project-brain/engine";
 
 class MemoryStorage {
   private store = new Map<string, string>();
+
+  get length() {
+    return this.store.size;
+  }
 
   clear() {
     this.store.clear();
@@ -29,6 +34,10 @@ class MemoryStorage {
 
   removeItem(key: string) {
     this.store.delete(key);
+  }
+
+  key(index: number) {
+    return [...this.store.keys()][index] ?? null;
   }
 }
 
@@ -269,6 +278,56 @@ describe("createProject", () => {
         createdAt: "2026-07-24T11:00:00.000Z",
       },
     ]);
+  });
+
+  test("builds a read-only registry detach preview from the main entry and all project-prefixed browser keys", () => {
+    const project = createProject(
+      "Beauty Client PRO",
+      "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+      undefined,
+      "C:\\SPS_OS_WORK\\beauty-client-pro",
+      "manifest-present",
+    );
+    storage.setItem(
+      "soft-premium-system.projects.0d3e28cb-6dff-442a-b94c-007a5d6b5779.tasks",
+      "[]",
+    );
+    storage.setItem(
+      "soft-premium-system.projects.0d3e28cb-6dff-442a-b94c-007a5d6b5779.source-status",
+      JSON.stringify({
+        sourceStatus: "git-repo",
+        repoCheckoutPath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+        remoteUrl: "https://github.com/Beautyclient/BeautyClientPro.git",
+        activeBranch: "work/beauty-client-pro",
+        workingTreeState: "clean",
+      }),
+    );
+    storage.setItem(
+      "soft-premium-system.projects.other-project.tasks",
+      "[]",
+    );
+
+    const preview = buildProjectRegistryDetachPreview(project);
+
+    expect(preview).toEqual({
+      projectId: "0d3e28cb-6dff-442a-b94c-007a5d6b5779",
+      projectName: "Beauty Client PRO",
+      wouldRemoveBrowserProjectEntry: true,
+      wouldRemoveServerRegistryEntry: true,
+      browserScopedKeysFound: [
+        "soft-premium-system.projects.0d3e28cb-6dff-442a-b94c-007a5d6b5779.source-status",
+        "soft-premium-system.projects.0d3e28cb-6dff-442a-b94c-007a5d6b5779.tasks",
+      ],
+      wouldCallDeleteExecution: false,
+      preservedPaths: {
+        workspace: "C:\\SPS_OS_WORK\\beauty-client-pro",
+        repoCheckout: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+        metadataRoot:
+          "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+      },
+      manifestRediscoveryWarning:
+        "Manifest sps-project.json w C:\\SPS_OS_WORK\\beauty-client-pro może ponownie pokazać projekt po odświeżeniu odkrywania.",
+    });
   });
 
   test("rebinds task and knowledge ownership to the canonical project when repository metadata updates a merged project", () => {

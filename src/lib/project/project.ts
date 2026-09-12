@@ -273,6 +273,21 @@ export type ProjectDeleteValidationSummary = {
   notes: string[];
 };
 
+export type ProjectRegistryDetachPreview = {
+  projectId: string;
+  projectName: string;
+  wouldRemoveBrowserProjectEntry: boolean;
+  wouldRemoveServerRegistryEntry: boolean;
+  browserScopedKeysFound: string[];
+  wouldCallDeleteExecution: false;
+  preservedPaths: {
+    workspace: string;
+    repoCheckout: string;
+    metadataRoot: string;
+  };
+  manifestRediscoveryWarning: string | null;
+};
+
 export function getProjectDeleteValidationSummary(
   project: Project,
 ): ProjectDeleteValidationSummary {
@@ -296,6 +311,76 @@ export function getProjectDeleteValidationSummary(
       "Katalog roboczy / repo checkout jest osobnym zasobem filesystemowym.",
       "Usunięcie klienta i usunięcie katalogu dyskowego to dwa różne kroki.",
     ],
+  };
+}
+
+function readRawStoredProjects(): Project[] {
+  if (typeof window === "undefined") {
+    return [];
+  }
+
+  const savedProjects = localStorage.getItem(PROJECTS_STORAGE_KEY);
+  if (!savedProjects) {
+    return [];
+  }
+
+  try {
+    const parsedProjects = JSON.parse(savedProjects) as unknown;
+
+    return Array.isArray(parsedProjects) ? (parsedProjects as Project[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function getLocalStorageKeysByPrefix(prefix: string): string[] {
+  if (typeof window === "undefined") {
+    return [];
+  }
+
+  const keys: string[] = [];
+
+  for (let index = 0; index < localStorage.length; index += 1) {
+    const key = localStorage.key(index);
+
+    if (key?.startsWith(prefix)) {
+      keys.push(key);
+    }
+  }
+
+  return keys.sort();
+}
+
+export function buildProjectRegistryDetachPreview(
+  project: Project,
+): ProjectRegistryDetachPreview {
+  const normalizedProjectId = normalizeProjectId(project.id);
+  const deleteValidationSummary = getProjectDeleteValidationSummary(project);
+  const browserProjectEntry = readRawStoredProjects().find(
+    (storedProject) => normalizeProjectId(storedProject.id) === normalizedProjectId,
+  );
+  const browserScopedKeysFound = getLocalStorageKeysByPrefix(
+    `soft-premium-system.projects.${normalizedProjectId}`,
+  );
+  const hasManifestRediscovery =
+    project.projectFilesystemStatus === "manifest-present" &&
+    Boolean(project.workingDirectory?.trim());
+
+  return {
+    projectId: normalizedProjectId,
+    projectName: project.name.trim(),
+    wouldRemoveBrowserProjectEntry: Boolean(browserProjectEntry),
+    wouldRemoveServerRegistryEntry: Boolean(normalizedProjectId),
+    browserScopedKeysFound,
+    wouldCallDeleteExecution: false,
+    preservedPaths: {
+      workspace: deleteValidationSummary.projectWorkspacePath,
+      repoCheckout: deleteValidationSummary.projectCheckoutPath,
+      metadataRoot: deleteValidationSummary.projectMetadataRootPath,
+    },
+    manifestRediscoveryWarning: hasManifestRediscovery
+      ? `Manifest sps-project.json w ${deleteValidationSummary.projectWorkspacePath} może ponownie pokazać projekt po odświeżeniu odkrywania.`
+      : null,
   };
 }
 

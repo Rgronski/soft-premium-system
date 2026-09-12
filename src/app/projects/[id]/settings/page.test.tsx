@@ -130,7 +130,7 @@ describe("ProjectSettingsPage", () => {
   });
 
   test("shows the live trial decision contract before any destructive execution", () => {
-    render(<ProjectSettingsPage />);
+    const { container } = render(<ProjectSettingsPage />);
 
     expect(screen.getByText(/Kontrakt decyzji live trial/)).toBeTruthy();
     expect(
@@ -148,6 +148,66 @@ describe("ProjectSettingsPage", () => {
     expect(
       screen.getByText(/Rollback \/ odzyskanie: rerun discovery refresh, reopen from the filesystem path/),
     ).toBeTruthy();
+  });
+
+  test("shows a read-only registry detach preview for the BCP project entry and all prefixed browser keys", () => {
+    const bcpProjectId = "0d3e28cb-6dff-442a-b94c-007a5d6b5779";
+    localStorage.clear();
+    useParamsMock.mockReturnValue({ id: bcpProjectId });
+    createProject(
+      "Beauty Client PRO",
+      bcpProjectId,
+      undefined,
+      "C:\\SPS_OS_WORK\\beauty-client-pro",
+      "manifest-present",
+    );
+    localStorage.setItem(
+      `soft-premium-system.projects.${bcpProjectId}.tasks`,
+      "[]",
+    );
+    localStorage.setItem(
+      `soft-premium-system.projects.${bcpProjectId}.clients`,
+      "[]",
+    );
+    localStorage.setItem(
+      "soft-premium-system.projects.other-project.tasks",
+      "[]",
+    );
+
+    const { container } = render(<ProjectSettingsPage />);
+
+    expect(screen.getByText(/Podgląd odpięcia z rejestru SPS/)).toBeTruthy();
+    expect(
+      screen.getByText(/Podgląd tylko do odczytu\. Nie wykonuje detach\/delete/),
+    ).toBeTruthy();
+    expect(screen.getByText(/wouldRemoveBrowserProjectEntry:\s*true/)).toBeTruthy();
+    expect(screen.getByText(/wouldRemoveServerRegistryEntry:\s*true/)).toBeTruthy();
+    expect(screen.getByText(/wouldCallDeleteExecution:\s*false/)).toBeTruthy();
+    expect(container.textContent).toContain(
+      `soft-premium-system.projects.${bcpProjectId}.clients`,
+    );
+    expect(container.textContent).toContain(
+      `soft-premium-system.projects.${bcpProjectId}.tasks`,
+    );
+    expect(
+      container.textContent,
+    ).not.toContain("soft-premium-system.projects.other-project.tasks");
+    expect(
+      screen.getByText(/preserved workspace: C:\\SPS_OS_WORK\\beauty-client-pro/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/preserved repo checkout: C:\\SPS_OS_WORK\\beauty-client-pro\\repo/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        /preserved metadata root: C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb/,
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/Manifest sps-project\.json w C:\\SPS_OS_WORK\\beauty-client-pro/),
+    ).toBeTruthy();
+    expect(container.textContent).toContain("nie woła DELETE /api/projects/[id]");
+    expect(container.textContent).toContain("nie używa /delete-execution");
   });
 
   test("revalidates a derived repo checkout and hides the manifest-only source copy", async () => {

@@ -5,6 +5,7 @@ import {
   getProjectBindingDecisionSummary,
   getProjectById,
   getProjectDeleteValidationSummary,
+  buildProjectRegistryDetachPreview,
   upsertProject,
 } from "@/lib/project/project";
 import { getProjectFromBrowserOrServer } from "@/lib/project/browser-lookup";
@@ -948,6 +949,7 @@ export default function ProjectSettingsPage() {
       }
     : getProjectBindingDecisionSummary(project);
   const deleteValidationSummary = getProjectDeleteValidationSummary(project);
+  const registryDetachPreview = buildProjectRegistryDetachPreview(project);
   const branchWorkModeSummary = buildBranchWorkModeSummary(
     project.name,
     branchWorkMode,
@@ -1327,6 +1329,64 @@ export default function ProjectSettingsPage() {
               </li>
             ))}
           </ul>
+        </div>
+
+        <div className="rounded-2xl border border-cyan-500/30 bg-cyan-500/5 p-4">
+          <p className="text-xs uppercase tracking-[0.2em] text-cyan-200/80">
+            Podgląd odpięcia z rejestru SPS
+          </p>
+          <p className="mt-2 text-sm text-cyan-50">
+            Podgląd tylko do odczytu. Nie wykonuje detach/delete, nie woła{" "}
+            <code>DELETE /api/projects/[id]</code> i nie używa{" "}
+            <code>/delete-execution</code>.
+          </p>
+          <div className="mt-3 space-y-2 text-sm text-cyan-100">
+            <p>
+              wouldRemoveBrowserProjectEntry:{" "}
+              {registryDetachPreview.wouldRemoveBrowserProjectEntry
+                ? "true"
+                : "false"}
+            </p>
+            <p>
+              wouldRemoveServerRegistryEntry:{" "}
+              {registryDetachPreview.wouldRemoveServerRegistryEntry
+                ? "true"
+                : "false"}
+            </p>
+            <p>
+              wouldCallDeleteExecution:{" "}
+              {String(registryDetachPreview.wouldCallDeleteExecution)}
+            </p>
+            <p>
+              preserved workspace:{" "}
+              {registryDetachPreview.preservedPaths.workspace}
+            </p>
+            <p>
+              preserved repo checkout:{" "}
+              {registryDetachPreview.preservedPaths.repoCheckout}
+            </p>
+            <p>
+              preserved metadata root:{" "}
+              {registryDetachPreview.preservedPaths.metadataRoot}
+            </p>
+          </div>
+          <div className="mt-3 space-y-2 text-sm text-cyan-100">
+            <p>browserScopedKeysFound:</p>
+            {registryDetachPreview.browserScopedKeysFound.length > 0 ? (
+              <ul className="space-y-1">
+                {registryDetachPreview.browserScopedKeysFound.map((key) => (
+                  <li key={key}>{key}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>brak kluczy z prefiksem projektu</p>
+            )}
+          </div>
+          {registryDetachPreview.manifestRediscoveryWarning ? (
+            <p className="mt-3 text-sm text-cyan-100">
+              {registryDetachPreview.manifestRediscoveryWarning}
+            </p>
+          ) : null}
         </div>
 
         <div className="rounded-2xl border border-sky-500/30 bg-sky-500/5 p-4">

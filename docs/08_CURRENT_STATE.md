@@ -48,7 +48,9 @@ NONE / Product Owner decision required
   NONE / Product Owner decision required
 
 **Latest Completed Milestone**
-  MS-034.2 - Project AI Workspace Two-Column Layout Foundation
+  MS-034.3D - BCP Registry Detach Preview Foundation
+
+MS-034.3D is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED as the BCP Registry Detach Preview Foundation. The project settings surface now shows `Podgląd odpięcia z rejestru SPS`, reports main project entry impact, enumerates all browser keys prefixed by `soft-premium-system.projects.<projectId>`, exposes `wouldRemoveBrowserProjectEntry`, `wouldRemoveServerRegistryEntry`, `browserScopedKeysFound`, and `wouldCallDeleteExecution: false`, shows preserved workspace / repo checkout / metadata root paths, and warns that `sps-project.json` may rediscover the project. This is read-only preview behavior only: it does not detach, delete, write, call `DELETE /api/projects/[id]`, call `/delete-execution`, modify Beauty Client PRO repository files, modify SPS metadata, modify Project Map behavior, or change canonical artifacts. `APP_VERSION` is `1.0084` and `LAST_PUBLISHED_MS` is `MS-034.3D - BCP Registry Detach Preview Foundation`.
 
 MS-034.2 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED as the Project AI Workspace Two-Column Layout Foundation. The project section bar now sits directly below `Przestrzeń robocza`, the AI workspace uses the available project width, the left pane represents `Chat / Konduktor / Chief Architect` with conductor proposals, ready instruction text, and local quick actions (`Dalej`, `Akceptuję`, `Przygotuj handoff`, `Kopiuj`), and the right pane represents `Codex: handoff i wykonanie` for the copy/paste handoff and execution-result return flow. This is UI/layout/workflow-surface scaffolding only: it adds no real automation, AI execution, API calls, storage, persistence, routes, Codex integration, Project Map behavior, canonical artifact changes, or Beauty Client PRO repository changes. `APP_VERSION` is `1.0083` and `LAST_PUBLISHED_MS` is `MS-034.2 - Project AI Workspace Two-Column Layout Foundation`.
 
