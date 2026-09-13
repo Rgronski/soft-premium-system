@@ -69,6 +69,32 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.3H2 Checkout Removal Execution Endpoint Contract
+
+### Version
+
+1.0089
+
+### Date
+
+2026-09-13
+
+### Summary
+
+Published the read-only endpoint/action contract surface for future checkout-only removal.
+
+### Completed Work
+
+* Added `Kontrakt endpointu/akcji: Usuń lokalny checkout / repo` in project settings.
+* Documented the future request shape: `projectId`, `operationMode=remove-checkout`, `targetPath`, `preservedPaths`, `gitPreflight`, and `approvalText`.
+* Documented validations, blocking rules, and response shape for a future guarded action.
+* Stated that `executionPerformed` remains `false` for H2.
+* Bumped `APP_VERSION` to `1.0089` and `LAST_PUBLISHED_MS` to `MS-034.3H2 - Checkout Removal Execution Endpoint Contract`.
+
+### Notes
+
+No delete, detach, write, reconnect execution, endpoint wiring, `DELETE /api/projects/[id]`, `/delete-execution`, BCP repository change, SPS metadata change, Project Map rewrite, Project Map artifact change, evidence change, source identity change, knowledge store change, audit change, risk decision change, fingerprint change, or canonical artifact change was added.
+
 ## Session 101 - MS-034.3H1 Checkout Removal Execution Readiness UI
 
 ### Version

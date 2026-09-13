@@ -195,12 +195,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.3F-F1` - Project Disk Removal Operation Modes Preview
 * `MS-034.3G` - Project Lifecycle Brain/Conductor/Map Contract Foundation
 * `MS-034.3H1` - Checkout Removal Execution Readiness UI
+* `MS-034.3H2` - Checkout Removal Execution Endpoint Contract
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.3H1 - Checkout Removal Execution Readiness UI
+Latest Completed Product Milestone: MS-034.3H2 - Checkout Removal Execution Endpoint Contract
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.3H2 - Checkout Removal Execution Endpoint Contract
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.3H2 sets `APP_VERSION` to `1.0089` and `LAST_PUBLISHED_MS` to `MS-034.3H2 - Checkout Removal Execution Endpoint Contract`.
+
+**Contract**
+The project settings surface now shows a read-only contract block titled `Kontrakt endpointu/akcji: Usuń lokalny checkout / repo`. The block describes the future request shape with `projectId`, `operationMode=remove-checkout`, `targetPath`, `preservedPaths`, `gitPreflight`, and `approvalText`; lists required validations and blocking rules; and documents the future response shape with `status`, `mode`, `wouldDeletePaths`, `preservedPaths`, `blockedReasons`, `gitPreflight`, `evidencePreserved`, `reconnectRequired`, and `executionPerformed`.
+
+**Boundary**
+MS-034.3H2 is a read-only endpoint/action contract surface only. It does not add delete, detach, write, reconnect execution, endpoint wiring, `DELETE /api/projects/[id]`, `/delete-execution`, Project Map rewrite, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map artifact changes, evidence changes, source identity changes, knowledge store changes, audit changes, risk decision changes, fingerprint changes, or canonical artifact changes. For H2, `executionPerformed` remains `false`.
 
 ## MS-034.3H1 - Checkout Removal Execution Readiness UI
 

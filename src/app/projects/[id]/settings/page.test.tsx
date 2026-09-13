@@ -282,6 +282,27 @@ describe("ProjectSettingsPage", () => {
     expect(container.textContent).toContain(
       "Ten panel nie wykonuje usuwania, nie dodaje endpointu",
     );
+    expect(
+      screen.getByText(/Kontrakt endpointu\/akcji: Usuń lokalny checkout \/ repo/),
+    ).toBeTruthy();
+    expect(container.textContent).toContain(
+      "H2 opisuje przyszły minimalny endpoint lub server action bez wykonania.",
+    );
+    expect(container.textContent).toContain(
+      "Request shape: projectId, operationMode=remove-checkout, targetPath, preservedPaths, gitPreflight, approvalText.",
+    );
+    expect(container.textContent).toContain(
+      "Walidacje: targetPath musi być checkoutem projektu",
+    );
+    expect(container.textContent).toContain(
+      "Blokady: Git dirty, niezweryfikowany remote main",
+    );
+    expect(container.textContent).toContain(
+      "Response shape: status, mode, wouldDeletePaths, preservedPaths, blockedReasons, gitPreflight, evidencePreserved, reconnectRequired, executionPerformed.",
+    );
+    expect(container.textContent).toContain(
+      "executionPerformed zawsze pozostaje false",
+    );
     expect(screen.getByText(/Project Brain, mapa i Konduktor/)).toBeTruthy();
     expect(
       container.textContent.indexOf("Project Brain, mapa i Konduktor"),

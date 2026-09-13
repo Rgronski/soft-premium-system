@@ -1527,6 +1527,42 @@ export default function ProjectSettingsPage() {
                 <code>/delete-execution</code> i nie modyfikuje repo ani
                 evidence.
               </p>
+              <div className="mt-4 rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
+                <p className="font-medium text-cyan-50">
+                  Kontrakt endpointu/akcji: Usuń lokalny checkout / repo
+                </p>
+                <p className="mt-2">
+                  H2 opisuje przyszły minimalny endpoint lub server action bez
+                  wykonania. Kontrakt pozostaje read-only i nie podpina{" "}
+                  <code>/delete-execution</code>.
+                </p>
+                <ul className="mt-3 space-y-1">
+                  <li>
+                    Request shape: projectId, operationMode=remove-checkout,
+                    targetPath, preservedPaths, gitPreflight, approvalText.
+                  </li>
+                  <li>
+                    Walidacje: targetPath musi być checkoutem projektu, musi
+                    pozostać w workspace, Git status musi być clean, branch,
+                    HEAD, remote i remote main muszą być znane.
+                  </li>
+                  <li>
+                    Blokady: Git dirty, niezweryfikowany remote main, targetPath
+                    poza workspace, próba usunięcia manifestu, `.sps-meta`,
+                    Project Map albo evidence.
+                  </li>
+                  <li>
+                    Response shape: status, mode, wouldDeletePaths,
+                    preservedPaths, blockedReasons, gitPreflight,
+                    evidencePreserved, reconnectRequired, executionPerformed.
+                  </li>
+                </ul>
+                <p className="mt-3">
+                  W H2 executionPerformed zawsze pozostaje false. Realne
+                  usuwanie wymaga osobnego milestone'u i osobnej zgody Product
+                  Ownera.
+                </p>
+              </div>
             </div>
           </div>
         </div>
