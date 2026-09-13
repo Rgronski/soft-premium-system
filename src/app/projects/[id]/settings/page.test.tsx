@@ -256,6 +256,43 @@ describe("ProjectSettingsPage", () => {
     expect(container.textContent).toContain(
       "SPS evidence nie jest kasowane domyślnie",
     );
+    expect(screen.getByText(/Project Brain, mapa i Konduktor/)).toBeTruthy();
+    expect(
+      container.textContent.indexOf("Project Brain, mapa i Konduktor"),
+    ).toBeGreaterThan(
+      container.textContent.indexOf(
+        "Tryby zarządzania lokalnymi plikami projektu",
+      ),
+    );
+    expect(container.textContent).toContain(
+      "To jest tylko kontrakt UI, bez wykonania delete, detach, reconnect albo zapisu mapy.",
+    );
+    expect(container.textContent).toContain(
+      "Project Brain przechowuje wiedzę, stan i evidence projektu.",
+    );
+    expect(container.textContent).toContain(
+      "Project Map opisuje strukturę projektu, canonical artifacts, audit, accepted risks i fingerprint.",
+    );
+    expect(container.textContent).toContain(
+      "Conductor czyta Brain + Map i rekomenduje następny bezpieczny krok.",
+    );
+    expect(container.textContent).toContain(
+      "Project Operations wykonuje tylko jawnie zatwierdzone operacje",
+    );
+    expect(container.textContent).toContain(
+      "Gdy lokalny checkout zniknie, evidence zostaje",
+    );
+    expect(container.textContent).toContain("reconnect i readback Project Map");
+    expect(container.textContent).toContain("projekt utworzony / zaimportowany");
+    expect(container.textContent).toContain("source identity znane");
+    expect(container.textContent).toContain("Project Map candidate available");
+    expect(container.textContent).toContain("canonical Project Map present");
+    expect(container.textContent).toContain("local checkout present");
+    expect(container.textContent).toContain("local checkout missing");
+    expect(container.textContent).toContain("evidence preserved");
+    expect(container.textContent).toContain("reconnect required");
+    expect(container.textContent).toContain("map readback required");
+    expect(container.textContent).toContain("Conductor next step required");
   });
 
   test("revalidates a derived repo checkout and hides the manifest-only source copy", async () => {

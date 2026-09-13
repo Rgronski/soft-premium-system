@@ -1500,6 +1500,44 @@ export default function ProjectSettingsPage() {
           </div>
         </div>
 
+        <div className="rounded-2xl border border-indigo-500/30 bg-indigo-500/5 p-4">
+          <p className="text-xs uppercase tracking-[0.2em] text-indigo-200/80">
+            Project Brain, mapa i Konduktor
+          </p>
+          <p className="mt-2 text-sm text-indigo-50">
+            Ten status wyjaśnia, jak SPS OS prowadzi projekt przez utworzenie,
+            reconnect i recovery. To jest tylko kontrakt UI, bez wykonania
+            delete, detach, reconnect albo zapisu mapy.
+          </p>
+          <div className="mt-3 grid gap-3 text-sm text-indigo-100 md:grid-cols-2">
+            <p>Project Brain przechowuje wiedzę, stan i evidence projektu.</p>
+            <p>
+              Project Map opisuje strukturę projektu, canonical artifacts,
+              audit, accepted risks i fingerprint.
+            </p>
+            <p>
+              Conductor czyta Brain + Map i rekomenduje następny bezpieczny
+              krok.
+            </p>
+            <p>
+              Project Operations wykonuje tylko jawnie zatwierdzone operacje:
+              detach, remove checkout, reconnect i map readback.
+            </p>
+          </div>
+          <p className="mt-3 text-sm text-indigo-100">
+            Gdy lokalny checkout zniknie, evidence zostaje, a bezpieczna
+            ścieżka to reconnect i readback Project Map przed dalszymi
+            decyzjami.
+          </p>
+          <p className="mt-2 text-sm text-indigo-100">
+            Stany lifecycle: projekt utworzony / zaimportowany, source identity
+            znane, Project Map candidate available, canonical Project Map
+            present, local checkout present, local checkout missing, evidence
+            preserved, reconnect required, map readback required, Conductor next
+            step required.
+          </p>
+        </div>
+
         <div className="rounded-2xl border border-sky-500/30 bg-sky-500/5 p-4">
           <p className="text-xs uppercase tracking-[0.2em] text-sky-200/80">
             Kontrakt decyzji live trial

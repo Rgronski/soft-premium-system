@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.3G Project Lifecycle Brain/Conductor/Map Contract Foundation
+
+### Version
+
+1.0087
+
+### Date
+
+2026-09-13
+
+### Summary
+
+Published the read-only project lifecycle contract card for Project Brain, Project Map, Conductor, and Project Operations.
+
+### Completed Work
+
+* Added the visible `Project Brain, mapa i Konduktor` card in project settings.
+* Explained that Project Brain keeps knowledge, state, and evidence.
+* Explained that Project Map keeps structure, canonical artifacts, audit, accepted risks, and fingerprint.
+* Explained that Conductor reads Brain + Map and recommends the next safe step.
+* Explained that Project Operations execute only explicitly approved actions and that missing checkout leads to reconnect/readback while evidence remains.
+* Bumped `APP_VERSION` to `1.0087` and `LAST_PUBLISHED_MS` to `MS-034.3G - Project Lifecycle Brain/Conductor/Map Contract Foundation`.
+
+### Notes
+
+No delete, detach, write, reconnect execution, endpoint wiring, `DELETE /api/projects/[id]`, `/delete-execution`, BCP repository change, SPS metadata change, Project Map rewrite, evidence change, source identity change, knowledge store change, audit change, risk decision change, fingerprint change, or canonical artifact change was added. Product Owner direction: finish the project removal milestone track before deeper real Brain/Map/Conductor integration.
+
 ## Session 101 - MS-034.3F-F1 Project Disk Removal Operation Modes Preview
 
 ### Version

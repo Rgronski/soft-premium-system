@@ -193,12 +193,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.3D` - BCP Registry Detach Preview Foundation
 * `MS-034.3E` - BCP Registry Detach Approval Gate Foundation
 * `MS-034.3F-F1` - Project Disk Removal Operation Modes Preview
+* `MS-034.3G` - Project Lifecycle Brain/Conductor/Map Contract Foundation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.3F-F1 - Project Disk Removal Operation Modes Preview
+Latest Completed Product Milestone: MS-034.3G - Project Lifecycle Brain/Conductor/Map Contract Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.3G - Project Lifecycle Brain/Conductor/Map Contract Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.3G sets `APP_VERSION` to `1.0087` and `LAST_PUBLISHED_MS` to `MS-034.3G - Project Lifecycle Brain/Conductor/Map Contract Foundation`.
+
+**Contract**
+The project settings surface now shows a visible read-only card titled `Project Brain, mapa i Konduktor`. The card explains that Project Brain keeps project knowledge, state, and evidence; Project Map keeps structure, canonical artifacts, audit, accepted risks, and fingerprint; Conductor reads Brain + Map and recommends the next safe step; and Project Operations execute only explicitly approved actions. It also states that if local checkout is missing, evidence remains and reconnect/readback becomes the safe path.
+
+**Boundary**
+MS-034.3G is UI contract/status foundation only. It does not add delete, detach, write, reconnect execution, endpoint wiring, `DELETE /api/projects/[id]`, `/delete-execution`, Project Map rewrite, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, canonical artifact changes, source identity changes, knowledge store changes, audit changes, risk decision changes, or fingerprint changes. Product Owner direction is to finish the project removal milestone track first; deeper real Brain/Map/Conductor integration is deferred until after that track is completed.
 
 ## MS-034.3F-F1 - Project Disk Removal Operation Modes Preview
 
