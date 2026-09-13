@@ -196,12 +196,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.3G` - Project Lifecycle Brain/Conductor/Map Contract Foundation
 * `MS-034.3H1` - Checkout Removal Execution Readiness UI
 * `MS-034.3H2` - Checkout Removal Execution Endpoint Contract
+* `MS-034.3H3` - Checkout Removal Endpoint Dry-Run
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.3H2 - Checkout Removal Execution Endpoint Contract
+Latest Completed Product Milestone: MS-034.3H3 - Checkout Removal Endpoint Dry-Run
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.3H3 - Checkout Removal Endpoint Dry-Run
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.3H3 sets `APP_VERSION` to `1.0090` and `LAST_PUBLISHED_MS` to `MS-034.3H3 - Checkout Removal Endpoint Dry-Run`.
+
+**Contract**
+SPS OS now exposes `POST /api/projects/[id]/checkout-removal/dry-run` as a dry-run-only checkout removal endpoint. The route returns `executionPerformed: false` and a response shape with `status`, `mode`, `wouldDeletePaths`, `preservedPaths`, `blockedReasons`, `gitPreflight`, `evidencePreserved`, and `reconnectRequired`. It blocks invalid `projectId`, wrong `operationMode`, invalid or missing `targetPath`, missing `preservedPaths`, missing `gitPreflight`, missing `approvalText`, target paths pointing at `sps-project.json`, `.sps-meta`, preserved paths, or paths outside the preserved workspace.
+
+**Boundary**
+MS-034.3H3 is dry-run only. It does not add real delete, detach, write behavior, UI execution wiring, `DELETE /api/projects/[id]`, `/delete-execution`, `executeProjectDiskDelete` usage, `rm`, `unlink`, `rmdir`, Project Map rewrite, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map artifact changes, evidence changes, source identity changes, knowledge store changes, audit changes, risk decision changes, fingerprint changes, or canonical artifact changes.
 
 ## MS-034.3H2 - Checkout Removal Execution Endpoint Contract
 

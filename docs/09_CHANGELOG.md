@@ -69,6 +69,32 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.3H3 Checkout Removal Endpoint Dry-Run
+
+### Version
+
+1.0090
+
+### Date
+
+2026-09-13
+
+### Summary
+
+Published the dry-run-only checkout removal endpoint.
+
+### Completed Work
+
+* Added `POST /api/projects/[id]/checkout-removal/dry-run`.
+* Returned `executionPerformed: false` with `status`, `mode`, `wouldDeletePaths`, `preservedPaths`, `blockedReasons`, `gitPreflight`, `evidencePreserved`, and `reconnectRequired`.
+* Blocked invalid `projectId`, wrong `operationMode`, invalid or missing `targetPath`, missing `preservedPaths`, missing `gitPreflight`, and missing `approvalText`.
+* Blocked target paths pointing at `sps-project.json`, `.sps-meta`, preserved paths, or outside the preserved workspace.
+* Bumped `APP_VERSION` to `1.0090` and `LAST_PUBLISHED_MS` to `MS-034.3H3 - Checkout Removal Endpoint Dry-Run`.
+
+### Notes
+
+No real delete, detach, write behavior, UI execution wiring, `DELETE /api/projects/[id]`, `/delete-execution`, `executeProjectDiskDelete` usage, `rm`, `unlink`, `rmdir`, BCP repository change, SPS metadata change, Project Map rewrite, Project Map artifact change, evidence change, source identity change, knowledge store change, audit change, risk decision change, fingerprint change, or canonical artifact change was added.
+
 ## Session 101 - MS-034.3H2 Checkout Removal Execution Endpoint Contract
 
 ### Version
