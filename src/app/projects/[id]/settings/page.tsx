@@ -1497,6 +1497,37 @@ export default function ProjectSettingsPage() {
                 tego trybu operacji.
               </p>
             </div>
+            <div className="mt-4 rounded-lg border border-cyan-300/10 p-3 text-sm text-cyan-100">
+              <p className="font-medium text-cyan-50">
+                Gotowość wykonania: Usuń lokalny checkout / repo
+              </p>
+              <p className="mt-2">
+                Status operacji: approval required. Realne wykonanie pozostaje
+                zablokowane do osobnego zatwierdzenia Product Ownera i przyszłego
+                endpointu wykonawczego.
+              </p>
+              <ul className="mt-3 space-y-1">
+                <li>Git status clean: wymagane.</li>
+                <li>Branch, HEAD i remote: wymagane.</li>
+                <li>Remote main verified: wymagane.</li>
+                <li>Approval text copied/confirmed: wymagane.</li>
+                <li>Evidence preserved: wymagane.</li>
+                <li>
+                  Blocked if Git dirty, path is not project checkout, path
+                  leaves workspace, manifest would be removed, or `.sps-meta`
+                  would be removed.
+                </li>
+              </ul>
+              <p className="mt-3">
+                Statusy przyszłej operacji: preview, approval required, ready,
+                blocked, executed, failed, reconnect required.
+              </p>
+              <p className="mt-2">
+                Ten panel nie wykonuje usuwania, nie dodaje endpointu, nie woła{" "}
+                <code>/delete-execution</code> i nie modyfikuje repo ani
+                evidence.
+              </p>
+            </div>
           </div>
         </div>
 

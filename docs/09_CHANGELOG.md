@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.3H1 Checkout Removal Execution Readiness UI
+
+### Version
+
+1.0088
+
+### Date
+
+2026-09-13
+
+### Summary
+
+Published the read-only execution readiness panel for future checkout-only removal.
+
+### Completed Work
+
+* Added `Gotowość wykonania: Usuń lokalny checkout / repo` in project settings.
+* Reported status `approval required`.
+* Listed required conditions: clean Git status, known branch/HEAD/remote, verified remote main, copied/confirmed approval text, and preserved evidence.
+* Listed blocking rules for dirty Git state, invalid checkout path, path leaving workspace, manifest removal, or `.sps-meta` removal.
+* Listed future statuses: `preview`, `approval required`, `ready`, `blocked`, `executed`, `failed`, and `reconnect required`.
+* Bumped `APP_VERSION` to `1.0088` and `LAST_PUBLISHED_MS` to `MS-034.3H1 - Checkout Removal Execution Readiness UI`.
+
+### Notes
+
+No delete, detach, write, reconnect execution, endpoint wiring, `DELETE /api/projects/[id]`, `/delete-execution`, BCP repository change, SPS metadata change, Project Map rewrite, Project Map artifact change, evidence change, source identity change, knowledge store change, audit change, risk decision change, fingerprint change, or canonical artifact change was added.
+
 ## Session 101 - MS-034.3G Project Lifecycle Brain/Conductor/Map Contract Foundation
 
 ### Version

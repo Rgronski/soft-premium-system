@@ -194,12 +194,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.3E` - BCP Registry Detach Approval Gate Foundation
 * `MS-034.3F-F1` - Project Disk Removal Operation Modes Preview
 * `MS-034.3G` - Project Lifecycle Brain/Conductor/Map Contract Foundation
+* `MS-034.3H1` - Checkout Removal Execution Readiness UI
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.3G - Project Lifecycle Brain/Conductor/Map Contract Foundation
+Latest Completed Product Milestone: MS-034.3H1 - Checkout Removal Execution Readiness UI
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.3H1 - Checkout Removal Execution Readiness UI
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.3H1 sets `APP_VERSION` to `1.0088` and `LAST_PUBLISHED_MS` to `MS-034.3H1 - Checkout Removal Execution Readiness UI`.
+
+**Contract**
+The project settings surface now shows a read-only execution readiness panel titled `Gotowość wykonania: Usuń lokalny checkout / repo`. The panel reports status `approval required`, lists required execution conditions including clean Git status, known branch/HEAD/remote, verified remote main, copied/confirmed approval text, and preserved evidence, and lists blocking rules for dirty Git state, invalid checkout path, path leaving the workspace, manifest removal, or `.sps-meta` removal. It also lists future operation statuses: `preview`, `approval required`, `ready`, `blocked`, `executed`, `failed`, and `reconnect required`.
+
+**Boundary**
+MS-034.3H1 is read-only UI contract only. It does not add delete, detach, write, reconnect execution, endpoint wiring, `DELETE /api/projects/[id]`, `/delete-execution`, Project Map rewrite, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map artifact changes, source identity changes, knowledge store changes, audit changes, risk decision changes, fingerprint changes, evidence changes, or canonical artifact changes.
 
 ## MS-034.3G - Project Lifecycle Brain/Conductor/Map Contract Foundation
 

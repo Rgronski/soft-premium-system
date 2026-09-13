@@ -235,9 +235,9 @@ describe("ProjectSettingsPage", () => {
       screen.getByText(/Tryby zarządzania lokalnymi plikami projektu/),
     ).toBeTruthy();
     expect(screen.getByText(/Odłącz z SPS OS/)).toBeTruthy();
-    expect(screen.getByText(/Usuń lokalny checkout \/ repo/)).toBeTruthy();
+    expect(screen.getAllByText(/Usuń lokalny checkout \/ repo/).length).toBeGreaterThan(0);
     expect(screen.getByText(/Usuń cały workspace projektu/)).toBeTruthy();
-    expect(screen.getByText(/Evidence preserved/)).toBeTruthy();
+    expect(screen.getAllByText(/Evidence preserved/).length).toBeGreaterThan(0);
     expect(container.textContent).toContain(
       "To jest tylko preview kontraktu UI. Nie wykonuje usunięcia",
     );
@@ -255,6 +255,32 @@ describe("ProjectSettingsPage", () => {
     );
     expect(container.textContent).toContain(
       "SPS evidence nie jest kasowane domyślnie",
+    );
+    expect(
+      screen.getByText(/Gotowość wykonania: Usuń lokalny checkout \/ repo/),
+    ).toBeTruthy();
+    expect(container.textContent).toContain(
+      "Status operacji: approval required.",
+    );
+    expect(container.textContent).toContain("Git status clean: wymagane.");
+    expect(container.textContent).toContain("Branch, HEAD i remote: wymagane.");
+    expect(container.textContent).toContain(
+      "Remote main verified: wymagane.",
+    );
+    expect(container.textContent).toContain(
+      "Approval text copied/confirmed: wymagane.",
+    );
+    expect(container.textContent).toContain("Evidence preserved: wymagane.");
+    expect(container.textContent).toContain("Blocked if Git dirty");
+    expect(container.textContent).toContain("path is not project checkout");
+    expect(container.textContent).toContain("path leaves workspace");
+    expect(container.textContent).toContain("manifest would be removed");
+    expect(container.textContent).toContain("`.sps-meta` would be removed");
+    expect(container.textContent).toContain(
+      "preview, approval required, ready, blocked, executed, failed, reconnect required",
+    );
+    expect(container.textContent).toContain(
+      "Ten panel nie wykonuje usuwania, nie dodaje endpointu",
     );
     expect(screen.getByText(/Project Brain, mapa i Konduktor/)).toBeTruthy();
     expect(
