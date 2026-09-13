@@ -197,12 +197,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.3H1` - Checkout Removal Execution Readiness UI
 * `MS-034.3H2` - Checkout Removal Execution Endpoint Contract
 * `MS-034.3H3` - Checkout Removal Endpoint Dry-Run
+* `MS-034.3H4` - Checkout Removal Dry-Run UI Wiring
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.3H3 - Checkout Removal Endpoint Dry-Run
+Latest Completed Product Milestone: MS-034.3H4 - Checkout Removal Dry-Run UI Wiring
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.3H4 - Checkout Removal Dry-Run UI Wiring
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.3H4 sets `APP_VERSION` to `1.0091` and `LAST_PUBLISHED_MS` to `MS-034.3H4 - Checkout Removal Dry-Run UI Wiring`.
+
+**Contract**
+The project settings surface now includes the `Sprawdź dry-run usunięcia checkoutu` action wired to `POST /api/projects/${project.id}/checkout-removal/dry-run`. The UI renders the dry-run response fields `executionPerformed`, `status`, `mode`, `wouldDeletePaths`, `preservedPaths`, `blockedReasons`, `gitPreflight`, `evidencePreserved`, and `reconnectRequired`, and clearly states `To jest dry-run. Nic nie zostało usunięte.` The dry-run payload preserves the canonical Beauty Client PRO metadata root `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb`.
+
+**Boundary**
+MS-034.3H4 wires UI only to the dry-run endpoint. It does not add real delete, detach, write behavior, UI execution beyond dry-run, `DELETE /api/projects/[id]`, `/delete-execution`, `executeProjectDiskDelete` usage, Project Map rewrite, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map artifact changes, evidence changes, source identity changes, knowledge store changes, audit changes, risk decision changes, fingerprint changes, or canonical artifact changes.
 
 ## MS-034.3H3 - Checkout Removal Endpoint Dry-Run
 

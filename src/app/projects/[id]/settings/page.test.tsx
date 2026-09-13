@@ -303,6 +303,14 @@ describe("ProjectSettingsPage", () => {
     expect(container.textContent).toContain(
       "executionPerformed zawsze pozostaje false",
     );
+    expect(
+      screen.getByRole("button", {
+        name: /Sprawdź dry-run usunięcia checkoutu/,
+      }),
+    ).toBeTruthy();
+    expect(container.textContent).toContain(
+      "To jest dry-run. Nic nie zostało usunięte.",
+    );
     expect(screen.getByText(/Project Brain, mapa i Konduktor/)).toBeTruthy();
     expect(
       container.textContent.indexOf("Project Brain, mapa i Konduktor"),
@@ -340,6 +348,178 @@ describe("ProjectSettingsPage", () => {
     expect(container.textContent).toContain("reconnect required");
     expect(container.textContent).toContain("map readback required");
     expect(container.textContent).toContain("Conductor next step required");
+  });
+
+  test("calls the checkout-removal dry-run endpoint and renders the response without delete execution", async () => {
+    const bcpProjectId = "0d3e28cb-6dff-442a-b94c-007a5d6b5779";
+    const fetchMock = vi.fn((input: RequestInfo | URL, _init?: RequestInit) => {
+      const url = typeof input === "string" ? input : input.toString();
+
+      if (url.includes("/checkout-removal/dry-run")) {
+        return Promise.resolve(
+          new Response(
+            JSON.stringify({
+              status: "preview",
+              mode: "remove-checkout",
+              executionPerformed: false,
+              wouldDeletePaths: [
+                "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+              ],
+              preservedPaths: [
+                "C:\\SPS_OS_WORK\\beauty-client-pro",
+                "C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json",
+                "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+              ],
+              blockedReasons: [],
+              gitPreflight: {
+                workingTreeStatus: "requires separate preflight",
+                remoteMainVerified: false,
+              },
+              evidencePreserved: true,
+              reconnectRequired: true,
+            }),
+            {
+              status: 200,
+              headers: {
+                "content-type": "application/json",
+              },
+            },
+          ),
+        );
+      }
+
+      return Promise.resolve(createBlockedSourceRevalidationResponse());
+    });
+
+    vi.stubGlobal("fetch", fetchMock);
+    localStorage.clear();
+    useParamsMock.mockReturnValue({ id: bcpProjectId });
+    createProject(
+      "Beauty Client PRO",
+      bcpProjectId,
+      undefined,
+      "C:\\SPS_OS_WORK\\beauty-client-pro",
+      "manifest-present",
+    );
+
+    const { container } = render(<ProjectSettingsPage />);
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", {
+          name: /Sprawdź dry-run usunięcia checkoutu/,
+        }),
+      ).toBeTruthy();
+    });
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: /Sprawdź dry-run usunięcia checkoutu/,
+      }),
+    );
+
+    await waitFor(() => {
+      expect(container.textContent).toContain("executionPerformed: false");
+    });
+
+    const dryRunCall = fetchMock.mock.calls.find(([input]) =>
+      String(input).includes("/checkout-removal/dry-run"),
+    );
+
+    expect(dryRunCall).toBeTruthy();
+    expect(String(dryRunCall?.[0])).toBe(
+      `/api/projects/${bcpProjectId}/checkout-removal/dry-run`,
+    );
+    expect(
+      JSON.parse(String((dryRunCall?.[1] as RequestInit | undefined)?.body)),
+    ).toMatchObject({
+      preservedPaths: [
+        "C:\\SPS_OS_WORK\\beauty-client-pro",
+        "C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json",
+        "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+      ],
+    });
+    expect(
+      fetchMock.mock.calls.some(([input]) =>
+        String(input).includes("/delete-execution"),
+      ),
+    ).toBe(false);
+    expect(
+      fetchMock.mock.calls.some(([input]) =>
+        String(input).includes("DELETE /api/projects"),
+      ),
+    ).toBe(false);
+    expect(container.textContent).toContain("wouldDeletePaths:");
+    expect(container.textContent).toContain(
+      "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+    );
+    expect(container.textContent).toContain("preservedPaths:");
+    expect(container.textContent).toContain("blockedReasons:");
+    expect(container.textContent).toContain("brak");
+    expect(container.textContent).toContain("gitPreflight:");
+    expect(container.textContent).toContain("evidencePreserved: true");
+    expect(container.textContent).toContain("reconnectRequired: true");
+    expect(container.textContent).toContain(
+      "To jest dry-run. Nic nie zostało usunięte.",
+    );
+  });
+
+  test("renders dry-run blocked reasons without deleting anything", async () => {
+    const fetchMock = vi.fn((input: RequestInfo | URL) => {
+      const url = typeof input === "string" ? input : input.toString();
+
+      if (url.includes("/checkout-removal/dry-run")) {
+        return Promise.resolve(
+          new Response(
+            JSON.stringify({
+              status: "blocked",
+              mode: "remove-checkout",
+              executionPerformed: false,
+              wouldDeletePaths: [],
+              preservedPaths: ["C:\\SPS_OS_WORK\\beauty-client-pro"],
+              blockedReasons: ["targetPath musi pozostać wewnątrz workspace."],
+              gitPreflight: {
+                remoteMainVerified: false,
+              },
+              evidencePreserved: true,
+              reconnectRequired: true,
+            }),
+            {
+              status: 409,
+              headers: {
+                "content-type": "application/json",
+              },
+            },
+          ),
+        );
+      }
+
+      return Promise.resolve(createBlockedSourceRevalidationResponse());
+    });
+
+    vi.stubGlobal("fetch", fetchMock);
+
+    const { container } = render(<ProjectSettingsPage />);
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: /Sprawdź dry-run usunięcia checkoutu/,
+      }),
+    );
+
+    await waitFor(() => {
+      expect(container.textContent).toContain(
+        "Dry-run zwrócił blokady. Nic nie zostało usunięte.",
+      );
+    });
+
+    expect(container.textContent).toContain("executionPerformed: false");
+    expect(container.textContent).toContain(
+      "targetPath musi pozostać wewnątrz workspace.",
+    );
+    expect(container.textContent).toContain(
+      "To jest dry-run. Nic nie zostało usunięte.",
+    );
   });
 
   test("revalidates a derived repo checkout and hides the manifest-only source copy", async () => {

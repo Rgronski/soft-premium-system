@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.3H4 Checkout Removal Dry-Run UI Wiring
+
+### Version
+
+1.0091
+
+### Date
+
+2026-09-14
+
+### Summary
+
+Published the project settings UI wiring for the checkout removal dry-run endpoint.
+
+### Completed Work
+
+* Added the `Sprawdź dry-run usunięcia checkoutu` action in project settings.
+* Sent a dry-run request to `POST /api/projects/${project.id}/checkout-removal/dry-run`.
+* Rendered `executionPerformed`, `status`, `mode`, `wouldDeletePaths`, `preservedPaths`, `blockedReasons`, `gitPreflight`, `evidencePreserved`, and `reconnectRequired`.
+* Stated `To jest dry-run. Nic nie zostało usunięte.`
+* Preserved the canonical BCP metadata root `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb`.
+* Bumped `APP_VERSION` to `1.0091` and `LAST_PUBLISHED_MS` to `MS-034.3H4 - Checkout Removal Dry-Run UI Wiring`.
+
+### Notes
+
+No real delete, detach, write behavior, UI execution beyond dry-run, `DELETE /api/projects/[id]`, `/delete-execution`, `executeProjectDiskDelete` usage, BCP repository change, `C:\SPS_OS_WORK` change, SPS metadata change, Project Map rewrite, Project Map artifact change, evidence change, source identity change, knowledge store change, audit change, risk decision change, fingerprint change, or canonical artifact change was added.
+
 ## Session 101 - MS-034.3H3 Checkout Removal Endpoint Dry-Run
 
 ### Version

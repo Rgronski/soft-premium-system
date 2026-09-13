@@ -63,8 +63,37 @@ type ProjectSourceRevalidationResponse =
   | ProjectSourceRevalidationBlockedResponse
   | ProjectSourceRevalidationErrorResponse;
 
+type CheckoutRemovalDryRunResponse = {
+  status: "preview" | "blocked";
+  mode: "remove-checkout";
+  executionPerformed: false;
+  wouldDeletePaths: string[];
+  preservedPaths: string[];
+  blockedReasons: string[];
+  gitPreflight: unknown;
+  evidencePreserved: true;
+  reconnectRequired: true;
+};
+
 const BCP_REGISTRY_DETACH_APPROVAL_TEXT =
   "Product Owner approves registry-only detach for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Scope is limited to SPS OS registry/UI visibility and explicitly excludes BCP repository, .git, source files, workspace wrapper manifest, SPS metadata root, source identity, knowledge store, canonical Project Map artifacts, audit, risk decisions, and structural fingerprint.";
+
+function buildCheckoutRemovalDryRunMetadataRootPath(project: Project): string {
+  const workspacePath = project.workingDirectory?.trim() ?? "";
+  const workspaceName =
+    workspacePath.split(/[\\/]+/u).filter(Boolean).at(-1) ?? project.name;
+  const readableSegment = workspaceName
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  const shortProjectId = project.id
+    .replace(/[^a-z0-9]/gi, "")
+    .slice(0, 8)
+    .toLowerCase();
+
+  return `C:\\SPS_OS_WORK\\.sps-meta\\${readableSegment || "project"}--${shortProjectId}`;
+}
 
 function buildProjectSourceRevalidationRequestUrl(
   projectId: string,
@@ -783,6 +812,12 @@ export default function ProjectSettingsPage() {
     useState<ProjectSourceReconciliationStatus | null>(null);
   const [registryDetachApprovalCopyStatus, setRegistryDetachApprovalCopyStatus] =
     useState<string | null>(null);
+  const [checkoutRemovalDryRunStatus, setCheckoutRemovalDryRunStatus] =
+    useState<"idle" | "loading" | "success" | "error">("idle");
+  const [checkoutRemovalDryRunResult, setCheckoutRemovalDryRunResult] =
+    useState<CheckoutRemovalDryRunResponse | null>(null);
+  const [checkoutRemovalDryRunError, setCheckoutRemovalDryRunError] =
+    useState<string | null>(null);
 
   useEffect(() => {
     let ignore = false;
@@ -809,6 +844,9 @@ export default function ProjectSettingsPage() {
       setGithubLocalWorkingBranchCreationOutcome("idle");
       setProjectSourceStatus(null);
       setFeedbackMessage(null);
+      setCheckoutRemovalDryRunStatus("idle");
+      setCheckoutRemovalDryRunResult(null);
+      setCheckoutRemovalDryRunError(null);
     }
 
     if (nextLocalProject) {
@@ -955,6 +993,8 @@ export default function ProjectSettingsPage() {
     : getProjectBindingDecisionSummary(project);
   const deleteValidationSummary = getProjectDeleteValidationSummary(project);
   const registryDetachPreview = buildProjectRegistryDetachPreview(project);
+  const checkoutRemovalDryRunMetadataRootPath =
+    buildCheckoutRemovalDryRunMetadataRootPath(project);
   const branchWorkModeSummary = buildBranchWorkModeSummary(
     project.name,
     branchWorkMode,
@@ -1068,6 +1108,66 @@ export default function ProjectSettingsPage() {
     } catch {
       setRegistryDetachApprovalCopyStatus(
         "Nie udało się skopiować tekstu zgody.",
+      );
+    }
+  }
+
+  async function handleCheckoutRemovalDryRun() {
+    const preservedPaths = [
+      registryDetachPreview.preservedPaths.workspace,
+      `${registryDetachPreview.preservedPaths.workspace}\\sps-project.json`,
+      checkoutRemovalDryRunMetadataRootPath,
+    ];
+
+    setCheckoutRemovalDryRunStatus("loading");
+    setCheckoutRemovalDryRunResult(null);
+    setCheckoutRemovalDryRunError(null);
+
+    try {
+      const response = await fetch(
+        `/api/projects/${currentProject.id}/checkout-removal/dry-run`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            projectId: currentProject.id,
+            operationMode: "remove-checkout",
+            targetPath: registryDetachPreview.preservedPaths.repoCheckout,
+            preservedPaths,
+            gitPreflight: {
+              workingTreeStatus:
+                reconciledSourceStatus?.workingTreeState ??
+                "requires separate preflight",
+              branch:
+                reconciledSourceStatus?.activeBranch ??
+                "requires separate preflight",
+              head: "requires separate preflight",
+              remote:
+                reconciledSourceStatus?.remoteUrl ??
+                currentProject.repositoryUrl?.trim() ??
+                "requires separate preflight",
+              remoteMainVerified: false,
+            },
+            approvalText:
+              "Product Owner approval required before any future checkout removal execution.",
+          }),
+        },
+      );
+      const payload = (await response.json()) as CheckoutRemovalDryRunResponse;
+
+      setCheckoutRemovalDryRunResult(payload);
+      setCheckoutRemovalDryRunStatus(response.ok ? "success" : "error");
+      if (!response.ok) {
+        setCheckoutRemovalDryRunError(
+          "Dry-run zwrócił blokady. Nic nie zostało usunięte.",
+        );
+      }
+    } catch {
+      setCheckoutRemovalDryRunStatus("error");
+      setCheckoutRemovalDryRunError(
+        "Dry-run usunięcia checkoutu nie połączył się z API. Nic nie zostało usunięte.",
       );
     }
   }
@@ -1562,6 +1662,81 @@ export default function ProjectSettingsPage() {
                   usuwanie wymaga osobnego milestone'u i osobnej zgody Product
                   Ownera.
                 </p>
+              </div>
+              <div className="mt-4 rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
+                <p className="font-medium text-cyan-50">
+                  Dry-run endpointu: Usuń lokalny checkout / repo
+                </p>
+                <p className="mt-2">
+                  To jest dry-run. Nic nie zostało usunięte.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleCheckoutRemovalDryRun}
+                  disabled={checkoutRemovalDryRunStatus === "loading"}
+                  className="mt-3 rounded-lg border border-cyan-300/30 px-3 py-2 text-sm font-medium text-cyan-50 transition hover:border-cyan-200 hover:bg-cyan-400/10 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {checkoutRemovalDryRunStatus === "loading"
+                    ? "Sprawdzam dry-run..."
+                    : "Sprawdź dry-run usunięcia checkoutu"}
+                </button>
+                {checkoutRemovalDryRunStatus === "loading" ? (
+                  <p className="mt-3">Dry-run w toku. Nic nie jest usuwane.</p>
+                ) : null}
+                {checkoutRemovalDryRunError ? (
+                  <p className="mt-3 text-amber-100">
+                    {checkoutRemovalDryRunError}
+                  </p>
+                ) : null}
+                {checkoutRemovalDryRunResult ? (
+                  <div className="mt-3 space-y-2">
+                    <p>
+                      executionPerformed:{" "}
+                      {String(checkoutRemovalDryRunResult.executionPerformed)}
+                    </p>
+                    <p>status: {checkoutRemovalDryRunResult.status}</p>
+                    <p>mode: {checkoutRemovalDryRunResult.mode}</p>
+                    <p>wouldDeletePaths:</p>
+                    <ul className="space-y-1">
+                      {checkoutRemovalDryRunResult.wouldDeletePaths.length > 0 ? (
+                        checkoutRemovalDryRunResult.wouldDeletePaths.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))
+                      ) : (
+                        <li>brak</li>
+                      )}
+                    </ul>
+                    <p>preservedPaths:</p>
+                    <ul className="space-y-1">
+                      {checkoutRemovalDryRunResult.preservedPaths.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                    <p>blockedReasons:</p>
+                    <ul className="space-y-1">
+                      {checkoutRemovalDryRunResult.blockedReasons.length > 0 ? (
+                        checkoutRemovalDryRunResult.blockedReasons.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))
+                      ) : (
+                        <li>brak</li>
+                      )}
+                    </ul>
+                    <p>
+                      gitPreflight:{" "}
+                      {JSON.stringify(checkoutRemovalDryRunResult.gitPreflight)}
+                    </p>
+                    <p>
+                      evidencePreserved:{" "}
+                      {String(checkoutRemovalDryRunResult.evidencePreserved)}
+                    </p>
+                    <p>
+                      reconnectRequired:{" "}
+                      {String(checkoutRemovalDryRunResult.reconnectRequired)}
+                    </p>
+                    <p>To jest dry-run. Nic nie zostało usunięte.</p>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
