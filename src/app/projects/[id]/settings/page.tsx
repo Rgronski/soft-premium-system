@@ -63,6 +63,9 @@ type ProjectSourceRevalidationResponse =
   | ProjectSourceRevalidationBlockedResponse
   | ProjectSourceRevalidationErrorResponse;
 
+const BCP_REGISTRY_DETACH_APPROVAL_TEXT =
+  "Product Owner approves registry-only detach for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Scope is limited to SPS OS registry/UI visibility and explicitly excludes BCP repository, .git, source files, workspace wrapper manifest, SPS metadata root, source identity, knowledge store, canonical Project Map artifacts, audit, risk decisions, and structural fingerprint.";
+
 function buildProjectSourceRevalidationRequestUrl(
   projectId: string,
   repositoryUrl: string,
@@ -778,6 +781,8 @@ export default function ProjectSettingsPage() {
     useState<GitHubLocalWorkingBranchCreationOutcome>("idle");
   const [projectSourceStatus, setProjectSourceStatus] =
     useState<ProjectSourceReconciliationStatus | null>(null);
+  const [registryDetachApprovalCopyStatus, setRegistryDetachApprovalCopyStatus] =
+    useState<string | null>(null);
 
   useEffect(() => {
     let ignore = false;
@@ -1054,6 +1059,17 @@ export default function ProjectSettingsPage() {
         ? "Adres GitHub zapisano jako metadane projektu."
         : "Pozostawiono projekt bez adresu GitHub.",
     );
+  }
+
+  async function handleCopyRegistryDetachApprovalText() {
+    try {
+      await navigator.clipboard.writeText(BCP_REGISTRY_DETACH_APPROVAL_TEXT);
+      setRegistryDetachApprovalCopyStatus("Tekst zgody skopiowany.");
+    } catch {
+      setRegistryDetachApprovalCopyStatus(
+        "Nie udało się skopiować tekstu zgody.",
+      );
+    }
   }
 
   function handleSaveWorkingDirectory() {
@@ -1387,6 +1403,34 @@ export default function ProjectSettingsPage() {
               {registryDetachPreview.manifestRediscoveryWarning}
             </p>
           ) : null}
+          <div className="mt-4 rounded-xl border border-cyan-300/20 bg-zinc-950/60 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-cyan-200/80">
+              Bramka zgody Product Ownera
+            </p>
+            <p className="mt-2 text-sm text-cyan-50">
+              Ten milestone nie wykonuje odpięcia. Zgoda jest wymagana dopiero
+              przed osobnym przyszłym zapisem w rejestrze SPS OS.
+            </p>
+            <p className="mt-2 text-sm text-cyan-100">
+              BCP repo, metadata, Project Map i canonical artifacts pozostają
+              nietknięte.
+            </p>
+            <p className="mt-3 text-sm text-cyan-100">
+              {BCP_REGISTRY_DETACH_APPROVAL_TEXT}
+            </p>
+            <button
+              type="button"
+              onClick={handleCopyRegistryDetachApprovalText}
+              className="mt-3 rounded-lg border border-cyan-300/30 px-3 py-2 text-sm font-medium text-cyan-50 transition hover:border-cyan-200 hover:bg-cyan-400/10"
+            >
+              Kopiuj tekst zgody
+            </button>
+            {registryDetachApprovalCopyStatus ? (
+              <p className="mt-2 text-sm text-cyan-100">
+                {registryDetachApprovalCopyStatus}
+              </p>
+            ) : null}
+          </div>
         </div>
 
         <div className="rounded-2xl border border-sky-500/30 bg-sky-500/5 p-4">

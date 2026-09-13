@@ -69,6 +69,31 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.3E BCP Registry Detach Approval Gate Foundation
+
+### Version
+
+1.0085
+
+### Date
+
+2026-09-12
+
+### Summary
+
+Published the read-only Product Owner approval gate for the BCP registry detach preview.
+
+### Completed Work
+
+* Added a read-only approval gate beside `Podgląd odpięcia z rejestru SPS`.
+* Displayed the exact Product Owner approval text required before any future registry-only detach could become executable.
+* Added local-only `Kopiuj tekst zgody` clipboard UI without approval persistence or execution behavior.
+* Bumped `APP_VERSION` to `1.0085` and `LAST_PUBLISHED_MS` to `MS-034.3E - BCP Registry Detach Approval Gate Foundation`.
+
+### Notes
+
+No detach, delete, write, approval persistence, `DELETE /api/projects/[id]`, `/delete-execution`, BCP repository change, SPS metadata change, Project Map change, source identity change, knowledge store change, audit change, risk decision change, fingerprint change, or canonical artifact change was added.
+
 ## Session 101 - MS-034.3D BCP Registry Detach Preview Foundation
 
 ### Version

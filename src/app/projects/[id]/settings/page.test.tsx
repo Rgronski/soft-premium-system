@@ -152,6 +152,13 @@ describe("ProjectSettingsPage", () => {
 
   test("shows a read-only registry detach preview for the BCP project entry and all prefixed browser keys", () => {
     const bcpProjectId = "0d3e28cb-6dff-442a-b94c-007a5d6b5779";
+    const writeText = vi.fn(() => Promise.resolve());
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: {
+        writeText,
+      },
+    });
     localStorage.clear();
     useParamsMock.mockReturnValue({ id: bcpProjectId });
     createProject(
@@ -208,6 +215,22 @@ describe("ProjectSettingsPage", () => {
     ).toBeTruthy();
     expect(container.textContent).toContain("nie woła DELETE /api/projects/[id]");
     expect(container.textContent).toContain("nie używa /delete-execution");
+    expect(screen.getByText(/Bramka zgody Product Ownera/)).toBeTruthy();
+    expect(
+      screen.getByText(/Ten milestone nie wykonuje odpięcia/),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/BCP repo, metadata, Project Map i canonical artifacts pozostają nietknięte/),
+    ).toBeTruthy();
+    expect(container.textContent).toContain(
+      "Product Owner approves registry-only detach for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Scope is limited to SPS OS registry/UI visibility and explicitly excludes BCP repository, .git, source files, workspace wrapper manifest, SPS metadata root, source identity, knowledge store, canonical Project Map artifacts, audit, risk decisions, and structural fingerprint.",
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: /Kopiuj tekst zgody/ }));
+
+    expect(writeText).toHaveBeenCalledWith(
+      "Product Owner approves registry-only detach for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Scope is limited to SPS OS registry/UI visibility and explicitly excludes BCP repository, .git, source files, workspace wrapper manifest, SPS metadata root, source identity, knowledge store, canonical Project Map artifacts, audit, risk decisions, and structural fingerprint.",
+    );
   });
 
   test("revalidates a derived repo checkout and hides the manifest-only source copy", async () => {

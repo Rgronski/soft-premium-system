@@ -191,12 +191,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-028.42a` - App Version Marker 1.028.42 Publication
 * `MS-034.2` - Project AI Workspace Two-Column Layout Foundation
 * `MS-034.3D` - BCP Registry Detach Preview Foundation
+* `MS-034.3E` - BCP Registry Detach Approval Gate Foundation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.3D - BCP Registry Detach Preview Foundation
+Latest Completed Product Milestone: MS-034.3E - BCP Registry Detach Approval Gate Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.3E - BCP Registry Detach Approval Gate Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.3E sets `APP_VERSION` to `1.0085` and `LAST_PUBLISHED_MS` to `MS-034.3E - BCP Registry Detach Approval Gate Foundation`.
+
+**Contract**
+The project settings surface now shows a read-only Product Owner approval gate beside `Podgląd odpięcia z rejestru SPS`. The gate displays the exact approval text required before any future registry-only detach could become executable, states that preview remains read-only, states that approval is required before any future write, states that this milestone does not execute detach, and states that BCP repo, metadata, Project Map, and canonical artifacts remain untouched. The local-only `Kopiuj tekst zgody` action copies the approval text only.
+
+**Boundary**
+MS-034.3E is approval-gate UI/contract scaffolding only. It does not persist approval, execute detach, delete, or write behavior, call or wire `DELETE /api/projects/[id]`, call or wire `/delete-execution`, modify Beauty Client PRO repository files, modify `C:\SPS_OS_WORK`, modify SPS metadata, Project Map behavior, canonical `map.json`, audit, risk decisions, fingerprint, source identity, or knowledge store.
 
 ## MS-034.3D - BCP Registry Detach Preview Foundation
 
