@@ -1431,6 +1431,73 @@ export default function ProjectSettingsPage() {
               </p>
             ) : null}
           </div>
+          <div className="mt-4 rounded-xl border border-cyan-300/20 bg-zinc-950/60 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-cyan-200/80">
+              Tryby zarządzania lokalnymi plikami projektu
+            </p>
+            <p className="mt-2 text-sm text-cyan-50">
+              To jest tylko preview kontraktu UI. Nie wykonuje usunięcia, nie
+              tworzy endpointu delete, nie woła{" "}
+              <code>DELETE /api/projects/[id]</code> i nie używa{" "}
+              <code>/delete-execution</code>.
+            </p>
+            <div className="mt-3 grid gap-3 text-sm text-cyan-100 md:grid-cols-2">
+              <div className="rounded-lg border border-cyan-300/10 p-3">
+                <p className="font-medium text-cyan-50">Odłącz z SPS OS</p>
+                <p className="mt-1">
+                  Przyszły tryb rejestru/UI/cache. Pliki projektu i SPS
+                  evidence zostają.
+                </p>
+              </div>
+              <div className="rounded-lg border border-cyan-300/10 p-3">
+                <p className="font-medium text-cyan-50">
+                  Usuń lokalny checkout / repo
+                </p>
+                <p className="mt-1">
+                  Przyszły tryb usuwa tylko repo checkout po osobnej zgodzie i
+                  Git preflight.
+                </p>
+              </div>
+              <div className="rounded-lg border border-cyan-300/10 p-3">
+                <p className="font-medium text-cyan-50">
+                  Usuń cały workspace projektu
+                </p>
+                <p className="mt-1">
+                  Wyższy poziom zgody. W F1 tylko opis, bez wykonania.
+                </p>
+              </div>
+              <div className="rounded-lg border border-cyan-300/10 p-3">
+                <p className="font-medium text-cyan-50">Evidence preserved</p>
+                <p className="mt-1">
+                  SPS evidence, Project Map, audit, risk decisions,
+                  fingerprint i knowledge store zostają zachowane.
+                </p>
+              </div>
+            </div>
+            <div className="mt-3 space-y-2 text-sm text-cyan-100">
+              <p>Ścieżki do usunięcia w trybie checkout-only:</p>
+              <ul className="space-y-1">
+                <li>{registryDetachPreview.preservedPaths.repoCheckout}</li>
+              </ul>
+              <p>Ścieżki do zachowania:</p>
+              <ul className="space-y-1">
+                <li>{registryDetachPreview.preservedPaths.workspace}</li>
+                <li>
+                  {registryDetachPreview.preservedPaths.workspace}
+                  \sps-project.json
+                </li>
+                <li>{registryDetachPreview.preservedPaths.metadataRoot}</li>
+              </ul>
+              <p>
+                Git status, branch, HEAD, remote i remote freshness muszą być
+                sprawdzone w osobnym preflight przed jakimkolwiek wykonaniem.
+              </p>
+              <p>
+                SPS evidence nie jest kasowane domyślnie i nie jest częścią
+                tego trybu operacji.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="rounded-2xl border border-sky-500/30 bg-sky-500/5 p-4">

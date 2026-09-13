@@ -231,6 +231,31 @@ describe("ProjectSettingsPage", () => {
     expect(writeText).toHaveBeenCalledWith(
       "Product Owner approves registry-only detach for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Scope is limited to SPS OS registry/UI visibility and explicitly excludes BCP repository, .git, source files, workspace wrapper manifest, SPS metadata root, source identity, knowledge store, canonical Project Map artifacts, audit, risk decisions, and structural fingerprint.",
     );
+    expect(
+      screen.getByText(/Tryby zarządzania lokalnymi plikami projektu/),
+    ).toBeTruthy();
+    expect(screen.getByText(/Odłącz z SPS OS/)).toBeTruthy();
+    expect(screen.getByText(/Usuń lokalny checkout \/ repo/)).toBeTruthy();
+    expect(screen.getByText(/Usuń cały workspace projektu/)).toBeTruthy();
+    expect(screen.getByText(/Evidence preserved/)).toBeTruthy();
+    expect(container.textContent).toContain(
+      "To jest tylko preview kontraktu UI. Nie wykonuje usunięcia",
+    );
+    expect(container.textContent).toContain(
+      "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+    );
+    expect(container.textContent).toContain(
+      "C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json",
+    );
+    expect(container.textContent).toContain(
+      "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+    );
+    expect(container.textContent).toContain(
+      "Git status, branch, HEAD, remote i remote freshness muszą być sprawdzone",
+    );
+    expect(container.textContent).toContain(
+      "SPS evidence nie jest kasowane domyślnie",
+    );
   });
 
   test("revalidates a derived repo checkout and hides the manifest-only source copy", async () => {

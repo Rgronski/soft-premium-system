@@ -69,6 +69,32 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.3F-F1 Project Disk Removal Operation Modes Preview
+
+### Version
+
+1.0086
+
+### Date
+
+2026-09-13
+
+### Summary
+
+Published the read-only project settings preview for local project file management modes.
+
+### Completed Work
+
+* Added `Tryby zarządzania lokalnymi plikami projektu` as a read-only preview surface.
+* Listed operation modes: `Odłącz z SPS OS`, `Usuń lokalny checkout / repo`, `Usuń cały workspace projektu`, and `Evidence preserved`.
+* Showed the BCP checkout-only removal path and preserved workspace, manifest, and SPS evidence metadata paths.
+* Stated that Git status, branch, HEAD, remote, and remote freshness require separate preflight and that SPS evidence is not deleted by default.
+* Bumped `APP_VERSION` to `1.0086` and `LAST_PUBLISHED_MS` to `MS-034.3F-F1 - Project Disk Removal Operation Modes Preview`.
+
+### Notes
+
+No detach, delete, write, disk-removal behavior, delete endpoint, `DELETE /api/projects/[id]`, `/delete-execution`, BCP repository change, SPS metadata change, Project Map change, evidence change, source identity change, knowledge store change, audit change, risk decision change, fingerprint change, or canonical artifact change was added.
+
 ## Session 101 - MS-034.3E BCP Registry Detach Approval Gate Foundation
 
 ### Version

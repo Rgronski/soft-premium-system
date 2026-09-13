@@ -192,12 +192,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.2` - Project AI Workspace Two-Column Layout Foundation
 * `MS-034.3D` - BCP Registry Detach Preview Foundation
 * `MS-034.3E` - BCP Registry Detach Approval Gate Foundation
+* `MS-034.3F-F1` - Project Disk Removal Operation Modes Preview
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.3E - BCP Registry Detach Approval Gate Foundation
+Latest Completed Product Milestone: MS-034.3F-F1 - Project Disk Removal Operation Modes Preview
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.3F-F1 - Project Disk Removal Operation Modes Preview
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.3F-F1 sets `APP_VERSION` to `1.0086` and `LAST_PUBLISHED_MS` to `MS-034.3F-F1 - Project Disk Removal Operation Modes Preview`.
+
+**Contract**
+The project settings surface now shows `Tryby zarządzania lokalnymi plikami projektu` as a read-only preview for local project file management modes: `Odłącz z SPS OS`, `Usuń lokalny checkout / repo`, `Usuń cały workspace projektu`, and `Evidence preserved`. For Beauty Client PRO it shows the checkout-only removal path `C:\SPS_OS_WORK\beauty-client-pro\repo`, preserved paths `C:\SPS_OS_WORK\beauty-client-pro`, `C:\SPS_OS_WORK\beauty-client-pro\sps-project.json`, and `C:\SPS_OS_WORK\.sps-meta\beauty-client-pro--0d3e28cb`, and states that Git status, branch, HEAD, remote, and remote freshness require separate preflight.
+
+**Boundary**
+MS-034.3F-F1 is UI/preview/contract surface only. It does not add real detach, delete, write, or disk-removal behavior, does not add or wire a delete endpoint, does not call or wire `DELETE /api/projects/[id]`, does not call or wire `/delete-execution`, and does not modify Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, Project Map behavior, Project Map artifacts, source identity, knowledge store, audit, risk decisions, or fingerprint. SPS evidence is not deleted by default.
 
 ## MS-034.3E - BCP Registry Detach Approval Gate Foundation
 
