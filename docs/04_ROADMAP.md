@@ -202,12 +202,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.3H6` - Checkout Removal Execution Endpoint Guarded Implementation
 * `MS-034.3H7` - Checkout Removal Execute UI Wiring Disabled Gate
 * `MS-034.3H8` - Checkout Removal Execute UI Activation Contract
+* `MS-034.3H9` - Checkout Removal Execute UI Final Confirmation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.3H8 - Checkout Removal Execute UI Activation Contract
+Latest Completed Product Milestone: MS-034.3H9 - Checkout Removal Execute UI Final Confirmation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.3H9 - Checkout Removal Execute UI Final Confirmation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.3H9 sets `APP_VERSION` to `1.0096` and `LAST_PUBLISHED_MS` to `MS-034.3H9 - Checkout Removal Execute UI Final Confirmation`.
+
+**Contract**
+The project settings surface now shows the final local UI confirmation boundary before future active checkout removal execution. It shows `Ostatnie potwierdzenie przed realnym usunięciem lokalnego checkoutu`, summarizes deletion path, preserved paths, evidence preserved, reconnect required, approval matched, dry-run clean, and Git preflight verified, and adds the local checkbox `Rozumiem, że następny krok może wykonać realne usunięcie lokalnego checkoutu.` The default status is `final confirmation blocked`, and `final confirmation ready` appears only when activation is ready and the local checkbox is checked.
+
+**Boundary**
+MS-034.3H9 only adds local final confirmation. The execute action remains disabled/non-executable, and real execution remains a future separate decision/action. It does not call `/api/projects/[id]/checkout-removal/execute`, add active execution behavior, enable real execution, execute deletion, call or wire `/delete-execution`, call or wire `DELETE /api/projects/[id]`, import or call `executeProjectDiskDelete`, change Beauty Client PRO repository files, change `C:\SPS_OS_WORK`, change SPS metadata, rewrite Project Map, change Project Map artifacts, evidence, source identity, knowledge store, audit, risk decisions, fingerprint, or canonical artifacts, and does not start Project Brain / Conductor / AI Workflow integration.
 
 ## MS-034.3H8 - Checkout Removal Execute UI Activation Contract
 

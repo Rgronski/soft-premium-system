@@ -628,6 +628,34 @@ describe("ProjectSettingsPage", () => {
     expect(container.textContent).toContain(
       "separate final execution confirmation",
     );
+    expect(container.textContent).toContain(
+      "Ostatnie potwierdzenie przed realnym usunięciem lokalnego checkoutu",
+    );
+    expect(container.textContent).toContain(
+      "To jest lokalna granica potwierdzenia. Realne wykonanie nadal wymaga przyszłej osobnej decyzji i akcji.",
+    );
+    expect(container.textContent).toContain(
+      "deletion path: C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+    );
+    expect(container.textContent).toContain(
+      "preserved paths: C:\\SPS_OS_WORK\\beauty-client-pro; C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json; C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--project1",
+    );
+    expect(container.textContent).toContain("evidence preserved: false");
+    expect(container.textContent).toContain("reconnect required: false");
+    expect(container.textContent).toContain("approval matched: false");
+    expect(container.textContent).toContain("dry-run clean: false");
+    expect(container.textContent).toContain("Git preflight verified: false");
+    expect(
+      screen.getByLabelText(
+        /Rozumiem, że następny krok może wykonać realne usunięcie lokalnego checkoutu/,
+      ),
+    ).toBeTruthy();
+    expect(container.textContent).toContain(
+      "Status ostatniego potwierdzenia: final confirmation blocked.",
+    );
+    expect(container.textContent).toContain(
+      "Przycisk wykonania pozostaje nieaktywny w H9; ten krok nie woła endpointu wykonawczego i niczego nie usuwa.",
+    );
 
     const executeButton = screen.getByRole("button", {
       name: /Wykonaj usunięcie checkoutu/,
@@ -749,6 +777,24 @@ describe("ProjectSettingsPage", () => {
         "Status aktywacji: activation ready.",
       );
     });
+    expect(container.textContent).toContain("evidence preserved: true");
+    expect(container.textContent).toContain("reconnect required: true");
+    expect(container.textContent).toContain("approval matched: true");
+    expect(container.textContent).toContain("dry-run clean: true");
+    expect(container.textContent).toContain("Git preflight verified: true");
+    expect(container.textContent).toContain(
+      "Status ostatniego potwierdzenia: final confirmation blocked.",
+    );
+
+    fireEvent.click(
+      screen.getByLabelText(
+        /Rozumiem, że następny krok może wykonać realne usunięcie lokalnego checkoutu/,
+      ),
+    );
+
+    expect(container.textContent).toContain(
+      "Status ostatniego potwierdzenia: final confirmation ready.",
+    );
     expect(
       screen
         .getByRole("button", { name: /Wykonaj usunięcie checkoutu/ })

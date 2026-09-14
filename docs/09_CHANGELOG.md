@@ -69,6 +69,34 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.3H9 Checkout Removal Execute UI Final Confirmation
+
+### Version
+
+1.0096
+
+### Date
+
+2026-09-14
+
+### Summary
+
+Published the final local UI confirmation boundary before future active checkout removal execution.
+
+### Completed Work
+
+* Added `Ostatnie potwierdzenie przed realnym usunięciem lokalnego checkoutu`.
+* Showed final summary fields for deletion path, preserved paths, evidence preserved, reconnect required, approval matched, dry-run clean, and Git preflight verified.
+* Added the local checkbox `Rozumiem, że następny krok może wykonać realne usunięcie lokalnego checkoutu.`
+* Kept default status as `final confirmation blocked`.
+* Showed `final confirmation ready` only when activation is ready and the local checkbox is checked.
+* Kept execution disabled/non-executable and real execution as a future separate decision/action.
+* Bumped `APP_VERSION` to `1.0096` and `LAST_PUBLISHED_MS` to `MS-034.3H9 - Checkout Removal Execute UI Final Confirmation`.
+
+### Notes
+
+No execute endpoint call, active execution behavior, real delete, detach, write behavior, `/delete-execution`, `DELETE /api/projects/[id]`, `executeProjectDiskDelete` usage, BCP repository change, `C:\SPS_OS_WORK` change, SPS metadata change, Project Map rewrite, Project Map artifact change, evidence change, source identity change, knowledge store change, audit change, risk decision change, fingerprint change, canonical artifact change, or Project Brain / Conductor / AI Workflow integration was added.
+
 ## Session 101 - MS-034.3H8 Checkout Removal Execute UI Activation Contract
 
 ### Version

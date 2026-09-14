@@ -827,6 +827,10 @@ export default function ProjectSettingsPage() {
     useState<string | null>(null);
   const [checkoutRemovalApprovalInput, setCheckoutRemovalApprovalInput] =
     useState("");
+  const [
+    checkoutRemovalFinalConfirmationAccepted,
+    setCheckoutRemovalFinalConfirmationAccepted,
+  ] = useState(false);
 
   useEffect(() => {
     let ignore = false;
@@ -857,6 +861,7 @@ export default function ProjectSettingsPage() {
       setCheckoutRemovalDryRunResult(null);
       setCheckoutRemovalDryRunError(null);
       setCheckoutRemovalApprovalInput("");
+      setCheckoutRemovalFinalConfirmationAccepted(false);
     }
 
     if (nextLocalProject) {
@@ -1022,12 +1027,12 @@ export default function ProjectSettingsPage() {
     !Array.isArray(checkoutRemovalDryRunResult.gitPreflight)
       ? (checkoutRemovalDryRunResult.gitPreflight as Record<string, unknown>)
       : null;
-  const checkoutRemovalActivationStatus =
+  const checkoutRemovalDryRunClean =
     checkoutRemovalDryRunResult?.executionPerformed === false &&
     checkoutRemovalDryRunResult.blockedReasons.length === 0 &&
     checkoutRemovalDryRunResult.evidencePreserved === true &&
-    checkoutRemovalDryRunResult.reconnectRequired === true &&
-    checkoutRemovalApprovalStatus === "approval matched" &&
+    checkoutRemovalDryRunResult.reconnectRequired === true;
+  const checkoutRemovalGitPreflightVerified =
     checkoutRemovalActivationGitPreflight?.workingTreeStatus === "clean" &&
     typeof checkoutRemovalActivationGitPreflight.branch === "string" &&
     checkoutRemovalActivationGitPreflight.branch.trim().length > 0 &&
@@ -1035,7 +1040,9 @@ export default function ProjectSettingsPage() {
     checkoutRemovalActivationGitPreflight.head.trim().length > 0 &&
     typeof checkoutRemovalActivationGitPreflight.remote === "string" &&
     checkoutRemovalActivationGitPreflight.remote.trim().length > 0 &&
-    checkoutRemovalActivationGitPreflight.remoteMainVerified === true &&
+    checkoutRemovalActivationGitPreflight.remoteMainVerified === true;
+  const checkoutRemovalPathsMatchContract = Boolean(
+    checkoutRemovalDryRunResult &&
     checkoutRemovalDryRunResult.wouldDeletePaths.includes(
       registryDetachPreview.preservedPaths.repoCheckout,
     ) &&
@@ -1047,9 +1054,20 @@ export default function ProjectSettingsPage() {
     ) &&
     checkoutRemovalDryRunResult.preservedPaths.includes(
       checkoutRemovalDryRunMetadataRootPath,
-    )
+    ),
+  );
+  const checkoutRemovalActivationStatus =
+    checkoutRemovalDryRunClean &&
+    checkoutRemovalApprovalStatus === "approval matched" &&
+    checkoutRemovalGitPreflightVerified &&
+    checkoutRemovalPathsMatchContract
       ? "activation ready"
       : "activation blocked";
+  const checkoutRemovalFinalConfirmationStatus =
+    checkoutRemovalActivationStatus === "activation ready" &&
+    checkoutRemovalFinalConfirmationAccepted
+      ? "final confirmation ready"
+      : "final confirmation blocked";
   const branchWorkModeSummary = buildBranchWorkModeSummary(
     project.name,
     branchWorkMode,
@@ -1177,6 +1195,7 @@ export default function ProjectSettingsPage() {
     setCheckoutRemovalDryRunStatus("loading");
     setCheckoutRemovalDryRunResult(null);
     setCheckoutRemovalDryRunError(null);
+    setCheckoutRemovalFinalConfirmationAccepted(false);
 
     try {
       const response = await fetch(
@@ -1875,6 +1894,70 @@ export default function ProjectSettingsPage() {
                   >
                     Wykonaj usunięcie checkoutu
                   </button>
+                </div>
+                <div className="mt-4 rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
+                  <p className="font-medium text-cyan-50">
+                    Ostatnie potwierdzenie przed realnym usunięciem lokalnego
+                    checkoutu
+                  </p>
+                  <p className="mt-2">
+                    To jest lokalna granica potwierdzenia. Realne wykonanie
+                    nadal wymaga przyszłej osobnej decyzji i akcji.
+                  </p>
+                  <ul className="mt-3 space-y-1">
+                    <li>
+                      deletion path:{" "}
+                      {registryDetachPreview.preservedPaths.repoCheckout}
+                    </li>
+                    <li>
+                      preserved paths:{" "}
+                      {registryDetachPreview.preservedPaths.workspace};{" "}
+                      {registryDetachPreview.preservedPaths.workspace}
+                      \sps-project.json;{" "}
+                      {checkoutRemovalDryRunMetadataRootPath}
+                    </li>
+                    <li>
+                      evidence preserved:{" "}
+                      {String(checkoutRemovalDryRunResult?.evidencePreserved === true)}
+                    </li>
+                    <li>
+                      reconnect required:{" "}
+                      {String(checkoutRemovalDryRunResult?.reconnectRequired === true)}
+                    </li>
+                    <li>
+                      approval matched:{" "}
+                      {String(checkoutRemovalApprovalStatus === "approval matched")}
+                    </li>
+                    <li>dry-run clean: {String(checkoutRemovalDryRunClean)}</li>
+                    <li>
+                      Git preflight verified:{" "}
+                      {String(checkoutRemovalGitPreflightVerified)}
+                    </li>
+                  </ul>
+                  <label className="mt-3 flex items-start gap-2 text-sm text-cyan-50">
+                    <input
+                      type="checkbox"
+                      checked={checkoutRemovalFinalConfirmationAccepted}
+                      onChange={(event) =>
+                        setCheckoutRemovalFinalConfirmationAccepted(
+                          event.target.checked,
+                        )
+                      }
+                      className="mt-1"
+                    />
+                    <span>
+                      Rozumiem, że następny krok może wykonać realne usunięcie
+                      lokalnego checkoutu.
+                    </span>
+                  </label>
+                  <p className="mt-3">
+                    Status ostatniego potwierdzenia:{" "}
+                    {checkoutRemovalFinalConfirmationStatus}.
+                  </p>
+                  <p className="mt-2">
+                    Przycisk wykonania pozostaje nieaktywny w H9; ten krok nie
+                    woła endpointu wykonawczego i niczego nie usuwa.
+                  </p>
                 </div>
               </div>
             </div>
