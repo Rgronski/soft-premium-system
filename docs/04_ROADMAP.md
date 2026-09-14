@@ -206,12 +206,64 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.3H10R` - Checkout Removal Settings Consolidation
 * `MS-035.0` - Project Brain Conductor AI Workflow Integration Contract Foundation
 * `MS-035.1` - AI Workspace Project Brain Recommendation Handoff Foundation
+* `MS-035.2` - Project Work Command Center One Next Step Foundation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-035.1 - AI Workspace Project Brain Recommendation Handoff Foundation
+Latest Completed Product Milestone: MS-035.2 - Project Work Command Center One Next Step Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-035.2 - Project Work Command Center One Next Step Foundation
+
+**Status**
+IMPLEMENTED / VERIFIED LOCALLY / ACCEPTED LOCALLY
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+IMPLEMENTED / VERIFIED LOCALLY / ACCEPTED LOCALLY / NOT PUBLISHED / NOT CLOSED
+
+**Type**
+Product Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Implement the smallest visible one-next-step project command surface so SPS OS explains what the project state means and what the next safe project-work step is, without adding automation.
+
+**Implementation Result**
+Project overview now contains `Project Work Command Center` / `Następny krok projektu`. It replaces the narrow Project Brain pending banner with a clearer one-next-step surface that translates low-level readiness/source status into human/product meaning, shows current readiness meaning, one dominant recommended next step, a short reason, a copy-ready manual Codex handoff, and a manual execution boundary.
+
+For pending Project Brain state, the surface explains that SPS OS sees the project/source, but Project Brain is not yet leading production work, and recommends completing Project Brain working context plus the first manual Codex handoff.
+
+**Product / Process Meaning**
+SPS OS should guide the Product Owner with one next project step instead of multiplying confusing panels. Project Map, Project Brain, Konduktor, and AI Workflow support one governed project direction.
+
+**Boundary**
+MS-035.2 is read-only guidance and manual handoff support only. It adds no automation, provider/model calls, endpoints, Codex auto-run, delete, detach, reconnect, checkout-removal changes, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, evidence changes, source identity changes, audit changes, risk decision changes, fingerprint changes, or canonical artifact changes.
+
+**Implementation Evidence**
+
+* `src/app/projects/[id]/page.tsx` adds the overview `Project Work Command Center` / `Następny krok projektu` surface.
+* `src/app/projects/[id]/page.tsx` derives readiness meaning, one recommendation, reason, manual handoff text, and execution boundary from existing page state.
+* `src/app/projects/[id]/page.test.tsx` verifies the one-next-step surface for pending Project Brain readiness.
+* `npm test -- src/app/projects/[id]/page.test.tsx` passed with `14 / 14` tests.
+
+**Verification Plan**
+
+* `git status -sb`
+* `git diff --check`
+* `git diff --stat`
+* `npm test -- src/app/projects/[id]/page.test.tsx`
 
 ## MS-035.1 - AI Workspace Project Brain Recommendation Handoff Foundation
 

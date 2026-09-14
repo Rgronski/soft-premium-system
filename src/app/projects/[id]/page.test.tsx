@@ -421,7 +421,7 @@ describe("ProjectWorkspacePage", () => {
     render(<ProjectWorkspacePage />);
 
     await waitFor(() => {
-      expect(screen.getByText(/repo checkout potwierdzony/)).toBeTruthy();
+      expect(screen.getAllByText(/repo checkout potwierdzony/).length).toBeGreaterThanOrEqual(1);
     });
 
     expect(screen.getByText(/Local git repo present/)).toBeTruthy();
@@ -563,7 +563,7 @@ describe("ProjectWorkspacePage", () => {
     ).toBeTruthy();
   });
 
-  test("shows a readiness banner when the local project Brain status is pending", () => {
+  test("shows one project command center step when the local Project Brain status is pending", () => {
     getProjectByIdMock.mockReturnValue({
       id: "project-1",
       name: "Alpha Workspace",
@@ -574,11 +574,19 @@ describe("ProjectWorkspacePage", () => {
 
     render(<ProjectWorkspacePage />);
 
+    expect(screen.getByText("Project Work Command Center")).toBeTruthy();
+    expect(screen.getByText("Następny krok projektu")).toBeTruthy();
     expect(
       screen.getByText(
-        "Project Brain ma status pending. Ten projekt nie jest jeszcze gotowy do użycia produkcyjnego.",
+        "SPS OS widzi projekt i jego źródło, ale Project Brain nie prowadzi jeszcze pracy produkcyjnej.",
       ),
     ).toBeTruthy();
+    expect(
+      screen.getAllByText(/Uzupełnij kontekst roboczy Project Brain/i).length,
+    ).toBeGreaterThanOrEqual(1);
+    expect(
+      screen.getAllByText(/Nic nie wykonuje się automatycznie/i).length,
+    ).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("warning")).toHaveLength(2);
   });
 

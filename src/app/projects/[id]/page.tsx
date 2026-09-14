@@ -486,6 +486,24 @@ export default function ProjectWorkspacePage() {
         dashboard.workspaceEntry.workspace.overview.workflow.health,
       )
     : "warning";
+  const projectWorkflowNextStep =
+    dashboard.workspaceEntry?.workspace.overview.workflow.nextStep ?? null;
+  const commandCenterReadinessMeaning =
+    projectBrainStatus === "available"
+      ? revalidatedSourceStatus
+        ? "Project Brain jest aktywny, a SPS OS potwierdził lokalny checkout repo."
+        : "Project Brain jest aktywny, ale źródło projektu nadal wymaga potwierdzenia przed pracą produkcyjną."
+      : "SPS OS widzi projekt i jego źródło, ale Project Brain nie prowadzi jeszcze pracy produkcyjnej.";
+  const commandCenterRecommendedStep =
+    projectBrainStatus === "available" && projectWorkflowNextStep
+      ? `Przygotuj ręczny handoff do Codexa dla kroku: ${projectWorkflowNextStep.label}.`
+      : "Uzupełnij kontekst roboczy Project Brain i przygotuj pierwszy ręczny handoff do Codexa.";
+  const commandCenterReason =
+    "Dzięki temu projekt będzie rozwijany według standardu SPS OS: mapa pokazuje stan, Brain trzyma kontekst, Konduktor wskazuje kolejny krok, a Codex wykonuje zaakceptowaną pracę.";
+  const commandCenterManualHandoff = `Cel: ${commandCenterRecommendedStep}
+Kontekst: ${commandCenterReadinessMeaning}
+Źródło: ${sourceBindingSummary.statusLabel}; ${sourceBindingSummary.localRepositoryLabel}
+Zasada: To jest rekomendacja. Nic nie wykonuje się automatycznie. Product Owner zatwierdza zakres przed pracą Codexa.`;
 
   async function handleDeleteProject() {
     if (!dashboard.workspaceEntry) {
@@ -552,17 +570,46 @@ export default function ProjectWorkspacePage() {
         !dashboard.workspaceEntry &&
         dashboard.errorCode === "project-not-found") ? null : dashboard.workspaceEntry ? (
         <WorkspaceContent>
-          {projectBrainStatus !== "available" ? (
-            <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 text-amber-100">
-              <p className="text-xs uppercase tracking-[0.2em] text-amber-200/80">
-                Gotowość projektu
-              </p>
-              <p className="mt-2 text-sm">
-                Project Brain ma status {projectBrainStatus}. Ten projekt nie
-                jest jeszcze gotowy do użycia produkcyjnego.
-              </p>
+          <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-emerald-50">
+            <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/80">
+              Project Work Command Center
+            </p>
+            <h3 className="mt-2 text-lg font-semibold text-zinc-50">
+              Następny krok projektu
+            </h3>
+            <div className="mt-4 grid gap-4 lg:grid-cols-3">
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
+                  Co oznacza stan
+                </p>
+                <p className="mt-2 text-sm leading-6 text-zinc-100">
+                  {commandCenterReadinessMeaning}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
+                  Jeden następny krok
+                </p>
+                <p className="mt-2 text-sm font-medium leading-6 text-zinc-50">
+                  {commandCenterRecommendedStep}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
+                  Dlaczego
+                </p>
+                <p className="mt-2 text-sm leading-6 text-zinc-100">
+                  {commandCenterReason}
+                </p>
+              </div>
             </div>
-          ) : null}
+            <pre className="mt-4 whitespace-pre-wrap rounded-xl border border-emerald-400/20 bg-zinc-950/70 px-4 py-3 text-xs leading-6 text-zinc-200">
+              {commandCenterManualHandoff}
+            </pre>
+            <p className="mt-3 text-sm text-emerald-100/80">
+              To jest rekomendacja. Nic nie wykonuje się automatycznie.
+            </p>
+          </div>
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
               Stan systemu plików
