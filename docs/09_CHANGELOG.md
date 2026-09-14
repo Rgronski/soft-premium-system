@@ -69,6 +69,32 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 102 - MS-035.4 AI Workspace Project Inputs Guidance Read Model Foundation
+
+### Version
+
+Implementation local
+
+### Date
+
+2026-09-14
+
+### Summary
+
+Added a read-only AI Workspace read model showing which existing project inputs feed Konduktor guidance.
+
+### Completed Work
+
+* Added `Wejścia do rekomendacji` under `Propozycje Konduktora`.
+* Displayed `Zadania`, `Wiedza`, and `Project Brain / workflow state` from the already-loaded AI project context and workflow result.
+* Preserved existing Konduktor behavior: one next safe step from the current Project Brain / Workflow Engine signal.
+* Preserved manual Codex handoff.
+* Verified the focused AI Workspace page test.
+
+### Notes
+
+* No model calls, provider changes, automation, new endpoints, Codex auto-run, delete/detach/reconnect behavior, checkout-removal behavior, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, or Project Map canonical artifacts were changed.
+
 ## Session 102 - MS-035.3 Project Work Inputs To Konduktor Guidance Foundation
 
 ### Version

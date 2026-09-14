@@ -423,6 +423,29 @@ export default function ProjectAiWorkspacePage() {
   } as const;
   const conductorReadinessLabel =
     conductorReadinessLabels[conductorGuidance.actionReadiness];
+  const recommendationInputSignals = [
+    {
+      label: "Zadania",
+      value: `${context.tasks.length}`,
+      description:
+        context.tasks.length > 0
+          ? "Aktywne zadania są sygnałem pracy w toku."
+          : "Brak zadań oznacza brak aktywnego sygnału pracy.",
+    },
+    {
+      label: "Wiedza",
+      value: `${context.knowledgeEntries.length}`,
+      description:
+        context.knowledgeEntries.length > 0
+          ? "Wpisy wiedzy dostarczają kontekst i uzasadnienie."
+          : "Brak wiedzy ogranicza kontekst rekomendacji.",
+    },
+    {
+      label: "Project Brain / workflow state",
+      value: workflowResult.health,
+      description: `Sygnał dla Konduktora: ${workflowResult.nextStep.label}.`,
+    },
+  ];
   const codexHandoffText = buildCodexHandoffText({
     context,
     recommendationHeadline: conductorGuidance.headline,
@@ -1022,6 +1045,33 @@ export default function ProjectAiWorkspacePage() {
                 </div>
                 <p className="mt-3 text-xs leading-5 text-zinc-500">
                   {conductorGuidance.reason}
+                </p>
+              </div>
+              <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                  Wejścia do rekomendacji
+                </p>
+                <div className="mt-3 grid gap-3 md:grid-cols-3">
+                  {recommendationInputSignals.map((signal) => (
+                    <div
+                      key={signal.label}
+                      className="rounded-lg border border-zinc-800 bg-zinc-900/70 px-3 py-3"
+                    >
+                      <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                        {signal.label}
+                      </p>
+                      <p className="mt-2 text-sm font-semibold text-zinc-100">
+                        {signal.value}
+                      </p>
+                      <p className="mt-2 text-xs leading-5 text-zinc-400">
+                        {signal.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-3 text-xs leading-5 text-zinc-500">
+                  Konduktor wybiera jeden następny krok z istniejących sygnałów.
+                  Ten widok niczego nie uruchamia.
                 </p>
               </div>
               <p className="mt-3 text-sm text-zinc-300">

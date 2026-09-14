@@ -216,6 +216,51 @@ Current Product Milestone: NONE / Product Owner decision required
 Latest Completed Product Milestone: MS-035.2R - Project Overview and AI Workspace Role Split Correction
 Next Product Milestone Candidate: NONE / Product Owner decision required
 
+## MS-035.4 - AI Workspace Project Inputs Guidance Read Model Foundation
+
+**Status**
+IMPLEMENTED / VERIFIED LOCALLY
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+IMPLEMENTED / VERIFIED LOCALLY / NOT PUBLISHED / NOT CLOSED
+
+**Type**
+Runtime Read Model Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Show in `Przestrzeń AI` which existing project inputs feed Konduktor guidance, without adding automation, model calls, endpoints, or new execution behavior.
+
+**Implementation Result**
+AI Workspace now shows a compact read-only `Wejścia do rekomendacji` section under `Propozycje Konduktora`. It displays `Zadania`, `Wiedza`, and `Project Brain / workflow state` from the already-loaded AI project context and workflow result. Konduktor still derives one next step from the existing Project Brain / Workflow Engine signal, and the Codex handoff remains manual.
+
+**Boundary**
+MS-035.4 is visibility/read-model only. It adds no model calls, provider changes, automation, new endpoints, Codex auto-run, delete/detach/reconnect behavior, checkout-removal behavior, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, or Project Map canonical changes.
+
+**Implementation Evidence**
+
+* `src/app/projects/[id]/ai/page.tsx` renders the read-only project input signals in AI Workspace.
+* `src/app/projects/[id]/ai/page.test.tsx` verifies tasks, knowledge, workflow state, one-step Konduktor guidance, and non-execution copy.
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed with focused AI Workspace coverage.
+
+**Verification Plan**
+
+* `git status -sb`
+* `git diff --check`
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx`
+* `git diff --stat`
+
 ## MS-035.3 - Project Work Inputs To Konduktor Guidance Foundation
 
 **Status**

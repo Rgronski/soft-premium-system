@@ -132,6 +132,19 @@ describe("ProjectAiWorkspacePage", () => {
     expect(screen.getByText("Note")).toBeTruthy();
     expect(screen.getByText("Body")).toBeTruthy();
     expect(screen.getByText("Fragment kontekstu: Longer content")).toBeTruthy();
+    expect(screen.getByText("Wejścia do rekomendacji")).toBeTruthy();
+    expect(screen.getByText("Aktywne zadania są sygnałem pracy w toku.")).toBeTruthy();
+    expect(
+      screen.getByText("Wpisy wiedzy dostarczają kontekst i uzasadnienie."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Sygnał dla Konduktora: Kontynuuj aktywną pracę."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Konduktor wybiera jeden następny krok z istniejących sygnałów. Ten widok niczego nie uruchamia.",
+      ),
+    ).toBeTruthy();
     expect(
       screen.getByRole("button", { name: "Utwórz zadanie z pamięci" }),
     ).toBeTruthy();
