@@ -2,6 +2,8 @@
 
 import { getBrowserAiProjectContext } from "@/lib/project-brain/browser";
 import { createKnowledgeEntry } from "@/lib/knowledge/knowledge";
+import { deriveConductorProjectBrainGuidance } from "@/lib/conductor/conductor";
+import { evaluateWorkflow } from "@/lib/workflow/engine";
 import {
   createTaskOnServer,
   getTasksFromServer,
@@ -40,17 +42,46 @@ import {
   type SaveUiState,
 } from "@/lib/ai-workspace-engine/engine";
 import type { AiProjectContext } from "@/lib/project-brain/types";
+import type { ProjectState } from "@/lib/workflow/types";
 import { useParams } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-const CODEXA_HANDOFF_COPY_TEXT = `===== HANDOFF DO CODEXA START =====
+function buildProjectBrainWorkflowState(context: AiProjectContext): ProjectState {
+  return {
+    phase: "ai-workspace-project-brain-recommendation",
+    completedWork: [],
+    activeWork: context.tasks.map((task) => task.id),
+    blockers: [],
+    warnings: [],
+    progress: 0,
+  };
+}
+
+function buildCodexHandoffText(input: {
+  context: AiProjectContext;
+  recommendationHeadline: string;
+  recommendationDescription: string;
+  recommendationReadiness: string;
+}): string {
+  return `===== HANDOFF DO CODEXA START =====
 Session Identity:
 Repository:
-Cel:
-Zakres:
+Cel: ${input.recommendationHeadline}
+Zakres: ${input.recommendationDescription}
 Dozwolone pliki:
 Zakazane pliki:
 Weryfikacja:
+Kontekst projektu:
+- Project ID: ${input.context.projectId}
+- Project name: ${input.context.projectName}
+- Tasks: ${input.context.tasks.length}
+- Knowledge entries: ${input.context.knowledgeEntries.length}
+Rekomendacja Konduktora:
+- Gotowość: ${input.recommendationReadiness}
+- Następny krok: ${input.recommendationHeadline}
+Zasada wykonania:
+- Codex pozostaje uruchamiany ręcznie poza SPS OS.
+- Ten handoff nie wykonuje automatycznie pracy ani milestone.
 Zasady pracy:
 - oszczędzaj tokeny i kredyty
 - diagnozuj przed edycją
@@ -61,6 +92,7 @@ Zasady pracy:
 - raportuj w bloku do skopiowania
 - nie przechodź na SOL bez decyzji Product Ownera
 ===== HANDOFF DO CODEXA END =====`;
+}
 
 const CONDUCTOR_QUICK_ACTIONS = [
   {
@@ -378,6 +410,25 @@ export default function ProjectAiWorkspacePage() {
   }
 
   const context = contextState.context;
+  const workflowResult = evaluateWorkflow(
+    buildProjectBrainWorkflowState(context),
+  );
+  const conductorGuidance = deriveConductorProjectBrainGuidance(
+    workflowResult.nextStep,
+  );
+  const conductorReadinessLabels = {
+    "ready-to-act-on": "Gotowe do działania",
+    "requires-product-owner-decision": "Wymaga decyzji Product Ownera",
+    "informational-only": "Tylko informacyjnie",
+  } as const;
+  const conductorReadinessLabel =
+    conductorReadinessLabels[conductorGuidance.actionReadiness];
+  const codexHandoffText = buildCodexHandoffText({
+    context,
+    recommendationHeadline: conductorGuidance.headline,
+    recommendationDescription: conductorGuidance.description,
+    recommendationReadiness: conductorReadinessLabel,
+  });
   const latestKnowledgeEntry =
     context.knowledgeEntries[context.knowledgeEntries.length - 1] ?? null;
 
@@ -721,7 +772,7 @@ export default function ProjectAiWorkspacePage() {
 
   async function handleCopyHandoff() {
     try {
-      await navigator.clipboard?.writeText?.(CODEXA_HANDOFF_COPY_TEXT);
+      await navigator.clipboard?.writeText?.(codexHandoffText);
     } catch {
       // Clipboard may be unavailable in test or runtime environments.
     } finally {
@@ -941,6 +992,38 @@ export default function ProjectAiWorkspacePage() {
               <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
                 Propozycje Konduktora
               </p>
+              <div className="mt-3 rounded-lg border border-emerald-500/20 bg-emerald-500/5 px-3 py-3">
+                <p className="text-xs uppercase tracking-[0.2em] text-emerald-300/80">
+                  Rekomendacja Project Brain
+                </p>
+                <p className="mt-2 text-sm font-semibold text-zinc-50">
+                  {conductorGuidance.headline}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-zinc-300">
+                  {conductorGuidance.description}
+                </p>
+                <div className="mt-3 grid gap-3 md:grid-cols-2">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                      Gotowość
+                    </p>
+                    <p className="mt-1 text-sm text-zinc-200">
+                      {conductorReadinessLabel}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                      Źródło
+                    </p>
+                    <p className="mt-1 text-sm text-zinc-200">
+                      Project Brain / Workflow Engine
+                    </p>
+                  </div>
+                </div>
+                <p className="mt-3 text-xs leading-5 text-zinc-500">
+                  {conductorGuidance.reason}
+                </p>
+              </div>
               <p className="mt-3 text-sm text-zinc-300">
                 Szybkie akcje przygotowują lokalną instrukcję do rozmowy. Nie
                 wykonują milestone ani pracy Codexa.
@@ -1172,26 +1255,9 @@ export default function ProjectAiWorkspacePage() {
             <pre className="mt-4 overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-6 text-zinc-200">
               {`SPS OS przygotowuje kontekst projektu i blok przekazania.
 Codex wykonuje tylko zaakceptowany zakres poza aplikacją.
-Poniższy szablon możesz skopiować i uzupełnić przed wysłaniem.
+Poniższy handoff jest copy-ready i pozostaje ręczny.
 
-===== HANDOFF DO CODEXA START =====
-Session Identity:
-Repository:
-Cel:
-Zakres:
-Dozwolone pliki:
-Zakazane pliki:
-Weryfikacja:
-Zasady pracy:
-- oszczędzaj tokeny i kredyty
-- diagnozuj przed edycją
-- stosuj minimalny patch
-- nie refaktoruj przy okazji
-- nie rozszerzaj scope
-- nie commituj ani nie pushuj bez trybu publikacji
-- raportuj w bloku do skopiowania
-- nie przechodź na SOL bez decyzji Product Ownera
-===== HANDOFF DO CODEXA END =====`}
+${codexHandoffText}`}
             </pre>
             <div className="mt-3 flex items-center gap-3">
               <button

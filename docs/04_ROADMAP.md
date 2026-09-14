@@ -205,12 +205,59 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.3H9` - Checkout Removal Execute UI Final Confirmation
 * `MS-034.3H10R` - Checkout Removal Settings Consolidation
 * `MS-035.0` - Project Brain Conductor AI Workflow Integration Contract Foundation
+* `MS-035.1` - AI Workspace Project Brain Recommendation Handoff Foundation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-035.0 - Project Brain Conductor AI Workflow Integration Contract Foundation
+Latest Completed Product Milestone: MS-035.1 - AI Workspace Project Brain Recommendation Handoff Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-035.1 - AI Workspace Project Brain Recommendation Handoff Foundation
+
+**Status**
+IMPLEMENTED / VERIFIED LOCALLY / ACCEPTED LOCALLY
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+IMPLEMENTED / VERIFIED LOCALLY / ACCEPTED LOCALLY / NOT PUBLISHED / NOT CLOSED
+
+**Type**
+Product Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Implement the smallest read-only AI Workspace integration that surfaces one Project Brain / workflow-derived recommendation as copy-ready manual Codex handoff guidance.
+
+**Implementation Result**
+AI Workspace now shows a read-only recommendation surface derived from existing Project Brain context, Workflow Engine, and Konduktor helpers. The page builds bounded local workflow state from the loaded AI project context, displays recommendation readiness, source, and reason, and includes the recommendation details in the manual Codex handoff block.
+
+**Boundary**
+MS-035.1 is presentation and handoff support only. It adds no automation, provider/model calls, endpoints, Codex auto-run, delete, detach, reconnect, checkout-removal changes, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, evidence changes, source identity changes, audit changes, risk decision changes, fingerprint changes, or canonical artifact changes.
+
+**Implementation Evidence**
+
+* `src/app/projects/[id]/ai/page.tsx` derives a read-only Project Brain / Workflow Engine recommendation for AI Workspace.
+* `src/app/projects/[id]/ai/page.tsx` includes recommendation details in the manual Codex handoff block.
+* `src/app/projects/[id]/ai/page.test.tsx` verifies the recommendation surface and dynamic copy-ready handoff behavior.
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed with `45 / 45` tests.
+
+**Verification Plan**
+
+* `git status -sb`
+* `git diff --check`
+* `git diff --stat`
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx`
 
 ## MS-035.0 - Project Brain Conductor AI Workflow Integration Contract Foundation
 

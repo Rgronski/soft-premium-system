@@ -16,24 +16,6 @@ const createKnowledgeEntryMock = vi.fn();
 const createTaskOnServerMock = vi.fn();
 const fetchMock = vi.fn<typeof fetch>();
 const clipboardWriteTextMock = vi.fn<(text: string) => Promise<void>>();
-const handoffTemplateText = `===== HANDOFF DO CODEXA START =====
-Session Identity:
-Repository:
-Cel:
-Zakres:
-Dozwolone pliki:
-Zakazane pliki:
-Weryfikacja:
-Zasady pracy:
-- oszczędzaj tokeny i kredyty
-- diagnozuj przed edycją
-- stosuj minimalny patch
-- nie refaktoruj przy okazji
-- nie rozszerzaj scope
-- nie commituj ani nie pushuj bez trybu publikacji
-- raportuj w bloku do skopiowania
-- nie przechodź na SOL bez decyzji Product Ownera
-===== HANDOFF DO CODEXA END =====`;
 const canonicalProjectContext = {
   projectId: "project-1",
   projectName: "Alpha",
@@ -2858,6 +2840,12 @@ describe("ProjectAiWorkspacePage", () => {
     expect(screen.getByText("Chat / Konduktor / Chief Architect")).toBeTruthy();
     expect(screen.getByText("Decyzje i przygotowanie handoffu")).toBeTruthy();
     expect(screen.getByText("Propozycje Konduktora")).toBeTruthy();
+    expect(screen.getByText("Rekomendacja Project Brain")).toBeTruthy();
+    expect(
+      screen.getByText("Konduktor potrzebuje decyzji Product Ownera"),
+    ).toBeTruthy();
+    expect(screen.getByText("Wymaga decyzji Product Ownera")).toBeTruthy();
+    expect(screen.getByText("Project Brain / Workflow Engine")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Dalej" })).toBeTruthy();
     expect(screen.getByRole("button", { name: "Akceptuję" })).toBeTruthy();
     expect(
@@ -2989,14 +2977,25 @@ describe("ProjectAiWorkspacePage", () => {
 
     expect(handoffTemplate).toBeTruthy();
     expect(handoffTemplate.textContent).toContain("Codex wykonuje tylko zaakceptowany zakres poza aplikacją.");
-    expect(handoffTemplate.textContent).toContain("Poniższy szablon możesz skopiować i uzupełnić przed wysłaniem.");
+    expect(handoffTemplate.textContent).toContain("Poniższy handoff jest copy-ready i pozostaje ręczny.");
     expect(handoffTemplate.textContent).toContain("Session Identity:");
     expect(handoffTemplate.textContent).toContain("Repository:");
-    expect(handoffTemplate.textContent).toContain("Cel:");
-    expect(handoffTemplate.textContent).toContain("Zakres:");
+    expect(handoffTemplate.textContent).toContain("Cel: Konduktor potrzebuje decyzji Product Ownera");
+    expect(handoffTemplate.textContent).toContain(
+      "Zakres: Konduktor wskazuje następny kierunek, ale nie zatwierdza kamienia milowego i nie uruchamia pracy automatycznie. Product Owner pozostaje właścicielem decyzji.",
+    );
     expect(handoffTemplate.textContent).toContain("Dozwolone pliki:");
     expect(handoffTemplate.textContent).toContain("Zakazane pliki:");
     expect(handoffTemplate.textContent).toContain("Weryfikacja:");
+    expect(handoffTemplate.textContent).toContain("Kontekst projektu:");
+    expect(handoffTemplate.textContent).toContain("- Project ID: project-1");
+    expect(handoffTemplate.textContent).toContain("- Project name: Alpha");
+    expect(handoffTemplate.textContent).toContain("- Tasks: 0");
+    expect(handoffTemplate.textContent).toContain("- Knowledge entries: 0");
+    expect(handoffTemplate.textContent).toContain("Rekomendacja Konduktora:");
+    expect(handoffTemplate.textContent).toContain("- Gotowość: Wymaga decyzji Product Ownera");
+    expect(handoffTemplate.textContent).toContain("Zasada wykonania:");
+    expect(handoffTemplate.textContent).toContain("Codex pozostaje uruchamiany ręcznie poza SPS OS.");
     expect(handoffTemplate.textContent).toContain("Zasady pracy:");
     expect(handoffTemplate.textContent).toContain("oszczędzaj tokeny i kredyty");
     expect(handoffTemplate.textContent).toContain("diagnozuj przed edycją");
@@ -3091,7 +3090,15 @@ describe("ProjectAiWorkspacePage", () => {
 
     await waitFor(() => {
       expect(clipboardWriteTextMock).toHaveBeenCalledTimes(1);
-      expect(clipboardWriteTextMock).toHaveBeenCalledWith(handoffTemplateText);
+      expect(clipboardWriteTextMock).toHaveBeenCalledWith(
+        expect.stringContaining("Cel: Konduktor potrzebuje decyzji Product Ownera"),
+      );
+      expect(clipboardWriteTextMock).toHaveBeenCalledWith(
+        expect.stringContaining("- Project name: Alpha"),
+      );
+      expect(clipboardWriteTextMock).toHaveBeenCalledWith(
+        expect.stringContaining("Ten handoff nie wykonuje automatycznie pracy ani milestone."),
+      );
       expect(screen.getByRole("button", { name: "Skopiowano" })).toBeTruthy();
     });
   });
