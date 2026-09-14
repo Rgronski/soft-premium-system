@@ -204,12 +204,89 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.3H8` - Checkout Removal Execute UI Activation Contract
 * `MS-034.3H9` - Checkout Removal Execute UI Final Confirmation
 * `MS-034.3H10R` - Checkout Removal Settings Consolidation
+* `MS-035.0` - Project Brain Conductor AI Workflow Integration Contract Foundation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.3H10R - Checkout Removal Settings Consolidation
+Latest Completed Product Milestone: MS-035.0 - Project Brain Conductor AI Workflow Integration Contract Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-035.0 - Project Brain Conductor AI Workflow Integration Contract Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Type**
+Product Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the smallest safe first contract for real Project Brain + Konduktor + AI Workflow integration for actual project work, without adding execution behavior.
+
+**Diagnosis Evidence**
+Project Brain already exposes project identity, tasks, knowledge entries, workflow state, AI project context, and metadata-context summaries for AI Workspace consumption. Konduktor already derives read-only guidance and action readiness from Project Brain / workflow signals and can present decision-required, informational-only, or ready-to-act-on states. AI Workspace already presents a two-pane Chat / Konduktor / Chief Architect plus Codex handoff surface, including local quick actions, copy-ready instructions, and a manual Codex handoff panel. Therefore the first safe integration milestone is a contract that binds these existing boundaries into one governed workflow before any new runtime execution behavior is added.
+
+**Smallest First Workflow**
+The first workflow is `Recommend next safe project-work handoff`.
+
+1. Project Brain provides a bounded project context packet containing project identity, task summaries, knowledge summaries/content where already allowed, workflow state, metadata module status, and explicit unavailable/project-not-found states.
+2. Konduktor consumes the Project Brain / workflow signal and presents exactly one next safe recommendation, or an explicit decision-required / informational-only state when the signal is not actionable.
+3. AI Workspace presents that recommendation as a ready next-step surface and a handoff-preparation surface.
+4. Codex remains a manually launched implementation engine: the Product Owner or Chief Architect copies the approved handoff into Codex, and Codex reports the result back outside automatic app execution.
+
+**Contract Result**
+MS-035.0 authorizes a documentation-level integration contract only. It confirms role separation and the first safe workflow shape:
+
+* Project Brain is the context/state/evidence authority.
+* Konduktor derives or presents the next safe recommendation from Project Brain / workflow signals.
+* AI Workspace presents the recommendation, ready instruction, and manual Codex handoff surface.
+* Chief Architect prepares scope and review.
+* Product Owner approves scope and repository actions.
+* Codex implements only approved scoped changes and is launched manually.
+
+**Allowed Implementation Scope**
+
+* documentation-only contract definition,
+* read-only diagnosis of existing Project Brain, Konduktor, AI Workspace, workflow, and project documents,
+* future Product Owner-approved follow-up milestone proposal,
+* usage record append for this Codex task.
+
+**Forbidden Scope**
+
+* real AI execution behavior,
+* automatic Codex launch from SPS OS,
+* API keys, provider changes, model-call changes, automation, scheduling, or background execution,
+* delete, detach, checkout-removal, reconnect, Project Map rewrite, Project Map canonical artifact, audit, risk-decision, fingerprint, or source-identity changes,
+* Beauty Client PRO repository changes,
+* `C:\SPS_OS_WORK` changes,
+* endpoint contract changes,
+* unrelated refactors.
+
+**Future Follow-Up Candidate**
+If Product Owner approves implementation after this contract, the smallest next milestone should wire the existing Project Brain / workflow recommendation into the existing AI Workspace handoff surface as a read-only, copy-ready recommendation. That follow-up must remain non-executing and must not auto-run Codex.
+
+**Verification Plan**
+
+* `git status -sb`
+* `git diff --check`
+* `git diff --stat`
+* confirm `Current Product Milestone` remains `NONE / Product Owner decision required`
+* confirm `MS-034.3H10R - Checkout Removal Settings Consolidation` remains `COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED`
 
 ## MS-034.3H10R - Checkout Removal Settings Consolidation
 
