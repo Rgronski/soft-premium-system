@@ -69,6 +69,34 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.3H10R Checkout Removal Settings Consolidation
+
+### Version
+
+1.0097
+
+### Date
+
+2026-09-14
+
+### Summary
+
+Published MS-034.3H10R as the checkout-removal settings consolidation.
+
+### Completed Work
+
+* Consolidated the checkout-removal settings UI into one workflow: `Dry-run`, `Zgoda Product Ownera`, `Preflight i aktywacja`, `Ostatnie potwierdzenie`, and `Wykonanie`.
+* Removed accumulated transitional checkout-removal cards and the obsolete standalone `BRAMKA ZGODY PRODUCT OWNERA` registry-only approval block from the current settings view.
+* Kept one checkout-removal approval source and one Product Owner approval textarea, while preserving dry-run, local approval, activation, final confirmation, and guarded execute UI behavior.
+* Surfaced the remote-main blocker as `Remote main nie jest potwierdzony. Wykonanie pozostaje zablokowane.`
+
+### Notes
+
+* No endpoint contracts changed.
+* No deletion was executed.
+* No old delete endpoints, Beauty Client PRO repository files, `C:\SPS_OS_WORK` files, SPS metadata, Project Map artifacts, evidence, source identity, knowledge store, audit, risk decisions, fingerprint, or canonical artifacts were changed.
+* Settings tabs foundation and Project Brain / Conductor / AI Workflow integration were not started.
+
 ## Session 101 - MS-034.3H9 Checkout Removal Execute UI Final Confirmation
 
 ### Version

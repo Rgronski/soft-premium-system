@@ -215,31 +215,16 @@ describe("ProjectSettingsPage", () => {
     ).toBeTruthy();
     expect(container.textContent).toContain("nie woła DELETE /api/projects/[id]");
     expect(container.textContent).toContain("nie używa /delete-execution");
-    expect(screen.getByText(/Bramka zgody Product Ownera/)).toBeTruthy();
-    expect(
-      screen.getByText(/Ten milestone nie wykonuje odpięcia/),
-    ).toBeTruthy();
-    expect(
-      screen.getByText(/BCP repo, metadata, Project Map i canonical artifacts pozostają nietknięte/),
-    ).toBeTruthy();
-    expect(container.textContent).toContain(
-      "Product Owner approves registry-only detach for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Scope is limited to SPS OS registry/UI visibility and explicitly excludes BCP repository, .git, source files, workspace wrapper manifest, SPS metadata root, source identity, knowledge store, canonical Project Map artifacts, audit, risk decisions, and structural fingerprint.",
-    );
-
-    fireEvent.click(screen.getByRole("button", { name: /Kopiuj tekst zgody/ }));
-
-    expect(writeText).toHaveBeenCalledWith(
-      "Product Owner approves registry-only detach for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Scope is limited to SPS OS registry/UI visibility and explicitly excludes BCP repository, .git, source files, workspace wrapper manifest, SPS metadata root, source identity, knowledge store, canonical Project Map artifacts, audit, risk decisions, and structural fingerprint.",
+    expect(container.textContent).not.toContain("Bramka zgody Product Ownera");
+    expect(container.textContent).not.toContain(
+      "Product Owner approves registry-only detach for Beauty Client PRO",
     );
     expect(
-      screen.getByText(/Tryby zarządzania lokalnymi plikami projektu/),
-    ).toBeTruthy();
-    expect(screen.getByText(/Odłącz z SPS OS/)).toBeTruthy();
+      screen.queryByRole("button", { name: /Kopiuj tekst zgody odpięcia/ }),
+    ).toBeNull();
     expect(screen.getAllByText(/Usuń lokalny checkout \/ repo/).length).toBeGreaterThan(0);
-    expect(screen.getByText(/Usuń cały workspace projektu/)).toBeTruthy();
-    expect(screen.getAllByText(/Evidence preserved/).length).toBeGreaterThan(0);
     expect(container.textContent).toContain(
-      "To jest tylko preview kontraktu UI. Nie wykonuje usunięcia",
+      "Jeden kontrolowany workflow dla usunięcia wyłącznie lokalnego checkoutu repo.",
     );
     expect(container.textContent).toContain(
       "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
@@ -250,59 +235,11 @@ describe("ProjectSettingsPage", () => {
     expect(container.textContent).toContain(
       "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
     );
-    expect(container.textContent).toContain(
-      "Git status, branch, HEAD, remote i remote freshness muszą być sprawdzone",
-    );
-    expect(container.textContent).toContain(
-      "SPS evidence nie jest kasowane domyślnie",
-    );
-    expect(
-      screen.getByText(/Gotowość wykonania: Usuń lokalny checkout \/ repo/),
-    ).toBeTruthy();
-    expect(container.textContent).toContain(
-      "Status operacji: approval required.",
-    );
-    expect(container.textContent).toContain("Git status clean: wymagane.");
-    expect(container.textContent).toContain("Branch, HEAD i remote: wymagane.");
-    expect(container.textContent).toContain(
-      "Remote main verified: wymagane.",
-    );
-    expect(container.textContent).toContain(
-      "Approval text copied/confirmed: wymagane.",
-    );
-    expect(container.textContent).toContain("Evidence preserved: wymagane.");
-    expect(container.textContent).toContain("Blocked if Git dirty");
-    expect(container.textContent).toContain("path is not project checkout");
-    expect(container.textContent).toContain("path leaves workspace");
-    expect(container.textContent).toContain("manifest would be removed");
-    expect(container.textContent).toContain("`.sps-meta` would be removed");
-    expect(container.textContent).toContain(
-      "preview, approval required, ready, blocked, executed, failed, reconnect required",
-    );
-    expect(container.textContent).toContain(
-      "Ten panel nie wykonuje usuwania, nie dodaje endpointu",
-    );
-    expect(
-      screen.getByText(/Kontrakt endpointu\/akcji: Usuń lokalny checkout \/ repo/),
-    ).toBeTruthy();
-    expect(container.textContent).toContain(
-      "H2 opisuje przyszły minimalny endpoint lub server action bez wykonania.",
-    );
-    expect(container.textContent).toContain(
-      "Request shape: projectId, operationMode=remove-checkout, targetPath, preservedPaths, gitPreflight, approvalText.",
-    );
-    expect(container.textContent).toContain(
-      "Walidacje: targetPath musi być checkoutem projektu",
-    );
-    expect(container.textContent).toContain(
-      "Blokady: Git dirty, niezweryfikowany remote main",
-    );
-    expect(container.textContent).toContain(
-      "Response shape: status, mode, wouldDeletePaths, preservedPaths, blockedReasons, gitPreflight, evidencePreserved, reconnectRequired, executionPerformed.",
-    );
-    expect(container.textContent).toContain(
-      "executionPerformed zawsze pozostaje false",
-    );
+    expect(container.textContent).toContain("1. Dry-run");
+    expect(container.textContent).toContain("2. Zgoda Product Ownera");
+    expect(container.textContent).toContain("3. Preflight i aktywacja");
+    expect(container.textContent).toContain("4. Ostatnie potwierdzenie");
+    expect(container.textContent).toContain("5. Wykonanie");
     expect(
       screen.getByRole("button", {
         name: /Sprawdź dry-run usunięcia checkoutu/,
@@ -311,13 +248,40 @@ describe("ProjectSettingsPage", () => {
     expect(container.textContent).toContain(
       "To jest dry-run. Nic nie zostało usunięte.",
     );
+    expect(screen.getByRole("button", { name: /^Kopiuj tekst zgody$/ })).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: /^Kopiuj tekst zgody$/ }));
+    expect(writeText).toHaveBeenCalledWith(
+      "Product Owner approves destructive checkout-only disk removal for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Remove exactly C:\\SPS_OS_WORK\\beauty-client-pro\\repo. Preserve C:\\SPS_OS_WORK\\beauty-client-pro. Preserve C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json. Preserve C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb. Remote main is verified at 60f8280b2103c12d16b2851a3cef1be140eb34b5. Product Owner acknowledges local checkout deletion is destructive but recoverable from remote if access remains available.",
+    );
+    expect(
+      screen.getAllByLabelText(/Wklej tekst zgody Product Ownera/),
+    ).toHaveLength(1);
+    expect(container.textContent).toContain("Status zgody: approval missing.");
+    expect(container.textContent).toContain("Status aktywacji: activation blocked.");
+    expect(
+      screen.getByRole("button", { name: /Wykonaj usunięcie checkoutu/ }),
+    ).toBeTruthy();
+    expect(container.textContent).not.toContain(
+      "Tryby zarządzania lokalnymi plikami projektu",
+    );
+    expect(container.textContent).not.toContain(
+      "Gotowość wykonania: Usuń lokalny checkout / repo",
+    );
+    expect(container.textContent).not.toContain(
+      "Kontrakt endpointu/akcji: Usuń lokalny checkout / repo",
+    );
+    expect(container.textContent).not.toContain(
+      "Dry-run endpointu: Usuń lokalny checkout / repo",
+    );
+    expect(container.textContent).not.toContain(
+      "Lokalna bramka zgody: Usuń lokalny checkout / repo",
+    );
+    expect(container.textContent).not.toContain("Przyszła akcja wykonawcza");
     expect(screen.getByText(/Project Brain, mapa i Konduktor/)).toBeTruthy();
     expect(
       container.textContent.indexOf("Project Brain, mapa i Konduktor"),
     ).toBeGreaterThan(
-      container.textContent.indexOf(
-        "Tryby zarządzania lokalnymi plikami projektu",
-      ),
+      container.textContent.indexOf("Usuń lokalny checkout / repo"),
     );
     expect(container.textContent).toContain(
       "To jest tylko kontrakt UI, bez wykonania delete, detach, reconnect albo zapisu mapy.",
@@ -533,19 +497,25 @@ describe("ProjectSettingsPage", () => {
 
     const { container } = render(<ProjectSettingsPage />);
 
-    expect(container.textContent).toContain(
+    expect(container.textContent).toContain("2. Zgoda Product Ownera");
+    expect(container.textContent).not.toContain(
       "Lokalna bramka zgody: Usuń lokalny checkout / repo",
     );
     expect(container.textContent).toContain(requiredApprovalText);
+    expect(
+      container.textContent?.match(
+        /Product Owner approves destructive checkout-only disk removal/g,
+      ) ?? [],
+    ).toHaveLength(1);
     expect(container.textContent).toContain(
       "Zgoda jest sprawdzana tylko lokalnie. Nic nie zostało wykonane.",
     );
-    expect(container.textContent).toContain("Status zgody: approval missing.");
+    expect(screen.getByRole("button", { name: /^Kopiuj tekst zgody$/ })).toBeTruthy();
     expect(
-      screen
-        .getByRole("button", { name: /Wykonanie niedostępne/ })
-        .hasAttribute("disabled"),
-    ).toBe(true);
+      screen.getAllByLabelText(/Wklej tekst zgody Product Ownera/),
+    ).toHaveLength(1);
+    expect(container.textContent).toContain("Status zgody: approval missing.");
+    expect(container.textContent).not.toContain("Wykonanie niedostępne");
 
     fireEvent.change(
       screen.getByLabelText(/Wklej tekst zgody Product Ownera/),
@@ -600,13 +570,15 @@ describe("ProjectSettingsPage", () => {
 
     const { container } = render(<ProjectSettingsPage />);
 
-    expect(container.textContent).toContain("Przyszła akcja wykonawcza");
+    expect(container.textContent).toContain("3. Preflight i aktywacja");
     expect(container.textContent).toContain(
-      "Wykonanie jest nadal zablokowane. Ten krok tylko pokazuje przyszłą akcję.",
+      "Zgoda jest sprawdzana tylko lokalnie. Nic nie zostało wykonane.",
     );
-    expect(container.textContent).toContain(
-      "To jest kontrakt aktywacji. Wykonanie nadal wymaga osobnego milestone.",
-    );
+    expect(screen.getByRole("button", { name: /^Kopiuj tekst zgody$/ })).toBeTruthy();
+    expect(
+      screen.getAllByLabelText(/Wklej tekst zgody Product Ownera/),
+    ).toHaveLength(1);
+    expect(container.textContent).not.toContain("Wykonanie niedostępne");
     expect(container.textContent).toContain("Status aktywacji: activation blocked.");
     expect(container.textContent).toContain(
       "dry-run executed and executionPerformed: false",
@@ -625,14 +597,9 @@ describe("ProjectSettingsPage", () => {
       "preserved paths include wrapper, manifest, metadata root",
     );
     expect(container.textContent).toContain("execute endpoint available");
+    expect(container.textContent).toContain("4. Ostatnie potwierdzenie");
     expect(container.textContent).toContain(
-      "separate final execution confirmation",
-    );
-    expect(container.textContent).toContain(
-      "Ostatnie potwierdzenie przed realnym usunięciem lokalnego checkoutu",
-    );
-    expect(container.textContent).toContain(
-      "To jest lokalna granica potwierdzenia. Realne wykonanie nadal wymaga przyszłej osobnej decyzji i akcji.",
+      "To jest lokalna granica potwierdzenia przed destrukcyjnym usunięciem lokalnego checkoutu.",
     );
     expect(container.textContent).toContain(
       "deletion path: C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
@@ -653,8 +620,9 @@ describe("ProjectSettingsPage", () => {
     expect(container.textContent).toContain(
       "Status ostatniego potwierdzenia: final confirmation blocked.",
     );
+    expect(container.textContent).toContain("5. Wykonanie");
     expect(container.textContent).toContain(
-      "Przycisk wykonania pozostaje nieaktywny w H9; ten krok nie woła endpointu wykonawczego i niczego nie usuwa.",
+      "H10 aktywuje wykonanie wyłącznie po przejściu wszystkich lokalnych bramek. Akcja jest destrukcyjna i dotyczy tylko lokalnego checkoutu repo.",
     );
 
     const executeButton = screen.getByRole("button", {
@@ -687,6 +655,97 @@ describe("ProjectSettingsPage", () => {
     expect(
       fetchMock.mock.calls.some(([input]) =>
         String(input).includes("DELETE /api/projects"),
+      ),
+    ).toBe(false);
+  });
+
+  test("shows remote main blocker when dry-run preflight is not verified", async () => {
+    const bcpProjectId = "0d3e28cb-6dff-442a-b94c-007a5d6b5779";
+    const requiredApprovalText =
+      "Product Owner approves destructive checkout-only disk removal for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Remove exactly C:\\SPS_OS_WORK\\beauty-client-pro\\repo. Preserve C:\\SPS_OS_WORK\\beauty-client-pro. Preserve C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json. Preserve C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb. Remote main is verified at 60f8280b2103c12d16b2851a3cef1be140eb34b5. Product Owner acknowledges local checkout deletion is destructive but recoverable from remote if access remains available.";
+    const fetchMock = vi.fn((input: RequestInfo | URL) => {
+      const url = typeof input === "string" ? input : input.toString();
+
+      if (url.includes("/checkout-removal/dry-run")) {
+        return Promise.resolve(
+          new Response(
+            JSON.stringify({
+              status: "preview",
+              mode: "remove-checkout",
+              executionPerformed: false,
+              wouldDeletePaths: [
+                "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+              ],
+              preservedPaths: [
+                "C:\\SPS_OS_WORK\\beauty-client-pro",
+                "C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json",
+                "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+              ],
+              blockedReasons: [],
+              gitPreflight: {
+                workingTreeStatus: "clean",
+                branch: "work/beauty-client-pro",
+                head: "60f8280b2103c12d16b2851a3cef1be140eb34b5",
+                remote: "https://github.com/Beautyclient/BeautyClientPro.git",
+                remoteMainVerified: false,
+              },
+              evidencePreserved: true,
+              reconnectRequired: true,
+            }),
+            {
+              status: 200,
+              headers: {
+                "content-type": "application/json",
+              },
+            },
+          ),
+        );
+      }
+
+      return Promise.resolve(createBlockedSourceRevalidationResponse());
+    });
+
+    vi.stubGlobal("fetch", fetchMock);
+    localStorage.clear();
+    useParamsMock.mockReturnValue({ id: bcpProjectId });
+    createProject(
+      "Beauty Client PRO",
+      bcpProjectId,
+      undefined,
+      "C:\\SPS_OS_WORK\\beauty-client-pro",
+      "manifest-present",
+    );
+
+    const { container } = render(<ProjectSettingsPage />);
+
+    fireEvent.click(
+      await screen.findByRole("button", {
+        name: /Sprawdź dry-run usunięcia checkoutu/,
+      }),
+    );
+    fireEvent.change(
+      screen.getByLabelText(/Wklej tekst zgody Product Ownera/),
+      {
+        target: {
+          value: requiredApprovalText,
+        },
+      },
+    );
+
+    await waitFor(() => {
+      expect(container.textContent).toContain(
+        "Remote main nie jest potwierdzony. Wykonanie pozostaje zablokowane.",
+      );
+    });
+    expect(container.textContent).toContain("Status aktywacji: activation blocked.");
+    expect(
+      screen
+        .getByRole("button", { name: /Wykonaj usunięcie checkoutu/ })
+        .hasAttribute("disabled"),
+    ).toBe(true);
+    expect(
+      fetchMock.mock.calls.some(([input]) =>
+        String(input).includes("/checkout-removal/execute"),
       ),
     ).toBe(false);
   });
@@ -799,12 +858,310 @@ describe("ProjectSettingsPage", () => {
       screen
         .getByRole("button", { name: /Wykonaj usunięcie checkoutu/ })
         .hasAttribute("disabled"),
-    ).toBe(true);
+    ).toBe(false);
     expect(
       fetchMock.mock.calls.some(([input]) =>
         String(input).includes("/checkout-removal/execute"),
       ),
     ).toBe(false);
+  });
+
+  test("calls the checkout removal execute endpoint only after all local gates pass", async () => {
+    const bcpProjectId = "0d3e28cb-6dff-442a-b94c-007a5d6b5779";
+    const requiredApprovalText =
+      "Product Owner approves destructive checkout-only disk removal for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Remove exactly C:\\SPS_OS_WORK\\beauty-client-pro\\repo. Preserve C:\\SPS_OS_WORK\\beauty-client-pro. Preserve C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json. Preserve C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb. Remote main is verified at 60f8280b2103c12d16b2851a3cef1be140eb34b5. Product Owner acknowledges local checkout deletion is destructive but recoverable from remote if access remains available.";
+    const fetchMock = vi.fn((input: RequestInfo | URL, init?: RequestInit) => {
+      const url = typeof input === "string" ? input : input.toString();
+
+      if (url.includes("/checkout-removal/dry-run")) {
+        return Promise.resolve(
+          new Response(
+            JSON.stringify({
+              status: "preview",
+              mode: "remove-checkout",
+              executionPerformed: false,
+              wouldDeletePaths: [
+                "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+              ],
+              preservedPaths: [
+                "C:\\SPS_OS_WORK\\beauty-client-pro",
+                "C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json",
+                "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+              ],
+              blockedReasons: [],
+              gitPreflight: {
+                workingTreeStatus: "clean",
+                branch: "work/beauty-client-pro",
+                head: "60f8280b2103c12d16b2851a3cef1be140eb34b5",
+                remote: "https://github.com/Beautyclient/BeautyClientPro.git",
+                remoteMainVerified: true,
+              },
+              evidencePreserved: true,
+              reconnectRequired: true,
+            }),
+            {
+              status: 200,
+              headers: {
+                "content-type": "application/json",
+              },
+            },
+          ),
+        );
+      }
+
+      if (url.includes("/checkout-removal/execute")) {
+        expect(JSON.parse(String(init?.body))).toMatchObject({
+          projectId: bcpProjectId,
+          operationMode: "remove-checkout",
+          targetPath: "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+          preservedPaths: [
+            "C:\\SPS_OS_WORK\\beauty-client-pro",
+            "C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json",
+            "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+          ],
+          approvalText: requiredApprovalText,
+        });
+
+        return Promise.resolve(
+          new Response(
+            JSON.stringify({
+              status: "executed",
+              mode: "remove-checkout",
+              executionPerformed: true,
+              deletedPaths: [
+                "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+              ],
+              preservedPaths: [
+                "C:\\SPS_OS_WORK\\beauty-client-pro",
+                "C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json",
+                "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+              ],
+              blockedReasons: [],
+              gitPreflight: {
+                workingTreeStatus: "clean",
+                branch: "work/beauty-client-pro",
+                head: "60f8280b2103c12d16b2851a3cef1be140eb34b5",
+                remote: "https://github.com/Beautyclient/BeautyClientPro.git",
+                remoteMainVerified: true,
+              },
+              evidencePreserved: true,
+              reconnectRequired: true,
+              nextStep: "Reconnect required: dodaj checkout ponownie.",
+            }),
+            {
+              status: 200,
+              headers: {
+                "content-type": "application/json",
+              },
+            },
+          ),
+        );
+      }
+
+      return Promise.resolve(createBlockedSourceRevalidationResponse());
+    });
+
+    vi.stubGlobal("fetch", fetchMock);
+    localStorage.clear();
+    useParamsMock.mockReturnValue({ id: bcpProjectId });
+    createProject(
+      "Beauty Client PRO",
+      bcpProjectId,
+      undefined,
+      "C:\\SPS_OS_WORK\\beauty-client-pro",
+      "manifest-present",
+    );
+
+    const { container } = render(<ProjectSettingsPage />);
+
+    fireEvent.click(
+      await screen.findByRole("button", {
+        name: /Sprawdź dry-run usunięcia checkoutu/,
+      }),
+    );
+    fireEvent.change(
+      screen.getByLabelText(/Wklej tekst zgody Product Ownera/),
+      {
+        target: {
+          value: requiredApprovalText,
+        },
+      },
+    );
+
+    await waitFor(() => {
+      expect(container.textContent).toContain(
+        "Status aktywacji: activation ready.",
+      );
+    });
+
+    expect(
+      fetchMock.mock.calls.some(([input]) =>
+        String(input).includes("/checkout-removal/execute"),
+      ),
+    ).toBe(false);
+
+    fireEvent.click(
+      screen.getByLabelText(
+        /Rozumiem, że następny krok może wykonać realne usunięcie lokalnego checkoutu/,
+      ),
+    );
+    fireEvent.click(
+      screen.getByRole("button", { name: /Wykonaj usunięcie checkoutu/ }),
+    );
+
+    await waitFor(() => {
+      expect(container.textContent).toContain("executionPerformed: true");
+    });
+    expect(container.textContent).toContain(
+      "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+    );
+    expect(container.textContent).toContain("reconnectRequired: true");
+    expect(container.textContent).toContain(
+      "nextStep: Reconnect required: dodaj checkout ponownie.",
+    );
+    expect(
+      fetchMock.mock.calls.some(([input]) =>
+        String(input).includes("/delete-execution"),
+      ),
+    ).toBe(false);
+    expect(
+      fetchMock.mock.calls.some(([input]) =>
+        String(input).includes("DELETE /api/projects"),
+      ),
+    ).toBe(false);
+  });
+
+  test("renders execute blocked reasons without claiming deletion", async () => {
+    const bcpProjectId = "0d3e28cb-6dff-442a-b94c-007a5d6b5779";
+    const requiredApprovalText =
+      "Product Owner approves destructive checkout-only disk removal for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Remove exactly C:\\SPS_OS_WORK\\beauty-client-pro\\repo. Preserve C:\\SPS_OS_WORK\\beauty-client-pro. Preserve C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json. Preserve C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb. Remote main is verified at 60f8280b2103c12d16b2851a3cef1be140eb34b5. Product Owner acknowledges local checkout deletion is destructive but recoverable from remote if access remains available.";
+    const fetchMock = vi.fn((input: RequestInfo | URL) => {
+      const url = typeof input === "string" ? input : input.toString();
+
+      if (url.includes("/checkout-removal/dry-run")) {
+        return Promise.resolve(
+          new Response(
+            JSON.stringify({
+              status: "preview",
+              mode: "remove-checkout",
+              executionPerformed: false,
+              wouldDeletePaths: [
+                "C:\\SPS_OS_WORK\\beauty-client-pro\\repo",
+              ],
+              preservedPaths: [
+                "C:\\SPS_OS_WORK\\beauty-client-pro",
+                "C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json",
+                "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+              ],
+              blockedReasons: [],
+              gitPreflight: {
+                workingTreeStatus: "clean",
+                branch: "work/beauty-client-pro",
+                head: "60f8280b2103c12d16b2851a3cef1be140eb34b5",
+                remote: "https://github.com/Beautyclient/BeautyClientPro.git",
+                remoteMainVerified: true,
+              },
+              evidencePreserved: true,
+              reconnectRequired: true,
+            }),
+            {
+              status: 200,
+              headers: {
+                "content-type": "application/json",
+              },
+            },
+          ),
+        );
+      }
+
+      if (url.includes("/checkout-removal/execute")) {
+        return Promise.resolve(
+          new Response(
+            JSON.stringify({
+              status: "blocked",
+              mode: "remove-checkout",
+              executionPerformed: false,
+              deletedPaths: [],
+              preservedPaths: [
+                "C:\\SPS_OS_WORK\\beauty-client-pro",
+                "C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json",
+                "C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb",
+              ],
+              blockedReasons: ["Remote main musi być zweryfikowany ponownie."],
+              gitPreflight: {
+                workingTreeStatus: "clean",
+                branch: "work/beauty-client-pro",
+                head: "60f8280b2103c12d16b2851a3cef1be140eb34b5",
+                remote: "https://github.com/Beautyclient/BeautyClientPro.git",
+                remoteMainVerified: true,
+              },
+              evidencePreserved: true,
+              reconnectRequired: true,
+              nextStep: "Usuń blokady i ponów preflight.",
+            }),
+            {
+              status: 409,
+              headers: {
+                "content-type": "application/json",
+              },
+            },
+          ),
+        );
+      }
+
+      return Promise.resolve(createBlockedSourceRevalidationResponse());
+    });
+
+    vi.stubGlobal("fetch", fetchMock);
+    localStorage.clear();
+    useParamsMock.mockReturnValue({ id: bcpProjectId });
+    createProject(
+      "Beauty Client PRO",
+      bcpProjectId,
+      undefined,
+      "C:\\SPS_OS_WORK\\beauty-client-pro",
+      "manifest-present",
+    );
+
+    const { container } = render(<ProjectSettingsPage />);
+
+    fireEvent.click(
+      await screen.findByRole("button", {
+        name: /Sprawdź dry-run usunięcia checkoutu/,
+      }),
+    );
+    fireEvent.change(
+      screen.getByLabelText(/Wklej tekst zgody Product Ownera/),
+      {
+        target: {
+          value: requiredApprovalText,
+        },
+      },
+    );
+
+    await waitFor(() => {
+      expect(container.textContent).toContain(
+        "Status aktywacji: activation ready.",
+      );
+    });
+
+    fireEvent.click(
+      screen.getByLabelText(
+        /Rozumiem, że następny krok może wykonać realne usunięcie lokalnego checkoutu/,
+      ),
+    );
+    fireEvent.click(
+      screen.getByRole("button", { name: /Wykonaj usunięcie checkoutu/ }),
+    );
+
+    await waitFor(() => {
+      expect(container.textContent).toContain("status: blocked");
+    });
+    expect(container.textContent).toContain("executionPerformed: false");
+    expect(container.textContent).toContain("deletedPaths:brak");
+    expect(container.textContent).toContain(
+      "Remote main musi być zweryfikowany ponownie.",
+    );
   });
 
   test("revalidates a derived repo checkout and hides the manifest-only source copy", async () => {

@@ -75,8 +75,18 @@ type CheckoutRemovalDryRunResponse = {
   reconnectRequired: true;
 };
 
-const BCP_REGISTRY_DETACH_APPROVAL_TEXT =
-  "Product Owner approves registry-only detach for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Scope is limited to SPS OS registry/UI visibility and explicitly excludes BCP repository, .git, source files, workspace wrapper manifest, SPS metadata root, source identity, knowledge store, canonical Project Map artifacts, audit, risk decisions, and structural fingerprint.";
+type CheckoutRemovalExecuteResponse = {
+  status: "blocked" | "executed" | "failed";
+  mode: "remove-checkout";
+  executionPerformed: boolean;
+  deletedPaths: string[];
+  preservedPaths: string[];
+  blockedReasons: string[];
+  gitPreflight: unknown;
+  evidencePreserved: true;
+  reconnectRequired: true;
+  nextStep: string;
+};
 
 const BCP_CHECKOUT_REMOVAL_APPROVAL_TEXT =
   "Product Owner approves destructive checkout-only disk removal for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Remove exactly C:\\SPS_OS_WORK\\beauty-client-pro\\repo. Preserve C:\\SPS_OS_WORK\\beauty-client-pro. Preserve C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json. Preserve C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb. Remote main is verified at 60f8280b2103c12d16b2851a3cef1be140eb34b5. Product Owner acknowledges local checkout deletion is destructive but recoverable from remote if access remains available.";
@@ -817,8 +827,10 @@ export default function ProjectSettingsPage() {
     useState<GitHubLocalWorkingBranchCreationOutcome>("idle");
   const [projectSourceStatus, setProjectSourceStatus] =
     useState<ProjectSourceReconciliationStatus | null>(null);
-  const [registryDetachApprovalCopyStatus, setRegistryDetachApprovalCopyStatus] =
-    useState<string | null>(null);
+  const [
+    checkoutRemovalApprovalCopyStatus,
+    setCheckoutRemovalApprovalCopyStatus,
+  ] = useState<string | null>(null);
   const [checkoutRemovalDryRunStatus, setCheckoutRemovalDryRunStatus] =
     useState<"idle" | "loading" | "success" | "error">("idle");
   const [checkoutRemovalDryRunResult, setCheckoutRemovalDryRunResult] =
@@ -831,6 +843,12 @@ export default function ProjectSettingsPage() {
     checkoutRemovalFinalConfirmationAccepted,
     setCheckoutRemovalFinalConfirmationAccepted,
   ] = useState(false);
+  const [checkoutRemovalExecuteStatus, setCheckoutRemovalExecuteStatus] =
+    useState<"idle" | "loading" | "success" | "blocked" | "error">("idle");
+  const [checkoutRemovalExecuteResult, setCheckoutRemovalExecuteResult] =
+    useState<CheckoutRemovalExecuteResponse | null>(null);
+  const [checkoutRemovalExecuteError, setCheckoutRemovalExecuteError] =
+    useState<string | null>(null);
 
   useEffect(() => {
     let ignore = false;
@@ -861,7 +879,11 @@ export default function ProjectSettingsPage() {
       setCheckoutRemovalDryRunResult(null);
       setCheckoutRemovalDryRunError(null);
       setCheckoutRemovalApprovalInput("");
+      setCheckoutRemovalApprovalCopyStatus(null);
       setCheckoutRemovalFinalConfirmationAccepted(false);
+      setCheckoutRemovalExecuteStatus("idle");
+      setCheckoutRemovalExecuteResult(null);
+      setCheckoutRemovalExecuteError(null);
     }
 
     if (nextLocalProject) {
@@ -1068,6 +1090,18 @@ export default function ProjectSettingsPage() {
     checkoutRemovalFinalConfirmationAccepted
       ? "final confirmation ready"
       : "final confirmation blocked";
+  const checkoutRemovalExecutePreservedPaths = [
+    registryDetachPreview.preservedPaths.workspace,
+    `${registryDetachPreview.preservedPaths.workspace}\\sps-project.json`,
+    checkoutRemovalDryRunMetadataRootPath,
+  ];
+  const checkoutRemovalExecuteCanRun =
+    checkoutRemovalFinalConfirmationStatus === "final confirmation ready" &&
+    Boolean(checkoutRemovalDryRunResult) &&
+    Boolean(checkoutRemovalActivationGitPreflight);
+  const checkoutRemovalRemoteMainBlocked =
+    checkoutRemovalDryRunResult !== null &&
+    checkoutRemovalActivationGitPreflight?.remoteMainVerified !== true;
   const branchWorkModeSummary = buildBranchWorkModeSummary(
     project.name,
     branchWorkMode,
@@ -1174,12 +1208,12 @@ export default function ProjectSettingsPage() {
     );
   }
 
-  async function handleCopyRegistryDetachApprovalText() {
+  async function handleCopyCheckoutRemovalApprovalText() {
     try {
-      await navigator.clipboard.writeText(BCP_REGISTRY_DETACH_APPROVAL_TEXT);
-      setRegistryDetachApprovalCopyStatus("Tekst zgody skopiowany.");
+      await navigator.clipboard.writeText(BCP_CHECKOUT_REMOVAL_APPROVAL_TEXT);
+      setCheckoutRemovalApprovalCopyStatus("Tekst zgody skopiowany.");
     } catch {
-      setRegistryDetachApprovalCopyStatus(
+      setCheckoutRemovalApprovalCopyStatus(
         "Nie udało się skopiować tekstu zgody.",
       );
     }
@@ -1196,6 +1230,9 @@ export default function ProjectSettingsPage() {
     setCheckoutRemovalDryRunResult(null);
     setCheckoutRemovalDryRunError(null);
     setCheckoutRemovalFinalConfirmationAccepted(false);
+    setCheckoutRemovalExecuteStatus("idle");
+    setCheckoutRemovalExecuteResult(null);
+    setCheckoutRemovalExecuteError(null);
 
     try {
       const response = await fetch(
@@ -1242,6 +1279,56 @@ export default function ProjectSettingsPage() {
       setCheckoutRemovalDryRunStatus("error");
       setCheckoutRemovalDryRunError(
         "Dry-run usunięcia checkoutu nie połączył się z API. Nic nie zostało usunięte.",
+      );
+    }
+  }
+
+  async function handleCheckoutRemovalExecute() {
+    if (
+      !checkoutRemovalExecuteCanRun ||
+      !checkoutRemovalDryRunResult ||
+      !checkoutRemovalActivationGitPreflight
+    ) {
+      return;
+    }
+
+    setCheckoutRemovalExecuteStatus("loading");
+    setCheckoutRemovalExecuteResult(null);
+    setCheckoutRemovalExecuteError(null);
+
+    try {
+      const response = await fetch(
+        `/api/projects/${currentProject.id}/checkout-removal/execute`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            projectId: currentProject.id,
+            operationMode: "remove-checkout",
+            targetPath: registryDetachPreview.preservedPaths.repoCheckout,
+            preservedPaths: checkoutRemovalExecutePreservedPaths,
+            gitPreflight: checkoutRemovalDryRunResult.gitPreflight,
+            approvalText: BCP_CHECKOUT_REMOVAL_APPROVAL_TEXT,
+          }),
+        },
+      );
+      const payload = (await response.json()) as CheckoutRemovalExecuteResponse;
+
+      setCheckoutRemovalExecuteResult(payload);
+      setCheckoutRemovalExecuteStatus(
+        payload.executionPerformed ? "success" : "blocked",
+      );
+      if (!response.ok && payload.blockedReasons.length === 0) {
+        setCheckoutRemovalExecuteError(
+          "Endpoint wykonawczy zwrócił błąd bez listy blokad.",
+        );
+      }
+    } catch {
+      setCheckoutRemovalExecuteStatus("error");
+      setCheckoutRemovalExecuteError(
+        "Nie udało się połączyć z endpointem wykonawczym. Nie potwierdzono usunięcia.",
       );
     }
   }
@@ -1579,171 +1666,26 @@ export default function ProjectSettingsPage() {
           ) : null}
           <div className="mt-4 rounded-xl border border-cyan-300/20 bg-zinc-950/60 p-4">
             <p className="text-xs uppercase tracking-[0.2em] text-cyan-200/80">
-              Bramka zgody Product Ownera
+              Usuń lokalny checkout / repo
             </p>
             <p className="mt-2 text-sm text-cyan-50">
-              Ten milestone nie wykonuje odpięcia. Zgoda jest wymagana dopiero
-              przed osobnym przyszłym zapisem w rejestrze SPS OS.
+              Jeden kontrolowany workflow dla usunięcia wyłącznie lokalnego
+              checkoutu repo. Wrapper, manifest, SPS metadata, Project Map i
+              evidence pozostają zachowane.
             </p>
-            <p className="mt-2 text-sm text-cyan-100">
-              BCP repo, metadata, Project Map i canonical artifacts pozostają
-              nietknięte.
-            </p>
-            <p className="mt-3 text-sm text-cyan-100">
-              {BCP_REGISTRY_DETACH_APPROVAL_TEXT}
-            </p>
-            <button
-              type="button"
-              onClick={handleCopyRegistryDetachApprovalText}
-              className="mt-3 rounded-lg border border-cyan-300/30 px-3 py-2 text-sm font-medium text-cyan-50 transition hover:border-cyan-200 hover:bg-cyan-400/10"
-            >
-              Kopiuj tekst zgody
-            </button>
-            {registryDetachApprovalCopyStatus ? (
-              <p className="mt-2 text-sm text-cyan-100">
-                {registryDetachApprovalCopyStatus}
-              </p>
-            ) : null}
-          </div>
-          <div className="mt-4 rounded-xl border border-cyan-300/20 bg-zinc-950/60 p-4">
-            <p className="text-xs uppercase tracking-[0.2em] text-cyan-200/80">
-              Tryby zarządzania lokalnymi plikami projektu
-            </p>
-            <p className="mt-2 text-sm text-cyan-50">
-              To jest tylko preview kontraktu UI. Nie wykonuje usunięcia, nie
-              tworzy endpointu delete, nie woła{" "}
-              <code>DELETE /api/projects/[id]</code> i nie używa{" "}
-              <code>/delete-execution</code>.
-            </p>
-            <div className="mt-3 grid gap-3 text-sm text-cyan-100 md:grid-cols-2">
-              <div className="rounded-lg border border-cyan-300/10 p-3">
-                <p className="font-medium text-cyan-50">Odłącz z SPS OS</p>
-                <p className="mt-1">
-                  Przyszły tryb rejestru/UI/cache. Pliki projektu i SPS
-                  evidence zostają.
-                </p>
-              </div>
-              <div className="rounded-lg border border-cyan-300/10 p-3">
-                <p className="font-medium text-cyan-50">
-                  Usuń lokalny checkout / repo
-                </p>
-                <p className="mt-1">
-                  Przyszły tryb usuwa tylko repo checkout po osobnej zgodzie i
-                  Git preflight.
-                </p>
-              </div>
-              <div className="rounded-lg border border-cyan-300/10 p-3">
-                <p className="font-medium text-cyan-50">
-                  Usuń cały workspace projektu
-                </p>
-                <p className="mt-1">
-                  Wyższy poziom zgody. W F1 tylko opis, bez wykonania.
-                </p>
-              </div>
-              <div className="rounded-lg border border-cyan-300/10 p-3">
-                <p className="font-medium text-cyan-50">Evidence preserved</p>
-                <p className="mt-1">
-                  SPS evidence, Project Map, audit, risk decisions,
-                  fingerprint i knowledge store zostają zachowane.
-                </p>
-              </div>
-            </div>
             <div className="mt-3 space-y-2 text-sm text-cyan-100">
-              <p>Ścieżki do usunięcia w trybie checkout-only:</p>
-              <ul className="space-y-1">
-                <li>{registryDetachPreview.preservedPaths.repoCheckout}</li>
-              </ul>
-              <p>Ścieżki do zachowania:</p>
-              <ul className="space-y-1">
-                <li>{registryDetachPreview.preservedPaths.workspace}</li>
-                <li>
-                  {registryDetachPreview.preservedPaths.workspace}
-                  \sps-project.json
-                </li>
-                <li>{registryDetachPreview.preservedPaths.metadataRoot}</li>
-              </ul>
+              <p>Ścieżka usuwana: {registryDetachPreview.preservedPaths.repoCheckout}</p>
               <p>
-                Git status, branch, HEAD, remote i remote freshness muszą być
-                sprawdzone w osobnym preflight przed jakimkolwiek wykonaniem.
-              </p>
-              <p>
-                SPS evidence nie jest kasowane domyślnie i nie jest częścią
-                tego trybu operacji.
+                Ścieżki zachowane: {registryDetachPreview.preservedPaths.workspace};{" "}
+                {registryDetachPreview.preservedPaths.workspace}\sps-project.json;{" "}
+                {checkoutRemovalDryRunMetadataRootPath}
               </p>
             </div>
-            <div className="mt-4 rounded-lg border border-cyan-300/10 p-3 text-sm text-cyan-100">
-              <p className="font-medium text-cyan-50">
-                Gotowość wykonania: Usuń lokalny checkout / repo
-              </p>
-              <p className="mt-2">
-                Status operacji: approval required. Realne wykonanie pozostaje
-                zablokowane do osobnego zatwierdzenia Product Ownera i przyszłego
-                endpointu wykonawczego.
-              </p>
-              <ul className="mt-3 space-y-1">
-                <li>Git status clean: wymagane.</li>
-                <li>Branch, HEAD i remote: wymagane.</li>
-                <li>Remote main verified: wymagane.</li>
-                <li>Approval text copied/confirmed: wymagane.</li>
-                <li>Evidence preserved: wymagane.</li>
-                <li>
-                  Blocked if Git dirty, path is not project checkout, path
-                  leaves workspace, manifest would be removed, or `.sps-meta`
-                  would be removed.
-                </li>
-              </ul>
-              <p className="mt-3">
-                Statusy przyszłej operacji: preview, approval required, ready,
-                blocked, executed, failed, reconnect required.
-              </p>
-              <p className="mt-2">
-                Ten panel nie wykonuje usuwania, nie dodaje endpointu, nie woła{" "}
-                <code>/delete-execution</code> i nie modyfikuje repo ani
-                evidence.
-              </p>
-              <div className="mt-4 rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
-                <p className="font-medium text-cyan-50">
-                  Kontrakt endpointu/akcji: Usuń lokalny checkout / repo
-                </p>
-                <p className="mt-2">
-                  H2 opisuje przyszły minimalny endpoint lub server action bez
-                  wykonania. Kontrakt pozostaje read-only i nie podpina{" "}
-                  <code>/delete-execution</code>.
-                </p>
-                <ul className="mt-3 space-y-1">
-                  <li>
-                    Request shape: projectId, operationMode=remove-checkout,
-                    targetPath, preservedPaths, gitPreflight, approvalText.
-                  </li>
-                  <li>
-                    Walidacje: targetPath musi być checkoutem projektu, musi
-                    pozostać w workspace, Git status musi być clean, branch,
-                    HEAD, remote i remote main muszą być znane.
-                  </li>
-                  <li>
-                    Blokady: Git dirty, niezweryfikowany remote main, targetPath
-                    poza workspace, próba usunięcia manifestu, `.sps-meta`,
-                    Project Map albo evidence.
-                  </li>
-                  <li>
-                    Response shape: status, mode, wouldDeletePaths,
-                    preservedPaths, blockedReasons, gitPreflight,
-                    evidencePreserved, reconnectRequired, executionPerformed.
-                  </li>
-                </ul>
-                <p className="mt-3">
-                  W H2 executionPerformed zawsze pozostaje false. Realne
-                  usuwanie wymaga osobnego milestone'u i osobnej zgody Product
-                  Ownera.
-                </p>
-              </div>
-              <div className="mt-4 rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
-                <p className="font-medium text-cyan-50">
-                  Dry-run endpointu: Usuń lokalny checkout / repo
-                </p>
-                <p className="mt-2">
-                  To jest dry-run. Nic nie zostało usunięte.
-                </p>
+
+            <div className="mt-4 space-y-4">
+              <div className="rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
+                <p className="font-medium text-cyan-50">1. Dry-run</p>
+                <p className="mt-2">To jest dry-run. Nic nie zostało usunięte.</p>
                 <button
                   type="button"
                   onClick={handleCheckoutRemovalDryRun}
@@ -1758,16 +1700,11 @@ export default function ProjectSettingsPage() {
                   <p className="mt-3">Dry-run w toku. Nic nie jest usuwane.</p>
                 ) : null}
                 {checkoutRemovalDryRunError ? (
-                  <p className="mt-3 text-amber-100">
-                    {checkoutRemovalDryRunError}
-                  </p>
+                  <p className="mt-3 text-amber-100">{checkoutRemovalDryRunError}</p>
                 ) : null}
                 {checkoutRemovalDryRunResult ? (
                   <div className="mt-3 space-y-2">
-                    <p>
-                      executionPerformed:{" "}
-                      {String(checkoutRemovalDryRunResult.executionPerformed)}
-                    </p>
+                    <p>executionPerformed: {String(checkoutRemovalDryRunResult.executionPerformed)}</p>
                     <p>status: {checkoutRemovalDryRunResult.status}</p>
                     <p>mode: {checkoutRemovalDryRunResult.mode}</p>
                     <p>wouldDeletePaths:</p>
@@ -1796,26 +1733,15 @@ export default function ProjectSettingsPage() {
                         <li>brak</li>
                       )}
                     </ul>
-                    <p>
-                      gitPreflight:{" "}
-                      {JSON.stringify(checkoutRemovalDryRunResult.gitPreflight)}
-                    </p>
-                    <p>
-                      evidencePreserved:{" "}
-                      {String(checkoutRemovalDryRunResult.evidencePreserved)}
-                    </p>
-                    <p>
-                      reconnectRequired:{" "}
-                      {String(checkoutRemovalDryRunResult.reconnectRequired)}
-                    </p>
-                    <p>To jest dry-run. Nic nie zostało usunięte.</p>
+                    <p>gitPreflight: {JSON.stringify(checkoutRemovalDryRunResult.gitPreflight)}</p>
+                    <p>evidencePreserved: {String(checkoutRemovalDryRunResult.evidencePreserved)}</p>
+                    <p>reconnectRequired: {String(checkoutRemovalDryRunResult.reconnectRequired)}</p>
                   </div>
                 ) : null}
               </div>
-              <div className="mt-4 rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
-                <p className="font-medium text-cyan-50">
-                  Lokalna bramka zgody: Usuń lokalny checkout / repo
-                </p>
+
+              <div className="rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
+                <p className="font-medium text-cyan-50">2. Zgoda Product Ownera</p>
                 <p className="mt-2">
                   Zgoda jest sprawdzana tylko lokalnie. Nic nie zostało wykonane.
                 </p>
@@ -1823,6 +1749,18 @@ export default function ProjectSettingsPage() {
                 <p className="mt-1 rounded-md border border-cyan-300/10 bg-zinc-950/70 p-3">
                   {BCP_CHECKOUT_REMOVAL_APPROVAL_TEXT}
                 </p>
+                <button
+                  type="button"
+                  onClick={handleCopyCheckoutRemovalApprovalText}
+                  className="mt-3 rounded-lg border border-cyan-300/30 px-3 py-2 text-sm font-medium text-cyan-50 transition hover:border-cyan-200 hover:bg-cyan-400/10"
+                >
+                  Kopiuj tekst zgody
+                </button>
+                {checkoutRemovalApprovalCopyStatus ? (
+                  <p className="mt-2 text-sm text-cyan-100">
+                    {checkoutRemovalApprovalCopyStatus}
+                  </p>
+                ) : null}
                 <label
                   htmlFor="checkout-removal-approval-text"
                   className="mt-3 block text-sm font-medium text-cyan-50"
@@ -1838,9 +1776,7 @@ export default function ProjectSettingsPage() {
                   rows={5}
                   className="mt-2 w-full rounded-lg border border-cyan-300/20 bg-zinc-950/70 p-3 text-sm text-cyan-50 outline-none transition focus:border-cyan-200"
                 />
-                <p className="mt-3">
-                  Status zgody: {checkoutRemovalApprovalStatus}.
-                </p>
+                <p className="mt-3">Status zgody: {checkoutRemovalApprovalStatus}.</p>
                 {checkoutRemovalApprovalStatus === "approval matched" ? (
                   <p className="mt-2">Future state: ready for execution.</p>
                 ) : null}
@@ -1849,116 +1785,143 @@ export default function ProjectSettingsPage() {
                     Tekst zgody nie pasuje do wymaganego kontraktu.
                   </p>
                 ) : null}
+              </div>
+
+              <div className="rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
+                <p className="font-medium text-cyan-50">3. Preflight i aktywacja</p>
+                <p className="mt-2">
+                  Status aktywacji: {checkoutRemovalActivationStatus}.
+                </p>
+                {checkoutRemovalRemoteMainBlocked ? (
+                  <p className="mt-2 text-amber-100">
+                    Remote main nie jest potwierdzony. Wykonanie pozostaje
+                    zablokowane.
+                  </p>
+                ) : null}
+                <ul className="mt-3 space-y-1">
+                  <li>dry-run executed and executionPerformed: false</li>
+                  <li>blockedReasons = brak</li>
+                  <li>evidencePreserved: true</li>
+                  <li>reconnectRequired: true</li>
+                  <li>local approval = approval matched</li>
+                  <li>working tree clean</li>
+                  <li>branch known</li>
+                  <li>HEAD known</li>
+                  <li>remote known</li>
+                  <li>remote main verified</li>
+                  <li>target path is checkout repo</li>
+                  <li>preserved paths include wrapper, manifest, metadata root</li>
+                  <li>execute endpoint available</li>
+                </ul>
+              </div>
+
+              <div className="rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
+                <p className="font-medium text-cyan-50">4. Ostatnie potwierdzenie</p>
+                <p className="mt-2">
+                  To jest lokalna granica potwierdzenia przed destrukcyjnym
+                  usunięciem lokalnego checkoutu.
+                </p>
+                <ul className="mt-3 space-y-1">
+                  <li>deletion path: {registryDetachPreview.preservedPaths.repoCheckout}</li>
+                  <li>
+                    preserved paths: {registryDetachPreview.preservedPaths.workspace};{" "}
+                    {registryDetachPreview.preservedPaths.workspace}\sps-project.json;{" "}
+                    {checkoutRemovalDryRunMetadataRootPath}
+                  </li>
+                  <li>evidence preserved: {String(checkoutRemovalDryRunResult?.evidencePreserved === true)}</li>
+                  <li>reconnect required: {String(checkoutRemovalDryRunResult?.reconnectRequired === true)}</li>
+                  <li>approval matched: {String(checkoutRemovalApprovalStatus === "approval matched")}</li>
+                  <li>dry-run clean: {String(checkoutRemovalDryRunClean)}</li>
+                  <li>Git preflight verified: {String(checkoutRemovalGitPreflightVerified)}</li>
+                </ul>
+                <label className="mt-3 flex items-start gap-2 text-sm text-cyan-50">
+                  <input
+                    type="checkbox"
+                    checked={checkoutRemovalFinalConfirmationAccepted}
+                    onChange={(event) =>
+                      setCheckoutRemovalFinalConfirmationAccepted(
+                        event.target.checked,
+                      )
+                    }
+                    className="mt-1"
+                  />
+                  <span>
+                    Rozumiem, że następny krok może wykonać realne usunięcie
+                    lokalnego checkoutu.
+                  </span>
+                </label>
+                <p className="mt-3">
+                  Status ostatniego potwierdzenia:{" "}
+                  {checkoutRemovalFinalConfirmationStatus}.
+                </p>
+              </div>
+
+              <div className="rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
+                <p className="font-medium text-cyan-50">5. Wykonanie</p>
+                <p className="mt-2">
+                  H10 aktywuje wykonanie wyłącznie po przejściu wszystkich
+                  lokalnych bramek. Akcja jest destrukcyjna i dotyczy tylko
+                  lokalnego checkoutu repo.
+                </p>
                 <button
                   type="button"
-                  disabled
-                  className="mt-3 cursor-not-allowed rounded-lg border border-cyan-300/20 px-3 py-2 text-sm font-medium text-cyan-100 opacity-60"
+                  onClick={handleCheckoutRemovalExecute}
+                  disabled={
+                    !checkoutRemovalExecuteCanRun ||
+                    checkoutRemovalExecuteStatus === "loading"
+                  }
+                  className="mt-3 rounded-lg border border-rose-300/30 px-3 py-2 text-sm font-medium text-rose-50 transition hover:border-rose-200 hover:bg-rose-400/10 disabled:cursor-not-allowed disabled:border-cyan-300/20 disabled:text-cyan-100 disabled:opacity-60"
                 >
-                  Wykonanie niedostępne
+                  {checkoutRemovalExecuteStatus === "loading"
+                    ? "Wykonuję usunięcie checkoutu..."
+                    : "Wykonaj usunięcie checkoutu"}
                 </button>
-                <div className="mt-4 rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
-                  <p className="font-medium text-cyan-50">
-                    Przyszła akcja wykonawcza
-                  </p>
-                  <p className="mt-2">
-                    Wykonanie jest nadal zablokowane. Ten krok tylko pokazuje
-                    przyszłą akcję.
-                  </p>
-                  <p className="mt-2">
-                    To jest kontrakt aktywacji. Wykonanie nadal wymaga osobnego
-                    milestone.
-                  </p>
+                {checkoutRemovalExecuteStatus === "loading" ? (
                   <p className="mt-3">
-                    Status aktywacji: {checkoutRemovalActivationStatus}.
+                    Wykonanie w toku. Zakres pozostaje ograniczony do lokalnego
+                    checkoutu repo.
                   </p>
-                  <ul className="mt-3 space-y-1">
-                    <li>dry-run executed and executionPerformed: false</li>
-                    <li>blockedReasons = brak</li>
-                    <li>evidencePreserved: true</li>
-                    <li>reconnectRequired: true</li>
-                    <li>local approval = approval matched</li>
-                    <li>working tree clean</li>
-                    <li>branch known</li>
-                    <li>HEAD known</li>
-                    <li>remote known</li>
-                    <li>remote main verified</li>
-                    <li>target path is checkout repo</li>
-                    <li>preserved paths include wrapper, manifest, metadata root</li>
-                    <li>execute endpoint available</li>
-                    <li>separate final execution confirmation</li>
-                  </ul>
-                  <button
-                    type="button"
-                    disabled
-                    className="mt-3 cursor-not-allowed rounded-lg border border-cyan-300/20 px-3 py-2 text-sm font-medium text-cyan-100 opacity-60"
-                  >
-                    Wykonaj usunięcie checkoutu
-                  </button>
-                </div>
-                <div className="mt-4 rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
-                  <p className="font-medium text-cyan-50">
-                    Ostatnie potwierdzenie przed realnym usunięciem lokalnego
-                    checkoutu
+                ) : null}
+                {checkoutRemovalExecuteError ? (
+                  <p className="mt-3 text-amber-100">
+                    {checkoutRemovalExecuteError}
                   </p>
-                  <p className="mt-2">
-                    To jest lokalna granica potwierdzenia. Realne wykonanie
-                    nadal wymaga przyszłej osobnej decyzji i akcji.
-                  </p>
-                  <ul className="mt-3 space-y-1">
-                    <li>
-                      deletion path:{" "}
-                      {registryDetachPreview.preservedPaths.repoCheckout}
-                    </li>
-                    <li>
-                      preserved paths:{" "}
-                      {registryDetachPreview.preservedPaths.workspace};{" "}
-                      {registryDetachPreview.preservedPaths.workspace}
-                      \sps-project.json;{" "}
-                      {checkoutRemovalDryRunMetadataRootPath}
-                    </li>
-                    <li>
-                      evidence preserved:{" "}
-                      {String(checkoutRemovalDryRunResult?.evidencePreserved === true)}
-                    </li>
-                    <li>
-                      reconnect required:{" "}
-                      {String(checkoutRemovalDryRunResult?.reconnectRequired === true)}
-                    </li>
-                    <li>
-                      approval matched:{" "}
-                      {String(checkoutRemovalApprovalStatus === "approval matched")}
-                    </li>
-                    <li>dry-run clean: {String(checkoutRemovalDryRunClean)}</li>
-                    <li>
-                      Git preflight verified:{" "}
-                      {String(checkoutRemovalGitPreflightVerified)}
-                    </li>
-                  </ul>
-                  <label className="mt-3 flex items-start gap-2 text-sm text-cyan-50">
-                    <input
-                      type="checkbox"
-                      checked={checkoutRemovalFinalConfirmationAccepted}
-                      onChange={(event) =>
-                        setCheckoutRemovalFinalConfirmationAccepted(
-                          event.target.checked,
-                        )
-                      }
-                      className="mt-1"
-                    />
-                    <span>
-                      Rozumiem, że następny krok może wykonać realne usunięcie
-                      lokalnego checkoutu.
-                    </span>
-                  </label>
-                  <p className="mt-3">
-                    Status ostatniego potwierdzenia:{" "}
-                    {checkoutRemovalFinalConfirmationStatus}.
-                  </p>
-                  <p className="mt-2">
-                    Przycisk wykonania pozostaje nieaktywny w H9; ten krok nie
-                    woła endpointu wykonawczego i niczego nie usuwa.
-                  </p>
-                </div>
+                ) : null}
+                {checkoutRemovalExecuteResult ? (
+                  <div className="mt-3 space-y-2">
+                    <p>status: {checkoutRemovalExecuteResult.status}</p>
+                    <p>executionPerformed: {String(checkoutRemovalExecuteResult.executionPerformed)}</p>
+                    <p>deletedPaths:</p>
+                    <ul className="space-y-1">
+                      {checkoutRemovalExecuteResult.deletedPaths.length > 0 ? (
+                        checkoutRemovalExecuteResult.deletedPaths.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))
+                      ) : (
+                        <li>brak</li>
+                      )}
+                    </ul>
+                    <p>preservedPaths:</p>
+                    <ul className="space-y-1">
+                      {checkoutRemovalExecuteResult.preservedPaths.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                    <p>blockedReasons:</p>
+                    <ul className="space-y-1">
+                      {checkoutRemovalExecuteResult.blockedReasons.length > 0 ? (
+                        checkoutRemovalExecuteResult.blockedReasons.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))
+                      ) : (
+                        <li>brak</li>
+                      )}
+                    </ul>
+                    <p>evidencePreserved: {String(checkoutRemovalExecuteResult.evidencePreserved)}</p>
+                    <p>reconnectRequired: {String(checkoutRemovalExecuteResult.reconnectRequired)}</p>
+                    <p>nextStep: {checkoutRemovalExecuteResult.nextStep}</p>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>

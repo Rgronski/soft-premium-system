@@ -203,12 +203,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.3H7` - Checkout Removal Execute UI Wiring Disabled Gate
 * `MS-034.3H8` - Checkout Removal Execute UI Activation Contract
 * `MS-034.3H9` - Checkout Removal Execute UI Final Confirmation
+* `MS-034.3H10R` - Checkout Removal Settings Consolidation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.3H9 - Checkout Removal Execute UI Final Confirmation
+Latest Completed Product Milestone: MS-034.3H10R - Checkout Removal Settings Consolidation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.3H10R - Checkout Removal Settings Consolidation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.3H10R sets `APP_VERSION` to `1.0097` and `LAST_PUBLISHED_MS` to `MS-034.3H10R - Checkout Removal Settings Consolidation`.
+
+**Contract**
+The project settings checkout-removal surface is consolidated into one coherent workflow: `Dry-run`, `Zgoda Product Ownera`, `Preflight i aktywacja`, `Ostatnie potwierdzenie`, and `Wykonanie`. The accumulated transitional cards are removed, including the obsolete standalone `BRAMKA ZGODY PRODUCT OWNERA` registry-only approval block, and the checkout-removal flow keeps one approval source plus one Product Owner approval textarea. The UI now surfaces `Remote main nie jest potwierdzony. Wykonanie pozostaje zablokowane.` when that blocker applies while preserving dry-run, local approval, activation, final confirmation, and guarded execute UI behavior.
+
+**Boundary**
+MS-034.3H10R is UI consolidation and cleanup only. It does not change endpoint contracts, execute deletion, call old `/delete-execution`, call `DELETE /api/projects/[id]`, import or call `executeProjectDiskDelete`, change Beauty Client PRO repository files, change `C:\SPS_OS_WORK`, change SPS metadata, rewrite Project Map, change Project Map artifacts, evidence, source identity, knowledge store, audit, risk decisions, fingerprint, or canonical artifacts, start settings tabs foundation, or start Project Brain / Conductor / AI Workflow integration.
 
 ## MS-034.3H9 - Checkout Removal Execute UI Final Confirmation
 
