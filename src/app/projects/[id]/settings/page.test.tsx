@@ -522,6 +522,73 @@ describe("ProjectSettingsPage", () => {
     );
   });
 
+  test("captures checkout removal approval locally without execution calls", async () => {
+    const requiredApprovalText =
+      "Product Owner approves destructive checkout-only disk removal for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Remove exactly C:\\SPS_OS_WORK\\beauty-client-pro\\repo. Preserve C:\\SPS_OS_WORK\\beauty-client-pro. Preserve C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json. Preserve C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb. Remote main is verified at 60f8280b2103c12d16b2851a3cef1be140eb34b5. Product Owner acknowledges local checkout deletion is destructive but recoverable from remote if access remains available.";
+    const fetchMock = vi.fn((input: RequestInfo | URL) =>
+      Promise.resolve(createBlockedSourceRevalidationResponse()),
+    );
+
+    vi.stubGlobal("fetch", fetchMock);
+
+    const { container } = render(<ProjectSettingsPage />);
+
+    expect(container.textContent).toContain(
+      "Lokalna bramka zgody: Usuń lokalny checkout / repo",
+    );
+    expect(container.textContent).toContain(requiredApprovalText);
+    expect(container.textContent).toContain(
+      "Zgoda jest sprawdzana tylko lokalnie. Nic nie zostało wykonane.",
+    );
+    expect(container.textContent).toContain("Status zgody: approval missing.");
+    expect(
+      screen
+        .getByRole("button", { name: /Wykonanie niedostępne/ })
+        .hasAttribute("disabled"),
+    ).toBe(true);
+
+    fireEvent.change(
+      screen.getByLabelText(/Wklej tekst zgody Product Ownera/),
+      {
+        target: {
+          value: "Product Owner approves something else.",
+        },
+      },
+    );
+
+    expect(container.textContent).toContain("Status zgody: approval mismatch.");
+    expect(container.textContent).toContain(
+      "Tekst zgody nie pasuje do wymaganego kontraktu.",
+    );
+
+    fireEvent.change(
+      screen.getByLabelText(/Wklej tekst zgody Product Ownera/),
+      {
+        target: {
+          value: requiredApprovalText,
+        },
+      },
+    );
+
+    expect(container.textContent).toContain("Status zgody: approval matched.");
+    expect(container.textContent).toContain("Future state: ready for execution.");
+    expect(
+      fetchMock.mock.calls.some(([input]) =>
+        String(input).includes("/delete-execution"),
+      ),
+    ).toBe(false);
+    expect(
+      fetchMock.mock.calls.some(([input]) =>
+        String(input).includes("DELETE /api/projects"),
+      ),
+    ).toBe(false);
+    expect(
+      fetchMock.mock.calls.some(([input]) =>
+        String(input).includes("/checkout-removal/dry-run"),
+      ),
+    ).toBe(false);
+  });
+
   test("revalidates a derived repo checkout and hides the manifest-only source copy", async () => {
     createProject(
       "Beauty Client PRO",

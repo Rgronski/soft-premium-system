@@ -69,6 +69,34 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.3H5 Checkout Removal Execution Approval Capture
+
+### Version
+
+1.0092
+
+### Date
+
+2026-09-14
+
+### Summary
+
+Published the local-only approval capture gate for future checkout removal execution.
+
+### Completed Work
+
+* Added `Lokalna bramka zgody: Usuń lokalny checkout / repo` in project settings.
+* Displayed the required Product Owner destructive approval text.
+* Added a textarea that compares Product Owner approval text locally.
+* Added local statuses: `approval missing`, `approval mismatch`, and `approval matched`.
+* Showed `Future state: ready for execution` only after a local match.
+* Kept execution unavailable/disabled and stated `Zgoda jest sprawdzana tylko lokalnie. Nic nie zostało wykonane.`
+* Bumped `APP_VERSION` to `1.0092` and `LAST_PUBLISHED_MS` to `MS-034.3H5 - Checkout Removal Execution Approval Capture`.
+
+### Notes
+
+No approval persistence, real delete, detach, write behavior, execution endpoint, UI execution beyond local approval capture, `DELETE /api/projects/[id]`, `/delete-execution`, `executeProjectDiskDelete` usage, BCP repository change, `C:\SPS_OS_WORK` change, SPS metadata change, Project Map rewrite, Project Map artifact change, evidence change, source identity change, knowledge store change, audit change, risk decision change, fingerprint change, or canonical artifact change was added.
+
 ## Session 101 - MS-034.3H4 Checkout Removal Dry-Run UI Wiring
 
 ### Version

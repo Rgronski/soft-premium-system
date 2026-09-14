@@ -198,12 +198,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.3H2` - Checkout Removal Execution Endpoint Contract
 * `MS-034.3H3` - Checkout Removal Endpoint Dry-Run
 * `MS-034.3H4` - Checkout Removal Dry-Run UI Wiring
+* `MS-034.3H5` - Checkout Removal Execution Approval Capture
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.3H4 - Checkout Removal Dry-Run UI Wiring
+Latest Completed Product Milestone: MS-034.3H5 - Checkout Removal Execution Approval Capture
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.3H5 - Checkout Removal Execution Approval Capture
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.3H5 sets `APP_VERSION` to `1.0092` and `LAST_PUBLISHED_MS` to `MS-034.3H5 - Checkout Removal Execution Approval Capture`.
+
+**Contract**
+The project settings surface now includes the local-only approval capture gate `Lokalna bramka zgody: Usuń lokalny checkout / repo`. It shows the required Product Owner destructive approval text, provides a textarea for Product Owner approval text, compares the entered text locally, supports `approval missing`, `approval mismatch`, and `approval matched`, and shows `Future state: ready for execution` only after a local match. Execution remains unavailable/disabled and the UI states `Zgoda jest sprawdzana tylko lokalnie. Nic nie zostało wykonane.`
+
+**Boundary**
+MS-034.3H5 is local UI approval capture only. It does not persist approval, add real delete, detach, write behavior, add an execution endpoint, wire UI execution beyond local approval capture, call or wire `DELETE /api/projects/[id]`, call or wire `/delete-execution`, import or call `executeProjectDiskDelete`, rewrite Project Map, change Beauty Client PRO repository files, change `C:\SPS_OS_WORK`, change SPS metadata, change Project Map artifacts, change evidence, source identity, knowledge store, audit, risk decisions, fingerprint, or canonical artifacts.
 
 ## MS-034.3H4 - Checkout Removal Dry-Run UI Wiring
 

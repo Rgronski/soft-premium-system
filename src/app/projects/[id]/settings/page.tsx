@@ -78,6 +78,13 @@ type CheckoutRemovalDryRunResponse = {
 const BCP_REGISTRY_DETACH_APPROVAL_TEXT =
   "Product Owner approves registry-only detach for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Scope is limited to SPS OS registry/UI visibility and explicitly excludes BCP repository, .git, source files, workspace wrapper manifest, SPS metadata root, source identity, knowledge store, canonical Project Map artifacts, audit, risk decisions, and structural fingerprint.";
 
+const BCP_CHECKOUT_REMOVAL_APPROVAL_TEXT =
+  "Product Owner approves destructive checkout-only disk removal for Beauty Client PRO, project id 0d3e28cb-6dff-442a-b94c-007a5d6b5779. Remove exactly C:\\SPS_OS_WORK\\beauty-client-pro\\repo. Preserve C:\\SPS_OS_WORK\\beauty-client-pro. Preserve C:\\SPS_OS_WORK\\beauty-client-pro\\sps-project.json. Preserve C:\\SPS_OS_WORK\\.sps-meta\\beauty-client-pro--0d3e28cb. Remote main is verified at 60f8280b2103c12d16b2851a3cef1be140eb34b5. Product Owner acknowledges local checkout deletion is destructive but recoverable from remote if access remains available.";
+
+function normalizeApprovalTextForLocalCompare(value: string): string {
+  return value.replace(/\s+/g, " ").trim();
+}
+
 function buildCheckoutRemovalDryRunMetadataRootPath(project: Project): string {
   const workspacePath = project.workingDirectory?.trim() ?? "";
   const workspaceName =
@@ -818,6 +825,8 @@ export default function ProjectSettingsPage() {
     useState<CheckoutRemovalDryRunResponse | null>(null);
   const [checkoutRemovalDryRunError, setCheckoutRemovalDryRunError] =
     useState<string | null>(null);
+  const [checkoutRemovalApprovalInput, setCheckoutRemovalApprovalInput] =
+    useState("");
 
   useEffect(() => {
     let ignore = false;
@@ -847,6 +856,7 @@ export default function ProjectSettingsPage() {
       setCheckoutRemovalDryRunStatus("idle");
       setCheckoutRemovalDryRunResult(null);
       setCheckoutRemovalDryRunError(null);
+      setCheckoutRemovalApprovalInput("");
     }
 
     if (nextLocalProject) {
@@ -995,6 +1005,17 @@ export default function ProjectSettingsPage() {
   const registryDetachPreview = buildProjectRegistryDetachPreview(project);
   const checkoutRemovalDryRunMetadataRootPath =
     buildCheckoutRemovalDryRunMetadataRootPath(project);
+  const normalizedCheckoutRemovalApprovalInput =
+    normalizeApprovalTextForLocalCompare(checkoutRemovalApprovalInput);
+  const checkoutRemovalApprovalStatus =
+    normalizedCheckoutRemovalApprovalInput.length === 0
+      ? "approval missing"
+      : normalizedCheckoutRemovalApprovalInput ===
+          normalizeApprovalTextForLocalCompare(
+            BCP_CHECKOUT_REMOVAL_APPROVAL_TEXT,
+          )
+        ? "approval matched"
+        : "approval mismatch";
   const branchWorkModeSummary = buildBranchWorkModeSummary(
     project.name,
     branchWorkMode,
@@ -1737,6 +1758,51 @@ export default function ProjectSettingsPage() {
                     <p>To jest dry-run. Nic nie zostało usunięte.</p>
                   </div>
                 ) : null}
+              </div>
+              <div className="mt-4 rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
+                <p className="font-medium text-cyan-50">
+                  Lokalna bramka zgody: Usuń lokalny checkout / repo
+                </p>
+                <p className="mt-2">
+                  Zgoda jest sprawdzana tylko lokalnie. Nic nie zostało wykonane.
+                </p>
+                <p className="mt-3">Wymagany tekst zgody:</p>
+                <p className="mt-1 rounded-md border border-cyan-300/10 bg-zinc-950/70 p-3">
+                  {BCP_CHECKOUT_REMOVAL_APPROVAL_TEXT}
+                </p>
+                <label
+                  htmlFor="checkout-removal-approval-text"
+                  className="mt-3 block text-sm font-medium text-cyan-50"
+                >
+                  Wklej tekst zgody Product Ownera
+                </label>
+                <textarea
+                  id="checkout-removal-approval-text"
+                  value={checkoutRemovalApprovalInput}
+                  onChange={(event) =>
+                    setCheckoutRemovalApprovalInput(event.target.value)
+                  }
+                  rows={5}
+                  className="mt-2 w-full rounded-lg border border-cyan-300/20 bg-zinc-950/70 p-3 text-sm text-cyan-50 outline-none transition focus:border-cyan-200"
+                />
+                <p className="mt-3">
+                  Status zgody: {checkoutRemovalApprovalStatus}.
+                </p>
+                {checkoutRemovalApprovalStatus === "approval matched" ? (
+                  <p className="mt-2">Future state: ready for execution.</p>
+                ) : null}
+                {checkoutRemovalApprovalStatus === "approval mismatch" ? (
+                  <p className="mt-2">
+                    Tekst zgody nie pasuje do wymaganego kontraktu.
+                  </p>
+                ) : null}
+                <button
+                  type="button"
+                  disabled
+                  className="mt-3 cursor-not-allowed rounded-lg border border-cyan-300/20 px-3 py-2 text-sm font-medium text-cyan-100 opacity-60"
+                >
+                  Wykonanie niedostępne
+                </button>
               </div>
             </div>
           </div>
