@@ -1016,6 +1016,40 @@ export default function ProjectSettingsPage() {
           )
         ? "approval matched"
         : "approval mismatch";
+  const checkoutRemovalActivationGitPreflight =
+    checkoutRemovalDryRunResult?.gitPreflight &&
+    typeof checkoutRemovalDryRunResult.gitPreflight === "object" &&
+    !Array.isArray(checkoutRemovalDryRunResult.gitPreflight)
+      ? (checkoutRemovalDryRunResult.gitPreflight as Record<string, unknown>)
+      : null;
+  const checkoutRemovalActivationStatus =
+    checkoutRemovalDryRunResult?.executionPerformed === false &&
+    checkoutRemovalDryRunResult.blockedReasons.length === 0 &&
+    checkoutRemovalDryRunResult.evidencePreserved === true &&
+    checkoutRemovalDryRunResult.reconnectRequired === true &&
+    checkoutRemovalApprovalStatus === "approval matched" &&
+    checkoutRemovalActivationGitPreflight?.workingTreeStatus === "clean" &&
+    typeof checkoutRemovalActivationGitPreflight.branch === "string" &&
+    checkoutRemovalActivationGitPreflight.branch.trim().length > 0 &&
+    typeof checkoutRemovalActivationGitPreflight.head === "string" &&
+    checkoutRemovalActivationGitPreflight.head.trim().length > 0 &&
+    typeof checkoutRemovalActivationGitPreflight.remote === "string" &&
+    checkoutRemovalActivationGitPreflight.remote.trim().length > 0 &&
+    checkoutRemovalActivationGitPreflight.remoteMainVerified === true &&
+    checkoutRemovalDryRunResult.wouldDeletePaths.includes(
+      registryDetachPreview.preservedPaths.repoCheckout,
+    ) &&
+    checkoutRemovalDryRunResult.preservedPaths.includes(
+      registryDetachPreview.preservedPaths.workspace,
+    ) &&
+    checkoutRemovalDryRunResult.preservedPaths.includes(
+      `${registryDetachPreview.preservedPaths.workspace}\\sps-project.json`,
+    ) &&
+    checkoutRemovalDryRunResult.preservedPaths.includes(
+      checkoutRemovalDryRunMetadataRootPath,
+    )
+      ? "activation ready"
+      : "activation blocked";
   const branchWorkModeSummary = buildBranchWorkModeSummary(
     project.name,
     branchWorkMode,
@@ -1811,10 +1845,26 @@ export default function ProjectSettingsPage() {
                     Wykonanie jest nadal zablokowane. Ten krok tylko pokazuje
                     przyszłą akcję.
                   </p>
+                  <p className="mt-2">
+                    To jest kontrakt aktywacji. Wykonanie nadal wymaga osobnego
+                    milestone.
+                  </p>
+                  <p className="mt-3">
+                    Status aktywacji: {checkoutRemovalActivationStatus}.
+                  </p>
                   <ul className="mt-3 space-y-1">
-                    <li>approval matched</li>
-                    <li>dry-run executed</li>
-                    <li>Git preflight confirmed</li>
+                    <li>dry-run executed and executionPerformed: false</li>
+                    <li>blockedReasons = brak</li>
+                    <li>evidencePreserved: true</li>
+                    <li>reconnectRequired: true</li>
+                    <li>local approval = approval matched</li>
+                    <li>working tree clean</li>
+                    <li>branch known</li>
+                    <li>HEAD known</li>
+                    <li>remote known</li>
+                    <li>remote main verified</li>
+                    <li>target path is checkout repo</li>
+                    <li>preserved paths include wrapper, manifest, metadata root</li>
                     <li>execute endpoint available</li>
                     <li>separate final execution confirmation</li>
                   </ul>

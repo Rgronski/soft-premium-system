@@ -201,12 +201,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.3H5` - Checkout Removal Execution Approval Capture
 * `MS-034.3H6` - Checkout Removal Execution Endpoint Guarded Implementation
 * `MS-034.3H7` - Checkout Removal Execute UI Wiring Disabled Gate
+* `MS-034.3H8` - Checkout Removal Execute UI Activation Contract
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.3H7 - Checkout Removal Execute UI Wiring Disabled Gate
+Latest Completed Product Milestone: MS-034.3H8 - Checkout Removal Execute UI Activation Contract
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.3H8 - Checkout Removal Execute UI Activation Contract
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.3H8 sets `APP_VERSION` to `1.0095` and `LAST_PUBLISHED_MS` to `MS-034.3H8 - Checkout Removal Execute UI Activation Contract`.
+
+**Contract**
+The project settings surface now shows a local activation contract/checklist for future checkout removal execution. The default status is `activation blocked`, and local `activation ready` can appear only when the dry-run result, local approval, Git preflight, target path, and preserved paths match the contract. The checklist covers dry-run execution with `executionPerformed: false`, no blocked reasons, `evidencePreserved: true`, `reconnectRequired: true`, local approval `approval matched`, clean/known/verified Git preflight, checkout target path, preserved wrapper/manifest/metadata root, execute endpoint availability, and final confirmation boundary. The copy clarifies that this prepares a future H9 and does not execute anything.
+
+**Boundary**
+MS-034.3H8 only adds the activation contract/checklist. The execute action remains disabled/non-executable. It does not call `/api/projects/[id]/checkout-removal/execute`, add active execution behavior, execute deletion, call or wire `/delete-execution`, call or wire `DELETE /api/projects/[id]`, import or call `executeProjectDiskDelete`, change Beauty Client PRO repository files, change `C:\SPS_OS_WORK`, change SPS metadata, rewrite Project Map, change Project Map artifacts, evidence, source identity, knowledge store, audit, risk decisions, fingerprint, or canonical artifacts.
 
 ## MS-034.3H7 - Checkout Removal Execute UI Wiring Disabled Gate
 

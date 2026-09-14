@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.3H8 Checkout Removal Execute UI Activation Contract
+
+### Version
+
+1.0095
+
+### Date
+
+2026-09-14
+
+### Summary
+
+Published the local activation contract/checklist for future checkout removal execution.
+
+### Completed Work
+
+* Added local activation status labels `activation blocked` and `activation ready`.
+* Kept `activation blocked` as the default status.
+* Allowed local `activation ready` only when dry-run result, local approval, Git preflight, target path, and preserved paths match the contract.
+* Listed activation requirements for `executionPerformed: false`, no blocked reasons, preserved evidence, reconnect requirement, matched approval, clean/known/verified Git preflight, checkout target, preserved wrapper/manifest/metadata root, execute endpoint availability, and final confirmation boundary.
+* Clarified that this prepares a future H9 and does not execute anything.
+* Bumped `APP_VERSION` to `1.0095` and `LAST_PUBLISHED_MS` to `MS-034.3H8 - Checkout Removal Execute UI Activation Contract`.
+
+### Notes
+
+No execute endpoint call, active execution behavior, real delete, detach, write behavior, `/delete-execution`, `DELETE /api/projects/[id]`, `executeProjectDiskDelete` usage, BCP repository change, `C:\SPS_OS_WORK` change, SPS metadata change, Project Map rewrite, Project Map artifact change, evidence change, source identity change, knowledge store change, audit change, risk decision change, fingerprint change, or canonical artifact change was added.
+
 ## Session 101 - MS-034.3H7 Checkout Removal Execute UI Wiring Disabled Gate
 
 ### Version
