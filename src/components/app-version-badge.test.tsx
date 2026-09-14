@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0101");
+    expect(APP_VERSION).toBe("1.0102");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-035.2R - Project Overview and AI Workspace Role Split Correction",
+      "MS-035.4 - AI Workspace Project Inputs Guidance Read Model Foundation",
     );
   });
 });
