@@ -238,24 +238,24 @@ Chief Architect
 Codex
 
 **Purpose**
-Implement the smallest visible one-next-step project command surface so SPS OS explains what the project state means and what the next safe project-work step is, without adding automation.
+Implement the smallest visible project overview next-step entry surface so SPS OS explains whether the project is ready to be guided and where the Product Owner should continue, without moving Project Brain / Konduktor work out of AI Workspace or adding automation.
 
 **Implementation Result**
-Project overview now contains `Project Work Command Center` / `Następny krok projektu`. It replaces the narrow Project Brain pending banner with a clearer one-next-step surface that translates low-level readiness/source status into human/product meaning, shows current readiness meaning, one dominant recommended next step, a short reason, a copy-ready manual Codex handoff, and a manual execution boundary.
+Project overview now contains a concise `Status projektu` / `Następny krok projektu` entry surface. It replaces the narrow Project Brain pending banner with a clearer readiness and navigation surface that translates low-level readiness/source status into human/product meaning and points the Product Owner to `Przestrzeń AI` for actual Project Brain / Konduktor guidance and manual Codex handoff.
 
-For pending Project Brain state, the surface explains that SPS OS sees the project/source, but Project Brain is not yet leading production work, and recommends completing Project Brain working context plus the first manual Codex handoff.
+For pending Project Brain state, the overview explains that SPS OS sees the project/source, but Project Brain is not yet leading production work, and directs the Product Owner to AI Workspace to see Project Brain / Konduktor guidance and prepare the manual Codex handoff.
 
 **Product / Process Meaning**
-SPS OS should guide the Product Owner with one next project step instead of multiplying confusing panels. Project Map, Project Brain, Konduktor, and AI Workflow support one governed project direction.
+SPS OS should guide the Product Owner with clear tab roles instead of multiplying confusing panels. `Przegląd` owns technical/project readiness and the next-place-to-go. `Przestrzeń AI` remains the primary surface for Project Brain context, Konduktor guidance, and copy-ready manual Codex handoff. Project Map, Project Brain, Konduktor, and AI Workflow support one governed project direction.
 
 **Boundary**
 MS-035.2 is read-only guidance and manual handoff support only. It adds no automation, provider/model calls, endpoints, Codex auto-run, delete, detach, reconnect, checkout-removal changes, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, evidence changes, source identity changes, audit changes, risk decision changes, fingerprint changes, or canonical artifact changes.
 
 **Implementation Evidence**
 
-* `src/app/projects/[id]/page.tsx` adds the overview `Project Work Command Center` / `Następny krok projektu` surface.
-* `src/app/projects/[id]/page.tsx` derives readiness meaning, one recommendation, reason, manual handoff text, and execution boundary from existing page state.
-* `src/app/projects/[id]/page.test.tsx` verifies the one-next-step surface for pending Project Brain readiness.
+* `src/app/projects/[id]/page.tsx` adds the overview `Status projektu` / `Następny krok projektu` entry surface.
+* `src/app/projects/[id]/page.tsx` derives readiness meaning from existing page state and links to `Przestrzeń AI` for actual guided work.
+* `src/app/projects/[id]/page.test.tsx` verifies the overview readiness entry, AI Workspace CTA, and manual execution boundary.
 * `npm test -- src/app/projects/[id]/page.test.tsx` passed with `14 / 14` tests.
 
 **Verification Plan**

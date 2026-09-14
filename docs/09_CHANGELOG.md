@@ -81,20 +81,20 @@ Implementation local
 
 ### Summary
 
-Accepted MS-035.2 locally as the project overview one-next-step command center implementation.
+Accepted MS-035.2 locally as the corrected project overview readiness entry and AI Workspace guidance role split.
 
 ### Completed Work
 
-* Added `Project Work Command Center` / `Następny krok projektu` to the project overview.
-* Replaced the narrow Project Brain pending banner with a clearer one-next-step surface.
-* Translated low-level readiness/source status into human/product meaning.
-* Showed current readiness meaning, one dominant recommended next step, short reason, copy-ready manual Codex handoff, and manual execution boundary.
-* For pending Project Brain state, explained that SPS OS sees the project/source, but Project Brain is not yet leading production work, and recommends completing Project Brain working context plus the first manual Codex handoff.
-* Verified the focused project overview page test with `14 / 14` tests passing.
+* Added a concise `Status projektu` / `Następny krok projektu` entry surface to the project overview.
+* Replaced the narrow Project Brain pending banner with readiness meaning and a clear CTA to `Przestrzeń AI`.
+* Kept `Przegląd` focused on technical/project readiness and where to continue.
+* Kept `Przestrzeń AI` as the primary surface for Project Brain context, Konduktor guidance, and copy-ready manual Codex handoff.
+* Preserved the manual execution boundary: no work executes automatically.
+* Verified the focused project overview page test with `14 / 14` tests passing after the role-split correction.
 
 ### Notes
 
-* SPS OS should guide the Product Owner with one next project step, not multiply confusing panels.
+* SPS OS should guide the Product Owner with clear connected tab roles, not multiply confusing panels.
 * Project Map, Project Brain, Konduktor, and AI Workflow support one governed project direction.
 * No automation, provider/model calls, endpoints, Codex auto-run, delete, detach, reconnect, checkout-removal changes, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, evidence changes, source identity changes, audit changes, risk decision changes, fingerprint changes, or canonical artifact changes were added.
 * MS-035.1 remains the latest published milestone before MS-035.2.

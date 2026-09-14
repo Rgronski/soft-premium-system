@@ -488,7 +488,7 @@ describe("ProjectWorkspacePage", () => {
     ).toBeTruthy();
     expect(screen.queryByText(/MS-025\.3 refined the decision prompt/i)).toBeNull();
     expect(
-      screen.getByRole("link", { name: /Przejd/i }),
+      screen.getByRole("link", { name: "Przejdź do zadań" }),
     ).toBeTruthy();
   });
 
@@ -559,11 +559,11 @@ describe("ProjectWorkspacePage", () => {
       screen.getByText(/Project Brain nie ma jeszcze wyraźniejszej wskazówki/i),
     ).toBeTruthy();
     expect(
-      screen.getByRole("link", { name: /Przejd/i }),
+      screen.getByRole("link", { name: "Przejdź do zadań" }),
     ).toBeTruthy();
   });
 
-  test("shows one project command center step when the local Project Brain status is pending", () => {
+  test("shows a concise project next-step entry to AI Workspace when the local Project Brain status is pending", () => {
     getProjectByIdMock.mockReturnValue({
       id: "project-1",
       name: "Alpha Workspace",
@@ -574,7 +574,7 @@ describe("ProjectWorkspacePage", () => {
 
     render(<ProjectWorkspacePage />);
 
-    expect(screen.getByText("Project Work Command Center")).toBeTruthy();
+    expect(screen.getByText("Status projektu")).toBeTruthy();
     expect(screen.getByText("Następny krok projektu")).toBeTruthy();
     expect(
       screen.getByText(
@@ -582,8 +582,12 @@ describe("ProjectWorkspacePage", () => {
       ),
     ).toBeTruthy();
     expect(
-      screen.getAllByText(/Uzupełnij kontekst roboczy Project Brain/i).length,
-    ).toBeGreaterThanOrEqual(1);
+      screen.getByText(/Przejdź do Przestrzeni AI, aby zobaczyć wskazanie Project Brain/i),
+    ).toBeTruthy();
+    expect(
+      screen.getByRole("link", { name: "Przejdź do Przestrzeni AI" }).getAttribute("href"),
+    ).toBe("/projects/project-1/ai");
+    expect(screen.queryByText(/^Cel:/i)).toBeNull();
     expect(
       screen.getAllByText(/Nic nie wykonuje się automatycznie/i).length,
     ).toBeGreaterThanOrEqual(1);

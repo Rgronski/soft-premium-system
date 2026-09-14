@@ -31,6 +31,7 @@ import {
   type ProjectSourceWorkingTreeState,
 } from "@/lib/project/source-status";
 import { getTasks } from "@/lib/task/task";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
@@ -486,24 +487,14 @@ export default function ProjectWorkspacePage() {
         dashboard.workspaceEntry.workspace.overview.workflow.health,
       )
     : "warning";
-  const projectWorkflowNextStep =
-    dashboard.workspaceEntry?.workspace.overview.workflow.nextStep ?? null;
-  const commandCenterReadinessMeaning =
+  const overviewReadinessMeaning =
     projectBrainStatus === "available"
       ? revalidatedSourceStatus
         ? "Project Brain jest aktywny, a SPS OS potwierdził lokalny checkout repo."
         : "Project Brain jest aktywny, ale źródło projektu nadal wymaga potwierdzenia przed pracą produkcyjną."
       : "SPS OS widzi projekt i jego źródło, ale Project Brain nie prowadzi jeszcze pracy produkcyjnej.";
-  const commandCenterRecommendedStep =
-    projectBrainStatus === "available" && projectWorkflowNextStep
-      ? `Przygotuj ręczny handoff do Codexa dla kroku: ${projectWorkflowNextStep.label}.`
-      : "Uzupełnij kontekst roboczy Project Brain i przygotuj pierwszy ręczny handoff do Codexa.";
-  const commandCenterReason =
-    "Dzięki temu projekt będzie rozwijany według standardu SPS OS: mapa pokazuje stan, Brain trzyma kontekst, Konduktor wskazuje kolejny krok, a Codex wykonuje zaakceptowaną pracę.";
-  const commandCenterManualHandoff = `Cel: ${commandCenterRecommendedStep}
-Kontekst: ${commandCenterReadinessMeaning}
-Źródło: ${sourceBindingSummary.statusLabel}; ${sourceBindingSummary.localRepositoryLabel}
-Zasada: To jest rekomendacja. Nic nie wykonuje się automatycznie. Product Owner zatwierdza zakres przed pracą Codexa.`;
+  const overviewRecommendedStep =
+    "Przejdź do Przestrzeni AI, aby zobaczyć wskazanie Project Brain i Konduktora oraz przygotować ręczny handoff do Codexa.";
 
   async function handleDeleteProject() {
     if (!dashboard.workspaceEntry) {
@@ -572,42 +563,39 @@ Zasada: To jest rekomendacja. Nic nie wykonuje się automatycznie. Product Owner
         <WorkspaceContent>
           <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-emerald-50">
             <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/80">
-              Project Work Command Center
+              Status projektu
             </p>
             <h3 className="mt-2 text-lg font-semibold text-zinc-50">
               Następny krok projektu
             </h3>
-            <div className="mt-4 grid gap-4 lg:grid-cols-3">
+            <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]">
               <div>
                 <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
                   Co oznacza stan
                 </p>
                 <p className="mt-2 text-sm leading-6 text-zinc-100">
-                  {commandCenterReadinessMeaning}
+                  {overviewReadinessMeaning}
                 </p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
-                  Jeden następny krok
+                  Gdzie kontynuować
                 </p>
                 <p className="mt-2 text-sm font-medium leading-6 text-zinc-50">
-                  {commandCenterRecommendedStep}
+                  {overviewRecommendedStep}
                 </p>
               </div>
-              <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
-                  Dlaczego
-                </p>
-                <p className="mt-2 text-sm leading-6 text-zinc-100">
-                  {commandCenterReason}
-                </p>
-              </div>
+              <Link
+                href={`/projects/${params.id}/ai`}
+                className="inline-flex h-fit w-fit items-center rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-sm font-medium text-emerald-50 transition-colors hover:border-emerald-300/50 hover:bg-emerald-400/20"
+              >
+                Przejdź do Przestrzeni AI
+              </Link>
             </div>
-            <pre className="mt-4 whitespace-pre-wrap rounded-xl border border-emerald-400/20 bg-zinc-950/70 px-4 py-3 text-xs leading-6 text-zinc-200">
-              {commandCenterManualHandoff}
-            </pre>
             <p className="mt-3 text-sm text-emerald-100/80">
-              To jest rekomendacja. Nic nie wykonuje się automatycznie.
+              Przegląd pokazuje gotowość i kierunek. Project Brain, Konduktor i
+              handoff do Codexa pozostają w Przestrzeni AI. Nic nie wykonuje się
+              automatycznie.
             </p>
           </div>
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
