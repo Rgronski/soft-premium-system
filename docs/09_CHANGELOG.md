@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.3H7 Checkout Removal Execute UI Wiring Disabled Gate
+
+### Version
+
+1.0094
+
+### Date
+
+2026-09-14
+
+### Summary
+
+Published the disabled/gated future checkout removal execution UI surface.
+
+### Completed Work
+
+* Added `Przyszła akcja wykonawcza` in project settings.
+* Showed the future label `Wykonaj usunięcie checkoutu`.
+* Kept the future action as a disabled button with no `onClick` handler.
+* Stated `Wykonanie jest nadal zablokowane. Ten krok tylko pokazuje przyszłą akcję.`
+* Listed future requirements: `approval matched`, `dry-run executed`, `Git preflight confirmed`, `execute endpoint available`, and `separate final execution confirmation`.
+* Bumped `APP_VERSION` to `1.0094` and `LAST_PUBLISHED_MS` to `MS-034.3H7 - Checkout Removal Execute UI Wiring Disabled Gate`.
+
+### Notes
+
+No execute endpoint call, active execution behavior, real delete, detach, write behavior, `/delete-execution`, `DELETE /api/projects/[id]`, `executeProjectDiskDelete` usage, BCP repository change, `C:\SPS_OS_WORK` change, SPS metadata change, Project Map rewrite, Project Map artifact change, evidence change, source identity change, knowledge store change, audit change, risk decision change, fingerprint change, or canonical artifact change was added.
+
 ## Session 101 - MS-034.3H6 Checkout Removal Execution Endpoint Guarded Implementation
 
 ### Version

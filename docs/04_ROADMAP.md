@@ -200,12 +200,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.3H4` - Checkout Removal Dry-Run UI Wiring
 * `MS-034.3H5` - Checkout Removal Execution Approval Capture
 * `MS-034.3H6` - Checkout Removal Execution Endpoint Guarded Implementation
+* `MS-034.3H7` - Checkout Removal Execute UI Wiring Disabled Gate
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.3H6 - Checkout Removal Execution Endpoint Guarded Implementation
+Latest Completed Product Milestone: MS-034.3H7 - Checkout Removal Execute UI Wiring Disabled Gate
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.3H7 - Checkout Removal Execute UI Wiring Disabled Gate
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.3H7 sets `APP_VERSION` to `1.0094` and `LAST_PUBLISHED_MS` to `MS-034.3H7 - Checkout Removal Execute UI Wiring Disabled Gate`.
+
+**Contract**
+The project settings surface now shows the disabled/gated future execution UI surface `Przyszła akcja wykonawcza` with the future label `Wykonaj usunięcie checkoutu`. The action is a disabled button with no `onClick` handler, the copy states `Wykonanie jest nadal zablokowane. Ten krok tylko pokazuje przyszłą akcję.`, and the UI lists required future conditions: `approval matched`, `dry-run executed`, `Git preflight confirmed`, `execute endpoint available`, and `separate final execution confirmation`.
+
+**Boundary**
+MS-034.3H7 only shows a disabled future execution action. It does not call `/api/projects/[id]/checkout-removal/execute`, add active execution behavior, execute deletion, call or wire `/delete-execution`, call or wire `DELETE /api/projects/[id]`, import or call `executeProjectDiskDelete`, change Beauty Client PRO repository files, change `C:\SPS_OS_WORK`, change SPS metadata, rewrite Project Map, change Project Map artifacts, evidence, source identity, knowledge store, audit, risk decisions, fingerprint, or canonical artifacts.
 
 ## MS-034.3H6 - Checkout Removal Execution Endpoint Guarded Implementation
 

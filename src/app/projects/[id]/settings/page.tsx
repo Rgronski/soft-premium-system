@@ -1803,6 +1803,29 @@ export default function ProjectSettingsPage() {
                 >
                   Wykonanie niedostępne
                 </button>
+                <div className="mt-4 rounded-lg border border-cyan-300/10 bg-zinc-950/40 p-3">
+                  <p className="font-medium text-cyan-50">
+                    Przyszła akcja wykonawcza
+                  </p>
+                  <p className="mt-2">
+                    Wykonanie jest nadal zablokowane. Ten krok tylko pokazuje
+                    przyszłą akcję.
+                  </p>
+                  <ul className="mt-3 space-y-1">
+                    <li>approval matched</li>
+                    <li>dry-run executed</li>
+                    <li>Git preflight confirmed</li>
+                    <li>execute endpoint available</li>
+                    <li>separate final execution confirmation</li>
+                  </ul>
+                  <button
+                    type="button"
+                    disabled
+                    className="mt-3 cursor-not-allowed rounded-lg border border-cyan-300/20 px-3 py-2 text-sm font-medium text-cyan-100 opacity-60"
+                  >
+                    Wykonaj usunięcie checkoutu
+                  </button>
+                </div>
               </div>
             </div>
           </div>
