@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 102 - MS-035.3 Project Work Inputs To Konduktor Guidance Foundation
+
+### Version
+
+Implementation local
+
+### Date
+
+2026-09-14
+
+### Summary
+
+Added the docs-first contract for how project work inputs feed Konduktor guidance before runtime implementation.
+
+### Completed Work
+
+* Defined governed input sources: `Zadania`, `Wiedza`, Project Brain, Project Map, and workflow state.
+* Recorded input-to-Konduktor precedence rules for blockers, Product Owner decisions, active work, Project Map constraints, Knowledge support, and weak/informational signals.
+* Recorded guidance output states: `decision required`, `informational`, `ready for handoff`, and `blocked`.
+* Preserved the role split: `Przegląd` remains status/entry summary; `Przestrzeń AI` remains the primary guidance and manual Codex handoff surface.
+* Recorded the manual execution boundary.
+
+### Notes
+
+* Docs-first contract only.
+* No source/runtime behavior, UI, automation, provider/model calls, endpoints, Codex auto-run, delete/detach/reconnect behavior, checkout-removal changes, Project Map canonical writes, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, or SPS metadata were changed.
+
 ## Session 102 - MS-035.2R2 Project Overview Visible Simplification Repair
 
 ### Version

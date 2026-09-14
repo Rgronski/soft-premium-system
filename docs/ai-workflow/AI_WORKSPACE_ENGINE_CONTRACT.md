@@ -200,6 +200,60 @@ This contract does not require Command Center implementation now.
 
 It only defines compatibility expectations.
 
+## Project Work Inputs To Konduktor Guidance
+
+MS-035.3 defines the docs-first contract for connecting project work inputs to Konduktor guidance.
+
+This section is a contract only.
+
+It does not add runtime behavior, UI, provider calls, model calls, endpoint behavior, automation, or Codex execution.
+
+### Input Sources
+
+Konduktor guidance may be derived only from governed project inputs:
+
+* tasks / `Zadania` as the active work and work-candidate signal,
+* knowledge / `Wiedza` as supporting context and evidence,
+* Project Brain as the interpreter of project state and context,
+* Project Map as structure, evidence, product-area, risk, and ownership context,
+* workflow state as health, warning, blocker, progress, active-work, and next-step signal.
+
+### Precedence Rules
+
+Guidance derivation must apply these rules in order:
+
+1. Blockers, rejected/unsafe state, missing required source identity, or Project Map / Project Brain integrity risk win over all other signals.
+2. Product Owner decision gaps win over implementation guidance.
+3. Active tasks or active workflow state win over starting new work.
+4. Project Map structure and evidence constrain task and knowledge suggestions.
+5. Knowledge can explain or support a recommendation, but cannot authorize a task, milestone, or execution by itself.
+6. Weak, absent, or diagnostic-only signals must produce informational guidance instead of invented executable work.
+
+### Guidance Output States
+
+Konduktor guidance must resolve to one of these product-facing states:
+
+* `decision required` - Product Owner must choose or approve scope before work continues.
+* `informational` - current signals are context only and do not authorize work.
+* `ready for handoff` - one bounded next step is specific enough for manual Codex handoff.
+* `blocked` - evidence, safety, source, ownership, or governance conditions prevent progress.
+
+### Presentation Rules
+
+AI Workspace is the primary surface for this guidance.
+
+It may explain the selected step, show readiness/source/reason, and prepare copy-ready manual Codex handoff when a future approved implementation milestone adds or refines behavior.
+
+Project Overview may show only a status or entry summary and may point to AI Workspace.
+
+Project Overview must not become the primary Project Brain / Konduktor work guidance or copy-ready handoff surface.
+
+### Manual Execution Boundary
+
+Konduktor guidance is advisory until Product Owner approval and manual Codex launch.
+
+The contract does not authorize automatic execution, background work, model/provider calls, endpoint changes, canonical Project Map writes, delete/detach/reconnect behavior, checkout-removal changes, or filesystem changes.
+
 ## Role Alignment
 
 This contract remains aligned with current workflow roles:

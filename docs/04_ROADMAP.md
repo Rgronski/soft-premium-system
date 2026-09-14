@@ -208,12 +208,85 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.1` - AI Workspace Project Brain Recommendation Handoff Foundation
 * `MS-035.2` - Project Work Command Center One Next Step Foundation
 * `MS-035.2R` - Project Overview and AI Workspace Role Split Correction
+* `MS-035.3` - Project Work Inputs To Konduktor Guidance Foundation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
 Latest Completed Product Milestone: MS-035.2R - Project Overview and AI Workspace Role Split Correction
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-035.3 - Project Work Inputs To Konduktor Guidance Foundation
+
+**Status**
+IMPLEMENTED / VERIFIED LOCALLY
+
+**Publication Status**
+NOT PUBLISHED
+
+**Milestone Status**
+IMPLEMENTED / VERIFIED LOCALLY / NOT PUBLISHED / NOT CLOSED
+
+**Type**
+Docs-first Contract Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Define the minimal contract for how project work inputs feed Konduktor guidance before adding runtime behavior or new UI.
+
+**Contract Result**
+Zadania and Wiedza are work inputs. Project Map is structure/evidence. Project Brain interprets project state and context. Workflow state turns interpreted inputs into a bounded next-step signal. Konduktor selects or labels one next safe step from that signal. `Przestrzeń AI` explains the guidance and prepares manual Codex handoff. `Przegląd` remains a status/entry summary only.
+
+**Input Sources**
+
+* Tasks / `Zadania`: active work candidates and current work-in-progress signal.
+* Knowledge / `Wiedza`: supporting context and evidence for why a step matters.
+* Project Brain: normalized project context and state interpreter over project, task, knowledge, and workflow inputs.
+* Project Map: structure, canonical/candidate evidence, known product areas, risks, blockers, and accepted boundaries.
+* Workflow state: current health, warnings, blockers, progress, active work, and next-step signal.
+
+**Input-To-Konduktor Precedence**
+
+1. Explicit blockers, rejected/unsafe state, missing required source identity, or Project Map/Project Brain integrity risk take precedence and produce blocked guidance.
+2. Product Owner decision gaps take precedence over implementation guidance and produce decision-required guidance.
+3. Active tasks/workflow work in progress take precedence over starting new work and should be continued before a new recommendation is introduced.
+4. Project Map structure/evidence scopes and constrains any task or knowledge suggestion; tasks or knowledge must not override ownership, canonical/candidate, or risk boundaries.
+5. Recent/available knowledge can explain and support a recommendation, but it cannot become a task, milestone, or executable action without Product Owner approval.
+6. If signals are weak, absent, or only diagnostic, Konduktor must return informational guidance instead of inventing executable work.
+
+**Guidance Output States**
+
+* `decision required`: Product Owner must choose/approve scope before work can continue.
+* `informational`: current signals are useful context only and do not authorize action.
+* `ready for handoff`: one bounded next step is specific enough for a manual Codex handoff.
+* `blocked`: safety, evidence, source, ownership, or governance conditions prevent progress.
+
+**Presentation Contract**
+
+`Przestrzeń AI` is the primary guidance surface. It may show Konduktor guidance, reason, readiness/source, and copy-ready manual handoff when a future implementation milestone adds or refines behavior. `Przegląd` may summarize status and point to `Przestrzeń AI`, but it must not become the main work guidance or handoff surface.
+
+**Manual Execution Boundary**
+
+MS-035.3 adds no runtime behavior. The contract does not authorize automation, model/provider calls, endpoint changes, Codex auto-run, delete/detach/reconnect, checkout-removal changes, Project Map canonical writes, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, or SPS metadata changes. Codex execution remains manually launched from a Product Owner-approved handoff.
+
+**Implementation Evidence**
+
+* `docs/04_ROADMAP.md` records the MS-035.3 contract milestone.
+* `docs/ai-workflow/AI_WORKSPACE_ENGINE_CONTRACT.md` records the guidance input, precedence, output-state, presentation, and manual execution contract.
+
+**Verification Plan**
+
+* `git status -sb`
+* `git diff --check`
+* `git diff --stat`
 
 ## MS-035.2R2 - Project Overview Visible Simplification Repair
 
