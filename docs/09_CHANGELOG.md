@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 101 - MS-034.3H6 Checkout Removal Execution Endpoint Guarded Implementation
+
+### Version
+
+1.0093
+
+### Date
+
+2026-09-14
+
+### Summary
+
+Published the guarded checkout-only execution endpoint for future local checkout removal.
+
+### Completed Work
+
+* Added `POST /api/projects/[id]/checkout-removal/execute`.
+* Validated `projectId`, `operationMode`, exact approval text, target path, preserved paths, and Git preflight.
+* Blocked wrong mode, approval mismatch, manifest target, `.sps-meta` target, preserved target, outside-workspace target, non-`repo` target, missing preserved paths, dirty or incomplete Git preflight, and unverified remote main.
+* Performed deletion only through guarded `fs.rm(..., { recursive: true, force: true })` after all guards pass.
+* Kept the endpoint separate from `/delete-execution` and did not import or call `executeProjectDiskDelete`.
+* Bumped `APP_VERSION` to `1.0093` and `LAST_PUBLISHED_MS` to `MS-034.3H6 - Checkout Removal Execution Endpoint Guarded Implementation`.
+
+### Notes
+
+No UI wiring, execution against BCP, `/delete-execution`, `DELETE /api/projects/[id]`, `executeProjectDiskDelete` usage, BCP repository change, `C:\SPS_OS_WORK` change, SPS metadata change, Project Map rewrite, Project Map artifact change, evidence change, source identity change, knowledge store change, audit change, risk decision change, fingerprint change, or canonical artifact change was added.
+
 ## Session 101 - MS-034.3H5 Checkout Removal Execution Approval Capture
 
 ### Version

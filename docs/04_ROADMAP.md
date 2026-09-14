@@ -199,12 +199,33 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-034.3H3` - Checkout Removal Endpoint Dry-Run
 * `MS-034.3H4` - Checkout Removal Dry-Run UI Wiring
 * `MS-034.3H5` - Checkout Removal Execution Approval Capture
+* `MS-034.3H6` - Checkout Removal Execution Endpoint Guarded Implementation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-034.3H5 - Checkout Removal Execution Approval Capture
+Latest Completed Product Milestone: MS-034.3H6 - Checkout Removal Execution Endpoint Guarded Implementation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-034.3H6 - Checkout Removal Execution Endpoint Guarded Implementation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-034.3H6 sets `APP_VERSION` to `1.0093` and `LAST_PUBLISHED_MS` to `MS-034.3H6 - Checkout Removal Execution Endpoint Guarded Implementation`.
+
+**Contract**
+SPS OS now includes the guarded checkout-only execution endpoint `POST /api/projects/[id]/checkout-removal/execute`. The endpoint validates `projectId`, `operationMode`, exact approval text, target path, preserved paths, and Git preflight before execution. It blocks wrong mode, approval mismatch, manifest target, `.sps-meta` target, preserved target, outside-workspace target, non-`repo` target, missing preserved paths, dirty or incomplete Git preflight, and unverified remote main. It performs deletion only through guarded `fs.rm(..., { recursive: true, force: true })` after all guards pass.
+
+**Boundary**
+MS-034.3H6 adds backend execution capability but is not wired to UI and was not executed against Beauty Client PRO. It does not add UI wiring, call the new endpoint against BCP, call or wire `/delete-execution`, call or wire `DELETE /api/projects/[id]`, import or call `executeProjectDiskDelete`, change Beauty Client PRO repository files, change `C:\SPS_OS_WORK`, change SPS metadata, rewrite Project Map, change Project Map artifacts, change evidence, source identity, knowledge store, audit, risk decisions, fingerprint, or canonical artifacts.
 
 ## MS-034.3H5 - Checkout Removal Execution Approval Capture
 
