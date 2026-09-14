@@ -207,12 +207,42 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.0` - Project Brain Conductor AI Workflow Integration Contract Foundation
 * `MS-035.1` - AI Workspace Project Brain Recommendation Handoff Foundation
 * `MS-035.2` - Project Work Command Center One Next Step Foundation
+* `MS-035.2R` - Project Overview and AI Workspace Role Split Correction
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-035.2 - Project Work Command Center One Next Step Foundation
+Latest Completed Product Milestone: MS-035.2R - Project Overview and AI Workspace Role Split Correction
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-035.2R2 - Project Overview Visible Simplification Repair
+
+**Status**
+IMPLEMENTED / VERIFIED LOCALLY / ACCEPTED LOCALLY / PUBLISHED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+IMPLEMENTED / VERIFIED LOCALLY / ACCEPTED LOCALLY / PUBLISHED / CLOSED
+
+**Type**
+Product Repair
+
+**Purpose**
+Repair the visible `Przegląd` layout after MS-035.2R so the first screen reads as project identity, readiness, whether SPS OS can lead, one clear next action to `Przestrzeń AI`, and a short reason instead of another layer of diagnostic cards.
+
+**Implementation Result**
+The top of `Przegląd` now starts with one decision-oriented `Przegląd projektu` band for project identity, readiness meaning, SPS OS lead status, and the single `Otwórz Przestrzeń AI` action. Technical evidence, source status, post-clone status, flow guide, and deletion administration are preserved but moved into secondary collapsed sections. The old `Pulpit przestrzeni pracy` dashboard header and Project Brain next-step card are removed from this overview page; task, knowledge, and repository data remain under `Aktywność i dane robocze` so there is no second competing overview. The overview contains no copy-ready Codex handoff; `Przestrzeń AI` remains the main Project Brain / Konduktor / manual handoff surface.
+
+**Boundary**
+MS-035.2R2 changes visible overview layout/copy only. It does not change version metadata, AI Workspace behavior, checkout-removal behavior, automation, provider/model calls, endpoints, delete/detach/reconnect behavior, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, or Project Map canonical artifacts.
+
+**Implementation Evidence**
+
+* `src/app/projects/[id]/page.tsx` makes the overview top visibly different and subordinates technical/admin sections.
+* `src/app/projects/[id]/page.test.tsx` verifies the project identity/readiness/AI Workspace next action and manual execution boundary.
+* `npm test -- src/app/projects/[id]/page.test.tsx` passed with `14 / 14` tests.
 
 ## MS-035.2 - Project Work Command Center One Next Step Foundation
 
@@ -257,6 +287,9 @@ MS-035.2 is read-only guidance and manual handoff support only. It adds no autom
 * `src/app/projects/[id]/page.tsx` derives readiness meaning from existing page state and links to `Przestrzeń AI` for actual guided work.
 * `src/app/projects/[id]/page.test.tsx` verifies the overview readiness entry, AI Workspace CTA, and manual execution boundary.
 * `npm test -- src/app/projects/[id]/page.test.tsx` passed with `14 / 14` tests.
+
+**Version Decision**
+The authoritative version source is `src/lib/app-version.ts`. MS-035.2R sets `APP_VERSION` to `1.0101` and `LAST_PUBLISHED_MS` to `MS-035.2R - Project Overview and AI Workspace Role Split Correction`. This corrects the visible badge drift where the app still showed `APP v1.0097` / `MS-034.3H10R` after MS-035.x publications.
 
 **Verification Plan**
 

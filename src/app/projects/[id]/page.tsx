@@ -6,7 +6,6 @@ import {
 import { getProjectFromBrowserOrServer } from "@/lib/project/browser-lookup";
 import { WorkspaceContent } from "@/components/workspace/WorkspaceContent";
 import { WorkspaceCollections } from "@/components/workspace/WorkspaceCollections";
-import { WorkspaceHeader } from "@/components/workspace/WorkspaceHeader";
 import { WorkspaceLayout } from "@/components/workspace/WorkspaceLayout";
 import { WorkspacePanels } from "@/components/workspace/WorkspacePanels";
 import { getTasksFromServer } from "@/lib/task/browser-server";
@@ -207,21 +206,6 @@ function createLocalRecoveryWorkspaceEntry(
   }
 }
 
-function deriveWorkflowHealth(
-  projectBrainStatus: string | undefined,
-  workflowHealth: ProjectWorkspaceEntry["workspace"]["overview"]["workflow"]["health"],
-): ProjectWorkspaceEntry["workspace"]["overview"]["workflow"]["health"] {
-  if (projectBrainStatus === "available") {
-    return workflowHealth;
-  }
-
-  if (projectBrainStatus === "failed") {
-    return "blocked";
-  }
-
-  return "warning";
-}
-
 function clearProjectScopedDeleteBrowserState(projectId: string): void {
   localStorage.removeItem(`soft-premium-system.projects.${projectId}.tasks`);
   localStorage.removeItem(`soft-premium-system.projects.${projectId}.knowledge`);
@@ -236,6 +220,19 @@ function clearProjectScopedDeleteBrowserState(projectId: string): void {
 
 function buildProjectDeleteExecutionRequestUrl(projectId: string): string {
   return `/api/projects/${encodeURIComponent(projectId)}/delete-execution`;
+}
+
+function isExternalRepositoryUrl(repositoryUrl: string | undefined): boolean {
+  if (!repositoryUrl) {
+    return false;
+  }
+
+  try {
+    const parsedUrl = new URL(repositoryUrl);
+    return parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:";
+  } catch {
+    return false;
+  }
 }
 
 export default function ProjectWorkspacePage() {
@@ -481,12 +478,6 @@ export default function ProjectWorkspacePage() {
       ? canonicalTasks
       : localWorkspaceTasks;
   const workspaceTaskCount = workspaceTasks.length;
-  const workflowHealth = dashboard.workspaceEntry
-    ? deriveWorkflowHealth(
-        projectBrainStatus,
-        dashboard.workspaceEntry.workspace.overview.workflow.health,
-      )
-    : "warning";
   const overviewReadinessMeaning =
     projectBrainStatus === "available"
       ? revalidatedSourceStatus
@@ -561,148 +552,171 @@ export default function ProjectWorkspacePage() {
         !dashboard.workspaceEntry &&
         dashboard.errorCode === "project-not-found") ? null : dashboard.workspaceEntry ? (
         <WorkspaceContent>
-          <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-emerald-50">
-            <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/80">
-              Status projektu
-            </p>
-            <h3 className="mt-2 text-lg font-semibold text-zinc-50">
-              Następny krok projektu
-            </h3>
-            <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]">
+          <section className="rounded-2xl border border-emerald-500/30 bg-zinc-950 p-5 text-zinc-50 shadow-sm shadow-emerald-950/20">
+            <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
               <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
-                  Co oznacza stan
+                <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/80">
+                  Przegląd projektu
                 </p>
-                <p className="mt-2 text-sm leading-6 text-zinc-100">
+                <h2 className="mt-2 text-2xl font-semibold">
+                  {dashboard.workspaceEntry.workspace.overview.project.name}
+                </h2>
+                <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-200">
                   {overviewReadinessMeaning}
                 </p>
               </div>
-              <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/70">
-                  Gdzie kontynuować
+              <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/80">
+                  Czy SPS OS może prowadzić?
                 </p>
-                <p className="mt-2 text-sm font-medium leading-6 text-zinc-50">
-                  {overviewRecommendedStep}
+                <p className="mt-2 text-lg font-semibold text-emerald-50">
+                  {projectBrainStatus === "available"
+                    ? "Tak, po potwierdzeniu źródła."
+                    : "Jeszcze nie w pełni."}
                 </p>
               </div>
-              <Link
-                href={`/projects/${params.id}/ai`}
-                className="inline-flex h-fit w-fit items-center rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-sm font-medium text-emerald-50 transition-colors hover:border-emerald-300/50 hover:bg-emerald-400/20"
-              >
-                Przejdź do Przestrzeni AI
-              </Link>
             </div>
-            <p className="mt-3 text-sm text-emerald-100/80">
-              Przegląd pokazuje gotowość i kierunek. Project Brain, Konduktor i
-              handoff do Codexa pozostają w Przestrzeni AI. Nic nie wykonuje się
-              automatycznie.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
-            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-              Stan systemu plików
-            </p>
-            <p className="mt-2 text-sm text-zinc-300">
-              {projectFilesystemStatus === "manifest-present"
-                ? "manifest obecny"
-                : projectFilesystemStatus === "manifest-missing"
-                  ? "manifest brak"
-                  : "nieznany"}
-            </p>
-          </div>
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
-            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-              Tryb źródła
-            </p>
-            <p className="mt-2 text-sm text-zinc-300">
-              {sourceBindingSummary.statusLabel}
-            </p>
-            <p className="mt-2 text-sm text-zinc-400">
-              {sourceBindingSummary.githubUrlLabel}
-            </p>
-            <p className="mt-2 text-sm text-zinc-300">
-              {sourceBindingSummary.localRepositoryLabel}
-            </p>
-            <p className="mt-2 text-sm text-zinc-300">
-              {sourceBindingSummary.nextStepLabel}
-            </p>
-            <p className="mt-2 text-sm text-zinc-300">
-              {sourceBindingSummary.repositoryContextMessage}
-            </p>
-          </div>
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
-            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-              Post-clone source status
-            </p>
-            {revalidatedSourceStatus ? (
-              <div className="mt-2 space-y-2">
-                <p className="text-sm text-emerald-200">
-                  Local git repo present
-                </p>
-                <p className="text-sm text-zinc-300">
-                  Project workspace folder: {project?.workingDirectory ?? "brak"}
-                </p>
-                <p className="text-sm text-zinc-300">
-                  Repo checkout folder: {revalidatedSourceStatus.repoCheckoutPath}
-                </p>
-                <p className="text-sm text-zinc-300">
-                  GitHub remote URL: {revalidatedSourceStatus.remoteUrl}
-                </p>
-                <p className="text-sm text-zinc-300">
-                  Active working branch: {revalidatedSourceStatus.activeBranch}
-                </p>
-                <p className="text-sm text-zinc-300">
-                  Working tree state: {revalidatedSourceStatus.workingTreeState}
-                </p>
-                <p className="text-sm text-zinc-400">
-                  Manifest-only workspace folder remains a separate project folder.
-                </p>
-              </div>
-            ) : (
-              <div className="mt-2 space-y-2">
-                <p className="text-sm text-zinc-300">manifest obecny</p>
-                <p className="text-sm text-zinc-300">
-                  Lokalne repo Git: nadal niedostępne
-                </p>
-                <p className="text-sm text-zinc-300">
-                  Project workspace folder: {project?.workingDirectory ?? "brak"}
-                </p>
-                <p className="text-sm text-zinc-400">
-                  Repo checkout folder: {repoCheckoutDirectoryHint ?? "brak"}
-                </p>
-                <p className="text-sm text-zinc-400">
-                  Manifest-only workspace folder remains a separate project folder.
-                </p>
-              </div>
-            )}
-          </div>
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
-            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-              Przewodnik przepływu
-            </p>
-            <p className="mt-2 text-sm text-zinc-400">
-              Zacznij tutaj: wybierz zadanie z listy poniżej, a potem przechodź
-              przez przestrzeń pracy po kolei.
-            </p>
-            <ol className="mt-4 flex flex-wrap gap-2">
-              {projectJourneySteps.map((step, index) => (
-                <li
-                  key={step}
-                  className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm ${
-                    index === 0
-                      ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-100"
-                      : "border-zinc-800 bg-zinc-900 text-zinc-300"
-                  }`}
+            <div className="mt-5 rounded-xl border border-zinc-800 bg-zinc-900/70 p-4">
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                Następny krok projektu
+              </p>
+              <div className="mt-3 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                  <p className="text-base font-semibold text-zinc-50">
+                    Przejdź do Przestrzeni AI
+                  </p>
+                  <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-300">
+                    {overviewRecommendedStep}
+                  </p>
+                </div>
+                <Link
+                  href={`/projects/${params.id}/ai`}
+                  className="inline-flex w-fit items-center rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-sm font-medium text-emerald-50 transition-colors hover:border-emerald-300/50 hover:bg-emerald-400/20"
                 >
-                  <span className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                    {index + 1}
-                  </span>
-                  <span>{step}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-          <div className="rounded-2xl border border-red-500/30 bg-red-500/5 p-4">
+                  Otwórz Przestrzeń AI
+                </Link>
+              </div>
+              <p className="mt-3 text-sm text-zinc-400">
+                Powód: Przegląd ma pokazać status i kierunek. Project Brain,
+                Konduktor i ręczny handoff do Codexa pozostają w Przestrzeni AI.
+                Nic nie wykonuje się automatycznie.
+              </p>
+            </div>
+          </section>
+          <details className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4">
+            <summary className="cursor-pointer text-sm font-medium text-zinc-200">
+              Dowody techniczne i przepływ
+            </summary>
+            <div className="mt-4 grid gap-4 lg:grid-cols-2">
+              <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                  Stan systemu plików
+                </p>
+                <p className="mt-2 text-sm text-zinc-300">
+                  {projectFilesystemStatus === "manifest-present"
+                    ? "manifest obecny"
+                    : projectFilesystemStatus === "manifest-missing"
+                      ? "manifest brak"
+                      : "nieznany"}
+                </p>
+              </div>
+              <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                  Tryb źródła
+                </p>
+                <p className="mt-2 text-sm text-zinc-300">
+                  {sourceBindingSummary.statusLabel}
+                </p>
+                <p className="mt-2 text-sm text-zinc-400">
+                  {sourceBindingSummary.githubUrlLabel}
+                </p>
+                <p className="mt-2 text-sm text-zinc-300">
+                  {sourceBindingSummary.localRepositoryLabel}
+                </p>
+                <p className="mt-2 text-sm text-zinc-300">
+                  {sourceBindingSummary.nextStepLabel}
+                </p>
+                <p className="mt-2 text-sm text-zinc-300">
+                  {sourceBindingSummary.repositoryContextMessage}
+                </p>
+              </div>
+              <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                  Post-clone source status
+                </p>
+                {revalidatedSourceStatus ? (
+                  <div className="mt-2 space-y-2">
+                    <p className="text-sm text-emerald-200">
+                      Local git repo present
+                    </p>
+                    <p className="text-sm text-zinc-300">
+                      Project workspace folder: {project?.workingDirectory ?? "brak"}
+                    </p>
+                    <p className="text-sm text-zinc-300">
+                      Repo checkout folder: {revalidatedSourceStatus.repoCheckoutPath}
+                    </p>
+                    <p className="text-sm text-zinc-300">
+                      GitHub remote URL: {revalidatedSourceStatus.remoteUrl}
+                    </p>
+                    <p className="text-sm text-zinc-300">
+                      Active working branch: {revalidatedSourceStatus.activeBranch}
+                    </p>
+                    <p className="text-sm text-zinc-300">
+                      Working tree state: {revalidatedSourceStatus.workingTreeState}
+                    </p>
+                    <p className="text-sm text-zinc-400">
+                      Manifest-only workspace folder remains a separate project folder.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="mt-2 space-y-2">
+                    <p className="text-sm text-zinc-300">manifest obecny</p>
+                    <p className="text-sm text-zinc-300">
+                      Lokalne repo Git: nadal niedostępne
+                    </p>
+                    <p className="text-sm text-zinc-300">
+                      Project workspace folder: {project?.workingDirectory ?? "brak"}
+                    </p>
+                    <p className="text-sm text-zinc-400">
+                      Repo checkout folder: {repoCheckoutDirectoryHint ?? "brak"}
+                    </p>
+                    <p className="text-sm text-zinc-400">
+                      Manifest-only workspace folder remains a separate project folder.
+                    </p>
+                  </div>
+                )}
+              </div>
+              <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                  Przewodnik przepływu
+                </p>
+                <p className="mt-2 text-sm text-zinc-400">
+                  Szczegółowy przepływ zostaje jako pomocnicza mapa pracy.
+                </p>
+                <ol className="mt-4 flex flex-wrap gap-2">
+                  {projectJourneySteps.map((step, index) => (
+                    <li
+                      key={step}
+                      className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm ${
+                        index === 0
+                          ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-100"
+                          : "border-zinc-800 bg-zinc-900 text-zinc-300"
+                      }`}
+                    >
+                      <span className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                        {index + 1}
+                      </span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </details>
+          <details className="rounded-2xl border border-red-500/30 bg-red-500/5 p-4">
+            <summary className="cursor-pointer text-sm font-medium text-red-100">
+              Administracja projektu
+            </summary>
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-xs uppercase tracking-[0.2em] text-red-200/80">
@@ -847,26 +861,52 @@ export default function ProjectWorkspacePage() {
                 ) : null}
               </div>
             ) : null}
-          </div>
-          <WorkspaceHeader
-            projectName={dashboard.workspaceEntry.workspace.overview.project.name}
-            repositoryUrl={
-              dashboard.workspaceEntry.workspace.overview.project.repositoryUrl
-            }
-            taskCount={workspaceTaskCount}
-            knowledgeCount={
-              dashboard.workspaceEntry.workspace.overview.counts.knowledgeEntries
-            }
-            workflowHealth={workflowHealth}
-            workflowConfidence={
-              dashboard.workspaceEntry.workspace.overview.workflow.confidence
-            }
-            workflowNextStep={
-              dashboard.workspaceEntry.workspace.overview.workflow.nextStep
-            }
-            warningCount={dashboard.workspaceEntry.workspace.overview.workflow.warnings}
-            blockerCount={dashboard.workspaceEntry.workspace.overview.workflow.blockers}
-          />
+          </details>
+          <details className="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-4">
+            <summary className="cursor-pointer text-sm font-medium text-zinc-200">
+              Aktywność i dane robocze
+            </summary>
+            <div className="mt-4 grid gap-3 md:grid-cols-3">
+              <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                  Zadania
+                </p>
+                <p className="mt-2 text-sm font-medium text-zinc-100">
+                  {workspaceTaskCount}
+                </p>
+              </div>
+              <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                  Wiedza
+                </p>
+                <p className="mt-2 text-sm font-medium text-zinc-100">
+                  {dashboard.workspaceEntry.workspace.overview.counts.knowledgeEntries}
+                </p>
+              </div>
+              <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                  Repozytorium
+                </p>
+                {isExternalRepositoryUrl(
+                  dashboard.workspaceEntry.workspace.overview.project.repositoryUrl,
+                ) ? (
+                  <a
+                    href={dashboard.workspaceEntry.workspace.overview.project.repositoryUrl}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="mt-2 inline-flex w-fit items-center rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+                  >
+                    Otwórz repozytorium
+                  </a>
+                ) : (
+                  <p className="mt-2 break-all text-sm text-zinc-400">
+                    {dashboard.workspaceEntry.workspace.overview.project.repositoryUrl ??
+                      "brak"}
+                  </p>
+                )}
+              </div>
+            </div>
+          </details>
           <WorkspaceCollections
             projectId={params.id}
             tasks={workspaceTasks}

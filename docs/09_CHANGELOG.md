@@ -69,6 +69,34 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 102 - MS-035.2R2 Project Overview Visible Simplification Repair
+
+### Version
+
+Implementation local
+
+### Date
+
+2026-09-14
+
+### Summary
+
+Repaired the visible project overview after Product Owner rejected the MS-035.2R layout as still too diagnostic and visually unchanged.
+
+### Completed Work
+
+* Replaced the first overview surface with one `Przegląd projektu` decision band for identity, readiness, SPS OS lead status, one next action, and reason.
+* Changed the primary CTA to `Otwórz Przestrzeń AI`.
+* Collapsed technical evidence, source status, post-clone status, flow guide, and deletion administration into secondary sections.
+* Removed the old dominant `Pulpit przestrzeni pracy` dashboard from the overview page and preserved task, knowledge, and repository data under `Aktywność i dane robocze`.
+* Preserved `Przestrzeń AI` as the main Project Brain / Konduktor / manual Codex handoff work surface.
+* Verified the focused project overview page test with `14 / 14` tests passing.
+
+### Notes
+
+* Version metadata was not changed.
+* No automation, provider/model calls, endpoints, Codex auto-run, delete, detach, reconnect, checkout-removal behavior, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, or Project Map canonical artifacts were changed.
+
 ## Session 102 - MS-035.2 Project Work Command Center One Next Step Foundation
 
 ### Version
@@ -91,11 +119,13 @@ Accepted MS-035.2 locally as the corrected project overview readiness entry and 
 * Kept `Przestrzeń AI` as the primary surface for Project Brain context, Konduktor guidance, and copy-ready manual Codex handoff.
 * Preserved the manual execution boundary: no work executes automatically.
 * Verified the focused project overview page test with `14 / 14` tests passing after the role-split correction.
+* Corrected the visible app-version badge source to `APP_VERSION 1.0101` and `LAST_PUBLISHED_MS MS-035.2R - Project Overview and AI Workspace Role Split Correction`.
 
 ### Notes
 
 * SPS OS should guide the Product Owner with clear connected tab roles, not multiply confusing panels.
 * Project Map, Project Brain, Konduktor, and AI Workflow support one governed project direction.
+* The previous visible badge value `APP v1.0097` / `MS-034.3H10R` came from stale canonical metadata in `src/lib/app-version.ts`, not from the overview layout itself.
 * No automation, provider/model calls, endpoints, Codex auto-run, delete, detach, reconnect, checkout-removal changes, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, evidence changes, source identity changes, audit changes, risk decision changes, fingerprint changes, or canonical artifact changes were added.
 * MS-035.1 remains the latest published milestone before MS-035.2.
 

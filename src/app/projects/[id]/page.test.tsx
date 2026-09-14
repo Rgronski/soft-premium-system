@@ -327,16 +327,14 @@ describe("ProjectWorkspacePage", () => {
 
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledTimes(1);
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledWith("project-1");
-    expect(screen.getByText("Alpha Workspace")).toBeTruthy();
+    expect(screen.getAllByText("Alpha Workspace").length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText("Task A")).toBeTruthy();
     expect(screen.getByText("Knowledge note")).toBeTruthy();
     expect(
       screen.getByRole("link", { name: "Otwórz repozytorium" }).getAttribute("href"),
     ).toBe("https://example.com/repos/alpha-workspace");
-    expect(screen.getAllByText("Kontynuuj aktywną pracę")).toHaveLength(2);
-    expect(
-      screen.getByRole("link", { name: "Przejdź do zadań" }).getAttribute("href"),
-    ).toBe("/projects/project-1/tasks");
+    expect(screen.getByText("Aktywność i dane robocze")).toBeTruthy();
+    expect(screen.queryByText("Pulpit przestrzeni pracy")).toBeNull();
     expect(screen.getByRole("link", { name: "Dodaj zadanie" })).toBeTruthy();
     expect(
       screen.getByRole("link", { name: "Zobacz wszystkie zadania" }).getAttribute("href"),
@@ -344,11 +342,6 @@ describe("ProjectWorkspacePage", () => {
     expect(
       screen.getByRole("link", { name: "Zobacz całą wiedzę" }).getAttribute("href"),
     ).toBe("/projects/project-1/knowledge");
-    expect(screen.getByText("Project Brain")).toBeTruthy();
-    expect(screen.getByRole("link", { name: "Przejdź do zadań" })).toBeTruthy();
-    expect(
-      screen.getByText("Konduktor podpowiada: Kontynuuj aktywną pracę"),
-    ).toBeTruthy();
     expect(screen.getByRole("button", { name: "Usuń projekt" })).toBeTruthy();
   });
 
@@ -473,7 +466,8 @@ describe("ProjectWorkspacePage", () => {
 
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledTimes(1);
     expect(getProjectWorkspaceEntryMock).toHaveBeenCalledWith("project-1");
-    expect(screen.getByText("Project Brain")).toBeTruthy();
+    expect(screen.getByText("Aktywność i dane robocze")).toBeTruthy();
+    expect(screen.queryByText("Pulpit przestrzeni pracy")).toBeNull();
     expect(screen.queryByText("MS-000.5 - Konduktor")).toBeNull();
     expect(
       screen.getByText("Konduktor projektu czeka na decyzję Product Ownera"),
@@ -487,9 +481,7 @@ describe("ProjectWorkspacePage", () => {
       ),
     ).toBeTruthy();
     expect(screen.queryByText(/MS-025\.3 refined the decision prompt/i)).toBeNull();
-    expect(
-      screen.getByRole("link", { name: "Przejdź do zadań" }),
-    ).toBeTruthy();
+    expect(screen.queryByRole("link", { name: "Przejdź do zadań" })).toBeNull();
   });
 
   test("renders a project-specific conductor state when the filesystem-backed store already has one", async () => {
@@ -552,15 +544,9 @@ describe("ProjectWorkspacePage", () => {
 
     render(<ProjectWorkspacePage />);
 
-    expect(
-      screen.getAllByText("Brak dodatkowego kontekstu Project Brain"),
-    ).toHaveLength(2);
-    expect(
-      screen.getByText(/Project Brain nie ma jeszcze wyraźniejszej wskazówki/i),
-    ).toBeTruthy();
-    expect(
-      screen.getByRole("link", { name: "Przejdź do zadań" }),
-    ).toBeTruthy();
+    expect(screen.queryByText("Pulpit przestrzeni pracy")).toBeNull();
+    expect(screen.getByText("Aktywność i dane robocze")).toBeTruthy();
+    expect(screen.queryByRole("link", { name: "Przejdź do zadań" })).toBeNull();
   });
 
   test("shows a concise project next-step entry to AI Workspace when the local Project Brain status is pending", () => {
@@ -574,7 +560,10 @@ describe("ProjectWorkspacePage", () => {
 
     render(<ProjectWorkspacePage />);
 
-    expect(screen.getByText("Status projektu")).toBeTruthy();
+    expect(screen.getAllByText("Przegląd projektu").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("Alpha Workspace").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText("Czy SPS OS może prowadzić?")).toBeTruthy();
+    expect(screen.getByText("Jeszcze nie w pełni.")).toBeTruthy();
     expect(screen.getByText("Następny krok projektu")).toBeTruthy();
     expect(
       screen.getByText(
@@ -585,13 +574,15 @@ describe("ProjectWorkspacePage", () => {
       screen.getByText(/Przejdź do Przestrzeni AI, aby zobaczyć wskazanie Project Brain/i),
     ).toBeTruthy();
     expect(
-      screen.getByRole("link", { name: "Przejdź do Przestrzeni AI" }).getAttribute("href"),
+      screen.getByRole("link", { name: "Otwórz Przestrzeń AI" }).getAttribute("href"),
     ).toBe("/projects/project-1/ai");
+    expect(screen.getByText("Dowody techniczne i przepływ")).toBeTruthy();
+    expect(screen.getByText("Administracja projektu")).toBeTruthy();
     expect(screen.queryByText(/^Cel:/i)).toBeNull();
     expect(
       screen.getAllByText(/Nic nie wykonuje się automatycznie/i).length,
     ).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText("warning")).toHaveLength(2);
+    expect(screen.getAllByText("warning")).toHaveLength(1);
   });
 
   test("confirms the safe detach variant, removes the project, and redirects home", async () => {
@@ -765,7 +756,7 @@ describe("ProjectWorkspacePage", () => {
 
     await waitFor(() => {
       expect(getProjectFromServerMock).toHaveBeenCalledWith("project-1");
-      expect(screen.getByText("Alpha Workspace")).toBeTruthy();
+      expect(screen.getAllByText("Alpha Workspace").length).toBeGreaterThanOrEqual(1);
     });
 
     expect(screen.queryByText("Projekt nie został znaleziony")).toBeNull();
@@ -821,9 +812,9 @@ describe("ProjectWorkspacePage", () => {
     render(<ProjectWorkspacePage />);
 
     expect(screen.queryByText("Projekt nie został znaleziony")).toBeNull();
-    expect(screen.getByText("Alpha Workspace")).toBeTruthy();
+    expect(screen.getAllByText("Alpha Workspace").length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText("Local task")).toBeTruthy();
     expect(screen.getByText("Local knowledge")).toBeTruthy();
-    expect(screen.getAllByText(/lokalna przestrzeń projektu/i)).toHaveLength(1);
+    expect(screen.queryByText("Pulpit przestrzeni pracy")).toBeNull();
   });
 });
