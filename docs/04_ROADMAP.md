@@ -215,19 +215,19 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-035.5 - Visible Version Gate Protocol Foundation
+Latest Completed Product Milestone: MS-035.6 - Konduktor Input-Aware Guidance Selection Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
 
 ## MS-035.6 - Konduktor Input-Aware Guidance Selection Foundation
 
 **Status**
-IMPLEMENTED / VERIFIED LOCALLY
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Publication Status**
-NOT PUBLISHED
+PUBLISHED
 
 **Milestone Status**
-IMPLEMENTED / VERIFIED LOCALLY / NOT PUBLISHED / NOT CLOSED
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
 
 **Type**
 Runtime Behavior Milestone
@@ -250,7 +250,7 @@ Konduktor now accepts existing project input signals from AI Workspace: task cou
 AI Workspace passes the already-loaded task and knowledge counts into the existing Konduktor helper and continues to show the MS-035.4 `Wejścia do rekomendacji` read model. Codex handoff remains manual.
 
 **Version Gate**
-Required at publication. MS-035.6 is user-facing/runtime behavior. Implementation does not update `src/lib/app-version.ts`; publication sync must update `APP_VERSION`, `LAST_PUBLISHED_MS`, and the app-version badge test.
+Required and completed at publication. `src/lib/app-version.ts` now records `APP_VERSION 1.0103` and `LAST_PUBLISHED_MS MS-035.6 - Konduktor Input-Aware Guidance Selection Foundation`; the focused app-version badge test passed.
 
 **Boundary**
 MS-035.6 adds no automation, model calls, provider changes, API keys, endpoints, Codex auto-run, delete/detach/reconnect behavior, checkout-removal behavior, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, or Project Map canonical changes.
@@ -259,6 +259,7 @@ MS-035.6 adds no automation, model calls, provider changes, API keys, endpoints,
 
 * `npm test -- src/lib/conductor/conductor.test.ts` passed with `11 / 11`.
 * `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed with `45 / 45`.
+* `npm test -- src/components/app-version-badge.test.tsx` passed with `1 / 1`.
 * `git diff --check` passed with line-ending warnings only.
 
 **Verification Plan**

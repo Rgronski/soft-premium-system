@@ -73,7 +73,7 @@ Each release entry should contain:
 
 ### Version
 
-Implementation local
+Published
 
 ### Date
 
@@ -91,10 +91,11 @@ Adjusted Konduktor guidance selection so it can use existing AI Workspace projec
 * Let missing knowledge with an informational Project Brain signal surface a context-gap informational state.
 * Preserved the MS-035.4 `Wejścia do rekomendacji` visible read model in AI Workspace.
 * Verified focused Konduktor and AI Workspace tests.
+* Applied the Visible Version Gate for `APP_VERSION 1.0103` and `LAST_PUBLISHED_MS MS-035.6 - Konduktor Input-Aware Guidance Selection Foundation`.
 
 ### Notes
 
-* Version Gate is required at publication because MS-035.6 is user-facing/runtime behavior. App-version metadata was not updated in this implementation phase.
+* Version Gate was required and completed because MS-035.6 is user-facing/runtime behavior.
 * No automation, model calls, provider changes, API keys, endpoints, Codex auto-run, delete/detach/reconnect behavior, checkout-removal behavior, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, or Project Map canonical artifacts were changed.
 
 ## Session 102 - MS-035.5 Visible Version Gate Protocol Foundation
