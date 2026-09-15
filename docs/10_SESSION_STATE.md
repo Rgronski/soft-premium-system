@@ -343,11 +343,11 @@ Platform Priority: Preserve candidate/canonical separation and keep SSOT, Projec
 Repository Branch: main
 Repository Working Tree State: CLEAN
 Ahead / Behind Status: 0 / 0
-Latest Verified Commit: 2ad0fb1
+Latest Verified Commit: c3f613c45bdd7e1d7a8c1e4bb92c496c0875138f
 Verification Status: PASS
 Blockers: NONE
 Open Risks: NONE
-Next Safe Step: Product Owner reviews and accepts MS-035.7, then chooses the next milestone.
+Next Safe Step: Product Owner chooses the next milestone.
 Next Session Plan: Start Session 104 only after Product Owner decision, keep Current Product Milestone and Next Product Milestone as `NONE / Product Owner decision required` until then, and preserve `MS-035.7 - AI Workspace Handoff Copy Polish Foundation` as `COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED`.
 
 MS-031.36 is COMPLETED / VERIFIED / PUBLISHED / ACCEPTED in the current local workspace as the Project Map Visible Technical Token Polish Pass Foundation. The Project Map tab now polishes remaining visible English / mixed technical labels, badges, and handoff preview copy after MS-031.35 while preserving raw technical values only where they are data. Foundation labels now include `Tożsamość projektu`, `Źródło robocze`, `Pierwszy layout`, `Pierwszy działający przepływ`, and `Ścieżka publikacji`; overview labels and status/source badges are Polish-first; handoff preview copy now names the future milestone wykonawczy boundary in Polish. MS-031.36 does not change evaluator behavior, candidate data model, approval persistence, writer routes/helpers/handlers, canonical Project Map runtime files, or Beauty Client PRO repository files. `APP_VERSION` is now `1.0069` and `LAST_PUBLISHED_MS` is `MS-031.36 - Project Map Visible Technical Token Polish Pass Foundation`.

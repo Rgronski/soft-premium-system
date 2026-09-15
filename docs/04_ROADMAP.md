@@ -261,7 +261,9 @@ MS-035.7 adds no automation, model calls, provider changes, API keys, endpoints,
 
 * `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed with `45 / 45`.
 * `npm test -- src/components/app-version-badge.test.tsx` passed with `1 / 1`.
-* `git diff --check` passed.
+* `git diff --check` passed with existing line-ending warnings only.
+* Published commit `c3f613c45bdd7e1d7a8c1e4bb92c496c0875138f feat: polish ai workspace codex handoff copy` was pushed to `origin/main`.
+* Post-push sync was confirmed with `main...origin/main` and ahead/behind `0/0`.
 
 **Verification Plan**
 

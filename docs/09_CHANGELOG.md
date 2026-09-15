@@ -89,6 +89,7 @@ Polished the AI Workspace manual Codex handoff copy so the copy-ready block is f
 * Clarified helper copy for values sourced from bootstrap, Git Context, SSOT, milestone contract, and verification plan.
 * Preserved the manual copy/paste execution boundary.
 * Applied the Visible Version Gate for `APP_VERSION 1.0104` and `LAST_PUBLISHED_MS MS-035.7 - AI Workspace Handoff Copy Polish Foundation`.
+* Published commit `c3f613c45bdd7e1d7a8c1e4bb92c496c0875138f feat: polish ai workspace codex handoff copy` to `origin/main` with post-push ahead/behind `0/0`.
 
 ### Notes
 
