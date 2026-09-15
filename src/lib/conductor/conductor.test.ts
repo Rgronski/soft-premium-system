@@ -115,6 +115,72 @@ describe("deriveConductorProjectBrainGuidance", () => {
     });
   });
 
+  test("uses active task inputs to prefer continuing project work", () => {
+    expect(
+      deriveConductorProjectBrainGuidance(
+        {
+          id: "continue-active-work",
+          label: "Kontynuuj aktywną pracę",
+          description:
+            "Kontynuuj aktywny element przepływu przed rozpoczęciem nowej pracy.",
+        },
+        {
+          tasksCount: 2,
+          knowledgeCount: 1,
+        },
+      ),
+    ).toEqual({
+      headline: "Konduktor podpowiada: kontynuuj zadania projektu",
+      description:
+        "W projekcie są aktywne zadania (2). Kontynuuj bieżącą pracę przed rozpoczynaniem nowego kierunku.",
+      reason:
+        "Active project tasks outrank starting new work when there are no blockers or Product Owner decision gaps.",
+      hasRecommendation: true,
+      actionReadiness: "ready-to-act-on",
+    });
+  });
+
+  test("keeps Product Owner decision gaps above active task inputs", () => {
+    expect(
+      deriveConductorProjectBrainGuidance(
+        {
+          id: "start-next-work",
+          label: "Start next work",
+          description: "Start the next safe workflow item.",
+        },
+        {
+          tasksCount: 3,
+          knowledgeCount: 2,
+        },
+      ).actionReadiness,
+    ).toBe("requires-product-owner-decision");
+  });
+
+  test("surfaces a context gap when knowledge is missing and the signal is informational", () => {
+    expect(
+      deriveConductorProjectBrainGuidance(
+        {
+          id: "local-project-recovery",
+          label: "Kontynuuj lokalny stan projektu",
+          description:
+            "Kontekst Project Brain jest niedostępny, ale lokalna przestrzeń projektu nadal jest dostępna.",
+        },
+        {
+          tasksCount: 0,
+          knowledgeCount: 0,
+        },
+      ),
+    ).toEqual({
+      headline: "Konduktor widzi lukę kontekstu",
+      description:
+        "Brakuje wpisów wiedzy, a sygnał Project Brain jest tylko informacyjny. Najbezpieczniej uzupełnić kontekst przed przygotowaniem kolejnego handoffu.",
+      reason:
+        "Knowledge can explain and support a recommendation, but missing knowledge cannot authorize execution when the Project Brain signal is weak or diagnostic.",
+      hasRecommendation: false,
+      actionReadiness: "informational-only",
+    });
+  });
+
   test("marks the default start-next-work signal as requiring Product Owner decision", () => {
     expect(
       deriveConductorProjectBrainGuidance({

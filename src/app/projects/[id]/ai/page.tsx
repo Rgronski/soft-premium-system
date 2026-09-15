@@ -415,6 +415,10 @@ export default function ProjectAiWorkspacePage() {
   );
   const conductorGuidance = deriveConductorProjectBrainGuidance(
     workflowResult.nextStep,
+    {
+      tasksCount: context.tasks.length,
+      knowledgeCount: context.knowledgeEntries.length,
+    },
   );
   const conductorReadinessLabels = {
     "ready-to-act-on": "Gotowe do działania",

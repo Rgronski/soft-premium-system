@@ -69,6 +69,34 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 102 - MS-035.6 Konduktor Input-Aware Guidance Selection Foundation
+
+### Version
+
+Implementation local
+
+### Date
+
+2026-09-15
+
+### Summary
+
+Adjusted Konduktor guidance selection so it can use existing AI Workspace project inputs while preserving one next safe step and manual Codex handoff.
+
+### Completed Work
+
+* Added optional project input signals to the existing Konduktor Project Brain guidance helper.
+* Used existing AI Workspace task and knowledge counts with the existing Project Brain / workflow next step.
+* Let active tasks produce a clearer continue-project-work recommendation when no stronger blocker or Product Owner decision gap outranks it.
+* Let missing knowledge with an informational Project Brain signal surface a context-gap informational state.
+* Preserved the MS-035.4 `Wejścia do rekomendacji` visible read model in AI Workspace.
+* Verified focused Konduktor and AI Workspace tests.
+
+### Notes
+
+* Version Gate is required at publication because MS-035.6 is user-facing/runtime behavior. App-version metadata was not updated in this implementation phase.
+* No automation, model calls, provider changes, API keys, endpoints, Codex auto-run, delete/detach/reconnect behavior, checkout-removal behavior, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, or Project Map canonical artifacts were changed.
+
 ## Session 102 - MS-035.5 Visible Version Gate Protocol Foundation
 
 ### Version

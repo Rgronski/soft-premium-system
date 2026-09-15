@@ -210,14 +210,15 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.2R` - Project Overview and AI Workspace Role Split Correction
 * `MS-035.3` - Project Work Inputs To Konduktor Guidance Foundation
 * `MS-035.4` - AI Workspace Project Inputs Guidance Read Model Foundation
+* `MS-035.5` - Visible Version Gate Protocol Foundation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-035.4 - AI Workspace Project Inputs Guidance Read Model Foundation
+Latest Completed Product Milestone: MS-035.5 - Visible Version Gate Protocol Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
 
-## MS-035.5 - Visible Version Gate Protocol Foundation
+## MS-035.6 - Konduktor Input-Aware Guidance Selection Foundation
 
 **Status**
 IMPLEMENTED / VERIFIED LOCALLY
@@ -227,6 +228,57 @@ NOT PUBLISHED
 
 **Milestone Status**
 IMPLEMENTED / VERIFIED LOCALLY / NOT PUBLISHED / NOT CLOSED
+
+**Type**
+Runtime Behavior Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Make Konduktor guidance selection consider existing AI Workspace project inputs while still producing one next safe step and preserving manual Codex handoff.
+
+**Implementation Result**
+Konduktor now accepts existing project input signals from AI Workspace: task count, knowledge count, and the existing Project Brain / workflow next step. Active tasks can produce a more specific recommendation to continue project work from tasks. Missing knowledge with an informational Project Brain signal can surface a context-gap informational state. Product Owner decision gaps still outrank task continuation, and the output remains one guidance state.
+
+AI Workspace passes the already-loaded task and knowledge counts into the existing Konduktor helper and continues to show the MS-035.4 `Wejścia do rekomendacji` read model. Codex handoff remains manual.
+
+**Version Gate**
+Required at publication. MS-035.6 is user-facing/runtime behavior. Implementation does not update `src/lib/app-version.ts`; publication sync must update `APP_VERSION`, `LAST_PUBLISHED_MS`, and the app-version badge test.
+
+**Boundary**
+MS-035.6 adds no automation, model calls, provider changes, API keys, endpoints, Codex auto-run, delete/detach/reconnect behavior, checkout-removal behavior, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, or Project Map canonical changes.
+
+**Verification Evidence**
+
+* `npm test -- src/lib/conductor/conductor.test.ts` passed with `11 / 11`.
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed with `45 / 45`.
+* `git diff --check` passed with line-ending warnings only.
+
+**Verification Plan**
+
+* `git status -sb`
+* `git diff --check`
+* `npm test -- src/lib/conductor/conductor.test.ts`
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx`
+* `git diff --stat`
+
+## MS-035.5 - Visible Version Gate Protocol Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
 
 **Type**
 Docs / Process Protocol Milestone

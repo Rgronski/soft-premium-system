@@ -132,6 +132,14 @@ describe("ProjectAiWorkspacePage", () => {
     expect(screen.getByText("Note")).toBeTruthy();
     expect(screen.getByText("Body")).toBeTruthy();
     expect(screen.getByText("Fragment kontekstu: Longer content")).toBeTruthy();
+    expect(
+      screen.getByText("Konduktor podpowiada: kontynuuj zadania projektu"),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "W projekcie są aktywne zadania (2). Kontynuuj bieżącą pracę przed rozpoczynaniem nowego kierunku.",
+      ),
+    ).toBeTruthy();
     expect(screen.getByText("Wejścia do rekomendacji")).toBeTruthy();
     expect(screen.getByText("Aktywne zadania są sygnałem pracy w toku.")).toBeTruthy();
     expect(

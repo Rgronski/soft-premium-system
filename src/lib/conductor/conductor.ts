@@ -16,6 +16,11 @@ export type ConductorProjectBrainGuidance = {
     | "informational-only";
 };
 
+export type ConductorProjectInputSignals = {
+  tasksCount: number;
+  knowledgeCount: number;
+};
+
 function getConductorRecommendationActionReadiness(
   workflowNextStep?: WorkflowNextStep | null,
 ): ConductorProjectBrainGuidance["actionReadiness"] {
@@ -157,6 +162,7 @@ export function deriveConductorBoundaryConsumerState(
 
 export function deriveConductorProjectBrainGuidance(
   workflowNextStep?: WorkflowNextStep | null,
+  inputSignals?: ConductorProjectInputSignals,
 ): ConductorProjectBrainGuidance {
   const actionReadiness =
     getConductorRecommendationActionReadiness(workflowNextStep);
@@ -177,12 +183,38 @@ export function deriveConductorProjectBrainGuidance(
   }
 
   if (actionReadiness === "informational-only") {
+    if (inputSignals && inputSignals.knowledgeCount === 0) {
+      return {
+        headline: "Konduktor widzi lukę kontekstu",
+        description:
+          "Brakuje wpisów wiedzy, a sygnał Project Brain jest tylko informacyjny. Najbezpieczniej uzupełnić kontekst przed przygotowaniem kolejnego handoffu.",
+        reason:
+          "Knowledge can explain and support a recommendation, but missing knowledge cannot authorize execution when the Project Brain signal is weak or diagnostic.",
+        hasRecommendation: false,
+        actionReadiness,
+      };
+    }
+
     return {
       headline: "Brak silniejszej rekomendacji",
       description:
         "Konduktor pozostaje przy istniejącym sygnale Project Brain tylko do odczytu i nie dodaje własnej decyzji.",
       reason,
       hasRecommendation: false,
+      actionReadiness,
+    };
+  }
+
+  if (workflowNextStep?.id === "continue-active-work" && inputSignals) {
+    return {
+      headline: "Konduktor podpowiada: kontynuuj zadania projektu",
+      description:
+        inputSignals.tasksCount > 1
+          ? `W projekcie są aktywne zadania (${inputSignals.tasksCount}). Kontynuuj bieżącą pracę przed rozpoczynaniem nowego kierunku.`
+          : "W projekcie jest aktywne zadanie. Kontynuuj bieżącą pracę przed rozpoczynaniem nowego kierunku.",
+      reason:
+        "Active project tasks outrank starting new work when there are no blockers or Product Owner decision gaps.",
+      hasRecommendation: true,
       actionReadiness,
     };
   }
