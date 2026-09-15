@@ -147,7 +147,8 @@ The handoff prompt must include:
 * implementation constraints under the Minimal Patch rule,
 * expected cost class,
 * model baseline,
-* cost controls.
+* cost controls,
+* Visible Version Gate status.
 
 This handoff formalizes the transition from diagnosis and architectural control to local repository implementation by Codex.
 
@@ -216,6 +217,31 @@ Verification should confirm:
 
 ---
 
+# Visible Version Gate Standard
+
+The Visible Version Gate protects Product Owner verification from stale browser evidence.
+
+The gate is required when a publication includes:
+
+* user-facing UI changes,
+* runtime behavior changes,
+* a published product milestone that should be visible in the app.
+
+The gate may be `not applicable` only for docs-only or process-only milestones with no app-facing result.
+
+When the gate is required, the publication handoff must:
+
+* state that the Visible Version Gate is required,
+* include `src/lib/app-version.ts` in the allowed publication scope,
+* set `APP_VERSION` to the next approved visible app version,
+* set `LAST_PUBLISHED_MS` to the published milestone name,
+* update focused badge expectations when needed,
+* run `npm test -- src/components/app-version-badge.test.tsx`.
+
+When the gate is not applicable, the publication handoff must state why no app-facing badge update is required.
+
+---
+
 # Codex Report Standard
 
 Codex must provide a report after verification and before any commit or push decision.
@@ -238,7 +264,10 @@ The report must include:
 14. model used or baseline,
 15. real credits if visible,
 16. avoided cost,
-17. missing usage components.
+17. missing usage components,
+18. Visible Version Gate applicability,
+19. expected visible badge after publish when applicable,
+20. badge test status or the reason the badge test is not applicable.
 
 If provider counters are unavailable, Codex must report usage measurement as estimated and real credits as not visible.
 

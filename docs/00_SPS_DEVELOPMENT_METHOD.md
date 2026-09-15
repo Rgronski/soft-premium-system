@@ -189,7 +189,21 @@ Validation protects continuity across sessions and contributors.
 
 ---
 
-# 14. Batch Mode
+# 14. Visible Version Gate
+
+SPDM treats the visible application version and visible published milestone badge as a publication control point whenever Product Owner-visible app behavior changes.
+
+The Visible Version Gate prevents stale browser evidence from being mistaken for current product behavior.
+
+The gate requires each publication handoff and Codex report to state whether visible version metadata is required, not applicable, or blocked.
+
+When required, the publication scope must update the canonical app version source, set the visible last published milestone, and verify the badge before commit and push.
+
+When not applicable, the handoff and report must explain why the milestone has no app-facing result.
+
+---
+
+# 15. Batch Mode
 
 SPDM allows work to be split into small controlled batches when a milestone is too broad for one safe change.
 
@@ -199,7 +213,7 @@ Batch Mode is not a shortcut around validation.
 
 ---
 
-# 15. Decision Log
+# 16. Decision Log
 
 Important decisions must be traceable.
 
@@ -209,7 +223,7 @@ If a decision matters later, it should not depend on memory alone.
 
 ---
 
-# 16. Future Evolution
+# 17. Future Evolution
 
 SPDM is foundational, but not frozen forever.
 

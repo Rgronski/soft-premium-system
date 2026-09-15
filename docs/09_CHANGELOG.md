@@ -69,6 +69,32 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 102 - MS-035.5 Visible Version Gate Protocol Foundation
+
+### Version
+
+Implementation local
+
+### Date
+
+2026-09-15
+
+### Summary
+
+Added the docs/process Visible Version Gate so publication reviews cannot silently miss stale visible app version and milestone badges.
+
+### Completed Work
+
+* Defined when the Visible Version Gate is required: user-facing UI changes, runtime behavior changes, and published product milestones that should be visible in the app.
+* Defined when the gate may be `not applicable`: docs-only or process-only milestones with no app-facing result.
+* Added publication handoff requirements for `src/lib/app-version.ts`, `APP_VERSION`, `LAST_PUBLISHED_MS`, focused badge expectations, and the app-version badge test.
+* Added Codex report requirements for gate applicability, expected visible badge after publish, and badge test status or not-applicable reason.
+
+### Notes
+
+* Docs/process only.
+* No source/runtime files, app behavior, automation, model/provider calls, endpoints, Codex auto-run, delete/detach/reconnect behavior, checkout-removal behavior, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, or Project Map canonical artifacts were changed.
+
 ## Session 102 - MS-035.4 AI Workspace Project Inputs Guidance Read Model Foundation
 
 ### Version

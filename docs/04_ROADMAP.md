@@ -209,14 +209,15 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.2` - Project Work Command Center One Next Step Foundation
 * `MS-035.2R` - Project Overview and AI Workspace Role Split Correction
 * `MS-035.3` - Project Work Inputs To Konduktor Guidance Foundation
+* `MS-035.4` - AI Workspace Project Inputs Guidance Read Model Foundation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-035.2R - Project Overview and AI Workspace Role Split Correction
+Latest Completed Product Milestone: MS-035.4 - AI Workspace Project Inputs Guidance Read Model Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
 
-## MS-035.4 - AI Workspace Project Inputs Guidance Read Model Foundation
+## MS-035.5 - Visible Version Gate Protocol Foundation
 
 **Status**
 IMPLEMENTED / VERIFIED LOCALLY
@@ -226,6 +227,46 @@ NOT PUBLISHED
 
 **Milestone Status**
 IMPLEMENTED / VERIFIED LOCALLY / NOT PUBLISHED / NOT CLOSED
+
+**Type**
+Docs / Process Protocol Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Prevent stale visible app version and published milestone badges from passing publication review after app-facing work.
+
+**Protocol Result**
+The Visible Version Gate is now recorded in the SPS Development Method and Development Standard. Publication handoffs must state whether the gate is required or not applicable. The gate is required for user-facing UI changes, runtime behavior changes, and published product milestones that should be visible in the app. It may be not applicable for docs-only or process-only milestones with no app-facing result.
+
+When required, the publication scope must update `src/lib/app-version.ts`, set `APP_VERSION`, set `LAST_PUBLISHED_MS`, update focused badge expectations when needed, and run `npm test -- src/components/app-version-badge.test.tsx`. Codex reports must state gate applicability, the expected visible badge after publish, and badge test status or the reason the badge test is not applicable.
+
+**Boundary**
+MS-035.5 is docs/process only. It changes no source/runtime files, no app behavior, no automation, no model/provider calls, no endpoints, no Codex auto-run, no delete/detach/reconnect behavior, no checkout-removal behavior, no Beauty Client PRO repository files, no `C:\SPS_OS_WORK` files, no SPS metadata, and no Project Map canonical artifacts.
+
+**Verification Plan**
+
+* `git status -sb`
+* `git diff --check`
+* `git diff --stat`
+
+## MS-035.4 - AI Workspace Project Inputs Guidance Read Model Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
 
 **Type**
 Runtime Read Model Milestone
