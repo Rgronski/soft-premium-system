@@ -69,6 +69,32 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 103 - MS-035.7 AI Workspace Handoff Copy Polish Foundation
+
+### Version
+
+Published
+
+### Date
+
+2026-09-15
+
+### Summary
+
+Polished the AI Workspace manual Codex handoff copy so the copy-ready block is field-complete for controlled SPS OS work.
+
+### Completed Work
+
+* Added explicit Session Identity, repository/branch, milestone control, Visible Version Gate, expected cost class, model baseline, usage record, verification, and required report fields to the manual handoff template.
+* Clarified helper copy for values sourced from bootstrap, Git Context, SSOT, milestone contract, and verification plan.
+* Preserved the manual copy/paste execution boundary.
+* Applied the Visible Version Gate for `APP_VERSION 1.0104` and `LAST_PUBLISHED_MS MS-035.7 - AI Workspace Handoff Copy Polish Foundation`.
+
+### Notes
+
+* Version Gate was required and completed because MS-035.7 changes user-facing AI Workspace copy.
+* No automation, model calls, provider changes, API keys, endpoints, Codex auto-run, hidden scope autofill, command execution, external workspace mutation, delete/detach/reconnect behavior, checkout-removal behavior, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, or Project Map canonical artifacts were changed.
+
 ## Session 102 - MS-035.6 Konduktor Input-Aware Guidance Selection Foundation
 
 ### Version

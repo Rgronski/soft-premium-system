@@ -65,7 +65,21 @@ function buildCodexHandoffText(input: {
 }): string {
   return `===== HANDOFF DO CODEXA START =====
 Session Identity:
+- Previous Session ID:
+- Current Session ID:
+- Next Session ID:
+- Identity source:
 Repository:
+- Path:
+- Branch:
+Milestone Control:
+- Current Product Milestone:
+- Latest Completed Milestone:
+- Visible Version Gate:
+Cost / Model:
+- Expected cost class:
+- Model baseline:
+- Usage record requirement:
 Cel: ${input.recommendationHeadline}
 Zakres: ${input.recommendationDescription}
 Dozwolone pliki:
@@ -82,6 +96,7 @@ Rekomendacja Konduktora:
 Zasada wykonania:
 - Codex pozostaje uruchamiany ręcznie poza SPS OS.
 - Ten handoff nie wykonuje automatycznie pracy ani milestone.
+- SPS OS nie uruchamia Codexa, nie dopowiada ukrytego scope, nie wykonuje komend, nie wywołuje providerów i nie mutuje zewnętrznych workspace.
 Zasady pracy:
 - oszczędzaj tokeny i kredyty
 - diagnozuj przed edycją
@@ -91,6 +106,19 @@ Zasady pracy:
 - nie commituj ani nie pushuj bez trybu publikacji
 - raportuj w bloku do skopiowania
 - nie przechodź na SOL bez decyzji Product Ownera
+Wymagany raport Codexa:
+- files changed
+- summary of implementation
+- Visible Version Gate status
+- verification commands and results
+- whether tests passed or failed
+- usage record written: yes/no
+- measurement status
+- observed cost class
+- real credits: niewidoczne w UI, unless visible
+- confirmation that forbidden areas were not touched
+- git status after work
+- do not commit or push
 ===== HANDOFF DO CODEXA END =====`;
 }
 
@@ -1326,18 +1354,21 @@ ${codexHandoffText}`}
             </div>
             <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-5 text-zinc-400">
               <p>Session Identity pobierz z aktywnego SPS OS session/bootstrap.</p>
-              <p>Repository to repozytorium SPS OS.</p>
-              <p>Zakres i Weryfikacja bierz z zatwierdzonego kontraktu milestone.</p>
+              <p>Repository i Branch pobierz z Git Context aktywnego pakietu.</p>
+              <p>Current Product Milestone i Latest Completed Milestone bierz z SSOT.</p>
+              <p>Visible Version Gate, koszt, model i usage record bierz z zatwierdzonego kontraktu milestone.</p>
               <p>SPS OS nie uzupelnia tych pol automatycznie na tym etapie.</p>
             </div>
             <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-5 text-zinc-400">
               <p className="font-medium text-zinc-300">Manualne wypelnianie</p>
               <p>Session Identity kopiuj z bootstrapu aktywnej sesji SPS OS.</p>
-              <p>Repository wpisz jako sciezke repozytorium SPS OS.</p>
+              <p>Previous, Current i Next Session ID kopiuj bez zgadywania.</p>
+              <p>Repository wpisz jako sciezke repozytorium SPS OS, a Branch jako aktywna galaz.</p>
               <p>Cel bierz z celu zatwierdzonego milestone.</p>
               <p>Zakres bierz z zatwierdzonego scope.</p>
               <p>Dozwolone pliki i Zakazane pliki bierz z handoffu lub kontraktu.</p>
               <p>Weryfikacja bierz z planu weryfikacji.</p>
+              <p>Required Codex report fields zostaw w bloku, zeby wynik byl kompletny.</p>
             </div>
           </div>
         </div>

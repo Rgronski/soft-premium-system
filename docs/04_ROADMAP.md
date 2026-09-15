@@ -211,12 +211,66 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.3` - Project Work Inputs To Konduktor Guidance Foundation
 * `MS-035.4` - AI Workspace Project Inputs Guidance Read Model Foundation
 * `MS-035.5` - Visible Version Gate Protocol Foundation
+* `MS-035.6` - Konduktor Input-Aware Guidance Selection Foundation
+* `MS-035.7` - AI Workspace Handoff Copy Polish Foundation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-035.6 - Konduktor Input-Aware Guidance Selection Foundation
+Latest Completed Product Milestone: MS-035.7 - AI Workspace Handoff Copy Polish Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-035.7 - AI Workspace Handoff Copy Polish Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Type**
+User-Facing UI Copy Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Polish and complete the AI Workspace manual Codex handoff copy so the copied block is clearer, field-complete, and aligned with SPS OS process requirements.
+
+**Implementation Result**
+AI Workspace now exposes a fuller copy-ready manual Codex handoff template with explicit Session Identity, repository/branch, milestone control, Visible Version Gate, expected cost class, model baseline, usage record requirement, verification, and required Codex report fields.
+
+Nearby helper copy now states which values come from active session/bootstrap, Git Context, SSOT, milestone contract, and verification plan. The handoff remains a manual copy/paste surface only.
+
+**Version Gate**
+Required and completed at publication. `src/lib/app-version.ts` now records `APP_VERSION 1.0104` and `LAST_PUBLISHED_MS MS-035.7 - AI Workspace Handoff Copy Polish Foundation`; the focused app-version badge test passed.
+
+**Boundary**
+MS-035.7 adds no automation, model calls, provider changes, API keys, endpoints, Codex auto-run, hidden scope autofill, command execution, external workspace mutation, delete/detach/reconnect behavior, checkout-removal behavior, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, or Project Map canonical changes.
+
+**Verification Evidence**
+
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed with `45 / 45`.
+* `npm test -- src/components/app-version-badge.test.tsx` passed with `1 / 1`.
+* `git diff --check` passed.
+
+**Verification Plan**
+
+* `git status -sb`
+* `git diff --check`
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx`
+* `npm test -- src/components/app-version-badge.test.tsx`
+* `npx tsc --noEmit` if TypeScript risk appears
+* `git diff --stat`
 
 ## MS-035.6 - Konduktor Input-Aware Guidance Selection Foundation
 

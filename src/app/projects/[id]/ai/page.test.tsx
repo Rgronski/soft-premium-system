@@ -3000,7 +3000,21 @@ describe("ProjectAiWorkspacePage", () => {
     expect(handoffTemplate.textContent).toContain("Codex wykonuje tylko zaakceptowany zakres poza aplikacją.");
     expect(handoffTemplate.textContent).toContain("Poniższy handoff jest copy-ready i pozostaje ręczny.");
     expect(handoffTemplate.textContent).toContain("Session Identity:");
+    expect(handoffTemplate.textContent).toContain("- Previous Session ID:");
+    expect(handoffTemplate.textContent).toContain("- Current Session ID:");
+    expect(handoffTemplate.textContent).toContain("- Next Session ID:");
+    expect(handoffTemplate.textContent).toContain("- Identity source:");
     expect(handoffTemplate.textContent).toContain("Repository:");
+    expect(handoffTemplate.textContent).toContain("- Path:");
+    expect(handoffTemplate.textContent).toContain("- Branch:");
+    expect(handoffTemplate.textContent).toContain("Milestone Control:");
+    expect(handoffTemplate.textContent).toContain("- Current Product Milestone:");
+    expect(handoffTemplate.textContent).toContain("- Latest Completed Milestone:");
+    expect(handoffTemplate.textContent).toContain("- Visible Version Gate:");
+    expect(handoffTemplate.textContent).toContain("Cost / Model:");
+    expect(handoffTemplate.textContent).toContain("- Expected cost class:");
+    expect(handoffTemplate.textContent).toContain("- Model baseline:");
+    expect(handoffTemplate.textContent).toContain("- Usage record requirement:");
     expect(handoffTemplate.textContent).toContain("Cel: Konduktor potrzebuje decyzji Product Ownera");
     expect(handoffTemplate.textContent).toContain(
       "Zakres: Konduktor wskazuje następny kierunek, ale nie zatwierdza kamienia milowego i nie uruchamia pracy automatycznie. Product Owner pozostaje właścicielem decyzji.",
@@ -3017,6 +3031,9 @@ describe("ProjectAiWorkspacePage", () => {
     expect(handoffTemplate.textContent).toContain("- Gotowość: Wymaga decyzji Product Ownera");
     expect(handoffTemplate.textContent).toContain("Zasada wykonania:");
     expect(handoffTemplate.textContent).toContain("Codex pozostaje uruchamiany ręcznie poza SPS OS.");
+    expect(handoffTemplate.textContent).toContain(
+      "SPS OS nie uruchamia Codexa, nie dopowiada ukrytego scope, nie wykonuje komend, nie wywołuje providerów i nie mutuje zewnętrznych workspace.",
+    );
     expect(handoffTemplate.textContent).toContain("Zasady pracy:");
     expect(handoffTemplate.textContent).toContain("oszczędzaj tokeny i kredyty");
     expect(handoffTemplate.textContent).toContain("diagnozuj przed edycją");
@@ -3026,6 +3043,12 @@ describe("ProjectAiWorkspacePage", () => {
     expect(handoffTemplate.textContent).toContain("nie commituj ani nie pushuj bez trybu publikacji");
     expect(handoffTemplate.textContent).toContain("raportuj w bloku do skopiowania");
     expect(handoffTemplate.textContent).toContain("nie przechodź na SOL bez decyzji Product Ownera");
+    expect(handoffTemplate.textContent).toContain("Wymagany raport Codexa:");
+    expect(handoffTemplate.textContent).toContain("files changed");
+    expect(handoffTemplate.textContent).toContain("Visible Version Gate status");
+    expect(handoffTemplate.textContent).toContain("usage record written: yes/no");
+    expect(handoffTemplate.textContent).toContain("git status after work");
+    expect(handoffTemplate.textContent).toContain("do not commit or push");
   });
 
   test("shows a read-only hint for the handoff context fields", async () => {
@@ -3049,10 +3072,17 @@ describe("ProjectAiWorkspacePage", () => {
       ).toBeTruthy();
     });
 
-    expect(screen.getByText("Repository to repozytorium SPS OS.")).toBeTruthy();
+    expect(
+      screen.getByText("Repository i Branch pobierz z Git Context aktywnego pakietu."),
+    ).toBeTruthy();
     expect(
       screen.getByText(
-        "Zakres i Weryfikacja bierz z zatwierdzonego kontraktu milestone.",
+        "Current Product Milestone i Latest Completed Milestone bierz z SSOT.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Visible Version Gate, koszt, model i usage record bierz z zatwierdzonego kontraktu milestone.",
       ),
     ).toBeTruthy();
     expect(
@@ -3068,7 +3098,12 @@ describe("ProjectAiWorkspacePage", () => {
     ).toBeTruthy();
     expect(
       screen.getByText(
-        "Repository wpisz jako sciezke repozytorium SPS OS.",
+        "Previous, Current i Next Session ID kopiuj bez zgadywania.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Repository wpisz jako sciezke repozytorium SPS OS, a Branch jako aktywna galaz.",
       ),
     ).toBeTruthy();
     expect(screen.getByText("Cel bierz z celu zatwierdzonego milestone.")).toBeTruthy();
@@ -3080,6 +3115,11 @@ describe("ProjectAiWorkspacePage", () => {
     ).toBeTruthy();
     expect(
       screen.getByText("Weryfikacja bierz z planu weryfikacji."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Required Codex report fields zostaw w bloku, zeby wynik byl kompletny.",
+      ),
     ).toBeTruthy();
     expect(
       screen.getByText(
@@ -3119,6 +3159,12 @@ describe("ProjectAiWorkspacePage", () => {
       );
       expect(clipboardWriteTextMock).toHaveBeenCalledWith(
         expect.stringContaining("Ten handoff nie wykonuje automatycznie pracy ani milestone."),
+      );
+      expect(clipboardWriteTextMock).toHaveBeenCalledWith(
+        expect.stringContaining("- Visible Version Gate:"),
+      );
+      expect(clipboardWriteTextMock).toHaveBeenCalledWith(
+        expect.stringContaining("Wymagany raport Codexa:"),
       );
       expect(screen.getByRole("button", { name: "Skopiowano" })).toBeTruthy();
     });

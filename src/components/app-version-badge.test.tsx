@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0103");
+    expect(APP_VERSION).toBe("1.0104");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-035.6 - Konduktor Input-Aware Guidance Selection Foundation",
+      "MS-035.7 - AI Workspace Handoff Copy Polish Foundation",
     );
   });
 });
