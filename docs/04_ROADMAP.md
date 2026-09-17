@@ -222,6 +222,51 @@ Current Product Milestone: NONE / Product Owner decision required
 Latest Completed Product Milestone: MS-035.10 - Cross-Project Operational Memory Contract Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
 
+## MS-035.11 - AI Workspace Integrated Workbench Contract Visibility Foundation
+
+**Status**
+IMPLEMENTED / VERIFIED LOCALLY
+
+**Publication Status**
+LOCAL ONLY / NOT COMMITTED / NOT PUSHED
+
+**Milestone Status**
+IMPLEMENTED / VERIFIED LOCALLY / PRODUCT OWNER ACCEPTANCE PENDING
+
+**Type**
+User-Facing UI Copy Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Make the completed Integrated Project Workbench and Cross-Project Operational Memory contracts visible inside AI Workspace without implementing automation, storage, API, Codex runner, execution bridge, or memory lookup.
+
+**Implementation Result**
+AI Workspace now shows a compact read-only contract status panel inside `Model pracy AI`. It identifies the surface as the Integrated Project Workbench, names the left side as Chief Architect / Konduktor / Project Brain, names the right side as the manual Codex Window, records the current stage as manual copy/paste roundtrip, and marks the Codex runner / execution bridge plus Cross-Project Operational Memory as future governed stages that are inactive now.
+
+The panel does not call APIs, persist data, use localStorage, query cross-project memory, automate Codex, execute work, or write Project Brain.
+
+**Version Gate**
+Required and applied locally. `src/lib/app-version.ts` now records `APP_VERSION 1.0106` and `LAST_PUBLISHED_MS MS-035.11 - AI Workspace Integrated Workbench Contract Visibility Foundation`; the focused app-version badge test is in scope.
+
+**Boundary**
+MS-035.11 adds no API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, Codex runner, automation, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, checkout-removal behavior, package generator changes, or unrelated AI Workspace generation/save flow changes.
+
+**Verification Plan**
+
+* `git status -sb`
+* `git diff --check`
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx`
+* `npm test -- src/components/app-version-badge.test.tsx`
+* `git diff --stat`
+
 ## MS-035.10 - Cross-Project Operational Memory Contract Foundation
 
 **Status**

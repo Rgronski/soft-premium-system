@@ -1028,6 +1028,54 @@ export default function ProjectAiWorkspacePage() {
               odpowiedzi.
             </p>
           </div>
+          <div className="mt-4 grid gap-3 lg:grid-cols-3">
+            <div className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3">
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                Status kontraktu workbench
+              </p>
+              <p className="mt-2 text-sm font-semibold text-zinc-100">
+                Zintegrowany Workbench Projektu
+              </p>
+              <p className="mt-2 text-xs leading-5 text-zinc-400">
+                Lewy panel: Chief Architect / Konduktor / Project Brain.
+              </p>
+              <p className="mt-1 text-xs leading-5 text-zinc-400">
+                Prawy panel: manualne okno Codexa.
+              </p>
+            </div>
+            <div className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3">
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                Etap wykonania
+              </p>
+              <p className="mt-2 text-sm font-semibold text-zinc-100">
+                Manualny roundtrip
+              </p>
+              <p className="mt-2 text-xs leading-5 text-zinc-400">
+                Handoff i raport przechodzą przez kopiuj/wklej.
+              </p>
+              <p className="mt-1 text-xs leading-5 text-zinc-400">
+                Codex runner / execution bridge: przyszły etap zarządzany,
+                teraz nieaktywny.
+              </p>
+            </div>
+            <div className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3">
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                Pamięć operacyjna
+              </p>
+              <p className="mt-2 text-sm font-semibold text-zinc-100">
+                Cross-Project Operational Memory: przyszłe źródło wzorców,
+                teraz nieaktywne.
+              </p>
+              <p className="mt-2 text-xs leading-5 text-zinc-400">
+                SPS OS nie odpytuje ani nie stosuje pamięci międzyprojektowej w
+                tym panelu.
+              </p>
+              <p className="mt-1 text-xs leading-5 text-zinc-400">
+                Ten panel niczego nie automatyzuje i nie zapisuje do Project
+                Brain.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)]">

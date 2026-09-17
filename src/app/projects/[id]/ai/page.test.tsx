@@ -2858,6 +2858,38 @@ describe("ProjectAiWorkspacePage", () => {
         "Gotowy wynik możesz skopiować przyciskiem Kopiuj przy odpowiedzi.",
       ),
     ).toBeTruthy();
+    expect(screen.getByText("Status kontraktu workbench")).toBeTruthy();
+    expect(screen.getByText("Zintegrowany Workbench Projektu")).toBeTruthy();
+    expect(
+      screen.getByText("Lewy panel: Chief Architect / Konduktor / Project Brain."),
+    ).toBeTruthy();
+    expect(screen.getByText("Prawy panel: manualne okno Codexa.")).toBeTruthy();
+    expect(screen.getByText("Etap wykonania")).toBeTruthy();
+    expect(screen.getByText("Manualny roundtrip")).toBeTruthy();
+    expect(
+      screen.getByText("Handoff i raport przechodzą przez kopiuj/wklej."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Codex runner / execution bridge: przyszły etap zarządzany, teraz nieaktywny.",
+      ),
+    ).toBeTruthy();
+    expect(screen.getByText("Pamięć operacyjna")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Cross-Project Operational Memory: przyszłe źródło wzorców, teraz nieaktywne.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "SPS OS nie odpytuje ani nie stosuje pamięci międzyprojektowej w tym panelu.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Ten panel niczego nie automatyzuje i nie zapisuje do Project Brain.",
+      ),
+    ).toBeTruthy();
     expect(screen.getByText("Chat / Konduktor / Chief Architect")).toBeTruthy();
     expect(screen.getByText("Decyzje i przygotowanie handoffu")).toBeTruthy();
     expect(screen.getByText("Propozycje Konduktora")).toBeTruthy();
@@ -2888,6 +2920,7 @@ describe("ProjectAiWorkspacePage", () => {
         "Skopiuj przygotowany handoff, wklej go do Codexa i wróć tutaj z wynikiem wykonania.",
       ),
     ).toBeTruthy();
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
   test("selects Conductor quick actions with ready local instructions", async () => {

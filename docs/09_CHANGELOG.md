@@ -69,6 +69,34 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 103 - MS-035.11 AI Workspace Integrated Workbench Contract Visibility Foundation
+
+### Version
+
+Implementation local
+
+### Date
+
+2026-09-17
+
+### Summary
+
+Added a read-only AI Workspace contract status panel for the integrated workbench boundary.
+
+### Completed Work
+
+* Exposed the Integrated Project Workbench status inside AI Workspace.
+* Identified the left side as Chief Architect / Konduktor / Project Brain.
+* Identified the right side as the manual Codex Window.
+* Marked the current stage as manual copy/paste roundtrip.
+* Marked Codex runner / execution bridge and Cross-Project Operational Memory as future governed inactive stages.
+* Applied the local Visible Version Gate for `APP_VERSION 1.0106` and `LAST_PUBLISHED_MS MS-035.11 - AI Workspace Integrated Workbench Contract Visibility Foundation`.
+
+### Notes
+
+* Visible Version Gate is required because MS-035.11 changes user-facing AI Workspace UI/copy.
+* No API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, Codex runner, automation, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, Project Map canonical artifacts, checkout-removal behavior, package generator scripts, or unrelated AI Workspace generation/save flows were changed.
+
 ## Session 103 - MS-035.10 Cross-Project Operational Memory Contract Foundation
 
 ### Version
@@ -89,7 +117,7 @@ Recorded the docs-only contract for future SPS OS cross-project operational memo
 * Defined the relationship between Project Brain, Cross-Project Operational Memory, Konduktor, Chief Architect, and Codex.
 * Listed allowed reusable memory content: solved patterns, implementation patterns, failed attempts, risks, handoff templates, verification commands, rollback/recovery notes, UI/copy patterns, milestone outcomes, and cost-saving lessons.
 * Defined privacy, separation, source-traceability, and Product Owner-visible provenance requirements.
-* Preserved `Current Product Milestone` as `NONE / Product Owner decision required` and kept the latest completed milestone aligned with `MS-035.9 - Integrated Project Workbench Codex Window Contract Foundation`.
+* Preserved `Current Product Milestone` as `NONE / Product Owner decision required` and kept the latest completed milestone aligned with `MS-035.10 - Cross-Project Operational Memory Contract Foundation`.
 
 ### Notes
 

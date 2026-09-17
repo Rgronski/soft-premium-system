@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0105");
+    expect(APP_VERSION).toBe("1.0106");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-035.8 - AI Workspace Manual Codex Window Roundtrip Foundation",
+      "MS-035.11 - AI Workspace Integrated Workbench Contract Visibility Foundation",
     );
   });
 });
