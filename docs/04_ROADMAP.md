@@ -220,12 +220,58 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.14` - AI Workspace Codex Report Acceptance Guidance Foundation
 * `MS-035.15` - AI Workspace Publication Report Return Guidance Foundation
 * `MS-035.16` - AI Workspace Manual Codex Flow Summary Foundation
+* `MS-035.17` - AI Workspace Conductor Manual Flow State Copy Foundation
 
 ## Current
 
-Current Product Milestone: MS-035.16 - AI Workspace Manual Codex Flow Summary Foundation
-Latest Completed Product Milestone: MS-035.16 - AI Workspace Manual Codex Flow Summary Foundation
+Current Product Milestone: MS-035.17 - AI Workspace Conductor Manual Flow State Copy Foundation
+Latest Completed Product Milestone: MS-035.17 - AI Workspace Conductor Manual Flow State Copy Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-035.17 - AI Workspace Conductor Manual Flow State Copy Foundation
+
+**Status**
+COMPLETED / VERIFIED LOCALLY
+
+**Publication Status**
+LOCAL ONLY / NOT COMMITTED
+
+**Milestone Status**
+COMPLETED / VERIFIED LOCALLY
+
+**Type**
+User-Facing UI Copy Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Clarify on the Conductor side that the AI Workspace workbench is a manual decision flow before Codex handoff, after Codex report, after local acceptance, and after publication report, without implementing a real state machine.
+
+**Implementation Result**
+AI Workspace now shows a compact `Stan manualnego przepływu` copy block in the left Konduktor area. It explains the manual flow moments before Codex handoff, after Codex report, after local acceptance, and after publication report, and states that Konduktor closes the manual roundtrip without creating a state machine.
+
+The guidance is read-only copy. It does not add workflow state, persistence, report parsing, automatic validation, automatic report generation, localStorage, Project Brain writes, API calls, Codex automation, execution bridge behavior, cross-project memory lookup, automatic commit/push behavior, a real state machine, or new stateful acceptance/checklist controls.
+
+**Version Gate**
+Required and applied locally. `src/lib/app-version.ts` records `APP_VERSION 1.0112` and `LAST_PUBLISHED_MS MS-035.17 - AI Workspace Conductor Manual Flow State Copy Foundation`.
+
+**Boundary**
+MS-035.17 adds no API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, report parser, automatic validation, persistence, automatic report generation, automatic commit/push behavior, Codex runner, automation, real state machine / workflow state implementation, stateful acceptance/checklist controls, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, checkout-removal behavior, package generator changes, or unrelated AI Workspace generation/save flow changes.
+
+**Verification Evidence**
+
+* `git status -sb` showed local MS-035.17 changes only.
+* `git diff --check` passed with standard LF -> CRLF warnings only.
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed `47 / 47`.
+* `npm test -- src/components/app-version-badge.test.tsx` passed `1 / 1`.
+* `git diff --stat` showed `9 files changed, 124 insertions(+), 18 deletions(-)`.
 
 ## MS-035.16 - AI Workspace Manual Codex Flow Summary Foundation
 

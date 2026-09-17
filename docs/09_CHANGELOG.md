@@ -69,6 +69,34 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 104 - MS-035.17 AI Workspace Conductor Manual Flow State Copy Foundation
+
+### Version
+
+Local only / not committed
+
+### Date
+
+2026-09-17
+
+### Summary
+
+Added read-only Conductor-side copy for the manual workbench flow state.
+
+### Completed Work
+
+* Added a compact `Stan manualnego przepływu` copy block in the left Konduktor area.
+* Clarified the manual moments before Codex handoff, after Codex report, after local acceptance, and after publication report.
+* Clarified that this is descriptive copy and does not create a state machine.
+* Kept the right Codex panel behavior unchanged.
+* Applied the local Visible Version Gate for `APP_VERSION 1.0112` and `LAST_PUBLISHED_MS MS-035.17 - AI Workspace Conductor Manual Flow State Copy Foundation`.
+
+### Notes
+
+* Visible Version Gate is required because MS-035.17 changes user-facing AI Workspace UI/copy.
+* Verification passed with `git diff --check` with standard LF -> CRLF warnings only, `npm test -- src/app/projects/[id]/ai/page.test.tsx` at `47 / 47`, and `npm test -- src/components/app-version-badge.test.tsx` at `1 / 1`.
+* No workflow state, persistence, report parser, automatic validation, automatic report generation, automatic commit/push behavior, real state machine, stateful acceptance/checklist controls, API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, Codex runner, automation, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, Project Map canonical artifacts, checkout-removal behavior, package generator scripts, or unrelated AI Workspace generation/save flows were changed.
+
 ## Session 104 - MS-035.16 AI Workspace Manual Codex Flow Summary Foundation
 
 ### Version

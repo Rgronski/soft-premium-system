@@ -1181,6 +1181,15 @@ export default function ProjectAiWorkspacePage() {
                   Ten widok niczego nie uruchamia.
                 </p>
               </div>
+              <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-5 text-zinc-400">
+                <p className="font-medium text-zinc-300">
+                  Stan manualnego przepływu
+                </p>
+                <p>Przed handoffem Codexa: Konduktor pomaga doprecyzować zakres.</p>
+                <p>Po raporcie Codexa: Konduktor kieruje przegląd do Product Ownera / Chief Architect.</p>
+                <p>Po lokalnej akceptacji: Konduktor przypomina, że publikacja wymaga osobnej decyzji.</p>
+                <p>Po raporcie publikacji: Konduktor domyka ręczny roundtrip bez tworzenia state machine.</p>
+              </div>
               <p className="mt-3 text-sm text-zinc-300">
                 Szybkie akcje przygotowują lokalną instrukcję do rozmowy. Nie
                 wykonują milestone ani pracy Codexa.

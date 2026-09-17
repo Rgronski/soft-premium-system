@@ -2913,6 +2913,27 @@ describe("ProjectAiWorkspacePage", () => {
     ).toBeTruthy();
     expect(screen.getByText("Wymaga decyzji Product Ownera")).toBeTruthy();
     expect(screen.getByText("Project Brain / Workflow Engine")).toBeTruthy();
+    expect(screen.getByText("Stan manualnego przepływu")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Przed handoffem Codexa: Konduktor pomaga doprecyzować zakres.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Po raporcie Codexa: Konduktor kieruje przegląd do Product Ownera / Chief Architect.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Po lokalnej akceptacji: Konduktor przypomina, że publikacja wymaga osobnej decyzji.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Po raporcie publikacji: Konduktor domyka ręczny roundtrip bez tworzenia state machine.",
+      ),
+    ).toBeTruthy();
     expect(screen.getByRole("button", { name: "Dalej" })).toBeTruthy();
     expect(screen.getByRole("button", { name: "Akceptuję" })).toBeTruthy();
     expect(
