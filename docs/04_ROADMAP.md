@@ -219,19 +219,19 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-035.9 - Integrated Project Workbench Codex Window Contract Foundation
+Latest Completed Product Milestone: MS-035.10 - Cross-Project Operational Memory Contract Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
 
 ## MS-035.10 - Cross-Project Operational Memory Contract Foundation
 
 **Status**
-IMPLEMENTED / VERIFIED LOCALLY
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Publication Status**
-LOCAL ONLY / NOT COMMITTED / NOT PUSHED
+PUBLISHED
 
 **Milestone Status**
-IMPLEMENTED / VERIFIED LOCALLY / PRODUCT OWNER ACCEPTANCE PENDING
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
 
 **Type**
 Docs / Architecture Contract Milestone
@@ -254,6 +254,8 @@ MS-035.10 defines Cross-Project Operational Memory as a reusable SPS OS layer, n
 Allowed memory content is limited to solved problem patterns, implementation patterns, failed attempts, risks and blockers, handoff templates, verification commands, rollback/recovery notes, UI/copy patterns, milestone outcomes, and cost-saving lessons.
 
 The contract requires privacy and separation rules: no uncontrolled leakage of client-specific details between projects, reusable pattern summaries instead of sensitive raw project data, traceable project-specific evidence with its source and access boundary, and Product Owner-visible provenance whenever a recommendation uses prior project memory.
+
+Publication commit: `0decee0b1e3194d766f365249230795752565363 docs: define cross-project operational memory contract`.
 
 **Non-Goals**
 MS-035.10 does not implement memory storage, database/schema work, embeddings, vector search, automatic reuse, Project Brain writes, Codex automation, provider/model work, data migration, API routes, UI, runtime behavior, or cross-project data mixing without future governance.

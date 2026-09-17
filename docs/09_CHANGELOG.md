@@ -73,7 +73,7 @@ Each release entry should contain:
 
 ### Version
 
-Implementation local
+Published
 
 ### Date
 
@@ -94,6 +94,7 @@ Recorded the docs-only contract for future SPS OS cross-project operational memo
 ### Notes
 
 * Visible Version Gate is not applicable because MS-035.10 is docs-only and has no app-facing runtime, UI, visible copy, or version badge change.
+* Published in commit `0decee0b1e3194d766f365249230795752565363 docs: define cross-project operational memory contract`.
 * No `src/**` files, API routes, storage implementation, database/schema files, embeddings/vector search, memory engine, Project Brain writes, Codex automation, provider/model configuration, checkout-removal behavior, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, package generator scripts, or Project Map canonical artifacts were changed.
 
 ## Session 103 - MS-035.9 Integrated Project Workbench Codex Window Contract Foundation
