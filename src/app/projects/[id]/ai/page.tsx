@@ -1498,6 +1498,13 @@ ${codexHandoffText}`}
               <p>Commit/push pozostaje osobnym, jawnym handoffem albo akcją.</p>
               <p>Nierozwiązane blockers/deviations zatrzymują publikację.</p>
             </div>
+            <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-5 text-zinc-400">
+              <p className="font-medium text-zinc-300">Zwrot raportu publikacji</p>
+              <p>Po commit/push zwróć do Chief Architect commit hash i subject.</p>
+              <p>Dodaj push status, final repository status i wyniki weryfikacji.</p>
+              <p>Dodaj Version Gate status, usage record status oraz blockers/deviations.</p>
+              <p>Ten blok niczego nie generuje automatycznie i nie publikuje zmian.</p>
+            </div>
           </div>
         </div>
       </div>

@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0109");
+    expect(APP_VERSION).toBe("1.0110");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-035.14 - AI Workspace Codex Report Acceptance Guidance Foundation",
+      "MS-035.15 - AI Workspace Publication Report Return Guidance Foundation",
     );
   });
 });

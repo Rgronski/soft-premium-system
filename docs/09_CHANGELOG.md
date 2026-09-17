@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 104 - MS-035.15 AI Workspace Publication Report Return Guidance Foundation
+
+### Version
+
+Local only / not committed
+
+### Date
+
+2026-09-17
+
+### Summary
+
+Added read-only AI Workspace guidance for returning publication reports after commit/push.
+
+### Completed Work
+
+* Added a compact `Zwrot raportu publikacji` guidance block near report review and acceptance guidance.
+* Named expected return fields: commit hash and subject, push status, final repository status, verification results, Version Gate status, usage record status, and blockers/deviations.
+* Kept the existing report textarea and manual copy/paste roundtrip unchanged.
+* Applied the local Visible Version Gate for `APP_VERSION 1.0110` and `LAST_PUBLISHED_MS MS-035.15 - AI Workspace Publication Report Return Guidance Foundation`.
+
+### Notes
+
+* Visible Version Gate is required because MS-035.15 changes user-facing AI Workspace UI/copy.
+* Verification passed with `git diff --check` with standard LF -> CRLF warnings only, `npm test -- src/app/projects/[id]/ai/page.test.tsx` at `47 / 47`, and `npm test -- src/components/app-version-badge.test.tsx` at `1 / 1`.
+* No report parser, automatic validation, persistence, automatic report generation, automatic commit/push behavior, API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, Codex runner, automation, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, Project Map canonical artifacts, checkout-removal behavior, package generator scripts, or unrelated AI Workspace generation/save flows were changed.
+
 ## Session 104 - MS-035.14 AI Workspace Codex Report Acceptance Guidance Foundation
 
 ### Version

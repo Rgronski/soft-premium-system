@@ -3284,6 +3284,23 @@ describe("ProjectAiWorkspacePage", () => {
     expect(
       screen.getByText("Nierozwiązane blockers/deviations zatrzymują publikację."),
     ).toBeTruthy();
+    expect(screen.getByText("Zwrot raportu publikacji")).toBeTruthy();
+    expect(
+      screen.getByText("Po commit/push zwróć do Chief Architect commit hash i subject."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Dodaj push status, final repository status i wyniki weryfikacji."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Dodaj Version Gate status, usage record status oraz blockers/deviations.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Ten blok niczego nie generuje automatycznie i nie publikuje zmian.",
+      ),
+    ).toBeTruthy();
 
     fireEvent.change(codexReportField, {
       target: { value: "Codex report ready for review" },
