@@ -223,14 +223,15 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.17` - AI Workspace Conductor Manual Flow State Copy Foundation
 * `MS-035.18` - AI Workspace Manual Workbench Boundary Status Foundation
 * `MS-035.19` - AI Workspace Manual Codex Window Header Clarity Foundation
+* `MS-035.20` - AI Workspace Conductor To Codex Handoff Boundary Copy Foundation
 
 ## Current
 
-Current Product Milestone: MS-035.19 - AI Workspace Manual Codex Window Header Clarity Foundation
-Latest Completed Product Milestone: MS-035.19 - AI Workspace Manual Codex Window Header Clarity Foundation
+Current Product Milestone: MS-035.20 - AI Workspace Conductor To Codex Handoff Boundary Copy Foundation
+Latest Completed Product Milestone: MS-035.20 - AI Workspace Conductor To Codex Handoff Boundary Copy Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
 
-## MS-035.19 - AI Workspace Manual Codex Window Header Clarity Foundation
+## MS-035.20 - AI Workspace Conductor To Codex Handoff Boundary Copy Foundation
 
 **Status**
 COMPLETED / VERIFIED LOCALLY
@@ -240,6 +241,51 @@ LOCAL ONLY / NOT COMMITTED
 
 **Milestone Status**
 COMPLETED / VERIFIED LOCALLY
+
+**Type**
+User-Facing UI Copy Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Clarify the boundary between left-side Konduktor guidance and the right-side manual Codex Window without adding execution behavior.
+
+**Implementation Result**
+AI Workspace now states near the Konduktor quick-action transition that Konduktor prepares the decision, recommendation, and handoff context, while Product Owner manually transfers the handoff to the right Codex window and manually returns the Codex report or publication report. The right handoff preview helper repeats the same boundary and states that this does not start Codex, automate execution, or persist report state.
+
+The guidance is read-only copy. Existing handoff, report textarea, copy, review, acceptance, and publication guidance behavior remains unchanged. It does not add workflow state, persistence, report parsing, automatic validation, automatic report generation, localStorage, Project Brain writes, API calls, Codex automation, runner behavior, execution bridge behavior, cross-project memory lookup, automatic commit/push behavior, a real state machine, or new stateful acceptance/checklist controls.
+
+**Version Gate**
+Required and applied locally. `src/lib/app-version.ts` records `APP_VERSION 1.0115` and `LAST_PUBLISHED_MS MS-035.20 - AI Workspace Conductor To Codex Handoff Boundary Copy Foundation`.
+
+**Boundary**
+MS-035.20 adds no API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, cross-project memory lookup implementation, report parser, automatic validation, persistence, automatic report generation, automatic commit/push behavior, Codex runner, automation, runner behavior, execution bridge behavior, real state machine / workflow state implementation, stateful acceptance/checklist controls, broad unrelated UI sections, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, checkout-removal behavior, package generator changes, or unrelated AI Workspace generation/save flow changes.
+
+**Verification Evidence**
+
+* `git status -sb` showed local MS-035.20 changes only.
+* `git diff --check` passed with standard LF -> CRLF warnings only.
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed `47 / 47`.
+* `npm test -- src/components/app-version-badge.test.tsx` passed `1 / 1`.
+* `git diff --stat` showed focused allowed-file changes only.
+
+## MS-035.19 - AI Workspace Manual Codex Window Header Clarity Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
 
 **Type**
 User-Facing UI Copy Milestone

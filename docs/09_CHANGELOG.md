@@ -69,6 +69,34 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 104 - MS-035.20 AI Workspace Conductor To Codex Handoff Boundary Copy Foundation
+
+### Version
+
+Local only / not committed
+
+### Date
+
+2026-09-17
+
+### Summary
+
+Clarified the handoff boundary between Konduktor guidance and the manual Codex Window.
+
+### Completed Work
+
+* Reworded the Konduktor transition helper to state that Konduktor prepares the decision, recommendation, and handoff context.
+* Clarified that Product Owner manually transfers the handoff to the right Codex window and manually returns the Codex report or publication report.
+* Updated the right handoff preview helper to state that this does not start Codex, automate execution, or persist report state.
+* Kept existing handoff, report textarea, copy, review, acceptance, and publication behavior unchanged.
+* Applied the local Visible Version Gate for `APP_VERSION 1.0115` and `LAST_PUBLISHED_MS MS-035.20 - AI Workspace Conductor To Codex Handoff Boundary Copy Foundation`.
+
+### Notes
+
+* Visible Version Gate is required because MS-035.20 changes user-facing AI Workspace UI/copy.
+* Verification passed with `git diff --check` with standard LF -> CRLF warnings only, `npm test -- src/app/projects/[id]/ai/page.test.tsx` at `47 / 47`, and `npm test -- src/components/app-version-badge.test.tsx` at `1 / 1`.
+* No workflow state, persistence, report parser, automatic validation, automatic report generation, automatic commit/push behavior, real state machine, stateful acceptance/checklist controls, API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, Codex runner, automation, runner behavior, execution bridge behavior, cross-project memory lookup implementation, broad unrelated UI sections, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, Project Map canonical artifacts, checkout-removal behavior, package generator scripts, or unrelated AI Workspace generation/save flows were changed.
+
 ## Session 104 - MS-035.19 AI Workspace Manual Codex Window Header Clarity Foundation
 
 ### Version

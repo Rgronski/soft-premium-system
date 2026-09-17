@@ -1199,8 +1199,10 @@ export default function ProjectAiWorkspacePage() {
                 <p>Ten status jest opisem granicy. Nie uruchamia automatyzacji, parsera, pamięci ani mostu wykonawczego.</p>
               </div>
               <p className="mt-3 text-sm text-zinc-300">
-                Szybkie akcje przygotowują lokalną instrukcję do rozmowy. Nie
-                wykonują milestone ani pracy Codexa.
+                Konduktor przygotowuje decyzję, rekomendację i kontekst
+                handoffu. Product Owner przenosi ten handoff ręcznie do prawego
+                okna Codexa i ręcznie zwraca raport Codexa lub raport
+                publikacji.
               </p>
               <div className="mt-3 flex flex-wrap items-center gap-3">
                 {CONDUCTOR_QUICK_ACTIONS.map((action) => (
@@ -1444,9 +1446,9 @@ export default function ProjectAiWorkspacePage() {
               <li>Skopiuj raport do przeglądu Chief Architect.</li>
             </ol>
             <pre className="mt-4 overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-6 text-zinc-200">
-              {`SPS OS przygotowuje kontekst projektu i blok przekazania do ręcznej pracy.
-Codex działa poza tym panelem; tutaj wraca tylko ręcznie wklejony raport.
-Poniższy handoff jest copy-ready i nie uruchamia zintegrowanego runnera.
+              {`Konduktor przygotowuje decyzję, rekomendację i kontekst handoffu.
+Product Owner ręcznie przenosi handoff do Codexa i ręcznie zwraca raport Codexa lub raport publikacji.
+To nie startuje Codexa, nie automatyzuje wykonania i nie utrwala stanu raportu.
 
 ${codexHandoffText}`}
             </pre>

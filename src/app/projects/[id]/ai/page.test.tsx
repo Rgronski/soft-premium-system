@@ -2961,7 +2961,7 @@ describe("ProjectAiWorkspacePage", () => {
     expect(screen.getByText("Gotowa instrukcja")).toBeTruthy();
     expect(
       screen.getByText(
-        "Dalej. Przejdź do następnego bezpiecznego kroku zgodnie z aktualnym milestone.",
+        "Konduktor przygotowuje decyzję, rekomendację i kontekst handoffu. Product Owner przenosi ten handoff ręcznie do prawego okna Codexa i ręcznie zwraca raport Codexa lub raport publikacji.",
       ),
     ).toBeTruthy();
     expect(screen.getByText("Manualne okno pracy Codexa")).toBeTruthy();
@@ -3071,9 +3071,14 @@ describe("ProjectAiWorkspacePage", () => {
         (content, element) =>
           element?.tagName === "PRE" &&
           content.includes(
-            "SPS OS przygotowuje kontekst projektu i blok przekazania do ręcznej pracy.",
+            "Konduktor przygotowuje decyzję, rekomendację i kontekst handoffu.",
           ) &&
-          content.includes("nie uruchamia zintegrowanego runnera"),
+          content.includes(
+            "Product Owner ręcznie przenosi handoff do Codexa i ręcznie zwraca raport Codexa lub raport publikacji.",
+          ) &&
+          content.includes(
+            "To nie startuje Codexa, nie automatyzuje wykonania i nie utrwala stanu raportu.",
+          ),
       ),
     ).toBeTruthy();
     const handoffTemplate = screen.getByText(
@@ -3085,10 +3090,10 @@ describe("ProjectAiWorkspacePage", () => {
 
     expect(handoffTemplate).toBeTruthy();
     expect(handoffTemplate.textContent).toContain(
-      "Codex działa poza tym panelem; tutaj wraca tylko ręcznie wklejony raport.",
+      "Product Owner ręcznie przenosi handoff do Codexa i ręcznie zwraca raport Codexa lub raport publikacji.",
     );
     expect(handoffTemplate.textContent).toContain(
-      "Poniższy handoff jest copy-ready i nie uruchamia zintegrowanego runnera.",
+      "To nie startuje Codexa, nie automatyzuje wykonania i nie utrwala stanu raportu.",
     );
     expect(handoffTemplate.textContent).toContain("Session Identity:");
     expect(handoffTemplate.textContent).toContain("- Previous Session ID:");

@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0114");
+    expect(APP_VERSION).toBe("1.0115");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-035.19 - AI Workspace Manual Codex Window Header Clarity Foundation",
+      "MS-035.20 - AI Workspace Conductor To Codex Handoff Boundary Copy Foundation",
     );
   });
 });
