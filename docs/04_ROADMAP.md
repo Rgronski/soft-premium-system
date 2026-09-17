@@ -217,12 +217,58 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.9` - Integrated Project Workbench Codex Window Contract Foundation
 * `MS-035.12` - AI Workspace Workbench Stage Guidance Foundation
 * `MS-035.13` - AI Workspace Codex Report Review Guidance Foundation
+* `MS-035.14` - AI Workspace Codex Report Acceptance Guidance Foundation
 
 ## Current
 
-Current Product Milestone: MS-035.13 - AI Workspace Codex Report Review Guidance Foundation
-Latest Completed Product Milestone: MS-035.13 - AI Workspace Codex Report Review Guidance Foundation
+Current Product Milestone: MS-035.14 - AI Workspace Codex Report Acceptance Guidance Foundation
+Latest Completed Product Milestone: MS-035.14 - AI Workspace Codex Report Acceptance Guidance Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-035.14 - AI Workspace Codex Report Acceptance Guidance Foundation
+
+**Status**
+COMPLETED / VERIFIED LOCALLY
+
+**Publication Status**
+LOCAL ONLY / NOT COMMITTED
+
+**Milestone Status**
+COMPLETED / VERIFIED LOCALLY
+
+**Type**
+User-Facing UI Copy Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Explain the manual acceptance boundary after a pasted Codex report is reviewed positively, without adding acceptance state, persistence, automation, or commit/push behavior.
+
+**Implementation Result**
+AI Workspace now shows a compact `Akceptacja raportu` guidance block near `Przegląd raportu` and `Odpowiedź Codexa / Raport Codexa`. It explains that Product Owner may accept the local result after positive review, acceptance does not automatically commit or push, commit/push remains a separate explicit handoff or action, and unresolved blockers/deviations stop publication.
+
+The guidance is read-only copy. It does not add acceptance controls, hidden state, report parsing, persistence, localStorage, Project Brain writes, API calls, automatic validation, automatic commit/push, Codex automation, execution bridge behavior, cross-project memory lookup, or Codex runner behavior.
+
+**Version Gate**
+Required and applied locally. `src/lib/app-version.ts` records `APP_VERSION 1.0109` and `LAST_PUBLISHED_MS MS-035.14 - AI Workspace Codex Report Acceptance Guidance Foundation`.
+
+**Boundary**
+MS-035.14 adds no API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, report parser, automatic validation, persistence, automatic commit/push behavior, Codex runner, automation, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, checkout-removal behavior, package generator changes, or unrelated AI Workspace generation/save flow changes.
+
+**Verification Evidence**
+
+* `git status -sb` showed local MS-035.14 changes only.
+* `git diff --check` passed with standard LF -> CRLF warnings only.
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed `47 / 47`.
+* `npm test -- src/components/app-version-badge.test.tsx` passed `1 / 1`.
+* `git diff --stat` showed `9 files changed, 119 insertions(+), 18 deletions(-)`.
 
 ## MS-035.13 - AI Workspace Codex Report Review Guidance Foundation
 

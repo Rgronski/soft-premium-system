@@ -3267,6 +3267,23 @@ describe("ProjectAiWorkspacePage", () => {
         "Ten blok jest tylko listą kontrolną: SPS OS nie parsuje, nie zapisuje i nie waliduje raportu automatycznie.",
       ),
     ).toBeTruthy();
+    expect(screen.getByText("Akceptacja raportu")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Po pozytywnym przeglądzie Product Owner może zaakceptować lokalny wynik.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Akceptacja raportu nie wykonuje automatycznie commit ani push.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Commit/push pozostaje osobnym, jawnym handoffem albo akcją."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Nierozwiązane blockers/deviations zatrzymują publikację."),
+    ).toBeTruthy();
 
     fireEvent.change(codexReportField, {
       target: { value: "Codex report ready for review" },
