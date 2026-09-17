@@ -254,6 +254,41 @@ Konduktor guidance is advisory until Product Owner approval and manual Codex lau
 
 The contract does not authorize automatic execution, background work, model/provider calls, endpoint changes, canonical Project Map writes, delete/detach/reconnect behavior, checkout-removal changes, or filesystem changes.
 
+## Integrated Project Workbench Codex Window Contract
+
+MS-035.9 records the target project workbench model for AI Workspace before any automated execution or provider integration is authorized.
+
+The target one-page workbench has two coordinated sides:
+
+* left side: Chief Architect conversation, Konduktor guidance, and Project Brain context,
+* right side: Codex Window for implementation handoff, result return, and future governed execution visibility.
+
+The current implementation is a manual stage. Product Owner copies the handoff from the right panel, pastes it into external Codex, pastes the Codex report back into the right panel, and copies the report for Chief Architect review.
+
+The future implementation may become controlled integration only after separate architecture, safety, and Product Owner approval.
+
+### Workbench Roles
+
+* Product Owner approves scope, repository actions, publication, and future execution bridge activation.
+* Chief Architect owns diagnosis, contracts, review, and architectural consistency.
+* Konduktor recommends the next safe action from governed project signals.
+* Project Brain remains the project knowledge and context authority.
+* Codex implements approved work and returns a report; it does not decide scope.
+
+### Integration Stages
+
+1. Manual Codex Window.
+2. Local report handling.
+3. Read-only execution status/history.
+4. Controlled Codex runner contract.
+5. Real execution bridge only after separate approval.
+
+### Cross-Project Memory Boundary
+
+Global cross-project operational memory is a separate future contract candidate.
+
+MS-035.9 does not implement or authorize cross-project memory, Project Brain storage changes, new APIs, automation, provider/model configuration, Codex runner behavior, or execution bridge behavior.
+
 ## Role Alignment
 
 This contract remains aligned with current workflow roles:

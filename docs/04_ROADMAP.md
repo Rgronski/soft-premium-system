@@ -218,10 +218,10 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-035.7 - AI Workspace Handoff Copy Polish Foundation
+Latest Completed Product Milestone: MS-035.8 - AI Workspace Manual Codex Window Roundtrip Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
 
-## MS-035.8 - AI Workspace Manual Codex Window Roundtrip Foundation
+## MS-035.9 - Integrated Project Workbench Codex Window Contract Foundation
 
 **Status**
 IMPLEMENTED / VERIFIED LOCALLY
@@ -231,6 +231,52 @@ LOCAL ONLY / NOT COMMITTED / NOT PUSHED
 
 **Milestone Status**
 IMPLEMENTED / VERIFIED LOCALLY / PRODUCT OWNER ACCEPTANCE PENDING
+
+**Type**
+Docs / Architecture Contract Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Record the target SPS OS project workbench model before any deeper workflow execution work starts: Chief Architect / Konduktor / Project Brain context on the left, and a Codex work window on the right.
+
+**Contract Result**
+MS-035.9 defines AI Workspace as the transitional one-page project workbench. The current stage remains manual copy/paste: Product Owner copies the Codex handoff, uses external Codex, pastes the report back into the right-side Codex window, and returns it for Chief Architect review. The future stage may become a controlled integration only after separate architecture and safety approvals.
+
+The contract defines the roles of Product Owner, Chief Architect, Konduktor, Project Brain, and Codex; records the right panel as the future Codex Window; and defines the integration stages as manual Codex window, local report handling, read-only execution status/history, controlled Codex runner contract, and real execution bridge only after separate approval.
+
+Cross-project operational memory is recorded as a separate future contract candidate. It is not implemented or authorized by MS-035.9.
+
+**Version Gate**
+Not applicable. MS-035.9 is docs-only and has no app-facing runtime, UI, visible copy, or version badge change.
+
+**Boundary**
+MS-035.9 adds no source/runtime changes, UI changes, API routes, provider/model configuration, automation, Codex runner, execution bridge, Project Brain storage/write behavior, cross-project memory implementation, checkout-removal behavior, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, package generator changes, or Project Map canonical changes.
+
+**Verification Plan**
+
+* `git status -sb`
+* `git diff --check`
+* `rg -n "MS-035.9|Integrated Project Workbench|Codex Window|cross-project operational memory|Current Product Milestone|Latest Completed Product Milestone" docs/04_ROADMAP.md docs/08_CURRENT_STATE.md docs/09_CHANGELOG.md docs/10_SESSION_STATE.md docs/ai-workflow/AI_WORKSPACE_ENGINE_CONTRACT.md docs/ai-workflow/WORKFLOW.md docs/ai-workflow/WORKFLOW_API_CONTRACT.md`
+* `git diff --stat`
+
+## MS-035.8 - AI Workspace Manual Codex Window Roundtrip Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
 
 **Type**
 User-Facing UI Copy Milestone
@@ -251,6 +297,8 @@ Make the right-side AI Workspace Codex panel work as one manual roundtrip window
 AI Workspace keeps the existing copy-ready handoff preview and `Kopiuj handoff` action. The same right panel now includes a local-only `Odpowiedź Codexa / Raport Codexa` textarea, a `Kopiuj raport` action, and helper copy for the manual loop: copy handoff, paste into external Codex, paste the Codex report back into SPS OS, then copy it to Chief Architect review.
 
 The pasted Codex report is local React state only. It is not persisted to Project Brain, Knowledge, localStorage, server state, URL state, or any API.
+
+Publication commit: `2aa761e111ddda485c977d3ba594fafd9e2952cb feat: add manual codex report roundtrip panel`.
 
 **Version Gate**
 Required and applied locally. `src/lib/app-version.ts` now records `APP_VERSION 1.0105` and `LAST_PUBLISHED_MS MS-035.8 - AI Workspace Manual Codex Window Roundtrip Foundation`; the focused app-version badge test passed.

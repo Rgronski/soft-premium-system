@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 103 - MS-035.9 Integrated Project Workbench Codex Window Contract Foundation
+
+### Version
+
+Implementation local
+
+### Date
+
+2026-09-17
+
+### Summary
+
+Recorded the docs-only contract for the target SPS OS integrated project workbench and future Codex Window boundary.
+
+### Completed Work
+
+* Defined the target workbench model with Chief Architect / Konduktor / Project Brain workspace on the left and Codex Window on the right.
+* Recorded the current manual stage and future controlled integration stages.
+* Defined the roles of Product Owner, Chief Architect, Konduktor, Project Brain, and Codex.
+* Recorded cross-project operational memory as a separate future contract candidate, outside MS-035.9 scope.
+* Preserved `Current Product Milestone` as `NONE / Product Owner decision required` and kept the latest completed milestone aligned with `MS-035.8 - AI Workspace Manual Codex Window Roundtrip Foundation`.
+
+### Notes
+
+* Visible Version Gate is not applicable because MS-035.9 is docs-only and has no app-facing runtime, UI, visible copy, or version badge change.
+* No `src/**` files, automation, Codex runner, API route, provider/model configuration, Project Brain storage/write behavior, cross-project memory implementation, checkout-removal behavior, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, package generator scripts, or Project Map canonical artifacts were changed.
+
 ## Session 103 - MS-035.8 AI Workspace Manual Codex Window Roundtrip Foundation
 
 ### Version

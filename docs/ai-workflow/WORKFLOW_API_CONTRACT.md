@@ -239,3 +239,13 @@ The user can inspect future candidate work separately from accepted milestone ex
 This contract exists to automate process coordination, state visibility, and workflow continuity.
 
 It does not authorize SPS, ENG-000, Codex, or any automation layer to make architectural decisions outside approved workflow governance.
+
+## Integrated Project Workbench Boundary
+
+MS-035.9 records the integrated project workbench direction as a process and architecture contract only.
+
+The right-side Codex Window is currently manual and local: it may carry copied handoff text and pasted Codex report text, but it does not call providers, create jobs, run Codex, persist reports, or write Project Brain state.
+
+Any future controlled Codex runner, execution status/history, API route, provider/model configuration, or real execution bridge requires a separate approved contract and milestone.
+
+Global cross-project operational memory is also a separate future contract candidate and is not implemented by this workflow API contract.
