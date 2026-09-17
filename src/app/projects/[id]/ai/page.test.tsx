@@ -3246,6 +3246,27 @@ describe("ProjectAiWorkspacePage", () => {
         "Pole jest lokalne: SPS OS nie zapisuje, nie analizuje i nie wysyła tej treści do API.",
       ),
     ).toBeTruthy();
+    expect(screen.getByText("Przegląd raportu")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Sprawdź, czy wykonany zakres zgadza się z zaakceptowanym handoffem.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Potwierdź wyniki weryfikacji i Visible Version Gate, jeśli był wymagany.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Porównaj forbidden areas, blockers/deviations oraz status commit/push.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Ten blok jest tylko listą kontrolną: SPS OS nie parsuje, nie zapisuje i nie waliduje raportu automatycznie.",
+      ),
+    ).toBeTruthy();
 
     fireEvent.change(codexReportField, {
       target: { value: "Codex report ready for review" },

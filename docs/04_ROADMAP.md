@@ -216,12 +216,58 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.8` - AI Workspace Manual Codex Window Roundtrip Foundation
 * `MS-035.9` - Integrated Project Workbench Codex Window Contract Foundation
 * `MS-035.12` - AI Workspace Workbench Stage Guidance Foundation
+* `MS-035.13` - AI Workspace Codex Report Review Guidance Foundation
 
 ## Current
 
-Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-035.12 - AI Workspace Workbench Stage Guidance Foundation
+Current Product Milestone: MS-035.13 - AI Workspace Codex Report Review Guidance Foundation
+Latest Completed Product Milestone: MS-035.13 - AI Workspace Codex Report Review Guidance Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-035.13 - AI Workspace Codex Report Review Guidance Foundation
+
+**Status**
+COMPLETED / VERIFIED LOCALLY
+
+**Publication Status**
+LOCAL ONLY / NOT COMMITTED
+
+**Milestone Status**
+COMPLETED / VERIFIED LOCALLY
+
+**Type**
+User-Facing UI Copy Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Help Product Owner / Chief Architect manually review a pasted Codex report after the right-side Codex roundtrip without parsing, storing, validating, or executing the report.
+
+**Implementation Result**
+AI Workspace now shows a compact `Przegląd raportu` checklist near `Odpowiedź Codexa / Raport Codexa`. It reminds the reviewer to check scope match, verification results, Visible Version Gate when required, forbidden areas, blockers/deviations, and commit/push status.
+
+The guidance is read-only copy. It does not parse reports, persist data, use localStorage, write Project Brain, call APIs, validate automatically, automate Codex, execute work, query cross-project memory, or activate a Codex runner / execution bridge.
+
+**Version Gate**
+Required and applied locally. `src/lib/app-version.ts` records `APP_VERSION 1.0108` and `LAST_PUBLISHED_MS MS-035.13 - AI Workspace Codex Report Review Guidance Foundation`.
+
+**Boundary**
+MS-035.13 adds no API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, report parser, automatic validation, Codex runner, automation, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, checkout-removal behavior, package generator changes, or unrelated AI Workspace generation/save flow changes.
+
+**Verification Evidence**
+
+* `git status -sb` showed local MS-035.13 changes only.
+* `git diff --check` passed with standard LF -> CRLF warnings only.
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed `47 / 47`.
+* `npm test -- src/components/app-version-badge.test.tsx` passed `1 / 1`.
+* `git diff --stat` showed `9 files changed, 121 insertions(+), 18 deletions(-)`.
 
 ## MS-035.12 - AI Workspace Workbench Stage Guidance Foundation
 

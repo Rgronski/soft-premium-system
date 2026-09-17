@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 104 - MS-035.13 AI Workspace Codex Report Review Guidance Foundation
+
+### Version
+
+Local only / not committed
+
+### Date
+
+2026-09-17
+
+### Summary
+
+Added read-only AI Workspace guidance for manually reviewing pasted Codex reports.
+
+### Completed Work
+
+* Added a compact `Przegląd raportu` checklist near `Odpowiedź Codexa / Raport Codexa`.
+* Reminded Product Owner / Chief Architect to check scope match, verification, Visible Version Gate when needed, forbidden areas, blockers/deviations, and commit/push status.
+* Kept the existing report textarea and manual copy/paste roundtrip unchanged.
+* Applied the local Visible Version Gate for `APP_VERSION 1.0108` and `LAST_PUBLISHED_MS MS-035.13 - AI Workspace Codex Report Review Guidance Foundation`.
+
+### Notes
+
+* Visible Version Gate is required because MS-035.13 changes user-facing AI Workspace UI/copy.
+* Verification passed with `git diff --check` with standard LF -> CRLF warnings only, `npm test -- src/app/projects/[id]/ai/page.test.tsx` at `47 / 47`, and `npm test -- src/components/app-version-badge.test.tsx` at `1 / 1`.
+* No report parser, automatic validation, API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, Codex runner, automation, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, Project Map canonical artifacts, checkout-removal behavior, package generator scripts, or unrelated AI Workspace generation/save flows were changed.
+
 ## Session 104 - MS-035.12 AI Workspace Workbench Stage Guidance Foundation
 
 ### Version

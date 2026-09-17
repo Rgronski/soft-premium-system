@@ -1484,6 +1484,13 @@ ${codexHandoffText}`}
                 </p>
               </div>
             </div>
+            <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-5 text-zinc-400">
+              <p className="font-medium text-zinc-300">Przegląd raportu</p>
+              <p>Sprawdź, czy wykonany zakres zgadza się z zaakceptowanym handoffem.</p>
+              <p>Potwierdź wyniki weryfikacji i Visible Version Gate, jeśli był wymagany.</p>
+              <p>Porównaj forbidden areas, blockers/deviations oraz status commit/push.</p>
+              <p>Ten blok jest tylko listą kontrolną: SPS OS nie parsuje, nie zapisuje i nie waliduje raportu automatycznie.</p>
+            </div>
           </div>
         </div>
       </div>
