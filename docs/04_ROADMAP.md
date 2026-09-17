@@ -221,14 +221,15 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.15` - AI Workspace Publication Report Return Guidance Foundation
 * `MS-035.16` - AI Workspace Manual Codex Flow Summary Foundation
 * `MS-035.17` - AI Workspace Conductor Manual Flow State Copy Foundation
+* `MS-035.18` - AI Workspace Manual Workbench Boundary Status Foundation
 
 ## Current
 
-Current Product Milestone: MS-035.17 - AI Workspace Conductor Manual Flow State Copy Foundation
-Latest Completed Product Milestone: MS-035.17 - AI Workspace Conductor Manual Flow State Copy Foundation
+Current Product Milestone: MS-035.18 - AI Workspace Manual Workbench Boundary Status Foundation
+Latest Completed Product Milestone: MS-035.18 - AI Workspace Manual Workbench Boundary Status Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
 
-## MS-035.17 - AI Workspace Conductor Manual Flow State Copy Foundation
+## MS-035.18 - AI Workspace Manual Workbench Boundary Status Foundation
 
 **Status**
 COMPLETED / VERIFIED LOCALLY
@@ -238,6 +239,51 @@ LOCAL ONLY / NOT COMMITTED
 
 **Milestone Status**
 COMPLETED / VERIFIED LOCALLY
+
+**Type**
+User-Facing UI Copy Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Clarify the active manual AI Workspace workbench boundary and separate it from future inactive execution, parsing, persistence, and memory capabilities.
+
+**Implementation Result**
+AI Workspace now shows a compact `Status granicy workbencha` copy block in the left Konduktor / manual flow area. It states that the currently active boundary is manual copy/paste, manual Codex report return, and Chief Architect / Product Owner review. It also states that Codex runner, execution bridge, report parser, persistence, and cross-project memory lookup remain future and inactive.
+
+The guidance is read-only copy. It does not add workflow state, persistence, report parsing, automatic validation, automatic report generation, localStorage, Project Brain writes, API calls, Codex automation, execution bridge behavior, cross-project memory lookup, automatic commit/push behavior, a real state machine, or new stateful acceptance/checklist controls.
+
+**Version Gate**
+Required and applied locally. `src/lib/app-version.ts` records `APP_VERSION 1.0113` and `LAST_PUBLISHED_MS MS-035.18 - AI Workspace Manual Workbench Boundary Status Foundation`.
+
+**Boundary**
+MS-035.18 adds no API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, cross-project memory lookup implementation, report parser, automatic validation, persistence, automatic report generation, automatic commit/push behavior, Codex runner, automation, real state machine / workflow state implementation, stateful acceptance/checklist controls, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, checkout-removal behavior, package generator changes, or unrelated AI Workspace generation/save flow changes.
+
+**Verification Evidence**
+
+* `git status -sb` showed local MS-035.18 changes only.
+* `git diff --check` passed with standard LF -> CRLF warnings only.
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed `47 / 47`.
+* `npm test -- src/components/app-version-badge.test.tsx` passed `1 / 1`.
+* `git diff --stat` showed focused allowed-file changes only.
+
+## MS-035.17 - AI Workspace Conductor Manual Flow State Copy Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
 
 **Type**
 User-Facing UI Copy Milestone

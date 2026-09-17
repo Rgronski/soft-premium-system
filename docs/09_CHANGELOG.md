@@ -69,6 +69,34 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 104 - MS-035.18 AI Workspace Manual Workbench Boundary Status Foundation
+
+### Version
+
+Local only / not committed
+
+### Date
+
+2026-09-17
+
+### Summary
+
+Added read-only AI Workspace boundary status copy for the manual workbench.
+
+### Completed Work
+
+* Added a compact `Status granicy workbencha` copy block in the left Konduktor / manual flow area.
+* Clarified that manual copy/paste, manual Codex report return, and Chief Architect / Product Owner review are active now.
+* Clarified that Codex runner, execution bridge, report parser, persistence, and cross-project memory lookup are future and inactive.
+* Kept the existing left and right panel behavior unchanged.
+* Applied the local Visible Version Gate for `APP_VERSION 1.0113` and `LAST_PUBLISHED_MS MS-035.18 - AI Workspace Manual Workbench Boundary Status Foundation`.
+
+### Notes
+
+* Visible Version Gate is required because MS-035.18 changes user-facing AI Workspace UI/copy.
+* Verification passed with `git diff --check` with standard LF -> CRLF warnings only, `npm test -- src/app/projects/[id]/ai/page.test.tsx` at `47 / 47`, and `npm test -- src/components/app-version-badge.test.tsx` at `1 / 1`.
+* No workflow state, persistence, report parser, automatic validation, automatic report generation, automatic commit/push behavior, real state machine, stateful acceptance/checklist controls, API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, Codex runner, automation, execution bridge behavior, cross-project memory lookup implementation, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, Project Map canonical artifacts, checkout-removal behavior, package generator scripts, or unrelated AI Workspace generation/save flows were changed.
+
 ## Session 104 - MS-035.17 AI Workspace Conductor Manual Flow State Copy Foundation
 
 ### Version

@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0112");
+    expect(APP_VERSION).toBe("1.0113");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-035.17 - AI Workspace Conductor Manual Flow State Copy Foundation",
+      "MS-035.18 - AI Workspace Manual Workbench Boundary Status Foundation",
     );
   });
 });

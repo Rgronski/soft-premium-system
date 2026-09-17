@@ -2934,6 +2934,22 @@ describe("ProjectAiWorkspacePage", () => {
         "Po raporcie publikacji: Konduktor domyka ręczny roundtrip bez tworzenia state machine.",
       ),
     ).toBeTruthy();
+    expect(screen.getByText("Status granicy workbencha")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Aktywne teraz: ręczne copy/paste, ręczny zwrot raportu Codexa oraz przegląd Chief Architect / Product Owner.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Przyszłe i nieaktywne: Codex runner, execution bridge, parser raportu, persistence oraz cross-project memory lookup.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Ten status jest opisem granicy. Nie uruchamia automatyzacji, parsera, pamięci ani mostu wykonawczego.",
+      ),
+    ).toBeTruthy();
     expect(screen.getByRole("button", { name: "Dalej" })).toBeTruthy();
     expect(screen.getByRole("button", { name: "Akceptuję" })).toBeTruthy();
     expect(

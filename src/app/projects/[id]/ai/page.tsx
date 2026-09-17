@@ -1190,6 +1190,14 @@ export default function ProjectAiWorkspacePage() {
                 <p>Po lokalnej akceptacji: Konduktor przypomina, że publikacja wymaga osobnej decyzji.</p>
                 <p>Po raporcie publikacji: Konduktor domyka ręczny roundtrip bez tworzenia state machine.</p>
               </div>
+              <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-5 text-zinc-400">
+                <p className="font-medium text-zinc-300">
+                  Status granicy workbencha
+                </p>
+                <p>Aktywne teraz: ręczne copy/paste, ręczny zwrot raportu Codexa oraz przegląd Chief Architect / Product Owner.</p>
+                <p>Przyszłe i nieaktywne: Codex runner, execution bridge, parser raportu, persistence oraz cross-project memory lookup.</p>
+                <p>Ten status jest opisem granicy. Nie uruchamia automatyzacji, parsera, pamięci ani mostu wykonawczego.</p>
+              </div>
               <p className="mt-3 text-sm text-zinc-300">
                 Szybkie akcje przygotowują lokalną instrukcję do rozmowy. Nie
                 wykonują milestone ani pracy Codexa.
