@@ -215,12 +215,58 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.7` - AI Workspace Handoff Copy Polish Foundation
 * `MS-035.8` - AI Workspace Manual Codex Window Roundtrip Foundation
 * `MS-035.9` - Integrated Project Workbench Codex Window Contract Foundation
+* `MS-035.12` - AI Workspace Workbench Stage Guidance Foundation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-035.11 - AI Workspace Integrated Workbench Contract Visibility Foundation
+Latest Completed Product Milestone: MS-035.12 - AI Workspace Workbench Stage Guidance Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-035.12 - AI Workspace Workbench Stage Guidance Foundation
+
+**Status**
+COMPLETED / VERIFIED LOCALLY
+
+**Publication Status**
+LOCAL ONLY / NOT COMMITTED
+
+**Milestone Status**
+COMPLETED / VERIFIED LOCALLY
+
+**Type**
+User-Facing UI Copy Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Show what comes next in the AI Workspace workbench based on the current manual workbench stage, while keeping the guidance read-only, non-executing, and separate from any future governed activation.
+
+**Implementation Result**
+AI Workspace now shows a compact `Wskazówka etapu` card inside `Model pracy AI`. It clarifies that the current stage is manual handoff and Codex report roundtrip, says Konduktor may point to the next workbench step without starting work, and names the next governed stage as a separately approved Codex Window stage.
+
+The guidance does not call APIs, persist data, use localStorage, write Project Brain, automate Codex, execute work, query cross-project memory, or activate a Codex runner / execution bridge.
+
+**Version Gate**
+Required and applied locally. `src/lib/app-version.ts` records `APP_VERSION 1.0107` and `LAST_PUBLISHED_MS MS-035.12 - AI Workspace Workbench Stage Guidance Foundation`.
+
+**Boundary**
+MS-035.12 adds no API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, Codex runner, automation, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, checkout-removal behavior, package generator changes, or unrelated AI Workspace generation/save flow changes.
+
+**Verification Evidence**
+
+* `git status -sb` showed local MS-035.12 changes only.
+* `git diff --check` passed with standard LF -> CRLF warnings only.
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed `47 / 47`.
+* `npm test -- src/components/app-version-badge.test.tsx` passed `1 / 1`.
+* `git diff --stat` showed `9 files changed, 128 insertions(+), 23 deletions(-)`.
 
 ## MS-035.11 - AI Workspace Integrated Workbench Contract Visibility Foundation
 

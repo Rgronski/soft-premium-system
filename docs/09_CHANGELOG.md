@@ -69,6 +69,34 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 104 - MS-035.12 AI Workspace Workbench Stage Guidance Foundation
+
+### Version
+
+Local only / not committed
+
+### Date
+
+2026-09-17
+
+### Summary
+
+Added read-only AI Workspace guidance for the current manual workbench stage and the next governed stage.
+
+### Completed Work
+
+* Added a compact `Wskazówka etapu` card inside `Model pracy AI`.
+* Clarified the current stage as manual handoff and Codex report roundtrip.
+* Stated that Konduktor points to the next workbench step without starting work.
+* Pointed to a separately approved governed Codex Window stage without activating it.
+* Applied the local Visible Version Gate for `APP_VERSION 1.0107` and `LAST_PUBLISHED_MS MS-035.12 - AI Workspace Workbench Stage Guidance Foundation`.
+
+### Notes
+
+* Visible Version Gate is required because MS-035.12 changes user-facing AI Workspace UI/copy.
+* Verification passed with `git diff --check` with standard LF -> CRLF warnings only, `npm test -- src/app/projects/[id]/ai/page.test.tsx` at `47 / 47`, and `npm test -- src/components/app-version-badge.test.tsx` at `1 / 1`.
+* No API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, Codex runner, automation, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, Project Map canonical artifacts, checkout-removal behavior, package generator scripts, or unrelated AI Workspace generation/save flows were changed.
+
 ## Session 103 - MS-035.11 AI Workspace Integrated Workbench Contract Visibility Foundation
 
 ### Version

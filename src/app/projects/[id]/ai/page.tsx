@@ -1028,7 +1028,7 @@ export default function ProjectAiWorkspacePage() {
               odpowiedzi.
             </p>
           </div>
-          <div className="mt-4 grid gap-3 lg:grid-cols-3">
+          <div className="mt-4 grid gap-3 lg:grid-cols-4">
             <div className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3">
               <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
                 Status kontraktu workbench
@@ -1056,6 +1056,21 @@ export default function ProjectAiWorkspacePage() {
               <p className="mt-1 text-xs leading-5 text-zinc-400">
                 Codex runner / execution bridge: przyszły etap zarządzany,
                 teraz nieaktywny.
+              </p>
+            </div>
+            <div className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3">
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                Wskazówka etapu
+              </p>
+              <p className="mt-2 text-sm font-semibold text-zinc-100">
+                Teraz: manualny handoff i raport Codexa.
+              </p>
+              <p className="mt-2 text-xs leading-5 text-zinc-400">
+                Konduktor wskazuje następny krok w workbench bez uruchamiania
+                pracy.
+              </p>
+              <p className="mt-1 text-xs leading-5 text-zinc-400">
+                Dalej: osobno zatwierdzony, zarządzany etap Codex Window.
               </p>
             </div>
             <div className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3">

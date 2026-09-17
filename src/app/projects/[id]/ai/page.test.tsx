@@ -2874,6 +2874,20 @@ describe("ProjectAiWorkspacePage", () => {
         "Codex runner / execution bridge: przyszły etap zarządzany, teraz nieaktywny.",
       ),
     ).toBeTruthy();
+    expect(screen.getByText("Wskazówka etapu")).toBeTruthy();
+    expect(
+      screen.getByText("Teraz: manualny handoff i raport Codexa."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Konduktor wskazuje następny krok w workbench bez uruchamiania pracy.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Dalej: osobno zatwierdzony, zarządzany etap Codex Window.",
+      ),
+    ).toBeTruthy();
     expect(screen.getByText("Pamięć operacyjna")).toBeTruthy();
     expect(
       screen.getByText(
