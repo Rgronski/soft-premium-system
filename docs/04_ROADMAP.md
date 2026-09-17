@@ -219,12 +219,58 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.13` - AI Workspace Codex Report Review Guidance Foundation
 * `MS-035.14` - AI Workspace Codex Report Acceptance Guidance Foundation
 * `MS-035.15` - AI Workspace Publication Report Return Guidance Foundation
+* `MS-035.16` - AI Workspace Manual Codex Flow Summary Foundation
 
 ## Current
 
-Current Product Milestone: MS-035.15 - AI Workspace Publication Report Return Guidance Foundation
-Latest Completed Product Milestone: MS-035.15 - AI Workspace Publication Report Return Guidance Foundation
+Current Product Milestone: MS-035.16 - AI Workspace Manual Codex Flow Summary Foundation
+Latest Completed Product Milestone: MS-035.16 - AI Workspace Manual Codex Flow Summary Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-035.16 - AI Workspace Manual Codex Flow Summary Foundation
+
+**Status**
+COMPLETED / VERIFIED LOCALLY
+
+**Publication Status**
+LOCAL ONLY / NOT COMMITTED
+
+**Milestone Status**
+COMPLETED / VERIFIED LOCALLY
+
+**Type**
+User-Facing UI Copy Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Show the existing manual Codex flow as one readable process for Product Owner without adding workflow state, persistence, automation, or new behavior.
+
+**Implementation Result**
+AI Workspace now shows a compact `Manualny przepływ Codexa` summary in the right Codex panel: `Przygotuj handoff -> Wklej do Codexa -> Wklej raport -> Przejrzyj -> Zaakceptuj -> Opublikuj -> Zwróć raport publikacji`. It states that this is only a process summary and that SPS OS does not add state or automation.
+
+The guidance is read-only copy. It does not add workflow state, checklist persistence, report parsing, automatic validation, automatic report generation, localStorage, Project Brain writes, API calls, Codex automation, execution bridge behavior, cross-project memory lookup, automatic commit/push behavior, or new stateful acceptance/checklist controls.
+
+**Version Gate**
+Required and applied locally. `src/lib/app-version.ts` records `APP_VERSION 1.0111` and `LAST_PUBLISHED_MS MS-035.16 - AI Workspace Manual Codex Flow Summary Foundation`.
+
+**Boundary**
+MS-035.16 adds no API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, report parser, automatic validation, persistence, automatic report generation, automatic commit/push behavior, Codex runner, automation, stateful acceptance/checklist controls, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, checkout-removal behavior, package generator changes, or unrelated AI Workspace generation/save flow changes.
+
+**Verification Evidence**
+
+* `git status -sb` showed local MS-035.16 changes only.
+* `git diff --check` passed with standard LF -> CRLF warnings only.
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed `47 / 47`.
+* `npm test -- src/components/app-version-badge.test.tsx` passed `1 / 1`.
+* `git diff --stat` showed `9 files changed, 114 insertions(+), 18 deletions(-)`.
 
 ## MS-035.15 - AI Workspace Publication Report Return Guidance Foundation
 

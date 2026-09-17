@@ -3235,6 +3235,17 @@ describe("ProjectAiWorkspacePage", () => {
       name: "Odpowiedź Codexa / Raport Codexa",
     });
 
+    expect(screen.getByText("Manualny przepływ Codexa")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Przygotuj handoff -> Wklej do Codexa -> Wklej raport -> Przejrzyj -> Zaakceptuj -> Opublikuj -> Zwróć raport publikacji.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "To podsumowanie procesu: SPS OS nie dodaje stanu ani automatyzacji.",
+      ),
+    ).toBeTruthy();
     expect(screen.getByText("Skopiuj handoff.")).toBeTruthy();
     expect(screen.getByText("Wklej go do zewnętrznego Codexa.")).toBeTruthy();
     expect(screen.getByText("Wklej raport Codexa z powrotem tutaj.")).toBeTruthy();

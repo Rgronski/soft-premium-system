@@ -69,6 +69,34 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 104 - MS-035.16 AI Workspace Manual Codex Flow Summary Foundation
+
+### Version
+
+Local only / not committed
+
+### Date
+
+2026-09-17
+
+### Summary
+
+Added a read-only AI Workspace summary of the manual Codex flow.
+
+### Completed Work
+
+* Added a compact `Manualny przepływ Codexa` summary in the right Codex panel.
+* Summarized the process as `Przygotuj handoff -> Wklej do Codexa -> Wklej raport -> Przejrzyj -> Zaakceptuj -> Opublikuj -> Zwróć raport publikacji`.
+* Clarified that SPS OS does not add process state or automation.
+* Kept existing textarea/copy behavior unchanged.
+* Applied the local Visible Version Gate for `APP_VERSION 1.0111` and `LAST_PUBLISHED_MS MS-035.16 - AI Workspace Manual Codex Flow Summary Foundation`.
+
+### Notes
+
+* Visible Version Gate is required because MS-035.16 changes user-facing AI Workspace UI/copy.
+* Verification passed with `git diff --check` with standard LF -> CRLF warnings only, `npm test -- src/app/projects/[id]/ai/page.test.tsx` at `47 / 47`, and `npm test -- src/components/app-version-badge.test.tsx` at `1 / 1`.
+* No workflow state, checklist persistence, report parser, automatic validation, persistence, automatic report generation, automatic commit/push behavior, stateful acceptance/checklist controls, API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, Codex runner, automation, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, Project Map canonical artifacts, checkout-removal behavior, package generator scripts, or unrelated AI Workspace generation/save flows were changed.
+
 ## Session 104 - MS-035.15 AI Workspace Publication Report Return Guidance Foundation
 
 ### Version

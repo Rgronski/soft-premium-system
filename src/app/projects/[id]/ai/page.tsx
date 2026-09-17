@@ -1409,6 +1409,15 @@ export default function ProjectAiWorkspacePage() {
               Skopiuj przygotowany handoff, wklej go do Codexa i wróć tutaj z
               wynikiem wykonania.
             </p>
+            <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-5 text-zinc-400">
+              <p className="font-medium text-zinc-300">Manualny przepływ Codexa</p>
+              <p>
+                Przygotuj handoff -&gt; Wklej do Codexa -&gt; Wklej raport -&gt;
+                Przejrzyj -&gt; Zaakceptuj -&gt; Opublikuj -&gt; Zwróć raport
+                publikacji.
+              </p>
+              <p>To podsumowanie procesu: SPS OS nie dodaje stanu ani automatyzacji.</p>
+            </div>
             <ol className="mt-3 list-decimal space-y-1 pl-5 text-xs leading-5 text-zinc-500">
               <li>Skopiuj handoff.</li>
               <li>Wklej go do zewnętrznego Codexa.</li>
