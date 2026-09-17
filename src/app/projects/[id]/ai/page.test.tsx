@@ -2964,11 +2964,11 @@ describe("ProjectAiWorkspacePage", () => {
         "Dalej. Przejdź do następnego bezpiecznego kroku zgodnie z aktualnym milestone.",
       ),
     ).toBeTruthy();
-    expect(screen.getByText("Codex: handoff i wykonanie")).toBeTruthy();
-    expect(screen.getByText("Okno pracy Codexa")).toBeTruthy();
+    expect(screen.getByText("Manualne okno pracy Codexa")).toBeTruthy();
+    expect(screen.getByText("Handoff, raport i przegląd")).toBeTruthy();
     expect(
       screen.getByText(
-        "Skopiuj przygotowany handoff, wklej go do Codexa i wróć tutaj z wynikiem wykonania.",
+        "To ręczne okno copy/paste: przygotuj handoff, wklej raport z zewnętrznego Codexa i przejdź przez przegląd, akceptację oraz zwrot raportu publikacji. SPS OS nie uruchamia tutaj zintegrowanego runnera.",
       ),
     ).toBeTruthy();
     expect(fetchMock).not.toHaveBeenCalled();
@@ -3063,14 +3063,17 @@ describe("ProjectAiWorkspacePage", () => {
     render(<ProjectAiWorkspacePage />);
 
     await waitFor(() => {
-      expect(screen.getByText("Codex: handoff i wykonanie")).toBeTruthy();
+      expect(screen.getByText("Manualne okno pracy Codexa")).toBeTruthy();
     });
 
     expect(
       screen.getByText(
         (content, element) =>
           element?.tagName === "PRE" &&
-          content.includes("SPS OS przygotowuje kontekst projektu i blok przekazania."),
+          content.includes(
+            "SPS OS przygotowuje kontekst projektu i blok przekazania do ręcznej pracy.",
+          ) &&
+          content.includes("nie uruchamia zintegrowanego runnera"),
       ),
     ).toBeTruthy();
     const handoffTemplate = screen.getByText(
@@ -3081,8 +3084,12 @@ describe("ProjectAiWorkspacePage", () => {
     );
 
     expect(handoffTemplate).toBeTruthy();
-    expect(handoffTemplate.textContent).toContain("Codex wykonuje tylko zaakceptowany zakres poza aplikacją.");
-    expect(handoffTemplate.textContent).toContain("Poniższy handoff jest copy-ready i pozostaje ręczny.");
+    expect(handoffTemplate.textContent).toContain(
+      "Codex działa poza tym panelem; tutaj wraca tylko ręcznie wklejony raport.",
+    );
+    expect(handoffTemplate.textContent).toContain(
+      "Poniższy handoff jest copy-ready i nie uruchamia zintegrowanego runnera.",
+    );
     expect(handoffTemplate.textContent).toContain("Session Identity:");
     expect(handoffTemplate.textContent).toContain("- Previous Session ID:");
     expect(handoffTemplate.textContent).toContain("- Current Session ID:");

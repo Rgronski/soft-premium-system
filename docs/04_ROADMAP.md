@@ -222,14 +222,15 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.16` - AI Workspace Manual Codex Flow Summary Foundation
 * `MS-035.17` - AI Workspace Conductor Manual Flow State Copy Foundation
 * `MS-035.18` - AI Workspace Manual Workbench Boundary Status Foundation
+* `MS-035.19` - AI Workspace Manual Codex Window Header Clarity Foundation
 
 ## Current
 
-Current Product Milestone: MS-035.18 - AI Workspace Manual Workbench Boundary Status Foundation
-Latest Completed Product Milestone: MS-035.18 - AI Workspace Manual Workbench Boundary Status Foundation
+Current Product Milestone: MS-035.19 - AI Workspace Manual Codex Window Header Clarity Foundation
+Latest Completed Product Milestone: MS-035.19 - AI Workspace Manual Codex Window Header Clarity Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
 
-## MS-035.18 - AI Workspace Manual Workbench Boundary Status Foundation
+## MS-035.19 - AI Workspace Manual Codex Window Header Clarity Foundation
 
 **Status**
 COMPLETED / VERIFIED LOCALLY
@@ -239,6 +240,51 @@ LOCAL ONLY / NOT COMMITTED
 
 **Milestone Status**
 COMPLETED / VERIFIED LOCALLY
+
+**Type**
+User-Facing UI Copy Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Clarify that the right Codex panel is a manual Codex work window for handoff, pasted report return, review, acceptance, and publication report return, not an integrated runner.
+
+**Implementation Result**
+AI Workspace now labels the right Codex panel as `Manualne okno pracy Codexa` with the heading `Handoff, raport i przegląd`. The intro explains that the panel is a manual copy/paste window for preparing the handoff, pasting the external Codex report, and continuing through review, acceptance, and publication report return. The handoff preview helper now states that Codex works outside the panel, that only the manually pasted report returns here, and that the copy-ready handoff does not start an integrated runner.
+
+The guidance is read-only copy. Existing handoff, report textarea, copy, review, acceptance, and publication guidance behavior remains unchanged. It does not add workflow state, persistence, report parsing, automatic validation, automatic report generation, localStorage, Project Brain writes, API calls, Codex automation, execution bridge behavior, cross-project memory lookup, automatic commit/push behavior, a real state machine, or new stateful acceptance/checklist controls.
+
+**Version Gate**
+Required and applied locally. `src/lib/app-version.ts` records `APP_VERSION 1.0114` and `LAST_PUBLISHED_MS MS-035.19 - AI Workspace Manual Codex Window Header Clarity Foundation`.
+
+**Boundary**
+MS-035.19 adds no API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, cross-project memory lookup implementation, report parser, automatic validation, persistence, automatic report generation, automatic commit/push behavior, Codex runner, automation, execution bridge behavior, real state machine / workflow state implementation, stateful acceptance/checklist controls, broad unrelated UI sections, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, checkout-removal behavior, package generator changes, or unrelated AI Workspace generation/save flow changes.
+
+**Verification Evidence**
+
+* `git status -sb` showed local MS-035.19 changes only.
+* `git diff --check` passed with standard LF -> CRLF warnings only.
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed `47 / 47`.
+* `npm test -- src/components/app-version-badge.test.tsx` passed `1 / 1`.
+* `git diff --stat` showed focused allowed-file changes only.
+
+## MS-035.18 - AI Workspace Manual Workbench Boundary Status Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
 
 **Type**
 User-Facing UI Copy Milestone

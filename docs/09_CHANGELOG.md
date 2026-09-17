@@ -69,6 +69,34 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 104 - MS-035.19 AI Workspace Manual Codex Window Header Clarity Foundation
+
+### Version
+
+Local only / not committed
+
+### Date
+
+2026-09-17
+
+### Summary
+
+Clarified the right Codex panel as a manual Codex work window.
+
+### Completed Work
+
+* Renamed the right-panel context label to `Manualne okno pracy Codexa`.
+* Updated the right-panel heading to `Handoff, raport i przegląd`.
+* Reworded the intro to tie handoff, pasted report, review, acceptance, and publication report return under one manual copy/paste context.
+* Clarified that SPS OS does not start an integrated runner from this panel.
+* Applied the local Visible Version Gate for `APP_VERSION 1.0114` and `LAST_PUBLISHED_MS MS-035.19 - AI Workspace Manual Codex Window Header Clarity Foundation`.
+
+### Notes
+
+* Visible Version Gate is required because MS-035.19 changes user-facing AI Workspace UI/copy.
+* Verification passed with `git diff --check` with standard LF -> CRLF warnings only, `npm test -- src/app/projects/[id]/ai/page.test.tsx` at `47 / 47`, and `npm test -- src/components/app-version-badge.test.tsx` at `1 / 1`.
+* No workflow state, persistence, report parser, automatic validation, automatic report generation, automatic commit/push behavior, real state machine, stateful acceptance/checklist controls, API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, Codex runner, automation, execution bridge behavior, cross-project memory lookup implementation, broad unrelated UI sections, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, Project Map canonical artifacts, checkout-removal behavior, package generator scripts, or unrelated AI Workspace generation/save flows were changed.
+
 ## Session 104 - MS-035.18 AI Workspace Manual Workbench Boundary Status Foundation
 
 ### Version

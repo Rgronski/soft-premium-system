@@ -1417,14 +1417,16 @@ export default function ProjectAiWorkspacePage() {
             className="rounded-xl border border-zinc-800 bg-zinc-950/70 p-4 scroll-mt-6"
           >
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-              Codex: handoff i wykonanie
+              Manualne okno pracy Codexa
             </p>
             <h3 className="mt-2 text-xl font-semibold text-zinc-50">
-              Okno pracy Codexa
+              Handoff, raport i przegląd
             </h3>
             <p className="mt-2 text-sm text-zinc-400">
-              Skopiuj przygotowany handoff, wklej go do Codexa i wróć tutaj z
-              wynikiem wykonania.
+              To ręczne okno copy/paste: przygotuj handoff, wklej raport z
+              zewnętrznego Codexa i przejdź przez przegląd, akceptację oraz
+              zwrot raportu publikacji. SPS OS nie uruchamia tutaj
+              zintegrowanego runnera.
             </p>
             <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-5 text-zinc-400">
               <p className="font-medium text-zinc-300">Manualny przepływ Codexa</p>
@@ -1442,9 +1444,9 @@ export default function ProjectAiWorkspacePage() {
               <li>Skopiuj raport do przeglądu Chief Architect.</li>
             </ol>
             <pre className="mt-4 overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-6 text-zinc-200">
-              {`SPS OS przygotowuje kontekst projektu i blok przekazania.
-Codex wykonuje tylko zaakceptowany zakres poza aplikacją.
-Poniższy handoff jest copy-ready i pozostaje ręczny.
+              {`SPS OS przygotowuje kontekst projektu i blok przekazania do ręcznej pracy.
+Codex działa poza tym panelem; tutaj wraca tylko ręcznie wklejony raport.
+Poniższy handoff jest copy-ready i nie uruchamia zintegrowanego runnera.
 
 ${codexHandoffText}`}
             </pre>
