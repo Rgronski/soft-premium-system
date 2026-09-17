@@ -249,3 +249,13 @@ The right-side Codex Window is currently manual and local: it may carry copied h
 Any future controlled Codex runner, execution status/history, API route, provider/model configuration, or real execution bridge requires a separate approved contract and milestone.
 
 Global cross-project operational memory is also a separate future contract candidate and is not implemented by this workflow API contract.
+
+## Cross-Project Operational Memory Boundary
+
+MS-035.10 defines the cross-project operational memory direction as a process and architecture contract only.
+
+The future memory layer may support recommendations with reusable pattern summaries, prior verification paths, prior handoff patterns, risk lessons, and cost-saving lessons across projects.
+
+The workflow API contract does not add an endpoint, storage system, schema, embedding index, vector search, memory engine, provider/model behavior, Project Brain write, automatic reuse behavior, Codex automation, or data migration.
+
+Any future use of prior project memory must preserve access boundaries, source traceability, and Product Owner-visible provenance.

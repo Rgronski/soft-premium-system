@@ -289,6 +289,49 @@ Global cross-project operational memory is a separate future contract candidate.
 
 MS-035.9 does not implement or authorize cross-project memory, Project Brain storage changes, new APIs, automation, provider/model configuration, Codex runner behavior, or execution bridge behavior.
 
+## Cross-Project Operational Memory Contract
+
+MS-035.10 defines Cross-Project Operational Memory as a future SPS OS layer above individual Project Brain instances.
+
+Project Brain remains the project-specific source of truth and context owner.
+
+Cross-Project Operational Memory may provide reusable operational pattern summaries and evidence references across projects.
+
+Konduktor may consult memory to suggest safer or faster next steps.
+
+Chief Architect may use memory to reduce repeated diagnosis.
+
+Codex may receive shorter, pattern-informed handoffs after Product Owner-approved scope.
+
+### Allowed Memory Content
+
+Cross-Project Operational Memory may contain governed summaries of:
+
+* solved problem patterns,
+* implementation patterns,
+* failed attempts,
+* risks and blockers,
+* handoff templates,
+* verification commands,
+* rollback and recovery notes,
+* UI/copy patterns,
+* milestone outcomes,
+* cost-saving lessons.
+
+### Privacy And Separation Rules
+
+Cross-Project Operational Memory must not create uncontrolled leakage of client-specific details between projects.
+
+It may expose reusable pattern summaries, not sensitive raw project data.
+
+Project-specific evidence must remain traceable to its source and access boundary.
+
+Product Owner-visible provenance is required when a recommendation uses prior project memory.
+
+### Non-Goals
+
+MS-035.10 does not implement storage, database/schema changes, embeddings, vector search, automatic reuse, Project Brain writes, Codex automation, API routes, provider/model configuration, UI changes, runtime behavior, data migration, or cross-project data mixing without future governance.
+
 ## Role Alignment
 
 This contract remains aligned with current workflow roles:

@@ -214,14 +214,15 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.6` - Konduktor Input-Aware Guidance Selection Foundation
 * `MS-035.7` - AI Workspace Handoff Copy Polish Foundation
 * `MS-035.8` - AI Workspace Manual Codex Window Roundtrip Foundation
+* `MS-035.9` - Integrated Project Workbench Codex Window Contract Foundation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-035.8 - AI Workspace Manual Codex Window Roundtrip Foundation
+Latest Completed Product Milestone: MS-035.9 - Integrated Project Workbench Codex Window Contract Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
 
-## MS-035.9 - Integrated Project Workbench Codex Window Contract Foundation
+## MS-035.10 - Cross-Project Operational Memory Contract Foundation
 
 **Status**
 IMPLEMENTED / VERIFIED LOCALLY
@@ -245,6 +246,55 @@ Chief Architect
 Codex
 
 **Purpose**
+Define the contract for a shared SPS OS operational memory layer above individual Project Brain instances so proven patterns, prior fixes, prior handoffs, risks, and verification paths can be reused across projects under governance.
+
+**Contract Result**
+MS-035.10 defines Cross-Project Operational Memory as a reusable SPS OS layer, not a replacement for Project Brain. Project Brain remains project-specific truth and context. Cross-Project Operational Memory may hold governed pattern summaries and evidence references across projects. Konduktor may consult it for safer or faster next-step suggestions, Chief Architect may use it to reduce repeated diagnosis, and Codex may receive shorter pattern-informed handoffs after Product Owner-approved scope.
+
+Allowed memory content is limited to solved problem patterns, implementation patterns, failed attempts, risks and blockers, handoff templates, verification commands, rollback/recovery notes, UI/copy patterns, milestone outcomes, and cost-saving lessons.
+
+The contract requires privacy and separation rules: no uncontrolled leakage of client-specific details between projects, reusable pattern summaries instead of sensitive raw project data, traceable project-specific evidence with its source and access boundary, and Product Owner-visible provenance whenever a recommendation uses prior project memory.
+
+**Non-Goals**
+MS-035.10 does not implement memory storage, database/schema work, embeddings, vector search, automatic reuse, Project Brain writes, Codex automation, provider/model work, data migration, API routes, UI, runtime behavior, or cross-project data mixing without future governance.
+
+**Version Gate**
+Not applicable. MS-035.10 is docs-only and has no app-facing runtime, UI, visible copy, or version badge change.
+
+**Boundary**
+MS-035.10 adds no source/runtime changes, UI changes, API routes, provider/model configuration, storage implementation, data migration, embeddings/vector search implementation, memory engine, Codex runner, automation, Project Brain storage/write behavior, checkout-removal behavior, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, package generator changes, or Project Map canonical changes.
+
+**Verification Plan**
+
+* `git status -sb`
+* `git diff --check`
+* `rg -n "MS-035.10|Cross-Project Operational Memory|operational memory|Project Brain|Konduktor|Codex|Current Product Milestone|Latest Completed Product Milestone" docs/04_ROADMAP.md docs/08_CURRENT_STATE.md docs/09_CHANGELOG.md docs/10_SESSION_STATE.md docs/ai-workflow/AI_WORKSPACE_ENGINE_CONTRACT.md docs/ai-workflow/WORKFLOW.md docs/ai-workflow/WORKFLOW_API_CONTRACT.md docs/02_ARCHITECTURE.md`
+* `git diff --stat`
+
+## MS-035.9 - Integrated Project Workbench Codex Window Contract Foundation
+
+**Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
+
+**Publication Status**
+PUBLISHED
+
+**Milestone Status**
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
+
+**Type**
+Docs / Architecture Contract Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
 Record the target SPS OS project workbench model before any deeper workflow execution work starts: Chief Architect / Konduktor / Project Brain context on the left, and a Codex work window on the right.
 
 **Contract Result**
@@ -253,6 +303,8 @@ MS-035.9 defines AI Workspace as the transitional one-page project workbench. Th
 The contract defines the roles of Product Owner, Chief Architect, Konduktor, Project Brain, and Codex; records the right panel as the future Codex Window; and defines the integration stages as manual Codex window, local report handling, read-only execution status/history, controlled Codex runner contract, and real execution bridge only after separate approval.
 
 Cross-project operational memory is recorded as a separate future contract candidate. It is not implemented or authorized by MS-035.9.
+
+Publication commit: `cddc65af0b21c662040153b88162217b27405939 docs: define integrated project workbench contract`.
 
 **Version Gate**
 Not applicable. MS-035.9 is docs-only and has no app-facing runtime, UI, visible copy, or version badge change.

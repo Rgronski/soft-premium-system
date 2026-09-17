@@ -69,11 +69,38 @@ Each release entry should contain:
 
 # Unreleased
 
-## Session 103 - MS-035.9 Integrated Project Workbench Codex Window Contract Foundation
+## Session 103 - MS-035.10 Cross-Project Operational Memory Contract Foundation
 
 ### Version
 
 Implementation local
+
+### Date
+
+2026-09-17
+
+### Summary
+
+Recorded the docs-only contract for future SPS OS cross-project operational memory.
+
+### Completed Work
+
+* Defined Cross-Project Operational Memory as a governed SPS OS layer above individual Project Brain instances.
+* Defined the relationship between Project Brain, Cross-Project Operational Memory, Konduktor, Chief Architect, and Codex.
+* Listed allowed reusable memory content: solved patterns, implementation patterns, failed attempts, risks, handoff templates, verification commands, rollback/recovery notes, UI/copy patterns, milestone outcomes, and cost-saving lessons.
+* Defined privacy, separation, source-traceability, and Product Owner-visible provenance requirements.
+* Preserved `Current Product Milestone` as `NONE / Product Owner decision required` and kept the latest completed milestone aligned with `MS-035.9 - Integrated Project Workbench Codex Window Contract Foundation`.
+
+### Notes
+
+* Visible Version Gate is not applicable because MS-035.10 is docs-only and has no app-facing runtime, UI, visible copy, or version badge change.
+* No `src/**` files, API routes, storage implementation, database/schema files, embeddings/vector search, memory engine, Project Brain writes, Codex automation, provider/model configuration, checkout-removal behavior, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, package generator scripts, or Project Map canonical artifacts were changed.
+
+## Session 103 - MS-035.9 Integrated Project Workbench Codex Window Contract Foundation
+
+### Version
+
+Published
 
 ### Date
 
@@ -94,6 +121,7 @@ Recorded the docs-only contract for the target SPS OS integrated project workben
 ### Notes
 
 * Visible Version Gate is not applicable because MS-035.9 is docs-only and has no app-facing runtime, UI, visible copy, or version badge change.
+* Published in commit `cddc65af0b21c662040153b88162217b27405939 docs: define integrated project workbench contract`.
 * No `src/**` files, automation, Codex runner, API route, provider/model configuration, Project Brain storage/write behavior, cross-project memory implementation, checkout-removal behavior, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, package generator scripts, or Project Map canonical artifacts were changed.
 
 ## Session 103 - MS-035.8 AI Workspace Manual Codex Window Roundtrip Foundation

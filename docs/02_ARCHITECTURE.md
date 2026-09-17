@@ -55,6 +55,24 @@ All project information is created, modified, and maintained through Project Bra
 
 ---
 
+## Cross-Project Operational Memory
+
+A governed SPS OS memory layer for reusable operational patterns across projects.
+
+Cross-Project Operational Memory is above individual Project Brain instances.
+
+It may summarize solved problem patterns, implementation patterns, failed attempts, risks, handoff templates, verification paths, rollback/recovery notes, UI/copy patterns, milestone outcomes, and cost-saving lessons.
+
+It does not replace Project Brain.
+
+It must not own project-specific truth or leak sensitive raw project data across project boundaries.
+
+When a recommendation uses prior project memory, SPS OS must preserve Product Owner-visible provenance and source traceability.
+
+MS-035.10 defines this as an architecture/product contract only; it does not authorize storage implementation, schema work, embeddings, vector search, automation, Project Brain writes, Codex automation, or cross-project data mixing without future governance.
+
+---
+
 ## Representation
 
 A representation is any form in which project knowledge is presented.

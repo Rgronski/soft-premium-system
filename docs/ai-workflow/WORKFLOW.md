@@ -40,7 +40,17 @@ The current workflow remains manual: handoff is copied to external Codex, Codex 
 
 Future stages may add local report handling, read-only execution status/history, a controlled Codex runner contract, and a real execution bridge only after separate approval.
 
-Cross-project operational memory is a separate future contract candidate and is not part of the current workflow implementation.
+## Cross-Project Operational Memory Direction
+
+MS-035.10 defines Cross-Project Operational Memory as a docs-only workflow contract.
+
+The workflow may later consult reusable operational patterns from prior projects or sessions to reduce repeated diagnosis, shorten handoffs, improve verification choices, and lower token/credit usage.
+
+Project Brain remains the truth for the active project.
+
+Cross-project memory may inform recommendations only through governed pattern summaries, source traceability, and Product Owner-visible provenance.
+
+This workflow contract does not implement memory storage, schema, embeddings, vector search, automatic reuse, Project Brain writes, Codex automation, or cross-project data mixing.
 
 ## Important Distinction
 
