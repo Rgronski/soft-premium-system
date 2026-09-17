@@ -22,9 +22,9 @@ describe("AppVersionBadge", () => {
 
     expect(screen.getByText(APP_VERSION_LABEL)).toBeTruthy();
     expect(screen.getByText(LAST_PUBLISHED_MS_LABEL)).toBeTruthy();
-    expect(APP_VERSION).toBe("1.0104");
+    expect(APP_VERSION).toBe("1.0105");
     expect(LAST_PUBLISHED_MS).toBe(
-      "MS-035.7 - AI Workspace Handoff Copy Polish Foundation",
+      "MS-035.8 - AI Workspace Manual Codex Window Roundtrip Foundation",
     );
   });
 });

@@ -213,12 +213,65 @@ The roadmap applies only to SPS OS 1.0.
 * `MS-035.5` - Visible Version Gate Protocol Foundation
 * `MS-035.6` - Konduktor Input-Aware Guidance Selection Foundation
 * `MS-035.7` - AI Workspace Handoff Copy Polish Foundation
+* `MS-035.8` - AI Workspace Manual Codex Window Roundtrip Foundation
 
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
 Latest Completed Product Milestone: MS-035.7 - AI Workspace Handoff Copy Polish Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
+
+## MS-035.8 - AI Workspace Manual Codex Window Roundtrip Foundation
+
+**Status**
+IMPLEMENTED / VERIFIED LOCALLY
+
+**Publication Status**
+LOCAL ONLY / NOT COMMITTED / NOT PUSHED
+
+**Milestone Status**
+IMPLEMENTED / VERIFIED LOCALLY / PRODUCT OWNER ACCEPTANCE PENDING
+
+**Type**
+User-Facing UI Copy Milestone
+
+**Owner**
+Product Owner
+
+**Architecture Owner**
+Chief Architect
+
+**Implementation Engine**
+Codex
+
+**Purpose**
+Make the right-side AI Workspace Codex panel work as one manual roundtrip window for copying a handoff out, pasting an external Codex report back, and copying that report for Chief Architect review.
+
+**Implementation Result**
+AI Workspace keeps the existing copy-ready handoff preview and `Kopiuj handoff` action. The same right panel now includes a local-only `Odpowiedź Codexa / Raport Codexa` textarea, a `Kopiuj raport` action, and helper copy for the manual loop: copy handoff, paste into external Codex, paste the Codex report back into SPS OS, then copy it to Chief Architect review.
+
+The pasted Codex report is local React state only. It is not persisted to Project Brain, Knowledge, localStorage, server state, URL state, or any API.
+
+**Version Gate**
+Required and applied locally. `src/lib/app-version.ts` now records `APP_VERSION 1.0105` and `LAST_PUBLISHED_MS MS-035.8 - AI Workspace Manual Codex Window Roundtrip Foundation`; the focused app-version badge test passed.
+
+**Boundary**
+MS-035.8 adds no automation, parsing, model calls, provider changes, API keys, endpoints, Codex auto-run, Project Brain writes, Knowledge writes, localStorage writes, URL persistence, delete/detach/reconnect behavior, checkout-removal behavior, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, or Project Map canonical changes.
+
+**Verification Evidence**
+
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed.
+* `npm test -- src/components/app-version-badge.test.tsx` passed.
+* `git diff --check` passed with existing line-ending warnings only.
+
+**Verification Plan**
+
+* `git status -sb`
+* `git diff --check`
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx`
+* `npm test -- src/components/app-version-badge.test.tsx`
+* `npx tsc --noEmit` if TypeScript risk appears
+* `git diff --stat`
 
 ## MS-035.7 - AI Workspace Handoff Copy Polish Foundation
 

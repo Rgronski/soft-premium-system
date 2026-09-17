@@ -285,6 +285,8 @@ export default function ProjectAiWorkspacePage() {
   );
   const [isProjectTasksLoading, setIsProjectTasksLoading] = useState(true);
   const [isHandoffCopied, setIsHandoffCopied] = useState(false);
+  const [codexReport, setCodexReport] = useState("");
+  const [isCodexReportCopied, setIsCodexReportCopied] = useState(false);
   const [selectedConductorInstruction, setSelectedConductorInstruction] =
     useState<string>(CONDUCTOR_QUICK_ACTIONS[0].instruction);
   const [conductorInstructionCopyStatus, setConductorInstructionCopyStatus] =
@@ -835,6 +837,16 @@ export default function ProjectAiWorkspacePage() {
     }
   }
 
+  async function handleCopyCodexReport() {
+    try {
+      await navigator.clipboard?.writeText?.(codexReport);
+    } catch {
+      // Clipboard may be unavailable in test or runtime environments.
+    } finally {
+      setIsCodexReportCopied(true);
+    }
+  }
+
   function handleSelectConductorQuickAction(instruction: string) {
     setSelectedConductorInstruction(instruction);
     setConductorInstructionCopyStatus(null);
@@ -1334,6 +1346,12 @@ export default function ProjectAiWorkspacePage() {
               Skopiuj przygotowany handoff, wklej go do Codexa i wróć tutaj z
               wynikiem wykonania.
             </p>
+            <ol className="mt-3 list-decimal space-y-1 pl-5 text-xs leading-5 text-zinc-500">
+              <li>Skopiuj handoff.</li>
+              <li>Wklej go do zewnętrznego Codexa.</li>
+              <li>Wklej raport Codexa z powrotem tutaj.</li>
+              <li>Skopiuj raport do przeglądu Chief Architect.</li>
+            </ol>
             <pre className="mt-4 overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3 text-xs leading-6 text-zinc-200">
               {`SPS OS przygotowuje kontekst projektu i blok przekazania.
 Codex wykonuje tylko zaakceptowany zakres poza aplikacją.
@@ -1369,6 +1387,39 @@ ${codexHandoffText}`}
               <p>Dozwolone pliki i Zakazane pliki bierz z handoffu lub kontraktu.</p>
               <p>Weryfikacja bierz z planu weryfikacji.</p>
               <p>Required Codex report fields zostaw w bloku, zeby wynik byl kompletny.</p>
+            </div>
+            <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-3">
+              <label className="block space-y-2">
+                <span className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                  Odpowiedź Codexa / Raport Codexa
+                </span>
+                <textarea
+                  value={codexReport}
+                  onChange={(event) => {
+                    setCodexReport(event.target.value);
+                    setIsCodexReportCopied(false);
+                  }}
+                  rows={8}
+                  className="w-full rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-3 text-sm text-zinc-100 outline-none transition focus:border-zinc-600"
+                  placeholder="Wklej tutaj ręcznie raport z zewnętrznego Codexa."
+                />
+              </label>
+              <div className="mt-3 flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    void handleCopyCodexReport();
+                  }}
+                  disabled={!codexReport.trim()}
+                  className="rounded-xl border border-zinc-700 bg-zinc-100 px-3 py-2 text-sm font-medium text-zinc-950 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {isCodexReportCopied ? "Skopiowano raport" : "Kopiuj raport"}
+                </button>
+                <p className="text-xs leading-5 text-zinc-500">
+                  Pole jest lokalne: SPS OS nie zapisuje, nie analizuje i nie
+                  wysyła tej treści do API.
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -69,6 +69,33 @@ Each release entry should contain:
 
 # Unreleased
 
+## Session 103 - MS-035.8 AI Workspace Manual Codex Window Roundtrip Foundation
+
+### Version
+
+Implementation local
+
+### Date
+
+2026-09-15
+
+### Summary
+
+Added a local manual Codex result-return field to the AI Workspace right-side Codex panel.
+
+### Completed Work
+
+* Kept the existing handoff preview and `Kopiuj handoff` action.
+* Added a local-only `Odpowiedź Codexa / Raport Codexa` textarea.
+* Added a local copy action for the pasted Codex report.
+* Added helper copy explaining the manual roundtrip from handoff copy to external Codex to Chief Architect review.
+* Applied the local Visible Version Gate for `APP_VERSION 1.0105` and `LAST_PUBLISHED_MS MS-035.8 - AI Workspace Manual Codex Window Roundtrip Foundation`.
+
+### Notes
+
+* Version Gate was required because MS-035.8 changes user-facing AI Workspace copy/UI.
+* No persistence, automation, parsing, model calls, provider changes, API keys, endpoints, Codex auto-run, Project Brain writes, Knowledge writes, localStorage writes, URL persistence, checkout-removal behavior, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, or Project Map canonical artifacts were changed.
+
 ## Session 103 - MS-035.7 AI Workspace Handoff Copy Polish Foundation
 
 ### Version

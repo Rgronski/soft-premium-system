@@ -3170,6 +3170,93 @@ describe("ProjectAiWorkspacePage", () => {
     });
   });
 
+  test("keeps pasted Codex reports local and copies them from the right panel", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+    clipboardWriteTextMock.mockResolvedValue(undefined);
+
+    render(<ProjectAiWorkspacePage />);
+
+    const codexReportField = await screen.findByRole("textbox", {
+      name: "Odpowiedź Codexa / Raport Codexa",
+    });
+
+    expect(screen.getByText("Skopiuj handoff.")).toBeTruthy();
+    expect(screen.getByText("Wklej go do zewnętrznego Codexa.")).toBeTruthy();
+    expect(screen.getByText("Wklej raport Codexa z powrotem tutaj.")).toBeTruthy();
+    expect(
+      screen.getByText("Skopiuj raport do przeglądu Chief Architect."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Pole jest lokalne: SPS OS nie zapisuje, nie analizuje i nie wysyła tej treści do API.",
+      ),
+    ).toBeTruthy();
+
+    fireEvent.change(codexReportField, {
+      target: { value: "Codex report ready for review" },
+    });
+
+    expect(codexReportField).toHaveProperty(
+      "value",
+      "Codex report ready for review",
+    );
+    expect(fetchMock).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByRole("button", { name: "Kopiuj raport" }));
+
+    await waitFor(() => {
+      expect(clipboardWriteTextMock).toHaveBeenCalledTimes(1);
+      expect(clipboardWriteTextMock).toHaveBeenCalledWith(
+        "Codex report ready for review",
+      );
+      expect(
+        screen.getByRole("button", { name: "Skopiowano raport" }),
+      ).toBeTruthy();
+    });
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  test("shows the copied Codex report state even when clipboard is unavailable", async () => {
+    getBrowserAiProjectContextMock.mockResolvedValue({
+      status: "available",
+      context: {
+        projectId: "project-1",
+        projectName: "Alpha",
+        tasks: [],
+        knowledgeEntries: [],
+      },
+    });
+    Object.defineProperty(window.navigator, "clipboard", {
+      configurable: true,
+      value: undefined,
+    });
+
+    render(<ProjectAiWorkspacePage />);
+
+    const codexReportField = await screen.findByRole("textbox", {
+      name: "Odpowiedź Codexa / Raport Codexa",
+    });
+    fireEvent.change(codexReportField, {
+      target: { value: "Clipboard unavailable report" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Kopiuj raport" }));
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", { name: "Skopiowano raport" }),
+      ).toBeTruthy();
+    });
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
   test("shows the copied state even when clipboard is unavailable", async () => {
     getBrowserAiProjectContextMock.mockResolvedValue({
       status: "available",
