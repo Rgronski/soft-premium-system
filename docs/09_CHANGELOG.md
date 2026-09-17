@@ -73,7 +73,7 @@ Each release entry should contain:
 
 ### Version
 
-Implementation local
+Published
 
 ### Date
 
@@ -95,6 +95,9 @@ Added a read-only AI Workspace contract status panel for the integrated workbenc
 ### Notes
 
 * Visible Version Gate is required because MS-035.11 changes user-facing AI Workspace UI/copy.
+* Visible Version Gate evidence: `APP_VERSION 1.0106` and `LAST_PUBLISHED_MS MS-035.11 - AI Workspace Integrated Workbench Contract Visibility Foundation`.
+* Verification passed with `git diff --check` with standard LF -> CRLF warnings only, `npm test -- src/app/projects/[id]/ai/page.test.tsx` at `47 / 47`, and `npm test -- src/components/app-version-badge.test.tsx` at `1 / 1`.
+* Published in commit `3625df6ac2da9e2cf8eedfa63f0e81ff263cf050 feat: show integrated workbench contract status`.
 * No API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, Codex runner, automation, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, Project Map canonical artifacts, checkout-removal behavior, package generator scripts, or unrelated AI Workspace generation/save flows were changed.
 
 ## Session 103 - MS-035.10 Cross-Project Operational Memory Contract Foundation

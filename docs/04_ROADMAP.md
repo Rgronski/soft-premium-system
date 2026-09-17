@@ -219,19 +219,19 @@ The roadmap applies only to SPS OS 1.0.
 ## Current
 
 Current Product Milestone: NONE / Product Owner decision required
-Latest Completed Product Milestone: MS-035.10 - Cross-Project Operational Memory Contract Foundation
+Latest Completed Product Milestone: MS-035.11 - AI Workspace Integrated Workbench Contract Visibility Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
 
 ## MS-035.11 - AI Workspace Integrated Workbench Contract Visibility Foundation
 
 **Status**
-IMPLEMENTED / VERIFIED LOCALLY
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED
 
 **Publication Status**
-LOCAL ONLY / NOT COMMITTED / NOT PUSHED
+PUBLISHED
 
 **Milestone Status**
-IMPLEMENTED / VERIFIED LOCALLY / PRODUCT OWNER ACCEPTANCE PENDING
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
 
 **Type**
 User-Facing UI Copy Milestone
@@ -253,11 +253,19 @@ AI Workspace now shows a compact read-only contract status panel inside `Model p
 
 The panel does not call APIs, persist data, use localStorage, query cross-project memory, automate Codex, execute work, or write Project Brain.
 
+Publication commit: `3625df6ac2da9e2cf8eedfa63f0e81ff263cf050 feat: show integrated workbench contract status`.
+
 **Version Gate**
-Required and applied locally. `src/lib/app-version.ts` now records `APP_VERSION 1.0106` and `LAST_PUBLISHED_MS MS-035.11 - AI Workspace Integrated Workbench Contract Visibility Foundation`; the focused app-version badge test is in scope.
+Required and applied. `src/lib/app-version.ts` records `APP_VERSION 1.0106` and `LAST_PUBLISHED_MS MS-035.11 - AI Workspace Integrated Workbench Contract Visibility Foundation`; `npm test -- src/components/app-version-badge.test.tsx` passed `1 / 1`.
 
 **Boundary**
 MS-035.11 adds no API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, Codex runner, automation, Beauty Client PRO repository changes, `C:\SPS_OS_WORK` changes, SPS metadata changes, Project Map canonical changes, checkout-removal behavior, package generator changes, or unrelated AI Workspace generation/save flow changes.
+
+**Verification Evidence**
+
+* `git diff --check` passed with standard LF -> CRLF warnings only.
+* `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed `47 / 47`.
+* `npm test -- src/components/app-version-badge.test.tsx` passed `1 / 1`.
 
 **Verification Plan**
 
