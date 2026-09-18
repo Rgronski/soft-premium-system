@@ -73,7 +73,7 @@ Each release entry should contain:
 
 ### Version
 
-Local only / not committed
+Published / pushed
 
 ### Date
 
@@ -95,6 +95,7 @@ Clarified the handoff boundary between Konduktor guidance and the manual Codex W
 
 * Visible Version Gate is required because MS-035.20 changes user-facing AI Workspace UI/copy.
 * Verification passed with `git diff --check` with standard LF -> CRLF warnings only, `npm test -- src/app/projects/[id]/ai/page.test.tsx` at `47 / 47`, and `npm test -- src/components/app-version-badge.test.tsx` at `1 / 1`.
+* Commit `c7e91ee feat: clarify conductor to codex handoff boundary` was pushed to `origin/main`.
 * No workflow state, persistence, report parser, automatic validation, automatic report generation, automatic commit/push behavior, real state machine, stateful acceptance/checklist controls, API routes, provider/model configuration, Project Brain storage/write behavior, database/schema files, embeddings/vector search, Codex runner, automation, runner behavior, execution bridge behavior, cross-project memory lookup implementation, broad unrelated UI sections, Beauty Client PRO repository files, `C:\SPS_OS_WORK`, SPS metadata, Project Map canonical artifacts, checkout-removal behavior, package generator scripts, or unrelated AI Workspace generation/save flows were changed.
 
 ## Session 104 - MS-035.19 AI Workspace Manual Codex Window Header Clarity Foundation

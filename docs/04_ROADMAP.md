@@ -227,20 +227,20 @@ The roadmap applies only to SPS OS 1.0.
 
 ## Current
 
-Current Product Milestone: MS-035.20 - AI Workspace Conductor To Codex Handoff Boundary Copy Foundation
+Current Product Milestone: NONE / Product Owner decision required
 Latest Completed Product Milestone: MS-035.20 - AI Workspace Conductor To Codex Handoff Boundary Copy Foundation
 Next Product Milestone Candidate: NONE / Product Owner decision required
 
 ## MS-035.20 - AI Workspace Conductor To Codex Handoff Boundary Copy Foundation
 
 **Status**
-COMPLETED / VERIFIED LOCALLY
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
 
 **Publication Status**
-LOCAL ONLY / NOT COMMITTED
+PUBLISHED
 
 **Milestone Status**
-COMPLETED / VERIFIED LOCALLY
+COMPLETED / VERIFIED / PUBLISHED / ACCEPTED / CLOSED
 
 **Type**
 User-Facing UI Copy Milestone
@@ -275,6 +275,7 @@ MS-035.20 adds no API routes, provider/model configuration, Project Brain storag
 * `npm test -- src/app/projects/[id]/ai/page.test.tsx` passed `47 / 47`.
 * `npm test -- src/components/app-version-badge.test.tsx` passed `1 / 1`.
 * `git diff --stat` showed focused allowed-file changes only.
+* Commit `c7e91ee feat: clarify conductor to codex handoff boundary` was pushed to `origin/main`.
 
 ## MS-035.19 - AI Workspace Manual Codex Window Header Clarity Foundation
 
